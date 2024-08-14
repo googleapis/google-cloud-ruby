@@ -100,6 +100,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the romanize_text REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::RomanizeTextRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::RomanizeTextResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::RomanizeTextResponse]
+              #   A result object deserialized from the server's reply
+              def romanize_text request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_romanize_text_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::RomanizeTextResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the detect_language REST call
               #
               # @param request_pb [::Google::Cloud::Translate::V3::DetectLanguageRequest]
@@ -328,6 +366,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_glossary REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::UpdateGlossaryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_glossary request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_glossary_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the list_glossaries REST call
               #
               # @param request_pb [::Google::Cloud::Translate::V3::ListGlossariesRequest]
@@ -421,6 +497,348 @@ module Google
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
                 verb, uri, query_string_params, body = ServiceStub.transcode_delete_glossary_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::GetGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::GlossaryEntry]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::GlossaryEntry]
+              #   A result object deserialized from the server's reply
+              def get_glossary_entry request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_glossary_entry_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::GlossaryEntry.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_glossary_entries REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::ListGlossaryEntriesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::ListGlossaryEntriesResponse]
+              #   A result object deserialized from the server's reply
+              def list_glossary_entries request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_glossary_entries_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::ListGlossaryEntriesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::GlossaryEntry]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::GlossaryEntry]
+              #   A result object deserialized from the server's reply
+              def create_glossary_entry request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_glossary_entry_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::GlossaryEntry.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::GlossaryEntry]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::GlossaryEntry]
+              #   A result object deserialized from the server's reply
+              def update_glossary_entry request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_glossary_entry_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::GlossaryEntry.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_glossary_entry request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_glossary_entry_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_dataset REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::CreateDatasetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_dataset request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_dataset_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_dataset REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::GetDatasetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::Dataset]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::Dataset]
+              #   A result object deserialized from the server's reply
+              def get_dataset request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_dataset_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::Dataset.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_datasets REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListDatasetsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::ListDatasetsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::ListDatasetsResponse]
+              #   A result object deserialized from the server's reply
+              def list_datasets request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_datasets_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::ListDatasetsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_dataset REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::DeleteDatasetRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_dataset request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_dataset_request request_pb
                 query_string_params = if query_string_params.any?
                                         query_string_params.to_h { |p| p.split "=", 2 }
                                       else
@@ -822,6 +1240,272 @@ module Google
               end
 
               ##
+              # Baseline implementation for the import_data REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ImportDataRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def import_data request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_import_data_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the export_data REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ExportDataRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def export_data request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_export_data_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_examples REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListExamplesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::ListExamplesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::ListExamplesResponse]
+              #   A result object deserialized from the server's reply
+              def list_examples request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_examples_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::ListExamplesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_model REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::CreateModelRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_model request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_model_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_models REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListModelsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::ListModelsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::ListModelsResponse]
+              #   A result object deserialized from the server's reply
+              def list_models request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_models_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::ListModelsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_model REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::GetModelRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Translate::V3::Model]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Translate::V3::Model]
+              #   A result object deserialized from the server's reply
+              def get_model request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_model_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Translate::V3::Model.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_model REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::DeleteModelRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_model request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_model_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the translate_text REST call
@@ -843,6 +1527,36 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v3/{parent}:translateText",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the romanize_text REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::RomanizeTextRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_romanize_text_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{parent}:romanizeText",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{parent}:romanizeText",
                                                           body: "*",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/?$}, false]
@@ -1000,6 +1714,28 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the update_glossary REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::UpdateGlossaryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_glossary_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v3/{glossary.name}",
+                                                          body: "glossary",
+                                                          matches: [
+                                                            ["glossary.name", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the list_glossaries REST call
               #
               # @param request_pb [::Google::Cloud::Translate::V3::ListGlossariesRequest]
@@ -1055,6 +1791,198 @@ module Google
                                                           uri_template: "/v3/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::GetGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_glossary_entry_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/glossaryEntries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_glossary_entries REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_glossary_entries_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{parent}/glossaryEntries",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_glossary_entry_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{parent}/glossaryEntries",
+                                                          body: "glossary_entry",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_glossary_entry_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v3/{glossary_entry.name}",
+                                                          body: "glossary_entry",
+                                                          matches: [
+                                                            ["glossary_entry.name", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/glossaryEntries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_glossary_entry REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_glossary_entry_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v3/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/glossaryEntries/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_dataset REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::CreateDatasetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_dataset_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{parent}/datasets",
+                                                          body: "dataset",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_dataset REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::GetDatasetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_dataset_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_datasets REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListDatasetsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_datasets_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{parent}/datasets",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_dataset REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::DeleteDatasetRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_dataset_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v3/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1275,6 +2203,156 @@ module Google
                                                           uri_template: "/v3/{parent}/adaptiveMtSentences",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/adaptiveMtDatasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the import_data REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ImportDataRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_import_data_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{dataset}:importData",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["dataset", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the export_data REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ExportDataRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_export_data_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{dataset}:exportData",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["dataset", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_examples REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListExamplesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_examples_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{parent}/examples",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/datasets/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_model REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::CreateModelRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_model_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v3/{parent}/models",
+                                                          body: "model",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_models REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::ListModelsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_models_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{parent}/models",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_model REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::GetModelRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_model_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v3/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/models/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_model REST call
+              #
+              # @param request_pb [::Google::Cloud::Translate::V3::DeleteModelRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_model_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v3/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/models/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

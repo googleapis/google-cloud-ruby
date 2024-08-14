@@ -15,6 +15,11 @@
                 "translate_text"
               ]
             },
+            "RomanizeText": {
+              "methods": [
+                "romanize_text"
+              ]
+            },
             "DetectLanguage": {
               "methods": [
                 "detect_language"
@@ -45,6 +50,11 @@
                 "create_glossary"
               ]
             },
+            "UpdateGlossary": {
+              "methods": [
+                "update_glossary"
+              ]
+            },
             "ListGlossaries": {
               "methods": [
                 "list_glossaries"
@@ -58,6 +68,51 @@
             "DeleteGlossary": {
               "methods": [
                 "delete_glossary"
+              ]
+            },
+            "GetGlossaryEntry": {
+              "methods": [
+                "get_glossary_entry"
+              ]
+            },
+            "ListGlossaryEntries": {
+              "methods": [
+                "list_glossary_entries"
+              ]
+            },
+            "CreateGlossaryEntry": {
+              "methods": [
+                "create_glossary_entry"
+              ]
+            },
+            "UpdateGlossaryEntry": {
+              "methods": [
+                "update_glossary_entry"
+              ]
+            },
+            "DeleteGlossaryEntry": {
+              "methods": [
+                "delete_glossary_entry"
+              ]
+            },
+            "CreateDataset": {
+              "methods": [
+                "create_dataset"
+              ]
+            },
+            "GetDataset": {
+              "methods": [
+                "get_dataset"
+              ]
+            },
+            "ListDatasets": {
+              "methods": [
+                "list_datasets"
+              ]
+            },
+            "DeleteDataset": {
+              "methods": [
+                "delete_dataset"
               ]
             },
             "CreateAdaptiveMtDataset": {
@@ -108,6 +163,41 @@
             "ListAdaptiveMtSentences": {
               "methods": [
                 "list_adaptive_mt_sentences"
+              ]
+            },
+            "ImportData": {
+              "methods": [
+                "import_data"
+              ]
+            },
+            "ExportData": {
+              "methods": [
+                "export_data"
+              ]
+            },
+            "ListExamples": {
+              "methods": [
+                "list_examples"
+              ]
+            },
+            "CreateModel": {
+              "methods": [
+                "create_model"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "list_models"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "get_model"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "delete_model"
               ]
             }
           }

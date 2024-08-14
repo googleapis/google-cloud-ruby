@@ -57,6 +57,18 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientPathsTest < Mini
     end
   end
 
+  def test_dataset_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dataset_path project: "value0", location: "value1", dataset: "value2"
+      assert_equal "projects/value0/locations/value1/datasets/value2", path
+    end
+  end
+
   def test_glossary_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -69,6 +81,18 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientPathsTest < Mini
     end
   end
 
+  def test_glossary_entry_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.glossary_entry_path project: "value0", location: "value1", glossary: "value2", glossary_entry: "value3"
+      assert_equal "projects/value0/locations/value1/glossaries/value2/glossaryEntries/value3", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -78,6 +102,18 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientPathsTest < Mini
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_model_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Translate::V3::TranslationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.model_path project: "value0", location: "value1", model: "value2"
+      assert_equal "projects/value0/locations/value1/models/value2", path
     end
   end
 end

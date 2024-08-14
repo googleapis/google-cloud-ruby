@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/translate/v3/version"
+require "google/cloud/translate/v3/bindings_override"
 
 require "google/cloud/translate/v3/translation_service/credentials"
 require "google/cloud/translate/v3/translation_service/paths"

@@ -55,6 +55,84 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Represents a single entry in a glossary.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the entry.
+        #     Format:
+        #       `projects/*/locations/*/glossaries/*/glossaryEntries/*`
+        # @!attribute [rw] terms_pair
+        #   @return [::Google::Cloud::Translate::V3::GlossaryEntry::GlossaryTermsPair]
+        #     Used for an unidirectional glossary.
+        # @!attribute [rw] terms_set
+        #   @return [::Google::Cloud::Translate::V3::GlossaryEntry::GlossaryTermsSet]
+        #     Used for an equivalent term sets glossary.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Describes the glossary entry.
+        class GlossaryEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a single entry for an unidirectional glossary.
+          # @!attribute [rw] source_term
+          #   @return [::Google::Cloud::Translate::V3::GlossaryTerm]
+          #     The source term is the term that will get match in the text,
+          # @!attribute [rw] target_term
+          #   @return [::Google::Cloud::Translate::V3::GlossaryTerm]
+          #     The term that will replace the match source term.
+          class GlossaryTermsPair
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a single entry for an equivalent term set glossary. This is used
+          # for equivalent term sets where each term can be replaced by the other terms
+          # in the set.
+          # @!attribute [rw] terms
+          #   @return [::Array<::Google::Cloud::Translate::V3::GlossaryTerm>]
+          #     Each term in the set represents a term that can be replaced by the other
+          #     terms.
+          class GlossaryTermsSet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Represents a single glossary term
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     The language for this glossary term.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     The text for the glossary term.
+        class GlossaryTerm
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Possible states of long running operations.
+        module OperationState
+          # Invalid.
+          OPERATION_STATE_UNSPECIFIED = 0
+
+          # Request is being processed.
+          OPERATION_STATE_RUNNING = 1
+
+          # The operation was successful.
+          OPERATION_STATE_SUCCEEDED = 2
+
+          # Failed to process operation.
+          OPERATION_STATE_FAILED = 3
+
+          # Request is in the process of being canceled after caller invoked
+          # longrunning.Operations.CancelOperation on the request id.
+          OPERATION_STATE_CANCELLING = 4
+
+          # The operation request was successfully canceled.
+          OPERATION_STATE_CANCELLED = 5
+        end
       end
     end
   end

@@ -137,10 +137,76 @@ module Google
         # @!attribute [rw] content
         #   @return [::Array<::String>]
         #     Required. The content of the input in string format.
-        #     For now only one sentence per request is supported.
+        # @!attribute [rw] reference_sentence_config
+        #   @return [::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::ReferenceSentenceConfig]
+        #     Configuration for caller provided reference sentences.
+        # @!attribute [rw] glossary_config
+        #   @return [::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::GlossaryConfig]
+        #     Optional. Glossary to be applied. The glossary must be
+        #     within the same region (have the same location-id) as the model, otherwise
+        #     an INVALID_ARGUMENT (400) error is returned.
         class AdaptiveMtTranslateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A pair of sentences used as reference in source and target languages.
+          # @!attribute [rw] source_sentence
+          #   @return [::String]
+          #     Source sentence in the sentence pair.
+          # @!attribute [rw] target_sentence
+          #   @return [::String]
+          #     Target sentence in the sentence pair.
+          class ReferenceSentencePair
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A list of reference sentence pairs.
+          # @!attribute [rw] reference_sentence_pairs
+          #   @return [::Array<::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::ReferenceSentencePair>]
+          #     Reference sentence pairs.
+          class ReferenceSentencePairList
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message of caller-provided reference configuration.
+          # @!attribute [rw] reference_sentence_pair_lists
+          #   @return [::Array<::Google::Cloud::Translate::V3::AdaptiveMtTranslateRequest::ReferenceSentencePairList>]
+          #     Reference sentences pair lists. Each list will be used as the references
+          #     to translate the sentence under "content" field at the corresponding
+          #     index. Length of the list is required to be equal to the length of
+          #     "content" field.
+          # @!attribute [rw] source_language_code
+          #   @return [::String]
+          #     Source language code.
+          # @!attribute [rw] target_language_code
+          #   @return [::String]
+          #     Target language code.
+          class ReferenceSentenceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configures which glossary is used for a specific target language and
+          # defines
+          # options for applying that glossary.
+          # @!attribute [rw] glossary
+          #   @return [::String]
+          #     Required. The `glossary` to be applied for this translation.
+          #
+          #     The format depends on the glossary:
+          #
+          #     - User-provided custom glossary:
+          #       `projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}`
+          # @!attribute [rw] ignore_case
+          #   @return [::Boolean]
+          #     Optional. Indicates match is case insensitive. The default value is
+          #     `false` if missing.
+          class GlossaryConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # An AdaptiveMt translation.
@@ -159,6 +225,10 @@ module Google
         # @!attribute [r] language_code
         #   @return [::String]
         #     Output only. The translation's language code.
+        # @!attribute [rw] glossary_translations
+        #   @return [::Array<::Google::Cloud::Translate::V3::AdaptiveMtTranslation>]
+        #     Text translation response if a glossary is provided in the request. This
+        #     could be the same as 'translation' above if no terms apply.
         class AdaptiveMtTranslateResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

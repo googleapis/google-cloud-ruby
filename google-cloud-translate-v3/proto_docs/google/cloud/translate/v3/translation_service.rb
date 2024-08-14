@@ -21,21 +21,12 @@ module Google
   module Cloud
     module Translate
       module V3
-        # Configures which glossary is used for a specific target language and defines
-        # options for applying that glossary.
-        # @!attribute [rw] glossary
-        #   @return [::String]
-        #     Required. The `glossary` to be applied for this translation.
-        #
-        #     The format depends on the glossary:
-        #
-        #     - User-provided custom glossary:
-        #       `projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}`
-        # @!attribute [rw] ignore_case
+        # Configures transliteration feature on top of translation.
+        # @!attribute [rw] enable_transliteration
         #   @return [::Boolean]
-        #     Optional. Indicates match is case insensitive. The default value is `false`
-        #     if missing.
-        class TranslateTextGlossaryConfig
+        #     If true, source text in romanized form can be translated to the target
+        #     language.
+        class TransliterationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -89,6 +80,8 @@ module Google
         #     - General (built-in) models:
         #       `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
         #
+        #     - Translation LLM models:
+        #       `projects/{project-number-or-id}/locations/{location-id}/models/general/translation-llm`,
         #
         #     For global (non-regionalized) requests, use `location-id` `global`.
         #     For example,
@@ -100,6 +93,9 @@ module Google
         #     Optional. Glossary to be applied. The glossary must be
         #     within the same region (have the same location-id) as the model, otherwise
         #     an INVALID_ARGUMENT (400) error is returned.
+        # @!attribute [rw] transliteration_config
+        #   @return [::Google::Cloud::Translate::V3::TransliterationConfig]
+        #     Optional. Transliteration to be applied.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels with user-defined metadata for the request.
@@ -168,6 +164,59 @@ module Google
         #   @return [::Google::Cloud::Translate::V3::TranslateTextGlossaryConfig]
         #     The `glossary_config` used for this translation.
         class Translation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for synchronous romanization.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Project or location to make a call. Must refer to a caller's
+        #     project.
+        #
+        #     Format: `projects/{project-number-or-id}/locations/{location-id}` or
+        #     `projects/{project-number-or-id}`.
+        #
+        #     For global calls, use `projects/{project-number-or-id}/locations/global` or
+        #     `projects/{project-number-or-id}`.
+        # @!attribute [rw] contents
+        #   @return [::Array<::String>]
+        #     Required. The content of the input in string format.
+        # @!attribute [rw] source_language_code
+        #   @return [::String]
+        #     Optional. The ISO-639 language code of the input text if
+        #     known, for example, "hi" or "zh". If the source language isn't specified,
+        #     the API attempts to identify the source language automatically and returns
+        #     the source language for each content in the response.
+        class RomanizeTextRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A single romanization response.
+        # @!attribute [rw] romanized_text
+        #   @return [::String]
+        #     Romanized text.
+        #     If an error occurs during romanization, this field might be excluded from
+        #     the response.
+        # @!attribute [rw] detected_language_code
+        #   @return [::String]
+        #     The ISO-639 language code of source text in the initial request, detected
+        #     automatically, if no source language was passed within the initial
+        #     request. If the source language was passed, auto-detection of the language
+        #     does not occur and this field is empty.
+        class Romanization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for synchronous romanization.
+        # @!attribute [rw] romanizations
+        #   @return [::Array<::Google::Cloud::Translate::V3::Romanization>]
+        #     Text romanization responses.
+        #     This field has the same length as
+        #     {::Google::Cloud::Translate::V3::RomanizeTextRequest#contents `contents`}.
+        class RomanizeTextResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -962,6 +1011,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for the update glossary flow
+        # @!attribute [rw] glossary
+        #   @return [::Google::Cloud::Translate::V3::Glossary]
+        #     Required. The glossary entry to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated. Currently only `display_name` and
+        #     'input_config'
+        class UpdateGlossaryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetGlossary.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1031,6 +1093,78 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for the Get Glossary Entry Api
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the glossary entry to get
+        class GetGlossaryEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for Delete Glossary Entry
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the glossary entry to delete
+        class DeleteGlossaryEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListGlossaryEntries
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent glossary resource name for listing the glossary's
+        #     entries.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Requested page size. The server may return fewer glossary entries
+        #     than requested. If unspecified, the server picks an appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results the server should return.
+        #     Typically, this is the value of
+        #     [ListGlossaryEntriesResponse.next_page_token] returned from the previous
+        #     call. The first page is returned if `page_token`is empty or missing.
+        class ListGlossaryEntriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListGlossaryEntries
+        # @!attribute [rw] glossary_entries
+        #   @return [::Array<::Google::Cloud::Translate::V3::GlossaryEntry>]
+        #     Optional. The Glossary Entries
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Optional. A token to retrieve a page of results. Pass this value in the
+        #     [ListGLossaryEntriesRequest.page_token] field in the subsequent calls.
+        class ListGlossaryEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateGlossaryEntry
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the glossary to create the entry under.
+        # @!attribute [rw] glossary_entry
+        #   @return [::Google::Cloud::Translate::V3::GlossaryEntry]
+        #     Required. The glossary entry to create
+        class CreateGlossaryEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateGlossaryEntry
+        # @!attribute [rw] glossary_entry
+        #   @return [::Google::Cloud::Translate::V3::GlossaryEntry]
+        #     Required. The glossary entry to update.
+        class UpdateGlossaryEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Stored in the
         # {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}
         # field returned by CreateGlossary.
@@ -1066,6 +1200,46 @@ module Google
             CANCELLING = 4
 
             # The glossary creation request was successfully canceled.
+            CANCELLED = 5
+          end
+        end
+
+        # Stored in the
+        # {::Google::Longrunning::Operation#metadata google.longrunning.Operation.metadata}
+        # field returned by UpdateGlossary.
+        # @!attribute [rw] glossary
+        #   @return [::Google::Cloud::Translate::V3::Glossary]
+        #     The updated glossary object.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Translate::V3::UpdateGlossaryMetadata::State]
+        #     The current state of the glossary update operation. If the glossary input
+        #     file was not updated this will be completed immediately
+        # @!attribute [rw] submit_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation was submitted to the server.
+        class UpdateGlossaryMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enumerates the possible states that the update request can be in.
+          module State
+            # Invalid.
+            STATE_UNSPECIFIED = 0
+
+            # Request is being processed.
+            RUNNING = 1
+
+            # The glossary was successfully updated.
+            SUCCEEDED = 2
+
+            # Failed to update the glossary.
+            FAILED = 3
+
+            # Request is in the process of being canceled after caller invoked
+            # longrunning.Operations.CancelOperation on the request id.
+            CANCELLING = 4
+
+            # The glossary update request was successfully canceled.
             CANCELLED = 5
           end
         end
@@ -1432,6 +1606,25 @@ module Google
             # cancel command are output as specified in the request.
             CANCELLED = 5
           end
+        end
+
+        # Configures which glossary is used for a specific target language and defines
+        # options for applying that glossary.
+        # @!attribute [rw] glossary
+        #   @return [::String]
+        #     Required. The `glossary` to be applied for this translation.
+        #
+        #     The format depends on the glossary:
+        #
+        #     - User-provided custom glossary:
+        #       `projects/{project-number-or-id}/locations/{location-id}/glossaries/{glossary-id}`
+        # @!attribute [rw] ignore_case
+        #   @return [::Boolean]
+        #     Optional. Indicates match is case insensitive. The default value is `false`
+        #     if missing.
+        class TranslateTextGlossaryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
