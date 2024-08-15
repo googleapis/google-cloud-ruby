@@ -260,7 +260,7 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     parent = "hello world"
-    ccase = {}
+    case_param = {}
 
     create_case_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_case, name
@@ -277,31 +277,31 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_case({ parent: parent, case: ccase }) do |response, operation|
+      client.create_case({ parent: parent, case: case_param }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_case parent: parent, case: ccase do |response, operation|
+      client.create_case parent: parent, case: case_param do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_case ::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: ccase) do |response, operation|
+      client.create_case ::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: case_param) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_case({ parent: parent, case: ccase }, grpc_options) do |response, operation|
+      client.create_case({ parent: parent, case: case_param }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_case(::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: ccase), grpc_options) do |response, operation|
+      client.create_case(::Google::Cloud::Support::V2::CreateCaseRequest.new(parent: parent, case: case_param), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -319,7 +319,7 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
     grpc_options = {}
 
     # Create request parameters for a unary method.
-    ccase = {}
+    case_param = {}
     update_mask = {}
 
     update_case_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -337,31 +337,31 @@ class ::Google::Cloud::Support::V2::CaseService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update_case({ case: ccase, update_mask: update_mask }) do |response, operation|
+      client.update_case({ case: case_param, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_case case: ccase, update_mask: update_mask do |response, operation|
+      client.update_case case: case_param, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_case ::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: ccase, update_mask: update_mask) do |response, operation|
+      client.update_case ::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: case_param, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_case({ case: ccase, update_mask: update_mask }, grpc_options) do |response, operation|
+      client.update_case({ case: case_param, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_case(::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: ccase, update_mask: update_mask), grpc_options) do |response, operation|
+      client.update_case(::Google::Cloud::Support::V2::UpdateCaseRequest.new(case: case_param, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
