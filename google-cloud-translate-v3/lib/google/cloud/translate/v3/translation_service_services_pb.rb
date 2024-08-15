@@ -37,6 +37,8 @@ module Google
 
             # Translates input text and returns translated text.
             rpc :TranslateText, ::Google::Cloud::Translate::V3::TranslateTextRequest, ::Google::Cloud::Translate::V3::TranslateTextResponse
+            # Romanize input text written in non-Latin scripts to Latin text.
+            rpc :RomanizeText, ::Google::Cloud::Translate::V3::RomanizeTextRequest, ::Google::Cloud::Translate::V3::RomanizeTextResponse
             # Detects the language of text within a request.
             rpc :DetectLanguage, ::Google::Cloud::Translate::V3::DetectLanguageRequest, ::Google::Cloud::Translate::V3::DetectLanguageResponse
             # Returns a list of supported languages for translation.
@@ -62,6 +64,9 @@ module Google
             # Creates a glossary and returns the long-running operation. Returns
             # NOT_FOUND, if the project doesn't exist.
             rpc :CreateGlossary, ::Google::Cloud::Translate::V3::CreateGlossaryRequest, ::Google::Longrunning::Operation
+            # Updates a glossary. A LRO is used since the update can be async if the
+            # glossary's entry file is updated.
+            rpc :UpdateGlossary, ::Google::Cloud::Translate::V3::UpdateGlossaryRequest, ::Google::Longrunning::Operation
             # Lists glossaries in a project. Returns NOT_FOUND, if the project doesn't
             # exist.
             rpc :ListGlossaries, ::Google::Cloud::Translate::V3::ListGlossariesRequest, ::Google::Cloud::Translate::V3::ListGlossariesResponse
@@ -72,6 +77,24 @@ module Google
             # if the glossary isn't created yet.
             # Returns NOT_FOUND, if the glossary doesn't exist.
             rpc :DeleteGlossary, ::Google::Cloud::Translate::V3::DeleteGlossaryRequest, ::Google::Longrunning::Operation
+            # Gets a single glossary entry by the given id.
+            rpc :GetGlossaryEntry, ::Google::Cloud::Translate::V3::GetGlossaryEntryRequest, ::Google::Cloud::Translate::V3::GlossaryEntry
+            # List the entries for the glossary.
+            rpc :ListGlossaryEntries, ::Google::Cloud::Translate::V3::ListGlossaryEntriesRequest, ::Google::Cloud::Translate::V3::ListGlossaryEntriesResponse
+            # Creates a glossary entry.
+            rpc :CreateGlossaryEntry, ::Google::Cloud::Translate::V3::CreateGlossaryEntryRequest, ::Google::Cloud::Translate::V3::GlossaryEntry
+            # Updates a glossary entry.
+            rpc :UpdateGlossaryEntry, ::Google::Cloud::Translate::V3::UpdateGlossaryEntryRequest, ::Google::Cloud::Translate::V3::GlossaryEntry
+            # Deletes a single entry from the glossary
+            rpc :DeleteGlossaryEntry, ::Google::Cloud::Translate::V3::DeleteGlossaryEntryRequest, ::Google::Protobuf::Empty
+            # Creates a Dataset.
+            rpc :CreateDataset, ::Google::Cloud::Translate::V3::CreateDatasetRequest, ::Google::Longrunning::Operation
+            # Gets a Dataset.
+            rpc :GetDataset, ::Google::Cloud::Translate::V3::GetDatasetRequest, ::Google::Cloud::Translate::V3::Dataset
+            # Lists datasets.
+            rpc :ListDatasets, ::Google::Cloud::Translate::V3::ListDatasetsRequest, ::Google::Cloud::Translate::V3::ListDatasetsResponse
+            # Deletes a dataset and all of its contents.
+            rpc :DeleteDataset, ::Google::Cloud::Translate::V3::DeleteDatasetRequest, ::Google::Longrunning::Operation
             # Creates an Adaptive MT dataset.
             rpc :CreateAdaptiveMtDataset, ::Google::Cloud::Translate::V3::CreateAdaptiveMtDatasetRequest, ::Google::Cloud::Translate::V3::AdaptiveMtDataset
             # Deletes an Adaptive MT dataset, including all its entries and associated
@@ -94,6 +117,20 @@ module Google
             rpc :ListAdaptiveMtFiles, ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesRequest, ::Google::Cloud::Translate::V3::ListAdaptiveMtFilesResponse
             # Lists all AdaptiveMtSentences under a given file/dataset.
             rpc :ListAdaptiveMtSentences, ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesRequest, ::Google::Cloud::Translate::V3::ListAdaptiveMtSentencesResponse
+            # Import sentence pairs into translation Dataset.
+            rpc :ImportData, ::Google::Cloud::Translate::V3::ImportDataRequest, ::Google::Longrunning::Operation
+            # Exports dataset's data to the provided output location.
+            rpc :ExportData, ::Google::Cloud::Translate::V3::ExportDataRequest, ::Google::Longrunning::Operation
+            # Lists sentence pairs in the dataset.
+            rpc :ListExamples, ::Google::Cloud::Translate::V3::ListExamplesRequest, ::Google::Cloud::Translate::V3::ListExamplesResponse
+            # Creates a Model.
+            rpc :CreateModel, ::Google::Cloud::Translate::V3::CreateModelRequest, ::Google::Longrunning::Operation
+            # Lists models.
+            rpc :ListModels, ::Google::Cloud::Translate::V3::ListModelsRequest, ::Google::Cloud::Translate::V3::ListModelsResponse
+            # Gets a model.
+            rpc :GetModel, ::Google::Cloud::Translate::V3::GetModelRequest, ::Google::Cloud::Translate::V3::Model
+            # Deletes a model.
+            rpc :DeleteModel, ::Google::Cloud::Translate::V3::DeleteModelRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
