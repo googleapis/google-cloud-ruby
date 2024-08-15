@@ -206,6 +206,21 @@ module Google
         #
         #     The root path value must meet
         #     [Object Name Requirements](/storage/docs/naming#objectnames).
+        # @!attribute [rw] managed_folder_transfer_enabled
+        #   @return [::Boolean]
+        #     Preview. Enables the transfer of managed folders between Cloud Storage
+        #     buckets. Set this option on the gcs_data_source.
+        #
+        #     If set to true:
+        #
+        #     - Managed folders in the source bucket are transferred to the
+        #       destination bucket.
+        #     - Managed folders in the destination bucket are overwritten. Other
+        #       OVERWRITE options are not supported.
+        #
+        #     See
+        #     [Transfer Cloud Storage managed
+        #     folders](/storage-transfer/docs/managed-folders).
         class GcsData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,27 +260,45 @@ module Google
         #     the provided role using the
         #     {::Google::Cloud::StorageTransfer::V1::GoogleServiceAccount GoogleServiceAccount} for
         #     this project.
+        # @!attribute [rw] cloudfront_domain
+        #   @return [::String]
+        #     Optional. The CloudFront distribution domain name pointing to this bucket,
+        #     to use when fetching.
+        #
+        #     See
+        #     [Transfer from S3 via
+        #     CloudFront](https://cloud.google.com/storage-transfer/docs/s3-cloudfront)
+        #     for more information.
+        #
+        #     Format: `https://{id}.cloudfront.net` or any valid custom domain. Must
+        #     begin with `https://`.
         # @!attribute [rw] credentials_secret
         #   @return [::String]
         #     Optional. The Resource name of a secret in Secret Manager.
         #
-        #     The Azure SAS token must be stored in Secret Manager in JSON format:
-        #     <pre>{
-        #      "sas_token" : "<var>SAS_TOKEN</var>"
-        #     }</pre>
+        #     AWS credentials must be stored in Secret Manager in JSON format:
+        #
+        #     {
+        #      "access_key_id": "ACCESS_KEY_ID",
+        #      "secret_access_key": "SECRET_ACCESS_KEY"
+        #     }
+        #
         #     {::Google::Cloud::StorageTransfer::V1::GoogleServiceAccount GoogleServiceAccount} must
         #     be granted `roles/secretmanager.secretAccessor` for the resource.
         #
-        #     See [Configure access to a source: Microsoft Azure Blob Storage]
-        #     (https://cloud.google.com/storage-transfer/docs/source-microsoft-azure#secret_manager)
+        #     See [Configure access to a source: Amazon S3]
+        #     (https://cloud.google.com/storage-transfer/docs/source-amazon-s3#secret_manager)
         #     for more information.
         #
-        #     If `credentials_secret` is specified, do not specify [azure_credentials][].
-        #
-        #     This feature is in
-        #     [preview](https://cloud.google.com/terms/service-terms#1).
+        #     If `credentials_secret` is specified, do not specify
+        #     {::Google::Cloud::StorageTransfer::V1::AwsS3Data#role_arn role_arn} or
+        #     {::Google::Cloud::StorageTransfer::V1::AwsS3Data#aws_access_key aws_access_key}.
         #
         #     Format: `projects/{project_number}/secrets/{secret_name}`
+        # @!attribute [rw] managed_private_network
+        #   @return [::Boolean]
+        #     Egress bytes over a Google-managed private network.
+        #     This network is shared between other users of Storage Transfer Service.
         class AwsS3Data
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,9 +336,11 @@ module Google
         #     Optional. The Resource name of a secret in Secret Manager.
         #
         #     The Azure SAS token must be stored in Secret Manager in JSON format:
-        #     <pre>{
-        #      "sas_token" : "<var>SAS_TOKEN</var>"
-        #     }</pre>
+        #
+        #     {
+        #      "sas_token" : "SAS_TOKEN"
+        #     }
+        #
         #     {::Google::Cloud::StorageTransfer::V1::GoogleServiceAccount GoogleServiceAccount} must
         #     be granted `roles/secretmanager.secretAccessor` for the resource.
         #
@@ -315,9 +350,6 @@ module Google
         #
         #     If `credentials_secret` is specified, do not specify
         #     {::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData#azure_credentials azure_credentials}.
-        #
-        #     This feature is in
-        #     [preview](https://cloud.google.com/terms/service-terms#1).
         #
         #     Format: `projects/{project_number}/secrets/{secret_name}`
         class AzureBlobStorageData
@@ -380,6 +412,18 @@ module Google
         #   @return [::String]
         #     Root directory path to the filesystem.
         class PosixFilesystem
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # An HdfsData resource specifies a path within an HDFS entity (e.g. a cluster).
+        # All cluster-specific settings, such as namenodes and ports, are configured on
+        # the transfer agents servicing requests, so HdfsData only contains the root
+        # path to the data in our transfer.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Root path to transfer files.
+        class HdfsData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -487,7 +531,7 @@ module Google
           end
         end
 
-        # Represents an On-Premises Agent pool.
+        # Represents an agent pool.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Specifies a unique string that identifies the agent pool.
@@ -522,8 +566,8 @@ module Google
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
-            # This is an initialization state. During this stage, the resources such as
-            # Pub/Sub topics are allocated for the AgentPool.
+            # This is an initialization state. During this stage, resources are
+            # allocated for the AgentPool.
             CREATING = 1
 
             # Determines that the AgentPool is created for use. At this state, Agents
@@ -615,6 +659,9 @@ module Google
         # @!attribute [rw] aws_s3_compatible_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::AwsS3CompatibleData]
         #     An AWS S3 compatible data source.
+        # @!attribute [rw] hdfs_data_source
+        #   @return [::Google::Cloud::StorageTransfer::V1::HdfsData]
+        #     An HDFS cluster data source.
         # @!attribute [rw] gcs_intermediate_data_location
         #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
         #     For transfers between file systems, specifies a Cloud Storage bucket
@@ -699,9 +746,10 @@ module Google
         # @!attribute [rw] time_created
         #   @return [::Google::Cloud::StorageTransfer::V1::MetadataOptions::TimeCreated]
         #     Specifies how each object's `timeCreated` metadata is preserved for
-        #     transfers between Google Cloud Storage buckets.  If unspecified, the
-        #     default behavior is the same as
+        #     transfers. If unspecified, the default behavior is the same as
         #     {::Google::Cloud::StorageTransfer::V1::MetadataOptions::TimeCreated::TIME_CREATED_SKIP TIME_CREATED_SKIP}.
+        #     This behavior is supported for transfers to Cloud Storage buckets from
+        #     Cloud Storage, Amazon S3, S3-compatible storage, and Azure sources.
         class MetadataOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -832,10 +880,10 @@ module Google
             # Do not preserve the `timeCreated` metadata from the source object.
             TIME_CREATED_SKIP = 1
 
-            # Preserves the source object's `timeCreated` metadata in the `customTime`
-            # field in the destination object.  Note that any value stored in the
-            # source object's `customTime` field will not be propagated to the
-            # destination object.
+            # Preserves the source object's `timeCreated` or `lastModified` metadata in
+            # the `customTime` field in the destination object.  Note that any value
+            # stored in the source object's `customTime` field will not be propagated
+            # to the destination object.
             TIME_CREATED_PRESERVE_AS_CUSTOM_TIME = 2
           end
         end
@@ -993,8 +1041,7 @@ module Google
         #     Transfer specification.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::StorageTransfer::V1::NotificationConfig]
-        #     Notification configuration. This is not supported for transfers involving
-        #     PosixFilesystem.
+        #     Notification configuration.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::StorageTransfer::V1::LoggingConfig]
         #     Logging configuration.
@@ -1255,32 +1302,25 @@ module Google
 
         # Specifies the logging behavior for transfer operations.
         #
-        # For cloud-to-cloud transfers, logs are sent to Cloud Logging. See
+        # Logs can be sent to Cloud Logging for all transfer types. See
         # [Read transfer
         # logs](https://cloud.google.com/storage-transfer/docs/read-transfer-logs) for
         # details.
-        #
-        # For transfers to or from a POSIX file system, logs are stored in the
-        # Cloud Storage bucket that is the source or sink of the transfer.
-        # See [Managing Transfer for on-premises jobs]
-        # (https://cloud.google.com/storage-transfer/docs/managing-on-prem-jobs#viewing-logs)
-        # for details.
         # @!attribute [rw] log_actions
         #   @return [::Array<::Google::Cloud::StorageTransfer::V1::LoggingConfig::LoggableAction>]
         #     Specifies the actions to be logged. If empty, no logs are generated.
-        #     Not supported for transfers with PosixFilesystem data sources; use
-        #     {::Google::Cloud::StorageTransfer::V1::LoggingConfig#enable_onprem_gcs_transfer_logs enable_onprem_gcs_transfer_logs}
-        #     instead.
         # @!attribute [rw] log_action_states
         #   @return [::Array<::Google::Cloud::StorageTransfer::V1::LoggingConfig::LoggableActionState>]
         #     States in which `log_actions` are logged. If empty, no logs are generated.
-        #     Not supported for transfers with PosixFilesystem data sources; use
-        #     {::Google::Cloud::StorageTransfer::V1::LoggingConfig#enable_onprem_gcs_transfer_logs enable_onprem_gcs_transfer_logs}
-        #     instead.
         # @!attribute [rw] enable_onprem_gcs_transfer_logs
         #   @return [::Boolean]
-        #     For transfers with a PosixFilesystem source, this option enables the Cloud
-        #     Storage transfer logs for this transfer.
+        #     For PosixFilesystem transfers, enables
+        #     [file system transfer
+        #     logs](https://cloud.google.com/storage-transfer/docs/on-prem-transfer-log-format)
+        #     instead of, or in addition to, Cloud Logging.
+        #
+        #     This option ignores [LoggableAction] and [LoggableActionState]. If these
+        #     are set, Cloud Logging will also be enabled for this transfer.
         class LoggingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
