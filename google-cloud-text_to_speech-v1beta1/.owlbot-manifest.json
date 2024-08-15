@@ -53,6 +53,7 @@
     "snippets/Gemfile",
     "snippets/snippet_metadata_google.cloud.texttospeech.v1beta1.json",
     "snippets/text_to_speech/list_voices.rb",
+    "snippets/text_to_speech/streaming_synthesize.rb",
     "snippets/text_to_speech/synthesize_speech.rb",
     "snippets/text_to_speech_long_audio_synthesize/synthesize_long_audio.rb",
     "test/google/cloud/text_to_speech/v1beta1/text_to_speech_long_audio_synthesize_operations_test.rb",

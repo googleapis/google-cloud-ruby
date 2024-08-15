@@ -19,6 +19,11 @@
               "methods": [
                 "synthesize_speech"
               ]
+            },
+            "StreamingSynthesize": {
+              "methods": [
+                "streaming_synthesize"
+              ]
             }
           }
         }
