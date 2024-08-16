@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-08-16)
+
+#### Features
+
+* Add BigQuery Metastore Partition Service API version v1alpha ([#26606](https://github.com/googleapis/google-cloud-ruby/issues/26606)) 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
