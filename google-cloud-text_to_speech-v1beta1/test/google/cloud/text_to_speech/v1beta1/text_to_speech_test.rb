@@ -177,6 +177,95 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
     end
   end
 
+  def test_streaming_synthesize
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a bidi streaming method.
+    streaming_config = {}
+
+    streaming_synthesize_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :streaming_synthesize, name
+      assert_kind_of Enumerable, request
+      refute_nil options
+      request
+    end
+
+    Gapic::ServiceStub.stub :new, streaming_synthesize_client_stub do
+      # Create client
+      client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use enumerable object with hash and protobuf object.
+      request_hash = { streaming_config: streaming_config }
+      request_proto = ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest.new streaming_config: streaming_config
+      enum_input = [request_hash, request_proto].to_enum
+      client.streaming_synthesize enum_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common).
+      request_hash = { streaming_config: streaming_config }
+      request_proto = ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest.new streaming_config: streaming_config
+      stream_input = Gapic::StreamInput.new
+      client.streaming_synthesize stream_input do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Use enumerable object with hash and protobuf object with options.
+      request_hash = { streaming_config: streaming_config }
+      request_proto = ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest.new streaming_config: streaming_config
+      enum_input = [request_hash, request_proto].to_enum
+      client.streaming_synthesize enum_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use stream input object (from gapic-common) with options.
+      request_hash = { streaming_config: streaming_config }
+      request_proto = ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest.new streaming_config: streaming_config
+      stream_input = Gapic::StreamInput.new
+      client.streaming_synthesize stream_input, grpc_options do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+      stream_input << request_hash
+      stream_input << request_proto
+      stream_input.close
+
+      # Verify method calls
+      assert_equal 4, streaming_synthesize_client_stub.call_rpc_count
+      streaming_synthesize_client_stub.requests.each do |request|
+        request.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest, r
+          assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeConfig), r["streaming_config"]
+          assert_equal :streaming_config, r.streaming_request
+        end
+      end
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

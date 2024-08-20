@@ -339,6 +339,86 @@ module Google
             end
 
             ##
+            # Performs bidirectional streaming speech synthesis: receive audio while
+            # sending text.
+            #
+            # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest, ::Hash>]
+            #   An enumerable of {::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest} instances.
+            # @param options [::Gapic::CallOptions, ::Hash]
+            #   Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/text_to_speech/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_synthesize method to start streaming.
+            #   output = client.streaming_synthesize input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest.new
+            #   input << Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def streaming_synthesize request, options = nil
+              unless request.is_a? ::Enumerable
+                raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
+                request = request.to_enum
+              end
+
+              request = request.lazy.map do |req|
+                ::Gapic::Protobuf.coerce req, to: ::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeRequest
+              end
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.streaming_synthesize.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::TextToSpeech::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.streaming_synthesize.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.streaming_synthesize.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @text_to_speech_stub.call_rpc :streaming_synthesize, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the TextToSpeech API.
             #
             # This class represents the configuration for TextToSpeech,
@@ -501,6 +581,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :synthesize_speech
+                ##
+                # RPC-specific configuration for `streaming_synthesize`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :streaming_synthesize
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -508,6 +593,8 @@ module Google
                   @list_voices = ::Gapic::Config::Method.new list_voices_config
                   synthesize_speech_config = parent_rpcs.synthesize_speech if parent_rpcs.respond_to? :synthesize_speech
                   @synthesize_speech = ::Gapic::Config::Method.new synthesize_speech_config
+                  streaming_synthesize_config = parent_rpcs.streaming_synthesize if parent_rpcs.respond_to? :streaming_synthesize
+                  @streaming_synthesize = ::Gapic::Config::Method.new streaming_synthesize_config
 
                   yield self if block_given?
                 end
