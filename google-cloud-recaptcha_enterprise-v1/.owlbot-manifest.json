@@ -36,6 +36,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/recaptcha_enterprise_service/add_ip_override.rb",
     "snippets/recaptcha_enterprise_service/annotate_assessment.rb",
     "snippets/recaptcha_enterprise_service/create_assessment.rb",
     "snippets/recaptcha_enterprise_service/create_firewall_policy.rb",

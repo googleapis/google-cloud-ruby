@@ -472,8 +472,7 @@ module Google
         # @!attribute [rw] express
         #   @return [::Boolean]
         #     Optional. Flag for a reCAPTCHA express request for an assessment without a
-        #     token. If enabled, `site_key` must reference a SCORE key with WAF feature
-        #     set to EXPRESS.
+        #     token. If enabled, `site_key` must reference an Express site key.
         # @!attribute [rw] requested_uri
         #   @return [::String]
         #     Optional. The URI resource the user requested that triggered an assessment.
@@ -1197,11 +1196,11 @@ module Google
         #     Optional. If true, skips the billing check.
         #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
         #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-        #     https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+        #     https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
         #     any disruption of your usage, we check that a billing account is present.
         #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
         #     billing check and proceed with the migration. See
-        #     https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+        #     https://cloud.google.com/recaptcha/docs/billing-information.
         class MigrateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1270,10 +1269,13 @@ module Google
         # @!attribute [rw] ios_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IOSKeySettings]
         #     Settings for keys that can be used by iOS apps.
+        # @!attribute [rw] express_settings
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ExpressKeySettings]
+        #     Settings for keys that can be used by reCAPTCHA Express.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See [Creating and managing labels]
-        #     (https://cloud.google.com/recaptcha-enterprise/docs/labels).
+        #     (https://cloud.google.com/recaptcha/docs/labels).
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp corresponding to the creation of this key.
@@ -1425,6 +1427,12 @@ module Google
         #     Providing these fields allows reCAPTCHA Enterprise to get a better
         #     assessment of the integrity of your app.
         class IOSKeySettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings specific to keys that can be used for reCAPTCHA Express.
+        class ExpressKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1777,6 +1785,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The AddIpOverride request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the key to which the IP override is added, in the
+        #     format `projects/{project}/keys/{key}`.
+        # @!attribute [rw] ip_override_data
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData]
+        #     Required. IP override added to the key.
+        class AddIpOverrideRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for AddIpOverride.
+        class AddIpOverrideResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A membership in a group of related accounts.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1823,7 +1850,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Supported WAF features. For more information, see
-          # https://cloud.google.com/recaptcha-enterprise/docs/usecase#comparison_of_features.
+          # https://cloud.google.com/recaptcha/docs/usecase#comparison_of_features.
           module WafFeature
             # Undefined feature.
             WAF_FEATURE_UNSPECIFIED = 0
@@ -1856,6 +1883,34 @@ module Google
 
             # Cloudflare
             CLOUDFLARE = 4
+          end
+        end
+
+        # Information about the IP or IP range override.
+        # @!attribute [rw] ip
+        #   @return [::String]
+        #     Required. The IP address to override (can be IPv4, IPv6 or CIDR).
+        #     The IP override must be a valid IPv4 or IPv6 address, or a CIDR range.
+        #     The IP override must be a public IP address.
+        #     Example of IPv4: 168.192.5.6
+        #     Example of IPv6: 2001:0000:130F:0000:0000:09C0:876A:130B
+        #     Example of IPv4 with CIDR: 168.192.5.0/24
+        #     Example of IPv6 with CIDR: 2001:0DB8:1234::/48
+        # @!attribute [rw] override_type
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData::OverrideType]
+        #     Required. Describes the type of IP override.
+        class IpOverrideData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that represents the type of IP override.
+          module OverrideType
+            # Default override type that indicates this enum hasn't been specified.
+            OVERRIDE_TYPE_UNSPECIFIED = 0
+
+            # Allowlist the IP address; i.e. give a `risk_analysis.score` of 0.9 for
+            # all valid assessments.
+            ALLOW = 1
           end
         end
       end

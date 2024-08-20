@@ -941,11 +941,11 @@ module Google
             #     Optional. If true, skips the billing check.
             #     A reCAPTCHA Enterprise key or migrated key behaves differently than a
             #     reCAPTCHA (non-Enterprise version) key when you reach a quota limit (see
-            #     https://cloud.google.com/recaptcha-enterprise/quotas#quota_limit). To avoid
+            #     https://cloud.google.com/recaptcha/quotas#quota_limit). To avoid
             #     any disruption of your usage, we check that a billing account is present.
             #     If your usage of reCAPTCHA is under the free quota, you can safely skip the
             #     billing check and proceed with the migration. See
-            #     https://cloud.google.com/recaptcha-enterprise/docs/billing-information.
+            #     https://cloud.google.com/recaptcha/docs/billing-information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -1005,6 +1005,98 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @recaptcha_enterprise_service_stub.call_rpc :migrate_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Adds an IP override to a key. The following restrictions hold:
+            # * The maximum number of IP overrides per key is 100.
+            # * For any conflict (such as IP already exists or IP part of an existing
+            #   IP range), an error will be returned.
+            #
+            # @overload add_ip_override(request, options = nil)
+            #   Pass arguments to `add_ip_override` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload add_ip_override(name: nil, ip_override_data: nil)
+            #   Pass arguments to `add_ip_override` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the key to which the IP override is added, in the
+            #     format `projects/{project}/keys/{key}`.
+            #   @param ip_override_data [::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData, ::Hash]
+            #     Required. IP override added to the key.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideRequest.new
+            #
+            #   # Call the add_ip_override method.
+            #   result = client.add_ip_override request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideResponse.
+            #   p result
+            #
+            def add_ip_override request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.add_ip_override.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.add_ip_override.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.add_ip_override.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :add_ip_override, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2163,6 +2255,11 @@ module Google
                 #
                 attr_reader :migrate_key
                 ##
+                # RPC-specific configuration for `add_ip_override`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :add_ip_override
+                ##
                 # RPC-specific configuration for `get_metrics`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2233,6 +2330,8 @@ module Google
                   @delete_key = ::Gapic::Config::Method.new delete_key_config
                   migrate_key_config = parent_rpcs.migrate_key if parent_rpcs.respond_to? :migrate_key
                   @migrate_key = ::Gapic::Config::Method.new migrate_key_config
+                  add_ip_override_config = parent_rpcs.add_ip_override if parent_rpcs.respond_to? :add_ip_override
+                  @add_ip_override = ::Gapic::Config::Method.new add_ip_override_config
                   get_metrics_config = parent_rpcs.get_metrics if parent_rpcs.respond_to? :get_metrics
                   @get_metrics = ::Gapic::Config::Method.new get_metrics_config
                   create_firewall_policy_config = parent_rpcs.create_firewall_policy if parent_rpcs.respond_to? :create_firewall_policy
