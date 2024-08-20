@@ -4754,6 +4754,11 @@ module Google
         #     reprofiling. If you set this field, profiles are refreshed at this
         #     frequency regardless of whether the underlying tables have changed.
         #     Defaults to never.
+        # @!attribute [rw] inspect_template_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryInspectTemplateModifiedCadence]
+        #     Governs when to update data profiles when the inspection rules
+        #     defined by the `InspectTemplate` change.
+        #     If not set, changing the template will not cause a data profile to update.
         class DiscoveryCloudSqlGenerationCadence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6560,10 +6565,12 @@ module Google
         # @!attribute [rw] file_extensions_scanned
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileExtensionInfo>]
         #     A sample of file types scanned in this cluster. Empty if no files were
-        #     scanned.
+        #     scanned. File extensions can be derived from the file name or the file
+        #     content.
         # @!attribute [rw] file_extensions_seen
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileExtensionInfo>]
         #     A sample of file types seen in this cluster. Empty if no files were seen.
+        #     File extensions can be derived from the file name or the file content.
         # @!attribute [rw] no_files_exist
         #   @return [::Boolean]
         #     True if no files exist in this cluster. If the bucket had more files than
@@ -6645,6 +6652,10 @@ module Google
         #     * Supported fields/values:
         #         - `project_id` - The Google Cloud project ID.
         #         - `file_store_path` - The path like "gs://bucket".
+        #         - `data_source_type` - The profile's data source type, like
+        #         "google/storage/bucket".
+        #         - `data_storage_location` - The location where the file store's data is
+        #         stored, like "us-central1".
         #         - `sensitivity_level` - HIGH|MODERATE|LOW
         #         - `data_risk_level` - HIGH|MODERATE|LOW
         #         - `resource_visibility`: PUBLIC|RESTRICTED
