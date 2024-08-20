@@ -1,4 +1,4 @@
-# Ruby Client for the Apache Kafka for BigQuery V1 API
+# Ruby Client for the Managed Service for Apache Kafka V1 API
 
 Manage Apache Kafka clusters and resources.
 
@@ -6,7 +6,7 @@ Manage Apache Kafka clusters and resources.
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Apache Kafka for BigQuery V1 API. Most users should consider using
+specific version of the Managed Service for Apache Kafka V1 API. Most users should consider using
 the main client gem,
 [google-cloud-managed_kafka](https://rubygems.org/gems/google-cloud-managed_kafka).
 See the section below titled *Which client should I use?* for more information.
