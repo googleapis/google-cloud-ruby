@@ -59,6 +59,11 @@ module Google
             # your user must have the reCAPTCHA Enterprise Admin IAM role in the
             # destination project.
             rpc :MigrateKey, ::Google::Cloud::RecaptchaEnterprise::V1::MigrateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
+            # Adds an IP override to a key. The following restrictions hold:
+            # * The maximum number of IP overrides per key is 100.
+            # * For any conflict (such as IP already exists or IP part of an existing
+            #   IP range), an error will be returned.
+            rpc :AddIpOverride, ::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideRequest, ::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideResponse
             # Get some aggregated metrics for a Key. This data can be used to build
             # dashboards.
             rpc :GetMetrics, ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Metrics
