@@ -30,7 +30,6 @@ module Google
         # @!attribute [rw] input
         #   @return [::Google::Cloud::TextToSpeech::V1::SynthesisInput]
         #     Required. The Synthesizer requires either plain text or SSML as input.
-        #     While Long Audio is in preview, SSML is temporarily unsupported.
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::TextToSpeech::V1::AudioConfig]
         #     Required. The configuration of the synthesized audio.

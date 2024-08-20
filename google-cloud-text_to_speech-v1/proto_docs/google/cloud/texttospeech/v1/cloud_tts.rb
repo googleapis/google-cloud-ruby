@@ -116,8 +116,9 @@ module Google
         #     Bokmal) instead of "no" (Norwegian)".
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the voice. If not set, the service will choose a
-        #     voice based on the other parameters such as language_code and gender.
+        #     The name of the voice. If both the name and the gender are not set,
+        #     the service will choose a voice based on the other parameters such as
+        #     language_code.
         # @!attribute [rw] ssml_gender
         #   @return [::Google::Cloud::TextToSpeech::V1::SsmlVoiceGender]
         #     The preferred gender of the voice. If not set, the service will
@@ -220,6 +221,57 @@ module Google
         #     with all bytes fields, protobuffers use a pure binary representation,
         #     whereas JSON representations use base64.
         class SynthesizeSpeechResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Provides configuration information for the StreamingSynthesize request.
+        # @!attribute [rw] voice
+        #   @return [::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams]
+        #     Required. The desired voice of the synthesized audio.
+        class StreamingSynthesizeConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Input to be synthesized.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     The raw text to be synthesized. It is recommended that each input
+        #     contains complete, terminating sentences, as this will likely result in
+        #     better prosody in the output audio. That being said, users are free to
+        #     input text however they please.
+        class StreamingSynthesisInput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the `StreamingSynthesize` method. Multiple
+        # `StreamingSynthesizeRequest` messages are sent in one call.
+        # The first message must contain a `streaming_config` that
+        # fully specifies the request configuration and must not contain `input`. All
+        # subsequent messages must only have `input` set.
+        # @!attribute [rw] streaming_config
+        #   @return [::Google::Cloud::TextToSpeech::V1::StreamingSynthesizeConfig]
+        #     StreamingSynthesizeConfig to be used in this streaming attempt. Only
+        #     specified in the first message sent in a `StreamingSynthesize` call.
+        # @!attribute [rw] input
+        #   @return [::Google::Cloud::TextToSpeech::V1::StreamingSynthesisInput]
+        #     Input to synthesize. Specified in all messages but the first in a
+        #     `StreamingSynthesize` call.
+        class StreamingSynthesizeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `StreamingSynthesizeResponse` is the only message returned to the
+        # client by `StreamingSynthesize` method. A series of zero or more
+        # `StreamingSynthesizeResponse` messages are streamed back to the client.
+        # @!attribute [rw] audio_content
+        #   @return [::String]
+        #     The audio data bytes encoded as specified in the request. This is
+        #     headerless LINEAR16 audio with a sample rate of 24000.
+        class StreamingSynthesizeResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
