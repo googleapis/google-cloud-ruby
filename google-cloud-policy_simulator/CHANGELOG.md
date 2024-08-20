@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-08-20)
+
+#### Features
+
+* Disable xrefs for README files in wrapper gems ([#26971](https://github.com/googleapis/google-cloud-ruby/issues/26971)) 
+
 ### 1.0.0 (2024-06-26)
 
 #### Features
