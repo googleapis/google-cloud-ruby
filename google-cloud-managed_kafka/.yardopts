@@ -1,5 +1,5 @@
 --no-private
---title="Apache Kafka for BigQuery API"
+--title="Managed Service for Apache Kafka API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
