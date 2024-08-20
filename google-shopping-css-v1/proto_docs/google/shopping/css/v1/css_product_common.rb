@@ -203,16 +203,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The certification for the product.
+        # The certification for the product. Use the this attribute to describe
+        # certifications, such as energy efficiency ratings, associated with a product.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the certification.
+        #     The name of the certification. At this time, the most common value is
+        #     "EPREL", which represents energy efficiency certifications in the EU
+        #     European Registry for Energy Labeling (EPREL) database.
         # @!attribute [rw] authority
         #   @return [::String]
-        #     Name of the certification body.
+        #     The authority or certification body responsible for issuing the
+        #     certification. At this time, the most common value is "EC" or
+        #     “European_Commission” for energy labels in the EU.
         # @!attribute [rw] code
         #   @return [::String]
-        #     A unique code to identify the certification.
+        #     The code of the certification. For example, for the EPREL certificate with
+        #     the link https://eprel.ec.europa.eu/screen/product/dishwashers2019/123456
+        #     the code is 123456. The code is required for European Energy Labels.
         class Certification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
