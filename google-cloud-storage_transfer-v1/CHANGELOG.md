@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 (2024-08-22)
+
+#### Features
+
+* add GCS Managed Folders 
+* add HDFS configuration ([#26965](https://github.com/googleapis/google-cloud-ruby/issues/26965)) 
+* add S3 Cloudfront Domain 
+* add S3 Managed Private Network 
+
 ### 1.0.0 (2024-07-10)
 
 #### Features
