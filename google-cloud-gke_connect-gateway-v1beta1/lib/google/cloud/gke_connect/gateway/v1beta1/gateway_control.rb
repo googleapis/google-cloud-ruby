@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,8 +22,9 @@ require "gapic/config/method"
 
 require "google/cloud/gke_connect/gateway/v1beta1/version"
 
-require "google/cloud/gke_connect/gateway/v1beta1/gateway_service/credentials"
-require "google/cloud/gke_connect/gateway/v1beta1/gateway_service/client"
+require "google/cloud/gke_connect/gateway/v1beta1/gateway_control/credentials"
+require "google/cloud/gke_connect/gateway/v1beta1/gateway_control/client"
+require "google/cloud/gke_connect/gateway/v1beta1/gateway_control/rest"
 
 module Google
   module Cloud
@@ -31,18 +32,19 @@ module Google
       module Gateway
         module V1beta1
           ##
-          # Gateway service is a public API which works as a Kubernetes resource model
-          # proxy between end users and registered Kubernetes clusters. Each RPC in this
-          # service matches with an HTTP verb. End user will initiate kubectl commands
-          # against the Gateway service, and Gateway service will forward user requests
-          # to clusters.
+          # GatewayControl is the control plane API for Connect Gateway.
           #
           # @example Load this service and instantiate a gRPC client
           #
-          #     require "google/cloud/gke_connect/gateway/v1beta1/gateway_service"
-          #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+          #     require "google/cloud/gke_connect/gateway/v1beta1/gateway_control"
+          #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client.new
           #
-          module GatewayService
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/gke_connect/gateway/v1beta1/gateway_control/rest"
+          #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Rest::Client.new
+          #
+          module GatewayControl
           end
         end
       end
@@ -50,5 +52,5 @@ module Google
   end
 end
 
-helper_path = ::File.join __dir__, "gateway_service", "helpers.rb"
-require "google/cloud/gke_connect/gateway/v1beta1/gateway_service/helpers" if ::File.file? helper_path
+helper_path = ::File.join __dir__, "gateway_control", "helpers.rb"
+require "google/cloud/gke_connect/gateway/v1beta1/gateway_control/helpers" if ::File.file? helper_path

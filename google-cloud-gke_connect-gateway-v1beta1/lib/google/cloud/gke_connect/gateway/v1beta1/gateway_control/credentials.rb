@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ module Google
     module GkeConnect
       module Gateway
         module V1beta1
-          module GatewayService
-            # Credentials for the GatewayService API.
+          module GatewayControl
+            # Credentials for the GatewayControl API.
             class Credentials < ::Google::Auth::Credentials
               self.scope = [
                 "https://www.googleapis.com/auth/cloud-platform"
