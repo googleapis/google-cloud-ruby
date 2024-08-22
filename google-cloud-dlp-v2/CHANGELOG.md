@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.0 (2024-08-22)
+
+#### Features
+
+* file store data profiles can now be filtered by type and storage location 
+* inspect template modified cadence discovery config for Cloud SQL ([#26972](https://github.com/googleapis/google-cloud-ruby/issues/26972)) 
+#### Documentation
+
+* small improvements 
+
 ### 1.2.0 (2024-08-06)
 
 #### Features
