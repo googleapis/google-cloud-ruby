@@ -97,6 +97,12 @@ module Google
         #   @return [::String]
         #     Optional. Reference to the public base model last used by the dataset. Only
         #     set for prompt datasets.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Dataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -87,6 +87,11 @@ module Google
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
         #     System reserved label keys are prefixed with "aiplatform.googleapis.com/"
         #     and are immutable.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key spec for the notebook execution job.
+        #     This field is auto-populated if the
+        #     [NotebookService.NotebookRuntimeTemplate][] has an encryption spec.
         class NotebookExecutionJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

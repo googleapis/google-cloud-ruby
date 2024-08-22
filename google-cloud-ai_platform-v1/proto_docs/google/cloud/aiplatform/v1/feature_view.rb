@@ -69,6 +69,12 @@ module Google
         #     contains the required configurations to create an index from source data,
         #     so that approximate nearest neighbor (a.k.a ANN) algorithms search can be
         #     performed during online serving.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class FeatureView
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

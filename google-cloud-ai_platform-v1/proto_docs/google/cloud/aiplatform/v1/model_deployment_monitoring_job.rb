@@ -141,6 +141,12 @@ module Google
         #   @return [::Google::Rpc::Status]
         #     Output only. Only populated when the job's state is `JOB_STATE_FAILED` or
         #     `JOB_STATE_CANCELLED`.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class ModelDeploymentMonitoringJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

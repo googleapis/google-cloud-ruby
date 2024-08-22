@@ -92,6 +92,12 @@ module Google
         #     Customer-managed encryption key options for a HyperparameterTuningJob.
         #     If this is set, then all resources created by the HyperparameterTuningJob
         #     will be encrypted with the provided encryption key.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class HyperparameterTuningJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

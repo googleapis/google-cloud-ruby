@@ -475,9 +475,14 @@ module Google
         # Request message for [PredictionService.GenerateContent].
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. The name of the publisher model requested to serve the
-        #     prediction. Format:
+        #     Required. The fully qualified name of the publisher model or tuned model
+        #     endpoint to use.
+        #
+        #     Publisher model format:
         #     `projects/{project}/locations/{location}/publishers/*/models/*`
+        #
+        #     Tuned model endpoint format:
+        #     `projects/{project}/locations/{location}/endpoints/{endpoint}`
         # @!attribute [rw] contents
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Content>]
         #     Required. The content of the current conversation with the model.

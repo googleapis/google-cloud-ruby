@@ -39,6 +39,9 @@ module Google
         #   @return [::Boolean]
         #     Optional. Boolean indicates whether the requested model is a Hugging Face
         #     model.
+        # @!attribute [rw] hugging_face_token
+        #   @return [::String]
+        #     Optional. Token used to access Hugging Face gated models.
         class GetPublisherModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

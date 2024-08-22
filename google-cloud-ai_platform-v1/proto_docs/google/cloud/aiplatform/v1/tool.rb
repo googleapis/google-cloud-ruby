@@ -180,7 +180,7 @@ module Google
             MODE_UNSPECIFIED = 0
 
             # Default model behavior, model decides to predict either a function call
-            # or a natural language repspose.
+            # or a natural language response.
             AUTO = 1
 
             # Model is constrained to always predicting a function call only.

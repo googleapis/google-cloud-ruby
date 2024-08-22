@@ -85,6 +85,12 @@ module Google
         #     second worker pool.
         #
         #     The values are the URIs for each node's interactive shell.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class CustomJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -344,12 +350,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Optional. This determines which type of scheduling strategy to use. Right
-          # now users have two options such as ON_DEMAND which will use regular on
-          # demand resources to schedule the job, the other is LOW_COST which would
+          # now users have two options such as STANDARD which will use regular on
+          # demand resources to schedule the job, the other is SPOT which would
           # leverage spot resources alongwith regular resources to schedule
           # the job.
           module Strategy
-            # Strategy will default to ON_DEMAND.
+            # Strategy will default to STANDARD.
             STRATEGY_UNSPECIFIED = 0
 
             # Regular on-demand provisioning strategy.
