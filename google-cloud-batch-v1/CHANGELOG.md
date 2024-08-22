@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.18.2 (2024-08-22)
+
+#### Documentation
+
+* Batch CentOS images and HPC CentOS images are EOS 
+* Clarify required fields for Runnable.Container 
+* Clarify required oneof fields for Runnable.Script 
+* clarify tasks success criteria for background runnable ([#26962](https://github.com/googleapis/google-cloud-ruby/issues/26962)) 
+* Clarify TaskSpec requires one or more runnables 
+
 ### 0.18.1 (2024-08-06)
 
 #### Documentation
