@@ -1,5 +1,14 @@
 # Release History
 
+### 0.15.0 (2024-08-22)
+
+#### Features
+
+* Support for bidirectional streaming speech synthesis ([#26967](https://github.com/googleapis/google-cloud-ruby/issues/26967)) 
+#### Documentation
+
+* Updates to comments in VoiceSelectionParams 
+
 ### 0.14.0 (2024-02-26)
 
 #### Features
