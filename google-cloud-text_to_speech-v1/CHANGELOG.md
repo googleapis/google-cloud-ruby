@@ -1,5 +1,15 @@
 # Release History
 
+### 1.1.0 (2024-08-22)
+
+#### Features
+
+* Support for bidirectional streaming speech synthesis 
+#### Documentation
+
+* update Long Audio capabilities to include SSML ([#26966](https://github.com/googleapis/google-cloud-ruby/issues/26966)) 
+* Updates to comments in VoiceSelectionParams 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
