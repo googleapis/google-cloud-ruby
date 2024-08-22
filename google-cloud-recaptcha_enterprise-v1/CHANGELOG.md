@@ -1,5 +1,16 @@
 # Release History
 
+### 1.1.0 (2024-08-22)
+
+#### Features
+
+* add `express_settings` to `Key` 
+* add AddIpOverride RPC ([#26975](https://github.com/googleapis/google-cloud-ruby/issues/26975)) 
+#### Documentation
+
+* clarify `Event.express` field 
+* fix billing, quota, and usecase links 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
