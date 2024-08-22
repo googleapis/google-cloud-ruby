@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 (2024-08-22)
+
+#### Documentation
+
+* update to Certification descriptions ([#26976](https://github.com/googleapis/google-cloud-ruby/issues/26976)) 
+
 ### 0.1.1 (2024-06-18)
 
 #### Documentation
