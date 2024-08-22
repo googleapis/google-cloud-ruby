@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/gke_connect/gateway"
 
-client = Google::Cloud::GkeConnect::Gateway.gateway_service do |config|
+client = Google::Cloud::GkeConnect::Gateway.gateway_control do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::GkeConnect::Gateway.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::GkeConnect::Gateway.gateway_service
+client = Google::Cloud::GkeConnect::Gateway.gateway_control
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/gke_connect/gateway"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::GkeConnect::Gateway.gateway_service
+client = Google::Cloud::GkeConnect::Gateway.gateway_control
 ```
 
 ### Local ADC file

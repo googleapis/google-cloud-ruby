@@ -47,36 +47,32 @@ module Google
     module GkeConnect
       module Gateway
         ##
-        # Create a new client object for GatewayService.
+        # Create a new client object for GatewayControl.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1beta1/latest/Google-Cloud-GkeConnect-Gateway-V1beta1-GatewayService-Client)
+        # [Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1beta1/latest/Google-Cloud-GkeConnect-Gateway-V1beta1-GatewayControl-Client)
         # for a gRPC client for version V1beta1 of the API.
         # However, you can specify a different API version by passing it in the
-        # `version` parameter. If the GatewayService service is
+        # `version` parameter. If the GatewayControl service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
         #
-        # ## About GatewayService
+        # ## About GatewayControl
         #
-        # Gateway service is a public API which works as a Kubernetes resource model
-        # proxy between end users and registered Kubernetes clusters. Each RPC in this
-        # service matches with an HTTP verb. End user will initiate kubectl commands
-        # against the Gateway service, and Gateway service will forward user requests
-        # to clusters.
+        # GatewayControl is the control plane API for Connect Gateway.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1beta1`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.gateway_service version: :v1beta1, &block
+        def self.gateway_control version: :v1beta1, &block
           require "google/cloud/gke_connect/gateway/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::GkeConnect::Gateway
                          .constants
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
-          service_module = Google::Cloud::GkeConnect::Gateway.const_get(package_name).const_get(:GatewayService)
+          service_module = Google::Cloud::GkeConnect::Gateway.const_get(package_name).const_get(:GatewayControl)
           service_module.const_get(:Client).new(&block)
         end
 
