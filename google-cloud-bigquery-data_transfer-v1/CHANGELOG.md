@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 (2024-08-22)
+
+#### Documentation
+
+* deprecate `authorization_code` ([#26974](https://github.com/googleapis/google-cloud-ruby/issues/26974)) 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
