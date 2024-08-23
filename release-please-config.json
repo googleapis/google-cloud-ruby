@@ -783,6 +783,10 @@
       "component": "google-cloud-gke_connect-gateway",
       "version_file": "lib/google/cloud/gke_connect/gateway/version.rb"
     },
+    "google-cloud-gke_connect-gateway-v1": {
+      "component": "google-cloud-gke_connect-gateway-v1",
+      "version_file": "lib/google/cloud/gke_connect/gateway/v1/version.rb"
+    },
     "google-cloud-gke_connect-gateway-v1beta1": {
       "component": "google-cloud-gke_connect-gateway-v1beta1",
       "version_file": "lib/google/cloud/gke_connect/gateway/v1beta1/version.rb"
