@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.7.0 (2024-08-26)
+
+### ⚠ BREAKING CHANGES
+
+* removed the nonfunctional GatewayService and replaced it with the GatewayControl service ([#26978](https://github.com/googleapis/google-cloud-ruby/issues/26978))
+
+#### Features
+
+* removed the nonfunctional GatewayService and replaced it with the GatewayControl service ([#26978](https://github.com/googleapis/google-cloud-ruby/issues/26978)) 
+
 ### 0.6.0 (2024-02-26)
 
 #### Features
