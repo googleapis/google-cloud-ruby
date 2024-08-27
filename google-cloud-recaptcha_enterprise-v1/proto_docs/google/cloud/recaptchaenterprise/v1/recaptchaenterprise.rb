@@ -436,6 +436,11 @@ module Google
         #     Output only. Assessment returned when a site key, a token, and a phone
         #     number as `user_id` are provided. Account defender and SMS toll fraud
         #     protection need to be enabled.
+        # @!attribute [rw] assessment_environment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AssessmentEnvironment]
+        #     Optional. The environment creating the assessment. This describes your
+        #     environment (the system invoking CreateAssessment), NOT the environment of
+        #     your user.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1884,6 +1889,25 @@ module Google
             # Cloudflare
             CLOUDFLARE = 4
           end
+        end
+
+        # The environment creating the assessment. This describes your environment
+        # (the system invoking CreateAssessment), NOT the environment of your user.
+        # @!attribute [rw] client
+        #   @return [::String]
+        #     Optional. Identifies the client module initiating the CreateAssessment
+        #     request. This can be the link to the client module's project. Examples
+        #     include:
+        #     - "github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager"
+        #     - "cloud.google.com/recaptcha/docs/implement-waf-akamai"
+        #     - "cloud.google.com/recaptcha/docs/implement-waf-cloudflare"
+        #     - "wordpress.org/plugins/recaptcha-something"
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional. The version of the client module. For example, "1.0.0".
+        class AssessmentEnvironment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Information about the IP or IP range override.
