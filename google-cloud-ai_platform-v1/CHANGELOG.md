@@ -1,5 +1,69 @@
 # Changelog
 
+### 0.49.0 (2024-08-26)
+
+#### Features
+
+* A new field `avg_logprobs` is added to message `.google.cloud.aiplatform.v1.Candidate` 
+* A new field `encryption_spec` is added to message `.google.cloud.aiplatform.v1.NotebookExecutionJob` 
+* A new field `hugging_face_token` is added to message `.google.cloud.aiplatform.v1.GetPublisherModelRequest` 
+* A new field `routing_config` is added to message `.google.cloud.aiplatform.v1.GenerationConfig` 
+* A new field `sample_request` is added to message `.google.cloud.aiplatform.v1.PublisherModel` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.BatchPredictionJob` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.CustomJob` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.DataItem` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.Dataset` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.DatasetVersion` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.DeploymentResourcePool` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.EntityType` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.FeatureOnlineStore` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.Featurestore` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.FeatureView` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.FeatureViewSync` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.HyperparameterTuningJob` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.Index` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.IndexEndpoint` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.aiplatform.v1.NasJob` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.BatchPredictionJob` ([#26954](https://github.com/googleapis/google-cloud-ruby/issues/26954)) 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.CustomJob` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.DataItem` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.Dataset` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.DatasetVersion` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.DeploymentResourcePool` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.EntityType` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.FeatureOnlineStore` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.Featurestore` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.FeatureView` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.FeatureViewSync` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.HyperparameterTuningJob` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.Index` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.IndexEndpoint` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob` 
+* A new field `satisfies_pzs` is added to message `.google.cloud.aiplatform.v1.NasJob` 
+* A new field `seed` is added to message `.google.cloud.aiplatform.v1.GenerationConfig` 
+* A new field `service_attachment` is added to message `.google.cloud.aiplatform.v1.PrivateServiceConnectConfig` 
+* A new field `time_series` is added to message `.google.cloud.aiplatform.v1.FeatureGroup` 
+* A new field `total_truncated_example_count` is added to message `.google.cloud.aiplatform.v1.SupervisedTuningDataStats` 
+* A new field `truncated_example_indices` is added to message `.google.cloud.aiplatform.v1.SupervisedTuningDataStats` 
+* A new message `RoutingConfig` is added 
+* A new message `TimeSeries` is added 
+* A new resource_definition `compute.googleapis.com/NetworkAttachment` is added 
+#### Documentation
+
+* A comment for enum `Strategy` is changed 
+* A comment for enum value `AUTO` in enum `Mode` is changed 
+* A comment for enum value `BLOCKLIST` in enum `FinishReason` is changed 
+* A comment for enum value `MAX_TOKENS` in enum `FinishReason` is changed 
+* A comment for enum value `OTHER` in enum `FinishReason` is changed 
+* A comment for enum value `PROHIBITED_CONTENT` in enum `FinishReason` is changed 
+* A comment for enum value `RECITATION` in enum `FinishReason` is changed 
+* A comment for enum value `SAFETY` in enum `FinishReason` is changed 
+* A comment for enum value `SPII` in enum `FinishReason` is changed 
+* A comment for enum value `STOP` in enum `FinishReason` is changed 
+* A comment for enum value `STRATEGY_UNSPECIFIED` in enum `Strategy` is changed 
+* A comment for field `model` in message `.google.cloud.aiplatform.v1.GenerateContentRequest` is changed 
+
 ### 0.48.0 (2024-08-08)
 
 #### Features
