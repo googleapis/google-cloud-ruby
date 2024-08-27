@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.1.3 (2024-08-27)
+
+#### Documentation
+
+* Update API title to official name ([#26964](https://github.com/googleapis/google-cloud-ruby/issues/26964)) 
+* Update product URL for google-cloud-managed_kafka ([#26996](https://github.com/googleapis/google-cloud-ruby/issues/26996)) 
+
 ### 0.1.2 (2024-08-08)
 
 #### Documentation
