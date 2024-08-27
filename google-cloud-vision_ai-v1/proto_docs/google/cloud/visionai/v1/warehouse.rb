@@ -271,13 +271,13 @@ module Google
               # The default process state should never happen.
               STATE_UNSPECIFIED = 0
 
-              # The feature is in progress.
+              # The ml model analysis is in progress.
               IN_PROGRESS = 1
 
-              # The process is successfully done.
+              # The ml model analysis is successfully done.
               SUCCEEDED = 2
 
-              # The process failed.
+              # The ml model analysis failed.
               FAILED = 3
             end
           end
@@ -896,6 +896,16 @@ module Google
         #     Output only. References to the deployed index instance.
         #     Index of VIDEO_ON_DEMAND corpus can have at most one deployed index.
         #     Index of IMAGE corpus can have multiple deployed indexes.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. This boolean field is only set for projects that have Physical
+        #     Zone Separation enabled via an Org Policy constraint. It is set to true
+        #     when the index is a valid zone separated index and false if it isn't.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. This boolean field is only set for projects that have Physical
+        #     Zone Isolation enabled via an Org Policy constraint. It is set to true when
+        #     the index is a valid zone isolated index and false if it isn't.
         class Index
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -953,6 +963,16 @@ module Google
         # @!attribute [rw] search_capability_setting
         #   @return [::Google::Cloud::VisionAI::V1::SearchCapabilitySetting]
         #     Default search capability setting on corpus level.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. This boolean field is only set for projects that have Physical
+        #     Zone Separation enabled via an Org Policy constraint. It is set to true
+        #     when the corpus is a valid zone separated corpus and false if it isn't.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. This boolean field is only set for projects that have Physical
+        #     Zone Isolation enabled via an Org Policy constraint. It is set to true when
+        #     the corpus is a valid zone isolated corpus and false if it isn't.
         class Corpus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1695,7 +1715,25 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::VisionAI::V1::OperationMetadata]
         #     The metadata of the operation.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::VisionAI::V1::BatchOperationStatus]
+        #     The importing status including partial failures, if the implementation can
+        #     provide such information during the progress of the ImportAssets.
         class ImportAssetsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The batch operation status.
+        # @!attribute [rw] success_count
+        #   @return [::Integer]
+        #     The count of assets (together with their annotations if any) successfully
+        #     ingested.
+        # @!attribute [rw] failure_count
+        #   @return [::Integer]
+        #     The count of assets failed to ingested; it might be due to the annotation
+        #     ingestion error.
+        class BatchOperationStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1869,6 +1907,18 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Update timestamp.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. This boolean field is only set for projects that have Physical
+        #     Zone Separation enabled via an Org Policy constraint. It is set to true
+        #     when the index endpoint is a valid zone separated index endpoint and false
+        #     if it isn't.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. This boolean field is only set for projects that have Physical
+        #     Zone Isolation enabled via an Org Policy constraint. It is set to true when
+        #     the index endpoint is a valid zone isolated index endpoint and false if it
+        #     isn't.
         class IndexEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2732,10 +2782,13 @@ module Google
         #     The matched asset segment.
         # @!attribute [rw] relevance
         #   @return [::Float]
-        #     Relevance of this `SearchResultItem` to user search request.
-        #     Currently available only in Image Warehouse, and by default represents
-        #     cosine similarity.  In the future can be other measures such as "dot
-        #     product" or "topicality" requested in the search request.
+        #     Available to IMAGE corpus types.
+        #     Relevance of this `SearchResultItem` to user search query (text query or
+        #     image query).
+        #     By default this represents cosine similarity between the query and the
+        #     retrieved media content. The value is in the range of [-1, 1].
+        #     Note that search ranking is not only decided by this relevance score,
+        #     but also other factors such as the match of annotations.
         # @!attribute [rw] requested_annotations
         #   @return [::Array<::Google::Cloud::VisionAI::V1::Annotation>]
         #     Search result annotations specified by result_annotation_keys in search

@@ -119,6 +119,7 @@ module Google
             # This method is only available via the gRPC API (not HTTP since
             # bi-directional streaming is not supported via HTTP).
             rpc :IngestAsset, stream(::Google::Cloud::VisionAI::V1::IngestAssetRequest), stream(::Google::Cloud::VisionAI::V1::IngestAssetResponse)
+            # Supported by STREAM_VIDEO corpus type.
             # Generates clips for downloading. The api takes in a time range, and
             # generates a clip of the first content available after start_time and
             # before end_time, which may overflow beyond these bounds.
