@@ -7,11 +7,11 @@
     "language": "ruby",
     "name": "managedkafka",
     "name_pretty": "Managed Service for Apache Kafka V1 API",
-    "product_documentation": "https://cloud.google.com/managed-kafka",
+    "product_documentation": "https://cloud.google.com/managed-service-for-apache-kafka/docs",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Manage Apache Kafka clusters and resources. Note that google-cloud-managed_kafka-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-managed_kafka instead. See the readme for more details.",
-    "ruby-cloud-product-url": "https://cloud.google.com/managed-kafka",
+    "ruby-cloud-product-url": "https://cloud.google.com/managed-service-for-apache-kafka/docs",
     "library_type": "GAPIC_AUTO"
 }
