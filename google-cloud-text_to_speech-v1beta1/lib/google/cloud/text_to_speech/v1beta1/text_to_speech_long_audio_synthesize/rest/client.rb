@@ -195,7 +195,6 @@ module Google
               #     `projects/*/locations/*`.
               #   @param input [::Google::Cloud::TextToSpeech::V1beta1::SynthesisInput, ::Hash]
               #     Required. The Synthesizer requires either plain text or SSML as input.
-              #     While Long Audio is in preview, SSML is temporarily unsupported.
               #   @param audio_config [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig, ::Hash]
               #     Required. The configuration of the synthesized audio.
               #   @param output_gcs_uri [::String]
