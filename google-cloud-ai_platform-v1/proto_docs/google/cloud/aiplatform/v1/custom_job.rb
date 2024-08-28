@@ -345,6 +345,12 @@ module Google
         #     Optional. Indicates if the job should retry for internal errors after the
         #     job starts running. If true, overrides
         #     `Scheduling.restart_job_on_worker_restart` to false.
+        # @!attribute [rw] max_wait_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. This is the maximum duration that a job will wait for the
+        #     requested resources to be provisioned if the scheduling strategy is set to
+        #     [Strategy.DWS_FLEX_START].
+        #     If set to 0, the job will wait indefinitely. The default is 24 hours.
         class Scheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
