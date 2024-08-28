@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.1 (2024-08-28)
+
+#### Documentation
+
+* update Long Audio capabilities to include SSML ([#27000](https://github.com/googleapis/google-cloud-ruby/issues/27000)) 
+
 ### 0.15.0 (2024-08-22)
 
 #### Features
