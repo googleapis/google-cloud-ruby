@@ -1,5 +1,14 @@
 # Release History
 
+### 1.2.0 (2024-08-28)
+
+#### Features
+
+* Add resource reference annotation to backup schedules ([#26960](https://github.com/googleapis/google-cloud-ruby/issues/26960)) 
+#### Documentation
+
+* Add an example to filter backups based on schedule name 
+
 ### 1.1.1 (2024-08-08)
 
 #### Documentation
