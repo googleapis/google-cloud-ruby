@@ -5884,6 +5884,10 @@ module Google
             # Clusters subscribed to STABLE receive versions that are known to be
             # stable and reliable in production.
             STABLE = 3
+
+            # Clusters subscribed to EXTENDED receive extended support and availability
+            # for versions which are known to be stable and reliable in production.
+            EXTENDED = 4
           end
         end
 
