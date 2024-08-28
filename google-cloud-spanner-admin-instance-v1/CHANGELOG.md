@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-08-28)
+
+#### Features
+
+* add edition field to the instance proto ([#26959](https://github.com/googleapis/google-cloud-ruby/issues/26959)) 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
