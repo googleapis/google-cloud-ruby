@@ -24,7 +24,7 @@ module Google
         # The create assessment request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project in which the assessment will be created,
+        #     Required. The name of the project in which the assessment is created,
         #     in the format `projects/{project}`.
         # @!attribute [rw] assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Assessment]
@@ -162,7 +162,7 @@ module Google
         #     `projects/{project}/assessments/{assessment}`.
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that will be assigned to the Event. This field can
+        #     Optional. The annotation that is assigned to the Event. This field can
         #     be left empty to provide reasons that apply to an event without concluding
         #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
@@ -436,6 +436,11 @@ module Google
         #     Output only. Assessment returned when a site key, a token, and a phone
         #     number as `user_id` are provided. Account defender and SMS toll fraud
         #     protection need to be enabled.
+        # @!attribute [rw] assessment_environment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AssessmentEnvironment]
+        #     Optional. The environment creating the assessment. This describes your
+        #     environment (the system invoking CreateAssessment), NOT the environment of
+        #     your user.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -472,7 +477,7 @@ module Google
         # @!attribute [rw] express
         #   @return [::Boolean]
         #     Optional. Flag for a reCAPTCHA express request for an assessment without a
-        #     token. If enabled, `site_key` must reference an Express site key.
+        #     token. If enabled, `site_key` must reference an express key.
         # @!attribute [rw] requested_uri
         #   @return [::String]
         #     Optional. The URI resource the user requested that triggered an assessment.
@@ -490,12 +495,12 @@ module Google
         # @!attribute [rw] firewall_policy_evaluation
         #   @return [::Boolean]
         #     Optional. Flag for enabling firewall policy config assessment.
-        #     If this flag is enabled, the firewall policy will be evaluated and a
-        #     suggested firewall action will be returned in the response.
+        #     If this flag is enabled, the firewall policy is evaluated and a
+        #     suggested firewall action is returned in the response.
         # @!attribute [rw] transaction_data
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData]
         #     Optional. Data describing a payment transaction to be assessed. Sending
-        #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
+        #     this data enables reCAPTCHA Fraud Prevention and the
         #     FraudPreventionAssessment component in the response.
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::UserInfo]
@@ -1005,7 +1010,7 @@ module Google
         # The create key request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project in which the key will be created, in the
+        #     Required. The name of the project in which the key is created, in the
         #     format `projects/{project}`.
         # @!attribute [rw] key
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -1018,7 +1023,7 @@ module Google
         # The list keys request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project that contains the keys that will be
+        #     Required. The name of the project that contains the keys that are
         #     listed, in the format `projects/{project}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -1073,7 +1078,7 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields of the key get updated. If the
-        #     mask is not present, all fields will be updated.
+        #     mask is not present, all fields are updated.
         class UpdateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1150,7 +1155,7 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. The mask to control which fields of the policy get updated. If
-        #     the mask is not present, all fields will be updated.
+        #     the mask is not present, all fields are updated.
         class UpdateFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1226,11 +1231,11 @@ module Google
         #     Inclusive start time aligned to a day (UTC).
         # @!attribute [rw] score_metrics
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ScoreMetrics>]
-        #     Metrics will be continuous and in order by dates, and in the granularity
+        #     Metrics are continuous and in order by dates, and in the granularity
         #     of day. All Key types should have score-based data.
         # @!attribute [rw] challenge_metrics
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ChallengeMetrics>]
-        #     Metrics will be continuous and in order by dates, and in the granularity
+        #     Metrics are continuous and in order by dates, and in the granularity
         #     of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
         #     challenge-based data.
         class Metrics
@@ -1271,7 +1276,7 @@ module Google
         #     Settings for keys that can be used by iOS apps.
         # @!attribute [rw] express_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ExpressKeySettings]
-        #     Settings for keys that can be used by reCAPTCHA Express.
+        #     Settings specific to keys that can be used for reCAPTCHA Express.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See [Creating and managing labels]
@@ -1522,13 +1527,13 @@ module Google
         # Policy config assessment.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. If the processing of a policy config fails, an error will be
-        #     populated and the firewall_policy will be left empty.
+        #     Output only. If the processing of a policy config fails, an error is
+        #     populated and the firewall_policy is left empty.
         # @!attribute [r] firewall_policy
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy]
         #     Output only. The policy that matched the request. If more than one policy
         #     may match, this is the first match. If no policy matches the incoming
-        #     request, the policy field will be left empty.
+        #     request, the policy field is left empty.
         class FirewallPolicyAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1884,6 +1889,25 @@ module Google
             # Cloudflare
             CLOUDFLARE = 4
           end
+        end
+
+        # The environment creating the assessment. This describes your environment
+        # (the system invoking CreateAssessment), NOT the environment of your user.
+        # @!attribute [rw] client
+        #   @return [::String]
+        #     Optional. Identifies the client module initiating the CreateAssessment
+        #     request. This can be the link to the client module's project. Examples
+        #     include:
+        #     - "github.com/GoogleCloudPlatform/recaptcha-enterprise-google-tag-manager"
+        #     - "cloud.google.com/recaptcha/docs/implement-waf-akamai"
+        #     - "cloud.google.com/recaptcha/docs/implement-waf-cloudflare"
+        #     - "wordpress.org/plugins/recaptcha-something"
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional. The version of the client module. For example, "1.0.0".
+        class AssessmentEnvironment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Information about the IP or IP range override.
