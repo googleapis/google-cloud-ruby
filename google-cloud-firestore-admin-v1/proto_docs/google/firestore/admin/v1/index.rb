@@ -34,11 +34,11 @@ module Google
           #   @return [::Google::Cloud::Firestore::Admin::V1::Index::QueryScope]
           #     Indexes with a collection query scope specified allow queries
           #     against a collection that is the child of a specific document, specified at
-          #     query time, and that has the same collection id.
+          #     query time, and that has the same collection ID.
           #
           #     Indexes with a collection group query scope specified allow queries against
           #     all collections descended from a specific document, specified at query
-          #     time, and that have the same collection id as this index.
+          #     time, and that have the same collection ID as this index.
           # @!attribute [rw] api_scope
           #   @return [::Google::Cloud::Firestore::Admin::V1::Index::ApiScope]
           #     The API scope supported by this index.
@@ -137,11 +137,11 @@ module Google
 
               # Indexes with a collection query scope specified allow queries
               # against a collection that is the child of a specific document, specified
-              # at query time, and that has the collection id specified by the index.
+              # at query time, and that has the collection ID specified by the index.
               COLLECTION = 1
 
               # Indexes with a collection group query scope specified allow queries
-              # against all collections that has the collection id specified by the
+              # against all collections that has the collection ID specified by the
               # index.
               COLLECTION_GROUP = 2
 

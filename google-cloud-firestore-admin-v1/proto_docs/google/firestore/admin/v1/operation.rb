@@ -152,13 +152,13 @@ module Google
           #     The progress, in bytes, of this operation.
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
-          #     Which collection ids are being exported.
+          #     Which collection IDs are being exported.
           # @!attribute [rw] output_uri_prefix
           #   @return [::String]
           #     Where the documents are being exported to.
           # @!attribute [rw] namespace_ids
           #   @return [::Array<::String>]
-          #     Which namespace ids are being exported.
+          #     Which namespace IDs are being exported.
           # @!attribute [rw] snapshot_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The timestamp that corresponds to the version of the database that is being
@@ -190,13 +190,13 @@ module Google
           #     The progress, in bytes, of this operation.
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
-          #     Which collection ids are being imported.
+          #     Which collection IDs are being imported.
           # @!attribute [rw] input_uri_prefix
           #   @return [::String]
           #     The location of the documents being imported.
           # @!attribute [rw] namespace_ids
           #   @return [::Array<::String>]
-          #     Which namespace ids are being imported.
+          #     Which namespace IDs are being imported.
           class ImportDocumentsMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -223,10 +223,10 @@ module Google
           #     The progress, in bytes, of this operation.
           # @!attribute [rw] collection_ids
           #   @return [::Array<::String>]
-          #     The ids of the collection groups that are being deleted.
+          #     The IDs of the collection groups that are being deleted.
           # @!attribute [rw] namespace_ids
           #   @return [::Array<::String>]
-          #     Which namespace ids are being deleted.
+          #     Which namespace IDs are being deleted.
           # @!attribute [rw] snapshot_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The timestamp that corresponds to the version of the database that is being
