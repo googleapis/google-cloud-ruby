@@ -120,47 +120,47 @@ module Google
             ##
             # Create a fully-qualified EffectiveEventThreatDetectionCustomModule resource string.
             #
-            # @overload effective_event_threat_detection_custom_module_path(organization:, module_param:)
+            # @overload effective_event_threat_detection_custom_module_path(organization:, module:)
             #   The resource will be in the following format:
             #
-            #   `organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module_param}`
+            #   `organizations/{organization}/eventThreatDetectionSettings/effectiveCustomModules/{module}`
             #
             #   @param organization [String]
-            #   @param module_param [String]
+            #   @param module [String]
             #
-            # @overload effective_event_threat_detection_custom_module_path(folder:, module_param:)
+            # @overload effective_event_threat_detection_custom_module_path(folder:, module:)
             #   The resource will be in the following format:
             #
-            #   `folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module_param}`
+            #   `folders/{folder}/eventThreatDetectionSettings/effectiveCustomModules/{module}`
             #
             #   @param folder [String]
-            #   @param module_param [String]
+            #   @param module [String]
             #
-            # @overload effective_event_threat_detection_custom_module_path(project:, module_param:)
+            # @overload effective_event_threat_detection_custom_module_path(project:, module:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module_param}`
+            #   `projects/{project}/eventThreatDetectionSettings/effectiveCustomModules/{module}`
             #
             #   @param project [String]
-            #   @param module_param [String]
+            #   @param module [String]
             #
             # @return [::String]
             def effective_event_threat_detection_custom_module_path **args
               resources = {
-                "module_param:organization" => (proc do |organization:, module_param:|
+                "module:organization" => (proc do |organization:, module:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-                  "organizations/#{organization}/eventThreatDetectionSettings/effectiveCustomModules/#{module_param}"
+                  "organizations/#{organization}/eventThreatDetectionSettings/effectiveCustomModules/#{binding.local_variable_get :module}"
                 end),
-                "folder:module_param" => (proc do |folder:, module_param:|
+                "folder:module" => (proc do |folder:, module:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
-                  "folders/#{folder}/eventThreatDetectionSettings/effectiveCustomModules/#{module_param}"
+                  "folders/#{folder}/eventThreatDetectionSettings/effectiveCustomModules/#{binding.local_variable_get :module}"
                 end),
-                "module_param:project" => (proc do |project:, module_param:|
+                "module:project" => (proc do |project:, module:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-                  "projects/#{project}/eventThreatDetectionSettings/effectiveCustomModules/#{module_param}"
+                  "projects/#{project}/eventThreatDetectionSettings/effectiveCustomModules/#{binding.local_variable_get :module}"
                 end)
               }
 
@@ -224,47 +224,47 @@ module Google
             ##
             # Create a fully-qualified EventThreatDetectionCustomModule resource string.
             #
-            # @overload event_threat_detection_custom_module_path(organization:, module_param:)
+            # @overload event_threat_detection_custom_module_path(organization:, module:)
             #   The resource will be in the following format:
             #
-            #   `organizations/{organization}/eventThreatDetectionSettings/customModules/{module_param}`
+            #   `organizations/{organization}/eventThreatDetectionSettings/customModules/{module}`
             #
             #   @param organization [String]
-            #   @param module_param [String]
+            #   @param module [String]
             #
-            # @overload event_threat_detection_custom_module_path(folder:, module_param:)
+            # @overload event_threat_detection_custom_module_path(folder:, module:)
             #   The resource will be in the following format:
             #
-            #   `folders/{folder}/eventThreatDetectionSettings/customModules/{module_param}`
+            #   `folders/{folder}/eventThreatDetectionSettings/customModules/{module}`
             #
             #   @param folder [String]
-            #   @param module_param [String]
+            #   @param module [String]
             #
-            # @overload event_threat_detection_custom_module_path(project:, module_param:)
+            # @overload event_threat_detection_custom_module_path(project:, module:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/eventThreatDetectionSettings/customModules/{module_param}`
+            #   `projects/{project}/eventThreatDetectionSettings/customModules/{module}`
             #
             #   @param project [String]
-            #   @param module_param [String]
+            #   @param module [String]
             #
             # @return [::String]
             def event_threat_detection_custom_module_path **args
               resources = {
-                "module_param:organization" => (proc do |organization:, module_param:|
+                "module:organization" => (proc do |organization:, module:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-                  "organizations/#{organization}/eventThreatDetectionSettings/customModules/#{module_param}"
+                  "organizations/#{organization}/eventThreatDetectionSettings/customModules/#{binding.local_variable_get :module}"
                 end),
-                "folder:module_param" => (proc do |folder:, module_param:|
+                "folder:module" => (proc do |folder:, module:|
                   raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
 
-                  "folders/#{folder}/eventThreatDetectionSettings/customModules/#{module_param}"
+                  "folders/#{folder}/eventThreatDetectionSettings/customModules/#{binding.local_variable_get :module}"
                 end),
-                "module_param:project" => (proc do |project:, module_param:|
+                "module:project" => (proc do |project:, module:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-                  "projects/#{project}/eventThreatDetectionSettings/customModules/#{module_param}"
+                  "projects/#{project}/eventThreatDetectionSettings/customModules/#{binding.local_variable_get :module}"
                 end)
               }
 
