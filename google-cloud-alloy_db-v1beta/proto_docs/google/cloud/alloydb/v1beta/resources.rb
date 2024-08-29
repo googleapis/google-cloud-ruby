@@ -320,6 +320,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # MaintenanceUpdatePolicy defines the policy for system updates.
+        # @!attribute [rw] maintenance_windows
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1beta::MaintenanceUpdatePolicy::MaintenanceWindow>]
+        #     Preferred windows to perform maintenance. Currently limited to 1.
+        class MaintenanceUpdatePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # MaintenanceWindow specifies a preferred day and time for maintenance.
+          # @!attribute [rw] day
+          #   @return [::Google::Type::DayOfWeek]
+          #     Preferred day of the week for maintenance, e.g. MONDAY, TUESDAY, etc.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Preferred time to start the maintenance operation on the specified day.
+          #     Maintenance will start within 1 hour of this time.
+          class MaintenanceWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # MaintenanceSchedule stores the maintenance schedule generated from
+        # the MaintenanceUpdatePolicy, once a maintenance rollout is triggered, if
+        # MaintenanceWindow is set, and if there is no conflicting DenyPeriod.
+        # The schedule is cleared once the update takes place. This field cannot be
+        # manually changed; modify the MaintenanceUpdatePolicy instead.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The scheduled start time for the maintenance.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A cluster is a collection of regional AlloyDB resources. It can include a
         # primary instance and one or more read pool instances.
         # All cluster resources share a storage layer, which scales as needed.
@@ -379,7 +414,7 @@ module Google
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
         #     must belong to the same project as the cluster. It is specified in the
-        #     form: "projects/\\{project}/global/networks/\\{network_id}". This is required
+        #     form: `projects/{project}/global/networks/{network_id}`. This is required
         #     to create a cluster. Deprecated, use network_config.network instead.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -438,6 +473,14 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] maintenance_update_policy
+        #   @return [::Google::Cloud::AlloyDB::V1beta::MaintenanceUpdatePolicy]
+        #     Optional. The maintenance update policy determines when to allow or deny
+        #     updates.
+        # @!attribute [r] maintenance_schedule
+        #   @return [::Google::Cloud::AlloyDB::V1beta::MaintenanceSchedule]
+        #     Output only. The maintenance schedule for the cluster, generated for a
+        #     specific rollout if a maintenance window is set.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -449,7 +492,7 @@ module Google
           #     resources are created and from which they are accessible via Private IP.
           #     The network must belong to the same project as the cluster. It is
           #     specified in the form:
-          #     "projects/\\{project_number}/global/networks/\\{network_id}". This is
+          #     `projects/{project_number}/global/networks/{network_id}`. This is
           #     required to create a cluster.
           # @!attribute [rw] allocated_ip_range
           #   @return [::String]
@@ -693,6 +736,9 @@ module Google
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::AlloyDB::V1beta::Instance::InstanceNetworkConfig]
         #     Optional. Instance level network configuration.
+        # @!attribute [r] outbound_public_ip_addresses
+        #   @return [::Array<::String>]
+        #     Output only. All outbound public IP addresses configured for the instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -861,6 +907,10 @@ module Google
           # @!attribute [rw] enable_public_ip
           #   @return [::Boolean]
           #     Optional. Enabling public ip for the instance.
+          # @!attribute [rw] enable_outbound_public_ip
+          #   @return [::Boolean]
+          #     Optional. Enabling an outbound public IP address to support a database
+          #     server sending requests out into the internet.
           class InstanceNetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
