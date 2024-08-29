@@ -73,13 +73,13 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
         config.credentials = grpc_channel
       end
 
-      path = client.effective_event_threat_detection_custom_module_path organization: "value0", module_param: "value1"
+      path = client.effective_event_threat_detection_custom_module_path organization: "value0", module: "value1"
       assert_equal "organizations/value0/eventThreatDetectionSettings/effectiveCustomModules/value1", path
 
-      path = client.effective_event_threat_detection_custom_module_path folder: "value0", module_param: "value1"
+      path = client.effective_event_threat_detection_custom_module_path folder: "value0", module: "value1"
       assert_equal "folders/value0/eventThreatDetectionSettings/effectiveCustomModules/value1", path
 
-      path = client.effective_event_threat_detection_custom_module_path project: "value0", module_param: "value1"
+      path = client.effective_event_threat_detection_custom_module_path project: "value0", module: "value1"
       assert_equal "projects/value0/eventThreatDetectionSettings/effectiveCustomModules/value1", path
     end
   end
@@ -109,13 +109,13 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
         config.credentials = grpc_channel
       end
 
-      path = client.event_threat_detection_custom_module_path organization: "value0", module_param: "value1"
+      path = client.event_threat_detection_custom_module_path organization: "value0", module: "value1"
       assert_equal "organizations/value0/eventThreatDetectionSettings/customModules/value1", path
 
-      path = client.event_threat_detection_custom_module_path folder: "value0", module_param: "value1"
+      path = client.event_threat_detection_custom_module_path folder: "value0", module: "value1"
       assert_equal "folders/value0/eventThreatDetectionSettings/customModules/value1", path
 
-      path = client.event_threat_detection_custom_module_path project: "value0", module_param: "value1"
+      path = client.event_threat_detection_custom_module_path project: "value0", module: "value1"
       assert_equal "projects/value0/eventThreatDetectionSettings/customModules/value1", path
     end
   end
