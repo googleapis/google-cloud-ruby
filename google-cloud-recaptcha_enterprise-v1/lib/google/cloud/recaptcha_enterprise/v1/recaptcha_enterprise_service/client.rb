@@ -196,7 +196,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project in which the assessment will be created,
+            #     Required. The name of the project in which the assessment is created,
             #     in the format `projects/{project}`.
             #   @param assessment [::Google::Cloud::RecaptchaEnterprise::V1::Assessment, ::Hash]
             #     Required. The assessment details.
@@ -289,7 +289,7 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     `projects/{project}/assessments/{assessment}`.
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can
+            #     Optional. The annotation that is assigned to the Event. This field can
             #     be left empty to provide reasons that apply to an event without concluding
             #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
@@ -391,7 +391,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project in which the key will be created, in the
+            #     Required. The name of the project in which the key is created, in the
             #     format `projects/{project}`.
             #   @param key [::Google::Cloud::RecaptchaEnterprise::V1::Key, ::Hash]
             #     Required. Information to create a reCAPTCHA Enterprise key.
@@ -480,7 +480,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project that contains the keys that will be
+            #     Required. The name of the project that contains the keys that are
             #     listed, in the format `projects/{project}`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of keys to return. Default is 10. Max limit is
@@ -757,7 +757,7 @@ module Google
             #     Required. The key to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The mask to control which fields of the key get updated. If the
-            #     mask is not present, all fields will be updated.
+            #     mask is not present, all fields are updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -1016,7 +1016,7 @@ module Google
             # Adds an IP override to a key. The following restrictions hold:
             # * The maximum number of IP overrides per key is 100.
             # * For any conflict (such as IP already exists or IP part of an existing
-            #   IP range), an error will be returned.
+            #   IP range), an error is returned.
             #
             # @overload add_ip_override(request, options = nil)
             #   Pass arguments to `add_ip_override` via a request object, either of type
@@ -1490,7 +1490,7 @@ module Google
             #     Required. The policy to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. The mask to control which fields of the policy get updated. If
-            #     the mask is not present, all fields will be updated.
+            #     the mask is not present, all fields are updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy]
