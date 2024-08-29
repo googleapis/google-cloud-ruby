@@ -25,7 +25,7 @@ module Google
           # Represents a single field in the database.
           #
           # Fields are grouped by their "Collection Group", which represent all
-          # collections in the database with the same id.
+          # collections in the database with the same ID.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. A field name of the form:
