@@ -196,9 +196,26 @@ module Google
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
+    # @!attribute [rw] experimental_features
+    #   @return [::Google::Api::PythonSettings::ExperimentalFeatures]
+    #     Experimental features to be included during client library generation.
     class PythonSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # Experimental features to be included during client library generation.
+      # These fields will be deprecated once the feature graduates and is enabled
+      # by default.
+      # @!attribute [rw] rest_async_io_enabled
+      #   @return [::Boolean]
+      #     Enables generation of asynchronous REST clients if `rest` transport is
+      #     enabled. By default, asynchronous REST clients will not be generated.
+      #     This feature will be enabled by default 1 month after launching the
+      #     feature in preview packages.
+      class ExperimentalFeatures
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
     end
 
     # Settings for Node client libraries.
