@@ -153,10 +153,10 @@ module Google
             # non-bonded connectivity to machines.
             BONDING_TYPE_UNSPECIFIED = 0
 
-            # Single homed.
+            # Multi homed.
             BONDED = 1
 
-            # Multi homed.
+            # Single homed.
             NON_BONDED = 2
           end
         end
