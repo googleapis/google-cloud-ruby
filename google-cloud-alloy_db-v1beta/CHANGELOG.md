@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.9.0 (2024-08-30)
+
+#### Features
+
+* support for enabling outbound public IP on an instance ([#27029](https://github.com/googleapis/google-cloud-ruby/issues/27029)) 
+* support for getting maintenance schedule of a cluster 
+* support for getting outbound public IP addresses of an instance 
+* support for setting maintenance update policy on a cluster 
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+* Add field `experimental_features` to message `PythonSettings` ([#27002](https://github.com/googleapis/google-cloud-ruby/issues/27002)) 
+
 ### 0.8.1 (2024-08-09)
 
 #### Documentation
