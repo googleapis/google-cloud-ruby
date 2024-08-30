@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27010](https://github.com/googleapis/google-cloud-ruby/issues/27010)) 
+
 ### 0.10.0 (2024-02-26)
 
 #### Features
