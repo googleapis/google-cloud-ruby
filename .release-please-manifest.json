@@ -387,7 +387,7 @@
   "google-cloud-gke_connect-gateway+FILLER": "0.0.0",
   "google-cloud-gke_connect-gateway-v1": "0.1.0",
   "google-cloud-gke_connect-gateway-v1+FILLER": "0.0.0",
-  "google-cloud-gke_connect-gateway-v1beta1": "0.7.0",
+  "google-cloud-gke_connect-gateway-v1beta1": "0.7.1",
   "google-cloud-gke_connect-gateway-v1beta1+FILLER": "0.0.0",
   "google-cloud-gke_hub": "1.4.1",
   "google-cloud-gke_hub+FILLER": "0.0.0",
