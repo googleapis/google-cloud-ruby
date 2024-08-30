@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-security_center-v2",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "language": "RUBY",
     "apis": [
       {
