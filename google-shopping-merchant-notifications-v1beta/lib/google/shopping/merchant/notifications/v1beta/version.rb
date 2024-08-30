@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Notifications
         module V1beta
-          VERSION = "0.1.1"
+          VERSION = "0.1.2"
         end
       end
     end
