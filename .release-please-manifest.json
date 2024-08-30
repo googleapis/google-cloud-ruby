@@ -505,7 +505,7 @@
   "google-cloud-notebooks-v2+FILLER": "0.0.0",
   "google-cloud-optimization": "1.2.1",
   "google-cloud-optimization+FILLER": "0.0.0",
-  "google-cloud-optimization-v1": "0.9.1",
+  "google-cloud-optimization-v1": "0.9.2",
   "google-cloud-optimization-v1+FILLER": "0.0.0",
   "google-cloud-orchestration-airflow-service": "1.4.1",
   "google-cloud-orchestration-airflow-service+FILLER": "0.0.0",
