@@ -1,5 +1,16 @@
 # Release History
 
+### 1.2.0 (2024-08-30)
+
+#### Features
+
+* add AssessmentEnvironment for CreateAssessement to explicitly describe the environment of the assessment 
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+* Add field `experimental_features` to message `PythonSettings` ([#27011](https://github.com/googleapis/google-cloud-ruby/issues/27011)) 
+* minor doc fixes ([#27021](https://github.com/googleapis/google-cloud-ruby/issues/27021)) 
+
 ### 1.1.0 (2024-08-22)
 
 #### Features
