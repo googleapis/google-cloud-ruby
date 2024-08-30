@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-config_service-v1",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "language": "RUBY",
     "apis": [
       {
