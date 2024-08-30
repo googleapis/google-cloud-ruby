@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.2 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
 ### 0.2.1 (2024-05-23)
 
 #### Documentation
