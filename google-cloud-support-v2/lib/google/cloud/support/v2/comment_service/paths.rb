@@ -89,13 +89,13 @@ module Google
               resources = {
                 "case:comment:organization" => (proc do |organization:, case:, comment:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ::ArgumentError, "case cannot contain /" if binding.local_variable_get(:case).to_s.include? "/"
+                  raise ::ArgumentError, "case cannot contain /" if case.to_s.include? "/"
 
                   "organizations/#{organization}/cases/#{binding.local_variable_get :case}/comments/#{comment}"
                 end),
                 "case:comment:project" => (proc do |project:, case:, comment:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "case cannot contain /" if binding.local_variable_get(:case).to_s.include? "/"
+                  raise ::ArgumentError, "case cannot contain /" if case.to_s.include? "/"
 
                   "projects/#{project}/cases/#{binding.local_variable_get :case}/comments/#{comment}"
                 end)
@@ -113,3 +113,4 @@ module Google
     end
   end
 end
+
