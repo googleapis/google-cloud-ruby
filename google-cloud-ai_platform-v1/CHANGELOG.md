@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.50.0 (2024-08-30)
+
+#### Features
+
+* add max_wait_duration to Scheduling ([#27023](https://github.com/googleapis/google-cloud-ruby/issues/27023)) 
+* add v1 NotebookExecutionJob to Schedule ([#27032](https://github.com/googleapis/google-cloud-ruby/issues/27032)) 
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+* Add field `experimental_features` to message `PythonSettings` ([#27002](https://github.com/googleapis/google-cloud-ruby/issues/27002)) 
+
 ### 0.49.0 (2024-08-26)
 
 #### Features
