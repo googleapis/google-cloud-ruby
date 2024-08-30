@@ -37,6 +37,10 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::PipelineService::Client#create_pipeline_job PipelineService.CreatePipelineJob}.
         #     CreatePipelineJobRequest.parent field is required (format:
         #     projects/\\{project}/locations/\\{location}).
+        # @!attribute [rw] create_notebook_execution_job_request
+        #   @return [::Google::Cloud::AIPlatform::V1::CreateNotebookExecutionJobRequest]
+        #     Request for
+        #     {::Google::Cloud::AIPlatform::V1::NotebookService::Client#create_notebook_execution_job NotebookService.CreateNotebookExecutionJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name of the Schedule.
