@@ -617,7 +617,7 @@
   "google-cloud-secret_manager+FILLER": "0.0.0",
   "google-cloud-secret_manager-v1": "1.0.0",
   "google-cloud-secret_manager-v1+FILLER": "0.0.0",
-  "google-cloud-secret_manager-v1beta1": "0.15.0",
+  "google-cloud-secret_manager-v1beta1": "0.15.1",
   "google-cloud-secret_manager-v1beta1+FILLER": "0.0.0",
   "google-cloud-secret_manager-v1beta2": "0.1.1",
   "google-cloud-secret_manager-v1beta2+FILLER": "0.0.0",
