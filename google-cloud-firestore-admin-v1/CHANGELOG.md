@@ -1,5 +1,15 @@
 # Release History
 
+### 1.0.1 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+* Add field `experimental_features` to message `PythonSettings` 
+* Clarify maximum retention of backups (max 14 weeks) ([#27027](https://github.com/googleapis/google-cloud-ruby/issues/27027)) 
+* Remove note about backups running at a specific time 
+* Standardize on the capitalization of "ID" 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
