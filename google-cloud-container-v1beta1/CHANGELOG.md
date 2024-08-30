@@ -1,5 +1,14 @@
 # Release History
 
+### 0.43.0 (2024-08-30)
+
+#### Features
+
+* add `EXTENDED` enum value for `ReleaseChannel.Channel` ([#27024](https://github.com/googleapis/google-cloud-ruby/issues/27024)) 
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
 ### 0.42.1 (2024-08-09)
 
 #### Documentation
