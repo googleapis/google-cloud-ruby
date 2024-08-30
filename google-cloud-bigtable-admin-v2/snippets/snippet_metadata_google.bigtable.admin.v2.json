@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigtable-admin-v2",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "language": "RUBY",
     "apis": [
       {

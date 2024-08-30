@@ -155,7 +155,7 @@
   "google-cloud-bigquery-storage-v1+FILLER": "0.0.0",
   "google-cloud-bigtable": "2.11.0",
   "google-cloud-bigtable+FILLER": "0.0.0",
-  "google-cloud-bigtable-admin-v2": "1.2.0",
+  "google-cloud-bigtable-admin-v2": "1.2.1",
   "google-cloud-bigtable-admin-v2+FILLER": "0.0.0",
   "google-cloud-bigtable-v2": "1.2.1",
   "google-cloud-bigtable-v2+FILLER": "0.0.0",
