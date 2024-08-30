@@ -231,7 +231,7 @@
   "google-cloud-container+FILLER": "0.0.0",
   "google-cloud-container-v1": "1.1.1",
   "google-cloud-container-v1+FILLER": "0.0.0",
-  "google-cloud-container-v1beta1": "0.42.1",
+  "google-cloud-container-v1beta1": "0.43.0",
   "google-cloud-container-v1beta1+FILLER": "0.0.0",
   "google-cloud-container_analysis": "1.4.1",
   "google-cloud-container_analysis+FILLER": "0.0.0",
