@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.2 (2024-08-30)
+
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` ([#27007](https://github.com/googleapis/google-cloud-ruby/issues/27007)) 
+
 ### 0.7.1 (2024-06-05)
 
 #### Documentation
