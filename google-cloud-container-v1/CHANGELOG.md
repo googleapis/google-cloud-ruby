@@ -1,5 +1,14 @@
 # Release History
 
+### 1.2.0 (2024-08-30)
+
+#### Features
+
+* add ReleaseChannel EXTENDED value ([#27022](https://github.com/googleapis/google-cloud-ruby/issues/27022)) 
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
 ### 1.1.1 (2024-08-09)
 
 #### Documentation
