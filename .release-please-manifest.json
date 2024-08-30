@@ -151,7 +151,7 @@
   "google-cloud-bigquery-reservation-v1+FILLER": "0.0.0",
   "google-cloud-bigquery-storage": "1.5.1",
   "google-cloud-bigquery-storage+FILLER": "0.0.0",
-  "google-cloud-bigquery-storage-v1": "1.0.0",
+  "google-cloud-bigquery-storage-v1": "1.0.1",
   "google-cloud-bigquery-storage-v1+FILLER": "0.0.0",
   "google-cloud-bigtable": "2.11.0",
   "google-cloud-bigtable+FILLER": "0.0.0",
