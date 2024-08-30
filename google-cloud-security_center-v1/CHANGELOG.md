@@ -1,5 +1,14 @@
 # Release History
 
+### 1.2.0 (2024-08-30)
+
+#### Features
+
+* Support local binding for variables with keyword name collision ([#27028](https://github.com/googleapis/google-cloud-ruby/issues/27028)) 
+#### Documentation
+
+* Add field `experimental_features` to message `PythonSettings` 
+
 ### 1.1.0 (2024-08-08)
 
 #### Features
