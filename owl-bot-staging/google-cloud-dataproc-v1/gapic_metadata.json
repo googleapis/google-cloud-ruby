@@ -1,0 +1,301 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.dataproc.v1",
+  "libraryPackage": "::Google::Cloud::Dataproc::V1",
+  "services": {
+    "AutoscalingPolicyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client",
+          "rpcs": {
+            "CreateAutoscalingPolicy": {
+              "methods": [
+                "create_autoscaling_policy"
+              ]
+            },
+            "UpdateAutoscalingPolicy": {
+              "methods": [
+                "update_autoscaling_policy"
+              ]
+            },
+            "GetAutoscalingPolicy": {
+              "methods": [
+                "get_autoscaling_policy"
+              ]
+            },
+            "ListAutoscalingPolicies": {
+              "methods": [
+                "list_autoscaling_policies"
+              ]
+            },
+            "DeleteAutoscalingPolicy": {
+              "methods": [
+                "delete_autoscaling_policy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BatchController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::BatchController::Client",
+          "rpcs": {
+            "CreateBatch": {
+              "methods": [
+                "create_batch"
+              ]
+            },
+            "GetBatch": {
+              "methods": [
+                "get_batch"
+              ]
+            },
+            "ListBatches": {
+              "methods": [
+                "list_batches"
+              ]
+            },
+            "DeleteBatch": {
+              "methods": [
+                "delete_batch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ClusterController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::ClusterController::Client",
+          "rpcs": {
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "StopCluster": {
+              "methods": [
+                "stop_cluster"
+              ]
+            },
+            "StartCluster": {
+              "methods": [
+                "start_cluster"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "DiagnoseCluster": {
+              "methods": [
+                "diagnose_cluster"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "JobController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::JobController::Client",
+          "rpcs": {
+            "SubmitJob": {
+              "methods": [
+                "submit_job"
+              ]
+            },
+            "SubmitJobAsOperation": {
+              "methods": [
+                "submit_job_as_operation"
+              ]
+            },
+            "GetJob": {
+              "methods": [
+                "get_job"
+              ]
+            },
+            "ListJobs": {
+              "methods": [
+                "list_jobs"
+              ]
+            },
+            "UpdateJob": {
+              "methods": [
+                "update_job"
+              ]
+            },
+            "CancelJob": {
+              "methods": [
+                "cancel_job"
+              ]
+            },
+            "DeleteJob": {
+              "methods": [
+                "delete_job"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeGroupController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::NodeGroupController::Client",
+          "rpcs": {
+            "CreateNodeGroup": {
+              "methods": [
+                "create_node_group"
+              ]
+            },
+            "ResizeNodeGroup": {
+              "methods": [
+                "resize_node_group"
+              ]
+            },
+            "GetNodeGroup": {
+              "methods": [
+                "get_node_group"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::SessionController::Client",
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "create_session"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "get_session"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
+              ]
+            },
+            "TerminateSession": {
+              "methods": [
+                "terminate_session"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "delete_session"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SessionTemplateController": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::SessionTemplateController::Client",
+          "rpcs": {
+            "CreateSessionTemplate": {
+              "methods": [
+                "create_session_template"
+              ]
+            },
+            "UpdateSessionTemplate": {
+              "methods": [
+                "update_session_template"
+              ]
+            },
+            "GetSessionTemplate": {
+              "methods": [
+                "get_session_template"
+              ]
+            },
+            "ListSessionTemplates": {
+              "methods": [
+                "list_session_templates"
+              ]
+            },
+            "DeleteSessionTemplate": {
+              "methods": [
+                "delete_session_template"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "WorkflowTemplateService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client",
+          "rpcs": {
+            "CreateWorkflowTemplate": {
+              "methods": [
+                "create_workflow_template"
+              ]
+            },
+            "GetWorkflowTemplate": {
+              "methods": [
+                "get_workflow_template"
+              ]
+            },
+            "InstantiateWorkflowTemplate": {
+              "methods": [
+                "instantiate_workflow_template"
+              ]
+            },
+            "InstantiateInlineWorkflowTemplate": {
+              "methods": [
+                "instantiate_inline_workflow_template"
+              ]
+            },
+            "UpdateWorkflowTemplate": {
+              "methods": [
+                "update_workflow_template"
+              ]
+            },
+            "ListWorkflowTemplates": {
+              "methods": [
+                "list_workflow_templates"
+              ]
+            },
+            "DeleteWorkflowTemplate": {
+              "methods": [
+                "delete_workflow_template"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
