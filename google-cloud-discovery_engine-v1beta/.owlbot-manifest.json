@@ -319,6 +319,7 @@
     "snippets/data_store_service/get_data_store.rb",
     "snippets/data_store_service/list_data_stores.rb",
     "snippets/data_store_service/update_data_store.rb",
+    "snippets/document_service/batch_get_documents_metadata.rb",
     "snippets/document_service/create_document.rb",
     "snippets/document_service/delete_document.rb",
     "snippets/document_service/get_document.rb",

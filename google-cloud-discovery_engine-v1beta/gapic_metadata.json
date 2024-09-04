@@ -234,6 +234,11 @@
               "methods": [
                 "purge_documents"
               ]
+            },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batch_get_documents_metadata"
+              ]
             }
           }
         }

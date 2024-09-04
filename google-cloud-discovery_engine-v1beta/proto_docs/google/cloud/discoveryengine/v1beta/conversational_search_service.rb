@@ -589,6 +589,9 @@ module Google
 
                 # Non-answer-seeking query classification type.
                 NON_ANSWER_SEEKING_QUERY = 2
+
+                # Jail-breaking query classification type.
+                JAIL_BREAKING_QUERY = 3
               end
             end
 

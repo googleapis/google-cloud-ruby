@@ -120,9 +120,12 @@ module Google
         #     object. Leave it unset if ordered by relevance. `order_by` expression is
         #     case-sensitive.
         #
-        #     For more information on ordering for retail search, see
-        #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
-        #
+        #     For more information on ordering the website search results, see
+        #     [Order web search
+        #     results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+        #     For more information on ordering the healthcare search results, see
+        #     [Order healthcare search
+        #     results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
         #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo]
@@ -303,6 +306,13 @@ module Google
         #     Session specification.
         #
         #     Can be used only when `session` is set.
+        # @!attribute [rw] relevance_threshold
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceThreshold]
+        #     The relevance threshold of the search results.
+        #
+        #     Default to Google defined threshold, leveraging a balance of
+        #     precision and recall to deliver both highly accurate results and
+        #     comprehensive coverage of relevant information.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -773,6 +783,14 @@ module Google
             #     navigational queries. If this field is set to `true`, we skip
             #     generating summaries for non-summary seeking queries and return
             #     fallback messages instead.
+            # @!attribute [rw] ignore_low_relevant_content
+            #   @return [::Boolean]
+            #     Specifies whether to filter out queries that have low relevance. The
+            #     default value is `false`.
+            #
+            #     If this field is set to `false`, all search results are used regardless
+            #     of relevance to generate answers. If set to `true`, only queries with
+            #     high relevance search results will generate answers.
             # @!attribute [rw] model_prompt_spec
             #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec::ModelPromptSpec]
             #     If specified, the spec will be used to modify the prompt provided to
@@ -1061,6 +1079,27 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The relevance threshold of the search results. The higher relevance
+          # threshold is, the higher relevant results are shown and the less number of
+          # results are returned.
+          module RelevanceThreshold
+            # Default value. In this case, server behavior defaults to Google defined
+            # threshold.
+            RELEVANCE_THRESHOLD_UNSPECIFIED = 0
+
+            # Lowest relevance threshold.
+            LOWEST = 1
+
+            # Low relevance threshold.
+            LOW = 2
+
+            # Medium relevance threshold.
+            MEDIUM = 3
+
+            # High relevance threshold.
+            HIGH = 4
+          end
         end
 
         # Response message for
@@ -1088,7 +1127,8 @@ module Google
         #     A unique search token. This should be included in the
         #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent UserEvent} logs resulting
         #     from this search, which enables accurate attribution of search model
-        #     performance.
+        #     performance. This also helps to identify a request during the customer
+        #     support scenarios.
         # @!attribute [rw] redirect_uri
         #   @return [::String]
         #     The URI of a customer-defined redirect page. If redirect action is
@@ -1132,6 +1172,10 @@ module Google
         #     Only set if
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#session SearchRequest.session}
         #     is provided. See its description for more details.
+        # @!attribute [rw] one_box_results
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::OneBoxResult>]
+        #     A list of One Box results. There can be multiple One Box results of
+        #     different types.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1350,14 +1394,14 @@ module Google
 
               # The adversarial query ignored case.
               #
-              # Only populated when
+              # Only used when
               # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#ignore_adversarial_query SummarySpec.ignore_adversarial_query}
               # is set to `true`.
               ADVERSARIAL_QUERY_IGNORED = 1
 
               # The non-summary seeking query ignored case.
               #
-              # Only populated when
+              # Only used when
               # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#ignore_non_summary_seeking_query SummarySpec.ignore_non_summary_seeking_query}
               # is set to `true`.
               NON_SUMMARY_SEEKING_QUERY_IGNORED = 2
@@ -1385,6 +1429,20 @@ module Google
               # Google skips the summary if there is no relevant content in the
               # retrieved search results.
               NO_RELEVANT_CONTENT = 6
+
+              # The jail-breaking query ignored case.
+              #
+              # For example, "Reply in the tone of a competing company's CEO".
+              # Only used when
+              # [SearchRequest.ContentSearchSpec.SummarySpec.ignore_jail_breaking_query]
+              # is set to `true`.
+              JAIL_BREAKING_QUERY_IGNORED = 7
+
+              # The customer policy violation case.
+              #
+              # Google skips the summary if there is a customer policy violation
+              # detected. The policy is defined by the customer.
+              CUSTOMER_POLICY_VIOLATION = 8
             end
           end
 
@@ -1454,6 +1512,9 @@ module Google
               #   @return [::Array<::String>]
               #     Values of the string field. The record will only be returned if the
               #     field value matches one of the values specified here.
+              # @!attribute [rw] query_segment
+              #   @return [::String]
+              #     Identifies the keywords within the search query that match a filter.
               class StringConstraint
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1470,6 +1531,9 @@ module Google
               # @!attribute [rw] value
               #   @return [::Float]
               #     The value specified in the numerical constraint.
+              # @!attribute [rw] query_segment
+              #   @return [::String]
+              #     Identifies the keywords within the search query that match a filter.
               class NumberConstraint
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1506,6 +1570,12 @@ module Google
               #     The reference address that was inferred from the input query. The
               #     proximity of the reference address to the geolocation field will be
               #     used to filter the results.
+              # @!attribute [rw] latitude
+              #   @return [::Float]
+              #     The latitude of the geolocation inferred from the input query.
+              # @!attribute [rw] longitude
+              #   @return [::Float]
+              #     The longitude of the geolocation inferred from the input query.
               # @!attribute [rw] radius_in_meters
               #   @return [::Float]
               #     The radius in meters around the address. The record is returned if
@@ -1575,6 +1645,34 @@ module Google
           class SessionInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # OneBoxResult is a holder for all results of specific type that we want
+          # to display in UI differently.
+          # @!attribute [rw] one_box_type
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::OneBoxResult::OneBoxType]
+          #     The type of One Box result.
+          # @!attribute [rw] search_results
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult>]
+          #     The search results for this One Box.
+          class OneBoxResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of One Box result.
+            module OneBoxType
+              # Default value. Should not be used.
+              ONE_BOX_TYPE_UNSPECIFIED = 0
+
+              # One Box result contains people results.
+              PEOPLE = 1
+
+              # One Box result contains organization results.
+              ORGANIZATION = 2
+
+              # One Box result contains slack results.
+              SLACK = 3
+            end
           end
         end
       end

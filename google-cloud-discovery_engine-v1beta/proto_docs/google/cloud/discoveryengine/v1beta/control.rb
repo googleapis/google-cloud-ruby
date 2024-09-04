@@ -102,7 +102,7 @@ module Google
         # @!attribute [r] associated_serving_config_ids
         #   @return [::Array<::String>]
         #     Output only. List of all
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig ServingConfig} ids this
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig ServingConfig} IDs this
         #     control is attached to. May take up to 10 minutes to update after changes.
         # @!attribute [rw] solution_type
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SolutionType]

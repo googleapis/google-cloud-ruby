@@ -939,11 +939,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload purge_documents(parent: nil, filter: nil, force: nil)
+            # @overload purge_documents(gcs_source: nil, inline_source: nil, parent: nil, filter: nil, error_config: nil, force: nil)
             #   Pass arguments to `purge_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1beta::GcsSource, ::Hash]
+            #     Cloud Storage location for the input content.
+            #     Supported `data_schema`:
+            #     * `document_id`: One valid
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id} per line.
+            #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest::InlineSource, ::Hash]
+            #     Inline source for the input content for purge.
             #   @param parent [::String]
             #     Required. The parent resource name, such as
             #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
@@ -951,6 +958,8 @@ module Google
             #     Required. Filter matching documents to purge. Only currently supported
             #     value is
             #     `*` (all items).
+            #   @param error_config [::Google::Cloud::DiscoveryEngine::V1beta::PurgeErrorConfig, ::Hash]
+            #     The desired location of errors incurred during the purge.
             #   @param force [::Boolean]
             #     Actually performs the purge. If `force` is set to false, return the
             #     expected purge count without deleting any documents.
@@ -1021,6 +1030,98 @@ module Google
 
               @document_service_stub.call_rpc :purge_documents, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets index freshness metadata for
+            # {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s. Supported for
+            # website search only.
+            #
+            # @overload batch_get_documents_metadata(request, options = nil)
+            #   Pass arguments to `batch_get_documents_metadata` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_get_documents_metadata(parent: nil, matcher: nil)
+            #   Pass arguments to `batch_get_documents_metadata` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent branch resource name, such as
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+            #   @param matcher [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest::Matcher, ::Hash]
+            #     Required. Matcher for the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new
+            #
+            #   # Call the batch_get_documents_metadata method.
+            #   result = client.batch_get_documents_metadata request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse.
+            #   p result
+            #
+            def batch_get_documents_metadata request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_get_documents_metadata.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_get_documents_metadata.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_get_documents_metadata.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @document_service_stub.call_rpc :batch_get_documents_metadata, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1216,6 +1317,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :purge_documents
+                ##
+                # RPC-specific configuration for `batch_get_documents_metadata`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_get_documents_metadata
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1233,6 +1339,8 @@ module Google
                   @import_documents = ::Gapic::Config::Method.new import_documents_config
                   purge_documents_config = parent_rpcs.purge_documents if parent_rpcs.respond_to? :purge_documents
                   @purge_documents = ::Gapic::Config::Method.new purge_documents_config
+                  batch_get_documents_metadata_config = parent_rpcs.batch_get_documents_metadata if parent_rpcs.respond_to? :batch_get_documents_metadata
+                  @batch_get_documents_metadata = ::Gapic::Config::Method.new batch_get_documents_metadata_config
 
                   yield self if block_given?
                 end

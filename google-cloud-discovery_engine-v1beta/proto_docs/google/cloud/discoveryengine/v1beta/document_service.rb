@@ -179,6 +179,110 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#batch_get_documents_metadata DocumentService.BatchGetDocumentsMetadata}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent branch resource name, such as
+        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
+        # @!attribute [rw] matcher
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest::Matcher]
+        #     Required. Matcher for the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s.
+        class BatchGetDocumentsMetadataRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Matcher for the {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
+          # by exact uris.
+          # @!attribute [rw] uris
+          #   @return [::Array<::String>]
+          #     The exact URIs to match by.
+          class UrisMatcher
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Matcher for the {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s.
+          # Currently supports matching by exact URIs.
+          # @!attribute [rw] uris_matcher
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest::UrisMatcher]
+          #     Matcher by exact URIs.
+          class Matcher
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#batch_get_documents_metadata DocumentService.BatchGetDocumentsMetadata}
+        # method.
+        # @!attribute [rw] documents_metadata
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse::DocumentMetadata>]
+        #     The metadata of the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s.
+        class BatchGetDocumentsMetadataResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The metadata of a {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}.
+          # @!attribute [rw] matcher_value
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse::DocumentMetadata::MatcherValue]
+          #     The value of the matcher that was used to match the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}.
+          # @!attribute [rw] state
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse::State]
+          #     The state of the document.
+          # @!attribute [rw] last_refreshed_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The timestamp of the last time the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} was last
+          #     indexed.
+          # @!attribute [rw] data_ingestion_source
+          #   @return [::String]
+          #     The data ingestion source of the
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}.
+          #
+          #     Allowed values are:
+          #
+          #     * `batch`: Data ingested via Batch API, e.g., ImportDocuments.
+          #     * `streaming` Data ingested via Streaming API, e.g., FHIR streaming.
+          class DocumentMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The value of the matcher that was used to match the
+            # {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}.
+            # @!attribute [rw] uri
+            #   @return [::String]
+            #     If match by URI, the URI of the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}.
+            class MatcherValue
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # The state of the {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}.
+          module State
+            # Should never be set.
+            STATE_UNSPECIFIED = 0
+
+            # The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is indexed.
+            INDEXED = 1
+
+            # The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is not
+            # indexed because its URI is not in the
+            # {::Google::Cloud::DiscoveryEngine::V1beta::TargetSite TargetSite}.
+            NOT_IN_TARGET_SITE = 2
+
+            # The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} is not
+            # indexed.
+            NOT_IN_INDEX = 3
+          end
+        end
       end
     end
   end

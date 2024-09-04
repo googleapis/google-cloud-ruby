@@ -83,6 +83,9 @@ module Google
 
             # The model training finished successfully but metrics did not improve.
             NO_IMPROVEMENT = 6
+
+            # Input data validation failed. Model training didn't start.
+            INPUT_VALIDATION_FAILED = 7
           end
         end
       end
