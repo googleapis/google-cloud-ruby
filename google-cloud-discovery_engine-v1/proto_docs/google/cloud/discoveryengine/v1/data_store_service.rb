@@ -49,6 +49,16 @@ module Google
         #     If the data store is not configured as site
         #     search (GENERIC vertical and PUBLIC_WEBSITE content_config), this flag will
         #     be ignored.
+        # @!attribute [rw] skip_default_schema_creation
+        #   @return [::Boolean]
+        #     A boolean flag indicating whether to skip the default schema creation for
+        #     the data store. Only enable this flag if you are certain that the default
+        #     schema is incompatible with your use case.
+        #
+        #     If set to true, you must manually create a schema for the data store before
+        #     any documents can be ingested.
+        #
+        #     This flag cannot be specified if `data_store.starting_schema` is specified.
         class CreateDataStoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

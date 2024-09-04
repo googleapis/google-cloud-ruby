@@ -414,8 +414,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     call_options = {}
 
     # Create request parameters for a unary method.
+    gcs_source = {}
     parent = "hello world"
     filter = "hello world"
+    error_config = {}
     force = true
 
     purge_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -432,32 +434,87 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.purge_documents({ parent: parent, filter: filter, force: force }) do |_result, response|
+        client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.purge_documents parent: parent, filter: filter, force: force do |_result, response|
+        client.purge_documents gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.purge_documents ::Google::Cloud::DiscoveryEngine::V1::PurgeDocumentsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
+        client.purge_documents ::Google::Cloud::DiscoveryEngine::V1::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.purge_documents({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
+        client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.purge_documents(::Google::Cloud::DiscoveryEngine::V1::PurgeDocumentsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
+        client.purge_documents(::Google::Cloud::DiscoveryEngine::V1::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, purge_documents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_get_documents_metadata
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    matcher = {}
+
+    batch_get_documents_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ServiceStub.stub :transcode_batch_get_documents_metadata_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_get_documents_metadata_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_get_documents_metadata({ parent: parent, matcher: matcher }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_get_documents_metadata parent: parent, matcher: matcher do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_get_documents_metadata ::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_get_documents_metadata({ parent: parent, matcher: matcher }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_get_documents_metadata(::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_get_documents_metadata_client_stub.call_count
       end
     end
   end

@@ -446,12 +446,7 @@ module Google
             # @!attribute [rw] search_result_mode
             #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SearchResultMode]
             #     Specifies the search result mode. If unspecified, the
-            #     search result mode is based on
-            #     [DataStore.DocumentProcessingConfig.chunking_config][]:
-            #     * If [DataStore.DocumentProcessingConfig.chunking_config][] is
-            #     specified,
-            #       it defaults to `CHUNKS`.
-            #     * Otherwise, it defaults to `DOCUMENTS`.
+            #     search result mode defaults to `DOCUMENTS`.
             #     See [parse and chunk
             #     documents](https://cloud.google.com/generative-ai-app-builder/docs/parse-chunk-documents)
             # @!attribute [rw] data_store_specs
@@ -590,6 +585,9 @@ module Google
 
                 # Non-answer-seeking query classification type.
                 NON_ANSWER_SEEKING_QUERY = 2
+
+                # Jail-breaking query classification type.
+                JAIL_BREAKING_QUERY = 3
               end
             end
 
@@ -624,9 +622,11 @@ module Google
         # @!attribute [rw] answer
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Answer]
         #     Answer resource object.
-        #     If [AnswerQueryRequest.StepSpec.max_step_count][] is greater than 1,
-        #     use {::Google::Cloud::DiscoveryEngine::V1::Answer#name Answer.name} to fetch
-        #     answer information using
+        #     If
+        #     {::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::QueryUnderstandingSpec::QueryRephraserSpec#max_rephrase_steps AnswerQueryRequest.QueryUnderstandingSpec.QueryRephraserSpec.max_rephrase_steps}
+        #     is greater than 1, use
+        #     {::Google::Cloud::DiscoveryEngine::V1::Answer#name Answer.name} to fetch answer
+        #     information using
         #     {::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Client#get_answer ConversationalSearchService.GetAnswer}
         #     API.
         # @!attribute [rw] session

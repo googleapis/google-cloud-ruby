@@ -915,6 +915,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}/operations",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/identity_mapping_stores/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}/operations",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -1028,6 +1035,13 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/dataStores/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/identity_mapping_stores/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(

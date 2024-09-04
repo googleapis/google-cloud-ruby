@@ -73,8 +73,9 @@ module Google
         end
 
         # Defines a conditioned behavior to employ during serving.
-        # Must be attached to a [ServingConfig][] to be considered at serving time.
-        # Permitted actions dependent on `SolutionType`.
+        # Must be attached to a
+        # [ServingConfig][google.cloud.discoveryengine.v1.ServingConfig] to be
+        # considered at serving time. Permitted actions dependent on `SolutionType`.
         # @!attribute [rw] boost_action
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Control::BoostAction]
         #     Defines a boost-type control
@@ -100,8 +101,9 @@ module Google
         #     Otherwise an INVALID ARGUMENT error is thrown.
         # @!attribute [r] associated_serving_config_ids
         #   @return [::Array<::String>]
-        #     Output only. List of all [ServingConfig][] ids this control is attached to.
-        #     May take up to 10 minutes to update after changes.
+        #     Output only. List of all
+        #     [ServingConfig][google.cloud.discoveryengine.v1.ServingConfig] IDs this
+        #     control is attached to. May take up to 10 minutes to update after changes.
         # @!attribute [rw] solution_type
         #   @return [::Google::Cloud::DiscoveryEngine::V1::SolutionType]
         #     Required. Immutable. What solution the control belongs to.

@@ -73,6 +73,14 @@ module Google
         #
         #     This field is OUTPUT_ONLY. If this field is not populated, it means the
         #     document has never been indexed.
+        # @!attribute [r] index_status
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Document::IndexStatus]
+        #     Output only. The index status of the document.
+        #
+        #     * If document is indexed successfully, the index_time field is populated.
+        #     * Otherwise, if document is not indexed due to errors, the error_samples
+        #       field is populated.
+        #     * Otherwise, index_status is unset.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -105,6 +113,20 @@ module Google
           #
           #     See https://www.iana.org/assignments/media-types/media-types.xhtml.
           class Content
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Index status of the document.
+          # @!attribute [rw] index_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time when the document was indexed.
+          #     If this field is populated, it means the document has been indexed.
+          # @!attribute [rw] error_samples
+          #   @return [::Array<::Google::Rpc::Status>]
+          #     A sample of errors encountered while indexing the document.
+          #     If this field is populated, the document is not indexed due to errors.
+          class IndexStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

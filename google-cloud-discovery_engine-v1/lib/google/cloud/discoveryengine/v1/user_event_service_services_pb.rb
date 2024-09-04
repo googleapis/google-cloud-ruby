@@ -41,6 +41,11 @@ module Google
             # This method is used only by the Discovery Engine API JavaScript pixel and
             # Google Tag Manager. Users should not call this method directly.
             rpc :CollectUserEvent, ::Google::Cloud::DiscoveryEngine::V1::CollectUserEventRequest, ::Google::Api::HttpBody
+            # Deletes permanently all user events specified by the filter provided.
+            # Depending on the number of events specified by the filter, this operation
+            # could take hours or days to complete. To test a filter, use the list
+            # command first.
+            rpc :PurgeUserEvents, ::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest, ::Google::Longrunning::Operation
             # Bulk import of user events. Request processing might be
             # synchronous. Events that already exist are skipped.
             # Use this method for backfilling historical user events.
