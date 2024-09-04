@@ -1546,6 +1546,10 @@ module Google
         #     Optional. The output Cloud Storage directory for the diagnostic
         #     tarball. If not specified, a task-specific directory in the cluster's
         #     staging bucket will be used.
+        # @!attribute [rw] tarball_access
+        #   @return [::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest::TarballAccess]
+        #     Optional. (Optional) The access type to the diagnostic tarball. If not
+        #     specified, falls back to default access of the bucket
         # @!attribute [rw] diagnosis_interval
         #   @return [::Google::Type::Interval]
         #     Optional. Time interval in which diagnosis should be carried out on the
@@ -1561,6 +1565,20 @@ module Google
         class DiagnoseClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines who has access to the diagnostic tarball
+          module TarballAccess
+            # Tarball Access unspecified. Falls back to default access of the bucket
+            TARBALL_ACCESS_UNSPECIFIED = 0
+
+            # Google Cloud Support group has read access to the
+            # diagnostic tarball
+            GOOGLE_CLOUD_SUPPORT = 1
+
+            # Google Cloud Dataproc Diagnose service account has read access to the
+            # diagnostic tarball
+            GOOGLE_DATAPROC_DIAGNOSE = 2
+          end
         end
 
         # The location of diagnostic output.

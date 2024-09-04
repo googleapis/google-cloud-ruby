@@ -559,6 +559,7 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     region = "hello world"
     cluster_name = "hello world"
     tarball_gcs_dir = "hello world"
+    tarball_access = :TARBALL_ACCESS_UNSPECIFIED
     diagnosis_interval = {}
     jobs = ["hello world"]
     yarn_application_ids = ["hello world"]
@@ -570,6 +571,7 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
       assert_equal "hello world", request["region"]
       assert_equal "hello world", request["cluster_name"]
       assert_equal "hello world", request["tarball_gcs_dir"]
+      assert_equal :TARBALL_ACCESS_UNSPECIFIED, request["tarball_access"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Type::Interval), request["diagnosis_interval"]
       assert_equal ["hello world"], request["jobs"]
       assert_equal ["hello world"], request["yarn_application_ids"]
@@ -583,35 +585,35 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }) do |response, operation|
+      client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.diagnose_cluster project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids do |response, operation|
+      client.diagnose_cluster project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.diagnose_cluster ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids) do |response, operation|
+      client.diagnose_cluster ::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }, grpc_options) do |response, operation|
+      client.diagnose_cluster({ project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.diagnose_cluster(::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids), grpc_options) do |response, operation|
+      client.diagnose_cluster(::Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new(project_id: project_id, region: region, cluster_name: cluster_name, tarball_gcs_dir: tarball_gcs_dir, tarball_access: tarball_access, diagnosis_interval: diagnosis_interval, jobs: jobs, yarn_application_ids: yarn_application_ids), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
