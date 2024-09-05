@@ -138,6 +138,9 @@ module Google
         # @!attribute [rw] drive_link_data
         #   @return [::Google::Apps::Chat::V1::DriveLinkData]
         #     Data for a drive link.
+        # @!attribute [rw] chat_space_link_data
+        #   @return [::Google::Apps::Chat::V1::ChatSpaceLinkData]
+        #     Data for a chat space link.
         class RichLinkMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -149,6 +152,9 @@ module Google
 
             # A Google Drive rich link type.
             DRIVE_FILE = 1
+
+            # A Chat space rich link type. For example, a space smart chip.
+            CHAT_SPACE = 2
           end
         end
 
@@ -162,6 +168,27 @@ module Google
         #   @return [::String]
         #     The mime type of the linked Google Drive resource.
         class DriveLinkData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Data for Chat space links.
+        # @!attribute [rw] space
+        #   @return [::String]
+        #     The space of the linked Chat space resource.
+        #
+        #     Format: `spaces/{space}`
+        # @!attribute [rw] thread
+        #   @return [::String]
+        #     The thread of the linked Chat space resource.
+        #
+        #     Format: `spaces/{space}/threads/{thread}`
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The message of the linked Chat space resource.
+        #
+        #     Format: `spaces/{space}/messages/{message}`
+        class ChatSpaceLinkData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
