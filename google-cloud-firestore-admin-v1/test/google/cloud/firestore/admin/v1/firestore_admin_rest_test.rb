@@ -1075,6 +1075,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
     parent = "hello world"
     database_id = "hello world"
     backup = "hello world"
+    encryption_config = {}
 
     restore_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1090,27 +1091,27 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.restore_database({ parent: parent, database_id: database_id, backup: backup }) do |_result, response|
+        client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restore_database parent: parent, database_id: database_id, backup: backup do |_result, response|
+        client.restore_database parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restore_database ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup) do |_result, response|
+        client.restore_database ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restore_database({ parent: parent, database_id: database_id, backup: backup }, call_options) do |_result, response|
+        client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restore_database(::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup), call_options) do |_result, response|
+        client.restore_database(::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

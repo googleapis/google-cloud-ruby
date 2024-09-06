@@ -159,6 +159,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Operation resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/databases/{database}/operations/{operation}`
+              #
+              # @param project [String]
+              # @param database [String]
+              # @param operation [String]
+              #
+              # @return [::String]
+              def operation_path project:, database:, operation:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "database cannot contain /" if database.to_s.include? "/"
+
+                "projects/#{project}/databases/#{database}/operations/#{operation}"
+              end
+
+              ##
               # Create a fully-qualified Project resource string.
               #
               # The resource will be in the following format:

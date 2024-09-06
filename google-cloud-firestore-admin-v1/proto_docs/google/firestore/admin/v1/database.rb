@@ -39,6 +39,10 @@ module Google
           #     Output only. The timestamp at which this database was most recently
           #     updated. Note this only includes updates to the database resource and not
           #     data contained by the database.
+          # @!attribute [r] delete_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp at which this database was deleted. Only set if
+          #     the database has been deleted.
           # @!attribute [rw] location_id
           #   @return [::String]
           #     The location of the database. Available locations are listed at
@@ -82,8 +86,8 @@ module Google
           # @!attribute [r] key_prefix
           #   @return [::String]
           #     Output only. The key_prefix for this database. This key_prefix is used, in
-          #     combination with the project id ("<key prefix>~<project id>") to construct
-          #     the application id that is returned from the Cloud Datastore APIs in Google
+          #     combination with the project ID ("<key prefix>~<project id>") to construct
+          #     the application ID that is returned from the Cloud Datastore APIs in Google
           #     App Engine first generation runtimes.
           #
           #     This value may be empty in which case the appid to use for URL-encoded keys
@@ -91,6 +95,16 @@ module Google
           # @!attribute [rw] delete_protection_state
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::DeleteProtectionState]
           #     State of delete protection for the database.
+          # @!attribute [rw] cmek_config
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::CmekConfig]
+          #     Optional. Presence indicates CMEK is enabled for this database.
+          # @!attribute [r] previous_id
+          #   @return [::String]
+          #     Output only. The database resource's prior database ID. This field is only
+          #     populated for deleted databases.
+          # @!attribute [r] source_info
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::SourceInfo]
+          #     Output only. Information about the provenance of this database.
           # @!attribute [rw] etag
           #   @return [::String]
           #     This checksum is computed by the server based on the value of other
@@ -100,13 +114,118 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
+            # The CMEK (Customer Managed Encryption Key) configuration for a Firestore
+            # database. If not present, the database is secured by the default Google
+            # encryption key.
+            # @!attribute [rw] kms_key_name
+            #   @return [::String]
+            #     Required. Only keys in the same location as this database are allowed to
+            #     be used for encryption.
+            #
+            #     For Firestore's nam5 multi-region, this corresponds to Cloud KMS
+            #     multi-region us. For Firestore's eur3 multi-region, this corresponds to
+            #     Cloud KMS multi-region europe. See
+            #     https://cloud.google.com/kms/docs/locations.
+            #
+            #     The expected format is
+            #     `projects/{project_id}/locations/{kms_location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+            # @!attribute [r] active_key_version
+            #   @return [::Array<::String>]
+            #     Output only. Currently in-use [KMS key
+            #     versions](https://cloud.google.com/kms/docs/resource-hierarchy#key_versions).
+            #     During [key rotation](https://cloud.google.com/kms/docs/key-rotation),
+            #     there can be multiple in-use key versions.
+            #
+            #     The expected format is
+            #     `projects/{project_id}/locations/{kms_location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{key_version}`.
+            class CmekConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Information about the provenance of this database.
+            # @!attribute [rw] backup
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Database::SourceInfo::BackupSource]
+            #     If set, this database was restored from the specified backup (or a
+            #     snapshot thereof).
+            # @!attribute [rw] operation
+            #   @return [::String]
+            #     The associated long-running operation. This field may not be set after
+            #     the operation has completed. Format:
+            #     `projects/{project}/databases/{database}/operations/{operation}`.
+            class SourceInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Information about a backup that was used to restore a database.
+              # @!attribute [rw] backup
+              #   @return [::String]
+              #     The resource name of the backup that was used to restore this
+              #     database. Format:
+              #     `projects/{project}/locations/{location}/backups/{backup}`.
+              class BackupSource
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Encryption configuration for a new database being created from another
+            # source.
+            #
+            # The source could be a {::Google::Cloud::Firestore::Admin::V1::Backup Backup} .
+            # @!attribute [rw] google_default_encryption
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::GoogleDefaultEncryptionOptions]
+            #     Use Google default encryption.
+            # @!attribute [rw] use_source_encryption
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::SourceEncryptionOptions]
+            #     The database will use the same encryption configuration as the source.
+            # @!attribute [rw] customer_managed_encryption
+            #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::CustomerManagedEncryptionOptions]
+            #     Use Customer Managed Encryption Keys (CMEK) for encryption.
+            class EncryptionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The configuration options for using Google default encryption.
+              class GoogleDefaultEncryptionOptions
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # The configuration options for using the same encryption method as the
+              # source.
+              class SourceEncryptionOptions
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # The configuration options for using CMEK (Customer Managed Encryption
+              # Key) encryption.
+              # @!attribute [rw] kms_key_name
+              #   @return [::String]
+              #     Required. Only keys in the same location as the database are allowed to
+              #     be used for encryption.
+              #
+              #     For Firestore's nam5 multi-region, this corresponds to Cloud KMS
+              #     multi-region us. For Firestore's eur3 multi-region, this corresponds to
+              #     Cloud KMS multi-region europe. See
+              #     https://cloud.google.com/kms/docs/locations.
+              #
+              #     The expected format is
+              #     `projects/{project_id}/locations/{kms_location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+              class CustomerManagedEncryptionOptions
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
             # The type of the database.
             # See https://cloud.google.com/datastore/docs/firestore-or-datastore for
             # information about how to choose.
             #
             # Mode changes are only allowed if the database is empty.
             module DatabaseType
-              # The default value. This value is used if the database type is omitted.
+              # Not used.
               DATABASE_TYPE_UNSPECIFIED = 0
 
               # Firestore Native Mode
