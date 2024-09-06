@@ -24,7 +24,7 @@ module Google
         # The create assessment request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project in which the assessment is created,
+        #     Required. The name of the project in which the assessment will be created,
         #     in the format `projects/{project_number}`.
         # @!attribute [rw] assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment]
@@ -162,7 +162,7 @@ module Google
         #     `projects/{project_number}/assessments/{assessment_id}`.
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that is assigned to the Event. This field can
+        #     Optional. The annotation that will be assigned to the Event. This field can
         #     be left empty to provide reasons that apply to an event without concluding
         #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
