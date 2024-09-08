@@ -26,6 +26,7 @@ require_relative "../storage_download_file"
 require_relative "../storage_download_file_into_memory"
 require_relative "../storage_download_file_requester_pays"
 require_relative "../storage_download_public_file"
+require_relative "../storage_fetch_from_gs_url"
 require_relative "../storage_generate_encryption_key"
 require_relative "../storage_generate_signed_post_policy_v4"
 require_relative "../storage_generate_signed_url_v4"
@@ -59,6 +60,7 @@ describe "Files Snippets" do
   let(:downloaded_file)  { "test_download_#{SecureRandom.hex}" }
   let(:file_1_name) { "path/file_1_name_#{SecureRandom.hex}.txt" }
   let(:file_2_name) { "path/file_2_name_#{SecureRandom.hex}.txt" }
+  let(:gs_url) {"gs://test_nucket_2/test_sub_folder/floer.jpeg"}
   let(:bucket) { @bucket }
   let(:secondary_bucket) { @secondary_bucket }
   let(:file_content) { "some content" }
@@ -271,6 +273,12 @@ describe "Files Snippets" do
     end
 
     assert_nil bucket.file remote_file_name
+  end
+
+  it "fetch_from_gs_url" do
+    fetch_from_gs_url gs_url
+
+    assert_output "Output json {'bucket_name'=>'test_nucket_2', 'file_name'=>'floer.jpeg'}"
   end
 
   it "get_metadata" do
