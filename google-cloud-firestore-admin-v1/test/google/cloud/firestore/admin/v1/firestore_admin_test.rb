@@ -1204,6 +1204,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
     parent = "hello world"
     database_id = "hello world"
     backup = "hello world"
+    encryption_config = {}
 
     restore_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restore_database, name
@@ -1211,6 +1212,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["database_id"]
       assert_equal "hello world", request["backup"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig), request["encryption_config"]
       refute_nil options
     end
 
@@ -1221,35 +1223,35 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use hash object
-      client.restore_database({ parent: parent, database_id: database_id, backup: backup }) do |response, operation|
+      client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restore_database parent: parent, database_id: database_id, backup: backup do |response, operation|
+      client.restore_database parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restore_database ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup) do |response, operation|
+      client.restore_database ::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restore_database({ parent: parent, database_id: database_id, backup: backup }, grpc_options) do |response, operation|
+      client.restore_database({ parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restore_database(::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup), grpc_options) do |response, operation|
+      client.restore_database(::Google::Cloud::Firestore::Admin::V1::RestoreDatabaseRequest.new(parent: parent, database_id: database_id, backup: backup, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
