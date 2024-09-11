@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.3 (2024-09-11)
+
+#### Documentation
+
+* Clarify documentation for transfer configuration updates 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
