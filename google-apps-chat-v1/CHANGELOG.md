@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2024-09-11)
+
+#### Features
+
+* Support for chat space links ([#27299](https://github.com/googleapis/google-cloud-ruby/issues/27299)) 
+
 ### 0.3.1 (2024-08-30)
 
 #### Documentation
