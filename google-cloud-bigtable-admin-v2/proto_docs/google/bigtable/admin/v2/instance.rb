@@ -292,9 +292,27 @@ module Google
             #   @return [::Array<::String>]
             #     The set of clusters to route to. The order is ignored; clusters will be
             #     tried in order of distance. If left empty, all clusters are eligible.
+            # @!attribute [rw] row_affinity
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny::RowAffinity]
+            #     Row affinity sticky routing based on the row key of the request.
+            #     Requests that span multiple rows are routed non-deterministically.
             class MultiClusterRoutingUseAny
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # If enabled, Bigtable will route the request based on the row key of the
+              # request, rather than randomly. Instead, each row key will be assigned
+              # to a cluster, and will stick to that cluster. If clusters are added or
+              # removed, then this may affect which row keys stick to which clusters.
+              # To avoid this, users can use a cluster group to specify which clusters
+              # are to be used. In this case, new clusters that are not a part of the
+              # cluster group will not be routed to, and routing will be unaffected by
+              # the new cluster. Moreover, clusters specified in the cluster group cannot
+              # be deleted unless removed from the cluster group.
+              class RowAffinity
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
 
             # Unconditionally routes all read/write requests to a specific cluster.
