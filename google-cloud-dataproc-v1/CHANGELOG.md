@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-09-11)
+
+#### Features
+
+* Support for tarball_access parameter to the diagnose_cluster RPC ([#27287](https://github.com/googleapis/google-cloud-ruby/issues/27287)) 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
