@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.1.0 (2024-09-11)
+
+#### Features
+
+* Support for Document index status 
+* Support for jail-breaking queries 
+* Support for Reference#structured_document_info 
+* Support for the batch_get_documents_metadata RPC 
+* Support for the gcs_source, inline_source, and error_config parameters to the purge_documents RPC 
+* Support for the purge_user_events RPC 
+* Support for the SearchTuningService 
+* Support for the skip_default_schema_creation parameter to the create_data_store RPC 
+* Support for UnstructuredDocumentInfo::ChunkContent#relevance_score 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
