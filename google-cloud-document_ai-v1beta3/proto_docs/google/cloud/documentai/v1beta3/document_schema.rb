@@ -135,6 +135,10 @@ module Google
           #     - The `/` is sometimes used to denote a property of a type.  For example
           #       `line_item/amount`.  This convention is deprecated, but will still be
           #       honored for backward compatibility.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     The description of the entity type. Could be used to provide more
+          #     information about the entity type for model calls.
           # @!attribute [rw] base_types
           #   @return [::Array<::String>]
           #     The entity type that this type is derived from.  For now, one and only
@@ -163,6 +167,10 @@ module Google
             #   @return [::String]
             #     The name of the property.  Follows the same guidelines as the
             #     EntityType name.
+            # @!attribute [rw] description
+            #   @return [::String]
+            #     The description of the property. Could be used to provide more
+            #     information about the property for model calls.
             # @!attribute [rw] display_name
             #   @return [::String]
             #     User defined name for the property.
