@@ -268,6 +268,11 @@ module Google
           # associated with the user id corresponding to the authorization info.
           # Otherwise, the transfer configuration will be associated with the calling
           # user.
+          #
+          # When using a cross project service account for creating a transfer config,
+          # you must enable cross project service account usage. For more information,
+          # see [Disable attachment of service accounts to resources in other
+          # projects](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts#disable_cross_project_service_accounts).
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The BigQuery project id where the transfer configuration should
@@ -334,6 +339,11 @@ module Google
 
           # A request to update a transfer configuration. To update the user id of the
           # transfer configuration, authorization info needs to be provided.
+          #
+          # When using a cross project service account for updating a transfer config,
+          # you must enable cross project service account usage. For more information,
+          # see [Disable attachment of service accounts to resources in other
+          # projects](https://cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts#disable_cross_project_service_accounts).
           # @!attribute [rw] transfer_config
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig]
           #     Required. Data transfer configuration to create.
