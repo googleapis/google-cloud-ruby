@@ -196,7 +196,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil)
+            # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -286,9 +286,12 @@ module Google
             #     object. Leave it unset if ordered by relevance. `order_by` expression is
             #     case-sensitive.
             #
-            #     For more information on ordering for retail search, see
-            #     [Ordering](https://cloud.google.com/retail/docs/filter-and-order#order)
-            #
+            #     For more information on ordering the website search results, see
+            #     [Order web search
+            #     results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+            #     For more information on ordering the healthcare search results, see
+            #     [Order healthcare search
+            #     results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
             #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
             #   @param user_info [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo, ::Hash]
             #     Information about the end user.
@@ -451,6 +454,12 @@ module Google
             #     Session specification.
             #
             #     Can be used only when `session` is set.
+            #   @param relevance_threshold [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceThreshold]
+            #     The relevance threshold of the search results.
+            #
+            #     Default to Google defined threshold, leveraging a balance of
+            #     precision and recall to deliver both highly accurate results and
+            #     comprehensive coverage of relevant information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult>]

@@ -98,9 +98,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration of destination for Purge related errors.
+        # @!attribute [rw] gcs_prefix
+        #   @return [::String]
+        #     Cloud Storage prefix for purge errors. This must be an empty,
+        #     existing Cloud Storage directory. Purge errors are written to
+        #     sharded files in this directory, one per line, as a JSON-encoded
+        #     `google.rpc.Status` message.
+        class PurgeErrorConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#purge_documents DocumentService.PurgeDocuments}
         # method.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GcsSource]
+        #     Cloud Storage location for the input content.
+        #     Supported `data_schema`:
+        #     * `document_id`: One valid
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id} per line.
+        # @!attribute [rw] inline_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest::InlineSource]
+        #     Inline source for the input content for purge.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, such as
@@ -110,6 +131,9 @@ module Google
         #     Required. Filter matching documents to purge. Only currently supported
         #     value is
         #     `*` (all items).
+        # @!attribute [rw] error_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::PurgeErrorConfig]
+        #     The desired location of errors incurred during the purge.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Actually performs the purge. If `force` is set to false, return the
@@ -117,6 +141,20 @@ module Google
         class PurgeDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The inline source for the input config for
+          # {::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#purge_documents DocumentService.PurgeDocuments}
+          # method.
+          # @!attribute [rw] documents
+          #   @return [::Array<::String>]
+          #     Required. A list of full resource name of documents to purge. In the
+          #     format
+          #     `projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*`.
+          #     Recommended max of 100 items.
+          class InlineSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for

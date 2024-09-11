@@ -446,15 +446,20 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
     grpc_options = {}
 
     # Create request parameters for a unary method.
+    gcs_source = {}
     parent = "hello world"
     filter = "hello world"
+    error_config = {}
     force = true
 
     purge_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :purge_documents, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::GcsSource), request["gcs_source"]
+      assert_equal :gcs_source, request.source
       assert_equal "hello world", request["parent"]
       assert_equal "hello world", request["filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::PurgeErrorConfig), request["error_config"]
       assert_equal true, request["force"]
       refute_nil options
     end
@@ -466,35 +471,35 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
       end
 
       # Use hash object
-      client.purge_documents({ parent: parent, filter: filter, force: force }) do |response, operation|
+      client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.purge_documents parent: parent, filter: filter, force: force do |response, operation|
+      client.purge_documents gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.purge_documents ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
+      client.purge_documents ::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.purge_documents({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
+      client.purge_documents({ gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.purge_documents(::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
+      client.purge_documents(::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest.new(gcs_source: gcs_source, parent: parent, filter: filter, error_config: error_config, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -502,6 +507,66 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientTest < Mi
 
       # Verify method calls
       assert_equal 5, purge_documents_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_get_documents_metadata
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    matcher = {}
+
+    batch_get_documents_metadata_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_get_documents_metadata, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest::Matcher), request["matcher"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_get_documents_metadata_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_get_documents_metadata({ parent: parent, matcher: matcher }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_get_documents_metadata parent: parent, matcher: matcher do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_get_documents_metadata ::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_get_documents_metadata({ parent: parent, matcher: matcher }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_get_documents_metadata(::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest.new(parent: parent, matcher: matcher), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_get_documents_metadata_client_stub.call_rpc_count
     end
   end
 

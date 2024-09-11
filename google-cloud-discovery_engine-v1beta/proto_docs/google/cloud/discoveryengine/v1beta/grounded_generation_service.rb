@@ -130,8 +130,9 @@ module Google
           #     field will be set to false. In that case, no grounding check was done for
           #     the claim and therefore
           #     {::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingResponse::Claim#citation_indices citation_indices},
+          #     [anti_citation_indices][google.cloud.discoveryengine.v1beta.CheckGroundingResponse.Claim.anti_citation_indices],
           #     and
-          #     [anti_citation_indices][google.cloud.discoveryengine.v1beta.CheckGroundingResponse.Claim.anti_citation_indices]
+          #     [score][google.cloud.discoveryengine.v1beta.CheckGroundingResponse.Claim.score]
           #     should not be returned.
           class Claim
             include ::Google::Protobuf::MessageExts
