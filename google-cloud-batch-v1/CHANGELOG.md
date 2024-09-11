@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.0 (2024-09-11)
+
+#### Features
+
+* Support for blocking project-level SSH keys ([#27288](https://github.com/googleapis/google-cloud-ruby/issues/27288)) 
+
 ### 0.18.3 (2024-08-30)
 
 #### Documentation
