@@ -1,5 +1,15 @@
 # Release History
 
+### 1.1.0 (2024-09-11)
+
+#### Features
+
+* Added Database#cmek_config (information about CMEK enablement) 
+* Added Database#delete_time (the time a database was deleted, if it ever was) 
+* Added Database#previous_id (if a database was deleted, what ID it was using beforehand) 
+* Added Database#source_info (information about database provenance, specifically for restored databases) 
+* Allow specifying an encryption_config when restoring a database 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
