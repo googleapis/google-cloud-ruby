@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.2 (2024-09-11)
+
+#### Documentation
+
+* Update documentation to note new maximum 31 day subscription message retention ([#27306](https://github.com/googleapis/google-cloud-ruby/issues/27306)) 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
