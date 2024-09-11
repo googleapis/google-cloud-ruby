@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.3 (2024-09-11)
+
+#### Documentation
+
+* Fix BondingType value descriptions ([#27286](https://github.com/googleapis/google-cloud-ruby/issues/27286)) 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
