@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2024-09-11)
+
+#### Features
+
+* Support for row affinity in app profiles ([#27307](https://github.com/googleapis/google-cloud-ruby/issues/27307)) 
+
 ### 1.2.1 (2024-08-30)
 
 #### Documentation
