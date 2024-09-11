@@ -22,7 +22,7 @@ module Google
     module FleetEngine
       module Delivery
         module V1
-          VERSION = "0.2.3"
+          VERSION = "0.2.4"
         end
       end
     end
