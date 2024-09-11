@@ -1571,6 +1571,19 @@ describe Google::Cloud::Storage::File, :mock_storage do
     end
   end
 
+  describe "fetch details from gs_url" do
+    let(:bucket_name) { "object-lock-bucket" }
+    let(:file_name) {"file.ext"}
+    let(:file_object) {Google::Cloud::Storage::File}
+    let(:gs_url) {"gs://#{bucket_name}/#{file_name}"}
+
+    it "it returns file_name and bucket_name from given gs url "  do
+      url_items= file_object.from_gs_url(gs_url)
+      assert_equal bucket_name, url_items["bucket_name"]
+      assert_equal file_name, url_items["file_name"]
+    end
+  end
+
   def gzip_data data
     gz = StringIO.new("")
     z = Zlib::GzipWriter.new(gz)

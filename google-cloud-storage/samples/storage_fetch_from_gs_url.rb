@@ -14,22 +14,19 @@
 
 # Sample for storage_fetch_from_gs_url
 def fetch_from_gs_url url
-    # [START storage_fetch_from_gs_url]
-    # The ID of your GCS bucket
-    # bucket_name = "your-unique-bucket-name"
-    # file_name   = "Name of a file in the Storage bucket"
-    # email       = "Google Cloud Storage ACL Entity email"        
+  # [START storage_fetch_from_gs_url]
+  # bucket_name = "your-unique-bucket-name"
+  # file_name   = "Name of a file in the Storage bucket"
+  #   gs_url= "gs://#{bucket_name}//#{file_name}"
+  require "google/cloud/storage"
 
-    require "google/cloud/storage"
+  file_object = Google::Cloud::Storage::File
+  output = file_object.from_gs_url url
 
-    fileObject = Google::Cloud::Storage::File
-    output = fileObject.from_gs_url url
-
-    puts "Output json #{output}"
-    # [END storage_fetch_from_gs_url]
+  puts "Output json #{output}"
+  # [END storage_fetch_from_gs_url]
 end
-  
+
 if $PROGRAM_NAME == __FILE__
-    fetch_from_gs_url url: ARGV.shift
+  fetch_from_gs_url url: ARGV.shift
 end
-  

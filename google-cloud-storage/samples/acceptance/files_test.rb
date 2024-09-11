@@ -60,7 +60,7 @@ describe "Files Snippets" do
   let(:downloaded_file)  { "test_download_#{SecureRandom.hex}" }
   let(:file_1_name) { "path/file_1_name_#{SecureRandom.hex}.txt" }
   let(:file_2_name) { "path/file_2_name_#{SecureRandom.hex}.txt" }
-  let(:gs_url) {"gs://test_nucket_2/test_sub_folder/floer.jpeg"}
+  let(:gs_url) { "gs://my-todo-app/test_sub_folder/heidi.jpeg?params1=test1&params2=test2" }
   let(:bucket) { @bucket }
   let(:secondary_bucket) { @secondary_bucket }
   let(:file_content) { "some content" }
