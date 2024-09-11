@@ -12,7 +12,7 @@ class InstancesSmokeTest < Minitest::Test
     @default_zone = "us-central1-a"
     @default_project = ENV["COMPUTE_TEST_PROJECT"]
     @machine_type = "zones/#{@default_zone}/machineTypes/n1-standard-1"
-    @image =  "projects/debian-cloud/global/images/family/debian-10"
+    @image =  "projects/debian-cloud/global/images/family/debian-11"
     @client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
     @client_ops = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
     @name = "rbgapic#{rand 10_000_000}"

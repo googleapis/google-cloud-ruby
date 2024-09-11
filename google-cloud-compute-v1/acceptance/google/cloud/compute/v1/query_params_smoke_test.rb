@@ -17,7 +17,7 @@ class QueryParamsSmokeTest < Minitest::Test
     @zonal_ops_client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
     @global_ops_client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
 
-    @image_name =  "projects/debian-cloud/global/images/family/debian-10"
+    @image_name =  "projects/debian-cloud/global/images/family/debian-11"
     skip "COMPUTE_TEST_PROJECT must be set before running this test" if @default_project.nil?
   end
 
