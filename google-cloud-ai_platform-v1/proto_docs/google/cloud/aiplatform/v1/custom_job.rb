@@ -364,10 +364,10 @@ module Google
             # Strategy will default to STANDARD.
             STRATEGY_UNSPECIFIED = 0
 
-            # Regular on-demand provisioning strategy.
+            # Deprecated. Regular on-demand provisioning strategy.
             ON_DEMAND = 1
 
-            # Low cost by making potential use of spot resources.
+            # Deprecated. Low cost by making potential use of spot resources.
             LOW_COST = 2
 
             # Standard provisioning strategy uses regular on-demand resources.
@@ -375,6 +375,9 @@ module Google
 
             # Spot provisioning strategy uses spot resources.
             SPOT = 4
+
+            # Flex Start strategy uses DWS to queue for resources.
+            FLEX_START = 6
           end
         end
       end

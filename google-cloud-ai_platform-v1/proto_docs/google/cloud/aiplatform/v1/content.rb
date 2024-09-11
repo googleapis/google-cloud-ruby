@@ -249,6 +249,9 @@ module Google
 
             # Block none.
             BLOCK_NONE = 4
+
+            # Turn off the safety filter.
+            OFF = 5
           end
 
           # Probability vs severity.

@@ -377,7 +377,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Respose message for
+        # Response message for
         # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#sync_feature_view FeatureOnlineStoreAdminService.SyncFeatureView}.
         # @!attribute [rw] feature_view_sync
         #   @return [::String]

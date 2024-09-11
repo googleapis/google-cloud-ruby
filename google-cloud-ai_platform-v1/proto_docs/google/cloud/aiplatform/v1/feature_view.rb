@@ -31,6 +31,9 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::FeatureRegistrySource]
         #     Optional. Configures the features from a Feature Registry source that
         #     need to be loaded onto the FeatureOnlineStore.
+        # @!attribute [rw] vertex_rag_source
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::VertexRagSource]
+        #     Optional. The Vertex RAG Source that the FeatureView is linked to.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the FeatureView. Format:
@@ -209,6 +212,28 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # A Vertex Rag source for features that need to be synced to Online
+          # Store.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     Required. The BigQuery view/table URI that will be materialized on each
+          #     manual sync trigger. The table/view is expected to have the following
+          #     columns and types at least:
+          #      - `corpus_id` (STRING, NULLABLE/REQUIRED)
+          #      - `file_id` (STRING, NULLABLE/REQUIRED)
+          #      - `chunk_id` (STRING, NULLABLE/REQUIRED)
+          #      - `chunk_data_type` (STRING, NULLABLE/REQUIRED)
+          #      - `chunk_data` (STRING, NULLABLE/REQUIRED)
+          #      - `embeddings` (FLOAT, REPEATED)
+          #      - `file_original_uri` (STRING, NULLABLE/REQUIRED)
+          # @!attribute [rw] rag_corpus_id
+          #   @return [::Integer]
+          #     Optional. The RAG corpus id corresponding to this FeatureView.
+          class VertexRagSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # @!attribute [rw] key
