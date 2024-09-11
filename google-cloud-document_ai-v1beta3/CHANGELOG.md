@@ -1,5 +1,11 @@
 # Release History
 
+### 0.37.0 (2024-09-11)
+
+#### Features
+
+* Added descriptions of entity type and property in the document schema ([#27301](https://github.com/googleapis/google-cloud-ruby/issues/27301)) 
+
 ### 0.36.1 (2024-08-30)
 
 #### Documentation
