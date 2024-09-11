@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.51.0 (2024-09-11)
+
+#### Features
+
+* Support for FeatureGroup::BigQuery#static_data_source and FeatureGroup::BigQuery#dense 
+* Support for FeatureView#vertex_rag_source 
+* Support for FeatureViewSync::SyncSummary#system_watermark_time 
+* Support for SafetySetting::HarmBlockThreshold::OFF 
+* Support for Scheduling::Strategy::FLEX_START 
+
 ### 0.50.0 (2024-08-30)
 
 #### Features
