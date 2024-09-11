@@ -1452,6 +1452,46 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_DocumentService_BatchGetDocumentsMetadata_sync",
+      "title": "Snippet for the batch_get_documents_metadata call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#batch_get_documents_metadata.",
+      "file": "document_service/batch_get_documents_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_get_documents_metadata",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#batch_get_documents_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataResponse",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "BatchGetDocumentsMetadata",
+          "full_name": "google.cloud.discoveryengine.v1.DocumentService.BatchGetDocumentsMetadata",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_EngineService_CreateEngine_sync",
       "title": "Snippet for the create_engine call in the EngineService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::EngineService::Client#create_engine.",
@@ -2012,6 +2052,86 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_SearchTuningService_TrainCustomModel_sync",
+      "title": "Snippet for the train_custom_model call in the SearchTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client#train_custom_model.",
+      "file": "search_tuning_service/train_custom_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "train_custom_model",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client#train_custom_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::TrainCustomModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SearchTuningService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client"
+        },
+        "method": {
+          "short_name": "TrainCustomModel",
+          "full_name": "google.cloud.discoveryengine.v1.SearchTuningService.TrainCustomModel",
+          "service": {
+            "short_name": "SearchTuningService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SearchTuningService_ListCustomModels_sync",
+      "title": "Snippet for the list_custom_models call in the SearchTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client#list_custom_models.",
+      "file": "search_tuning_service/list_custom_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_models",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client#list_custom_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::ListCustomModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::ListCustomModelsResponse",
+        "client": {
+          "short_name": "SearchTuningService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client"
+        },
+        "method": {
+          "short_name": "ListCustomModels",
+          "full_name": "google.cloud.discoveryengine.v1.SearchTuningService.ListCustomModels",
+          "service": {
+            "short_name": "SearchTuningService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_SiteSearchEngineService_GetSiteSearchEngine_sync",
       "title": "Snippet for the get_site_search_engine call in the SiteSearchEngineService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Client#get_site_search_engine.",
@@ -2567,6 +2687,46 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_UserEventService_PurgeUserEvents_sync",
+      "title": "Snippet for the purge_user_events call in the UserEventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::UserEventService::Client#purge_user_events.",
+      "file": "user_event_service/purge_user_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_user_events",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::UserEventService::Client#purge_user_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "PurgeUserEvents",
+          "full_name": "google.cloud.discoveryengine.v1.UserEventService.PurgeUserEvents",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.discoveryengine.v1.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

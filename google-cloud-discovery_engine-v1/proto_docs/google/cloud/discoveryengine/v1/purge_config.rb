@@ -21,9 +21,107 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1
+        # Request message for PurgeUserEvents method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the catalog under which the events are
+        #     created. The format is
+        #     `projects/{project}/locations/global/collections/{collection}/dataStores/{dataStore}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Required. The filter string to specify the events to be deleted with a
+        #     length limit of 5,000 characters. The eligible fields for filtering are:
+        #
+        #     * `eventType`: Double quoted
+        #     {::Google::Cloud::DiscoveryEngine::V1::UserEvent#event_type UserEvent.event_type}
+        #     string.
+        #     * `eventTime`: in ISO 8601 "zulu" format.
+        #     * `userPseudoId`: Double quoted string. Specifying this will delete all
+        #       events associated with a visitor.
+        #     * `userId`: Double quoted string. Specifying this will delete all events
+        #       associated with a user.
+        #
+        #     Examples:
+        #
+        #     * Deleting all events in a time range:
+        #       `eventTime > "2012-04-23T18:25:43.511Z"
+        #       eventTime < "2012-04-23T18:30:43.511Z"`
+        #     * Deleting specific eventType:
+        #       `eventType = "search"`
+        #     * Deleting all events for a specific visitor:
+        #       `userPseudoId = "visitor1024"`
+        #     * Deleting all events inside a DataStore:
+        #       `*`
+        #
+        #     The filtering fields are assumed to have an implicit AND.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     The `force` field is currently not supported. Purge user event requests
+        #     will permanently delete all purgeable events. Once the development is
+        #     complete:
+        #     If `force` is set to false, the method will return the expected
+        #     purge count without deleting any user events. This field will default to
+        #     false if not included in the request.
+        class PurgeUserEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of the PurgeUserEventsRequest. If the long running operation is
+        # successfully done, then this message is returned by the
+        # google.longrunning.Operations.response field.
+        # @!attribute [rw] purge_count
+        #   @return [::Integer]
+        #     The total count of events purged as a result of the operation.
+        class PurgeUserEventsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the PurgeUserEvents operation.
+        # This will be returned by the google.longrunning.Operation.metadata field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        # @!attribute [rw] success_count
+        #   @return [::Integer]
+        #     Count of entries that were deleted successfully.
+        # @!attribute [rw] failure_count
+        #   @return [::Integer]
+        #     Count of entries that encountered errors while processing.
+        class PurgeUserEventsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration of destination for Purge related errors.
+        # @!attribute [rw] gcs_prefix
+        #   @return [::String]
+        #     Cloud Storage prefix for purge errors. This must be an empty,
+        #     existing Cloud Storage directory. Purge errors are written to
+        #     sharded files in this directory, one per line, as a JSON-encoded
+        #     `google.rpc.Status` message.
+        class PurgeErrorConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#purge_documents DocumentService.PurgeDocuments}
         # method.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::GcsSource]
+        #     Cloud Storage location for the input content.
+        #     Supported `data_schema`:
+        #     * `document_id`: One valid
+        #     {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id} per line.
+        # @!attribute [rw] inline_source
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::PurgeDocumentsRequest::InlineSource]
+        #     Inline source for the input content for purge.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, such as
@@ -33,6 +131,9 @@ module Google
         #     Required. Filter matching documents to purge. Only currently supported
         #     value is
         #     `*` (all items).
+        # @!attribute [rw] error_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::PurgeErrorConfig]
+        #     The desired location of errors incurred during the purge.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Actually performs the purge. If `force` is set to false, return the
@@ -40,6 +141,20 @@ module Google
         class PurgeDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The inline source for the input config for
+          # {::Google::Cloud::DiscoveryEngine::V1::DocumentService::Client#purge_documents DocumentService.PurgeDocuments}
+          # method.
+          # @!attribute [rw] documents
+          #   @return [::Array<::String>]
+          #     Required. A list of full resource name of documents to purge. In the
+          #     format
+          #     `projects/*/locations/*/collections/*/dataStores/*/branches/*/documents/*`.
+          #     Recommended max of 100 items.
+          class InlineSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for

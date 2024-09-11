@@ -67,6 +67,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientTest < Minit
     data_store = {}
     data_store_id = "hello world"
     create_advanced_site_search = true
+    skip_default_schema_creation = true
 
     create_data_store_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_data_store, name
@@ -75,6 +76,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientTest < Minit
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::DataStore), request["data_store"]
       assert_equal "hello world", request["data_store_id"]
       assert_equal true, request["create_advanced_site_search"]
+      assert_equal true, request["skip_default_schema_creation"]
       refute_nil options
     end
 
@@ -85,35 +87,35 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientTest < Minit
       end
 
       # Use hash object
-      client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search }) do |response, operation|
+      client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_data_store parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search do |response, operation|
+      client.create_data_store parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_data_store ::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search) do |response, operation|
+      client.create_data_store ::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search }, grpc_options) do |response, operation|
+      client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_data_store(::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search), grpc_options) do |response, operation|
+      client.create_data_store(::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

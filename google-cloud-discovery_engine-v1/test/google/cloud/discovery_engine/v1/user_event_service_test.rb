@@ -184,6 +184,73 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::ClientTest < Minit
     end
   end
 
+  def test_purge_user_events
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    force = true
+
+    purge_user_events_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :purge_user_events, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, purge_user_events_client_stub do
+      # Create client
+      client = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.purge_user_events({ parent: parent, filter: filter, force: force }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.purge_user_events parent: parent, filter: filter, force: force do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.purge_user_events ::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.purge_user_events({ parent: parent, filter: filter, force: force }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.purge_user_events(::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, purge_user_events_client_stub.call_rpc_count
+    end
+  end
+
   def test_import_user_events
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

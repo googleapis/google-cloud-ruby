@@ -447,6 +447,10 @@ module Google
         #   @return [::Array<::String>]
         #     The promotion IDs associated with this Document.
         #     Currently, this field is restricted to at most one ID.
+        # @!attribute [r] joined
+        #   @return [::Boolean]
+        #     Output only. Whether the referenced Document can be found in the data
+        #     store.
         class DocumentInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

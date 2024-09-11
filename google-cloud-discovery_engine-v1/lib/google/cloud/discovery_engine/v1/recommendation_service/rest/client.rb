@@ -195,7 +195,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param serving_config [::String]
-              #     Required. Full resource name of a [ServingConfig][]:
+              #     Required. Full resource name of a
+              #     [ServingConfig][google.cloud.discoveryengine.v1.ServingConfig]:
               #     `projects/*/locations/global/collections/*/engines/*/servingConfigs/*`, or
               #     `projects/*/locations/global/collections/*/dataStores/*/servingConfigs/*`
               #

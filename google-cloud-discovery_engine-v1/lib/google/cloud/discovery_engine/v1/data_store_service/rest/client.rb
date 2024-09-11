@@ -205,7 +205,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_data_store(parent: nil, data_store: nil, data_store_id: nil, create_advanced_site_search: nil)
+              # @overload create_data_store(parent: nil, data_store: nil, data_store_id: nil, create_advanced_site_search: nil, skip_default_schema_creation: nil)
               #   Pass arguments to `create_data_store` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -231,6 +231,15 @@ module Google
               #     If the data store is not configured as site
               #     search (GENERIC vertical and PUBLIC_WEBSITE content_config), this flag will
               #     be ignored.
+              #   @param skip_default_schema_creation [::Boolean]
+              #     A boolean flag indicating whether to skip the default schema creation for
+              #     the data store. Only enable this flag if you are certain that the default
+              #     schema is incompatible with your use case.
+              #
+              #     If set to true, you must manually create a schema for the data store before
+              #     any documents can be ingested.
+              #
+              #     This flag cannot be specified if `data_store.starting_schema` is specified.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

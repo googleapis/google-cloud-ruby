@@ -82,6 +82,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Rest::ClientTest <
     data_store = {}
     data_store_id = "hello world"
     create_advanced_site_search = true
+    skip_default_schema_creation = true
 
     create_data_store_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -97,27 +98,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::Rest::ClientTest <
         end
 
         # Use hash object
-        client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search }) do |_result, response|
+        client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_data_store parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search do |_result, response|
+        client.create_data_store parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_data_store ::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search) do |_result, response|
+        client.create_data_store ::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search }, call_options) do |_result, response|
+        client.create_data_store({ parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_data_store(::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search), call_options) do |_result, response|
+        client.create_data_store(::Google::Cloud::DiscoveryEngine::V1::CreateDataStoreRequest.new(parent: parent, data_store: data_store, data_store_id: data_store_id, create_advanced_site_search: create_advanced_site_search, skip_default_schema_creation: skip_default_schema_creation), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

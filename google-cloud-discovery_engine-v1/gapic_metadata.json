@@ -234,6 +234,11 @@
               "methods": [
                 "purge_documents"
               ]
+            },
+            "BatchGetDocumentsMetadata": {
+              "methods": [
+                "batch_get_documents_metadata"
+              ]
             }
           }
         }
@@ -363,6 +368,25 @@
         }
       }
     },
+    "SearchTuningService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::SearchTuningService::Client",
+          "rpcs": {
+            "TrainCustomModel": {
+              "methods": [
+                "train_custom_model"
+              ]
+            },
+            "ListCustomModels": {
+              "methods": [
+                "list_custom_models"
+              ]
+            }
+          }
+        }
+      }
+    },
     "SiteSearchEngineService": {
       "clients": {
         "grpc": {
@@ -445,6 +469,11 @@
             "CollectUserEvent": {
               "methods": [
                 "collect_user_event"
+              ]
+            },
+            "PurgeUserEvents": {
+              "methods": [
+                "purge_user_events"
               ]
             },
             "ImportUserEvents": {

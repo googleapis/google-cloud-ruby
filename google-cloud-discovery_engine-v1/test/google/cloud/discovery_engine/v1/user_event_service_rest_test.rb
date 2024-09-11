@@ -183,6 +183,62 @@ class ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ClientTest <
     end
   end
 
+  def test_purge_user_events
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    force = true
+
+    purge_user_events_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::ServiceStub.stub :transcode_purge_user_events_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, purge_user_events_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1::UserEventService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.purge_user_events({ parent: parent, filter: filter, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.purge_user_events parent: parent, filter: filter, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.purge_user_events ::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.purge_user_events({ parent: parent, filter: filter, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.purge_user_events(::Google::Cloud::DiscoveryEngine::V1::PurgeUserEventsRequest.new(parent: parent, filter: filter, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, purge_user_events_client_stub.call_count
+      end
+    end
+  end
+
   def test_import_user_events
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new

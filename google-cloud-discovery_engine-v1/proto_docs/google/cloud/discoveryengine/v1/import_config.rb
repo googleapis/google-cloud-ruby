@@ -68,7 +68,7 @@ module Google
         #     BigQuery time partitioned table's _PARTITIONDATE in YYYY-MM-DD format.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The project ID (can be project # or ID) that the BigQuery source is in with
+        #     The project ID or the project number that contains the BigQuery source. Has
         #     a length limit of 128 characters. If not specified, inherits the project
         #     ID from the parent request.
         # @!attribute [rw] dataset_id
@@ -113,7 +113,7 @@ module Google
         # The Spanner source for importing data
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The project ID that the Spanner source is in with a length limit of 128
+        #     The project ID that contains the Spanner source. Has a length limit of 128
         #     characters. If not specified, inherits the project ID from the parent
         #     request.
         # @!attribute [rw] instance_id
@@ -268,7 +268,7 @@ module Google
         # The Cloud Bigtable source for importing data.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The project ID that the Bigtable source is in with a length limit of 128
+        #     The project ID that contains the Bigtable source. Has a length limit of 128
         #     characters. If not specified, inherits the project ID from the parent
         #     request.
         # @!attribute [rw] instance_id
@@ -297,6 +297,12 @@ module Google
         #     Intermediate Cloud Storage directory used for the import with a length
         #     limit of 2,000 characters. Can be specified if one wants to have the
         #     FhirStore export to a specific Cloud Storage directory.
+        # @!attribute [rw] resource_types
+        #   @return [::Array<::String>]
+        #     The FHIR resource types to import. The resource types should be a subset of
+        #     all [supported FHIR resource
+        #     types](https://cloud.google.com/generative-ai-app-builder/docs/fhir-schema-reference#resource-level-specification).
+        #     Default to all supported FHIR resource types if empty.
         class FhirStoreSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,8 +311,8 @@ module Google
         # Cloud SQL source import data from.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The project ID that the Cloud SQL source is in with a length limit of 128
-        #     characters. If not specified, inherits the project ID from the parent
+        #     The project ID that contains the Cloud SQL source. Has a length limit of
+        #     128 characters. If not specified, inherits the project ID from the parent
         #     request.
         # @!attribute [rw] instance_id
         #   @return [::String]
@@ -341,8 +347,8 @@ module Google
         # AlloyDB source import data from.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The project ID that the AlloyDB source is in
-        #     with a length limit of 128 characters. If not specified, inherits the
+        #     The project ID that contains the AlloyDB source.
+        #     Has a length limit of 128 characters. If not specified, inherits the
         #     project ID from the parent request.
         # @!attribute [rw] location_id
         #   @return [::String]

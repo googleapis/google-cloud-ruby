@@ -93,6 +93,9 @@ module Google
           # @!attribute [rw] chunk_info
           #   @return [::Google::Cloud::DiscoveryEngine::V1::Answer::Reference::ChunkInfo]
           #     Chunk information.
+          # @!attribute [rw] structured_document_info
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::Answer::Reference::StructuredDocumentInfo]
+          #     Structured document information.
           class Reference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,6 +128,13 @@ module Google
               # @!attribute [rw] page_identifier
               #   @return [::String]
               #     Page identifier.
+              # @!attribute [rw] relevance_score
+              #   @return [::Float]
+              #     The relevance of the chunk for a given query. Values range from 0.0
+              #     (completely irrelevant) to 1.0 (completely relevant).
+              #     This value is for informational purpose only. It may change for
+              #     the same query and chunk at any time due to a model retraining or
+              #     change in implementation.
               class ChunkContent
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -140,7 +150,11 @@ module Google
             #     Chunk textual content.
             # @!attribute [rw] relevance_score
             #   @return [::Float]
-            #     Relevance score.
+            #     The relevance of the chunk for a given query. Values range from 0.0
+            #     (completely irrelevant) to 1.0 (completely relevant).
+            #     This value is for informational purpose only. It may change for
+            #     the same query and chunk at any time due to a model retraining or
+            #     change in implementation.
             # @!attribute [rw] document_metadata
             #   @return [::Google::Cloud::DiscoveryEngine::V1::Answer::Reference::ChunkInfo::DocumentMetadata]
             #     Document metadata.
@@ -169,6 +183,18 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Structured search information.
+            # @!attribute [rw] document
+            #   @return [::String]
+            #     Document resource name.
+            # @!attribute [rw] struct_data
+            #   @return [::Google::Protobuf::Struct]
+            #     Structured search data.
+            class StructuredDocumentInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
 
@@ -239,9 +265,8 @@ module Google
                 #   @return [::Google::Protobuf::Struct]
                 #     Data representation.
                 #     The structured JSON data for the document.
-                #     It's populated from the struct data from the Document (code
-                #     pointer: http://shortn/_objzAfIiHq), or the Chunk in search result
-                #     (code pointer: http://shortn/_Ipo6KFFGBL).
+                #     It's populated from the struct data from the Document, or the
+                #     Chunk in search result.
                 class SearchResult
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,7 +292,11 @@ module Google
                   #     Chunk textual content.
                   # @!attribute [rw] relevance_score
                   #   @return [::Float]
-                  #     Relevance score.
+                  #     The relevance of the chunk for a given query. Values range from
+                  #     0.0 (completely irrelevant) to 1.0 (completely relevant).
+                  #     This value is for informational purpose only. It may change for
+                  #     the same query and chunk at any time due to a model retraining or
+                  #     change in implementation.
                   class ChunkInfo
                     include ::Google::Protobuf::MessageExts
                     extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,6 +350,9 @@ module Google
 
                 # Non-answer-seeking query classification type.
                 NON_ANSWER_SEEKING_QUERY = 2
+
+                # Jail-breaking query classification type.
+                JAIL_BREAKING_QUERY = 3
               end
             end
           end
@@ -367,6 +399,19 @@ module Google
             # Google skips the answer if there is no relevant content in the
             # retrieved search results.
             NO_RELEVANT_CONTENT = 5
+
+            # The jail-breaking query ignored case.
+            #
+            # For example, "Reply in the tone of a competing company's CEO".
+            # Google skips the answer if the query is classified as a jail-breaking
+            # query.
+            JAIL_BREAKING_QUERY_IGNORED = 6
+
+            # The customer policy violation case.
+            #
+            # Google skips the summary if there is a customer policy violation
+            # detected. The policy is defined by the customer.
+            CUSTOMER_POLICY_VIOLATION = 7
           end
         end
       end
