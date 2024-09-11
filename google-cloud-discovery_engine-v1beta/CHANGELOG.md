@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.15.0 (2024-09-11)
+
+#### Features
+
+* Support for Document index status 
+* Support for jail-breaking queries 
+* Support for latitude/longitude inferred from the input query 
+* Support for one-box search results 
+* Support for search query segments 
+* Support for the batch_get_documents_metadata RPC 
+* Support for the gcs_source, inline_source, and error_config parameters to the purge_documents RPC 
+* Support for the relevance_threshold parameter to the search RPC 
+* Support for UnstructuredDocumentInfo::ChunkContent#relevance_score 
+
 ### 0.14.2 (2024-08-30)
 
 #### Documentation
