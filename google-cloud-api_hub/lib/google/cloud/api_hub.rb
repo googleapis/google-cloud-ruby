@@ -34,7 +34,6 @@ require "google/cloud/config"
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
   config.add_field! :lib_version,   nil, match: ::String
-  config.add_field! :interceptors,  nil, match: ::Array
   config.add_field! :timeout,       nil, match: ::Numeric
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
@@ -49,14 +48,12 @@ module Google
       # Create a new client object for ApiHub.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::ApiHub::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHub-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::ApiHub::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHub-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ApiHub service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About ApiHub
       #
@@ -64,10 +61,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.api_hub version: :v1, transport: :grpc, &block
+      def self.api_hub version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -75,22 +71,19 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:ApiHub)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for ApiHubDependencies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::ApiHubDependencies::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubDependencies-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubDependencies-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ApiHubDependencies service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About ApiHubDependencies
       #
@@ -99,10 +92,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.api_hub_dependencies version: :v1, transport: :grpc, &block
+      def self.api_hub_dependencies version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -110,22 +102,19 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:ApiHubDependencies)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for HostProjectRegistrationService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-HostProjectRegistrationService-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-HostProjectRegistrationService-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the HostProjectRegistrationService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About HostProjectRegistrationService
       #
@@ -133,10 +122,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.host_project_registration_service version: :v1, transport: :grpc, &block
+      def self.host_project_registration_service version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -144,22 +132,19 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:HostProjectRegistrationService)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for LintingService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::LintingService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-LintingService-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::LintingService::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-LintingService-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the LintingService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About LintingService
       #
@@ -167,10 +152,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.linting_service version: :v1, transport: :grpc, &block
+      def self.linting_service version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -178,22 +162,19 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:LintingService)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for ApiHubPlugin.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::ApiHubPlugin::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubPlugin-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-ApiHubPlugin-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ApiHubPlugin service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About ApiHubPlugin
       #
@@ -201,10 +182,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.api_hub_plugin version: :v1, transport: :grpc, &block
+      def self.api_hub_plugin version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -212,22 +192,19 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:ApiHubPlugin)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for Provisioning.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::Provisioning::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-Provisioning-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::Provisioning::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-Provisioning-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Provisioning service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About Provisioning
       #
@@ -235,10 +212,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.provisioning version: :v1, transport: :grpc, &block
+      def self.provisioning version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -246,22 +222,19 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:Provisioning)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for RuntimeProjectAttachmentService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-RuntimeProjectAttachmentService-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_hub-v1/latest/Google-Cloud-ApiHub-V1-RuntimeProjectAttachmentService-Rest-Client)
+      # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RuntimeProjectAttachmentService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
-      # You can also specify a different transport by passing `:rest` or `:grpc` in
-      # the `transport` parameter.
       #
       # ## About RuntimeProjectAttachmentService
       #
@@ -269,10 +242,9 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.runtime_project_attachment_service version: :v1, transport: :grpc, &block
+      def self.runtime_project_attachment_service version: :v1, &block
         require "google/cloud/api_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiHub
@@ -280,8 +252,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:RuntimeProjectAttachmentService)
-        service_module = service_module.const_get(:Rest) if transport == :rest
-        service_module.const_get(:Client).new(&block)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
@@ -296,8 +267,6 @@ module Google
       #   The library name as recorded in instrumentation and logging.
       # * `lib_version` (*type:* `String`) -
       #   The library version as recorded in instrumentation and logging.
-      # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
-      #   An array of interceptors that are run before calls are executed.
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -

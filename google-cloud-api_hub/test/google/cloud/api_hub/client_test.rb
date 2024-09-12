@@ -19,7 +19,6 @@
 require "helper"
 require "google/cloud/api_hub"
 require "gapic/common"
-require "gapic/grpc"
 require "gapic/rest"
 
 class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
@@ -33,133 +32,63 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_api_hub_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.api_hub transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::ApiHub::Client, client
-    end
-  end
-
   def test_api_hub_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.api_hub transport: :rest do |config|
+      client = Google::Cloud::ApiHub.api_hub do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::ApiHub::Rest::Client, client
     end
   end
 
-  def test_api_hub_dependencies_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.api_hub_dependencies transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::ApiHubDependencies::Client, client
-    end
-  end
-
   def test_api_hub_dependencies_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.api_hub_dependencies transport: :rest do |config|
+      client = Google::Cloud::ApiHub.api_hub_dependencies do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client, client
     end
   end
 
-  def test_host_project_registration_service_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.host_project_registration_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client, client
-    end
-  end
-
   def test_host_project_registration_service_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.host_project_registration_service transport: :rest do |config|
+      client = Google::Cloud::ApiHub.host_project_registration_service do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client, client
     end
   end
 
-  def test_linting_service_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.linting_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::LintingService::Client, client
-    end
-  end
-
   def test_linting_service_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.linting_service transport: :rest do |config|
+      client = Google::Cloud::ApiHub.linting_service do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::LintingService::Rest::Client, client
     end
   end
 
-  def test_api_hub_plugin_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.api_hub_plugin transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::ApiHubPlugin::Client, client
-    end
-  end
-
   def test_api_hub_plugin_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.api_hub_plugin transport: :rest do |config|
+      client = Google::Cloud::ApiHub.api_hub_plugin do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client, client
     end
   end
 
-  def test_provisioning_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.provisioning transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::Provisioning::Client, client
-    end
-  end
-
   def test_provisioning_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.provisioning transport: :rest do |config|
+      client = Google::Cloud::ApiHub.provisioning do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::Provisioning::Rest::Client, client
     end
   end
 
-  def test_runtime_project_attachment_service_grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ApiHub.runtime_project_attachment_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client, client
-    end
-  end
-
   def test_runtime_project_attachment_service_rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::ApiHub.runtime_project_attachment_service transport: :rest do |config|
+      client = Google::Cloud::ApiHub.runtime_project_attachment_service do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client, client
