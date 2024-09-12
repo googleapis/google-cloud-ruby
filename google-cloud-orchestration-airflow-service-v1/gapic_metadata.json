@@ -55,6 +55,11 @@
                 "list_workloads"
               ]
             },
+            "CheckUpgrade": {
+              "methods": [
+                "check_upgrade"
+              ]
+            },
             "CreateUserWorkloadsSecret": {
               "methods": [
                 "create_user_workloads_secret"

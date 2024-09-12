@@ -640,6 +640,71 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client
     end
   end
 
+  def test_check_upgrade
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    environment = "hello world"
+    image_version = "hello world"
+
+    check_upgrade_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :check_upgrade, name
+      assert_kind_of ::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest, request
+      assert_equal "hello world", request["environment"]
+      assert_equal "hello world", request["image_version"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, check_upgrade_client_stub do
+      # Create client
+      client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.check_upgrade({ environment: environment, image_version: image_version }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.check_upgrade environment: environment, image_version: image_version do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.check_upgrade ::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest.new(environment: environment, image_version: image_version) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.check_upgrade({ environment: environment, image_version: image_version }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.check_upgrade(::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest.new(environment: environment, image_version: image_version), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, check_upgrade_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_user_workloads_secret
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Orchestration::Airflow::Service::V1::UserWorkloadsSecret.new

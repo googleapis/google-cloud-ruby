@@ -57,6 +57,10 @@ module Google
                 # This method is supported for Cloud Composer environments in versions
                 # composer-3.*.*-airflow-*.*.* and newer.
                 rpc :ListWorkloads, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse
+                # Check if an upgrade operation on the environment will succeed.
+                #
+                # In case of problems detailed info can be found in the returned Operation.
+                rpc :CheckUpgrade, ::Google::Cloud::Orchestration::Airflow::Service::V1::CheckUpgradeRequest, ::Google::Longrunning::Operation
                 # Creates a user workloads Secret.
                 #
                 # This method is supported for Cloud Composer environments in versions
