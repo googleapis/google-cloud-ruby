@@ -102,6 +102,7 @@
     "snippets/chat_service/list_reactions.rb",
     "snippets/chat_service/list_space_events.rb",
     "snippets/chat_service/list_spaces.rb",
+    "snippets/chat_service/search_spaces.rb",
     "snippets/chat_service/set_up_space.rb",
     "snippets/chat_service/update_membership.rb",
     "snippets/chat_service/update_message.rb",
