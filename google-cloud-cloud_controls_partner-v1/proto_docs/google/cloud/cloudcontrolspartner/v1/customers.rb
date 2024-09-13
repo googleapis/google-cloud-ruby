@@ -28,13 +28,13 @@ module Google
         #     `organizations/{organization}/locations/{location}/customers/{customer}`
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The customer organization's display name. E.g. "google.com".
-        # @!attribute [rw] customer_onboarding_state
+        #     Required. Display name for the customer
+        # @!attribute [r] customer_onboarding_state
         #   @return [::Google::Cloud::CloudControlsPartner::V1::CustomerOnboardingState]
-        #     Container for customer onboarding steps
-        # @!attribute [rw] is_onboarded
+        #     Output only. Container for customer onboarding steps
+        # @!attribute [r] is_onboarded
         #   @return [::Boolean]
-        #     Indicates whether a customer is fully onboarded
+        #     Output only. Indicates whether a customer is fully onboarded
         class Customer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
