@@ -789,6 +789,94 @@ module Google
               end
 
               ##
+              # This operation will switch the active/replica zone for a regional
+              # storagePool.
+              #
+              # @overload switch_active_replica_zone(request, options = nil)
+              #   Pass arguments to `switch_active_replica_zone` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload switch_active_replica_zone(name: nil)
+              #   Pass arguments to `switch_active_replica_zone` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the storage pool
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest.new
+              #
+              #   # Call the switch_active_replica_zone method.
+              #   result = client.switch_active_replica_zone request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def switch_active_replica_zone request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.switch_active_replica_zone.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.switch_active_replica_zone.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.switch_active_replica_zone.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.switch_active_replica_zone request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists Volumes in a given project.
               #
               # @overload list_volumes(request, options = nil)
@@ -5086,6 +5174,11 @@ module Google
                   #
                   attr_reader :delete_storage_pool
                   ##
+                  # RPC-specific configuration for `switch_active_replica_zone`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :switch_active_replica_zone
+                  ##
                   # RPC-specific configuration for `list_volumes`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5328,6 +5421,8 @@ module Google
                     @update_storage_pool = ::Gapic::Config::Method.new update_storage_pool_config
                     delete_storage_pool_config = parent_rpcs.delete_storage_pool if parent_rpcs.respond_to? :delete_storage_pool
                     @delete_storage_pool = ::Gapic::Config::Method.new delete_storage_pool_config
+                    switch_active_replica_zone_config = parent_rpcs.switch_active_replica_zone if parent_rpcs.respond_to? :switch_active_replica_zone
+                    @switch_active_replica_zone = ::Gapic::Config::Method.new switch_active_replica_zone_config
                     list_volumes_config = parent_rpcs.list_volumes if parent_rpcs.respond_to? :list_volumes
                     @list_volumes = ::Gapic::Config::Method.new list_volumes_config
                     get_volume_config = parent_rpcs.get_volume if parent_rpcs.respond_to? :get_volume
