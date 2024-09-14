@@ -361,6 +361,7 @@ module Google
               #      *   `platform_version`.
               #      *   `proxy_config.kubernetes_secret.name`.
               #      *   `proxy_config.kubernetes_secret.namespace`.
+              #      *   `security_posture_config.vulnerability_mode`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -477,7 +478,7 @@ module Google
               #   @param distribution [::String]
               #     Required. The Kubernetes distribution of the underlying attached cluster.
               #
-              #     Supported values: ["eks", "aks"].
+              #     Supported values: ["eks", "aks", "generic"].
               #   @param proxy_config [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig, ::Hash]
               #     Optional. Proxy configuration for outbound HTTP(S) traffic.
               # @yield [result, operation] Access the result along with the TransportOperation object

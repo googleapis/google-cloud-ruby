@@ -116,6 +116,9 @@ module Google
         # @!attribute [rw] binary_authorization
         #   @return [::Google::Cloud::GkeMultiCloud::V1::BinaryAuthorization]
         #     Optional. Binary Authorization configuration for this cluster.
+        # @!attribute [rw] security_posture_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::SecurityPostureConfig]
+        #     Optional. Security Posture configuration for this cluster.
         class AttachedCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

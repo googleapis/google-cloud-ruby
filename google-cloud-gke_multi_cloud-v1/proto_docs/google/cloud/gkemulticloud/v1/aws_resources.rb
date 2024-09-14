@@ -457,6 +457,9 @@ module Google
         # @!attribute [rw] management
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AwsNodeManagement]
         #     Optional. The Management configuration for this node pool.
+        # @!attribute [rw] kubelet_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::NodeKubeletConfig]
+        #     Optional. Node kubelet configs.
         # @!attribute [rw] update_settings
         #   @return [::Google::Cloud::GkeMultiCloud::V1::UpdateSettings]
         #     Optional. Update settings control the speed and disruption of the update.
@@ -769,7 +772,7 @@ module Google
         #
         #     The secret must be a JSON encoded proxy configuration
         #     as described in
-        #     https://cloud.google.com/anthos/clusters/docs/multi-cloud/aws/how-to/use-a-proxy#create_a_proxy_configuration_file
+        #     https://cloud.google.com/kubernetes-engine/multi-cloud/docs/aws/how-to/use-a-proxy#create_a_proxy_configuration_file
         # @!attribute [rw] secret_version
         #   @return [::String]
         #     The version string of the AWS Secret Manager secret that contains the
