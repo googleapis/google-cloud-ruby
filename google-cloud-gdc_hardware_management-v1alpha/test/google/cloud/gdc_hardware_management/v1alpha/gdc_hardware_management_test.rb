@@ -397,12 +397,14 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    type = :TYPE_UNSPECIFIED
 
     submit_order_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :submit_order, name
       assert_kind_of ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
+      assert_equal :TYPE_UNSPECIFIED, request["type"]
       refute_nil options
     end
 
@@ -413,35 +415,35 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
       end
 
       # Use hash object
-      client.submit_order({ name: name, request_id: request_id }) do |response, operation|
+      client.submit_order({ name: name, request_id: request_id, type: type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.submit_order name: name, request_id: request_id do |response, operation|
+      client.submit_order name: name, request_id: request_id, type: type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.submit_order ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id) do |response, operation|
+      client.submit_order ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.submit_order({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+      client.submit_order({ name: name, request_id: request_id, type: type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.submit_order(::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+      client.submit_order(::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1570,6 +1572,66 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
 
       # Verify method calls
       assert_equal 5, create_comment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_record_action_on_comment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::GDCHardwareManagement::V1alpha::Comment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    action_type = :ACTION_TYPE_UNSPECIFIED
+
+    record_action_on_comment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :record_action_on_comment, name
+      assert_kind_of ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :ACTION_TYPE_UNSPECIFIED, request["action_type"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, record_action_on_comment_client_stub do
+      # Create client
+      client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.record_action_on_comment({ name: name, action_type: action_type }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.record_action_on_comment name: name, action_type: action_type do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.record_action_on_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.record_action_on_comment({ name: name, action_type: action_type }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.record_action_on_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, record_action_on_comment_client_stub.call_rpc_count
     end
   end
 

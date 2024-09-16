@@ -143,9 +143,37 @@ module Google
         #   @return [::String]
         #     Optional. An optional unique identifier for this request. See
         #     [AIP-155](https://google.aip.dev/155).
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest::Type]
+        #     Optional. Type of this request. If unset, the request type is assumed to be
+        #     `INFO_PENDING`.
         class SubmitOrderRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid types of submit order request.
+          module Type
+            # Request type is unspecified. This should not be used.
+            TYPE_UNSPECIFIED = 0
+
+            # Use this request type to submit your order and initiate conversation with
+            # Google. After this submission, you will not be able to modify the number
+            # or SKU of your ordered hardware. Please note that this order will not be
+            # ready for fulfillment yet until you provide more information, such as
+            # zone network configuration, hardware physical and installation
+            # information, etc.
+            # If you are submitting an order for a SKU type of RACK, please use this
+            # request type, as additional information will be required outside of the
+            # API.
+            INFO_PENDING = 1
+
+            # Use this request type if and when you are ready to submit your order for
+            # fulfillment. In addition to the information required for `INFO_PENDING`,
+            # the order must contain all required information, such as zone network
+            # configuration, hardware physical and installation information, etc.
+            # Further changes to any order information will no longer be allowed.
+            INFO_COMPLETE = 2
+          end
         end
 
         # A request to list sites.
@@ -533,6 +561,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request to record an action on a comment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the comment.
+        #     Format:
+        #     `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
+        # @!attribute [rw] action_type
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest::ActionType]
+        #     Required. The action type of the recorded action.
+        class RecordActionOnCommentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid action types of Comment.
+          module ActionType
+            # Action is unspecified.
+            ACTION_TYPE_UNSPECIFIED = 0
+
+            # Mark comment as read.
+            READ = 1
+
+            # Mark comment as unread.
+            UNREAD = 2
+          end
+        end
+
         # A request to list change log entries.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -760,6 +814,9 @@ module Google
             STATE_SIGNAL_UNSPECIFIED = 0
 
             # The Zone is ready for site turnup.
+            FACTORY_TURNUP_CHECKS_PASSED = 1
+
+            # The Zone is ready for site turnup. Deprecated, but not deleted.
             READY_FOR_SITE_TURNUP = 1
 
             # The Zone failed in factory turnup checks.

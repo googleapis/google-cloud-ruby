@@ -936,6 +936,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the record_action_on_comment REST call
+              #
+              # @param request_pb [::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::Comment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Comment]
+              #   A result object deserialized from the server's reply
+              def record_action_on_comment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_record_action_on_comment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::GDCHardwareManagement::V1alpha::Comment.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the list_change_log_entries REST call
               #
               # @param request_pb [::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest]
@@ -1803,6 +1841,28 @@ module Google
                                                           body: "comment",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/locations/[^/]+/orders/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the record_action_on_comment REST call
+              #
+              # @param request_pb [::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_record_action_on_comment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1alpha/{name}:recordAction",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/orders/[^/]+/comments/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

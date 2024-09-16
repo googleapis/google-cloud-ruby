@@ -932,6 +932,46 @@
       ]
     },
     {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_sync",
+      "title": "Snippet for the record_action_on_comment call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#record_action_on_comment.",
+      "file": "gdc_hardware_management/record_action_on_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "record_action_on_comment",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#record_action_on_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Comment",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "RecordActionOnComment",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_sync",
       "title": "Snippet for the list_change_log_entries call in the GDCHardwareManagement service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_change_log_entries.",
