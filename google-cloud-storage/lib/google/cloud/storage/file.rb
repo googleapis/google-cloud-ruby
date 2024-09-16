@@ -2086,19 +2086,19 @@ module Google
         #
         # @return [Hash(String => String)]
         #
-        # @example Fetch bucketName and fileName from gs url:
+        # @example Fetch bucket_name and file_name from gs url:
         #   require "google/cloud/storage"
         #   gs_url= "gs://my-todo-app/avatars/heidi.jpeg"
-        #   fileObject=Google::Cloud::Storage::File
-        #   fileObject.from_gs_url(gs_url)
+        #   file=Google::Cloud::Storage::File
+        #   file.from_gs_url(gs_url)
         #   =>
         #   {"bucket_name"=>"my-todo-app", "file_name"=>"heidi.jpeg"}
         #
-        # @example Fetch bucketName , fileName and other query params from gs url:
+        # @example Fetch bucket_name , file_name and other query params from gs url:
         #   require "google/cloud/storage"
         #   gs_url= "gs://my-todo-app/test_sub_folder/heidi.jpeg?params1=test1&params2=test2"
-        #   fileObject=Google::Cloud::Storage::File
-        #   fileObject.from_gs_url(gs_url)
+        #   file=Google::Cloud::Storage::File
+        #   file.from_gs_url(gs_url)
         #   =>{
         #     "bucket_name"=>"my-todo-app",
         #     "file_name"=>"heidi.jpeg",
@@ -2108,27 +2108,23 @@ module Google
         #       }
         #      }
 
-        def self.from_gs_url url
+        def self.from_gs_url gs_url
           prefix = "gs://".freeze
+          raise ArgumentError, "Invalid GCS URL" unless gs_url.start_with? prefix
           # seprating params from input url
-          # encoded_url = url.strip.gsub('@','%40')
-          parsed_url = URI.parse url
-          query_params = URI.decode_www_form(parsed_url.query).to_h if parsed_url.query
-          parsed_url.query = nil
-          url = parsed_url.to_s
+          path, query = gs_url.sub(prefix, "").split("?", 2)
           # parsing the url
-          object_uri = url.split(prefix)[1]
-          bucket_name = object_uri.split("/")[0]
-          file_name = object_uri.split("/").last
+          bucket_name, file_path = path.split "/", 2
+          query_params = URI.decode_www_form(query).to_h if query
+          file_name = file_path.split("/").last
           url_items = {
             "bucket_name" => bucket_name,
             "file_name" => file_name
           }
           # adding url params to output hash
-          url_items.merge! "options" => query_params if query_params
+          url_items.merge! "options" => query_params if query
           url_items
         end
-
 
         protected
 
