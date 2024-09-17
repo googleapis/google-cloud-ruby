@@ -31,11 +31,6 @@ module Google
       ##
       # API client module.
       #
-      # @example Load this package, including all its services, and instantiate a gRPC client
-      #
-      #     require "google/cloud/api_hub/v1"
-      #     client = ::Google::Cloud::ApiHub::V1::ApiHub::Client.new
-      #
       # @example Load this package, including all its services, and instantiate a REST client
       #
       #     require "google/cloud/api_hub/v1"

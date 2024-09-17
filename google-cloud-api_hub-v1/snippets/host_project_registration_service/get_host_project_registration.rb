@@ -29,11 +29,11 @@ require "google/cloud/api_hub/v1"
 # client as shown in https://cloud.google.com/ruby/docs/reference.
 #
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client#get_host_project_registration.
+# Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client#get_host_project_registration.
 #
 def get_host_project_registration
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client.new
+  client = Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::ApiHub::V1::GetHostProjectRegistrationRequest.new

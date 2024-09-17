@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ApiHub
       module V1
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#create_api CreateApi} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_api CreateApi} method's request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource for the API resource.
@@ -45,7 +45,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_api GetApi} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_api GetApi} method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the API resource to retrieve.
@@ -55,7 +55,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#update_api UpdateApi} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_api UpdateApi} method's request.
         # @!attribute [rw] api
         #   @return [::Google::Cloud::ApiHub::V1::Api]
         #     Required. The API resource to update.
@@ -71,7 +71,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#delete_api DeleteApi} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_api DeleteApi} method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the API resource to delete.
@@ -85,7 +85,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_apis ListApis} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_apis ListApis} method's request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of API resources.
@@ -181,7 +181,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_apis ListApis} method's response.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_apis ListApis} method's response.
         # @!attribute [rw] apis
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Api>]
         #     The API resources present in the API hub.
@@ -194,7 +194,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#create_version CreateVersion} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_version CreateVersion} method's
         # request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -219,7 +219,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_version GetVersion} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_version GetVersion} method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the API version to retrieve.
@@ -230,7 +230,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#update_version UpdateVersion} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_version UpdateVersion} method's
         # request.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::ApiHub::V1::Version]
@@ -247,7 +247,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#delete_version DeleteVersion} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_version DeleteVersion} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -263,7 +263,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_versions ListVersions} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_versions ListVersions} method's
         # request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -348,7 +348,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_versions ListVersions} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_versions ListVersions} method's
         # response.
         # @!attribute [rw] versions
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Version>]
@@ -362,7 +362,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#create_spec CreateSpec} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_spec CreateSpec} method's request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource for Spec.
@@ -388,7 +388,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_spec GetSpec} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_spec GetSpec} method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec to retrieve.
@@ -399,7 +399,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#update_spec UpdateSpec} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_spec UpdateSpec} method's request.
         # @!attribute [rw] spec
         #   @return [::Google::Cloud::ApiHub::V1::Spec]
         #     Required. The spec to update.
@@ -415,7 +415,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#delete_spec DeleteSpec} method's request.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_spec DeleteSpec} method's request.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec  to delete.
@@ -503,7 +503,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_specs ListSpecs} method's response.
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_specs ListSpecs} method's response.
         # @!attribute [rw] specs
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Spec>]
         #     The specs corresponding to an API.
@@ -516,7 +516,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_spec_contents GetSpecContents} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_spec_contents GetSpecContents} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -528,7 +528,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_api_operation GetApiOperation} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_api_operation GetApiOperation} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -540,7 +540,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_api_operations ListApiOperations}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_api_operations ListApiOperations}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -607,7 +607,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_api_operations ListApiOperations}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_api_operations ListApiOperations}
         # method's response.
         # @!attribute [rw] api_operations
         #   @return [::Array<::Google::Cloud::ApiHub::V1::ApiOperation>]
@@ -624,7 +624,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_definition GetDefinition} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_definition GetDefinition} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -636,7 +636,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#create_deployment CreateDeployment}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_deployment CreateDeployment}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -662,7 +662,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_deployment GetDeployment} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_deployment GetDeployment} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -673,7 +673,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#update_deployment UpdateDeployment}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_deployment UpdateDeployment}
         # method's request.
         # @!attribute [rw] deployment
         #   @return [::Google::Cloud::ApiHub::V1::Deployment]
@@ -690,7 +690,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#delete_deployment DeleteDeployment}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_deployment DeleteDeployment}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -701,7 +701,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_deployments ListDeployments} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_deployments ListDeployments} method's
         # request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -785,7 +785,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_deployments ListDeployments} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_deployments ListDeployments} method's
         # response.
         # @!attribute [rw] deployments
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Deployment>]
@@ -799,7 +799,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#create_attribute CreateAttribute} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_attribute CreateAttribute} method's
         # request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -825,7 +825,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_attribute GetAttribute} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_attribute GetAttribute} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -837,7 +837,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#update_attribute UpdateAttribute} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_attribute UpdateAttribute} method's
         # request.
         # @!attribute [rw] attribute
         #   @return [::Google::Cloud::ApiHub::V1::Attribute]
@@ -854,7 +854,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#delete_attribute DeleteAttribute} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_attribute DeleteAttribute} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -866,7 +866,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_attributes ListAttributes} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_attributes ListAttributes} method's
         # request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -935,7 +935,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_attributes ListAttributes} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_attributes ListAttributes} method's
         # response.
         # @!attribute [rw] attributes
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Attribute>]
@@ -949,7 +949,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#search_resources SearchResources} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#search_resources SearchResources} method's
         # request.
         # @!attribute [rw] location
         #   @return [::String]
@@ -1046,7 +1046,7 @@ module Google
         end
 
         # Response for the
-        # {::Google::Cloud::ApiHub::V1::ApiHub::Client#search_resources SearchResources} method.
+        # {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#search_resources SearchResources} method.
         # @!attribute [rw] search_results
         #   @return [::Array<::Google::Cloud::ApiHub::V1::SearchResult>]
         #     List of search results according to the filter and search query specified.
@@ -1063,7 +1063,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Client#create_dependency CreateDependency}
+        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client#create_dependency CreateDependency}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1099,7 +1099,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Client#update_dependency UpdateDependency}
+        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client#update_dependency UpdateDependency}
         # method's request.
         # @!attribute [rw] dependency
         #   @return [::Google::Cloud::ApiHub::V1::Dependency]
@@ -1116,7 +1116,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Client#delete_dependency DeleteDependency}
+        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client#delete_dependency DeleteDependency}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1128,7 +1128,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Client#list_dependencies ListDependencies}
+        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client#list_dependencies ListDependencies}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1189,7 +1189,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Client#list_dependencies ListDependencies}
+        # {::Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client#list_dependencies ListDependencies}
         # method's response.
         # @!attribute [rw] dependencies
         #   @return [::Array<::Google::Cloud::ApiHub::V1::Dependency>]
@@ -1204,7 +1204,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#create_external_api CreateExternalApi}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#create_external_api CreateExternalApi}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1231,7 +1231,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#get_external_api GetExternalApi} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#get_external_api GetExternalApi} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1243,7 +1243,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#update_external_api UpdateExternalApi}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#update_external_api UpdateExternalApi}
         # method's request.
         # @!attribute [rw] external_api
         #   @return [::Google::Cloud::ApiHub::V1::ExternalApi]
@@ -1260,7 +1260,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#delete_external_api DeleteExternalApi}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#delete_external_api DeleteExternalApi}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1272,7 +1272,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_external_apis ListExternalApis}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_external_apis ListExternalApis}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -1296,7 +1296,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_external_apis ListExternalApis}
+        # The {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_external_apis ListExternalApis}
         # method's response.
         # @!attribute [rw] external_apis
         #   @return [::Array<::Google::Cloud::ApiHub::V1::ExternalApi>]

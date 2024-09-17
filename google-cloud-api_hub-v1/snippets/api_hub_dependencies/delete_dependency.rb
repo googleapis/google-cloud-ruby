@@ -29,11 +29,11 @@ require "google/cloud/api_hub/v1"
 # client as shown in https://cloud.google.com/ruby/docs/reference.
 #
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::ApiHub::V1::ApiHubDependencies::Client#delete_dependency.
+# Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client#delete_dependency.
 #
 def delete_dependency
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::ApiHub::V1::ApiHubDependencies::Client.new
+  client = Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::ApiHub::V1::DeleteDependencyRequest.new

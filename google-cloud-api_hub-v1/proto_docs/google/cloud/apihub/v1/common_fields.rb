@@ -684,7 +684,7 @@ module Google
         #     Output only. Additional details apart from `OperationDetails` parsed from
         #     an OpenAPI spec. The OperationDetails parsed from the spec can be
         #     obtained by using
-        #     {::Google::Cloud::ApiHub::V1::ApiHub::Client#list_api_operations ListAPIOperations}
+        #     {::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client#list_api_operations ListAPIOperations}
         #     method.
         # @!attribute [r] description
         #   @return [::String]

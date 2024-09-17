@@ -66,7 +66,7 @@ module Google
           end
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHubPlugin::Client#get_plugin GetPlugin} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#get_plugin GetPlugin} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -77,7 +77,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHubPlugin::Client#enable_plugin EnablePlugin} method's
+        # The {::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#enable_plugin EnablePlugin} method's
         # request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -88,7 +88,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The {::Google::Cloud::ApiHub::V1::ApiHubPlugin::Client#disable_plugin DisablePlugin}
+        # The {::Google::Cloud::ApiHub::V1::ApiHubPlugin::Rest::Client#disable_plugin DisablePlugin}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]

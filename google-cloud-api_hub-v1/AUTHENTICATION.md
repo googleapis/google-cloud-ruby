@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/api_hub/v1"
 
-client = ::Google::Cloud::ApiHub::V1::ApiHub::Client.new do |config|
+client = ::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -66,11 +66,11 @@ To configure a credentials file globally for all clients:
 ```ruby
 require "google/cloud/api_hub/v1"
 
-::Google::Cloud::ApiHub::V1::ApiHub::Client.configure do |config|
+::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = ::Google::Cloud::ApiHub::V1::ApiHub::Client.new
+client = ::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/api_hub/v1"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = ::Google::Cloud::ApiHub::V1::ApiHub::Client.new
+client = ::Google::Cloud::ApiHub::V1::ApiHub::Rest::Client.new
 ```
 
 ### Local ADC file
