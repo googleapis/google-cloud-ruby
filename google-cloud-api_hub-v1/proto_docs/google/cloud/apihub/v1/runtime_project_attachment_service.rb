@@ -22,7 +22,7 @@ module Google
     module ApiHub
       module V1
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#create_runtime_project_attachment CreateRuntimeProjectAttachment}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#create_runtime_project_attachment CreateRuntimeProjectAttachment}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -43,7 +43,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#get_runtime_project_attachment GetRuntimeProjectAttachment}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#get_runtime_project_attachment GetRuntimeProjectAttachment}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -56,7 +56,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#list_runtime_project_attachments ListRuntimeProjectAttachments}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#list_runtime_project_attachments ListRuntimeProjectAttachments}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -104,7 +104,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#list_runtime_project_attachments ListRuntimeProjectAttachments}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#list_runtime_project_attachments ListRuntimeProjectAttachments}
         # method's response.
         # @!attribute [rw] runtime_project_attachments
         #   @return [::Array<::Google::Cloud::ApiHub::V1::RuntimeProjectAttachment>]
@@ -119,7 +119,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#delete_runtime_project_attachment DeleteRuntimeProjectAttachment}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#delete_runtime_project_attachment DeleteRuntimeProjectAttachment}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -132,7 +132,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#lookup_runtime_project_attachment LookupRuntimeProjectAttachment}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#lookup_runtime_project_attachment LookupRuntimeProjectAttachment}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -145,7 +145,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Client#list_runtime_project_attachments ListRuntimeProjectAttachments}
+        # {::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client#list_runtime_project_attachments ListRuntimeProjectAttachments}
         # method's response.
         # @!attribute [rw] runtime_project_attachment
         #   @return [::Google::Cloud::ApiHub::V1::RuntimeProjectAttachment]

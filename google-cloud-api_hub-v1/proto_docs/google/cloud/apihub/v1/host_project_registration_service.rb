@@ -22,7 +22,7 @@ module Google
     module ApiHub
       module V1
         # The
-        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client#create_host_project_registration CreateHostProjectRegistration}
+        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client#create_host_project_registration CreateHostProjectRegistration}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -43,7 +43,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client#get_host_project_registration GetHostProjectRegistration}
+        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client#get_host_project_registration GetHostProjectRegistration}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -55,7 +55,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client#list_host_project_registrations ListHostProjectRegistrations}
+        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client#list_host_project_registrations ListHostProjectRegistrations}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -103,7 +103,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Client#list_host_project_registrations ListHostProjectRegistrations}
+        # {::Google::Cloud::ApiHub::V1::HostProjectRegistrationService::Rest::Client#list_host_project_registrations ListHostProjectRegistrations}
         # method's response.
         # @!attribute [rw] host_project_registrations
         #   @return [::Array<::Google::Cloud::ApiHub::V1::HostProjectRegistration>]

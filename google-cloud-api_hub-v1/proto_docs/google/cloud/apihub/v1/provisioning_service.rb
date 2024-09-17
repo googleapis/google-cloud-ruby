@@ -22,7 +22,7 @@ module Google
     module ApiHub
       module V1
         # The
-        # {::Google::Cloud::ApiHub::V1::Provisioning::Client#create_api_hub_instance CreateApiHubInstance}
+        # {::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#create_api_hub_instance CreateApiHubInstance}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -45,7 +45,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::Provisioning::Client#get_api_hub_instance GetApiHubInstance}
+        # {::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#get_api_hub_instance GetApiHubInstance}
         # method's request.
         # @!attribute [rw] name
         #   @return [::String]
@@ -58,7 +58,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::Provisioning::Client#lookup_api_hub_instance LookupApiHubInstance}
+        # {::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#lookup_api_hub_instance LookupApiHubInstance}
         # method's request.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -72,7 +72,7 @@ module Google
         end
 
         # The
-        # {::Google::Cloud::ApiHub::V1::Provisioning::Client#lookup_api_hub_instance LookupApiHubInstance}
+        # {::Google::Cloud::ApiHub::V1::Provisioning::Rest::Client#lookup_api_hub_instance LookupApiHubInstance}
         # method's response.`
         # @!attribute [rw] api_hub_instance
         #   @return [::Google::Cloud::ApiHub::V1::ApiHubInstance]
