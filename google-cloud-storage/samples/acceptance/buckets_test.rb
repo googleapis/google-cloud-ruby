@@ -351,20 +351,21 @@ describe "Buckets Snippets" do
   end
 
   describe "get_bucket_class_and_location" do
-    bucket_name = "my-simple-bucket" 
+    bucket_name = "my-simple-bucket"
     location = "US"
     storage_class = "COLDLINE"
 
     it "get_bucket_class_and_location" do
-      storage.create_bucket bucket_name, 
+      storage.create_bucket bucket_name,
                             location: location,
                             storage_class: storage_class
-
-      assert_output("Bucket #{bucket_name} default storage class is #{storage_class}, and the location is #{location}") do
+      expected_output = "Bucket #{bucket_name} default storage class is " \
+                    "#{storage_class}, and the location is #{location}"
+      assert_output expected_output do
         get_bucket_class_and_location bucket_name: bucket_name
       end
     end
-  end 
+  end
 
   describe "labels" do
     it "add_bucket_label, remove_bucket_label" do
