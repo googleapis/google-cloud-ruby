@@ -111,6 +111,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # SwitchActiveReplicaZoneRequest switch the active/replica zone for a regional
+        # storagePool.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the storage pool
+        class SwitchActiveReplicaZoneRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # StoragePool is a container for volumes with a service level and capacity.
         # Volumes can be created in a pool of sufficient available capacity.
         # StoragePool capacity is what you are billed for.
@@ -170,6 +180,11 @@ module Google
         #   @return [::Boolean]
         #     Deprecated. Used to allow SO pool to access AD or DNS server from other
         #     regions.
+        # @!attribute [rw] allow_auto_tiering
+        #   @return [::Boolean]
+        #     Optional. True if the storage pool supports Auto Tiering enabled volumes.
+        #     Default is false. Auto-tiering can be enabled after storage pool creation
+        #     but it can't be disabled once enabled.
         # @!attribute [rw] replica_zone
         #   @return [::String]
         #     Optional. Specifies the replica zone for regional storagePool.

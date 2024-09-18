@@ -35,6 +35,11 @@
                 "delete_storage_pool"
               ]
             },
+            "SwitchActiveReplicaZone": {
+              "methods": [
+                "switch_active_replica_zone"
+              ]
+            },
             "ListVolumes": {
               "methods": [
                 "list_volumes"

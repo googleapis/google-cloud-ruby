@@ -251,6 +251,9 @@ module Google
         # @!attribute [r] zone
         #   @return [::String]
         #     Output only. Specifies the active zone for regional volume.
+        # @!attribute [r] cold_tier_size_gib
+        #   @return [::Integer]
+        #     Output only. Size of the volume cold tier data in GiB.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

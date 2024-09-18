@@ -104,6 +104,7 @@
     "snippets/netapp/reverse_replication_direction.rb",
     "snippets/netapp/revert_volume.rb",
     "snippets/netapp/stop_replication.rb",
+    "snippets/netapp/switch_active_replica_zone.rb",
     "snippets/netapp/update_active_directory.rb",
     "snippets/netapp/update_backup.rb",
     "snippets/netapp/update_backup_policy.rb",
