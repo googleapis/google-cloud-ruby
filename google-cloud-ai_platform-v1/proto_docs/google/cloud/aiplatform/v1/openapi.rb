@@ -23,8 +23,8 @@ module Google
       module V1
         # Schema is used to define the format of input/output data. Represents a select
         # subset of an [OpenAPI 3.0 schema
-        # object](https://spec.openapis.org/oas/v3.0.3#schema). More fields may be
-        # added in the future as needed.
+        # object](https://spec.openapis.org/oas/v3.0.3#schema-object). More fields may
+        # be added in the future as needed.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::AIPlatform::V1::Type]
         #     Optional. The type of the data.
@@ -66,6 +66,11 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::Schema}]
         #     Optional. SCHEMA FIELDS FOR TYPE OBJECT
         #     Properties of Type.OBJECT.
+        # @!attribute [rw] property_ordering
+        #   @return [::Array<::String>]
+        #     Optional. The order of the properties.
+        #     Not a standard field in open api spec. Only used to support the order of
+        #     the properties.
         # @!attribute [rw] required
         #   @return [::Array<::String>]
         #     Optional. Required properties of Type.OBJECT.
