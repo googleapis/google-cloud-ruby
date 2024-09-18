@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.2.0 (2024-09-18)
+
+### ⚠ BREAKING CHANGES
+
+* Remove unsupported gRPC clients ([#27296](https://github.com/googleapis/google-cloud-ruby/issues/27296))
+
+#### Bug Fixes
+
+* Remove unsupported gRPC clients ([#27296](https://github.com/googleapis/google-cloud-ruby/issues/27296)) 
+
 ### 0.1.1 (2024-08-30)
 
 #### Documentation
