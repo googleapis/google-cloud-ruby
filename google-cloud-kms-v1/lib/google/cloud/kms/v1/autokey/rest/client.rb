@@ -31,7 +31,8 @@ module Google
             ##
             # REST client for the Autokey service.
             #
-            # Provides interfaces for using Cloud KMS Autokey to provision new
+            # Provides interfaces for using [Cloud KMS
+            # Autokey](https://cloud.google.com/kms/help/autokey) to provision new
             # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}, ready for Customer Managed
             # Encryption Key (CMEK) use, on-demand. To support certain client tooling, this
             # feature is modeled around a {::Google::Cloud::Kms::V1::KeyHandle KeyHandle}
@@ -425,7 +426,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_key_handles(parent: nil, filter: nil)
+              # @overload list_key_handles(parent: nil, page_size: nil, page_token: nil, filter: nil)
               #   Pass arguments to `list_key_handles` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -434,15 +435,27 @@ module Google
               #     Required. Name of the resource project and location from which to list
               #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles}, e.g.
               #     `projects/{PROJECT_ID}/locations/{LOCATION}`.
+              #   @param page_size [::Integer]
+              #     Optional. Optional limit on the number of
+              #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} to include in the response. The
+              #     service may return fewer than this value. Further
+              #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} can subsequently be obtained by
+              #     including the
+              #     {::Google::Cloud::Kms::V1::ListKeyHandlesResponse#next_page_token ListKeyHandlesResponse.next_page_token}
+              #     in a subsequent request.  If unspecified, at most
+              #     100 {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} will be returned.
+              #   @param page_token [::String]
+              #     Optional. Optional pagination token, returned earlier via
+              #     {::Google::Cloud::Kms::V1::ListKeyHandlesResponse#next_page_token ListKeyHandlesResponse.next_page_token}.
               #   @param filter [::String]
               #     Optional. Filter to apply when listing
               #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles}, e.g.
               #     `resource_type_selector="{SERVICE}.googleapis.com/{TYPE}"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Kms::V1::ListKeyHandlesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::KeyHandle>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Kms::V1::ListKeyHandlesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Kms::V1::KeyHandle>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -458,8 +471,12 @@ module Google
               #   # Call the list_key_handles method.
               #   result = client.list_key_handles request
               #
-              #   # The returned object is of type Google::Cloud::Kms::V1::ListKeyHandlesResponse.
-              #   p result
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Kms::V1::KeyHandle.
+              #     p item
+              #   end
               #
               def list_key_handles request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -490,6 +507,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @autokey_stub.list_key_handles request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @autokey_stub, :list_key_handles, "key_handles", request, result, options
                   yield result, operation if block_given?
                   return result
                 end

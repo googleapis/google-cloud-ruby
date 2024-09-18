@@ -98,6 +98,20 @@ module Google
         #     Required. Name of the resource project and location from which to list
         #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles}, e.g.
         #     `projects/{PROJECT_ID}/locations/{LOCATION}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Optional limit on the number of
+        #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} to include in the response. The
+        #     service may return fewer than this value. Further
+        #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} can subsequently be obtained by
+        #     including the
+        #     {::Google::Cloud::Kms::V1::ListKeyHandlesResponse#next_page_token ListKeyHandlesResponse.next_page_token}
+        #     in a subsequent request.  If unspecified, at most
+        #     100 {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} will be returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Optional pagination token, returned earlier via
+        #     {::Google::Cloud::Kms::V1::ListKeyHandlesResponse#next_page_token ListKeyHandlesResponse.next_page_token}.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Filter to apply when listing
@@ -113,6 +127,11 @@ module Google
         # @!attribute [rw] key_handles
         #   @return [::Array<::Google::Cloud::Kms::V1::KeyHandle>]
         #     Resulting {::Google::Cloud::Kms::V1::KeyHandle KeyHandles}.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve next page of results. Pass this value in
+        #     {::Google::Cloud::Kms::V1::ListKeyHandlesRequest#page_token ListKeyHandlesRequest.page_token}
+        #     to retrieve the next page of results.
         class ListKeyHandlesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

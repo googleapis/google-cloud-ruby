@@ -41,7 +41,11 @@ def list_key_handles
   # Call the list_key_handles method.
   result = client.list_key_handles request
 
-  # The returned object is of type Google::Cloud::Kms::V1::ListKeyHandlesResponse.
-  p result
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
+    # Each element is of type ::Google::Cloud::Kms::V1::KeyHandle.
+    p item
+  end
 end
 # [END cloudkms_v1_generated_Autokey_ListKeyHandles_sync]
