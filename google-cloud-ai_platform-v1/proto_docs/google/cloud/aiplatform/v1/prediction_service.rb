@@ -454,6 +454,10 @@ module Google
         #     A `Tool` is a piece of code that enables the system to interact with
         #     external systems to perform an action, or set of actions, outside of
         #     knowledge and scope of the model.
+        # @!attribute [rw] generation_config
+        #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig]
+        #     Optional. Generation config that the model will use to generate the
+        #     response.
         class CountTokensRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -507,6 +511,15 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ToolConfig]
         #     Optional. Tool config. This config is shared for all tools provided in the
         #     request.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels with user-defined metadata for the request. It is used
+        #     for billing and reporting only.
+        #
+        #     Label keys and values can be no longer than 63 characters
+        #     (Unicode codepoints) and can only contain lowercase letters, numeric
+        #     characters, underscores, and dashes. International characters are allowed.
+        #     Label values are optional. Label keys must start with a letter.
         # @!attribute [rw] safety_settings
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::SafetySetting>]
         #     Optional. Per request settings for blocking unsafe content.
@@ -517,6 +530,15 @@ module Google
         class GenerateContentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Response message for [PredictionService.GenerateContent].
@@ -580,6 +602,7 @@ module Google
           #     Number of tokens in the response(s).
           # @!attribute [rw] total_token_count
           #   @return [::Integer]
+          #     Total token count for prompt and response candidates.
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -206,7 +206,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload count_tokens(endpoint: nil, model: nil, instances: nil, contents: nil, system_instruction: nil, tools: nil)
+            # @overload count_tokens(endpoint: nil, model: nil, instances: nil, contents: nil, system_instruction: nil, tools: nil, generation_config: nil)
             #   Pass arguments to `count_tokens` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -235,6 +235,9 @@ module Google
             #     A `Tool` is a piece of code that enables the system to interact with
             #     external systems to perform an action, or set of actions, outside of
             #     knowledge and scope of the model.
+            #   @param generation_config [::Google::Cloud::AIPlatform::V1::GenerationConfig, ::Hash]
+            #     Optional. Generation config that the model will use to generate the
+            #     response.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::CountTokensResponse]
