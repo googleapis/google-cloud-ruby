@@ -562,6 +562,9 @@ module Google
 
           # The harm category is sexually explicit content.
           HARM_CATEGORY_SEXUALLY_EXPLICIT = 4
+
+          # The harm category is civic integrity.
+          HARM_CATEGORY_CIVIC_INTEGRITY = 5
         end
       end
     end
