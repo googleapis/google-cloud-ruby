@@ -79,6 +79,11 @@ module Google
             rpc :GetComment, ::Google::Cloud::GDCHardwareManagement::V1alpha::GetCommentRequest, ::Google::Cloud::GDCHardwareManagement::V1alpha::Comment
             # Creates a new comment on an order.
             rpc :CreateComment, ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateCommentRequest, ::Google::Longrunning::Operation
+            # Record Action on a Comment. If the Action specified in the request is READ,
+            # the viewed time in the comment is set to the time the request was received.
+            # If the comment is already marked as read, subsequent calls will be ignored.
+            # If the Action is UNREAD, the viewed time is cleared from the comment.
+            rpc :RecordActionOnComment, ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest, ::Google::Cloud::GDCHardwareManagement::V1alpha::Comment
             # Lists the changes made to an order.
             rpc :ListChangeLogEntries, ::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest, ::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesResponse
             # Gets details of a change to an order.

@@ -107,6 +107,10 @@ module Google
             # Order has been submitted to Google.
             SUBMITTED = 2
 
+            # All information required from the customer for fulfillment of the order
+            # is complete.
+            INFO_COMPLETE = 12
+
             # Order has been accepted by Google.
             ACCEPTED = 3
 
@@ -183,6 +187,12 @@ module Google
         #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::TimePeriod>]
         #     Optional. The time periods when the site is accessible.
         #     If this field is empty, the site is accessible at all times.
+        #
+        #     This field is used by Google to schedule the initial installation as well
+        #     as any later hardware maintenance. You may update this at any time. For
+        #     example, if the initial installation is requested during off-hours but
+        #     maintenance should be performed during regular business hours, you should
+        #     update the access times after initial installation is complete.
         # @!attribute [rw] notes
         #   @return [::String]
         #     Optional. Any additional notes for this Site. Please include information
@@ -191,6 +201,10 @@ module Google
         #      - any regulations affecting the technicians visiting the site
         #      - any special process or approval required to move the equipment
         #      - whether a representative will be available during site visits
+        # @!attribute [rw] customer_site_id
+        #   @return [::String]
+        #     Optional. Customer defined identifier for this Site. This can be used to
+        #     identify the site in the customer's own systems.
         class Site
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -410,6 +424,13 @@ module Google
         #   @return [::String]
         #     Required. Text of this comment. The length of text must be <= 1000
         #     characters.
+        # @!attribute [r] customer_viewed_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp of the first time this comment was viewed by the
+        #     customer. If the comment wasn't viewed then this timestamp will be unset.
+        # @!attribute [r] author_entity
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Entity]
+        #     Output only. The entity the author belongs to.
         class Comment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -546,6 +567,9 @@ module Google
         # @!attribute [r] globally_unique_id
         #   @return [::String]
         #     Output only. Globally unique identifier generated for this Edge Zone.
+        # @!attribute [r] subscription_configs
+        #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::SubscriptionConfig>]
+        #     Output only. Subscription configurations for this zone.
         class Zone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -900,6 +924,46 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A message to store a subscription configuration.
+        # @!attribute [r] subscription_id
+        #   @return [::String]
+        #     Output only. The unique identifier of the subscription.
+        # @!attribute [r] billing_id
+        #   @return [::String]
+        #     Output only. The Google Cloud Billing ID that the subscription is created
+        #     under.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::SubscriptionConfig::SubscriptionState]
+        #     Output only. The current state of the subscription.
+        class SubscriptionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum to represent the state of the subscription.
+          module SubscriptionState
+            # State is unspecified.
+            SUBSCRIPTION_STATE_UNSPECIFIED = 0
+
+            # Active state means that the subscription has been created successfully
+            # and billing is happening.
+            ACTIVE = 1
+
+            # Inactive means that the subscription has been created successfully, but
+            # billing has not started yet.
+            INACTIVE = 2
+
+            # The subscription is in an erroneous state.
+            ERROR = 3
+
+            # The subscription state failed to be retrieved. This may be a transient
+            # issue. The user should retry the request.
+            FAILED_TO_RETRIEVE = 4
+
+            # The subscription has been completed, because it has reached the end date.
+            COMPLETED = 5
+          end
+        end
+
         # The power supply options.
         module PowerSupply
           # Power supply is unspecified.
@@ -910,6 +974,21 @@ module Google
 
           # DC power supply.
           POWER_SUPPLY_DC = 2
+        end
+
+        # Entity is used to denote an organization or party.
+        module Entity
+          # Entity is unspecified.
+          ENTITY_UNSPECIFIED = 0
+
+          # Google.
+          GOOGLE = 1
+
+          # Customer.
+          CUSTOMER = 2
+
+          # Vendor.
+          VENDOR = 3
         end
       end
     end

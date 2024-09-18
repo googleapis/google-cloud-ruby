@@ -361,6 +361,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    type = :TYPE_UNSPECIFIED
 
     submit_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -376,27 +377,27 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
         end
 
         # Use hash object
-        client.submit_order({ name: name, request_id: request_id }) do |_result, response|
+        client.submit_order({ name: name, request_id: request_id, type: type }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.submit_order name: name, request_id: request_id do |_result, response|
+        client.submit_order name: name, request_id: request_id, type: type do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.submit_order ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id) do |_result, response|
+        client.submit_order ::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.submit_order({ name: name, request_id: request_id }, call_options) do |_result, response|
+        client.submit_order({ name: name, request_id: request_id, type: type }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.submit_order(::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        client.submit_order(::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest.new(name: name, request_id: request_id, type: type), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1355,6 +1356,61 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
 
         # Verify method calls
         assert_equal 5, create_comment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_record_action_on_comment
+    # Create test objects.
+    client_result = ::Google::Cloud::GDCHardwareManagement::V1alpha::Comment.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    action_type = :ACTION_TYPE_UNSPECIFIED
+
+    record_action_on_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Rest::ServiceStub.stub :transcode_record_action_on_comment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, record_action_on_comment_client_stub do
+        # Create client
+        client = ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.record_action_on_comment({ name: name, action_type: action_type }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.record_action_on_comment name: name, action_type: action_type do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.record_action_on_comment ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.record_action_on_comment({ name: name, action_type: action_type }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.record_action_on_comment(::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new(name: name, action_type: action_type), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, record_action_on_comment_client_stub.call_count
       end
     end
   end

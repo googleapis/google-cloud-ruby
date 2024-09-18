@@ -125,6 +125,11 @@
                 "create_comment"
               ]
             },
+            "RecordActionOnComment": {
+              "methods": [
+                "record_action_on_comment"
+              ]
+            },
             "ListChangeLogEntries": {
               "methods": [
                 "list_change_log_entries"

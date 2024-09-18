@@ -848,7 +848,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload submit_order(name: nil, request_id: nil)
+            # @overload submit_order(name: nil, request_id: nil, type: nil)
             #   Pass arguments to `submit_order` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -859,6 +859,9 @@ module Google
             #   @param request_id [::String]
             #     Optional. An optional unique identifier for this request. See
             #     [AIP-155](https://google.aip.dev/155).
+            #   @param type [::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest::Type]
+            #     Optional. Type of this request. If unset, the request type is assumed to be
+            #     `INFO_PENDING`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2625,6 +2628,99 @@ module Google
             end
 
             ##
+            # Record Action on a Comment. If the Action specified in the request is READ,
+            # the viewed time in the comment is set to the time the request was received.
+            # If the comment is already marked as read, subsequent calls will be ignored.
+            # If the Action is UNREAD, the viewed time is cleared from the comment.
+            #
+            # @overload record_action_on_comment(request, options = nil)
+            #   Pass arguments to `record_action_on_comment` via a request object, either of type
+            #   {::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload record_action_on_comment(name: nil, action_type: nil)
+            #   Pass arguments to `record_action_on_comment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the comment.
+            #     Format:
+            #     `projects/{project}/locations/{location}/orders/{order}/comments/{comment}`
+            #   @param action_type [::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest::ActionType]
+            #     Required. The action type of the recorded action.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::GDCHardwareManagement::V1alpha::Comment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Comment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gdc_hardware_management/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest.new
+            #
+            #   # Call the record_action_on_comment method.
+            #   result = client.record_action_on_comment request
+            #
+            #   # The returned object is of type Google::Cloud::GDCHardwareManagement::V1alpha::Comment.
+            #   p result
+            #
+            def record_action_on_comment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.record_action_on_comment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GDCHardwareManagement::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.record_action_on_comment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.record_action_on_comment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @gdc_hardware_management_stub.call_rpc :record_action_on_comment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the changes made to an order.
             #
             # @overload list_change_log_entries(request, options = nil)
@@ -3867,6 +3963,11 @@ module Google
                 #
                 attr_reader :create_comment
                 ##
+                # RPC-specific configuration for `record_action_on_comment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :record_action_on_comment
+                ##
                 # RPC-specific configuration for `list_change_log_entries`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3965,6 +4066,8 @@ module Google
                   @get_comment = ::Gapic::Config::Method.new get_comment_config
                   create_comment_config = parent_rpcs.create_comment if parent_rpcs.respond_to? :create_comment
                   @create_comment = ::Gapic::Config::Method.new create_comment_config
+                  record_action_on_comment_config = parent_rpcs.record_action_on_comment if parent_rpcs.respond_to? :record_action_on_comment
+                  @record_action_on_comment = ::Gapic::Config::Method.new record_action_on_comment_config
                   list_change_log_entries_config = parent_rpcs.list_change_log_entries if parent_rpcs.respond_to? :list_change_log_entries
                   @list_change_log_entries = ::Gapic::Config::Method.new list_change_log_entries_config
                   get_change_log_entry_config = parent_rpcs.get_change_log_entry if parent_rpcs.respond_to? :get_change_log_entry
