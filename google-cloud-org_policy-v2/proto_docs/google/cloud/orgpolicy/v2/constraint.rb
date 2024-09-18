@@ -192,6 +192,12 @@ module Google
             # Constraint applied when deleting the resource.
             # Not supported yet.
             DELETE = 3
+
+            # Constraint applied when removing an IAM grant.
+            REMOVE_GRANT = 4
+
+            # Constraint applied when enforcing forced tagging.
+            GOVERN_TAGS = 5
           end
 
           # Allow or deny type.
