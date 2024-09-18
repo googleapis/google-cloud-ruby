@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.2 (2024-09-18)
+
+#### Documentation
+
+* Clarify comments for `QueryAssetsResponse` and `ResourceSearchResult` ([#27321](https://github.com/googleapis/google-cloud-ruby/issues/27321)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
