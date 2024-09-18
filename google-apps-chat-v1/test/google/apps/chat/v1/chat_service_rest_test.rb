@@ -202,6 +202,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     show_groups = true
     show_invited = true
+    use_admin_access = true
 
     list_memberships_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -217,27 +218,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited }) do |_result, response|
+        client.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_memberships parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited do |_result, response|
+        client.list_memberships parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_memberships ::Google::Apps::Chat::V1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited) do |_result, response|
+        client.list_memberships ::Google::Apps::Chat::V1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited }, call_options) do |_result, response|
+        client.list_memberships({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_memberships(::Google::Apps::Chat::V1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited), call_options) do |_result, response|
+        client.list_memberships(::Google::Apps::Chat::V1::ListMembershipsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, show_groups: show_groups, show_invited: show_invited, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -256,6 +257,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    use_admin_access = true
 
     get_membership_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -271,27 +273,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.get_membership({ name: name }) do |_result, response|
+        client.get_membership({ name: name, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_membership name: name do |_result, response|
+        client.get_membership name: name, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_membership ::Google::Apps::Chat::V1::GetMembershipRequest.new(name: name) do |_result, response|
+        client.get_membership ::Google::Apps::Chat::V1::GetMembershipRequest.new(name: name, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_membership({ name: name }, call_options) do |_result, response|
+        client.get_membership({ name: name, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_membership(::Google::Apps::Chat::V1::GetMembershipRequest.new(name: name), call_options) do |_result, response|
+        client.get_membership(::Google::Apps::Chat::V1::GetMembershipRequest.new(name: name, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -631,6 +633,64 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_search_spaces
+    # Create test objects.
+    client_result = ::Google::Apps::Chat::V1::SearchSpacesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    use_admin_access = true
+    page_size = 42
+    page_token = "hello world"
+    query = "hello world"
+    order_by = "hello world"
+
+    search_spaces_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Apps::Chat::V1::ChatService::Rest::ServiceStub.stub :transcode_search_spaces_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, search_spaces_client_stub do
+        # Create client
+        client = ::Google::Apps::Chat::V1::ChatService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.search_spaces({ use_admin_access: use_admin_access, page_size: page_size, page_token: page_token, query: query, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.search_spaces use_admin_access: use_admin_access, page_size: page_size, page_token: page_token, query: query, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.search_spaces ::Google::Apps::Chat::V1::SearchSpacesRequest.new(use_admin_access: use_admin_access, page_size: page_size, page_token: page_token, query: query, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.search_spaces({ use_admin_access: use_admin_access, page_size: page_size, page_token: page_token, query: query, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.search_spaces(::Google::Apps::Chat::V1::SearchSpacesRequest.new(use_admin_access: use_admin_access, page_size: page_size, page_token: page_token, query: query, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, search_spaces_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_space
     # Create test objects.
     client_result = ::Google::Apps::Chat::V1::Space.new
@@ -640,6 +700,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    use_admin_access = true
 
     get_space_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -655,27 +716,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.get_space({ name: name }) do |_result, response|
+        client.get_space({ name: name, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_space name: name do |_result, response|
+        client.get_space name: name, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_space ::Google::Apps::Chat::V1::GetSpaceRequest.new(name: name) do |_result, response|
+        client.get_space ::Google::Apps::Chat::V1::GetSpaceRequest.new(name: name, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_space({ name: name }, call_options) do |_result, response|
+        client.get_space({ name: name, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_space(::Google::Apps::Chat::V1::GetSpaceRequest.new(name: name), call_options) do |_result, response|
+        client.get_space(::Google::Apps::Chat::V1::GetSpaceRequest.new(name: name, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -806,6 +867,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     space = {}
     update_mask = {}
+    use_admin_access = true
 
     update_space_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -821,27 +883,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.update_space({ space: space, update_mask: update_mask }) do |_result, response|
+        client.update_space({ space: space, update_mask: update_mask, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_space space: space, update_mask: update_mask do |_result, response|
+        client.update_space space: space, update_mask: update_mask, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_space ::Google::Apps::Chat::V1::UpdateSpaceRequest.new(space: space, update_mask: update_mask) do |_result, response|
+        client.update_space ::Google::Apps::Chat::V1::UpdateSpaceRequest.new(space: space, update_mask: update_mask, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_space({ space: space, update_mask: update_mask }, call_options) do |_result, response|
+        client.update_space({ space: space, update_mask: update_mask, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_space(::Google::Apps::Chat::V1::UpdateSpaceRequest.new(space: space, update_mask: update_mask), call_options) do |_result, response|
+        client.update_space(::Google::Apps::Chat::V1::UpdateSpaceRequest.new(space: space, update_mask: update_mask, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -860,6 +922,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    use_admin_access = true
 
     delete_space_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -875,27 +938,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.delete_space({ name: name }) do |_result, response|
+        client.delete_space({ name: name, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_space name: name do |_result, response|
+        client.delete_space name: name, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_space ::Google::Apps::Chat::V1::DeleteSpaceRequest.new(name: name) do |_result, response|
+        client.delete_space ::Google::Apps::Chat::V1::DeleteSpaceRequest.new(name: name, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_space({ name: name }, call_options) do |_result, response|
+        client.delete_space({ name: name, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_space(::Google::Apps::Chat::V1::DeleteSpaceRequest.new(name: name), call_options) do |_result, response|
+        client.delete_space(::Google::Apps::Chat::V1::DeleteSpaceRequest.new(name: name, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1023,6 +1086,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     parent = "hello world"
     membership = {}
+    use_admin_access = true
 
     create_membership_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1038,27 +1102,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.create_membership({ parent: parent, membership: membership }) do |_result, response|
+        client.create_membership({ parent: parent, membership: membership, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.create_membership parent: parent, membership: membership do |_result, response|
+        client.create_membership parent: parent, membership: membership, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.create_membership ::Google::Apps::Chat::V1::CreateMembershipRequest.new(parent: parent, membership: membership) do |_result, response|
+        client.create_membership ::Google::Apps::Chat::V1::CreateMembershipRequest.new(parent: parent, membership: membership, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.create_membership({ parent: parent, membership: membership }, call_options) do |_result, response|
+        client.create_membership({ parent: parent, membership: membership, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.create_membership(::Google::Apps::Chat::V1::CreateMembershipRequest.new(parent: parent, membership: membership), call_options) do |_result, response|
+        client.create_membership(::Google::Apps::Chat::V1::CreateMembershipRequest.new(parent: parent, membership: membership, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1078,6 +1142,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     membership = {}
     update_mask = {}
+    use_admin_access = true
 
     update_membership_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1093,27 +1158,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.update_membership({ membership: membership, update_mask: update_mask }) do |_result, response|
+        client.update_membership({ membership: membership, update_mask: update_mask, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_membership membership: membership, update_mask: update_mask do |_result, response|
+        client.update_membership membership: membership, update_mask: update_mask, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_membership ::Google::Apps::Chat::V1::UpdateMembershipRequest.new(membership: membership, update_mask: update_mask) do |_result, response|
+        client.update_membership ::Google::Apps::Chat::V1::UpdateMembershipRequest.new(membership: membership, update_mask: update_mask, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_membership({ membership: membership, update_mask: update_mask }, call_options) do |_result, response|
+        client.update_membership({ membership: membership, update_mask: update_mask, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_membership(::Google::Apps::Chat::V1::UpdateMembershipRequest.new(membership: membership, update_mask: update_mask), call_options) do |_result, response|
+        client.update_membership(::Google::Apps::Chat::V1::UpdateMembershipRequest.new(membership: membership, update_mask: update_mask, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1132,6 +1197,7 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    use_admin_access = true
 
     delete_membership_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1147,27 +1213,27 @@ class ::Google::Apps::Chat::V1::ChatService::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.delete_membership({ name: name }) do |_result, response|
+        client.delete_membership({ name: name, use_admin_access: use_admin_access }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_membership name: name do |_result, response|
+        client.delete_membership name: name, use_admin_access: use_admin_access do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_membership ::Google::Apps::Chat::V1::DeleteMembershipRequest.new(name: name) do |_result, response|
+        client.delete_membership ::Google::Apps::Chat::V1::DeleteMembershipRequest.new(name: name, use_admin_access: use_admin_access) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_membership({ name: name }, call_options) do |_result, response|
+        client.delete_membership({ name: name, use_admin_access: use_admin_access }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_membership(::Google::Apps::Chat::V1::DeleteMembershipRequest.new(name: name), call_options) do |_result, response|
+        client.delete_membership(::Google::Apps::Chat::V1::DeleteMembershipRequest.new(name: name, use_admin_access: use_admin_access), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

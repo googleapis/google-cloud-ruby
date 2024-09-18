@@ -123,6 +123,11 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.search_spaces.timeout = 30.0
+                  default_config.rpcs.search_spaces.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.get_space.timeout = 30.0
                   default_config.rpcs.get_space.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -614,7 +619,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_memberships(parent: nil, page_size: nil, page_token: nil, filter: nil, show_groups: nil, show_invited: nil)
+              # @overload list_memberships(parent: nil, page_size: nil, page_token: nil, filter: nil, show_groups: nil, show_invited: nil, use_admin_access: nil)
               #   Pass arguments to `list_memberships` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -651,8 +656,8 @@ module Google
               #
               #     To filter by role, set `role` to `ROLE_MEMBER` or `ROLE_MANAGER`.
               #
-              #     To filter by type, set `member.type` to `HUMAN` or `BOT`. Developer
-              #     Preview: You can also filter for `member.type` using the `!=` operator.
+              #     To filter by type, set `member.type` to `HUMAN` or `BOT`. You can also
+              #     filter for `member.type` using the `!=` operator.
               #
               #     To filter by both role and type, use the `AND` operator. To filter by
               #     either role or type, use the `OR` operator.
@@ -696,6 +701,19 @@ module Google
               #
               #     Currently requires [user
               #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires either the `chat.admin.memberships.readonly` or
+              #     `chat.admin.memberships` [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+              #
+              #     Listing app memberships in a space isn't supported when using admin access.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Membership>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -783,7 +801,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_membership(name: nil)
+              # @overload get_membership(name: nil, use_admin_access: nil)
               #   Pass arguments to `get_membership` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -802,6 +820,19 @@ module Google
               #     you can use the user's email as an alias for `{member}`. For example,
               #     `spaces/{space}/members/example@gmail.com` where `example@gmail.com` is the
               #     email of the Google Chat user.
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.memberships` or `chat.admin.memberships.readonly`
+              #     [OAuth 2.0
+              #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+              #
+              #     Getting app memberships in a space isn't supported when using admin access.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Membership]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1496,6 +1527,215 @@ module Google
               end
 
               ##
+              # Returns a list of spaces in a Google Workspace organization based on an
+              # administrator's search. Requires [user
+              # authentication with administrator
+              # privileges](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user#admin-privileges).
+              # In the request, set `use_admin_access` to `true`.
+              #
+              # @overload search_spaces(request, options = nil)
+              #   Pass arguments to `search_spaces` via a request object, either of type
+              #   {::Google::Apps::Chat::V1::SearchSpacesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Apps::Chat::V1::SearchSpacesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload search_spaces(use_admin_access: nil, page_size: nil, page_token: nil, query: nil, order_by: nil)
+              #   Pass arguments to `search_spaces` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires either the `chat.admin.spaces.readonly` or `chat.admin.spaces`
+              #     [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+              #
+              #     This method currently only supports admin access, thus only `true` is
+              #     accepted for this field.
+              #   @param page_size [::Integer]
+              #     The maximum number of spaces to return. The service may return fewer than
+              #     this value.
+              #
+              #     If unspecified, at most 100 spaces are returned.
+              #
+              #     The maximum value is 1000. If you use a value more than 1000, it's
+              #     automatically changed to 1000.
+              #   @param page_token [::String]
+              #     A token, received from the previous search spaces call. Provide this
+              #     parameter to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided should match the call that
+              #     provided the page token. Passing different values to the other parameters
+              #     might lead to unexpected results.
+              #   @param query [::String]
+              #     Required. A search query.
+              #
+              #     You can search by using the following parameters:
+              #
+              #     - `create_time`
+              #     - `customer`
+              #     - `display_name`
+              #     - `external_user_allowed`
+              #     - `last_active_time`
+              #     - `space_history_state`
+              #     - `space_type`
+              #
+              #     `create_time` and `last_active_time` accept a timestamp in
+              #     [RFC-3339](https://www.rfc-editor.org/rfc/rfc3339) format and the supported
+              #     comparison operators are: `=`, `<`, `>`, `<=`, `>=`.
+              #
+              #     `customer` is required and is used to indicate which customer
+              #     to fetch spaces from. `customers/my_customer` is the only supported value.
+              #
+              #     `display_name` only accepts the `HAS` (`:`) operator. The text to
+              #     match is first tokenized into tokens and each token is prefix-matched
+              #     case-insensitively and independently as a substring anywhere in the space's
+              #     `display_name`. For example, `Fun Eve` matches `Fun event` or `The
+              #     evening was fun`, but not `notFun event` or `even`.
+              #
+              #     `external_user_allowed` accepts either `true` or `false`.
+              #
+              #     `space_history_state` only accepts values from the [`historyState`]
+              #     (https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces#Space.HistoryState)
+              #     field of a `space` resource.
+              #
+              #     `space_type` is required and the only valid value is `SPACE`.
+              #
+              #     Across different fields, only `AND` operators are supported. A valid
+              #     example is `space_type = "SPACE" AND display_name:"Hello"` and an invalid
+              #     example is `space_type = "SPACE" OR display_name:"Hello"`.
+              #
+              #     Among the same field,
+              #     `space_type` doesn't support `AND` or `OR` operators.
+              #     `display_name`, 'space_history_state', and 'external_user_allowed' only
+              #     support `OR` operators.
+              #     `last_active_time` and `create_time` support both `AND` and `OR` operators.
+              #     `AND` can only be used to represent an interval, such as `last_active_time
+              #     < "2022-01-01T00:00:00+00:00" AND last_active_time >
+              #     "2023-01-01T00:00:00+00:00"`.
+              #
+              #     The following example queries are valid:
+              #
+              #     ```
+              #     customer = "customers/my_customer" AND space_type = "SPACE"
+              #
+              #     customer = "customers/my_customer" AND space_type = "SPACE" AND
+              #     display_name:"Hello World"
+              #
+              #     customer = "customers/my_customer" AND space_type = "SPACE" AND
+              #     (last_active_time < "2020-01-01T00:00:00+00:00" OR last_active_time >
+              #     "2022-01-01T00:00:00+00:00")
+              #
+              #     customer = "customers/my_customer" AND space_type = "SPACE" AND
+              #     (display_name:"Hello World" OR display_name:"Fun event") AND
+              #     (last_active_time > "2020-01-01T00:00:00+00:00" AND last_active_time <
+              #     "2022-01-01T00:00:00+00:00")
+              #
+              #     customer = "customers/my_customer" AND space_type = "SPACE" AND
+              #     (create_time > "2019-01-01T00:00:00+00:00" AND create_time <
+              #     "2020-01-01T00:00:00+00:00") AND (external_user_allowed = "true") AND
+              #     (space_history_state = "HISTORY_ON" OR space_history_state = "HISTORY_OFF")
+              #     ```
+              #   @param order_by [::String]
+              #     Optional. How the list of spaces is ordered.
+              #
+              #     Supported attributes to order by are:
+              #
+              #     - `membership_count.joined_direct_human_user_count` — Denotes the count of
+              #     human users that have directly joined a space.
+              #     - `last_active_time` — Denotes the time when last eligible item is added to
+              #     any topic of this space.
+              #     - `create_time` — Denotes the time of the space creation.
+              #
+              #     Valid ordering operation values are:
+              #
+              #     - `ASC` for ascending. Default value.
+              #
+              #     - `DESC` for descending.
+              #
+              #     The supported syntax are:
+              #
+              #     - `membership_count.joined_direct_human_user_count DESC`
+              #     - `membership_count.joined_direct_human_user_count ASC`
+              #     - `last_active_time DESC`
+              #     - `last_active_time ASC`
+              #     - `create_time DESC`
+              #     - `create_time ASC`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Space>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Apps::Chat::V1::Space>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/apps/chat/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Apps::Chat::V1::ChatService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Apps::Chat::V1::SearchSpacesRequest.new
+              #
+              #   # Call the search_spaces method.
+              #   result = client.search_spaces request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Apps::Chat::V1::Space.
+              #     p item
+              #   end
+              #
+              def search_spaces request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Apps::Chat::V1::SearchSpacesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.search_spaces.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Apps::Chat::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.search_spaces.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.search_spaces.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @chat_service_stub.search_spaces request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :search_spaces, "spaces", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Returns details about a space. For an example, see
               # [Get details about a
               # space](https://developers.google.com/workspace/chat/get-spaces).
@@ -1518,7 +1758,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_space(name: nil)
+              # @overload get_space(name: nil, use_admin_access: nil)
               #   Pass arguments to `get_space` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1527,6 +1767,16 @@ module Google
               #     Required. Resource name of the space, in the form `spaces/{space}`.
               #
               #     Format: `spaces/{space}`
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.spaces` or `chat.admin.spaces.readonly` [OAuth 2.0
+              #     scopes](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Space]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1900,7 +2150,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update_space(space: nil, update_mask: nil)
+              # @overload update_space(space: nil, update_mask: nil, use_admin_access: nil)
               #   Pass arguments to `update_space` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1961,6 +2211,19 @@ module Google
               #     `permission_settings.reply_messages`
               #      (Warning: mutually exclusive with all other non-permission settings field
               #     paths). `permission_settings` is not supported with admin access.
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.spaces` [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+              #
+              #     Some `FieldMask` values are not supported using admin access. For details,
+              #     see the description of `update_mask`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Space]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2040,7 +2303,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_space(name: nil)
+              # @overload delete_space(name: nil, use_admin_access: nil)
               #   Pass arguments to `delete_space` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2049,6 +2312,16 @@ module Google
               #     Required. Resource name of the space to delete.
               #
               #     Format: `spaces/{space}`
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.delete` [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2349,7 +2622,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_membership(parent: nil, membership: nil)
+              # @overload create_membership(parent: nil, membership: nil, use_admin_access: nil)
               #   Pass arguments to `create_membership` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2376,6 +2649,20 @@ module Google
               #     `users/user@example.com` or `users/123456789`. When a Chat app creates a
               #     membership relation for itself, it must use the `chat.memberships.app`
               #     scope, set `user.type` to `BOT`, and set `user.name` to `users/app`.
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.memberships` [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+              #
+              #     Creating app memberships or creating memberships for users outside the
+              #     administrator's Google Workspace organization isn't supported using admin
+              #     access.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Membership]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2452,7 +2739,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload update_membership(membership: nil, update_mask: nil)
+              # @overload update_membership(membership: nil, update_mask: nil, use_admin_access: nil)
               #   Pass arguments to `update_membership` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2467,6 +2754,16 @@ module Google
               #     Currently supported field paths:
               #
               #     - `role`
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.memberships` [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Membership]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2544,7 +2841,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_membership(name: nil)
+              # @overload delete_membership(name: nil, use_admin_access: nil)
               #   Pass arguments to `delete_membership` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2564,6 +2861,18 @@ module Google
               #     and `spaces/{space}/members/app` format.
               #
               #     Format: `spaces/{space}/members/{member}` or `spaces/{space}/members/app`.
+              #   @param use_admin_access [::Boolean]
+              #     When `true`, the method runs using the user's Google Workspace
+              #     administrator privileges.
+              #
+              #     The calling user must be a Google Workspace administrator with the
+              #     [manage chat and spaces conversations
+              #     privilege](https://support.google.com/a/answer/13369245).
+              #
+              #     Requires the `chat.admin.memberships` [OAuth 2.0
+              #     scope](https://developers.google.com/workspace/chat/authenticate-authorize#chat-api-scopes).
+              #
+              #     Deleting app memberships in a space isn't supported using admin access.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Apps::Chat::V1::Membership]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3699,6 +4008,11 @@ module Google
                   #
                   attr_reader :list_spaces
                   ##
+                  # RPC-specific configuration for `search_spaces`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_spaces
+                  ##
                   # RPC-specific configuration for `get_space`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3811,6 +4125,8 @@ module Google
                     @upload_attachment = ::Gapic::Config::Method.new upload_attachment_config
                     list_spaces_config = parent_rpcs.list_spaces if parent_rpcs.respond_to? :list_spaces
                     @list_spaces = ::Gapic::Config::Method.new list_spaces_config
+                    search_spaces_config = parent_rpcs.search_spaces if parent_rpcs.respond_to? :search_spaces
+                    @search_spaces = ::Gapic::Config::Method.new search_spaces_config
                     get_space_config = parent_rpcs.get_space if parent_rpcs.respond_to? :get_space
                     @get_space = ::Gapic::Config::Method.new get_space_config
                     create_space_config = parent_rpcs.create_space if parent_rpcs.respond_to? :create_space

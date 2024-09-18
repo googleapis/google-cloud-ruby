@@ -169,6 +169,12 @@ module Google
             # [`spaces.search()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/search)
             # method using Workspace administrator privileges instead.
             rpc :ListSpaces, ::Google::Apps::Chat::V1::ListSpacesRequest, ::Google::Apps::Chat::V1::ListSpacesResponse
+            # Returns a list of spaces in a Google Workspace organization based on an
+            # administrator's search. Requires [user
+            # authentication with administrator
+            # privileges](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user#admin-privileges).
+            # In the request, set `use_admin_access` to `true`.
+            rpc :SearchSpaces, ::Google::Apps::Chat::V1::SearchSpacesRequest, ::Google::Apps::Chat::V1::SearchSpacesResponse
             # Returns details about a space. For an example, see
             # [Get details about a
             # space](https://developers.google.com/workspace/chat/get-spaces).
