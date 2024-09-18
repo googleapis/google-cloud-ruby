@@ -849,8 +849,9 @@ module Google
             #     This may be split into multiple chunks, each with a size of
             #     at least 4 hours.
             #
-            #     If this value is omitted, the default value for maintenance window will be
-            #     applied. The default value is Saturday and Sunday 00-06 GMT.
+            #     If this value is omitted, the default value for maintenance window is
+            #     applied. By default, maintenance windows are from 00:00:00 to 04:00:00
+            #     (GMT) on Friday, Saturday, and Sunday every week.
             # @!attribute [rw] workloads_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::WorkloadsConfig]
             #     Optional. The workloads configuration settings for the GKE cluster
@@ -1621,6 +1622,9 @@ module Google
               end
 
               # Configuration for resources used by Airflow DAG processors.
+              #
+              # This field is supported for Cloud Composer environments in versions
+              # composer-3.*.*-airflow-*.*.* and newer.
               # @!attribute [rw] cpu
               #   @return [::Float]
               #     Optional. CPU request and limit for a single Airflow DAG processor
@@ -1748,6 +1752,9 @@ module Google
             # @!attribute [r] satisfies_pzs
             #   @return [::Boolean]
             #     Output only. Reserved for future use.
+            # @!attribute [r] satisfies_pzi
+            #   @return [::Boolean]
+            #     Output only. Reserved for future use.
             # @!attribute [rw] storage_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::StorageConfig]
             #     Optional. Storage configuration for this environment.
@@ -1785,6 +1792,43 @@ module Google
                 # The environment has encountered an error and cannot be used.
                 ERROR = 5
               end
+            end
+
+            # Request to check whether image upgrade will succeed.
+            # @!attribute [rw] environment
+            #   @return [::String]
+            #     Required. The resource name of the environment to check upgrade for, in the
+            #     form:
+            #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+            # @!attribute [rw] image_version
+            #   @return [::String]
+            #     Optional. The version of the software running in the environment.
+            #     This encapsulates both the version of Cloud Composer functionality and the
+            #     version of Apache Airflow. It must match the regular expression
+            #     `composer-([0-9]+(\.[0-9]+\.[0-9]+(-preview\.[0-9]+)?)?|latest)-airflow-([0-9]+(\.[0-9]+(\.[0-9]+)?)?)`.
+            #     When used as input, the server also checks if the provided version is
+            #     supported and denies the request for an unsupported version.
+            #
+            #     The Cloud Composer portion of the image version is a full
+            #     [semantic version](https://semver.org), or an alias in the form of major
+            #     version number or `latest`. When an alias is provided, the server replaces
+            #     it with the current Cloud Composer version that satisfies the alias.
+            #
+            #     The Apache Airflow portion of the image version is a full semantic version
+            #     that points to one of the supported Apache Airflow versions, or an alias in
+            #     the form of only major or major.minor versions specified. When an alias is
+            #     provided, the server replaces it with the latest Apache Airflow version
+            #     that satisfies the alias and is supported in the given Cloud Composer
+            #     version.
+            #
+            #     In all cases, the resolved image version is stored in the same field.
+            #
+            #     See also [version
+            #     list](/composer/docs/concepts/versioning/composer-versions) and [versioning
+            #     overview](/composer/docs/concepts/versioning/composer-versioning-overview).
+            class CheckUpgradeRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Message containing information about the result of an upgrade check
@@ -1833,6 +1877,9 @@ module Google
             end
 
             # The configuration setting for Airflow database data retention mechanism.
+            # @!attribute [rw] airflow_metadata_retention_config
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::AirflowMetadataRetentionPolicyConfig]
+            #     Optional. The retention policy for airflow metadata database.
             # @!attribute [rw] task_logs_retention_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::TaskLogsRetentionConfig]
             #     Optional. The configuration settings for task logs retention
@@ -1844,8 +1891,7 @@ module Google
             # The configuration setting for Task Logs.
             # @!attribute [rw] storage_mode
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::TaskLogsRetentionConfig::TaskLogsStorageMode]
-            #     Optional. The mode of storage for Airflow workers task logs. For details,
-            #     see go/composer-store-task-logs-in-cloud-logging-only-design-doc
+            #     Optional. The mode of storage for Airflow workers task logs.
             class TaskLogsRetentionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1861,6 +1907,30 @@ module Google
 
                 # Store task logs in Cloud Logging only.
                 CLOUD_LOGGING_ONLY = 2
+              end
+            end
+
+            # The policy for airflow metadata database retention.
+            # @!attribute [rw] retention_mode
+            #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::AirflowMetadataRetentionPolicyConfig::RetentionMode]
+            #     Optional. Retention can be either enabled or disabled.
+            # @!attribute [rw] retention_days
+            #   @return [::Integer]
+            #     Optional. How many days data should be retained for.
+            class AirflowMetadataRetentionPolicyConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Describes retention policy.
+              module RetentionMode
+                # Default mode doesn't change environment parameters.
+                RETENTION_MODE_UNSPECIFIED = 0
+
+                # Retention policy is enabled.
+                RETENTION_MODE_ENABLED = 1
+
+                # Retention policy is disabled.
+                RETENTION_MODE_DISABLED = 2
               end
             end
           end

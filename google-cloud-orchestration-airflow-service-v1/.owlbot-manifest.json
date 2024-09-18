@@ -54,6 +54,7 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/date.rb",
     "snippets/Gemfile",
+    "snippets/environments/check_upgrade.rb",
     "snippets/environments/create_environment.rb",
     "snippets/environments/create_user_workloads_config_map.rb",
     "snippets/environments/create_user_workloads_secret.rb",
