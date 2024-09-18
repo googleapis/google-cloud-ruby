@@ -351,12 +351,12 @@ describe "Buckets Snippets" do
   end
 
   describe "get_bucket_class_and_location" do
-    bucket_name = "my-simple-bucket"
+    bucket_name = "my-simple-storage-bucket"
     location = "US"
     storage_class = "COLDLINE"
 
     it "get_bucket_class_and_location" do
-      storage.create_bucket bucket_name,
+      storage_client.create_bucket bucket_name,
                             location: location,
                             storage_class: storage_class
       expected_output = "Bucket #{bucket_name} default storage class is " \
