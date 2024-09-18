@@ -138,7 +138,7 @@ module Google
         #   @return [::String]
         #     Required. The Kubernetes distribution of the underlying attached cluster.
         #
-        #     Supported values: ["eks", "aks"].
+        #     Supported values: ["eks", "aks", "generic"].
         # @!attribute [rw] proxy_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AttachedProxyConfig]
         #     Optional. Proxy configuration for outbound HTTP(S) traffic.
@@ -173,6 +173,7 @@ module Google
         #      *   `platform_version`.
         #      *   `proxy_config.kubernetes_secret.name`.
         #      *   `proxy_config.kubernetes_secret.namespace`.
+        #      *   `security_posture_config.vulnerability_mode`
         class UpdateAttachedClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
