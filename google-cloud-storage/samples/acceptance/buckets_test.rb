@@ -350,7 +350,7 @@ describe "Buckets Snippets" do
     end
   end
 
-  describe "Get Bucket Class And Location data" do
+  describe "get bucket class and location data" do
     bucket_name = "my-simple-storage-bucket"
     location = "US"
     storage_class = "COLDLINE"
