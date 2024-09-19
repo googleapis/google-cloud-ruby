@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.1.0 (2024-09-19)
+
+#### Features
+
+* A new field `airflow_metadata_retention_config` is added to message `.google.cloud.orchestration.airflow.service.v1.DataRetentionConfig` 
+* A new field `satisfies_pzi` is added to message `.google.cloud.orchestration.airflow.service.v1.Environment` 
+* A new message `AirflowMetadataRetentionPolicyConfig` is added 
+* A new message `CheckUpgradeRequest` is added 
+* A new method `CheckUpgrade` is added to service `Environments` ([#27323](https://github.com/googleapis/google-cloud-ruby/issues/27323)) 
+#### Documentation
+
+* A comment for field `maintenance_window` in message `.google.cloud.orchestration.airflow.service.v1.EnvironmentConfig` is changed 
+* A comment for field `storage_mode` in message `.google.cloud.orchestration.airflow.service.v1.TaskLogsRetentionConfig` is changed 
+* A comment for message `WorkloadsConfig` is changed 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
