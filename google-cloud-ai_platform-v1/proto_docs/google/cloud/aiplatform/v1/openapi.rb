@@ -102,6 +102,10 @@ module Google
         #   @return [::Google::Protobuf::Value]
         #     Optional. Example of the object. Will only populated when the object is the
         #     root.
+        # @!attribute [rw] any_of
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Schema>]
+        #     Optional. The value should be validated against any (one or more) of the
+        #     subschemas in the list.
         class Schema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
