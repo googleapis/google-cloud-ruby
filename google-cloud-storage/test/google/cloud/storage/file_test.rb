@@ -1572,35 +1572,34 @@ describe Google::Cloud::Storage::File, :mock_storage do
   end
 
   describe "fetch details from gs_url" do
-    let(:bucket_name) { "object-lock-bucket" }
-    let(:file_name) {"file.jpeg"}
+    let(:bucket_name) { "my-random-bucket" }
+    let(:file_path) {"file.jpeg"}
     let(:file) {Google::Cloud::Storage::File}
     let(:param) {"param1"}
     let(:param_val) {"test"}
+    let(:gs_url) {"gs://#{bucket_name}/#{file_path}"}
 
     it "it returns file_name and bucket_name from given gs url"  do
-      gs_url = "gs://#{bucket_name}/#{file_name}"
       url_items = file.from_gs_url gs_url
       assert_equal bucket_name, url_items["bucket_name"]
-      assert_equal file_name, url_items["file_name"]
+      assert_equal file_path, url_items["file_path"]
     end
 
     it "it returns file_name, bucket_name and url params in options hash from given gs url with parameters"  do
-      gs_url= "gs://#{bucket_name}/#{file_name}?#{param}=#{param_val}"
+      gs_url= "gs://#{bucket_name}/#{file_path}?#{param}=#{param_val}"
       url_items = file.from_gs_url gs_url
       assert_equal bucket_name, url_items["bucket_name"]
-      assert_equal file_name, url_items["file_name"]
+      assert_equal file_path, url_items["file_path"]
       expected_params_hash_in_output = {'param1' =>'test'}
       assert_equal expected_params_hash_in_output, url_items["options"]
     end
 
     it "it returns file_path with subfolder name and file name and bucket_name from given gs url"  do
-      bucket_subfolder_name = "avatars"
-      gs_url = "gs://#{bucket_name}/#{bucket_subfolder_name}/#{file_name}"
+      file_path = "avatars/#{file_path}"
+      gs_url = "gs://#{bucket_name}/#{file_path}"
       url_items = file.from_gs_url gs_url
-      expected_file_name = "#{bucket_subfolder_name}/#{file_name}"
       assert_equal bucket_name, url_items["bucket_name"]
-      assert_equal expected_file_name, url_items["file_name"]
+      assert_equal file_path, url_items["file_path"]
     end
 
     it "raises error if url provided is not a valid gs url" do

@@ -2092,7 +2092,7 @@ module Google
         #   file=Google::Cloud::Storage::File
         #   file.from_gs_url(gs_url)
         #   =>
-        #   {"bucket_name"=>"my-todo-app", "file_name"=>"avatars/heidi.jpeg"}
+        #   {"bucket_name"=>"my-todo-app", "file_path"=>"avatars/heidi.jpeg"}
         #
         # @example Fetch bucket_name , file_name and other query params from gs url:
         #   require "google/cloud/storage"
@@ -2101,7 +2101,7 @@ module Google
         #   file.from_gs_url(gs_url)
         #   =>{
         #     "bucket_name"=>"my-todo-app",
-        #     "file_name"=>"test_sub_folder/heidi.jpeg",
+        #     "file_path"=>"test_sub_folder/heidi.jpeg",
         #     "options" => {
         #       "params1"=>"test1",
         #       "params2"=>"test2"
@@ -2118,7 +2118,7 @@ module Google
           query_params = URI.decode_www_form(query).to_h if query
           url_items = {
             "bucket_name" => bucket_name,
-            "file_name" => file_path
+            "file_path" => file_path
           }
           # adding url params to output hash
           url_items.merge! "options" => query_params if query
