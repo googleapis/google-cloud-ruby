@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.11.0 (2024-09-19)
+
+#### Features
+
+* An optional field `kubelet_config` in message `.google.cloud.gkemulticloud.v1.AwsNodePool` is added 
+* An optional field `security_posture_config` in message `.google.cloud.gkemulticloud.v1.AttachedCluster` is added ([#27330](https://github.com/googleapis/google-cloud-ruby/issues/27330)) 
+
 ### 0.10.1 (2024-08-30)
 
 #### Documentation
