@@ -351,7 +351,7 @@ describe "Buckets Snippets" do
   end
 
   describe "get bucket class and location data" do
-    bucket_name = "my-simple-storage-bucket"
+    bucket_name = random_bucket_name
     location = "US"
     storage_class = "COLDLINE"
 
@@ -360,7 +360,7 @@ describe "Buckets Snippets" do
                                    location: location,
                                    storage_class: storage_class
       expected_output = "Bucket #{bucket_name} default storage class is " \
-                        "#{storage_class}, and the location is #{location}"
+                        "#{storage_class}, and the location is #{location}\n"
       assert_output expected_output do
         get_bucket_class_and_location bucket_name: bucket_name
       end
