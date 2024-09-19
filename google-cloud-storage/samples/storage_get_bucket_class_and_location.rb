@@ -33,5 +33,4 @@ def get_bucket_class_and_location bucket_name:
 end
 # [END storage_get_bucket_class_and_location]
 
-
 get_bucket_class_and_location bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__
