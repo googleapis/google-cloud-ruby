@@ -357,10 +357,10 @@ describe "Buckets Snippets" do
 
     it "get_bucket_class_and_location" do
       storage_client.create_bucket bucket_name,
-                            location: location,
-                            storage_class: storage_class
+                                   location: location,
+                                   storage_class: storage_class
       expected_output = "Bucket #{bucket_name} default storage class is " \
-                    "#{storage_class}, and the location is #{location}"
+                        "#{storage_class}, and the location is #{location}"
       assert_output expected_output do
         get_bucket_class_and_location bucket_name: bucket_name
       end
