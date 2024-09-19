@@ -579,9 +579,30 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::Subscription::State]
         #     Output only. An output-only field indicating whether or not the
         #     subscription can receive messages.
+        # @!attribute [r] analytics_hub_subscription_info
+        #   @return [::Google::Cloud::PubSub::V1::Subscription::AnalyticsHubSubscriptionInfo]
+        #     Output only. Information about the associated Analytics Hub subscription.
+        #     Only set if the subscritpion is created by Analytics Hub.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about an associated Analytics Hub subscription
+          # (https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions).
+          # @!attribute [rw] listing
+          #   @return [::String]
+          #     Optional. The name of the associated Analytics Hub listing resource.
+          #     Pattern:
+          #     "projects/\\{project}/locations/\\{location}/dataExchanges/\\{data_exchange}/listings/\\{listing}"
+          # @!attribute [rw] subscription
+          #   @return [::String]
+          #     Optional. The name of the associated Analytics Hub subscription resource.
+          #     Pattern:
+          #     "projects/\\{project}/locations/\\{location}/subscriptions/\\{subscription}"
+          class AnalyticsHubSubscriptionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
