@@ -1573,14 +1573,41 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   describe "fetch details from gs_url" do
     let(:bucket_name) { "object-lock-bucket" }
-    let(:file_name) {"file.ext"}
-    let(:file_object) {Google::Cloud::Storage::File}
-    let(:gs_url) {"gs://#{bucket_name}/#{file_name}"}
+    let(:file_name) {"file.jpeg"}
+    let(:file) {Google::Cloud::Storage::File}
+    let(:param) {"param1"}
+    let(:param_val) {"test"}
 
-    it "it returns file_name and bucket_name from given gs url "  do
-      url_items= file_object.from_gs_url(gs_url)
+    it "it returns file_name and bucket_name from given gs url"  do
+      gs_url = "gs://#{bucket_name}/#{file_name}"
+      url_items = file.from_gs_url gs_url
       assert_equal bucket_name, url_items["bucket_name"]
       assert_equal file_name, url_items["file_name"]
+    end
+
+    it "it returns file_name, bucket_name and url params in options hash from given gs url with parameters"  do
+      gs_url= "gs://#{bucket_name}/#{file_name}?#{param}=#{param_val}"
+      url_items = file.from_gs_url gs_url
+      assert_equal bucket_name, url_items["bucket_name"]
+      assert_equal file_name, url_items["file_name"]
+      expected_params_hash_in_output = {'param1' =>'test'}
+      assert_equal expected_params_hash_in_output, url_items["options"]
+    end
+
+    it "it returns file_path with subfolder name and file name and bucket_name from given gs url"  do
+      bucket_subfolder_name = "avatars"
+      gs_url = "gs://#{bucket_name}/#{bucket_subfolder_name}/#{file_name}"
+      url_items = file.from_gs_url gs_url
+      expected_file_name = "#{bucket_subfolder_name}/#{file_name}"
+      assert_equal bucket_name, url_items["bucket_name"]
+      assert_equal expected_file_name, url_items["file_name"]
+    end
+
+    it "raises error if url provided is not a valid gs url" do
+      invalid_gs_url = "http://my_bucket/my_file.txt"
+      assert_raises ArgumentError do
+        file.from_gs_url invalid_gs_url
+      end
     end
   end
 
