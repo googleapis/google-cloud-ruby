@@ -28,8 +28,8 @@ def get_bucket_class_and_location bucket_name:
   # Handle the case where the bucket is not found
   raise "Bucket not found: #{bucket_name}" if bucket.nil?
 
-  # Output the bucket's default storage class and location
-  puts "Bucket #{bucket.name} default storage class is #{bucket.storage_class}, and the location is #{bucket.location}"
+  # Output the bucket's storage class and location
+  puts "Bucket #{bucket.name} storage class is #{bucket.storage_class}, and the location is #{bucket.location}"
 end
 # [END storage_get_bucket_class_and_location]
 

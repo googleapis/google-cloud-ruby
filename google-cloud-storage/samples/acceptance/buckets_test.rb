@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -359,7 +359,7 @@ describe "Buckets Snippets" do
       storage_client.create_bucket bucket_name,
                                    location: location,
                                    storage_class: storage_class
-      expected_output = "Bucket #{bucket_name} default storage class is " \
+      expected_output = "Bucket #{bucket_name} storage class is " \
                         "#{storage_class}, and the location is #{location}\n"
       assert_output expected_output do
         get_bucket_class_and_location bucket_name: bucket_name
