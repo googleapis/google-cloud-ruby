@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.2.0 (2024-09-19)
+
+#### Features
+
+* A new field 'allow_auto_tiering' in message 'google.cloud.netapp.v1.StoragePool' is added 
+* A new field 'cold_tier_size_gib' in message 'google.cloud.netapp.v1.Volume' is added 
+* A new message 'google.cloud.netapp.v1.SwitchActiveReplicaZoneRequest' is added 
+* A new rpc 'SwitchActiveReplicaZone' is added to service 'google.cloud.netapp.v1.NetApp' ([#27329](https://github.com/googleapis/google-cloud-ruby/issues/27329)) 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
