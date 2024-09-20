@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2024-09-19)
+
+#### Features
+
+* Add `last_active_time` and `membership_count` to the `Space` resource. 
+* Support `useAdminAccess` for managing chat spaces and organization memberships ([#27325](https://github.com/googleapis/google-cloud-ruby/issues/27325)) 
+
 ### 0.4.0 (2024-09-11)
 
 #### Features
