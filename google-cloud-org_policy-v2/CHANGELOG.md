@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-09-19)
+
+#### Features
+
+* Support adding constraints to new method types REMOVE_GRANTS and GOVERN_TAGS ([#27336](https://github.com/googleapis/google-cloud-ruby/issues/27336)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
