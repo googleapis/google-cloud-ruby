@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.52.0 (2024-09-19)
+
+#### Features
+
+* A new field `generation_config` is added to message `.google.cloud.aiplatform.v1.CountTokensRequest` 
+* A new field `labels` is added to message `.google.cloud.aiplatform.v1.GenerateContentRequest` 
+* A new field `property_ordering` is added to message `.google.cloud.aiplatform.v1.Schema` 
+* Add CIVIC_INTEGRITY category to SafetySettings for prediction service ([#27331](https://github.com/googleapis/google-cloud-ruby/issues/27331)) 
+
 ### 0.51.0 (2024-09-11)
 
 #### Features
