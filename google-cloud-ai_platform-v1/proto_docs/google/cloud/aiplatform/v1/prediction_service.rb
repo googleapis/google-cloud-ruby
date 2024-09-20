@@ -545,6 +545,9 @@ module Google
         # @!attribute [r] candidates
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Candidate>]
         #     Output only. Generated candidates.
+        # @!attribute [r] model_version
+        #   @return [::String]
+        #     Output only. The model version used to generate the response.
         # @!attribute [r] prompt_feedback
         #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::PromptFeedback]
         #     Output only. Content filter results for a prompt sent in the request.
