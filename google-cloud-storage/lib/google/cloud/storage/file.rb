@@ -2086,7 +2086,7 @@ module Google
         #
         # @return [Hash(String => String)]
         #
-        # @example Fetch bucket_name and file_name from gs url:
+        # @example Fetch bucket_name and file_Path from gs url:
         #   require "google/cloud/storage"
         #   gs_url= "gs://my-todo-app/avatars/heidi.jpeg"
         #   file=Google::Cloud::Storage::File
@@ -2094,7 +2094,7 @@ module Google
         #   =>
         #   {"bucket_name"=>"my-todo-app", "file_path"=>"avatars/heidi.jpeg"}
         #
-        # @example Fetch bucket_name , file_name and other query params from gs url:
+        # @example Fetch bucket_name , file_Path and other query params from gs url:
         #   require "google/cloud/storage"
         #   gs_url= "gs://my-todo-app/test_sub_folder/heidi.jpeg?params1=test1&params2=test2"
         #   file=Google::Cloud::Storage::File
