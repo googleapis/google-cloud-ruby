@@ -52,6 +52,14 @@ module Google
         # @!attribute [rw] smart_reply_model_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::SmartReplyModelMetadata]
         #     Metadata for smart reply models.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. A read only boolean field reflecting Zone Separation
+        #     status of the model.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. A read only boolean field reflecting Zone Isolation status
+        #     of the model.
         class ConversationModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
