@@ -34,6 +34,7 @@ require_relative "../storage_enable_default_event_based_hold"
 require_relative "../storage_enable_requester_pays"
 require_relative "../storage_enable_uniform_bucket_level_access"
 require_relative "../storage_enable_versioning"
+require_relative "../storage_get_bucket_class_and_location"
 require_relative "../storage_get_bucket_metadata"
 require_relative "../storage_get_default_event_based_hold"
 require_relative "../storage_get_public_access_prevention"
@@ -346,6 +347,23 @@ describe "Buckets Snippets" do
 
       bucket.refresh!
       refute bucket.default_kms_key
+    end
+  end
+
+  describe "get bucket class and location data" do
+    bucket_name = random_bucket_name
+    location = "US"
+    storage_class = "COLDLINE"
+
+    it "get_bucket_class_and_location" do
+      storage_client.create_bucket bucket_name,
+                                   location: location,
+                                   storage_class: storage_class
+      expected_output = "Bucket #{bucket_name} storage class is " \
+                        "#{storage_class}, and the location is #{location}\n"
+      assert_output expected_output do
+        get_bucket_class_and_location bucket_name: bucket_name
+      end
     end
   end
 
