@@ -1148,7 +1148,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_cluster(name: nil, location: nil, serve_nodes: nil, cluster_config: nil, default_storage_type: nil, encryption_config: nil)
+              # @overload update_cluster(name: nil, location: nil, serve_nodes: nil, node_scaling_factor: nil, cluster_config: nil, default_storage_type: nil, encryption_config: nil)
               #   Pass arguments to `update_cluster` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1164,6 +1164,8 @@ module Google
               #   @param serve_nodes [::Integer]
               #     The number of nodes allocated to this cluster. More nodes enable higher
               #     throughput and more consistent performance.
+              #   @param node_scaling_factor [::Google::Cloud::Bigtable::Admin::V2::Cluster::NodeScalingFactor]
+              #     Immutable. The node scaling factor of this cluster.
               #   @param cluster_config [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig, ::Hash]
               #     Configuration for this cluster.
               #   @param default_storage_type [::Google::Cloud::Bigtable::Admin::V2::StorageType]
