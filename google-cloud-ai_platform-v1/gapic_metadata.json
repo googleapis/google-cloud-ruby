@@ -525,6 +525,11 @@
               "methods": [
                 "cancel_tuning_job"
               ]
+            },
+            "RebaseTunedModel": {
+              "methods": [
+                "rebase_tuned_model"
+              ]
             }
           }
         }

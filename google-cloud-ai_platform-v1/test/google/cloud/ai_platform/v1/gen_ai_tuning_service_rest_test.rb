@@ -290,6 +290,64 @@ class ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ClientTest < Mi
     end
   end
 
+  def test_rebase_tuned_model
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    tuned_model_ref = {}
+    tuning_job = {}
+    artifact_destination = {}
+    deploy_to_same_endpoint = true
+
+    rebase_tuned_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::ServiceStub.stub :transcode_rebase_tuned_model_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, rebase_tuned_model_client_stub do
+        # Create client
+        client = ::Google::Cloud::AIPlatform::V1::GenAiTuningService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.rebase_tuned_model parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.rebase_tuned_model ::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.rebase_tuned_model({ parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.rebase_tuned_model(::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest.new(parent: parent, tuned_model_ref: tuned_model_ref, tuning_job: tuning_job, artifact_destination: artifact_destination, deploy_to_same_endpoint: deploy_to_same_endpoint), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, rebase_tuned_model_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

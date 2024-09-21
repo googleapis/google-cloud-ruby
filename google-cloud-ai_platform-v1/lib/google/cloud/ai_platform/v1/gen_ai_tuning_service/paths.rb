@@ -127,6 +127,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified PipelineJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param pipeline_job [String]
+            #
+            # @return [::String]
+            def pipeline_job_path project:, location:, pipeline_job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/pipelineJobs/#{pipeline_job}"
+            end
+
+            ##
             # Create a fully-qualified TuningJob resource string.
             #
             # The resource will be in the following format:
