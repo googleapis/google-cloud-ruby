@@ -43,6 +43,20 @@
           }
         }
       }
+    },
+    "FileUploadsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client",
+          "rpcs": {
+            "GetFileUpload": {
+              "methods": [
+                "get_file_upload"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }
