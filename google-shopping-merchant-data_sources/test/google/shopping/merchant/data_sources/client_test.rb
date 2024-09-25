@@ -51,4 +51,23 @@ class Google::Shopping::Merchant::DataSources::ClientConstructionMinitest < Mini
       assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Rest::Client, client
     end
   end
+
+  def test_file_uploads_service_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Shopping::Merchant::DataSources.file_uploads_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client, client
+    end
+  end
+
+  def test_file_uploads_service_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Shopping::Merchant::DataSources.file_uploads_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Rest::Client, client
+    end
+  end
 end
