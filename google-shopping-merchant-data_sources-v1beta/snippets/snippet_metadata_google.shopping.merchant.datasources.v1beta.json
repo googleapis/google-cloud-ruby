@@ -250,6 +250,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_FileUploadsService_GetFileUpload_sync",
+      "title": "Snippet for the get_file_upload call in the FileUploadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client#get_file_upload.",
+      "file": "file_uploads_service/get_file_upload.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_file_upload",
+        "full_name": "::Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client#get_file_upload",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::DataSources::V1beta::GetFileUploadRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::DataSources::V1beta::FileUpload",
+        "client": {
+          "short_name": "FileUploadsService::Client",
+          "full_name": "::Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client"
+        },
+        "method": {
+          "short_name": "GetFileUpload",
+          "full_name": "google.shopping.merchant.datasources.v1beta.FileUploadsService.GetFileUpload",
+          "service": {
+            "short_name": "FileUploadsService",
+            "full_name": "google.shopping.merchant.datasources.v1beta.FileUploadsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
