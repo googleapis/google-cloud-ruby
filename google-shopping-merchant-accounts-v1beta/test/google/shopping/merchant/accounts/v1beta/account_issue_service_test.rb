@@ -67,7 +67,7 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Clien
     page_size = 42
     page_token = "hello world"
     language_code = "hello world"
-    time_zone = {}
+    time_zone = "hello world"
 
     list_account_issues_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_account_issues, name
@@ -76,7 +76,7 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Clien
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["language_code"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Type::TimeZone), request["time_zone"]
+      assert_equal "hello world", request["time_zone"]
       refute_nil options
     end
 

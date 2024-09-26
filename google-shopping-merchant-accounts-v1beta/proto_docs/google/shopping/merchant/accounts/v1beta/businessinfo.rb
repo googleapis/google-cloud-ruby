@@ -39,6 +39,11 @@ module Google
           # @!attribute [rw] customer_service
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::CustomerService]
           #     Optional. The customer service of the business.
+          # @!attribute [rw] korean_business_registration_number
+          #   @return [::String]
+          #     Optional. The 10-digit [Korean business registration
+          #     number](https://support.google.com/merchants/answer/9037766) separated with
+          #     dashes in the format: XXX-XX-XXXXX.
           class BusinessInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

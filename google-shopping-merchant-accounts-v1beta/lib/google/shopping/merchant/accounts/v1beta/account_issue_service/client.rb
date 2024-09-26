@@ -71,6 +71,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.timeout = 60.0
+                  default_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -200,7 +205,7 @@ module Google
               #     given language. The format is [BCP-47](https://tools.ietf.org/html/bcp47),
               #     such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
               #     used.
-              #   @param time_zone [::Google::Type::TimeZone, ::Hash]
+              #   @param time_zone [::String]
               #     Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
               #     localize times in human-readable fields. For example 'America/Los_Angeles'.
               #     If not set, 'America/Los_Angeles' will be used.

@@ -23,7 +23,7 @@ module Google
       module Accounts
         module V1beta
           # The merchant account's [shipping
-          # setting]((https://support.google.com/merchants/answer/6069284).
+          # setting](https://support.google.com/merchants/answer/6069284).
           # @!attribute [rw] name
           #   @return [::String]
           #     Identifier. The resource name of the shipping setting.
@@ -344,11 +344,15 @@ module Google
           #   @return [::Integer]
           #     Minimum number of business days spent before an order is shipped.
           #     0 means same day shipped, 1 means next day shipped.
+          #     'min_handling_days' and 'max_handling_days' should be either set or not set
+          #     at the same time.
           # @!attribute [rw] max_handling_days
           #   @return [::Integer]
           #     Maximum number of business days spent before an order is shipped.
           #     0 means same day shipped, 1 means next day shipped.
           #     Must be greater than or equal to `min_handling_days`.
+          #     'min_handling_days' and 'max_handling_days' should be either set or not set
+          #     at the same time.
           # @!attribute [rw] transit_time_table
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::TransitTable]
           #     Transit time table, number of business days spent in transit based on row

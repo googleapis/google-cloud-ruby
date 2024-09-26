@@ -271,9 +271,12 @@ module Google
                 #     Optional. The Terms of Service (ToS) to be accepted immediately upon
                 #     account creation.
                 #   @param service [::Array<::Google::Shopping::Merchant::Accounts::V1beta::CreateAndConfigureAccountRequest::AddAccountService, ::Hash>]
-                #     Optional. If specified, an account service between the account to be
-                #     created and the provider account is initialized as part of the
-                #     creation.
+                #     Required. An account service between the account to be created and the
+                #     provider account is initialized as part of the creation. At least one such
+                #     service needs to be provided. Currently exactly one of these needs to be
+                #     `account_aggregation`, which means you can only create sub accounts, not
+                #     standalone account through this method. Additional `account_management` or
+                #     `product_management` services may be provided.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Shopping::Merchant::Accounts::V1beta::Account]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

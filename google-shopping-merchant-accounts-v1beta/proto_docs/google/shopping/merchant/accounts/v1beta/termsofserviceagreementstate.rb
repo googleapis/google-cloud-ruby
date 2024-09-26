@@ -48,6 +48,8 @@ module Google
           #   @return [::String]
           #     Identifier. The resource name of the terms of service version.
           #     Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
+          #     The identifier format is: `{TermsOfServiceKind}-{country}`
+          #     For example, an identifier could be: `MERCHANT_CENTER-US`
           # @!attribute [rw] region_code
           #   @return [::String]
           #     Region code as defined by https://cldr.unicode.org/. This is the
@@ -110,6 +112,7 @@ module Google
           #   @return [::String]
           #     Required. The resource name of the terms of service version.
           #     Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
+          #     The identifier format is: `{TermsOfServiceKind}-{country}`
           class GetTermsOfServiceAgreementStateRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
