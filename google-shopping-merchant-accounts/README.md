@@ -1,7 +1,8 @@
 # Ruby Client for the Merchant API
 
-Programmatically manage your Merchant Center accounts.
+Programmatically manage your Merchant Center Accounts.
 
+Merchant API consists of multiple Sub-APIs. Accounts Sub-API: Enables you to programmatically manage your accounts. Conversions Sub-API: Enables you to programmatically manage your conversion sources for a merchant account. Datasources Sub-API: Enables you to programmatically manage your datasources. Inventories Sub-API: This bundle enables you to programmatically manage your local and regional inventories. Local Feeds Partnerships Sub-API: This bundle enables LFP partners to submit local inventories for a merchant. Notifications Sub-API: This bundle enables you to programmatically manage your notification subscriptions. Products Sub-API: This bundle enables you to programmatically manage your products. Promotions Sub-API: This bundle enables you to programmatically manage your promotions for products. Quota Sub-API: This bundle enables you to list your quotas for all APIs you are using. Reports Sub-API: This bundle enables you to programmatically retrieve reports and insights about products, their performance and their competitive environment.
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-shopping-merchant-accounts-v*`.
