@@ -260,7 +260,7 @@ module Google
           end
         end
 
-        # Tuning Spec for Supervised Tuning.
+        # Tuning Spec for Supervised Tuning for first party models.
         # @!attribute [rw] training_dataset_uri
         #   @return [::String]
         #     Required. Cloud Storage path to file containing training dataset for
@@ -273,6 +273,23 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::SupervisedHyperParameters]
         #     Optional. Hyperparameters for SFT.
         class SupervisedTuningSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # TunedModel Reference for legacy model migration.
+        # @!attribute [rw] tuned_model
+        #   @return [::String]
+        #     Support migration from model registry.
+        # @!attribute [rw] tuning_job
+        #   @return [::String]
+        #     Support migration from tuning job list page, from gemini-1.0-pro-002
+        #     to 1.5 and above.
+        # @!attribute [rw] pipeline_job
+        #   @return [::String]
+        #     Support migration from tuning job list page, from bison model to gemini
+        #     model.
+        class TunedModelRef
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
