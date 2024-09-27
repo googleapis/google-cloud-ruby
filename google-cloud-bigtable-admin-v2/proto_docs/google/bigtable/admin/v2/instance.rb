@@ -159,6 +159,9 @@ module Google
           #   @return [::Integer]
           #     The number of nodes allocated to this cluster. More nodes enable higher
           #     throughput and more consistent performance.
+          # @!attribute [rw] node_scaling_factor
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::NodeScalingFactor]
+          #     Immutable. The node scaling factor of this cluster.
           # @!attribute [rw] cluster_config
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig]
           #     Configuration for this cluster.
@@ -236,6 +239,21 @@ module Google
               # The cluster has no backing nodes. The data (tables) still
               # exist, but no operations can be performed on the cluster.
               DISABLED = 4
+            end
+
+            # Possible node scaling factors of the clusters. Node scaling delivers better
+            # latency and more throughput by removing node boundaries.
+            module NodeScalingFactor
+              # No node scaling specified. Defaults to NODE_SCALING_FACTOR_1X.
+              NODE_SCALING_FACTOR_UNSPECIFIED = 0
+
+              # The cluster is running with a scaling factor of 1.
+              NODE_SCALING_FACTOR_1X = 1
+
+              # The cluster is running with a scaling factor of 2.
+              # All node count values must be in increments of 2 with this scaling factor
+              # enabled, otherwise an INVALID_ARGUMENT error will be returned.
+              NODE_SCALING_FACTOR_2X = 2
             end
           end
 

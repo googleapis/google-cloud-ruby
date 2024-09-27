@@ -633,6 +633,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
     location = "hello world"
     state = :STATE_NOT_KNOWN
     serve_nodes = 42
+    node_scaling_factor = :NODE_SCALING_FACTOR_UNSPECIFIED
     cluster_config = {}
     default_storage_type = :STORAGE_TYPE_UNSPECIFIED
     encryption_config = {}
@@ -644,6 +645,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       assert_equal "hello world", request["location"]
       assert_equal :STATE_NOT_KNOWN, request["state"]
       assert_equal 42, request["serve_nodes"]
+      assert_equal :NODE_SCALING_FACTOR_UNSPECIFIED, request["node_scaling_factor"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig), request["cluster_config"]
       assert_equal :cluster_config, request.config
       assert_equal :STORAGE_TYPE_UNSPECIFIED, request["default_storage_type"]
@@ -658,35 +660,35 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use hash object
-      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }) do |response, operation|
+      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_cluster name: name, location: location, state: state, serve_nodes: serve_nodes, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config do |response, operation|
+      client.update_cluster name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config) do |response, operation|
+      client.update_cluster ::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }, grpc_options) do |response, operation|
+      client.update_cluster({ name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_cluster(::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options) do |response, operation|
+      client.update_cluster(::Google::Cloud::Bigtable::Admin::V2::Cluster.new(name: name, location: location, state: state, serve_nodes: serve_nodes, node_scaling_factor: node_scaling_factor, cluster_config: cluster_config, default_storage_type: default_storage_type, encryption_config: encryption_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
