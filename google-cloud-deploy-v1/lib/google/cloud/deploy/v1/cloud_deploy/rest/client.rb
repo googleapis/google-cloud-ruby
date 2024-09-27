@@ -137,6 +137,22 @@ module Google
 
                   default_config.rpcs.abandon_release.timeout = 60.0
 
+                  default_config.rpcs.create_deploy_policy.timeout = 60.0
+
+                  default_config.rpcs.update_deploy_policy.timeout = 60.0
+
+                  default_config.rpcs.delete_deploy_policy.timeout = 60.0
+
+                  default_config.rpcs.list_deploy_policies.timeout = 60.0
+                  default_config.rpcs.list_deploy_policies.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_deploy_policy.timeout = 60.0
+                  default_config.rpcs.get_deploy_policy.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.approve_rollout.timeout = 60.0
 
                   default_config.rpcs.advance_rollout.timeout = 60.0
@@ -964,7 +980,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload rollback_target(name: nil, target_id: nil, rollout_id: nil, release_id: nil, rollout_to_roll_back: nil, rollback_config: nil, validate_only: nil)
+              # @overload rollback_target(name: nil, target_id: nil, rollout_id: nil, release_id: nil, rollout_to_roll_back: nil, rollback_config: nil, validate_only: nil, override_deploy_policy: nil)
               #   Pass arguments to `rollback_target` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -989,6 +1005,9 @@ module Google
               #   @param validate_only [::Boolean]
               #     Optional. If set to true, the request is validated and the user is provided
               #     with a `RollbackTargetResponse`.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deploy_policy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::RollbackTargetResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2172,7 +2191,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_release(parent: nil, release_id: nil, release: nil, request_id: nil, validate_only: nil)
+              # @overload create_release(parent: nil, release_id: nil, release: nil, request_id: nil, validate_only: nil, override_deploy_policy: nil)
               #   Pass arguments to `create_release` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2202,6 +2221,9 @@ module Google
               #   @param validate_only [::Boolean]
               #     Optional. If set to true, the request is validated and the user is provided
               #     with an expected result, but no actual change is made.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2350,6 +2372,520 @@ module Google
               end
 
               ##
+              # Creates a new DeployPolicy in a given project and location.
+              #
+              # @overload create_deploy_policy(request, options = nil)
+              #   Pass arguments to `create_deploy_policy` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::CreateDeployPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::CreateDeployPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_deploy_policy(parent: nil, deploy_policy_id: nil, deploy_policy: nil, request_id: nil, validate_only: nil)
+              #   Pass arguments to `create_deploy_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent collection in which the `DeployPolicy` must be
+              #     created. The format is `projects/{project_id}/locations/{location_name}`.
+              #   @param deploy_policy_id [::String]
+              #     Required. ID of the `DeployPolicy`.
+              #   @param deploy_policy [::Google::Cloud::Deploy::V1::DeployPolicy, ::Hash]
+              #     Required. The `DeployPolicy` to create.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param validate_only [::Boolean]
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/deploy/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Deploy::V1::CreateDeployPolicyRequest.new
+              #
+              #   # Call the create_deploy_policy method.
+              #   result = client.create_deploy_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_deploy_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::CreateDeployPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_deploy_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_deploy_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_deploy_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.create_deploy_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single DeployPolicy.
+              #
+              # @overload update_deploy_policy(request, options = nil)
+              #   Pass arguments to `update_deploy_policy` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::UpdateDeployPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::UpdateDeployPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_deploy_policy(update_mask: nil, deploy_policy: nil, request_id: nil, allow_missing: nil, validate_only: nil)
+              #   Pass arguments to `update_deploy_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. Field mask is used to specify the fields to be overwritten by the
+              #     update in the `DeployPolicy` resource. The fields specified in the
+              #     update_mask are relative to the resource, not the full request. A field
+              #     will be overwritten if it's in the mask. If the user doesn't provide a mask
+              #     then all fields are overwritten.
+              #   @param deploy_policy [::Google::Cloud::Deploy::V1::DeployPolicy, ::Hash]
+              #     Required. The `DeployPolicy` to update.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param allow_missing [::Boolean]
+              #     Optional. If set to true, updating a `DeployPolicy` that does not exist
+              #     will result in the creation of a new `DeployPolicy`.
+              #   @param validate_only [::Boolean]
+              #     Optional. If set to true, the request is validated and the user is provided
+              #     with an expected result, but no actual change is made.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/deploy/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Deploy::V1::UpdateDeployPolicyRequest.new
+              #
+              #   # Call the update_deploy_policy method.
+              #   result = client.update_deploy_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_deploy_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::UpdateDeployPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_deploy_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_deploy_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_deploy_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.update_deploy_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single DeployPolicy.
+              #
+              # @overload delete_deploy_policy(request, options = nil)
+              #   Pass arguments to `delete_deploy_policy` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::DeleteDeployPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::DeleteDeployPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_deploy_policy(name: nil, request_id: nil, allow_missing: nil, validate_only: nil, etag: nil)
+              #   Pass arguments to `delete_deploy_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the `DeployPolicy` to delete. The format is
+              #     `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+              #   @param request_id [::String]
+              #     Optional. A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server knows to ignore the
+              #     request if it has already been completed. The server guarantees that for
+              #     at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param allow_missing [::Boolean]
+              #     Optional. If set to true, then deleting an already deleted or non-existing
+              #     `DeployPolicy` will succeed.
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, validate the request and preview the review, but do not
+              #     actually post it.
+              #   @param etag [::String]
+              #     Optional. This checksum is computed by the server based on the value of
+              #     other fields, and may be sent on update and delete requests to ensure the
+              #     client has an up-to-date value before proceeding.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/deploy/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Deploy::V1::DeleteDeployPolicyRequest.new
+              #
+              #   # Call the delete_deploy_policy method.
+              #   result = client.delete_deploy_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_deploy_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::DeleteDeployPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_deploy_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_deploy_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_deploy_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.delete_deploy_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists DeployPolicies in a given project and location.
+              #
+              # @overload list_deploy_policies(request, options = nil)
+              #   Pass arguments to `list_deploy_policies` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::ListDeployPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::ListDeployPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_deploy_policies(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_deploy_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent, which owns this collection of deploy policies. Format
+              #     must be `projects/{project_id}/locations/{location_name}`.
+              #   @param page_size [::Integer]
+              #     The maximum number of deploy policies to return. The service may return
+              #     fewer than this value. If unspecified, at most 50 deploy policies will
+              #     be returned. The maximum value is 1000; values above 1000 will be set
+              #     to 1000.
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListDeployPolicies` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other provided parameters match
+              #     the call that provided the page token.
+              #   @param filter [::String]
+              #     Filter deploy policies to be returned. See https://google.aip.dev/160 for
+              #     more details. All fields can be used in the filter.
+              #   @param order_by [::String]
+              #     Field to sort by. See https://google.aip.dev/132#ordering for more details.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::ListDeployPoliciesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::ListDeployPoliciesResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/deploy/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Deploy::V1::ListDeployPoliciesRequest.new
+              #
+              #   # Call the list_deploy_policies method.
+              #   result = client.list_deploy_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Deploy::V1::DeployPolicy.
+              #     p item
+              #   end
+              #
+              def list_deploy_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::ListDeployPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_deploy_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_deploy_policies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_deploy_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.list_deploy_policies request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single DeployPolicy.
+              #
+              # @overload get_deploy_policy(request, options = nil)
+              #   Pass arguments to `get_deploy_policy` via a request object, either of type
+              #   {::Google::Cloud::Deploy::V1::GetDeployPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Deploy::V1::GetDeployPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_deploy_policy(name: nil)
+              #   Pass arguments to `get_deploy_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the `DeployPolicy`. Format must be
+              #     `projects/{project_id}/locations/{location_name}/deployPolicies/{deploy_policy_name}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Deploy::V1::DeployPolicy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Deploy::V1::DeployPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/deploy/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Deploy::V1::CloudDeploy::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Deploy::V1::GetDeployPolicyRequest.new
+              #
+              #   # Call the get_deploy_policy method.
+              #   result = client.get_deploy_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Deploy::V1::DeployPolicy.
+              #   p result
+              #
+              def get_deploy_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::GetDeployPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_deploy_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Deploy::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_deploy_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_deploy_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @cloud_deploy_stub.get_deploy_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Approves a Rollout.
               #
               # @overload approve_rollout(request, options = nil)
@@ -2362,7 +2898,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload approve_rollout(name: nil, approved: nil)
+              # @overload approve_rollout(name: nil, approved: nil, override_deploy_policy: nil)
               #   Pass arguments to `approve_rollout` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2372,6 +2908,9 @@ module Google
               #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
               #   @param approved [::Boolean]
               #     Required. True = approve; false = reject
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::ApproveRolloutResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2444,7 +2983,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload advance_rollout(name: nil, phase_id: nil)
+              # @overload advance_rollout(name: nil, phase_id: nil, override_deploy_policy: nil)
               #   Pass arguments to `advance_rollout` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2454,6 +2993,9 @@ module Google
               #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
               #   @param phase_id [::String]
               #     Required. The phase ID to advance the `Rollout` to.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::AdvanceRolloutResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2526,7 +3068,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload cancel_rollout(name: nil)
+              # @overload cancel_rollout(name: nil, override_deploy_policy: nil)
               #   Pass arguments to `cancel_rollout` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2534,6 +3076,9 @@ module Google
               #   @param name [::String]
               #     Required. Name of the Rollout. Format is
               #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}`.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::CancelRolloutResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2786,7 +3331,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_rollout(parent: nil, rollout_id: nil, rollout: nil, request_id: nil, validate_only: nil, starting_phase_id: nil)
+              # @overload create_rollout(parent: nil, rollout_id: nil, rollout: nil, request_id: nil, validate_only: nil, override_deploy_policy: nil, starting_phase_id: nil)
               #   Pass arguments to `create_rollout` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2816,6 +3361,9 @@ module Google
               #   @param validate_only [::Boolean]
               #     Optional. If set to true, the request is validated and the user is provided
               #     with an expected result, but no actual change is made.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               #   @param starting_phase_id [::String]
               #     Optional. The starting phase ID for the `Rollout`. If empty the `Rollout`
               #     will start at the first phase.
@@ -2899,7 +3447,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload ignore_job(rollout: nil, phase_id: nil, job_id: nil)
+              # @overload ignore_job(rollout: nil, phase_id: nil, job_id: nil, override_deploy_policy: nil)
               #   Pass arguments to `ignore_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2911,6 +3459,9 @@ module Google
               #     Required. The phase ID the Job to ignore belongs to.
               #   @param job_id [::String]
               #     Required. The job ID for the Job to ignore.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::IgnoreJobResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2983,7 +3534,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload retry_job(rollout: nil, phase_id: nil, job_id: nil)
+              # @overload retry_job(rollout: nil, phase_id: nil, job_id: nil, override_deploy_policy: nil)
               #   Pass arguments to `retry_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2995,6 +3546,9 @@ module Google
               #     Required. The phase ID the Job to retry belongs to.
               #   @param job_id [::String]
               #     Required. The job ID for the Job to retry.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::RetryJobResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3247,7 +3801,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload terminate_job_run(name: nil)
+              # @overload terminate_job_run(name: nil, override_deploy_policy: nil)
               #   Pass arguments to `terminate_job_run` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3255,6 +3809,9 @@ module Google
               #   @param name [::String]
               #     Required. Name of the `JobRun`. Format must be
               #     `projects/{project}/locations/{location}/deliveryPipelines/{deliveryPipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{jobRun}`.
+              #   @param override_deploy_policy [::Array<::String>]
+              #     Optional. Deploy policies to override. Format is
+              #     `projects/{project}/locations/{location}/deployPolicies/{deployPolicy}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Deploy::V1::TerminateJobRunResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -4415,6 +4972,31 @@ module Google
                   #
                   attr_reader :abandon_release
                   ##
+                  # RPC-specific configuration for `create_deploy_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_deploy_policy
+                  ##
+                  # RPC-specific configuration for `update_deploy_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_deploy_policy
+                  ##
+                  # RPC-specific configuration for `delete_deploy_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_deploy_policy
+                  ##
+                  # RPC-specific configuration for `list_deploy_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_deploy_policies
+                  ##
+                  # RPC-specific configuration for `get_deploy_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_deploy_policy
+                  ##
                   # RPC-specific configuration for `approve_rollout`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4557,6 +5139,16 @@ module Google
                     @create_release = ::Gapic::Config::Method.new create_release_config
                     abandon_release_config = parent_rpcs.abandon_release if parent_rpcs.respond_to? :abandon_release
                     @abandon_release = ::Gapic::Config::Method.new abandon_release_config
+                    create_deploy_policy_config = parent_rpcs.create_deploy_policy if parent_rpcs.respond_to? :create_deploy_policy
+                    @create_deploy_policy = ::Gapic::Config::Method.new create_deploy_policy_config
+                    update_deploy_policy_config = parent_rpcs.update_deploy_policy if parent_rpcs.respond_to? :update_deploy_policy
+                    @update_deploy_policy = ::Gapic::Config::Method.new update_deploy_policy_config
+                    delete_deploy_policy_config = parent_rpcs.delete_deploy_policy if parent_rpcs.respond_to? :delete_deploy_policy
+                    @delete_deploy_policy = ::Gapic::Config::Method.new delete_deploy_policy_config
+                    list_deploy_policies_config = parent_rpcs.list_deploy_policies if parent_rpcs.respond_to? :list_deploy_policies
+                    @list_deploy_policies = ::Gapic::Config::Method.new list_deploy_policies_config
+                    get_deploy_policy_config = parent_rpcs.get_deploy_policy if parent_rpcs.respond_to? :get_deploy_policy
+                    @get_deploy_policy = ::Gapic::Config::Method.new get_deploy_policy_config
                     approve_rollout_config = parent_rpcs.approve_rollout if parent_rpcs.respond_to? :approve_rollout
                     @approve_rollout = ::Gapic::Config::Method.new approve_rollout_config
                     advance_rollout_config = parent_rpcs.advance_rollout if parent_rpcs.respond_to? :advance_rollout

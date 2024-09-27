@@ -74,6 +74,16 @@ module Google
             rpc :CreateRelease, ::Google::Cloud::Deploy::V1::CreateReleaseRequest, ::Google::Longrunning::Operation
             # Abandons a Release in the Delivery Pipeline.
             rpc :AbandonRelease, ::Google::Cloud::Deploy::V1::AbandonReleaseRequest, ::Google::Cloud::Deploy::V1::AbandonReleaseResponse
+            # Creates a new DeployPolicy in a given project and location.
+            rpc :CreateDeployPolicy, ::Google::Cloud::Deploy::V1::CreateDeployPolicyRequest, ::Google::Longrunning::Operation
+            # Updates the parameters of a single DeployPolicy.
+            rpc :UpdateDeployPolicy, ::Google::Cloud::Deploy::V1::UpdateDeployPolicyRequest, ::Google::Longrunning::Operation
+            # Deletes a single DeployPolicy.
+            rpc :DeleteDeployPolicy, ::Google::Cloud::Deploy::V1::DeleteDeployPolicyRequest, ::Google::Longrunning::Operation
+            # Lists DeployPolicies in a given project and location.
+            rpc :ListDeployPolicies, ::Google::Cloud::Deploy::V1::ListDeployPoliciesRequest, ::Google::Cloud::Deploy::V1::ListDeployPoliciesResponse
+            # Gets details of a single DeployPolicy.
+            rpc :GetDeployPolicy, ::Google::Cloud::Deploy::V1::GetDeployPolicyRequest, ::Google::Cloud::Deploy::V1::DeployPolicy
             # Approves a Rollout.
             rpc :ApproveRollout, ::Google::Cloud::Deploy::V1::ApproveRolloutRequest, ::Google::Cloud::Deploy::V1::ApproveRolloutResponse
             # Advances a Rollout in a given project and location.
