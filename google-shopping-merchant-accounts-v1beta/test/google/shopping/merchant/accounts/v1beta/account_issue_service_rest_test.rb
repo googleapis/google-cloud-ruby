@@ -82,7 +82,7 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Rest:
     page_size = 42
     page_token = "hello world"
     language_code = "hello world"
-    time_zone = {}
+    time_zone = "hello world"
 
     list_account_issues_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"

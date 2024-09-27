@@ -116,6 +116,25 @@
         }
       }
     },
+    "AutofeedSettingsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::Client",
+          "rpcs": {
+            "GetAutofeedSettings": {
+              "methods": [
+                "get_autofeed_settings"
+              ]
+            },
+            "UpdateAutofeedSettings": {
+              "methods": [
+                "update_autofeed_settings"
+              ]
+            }
+          }
+        }
+      }
+    },
     "BusinessIdentityService": {
       "clients": {
         "grpc": {
