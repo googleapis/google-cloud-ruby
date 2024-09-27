@@ -189,6 +189,8 @@ class ::Google::Cloud::Kms::V1::Autokey::Rest::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
     filter = "hello world"
 
     list_key_handles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -205,27 +207,27 @@ class ::Google::Cloud::Kms::V1::Autokey::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.list_key_handles({ parent: parent, filter: filter }) do |_result, response|
+        client.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_key_handles parent: parent, filter: filter do |_result, response|
+        client.list_key_handles parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_key_handles ::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, filter: filter) do |_result, response|
+        client.list_key_handles ::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_key_handles({ parent: parent, filter: filter }, call_options) do |_result, response|
+        client.list_key_handles({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_key_handles(::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
+        client.list_key_handles(::Google::Cloud::Kms::V1::ListKeyHandlesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

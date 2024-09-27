@@ -29,7 +29,8 @@ module Google
           ##
           # Client for the AutokeyAdmin service.
           #
-          # Provides interfaces for managing Cloud KMS Autokey folder-level
+          # Provides interfaces for managing [Cloud KMS
+          # Autokey](https://cloud.google.com/kms/help/autokey) folder-level
           # configurations. A configuration is inherited by all descendent projects. A
           # configuration at one folder overrides any other configurations in its
           # ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS
