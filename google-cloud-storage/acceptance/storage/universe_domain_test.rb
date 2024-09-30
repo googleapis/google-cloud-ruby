@@ -46,6 +46,10 @@ describe Google::Cloud::Storage do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" } }
   end
 
+  before :all do
+    bucket
+  end
+
   after :all do
     # Clean up: Ensure the bucket and objects are deleted after tests
     bucket = storage.bucket bucket_name
