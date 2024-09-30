@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 (2024-09-30)
+
+#### Features
+
+* Support for Analytics Hub subscription info 
+* Support for Cloud Storage and platform logs settings in IngestionDataSourceSettings 
+
 ### 1.1.2 (2024-09-11)
 
 #### Documentation
