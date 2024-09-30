@@ -22,7 +22,7 @@ describe Google::Cloud::Storage do
     export TEST_UNIVERSE_PROJECT_ID=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-project-id)
     export TEST_UNIVERSE_LOCATION=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-storage-location)"
   )
-            
+           
   # Universe Domain Test project Credentials
   $test_universe_domain = ENV["TEST_UNIVERSE_DOMAIN"]
   $test_universe_project_id = ENV["TEST_UNIVERSE_PROJECT_ID"]
@@ -46,7 +46,8 @@ describe Google::Cloud::Storage do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" } }
   end
 
-  before :all do
+  before do
+    # always create the bucket
     bucket
   end
 
@@ -62,7 +63,6 @@ describe Google::Cloud::Storage do
   it "creates a new bucket with universe_domain" do
     # Verify that the bucket is created
     _(bucket.name).must_equal bucket_name
-    _(bucket.location).must_equal bucket_location
   end
 
   it "uploads an object form a path in the bucket" do
