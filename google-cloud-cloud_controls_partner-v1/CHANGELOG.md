@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-09-30)
+
+#### Features
+
+* Permission for support case details for Access Transparency log entries ([#27327](https://github.com/googleapis/google-cloud-ruby/issues/27327)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
