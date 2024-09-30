@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.2.0 (2024-09-30)
+
+#### Features
+
+* Add FileUploads service ([#27360](https://github.com/googleapis/google-cloud-ruby/issues/27360)) 
+#### Documentation
+
+* A comment for enum value `PRODUCTS` in enum `Channel` is changed 
+
 ### 0.1.2 (2024-08-30)
 
 #### Documentation
