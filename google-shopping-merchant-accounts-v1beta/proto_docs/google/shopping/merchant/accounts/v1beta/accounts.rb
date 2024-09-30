@@ -132,6 +132,10 @@ module Google
           #   @return [::String]
           #     Required. The name of the account to delete.
           #     Format: `accounts/{account}`
+          # @!attribute [rw] force
+          #   @return [::Boolean]
+          #     Optional. If set to `true`, the account is deleted even if it provides
+          #     services to other accounts or has processed offers.
           class DeleteAccountRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -190,6 +190,7 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountsService::Rest::Cli
 
     # Create request parameters for a unary method.
     name = "hello world"
+    force = true
 
     delete_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -205,27 +206,27 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountsService::Rest::Cli
         end
 
         # Use hash object
-        client.delete_account({ name: name }) do |_result, response|
+        client.delete_account({ name: name, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_account name: name do |_result, response|
+        client.delete_account name: name, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_account ::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name) do |_result, response|
+        client.delete_account ::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_account({ name: name }, call_options) do |_result, response|
+        client.delete_account({ name: name, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_account(::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name), call_options) do |_result, response|
+        client.delete_account(::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
