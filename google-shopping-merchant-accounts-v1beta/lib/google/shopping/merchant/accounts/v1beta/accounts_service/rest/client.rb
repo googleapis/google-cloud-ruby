@@ -340,6 +340,9 @@ module Google
                 # Deletes the specified account regardless of its type: standalone, MCA or
                 # sub-account. Deleting an MCA leads to the deletion of all of its
                 # sub-accounts. Executing this method requires admin access.
+                # The deletion succeeds only if the account does not provide services
+                # to any other account and has no processed offers. You can use the `force`
+                # parameter to override this.
                 #
                 # @overload delete_account(request, options = nil)
                 #   Pass arguments to `delete_account` via a request object, either of type
@@ -351,7 +354,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload delete_account(name: nil)
+                # @overload delete_account(name: nil, force: nil)
                 #   Pass arguments to `delete_account` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -359,6 +362,9 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the account to delete.
                 #     Format: `accounts/{account}`
+                #   @param force [::Boolean]
+                #     Optional. If set to `true`, the account is deleted even if it provides
+                #     services to other accounts or has processed offers.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -505,7 +511,8 @@ module Google
                 # constraints of the request such as page size or filters.
                 # This is not just listing the sub-accounts of an MCA, but all accounts the
                 # calling user has access to including other MCAs, linked accounts,
-                # standalone accounts and so on.
+                # standalone accounts and so on. If no filter is provided, then it returns
+                # accounts the user is directly added to.
                 #
                 # @overload list_accounts(request, options = nil)
                 #   Pass arguments to `list_accounts` via a request object, either of type

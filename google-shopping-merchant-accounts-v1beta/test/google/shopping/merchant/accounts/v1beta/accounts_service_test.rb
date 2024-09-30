@@ -187,11 +187,13 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountsService::ClientTes
 
     # Create request parameters for a unary method.
     name = "hello world"
+    force = true
 
     delete_account_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_account, name
       assert_kind_of ::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -202,31 +204,31 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountsService::ClientTes
       end
 
       # Use hash object
-      client.delete_account({ name: name }) do |response, operation|
+      client.delete_account({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_account name: name do |response, operation|
+      client.delete_account name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_account ::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name) do |response, operation|
+      client.delete_account ::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_account({ name: name }, grpc_options) do |response, operation|
+      client.delete_account({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_account(::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_account(::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
