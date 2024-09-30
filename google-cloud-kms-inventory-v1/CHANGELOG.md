@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.2 (2024-09-30)
+
+#### Documentation
+
+* Document that CryptoKey#destroy_scheduled_duration default is 30 days ([#27339](https://github.com/googleapis/google-cloud-ruby/issues/27339)) 
+
 ### 0.11.1 (2024-08-30)
 
 #### Documentation
