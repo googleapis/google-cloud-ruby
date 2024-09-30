@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.0 (2024-09-30)
+
+#### Features
+
+* Added support for deploy policies ([#27370](https://github.com/googleapis/google-cloud-ruby/issues/27370)) 
+
 ### 1.2.2 (2024-08-30)
 
 #### Documentation
