@@ -30,6 +30,13 @@ for ruby_version in "${ruby_versions[@]}"; do
   export GEM_HOME=$HOME/.gem
   export PATH=$GEM_HOME/bin:$PATH
 
+  # Universe Domain Test project Credentials
+  export TEST_UNIVERSE_DOMAIN_CREDENTIAL=$(realpath ${KOKORO_GFILE_DIR}/secret_manager/client-library-test-universe-domain-credential)
+  export TEST_UNIVERSE_DOMAIN=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-domain)
+  export TEST_UNIVERSE_PROJECT_ID=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-project-id)
+  export TEST_UNIVERSE_LOCATION=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-storage-location)
+
+
   gem install --no-document toys
 
   toys ci -v --load-kokoro-context $EXTRA_CI_ARGS < /dev/null

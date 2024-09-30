@@ -16,28 +16,16 @@ require "storage_helper"
 
 describe Google::Cloud::Storage do
 
-  system(
-    "export TEST_UNIVERSE_DOMAIN_CREDENTIAL=$(realpath ${KOKORO_GFILE_DIR}/secret_manager/client-library-test-universe-domain-credential)
-    export TEST_UNIVERSE_DOMAIN=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-domain)
-    export TEST_UNIVERSE_PROJECT_ID=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-project-id)
-    export TEST_UNIVERSE_LOCATION=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-storage-location)"
-  )
-           
-  # Universe Domain Test project Credentials
-  $test_universe_domain = ENV["TEST_UNIVERSE_DOMAIN"]
-  $test_universe_project_id = ENV["TEST_UNIVERSE_PROJECT_ID"]
-  $test_universe_location = ENV["TEST_UNIVERSE_LOCATION"]
-  $test_universe_domain_credential = ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"]
-
   let :storage do
+    # Universe Domain Test project Credentials
     Google::Cloud::Storage.new(
-      project_id: $test_universe_project_id,
-      credentials: $test_universe_domain_credential,
-      universe_domain: $test_universe_domain
+      project_id: ENV["TEST_UNIVERSE_PROJECT_ID"],
+      credentials: ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"],
+      universe_domain: ENV["TEST_UNIVERSE_DOMAIN"]
     )
   end
   let(:bucket_name) { $bucket_names.first }
-  let(:bucket_location) { $test_universe_location }
+  let(:bucket_location) { ENV["TEST_UNIVERSE_LOCATION"] }
   let :bucket do
     storage.bucket(bucket_name) || safe_gcs_execute { storage.create_bucket bucket_name, location: bucket_location }
   end
