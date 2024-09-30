@@ -1,5 +1,11 @@
 # Release History
 
+### 2.8.2 (2024-09-30)
+
+#### Documentation
+
+* Provide links to KMS Autokey documentation on cloud.google.com ([#27337](https://github.com/googleapis/google-cloud-ruby/issues/27337)) 
+
 ### 2.8.1 (2024-08-08)
 
 #### Documentation
