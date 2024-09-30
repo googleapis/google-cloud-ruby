@@ -15,6 +15,13 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage do
+
+  # Universe Domain Test project Credentials
+  $test_universe_domain = ENV["TEST_UNIVERSE_DOMAIN"]
+  $test_universe_project_id = ENV["TEST_UNIVERSE_PROJECT_ID"]
+  $test_universe_location = ENV["TEST_UNIVERSE_LOCATION"]
+  $test_universe_domain_credential = ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"]
+
   let :storage do
     Google::Cloud::Storage.new(
       project_id: $test_universe_project_id,

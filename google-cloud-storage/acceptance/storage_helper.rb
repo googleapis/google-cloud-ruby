@@ -28,12 +28,6 @@ if ENV["GCLOUD_TEST_GENERATE_XML_REPORT"]
   Minitest::Reporters.use! [Minitest::Reporters::SpecReporter.new, Minitest::Reporters::JUnitReporter.new]
 end
 
-# Universe Domain Test project Credentials
-$test_universe_domain = ENV["TEST_UNIVERSE_DOMAIN"]
-$test_universe_project_id = ENV["TEST_UNIVERSE_PROJECT_ID"]
-$test_universe_location = ENV["TEST_UNIVERSE_LOCATION"]
-$test_universe_domain_credential = ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"]
-
 # Create shared storage object so we don't create new for each test
 scopes = ["https://www.googleapis.com/auth/devstorage.full_control", "https://www.googleapis.com/auth/iam"]
 $storage = Google::Cloud.new.storage retries: 10, scope: scopes
