@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.53.0 (2024-09-30)
+
+#### Features
+
+* GenerateContentResponse includes the model version 
+* Schemas support any_of subschemas 
+* Support for logprobs results 
+* Support for the rebase_tuned_model RPC 
+
 ### 0.52.0 (2024-09-19)
 
 #### Features
