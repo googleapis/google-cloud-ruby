@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 (2024-09-30)
+
+#### Features
+
+* Support for PCMU/a-law 
+* Support for Zone Isolation and Zone Separation compliance status 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
