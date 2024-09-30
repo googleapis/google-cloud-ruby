@@ -1,5 +1,12 @@
 # Release History
 
+### 1.4.0 (2024-09-30)
+
+#### Features
+
+* Support for publishing findings to Google Security Operations and Security Command Center 
+* Support for starting locations and discovery targets in other clouds 
+
 ### 1.3.1 (2024-08-30)
 
 #### Documentation
