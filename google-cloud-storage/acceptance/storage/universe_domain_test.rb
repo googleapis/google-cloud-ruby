@@ -13,42 +13,18 @@
 # limitations under the License.
 
 require "storage_helper"
-require "google/cloud/secret_manager"
 
 describe Google::Cloud::Storage do
-  # Universe Domain Test project Credentials
-  secret_project = "cloud-devrel-kokoro-resources"
-  secret_domain_id = "client-library-test-universe-domain"
-  secret_project_id = "client-library-test-universe-project-id"
-  secret_location_id = "client-library-test-universe-storage-location"
-  secret_domain_cred_id = "client-library-test-universe-domain-credential"
-  secret_version = "latest"
-
-  client = Google::Cloud::SecretManager.secret_manager_service
-  ENV["TEST_UNIVERSE_DOMAIN"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_domain_id,
-    secret_version: secret_version
-  )
-  ENV["TEST_UNIVERSE_PROJECT_ID"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_project_id,
-    secret_version: secret_version
-  )
-  ENV["TEST_UNIVERSE_LOCATION"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_location_id,
-    secret_version: secret_version
-  )
-
-  ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_domain_cred_id,
-    secret_version: secret_version
+  # Setting Universe Domain Test project Credentials in env vars
+  system(
+    "export TEST_UNIVERSE_DOMAIN_CREDENTIAL=$(realpath ${KOKORO_GFILE_DIR}/secret_manager/client-library-test-universe-domain-credential)
+    export TEST_UNIVERSE_DOMAIN=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-domain)
+    export TEST_UNIVERSE_PROJECT_ID=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-project-id)
+    export TEST_UNIVERSE_LOCATION=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-storage-location)"
   )
 
   let :storage do
-    # Universe Domain Test project Credentials
+    # Fetching Universe Domain Test project Credentials
     Google::Cloud::Storage.new(
       project_id: ENV["TEST_UNIVERSE_PROJECT_ID"],
       credentials: ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"],
