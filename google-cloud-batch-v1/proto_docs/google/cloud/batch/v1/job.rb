@@ -515,7 +515,10 @@ module Google
           #   @return [::String]
           #     Name of an instance template used to create VMs.
           #     Named the field as 'instance_template' instead of 'template' to avoid
-          #     c++ keyword conflict.
+          #     C++ keyword conflict.
+          #
+          #     Batch only supports global instance templates.
+          #     You can specify the global instance template as a full or partial URL.
           # @!attribute [rw] install_gpu_drivers
           #   @return [::Boolean]
           #     Set this field true if you want Batch to help fetch drivers from a third
