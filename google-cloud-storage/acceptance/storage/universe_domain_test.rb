@@ -20,7 +20,8 @@ describe Google::Cloud::Storage do
   secret_project = "cloud-devrel-kokoro-resources"
   secret_domain_id = "client-library-test-universe-domain"
   secret_project_id = "client-library-test-universe-project-id"
-  secret_location_id = "client-library-test-universe-storage-location'"
+  secret_location_id = "client-library-test-universe-storage-location"
+  secret_domain_cred_id = "client-library-test-universe-domain-credential"
   secret_version = "latest"
 
   client = Google::Cloud::SecretManager.secret_manager_service
@@ -39,7 +40,12 @@ describe Google::Cloud::Storage do
     secret:         secret_location_id,
     secret_version: secret_version
   )
-  ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"] = File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain-credential"))
+
+  ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"] = client.secret_version_path(
+    project:        secret_project,
+    secret:         secret_domain_cred_id,
+    secret_version: secret_version
+  )
 
   let :storage do
     # Universe Domain Test project Credentials
