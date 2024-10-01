@@ -1,5 +1,15 @@
 # Release History
 
+### 1.1.0 (2024-10-01)
+
+#### Features
+
+* add INTERVAL API 
+* add new QueryMode enum values (WITH_STATS, WITH_PLAN_AND_STATS) 
+#### Documentation
+
+* update comment for PROFILE QueryMode ([#27385](https://github.com/googleapis/google-cloud-ruby/issues/27385)) 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
