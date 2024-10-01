@@ -24,18 +24,26 @@ describe Google::Cloud::Storage do
   TEST_UNIVERSE_DOMAIN_CREDENTIAL = File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain-credential"))
 
 
-  let :universe_domain_storage do
+  let :ud_storage do
     Google::Cloud::Storage.new(
       project_id: TEST_UNIVERSE_PROJECT_ID,
       keyfile: TEST_UNIVERSE_DOMAIN_CREDENTIAL,
       universe_domain: TEST_UNIVERSE_DOMAIN
     )
   end
+  let(:ud_bucket_name) { bucket_names "ud-test-bucket" }
+
+  after do
+    ud_bucket = ud_storage.bucket ud_bucket_name
+    if ud_bucket
+      ud_bucket.files.all &:delete
+      safe_gcs_execute { ud_bucket.delete }
+    end
+  end
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
-    ud_bucket_name = "ud-test-bucket"
-    ud_bucket = safe_gcs_execute { universe_domain_storage.create_bucket ud_bucket_name, location: TEST_UNIVERSE_LOCATION }
+    ud_bucket = safe_gcs_execute { ud_storage.create_bucket ud_bucket_name, location: TEST_UNIVERSE_LOCATION }
     puts "bucket: #{ud_bucket.inspect}"
     _(ud_bucket).wont_be_nil
     _(ud_bucket.name).must_equal ud_bucket_name

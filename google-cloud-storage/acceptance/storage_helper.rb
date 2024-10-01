@@ -123,11 +123,15 @@ end
 require "time"
 require "securerandom"
 t = Time.now.utc.iso8601.gsub ":", "-"
-$bucket_names = 3.times.map { "gcloud-ruby-acceptance-#{t}-#{SecureRandom.hex(4)}".downcase }
+$bucket_names = bucket_names
 $prefix = "gcloud_ruby_acceptance_#{t}_#{SecureRandom.hex(4)}".downcase.gsub "-", "_"
 # bucket names for second project
 $bucket_names_2 = 3.times.map { "gcloud-ruby-acceptance-2-#{t}-#{SecureRandom.hex(4)}".downcase }
 $bucket_name_public = "gcloud-ruby-acceptance-public-read".freeze
+
+def bucket_names prefix: "gcloud-ruby-acceptance"
+  3.times.map { "#{prefix}-#{t}-#{SecureRandom.hex(4)}".downcase }
+end
 
 def bucket_public
   begin
