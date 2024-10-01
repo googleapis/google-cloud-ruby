@@ -31,6 +31,7 @@ describe Google::Cloud::Storage do
       universe_domain: TEST_UNIVERSE_DOMAIN
     )
   end
+  let(:t) { Time.now.utc.iso8601.gsub ":", "-" }
   let(:ud_bucket_name) { "ud-test-ruby-bucket-#{t}-#{SecureRandom.hex(4)}".downcase }
 
   after do
