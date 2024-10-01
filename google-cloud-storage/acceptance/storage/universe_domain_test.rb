@@ -15,24 +15,23 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage do
-  # Setting Universe Domain Test project Credentials in env vars
-  system(
-    "export TEST_UNIVERSE_DOMAIN_CREDENTIAL=$(realpath ${KOKORO_GFILE_DIR}/secret_manager/client-library-test-universe-domain-credential)
-    export TEST_UNIVERSE_DOMAIN=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-domain)
-    export TEST_UNIVERSE_PROJECT_ID=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-project-id)
-    export TEST_UNIVERSE_LOCATION=$(gcloud secrets versions access latest --project cloud-devrel-kokoro-resources --secret=client-library-test-universe-storage-location)"
-  )
+  # Fetch secret values from the secret_manager path
+  TEST_UNIVERSE_PROJECT_ID = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-project-id")))
+  TEST_UNIVERSE_LOCATION = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-storage-location")))
+  TEST_UNIVERSE_DOMAIN = File.read(File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain")))
+  TEST_UNIVERSE_DOMAIN_CREDENTIAL = File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain-credential"))
+
 
   let :storage do
     # Fetching Universe Domain Test project Credentials
     Google::Cloud::Storage.new(
-      project_id: ENV["TEST_UNIVERSE_PROJECT_ID"],
-      credentials: ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"],
-      universe_domain: ENV["TEST_UNIVERSE_DOMAIN"]
+      project_id: TEST_UNIVERSE_PROJECT_ID,
+      credentials: TEST_UNIVERSE_DOMAIN_CREDENTIAL,
+      universe_domain: TEST_UNIVERSE_DOMAIN
     )
   end
   let(:bucket_name) { $bucket_names.first }
-  let(:bucket_location) { ENV["TEST_UNIVERSE_LOCATION"] }
+  let(:bucket_location) { TEST_UNIVERSE_LOCATION }
   let :bucket do
     storage.bucket(bucket_name) || safe_gcs_execute { storage.create_bucket bucket_name, location: bucket_location }
   end
