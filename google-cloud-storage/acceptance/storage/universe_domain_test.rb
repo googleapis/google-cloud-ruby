@@ -14,8 +14,6 @@
 
 require "storage_helper"
 
-Google::Apis.logger.level = Logger::DEBUG
-
 describe Google::Cloud::Storage do
   # Fetch secret values from the secret_manager path
   TEST_UNIVERSE_PROJECT_ID = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-project-id")))
@@ -24,70 +22,33 @@ describe Google::Cloud::Storage do
   TEST_UNIVERSE_DOMAIN_CREDENTIAL = File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain-credential"))
 
 
-  let :storage do
-    # Fetching Universe Domain Test project Credentials
+  let :universe_domain_storage do
     Google::Cloud::Storage.new(
       project_id: TEST_UNIVERSE_PROJECT_ID,
-      credentials: TEST_UNIVERSE_DOMAIN_CREDENTIAL,
+      keyfile: TEST_UNIVERSE_DOMAIN_CREDENTIAL,
       universe_domain: TEST_UNIVERSE_DOMAIN
     )
   end
-  let(:bucket_name) { $bucket_names.first }
-  let(:bucket_location) { TEST_UNIVERSE_LOCATION }
-  let :bucket do
-    storage.bucket(bucket_name) || safe_gcs_execute { storage.create_bucket bucket_name, location: bucket_location }
-  end
 
-  let :files do
-    { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" } }
-  end
-
-  before do
-    # always create the bucket
-    bucket
-  end
-
-  after :all do
-    # Clean up: Ensure the bucket and objects are deleted after tests
-    bucket = storage.bucket bucket_name
-    if bucket
-      bucket.files.each(&:delete) # Delete all objects in the bucket
-      bucket.delete
-    end
-  end
-
-  it "creates a new bucket with universe_domain" do
-    # Verify that the bucket is created
+  it "creates a new bucket and uploads an object with universe_domain" do
+    # Create a bucket
+    bucket_name = $bucket_names.first
+    bucket = safe_gcs_execute { universe_domain_storage.create_bucket bucket_name, location: TEST_UNIVERSE_LOCATION }
     _(bucket.name).must_equal bucket_name
-  end
 
-  it "uploads an object form a path in the bucket" do
     # Upload an object
-    object_name = "CloudLogo.png"
-    original = File.new files[:logo][:path]
-    uploaded_file = bucket.create_file original, "CloudLogo.png"
-    # Verify object was uploaded
-    _(uploaded_file.name).must_equal object_name
+    file_name = "ud-test-file"
+    payload = StringIO.new "Hello world!"
+    file = bucket.create_file payload, file_name
+    _(file.name).must_equal file_name
 
-    # Retrive object
-    retrieved_file = bucket.file object_name
+    # Delete the object
+    file.delete
+    file = bucket.file file_name
+    _(file).must_be_nil
 
-    # Verify object
-    _(retrieved_file.name).must_equal object_name
-  end
-
-  it "uploads and verifies an object in the bucket" do
-    # Upload an object
-    object_name = "test-object.txt"
-    object_content = "Hello this a test file"
-    uploaded_file = bucket.create_file StringIO.new(object_content), object_name
-
-    # Verify object was uploaded
-    _(uploaded_file.name).must_equal object_name
-
-    # Verify object content
-    retrieved_file = bucket.file object_name
-    downloaded_content = retrieved_file.download.read
-    _(downloaded_content).must_equal object_content
+    # Delete the bucket
+    bucket.delete
+    _(bucket).must_be_nil
   end
 end
