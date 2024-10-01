@@ -34,6 +34,8 @@ describe Google::Cloud::Storage do
     # Create a bucket
     bucket_name = $bucket_names.first
     bucket = safe_gcs_execute { universe_domain_storage.create_bucket bucket_name, location: TEST_UNIVERSE_LOCATION }
+    puts "bucket: #{bucket.inspect}"
+    _(bucket).wont_be_nil
     _(bucket.name).must_equal bucket_name
 
     # Upload an object
@@ -41,6 +43,10 @@ describe Google::Cloud::Storage do
     payload = StringIO.new "Hello world!"
     file = bucket.create_file payload, file_name
     _(file.name).must_equal file_name
+
+    # Read the file uploaded
+    uploaded_file = bucket.file file_name
+    _(uploaded_file.name).must_equal file_name
 
     # Delete the object
     file.delete
