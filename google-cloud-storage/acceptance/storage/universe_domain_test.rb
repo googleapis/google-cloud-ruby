@@ -43,17 +43,16 @@ describe Google::Cloud::Storage do
     # Upload an object
     ud_file_name = "ud-test-file"
     ud_payload = StringIO.new "Hello world!"
-    ud_file = bucket.create_file ud_payload, ud_file_name
+    ud_file = ud_bucket.create_file ud_payload, ud_file_name
     _(ud_file.name).must_equal ud_file_name
 
     # Read the file uploaded
-    uploaded_ud_file = bucket.file ud_file_name
+    uploaded_ud_file = ud_bucket.file ud_file_name
     _(uploaded_ud_file.name).must_equal ud_file_name
 
     # Delete the object
-    ud_file.delete
-    ud_file = bucket.file ud_file_name
-    _(ud_file).must_be_nil
+    uploaded_ud_file.delete
+    _(uploaded_ud_file).must_be_nil
 
     # Delete the bucket
     ud_bucket.delete
