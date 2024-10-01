@@ -68,7 +68,6 @@ do
         --secret $key > \
         "$SECRET_LOCATION/$key"
     if [[ $? == 0 ]]; then
-        cat ${SECRET_LOCATION}/${key}
         msg "Secret written to ${SECRET_LOCATION}/${key}"
     else
         msg "Error retrieving secret ${key}"
