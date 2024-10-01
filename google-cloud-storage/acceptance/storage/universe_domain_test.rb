@@ -14,6 +14,8 @@
 
 require "storage_helper"
 
+Google::Apis.logger.level = Logger::DEBUG
+
 describe Google::Cloud::Storage do
   # Fetch secret values from the secret_manager path
   TEST_UNIVERSE_PROJECT_ID = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-project-id")))
@@ -32,29 +34,29 @@ describe Google::Cloud::Storage do
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
-    bucket_name = $bucket_names.first
-    bucket = safe_gcs_execute { universe_domain_storage.create_bucket bucket_name, location: TEST_UNIVERSE_LOCATION }
-    puts "bucket: #{bucket.inspect}"
-    _(bucket).wont_be_nil
-    _(bucket.name).must_equal bucket_name
+    ud_bucket_name = "ud-test-bucket"
+    ud_bucket = safe_gcs_execute { universe_domain_storage.create_bucket ud_bucket_name, location: TEST_UNIVERSE_LOCATION }
+    puts "bucket: #{ud_bucket.inspect}"
+    _(ud_bucket).wont_be_nil
+    _(ud_bucket.name).must_equal ud_bucket_name
 
     # Upload an object
-    file_name = "ud-test-file"
-    payload = StringIO.new "Hello world!"
-    file = bucket.create_file payload, file_name
-    _(file.name).must_equal file_name
+    ud_file_name = "ud-test-file"
+    ud_payload = StringIO.new "Hello world!"
+    ud_file = bucket.create_file ud_payload, ud_file_name
+    _(ud_file.name).must_equal ud_file_name
 
     # Read the file uploaded
-    uploaded_file = bucket.file file_name
-    _(uploaded_file.name).must_equal file_name
+    uploaded_ud_file = bucket.file ud_file_name
+    _(uploaded_ud_file.name).must_equal ud_file_name
 
     # Delete the object
-    file.delete
-    file = bucket.file file_name
-    _(file).must_be_nil
+    ud_file.delete
+    ud_file = bucket.file ud_file_name
+    _(ud_file).must_be_nil
 
     # Delete the bucket
-    bucket.delete
-    _(bucket).must_be_nil
+    ud_bucket.delete
+    _(ud_bucket).must_be_nil
   end
 end
