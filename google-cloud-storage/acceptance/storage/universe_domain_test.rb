@@ -15,6 +15,12 @@
 require "storage_helper"
 
 describe Google::Cloud::Storage do
+  # Universe Domain Test project Credentials
+  ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"] = File.realpath(File.join(ENV[KOKORO_GFILE_DIR], 'secret_manager', 'client-library-test-universe-domain-credential'))
+  ENV["TEST_UNIVERSE_DOMAIN"] = File.read(File.realpath(File.join(ENV[KOKORO_GFILE_DIR], 'secret_manager', 'client-library-test-universe-domain'))).strip
+  ENV["TEST_UNIVERSE_PROJECT_ID"] = File.read(File.realpath(File.join(ENV[KOKORO_GFILE_DIR], 'secret_manager', 'client-library-test-universe-project-id'))).strip
+  ENV["TEST_UNIVERSE_LOCATION"] = File.read(File.realpath(File.join(ENV[KOKORO_GFILE_DIR], 'secret_manager', 'client-library-test-universe-storage-location'))).strip
+
   let :storage do
     # Universe Domain Test project Credentials
     Google::Cloud::Storage.new(
