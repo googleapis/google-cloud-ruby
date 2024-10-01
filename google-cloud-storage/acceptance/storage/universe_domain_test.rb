@@ -31,7 +31,7 @@ describe Google::Cloud::Storage do
       universe_domain: TEST_UNIVERSE_DOMAIN
     )
   end
-  let(:ud_bucket_name) { bucket_names "ud-test-bucket" }
+  let(:ud_bucket_name) { generate_bucket_names "ud-test-ruby-bucket" }
 
   after do
     ud_bucket = ud_storage.bucket ud_bucket_name
