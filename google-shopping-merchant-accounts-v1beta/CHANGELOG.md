@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.3.0 (2024-10-01)
+
+#### Features
+
+* add 'force' parameter for accounts.delete method ([#27386](https://github.com/googleapis/google-cloud-ruby/issues/27386)) 
+#### Documentation
+
+* update descriptions for the DeleteAccount and ListAccounts RPCs 
+
 ### 0.2.0 (2024-09-30)
 
 #### Features
