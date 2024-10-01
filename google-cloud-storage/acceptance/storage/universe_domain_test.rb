@@ -14,9 +14,9 @@
 
 require "storage_helper"
 
-Google::Apis.logger.level = Logger::DEBUG
-
-describe Google::Cloud::Storage do
+describe Google::Cloud::Storage, :universe_domain do
+  Google::Apis.logger.level = Logger::DEBUG
+  
   # Fetch secret values from the secret_manager path
   TEST_UNIVERSE_PROJECT_ID = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-project-id")))
   TEST_UNIVERSE_LOCATION = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-storage-location")))
@@ -27,7 +27,7 @@ describe Google::Cloud::Storage do
   let :ud_storage do
     Google::Cloud::Storage.new(
       project_id: TEST_UNIVERSE_PROJECT_ID,
-      keyfile: TEST_UNIVERSE_DOMAIN_CREDENTIAL,
+      credentials: TEST_UNIVERSE_DOMAIN_CREDENTIAL,
       universe_domain: TEST_UNIVERSE_DOMAIN
     )
   end
