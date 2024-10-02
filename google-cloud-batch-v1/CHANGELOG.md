@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.1 (2024-10-02)
+
+#### Documentation
+
+* Clarify Batch only supports global custom instance template now ([#27390](https://github.com/googleapis/google-cloud-ruby/issues/27390)) 
+
 ### 0.19.0 (2024-09-11)
 
 #### Features
