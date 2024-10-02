@@ -28,6 +28,13 @@ module Google
         #     Resource name of the space.
         #
         #     Format: `spaces/{space}`
+        #
+        #     Where `{space}` represents the system-assigned ID for the space. You can
+        #     obtain the space ID by calling the
+        #     [`spaces.list()`](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/list)
+        #     method or from the space URL. For example, if the space URL
+        #     is `https://mail.google.com/mail/u/0/#chat/space/AAAAAAAAA`, the space ID
+        #     is `AAAAAAAAA`.
         # @!attribute [r] type
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Apps::Chat::V1::Space::Type]
@@ -49,11 +56,11 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The space's display name. Required when [creating a
-        #     space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/create).
-        #     If you receive the error message `ALREADY_EXISTS` when creating a space or
-        #     updating the `displayName`, try a different `displayName`. An
-        #     existing space within the Google Workspace organization might already use
-        #     this display name.
+        #     space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/create)
+        #     with a `spaceType` of `SPACE`. If you receive the error message
+        #     `ALREADY_EXISTS` when creating a space or updating the `displayName`, try a
+        #     different `displayName`. An existing space within the Google Workspace
+        #     organization might already use this display name.
         #
         #     For direct messages, this field might be empty.
         #
@@ -67,15 +74,6 @@ module Google
         #       * The authenticated user uses a consumer account (unmanaged user
         #         account). By default, a space created by a consumer account permits any
         #         Google Chat user.
-        #
-        #       * The space is used to [import data to Google Chat]
-        #         (https://developers.google.com/chat/api/guides/import-data-overview)
-        #         because import mode spaces must only permit members from the same
-        #         Google Workspace organization. However, as part of the [Google
-        #         Workspace Developer Preview
-        #         Program](https://developers.google.com/workspace/preview), import mode
-        #         spaces can permit any Google Chat user so this field can then be set
-        #         for import mode spaces.
         #
         #     For existing spaces, this field is output only.
         # @!attribute [r] space_threading_state
@@ -126,6 +124,17 @@ module Google
         # @!attribute [r] space_uri
         #   @return [::String]
         #     Output only. The URI for a user to access the space.
+        # @!attribute [rw] predefined_permission_settings
+        #   @return [::Google::Apps::Chat::V1::Space::PredefinedPermissionSettings]
+        #     Optional. Input only. Predefined space permission settings, input only
+        #     when creating a space. If the field is not set, a collaboration space is
+        #     created. After you create the space, settings are populated in the
+        #     `PermissionSettings` field.
+        # @!attribute [rw] permission_settings
+        #   @return [::Google::Apps::Chat::V1::Space::PermissionSettings]
+        #     Optional. Space permission settings for existing spaces. Input for
+        #     updating exact space permission settings, where existing permission
+        #     settings are replaced. Output lists current permission settings.
         class Space
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -169,14 +178,19 @@ module Google
           #   @return [::String]
           #     Optional. The resource name of the [target
           #     audience](https://support.google.com/a/answer/9934697) who can discover
-          #     the space, join the space, and preview the messages in the space. For
-          #     details, see [Make a space discoverable to a target
+          #     the space, join the space, and preview the messages in the space. If
+          #     unset, only users or Google Groups who have been individually invited or
+          #     added to the space can access it. For details, see [Make a space
+          #     discoverable to a target
           #     audience](https://developers.google.com/workspace/chat/space-target-audience).
           #
           #     Format: `audiences/{audience}`
           #
           #     To use the default target audience for the Google Workspace organization,
           #     set to `audiences/default`.
+          #
+          #     This field is not populated when using the `chat.bot` scope with [app
+          #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
           class AccessSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,14 +200,64 @@ module Google
               # Access state is unknown or not supported in this API.
               ACCESS_STATE_UNSPECIFIED = 0
 
-              # Space is discoverable by added or invited members or groups.
+              # Only users or Google Groups that have been individually added or
+              # invited by other users or Google Workspace administrators can discover
+              # and access the space.
               PRIVATE = 1
 
-              # Space is discoverable by the selected [target
-              # audience](https://support.google.com/a/answer/9934697), as well as
-              # added or invited members or groups.
+              # A space manager has granted a target audience access to
+              # the space. Users or Google Groups that have been individually added or
+              # invited to the space can also discover and access the space. To learn
+              # more, see [Make a space discoverable to specific
+              # users](https://developers.google.com/workspace/chat/space-target-audience).
               DISCOVERABLE = 2
             end
+          end
+
+          # [Permission settings](https://support.google.com/chat/answer/13340792)
+          # that you can specify when updating an existing named space.
+          #
+          # To set permission settings when creating a space, specify the
+          # `PredefinedPermissionSettings` field in your request.
+          # @!attribute [rw] manage_members_and_groups
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for managing members and groups in a space.
+          # @!attribute [rw] modify_space_details
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for updating space name, avatar, description and guidelines.
+          # @!attribute [rw] toggle_history
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for toggling space history on and off.
+          # @!attribute [rw] use_at_mention_all
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for using @all in a space.
+          # @!attribute [rw] manage_apps
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for managing apps in a space.
+          # @!attribute [rw] manage_webhooks
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for managing webhooks in a space.
+          # @!attribute [r] post_messages
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Output only. Setting for posting messages in a space.
+          # @!attribute [rw] reply_messages
+          #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
+          #     Setting for replying to messages in a space.
+          class PermissionSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a space permission setting.
+          # @!attribute [rw] managers_allowed
+          #   @return [::Boolean]
+          #     Whether spaces managers have this permission.
+          # @!attribute [rw] members_allowed
+          #   @return [::Boolean]
+          #     Whether non-manager members have this permission.
+          class PermissionSetting
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Deprecated: Use `SpaceType` instead.
@@ -245,17 +309,38 @@ module Google
             # 3 or more people.
             UNTHREADED_MESSAGES = 4
           end
+
+          # Predefined permission settings that you can only specify when creating a
+          # named space. More settings might be added in the future.
+          # For details about permission settings for named spaces, see [Learn about
+          # spaces](https://support.google.com/chat/answer/7659784).
+          module PredefinedPermissionSettings
+            # Unspecified. Don't use.
+            PREDEFINED_PERMISSION_SETTINGS_UNSPECIFIED = 0
+
+            # Setting to make the space a collaboration space where all members can
+            # post messages.
+            COLLABORATION_SPACE = 1
+
+            # Setting to make the space an announcement space where only space managers
+            # can post messages.
+            ANNOUNCEMENT_SPACE = 2
+          end
         end
 
-        # A request to create a named space.
+        # A request to create a named space with no members.
         # @!attribute [rw] space
         #   @return [::Google::Apps::Chat::V1::Space]
         #     Required. The `displayName` and `spaceType` fields must be populated.  Only
         #     `SpaceType.SPACE` is supported.
         #
-        #     If you receive the error message `ALREADY_EXISTS` when creating a space,
+        #     If you receive the error message `ALREADY_EXISTS`,
         #     try a different `displayName`. An existing space within the Google
         #     Workspace organization might already use this display name.
+        #
+        #     If you're a member of the [Developer Preview
+        #     program](https://developers.google.com/workspace/preview),
+        #     `SpaceType.GROUP_CHAT` can be used if `importMode` is set to true.
         #
         #     The space `name` is assigned on the server so anything specified in this
         #     field will be ignored.
@@ -321,6 +406,8 @@ module Google
         # @!attribute [rw] spaces
         #   @return [::Array<::Google::Apps::Chat::V1::Space>]
         #     List of spaces in the requested (or first) page.
+        #     Note: The `permissionSettings` field is not returned in the Space
+        #     object for list requests.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     You can send a token as `pageToken` to retrieve the next page of
@@ -384,54 +471,64 @@ module Google
         #     Required. The updated field paths, comma separated if there are
         #     multiple.
         #
-        #     Currently supported field paths:
+        #     You can update the following fields for a space:
         #
-        #     - `display_name` (Only supports changing the display name of a space with
-        #     the `SPACE` type, or when also including the `space_type` mask to change a
-        #     `GROUP_CHAT` space type to `SPACE`. Trying to update the display name of a
-        #     `GROUP_CHAT` or a `DIRECT_MESSAGE` space results in an invalid argument
-        #     error. If you receive the error message `ALREADY_EXISTS` when updating the
-        #     `displayName`, try a different `displayName`. An existing space within the
-        #     Google Workspace organization might already use this display name.)
+        #     `space_details`: Updates the space's description. Supports up to 150
+        #     characters.
         #
-        #     - `space_type` (Only supports changing a `GROUP_CHAT` space type to
+        #     `display_name`: Only supports updating the display name for spaces where
+        #     `spaceType` field is `SPACE`.
+        #      If you receive the error message `ALREADY_EXISTS`, try a different
+        #      value. An existing space within the
+        #     Google Workspace organization might already use this display name.
+        #
+        #     `space_type`: Only supports changing a `GROUP_CHAT` space type to
         #     `SPACE`. Include `display_name` together
         #     with `space_type` in the update mask and ensure that the specified space
         #     has a non-empty display name and the `SPACE` space type. Including the
         #     `space_type` mask and the `SPACE` type in the specified space when updating
         #     the display name is optional if the existing space already has the `SPACE`
         #     type. Trying to update the space type in other ways results in an invalid
-        #     argument error).
-        #     `space_type` is not supported with admin access.
+        #     argument error.
+        #     `space_type` is not supported with `useAdminAccess`.
         #
-        #     - `space_details`
+        #     `space_history_state`: Updates [space history
+        #     settings](https://support.google.com/chat/answer/7664687) by turning
+        #     history on or off for the space. Only supported if history settings are
+        #     enabled for the Google Workspace organization. To update the
+        #     space history state, you must omit all other field masks in your request.
+        #     `space_history_state` is not supported with `useAdminAccess`.
         #
-        #     - `space_history_state` (Supports [turning history on or off for the
-        #     space](https://support.google.com/chat/answer/7664687) if [the organization
-        #     allows users to change their history
-        #     setting](https://support.google.com/a/answer/7664184).
-        #     Warning: mutually exclusive with all other field paths.)
-        #     `space_history_state` is not supported with admin access.
-        #
-        #     - `access_settings.audience` (Supports changing the [access
+        #     `access_settings.audience`: Updates the [access
         #     setting](https://support.google.com/chat/answer/11971020) of who can
-        #     discover the space, join the space, and preview the messages in space. If
-        #     no audience is specified in the access setting, the space's access setting
-        #     is updated to private. Warning: mutually exclusive with all other field
-        #     paths.)
-        #     `access_settings.audience` is not supported with admin access.
+        #     discover the space, join the space, and preview the messages in named space
+        #     where `spaceType` field is `SPACE`. If the existing space has a
+        #     target audience, you can remove the audience and restrict space access by
+        #     omitting a value for this field mask. To update access settings for a
+        #     space, the authenticating user must be a space manager and omit all other
+        #     field masks in your request. You can't update this field if the space is in
+        #     [import
+        #     mode](https://developers.google.com/workspace/chat/import-data-overview).
+        #     To learn more, see [Make a space discoverable to specific
+        #     users](https://developers.google.com/workspace/chat/space-target-audience).
+        #     `access_settings.audience` is not supported with `useAdminAccess`.
         #
-        #     - Developer Preview: Supports changing the [permission
-        #     settings](https://support.google.com/chat/answer/13340792) of a space,
-        #     supported field paths
-        #     include: `permission_settings.manage_members_and_groups`,
-        #     `permission_settings.modify_space_details`,
-        #     `permission_settings.toggle_history`,
-        #     `permission_settings.use_at_mention_all`,
-        #     `permission_settings.manage_apps`, `permission_settings.manage_webhooks`,
-        #     `permission_settings.reply_messages`
-        #      (Warning: mutually exclusive with all other non-permission settings field
-        #     paths). `permission_settings` is not supported with admin access.
+        #     `permission_settings`: Supports changing the
+        #     [permission settings](https://support.google.com/chat/answer/13340792)
+        #     of a space.
+        #     When updating permission settings, you can only specify
+        #     `permissionSettings` field masks; you cannot update other field masks
+        #     at the same time. `permissionSettings` is not supported with
+        #     `useAdminAccess`.
+        #     The supported field masks include:
+        #
+        #     - `permission_settings.manageMembersAndGroups`
+        #     - `permission_settings.modifySpaceDetails`
+        #     - `permission_settings.toggleHistory`
+        #     - `permission_settings.useAtMentionAll`
+        #     - `permission_settings.manageApps`
+        #     - `permission_settings.manageWebhooks`
+        #     - `permission_settings.replyMessages`
         # @!attribute [rw] use_admin_access
         #   @return [::Boolean]
         #     When `true`, the method runs using the user's Google Workspace

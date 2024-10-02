@@ -271,6 +271,8 @@ module Google
         # @!attribute [rw] space_events
         #   @return [::Array<::Google::Apps::Chat::V1::SpaceEvent>]
         #     Results are returned in chronological order (oldest event first).
+        #     Note: The `permissionSettings` field is not returned in the Space
+        #     object for list requests.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Continuation token used to fetch more events.
