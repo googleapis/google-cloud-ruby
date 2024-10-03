@@ -35,13 +35,13 @@ describe Google::Cloud::Storage, :universe_domain do
   let(:ud_bucket_name) { "ud-test-ruby-bucket-#{t}-#{SecureRandom.hex(4)}".downcase }
 
 
-  after do
-    ud_bucket = ud_storage.bucket ud_bucket_name
-    if ud_bucket
-      ud_bucket.files.all &:delete
-      safe_gcs_execute { ud_bucket.delete }
-    end
-  end
+  # after do
+  #   ud_bucket = ud_storage.bucket ud_bucket_name
+  #   if ud_bucket
+  #     ud_bucket.files.all &:delete
+  #     safe_gcs_execute { ud_bucket.delete }
+  #   end
+  # end
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
@@ -56,9 +56,14 @@ describe Google::Cloud::Storage, :universe_domain do
     ud_file = ud_bucket.create_file ud_payload, ud_file_name
     _(ud_file.name).must_equal ud_file_name
 
+    puts "shubhangi_ud_bucket file uploloaded: #{ud_file_name}"
+
     # Read the file uploaded
     uploaded_ud_file = ud_bucket.file ud_file_name
     _(uploaded_ud_file.name).must_equal ud_file_name
+
+    puts "shubhangi_ud_bucket file Read done: #{ud_file_name}"
+
 
     # Delete the object
     uploaded_ud_file.delete
@@ -67,5 +72,8 @@ describe Google::Cloud::Storage, :universe_domain do
     # Delete the bucket
     ud_bucket.delete
     _(ud_bucket).must_be_nil
+
+    puts "shubhangi_ud_bucket bucket supposed to be deleted"
+
   end
 end
