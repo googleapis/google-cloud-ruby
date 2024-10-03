@@ -8,7 +8,7 @@
     "name": "oracledatabase",
     "name_pretty": "Oracle Database@Google Cloud V1 API",
     "product_documentation": "https://cloud.google.com/oracle/database/docs",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Oracle Database@Google Cloud API provides a set of APIs to manage Oracle database services, such as Exadata and Autonomous Databases. Note that google-cloud-oracle_database-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-oracle_database instead. See the readme for more details.",
