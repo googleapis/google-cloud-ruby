@@ -44,7 +44,7 @@ describe Google::Cloud::Storage, :universe_domain do
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
-    ud_bucket = safe_gcs_execute { ud_storage.create_bucket ud_bucket_name, location: TEST_UNIVERSE_LOCATION }
+    ud_bucket =  ud_storage.create_bucket ud_bucket_name, location: TEST_UNIVERSE_LOCATION 
     puts "shubhangi_ud_bucket: #{ud_bucket.inspect}"
     _(ud_bucket).wont_be_nil
     _(ud_bucket.name).must_equal ud_bucket_name
