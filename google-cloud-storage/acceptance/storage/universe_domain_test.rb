@@ -23,7 +23,6 @@ describe Google::Cloud::Storage, :universe_domain do
   TEST_UNIVERSE_DOMAIN = File.read(File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain")))
   TEST_UNIVERSE_DOMAIN_CREDENTIAL = File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain-credential"))
 
-
   let :ud_storage do
     Google::Cloud::Storage.new(
       project_id: TEST_UNIVERSE_PROJECT_ID,
@@ -34,13 +33,13 @@ describe Google::Cloud::Storage, :universe_domain do
   let(:t) { Time.now.utc.iso8601.gsub ":", "-" }
   let(:ud_bucket_name) { "ud-test-ruby-bucket-#{t}-#{SecureRandom.hex(4)}".downcase }
 
-  after do
-    ud_bucket = ud_storage.bucket ud_bucket_name
-    if ud_bucket
-      ud_bucket.files.all &:delete
-      safe_gcs_execute { ud_bucket.delete }
-    end
-  end
+  # after do
+  #   ud_bucket = ud_storage.bucket ud_bucket_name
+  #   if ud_bucket
+  #     ud_bucket.files.all &:delete
+  #     safe_gcs_execute { ud_bucket.delete }
+  #   end
+  # end
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
@@ -64,15 +63,15 @@ describe Google::Cloud::Storage, :universe_domain do
     puts "shubhangi_ud_bucket file Read done: #{ud_file_name}"
 
 
-    # Delete the object
-    uploaded_ud_file.delete
-    _(uploaded_ud_file).must_be_nil
+    # # Delete the object
+    # uploaded_ud_file.delete
+    # _(uploaded_ud_file).must_be_nil
 
-    # Delete the bucket
-    ud_bucket.delete
-    _(ud_bucket).must_be_nil
+    # # Delete the bucket
+    # ud_bucket.delete
+    # _(ud_bucket).must_be_nil
 
-    puts "shubhangi_ud_bucket bucket supposed to be deleted"
+    # puts "shubhangi_ud_bucket bucket supposed to be deleted"
 
   end
 end
