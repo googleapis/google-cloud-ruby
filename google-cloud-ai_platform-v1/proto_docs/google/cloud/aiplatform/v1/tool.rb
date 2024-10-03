@@ -147,9 +147,34 @@ module Google
         end
 
         # Tool to retrieve public web data for grounding, powered by Google.
+        # @!attribute [rw] dynamic_retrieval_config
+        #   @return [::Google::Cloud::AIPlatform::V1::DynamicRetrievalConfig]
+        #     Specifies the dynamic retrieval configuration for the given source.
         class GoogleSearchRetrieval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes the options to customize dynamic retrieval.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::AIPlatform::V1::DynamicRetrievalConfig::Mode]
+        #     The mode of the predictor to be used in dynamic retrieval.
+        # @!attribute [rw] dynamic_threshold
+        #   @return [::Float]
+        #     Optional. The threshold to be used in dynamic retrieval.
+        #     If not set, a system default value is used.
+        class DynamicRetrievalConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The mode of the predictor to be used in dynamic retrieval.
+          module Mode
+            # Always trigger retrieval.
+            MODE_UNSPECIFIED = 0
+
+            # Run retrieval only when system decides it is necessary.
+            MODE_DYNAMIC = 1
+          end
         end
 
         # Tool config. This config is shared for all tools provided in the request.

@@ -573,6 +573,9 @@ module Google
         # @!attribute [rw] grounding_supports
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingSupport>]
         #     Optional. List of grounding support.
+        # @!attribute [r] retrieval_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::RetrievalMetadata]
+        #     Optional. Output only. Retrieval metadata.
         class GroundingMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -588,6 +591,19 @@ module Google
         #     Optional. Base64 encoded JSON representing array of <search term, search
         #     url> tuple.
         class SearchEntryPoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to retrieval in the grounding flow.
+        # @!attribute [rw] google_search_dynamic_retrieval_score
+        #   @return [::Float]
+        #     Optional. Score indicating how likely information from google search could
+        #     help answer the prompt. The score is in the range `[0, 1]`, where 0 is the
+        #     least likely and 1 is the most likely. This score is only populated when
+        #     google search grounding and dynamic retrieval is enabled. It will be
+        #     compared to the threshold to determine whether to trigger google search.
+        class RetrievalMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
