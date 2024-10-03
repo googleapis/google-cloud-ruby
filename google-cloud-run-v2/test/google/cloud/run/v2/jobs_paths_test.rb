@@ -93,6 +93,21 @@ class ::Google::Cloud::Run::V2::Jobs::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_policy_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Run::V2::Jobs::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.policy_path project: "value0"
+      assert_equal "projects/value0/policy", path
+
+      path = client.policy_path location: "value0"
+      assert_equal "locations/value0/policy", path
+    end
+  end
+
   def test_secret_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

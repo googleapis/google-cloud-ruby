@@ -26,8 +26,8 @@ module Google
         # @!attribute [rw] connector
         #   @return [::String]
         #     VPC Access connector name.
-        #     Format: projects/\\{project}/locations/\\{location}/connectors/\\{connector},
-        #     where \\{project} can be project id or number.
+        #     Format: `projects/{project}/locations/{location}/connectors/{connector}`,
+        #     where `{project}` can be project id or number.
         #     For more information on sending traffic to a VPC network via a connector,
         #     visit https://cloud.google.com/run/docs/configuring/vpc-connectors.
         # @!attribute [rw] egress
@@ -86,7 +86,7 @@ module Google
         # @!attribute [rw] policy
         #   @return [::String]
         #     Optional. The path to a binary authorization policy.
-        #     Format: projects/\\{project}/platforms/cloudRun/\\{policy-name}
+        #     Format: `projects/{project}/platforms/cloudRun/{policy-name}`
         # @!attribute [rw] breakglass_justification
         #   @return [::String]
         #     Optional. If present, indicates to use Breakglass using this justification.
@@ -106,8 +106,22 @@ module Google
         # @!attribute [rw] max_instance_count
         #   @return [::Integer]
         #     Optional. Maximum number of serving instances that this resource should
-        #     have.
+        #     have. When unspecified, the field is set to the server default value of
+        #     100. For more information see
+        #     https://cloud.google.com/run/docs/configuring/max-instances
         class RevisionScaling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings for Cloud Service Mesh. For more information see
+        # https://cloud.google.com/service-mesh/docs/overview.
+        # @!attribute [rw] mesh
+        #   @return [::String]
+        #     The Mesh resource name. Format:
+        #     `projects/{project}/locations/global/meshes/{mesh}`, where `{project}` can
+        #     be project id or number.
+        class ServiceMesh
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -118,8 +132,33 @@ module Google
         #   @return [::Integer]
         #     Optional. total min instances for the service. This number of instances is
         #     divided among all revisions with specified traffic based on the percent
-        #     of traffic they are receiving. (BETA)
+        #     of traffic they are receiving.
+        # @!attribute [rw] scaling_mode
+        #   @return [::Google::Cloud::Run::V2::ServiceScaling::ScalingMode]
+        #     Optional. The scaling mode for the service.
         class ServiceScaling
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The scaling mode for the service. If not provided, it defaults to
+          # AUTOMATIC.
+          module ScalingMode
+            # Unspecified.
+            SCALING_MODE_UNSPECIFIED = 0
+
+            # Scale based on traffic between min and max instances.
+            AUTOMATIC = 1
+
+            # Scale to exactly min instances and ignore max instances.
+            MANUAL = 2
+          end
+        end
+
+        # Hardware constraints configuration.
+        # @!attribute [rw] accelerator
+        #   @return [::String]
+        #     Required. GPU accelerator type to attach to an instance.
+        class NodeSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -137,6 +176,9 @@ module Google
 
           # Both internal and Google Cloud Load Balancer traffic is allowed.
           INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER = 3
+
+          # No ingress traffic is allowed.
+          INGRESS_TRAFFIC_NONE = 4
         end
 
         # Alternatives for execution environments.

@@ -241,9 +241,23 @@ module Google
         # @!attribute [rw] scaling
         #   @return [::Google::Cloud::Run::V2::ServiceScaling]
         #     Optional. Specifies service-level scaling settings
+        # @!attribute [rw] invoker_iam_disabled
+        #   @return [::Boolean]
+        #     Optional. Disables IAM permission check for run.routes.invoke for callers
+        #     of this service. This setting should not be used with external ingress.
         # @!attribute [rw] default_uri_disabled
         #   @return [::Boolean]
         #     Optional. Disables public resolution of the default URI of this service.
+        # @!attribute [r] urls
+        #   @return [::Array<::String>]
+        #     Output only. All URLs serving traffic for this Service.
+        # @!attribute [rw] custom_audiences
+        #   @return [::Array<::String>]
+        #     One or more custom audiences that you want this service to support. Specify
+        #     each custom audience as the full URL in a string. The custom audiences are
+        #     encoded in the token and used to authenticate requests. For more
+        #     information, see
+        #     https://cloud.google.com/run/docs/configuring/custom-audiences.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
         #     Output only. The generation of this Service currently serving traffic. See
@@ -281,13 +295,6 @@ module Google
         # @!attribute [r] uri
         #   @return [::String]
         #     Output only. The main URI in which this Service is serving traffic.
-        # @!attribute [rw] custom_audiences
-        #   @return [::Array<::String>]
-        #     One or more custom audiences that you want this service to support. Specify
-        #     each custom audience as the full URL in a string. The custom audiences are
-        #     encoded in the token and used to authenticate requests. For more
-        #     information, see
-        #     https://cloud.google.com/run/docs/configuring/custom-audiences.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
