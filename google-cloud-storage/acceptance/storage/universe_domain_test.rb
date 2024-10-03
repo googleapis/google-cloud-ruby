@@ -34,14 +34,13 @@ describe Google::Cloud::Storage, :universe_domain do
   let(:t) { Time.now.utc.iso8601.gsub ":", "-" }
   let(:ud_bucket_name) { "ud-test-ruby-bucket-#{t}-#{SecureRandom.hex(4)}".downcase }
 
-
-  # after do
-  #   ud_bucket = ud_storage.bucket ud_bucket_name
-  #   if ud_bucket
-  #     ud_bucket.files.all &:delete
-  #     safe_gcs_execute { ud_bucket.delete }
-  #   end
-  # end
+  after do
+    ud_bucket = ud_storage.bucket ud_bucket_name
+    if ud_bucket
+      ud_bucket.files.all &:delete
+      safe_gcs_execute { ud_bucket.delete }
+    end
+  end
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
