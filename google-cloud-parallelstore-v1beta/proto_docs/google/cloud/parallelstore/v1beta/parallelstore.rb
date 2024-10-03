@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the instance, in the format
-        #     `projects/{project}/locations/{location}/instances/{instance_id}`
+        #     `projects/{project}/locations/{location}/instances/{instance_id}`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. The description of the instance. 2048 characters or less.
@@ -42,64 +42,54 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Cloud Labels are a flexible and lightweight mechanism for
         #     organizing cloud resources into groups that reflect a customer's
-        #     organizational needs and deployment strategies. Cloud Labels can be used to
-        #     filter collections of resources. They can be used to control how resource
-        #     metrics are aggregated. And they can be used as arguments to policy
-        #     management rules (e.g. route, firewall, load balancing, etc.).
-        #
-        #      * Label keys must be between 1 and 63 characters long and must conform to
-        #        the following regular expression: `[a-z][a-z0-9_-]{0,62}`.
-        #      * Label values must be between 0 and 63 characters long and must conform
-        #        to the regular expression `[a-z0-9_-]{0,63}`.
-        #      * No more than 64 labels can be associated with a given resource.
-        #
-        #     See https://goo.gl/xmQnxf for more information on and examples of labels.
-        #
-        #     If you plan to use labels in your own code, please note that additional
-        #     characters may be allowed in the future. Therefore, you are advised to use
-        #     an internal label representation, such as JSON, which doesn't rely upon
-        #     specific characters being disallowed.  For example, representing labels
-        #     as the string:  name + "_" + value  would prove problematic if we were to
-        #     allow "_" in a future release.
+        #     organizational needs and deployment strategies. See
+        #     https://cloud.google.com/resource-manager/docs/labels-overview for details.
         # @!attribute [rw] capacity_gib
         #   @return [::Integer]
-        #     Required. Immutable. Storage capacity of Parallelstore instance in
-        #     Gibibytes (GiB).
+        #     Required. Immutable. The instance's storage capacity in Gibibytes (GiB).
+        #     Allowed values are between 12000 and 100000, in multiples of 4000; e.g.,
+        #     12000, 16000, 20000, ...
         # @!attribute [r] daos_version
         #   @return [::String]
-        #     Output only. The version of DAOS software running in the instance
+        #     Output only. The version of DAOS software running in the instance.
         # @!attribute [r] access_points
         #   @return [::Array<::String>]
-        #     Output only. List of access_points.
-        #     Contains a list of IPv4 addresses used for client side configuration.
+        #     Output only. A list of IPv4 addresses used for client side configuration.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Optional. Immutable. The name of the Google Compute Engine
+        #     Optional. Immutable. The name of the Compute Engine
         #     [VPC network](https://cloud.google.com/vpc/docs/vpc) to which the
         #     instance is connected.
         # @!attribute [rw] reserved_ip_range
         #   @return [::String]
-        #     Optional. Immutable. Contains the id of the allocated IP address range
-        #     associated with the private service access connection for example,
-        #     "test-default" associated with IP range 10.0.0.0/29. If no range id is
-        #     provided all ranges will be considered.
+        #     Optional. Immutable. The ID of the IP address range being used by the
+        #     instance's VPC network. See [Configure a VPC
+        #     network](https://cloud.google.com/parallelstore/docs/vpc#create_and_configure_the_vpc).
+        #     If no ID is provided, all ranges are considered.
         # @!attribute [r] effective_reserved_ip_range
         #   @return [::String]
-        #     Output only. Immutable. Contains the id of the allocated IP address range
-        #     associated with the private service access connection for example,
-        #     "test-default" associated with IP range 10.0.0.0/29. This field is
-        #     populated by the service and and contains the value currently used by the
-        #     service.
+        #     Output only. Immutable. The ID of the IP address range being used by the
+        #     instance's VPC network. This field is populated by the service and contains
+        #     the value currently used by the service.
         # @!attribute [rw] file_stripe_level
         #   @return [::Google::Cloud::Parallelstore::V1beta::FileStripeLevel]
-        #     Optional. Stripe level for files.
-        #     MIN better suited for small size files.
-        #     MAX higher throughput performance for larger files.
+        #     Optional. Stripe level for files. Allowed values are:
+        #
+        #     * `FILE_STRIPE_LEVEL_MIN`: offers the best performance for small size
+        #       files.
+        #     * `FILE_STRIPE_LEVEL_BALANCED`: balances performance for workloads
+        #       involving a mix of small and large files.
+        #     * `FILE_STRIPE_LEVEL_MAX`: higher throughput performance for larger files.
         # @!attribute [rw] directory_stripe_level
         #   @return [::Google::Cloud::Parallelstore::V1beta::DirectoryStripeLevel]
-        #     Optional. Stripe level for directories.
-        #     MIN when directory has a small number of files.
-        #     MAX when directory has a large number of files.
+        #     Optional. Stripe level for directories. Allowed values are:
+        #
+        #     * `DIRECTORY_STRIPE_LEVEL_MIN`: recommended when directories contain a
+        #       small number of files.
+        #     * `DIRECTORY_STRIPE_LEVEL_BALANCED`: balances performance for workloads
+        #       involving a mix of small and large directories.
+        #     * `DIRECTORY_STRIPE_LEVEL_MAX`: recommended for directories with a large
+        #       number of files.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -113,7 +103,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Represents the different states of a Parallelstore instance.
+          # The possible states of a Parallelstore instance.
           module State
             # Not set.
             STATE_UNSPECIFIED = 0
@@ -129,40 +119,43 @@ module Google
 
             # The instance is not usable.
             FAILED = 4
+
+            # The instance is being upgraded.
+            UPGRADING = 5
           end
         end
 
-        # Message for requesting list of Instances
+        # List instances request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location for which to retrieve instance
         #     information, in the format `projects/{project_id}/locations/{location}`.
-        #     For Parallelstore locations map to Google Cloud zones, for example
-        #     **us-central1-a**.
-        #     To retrieve instance information for all locations, use "-" for the
-        #     `{location}` value.
+        #
+        #     To retrieve instance information for all locations, use "-" as the value of
+        #     `{location}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
-        #     requested. If unspecified, server will pick an appropriate default.
+        #     requested. If unspecified, the server will pick an appropriate default.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results the server should return.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filtering results
+        #     Optional. Filtering results.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. Hint for how to order the results
+        #     Optional. Hint for how to order the results.
         class ListInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for response to listing Instances
+        # Response from
+        # {::Google::Cloud::Parallelstore::V1beta::Parallelstore::Client#list_instances ListInstances}.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Parallelstore::V1beta::Instance>]
-        #     The list of Parallelstore Instances
+        #     The list of Parallelstore instances.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token identifying a page of results the server should return.
@@ -174,7 +167,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to get an instance's details.
+        # Get an instance's details.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The instance resource name, in the format
@@ -184,17 +177,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for
-        # {::Google::Cloud::Parallelstore::V1beta::Parallelstore::Client#create_instance CreateInstance}
+        # Create a new Parallelstore instance.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The instance's project and location, in the format
         #     `projects/{project}/locations/{location}`.
-        #     Locations map to Google Cloud zones, for example **us-west1-b**.
+        #     Locations map to Google Cloud zones; for example, `us-west1-b`.
         # @!attribute [rw] instance_id
         #   @return [::String]
-        #     Required. The logical name of the Parallelstore instance in the user
-        #     project with the following restrictions:
+        #     Required. The name of the Parallelstore instance.
         #
         #     * Must contain only lowercase letters, numbers, and hyphens.
         #     * Must start with a letter.
@@ -224,16 +215,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for updating a Instance
+        # Update an instance.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Mask of fields to update .Field mask is used to specify the
+        #     Required. Mask of fields to update. Field mask is used to specify the
         #     fields to be overwritten in the Instance resource by the update. At least
         #     one path must be supplied in this field. The fields specified in the
         #     update_mask are relative to the resource, not the full request.
         # @!attribute [rw] instance
         #   @return [::Google::Cloud::Parallelstore::V1beta::Instance]
-        #     Required. The instance to update
+        #     Required. The instance to update.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
@@ -254,7 +245,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for deleting a Instance
+        # Delete an instance.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the resource
@@ -278,7 +269,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the metadata of the long-running operation.
+        # Long-running operation metadata.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -309,51 +300,52 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Google Cloud Storage as a source.
+        # Cloud Storage as the source of a data transfer.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Required. URI to a Cloud Storage object in format:
-        #     'gs://<bucket_name>/<path_inside_bucket>'.
+        #     Required. URI to a Cloud Storage bucket in the format:
+        #     `gs://<bucket_name>/<path_inside_bucket>`. The path inside the bucket is
+        #     optional.
         class SourceGcsBucket
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Google Cloud Storage as a destination.
+        # Cloud Storage as the destination of a data transfer.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Required. URI to a Cloud Storage object in format:
-        #     'gs://<bucket_name>/<path_inside_bucket>'.
+        #     Required. URI to a Cloud Storage bucket in the format:
+        #     `gs://<bucket_name>/<path_inside_bucket>`. The path inside the bucket is
+        #     optional.
         class DestinationGcsBucket
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Pa as a source.
+        # Parallelstore as the source of a data transfer.
         # @!attribute [rw] path
         #   @return [::String]
         #     Optional. Root directory path to the Paralellstore filesystem, starting
-        #     with '/'. Defaults to '/' if unset.
+        #     with `/`. Defaults to `/` if unset.
         class SourceParallelstore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Parallelstore as a destination.
+        # Parallelstore as the destination of a data transfer.
         # @!attribute [rw] path
         #   @return [::String]
         #     Optional. Root directory path to the Paralellstore filesystem, starting
-        #     with '/'. Defaults to '/' if unset.
+        #     with `/`. Defaults to `/` if unset.
         class DestinationParallelstore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message representing the request importing data from parallelstore to Cloud
-        # Storage.
+        # Import data from Cloud Storage into a Parallelstore instance.
         # @!attribute [rw] source_gcs_bucket
         #   @return [::Google::Cloud::Parallelstore::V1beta::SourceGcsBucket]
-        #     Cloud Storage source.
+        #     The Cloud Storage source bucket and, optionally, path inside the bucket.
         # @!attribute [rw] destination_parallelstore
         #   @return [::Google::Cloud::Parallelstore::V1beta::DestinationParallelstore]
         #     Parallelstore destination.
@@ -377,18 +369,23 @@ module Google
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     Optional. User-specified Service Account (SA) credentials to be used when
+        #     Optional. User-specified service account credentials to be used when
         #     performing the transfer.
-        #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+        #
+        #     Use one of the following formats:
+        #
+        #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
+        #
         #     If unspecified, the Parallelstore service agent is used:
-        #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+        #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
         class ImportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message representing the request exporting data from Cloud Storage to
-        # parallelstore.
+        # Export data from Parallelstore to Cloud Storage.
         # @!attribute [rw] source_parallelstore
         #   @return [::Google::Cloud::Parallelstore::V1beta::SourceParallelstore]
         #     Parallelstore source.
@@ -417,24 +414,29 @@ module Google
         #   @return [::String]
         #     Optional. User-specified Service Account (SA) credentials to be used when
         #     performing the transfer.
-        #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+        #     Use one of the following formats:
+        #
+        #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+        #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}
+        #
         #     If unspecified, the Parallelstore service agent is used:
-        #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+        #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
         class ExportDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ImportDataResponse is the response returned from ImportData rpc.
+        # The response to a request to import data to Parallelstore.
         class ImportDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ImportDataMetadata contains import data operation metadata
+        # Metadata related to the data import operation.
         # @!attribute [rw] operation_metadata
         #   @return [::Google::Cloud::Parallelstore::V1beta::TransferOperationMetadata]
-        #     Contains the data transfer operation metadata.
+        #     Data transfer operation metadata.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -465,16 +467,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ExportDataResponse is the response returned from ExportData rpc
+        # The response to a request to export data from Parallelstore.
         class ExportDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ExportDataMetadata contains export data operation metadata
+        # Metadata related to the data export operation.
         # @!attribute [rw] operation_metadata
         #   @return [::Google::Cloud::Parallelstore::V1beta::TransferOperationMetadata]
-        #     Contains the data transfer operation metadata.
+        #     Data transfer operation metadata.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -505,7 +507,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the metadata of the long-running operation.
+        # Long-running operation metadata related to a data transfer.
         # @!attribute [r] source_parallelstore
         #   @return [::Google::Cloud::Parallelstore::V1beta::SourceParallelstore]
         #     Output only. Parallelstore source.
@@ -520,7 +522,7 @@ module Google
         #     Output only. Parallelstore destination.
         # @!attribute [r] counters
         #   @return [::Google::Cloud::Parallelstore::V1beta::TransferCounters]
-        #     Output only. Information about the progress of the transfer operation.
+        #     Output only. The progress of the transfer operation.
         # @!attribute [r] transfer_type
         #   @return [::Google::Cloud::Parallelstore::V1beta::TransferType]
         #     Output only. The type of transfer occurring.
@@ -573,7 +575,7 @@ module Google
 
         # Represents the striping options for files.
         module FileStripeLevel
-          # Default file striping
+          # If not set, FileStripeLevel will default to FILE_STRIPE_LEVEL_BALANCED
           FILE_STRIPE_LEVEL_UNSPECIFIED = 0
 
           # Minimum file striping
@@ -588,7 +590,7 @@ module Google
 
         # Represents the striping options for directories.
         module DirectoryStripeLevel
-          # Default directory striping
+          # If not set, DirectoryStripeLevel will default to DIRECTORY_STRIPE_LEVEL_MAX
           DIRECTORY_STRIPE_LEVEL_UNSPECIFIED = 0
 
           # Minimum directory striping
