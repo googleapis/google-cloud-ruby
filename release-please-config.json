@@ -1027,6 +1027,10 @@
       "component": "google-cloud-optimization-v1",
       "version_file": "lib/google/cloud/optimization/v1/version.rb"
     },
+    "google-cloud-oracle_database-v1": {
+      "component": "google-cloud-oracle_database-v1",
+      "version_file": "lib/google/cloud/oracle_database/v1/version.rb"
+    },
     "google-cloud-orchestration-airflow-service": {
       "component": "google-cloud-orchestration-airflow-service",
       "version_file": "lib/google/cloud/orchestration/airflow/service/version.rb"
