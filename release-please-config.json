@@ -1027,6 +1027,10 @@
       "component": "google-cloud-optimization-v1",
       "version_file": "lib/google/cloud/optimization/v1/version.rb"
     },
+    "google-cloud-oracle_database": {
+      "component": "google-cloud-oracle_database",
+      "version_file": "lib/google/cloud/oracle_database/version.rb"
+    },
     "google-cloud-oracle_database-v1": {
       "component": "google-cloud-oracle_database-v1",
       "version_file": "lib/google/cloud/oracle_database/v1/version.rb"
