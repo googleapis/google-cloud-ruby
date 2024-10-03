@@ -33,18 +33,18 @@ describe Google::Cloud::Storage, :universe_domain do
   let(:t) { Time.now.utc.iso8601.gsub ":", "-" }
   let(:ud_bucket_name) { "ud-test-ruby-bucket-#{t}-#{SecureRandom.hex(4)}".downcase }
 
-  # after do
-  #   ud_bucket = ud_storage.bucket ud_bucket_name
-  #   if ud_bucket
-  #     ud_bucket.files.all &:delete
-  #     safe_gcs_execute { ud_bucket.delete }
-  #   end
-  # end
+  after do
+    ud_bucket = ud_storage.bucket ud_bucket_name
+    if ud_bucket
+      ud_bucket.files.all &:delete
+      safe_gcs_execute { ud_bucket.delete }
+    end
+  end
 
   it "creates a new bucket and uploads an object with universe_domain" do
     # Create a bucket
     ud_bucket =  ud_storage.create_bucket ud_bucket_name, location: TEST_UNIVERSE_LOCATION 
-    puts "shubhangi_ud_bucket: #{ud_bucket.inspect}"
+    puts "ud_bucket: #{ud_bucket.inspect}"
     _(ud_bucket).wont_be_nil
     _(ud_bucket.name).must_equal ud_bucket_name
 
@@ -54,24 +54,23 @@ describe Google::Cloud::Storage, :universe_domain do
     ud_file = ud_bucket.create_file ud_payload, ud_file_name
     _(ud_file.name).must_equal ud_file_name
 
-    puts "shubhangi_ud_bucket file uploloaded: #{ud_file_name}"
+    puts "ud_bucket file uploloaded: #{ud_file_name}"
 
     # Read the file uploaded
     uploaded_ud_file = ud_bucket.file ud_file_name
     _(uploaded_ud_file.name).must_equal ud_file_name
 
-    puts "shubhangi_ud_bucket file Read done: #{ud_file_name}"
+    puts "ud_bucket file Read done: #{ud_file_name}"
 
+    # Delete the object
+    uploaded_ud_file.delete
+    _(uploaded_ud_file).must_be_nil
 
-    # # Delete the object
-    # uploaded_ud_file.delete
-    # _(uploaded_ud_file).must_be_nil
+    # Delete the bucket
+    ud_bucket.delete
+    _(ud_bucket).must_be_nil
 
-    # # Delete the bucket
-    # ud_bucket.delete
-    # _(ud_bucket).must_be_nil
-
-    # puts "shubhangi_ud_bucket bucket supposed to be deleted"
+    puts "ud_bucket bucket supposed to be deleted"
 
   end
 end
