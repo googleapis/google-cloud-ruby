@@ -4,10 +4,11 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n-google/spanner/admin/instance/v1/common.proto\x12 google.spanner.admin.instance.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8b\x01\n\x11OperationProgress\x12\x18\n\x10progress_percent\x18\x01 \x01(\x05\x12.\n\nstart_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp*w\n\x11\x46ulfillmentPeriod\x12\"\n\x1e\x46ULFILLMENT_PERIOD_UNSPECIFIED\x10\x00\x12\x1d\n\x19\x46ULFILLMENT_PERIOD_NORMAL\x10\x01\x12\x1f\n\x1b\x46ULFILLMENT_PERIOD_EXTENDED\x10\x02\x42\xfd\x01\n$com.google.spanner.admin.instance.v1B\x0b\x43ommonProtoP\x01ZFcloud.google.com/go/spanner/admin/instance/apiv1/instancepb;instancepb\xaa\x02&Google.Cloud.Spanner.Admin.Instance.V1\xca\x02&Google\\Cloud\\Spanner\\Admin\\Instance\\V1\xea\x02+Google::Cloud::Spanner::Admin::Instance::V1b\x06proto3"
+descriptor_data = "\n-google/spanner/admin/instance/v1/common.proto\x12 google.spanner.admin.instance.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x8b\x01\n\x11OperationProgress\x12\x18\n\x10progress_percent\x18\x01 \x01(\x05\x12.\n\nstart_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\")\n\x10ReplicaSelection\x12\x15\n\x08location\x18\x01 \x01(\tB\x03\xe0\x41\x02*w\n\x11\x46ulfillmentPeriod\x12\"\n\x1e\x46ULFILLMENT_PERIOD_UNSPECIFIED\x10\x00\x12\x1d\n\x19\x46ULFILLMENT_PERIOD_NORMAL\x10\x01\x12\x1f\n\x1b\x46ULFILLMENT_PERIOD_EXTENDED\x10\x02\x42\xfd\x01\n$com.google.spanner.admin.instance.v1B\x0b\x43ommonProtoP\x01ZFcloud.google.com/go/spanner/admin/instance/apiv1/instancepb;instancepb\xaa\x02&Google.Cloud.Spanner.Admin.Instance.V1\xca\x02&Google\\Cloud\\Spanner\\Admin\\Instance\\V1\xea\x02+Google::Cloud::Spanner::Admin::Instance::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -41,6 +42,7 @@ module Google
         module Instance
           module V1
             OperationProgress = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.OperationProgress").msgclass
+            ReplicaSelection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaSelection").msgclass
             FulfillmentPeriod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.FulfillmentPeriod").enummodule
           end
         end
