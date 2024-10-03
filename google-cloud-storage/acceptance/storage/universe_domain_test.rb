@@ -17,30 +17,13 @@ require "storage_helper"
 describe Google::Cloud::Storage, :universe_domain do
   Google::Apis.logger.level = Logger::DEBUG
   
-    # Universe Domain Test project Credentials
-  secret_project = 'cloud-devrel-kokoro-resources'
-  secret_domain_id = 'client-library-test-universe-domain'
-  secret_project_id = 'client-library-test-universe-project-id'
-  secret_location_id = 'client-library-test-universe-storage-location'
-  secret_version = 'latest'
+  # Fetch secret values from the secret_manager path
+  TEST_UNIVERSE_PROJECT_ID = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-project-id")))
+  TEST_UNIVERSE_LOCATION = File.read(File.realpath(File.join(ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-storage-location")))
+  TEST_UNIVERSE_DOMAIN = File.read(File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain")))
+  TEST_UNIVERSE_DOMAIN_CREDENTIAL = File.realpath(File.join( ENV["KOKORO_GFILE_DIR"], "secret_manager", "client-library-test-universe-domain-credential"))
 
-  client = Google::Cloud::SecretManager.secret_manager_service
-  ENV["TEST_UNIVERSE_DOMAIN"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_domain_id,
-    secret_version: secret_version
-  )
-  ENV["TEST_UNIVERSE_PROJECT_ID"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_project_id,
-    secret_version: secret_version
-  )
-  ENV["TEST_UNIVERSE_LOCATION"] = client.secret_version_path(
-    project:        secret_project,
-    secret:         secret_location_id,
-    secret_version: secret_version
-  )
-  ENV["TEST_UNIVERSE_DOMAIN_CREDENTIAL"] = File.realpath(File.join(ENV['KOKORO_GFILE_DIR'], 'secret_manager', 'client-library-test-universe-domain-credential'))
+
   let :ud_storage do
     Google::Cloud::Storage.new(
       project_id: TEST_UNIVERSE_PROJECT_ID,
