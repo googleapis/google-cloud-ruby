@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2024-10-04)
+
+#### Features
+
+* Support for AutofeedSettingsService ([#27364](https://github.com/googleapis/google-cloud-ruby/issues/27364)) 
+
 ### 0.1.1 (2024-08-08)
 
 #### Documentation
