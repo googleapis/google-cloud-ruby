@@ -47,19 +47,19 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.parallelstore.v1beta.Parallelstore'
 
-            # Lists Instances in a given project and location.
+            # Lists all instances in a given project and location.
             rpc :ListInstances, ::Google::Cloud::Parallelstore::V1beta::ListInstancesRequest, ::Google::Cloud::Parallelstore::V1beta::ListInstancesResponse
-            # Gets details of a single Instance.
+            # Gets details of a single instance.
             rpc :GetInstance, ::Google::Cloud::Parallelstore::V1beta::GetInstanceRequest, ::Google::Cloud::Parallelstore::V1beta::Instance
             # Creates a Parallelstore instance in a given project and location.
             rpc :CreateInstance, ::Google::Cloud::Parallelstore::V1beta::CreateInstanceRequest, ::Google::Longrunning::Operation
-            # Updates the parameters of a single Instance.
+            # Updates the parameters of a single instance.
             rpc :UpdateInstance, ::Google::Cloud::Parallelstore::V1beta::UpdateInstanceRequest, ::Google::Longrunning::Operation
-            # Deletes a single Instance.
+            # Deletes a single instance.
             rpc :DeleteInstance, ::Google::Cloud::Parallelstore::V1beta::DeleteInstanceRequest, ::Google::Longrunning::Operation
-            # ImportData copies data from Cloud Storage to Parallelstore.
+            # Copies data from Cloud Storage to Parallelstore.
             rpc :ImportData, ::Google::Cloud::Parallelstore::V1beta::ImportDataRequest, ::Google::Longrunning::Operation
-            # ExportData copies data from Parallelstore to Cloud Storage
+            # Copies data from Parallelstore to Cloud Storage.
             rpc :ExportData, ::Google::Cloud::Parallelstore::V1beta::ExportDataRequest, ::Google::Longrunning::Operation
           end
 
