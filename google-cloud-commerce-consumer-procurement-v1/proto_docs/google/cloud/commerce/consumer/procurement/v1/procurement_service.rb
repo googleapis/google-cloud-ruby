@@ -40,7 +40,7 @@ module Google
             #   @return [::String]
             #     Optional. A unique identifier for this request.
             #     The server will ignore subsequent requests that provide a duplicate request
-            #     ID for at least 120 minutes after the first request.
+            #     ID for at least 24 hours after the first request.
             #
             #     The request ID must be a valid
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
@@ -89,6 +89,7 @@ module Google
             #
             #     * `display_name`
             #
+            #
             #     If the query contains special characters other than letters,
             #     underscore, or digits, the phrase must be quoted with double quotes. For
             #     example, `display_name="foo:bar"`, where the display name needs to be
@@ -113,6 +114,119 @@ module Google
             class ListOrdersResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Request message for
+            # {::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#modify_order ConsumerProcurementService.ModifyOrder}.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. Name of the order to update.
+            # @!attribute [rw] modifications
+            #   @return [::Array<::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest::Modification>]
+            #     Optional. Modifications for an existing Order created by an Offer.
+            #     Required when Offer based Order is being modified, except for when going
+            #     from an offer to a public plan.
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     Optional. Updated display name of the order, leave as empty if you do not
+            #     want to update current display name.
+            # @!attribute [rw] etag
+            #   @return [::String]
+            #     Optional. The weak etag, which can be optionally populated, of the order
+            #     that this modify request is based on. Validation checking will only happen
+            #     if the invoker supplies this field.
+            class ModifyOrderRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Modifications to make on the order.
+              # @!attribute [rw] line_item_id
+              #   @return [::String]
+              #     Required. ID of the existing line item to make change to.
+              #     Required when change type is
+              #     [LineItemChangeType.LINE_ITEM_CHANGE_TYPE_UPDATE] or
+              #     [LineItemChangeType.LINE_ITEM_CHANGE_TYPE_CANCEL].
+              # @!attribute [rw] change_type
+              #   @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::LineItemChangeType]
+              #     Required. Type of change to make.
+              # @!attribute [rw] new_line_item_info
+              #   @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::LineItemInfo]
+              #     Optional. The line item to update to.
+              #     Required when change_type is
+              #     [LineItemChangeType.LINE_ITEM_CHANGE_TYPE_CREATE] or
+              #     [LineItemChangeType.LINE_ITEM_CHANGE_TYPE_UPDATE].
+              # @!attribute [rw] auto_renewal_behavior
+              #   @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::AutoRenewalBehavior]
+              #     Optional. Auto renewal behavior of the subscription for the update.
+              #     Applied when change_type is
+              #     [LineItemChangeType.LINE_ITEM_CHANGE_TYPE_UPDATE]. Follows plan default
+              #     config when this field is not specified.
+              class Modification
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Message stored in the metadata field of the Operation returned by
+            # {::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#modify_order ConsumerProcurementService.ModifyOrder}.
+            class ModifyOrderMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Request message for
+            # {::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#cancel_order ConsumerProcurementService.CancelOrder}.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The resource name of the order.
+            # @!attribute [rw] etag
+            #   @return [::String]
+            #     Optional. The weak etag, which can be optionally populated, of the order
+            #     that this cancel request is based on. Validation checking will only happen
+            #     if the invoker supplies this field.
+            # @!attribute [rw] cancellation_policy
+            #   @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest::CancellationPolicy]
+            #     Optional. Cancellation policy of this request.
+            class CancelOrderRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Indicates the cancellation policy the customer uses to cancel the order.
+              module CancellationPolicy
+                # If unspecified, cancellation will try to cancel the order, if order
+                # cannot be immediately cancelled, auto renewal will be turned off.
+                # However, caller should avoid using the value as it will yield a
+                # non-deterministic result. This is still supported mainly to maintain
+                # existing integrated usages and ensure backwards compatibility.
+                CANCELLATION_POLICY_UNSPECIFIED = 0
+
+                # Request will cancel the whole order immediately, if order cannot be
+                # immediately cancelled, the request will fail.
+                CANCELLATION_POLICY_CANCEL_IMMEDIATELY = 1
+
+                # Request will cancel the auto renewal, if order is not subscription based,
+                # the request will fail.
+                CANCELLATION_POLICY_CANCEL_AT_TERM_END = 2
+              end
+            end
+
+            # Message stored in the metadata field of the Operation returned by
+            # {::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#cancel_order ConsumerProcurementService.CancelOrder}.
+            class CancelOrderMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Indicates the auto renewal behavior customer specifies on subscription.
+            module AutoRenewalBehavior
+              # If unspecified, the auto renewal behavior will follow the default config.
+              AUTO_RENEWAL_BEHAVIOR_UNSPECIFIED = 0
+
+              # Auto Renewal will be enabled on subscription.
+              AUTO_RENEWAL_BEHAVIOR_ENABLE = 1
+
+              # Auto Renewal will be disabled on subscription.
+              AUTO_RENEWAL_BEHAVIOR_DISABLE = 2
             end
           end
         end

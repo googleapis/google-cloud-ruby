@@ -237,7 +237,7 @@ module Google
                 #   @param request_id [::String]
                 #     Optional. A unique identifier for this request.
                 #     The server will ignore subsequent requests that provide a duplicate request
-                #     ID for at least 120 minutes after the first request.
+                #     ID for at least 24 hours after the first request.
                 #
                 #     The request ID must be a valid
                 #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
@@ -439,6 +439,7 @@ module Google
                 #
                 #     * `display_name`
                 #
+                #
                 #     If the query contains special characters other than letters,
                 #     underscore, or digits, the phrase must be quoted with double quotes. For
                 #     example, `display_name="foo:bar"`, where the display name needs to be
@@ -511,6 +512,214 @@ module Google
 
                   @consumer_procurement_service_stub.call_rpc :list_orders, request, options: options do |response, operation|
                     response = ::Gapic::PagedEnumerable.new @consumer_procurement_service_stub, :list_orders, request, response, operation, options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Modifies an existing
+                # {::Google::Cloud::Commerce::Consumer::Procurement::V1::Order Order} resource.
+                #
+                # @overload modify_order(request, options = nil)
+                #   Pass arguments to `modify_order` via a request object, either of type
+                #   {::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload modify_order(name: nil, modifications: nil, display_name: nil, etag: nil)
+                #   Pass arguments to `modify_order` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. Name of the order to update.
+                #   @param modifications [::Array<::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest::Modification, ::Hash>]
+                #     Optional. Modifications for an existing Order created by an Offer.
+                #     Required when Offer based Order is being modified, except for when going
+                #     from an offer to a public plan.
+                #   @param display_name [::String]
+                #     Optional. Updated display name of the order, leave as empty if you do not
+                #     want to update current display name.
+                #   @param etag [::String]
+                #     Optional. The weak etag, which can be optionally populated, of the order
+                #     that this modify request is based on. Validation checking will only happen
+                #     if the invoker supplies this field.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::Operation]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/commerce/consumer/procurement/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest.new
+                #
+                #   # Call the modify_order method.
+                #   result = client.modify_order request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def modify_order request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.modify_order.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Commerce::Consumer::Procurement::V1::VERSION
+                  metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.name
+                    header_params["name"] = request.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.modify_order.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.modify_order.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @consumer_procurement_service_stub.call_rpc :modify_order, request, options: options do |response, operation|
+                    response = ::Gapic::Operation.new response, @operations_client, options: options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
+                # Cancels an existing
+                # {::Google::Cloud::Commerce::Consumer::Procurement::V1::Order Order}. Every product
+                # procured in the Order will be cancelled.
+                #
+                # @overload cancel_order(request, options = nil)
+                #   Pass arguments to `cancel_order` via a request object, either of type
+                #   {::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload cancel_order(name: nil, etag: nil, cancellation_policy: nil)
+                #   Pass arguments to `cancel_order` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param name [::String]
+                #     Required. The resource name of the order.
+                #   @param etag [::String]
+                #     Optional. The weak etag, which can be optionally populated, of the order
+                #     that this cancel request is based on. Validation checking will only happen
+                #     if the invoker supplies this field.
+                #   @param cancellation_policy [::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest::CancellationPolicy]
+                #     Optional. Cancellation policy of this request.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::Operation]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/commerce/consumer/procurement/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest.new
+                #
+                #   # Call the cancel_order method.
+                #   result = client.cancel_order request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use it to
+                #   # check the status of an operation, cancel it, or wait for results.
+                #   # Here is how to wait for a response.
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "No response received."
+                #   end
+                #
+                def cancel_order request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.cancel_order.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Commerce::Consumer::Procurement::V1::VERSION
+                  metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.name
+                    header_params["name"] = request.name
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.cancel_order.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.cancel_order.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @consumer_procurement_service_stub.call_rpc :cancel_order, request, options: options do |response, operation|
+                    response = ::Gapic::Operation.new response, @operations_client, options: options
                     yield response, operation if block_given?
                     return response
                   end
@@ -686,6 +895,16 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :list_orders
+                    ##
+                    # RPC-specific configuration for `modify_order`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :modify_order
+                    ##
+                    # RPC-specific configuration for `cancel_order`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :cancel_order
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -695,6 +914,10 @@ module Google
                       @get_order = ::Gapic::Config::Method.new get_order_config
                       list_orders_config = parent_rpcs.list_orders if parent_rpcs.respond_to? :list_orders
                       @list_orders = ::Gapic::Config::Method.new list_orders_config
+                      modify_order_config = parent_rpcs.modify_order if parent_rpcs.respond_to? :modify_order
+                      @modify_order = ::Gapic::Config::Method.new modify_order_config
+                      cancel_order_config = parent_rpcs.cancel_order if parent_rpcs.respond_to? :cancel_order
+                      @cancel_order = ::Gapic::Config::Method.new cancel_order_config
 
                       yield self if block_given?
                     end

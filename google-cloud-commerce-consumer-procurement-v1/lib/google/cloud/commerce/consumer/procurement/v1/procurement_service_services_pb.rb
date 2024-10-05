@@ -62,6 +62,13 @@ module Google
                 # resources that the user has access to, within the scope of the parent
                 # resource.
                 rpc :ListOrders, ::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersRequest, ::Google::Cloud::Commerce::Consumer::Procurement::V1::ListOrdersResponse
+                # Modifies an existing
+                # [Order][google.cloud.commerce.consumer.procurement.v1.Order] resource.
+                rpc :ModifyOrder, ::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest, ::Google::Longrunning::Operation
+                # Cancels an existing
+                # [Order][google.cloud.commerce.consumer.procurement.v1.Order]. Every product
+                # procured in the Order will be cancelled.
+                rpc :CancelOrder, ::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest, ::Google::Longrunning::Operation
               end
 
               Stub = Service.rpc_stub_class
