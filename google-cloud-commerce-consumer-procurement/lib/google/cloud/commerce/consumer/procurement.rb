@@ -48,6 +48,40 @@ module Google
       module Consumer
         module Procurement
           ##
+          # Create a new client object for LicenseManagementService.
+          #
+          # By default, this returns an instance of
+          # [Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-commerce-consumer-procurement-v1/latest/Google-Cloud-Commerce-Consumer-Procurement-V1-LicenseManagementService-Client)
+          # for a gRPC client for version V1 of the API.
+          # However, you can specify a different API version by passing it in the
+          # `version` parameter. If the LicenseManagementService service is
+          # supported by that API version, and the corresponding gem is available, the
+          # appropriate versioned client will be returned.
+          # You can also specify a different transport by passing `:rest` or `:grpc` in
+          # the `transport` parameter.
+          #
+          # ## About LicenseManagementService
+          #
+          # Service for managing licenses.
+          #
+          # @param version [::String, ::Symbol] The API version to connect to. Optional.
+          #   Defaults to `:v1`.
+          # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+          # @return [::Object] A client object for the specified version.
+          #
+          def self.license_management_service version: :v1, transport: :grpc, &block
+            require "google/cloud/commerce/consumer/procurement/#{version.to_s.downcase}"
+
+            package_name = Google::Cloud::Commerce::Consumer::Procurement
+                           .constants
+                           .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                           .first
+            service_module = Google::Cloud::Commerce::Consumer::Procurement.const_get(package_name).const_get(:LicenseManagementService)
+            service_module = service_module.const_get(:Rest) if transport == :rest
+            service_module.const_get(:Client).new(&block)
+          end
+
+          ##
           # Create a new client object for ConsumerProcurementService.
           #
           # By default, this returns an instance of
