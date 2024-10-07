@@ -31,9 +31,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/commerce/consumer/procurement/v1"
 
-client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client.new
-request = ::Google::Cloud::Commerce::Consumer::Procurement::V1::PlaceOrderRequest.new # (request fields as keyword arguments...)
-response = client.place_order request
+client = ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client.new
+request = ::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest.new # (request fields as keyword arguments...)
+response = client.get_license_pool request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-commerce-consumer-procurement-v1/latest)
