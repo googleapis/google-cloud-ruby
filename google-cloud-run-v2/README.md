@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/run/v2"
 
-client = ::Google::Cloud::Run::V2::Executions::Client.new
-request = ::Google::Cloud::Run::V2::GetExecutionRequest.new # (request fields as keyword arguments...)
-response = client.get_execution request
+client = ::Google::Cloud::Run::V2::Builds::Client.new
+request = ::Google::Cloud::Run::V2::SubmitBuildRequest.new # (request fields as keyword arguments...)
+response = client.submit_build request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-run-v2/latest)

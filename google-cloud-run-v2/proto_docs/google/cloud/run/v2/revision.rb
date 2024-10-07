@@ -178,6 +178,9 @@ module Google
         #     A reference to a customer managed encryption key (CMEK) to use to encrypt
         #     this container image. For more information, go to
         #     https://cloud.google.com/run/docs/securing/using-cmek
+        # @!attribute [rw] service_mesh
+        #   @return [::Google::Cloud::Run::V2::ServiceMesh]
+        #     Enables service mesh connectivity.
         # @!attribute [rw] encryption_key_revocation_action
         #   @return [::Google::Cloud::Run::V2::EncryptionKeyRevocationAction]
         #     The action to take if the encryption key is revoked.
@@ -212,6 +215,9 @@ module Google
         # @!attribute [r] scaling_status
         #   @return [::Google::Cloud::Run::V2::RevisionScalingStatus]
         #     Output only. The current effective scaling settings for the revision.
+        # @!attribute [rw] node_selector
+        #   @return [::Google::Cloud::Run::V2::NodeSelector]
+        #     The node selector for the revision.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
