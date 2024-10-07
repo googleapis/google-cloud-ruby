@@ -192,6 +192,29 @@ module Google
               end
             end
 
+            # ReplicaComputeCapacity describes the amount of server resources that are
+            # allocated to each replica identified by the replica selection.
+            # @!attribute [rw] replica_selection
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::ReplicaSelection]
+            #     Required. Identifies replicas by specified properties.
+            #     All replicas in the selection have the same amount of compute capacity.
+            # @!attribute [rw] node_count
+            #   @return [::Integer]
+            #     The number of nodes allocated to each replica.
+            #
+            #     This may be zero in API responses for instances that are not yet in
+            #     state `READY`.
+            # @!attribute [rw] processing_units
+            #   @return [::Integer]
+            #     The number of processing units allocated to each replica.
+            #
+            #     This may be zero in API responses for instances that are not yet in
+            #     state `READY`.
+            class ReplicaComputeCapacity
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Autoscaling configuration for an instance.
             # @!attribute [rw] autoscaling_limits
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingLimits]
@@ -199,6 +222,17 @@ module Google
             # @!attribute [rw] autoscaling_targets
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingTargets]
             #     Required. The autoscaling targets for an instance.
+            # @!attribute [rw] asymmetric_autoscaling_options
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption>]
+            #     Optional. Optional asymmetric autoscaling options.
+            #     Replicas matching the replica selection criteria will be autoscaled
+            #     independently from other replicas. The autoscaler will scale the replicas
+            #     based on the utilization of replicas identified by the replica selection.
+            #     Replica selections should not overlap with each other.
+            #
+            #     Other replicas (those do not match any replica selection) will be
+            #     autoscaled together and will have the same compute capacity allocated to
+            #     them.
             class AutoscalingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -247,6 +281,39 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+
+              # AsymmetricAutoscalingOption specifies the scaling of replicas identified by
+              # the given selection.
+              # @!attribute [rw] replica_selection
+              #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::ReplicaSelection]
+              #     Required. Selects the replicas to which this AsymmetricAutoscalingOption
+              #     applies. Only read-only replicas are supported.
+              # @!attribute [rw] overrides
+              #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AsymmetricAutoscalingOption::AutoscalingConfigOverrides]
+              #     Optional. Overrides applied to the top-level autoscaling configuration
+              #     for the selected replicas.
+              class AsymmetricAutoscalingOption
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Overrides the top-level autoscaling configuration for the replicas
+                # identified by `replica_selection`. All fields in this message are
+                # optional. Any unspecified fields will use the corresponding values from
+                # the top-level autoscaling configuration.
+                # @!attribute [rw] autoscaling_limits
+                #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig::AutoscalingLimits]
+                #     Optional. If specified, overrides the min/max limit in the top-level
+                #     autoscaling configuration for the selected replicas.
+                # @!attribute [rw] autoscaling_target_high_priority_cpu_utilization_percent
+                #   @return [::Integer]
+                #     Optional. If specified, overrides the autoscaling target
+                #     high_priority_cpu_utilization_percent in the top-level autoscaling
+                #     configuration for the selected replicas.
+                class AutoscalingConfigOverrides
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+              end
             end
 
             # An isolated set of Cloud Spanner resources on which databases can be hosted.
@@ -268,32 +335,53 @@ module Google
             #     Must be unique per project and between 4 and 30 characters in length.
             # @!attribute [rw] node_count
             #   @return [::Integer]
-            #     The number of nodes allocated to this instance. At most one of either
-            #     node_count or processing_units should be present in the message.
+            #     The number of nodes allocated to this instance. At most, one of either
+            #     `node_count` or `processing_units` should be present in the message.
             #
-            #     Users can set the node_count field to specify the target number of nodes
+            #     Users can set the `node_count` field to specify the target number of nodes
             #     allocated to the instance.
             #
-            #     This may be zero in API responses for instances that are not yet in state
-            #     `READY`.
+            #     If autoscaling is enabled, `node_count` is treated as an `OUTPUT_ONLY`
+            #     field and reflects the current number of nodes allocated to the instance.
             #
-            #     See [the
-            #     documentation](https://cloud.google.com/spanner/docs/compute-capacity)
-            #     for more information about nodes and processing units.
+            #     This might be zero in API responses for instances that are not yet in the
+            #     `READY` state.
+            #
+            #     If the instance has varying node count across replicas (achieved by
+            #     setting asymmetric_autoscaling_options in autoscaling config), the
+            #     node_count here is the maximum node count across all replicas.
+            #
+            #     For more information, see
+            #     [Compute capacity, nodes, and processing
+            #     units](https://cloud.google.com/spanner/docs/compute-capacity).
             # @!attribute [rw] processing_units
             #   @return [::Integer]
-            #     The number of processing units allocated to this instance. At most one of
-            #     processing_units or node_count should be present in the message.
+            #     The number of processing units allocated to this instance. At most, one of
+            #     either `processing_units` or `node_count` should be present in the message.
             #
-            #     Users can set the processing_units field to specify the target number of
+            #     Users can set the `processing_units` field to specify the target number of
             #     processing units allocated to the instance.
             #
-            #     This may be zero in API responses for instances that are not yet in state
-            #     `READY`.
+            #     If autoscaling is enabled, `processing_units` is treated as an
+            #     `OUTPUT_ONLY` field and reflects the current number of processing units
+            #     allocated to the instance.
             #
-            #     See [the
-            #     documentation](https://cloud.google.com/spanner/docs/compute-capacity)
-            #     for more information about nodes and processing units.
+            #     This might be zero in API responses for instances that are not yet in the
+            #     `READY` state.
+            #
+            #     If the instance has varying processing units per replica
+            #     (achieved by setting asymmetric_autoscaling_options in autoscaling config),
+            #     the processing_units here is the maximum processing units across all
+            #     replicas.
+            #
+            #     For more information, see
+            #     [Compute capacity, nodes and processing
+            #     units](https://cloud.google.com/spanner/docs/compute-capacity).
+            # @!attribute [r] replica_compute_capacity
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Instance::V1::ReplicaComputeCapacity>]
+            #     Output only. Lists the compute capacity per ReplicaSelection. A replica
+            #     selection identifies a set of replicas with common properties. Replicas
+            #     identified by a ReplicaSelection are scaled with the same compute capacity.
             # @!attribute [rw] autoscaling_config
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::AutoscalingConfig]
             #     Optional. The autoscaling configuration. Autoscaling is enabled if this
