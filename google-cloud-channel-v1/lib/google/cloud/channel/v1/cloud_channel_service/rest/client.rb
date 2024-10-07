@@ -450,7 +450,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload check_cloud_identity_accounts_exist(parent: nil, domain: nil)
+              # @overload check_cloud_identity_accounts_exist(parent: nil, domain: nil, primary_admin_email: nil)
               #   Pass arguments to `check_cloud_identity_accounts_exist` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -459,7 +459,12 @@ module Google
               #     Required. The reseller account's resource name.
               #     Parent uses the format: accounts/\\{account_id}
               #   @param domain [::String]
-              #     Required. Domain to fetch for Cloud Identity account customer.
+              #     Required. Domain to fetch for Cloud Identity account customers, including
+              #     domain and team customers. For team customers, please use the domain for
+              #     their emails.
+              #   @param primary_admin_email [::String]
+              #     Optional. Primary admin email to fetch for Cloud Identity account team
+              #     customer.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -830,7 +835,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_customer(domain: nil, cloud_identity_id: nil, parent: nil, auth_token: nil, overwrite_if_exists: nil, channel_partner_id: nil, customer: nil)
+              # @overload import_customer(domain: nil, cloud_identity_id: nil, primary_admin_email: nil, parent: nil, auth_token: nil, overwrite_if_exists: nil, channel_partner_id: nil, customer: nil)
               #   Pass arguments to `import_customer` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -839,6 +844,8 @@ module Google
               #     Required. Customer domain.
               #   @param cloud_identity_id [::String]
               #     Required. Customer's Cloud Identity ID
+              #   @param primary_admin_email [::String]
+              #     Required. Customer's primary admin email.
               #   @param parent [::String]
               #     Required. The resource name of the reseller's account.
               #     Parent takes the format: accounts/\\{account_id} or
