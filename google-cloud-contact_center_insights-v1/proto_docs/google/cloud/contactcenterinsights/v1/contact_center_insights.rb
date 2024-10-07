@@ -202,7 +202,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The metadata for an UploadConversation operation.
+        # The metadata for an `UploadConversation` operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -231,7 +231,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of conversations to return in the response. A valid page
-        #     size ranges from 0 to 1,000 inclusive. If the page size is zero or
+        #     size ranges from 0 to 100,000 inclusive. If the page size is zero or
         #     unspecified, a default page size of 100 will be chosen. Note that a call
         #     might return fewer results than the requested page size.
         # @!attribute [rw] page_token
@@ -243,6 +243,23 @@ module Google
         #   @return [::String]
         #     A filter to reduce results to a specific subset. Useful for querying
         #     conversations with specific properties.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The attribute by which to order conversations in the response.
+        #     If empty, conversations will be ordered by descending creation time.
+        #     Supported values are one of the following:
+        #
+        #     * create_time
+        #     * customer_satisfaction_rating
+        #     * duration
+        #     * latest_analysis
+        #     * start_time
+        #     * turn_count
+        #
+        #     The default sort order is ascending. To specify order, append `asc` or
+        #     `desc` (`create_time desc`).
+        #     For more details, see [Google AIPs
+        #     Ordering](https://google.aip.dev/132#ordering).
         # @!attribute [rw] view
         #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationView]
         #     The level of details of the conversation. Default is `BASIC`.
@@ -283,7 +300,20 @@ module Google
         #     Required. The new values for the conversation.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated.
+        #     The list of fields to be updated. All possible fields can be updated by
+        #     passing `*`, or a subset of the following updateable fields can be
+        #     provided:
+        #
+        #     * `agent_id`
+        #     * `language_code`
+        #     * `labels`
+        #     * `metadata`
+        #     * `quality_metadata`
+        #     * `call_metadata`
+        #     * `start_time`
+        #     * `expire_time` or `ttl`
+        #     * `data_source.gcs_source.audio_uri` or
+        #     `data_source.dialogflow_source.audio_uri`
         class UpdateConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -325,6 +355,12 @@ module Google
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig]
         #     Optional. Default Speech-to-Text configuration. Optional, will default to
         #     the config specified in Settings.
+        # @!attribute [rw] sample_size
+        #   @return [::Integer]
+        #     Optional. If set, this fields indicates the number of objects to ingest
+        #     from the Cloud Storage bucket. If empty, the entire bucket will be
+        #     ingested. Unless they are first deleted, conversations produced through
+        #     sampling won't be ingested by subsequent ingest requests.
         class IngestConversationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,6 +372,21 @@ module Google
           # @!attribute [rw] bucket_object_type
           #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest::GcsSource::BucketObjectType]
           #     Optional. Specifies the type of the objects in `bucket_uri`.
+          # @!attribute [rw] metadata_bucket_uri
+          #   @return [::String]
+          #     Optional. The Cloud Storage path to the conversation metadata. Note that:
+          #     [1] Metadata files are expected to be in JSON format.
+          #     [2] Metadata and source files (transcripts or audio) must be in
+          #         separate buckets.
+          #     [3] A source file and its corresponding metadata file must share the same
+          #     name to
+          #         be properly ingested, E.g. `gs://bucket/audio/conversation1.mp3` and
+          #         `gs://bucket/metadata/conversation1.json`.
+          # @!attribute [rw] custom_metadata_keys
+          #   @return [::Array<::String>]
+          #     Optional. Custom keys to extract as conversation labels from metadata
+          #     files in `metadata_bucket_uri`. Keys not included in this field will be
+          #     ignored. Note that there is a limit of 20 labels per conversation.
           class GcsSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -364,8 +415,10 @@ module Google
           # Configuration that applies to all conversations.
           # @!attribute [rw] agent_id
           #   @return [::String]
-          #     An opaque, user-specified string representing the human agent who handled
-          #     the conversations.
+          #     Optional. An opaque, user-specified string representing a human agent who
+          #     handled all conversations in the import. Note that this will be
+          #     overridden if per-conversation metadata is provided through the
+          #     `metadata_bucket_uri`.
           # @!attribute [rw] agent_channel
           #   @return [::Integer]
           #     Optional. Indicates which of the channels, 1 or 2, contains the agent.
@@ -839,6 +892,95 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to export an issue model.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest::GcsDestination]
+        #     Google Cloud Storage URI to export the issue model to.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The issue model to export.
+        class ExportIssueModelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Google Cloud Storage Object URI to save the issue model to.
+          # @!attribute [rw] object_uri
+          #   @return [::String]
+          #     Required. Format: `gs://<bucket-name>/<object-name>`
+          class GcsDestination
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response from export issue model
+        class ExportIssueModelResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata used for export issue model.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation was created.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation finished running.
+        # @!attribute [rw] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest]
+        #     The original export request.
+        class ExportIssueModelMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to import an issue model.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest::GcsSource]
+        #     Google Cloud Storage source message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the issue model.
+        # @!attribute [rw] create_new_model
+        #   @return [::Boolean]
+        #     Optional. If set to true, will create an issue model from the imported file
+        #     with randomly generated IDs for the issue model and corresponding issues.
+        #     Otherwise, replaces an existing model with the same ID as the file.
+        class ImportIssueModelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Google Cloud Storage Object URI to get the issue model file from.
+          # @!attribute [rw] object_uri
+          #   @return [::String]
+          #     Required. Format: `gs://<bucket-name>/<object-name>`
+          class GcsSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response from import issue model
+        class ImportIssueModelResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata used for import issue model.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation was created.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation finished running.
+        # @!attribute [rw] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest]
+        #     The original import request.
+        class ImportIssueModelMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request to get an issue.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1005,6 +1147,52 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The list of fields to be updated.
         class UpdateSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get location-level encryption specification.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the encryption spec resource to get.
+        class GetEncryptionSpecRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to initialize a location-level encryption specification.
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec]
+        #     Required. The encryption spec used for CMEK encryption. It is required that
+        #     the kms key is in the same region as the endpoint. The same key will be
+        #     used for all provisioned resources, if encryption is available. If the
+        #     kms_key_name is left empty, no encryption will be enforced.
+        class InitializeEncryptionSpecRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response to initialize a location-level encryption specification.
+        class InitializeEncryptionSpecResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for initializing a location-level encryption specification.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest]
+        #     Output only. The original request for initialization.
+        # @!attribute [rw] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Partial errors during initialising operation that might cause the operation
+        #     output to be incomplete.
+        class InitializeEncryptionSpecMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

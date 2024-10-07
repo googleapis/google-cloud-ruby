@@ -84,6 +84,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EncryptionSpec resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/encryptionSpec`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def encryption_spec_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/encryptionSpec"
+            end
+
+            ##
             # Create a fully-qualified Issue resource string.
             #
             # The resource will be in the following format:
