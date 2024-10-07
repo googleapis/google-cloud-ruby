@@ -64,6 +64,11 @@ module Google
         # @!attribute [rw] quality_metadata
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::QualityMetadata]
         #     Conversation metadata related to quality management.
+        # @!attribute [rw] metadata_json
+        #   @return [::String]
+        #     Input only. JSON Metadata encoded as a string.
+        #     This field is primarily used by Insights integrations with various telphony
+        #     systems and must be in one of Insights' supported formats.
         # @!attribute [r] transcript
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Transcript]
         #     Output only. The conversation transcript.
@@ -346,6 +351,9 @@ module Google
           # @!attribute [rw] sentiments
           #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::ConversationLevelSentiment>]
           #     Overall conversation-level sentiment for each channel of the call.
+          # @!attribute [rw] silence
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationLevelSilence]
+          #     Overall conversation-level silence during the call.
           # @!attribute [rw] intents
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ContactCenterInsights::V1::Intent}]
           #     All the matched intents in the call.
@@ -409,6 +417,18 @@ module Google
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SentimentData]
         #     Data specifying sentiment.
         class ConversationLevelSentiment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Conversation-level silence data.
+        # @!attribute [rw] silence_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Amount of time calculated to be in silence.
+        # @!attribute [rw] silence_percentage
+        #   @return [::Float]
+        #     Percentage of the total conversation spent in silence.
+        class ConversationLevelSilence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -833,6 +853,9 @@ module Google
         #   @return [::Array<::String>]
         #     Output only. Resource names of the sample representative utterances that
         #     match to this issue.
+        # @!attribute [rw] display_description
+        #   @return [::String]
+        #     Representative description of the issue.
         class Issue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1002,7 +1025,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The settings resource.
+        # The CCAI Insights project wide settings.
+        # Use these settings to configure the behavior of Insights.
+        # View these settings with
+        # [`getsettings`](https://cloud.google.com/contact-center/insights/docs/reference/rest/v1/projects.locations/getSettings)
+        # and change the settings with
+        # [`updateSettings`](https://cloud.google.com/contact-center/insights/docs/reference/rest/v1/projects.locations/updateSettings).
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name of the settings resource.
@@ -1037,8 +1065,11 @@ module Google
         #     * "create-analysis": Notify each time an analysis is created.
         #     * "create-conversation": Notify each time a conversation is created.
         #     * "export-insights-data": Notify each time an export is complete.
+        #     * "ingest-conversations": Notify each time an IngestConversations LRO is
+        #     complete.
         #     * "update-conversation": Notify each time a conversation is updated via
         #     UpdateConversation.
+        #     * "upload-conversation": Notify when an UploadConversation LRO is complete.
         #
         #     Values are Pub/Sub topics. The format of each Pub/Sub topic is:
         #     projects/\\{project}/topics/\\{topic}
@@ -1048,11 +1079,16 @@ module Google
         # @!attribute [rw] redaction_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
         #     Default DLP redaction resources to be applied while ingesting
-        #     conversations.
+        #     conversations. This applies to conversations ingested from the
+        #     `UploadConversation` and `IngestConversations` endpoints, including
+        #     conversations coming from CCAI Platform.
         # @!attribute [rw] speech_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig]
-        #     Optional. Default Speech-to-Text resources to be used while ingesting audio
-        #     files. Optional, CCAI Insights will create a default if not provided.
+        #     Optional. Default Speech-to-Text resources to use while ingesting audio
+        #     files. Optional, CCAI Insights will create a default if not provided. This
+        #     applies to conversations ingested from the `UploadConversation` and
+        #     `IngestConversations` endpoints, including conversations coming from CCAI
+        #     Platform.
         class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1085,7 +1121,32 @@ module Google
           end
         end
 
+        # A customer-managed encryption key specification that can be applied to all
+        # created resources (e.g. Conversation).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. The resource name of the encryption key specification resource.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/encryptionSpec
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Required. The name of customer-managed encryption key that is used to
+        #     secure a resource and its sub-resources. If empty, the resource is secured
+        #     by the default Google encryption key. Only the key in the same location as
+        #     this resource is allowed to be used for encryption. Format:
+        #     `projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{key}`
+        class EncryptionSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # DLP resources used for redaction while ingesting conversations.
+        # DLP settings are applied to conversations ingested from the
+        # `UploadConversation` and `IngestConversations` endpoints, including
+        # conversation coming from CCAI Platform. They are not applied to conversations
+        # ingested from the `CreateConversation` endpoint or the Dialogflow / Agent
+        # Assist runtime integrations. When using Dialogflow / Agent Assist runtime
+        # integrations, redaction should be performed in Dialogflow / Agent Assist.
         # @!attribute [rw] deidentify_template
         #   @return [::String]
         #     The fully-qualified DLP deidentify template resource name.
@@ -1102,6 +1163,10 @@ module Google
         end
 
         # Speech-to-Text configuration.
+        # Speech-to-Text settings are applied to conversations ingested from the
+        # `UploadConversation` and `IngestConversations` endpoints, including
+        # conversation coming from CCAI Platform. They are not applied to conversations
+        # ingested from the `CreateConversation` endpoint.
         # @!attribute [rw] speech_recognizer
         #   @return [::String]
         #     The fully-qualified Speech Recognizer resource name.
@@ -1148,9 +1213,42 @@ module Google
         # @!attribute [rw] answer_feedback
         #   @return [::Google::Cloud::ContactCenterInsights::V1::AnswerFeedback]
         #     The feedback that the customer has about the answer in `data`.
+        # @!attribute [rw] user_input
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RuntimeAnnotation::UserInput]
+        #     Explicit input used for generating the answer
         class RuntimeAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Explicit input used for generating the answer
+          # @!attribute [rw] query
+          #   @return [::String]
+          #     Query text. Article Search uses this to store the input query used
+          #     to generate the search results.
+          # @!attribute [rw] generator_name
+          #   @return [::String]
+          #     The resource name of associated generator. Format:
+          #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
+          # @!attribute [rw] query_source
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::RuntimeAnnotation::UserInput::QuerySource]
+          #     Query source for the answer.
+          class UserInput
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The source of the query.
+            module QuerySource
+              # Unknown query source.
+              QUERY_SOURCE_UNSPECIFIED = 0
+
+              # The query is from agents.
+              AGENT_QUERY = 1
+
+              # The query is a query from previous suggestions, e.g. from a preceding
+              # SuggestKnowledgeAssist response.
+              SUGGESTED_QUERY = 2
+            end
+          end
         end
 
         # The feedback that the customer has about a certain answer in the
@@ -1525,6 +1623,9 @@ module Google
 
               # The CCAI baseline model.
               BASELINE_MODEL = 1
+
+              # The CCAI baseline model, V2.0.
+              BASELINE_MODEL_V2_0 = 2
             end
           end
         end

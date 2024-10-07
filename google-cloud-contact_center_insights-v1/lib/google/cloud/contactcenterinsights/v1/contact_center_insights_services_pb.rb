@@ -34,9 +34,11 @@ module Google
             self.service_name = 'google.cloud.contactcenterinsights.v1.ContactCenterInsights'
 
             # Creates a conversation.
+            # Note that this method does not support audio transcription or redaction.
+            # Use `conversations.upload` instead.
             rpc :CreateConversation, ::Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest, ::Google::Cloud::ContactCenterInsights::V1::Conversation
-            # Create a longrunning conversation upload operation. This method differs
-            # from CreateConversation by allowing audio transcription and optional DLP
+            # Create a long-running conversation upload operation. This method differs
+            # from `CreateConversation` by allowing audio transcription and optional DLP
             # redaction.
             rpc :UploadConversation, ::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest, ::Google::Longrunning::Operation
             # Updates a conversation.
@@ -81,6 +83,10 @@ module Google
             # Undeploys an issue model.
             # An issue model can not be used in analysis after it has been undeployed.
             rpc :UndeployIssueModel, ::Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest, ::Google::Longrunning::Operation
+            # Exports an issue model to the provided destination.
+            rpc :ExportIssueModel, ::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest, ::Google::Longrunning::Operation
+            # Imports an issue model from a Cloud Storage bucket.
+            rpc :ImportIssueModel, ::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest, ::Google::Longrunning::Operation
             # Gets an issue.
             rpc :GetIssue, ::Google::Cloud::ContactCenterInsights::V1::GetIssueRequest, ::Google::Cloud::ContactCenterInsights::V1::Issue
             # Lists issues.
@@ -107,6 +113,14 @@ module Google
             rpc :GetSettings, ::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest, ::Google::Cloud::ContactCenterInsights::V1::Settings
             # Updates project-level settings.
             rpc :UpdateSettings, ::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest, ::Google::Cloud::ContactCenterInsights::V1::Settings
+            # Gets location-level encryption key specification.
+            rpc :GetEncryptionSpec, ::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest, ::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec
+            # Initializes a location-level encryption key specification.  An error will
+            # be thrown if the location has resources already created before the
+            # initialization. Once the encryption specification is initialized at a
+            # location, it is immutable and all newly created resources under the
+            # location will be encrypted with the existing specification.
+            rpc :InitializeEncryptionSpec, ::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest, ::Google::Longrunning::Operation
             # Creates a view.
             rpc :CreateView, ::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest, ::Google::Cloud::ContactCenterInsights::V1::View
             # Gets a view.

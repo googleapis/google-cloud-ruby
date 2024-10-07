@@ -69,6 +69,18 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
     end
   end
 
+  def test_encryption_spec_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.encryption_spec_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1/encryptionSpec", path
+    end
+  end
+
   def test_issue_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

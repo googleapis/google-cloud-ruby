@@ -177,6 +177,8 @@ module Google
 
               ##
               # Creates a conversation.
+              # Note that this method does not support audio transcription or redaction.
+              # Use `conversations.upload` instead.
               #
               # @overload create_conversation(request, options = nil)
               #   Pass arguments to `create_conversation` via a request object, either of type
@@ -264,8 +266,8 @@ module Google
               end
 
               ##
-              # Create a longrunning conversation upload operation. This method differs
-              # from CreateConversation by allowing audio transcription and optional DLP
+              # Create a long-running conversation upload operation. This method differs
+              # from `CreateConversation` by allowing audio transcription and optional DLP
               # redaction.
               #
               # @overload upload_conversation(request, options = nil)
@@ -388,7 +390,20 @@ module Google
               #   @param conversation [::Google::Cloud::ContactCenterInsights::V1::Conversation, ::Hash]
               #     Required. The new values for the conversation.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     The list of fields to be updated.
+              #     The list of fields to be updated. All possible fields can be updated by
+              #     passing `*`, or a subset of the following updateable fields can be
+              #     provided:
+              #
+              #     * `agent_id`
+              #     * `language_code`
+              #     * `labels`
+              #     * `metadata`
+              #     * `quality_metadata`
+              #     * `call_metadata`
+              #     * `start_time`
+              #     * `expire_time` or `ttl`
+              #     * `data_source.gcs_source.audio_uri` or
+              #     `data_source.dialogflow_source.audio_uri`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::Conversation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -542,7 +557,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_conversations(parent: nil, page_size: nil, page_token: nil, filter: nil, view: nil)
+              # @overload list_conversations(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, view: nil)
               #   Pass arguments to `list_conversations` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -551,7 +566,7 @@ module Google
               #     Required. The parent resource of the conversation.
               #   @param page_size [::Integer]
               #     The maximum number of conversations to return in the response. A valid page
-              #     size ranges from 0 to 1,000 inclusive. If the page size is zero or
+              #     size ranges from 0 to 100,000 inclusive. If the page size is zero or
               #     unspecified, a default page size of 100 will be chosen. Note that a call
               #     might return fewer results than the requested page size.
               #   @param page_token [::String]
@@ -561,6 +576,22 @@ module Google
               #   @param filter [::String]
               #     A filter to reduce results to a specific subset. Useful for querying
               #     conversations with specific properties.
+              #   @param order_by [::String]
+              #     Optional. The attribute by which to order conversations in the response.
+              #     If empty, conversations will be ordered by descending creation time.
+              #     Supported values are one of the following:
+              #
+              #     * create_time
+              #     * customer_satisfaction_rating
+              #     * duration
+              #     * latest_analysis
+              #     * start_time
+              #     * turn_count
+              #
+              #     The default sort order is ascending. To specify order, append `asc` or
+              #     `desc` (`create_time desc`).
+              #     For more details, see [Google AIPs
+              #     Ordering](https://google.aip.dev/132#ordering).
               #   @param view [::Google::Cloud::ContactCenterInsights::V1::ConversationView]
               #     The level of details of the conversation. Default is `BASIC`.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1260,7 +1291,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil, redaction_config: nil, speech_config: nil)
+              # @overload ingest_conversations(gcs_source: nil, transcript_object_config: nil, parent: nil, conversation_config: nil, redaction_config: nil, speech_config: nil, sample_size: nil)
               #   Pass arguments to `ingest_conversations` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1280,6 +1311,11 @@ module Google
               #   @param speech_config [::Google::Cloud::ContactCenterInsights::V1::SpeechConfig, ::Hash]
               #     Optional. Default Speech-to-Text configuration. Optional, will default to
               #     the config specified in Settings.
+              #   @param sample_size [::Integer]
+              #     Optional. If set, this fields indicates the number of objects to ingest
+              #     from the Cloud Storage bucket. If empty, the entire bucket will be
+              #     ingested. Unless they are first deleted, conversations produced through
+              #     sampling won't be ingested by subsequent ingest requests.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2028,6 +2064,188 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @contact_center_insights_stub.undeploy_issue_model request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Exports an issue model to the provided destination.
+              #
+              # @overload export_issue_model(request, options = nil)
+              #   Pass arguments to `export_issue_model` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload export_issue_model(gcs_destination: nil, name: nil)
+              #   Pass arguments to `export_issue_model` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param gcs_destination [::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest::GcsDestination, ::Hash]
+              #     Google Cloud Storage URI to export the issue model to.
+              #   @param name [::String]
+              #     Required. The issue model to export.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new
+              #
+              #   # Call the export_issue_model method.
+              #   result = client.export_issue_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def export_issue_model request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.export_issue_model.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.export_issue_model.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.export_issue_model.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.export_issue_model request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Imports an issue model from a Cloud Storage bucket.
+              #
+              # @overload import_issue_model(request, options = nil)
+              #   Pass arguments to `import_issue_model` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload import_issue_model(gcs_source: nil, parent: nil, create_new_model: nil)
+              #   Pass arguments to `import_issue_model` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param gcs_source [::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest::GcsSource, ::Hash]
+              #     Google Cloud Storage source message.
+              #   @param parent [::String]
+              #     Required. The parent resource of the issue model.
+              #   @param create_new_model [::Boolean]
+              #     Optional. If set to true, will create an issue model from the imported file
+              #     with randomly generated IDs for the issue model and corresponding issues.
+              #     Otherwise, replaces an existing model with the same ID as the file.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new
+              #
+              #   # Call the import_issue_model method.
+              #   result = client.import_issue_model request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def import_issue_model request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.import_issue_model.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.import_issue_model.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.import_issue_model.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.import_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -3095,6 +3313,179 @@ module Google
               end
 
               ##
+              # Gets location-level encryption key specification.
+              #
+              # @overload get_encryption_spec(request, options = nil)
+              #   Pass arguments to `get_encryption_spec` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_encryption_spec(name: nil)
+              #   Pass arguments to `get_encryption_spec` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the encryption spec resource to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new
+              #
+              #   # Call the get_encryption_spec method.
+              #   result = client.get_encryption_spec request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::EncryptionSpec.
+              #   p result
+              #
+              def get_encryption_spec request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_encryption_spec.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_encryption_spec.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_encryption_spec.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.get_encryption_spec request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Initializes a location-level encryption key specification.  An error will
+              # be thrown if the location has resources already created before the
+              # initialization. Once the encryption specification is initialized at a
+              # location, it is immutable and all newly created resources under the
+              # location will be encrypted with the existing specification.
+              #
+              # @overload initialize_encryption_spec(request, options = nil)
+              #   Pass arguments to `initialize_encryption_spec` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload initialize_encryption_spec(encryption_spec: nil)
+              #   Pass arguments to `initialize_encryption_spec` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param encryption_spec [::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec, ::Hash]
+              #     Required. The encryption spec used for CMEK encryption. It is required that
+              #     the kms key is in the same region as the endpoint. The same key will be
+              #     used for all provisioned resources, if encryption is available. If the
+              #     kms_key_name is left empty, no encryption will be enforced.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new
+              #
+              #   # Call the initialize_encryption_spec method.
+              #   result = client.initialize_encryption_spec request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def initialize_encryption_spec request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.initialize_encryption_spec.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.initialize_encryption_spec.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.initialize_encryption_spec.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.initialize_encryption_spec request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates a view.
               #
               # @overload create_view(request, options = nil)
@@ -3749,6 +4140,16 @@ module Google
                   #
                   attr_reader :undeploy_issue_model
                   ##
+                  # RPC-specific configuration for `export_issue_model`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :export_issue_model
+                  ##
+                  # RPC-specific configuration for `import_issue_model`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :import_issue_model
+                  ##
                   # RPC-specific configuration for `get_issue`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3813,6 +4214,16 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_settings
+                  ##
+                  # RPC-specific configuration for `get_encryption_spec`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_encryption_spec
+                  ##
+                  # RPC-specific configuration for `initialize_encryption_spec`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :initialize_encryption_spec
                   ##
                   # RPC-specific configuration for `create_view`
                   # @return [::Gapic::Config::Method]
@@ -3883,6 +4294,10 @@ module Google
                     @deploy_issue_model = ::Gapic::Config::Method.new deploy_issue_model_config
                     undeploy_issue_model_config = parent_rpcs.undeploy_issue_model if parent_rpcs.respond_to? :undeploy_issue_model
                     @undeploy_issue_model = ::Gapic::Config::Method.new undeploy_issue_model_config
+                    export_issue_model_config = parent_rpcs.export_issue_model if parent_rpcs.respond_to? :export_issue_model
+                    @export_issue_model = ::Gapic::Config::Method.new export_issue_model_config
+                    import_issue_model_config = parent_rpcs.import_issue_model if parent_rpcs.respond_to? :import_issue_model
+                    @import_issue_model = ::Gapic::Config::Method.new import_issue_model_config
                     get_issue_config = parent_rpcs.get_issue if parent_rpcs.respond_to? :get_issue
                     @get_issue = ::Gapic::Config::Method.new get_issue_config
                     list_issues_config = parent_rpcs.list_issues if parent_rpcs.respond_to? :list_issues
@@ -3909,6 +4324,10 @@ module Google
                     @get_settings = ::Gapic::Config::Method.new get_settings_config
                     update_settings_config = parent_rpcs.update_settings if parent_rpcs.respond_to? :update_settings
                     @update_settings = ::Gapic::Config::Method.new update_settings_config
+                    get_encryption_spec_config = parent_rpcs.get_encryption_spec if parent_rpcs.respond_to? :get_encryption_spec
+                    @get_encryption_spec = ::Gapic::Config::Method.new get_encryption_spec_config
+                    initialize_encryption_spec_config = parent_rpcs.initialize_encryption_spec if parent_rpcs.respond_to? :initialize_encryption_spec
+                    @initialize_encryption_spec = ::Gapic::Config::Method.new initialize_encryption_spec_config
                     create_view_config = parent_rpcs.create_view if parent_rpcs.respond_to? :create_view
                     @create_view = ::Gapic::Config::Method.new create_view_config
                     get_view_config = parent_rpcs.get_view if parent_rpcs.respond_to? :get_view

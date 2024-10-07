@@ -115,6 +115,16 @@
                 "undeploy_issue_model"
               ]
             },
+            "ExportIssueModel": {
+              "methods": [
+                "export_issue_model"
+              ]
+            },
+            "ImportIssueModel": {
+              "methods": [
+                "import_issue_model"
+              ]
+            },
             "GetIssue": {
               "methods": [
                 "get_issue"
@@ -178,6 +188,16 @@
             "UpdateSettings": {
               "methods": [
                 "update_settings"
+              ]
+            },
+            "GetEncryptionSpec": {
+              "methods": [
+                "get_encryption_spec"
+              ]
+            },
+            "InitializeEncryptionSpec": {
+              "methods": [
+                "initialize_encryption_spec"
               ]
             },
             "CreateView": {
