@@ -21,6 +21,24 @@ module Google
   module Cloud
     module AIPlatform
       module V1
+        # PSC config that is used to automatically create forwarding rule via
+        # ServiceConnectionMap.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. Project id used to create forwarding rule.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Required. The full name of the Google Compute Engine
+        #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks).
+        #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert):
+        #     `projects/{project}/global/networks/{network}`.
+        #     Where \\{project} is a project number, as in '12345', and \\{network} is
+        #     network name.
+        class PSCAutomationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents configuration for private service connect.
         # @!attribute [rw] enable_private_service_connect
         #   @return [::Boolean]
