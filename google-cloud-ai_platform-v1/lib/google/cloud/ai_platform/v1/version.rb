@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        VERSION = "0.53.0"
+        VERSION = "0.54.0"
       end
     end
   end
