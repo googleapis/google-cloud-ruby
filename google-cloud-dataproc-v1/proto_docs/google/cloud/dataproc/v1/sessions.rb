@@ -82,12 +82,13 @@ module Google
         #     A filter is a logical expression constraining the values of various fields
         #     in each session resource. Filters are case sensitive, and may contain
         #     multiple clauses combined with logical operators (AND, OR).
-        #     Supported fields are `session_id`, `session_uuid`, `state`, and
-        #     `create_time`.
+        #     Supported fields are `session_id`, `session_uuid`, `state`, `create_time`,
+        #     and `labels`.
         #
         #     Example: `state = ACTIVE and create_time < "2023-01-01T00:00:00Z"`
         #     is a filter for sessions in an ACTIVE state that were created before
-        #     2023-01-01.
+        #     2023-01-01. `state = ACTIVE and labels.environment=production` is a filter
+        #     for sessions in an ACTIVE state that have a production environment label.
         #
         #     See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
         #     description of the filter syntax and a list of supported comparators.
@@ -165,6 +166,9 @@ module Google
         # @!attribute [rw] jupyter_session
         #   @return [::Google::Cloud::Dataproc::V1::JupyterConfig]
         #     Optional. Jupyter session config.
+        # @!attribute [rw] spark_connect_session
+        #   @return [::Google::Cloud::Dataproc::V1::SparkConnectConfig]
+        #     Optional. Spark Connect session config.
         # @!attribute [r] runtime_info
         #   @return [::Google::Cloud::Dataproc::V1::RuntimeInfo]
         #     Output only. Runtime information about session execution.
@@ -288,6 +292,12 @@ module Google
             # Scala kernel.
             SCALA = 2
           end
+        end
+
+        # Spark Connect configuration for an interactive session.
+        class SparkConnectConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
