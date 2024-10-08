@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.54.0 (2024-10-08)
+
+#### Features
+
+* Added a continuous FeatureView sync option 
+* Added a dynamic retrieval API 
+* Added psc_automation_configs to DeployIndex 
+
 ### 0.53.0 (2024-09-30)
 
 #### Features
