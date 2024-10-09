@@ -109,6 +109,25 @@ class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_generative_question_service_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.generative_question_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::GenerativeQuestionService::Client, client
+    end
+  end
+
+  def test_generative_question_service_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Retail.generative_question_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::GenerativeQuestionService::Rest::Client, client
+    end
+  end
+
   def test_model_service_grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
