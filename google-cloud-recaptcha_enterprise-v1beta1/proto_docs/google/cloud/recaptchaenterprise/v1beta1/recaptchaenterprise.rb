@@ -24,7 +24,7 @@ module Google
         # The create assessment request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project in which the assessment will be created,
+        #     Required. The name of the project in which the assessment is created,
         #     in the format `projects/{project_number}`.
         # @!attribute [rw] assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment]
@@ -162,8 +162,8 @@ module Google
         #     `projects/{project_number}/assessments/{assessment_id}`.
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that will be assigned to the Event. This field can
-        #     be left empty to provide reasons that apply to an event without concluding
+        #     Optional. The annotation that is assigned to the Event. This field can be
+        #     left empty to provide reasons that apply to an event without concluding
         #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Reason>]
@@ -364,12 +364,12 @@ module Google
 
         # @!attribute [rw] token
         #   @return [::String]
-        #     Optional. The user response token provided by the reCAPTCHA Enterprise
-        #     client-side integration on your site.
+        #     Optional. The user response token provided by the reCAPTCHA client-side
+        #     integration on your site.
         # @!attribute [rw] site_key
         #   @return [::String]
-        #     Optional. The site key that was used to invoke reCAPTCHA Enterprise on your
-        #     site and generate the token.
+        #     Optional. The site key that was used to invoke reCAPTCHA on your site and
+        #     generate the token.
         # @!attribute [rw] user_agent
         #   @return [::String]
         #     Optional. The user agent present in the request from the user's device
@@ -382,7 +382,7 @@ module Google
         #   @return [::String]
         #     Optional. The expected action for this type of event. This should be the
         #     same action provided at token generation time on client-side platforms
-        #     already integrated with recaptcha enterprise.
+        #     already integrated with reCAPTCHA.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
         #     Optional. Unique stable hashed user identifier for the request. The
@@ -390,7 +390,7 @@ module Google
         # @!attribute [rw] transaction_data
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData]
         #     Optional. Data describing a payment transaction to be assessed. Sending
-        #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
+        #     this data enables reCAPTCHA Fraud Prevention and the
         #     FraudPreventionAssessment component in the response.
         # @!attribute [rw] fraud_prevention
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Event::FraudPrevention]
@@ -418,7 +418,7 @@ module Google
           end
         end
 
-        # Transaction data associated with a payment protected by reCAPTCHA Enterprise.
+        # Transaction data associated with a payment protected by reCAPTCHA.
         # @!attribute [rw] transaction_id
         #   @return [::String]
         #     Unique identifier for the transaction. This custom identifier can be used
@@ -558,11 +558,11 @@ module Google
           # @!attribute [rw] avs_response_code
           #   @return [::String]
           #     AVS response code from the gateway
-          #     (available only when reCAPTCHA Enterprise is called after authorization).
+          #     (available only when reCAPTCHA is called after authorization).
           # @!attribute [rw] cvv_response_code
           #   @return [::String]
           #     CVV response code from the gateway
-          #     (available only when reCAPTCHA Enterprise is called after authorization).
+          #     (available only when reCAPTCHA is called after authorization).
           class GatewayInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
