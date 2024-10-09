@@ -33,6 +33,66 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_backup_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_path project: "value0", location: "value1", backupvault: "value2", datasource: "value3", backup: "value4"
+      assert_equal "projects/value0/locations/value1/backupVaults/value2/dataSources/value3/backups/value4", path
+    end
+  end
+
+  def test_backup_plan_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_plan_path project: "value0", location: "value1", backup_plan: "value2"
+      assert_equal "projects/value0/locations/value1/backupPlans/value2", path
+    end
+  end
+
+  def test_backup_plan_association_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_plan_association_path project: "value0", location: "value1", backup_plan_association: "value2"
+      assert_equal "projects/value0/locations/value1/backupPlanAssociations/value2", path
+    end
+  end
+
+  def test_backup_vault_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.backup_vault_path project: "value0", location: "value1", backupvault: "value2"
+      assert_equal "projects/value0/locations/value1/backupVaults/value2", path
+    end
+  end
+
+  def test_data_source_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::BackupDR::V1::BackupDR::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_source_path project: "value0", location: "value1", backupvault: "value2", datasource: "value3"
+      assert_equal "projects/value0/locations/value1/backupVaults/value2/dataSources/value3", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
