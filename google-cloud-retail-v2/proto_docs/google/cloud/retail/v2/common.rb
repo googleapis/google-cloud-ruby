@@ -333,7 +333,7 @@ module Google
           # @!attribute [rw] facet_position_adjustments
           #   @return [::Array<::Google::Cloud::Retail::V2::Rule::ForceReturnFacetAction::FacetPositionAdjustment>]
           #     Each instance corresponds to a force return attribute for the given
-          #     condition. There can't be more 3 instances here.
+          #     condition. There can't be more 15 instances here.
           class ForceReturnFacetAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

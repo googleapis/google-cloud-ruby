@@ -195,7 +195,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil)
+              # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil, entity: nil, conversational_search_spec: nil, tile_navigation_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -438,6 +438,11 @@ module Google
               #     If this is set, it should be exactly matched with
               #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get search
               #     results boosted by entity.
+              #   @param conversational_search_spec [::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec, ::Hash]
+              #     Optional. This field specifies all conversational related parameters
+              #     addition to traditional retail search.
+              #   @param tile_navigation_spec [::Google::Cloud::Retail::V2::SearchRequest::TileNavigationSpec, ::Hash]
+              #     Optional. This field specifies tile navigation related parameters.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Retail::V2::SearchResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

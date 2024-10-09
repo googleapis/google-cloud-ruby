@@ -96,9 +96,9 @@ module Google
         #     capped by 20.
         # @!attribute [rw] enable_attribute_suggestions
         #   @return [::Boolean]
-        #     If true, attribute suggestions are enabled and provided in response.
+        #     If true, attribute suggestions are enabled and provided in the response.
         #
-        #     This field is only available for "cloud-retail" dataset.
+        #     This field is only available for the "cloud-retail" dataset.
         # @!attribute [rw] entity
         #   @return [::String]
         #     The entity for customers who run multiple entities, domains, sites, or
@@ -147,6 +147,16 @@ module Google
         #
         #     Recent searches are deduplicated. More recent searches will be reserved
         #     when duplication happens.
+        # @!attribute [rw] attribute_results
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CompleteQueryResponse::AttributeResult}]
+        #     A map of matched attribute suggestions. This field is only available for
+        #     "cloud-retail" dataset.
+        #
+        #     Current supported keys:
+        #
+        #     * `brands`
+        #
+        #     * `categories`
         class CompleteQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,6 +196,24 @@ module Google
           #   @return [::String]
           #     The recent search query.
           class RecentSearchResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Resource that represents attribute results.
+          # The list of suggestions for the attribute.
+          # @!attribute [rw] suggestions
+          #   @return [::Array<::String>]
+          class AttributeResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Retail::V2::CompleteQueryResponse::AttributeResult]
+          class AttributeResultsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

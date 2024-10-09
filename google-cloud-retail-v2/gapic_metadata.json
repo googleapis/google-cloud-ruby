@@ -136,6 +136,40 @@
         }
       }
     },
+    "GenerativeQuestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client",
+          "rpcs": {
+            "UpdateGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "update_generative_questions_feature_config"
+              ]
+            },
+            "GetGenerativeQuestionsFeatureConfig": {
+              "methods": [
+                "get_generative_questions_feature_config"
+              ]
+            },
+            "ListGenerativeQuestionConfigs": {
+              "methods": [
+                "list_generative_question_configs"
+              ]
+            },
+            "UpdateGenerativeQuestionConfig": {
+              "methods": [
+                "update_generative_question_config"
+              ]
+            },
+            "BatchUpdateGenerativeQuestionConfigs": {
+              "methods": [
+                "batch_update_generative_question_configs"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ModelService": {
       "clients": {
         "grpc": {

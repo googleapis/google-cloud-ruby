@@ -300,6 +300,15 @@ module Google
         #     Default to
         #     {::Google::Cloud::Retail::V2::Product::Availability::IN_STOCK Availability.IN_STOCK}.
         #
+        #     For primary products with variants set the availability of the primary as
+        #     {::Google::Cloud::Retail::V2::Product::Availability::OUT_OF_STOCK Availability.OUT_OF_STOCK}
+        #     and set the true availability at the variant level. This way the primary
+        #     product will be considered "in stock" as long as it has at least one
+        #     variant in stock.
+        #
+        #     For primary products with no variants set the true availability at the
+        #     primary level.
+        #
         #     Corresponding properties: Google Merchant Center property
         #     [availability](https://support.google.com/merchants/answer/6324448).
         #     Schema.org property [Offer.availability](https://schema.org/availability).
@@ -474,8 +483,6 @@ module Google
         #     * {::Google::Cloud::Retail::V2::Product#name name}
         #     * {::Google::Cloud::Retail::V2::Product#color_info color_info}
         #
-        #     The maximum number of paths is 30. Otherwise, an INVALID_ARGUMENT error is
-        #     returned.
         #
         #     Note: Returning more fields in
         #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} can increase
