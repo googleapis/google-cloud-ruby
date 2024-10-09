@@ -25,6 +25,48 @@ module Google
           # Path helper methods for the ClusterManager API.
           module Paths
             ##
+            # Create a fully-qualified CaPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/caPools/{ca_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ca_pool [String]
+            #
+            # @return [::String]
+            def ca_pool_path project:, location:, ca_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/caPools/#{ca_pool}"
+            end
+
+            ##
+            # Create a fully-qualified CryptoKeyVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}/cryptoKeyVersions/{crypto_key_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            # @param crypto_key_version [String]
+            #
+            # @return [::String]
+            def crypto_key_version_path project:, location:, key_ring:, crypto_key:, crypto_key_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+              raise ::ArgumentError, "crypto_key cannot contain /" if crypto_key.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}/cryptoKeyVersions/#{crypto_key_version}"
+            end
+
+            ##
             # Create a fully-qualified Topic resource string.
             #
             # The resource will be in the following format:
