@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/run"
 
-client = Google::Cloud::Run.executions do |config|
+client = Google::Cloud::Run.builds do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::Run.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::Run.executions
+client = Google::Cloud::Run.builds
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/run"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::Run.executions
+client = Google::Cloud::Run.builds
 ```
 
 ### Local ADC file
