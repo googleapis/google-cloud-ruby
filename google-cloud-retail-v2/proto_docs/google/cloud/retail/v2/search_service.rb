@@ -21,6 +21,49 @@ module Google
   module Cloud
     module Retail
       module V2
+        # Product attribute which structured by an attribute name and value. This
+        # structure is used in conversational search filters and answers. For example,
+        # if we have `name=color` and `value=red`, this means that the color is `red`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The attribute name.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     The attribute value.
+        class ProductAttributeValue
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Product attribute name and numeric interval.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The attribute name (e.g. "length")
+        # @!attribute [rw] interval
+        #   @return [::Google::Cloud::Retail::V2::Interval]
+        #     The numeric interval (e.g. [10, 20))
+        class ProductAttributeInterval
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # This field specifies the tile information including an attribute key,
+        # attribute value. More fields will be added in the future, eg: product id
+        # or product counts, etc.
+        # @!attribute [rw] product_attribute_value
+        #   @return [::Google::Cloud::Retail::V2::ProductAttributeValue]
+        #     The product attribute key-value.
+        # @!attribute [rw] product_attribute_interval
+        #   @return [::Google::Cloud::Retail::V2::ProductAttributeInterval]
+        #     The product attribute key-numeric interval.
+        # @!attribute [rw] representative_product_id
+        #   @return [::String]
+        #     The representative product id for this tile.
+        class Tile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for
         # {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search} method.
         # @!attribute [rw] placement
@@ -284,6 +327,13 @@ module Google
         #     If this is set, it should be exactly matched with
         #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get search
         #     results boosted by entity.
+        # @!attribute [rw] conversational_search_spec
+        #   @return [::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec]
+        #     Optional. This field specifies all conversational related parameters
+        #     addition to traditional retail search.
+        # @!attribute [rw] tile_navigation_spec
+        #   @return [::Google::Cloud::Retail::V2::SearchRequest::TileNavigationSpec]
+        #     Optional. This field specifies tile navigation related parameters.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -692,6 +742,78 @@ module Google
             end
           end
 
+          # This field specifies all conversational related parameters addition to
+          # traditional retail search.
+          # @!attribute [rw] followup_conversation_requested
+          #   @return [::Boolean]
+          #     This field specifies whether the customer would like to do conversational
+          #     search. If this field is set to true, conversational related extra
+          #     information will be returned from server side, including follow-up
+          #     question, answer options, etc.
+          # @!attribute [rw] conversation_id
+          #   @return [::String]
+          #     This field specifies the conversation id, which maintains the state of
+          #     the conversation between client side and server side. Use the value from
+          #     the previous [ConversationalSearchResult.conversation_id][]. For the
+          #     initial request, this should be empty.
+          # @!attribute [rw] user_answer
+          #   @return [::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec::UserAnswer]
+          #     This field specifies the current user answer during the conversational
+          #     search. This can be either user selected from suggested answers or user
+          #     input plain text.
+          class ConversationalSearchSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # This field specifies the current user answer during the conversational
+            # search. This can be either user selected from suggested answers or user
+            # input plain text.
+            # @!attribute [rw] text_answer
+            #   @return [::String]
+            #     This field specifies the incremental input text from the user during
+            #     the conversational search.
+            # @!attribute [rw] selected_answer
+            #   @return [::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec::UserAnswer::SelectedAnswer]
+            #     This field specifies the selected attributes during the
+            #     conversational search. This should be a subset of
+            #     [ConversationalSearchResult.suggested_answers][].
+            class UserAnswer
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # This field specifies the selected answers during the conversational
+              # search.
+              # @!attribute [rw] product_attribute_values
+              #   @deprecated This field is deprecated and may be removed in the next major version update.
+              #   @return [::Array<::Google::Cloud::Retail::V2::ProductAttributeValue>]
+              #     This field is deprecated and should not be set.
+              # @!attribute [rw] product_attribute_value
+              #   @return [::Google::Cloud::Retail::V2::ProductAttributeValue]
+              #     This field specifies the selected answer which is a attribute
+              #     key-value.
+              class SelectedAnswer
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
+
+          # This field specifies tile navigation related parameters.
+          # @!attribute [rw] tile_navigation_requested
+          #   @return [::Boolean]
+          #     This field specifies whether the customer would like to request tile
+          #     navigation.
+          # @!attribute [rw] applied_tiles
+          #   @return [::Array<::Google::Cloud::Retail::V2::Tile>]
+          #     This field specifies the tiles which are already clicked in client side.
+          #     NOTE: This field is not being used for filtering search products. Client
+          #     side should also put all the applied tiles in
+          #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter}.
+          class TileNavigationSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -794,6 +916,14 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::ExperimentInfo>]
         #     Metadata related to A/B testing [Experiment][] associated with this
         #     response. Only exists when an experiment is triggered.
+        # @!attribute [rw] conversational_search_result
+        #   @return [::Google::Cloud::Retail::V2::SearchResponse::ConversationalSearchResult]
+        #     This field specifies all related information that is needed on client
+        #     side for UI rendering of conversational retail search.
+        # @!attribute [rw] tile_navigation_result
+        #   @return [::Google::Cloud::Retail::V2::SearchResponse::TileNavigationResult]
+        #     This field specifies all related information for tile navigation that will
+        #     be used in client side.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -965,6 +1095,80 @@ module Google
           #     {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec#pin_unexpanded_results SearchRequest.QueryExpansionSpec.pin_unexpanded_results}
           #     is set to true.
           class QueryExpansionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # This field specifies all related information that is needed on client
+          # side for UI rendering of conversational retail search.
+          # @!attribute [rw] conversation_id
+          #   @return [::String]
+          #     Conversation UUID. This field will be stored in client side storage to
+          #     maintain the conversation session with server and will be used for next
+          #     search request's
+          #     {::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec#conversation_id SearchRequest.ConversationalSearchSpec.conversation_id}
+          #     to restore conversation state in server.
+          # @!attribute [rw] refined_query
+          #   @return [::String]
+          #     The current refined query for the conversational search. This field
+          #     will be used in customer UI that the query in the search bar should be
+          #     replaced with the refined query. For example, if
+          #     {::Google::Cloud::Retail::V2::SearchRequest#query SearchRequest.query} is
+          #     `dress` and next
+          #     {::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec::UserAnswer#text_answer SearchRequest.ConversationalSearchSpec.UserAnswer.text_answer}
+          #     is `red color`, which does not match any product attribute value filters,
+          #     the refined query will be `dress, red color`.
+          # @!attribute [rw] additional_filters
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
+          #   @return [::Array<::Google::Cloud::Retail::V2::SearchResponse::ConversationalSearchResult::AdditionalFilter>]
+          #     This field is deprecated but will be kept for backward compatibility.
+          #     There is expected to have only one additional filter and the value will
+          #     be the same to the same as field `additional_filter`.
+          # @!attribute [rw] followup_question
+          #   @return [::String]
+          #     The follow-up question. e.g., `What is the color?`
+          # @!attribute [rw] suggested_answers
+          #   @return [::Array<::Google::Cloud::Retail::V2::SearchResponse::ConversationalSearchResult::SuggestedAnswer>]
+          #     The answer options provided to client for the follow-up question.
+          # @!attribute [rw] additional_filter
+          #   @return [::Google::Cloud::Retail::V2::SearchResponse::ConversationalSearchResult::AdditionalFilter]
+          #     This is the incremental additional filters implied from the current
+          #     user answer. User should add the suggested addition filters to the
+          #     previous
+          #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter},  and
+          #     use the merged filter in the follow up search request.
+          class ConversationalSearchResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Suggested answers to the follow-up question.
+            # @!attribute [rw] product_attribute_value
+            #   @return [::Google::Cloud::Retail::V2::ProductAttributeValue]
+            #     Product attribute value, including an attribute key and an
+            #     attribute value. Other types can be added here in the future.
+            class SuggestedAnswer
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Additional filter that client side need to apply.
+            # @!attribute [rw] product_attribute_value
+            #   @return [::Google::Cloud::Retail::V2::ProductAttributeValue]
+            #     Product attribute value, including an attribute key and an
+            #     attribute value. Other types can be added here in the future.
+            class AdditionalFilter
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # This field specifies all related information for tile navigation that will
+          # be used in client side.
+          # @!attribute [rw] tiles
+          #   @return [::Array<::Google::Cloud::Retail::V2::Tile>]
+          #     The current tiles that are used for tile navigation, sorted by
+          #     engagement.
+          class TileNavigationResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

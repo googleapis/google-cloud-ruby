@@ -772,6 +772,206 @@
       ]
     },
     {
+      "region_tag": "retail_v2_generated_GenerativeQuestionService_UpdateGenerativeQuestionsFeatureConfig_sync",
+      "title": "Snippet for the update_generative_questions_feature_config call in the GenerativeQuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::GenerativeQuestionService::Client#update_generative_questions_feature_config.",
+      "file": "generative_question_service/update_generative_questions_feature_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_generative_questions_feature_config",
+        "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client#update_generative_questions_feature_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateGenerativeQuestionsFeatureConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::GenerativeQuestionsFeatureConfig",
+        "client": {
+          "short_name": "GenerativeQuestionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGenerativeQuestionsFeatureConfig",
+          "full_name": "google.cloud.retail.v2.GenerativeQuestionService.UpdateGenerativeQuestionsFeatureConfig",
+          "service": {
+            "short_name": "GenerativeQuestionService",
+            "full_name": "google.cloud.retail.v2.GenerativeQuestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_GenerativeQuestionService_GetGenerativeQuestionsFeatureConfig_sync",
+      "title": "Snippet for the get_generative_questions_feature_config call in the GenerativeQuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::GenerativeQuestionService::Client#get_generative_questions_feature_config.",
+      "file": "generative_question_service/get_generative_questions_feature_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_generative_questions_feature_config",
+        "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client#get_generative_questions_feature_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetGenerativeQuestionsFeatureConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::GenerativeQuestionsFeatureConfig",
+        "client": {
+          "short_name": "GenerativeQuestionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client"
+        },
+        "method": {
+          "short_name": "GetGenerativeQuestionsFeatureConfig",
+          "full_name": "google.cloud.retail.v2.GenerativeQuestionService.GetGenerativeQuestionsFeatureConfig",
+          "service": {
+            "short_name": "GenerativeQuestionService",
+            "full_name": "google.cloud.retail.v2.GenerativeQuestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_GenerativeQuestionService_ListGenerativeQuestionConfigs_sync",
+      "title": "Snippet for the list_generative_question_configs call in the GenerativeQuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::GenerativeQuestionService::Client#list_generative_question_configs.",
+      "file": "generative_question_service/list_generative_question_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_generative_question_configs",
+        "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client#list_generative_question_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ListGenerativeQuestionConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ListGenerativeQuestionConfigsResponse",
+        "client": {
+          "short_name": "GenerativeQuestionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client"
+        },
+        "method": {
+          "short_name": "ListGenerativeQuestionConfigs",
+          "full_name": "google.cloud.retail.v2.GenerativeQuestionService.ListGenerativeQuestionConfigs",
+          "service": {
+            "short_name": "GenerativeQuestionService",
+            "full_name": "google.cloud.retail.v2.GenerativeQuestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_GenerativeQuestionService_UpdateGenerativeQuestionConfig_sync",
+      "title": "Snippet for the update_generative_question_config call in the GenerativeQuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::GenerativeQuestionService::Client#update_generative_question_config.",
+      "file": "generative_question_service/update_generative_question_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_generative_question_config",
+        "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client#update_generative_question_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateGenerativeQuestionConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::GenerativeQuestionConfig",
+        "client": {
+          "short_name": "GenerativeQuestionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGenerativeQuestionConfig",
+          "full_name": "google.cloud.retail.v2.GenerativeQuestionService.UpdateGenerativeQuestionConfig",
+          "service": {
+            "short_name": "GenerativeQuestionService",
+            "full_name": "google.cloud.retail.v2.GenerativeQuestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_GenerativeQuestionService_BatchUpdateGenerativeQuestionConfigs_sync",
+      "title": "Snippet for the batch_update_generative_question_configs call in the GenerativeQuestionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::GenerativeQuestionService::Client#batch_update_generative_question_configs.",
+      "file": "generative_question_service/batch_update_generative_question_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_update_generative_question_configs",
+        "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client#batch_update_generative_question_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::BatchUpdateGenerativeQuestionConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::BatchUpdateGenerativeQuestionConfigsResponse",
+        "client": {
+          "short_name": "GenerativeQuestionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::GenerativeQuestionService::Client"
+        },
+        "method": {
+          "short_name": "BatchUpdateGenerativeQuestionConfigs",
+          "full_name": "google.cloud.retail.v2.GenerativeQuestionService.BatchUpdateGenerativeQuestionConfigs",
+          "service": {
+            "short_name": "GenerativeQuestionService",
+            "full_name": "google.cloud.retail.v2.GenerativeQuestionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "retail_v2_generated_ModelService_CreateModel_sync",
       "title": "Snippet for the create_model call in the ModelService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Retail::V2::ModelService::Client#create_model.",

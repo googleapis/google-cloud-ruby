@@ -100,6 +100,8 @@ class ::Google::Cloud::Retail::V2::SearchService::Rest::ClientTest < Minitest::T
     labels = {}
     spell_correction_spec = {}
     entity = "hello world"
+    conversational_search_spec = {}
+    tile_navigation_spec = {}
 
     search_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -115,27 +117,27 @@ class ::Google::Cloud::Retail::V2::SearchService::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity }) do |_result, response|
+        client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity do |_result, response|
+        client.search placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search ::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity) do |_result, response|
+        client.search ::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity }, call_options) do |_result, response|
+        client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search(::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity), call_options) do |_result, response|
+        client.search(::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
