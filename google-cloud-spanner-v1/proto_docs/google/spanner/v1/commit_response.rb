@@ -30,6 +30,10 @@ module Google
         #     The statistics about this Commit. Not returned by default.
         #     For more information, see
         #     {::Google::Cloud::Spanner::V1::CommitRequest#return_commit_stats CommitRequest.return_commit_stats}.
+        # @!attribute [rw] precommit_token
+        #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
+        #     If specified, transaction has not committed yet.
+        #     Clients must retry the commit with the new precommit token.
         class CommitResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

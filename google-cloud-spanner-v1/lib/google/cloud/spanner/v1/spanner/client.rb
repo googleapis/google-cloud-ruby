@@ -1544,7 +1544,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(session: nil, options: nil, request_options: nil)
+            # @overload begin_transaction(session: nil, options: nil, request_options: nil, mutation_key: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1559,6 +1559,13 @@ module Google
             #     request_options struct will not do anything. To set the priority for a
             #     transaction, set it on the reads and writes that are part of this
             #     transaction instead.
+            #   @param mutation_key [::Google::Cloud::Spanner::V1::Mutation, ::Hash]
+            #     Optional. Required for read-write transactions on a multiplexed session
+            #     that commit mutations but do not perform any reads or queries. Clients
+            #     should randomly select one of the mutations from the mutation set and send
+            #     it as a part of this request.
+            #     This feature is not yet supported and will result in an UNIMPLEMENTED
+            #     error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Transaction]
@@ -1651,7 +1658,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil)
+            # @overload commit(session: nil, transaction_id: nil, single_use_transaction: nil, mutations: nil, return_commit_stats: nil, max_commit_delay: nil, request_options: nil, precommit_token: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1686,6 +1693,13 @@ module Google
             #     and 500 ms.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
+            #   @param precommit_token [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken, ::Hash]
+            #     Optional. If the read-write transaction was executed on a multiplexed
+            #     session, the precommit token with the highest sequence number received in
+            #     this transaction attempt, should be included here. Failing to do so will
+            #     result in a FailedPrecondition error.
+            #     This feature is not yet supported and will result in an UNIMPLEMENTED
+            #     error.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::CommitResponse]

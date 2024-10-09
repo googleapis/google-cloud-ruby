@@ -391,6 +391,13 @@ module Google
           # @!attribute [rw] read_lock_mode
           #   @return [::Google::Cloud::Spanner::V1::TransactionOptions::ReadWrite::ReadLockMode]
           #     Read lock mode for the transaction.
+          # @!attribute [rw] multiplexed_session_previous_transaction_id
+          #   @return [::String]
+          #     Optional. Clients should pass the transaction ID of the previous
+          #     transaction attempt that was aborted if this transaction is being
+          #     executed on a multiplexed session.
+          #     This feature is not yet supported and will result in an UNIMPLEMENTED
+          #     error.
           class ReadWrite
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -512,6 +519,17 @@ module Google
         #
         #     A timestamp in RFC3339 UTC \"Zulu\" format, accurate to nanoseconds.
         #     Example: `"2014-10-02T15:01:23.045123456Z"`.
+        # @!attribute [rw] precommit_token
+        #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
+        #     A precommit token will be included in the response of a BeginTransaction
+        #     request if the read-write transaction is on a multiplexed session and
+        #     a mutation_key was specified in the
+        #     {::Google::Cloud::Spanner::V1::BeginTransactionRequest BeginTransaction}.
+        #     The precommit token with the highest sequence number from this transaction
+        #     attempt should be passed to the {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit}
+        #     request for this transaction.
+        #     This feature is not yet supported and will result in an UNIMPLEMENTED
+        #     error.
         class Transaction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -538,6 +556,23 @@ module Google
         #     {::Google::Cloud::Spanner::V1::ResultSetMetadata#transaction ResultSetMetadata.transaction},
         #     which is a {::Google::Cloud::Spanner::V1::Transaction Transaction}.
         class TransactionSelector
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When a read-write transaction is executed on a multiplexed session,
+        # this precommit token is sent back to the client
+        # as a part of the [Transaction] message in the BeginTransaction response and
+        # also as a part of the [ResultSet] and [PartialResultSet] responses.
+        # @!attribute [rw] precommit_token
+        #   @return [::String]
+        #     Opaque precommit token.
+        # @!attribute [rw] seq_num
+        #   @return [::Integer]
+        #     An incrementing seq number is generated on every precommit token
+        #     that is returned. Clients should remember the precommit token with the
+        #     highest sequence number from the current transaction attempt.
+        class MultiplexedSessionPrecommitToken
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
