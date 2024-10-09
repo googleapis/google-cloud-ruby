@@ -23,6 +23,6 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.7"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-discovery_engine-v1", ">= 0.4", "< 2.a"
-  gem.add_dependency "google-cloud-discovery_engine-v1beta", ">= 0.7", "< 2.a"
+  gem.add_dependency "google-cloud-discovery_engine-v1", "~> 1.1"
+  gem.add_dependency "google-cloud-discovery_engine-v1beta", ">= 0.15", "< 2.a"
 end
