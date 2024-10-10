@@ -265,6 +265,67 @@ module Google
           end
         end
 
+        # Payload of the Platform Log entry sent when a failure is encountered while
+        # ingesting.
+        # @!attribute [rw] topic
+        #   @return [::String]
+        #     Required. Name of the import topic. Format is:
+        #     projects/\\{project_name}/topics/\\{topic_name}.
+        # @!attribute [rw] error_message
+        #   @return [::String]
+        #     Required. Error details explaining why ingestion to Pub/Sub has failed.
+        # @!attribute [rw] cloud_storage_failure
+        #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::CloudStorageFailure]
+        #     Optional. Failure when ingesting from Cloud Storage.
+        class IngestionFailureEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the reason why some data may have been left out of
+          # the desired Pub/Sub message due to the API message limits
+          # (https://cloud.google.com/pubsub/quotas#resource_limits). For example,
+          # when the number of attributes is larger than 100, the number of
+          # attributes is truncated to 100 to respect the limit on the attribute count.
+          # Other attribute limits are treated similarly. When the size of the desired
+          # message would've been larger than 10MB, the message won't be published at
+          # all, and ingestion of the subsequent messages will proceed as normal.
+          class ApiViolationReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Set when an Avro file is unsupported or its format is not valid. When this
+          # occurs, one or more Avro objects won't be ingested.
+          class AvroFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Failure when ingesting from a Cloud Storage source.
+          # @!attribute [rw] bucket
+          #   @return [::String]
+          #     Optional. Name of the Cloud Storage bucket used for ingestion.
+          # @!attribute [rw] object_name
+          #   @return [::String]
+          #     Optional. Name of the Cloud Storage object which contained the section
+          #     that couldn't be ingested.
+          # @!attribute [rw] object_generation
+          #   @return [::Integer]
+          #     Optional. Generation of the Cloud Storage object which contained the
+          #     section that couldn't be ingested.
+          # @!attribute [rw] avro_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AvroFailureReason]
+          #     Optional. Failure encountered when parsing an Avro file.
+          # @!attribute [rw] api_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
+          #     Optional. The Pub/Sub API limits prevented the desired message from
+          #     being published.
+          class CloudStorageFailure
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # A topic resource.
         # @!attribute [rw] name
         #   @return [::String]
