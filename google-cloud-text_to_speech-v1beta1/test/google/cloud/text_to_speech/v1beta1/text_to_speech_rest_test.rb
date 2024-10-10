@@ -136,6 +136,7 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::ClientTest < M
     voice = {}
     audio_config = {}
     enable_time_pointing = [:TIMEPOINT_TYPE_UNSPECIFIED]
+    advanced_voice_options = {}
 
     synthesize_speech_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -151,27 +152,27 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::ClientTest < M
         end
 
         # Use hash object
-        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing }) do |_result, response|
+        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.synthesize_speech input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing do |_result, response|
+        client.synthesize_speech input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing) do |_result, response|
+        client.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing }, call_options) do |_result, response|
+        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing), call_options) do |_result, response|
+        client.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
