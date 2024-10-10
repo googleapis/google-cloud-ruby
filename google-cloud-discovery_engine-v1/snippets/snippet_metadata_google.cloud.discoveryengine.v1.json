@@ -1692,6 +1692,86 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1_generated_GroundedGenerationService_StreamGenerateGroundedContent_sync",
+      "title": "Snippet for the stream_generate_grounded_content call in the GroundedGenerationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client#stream_generate_grounded_content.",
+      "file": "grounded_generation_service/stream_generate_grounded_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_generate_grounded_content",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client#stream_generate_grounded_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse",
+        "client": {
+          "short_name": "GroundedGenerationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client"
+        },
+        "method": {
+          "short_name": "StreamGenerateGroundedContent",
+          "full_name": "google.cloud.discoveryengine.v1.GroundedGenerationService.StreamGenerateGroundedContent",
+          "service": {
+            "short_name": "GroundedGenerationService",
+            "full_name": "google.cloud.discoveryengine.v1.GroundedGenerationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_GroundedGenerationService_GenerateGroundedContent_sync",
+      "title": "Snippet for the generate_grounded_content call in the GroundedGenerationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client#generate_grounded_content.",
+      "file": "grounded_generation_service/generate_grounded_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_grounded_content",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client#generate_grounded_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse",
+        "client": {
+          "short_name": "GroundedGenerationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client"
+        },
+        "method": {
+          "short_name": "GenerateGroundedContent",
+          "full_name": "google.cloud.discoveryengine.v1.GroundedGenerationService.GenerateGroundedContent",
+          "service": {
+            "short_name": "GroundedGenerationService",
+            "full_name": "google.cloud.discoveryengine.v1.GroundedGenerationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1_generated_GroundedGenerationService_CheckGrounding_sync",
       "title": "Snippet for the check_grounding call in the GroundedGenerationService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client#check_grounding.",

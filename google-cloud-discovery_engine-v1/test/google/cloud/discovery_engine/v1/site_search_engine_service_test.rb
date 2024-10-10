@@ -630,12 +630,14 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
     # Create request parameters for a unary method.
     site_search_engine = "hello world"
     uris = ["hello world"]
+    site_credential = "hello world"
 
     recrawl_uris_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :recrawl_uris, name
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest, request
       assert_equal "hello world", request["site_search_engine"]
       assert_equal ["hello world"], request["uris"]
+      assert_equal "hello world", request["site_credential"]
       refute_nil options
     end
 
@@ -646,35 +648,35 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientTest 
       end
 
       # Use hash object
-      client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris }) do |response, operation|
+      client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.recrawl_uris site_search_engine: site_search_engine, uris: uris do |response, operation|
+      client.recrawl_uris site_search_engine: site_search_engine, uris: uris, site_credential: site_credential do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.recrawl_uris ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris) do |response, operation|
+      client.recrawl_uris ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris }, grpc_options) do |response, operation|
+      client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.recrawl_uris(::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris), grpc_options) do |response, operation|
+      client.recrawl_uris(::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

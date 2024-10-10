@@ -283,6 +283,16 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Client",
           "rpcs": {
+            "StreamGenerateGroundedContent": {
+              "methods": [
+                "stream_generate_grounded_content"
+              ]
+            },
+            "GenerateGroundedContent": {
+              "methods": [
+                "generate_grounded_content"
+              ]
+            },
             "CheckGrounding": {
               "methods": [
                 "check_grounding"

@@ -205,11 +205,26 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Matcher for the {::Google::Cloud::DiscoveryEngine::V1::Document Document}s by
+          # FHIR resource names.
+          # @!attribute [rw] fhir_resources
+          #   @return [::Array<::String>]
+          #     Required. The FHIR resources to match by.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/datasets/\\{dataset}/fhirStores/\\{fhir_store}/fhir/\\{resource_type}/\\{fhir_resource_id}
+          class FhirMatcher
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Matcher for the {::Google::Cloud::DiscoveryEngine::V1::Document Document}s.
           # Currently supports matching by exact URIs.
           # @!attribute [rw] uris_matcher
           #   @return [::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest::UrisMatcher]
           #     Matcher by exact URIs.
+          # @!attribute [rw] fhir_matcher
+          #   @return [::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest::FhirMatcher]
+          #     Matcher by FHIR resource names.
           class Matcher
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -257,6 +272,10 @@ module Google
             #   @return [::String]
             #     If match by URI, the URI of the
             #     {::Google::Cloud::DiscoveryEngine::V1::Document Document}.
+            # @!attribute [rw] fhir_resource
+            #   @return [::String]
+            #     Required. Format:
+            #     projects/\\{project}/locations/\\{location}/datasets/\\{dataset}/fhirStores/\\{fhir_store}/fhir/\\{resource_type}/\\{fhir_resource_id}
             class MatcherValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

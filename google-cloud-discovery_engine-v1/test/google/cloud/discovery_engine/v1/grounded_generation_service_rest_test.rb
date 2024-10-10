@@ -70,6 +70,65 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Rest::Cli
     end
   end
 
+  def test_generate_grounded_content
+    # Create test objects.
+    client_result = ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    system_instruction = {}
+    contents = [{}]
+    generation_spec = {}
+    grounding_spec = {}
+    user_labels = {}
+
+    generate_grounded_content_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Rest::ServiceStub.stub :transcode_generate_grounded_content_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, generate_grounded_content_client_stub do
+        # Create client
+        client = ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.generate_grounded_content({ location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.generate_grounded_content location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.generate_grounded_content ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new(location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.generate_grounded_content({ location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.generate_grounded_content(::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest.new(location: location, system_instruction: system_instruction, contents: contents, generation_spec: generation_spec, grounding_spec: grounding_spec, user_labels: user_labels), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, generate_grounded_content_client_stub.call_count
+      end
+    end
+  end
+
   def test_check_grounding
     # Create test objects.
     client_result = ::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse.new

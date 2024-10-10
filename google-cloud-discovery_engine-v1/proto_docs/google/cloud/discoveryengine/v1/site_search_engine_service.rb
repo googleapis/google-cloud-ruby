@@ -346,6 +346,11 @@ module Google
         #     an INVALID_ARGUMENT error is thrown. Each URI should match at least one
         #     {::Google::Cloud::DiscoveryEngine::V1::TargetSite TargetSite} in
         #     `site_search_engine`.
+        # @!attribute [rw] site_credential
+        #   @return [::String]
+        #     Optional. Full resource name of the [SiteCredential][], such as
+        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/siteCredentials/*`.
+        #     Only set to crawl private URIs.
         class RecrawlUrisRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

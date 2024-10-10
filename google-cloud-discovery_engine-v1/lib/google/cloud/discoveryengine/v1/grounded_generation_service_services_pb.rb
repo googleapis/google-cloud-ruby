@@ -33,6 +33,10 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.discoveryengine.v1.GroundedGenerationService'
 
+            # Generates grounded content in a streaming fashion.
+            rpc :StreamGenerateGroundedContent, stream(::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest), stream(::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse)
+            # Generates grounded content.
+            rpc :GenerateGroundedContent, ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentRequest, ::Google::Cloud::DiscoveryEngine::V1::GenerateGroundedContentResponse
             # Performs a grounding check.
             rpc :CheckGrounding, ::Google::Cloud::DiscoveryEngine::V1::CheckGroundingRequest, ::Google::Cloud::DiscoveryEngine::V1::CheckGroundingResponse
           end

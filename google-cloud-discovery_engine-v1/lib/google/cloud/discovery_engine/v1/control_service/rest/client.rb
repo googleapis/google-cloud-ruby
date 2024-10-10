@@ -204,9 +204,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Full resource name of parent data store. Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
               #     or
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
               #   @param control [::Google::Cloud::DiscoveryEngine::V1::Control, ::Hash]
               #     Required. The Control to create.
               #   @param control_id [::String]
@@ -297,7 +297,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. The resource name of the Control to delete. Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Protobuf::Empty]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -469,7 +469,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. The resource name of the Control to get. Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::Control]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -550,9 +550,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The data store resource name. Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
               #     or
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of results to return. If unspecified, defaults
               #     to 50. Max allowed value is 1000.
