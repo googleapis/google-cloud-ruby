@@ -125,6 +125,7 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
     voice = {}
     audio_config = {}
     enable_time_pointing = [:TIMEPOINT_TYPE_UNSPECIFIED]
+    advanced_voice_options = {}
 
     synthesize_speech_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :synthesize_speech, name
@@ -133,6 +134,8 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams), request["voice"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::AudioConfig), request["audio_config"]
       assert_equal [:TIMEPOINT_TYPE_UNSPECIFIED], request["enable_time_pointing"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::TextToSpeech::V1beta1::AdvancedVoiceOptions), request["advanced_voice_options"]
+      assert request.has_advanced_voice_options?
       refute_nil options
     end
 
@@ -143,31 +146,31 @@ class ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::ClientTest < Minites
       end
 
       # Use hash object
-      client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing }) do |response, operation|
+      client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.synthesize_speech input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing do |response, operation|
+      client.synthesize_speech input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing) do |response, operation|
+      client.synthesize_speech ::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing }, grpc_options) do |response, operation|
+      client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing), grpc_options) do |response, operation|
+      client.synthesize_speech(::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, enable_time_pointing: enable_time_pointing, advanced_voice_options: advanced_voice_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

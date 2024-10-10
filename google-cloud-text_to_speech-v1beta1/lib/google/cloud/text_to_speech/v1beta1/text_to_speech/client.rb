@@ -267,7 +267,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload synthesize_speech(input: nil, voice: nil, audio_config: nil, enable_time_pointing: nil)
+            # @overload synthesize_speech(input: nil, voice: nil, audio_config: nil, enable_time_pointing: nil, advanced_voice_options: nil)
             #   Pass arguments to `synthesize_speech` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -280,6 +280,8 @@ module Google
             #     Required. The configuration of the synthesized audio.
             #   @param enable_time_pointing [::Array<::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest::TimepointType>]
             #     Whether and what timepoints are returned in the response.
+            #   @param advanced_voice_options [::Google::Cloud::TextToSpeech::V1beta1::AdvancedVoiceOptions, ::Hash]
+            #     Advanced voice options.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse]
