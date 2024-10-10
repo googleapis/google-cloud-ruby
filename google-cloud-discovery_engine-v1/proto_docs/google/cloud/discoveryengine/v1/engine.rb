@@ -47,7 +47,7 @@ module Google
         #     characters.
         #
         #     Format:
-        #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
         #     engine should be 1-63 characters, and valid characters are
         #     /[a-z0-9][a-z0-9-_]*/. Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] display_name
@@ -93,6 +93,10 @@ module Google
         # @!attribute [rw] common_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Engine::CommonConfig]
         #     Common config spec that specifies the metadata of the engine.
+        # @!attribute [rw] disable_analytics
+        #   @return [::Boolean]
+        #     Optional. Whether to disable analytics for searches performed on this
+        #     engine.
         class Engine
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

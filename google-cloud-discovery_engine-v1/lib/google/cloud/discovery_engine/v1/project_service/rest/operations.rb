@@ -915,7 +915,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}/operations",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/identity_mapping_stores/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/identityMappingStores/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -1041,7 +1041,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
-                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/identity_mapping_stores/[^/]+/operations/[^/]+/?$}, false]
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/identityMappingStores/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(

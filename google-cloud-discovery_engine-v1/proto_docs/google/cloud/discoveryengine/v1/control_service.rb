@@ -25,9 +25,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Full resource name of parent data store. Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
         #     or
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
         # @!attribute [rw] control
         #   @return [::Google::Cloud::DiscoveryEngine::V1::Control]
         #     Required. The Control to create.
@@ -66,7 +66,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Control to delete. Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
         class DeleteControlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -76,7 +76,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Control to get. Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/controls/{control_id}`
         class GetControlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,9 +86,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The data store resource name. Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/dataStores/{data_store_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`
         #     or
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`.
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of results to return. If unspecified, defaults
