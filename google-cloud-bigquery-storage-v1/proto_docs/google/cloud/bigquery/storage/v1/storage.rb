@@ -256,6 +256,10 @@ module Google
           # @!attribute [rw] proto_rows
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ProtoData]
           #     Rows in proto format.
+          # @!attribute [rw] arrow_rows
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::ArrowData]
+          #     Rows in arrow format. This is an experimental feature only selected for
+          #     allowlisted customers.
           # @!attribute [rw] trace_id
           #   @return [::String]
           #     Id set by client to annotate its identity. Only initial request setting is
@@ -294,6 +298,20 @@ module Google
           class AppendRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Arrow schema and data.
+            # Arrow format is an experimental feature only selected for allowlisted
+            # customers.
+            # @!attribute [rw] writer_schema
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSchema]
+            #     Optional. Arrow Schema used to serialize the data.
+            # @!attribute [rw] rows
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowRecordBatch]
+            #     Required. Serialized row data in Arrow format.
+            class ArrowData
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # ProtoData contains the data rows and schema when constructing append
             # requests.
