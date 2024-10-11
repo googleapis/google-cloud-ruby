@@ -42,7 +42,7 @@ describe "topics" do
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }
   let(:topic_id) { random_topic_id }
   let(:cloud_storage_ingestion_topic_id) { random_topic_id }
-  let(:cloud_storage_bucket) { "mikeprieto-bucket" }
+  let(:cloud_storage_bucket) { "test-bucket" }
   let(:subscription_id) { random_subscription_id }
   let(:dead_letter_topic_id) { random_topic_id }
 
