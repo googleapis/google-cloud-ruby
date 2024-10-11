@@ -25,20 +25,26 @@ def create_topic_with_cloud_storage_ingestion topic_id:, bucket:, input_format:,
   # minimum_object_create_time = "YYYY-MM-DDThh:mm:ssZ"
 
   pubsub = Google::Cloud::Pubsub.new
+
   cloud_storage_settings = Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage.new(
     bucket: bucket,
   )
+
   case input_format
   when "text"
-    cloud_storage_settings.text_format = Google::Cloud::PubSub::V1:IngestionDataSourceSettings::CloudStorage::TextFormat.new(
-      delimiter: text_delimiter,
-    )
+    cloud_storage_settings.text_format =
+      Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::TextFormat.new(
+        delimiter: text_delimiter,
+      )
   when "avro"
-    cloud_storage_settings.avro_format = Google::Cloud::PubSub::V1:IngestionDataSourceSettings::CloudStorage::AvroFormat.new
+    cloud_storage_settings.avro_format =
+      Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::AvroFormat.new
   when "pubsub_avro"
-    cloud_storage_settings.pubsub_avro_format = Google::Cloud::PubSub::V1:IngestionDataSourceSettings::CloudStorage::PubSubAvroFormat.new
+    cloud_storage_settings.pubsub_avro_format =
+      Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::PubSubAvroFormat.new
   else
     puts "Invalid input format: #{input_format}; must be in ('text', 'avro', 'pubsub_avro')"
+    return
   end
 
   unless match_glob.empty?
@@ -51,7 +57,7 @@ def create_topic_with_cloud_storage_ingestion topic_id:, bucket:, input_format:,
   end
 
   ingestion_data_source_settings = Google::Cloud::PubSub::V1::IngestionDataSourceSettings.new(
-    cloud_storage_settings: cloud_storage_settings,
+    cloud_storage: cloud_storage_settings,
   )
   topic = pubsub.create_topic topic_id, ingestion_data_source_settings: ingestion_data_source_settings
 
