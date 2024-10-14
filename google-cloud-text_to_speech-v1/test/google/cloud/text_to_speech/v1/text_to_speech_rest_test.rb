@@ -135,6 +135,7 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Rest::ClientTest < Minite
     input = {}
     voice = {}
     audio_config = {}
+    advanced_voice_options = {}
 
     synthesize_speech_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -150,27 +151,27 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::Rest::ClientTest < Minite
         end
 
         # Use hash object
-        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config }) do |_result, response|
+        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.synthesize_speech input: input, voice: voice, audio_config: audio_config do |_result, response|
+        client.synthesize_speech input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.synthesize_speech ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config) do |_result, response|
+        client.synthesize_speech ::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config }, call_options) do |_result, response|
+        client.synthesize_speech({ input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.synthesize_speech(::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config), call_options) do |_result, response|
+        client.synthesize_speech(::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new(input: input, voice: voice, audio_config: audio_config, advanced_voice_options: advanced_voice_options), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

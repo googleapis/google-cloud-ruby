@@ -66,6 +66,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Used for advanced voice options.
+        # @!attribute [rw] low_latency_journey_synthesis
+        #   @return [::Boolean]
+        #     Only for Journey voices. If false, the synthesis will be context aware
+        #     and have higher latency.
+        class AdvancedVoiceOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The top-level message sent by the client for the `SynthesizeSpeech` method.
         # @!attribute [rw] input
         #   @return [::Google::Cloud::TextToSpeech::V1::SynthesisInput]
@@ -76,7 +86,51 @@ module Google
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::TextToSpeech::V1::AudioConfig]
         #     Required. The configuration of the synthesized audio.
+        # @!attribute [rw] advanced_voice_options
+        #   @return [::Google::Cloud::TextToSpeech::V1::AdvancedVoiceOptions]
+        #     Advanced voice options.
         class SynthesizeSpeechRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Pronunciation customization for a phrase.
+        # @!attribute [rw] phrase
+        #   @return [::String]
+        #     The phrase to which the customization will be applied.
+        #     The phrase can be multiple words (in the case of proper nouns etc), but
+        #     should not span to a whole sentence.
+        # @!attribute [rw] phonetic_encoding
+        #   @return [::Google::Cloud::TextToSpeech::V1::CustomPronunciationParams::PhoneticEncoding]
+        #     The phonetic encoding of the phrase.
+        # @!attribute [rw] pronunciation
+        #   @return [::String]
+        #     The pronunciation of the phrase. This must be in the phonetic encoding
+        #     specified above.
+        class CustomPronunciationParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The phonetic encoding of the phrase.
+          module PhoneticEncoding
+            # Not specified.
+            PHONETIC_ENCODING_UNSPECIFIED = 0
+
+            # IPA. (e.g. apple -> ˈæpəl )
+            # https://en.wikipedia.org/wiki/International_Phonetic_Alphabet
+            PHONETIC_ENCODING_IPA = 1
+
+            # X-SAMPA (e.g. apple -> "{p@l" )
+            # https://en.wikipedia.org/wiki/X-SAMPA
+            PHONETIC_ENCODING_X_SAMPA = 2
+          end
+        end
+
+        # A collection of pronunciation customizations.
+        # @!attribute [rw] pronunciations
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1::CustomPronunciationParams>]
+        #     The pronunciation customizations to be applied.
+        class CustomPronunciations
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -95,6 +149,20 @@ module Google
         #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For
         #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
+        # @!attribute [rw] custom_pronunciations
+        #   @return [::Google::Cloud::TextToSpeech::V1::CustomPronunciations]
+        #     Optional. The pronunciation customizations to be applied to the input. If
+        #     this is set, the input will be synthesized using the given pronunciation
+        #     customizations.
+        #
+        #     The initial support will be for EFIGS (English, French,
+        #     Italian, German, Spanish) languages, as provided in
+        #     VoiceSelectionParams. Journey and Instant Clone voices are
+        #     not supported yet.
+        #
+        #     In order to customize the pronunciation of a phrase, there must be an exact
+        #     match of the phrase in the input types. If using SSML, the phrase must not
+        #     be inside a phoneme tag (entirely or partially).
         class SynthesisInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
