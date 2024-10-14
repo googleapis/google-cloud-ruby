@@ -76,6 +76,11 @@ module Google
         #     unset.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        # @!attribute [rw] one_box_page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return for OneBox.
+        #     This applies to each OneBox type individually.
+        #     Default number is 10.
         # @!attribute [rw] data_store_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec>]
         #     Specs defining dataStores to filter on in a search call and configurations
@@ -278,6 +283,11 @@ module Google
           #     Required. Full resource name of
           #     {::Google::Cloud::DiscoveryEngine::V1::DataStore DataStore}, such as
           #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. Filter specification to filter documents in the data store
+          #     specified by data_store field. For more information on filtering, see
+          #     [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
           class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -468,9 +478,93 @@ module Google
             #     ignored. Only one of the (condition, boost) combination or the
             #     boost_control_spec below are set. If both are set then the global boost
             #     is ignored and the more fine-grained boost_control_spec is applied.
+            # @!attribute [rw] boost_control_spec
+            #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec::ConditionBoostSpec::BoostControlSpec]
+            #     Complex specification for custom ranking based on customer defined
+            #     attribute value.
             class ConditionBoostSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Specification for custom ranking based on customer specified attribute
+              # value. It provides more controls for customized ranking than the simple
+              # (condition, boost) combination above.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     The name of the field whose value will be used to determine the
+              #     boost amount.
+              # @!attribute [rw] attribute_type
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec::ConditionBoostSpec::BoostControlSpec::AttributeType]
+              #     The attribute type to be used to determine the boost amount. The
+              #     attribute value can be derived from the field value of the specified
+              #     field_name. In the case of numerical it is straightforward i.e.
+              #     attribute_value = numerical_field_value. In the case of freshness
+              #     however, attribute_value = (time.now() - datetime_field_value).
+              # @!attribute [rw] interpolation_type
+              #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec::ConditionBoostSpec::BoostControlSpec::InterpolationType]
+              #     The interpolation type to be applied to connect the control points
+              #     listed below.
+              # @!attribute [rw] control_points
+              #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::BoostSpec::ConditionBoostSpec::BoostControlSpec::ControlPoint>]
+              #     The control points used to define the curve. The monotonic function
+              #     (defined through the interpolation_type above) passes through the
+              #     control points listed here.
+              class BoostControlSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # The control points used to define the curve. The curve defined
+                # through these control points can only be monotonically increasing
+                # or decreasing(constant values are acceptable).
+                # @!attribute [rw] attribute_value
+                #   @return [::String]
+                #     Can be one of:
+                #     1. The numerical field value.
+                #     2. The duration spec for freshness:
+                #     The value must be formatted as an XSD `dayTimeDuration` value (a
+                #     restricted subset of an ISO 8601 duration value). The pattern for
+                #     this is: `[nD][T[nH][nM][nS]]`.
+                # @!attribute [rw] boost_amount
+                #   @return [::Float]
+                #     The value between -1 to 1 by which to boost the score if the
+                #     attribute_value evaluates to the value specified above.
+                class ControlPoint
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # The attribute(or function) for which the custom ranking is to be
+                # applied.
+                module AttributeType
+                  # Unspecified AttributeType.
+                  ATTRIBUTE_TYPE_UNSPECIFIED = 0
+
+                  # The value of the numerical field will be used to dynamically update
+                  # the boost amount. In this case, the attribute_value (the x value)
+                  # of the control point will be the actual value of the numerical
+                  # field for which the boost_amount is specified.
+                  NUMERICAL = 1
+
+                  # For the freshness use case the attribute value will be the duration
+                  # between the current time and the date in the datetime field
+                  # specified. The value must be formatted as an XSD `dayTimeDuration`
+                  # value (a restricted subset of an ISO 8601 duration value). The
+                  # pattern for this is: `[nD][T[nH][nM][nS]]`.
+                  # For example, `5D`, `3DT12H30M`, `T24H`.
+                  FRESHNESS = 2
+                end
+
+                # The interpolation type to be applied. Default will be linear
+                # (Piecewise Linear).
+                module InterpolationType
+                  # Interpolation type is unspecified. In this case, it defaults to
+                  # Linear.
+                  INTERPOLATION_TYPE_UNSPECIFIED = 0
+
+                  # Piecewise linear interpolation will be applied.
+                  LINEAR = 1
+                end
+              end
             end
           end
 
@@ -650,6 +744,19 @@ module Google
             #     If this field is set to `false`, all search results are used regardless
             #     of relevance to generate answers. If set to `true`, only queries with
             #     high relevance search results will generate answers.
+            # @!attribute [rw] ignore_jail_breaking_query
+            #   @return [::Boolean]
+            #     Optional. Specifies whether to filter out jail-breaking queries. The
+            #     default value is `false`.
+            #
+            #     Google employs search-query classification to detect jail-breaking
+            #     queries. No summary is returned if the search query is classified as a
+            #     jail-breaking query. A user might add instructions to the query to
+            #     change the tone, style, language, content of the answer, or ask the
+            #     model to act as a different entity, e.g. "Reply in the tone of a
+            #     competing company's CEO". If this field is set to `true`, we skip
+            #     generating summaries for jail-breaking queries and return fallback
+            #     messages instead.
             # @!attribute [rw] model_prompt_spec
             #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec::ModelPromptSpec]
             #     If specified, the spec will be used to modify the prompt provided to
@@ -1132,6 +1239,7 @@ module Google
 
               # The non-summary seeking query ignored case.
               #
+              # Google skips the summary if the query is chit chat.
               # Only used when
               # {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec#ignore_non_summary_seeking_query SummarySpec.ignore_non_summary_seeking_query}
               # is set to `true`.
@@ -1174,6 +1282,14 @@ module Google
               # Google skips the summary if there is a customer policy violation
               # detected. The policy is defined by the customer.
               CUSTOMER_POLICY_VIOLATION = 8
+
+              # The non-answer seeking query ignored case.
+              #
+              # Google skips the summary if the query doesn't have clear intent.
+              # Only used when
+              # [SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_answer_seeking_query]
+              # is set to `true`.
+              NON_SUMMARY_SEEKING_QUERY_IGNORED_V2 = 9
             end
           end
 

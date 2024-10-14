@@ -427,7 +427,7 @@ module Google
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1::Document Document} resource full
         #     name, of the form:
-        #     `projects/{project_id}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
         # @!attribute [rw] uri
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1::Document Document} URI - only

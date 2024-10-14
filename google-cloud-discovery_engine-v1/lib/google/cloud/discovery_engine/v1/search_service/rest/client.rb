@@ -189,7 +189,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -239,6 +239,10 @@ module Google
               #     unset.
               #
               #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+              #   @param one_box_page_size [::Integer]
+              #     The maximum number of results to return for OneBox.
+              #     This applies to each OneBox type individually.
+              #     Default number is 10.
               #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec, ::Hash>]
               #     Specs defining dataStores to filter on in a search call and configurations
               #     for those dataStores. This is only considered for engines with multiple

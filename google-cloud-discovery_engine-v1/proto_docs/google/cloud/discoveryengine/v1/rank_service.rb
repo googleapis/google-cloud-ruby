@@ -53,7 +53,7 @@ module Google
         # @!attribute [rw] ranking_config
         #   @return [::String]
         #     Required. The resource name of the rank service config, such as
-        #     `projects/{project_num}/locations/{location_id}/rankingConfigs/default_ranking_config`.
+        #     `projects/{project_num}/locations/{location}/rankingConfigs/default_ranking_config`.
         # @!attribute [rw] model
         #   @return [::String]
         #     The identifier of the model to use. It is one of:

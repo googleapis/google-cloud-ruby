@@ -27,8 +27,9 @@ module Google
         #     Required. The fully qualified resource name of the model.
         #
         #     Format:
-        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}`
-        #     model must be an alpha-numerical string with limit of 40 characters.
+        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/customTuningModels/{custom_tuning_model}`.
+        #
+        #     Model must be an alpha-numerical string with limit of 40 characters.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the model.
@@ -41,13 +42,17 @@ module Google
         # @!attribute [rw] create_time
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Timestamp]
-        #     Deprecated: timestamp the Model was created at.
+        #     Deprecated: Timestamp the Model was created at.
         # @!attribute [rw] training_start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp the model training was initiated.
         # @!attribute [rw] metrics
         #   @return [::Google::Protobuf::Map{::String => ::Float}]
         #     The metrics of the trained model.
+        # @!attribute [rw] error_message
+        #   @return [::String]
+        #     Currently this is only populated if the model state is
+        #     `INPUT_VALIDATION_FAILED`.
         class CustomTuningModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

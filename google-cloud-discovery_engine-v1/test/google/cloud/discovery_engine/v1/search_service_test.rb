@@ -70,6 +70,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
     page_size = 42
     page_token = "hello world"
     offset = 42
+    one_box_page_size = 42
     data_store_specs = [{}]
     filter = "hello world"
     canonical_filter = "hello world"
@@ -99,6 +100,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal 42, request["offset"]
+      assert_equal 42, request["one_box_page_size"]
       assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::SearchRequest::DataStoreSpec, request["data_store_specs"].first
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["canonical_filter"]
@@ -127,35 +129,35 @@ class ::Google::Cloud::DiscoveryEngine::V1::SearchService::ClientTest < Minitest
       end
 
       # Use hash object
-      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec }) do |response, operation|
+      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, one_box_page_size: one_box_page_size, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec do |response, operation|
+      client.search serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, one_box_page_size: one_box_page_size, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search ::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec) do |response, operation|
+      client.search ::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, one_box_page_size: one_box_page_size, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec }, grpc_options) do |response, operation|
+      client.search({ serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, one_box_page_size: one_box_page_size, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search(::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec), grpc_options) do |response, operation|
+      client.search(::Google::Cloud::DiscoveryEngine::V1::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, image_query: image_query, page_size: page_size, page_token: page_token, offset: offset, one_box_page_size: one_box_page_size, data_store_specs: data_store_specs, filter: filter, canonical_filter: canonical_filter, order_by: order_by, user_info: user_info, language_code: language_code, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels, search_as_you_type_spec: search_as_you_type_spec, session: session, session_spec: session_spec), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

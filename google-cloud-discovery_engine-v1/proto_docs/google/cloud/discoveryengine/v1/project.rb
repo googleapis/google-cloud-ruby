@@ -25,7 +25,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Full resource name of the project, for example
-        #     `projects/{project_number}`.
+        #     `projects/{project}`.
         #     Note that when making requests, project number and project id are both
         #     acceptable, but the server will always respond in project number.
         # @!attribute [r] create_time

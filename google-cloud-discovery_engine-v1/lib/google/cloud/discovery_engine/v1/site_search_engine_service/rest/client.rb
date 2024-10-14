@@ -1030,7 +1030,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload recrawl_uris(site_search_engine: nil, uris: nil)
+              # @overload recrawl_uris(site_search_engine: nil, uris: nil, site_credential: nil)
               #   Pass arguments to `recrawl_uris` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1044,6 +1044,10 @@ module Google
               #     an INVALID_ARGUMENT error is thrown. Each URI should match at least one
               #     {::Google::Cloud::DiscoveryEngine::V1::TargetSite TargetSite} in
               #     `site_search_engine`.
+              #   @param site_credential [::String]
+              #     Optional. Full resource name of the [SiteCredential][], such as
+              #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/siteCredentials/*`.
+              #     Only set to crawl private URIs.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
