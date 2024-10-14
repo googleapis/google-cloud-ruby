@@ -44,6 +44,15 @@ module Google
         #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN ExecuteSqlRequest.QueryMode.PLAN} {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}.
         #     Other fields may or may not be populated, based on the
         #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}.
+        # @!attribute [rw] precommit_token
+        #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
+        #     Optional. A precommit token will be included if the read-write transaction
+        #     is on a multiplexed session.
+        #     The precommit token with the highest sequence number from this transaction
+        #     attempt should be passed to the
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} request for this transaction.
+        #     This feature is not yet supported and will result in an UNIMPLEMENTED
+        #     error.
         class ResultSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,6 +160,15 @@ module Google
         #     only once with the last response in the stream.
         #     This field will also be present in the last response for DML
         #     statements.
+        # @!attribute [rw] precommit_token
+        #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
+        #     Optional. A precommit token will be included if the read-write transaction
+        #     is on a multiplexed session.
+        #     The precommit token with the highest sequence number from this transaction
+        #     attempt should be passed to the
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} request for this transaction.
+        #     This feature is not yet supported and will result in an UNIMPLEMENTED
+        #     error.
         class PartialResultSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
