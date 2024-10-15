@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.1.0 (2024-10-15)
+
+#### Features
+
+* Support for the LicenseManagementService 
+* Support for the modify_order and cancel_order RPCs 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
