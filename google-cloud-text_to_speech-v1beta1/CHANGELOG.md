@@ -1,5 +1,12 @@
 # Release History
 
+### 0.16.0 (2024-10-15)
+
+#### Features
+
+* Support for low-latency journey synthesis 
+* Support for pronunciation customizations 
+
 ### 0.15.2 (2024-08-30)
 
 #### Documentation
