@@ -126,6 +126,12 @@ module Google
         # @!attribute [rw] cloud_sql_instance
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudSQLInstanceInfo]
         #     Display information of a Cloud SQL instance.
+        # @!attribute [rw] redis_instance
+        #   @return [::Google::Cloud::NetworkManagement::V1::RedisInstanceInfo]
+        #     Display information of a Redis Instance.
+        # @!attribute [rw] redis_cluster
+        #   @return [::Google::Cloud::NetworkManagement::V1::RedisClusterInfo]
+        #     Display information of a Redis Cluster.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudFunctionInfo]
         #     Display information of a Cloud Function.
@@ -147,6 +153,10 @@ module Google
         # @!attribute [rw] storage_bucket
         #   @return [::Google::Cloud::NetworkManagement::V1::StorageBucketInfo]
         #     Display information of a Storage Bucket. Used only for return traces.
+        # @!attribute [rw] serverless_neg
+        #   @return [::Google::Cloud::NetworkManagement::V1::ServerlessNegInfo]
+        #     Display information of a Serverless network endpoint group backend. Used
+        #     only for return traces.
         class Step
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -183,6 +193,14 @@ module Google
             # A CloudSQLInstanceInfo is populated with starting instance information.
             START_FROM_CLOUD_SQL_INSTANCE = 22
 
+            # Initial state: packet originating from a Redis instance.
+            # A RedisInstanceInfo is populated with starting instance information.
+            START_FROM_REDIS_INSTANCE = 32
+
+            # Initial state: packet originating from a Redis Cluster.
+            # A RedisClusterInfo is populated with starting Cluster information.
+            START_FROM_REDIS_CLUSTER = 33
+
             # Initial state: packet originating from a Cloud Function.
             # A CloudFunctionInfo is populated with starting function information.
             START_FROM_CLOUD_FUNCTION = 23
@@ -203,6 +221,11 @@ module Google
             # Initial state: packet originating from a published service that uses
             # Private Service Connect. Used only for return traces.
             START_FROM_PSC_PUBLISHED_SERVICE = 30
+
+            # Initial state: packet originating from a serverless network endpoint
+            # group backend. Used only for return traces.
+            # The serverless_neg information is populated.
+            START_FROM_SERVERLESS_NEG = 31
 
             # Config checking state: verify ingress firewall rule.
             APPLY_INGRESS_FIREWALL_RULE = 4
@@ -293,36 +316,46 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Service account authorized for the instance.
+        # @!attribute [rw] psc_network_attachment_uri
+        #   @return [::String]
+        #     URI of the PSC network attachment the NIC is attached to (if relevant).
         class InstanceInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # For display only. Metadata associated with a Compute Engine network.
+        # Next ID: 7
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Name of a Compute Engine network.
         # @!attribute [rw] uri
         #   @return [::String]
         #     URI of a Compute Engine network.
+        # @!attribute [rw] matched_subnet_uri
+        #   @return [::String]
+        #     URI of the subnet matching the source IP address of the test.
         # @!attribute [rw] matched_ip_range
         #   @return [::String]
-        #     The IP range that matches the test.
+        #     The IP range of the subnet matching the source IP address of the test.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The region of the subnet matching the source IP address of the test.
         class NetworkInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # For display only. Metadata associated with a VPC firewall rule, an implied
-        # VPC firewall rule, or a hierarchical firewall policy rule.
+        # VPC firewall rule, or a firewall policy rule.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The display name of the VPC firewall rule. This field is not applicable
-        #     to hierarchical firewall policy rules.
+        #     The display name of the firewall rule. This field might be empty for
+        #     firewall policy rules.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     The URI of the VPC firewall rule. This field is not applicable to
-        #     implied firewall rules or hierarchical firewall policy rules.
+        #     The URI of the firewall rule. This field is not applicable to implied
+        #     VPC firewall rules.
         # @!attribute [rw] direction
         #   @return [::String]
         #     Possible values: INGRESS, EGRESS
@@ -339,14 +372,20 @@ module Google
         # @!attribute [rw] target_tags
         #   @return [::Array<::String>]
         #     The target tags defined by the VPC firewall rule. This field is not
-        #     applicable to hierarchical firewall policy rules.
+        #     applicable to firewall policy rules.
         # @!attribute [rw] target_service_accounts
         #   @return [::Array<::String>]
         #     The target service accounts specified by the firewall rule.
         # @!attribute [rw] policy
         #   @return [::String]
-        #     The hierarchical firewall policy that this rule is associated with.
-        #     This field is not applicable to VPC firewall rules.
+        #     The name of the firewall policy that this rule is associated with.
+        #     This field is not applicable to VPC firewall rules and implied VPC firewall
+        #     rules.
+        # @!attribute [rw] policy_uri
+        #   @return [::String]
+        #     The URI of the firewall policy that this rule is associated with.
+        #     This field is not applicable to VPC firewall rules and implied VPC firewall
+        #     rules.
         # @!attribute [rw] firewall_rule_type
         #   @return [::Google::Cloud::NetworkManagement::V1::FirewallInfo::FirewallRuleType]
         #     The firewall rule's type.
@@ -419,10 +458,10 @@ module Google
         #     Name of a route.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a route.
-        #     Dynamic, peering static and peering dynamic routes do not have an URI.
-        #     Advertised route from Google Cloud VPC to on-premises network also does
-        #     not have an URI.
+        #     URI of a route (if applicable).
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Region of the route (if applicable).
         # @!attribute [rw] dest_ip_range
         #   @return [::String]
         #     Destination IP range of the route.
@@ -456,6 +495,16 @@ module Google
         # @!attribute [rw] ncc_spoke_uri
         #   @return [::String]
         #     URI of a NCC Spoke. NCC_HUB routes only.
+        # @!attribute [rw] advertised_route_source_router_uri
+        #   @return [::String]
+        #     For advertised dynamic routes, the URI of the Cloud Router that advertised
+        #     the corresponding IP prefix.
+        # @!attribute [rw] advertised_route_next_hop_uri
+        #   @return [::String]
+        #     For advertised routes, the URI of their next hop, i.e. the URI of the
+        #     hybrid endpoint (VPN tunnel, Interconnect attachment, NCC router appliance)
+        #     the advertised prefix is advertised through, or URI of the source peered
+        #     network.
         class RouteInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -486,6 +535,10 @@ module Google
 
             # Policy based route.
             POLICY_BASED = 7
+
+            # Advertised route. Synthetic route which is used to transition from the
+            # StartFromPrivateNetwork state in Connectivity tests.
+            ADVERTISED = 101
           end
 
           # Type of next hop:
@@ -601,16 +654,16 @@ module Google
         # For display only. Metadata associated with a Compute Engine forwarding rule.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Name of a Compute Engine forwarding rule.
+        #     Name of the forwarding rule.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Compute Engine forwarding rule.
+        #     URI of the forwarding rule.
         # @!attribute [rw] matched_protocol
         #   @return [::String]
-        #     Protocol defined in the forwarding rule that matches the test.
+        #     Protocol defined in the forwarding rule that matches the packet.
         # @!attribute [rw] matched_port_range
         #   @return [::String]
-        #     Port range defined in the forwarding rule that matches the test.
+        #     Port range defined in the forwarding rule that matches the packet.
         # @!attribute [rw] vip
         #   @return [::String]
         #     VIP of the forwarding rule.
@@ -619,7 +672,21 @@ module Google
         #     Target type of the forwarding rule.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     Network URI. Only valid for Internal Load Balancer.
+        #     Network URI.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Region of the forwarding rule. Set only for regional forwarding rules.
+        # @!attribute [rw] load_balancer_name
+        #   @return [::String]
+        #     Name of the load balancer the forwarding rule belongs to. Empty for
+        #     forwarding rules not related to load balancers (like PSC forwarding rules).
+        # @!attribute [rw] psc_service_attachment_uri
+        #   @return [::String]
+        #     URI of the PSC service attachment this forwarding rule targets (if
+        #     applicable).
+        # @!attribute [rw] psc_google_api_target
+        #   @return [::String]
+        #     PSC Google API target this forwarding rule targets (if applicable).
         class ForwardingRuleInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -840,6 +907,13 @@ module Google
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the target (if applicable).
+        # @!attribute [rw] storage_bucket
+        #   @return [::String]
+        #     Name of the Cloud Storage Bucket the packet is delivered to (if
+        #     applicable).
+        # @!attribute [rw] psc_google_api_target
+        #   @return [::String]
+        #     PSC Google API target the packet is delivered to (if applicable).
         class DeliverInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -868,7 +942,7 @@ module Google
             # Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-services).
             PSC_PUBLISHED_SERVICE = 6
 
-            # Target is all Google APIs that use [Private Service
+            # Target is Google APIs that use [Private Service
             # Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis).
             PSC_GOOGLE_API = 7
 
@@ -893,6 +967,15 @@ module Google
 
             # Target is a Cloud Run revision. Used only for return traces.
             CLOUD_RUN_REVISION = 14
+
+            # Target is a Google-managed service. Used only for return traces.
+            GOOGLE_MANAGED_SERVICE = 15
+
+            # Target is a Redis Instance.
+            REDIS_INSTANCE = 16
+
+            # Target is a Redis Cluster.
+            REDIS_CLUSTER = 17
           end
         end
 
@@ -1003,6 +1086,10 @@ module Google
             # found.
             UNKNOWN_IP = 2
 
+            # Aborted because no endpoint with the packet's destination IP is found in
+            # the Google-managed project.
+            GOOGLE_MANAGED_SERVICE_UNKNOWN_IP = 32
+
             # Aborted because the source IP address doesn't belong to any of the
             # subnets of the source VPC network.
             SOURCE_IP_ADDRESS_NOT_IN_SOURCE_NETWORK = 23
@@ -1018,6 +1105,10 @@ module Google
             # Aborted because user lacks permission to access Network endpoint group
             # endpoint configs required to run the test.
             PERMISSION_DENIED_NO_NEG_ENDPOINT_CONFIGS = 29
+
+            # Aborted because user lacks permission to access Cloud Router configs
+            # required to run the test.
+            PERMISSION_DENIED_NO_CLOUD_ROUTER_CONFIGS = 36
 
             # Aborted because no valid source or destination endpoint is derived from
             # the input test request.
@@ -1073,6 +1164,13 @@ module Google
             # Aborted because tests with a PSC-based Cloud SQL instance as a source are
             # not supported.
             SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20
+
+            # Aborted because tests with a Redis Cluster as a source are not supported.
+            SOURCE_REDIS_CLUSTER_UNSUPPORTED = 34
+
+            # Aborted because tests with a Redis Instance as a source are not
+            # supported.
+            SOURCE_REDIS_INSTANCE_UNSUPPORTED = 35
 
             # Aborted because tests with a forwarding rule as a source are not
             # supported.
@@ -1217,6 +1315,12 @@ module Google
             # Packet sent from or to a Cloud SQL instance that is not in running state.
             CLOUD_SQL_INSTANCE_NOT_RUNNING = 28
 
+            # Packet sent from or to a Redis Instance that is not in running state.
+            REDIS_INSTANCE_NOT_RUNNING = 68
+
+            # Packet sent from or to a Redis Cluster that is not in running state.
+            REDIS_CLUSTER_NOT_RUNNING = 69
+
             # The type of traffic is blocked and the user cannot configure a firewall
             # rule to enable it. See [Always blocked
             # traffic](https://cloud.google.com/vpc/docs/firewalls#blockedtraffic) for
@@ -1282,6 +1386,11 @@ module Google
             # instance to a destination network.
             CLOUD_SQL_INSTANCE_NO_ROUTE = 35
 
+            # Packet was dropped because the Cloud SQL instance requires all
+            # connections to use Cloud SQL connectors and to target the Cloud SQL proxy
+            # port (3307).
+            CLOUD_SQL_CONNECTOR_REQUIRED = 63
+
             # Packet could be dropped because the Cloud Function is not in an active
             # status.
             CLOUD_FUNCTION_NOT_ACTIVE = 22
@@ -1292,6 +1401,14 @@ module Google
             # Packet could be dropped because the VPC connector is not in a running
             # state.
             VPC_CONNECTOR_NOT_RUNNING = 24
+
+            # Packet could be dropped because the traffic from the serverless service
+            # to the VPC connector is not allowed.
+            VPC_CONNECTOR_SERVERLESS_TRAFFIC_BLOCKED = 60
+
+            # Packet could be dropped because the health check traffic to the VPC
+            # connector is not allowed.
+            VPC_CONNECTOR_HEALTH_CHECK_TRAFFIC_BLOCKED = 61
 
             # Packet could be dropped because it was sent from a different region
             # to a regional forwarding without global access.
@@ -1324,6 +1441,10 @@ module Google
             # No NAT subnets are defined for the PSC service attachment.
             NO_NAT_SUBNETS_FOR_PSC_SERVICE_ATTACHMENT = 57
 
+            # PSC endpoint is accessed via NCC, but PSC transitivity configuration is
+            # not yet propagated.
+            PSC_TRANSITIVITY_NOT_PROPAGATED = 64
+
             # The packet sent from the hybrid NEG proxy matches a non-dynamic route,
             # but such a configuration is not supported.
             HYBRID_NEG_NON_DYNAMIC_ROUTE_MATCHED = 55
@@ -1348,6 +1469,75 @@ module Google
 
             # Packet is stuck in a routing loop.
             ROUTING_LOOP = 59
+
+            # Packet is dropped inside a Google-managed service due to being delivered
+            # in return trace to an endpoint that doesn't match the endpoint the packet
+            # was sent from in forward trace. Used only for return traces.
+            DROPPED_INSIDE_GOOGLE_MANAGED_SERVICE = 62
+
+            # Packet is dropped due to a load balancer backend instance not having a
+            # network interface in the network expected by the load balancer.
+            LOAD_BALANCER_BACKEND_INVALID_NETWORK = 65
+
+            # Packet is dropped due to a backend service named port not being defined
+            # on the instance group level.
+            BACKEND_SERVICE_NAMED_PORT_NOT_DEFINED = 66
+
+            # Packet is dropped due to a destination IP range being part of a Private
+            # NAT IP range.
+            DESTINATION_IS_PRIVATE_NAT_IP_RANGE = 67
+
+            # Generic drop cause for a packet being dropped inside a Redis Instance
+            # service project.
+            DROPPED_INSIDE_REDIS_INSTANCE_SERVICE = 70
+
+            # Packet is dropped due to an unsupported port being used to connect to a
+            # Redis Instance. Port 6379 should be used to connect to a Redis Instance.
+            REDIS_INSTANCE_UNSUPPORTED_PORT = 71
+
+            # Packet is dropped due to connecting from PUPI address to a PSA based
+            # Redis Instance.
+            REDIS_INSTANCE_CONNECTING_FROM_PUPI_ADDRESS = 72
+
+            # Packet is dropped due to no route to the destination network.
+            REDIS_INSTANCE_NO_ROUTE_TO_DESTINATION_NETWORK = 73
+
+            # Redis Instance does not have an external IP address.
+            REDIS_INSTANCE_NO_EXTERNAL_IP = 74
+
+            # Packet is dropped due to an unsupported protocol being used to connect to
+            # a Redis Instance. Only TCP connections are accepted by a Redis Instance.
+            REDIS_INSTANCE_UNSUPPORTED_PROTOCOL = 78
+
+            # Generic drop cause for a packet being dropped inside a Redis Cluster
+            # service project.
+            DROPPED_INSIDE_REDIS_CLUSTER_SERVICE = 75
+
+            # Packet is dropped due to an unsupported port being used to connect to a
+            # Redis Cluster. Ports 6379 and 11000 to 13047 should be used to connect to
+            # a Redis Cluster.
+            REDIS_CLUSTER_UNSUPPORTED_PORT = 76
+
+            # Redis Cluster does not have an external IP address.
+            REDIS_CLUSTER_NO_EXTERNAL_IP = 77
+
+            # Packet is dropped due to an unsupported protocol being used to connect to
+            # a Redis Cluster. Only TCP connections are accepted by a Redis Cluster.
+            REDIS_CLUSTER_UNSUPPORTED_PROTOCOL = 79
+
+            # Packet from the non-GCP (on-prem) or unknown GCP network is dropped due
+            # to the destination IP address not belonging to any IP prefix advertised
+            # via BGP by the Cloud Router.
+            NO_ADVERTISED_ROUTE_TO_GCP_DESTINATION = 80
+
+            # Packet from the non-GCP (on-prem) or unknown GCP network is dropped due
+            # to the destination IP address not belonging to any IP prefix included to
+            # the local traffic selector of the VPN tunnel.
+            NO_TRAFFIC_SELECTOR_TO_GCP_DESTINATION = 81
+
+            # Packet from the unknown peered network is dropped due to no known route
+            # from the source network to the destination IP address.
+            NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION = 82
           end
         end
 
@@ -1391,6 +1581,57 @@ module Google
         #   @return [::String]
         #     Region in which the Cloud SQL instance is running.
         class CloudSQLInstanceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with a Cloud Redis Instance.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name of a Cloud Redis Instance.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of a Cloud Redis Instance.
+        # @!attribute [rw] network_uri
+        #   @return [::String]
+        #     URI of a Cloud Redis Instance network.
+        # @!attribute [rw] primary_endpoint_ip
+        #   @return [::String]
+        #     Primary endpoint IP address of a Cloud Redis Instance.
+        # @!attribute [rw] read_endpoint_ip
+        #   @return [::String]
+        #     Read endpoint IP address of a Cloud Redis Instance (if applicable).
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Region in which the Cloud Redis Instance is defined.
+        class RedisInstanceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with a Redis Cluster.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name of a Redis Cluster.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of a Redis Cluster in format
+        #     "projects/\\{project_id}/locations/\\{location}/clusters/\\{cluster_id}"
+        # @!attribute [rw] network_uri
+        #   @return [::String]
+        #     URI of a Redis Cluster network in format
+        #     "projects/\\{project_id}/global/networks/\\{network_id}".
+        # @!attribute [rw] discovery_endpoint_ip_address
+        #   @return [::String]
+        #     Discovery endpoint IP address of a Redis Cluster.
+        # @!attribute [rw] secondary_endpoint_ip_address
+        #   @return [::String]
+        #     Secondary endpoint IP address of a Redis Cluster.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Name of the region in which the Redis Cluster is defined. For example,
+        #     "us-central1".
+        class RedisClusterInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1647,6 +1888,16 @@ module Google
         #   @return [::String]
         #     Cloud Storage Bucket name.
         class StorageBucketInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with the serverless network endpoint
+        # group backend.
+        # @!attribute [rw] neg_uri
+        #   @return [::String]
+        #     URI of the serverless network endpoint group.
+        class ServerlessNegInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

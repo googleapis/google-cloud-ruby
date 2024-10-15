@@ -41,6 +41,20 @@ module Google
               "projects/#{project}/locations/global/connectivityTests/#{test}"
             end
 
+            ##
+            # Create a fully-qualified Project resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_path project:
+              "projects/#{project}"
+            end
+
             extend self
           end
         end
