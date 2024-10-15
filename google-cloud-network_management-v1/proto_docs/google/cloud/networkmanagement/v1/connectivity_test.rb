@@ -24,7 +24,7 @@ module Google
         # A Connectivity Test for a network reachability analysis.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Unique name of the resource using the form:
+        #     Identifier. Unique name of the resource using the form:
         #         `projects/{project_id}/locations/global/connectivityTests/{test_id}`
         # @!attribute [rw] description
         #   @return [::String]
@@ -158,6 +158,14 @@ module Google
         # @!attribute [rw] cloud_sql_instance
         #   @return [::String]
         #     A [Cloud SQL](https://cloud.google.com/sql) instance URI.
+        # @!attribute [rw] redis_instance
+        #   @return [::String]
+        #     A [Redis Instance](https://cloud.google.com/memorystore/docs/redis)
+        #     URI.
+        # @!attribute [rw] redis_cluster
+        #   @return [::String]
+        #     A [Redis Cluster](https://cloud.google.com/memorystore/docs/cluster)
+        #     URI.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudFunctionEndpoint]
         #     A [Cloud Function](https://cloud.google.com/functions).
