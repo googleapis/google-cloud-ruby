@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2024-10-15)
+
+#### Documentation
+
+* Added more information about supplemental data sources ([#27404](https://github.com/googleapis/google-cloud-ruby/issues/27404)) 
+
 ### 0.2.0 (2024-09-30)
 
 #### Features
