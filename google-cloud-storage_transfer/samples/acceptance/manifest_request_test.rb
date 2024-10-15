@@ -29,7 +29,7 @@ describe "Storage Transfer Service manifest_request" do
   let(:manifestfile_path) {"manifest.csv"}
   let(:manifest_location) {"gs://#{source_bucket.name}/#{manifestfile_path}"}
   let(:source_agent_pool_name) {'test-pool'}
-  let(:data_csv) { CSV.generate { |csv|  csv << ["gs://#{source_bucket.name}/#{manifestfile_path}"] } }
+  let(:data_csv) { CSV.generate { |csv|  csv << ["#{manifestfile_path}"] } }
   let(:data_io) { StringIO.new data_csv }
     let(:file) { source_bucket.file(manifestfile_path) || source_bucket.create_file(data_io, manifestfile_path) }
 
