@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-10-15)
+
+#### Features
+
+* Experimental support for fields in arrow format ([#27435](https://github.com/googleapis/google-cloud-ruby/issues/27435)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
