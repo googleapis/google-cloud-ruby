@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 (2024-10-15)
+
+#### Features
+
+* Support asymmetric autoscaling options 
+* The Instance resource reports the compute capacity per ReplicaSelection 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
