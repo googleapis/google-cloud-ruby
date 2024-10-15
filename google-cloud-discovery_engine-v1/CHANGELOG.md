@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.2.0 (2024-10-15)
+
+#### Features
+
+* Support for generate_grounded_content and stream_generate_grounded_content RPCs 
+* Support for setting a site credential in the recrawl_uris RPC 
+* Support for setting the maximum number of OneBox results when searching 
+#### Bug Fixes
+
+* Fixed identityMappingStores resource URLs 
+
 ### 1.1.0 (2024-09-11)
 
 #### Features
