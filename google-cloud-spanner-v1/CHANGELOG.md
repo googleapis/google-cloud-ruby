@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2024-10-15)
+
+#### Features
+
+* Support for read/write transactions on multiplexed sessions ([#27426](https://github.com/googleapis/google-cloud-ruby/issues/27426)) 
+
 ### 1.1.0 (2024-10-01)
 
 #### Features
