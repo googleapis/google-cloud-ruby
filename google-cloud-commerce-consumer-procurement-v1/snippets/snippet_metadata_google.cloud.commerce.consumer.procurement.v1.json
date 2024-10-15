@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-commerce-consumer-procurement-v1",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "language": "RUBY",
     "apis": [
       {
