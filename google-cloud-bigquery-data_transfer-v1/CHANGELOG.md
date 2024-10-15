@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-10-15)
+
+#### Features
+
+* Added updated schedule options and error details to TransferConfig ([#27387](https://github.com/googleapis/google-cloud-ruby/issues/27387)) 
+
 ### 1.0.3 (2024-09-11)
 
 #### Documentation
