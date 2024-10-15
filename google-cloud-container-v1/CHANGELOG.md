@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2024-10-15)
+
+#### Features
+
+* Added storage pools field to NodePool API ([#27429](https://github.com/googleapis/google-cloud-ruby/issues/27429)) 
+
 ### 1.2.0 (2024-08-30)
 
 #### Features
