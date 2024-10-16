@@ -14,74 +14,76 @@
 
 require_relative "helper"
 require_relative "../manifest_request"
-require "google/cloud/storage_transfer"
-
-require "stringio"
 require "csv"
 
 
 describe "Storage Transfer Service manifest_request" do
-  let(:storage_transfer) {Google::Cloud::StorageTransfer.new}
   let(:project) { Google::Cloud::Storage.new }
-  let(:source_bucket) { create_bucket_helper random_bucket_name}
+  let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
-  let(:my_file_path) {"testfile.jpeg"}
-  let(:manifestfile_path) {"manifest.csv"}
-  let(:manifest_location) {"gs://#{source_bucket.name}/#{manifestfile_path}"}
-  let(:source_agent_pool_name) {'test-pool'}
-  let(:data_csv) { CSV.generate { |csv|  csv << ["#{manifestfile_path}"] } }
+  let(:root_directory) { "/tmp" }
+  let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
+  let(:dummy_file_path) { "/tmp/#{dummy_file_name}" }
+  let(:create_dummy_file) {
+    # create dummy file 
+    File.open dummy_file_path, "w" do |file|
+      file.write "this is dummy"
+    end
+  }
+  let(:manifestfile_path) { "manifest.csv" }
+  let(:manifest_location) { "gs://#{source_bucket.name}/#{manifestfile_path}" }
+  let(:agent_pool_name) { "" }
+  let(:data_csv) {
+    create_dummy_file
+    # create manifestcsv file
+    CSV.generate { |csv| csv << [dummy_file_name] }
+  }
   let(:data_io) { StringIO.new data_csv }
-    let(:file) { source_bucket.file(manifestfile_path) || source_bucket.create_file(data_io, manifestfile_path) }
-
-  # let(:agent_pool) {
-  #   Google::Cloud::StorageTransfer.new.create_agent_pool(
-  #     agent_pool_name: source_agent_pool_name
-  #   )
-  # }
+  let(:create_manifest_file) { source_bucket.file(manifestfile_path) || source_bucket.create_file(data_io, manifestfile_path) }
 
   before do
-    file_content = "This is a dummy file ."
-    string_io = StringIO.new(file_content)
-    source_bucket.create_file string_io, my_file_path
-    puts "#{my_file_path}  file uploaded to GCS at gs://#{source_bucket.name}/#{my_file_path}"
-
-    file
-    puts "#{manifestfile_path}  file uploaded to GCS at gs://#{source_bucket.name}/#{manifestfile_path}"
+    create_manifest_file
     grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
     grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
-
-
   end
-  # after do
-  #   delete_bucket_helper source_bucket.name
-  #   delete_bucket_helper sink_bucket.name
-  # end
+  after do
+    # delete dummy file
+    if File.exist? dummy_file_path
+      File.delete dummy_file_path
+      puts "File deleted: #{dummy_file_path}"
+    else
+      puts "File not found: #{dummy_file_path}"
+    end
+    delete_bucket_helper source_bucket.name
+    delete_bucket_helper sink_bucket.name
+  end
 
-  # it "creates a transfer job" do
- 
-  #   out, _err = capture_io do
-  #     retry_resource_exhaustion do
-  #       manifest_request project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name , manifest_location: manifest_location
-  #     end
-  #   end
-  #   assert_includes out, "transferJobs"
-  #   job_name = out.scan(%r{transferJobs/\d+})[0]
-
-  #   #  file = sink_bucket.file(my_file_path)
-  #   #  assert file
-
-  #   # delete_transfer_job project_id: project.project_id, job_name: job_name
-  # end
+  it "creates a transfer job" do
+    out, _err = capture_io do
+      retry_resource_exhaustion do
+        manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
+      end
+    end
+    assert_includes out, "transferJobs"
+    job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
+    delete_transfer_job project_id: project.project_id, job_name: job_name
+  end
 
   it "checks the file is created in destination bucket" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        manifest_request project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name , manifest_location: manifest_location
+        manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
-     file = sink_bucket.file(my_file_path)
-     assert file
+
+    # Object takes time to be created on bucket hence retrying
+    file, _err = capture_io do
+      retry_resource_exhaustion do
+        sink_bucket.file dummy_file_name
+      end
+    end
+    assert file
+    job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
+    delete_transfer_job project_id: project.project_id, job_name: job_name
   end
 end
-
-
