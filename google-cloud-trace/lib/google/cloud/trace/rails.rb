@@ -85,6 +85,7 @@ module Google
         config.google_cloud.trace.notifications = DEFAULT_NOTIFICATIONS.dup
         config.google_cloud.trace.max_data_length =
           Google::Cloud::Trace::Notifications::DEFAULT_MAX_DATA_LENGTH
+        config.google_cloud.trace.default_labels = {}
 
         initializer "Google.Cloud.Trace" do |app|
           self.class.consolidate_rails_config app.config
@@ -168,6 +169,9 @@ module Google
             end
             config.sampler ||= trace_config.sampler
             config.span_id_generator ||= trace_config.span_id_generator
+            if trace_config.default_labels.present?
+              config.default_labels = trace_config.default_labels
+            end
           end
         end
 
