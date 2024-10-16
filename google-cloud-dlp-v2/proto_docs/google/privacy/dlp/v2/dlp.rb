@@ -6375,13 +6375,14 @@ module Google
         #     locations.
         # @!attribute [rw] dataset_id
         #   @return [::String]
-        #     If the resource is BigQuery, the  dataset ID.
+        #     If the resource is BigQuery, the dataset ID.
         # @!attribute [rw] table_id
         #   @return [::String]
-        #     If the resource is BigQuery, the BigQuery table ID.
+        #     The table ID.
         # @!attribute [rw] full_resource
         #   @return [::String]
-        #     The resource name of the resource profiled.
+        #     The Cloud Asset Inventory resource that was profiled in order to generate
+        #     this TableDataProfile.
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name
         # @!attribute [rw] profile_status
         #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
@@ -6536,15 +6537,15 @@ module Google
         #     The Google Cloud project ID that owns the profiled resource.
         # @!attribute [rw] dataset_location
         #   @return [::String]
-        #     The BigQuery location where the dataset's data is stored.
+        #     If supported, the location where the dataset's data is stored.
         #     See https://cloud.google.com/bigquery/docs/locations for supported
-        #     locations.
+        #     BigQuery locations.
         # @!attribute [rw] dataset_id
         #   @return [::String]
-        #     The BigQuery dataset ID.
+        #     The BigQuery dataset ID, if the resource profiled is a BigQuery table.
         # @!attribute [rw] table_id
         #   @return [::String]
-        #     The BigQuery table ID.
+        #     The table ID.
         # @!attribute [rw] column
         #   @return [::String]
         #     The name of the column.
@@ -7464,8 +7465,8 @@ module Google
           PROFILE_GENERATION_UPDATE = 2
         end
 
-        # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
-        # and SNAPSHOT are not supported.
+        # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW, and
+        # non-BigLake external tables are not supported.
         module BigQueryTableTypeCollection
           # Unused.
           BIG_QUERY_COLLECTION_UNSPECIFIED = 0
@@ -7483,8 +7484,8 @@ module Google
           BIG_QUERY_COLLECTION_ONLY_SUPPORTED_TYPES = 2
         end
 
-        # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW,
-        # SNAPSHOT, and non-BigLake external tables are not supported.
+        # Over time new types may be added. Currently VIEW, MATERIALIZED_VIEW, and
+        # non-BigLake external tables are not supported.
         module BigQueryTableType
           # Unused.
           BIG_QUERY_TABLE_TYPE_UNSPECIFIED = 0
@@ -7494,6 +7495,9 @@ module Google
 
           # A table that references data stored in Cloud Storage.
           BIG_QUERY_TABLE_TYPE_EXTERNAL_BIG_LAKE = 2
+
+          # A snapshot of a BigQuery table.
+          BIG_QUERY_TABLE_TYPE_SNAPSHOT = 3
         end
 
         # How frequently data profiles can be updated. New options can be added at a
