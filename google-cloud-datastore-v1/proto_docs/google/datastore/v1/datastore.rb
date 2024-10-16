@@ -429,6 +429,11 @@ module Google
         #     The update time of the entity that this mutation is being applied
         #     to. If this does not match the current update time on the server, the
         #     mutation conflicts.
+        # @!attribute [rw] conflict_resolution_strategy
+        #   @return [::Google::Cloud::Datastore::V1::Mutation::ConflictResolutionStrategy]
+        #     The strategy to use when a conflict is detected. Defaults to
+        #     `SERVER_VALUE`.
+        #     If this is set, then `conflict_detection_strategy` must also be set.
         # @!attribute [rw] property_mask
         #   @return [::Google::Cloud::Datastore::V1::PropertyMask]
         #     The properties to write in this mutation.
@@ -439,9 +444,126 @@ module Google
         #     If the entity already exists, only properties referenced in the mask are
         #     updated, others are left untouched.
         #     Properties referenced in the mask but not in the entity are deleted.
+        # @!attribute [rw] property_transforms
+        #   @return [::Array<::Google::Cloud::Datastore::V1::PropertyTransform>]
+        #     Optional. The transforms to perform on the entity.
+        #
+        #     This field can be set only when the operation is `insert`, `update`,
+        #     or `upsert`. If present, the transforms are be applied to the entity
+        #     regardless of the property mask, in order, after the operation.
         class Mutation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The possible ways to resolve a conflict detected in a mutation.
+          module ConflictResolutionStrategy
+            # Unspecified. Defaults to `SERVER_VALUE`.
+            STRATEGY_UNSPECIFIED = 0
+
+            # The server entity is kept.
+            SERVER_VALUE = 1
+
+            # The whole commit request fails.
+            FAIL = 3
+          end
+        end
+
+        # A transformation of an entity property.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Optional. The name of the property.
+        #
+        #     Property paths (a list of property names separated by dots (`.`)) may be
+        #     used to refer to properties inside entity values. For example `foo.bar`
+        #     means the property `bar` inside the entity property `foo`.
+        #
+        #     If a property name contains a dot `.` or a backlslash `\`, then that name
+        #     must be escaped.
+        # @!attribute [rw] set_to_server_value
+        #   @return [::Google::Cloud::Datastore::V1::PropertyTransform::ServerValue]
+        #     Sets the property to the given server value.
+        # @!attribute [rw] increment
+        #   @return [::Google::Cloud::Datastore::V1::Value]
+        #     Adds the given value to the property's current value.
+        #
+        #     This must be an integer or a double value.
+        #     If the property is not an integer or double, or if the property does not
+        #     yet exist, the transformation will set the property to the given value.
+        #     If either of the given value or the current property value are doubles,
+        #     both values will be interpreted as doubles. Double arithmetic and
+        #     representation of double values follows IEEE 754 semantics.
+        #     If there is positive/negative integer overflow, the property is resolved
+        #     to the largest magnitude positive/negative integer.
+        # @!attribute [rw] maximum
+        #   @return [::Google::Cloud::Datastore::V1::Value]
+        #     Sets the property to the maximum of its current value and the given
+        #     value.
+        #
+        #     This must be an integer or a double value.
+        #     If the property is not an integer or double, or if the property does not
+        #     yet exist, the transformation will set the property to the given value.
+        #     If a maximum operation is applied where the property and the input value
+        #     are of mixed types (that is - one is an integer and one is a double)
+        #     the property takes on the type of the larger operand. If the operands are
+        #     equivalent (e.g. 3 and 3.0), the property does not change.
+        #     0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
+        #     zero input value is always the stored value.
+        #     The maximum of any numeric value x and NaN is NaN.
+        # @!attribute [rw] minimum
+        #   @return [::Google::Cloud::Datastore::V1::Value]
+        #     Sets the property to the minimum of its current value and the given
+        #     value.
+        #
+        #     This must be an integer or a double value.
+        #     If the property is not an integer or double, or if the property does not
+        #     yet exist, the transformation will set the property to the input value.
+        #     If a minimum operation is applied where the property and the input value
+        #     are of mixed types (that is - one is an integer and one is a double)
+        #     the property takes on the type of the smaller operand. If the operands
+        #     are equivalent (e.g. 3 and 3.0), the property does not change. 0, 0.0,
+        #     and -0.0 are all zero. The minimum of a zero stored value and zero input
+        #     value is always the stored value. The minimum of any numeric value x and
+        #     NaN is NaN.
+        # @!attribute [rw] append_missing_elements
+        #   @return [::Google::Cloud::Datastore::V1::ArrayValue]
+        #     Appends the given elements in order if they are not already present in
+        #     the current property value.
+        #     If the property is not an array, or if the property does not yet exist,
+        #     it is first set to the empty array.
+        #
+        #     Equivalent numbers of different types (e.g. 3L and 3.0) are
+        #     considered equal when checking if a value is missing.
+        #     NaN is equal to NaN, and the null value is equal to the null value.
+        #     If the input contains multiple equivalent values, only the first will
+        #     be considered.
+        #
+        #     The corresponding transform result will be the null value.
+        # @!attribute [rw] remove_all_from_array
+        #   @return [::Google::Cloud::Datastore::V1::ArrayValue]
+        #     Removes all of the given elements from the array in the property.
+        #     If the property is not an array, or if the property does not yet exist,
+        #     it is set to the empty array.
+        #
+        #     Equivalent numbers of different types (e.g. 3L and 3.0) are
+        #     considered equal when deciding whether an element should be removed.
+        #     NaN is equal to NaN, and the null value is equal to the null value.
+        #     This will remove all equivalent values if there are duplicates.
+        #
+        #     The corresponding transform result will be the null value.
+        class PropertyTransform
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A value that is calculated by the server.
+          module ServerValue
+            # Unspecified. This value must not be used.
+            SERVER_VALUE_UNSPECIFIED = 0
+
+            # The time at which the server processed the request, with millisecond
+            # precision. If used on multiple properties (same or different entities)
+            # in a transaction, all the properties will get the same server timestamp.
+            REQUEST_TIME = 1
+          end
         end
 
         # The result of applying a mutation.
@@ -469,6 +591,11 @@ module Google
         #   @return [::Boolean]
         #     Whether a conflict was detected for this mutation. Always false when a
         #     conflict detection strategy field is not set in the mutation.
+        # @!attribute [rw] transform_results
+        #   @return [::Array<::Google::Cloud::Datastore::V1::Value>]
+        #     The results of applying each
+        #     {::Google::Cloud::Datastore::V1::PropertyTransform PropertyTransform}, in the same
+        #     order of the request.
         class MutationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
