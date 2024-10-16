@@ -42,7 +42,7 @@ describe "topics" do
   let(:service_account_email) { "serviceAccount:kokoro@#{pubsub.project}.iam.gserviceaccount.com" }
   let(:topic_id) { random_topic_id }
   let(:cloud_storage_ingestion_topic_id) { random_topic_id }
-  let(:cloud_storage_bucket) { "pubsub-ruby-sample-test-bucket" }
+  let(:cloud_storage_bucket) { "pubsub-ruby-sample-bucket" }
   let(:subscription_id) { random_subscription_id }
   let(:dead_letter_topic_id) { random_topic_id }
 
@@ -62,6 +62,7 @@ describe "topics" do
     assert_equal "projects/#{pubsub.project}/topics/#{topic_id}", topic.name
 
     # pubsub_create_topic_with_cloud_storage_ingestion
+    # This test requires the existence of GCS bucket gs://pubsub-ruby-sample-bucket in `pubsub.project` with the P4SA for `pubsub.project` having the "storage.admin" role on the GCS bucket.
     assert_output "Topic projects/#{pubsub.project}/topics/#{cloud_storage_ingestion_topic_id} with Cloud Storage ingestion settings created.\n" do
       create_topic_with_cloud_storage_ingestion topic_id: cloud_storage_ingestion_topic_id,
                                                 bucket: cloud_storage_bucket,
