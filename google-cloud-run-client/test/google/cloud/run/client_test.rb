@@ -33,6 +33,25 @@ class Google::Cloud::Run::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_builds_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Run.builds transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Run::V2::Builds::Client, client
+    end
+  end
+
+  def test_builds_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Run.builds transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Run::V2::Builds::Rest::Client, client
+    end
+  end
+
   def test_executions_grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
