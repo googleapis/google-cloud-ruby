@@ -14,62 +14,62 @@
 
 # [Start storagetransfer_transfer_to_nearline]
 def create_daily_nearline_30_day_migration project_id:, gcs_source_bucket:, gcs_sink_bucket:, start_date:
-    # Your Google Cloud Project ID
-    # project_id = "your-project_id"
-  
-    # The name of the source GCS bucket to transfer objects from
-    # gcs_source_bucket = "your-source-gcs-source-bucket"
-  
-    # The name of the  GCS bucket to transfer objects to
-    # gcs_sink_bucket = "your-sink-gcs-bucket"
-  
-    require "google/cloud/storage_transfer"
-  
-    transfer_job = {
-      project_id: project_id,
-      transfer_spec: {
-        gcs_data_source: {
-          bucket_name: gcs_source_bucket
-        },
-        gcs_data_sink: {
-          bucket_name: gcs_sink_bucket
-        },
-        object_conditions: {
-            min_time_elapsed_since_last_modification: {
-                seconds: 2592000  # 30 days
-              }
-        },
-        transfer_options: {
-            delete_objects_from_source_after_transfer: true,
+  # Your Google Cloud Project ID
+  # project_id = "your-project_id"
+
+  # The name of the source GCS bucket to transfer objects from
+  # gcs_source_bucket = "your-source-gcs-source-bucket"
+
+  # The name of the  GCS bucket to transfer objects to
+  # gcs_sink_bucket = "your-nearline-gcs-bucket"
+
+  # Time when you want to schedule the job
+  # start_date = Time.now
+
+  require "google/cloud/storage_transfer"
+
+  transfer_job = {
+    project_id: project_id,
+    transfer_spec: {
+      gcs_data_source: {
+        bucket_name: gcs_source_bucket
+      },
+      gcs_data_sink: {
+        bucket_name: gcs_sink_bucket
+      },
+      object_conditions: {
+        min_time_elapsed_since_last_modification: {
+          seconds: 259_200_0 # 30 days
         }
       },
-      schedule: {
-        schedule_start_date: {
-            day: start_date.day ,
-            month: start_date.month - 1,
-            year: start_date.year
-        }
-
+      transfer_options: {
+        delete_objects_from_source_after_transfer: true # Deletes the object from source bucket after transfer
+      }
+    },
+    schedule: {
+      schedule_start_date: {
+        year: start_date.year,
+        month: start_date.month,
+        day: start_date.day
       },
-      status: :ENABLED
-    }
-  
-    client = Google::Cloud::StorageTransfer.storage_transfer_service
-  
-    transfer_job_response = client.create_transfer_job transfer_job: transfer_job
-  
-    run_request = {
-      project_id: project_id,
-      job_name: transfer_job_response.name
-    }
-    client.run_transfer_job run_request
-  
-    puts "Created and ran transfer job between #{gcs_source_bucket} and #{gcs_sink_bucket} with name #{transfer_job_response.name}"
-  end
-  # [END storagetransfer_transfer_to_nearline]
+      start_time_of_day: {
+        hours: start_date.hour,
+        minutes: start_date.min,
+        seconds: start_date.sec + 1
+      }
+    },
+    status: :ENABLED
+  }
 
-  
-  if $PROGRAM_NAME == __FILE__
-    create_daily_nearline_30_day_migration project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, start_date: ARGV.shift
-  end
-  
+  client = Google::Cloud::StorageTransfer.storage_transfer_service
+
+  transfer_job_response = client.create_transfer_job transfer_job: transfer_job
+
+  # This is a scheduled job hence there is no need to run the job seprately
+
+  puts "Created transfer job between #{gcs_source_bucket} and nearline bucket #{gcs_sink_bucket} with name #{transfer_job_response.name}"
+end
+# [END storagetransfer_transfer_to_nearline]
+if $PROGRAM_NAME == __FILE__
+  create_daily_nearline_30_day_migration project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, start_date: ARGV.shift
+end
