@@ -1,5 +1,11 @@
 # Release History
 
+### 1.53.0 (2024-10-17)
+
+#### Features
+
+* fetch file and bucket details from url ([#27322](https://github.com/googleapis/google-cloud-ruby/issues/27322)) 
+
 ### 1.52.0 (2024-05-31)
 
 #### Features
