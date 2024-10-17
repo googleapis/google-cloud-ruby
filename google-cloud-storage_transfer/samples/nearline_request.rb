@@ -36,7 +36,7 @@ def create_daily_nearline_30_day_migration project_id:, gcs_source_bucket:, gcs_
         },
         object_conditions: {
             min_time_elapsed_since_last_modification: {
-                seconds: 86400  # Minimum time of 1 day (24 hours)
+                seconds: 2592000  # 30 days
               }
         },
         transfer_options: {
@@ -45,8 +45,8 @@ def create_daily_nearline_30_day_migration project_id:, gcs_source_bucket:, gcs_
       },
       schedule: {
         schedule_start_date: {
-            day: start_date.day,
-            month: start_date.month,
+            day: start_date.day ,
+            month: start_date.month - 1,
             year: start_date.year
         }
 
