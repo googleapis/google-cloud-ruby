@@ -17,6 +17,7 @@ require "google/cloud/storage_transfer"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
+require "pry"
 
 def grant_sts_permissions project_id:, bucket_name:
   client = Google::Cloud::StorageTransfer.storage_transfer_service
@@ -94,6 +95,15 @@ def delete_bucket_helper bucket_name
 
     bucket.files.each(&:delete)
     bucket.delete
+  end
+end
+
+def retry_untill_tranfer_is_done
+  5.times do
+    result = yield
+    return result if result.is_a?(Google::Cloud::Storage::File)
+    puts "retry"
+    sleep rand(5..10)
   end
 end
 
