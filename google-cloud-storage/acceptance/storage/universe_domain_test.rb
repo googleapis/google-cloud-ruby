@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "storage_helper"
-require "pry"
 
 describe Google::Cloud::Storage, :universe_domain do
   
