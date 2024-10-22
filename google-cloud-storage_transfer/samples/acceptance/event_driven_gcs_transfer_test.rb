@@ -11,18 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-require "google/cloud/pubsub"
-require "pry"
-
 require_relative "helper"
 require_relative "../event_driven_gcs_transfer"
+require "google/cloud/pubsub"
+
 
 describe "Storage Transfer Service Event Driven Gcs Transfer" do
   let(:project) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
   let :pubsub do
-    require "google/cloud/pubsub"
     Google::Cloud::Pubsub.new
   end
   let :topic do
@@ -64,7 +62,7 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
 
   it "creates a transfer job" do
     out, _err = capture_io do
-      create_event_driven_gcs_transfer project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name#{}, notifications: source_bucket.notifications
+      create_event_driven_gcs_transfer project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name
     end
     assert_includes out, "transferJobs"
     binding.pry
