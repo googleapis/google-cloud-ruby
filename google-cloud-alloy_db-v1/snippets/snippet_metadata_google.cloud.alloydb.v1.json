@@ -252,6 +252,46 @@
       ]
     },
     {
+      "region_tag": "alloydb_v1_generated_AlloyDBAdmin_SwitchoverCluster_sync",
+      "title": "Snippet for the switchover_cluster call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#switchover_cluster.",
+      "file": "alloy_db_admin/switchover_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "switchover_cluster",
+        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#switchover_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "SwitchoverCluster",
+          "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin.SwitchoverCluster",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "alloydb_v1_generated_AlloyDBAdmin_RestoreCluster_sync",
       "title": "Snippet for the restore_cluster call in the AlloyDBAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#restore_cluster.",
@@ -727,6 +767,46 @@
         {
           "start": 20,
           "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ExecuteSql_sync",
+      "title": "Snippet for the execute_sql call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#execute_sql.",
+      "file": "alloy_db_admin/execute_sql.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_sql",
+        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#execute_sql",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1::ExecuteSqlResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ExecuteSql",
+          "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin.ExecuteSql",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]
@@ -1247,6 +1327,46 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "alloydb_v1_generated_AlloyDBAdmin_ListDatabases_sync",
+      "title": "Snippet for the list_databases call in the AlloyDBAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_databases.",
+      "file": "alloy_db_admin/list_databases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_databases",
+        "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client#list_databases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AlloyDB::V1::ListDatabasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AlloyDB::V1::ListDatabasesResponse",
+        "client": {
+          "short_name": "AlloyDBAdmin::Client",
+          "full_name": "::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabases",
+          "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin.ListDatabases",
+          "service": {
+            "short_name": "AlloyDBAdmin",
+            "full_name": "google.cloud.alloydb.v1.AlloyDBAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
           "type": "FULL"
         }
       ]
