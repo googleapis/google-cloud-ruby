@@ -38,32 +38,8 @@ describe "Storage Transfer Service To Nearline Transfer" do
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
+    # delete transfer job
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
 
-  # it "checks the file is created in destination bucket" do
-  #   out, _err = capture_io do
-  #     retry_resource_exhaustion do
-  #       create_daily_nearline_30_day_migration project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
-  #     end
-  #   end
-  #   # Object takes time to be created on bucket hence retrying
-  #   # file, _err = capture_io do
-  #   #   retry_resource_exhaustion do
-  #   #     sink_bucket.file dummy_file_name
-  #   #   end
-  #   # end
-
-  #   file, _err = capture_io do
-  #     retry_resource_exhaustion do
-  #       sink_bucket.file dummy_file_name
-  #     end
-  #   end
-
-  #   #{}assert sink_bucket.file dummy_file_name
-  #  #{} binding.pry
-  #    assert !file.empty?
-  #   job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-  #   delete_transfer_job project_id: project.project_id, job_name: job_name
-  # end
 end
