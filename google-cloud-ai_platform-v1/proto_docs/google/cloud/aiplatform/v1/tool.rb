@@ -135,10 +135,10 @@ module Google
         end
 
         # Retrieve from Vertex AI Search datastore for grounding.
-        # See https://cloud.google.com/vertex-ai-search-and-conversation
+        # See https://cloud.google.com/products/agent-builder
         # @!attribute [rw] datastore
         #   @return [::String]
-        #     Required. Fully-qualified Vertex AI Search's datastore resource ID.
+        #     Required. Fully-qualified Vertex AI Search data store resource ID.
         #     Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{dataStore}`
         class VertexAISearch
