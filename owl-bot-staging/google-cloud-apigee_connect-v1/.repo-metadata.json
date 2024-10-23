@@ -1,0 +1,18 @@
+{
+    "api_id": "apigeeconnect.googleapis.com",
+    "api_shortname": "apigeeconnect",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_connect-v1/latest",
+    "distribution_name": "google-cloud-apigee_connect-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "apigeeconnect",
+    "name_pretty": "Apigee Connect V1 API",
+    "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.4/apigee-connect",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Apigee Connect allows the Apigee hybrid management plane to connect securely to the MART service in the runtime plane without requiring you to expose the MART endpoint on the internet. If you use Apigee Connect, you do not need to configure the MART ingress gateway with a host alias and an authorized DNS certificate. Note that google-cloud-apigee_connect-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-apigee_connect instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "APIGEE_CONNECT",
+    "ruby-cloud-product-url": "https://cloud.google.com/apigee/docs/hybrid/v1.4/apigee-connect",
+    "library_type": "GAPIC_AUTO"
+}
