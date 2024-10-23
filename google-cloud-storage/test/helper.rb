@@ -144,6 +144,7 @@ class MockStorage < Minitest::Spec
                        name=random_file_path,
                        generation="1234567890",
                        kms_key_name="path/to/encryption_key_name",
+                       restore_token: nil,
                        custom_time: nil,
                        retention_params: nil,
                        override_unlocked_retention: nil,
@@ -175,6 +176,7 @@ class MockStorage < Minitest::Spec
       "kmsKeyName" => kms_key_name,
       "temporaryHold" => true,
       "eventBasedHold" => true,
+      "restore_token" => restore_token,
       "retentionExpirationTime" => Time.now,
       "retention" => file_retention_hash(retention_params),
       "overrideUnlockedRetention" => override_unlocked_retention,
@@ -494,6 +496,7 @@ class MockStorage < Minitest::Spec
   end
 
   def restore_object_args copy_source_acl: nil,
+                          restore_token: nil,
                           if_generation_match: nil,
                           if_generation_not_match: nil,
                           if_metageneration_match: nil,

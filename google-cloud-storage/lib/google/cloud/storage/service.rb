@@ -661,6 +661,7 @@ module Google
         def restore_file bucket_name,
                          file_path,
                          generation,
+                         restore_token: nil,
                          copy_source_acl: nil,
                          if_generation_match: nil,
                          if_generation_not_match: nil,
@@ -678,6 +679,7 @@ module Google
 
           execute do
             service.restore_object bucket_name, file_path, generation,
+                                   restore_token: restore_token,
                                    copy_source_acl: copy_source_acl,
                                    if_generation_match: if_generation_match,
                                    if_generation_not_match: if_generation_not_match,

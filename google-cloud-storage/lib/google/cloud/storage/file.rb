@@ -1589,6 +1589,10 @@ module Google
           true
         end
 
+        def restore_token
+          @gapi.restore_token
+        end
+
         # Mode of object level retention configuration.
         # Valid values are 'Locked' or 'Unlocked'
         #

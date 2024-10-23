@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "pry"
 
 describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
@@ -113,6 +114,44 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
 
     _(file.name).must_equal file_name
     _(file.bucket).must_equal bucket_name
+  end
+
+  describe "for hierarchical namespace buckets" do
+    
+    let(:bucket_hash) { 
+      hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: true)
+
+      random_bucket_hash name: bucket_name, hierarchical_namespace: hierarchical_namespace
+    }
+
+    let(:restore_token){ "test_token" }
+
+    before do
+    end
+
+    it "can restore soft deleted file" do
+      mock = Minitest::Mock.new
+      mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
+      file.service.mocked_service = mock
+      file.delete
+      mock.verify
+
+      mock = Minitest::Mock.new
+      mock.expect :restore_object, restore_file_gapi(bucket_name, file_name),
+        [bucket_name, file.name, generation],restore_token: restore_token, **restore_object_args()
+      bucket.service.mocked_service = mock
+
+      binding.pry
+      file = bucket.restore_file file_name, generation, restore_token: restore_token
+      mock.verify
+
+      _(file.name).must_equal file_name
+      _(file.bucket).must_equal bucket_name
+    end
+
+
+    
+
   end
 
   def patch_bucket_gapi soft_delete_policy: nil
