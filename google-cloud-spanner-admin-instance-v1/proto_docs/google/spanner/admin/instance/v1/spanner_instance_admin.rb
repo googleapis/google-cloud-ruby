@@ -430,6 +430,17 @@ module Google
             # @!attribute [rw] edition
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance::Edition]
             #     Optional. The `Edition` of the current instance.
+            # @!attribute [rw] default_backup_schedule_type
+            #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance::DefaultBackupScheduleType]
+            #     Optional. Controls the default backup behavior for new databases within the
+            #     instance.
+            #
+            #     Note that `AUTOMATIC` is not permitted for free instances, as backups and
+            #     backup schedules are not allowed for free instances.
+            #
+            #     In the `GetInstance` or `ListInstances` response, if the value of
+            #     default_backup_schedule_type is unset or NONE, no default backup
+            #     schedule will be created for new databases within the instance.
             class Instance
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -472,6 +483,24 @@ module Google
 
                 # Enterprise Plus edition.
                 ENTERPRISE_PLUS = 3
+              end
+
+              # Indicates the default backup behavior for new databases within the
+              # instance.
+              module DefaultBackupScheduleType
+                # Not specified.
+                DEFAULT_BACKUP_SCHEDULE_TYPE_UNSPECIFIED = 0
+
+                # No default backup schedule will be created automatically on creation of a
+                # database within the instance.
+                NONE = 1
+
+                # A default backup schedule will be created automatically on creation of a
+                # database within the instance. The default backup schedule creates a full
+                # backup every 24 hours and retains the backup for a period of 7 days. Once
+                # created, the default backup schedule can be edited/deleted similar to any
+                # other backup schedule.
+                AUTOMATIC = 2
               end
             end
 
