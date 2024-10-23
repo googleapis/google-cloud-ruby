@@ -55,7 +55,7 @@ def create_daily_nearline_30_day_migration project_id:, gcs_source_bucket:, gcs_
       start_time_of_day: {
         hours: start_date.hour,
         minutes: start_date.min,
-        seconds: start_date.sec + 1
+        seconds: start_date.sec + 5
       }
     },
     status: :ENABLED
