@@ -17,7 +17,6 @@ require "google/cloud/storage_transfer"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
-require "pry"
 
 def grant_sts_permissions project_id:, bucket_name:
   client = Google::Cloud::StorageTransfer.storage_transfer_service
@@ -103,7 +102,7 @@ def retry_untill_tranfer_is_done
     result = yield
     return result if result.is_a?(Google::Cloud::Storage::File)
     puts "retry"
-    sleep rand(5..10)
+    sleep rand(15..26)
   end
 end
 
