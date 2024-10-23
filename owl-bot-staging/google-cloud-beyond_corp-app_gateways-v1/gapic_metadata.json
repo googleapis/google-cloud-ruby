@@ -1,0 +1,38 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.beyondcorp.appgateways.v1",
+  "libraryPackage": "::Google::Cloud::BeyondCorp::AppGateways::V1",
+  "services": {
+    "AppGatewaysService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client",
+          "rpcs": {
+            "ListAppGateways": {
+              "methods": [
+                "list_app_gateways"
+              ]
+            },
+            "GetAppGateway": {
+              "methods": [
+                "get_app_gateway"
+              ]
+            },
+            "CreateAppGateway": {
+              "methods": [
+                "create_app_gateway"
+              ]
+            },
+            "DeleteAppGateway": {
+              "methods": [
+                "delete_app_gateway"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
