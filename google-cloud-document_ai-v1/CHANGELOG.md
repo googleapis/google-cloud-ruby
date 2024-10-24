@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.2.0 (2024-10-24)
+
+#### Features
+
+* Add RESOURCE_EXHAUSTED to retryable status codes for ProcessDocument method 
+* Updated the exponential backoff settings for the Document AI ProcessDocument and BatchProcessDocuments methods ([#27457](https://github.com/googleapis/google-cloud-ruby/issues/27457)) 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
