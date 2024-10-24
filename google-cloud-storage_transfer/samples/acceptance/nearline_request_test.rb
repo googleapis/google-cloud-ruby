@@ -49,14 +49,13 @@ describe "Storage Transfer Service To Nearline Transfer" do
       end
     end
     # Object takes time to be created on bucket hence retrying
-     file = retry_untill_tranfer_is_done do
-              sink_bucket.file dummy_file_name
-            end
+    file = retry_untill_tranfer_is_done do
+             sink_bucket.file dummy_file_name
+           end
 
     assert file.is_a?(Google::Cloud::Storage::File), "File #{dummy_file_name} should exist on #{sink_bucket.name}"
     # Delete transfer jobs
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
-
 end
