@@ -40,6 +40,11 @@
                 "promote_cluster"
               ]
             },
+            "SwitchoverCluster": {
+              "methods": [
+                "switchover_cluster"
+              ]
+            },
             "RestoreCluster": {
               "methods": [
                 "restore_cluster"
@@ -98,6 +103,11 @@
             "RestartInstance": {
               "methods": [
                 "restart_instance"
+              ]
+            },
+            "ExecuteSql": {
+              "methods": [
+                "execute_sql"
               ]
             },
             "ListBackups": {
@@ -163,6 +173,11 @@
             "DeleteUser": {
               "methods": [
                 "delete_user"
+              ]
+            },
+            "ListDatabases": {
+              "methods": [
+                "list_databases"
               ]
             }
           }
