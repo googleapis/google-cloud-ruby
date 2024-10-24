@@ -101,6 +101,11 @@ module Google
           #   @return [::String]
           #     Output only. Service Attachment for SSH, resource is in the format of
           #     `projects/{project}/regions/{region}/serviceAttachments/{service_attachment}`.
+          # @!attribute [rw] psc_allowed_projects
+          #   @return [::Array<::String>]
+          #     Optional. Additional allowed projects for setting up PSC connections.
+          #     Instance host project is automatically allowed and does not need to be
+          #     included in this list.
           class PrivateConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -165,8 +170,10 @@ module Google
         #     Optional. The name of the instance in which the repository is hosted,
         #     formatted as
         #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`
-        #     For data plane CreateRepository requests, this field is output only.
-        #     For control plane CreateRepository requests, this field is used as input.
+        #     When creating repository via
+        #     securesourcemanager.googleapis.com (Control Plane API), this field is used
+        #     as input. When creating repository via *.sourcemanager.dev (Data Plane
+        #     API), this field is output only.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Unique identifier of the repository.
@@ -350,6 +357,90 @@ module Google
           end
         end
 
+        # Metadata of a BranchRule. BranchRule is the protection rule to enforce
+        # pre-defined rules on desginated branches within a repository.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. A unique identifier for a BranchRule. The name should be of the
+        #     format:
+        #     `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique identifier of the repository.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create timestamp.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Update timestamp.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User annotations. These attributes can only be set and used by
+        #     the user. See https://google.aip.dev/128#annotations for more details such
+        #     as format and size limitations.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. This checksum is computed by the server based on the value of
+        #     other fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] include_pattern
+        #   @return [::String]
+        #     Optional. The pattern of the branch that can match to this BranchRule.
+        #     Specified as regex.
+        #     .* for all branches. Examples: main, (main|release.*).
+        #     Current MVP phase only support `.*` for wildcard.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. Determines if the branch rule is disabled or not.
+        # @!attribute [rw] require_pull_request
+        #   @return [::Boolean]
+        #     Optional. Determines if the branch rule requires a pull request or not.
+        # @!attribute [rw] minimum_reviews_count
+        #   @return [::Integer]
+        #     Optional. The minimum number of reviews required for the branch rule to be
+        #     matched.
+        # @!attribute [rw] minimum_approvals_count
+        #   @return [::Integer]
+        #     Optional. The minimum number of approvals required for the branch rule to
+        #     be matched.
+        # @!attribute [rw] require_comments_resolved
+        #   @return [::Boolean]
+        #     Optional. Determines if require comments resolved before merging to the
+        #     branch.
+        # @!attribute [rw] allow_stale_reviews
+        #   @return [::Boolean]
+        #     Optional. Determines if allow stale reviews or approvals before merging to
+        #     the branch.
+        # @!attribute [rw] require_linear_history
+        #   @return [::Boolean]
+        #     Optional. Determines if require linear history before merging to the
+        #     branch.
+        # @!attribute [rw] required_status_checks
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::BranchRule::Check>]
+        #     Optional. List of required status checks before merging to the branch.
+        class BranchRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Check is a type for status check.
+          # @!attribute [rw] context
+          #   @return [::String]
+          #     Required. The context of the check.
+          class Check
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # ListInstancesRequest is the request to list instances.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -494,6 +585,15 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Filter results.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Optional. The name of the instance in which the repository is hosted,
+        #     formatted as
+        #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+        #     When listing repositories via
+        #     securesourcemanager.googleapis.com (Control Plane API), this field is
+        #     required. When listing repositories via *.sourcemanager.dev (Data Plane
+        #     API), this field is ignored.
         class ListRepositoriesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -550,6 +650,84 @@ module Google
         #     Optional. If set to true, and the repository is not found, the request will
         #     succeed but no action will be taken on the server.
         class DeleteRepositoryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetBranchRuleRequest is the request for getting a branch rule.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the repository to retrieve.
+        #     The format is
+        #     `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`.
+        class GetBranchRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CreateBranchRuleRequest is the request to create a branch rule.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        # @!attribute [rw] branch_rule
+        #   @return [::Google::Cloud::SecureSourceManager::V1::BranchRule]
+        # @!attribute [rw] branch_rule_id
+        #   @return [::String]
+        class CreateBranchRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListBranchRulesRequest is the request to list branch rules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        class ListBranchRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DeleteBranchRuleRequest is the request to delete a branch rule.
+        # @!attribute [rw] name
+        #   @return [::String]
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the branch rule is not found, the request
+        #     will succeed but no action will be taken on the server.
+        class DeleteBranchRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UpdateBranchRuleRequest is the request to update a branchRule.
+        # @!attribute [rw] branch_rule
+        #   @return [::Google::Cloud::SecureSourceManager::V1::BranchRule]
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     actually post it.  (https://google.aip.dev/163, for declarative friendly)
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     branchRule resource by the update.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask.
+        #     The special value "*" means full replacement.
+        class UpdateBranchRuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListBranchRulesResponse is the response to listing branchRules.
+        # @!attribute [rw] branch_rules
+        #   @return [::Array<::Google::Cloud::SecureSourceManager::V1::BranchRule>]
+        #     The list of branch rules.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token identifying a page of results the server should return.
+        class ListBranchRulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

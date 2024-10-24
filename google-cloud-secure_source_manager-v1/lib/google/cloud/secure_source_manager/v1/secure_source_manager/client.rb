@@ -672,7 +672,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_repositories(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            # @overload list_repositories(parent: nil, page_size: nil, page_token: nil, filter: nil, instance: nil)
             #   Pass arguments to `list_repositories` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -686,6 +686,14 @@ module Google
             #     A token identifying a page of results the server should return.
             #   @param filter [::String]
             #     Optional. Filter results.
+            #   @param instance [::String]
+            #     Optional. The name of the instance in which the repository is hosted,
+            #     formatted as
+            #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
+            #     When listing repositories via
+            #     securesourcemanager.googleapis.com (Control Plane API), this field is
+            #     required. When listing repositories via *.sourcemanager.dev (Data Plane
+            #     API), this field is ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::Repository>]
@@ -1333,6 +1341,479 @@ module Google
             end
 
             ##
+            # CreateBranchRule creates a branch rule in a given repository.
+            #
+            # @overload create_branch_rule(request, options = nil)
+            #   Pass arguments to `create_branch_rule` via a request object, either of type
+            #   {::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_branch_rule(parent: nil, branch_rule: nil, branch_rule_id: nil)
+            #   Pass arguments to `create_branch_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #   @param branch_rule [::Google::Cloud::SecureSourceManager::V1::BranchRule, ::Hash]
+            #   @param branch_rule_id [::String]
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secure_source_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new
+            #
+            #   # Call the create_branch_rule method.
+            #   result = client.create_branch_rule request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_branch_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_branch_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_branch_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_branch_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secure_source_manager_stub.call_rpc :create_branch_rule, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # ListBranchRules lists branch rules in a given repository.
+            #
+            # @overload list_branch_rules(request, options = nil)
+            #   Pass arguments to `list_branch_rules` via a request object, either of type
+            #   {::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_branch_rules(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_branch_rules` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #   @param page_size [::Integer]
+            #   @param page_token [::String]
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::BranchRule>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecureSourceManager::V1::BranchRule>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secure_source_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new
+            #
+            #   # Call the list_branch_rules method.
+            #   result = client.list_branch_rules request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::SecureSourceManager::V1::BranchRule.
+            #     p item
+            #   end
+            #
+            def list_branch_rules request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_branch_rules.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_branch_rules.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_branch_rules.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secure_source_manager_stub.call_rpc :list_branch_rules, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @secure_source_manager_stub, :list_branch_rules, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # GetBranchRule gets a branch rule.
+            #
+            # @overload get_branch_rule(request, options = nil)
+            #   Pass arguments to `get_branch_rule` via a request object, either of type
+            #   {::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_branch_rule(name: nil)
+            #   Pass arguments to `get_branch_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the repository to retrieve.
+            #     The format is
+            #     `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecureSourceManager::V1::BranchRule]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecureSourceManager::V1::BranchRule]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secure_source_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new
+            #
+            #   # Call the get_branch_rule method.
+            #   result = client.get_branch_rule request
+            #
+            #   # The returned object is of type Google::Cloud::SecureSourceManager::V1::BranchRule.
+            #   p result
+            #
+            def get_branch_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_branch_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_branch_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_branch_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secure_source_manager_stub.call_rpc :get_branch_rule, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # UpdateBranchRule updates a branch rule.
+            #
+            # @overload update_branch_rule(request, options = nil)
+            #   Pass arguments to `update_branch_rule` via a request object, either of type
+            #   {::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_branch_rule(branch_rule: nil, validate_only: nil, update_mask: nil)
+            #   Pass arguments to `update_branch_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param branch_rule [::Google::Cloud::SecureSourceManager::V1::BranchRule, ::Hash]
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     actually post it.  (https://google.aip.dev/163, for declarative friendly)
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     branchRule resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask.
+            #     The special value "*" means full replacement.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secure_source_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new
+            #
+            #   # Call the update_branch_rule method.
+            #   result = client.update_branch_rule request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_branch_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_branch_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.branch_rule&.name
+                header_params["branch_rule.name"] = request.branch_rule.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_branch_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_branch_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secure_source_manager_stub.call_rpc :update_branch_rule, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # DeleteBranchRule deletes a branch rule.
+            #
+            # @overload delete_branch_rule(request, options = nil)
+            #   Pass arguments to `delete_branch_rule` via a request object, either of type
+            #   {::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_branch_rule(name: nil, allow_missing: nil)
+            #   Pass arguments to `delete_branch_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the branch rule is not found, the request
+            #     will succeed but no action will be taken on the server.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/secure_source_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new
+            #
+            #   # Call the delete_branch_rule method.
+            #   result = client.delete_branch_rule request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_branch_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_branch_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecureSourceManager::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_branch_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_branch_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @secure_source_manager_stub.call_rpc :delete_branch_rule, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the SecureSourceManager API.
             #
             # This class represents the configuration for SecureSourceManager,
@@ -1540,6 +2021,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :test_iam_permissions_repo
+                ##
+                # RPC-specific configuration for `create_branch_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_branch_rule
+                ##
+                # RPC-specific configuration for `list_branch_rules`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_branch_rules
+                ##
+                # RPC-specific configuration for `get_branch_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_branch_rule
+                ##
+                # RPC-specific configuration for `update_branch_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_branch_rule
+                ##
+                # RPC-specific configuration for `delete_branch_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_branch_rule
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1565,6 +2071,16 @@ module Google
                   @set_iam_policy_repo = ::Gapic::Config::Method.new set_iam_policy_repo_config
                   test_iam_permissions_repo_config = parent_rpcs.test_iam_permissions_repo if parent_rpcs.respond_to? :test_iam_permissions_repo
                   @test_iam_permissions_repo = ::Gapic::Config::Method.new test_iam_permissions_repo_config
+                  create_branch_rule_config = parent_rpcs.create_branch_rule if parent_rpcs.respond_to? :create_branch_rule
+                  @create_branch_rule = ::Gapic::Config::Method.new create_branch_rule_config
+                  list_branch_rules_config = parent_rpcs.list_branch_rules if parent_rpcs.respond_to? :list_branch_rules
+                  @list_branch_rules = ::Gapic::Config::Method.new list_branch_rules_config
+                  get_branch_rule_config = parent_rpcs.get_branch_rule if parent_rpcs.respond_to? :get_branch_rule
+                  @get_branch_rule = ::Gapic::Config::Method.new get_branch_rule_config
+                  update_branch_rule_config = parent_rpcs.update_branch_rule if parent_rpcs.respond_to? :update_branch_rule
+                  @update_branch_rule = ::Gapic::Config::Method.new update_branch_rule_config
+                  delete_branch_rule_config = parent_rpcs.delete_branch_rule if parent_rpcs.respond_to? :delete_branch_rule
+                  @delete_branch_rule = ::Gapic::Config::Method.new delete_branch_rule_config
 
                   yield self if block_given?
                 end

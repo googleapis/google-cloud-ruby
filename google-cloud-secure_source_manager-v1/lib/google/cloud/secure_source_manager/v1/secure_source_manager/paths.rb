@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the SecureSourceManager API.
           module Paths
             ##
+            # Create a fully-qualified BranchRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/branchRules/{branch_rule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param branch_rule [String]
+            #
+            # @return [::String]
+            def branch_rule_path project:, location:, repository:, branch_rule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/branchRules/#{branch_rule}"
+            end
+
+            ##
             # Create a fully-qualified CaPool resource string.
             #
             # The resource will be in the following format:
