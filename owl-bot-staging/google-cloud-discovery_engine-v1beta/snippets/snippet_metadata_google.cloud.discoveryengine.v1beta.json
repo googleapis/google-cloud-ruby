@@ -1,0 +1,3615 @@
+{
+  "client_library": {
+    "name": "google-cloud-discovery_engine-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.discoveryengine.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "discoveryengine_v1beta_generated_CompletionService_CompleteQuery_sync",
+      "title": "Snippet for the complete_query call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#complete_query.",
+      "file": "completion_service/complete_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "complete_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#complete_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryResponse",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "CompleteQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.CompletionService.CompleteQuery",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_CompletionService_ImportSuggestionDenyListEntries_sync",
+      "title": "Snippet for the import_suggestion_deny_list_entries call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#import_suggestion_deny_list_entries.",
+      "file": "completion_service/import_suggestion_deny_list_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_suggestion_deny_list_entries",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#import_suggestion_deny_list_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ImportSuggestionDenyListEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "ImportSuggestionDenyListEntries",
+          "full_name": "google.cloud.discoveryengine.v1beta.CompletionService.ImportSuggestionDenyListEntries",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_CompletionService_PurgeSuggestionDenyListEntries_sync",
+      "title": "Snippet for the purge_suggestion_deny_list_entries call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#purge_suggestion_deny_list_entries.",
+      "file": "completion_service/purge_suggestion_deny_list_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_suggestion_deny_list_entries",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#purge_suggestion_deny_list_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::PurgeSuggestionDenyListEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "PurgeSuggestionDenyListEntries",
+          "full_name": "google.cloud.discoveryengine.v1beta.CompletionService.PurgeSuggestionDenyListEntries",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_CompletionService_ImportCompletionSuggestions_sync",
+      "title": "Snippet for the import_completion_suggestions call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#import_completion_suggestions.",
+      "file": "completion_service/import_completion_suggestions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_completion_suggestions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#import_completion_suggestions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ImportCompletionSuggestionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "ImportCompletionSuggestions",
+          "full_name": "google.cloud.discoveryengine.v1beta.CompletionService.ImportCompletionSuggestions",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_CompletionService_PurgeCompletionSuggestions_sync",
+      "title": "Snippet for the purge_completion_suggestions call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#purge_completion_suggestions.",
+      "file": "completion_service/purge_completion_suggestions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_completion_suggestions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#purge_completion_suggestions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::PurgeCompletionSuggestionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "PurgeCompletionSuggestions",
+          "full_name": "google.cloud.discoveryengine.v1beta.CompletionService.PurgeCompletionSuggestions",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_CreateControl_sync",
+      "title": "Snippet for the create_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#create_control.",
+      "file": "control_service/create_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#create_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "CreateControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.CreateControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_DeleteControl_sync",
+      "title": "Snippet for the delete_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#delete_control.",
+      "file": "control_service/delete_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#delete_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "DeleteControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.DeleteControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_UpdateControl_sync",
+      "title": "Snippet for the update_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#update_control.",
+      "file": "control_service/update_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#update_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "UpdateControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.UpdateControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_GetControl_sync",
+      "title": "Snippet for the get_control call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#get_control.",
+      "file": "control_service/get_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_control",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#get_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "GetControl",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.GetControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ControlService_ListControls_sync",
+      "title": "Snippet for the list_controls call in the ControlService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#list_controls.",
+      "file": "control_service/list_controls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_controls",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client#list_controls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListControlsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListControlsResponse",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ControlService::Client"
+        },
+        "method": {
+          "short_name": "ListControls",
+          "full_name": "google.cloud.discoveryengine.v1beta.ControlService.ListControls",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SearchService_Search_sync",
+      "title": "Snippet for the search call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search.",
+      "file": "search_service/search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client"
+        },
+        "method": {
+          "short_name": "Search",
+          "full_name": "google.cloud.discoveryengine.v1beta.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_ConverseConversation_sync",
+      "title": "Snippet for the converse_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#converse_conversation.",
+      "file": "conversational_search_service/converse_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "converse_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#converse_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ConverseConversationResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "ConverseConversation",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.ConverseConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_CreateConversation_sync",
+      "title": "Snippet for the create_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#create_conversation.",
+      "file": "conversational_search_service/create_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#create_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Conversation",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "CreateConversation",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.CreateConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_DeleteConversation_sync",
+      "title": "Snippet for the delete_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#delete_conversation.",
+      "file": "conversational_search_service/delete_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#delete_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "DeleteConversation",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.DeleteConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_UpdateConversation_sync",
+      "title": "Snippet for the update_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#update_conversation.",
+      "file": "conversational_search_service/update_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#update_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Conversation",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "UpdateConversation",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.UpdateConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_GetConversation_sync",
+      "title": "Snippet for the get_conversation call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_conversation.",
+      "file": "conversational_search_service/get_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_conversation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Conversation",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "GetConversation",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.GetConversation",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_ListConversations_sync",
+      "title": "Snippet for the list_conversations call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#list_conversations.",
+      "file": "conversational_search_service/list_conversations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_conversations",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#list_conversations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListConversationsResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "ListConversations",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.ListConversations",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_AnswerQuery_sync",
+      "title": "Snippet for the answer_query call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#answer_query.",
+      "file": "conversational_search_service/answer_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "answer_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#answer_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "AnswerQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.AnswerQuery",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_GetAnswer_sync",
+      "title": "Snippet for the get_answer call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_answer.",
+      "file": "conversational_search_service/get_answer.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_answer",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_answer",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetAnswerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Answer",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "GetAnswer",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.GetAnswer",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_CreateSession_sync",
+      "title": "Snippet for the create_session call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#create_session.",
+      "file": "conversational_search_service/create_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#create_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Session",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "CreateSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.CreateSession",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_DeleteSession_sync",
+      "title": "Snippet for the delete_session call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#delete_session.",
+      "file": "conversational_search_service/delete_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#delete_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.DeleteSession",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_UpdateSession_sync",
+      "title": "Snippet for the update_session call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#update_session.",
+      "file": "conversational_search_service/update_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#update_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Session",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.UpdateSession",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_GetSession_sync",
+      "title": "Snippet for the get_session call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_session.",
+      "file": "conversational_search_service/get_session.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_session",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#get_session",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSessionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Session",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "GetSession",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.GetSession",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ConversationalSearchService_ListSessions_sync",
+      "title": "Snippet for the list_sessions call in the ConversationalSearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#list_sessions.",
+      "file": "conversational_search_service/list_sessions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sessions",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client#list_sessions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSessionsResponse",
+        "client": {
+          "short_name": "ConversationalSearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Client"
+        },
+        "method": {
+          "short_name": "ListSessions",
+          "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService.ListSessions",
+          "service": {
+            "short_name": "ConversationalSearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ConversationalSearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DataStoreService_CreateDataStore_sync",
+      "title": "Snippet for the create_data_store call in the DataStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#create_data_store.",
+      "file": "data_store_service/create_data_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#create_data_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateDataStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataStore",
+          "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService.CreateDataStore",
+          "service": {
+            "short_name": "DataStoreService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DataStoreService_GetDataStore_sync",
+      "title": "Snippet for the get_data_store call in the DataStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#get_data_store.",
+      "file": "data_store_service/get_data_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#get_data_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetDataStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::DataStore",
+        "client": {
+          "short_name": "DataStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client"
+        },
+        "method": {
+          "short_name": "GetDataStore",
+          "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService.GetDataStore",
+          "service": {
+            "short_name": "DataStoreService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DataStoreService_ListDataStores_sync",
+      "title": "Snippet for the list_data_stores call in the DataStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#list_data_stores.",
+      "file": "data_store_service/list_data_stores.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_stores",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#list_data_stores",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListDataStoresRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListDataStoresResponse",
+        "client": {
+          "short_name": "DataStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client"
+        },
+        "method": {
+          "short_name": "ListDataStores",
+          "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService.ListDataStores",
+          "service": {
+            "short_name": "DataStoreService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DataStoreService_DeleteDataStore_sync",
+      "title": "Snippet for the delete_data_store call in the DataStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#delete_data_store.",
+      "file": "data_store_service/delete_data_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#delete_data_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteDataStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataStore",
+          "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService.DeleteDataStore",
+          "service": {
+            "short_name": "DataStoreService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DataStoreService_UpdateDataStore_sync",
+      "title": "Snippet for the update_data_store call in the DataStoreService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#update_data_store.",
+      "file": "data_store_service/update_data_store.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_store",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client#update_data_store",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateDataStoreRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::DataStore",
+        "client": {
+          "short_name": "DataStoreService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DataStoreService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataStore",
+          "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService.UpdateDataStore",
+          "service": {
+            "short_name": "DataStoreService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DataStoreService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_GetDocument_sync",
+      "title": "Snippet for the get_document call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#get_document.",
+      "file": "document_service/get_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_document",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#get_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Document",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "GetDocument",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.GetDocument",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_ListDocuments_sync",
+      "title": "Snippet for the list_documents call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#list_documents.",
+      "file": "document_service/list_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_documents",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#list_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListDocumentsResponse",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "ListDocuments",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.ListDocuments",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_CreateDocument_sync",
+      "title": "Snippet for the create_document call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#create_document.",
+      "file": "document_service/create_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_document",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#create_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Document",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "CreateDocument",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.CreateDocument",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_UpdateDocument_sync",
+      "title": "Snippet for the update_document call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#update_document.",
+      "file": "document_service/update_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_document",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#update_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Document",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDocument",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.UpdateDocument",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_DeleteDocument_sync",
+      "title": "Snippet for the delete_document call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#delete_document.",
+      "file": "document_service/delete_document.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_document",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#delete_document",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteDocumentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDocument",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.DeleteDocument",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_ImportDocuments_sync",
+      "title": "Snippet for the import_documents call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#import_documents.",
+      "file": "document_service/import_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_documents",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#import_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "ImportDocuments",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.ImportDocuments",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_PurgeDocuments_sync",
+      "title": "Snippet for the purge_documents call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#purge_documents.",
+      "file": "document_service/purge_documents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_documents",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#purge_documents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "PurgeDocuments",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.PurgeDocuments",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_DocumentService_BatchGetDocumentsMetadata_sync",
+      "title": "Snippet for the batch_get_documents_metadata call in the DocumentService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#batch_get_documents_metadata.",
+      "file": "document_service/batch_get_documents_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_get_documents_metadata",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client#batch_get_documents_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::BatchGetDocumentsMetadataResponse",
+        "client": {
+          "short_name": "DocumentService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client"
+        },
+        "method": {
+          "short_name": "BatchGetDocumentsMetadata",
+          "full_name": "google.cloud.discoveryengine.v1beta.DocumentService.BatchGetDocumentsMetadata",
+          "service": {
+            "short_name": "DocumentService",
+            "full_name": "google.cloud.discoveryengine.v1beta.DocumentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_CreateEngine_sync",
+      "title": "Snippet for the create_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#create_engine.",
+      "file": "engine_service/create_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#create_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "CreateEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.CreateEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_DeleteEngine_sync",
+      "title": "Snippet for the delete_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#delete_engine.",
+      "file": "engine_service/delete_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#delete_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "DeleteEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.DeleteEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_UpdateEngine_sync",
+      "title": "Snippet for the update_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#update_engine.",
+      "file": "engine_service/update_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#update_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Engine",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "UpdateEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.UpdateEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_GetEngine_sync",
+      "title": "Snippet for the get_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#get_engine.",
+      "file": "engine_service/get_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#get_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Engine",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "GetEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.GetEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_ListEngines_sync",
+      "title": "Snippet for the list_engines call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#list_engines.",
+      "file": "engine_service/list_engines.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_engines",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#list_engines",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEnginesResponse",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "ListEngines",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.ListEngines",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_PauseEngine_sync",
+      "title": "Snippet for the pause_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#pause_engine.",
+      "file": "engine_service/pause_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pause_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#pause_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::PauseEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Engine",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "PauseEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.PauseEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_ResumeEngine_sync",
+      "title": "Snippet for the resume_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#resume_engine.",
+      "file": "engine_service/resume_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#resume_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ResumeEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Engine",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "ResumeEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.ResumeEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EngineService_TuneEngine_sync",
+      "title": "Snippet for the tune_engine call in the EngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#tune_engine.",
+      "file": "engine_service/tune_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "tune_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client#tune_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::TuneEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EngineService::Client"
+        },
+        "method": {
+          "short_name": "TuneEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.EngineService.TuneEngine",
+          "service": {
+            "short_name": "EngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_GetEvaluation_sync",
+      "title": "Snippet for the get_evaluation call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#get_evaluation.",
+      "file": "evaluation_service/get_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_evaluation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#get_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Evaluation",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "GetEvaluation",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.GetEvaluation",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_ListEvaluations_sync",
+      "title": "Snippet for the list_evaluations call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluations.",
+      "file": "evaluation_service/list_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluations",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationsResponse",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluations",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluations",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_CreateEvaluation_sync",
+      "title": "Snippet for the create_evaluation call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#create_evaluation.",
+      "file": "evaluation_service/create_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_evaluation",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#create_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "CreateEvaluation",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.CreateEvaluation",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_EvaluationService_ListEvaluationResults_sync",
+      "title": "Snippet for the list_evaluation_results call in the EvaluationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluation_results.",
+      "file": "evaluation_service/list_evaluation_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluation_results",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client#list_evaluation_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListEvaluationResultsResponse",
+        "client": {
+          "short_name": "EvaluationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluationResults",
+          "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService.ListEvaluationResults",
+          "service": {
+            "short_name": "EvaluationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.EvaluationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_GroundedGenerationService_CheckGrounding_sync",
+      "title": "Snippet for the check_grounding call in the GroundedGenerationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#check_grounding.",
+      "file": "grounded_generation_service/check_grounding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_grounding",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#check_grounding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::CheckGroundingResponse",
+        "client": {
+          "short_name": "GroundedGenerationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client"
+        },
+        "method": {
+          "short_name": "CheckGrounding",
+          "full_name": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.CheckGrounding",
+          "service": {
+            "short_name": "GroundedGenerationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.GroundedGenerationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ProjectService_ProvisionProject_sync",
+      "title": "Snippet for the provision_project call in the ProjectService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client#provision_project.",
+      "file": "project_service/provision_project.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "provision_project",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client#provision_project",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ProvisionProjectRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProjectService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Client"
+        },
+        "method": {
+          "short_name": "ProvisionProject",
+          "full_name": "google.cloud.discoveryengine.v1beta.ProjectService.ProvisionProject",
+          "service": {
+            "short_name": "ProjectService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ProjectService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_RankService_Rank_sync",
+      "title": "Snippet for the rank call in the RankService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::RankService::Client#rank.",
+      "file": "rank_service/rank.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rank",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::RankService::Client#rank",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::RankRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::RankResponse",
+        "client": {
+          "short_name": "RankService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::RankService::Client"
+        },
+        "method": {
+          "short_name": "Rank",
+          "full_name": "google.cloud.discoveryengine.v1beta.RankService.Rank",
+          "service": {
+            "short_name": "RankService",
+            "full_name": "google.cloud.discoveryengine.v1beta.RankService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_RecommendationService_Recommend_sync",
+      "title": "Snippet for the recommend call in the RecommendationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client#recommend.",
+      "file": "recommendation_service/recommend.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "recommend",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client#recommend",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::RecommendRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::RecommendResponse",
+        "client": {
+          "short_name": "RecommendationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client"
+        },
+        "method": {
+          "short_name": "Recommend",
+          "full_name": "google.cloud.discoveryengine.v1beta.RecommendationService.Recommend",
+          "service": {
+            "short_name": "RecommendationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.RecommendationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_GetSampleQuery_sync",
+      "title": "Snippet for the get_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#get_sample_query.",
+      "file": "sample_query_service/get_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#get_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "GetSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.GetSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_ListSampleQueries_sync",
+      "title": "Snippet for the list_sample_queries call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#list_sample_queries.",
+      "file": "sample_query_service/list_sample_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sample_queries",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#list_sample_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQueriesResponse",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "ListSampleQueries",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.ListSampleQueries",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_CreateSampleQuery_sync",
+      "title": "Snippet for the create_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#create_sample_query.",
+      "file": "sample_query_service/create_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#create_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "CreateSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.CreateSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_UpdateSampleQuery_sync",
+      "title": "Snippet for the update_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#update_sample_query.",
+      "file": "sample_query_service/update_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#update_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuery",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.UpdateSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_DeleteSampleQuery_sync",
+      "title": "Snippet for the delete_sample_query call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#delete_sample_query.",
+      "file": "sample_query_service/delete_sample_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sample_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#delete_sample_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSampleQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.DeleteSampleQuery",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQueryService_ImportSampleQueries_sync",
+      "title": "Snippet for the import_sample_queries call in the SampleQueryService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#import_sample_queries.",
+      "file": "sample_query_service/import_sample_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_sample_queries",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client#import_sample_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ImportSampleQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SampleQueryService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQueryService::Client"
+        },
+        "method": {
+          "short_name": "ImportSampleQueries",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService.ImportSampleQueries",
+          "service": {
+            "short_name": "SampleQueryService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQueryService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_GetSampleQuerySet_sync",
+      "title": "Snippet for the get_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#get_sample_query_set.",
+      "file": "sample_query_set_service/get_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#get_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "GetSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.GetSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_ListSampleQuerySets_sync",
+      "title": "Snippet for the list_sample_query_sets call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#list_sample_query_sets.",
+      "file": "sample_query_set_service/list_sample_query_sets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sample_query_sets",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#list_sample_query_sets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSampleQuerySetsResponse",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "ListSampleQuerySets",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.ListSampleQuerySets",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_CreateSampleQuerySet_sync",
+      "title": "Snippet for the create_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#create_sample_query_set.",
+      "file": "sample_query_set_service/create_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#create_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "CreateSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.CreateSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_UpdateSampleQuerySet_sync",
+      "title": "Snippet for the update_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#update_sample_query_set.",
+      "file": "sample_query_set_service/update_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#update_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySet",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.UpdateSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SampleQuerySetService_DeleteSampleQuerySet_sync",
+      "title": "Snippet for the delete_sample_query_set call in the SampleQuerySetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#delete_sample_query_set.",
+      "file": "sample_query_set_service/delete_sample_query_set.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sample_query_set",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client#delete_sample_query_set",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSampleQuerySetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SampleQuerySetService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SampleQuerySetService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSampleQuerySet",
+          "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService.DeleteSampleQuerySet",
+          "service": {
+            "short_name": "SampleQuerySetService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SampleQuerySetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SchemaService_GetSchema_sync",
+      "title": "Snippet for the get_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#get_schema.",
+      "file": "schema_service/get_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schema",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#get_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::Schema",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "GetSchema",
+          "full_name": "google.cloud.discoveryengine.v1beta.SchemaService.GetSchema",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SchemaService_ListSchemas_sync",
+      "title": "Snippet for the list_schemas call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#list_schemas.",
+      "file": "schema_service/list_schemas.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schemas",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#list_schemas",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSchemasRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListSchemasResponse",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "ListSchemas",
+          "full_name": "google.cloud.discoveryengine.v1beta.SchemaService.ListSchemas",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SchemaService_CreateSchema_sync",
+      "title": "Snippet for the create_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#create_schema.",
+      "file": "schema_service/create_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_schema",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#create_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "CreateSchema",
+          "full_name": "google.cloud.discoveryengine.v1beta.SchemaService.CreateSchema",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SchemaService_UpdateSchema_sync",
+      "title": "Snippet for the update_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#update_schema.",
+      "file": "schema_service/update_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_schema",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#update_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSchema",
+          "full_name": "google.cloud.discoveryengine.v1beta.SchemaService.UpdateSchema",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SchemaService_DeleteSchema_sync",
+      "title": "Snippet for the delete_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#delete_schema.",
+      "file": "schema_service/delete_schema.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schema",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client#delete_schema",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSchemaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SchemaService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SchemaService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchema",
+          "full_name": "google.cloud.discoveryengine.v1beta.SchemaService.DeleteSchema",
+          "service": {
+            "short_name": "SchemaService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SchemaService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SearchTuningService_TrainCustomModel_sync",
+      "title": "Snippet for the train_custom_model call in the SearchTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#train_custom_model.",
+      "file": "search_tuning_service/train_custom_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "train_custom_model",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#train_custom_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::TrainCustomModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SearchTuningService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client"
+        },
+        "method": {
+          "short_name": "TrainCustomModel",
+          "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService.TrainCustomModel",
+          "service": {
+            "short_name": "SearchTuningService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SearchTuningService_ListCustomModels_sync",
+      "title": "Snippet for the list_custom_models call in the SearchTuningService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#list_custom_models.",
+      "file": "search_tuning_service/list_custom_models.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_custom_models",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client#list_custom_models",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListCustomModelsResponse",
+        "client": {
+          "short_name": "SearchTuningService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::Client"
+        },
+        "method": {
+          "short_name": "ListCustomModels",
+          "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService.ListCustomModels",
+          "service": {
+            "short_name": "SearchTuningService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SearchTuningService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ServingConfigService_UpdateServingConfig_sync",
+      "title": "Snippet for the update_serving_config call in the ServingConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#update_serving_config.",
+      "file": "serving_config_service/update_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_serving_config",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#update_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServingConfig",
+          "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService.UpdateServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ServingConfigService_GetServingConfig_sync",
+      "title": "Snippet for the get_serving_config call in the ServingConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#get_serving_config.",
+      "file": "serving_config_service/get_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_serving_config",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#get_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "GetServingConfig",
+          "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService.GetServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_ServingConfigService_ListServingConfigs_sync",
+      "title": "Snippet for the list_serving_configs call in the ServingConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#list_serving_configs.",
+      "file": "serving_config_service/list_serving_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_serving_configs",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client#list_serving_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListServingConfigsResponse",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "ListServingConfigs",
+          "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService.ListServingConfigs",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.discoveryengine.v1beta.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_GetSiteSearchEngine_sync",
+      "title": "Snippet for the get_site_search_engine call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#get_site_search_engine.",
+      "file": "site_search_engine_service/get_site_search_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_site_search_engine",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#get_site_search_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetSiteSearchEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngine",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "GetSiteSearchEngine",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.GetSiteSearchEngine",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_CreateTargetSite_sync",
+      "title": "Snippet for the create_target_site call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#create_target_site.",
+      "file": "site_search_engine_service/create_target_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_target_site",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#create_target_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateTargetSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "CreateTargetSite",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.CreateTargetSite",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_BatchCreateTargetSites_sync",
+      "title": "Snippet for the batch_create_target_sites call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#batch_create_target_sites.",
+      "file": "site_search_engine_service/batch_create_target_sites.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_create_target_sites",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#batch_create_target_sites",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::BatchCreateTargetSitesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "BatchCreateTargetSites",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.BatchCreateTargetSites",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_GetTargetSite_sync",
+      "title": "Snippet for the get_target_site call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#get_target_site.",
+      "file": "site_search_engine_service/get_target_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_target_site",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#get_target_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GetTargetSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::TargetSite",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "GetTargetSite",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.GetTargetSite",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_UpdateTargetSite_sync",
+      "title": "Snippet for the update_target_site call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#update_target_site.",
+      "file": "site_search_engine_service/update_target_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_target_site",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#update_target_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::UpdateTargetSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "UpdateTargetSite",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.UpdateTargetSite",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_DeleteTargetSite_sync",
+      "title": "Snippet for the delete_target_site call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#delete_target_site.",
+      "file": "site_search_engine_service/delete_target_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_target_site",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#delete_target_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteTargetSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTargetSite",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.DeleteTargetSite",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_ListTargetSites_sync",
+      "title": "Snippet for the list_target_sites call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#list_target_sites.",
+      "file": "site_search_engine_service/list_target_sites.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_target_sites",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#list_target_sites",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ListTargetSitesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::ListTargetSitesResponse",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "ListTargetSites",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.ListTargetSites",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_EnableAdvancedSiteSearch_sync",
+      "title": "Snippet for the enable_advanced_site_search call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#enable_advanced_site_search.",
+      "file": "site_search_engine_service/enable_advanced_site_search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enable_advanced_site_search",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#enable_advanced_site_search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::EnableAdvancedSiteSearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "EnableAdvancedSiteSearch",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.EnableAdvancedSiteSearch",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_DisableAdvancedSiteSearch_sync",
+      "title": "Snippet for the disable_advanced_site_search call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#disable_advanced_site_search.",
+      "file": "site_search_engine_service/disable_advanced_site_search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "disable_advanced_site_search",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#disable_advanced_site_search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DisableAdvancedSiteSearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "DisableAdvancedSiteSearch",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.DisableAdvancedSiteSearch",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_RecrawlUris_sync",
+      "title": "Snippet for the recrawl_uris call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#recrawl_uris.",
+      "file": "site_search_engine_service/recrawl_uris.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "recrawl_uris",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#recrawl_uris",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::RecrawlUrisRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "RecrawlUris",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.RecrawlUris",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_BatchVerifyTargetSites_sync",
+      "title": "Snippet for the batch_verify_target_sites call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#batch_verify_target_sites.",
+      "file": "site_search_engine_service/batch_verify_target_sites.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_verify_target_sites",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#batch_verify_target_sites",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::BatchVerifyTargetSitesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "BatchVerifyTargetSites",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.BatchVerifyTargetSites",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_FetchDomainVerificationStatus_sync",
+      "title": "Snippet for the fetch_domain_verification_status call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#fetch_domain_verification_status.",
+      "file": "site_search_engine_service/fetch_domain_verification_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_domain_verification_status",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#fetch_domain_verification_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::FetchDomainVerificationStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::FetchDomainVerificationStatusResponse",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "FetchDomainVerificationStatus",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.FetchDomainVerificationStatus",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_UserEventService_WriteUserEvent_sync",
+      "title": "Snippet for the write_user_event call in the UserEventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#write_user_event.",
+      "file": "user_event_service/write_user_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "write_user_event",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#write_user_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::WriteUserEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::UserEvent",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "WriteUserEvent",
+          "full_name": "google.cloud.discoveryengine.v1beta.UserEventService.WriteUserEvent",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.discoveryengine.v1beta.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_UserEventService_CollectUserEvent_sync",
+      "title": "Snippet for the collect_user_event call in the UserEventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#collect_user_event.",
+      "file": "user_event_service/collect_user_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "collect_user_event",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#collect_user_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CollectUserEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "CollectUserEvent",
+          "full_name": "google.cloud.discoveryengine.v1beta.UserEventService.CollectUserEvent",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.discoveryengine.v1beta.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_UserEventService_PurgeUserEvents_sync",
+      "title": "Snippet for the purge_user_events call in the UserEventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#purge_user_events.",
+      "file": "user_event_service/purge_user_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_user_events",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#purge_user_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::PurgeUserEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "PurgeUserEvents",
+          "full_name": "google.cloud.discoveryengine.v1beta.UserEventService.PurgeUserEvents",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.discoveryengine.v1beta.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_UserEventService_ImportUserEvents_sync",
+      "title": "Snippet for the import_user_events call in the UserEventService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#import_user_events.",
+      "file": "user_event_service/import_user_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_user_events",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client#import_user_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::ImportUserEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "ImportUserEvents",
+          "full_name": "google.cloud.discoveryengine.v1beta.UserEventService.ImportUserEvents",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.discoveryengine.v1beta.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

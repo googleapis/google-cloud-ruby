@@ -1,0 +1,735 @@
+{
+  "client_library": {
+    "name": "google-cloud-eventarc-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.eventarc.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_GetTrigger_sync",
+      "title": "Snippet for the get_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_trigger.",
+      "file": "eventarc/get_trigger.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_trigger",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#get_trigger",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::GetTriggerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::Trigger",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "GetTrigger",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.GetTrigger",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_ListTriggers_sync",
+      "title": "Snippet for the list_triggers call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_triggers.",
+      "file": "eventarc/list_triggers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_triggers",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#list_triggers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::ListTriggersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::ListTriggersResponse",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "ListTriggers",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.ListTriggers",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_CreateTrigger_sync",
+      "title": "Snippet for the create_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#create_trigger.",
+      "file": "eventarc/create_trigger.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_trigger",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#create_trigger",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::CreateTriggerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "CreateTrigger",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.CreateTrigger",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_UpdateTrigger_sync",
+      "title": "Snippet for the update_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#update_trigger.",
+      "file": "eventarc/update_trigger.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_trigger",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#update_trigger",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::UpdateTriggerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "UpdateTrigger",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.UpdateTrigger",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_DeleteTrigger_sync",
+      "title": "Snippet for the delete_trigger call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#delete_trigger.",
+      "file": "eventarc/delete_trigger.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_trigger",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#delete_trigger",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::DeleteTriggerRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "DeleteTrigger",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.DeleteTrigger",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_GetChannel_sync",
+      "title": "Snippet for the get_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel.",
+      "file": "eventarc/get_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_channel",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::GetChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::Channel",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "GetChannel",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.GetChannel",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_ListChannels_sync",
+      "title": "Snippet for the list_channels call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_channels.",
+      "file": "eventarc/list_channels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_channels",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#list_channels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::ListChannelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::ListChannelsResponse",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "ListChannels",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.ListChannels",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_CreateChannel_sync",
+      "title": "Snippet for the create_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#create_channel.",
+      "file": "eventarc/create_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_channel",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#create_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::CreateChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "CreateChannel",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.CreateChannel",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_UpdateChannel_sync",
+      "title": "Snippet for the update_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#update_channel.",
+      "file": "eventarc/update_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_channel",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#update_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::UpdateChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "UpdateChannel",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.UpdateChannel",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_DeleteChannel_sync",
+      "title": "Snippet for the delete_channel call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#delete_channel.",
+      "file": "eventarc/delete_channel.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_channel",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#delete_channel",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::DeleteChannelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "DeleteChannel",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.DeleteChannel",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_GetProvider_sync",
+      "title": "Snippet for the get_provider call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_provider.",
+      "file": "eventarc/get_provider.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_provider",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#get_provider",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::GetProviderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::Provider",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "GetProvider",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.GetProvider",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_ListProviders_sync",
+      "title": "Snippet for the list_providers call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_providers.",
+      "file": "eventarc/list_providers.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_providers",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#list_providers",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::ListProvidersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::ListProvidersResponse",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "ListProviders",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.ListProviders",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_GetChannelConnection_sync",
+      "title": "Snippet for the get_channel_connection call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel_connection.",
+      "file": "eventarc/get_channel_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_channel_connection",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#get_channel_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::GetChannelConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::ChannelConnection",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "GetChannelConnection",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.GetChannelConnection",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_ListChannelConnections_sync",
+      "title": "Snippet for the list_channel_connections call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#list_channel_connections.",
+      "file": "eventarc/list_channel_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_channel_connections",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#list_channel_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::ListChannelConnectionsResponse",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "ListChannelConnections",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.ListChannelConnections",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_CreateChannelConnection_sync",
+      "title": "Snippet for the create_channel_connection call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#create_channel_connection.",
+      "file": "eventarc/create_channel_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_channel_connection",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#create_channel_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "CreateChannelConnection",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.CreateChannelConnection",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_DeleteChannelConnection_sync",
+      "title": "Snippet for the delete_channel_connection call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#delete_channel_connection.",
+      "file": "eventarc/delete_channel_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_channel_connection",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#delete_channel_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "DeleteChannelConnection",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.DeleteChannelConnection",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_GetGoogleChannelConfig_sync",
+      "title": "Snippet for the get_google_channel_config call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#get_google_channel_config.",
+      "file": "eventarc/get_google_channel_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_google_channel_config",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#get_google_channel_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::GoogleChannelConfig",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "GetGoogleChannelConfig",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "eventarc_v1_generated_Eventarc_UpdateGoogleChannelConfig_sync",
+      "title": "Snippet for the update_google_channel_config call in the Eventarc service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Eventarc::V1::Eventarc::Client#update_google_channel_config.",
+      "file": "eventarc/update_google_channel_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_google_channel_config",
+        "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client#update_google_channel_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Eventarc::V1::GoogleChannelConfig",
+        "client": {
+          "short_name": "Eventarc::Client",
+          "full_name": "::Google::Cloud::Eventarc::V1::Eventarc::Client"
+        },
+        "method": {
+          "short_name": "UpdateGoogleChannelConfig",
+          "full_name": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
+          "service": {
+            "short_name": "Eventarc",
+            "full_name": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
