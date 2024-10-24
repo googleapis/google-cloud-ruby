@@ -105,6 +105,13 @@ def create_bucket_helper bucket_name
   end
 end
 
+def create_nearline_bucket_helper bucket_name
+  storage_client = Google::Cloud::Storage.new
+  retry_resource_exhaustion do
+    storage_client.create_bucket bucket_name, storage_class: "NEARLINE"
+  end
+end
+
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
