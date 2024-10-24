@@ -1079,6 +1079,10 @@
       "component": "google-cloud-parallelstore",
       "version_file": "lib/google/cloud/parallelstore/version.rb"
     },
+    "google-cloud-parallelstore-v1": {
+      "component": "google-cloud-parallelstore-v1",
+      "version_file": "lib/google/cloud/parallelstore/v1/version.rb"
+    },
     "google-cloud-parallelstore-v1beta": {
       "component": "google-cloud-parallelstore-v1beta",
       "version_file": "lib/google/cloud/parallelstore/v1beta/version.rb"
