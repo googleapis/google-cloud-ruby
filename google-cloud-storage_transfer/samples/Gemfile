@@ -17,6 +17,7 @@ source "https://rubygems.org"
 use_head = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 
 gem "google-cloud-storage_transfer", path: use_head ? "../../google-cloud-storage_transfer" : nil
+
 group :test do
   gem "google-cloud-storage"
   gem "google-cloud-pubsub"

@@ -15,7 +15,6 @@ require_relative "helper"
 require_relative "../event_driven_gcs_transfer"
 require "google/cloud/pubsub"
 
-
 describe "Storage Transfer Service Event Driven Gcs Transfer" do
   let(:project) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
