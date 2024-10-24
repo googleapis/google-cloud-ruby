@@ -1,5 +1,11 @@
 # Release History
 
+### 1.10.0 (2024-10-24)
+
+#### Features
+
+* Support for GenerativeQuestionService ([#27424](https://github.com/googleapis/google-cloud-ruby/issues/27424)) 
+
 ### 1.9.1 (2024-08-08)
 
 #### Documentation
