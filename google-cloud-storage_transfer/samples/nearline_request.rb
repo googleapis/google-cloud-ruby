@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [Start storagetransfer_transfer_to_nearline]
+# [START storagetransfer_transfer_to_nearline]
 def create_daily_nearline_30_day_migration project_id:, gcs_source_bucket:, gcs_sink_bucket:, start_date:
   # Your Google Cloud Project ID
   # project_id = "your-project_id"
