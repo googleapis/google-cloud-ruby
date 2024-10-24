@@ -211,6 +211,11 @@ module Google
         #     The configuration for a custom voice. If [CustomVoiceParams.model] is set,
         #     the service will choose the custom voice matching the specified
         #     configuration.
+        # @!attribute [rw] voice_clone
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::VoiceCloneParams]
+        #     Optional. The configuration for a voice clone. If
+        #     [VoiceCloneParams.voice_clone_key] is set, the service will choose the
+        #     voice clone matching the specified configuration.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -290,6 +295,15 @@ module Google
             # customer service system and played repeatedly.
             OFFLINE = 2
           end
+        end
+
+        # The configuration of Voice Clone feature.
+        # @!attribute [rw] voice_cloning_key
+        #   @return [::String]
+        #     Required. Created by GenerateVoiceCloningKey.
+        class VoiceCloneParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The message returned to the client by the `SynthesizeSpeech` method.
