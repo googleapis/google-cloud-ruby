@@ -21,9 +21,9 @@ describe "Storage Transfer Service manifest_request" do
   let(:project) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
-  let(:root_directory) { "/tmp" }
+  let(:root_directory) { "/tmp/uploads" }
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
-  let(:dummy_file_path) { "/tmp/#{dummy_file_name}" }
+  let(:dummy_file_path) { "#{root_directory}/#{dummy_file_name}" }
   let(:create_dummy_file) {
     # create dummy file 
     File.open dummy_file_path, "w" do |file|
@@ -75,14 +75,12 @@ describe "Storage Transfer Service manifest_request" do
         manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
-
     # Object takes time to be created on bucket hence retrying
-    file, _err = capture_io do
-      retry_resource_exhaustion do
-        sink_bucket.file dummy_file_name
-      end
-    end
-    assert file
+    file = retry_untill_tranfer_is_done do
+            sink_bucket.file dummy_file_name
+          end
+    assert file.is_a?(Google::Cloud::Storage::File), "File #{dummy_file_name} should exist on #{sink_bucket.name}"
+    # Delete transfer jobs
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
