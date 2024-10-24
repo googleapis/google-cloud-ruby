@@ -1,0 +1,17 @@
+{
+    "api_id": "securitycentermanagement.googleapis.com",
+    "api_shortname": "securitycentermanagement",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-security_center_management-v1/latest",
+    "distribution_name": "google-cloud-security_center_management-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "securitycentermanagement",
+    "name_pretty": "Security Center Management V1 API",
+    "product_documentation": "https://cloud.google.com/security-command-center/docs/reference/security-center-management/rest",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Management API for Security Command Center, a built-in security and risk management solution for Google Cloud. Use this API to programmatically update the settings and configuration of Security Command Center. Note that google-cloud-security_center_management-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-security_center_management instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/security-command-center/docs/reference/security-center-management/rest",
+    "library_type": "GAPIC_AUTO"
+}
