@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-10-24)
+
+#### Features
+
+* Support for LicenseManagementService ([#27408](https://github.com/googleapis/google-cloud-ruby/issues/27408)) 
+
 ### 1.0.1 (2024-08-09)
 
 #### Documentation
