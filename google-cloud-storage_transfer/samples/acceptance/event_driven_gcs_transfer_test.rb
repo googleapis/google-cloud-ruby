@@ -34,7 +34,7 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
   end
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
   let(:create_dummy_file) {
-    source_bucket.create_file(StringIO.new("this is dummy"), dummy_file_name)
+    source_bucket.create_file StringIO.new("this is dummy"), dummy_file_name
   }
   let(:custom_attrs) { { "foo" => "bar" } }
   let(:event_types) { ["OBJECT_FINALIZE"] }

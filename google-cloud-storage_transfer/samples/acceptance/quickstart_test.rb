@@ -21,7 +21,7 @@ describe "Storage Transfer Service Quickstart" do
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
 
- before do
+  before do
     # create dummy file in source bucket
     source_bucket.create_file StringIO.new("this is dummy"), dummy_file_name
     grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
@@ -47,7 +47,7 @@ describe "Storage Transfer Service Quickstart" do
 
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
-  
+
   it "checks the file is created in destination bucket" do
     out, _err = capture_io do
       retry_resource_exhaustion do
@@ -56,10 +56,10 @@ describe "Storage Transfer Service Quickstart" do
     end
     # Object takes time to be created on bucket hence retrying
     file = retry_untill_tranfer_is_done do
-              sink_bucket.file dummy_file_name
-           end
+      sink_bucket.file dummy_file_name
+    end
     assert file, "File #{dummy_file_name} should exist on #{sink_bucket.name}"
-    #Delete Transfer job
+    # Delete Transfer job
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end

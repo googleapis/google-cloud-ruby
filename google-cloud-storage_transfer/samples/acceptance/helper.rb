@@ -72,8 +72,8 @@ def grant_pubsub_permissions project_id:, topic:, subscription:
     p.add "roles/pubsub.subscriber", member
   end
 
-  topic.update_policy(topic.policy)
-  subscription.update_policy(subscription.policy)
+  topic.update_policy topic.policy
+  subscription.update_policy subscription.policy
 end
 
 def delete_transfer_job project_id:, job_name:
@@ -126,7 +126,7 @@ end
 def retry_untill_tranfer_is_done
   5.times do
     result = yield
-    return result if result.is_a?(Google::Cloud::Storage::File)
+    return result if result.is_a? Google::Cloud::Storage::File
     puts "retry"
     sleep rand(15..26)
   end

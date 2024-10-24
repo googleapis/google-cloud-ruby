@@ -25,8 +25,8 @@ describe "Storage Transfer Service manifest_request" do
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
   let(:dummy_file_path) { "#{root_directory}/#{dummy_file_name}" }
   let(:create_dummy_file) {
-    # create dummy file 
-    File.open dummy_file_path, "w" do |file|
+    # create dummy file
+    File.write dummy_file_path, "w" do |file|
       file.write "this is dummy"
     end
   }
@@ -77,8 +77,8 @@ describe "Storage Transfer Service manifest_request" do
     end
     # Object takes time to be created on bucket hence retrying
     file = retry_untill_tranfer_is_done do
-            sink_bucket.file dummy_file_name
-          end
+      sink_bucket.file dummy_file_name
+    end
     assert file.is_a?(Google::Cloud::Storage::File), "File #{dummy_file_name} should exist on #{sink_bucket.name}"
     # Delete transfer jobs
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
