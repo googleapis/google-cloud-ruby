@@ -44,4 +44,16 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::ClientPathsTe
       assert_equal "projects/value0/locations/global/connectivityTests/value1", path
     end
   end
+
+  def test_project_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_path project: "value0"
+      assert_equal "projects/value0", path
+    end
+  end
 end
