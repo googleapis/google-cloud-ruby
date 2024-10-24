@@ -14,16 +14,16 @@
 
 # [START storagetransfer_quickstart]
 def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_bucket:, pubsub_id:
-    # Your Google Cloud Project ID
-    # project_id = "your-project_id"
+  # Your Google Cloud Project ID
+  # project_id = "your-project_id"
 
-    # The name of the source GCS bucket to transfer objects from
-    # gcs_source_bucket = "your-source-gcs-source-bucket"
+  # The name of the source GCS bucket to transfer objects from
+  # gcs_source_bucket = "your-source-gcs-source-bucket"
 
-    # The name of the  GCS bucket to transfer objects to
-    # gcs_sink_bucket = "your-sink-gcs-bucket"
+  # The name of the  GCS bucket to transfer objects to
+  # gcs_sink_bucket = "your-sink-gcs-bucket"
 
-    #pubsub_id = projects/<Project-name>topics/<Subscription-name>
+  # pubsub_id = projects/<Project-name>topics/<Subscription-name>
 
   require "google/cloud/storage_transfer"
 
@@ -37,7 +37,7 @@ def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_b
         bucket_name: gcs_sink_bucket
       },
       transfer_options: {
-          overwrite_objects_already_existing_in_sink: true
+        overwrite_objects_already_existing_in_sink: true
       }
     },
     event_stream: {
@@ -51,8 +51,7 @@ def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_b
   transfer_job_response = client.create_transfer_job transfer_job: transfer_job
   puts "Created and ran transfer job between #{gcs_source_bucket} and #{gcs_sink_bucket} with name #{transfer_job_response.name}"
 end
-  # [END storagetransfer_quickstart]
-  
+# [END storagetransfer_quickstart]
 if $PROGRAM_NAME == __FILE__
   create_event_driven_gcs_transfer project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, pubsub_id: ARGV.shift
 end

@@ -26,26 +26,23 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
   let :topic do
     pubsub.create_topic "ruby_storagetransfer_topic_#{SecureRandom.hex}"
   end
-  let(:subscription) {topic.subscribe("ruby_storagetransfer_subscription_#{SecureRandom.hex}")}
+  let(:subscription) { topic.subscribe "ruby_storagetransfer_subscription_#{SecureRandom.hex}" }
   let :destroy_topic do
-    topic.subscriptions.each do |subscription|
-        subscription.delete
-    end
+    topic.subscriptions.each(&:delete)
     topic.delete
     puts "Destroy topic #{topic.name}"
   end
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
   let(:create_dummy_file) {
-    source_bucket.create_file( StringIO.new("this is dummy"), dummy_file_name)
+    source_bucket.create_file(StringIO.new("this is dummy"), dummy_file_name)
   }
   let(:custom_attrs) { { "foo" => "bar" } }
   let(:event_types) { ["OBJECT_FINALIZE"] }
   let(:filename_prefix) { "my-prefix" }
   let(:payload) { "NONE" }
   before do
-    grant_pubsub_permissions project_id: project.project_id, topic:topic, subscription: subscription
-        create_dummy_file
-
+    grant_pubsub_permissions project_id: project.project_id, topic: topic, subscription: subscription
+    create_dummy_file
     grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
     grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
 
@@ -53,7 +50,7 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
                                                             event_types: event_types,
                                                             prefix: filename_prefix,
                                                             payload: payload
-  end  
+  end
   after do
     destroy_topic
     delete_bucket_helper source_bucket.name
@@ -65,7 +62,6 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
       create_event_driven_gcs_transfer project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name
     end
     assert_includes out, "transferJobs"
-    binding.pry
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
