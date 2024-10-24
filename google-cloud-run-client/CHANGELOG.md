@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.0 (2024-10-24)
+
+#### Features
+
+* Support for the Builds service ([#27403](https://github.com/googleapis/google-cloud-ruby/issues/27403)) 
+
 ### 1.2.1 (2024-08-08)
 
 #### Documentation
