@@ -1,4 +1,6 @@
 {
+  "google-ads-ad_manager-v1": "0.0.1",
+  "google-ads-ad_manager-v1+FILLER": "0.0.0",
   "google-analytics-admin": "0.5.1",
   "google-analytics-admin+FILLER": "0.0.0",
   "google-analytics-admin-v1alpha": "0.30.1",
