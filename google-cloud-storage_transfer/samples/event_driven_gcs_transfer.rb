@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storagetransfer_quickstart]
+# [START storagetransfer_create_event_driven_gcs_transfer]
 def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_bucket:, pubsub_id:
   # Your Google Cloud Project ID
   # project_id = "your-project_id"
@@ -51,7 +51,7 @@ def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_b
   transfer_job_response = client.create_transfer_job transfer_job: transfer_job
   puts "Created and ran transfer job between #{gcs_source_bucket} and #{gcs_sink_bucket} with name #{transfer_job_response.name}"
 end
-# [END storagetransfer_quickstart]
+# [END storagetransfer_create_event_driven_gcs_transfer]
 if $PROGRAM_NAME == __FILE__
   create_event_driven_gcs_transfer project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, pubsub_id: ARGV.shift
 end
