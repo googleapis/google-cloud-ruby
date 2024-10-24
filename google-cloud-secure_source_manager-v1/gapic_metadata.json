@@ -64,6 +64,31 @@
               "methods": [
                 "test_iam_permissions_repo"
               ]
+            },
+            "CreateBranchRule": {
+              "methods": [
+                "create_branch_rule"
+              ]
+            },
+            "ListBranchRules": {
+              "methods": [
+                "list_branch_rules"
+              ]
+            },
+            "GetBranchRule": {
+              "methods": [
+                "get_branch_rule"
+              ]
+            },
+            "UpdateBranchRule": {
+              "methods": [
+                "update_branch_rule"
+              ]
+            },
+            "DeleteBranchRule": {
+              "methods": [
+                "delete_branch_rule"
+              ]
             }
           }
         }

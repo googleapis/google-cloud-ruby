@@ -450,6 +450,206 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_sync",
+      "title": "Snippet for the create_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_branch_rule.",
+      "file": "secure_source_manager/create_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#create_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "CreateBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_sync",
+      "title": "Snippet for the list_branch_rules call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_branch_rules.",
+      "file": "secure_source_manager/list_branch_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_branch_rules",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#list_branch_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::ListBranchRulesResponse",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "ListBranchRules",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRules",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_sync",
+      "title": "Snippet for the get_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_branch_rule.",
+      "file": "secure_source_manager/get_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#get_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecureSourceManager::V1::BranchRule",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "GetBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_sync",
+      "title": "Snippet for the update_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_branch_rule.",
+      "file": "secure_source_manager/update_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#update_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_sync",
+      "title": "Snippet for the delete_branch_rule call in the SecureSourceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_branch_rule.",
+      "file": "secure_source_manager/delete_branch_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_branch_rule",
+        "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client#delete_branch_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecureSourceManager::Client",
+          "full_name": "::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteBranchRule",
+          "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRule",
+          "service": {
+            "short_name": "SecureSourceManager",
+            "full_name": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
