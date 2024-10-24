@@ -200,9 +200,27 @@ module Google
       #     The delay of data points caused by ingestion. Data points older than this
       #     age are guaranteed to be ingested and available to be read, excluding
       #     data loss due to errors.
+      # @!attribute [rw] time_series_resource_hierarchy_level
+      #   @return [::Array<::Google::Api::MetricDescriptor::MetricDescriptorMetadata::TimeSeriesResourceHierarchyLevel>]
+      #     The scope of the timeseries data of the metric.
       class MetricDescriptorMetadata
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # The resource hierarchy level of the timeseries data of a metric.
+        module TimeSeriesResourceHierarchyLevel
+          # Do not use this default value.
+          TIME_SERIES_RESOURCE_HIERARCHY_LEVEL_UNSPECIFIED = 0
+
+          # Scopes a metric to a project.
+          PROJECT = 1
+
+          # Scopes a metric to an organization.
+          ORGANIZATION = 2
+
+          # Scopes a metric to a folder.
+          FOLDER = 3
+        end
       end
 
       # The kind of measurement. It describes how the data is reported.
