@@ -23,7 +23,7 @@ describe "Storage Transfer Service from POSIX" do
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
   let(:dummy_file_path) { "#{root_directory}/#{dummy_file_name}" }
   let(:create_dummy_file) {
-    # create dummy file 
+    # create dummy file
     File.open dummy_file_path, "w" do |file|
       file.write "this is dummy"
     end
