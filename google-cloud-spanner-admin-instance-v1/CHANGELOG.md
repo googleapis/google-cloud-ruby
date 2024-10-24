@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2024-10-24)
+
+#### Features
+
+* Add support for Cloud Spanner Default Backup Schedules ([#27462](https://github.com/googleapis/google-cloud-ruby/issues/27462)) 
+
 ### 1.2.0 (2024-10-15)
 
 #### Features
