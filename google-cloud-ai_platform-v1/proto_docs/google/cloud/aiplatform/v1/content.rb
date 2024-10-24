@@ -534,6 +534,9 @@ module Google
           # @!attribute [rw] title
           #   @return [::String]
           #     Title of the attribution.
+          # @!attribute [rw] text
+          #   @return [::String]
+          #     Text of the attribution.
           class RetrievedContext
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -598,11 +601,11 @@ module Google
         # Metadata related to retrieval in the grounding flow.
         # @!attribute [rw] google_search_dynamic_retrieval_score
         #   @return [::Float]
-        #     Optional. Score indicating how likely information from google search could
+        #     Optional. Score indicating how likely information from Google Search could
         #     help answer the prompt. The score is in the range `[0, 1]`, where 0 is the
         #     least likely and 1 is the most likely. This score is only populated when
-        #     google search grounding and dynamic retrieval is enabled. It will be
-        #     compared to the threshold to determine whether to trigger google search.
+        #     Google Search grounding and dynamic retrieval is enabled. It will be
+        #     compared to the threshold to determine whether to trigger Google Search.
         class RetrievalMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
