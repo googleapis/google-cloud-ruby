@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudoptimization.googleapis.com",
+    "api_shortname": "cloudoptimization",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-optimization-v1/latest",
+    "distribution_name": "google-cloud-optimization-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudoptimization",
+    "name_pretty": "Cloud Optimization V1 API",
+    "product_documentation": "https://cloud.google.com/optimization",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Optimization API provides a portfolio of solvers to address common optimization use cases starting with optimal route planning for vehicle fleets. Note that google-cloud-optimization-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-optimization instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/optimization",
+    "library_type": "GAPIC_AUTO"
+}
