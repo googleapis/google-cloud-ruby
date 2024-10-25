@@ -115,6 +115,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.delete_site.timeout = 60.0
+                default_config.rpcs.delete_site.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.list_hardware_groups.timeout = 60.0
                 default_config.rpcs.list_hardware_groups.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -355,6 +360,10 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location to list orders in.
             #     Format: `projects/{project}/locations/{location}`
+            #
+            #     To list orders across all locations, substitute `-` (the hyphen or
+            #     dash character) for the location and check the unreachable field in
+            #     the response message.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
             #     requested. If unspecified, server will pick an appropriate default.
@@ -957,6 +966,10 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location to list sites in.
             #     Format: `projects/{project}/locations/{location}`
+            #
+            #     To list sites across all locations, substitute `-` (the hyphen or
+            #     dash character) for the location and check the unreachable field in
+            #     the response message.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
             #     requested. If unspecified, server will pick an appropriate default.
@@ -1327,6 +1340,104 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @gdc_hardware_management_stub.call_rpc :update_site, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a site.
+            #
+            # @overload delete_site(request, options = nil)
+            #   Pass arguments to `delete_site` via a request object, either of type
+            #   {::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_site(name: nil, request_id: nil)
+            #   Pass arguments to `delete_site` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the site.
+            #     Format: `projects/{project}/locations/{location}/sites/{site}`
+            #   @param request_id [::String]
+            #     Optional. An optional unique identifier for this request. See
+            #     [AIP-155](https://google.aip.dev/155).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gdc_hardware_management/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest.new
+            #
+            #   # Call the delete_site method.
+            #   result = client.delete_site request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_site request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_site.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::GDCHardwareManagement::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_site.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_site.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @gdc_hardware_management_stub.call_rpc :delete_site, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -1856,6 +1967,10 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location to list hardware in.
             #     Format: `projects/{project}/locations/{location}`
+            #
+            #     To list hardware across all locations, substitute `-` (the hyphen or
+            #     dash character) for the location and check the unreachable field in
+            #     the response message.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
             #     requested. If unspecified, server will pick an appropriate default.
@@ -2930,6 +3045,10 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location to list SKUs in.
             #     Format: `projects/{project}/locations/{location}`
+            #
+            #     To list SKUs across all locations, substitute `-` (the hyphen or
+            #     dash character) for the location and check the unreachable field in
+            #     the response message.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
             #     requested. If unspecified, server will pick an appropriate default.
@@ -3118,6 +3237,10 @@ module Google
             #   @param parent [::String]
             #     Required. The project and location to list zones in.
             #     Format: `projects/{project}/locations/{location}`
+            #
+            #     To list zones across all locations, substitute `-` (the hyphen or
+            #     dash character) for the location and check the unreachable field in
+            #     the response message.
             #   @param page_size [::Integer]
             #     Optional. Requested page size. Server may return fewer items than
             #     requested. If unspecified, server will pick an appropriate default.
@@ -3898,6 +4021,11 @@ module Google
                 #
                 attr_reader :update_site
                 ##
+                # RPC-specific configuration for `delete_site`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_site
+                ##
                 # RPC-specific configuration for `list_hardware_groups`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4040,6 +4168,8 @@ module Google
                   @create_site = ::Gapic::Config::Method.new create_site_config
                   update_site_config = parent_rpcs.update_site if parent_rpcs.respond_to? :update_site
                   @update_site = ::Gapic::Config::Method.new update_site_config
+                  delete_site_config = parent_rpcs.delete_site if parent_rpcs.respond_to? :delete_site
+                  @delete_site = ::Gapic::Config::Method.new delete_site_config
                   list_hardware_groups_config = parent_rpcs.list_hardware_groups if parent_rpcs.respond_to? :list_hardware_groups
                   @list_hardware_groups = ::Gapic::Config::Method.new list_hardware_groups_config
                   get_hardware_group_config = parent_rpcs.get_hardware_group if parent_rpcs.respond_to? :get_hardware_group
