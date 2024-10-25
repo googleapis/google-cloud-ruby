@@ -274,7 +274,7 @@ module Google
             #     {::Google::Cloud::DiscoveryEngine::V1::Document Document}.
             # @!attribute [rw] fhir_resource
             #   @return [::String]
-            #     Required. Format:
+            #     Format:
             #     projects/\\{project}/locations/\\{location}/datasets/\\{dataset}/fhirStores/\\{fhir_store}/fhir/\\{resource_type}/\\{fhir_resource_id}
             class MatcherValue
               include ::Google::Protobuf::MessageExts

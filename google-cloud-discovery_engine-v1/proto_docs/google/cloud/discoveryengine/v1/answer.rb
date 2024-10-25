@@ -422,6 +422,12 @@ module Google
             #
             # Google skips the answer if the query doesn't have clear intent.
             NON_ANSWER_SEEKING_QUERY_IGNORED_V2 = 8
+
+            # The low-grounded answer case.
+            #
+            # Google skips the answer if a well grounded answer was unable to be
+            # generated.
+            LOW_GROUNDED_ANSWER = 9
           end
         end
       end
