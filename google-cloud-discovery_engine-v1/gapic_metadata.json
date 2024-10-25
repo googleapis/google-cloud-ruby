@@ -82,6 +82,11 @@
               "methods": [
                 "search"
               ]
+            },
+            "SearchLite": {
+              "methods": [
+                "search_lite"
+              ]
             }
           }
         }

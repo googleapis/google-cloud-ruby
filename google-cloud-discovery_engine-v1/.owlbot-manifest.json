@@ -292,6 +292,7 @@
     "snippets/schema_service/list_schemas.rb",
     "snippets/schema_service/update_schema.rb",
     "snippets/search_service/search.rb",
+    "snippets/search_service/search_lite.rb",
     "snippets/search_tuning_service/list_custom_models.rb",
     "snippets/search_tuning_service/train_custom_model.rb",
     "snippets/site_search_engine_service/batch_create_target_sites.rb",
