@@ -20,6 +20,7 @@ gem "google-cloud-storage_transfer", path: use_head ? "../../google-cloud-storag
 
 group :test do
   gem "google-cloud-storage"
+  gem "google-cloud-pubsub"
   gem "google-style", "~> 1.25.1"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"

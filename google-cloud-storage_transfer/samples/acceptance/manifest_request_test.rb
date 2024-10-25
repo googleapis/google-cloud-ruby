@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,53 +13,74 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../quickstart"
+require_relative "../manifest_request"
+require "csv"
 
-describe "Storage Transfer Service Quickstart" do
+
+describe "Storage Transfer Service manifest_request" do
   let(:project) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
+  let(:root_directory) { "/tmp/uploads" }
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
+  let(:dummy_file_path) { "#{root_directory}/#{dummy_file_name}" }
+  let(:create_dummy_file) {
+    # create dummy file
+    File.write dummy_file_path, "w" do |file|
+      file.write "this is dummy"
+    end
+  }
+  let(:manifestfile_path) { "manifest.csv" }
+  let(:manifest_location) { "gs://#{source_bucket.name}/#{manifestfile_path}" }
+  let(:agent_pool_name) { "" }
+  let(:data_csv) {
+    create_dummy_file
+    # create manifestcsv file
+    CSV.generate { |csv| csv << [dummy_file_name] }
+  }
+  let(:data_io) { StringIO.new data_csv }
+  let(:create_manifest_file) { source_bucket.file(manifestfile_path) || source_bucket.create_file(data_io, manifestfile_path) }
 
   before do
-    # create dummy file in source bucket
-    source_bucket.create_file StringIO.new("this is dummy"), dummy_file_name
+    create_manifest_file
     grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
     grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
   end
-
   after do
+    # delete dummy file
+    if File.exist? dummy_file_path
+      File.delete dummy_file_path
+      puts "File deleted: #{dummy_file_path}"
+    else
+      puts "File not found: #{dummy_file_path}"
+    end
     delete_bucket_helper source_bucket.name
     delete_bucket_helper sink_bucket.name
   end
 
   it "creates a transfer job" do
-    grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
-    grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
     out, _err = capture_io do
       retry_resource_exhaustion do
-        quickstart project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name
+        manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
-
     assert_includes out, "transferJobs"
-    job_name = out.scan(%r{transferJobs/\d+})[0]
-
+    job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
 
   it "checks the file is created in destination bucket" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        quickstart project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name
+        manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
     # Object takes time to be created on bucket hence retrying
     file = retry_untill_tranfer_is_done do
       sink_bucket.file dummy_file_name
     end
-    assert file, "File #{dummy_file_name} should exist on #{sink_bucket.name}"
-    # Delete Transfer job
+    assert file.is_a?(Google::Cloud::Storage::File), "File #{dummy_file_name} should exist on #{sink_bucket.name}"
+    # Delete transfer jobs
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end

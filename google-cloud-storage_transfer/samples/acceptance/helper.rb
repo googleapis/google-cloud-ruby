@@ -57,6 +57,25 @@ def grant_sts_permissions project_id:, bucket_name:
   end
 end
 
+def grant_pubsub_permissions project_id:, topic:, subscription:
+  storage_client = Google::Cloud::Storage.new
+  client = Google::Cloud::StorageTransfer.storage_transfer_service
+  request = { project_id: project_id }
+  response = client.get_google_service_account request
+  email = response.account_email
+  member = "serviceAccount:#{email}"
+  topic.policy do |p|
+    p.add "roles/pubsub.publisher",
+          "serviceAccount:#{storage_client.service_account_email}"
+  end
+  subscription.policy do |p|
+    p.add "roles/pubsub.subscriber", member
+  end
+
+  topic.update_policy topic.policy
+  subscription.update_policy subscription.policy
+end
+
 def delete_transfer_job project_id:, job_name:
   client = Google::Cloud::StorageTransfer.storage_transfer_service
 
@@ -86,6 +105,13 @@ def create_bucket_helper bucket_name
   end
 end
 
+def create_nearline_bucket_helper bucket_name
+  storage_client = Google::Cloud::Storage.new
+  retry_resource_exhaustion do
+    storage_client.create_bucket bucket_name, storage_class: "NEARLINE"
+  end
+end
+
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
@@ -94,6 +120,15 @@ def delete_bucket_helper bucket_name
 
     bucket.files.each(&:delete)
     bucket.delete
+  end
+end
+
+def retry_untill_tranfer_is_done
+  5.times do
+    result = yield
+    return result if result.is_a? Google::Cloud::Storage::File
+    puts "retry"
+    sleep rand(15..26)
   end
 end
 
