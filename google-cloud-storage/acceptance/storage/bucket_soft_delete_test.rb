@@ -107,7 +107,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
       _(file.exists?).must_equal true
     end
 
-    it "can not restore a deleted file from bucket using incorrect restore token" do
+    it "can't restore a deleted file from bucket using incorrect restore token" do
       file = hns_bucket.file file_name
       file.delete
       deleted_file = hns_bucket.file file_name, soft_deleted: true, generation: file.generation
