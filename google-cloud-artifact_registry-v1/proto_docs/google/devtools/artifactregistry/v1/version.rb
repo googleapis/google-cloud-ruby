@@ -27,7 +27,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the version, for example:
-        #     "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1".
+        #     `projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1`.
         #     If the package or version ID parts contain slashes, the slashes are
         #     escaped.
         # @!attribute [rw] description
@@ -50,9 +50,21 @@ module Google
         #     resource. Currently, the resources could be:
         #     {::Google::Cloud::ArtifactRegistry::V1::DockerImage DockerImage}
         #     {::Google::Cloud::ArtifactRegistry::V1::MavenArtifact MavenArtifact}
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Client specified annotations.
         class Version
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request to list versions.
@@ -71,6 +83,53 @@ module Google
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. The field to order the results by.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request. Filter
+        #     rules are case insensitive. The fields eligible for filtering are:
+        #
+        #       * `name`
+        #       * `annotations`
+        #
+        #      Examples of using a filter:
+        #
+        #      To filter the results of your request to versions with the name
+        #      `my-version` in project `my-project` in the `us-central` region, in
+        #      repository `my-repo`, append the following filter expression to your
+        #      request:
+        #
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my-version"`
+        #
+        #      You can also use wildcards to match any number of characters before or
+        #      after the value:
+        #
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version"`
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/my*"`
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/*version*"`
+        #
+        #      To filter the results of your request to versions with the annotation
+        #      key-value pair [`external_link`: `external_link_value`], append the
+        #      following filter expression to your request:
+        #
+        #       * `"annotations.external_link:external_link_value"`
+        #
+        #      To filter just for a specific annotation key `external_link`, append the
+        #      following filter expression to your request:
+        #
+        #       * `"annotations.external_link"`
+        #
+        #      If the annotation key or value contains special characters, you can escape
+        #      them by surrounding the value with backticks. For example, to filter the
+        #      results of your request to versions with the annotation key-value pair
+        #      [`external.link`:`https://example.com/my-version`], append the following
+        #      filter expression to your request:
+        #
+        #       * `` "annotations.`external.link`:`https://example.com/my-version`" ``
+        #
+        #      You can also filter with annotations with a wildcard to
+        #      match any number of characters before or after the value:
+        #
+        #       * `` "annotations.*_link:`*example.com*`" ``
         class ListVersionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,6 +194,20 @@ module Google
         #   @return [::Array<::String>]
         #     The versions the operation failed to delete.
         class BatchDeleteVersionsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a version.
+        # @!attribute [rw] version
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::Version]
+        #     Required. The Version that replaces the resource on the server.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The update mask applies to the resource. For the `FieldMask` definition,
+        #     see
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        class UpdateVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

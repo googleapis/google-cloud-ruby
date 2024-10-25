@@ -6,10 +6,11 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n1google/devtools/artifactregistry/v1/package.proto\x12#google.devtools.artifactregistry.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\x94\x02\n\x07Package\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12/\n\x0b\x63reate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bupdate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp:\x82\x01\xea\x41\x7f\n\'artifactregistry.googleapis.com/Package\x12Tprojects/{project}/locations/{location}/repositories/{repository}/packages/{package}\"}\n\x13ListPackagesRequest\x12?\n\x06parent\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\x12\'artifactregistry.googleapis.com/Package\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\"o\n\x14ListPackagesResponse\x12>\n\x08packages\x18\x01 \x03(\x0b\x32,.google.devtools.artifactregistry.v1.Package\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"R\n\x11GetPackageRequest\x12=\n\x04name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'artifactregistry.googleapis.com/Package\"U\n\x14\x44\x65letePackageRequest\x12=\n\x04name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'artifactregistry.googleapis.com/PackageB\xf7\x01\n\'com.google.devtools.artifactregistry.v1B\x0cPackageProtoP\x01ZPcloud.google.com/go/artifactregistry/apiv1/artifactregistrypb;artifactregistrypb\xaa\x02 Google.Cloud.ArtifactRegistry.V1\xca\x02 Google\\Cloud\\ArtifactRegistry\\V1\xea\x02#Google::Cloud::ArtifactRegistry::V1b\x06proto3"
+descriptor_data = "\n1google/devtools/artifactregistry/v1/package.proto\x12#google.devtools.artifactregistry.v1\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xa1\x03\n\x07Package\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x14\n\x0c\x64isplay_name\x18\x02 \x01(\t\x12/\n\x0b\x63reate_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bupdate_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12W\n\x0b\x61nnotations\x18\x07 \x03(\x0b\x32=.google.devtools.artifactregistry.v1.Package.AnnotationsEntryB\x03\xe0\x41\x01\x1a\x32\n\x10\x41nnotationsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01:\x82\x01\xea\x41\x7f\n\'artifactregistry.googleapis.com/Package\x12Tprojects/{project}/locations/{location}/repositories/{repository}/packages/{package}\"\xa9\x01\n\x13ListPackagesRequest\x12?\n\x06parent\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\x12\'artifactregistry.googleapis.com/Package\x12\x11\n\tpage_size\x18\x02 \x01(\x05\x12\x12\n\npage_token\x18\x03 \x01(\t\x12\x13\n\x06\x66ilter\x18\x04 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08order_by\x18\x05 \x01(\tB\x03\xe0\x41\x01\"o\n\x14ListPackagesResponse\x12>\n\x08packages\x18\x01 \x03(\x0b\x32,.google.devtools.artifactregistry.v1.Package\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t\"R\n\x11GetPackageRequest\x12=\n\x04name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'artifactregistry.googleapis.com/Package\"U\n\x14\x44\x65letePackageRequest\x12=\n\x04name\x18\x01 \x01(\tB/\xe0\x41\x02\xfa\x41)\n\'artifactregistry.googleapis.com/Package\"\x86\x01\n\x14UpdatePackageRequest\x12=\n\x07package\x18\x01 \x01(\x0b\x32,.google.devtools.artifactregistry.v1.Package\x12/\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\xf7\x01\n\'com.google.devtools.artifactregistry.v1B\x0cPackageProtoP\x01ZPcloud.google.com/go/artifactregistry/apiv1/artifactregistrypb;artifactregistrypb\xaa\x02 Google.Cloud.ArtifactRegistry.V1\xca\x02 Google\\Cloud\\ArtifactRegistry\\V1\xea\x02#Google::Cloud::ArtifactRegistry::V1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -25,6 +26,7 @@ rescue TypeError
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
     ["google.protobuf.Timestamp", "google/protobuf/timestamp.proto"],
+    ["google.protobuf.FieldMask", "google/protobuf/field_mask.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor
@@ -45,6 +47,7 @@ module Google
         ListPackagesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.ListPackagesResponse").msgclass
         GetPackageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.GetPackageRequest").msgclass
         DeletePackageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.DeletePackageRequest").msgclass
+        UpdatePackageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.UpdatePackageRequest").msgclass
       end
     end
   end
