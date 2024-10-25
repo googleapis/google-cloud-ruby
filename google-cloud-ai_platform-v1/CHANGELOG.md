@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.55.0 (2024-10-25)
+
+#### Features
+
+* add `text` field for Grounding metadata support chunk output ([#27458](https://github.com/googleapis/google-cloud-ruby/issues/27458)) 
+
 ### 0.54.0 (2024-10-08)
 
 #### Features
