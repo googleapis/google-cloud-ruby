@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require "storage_helper"
-require "pry"
 
 describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
   let(:bucket_name) { $bucket_names[0] }
@@ -88,14 +87,13 @@ describe Google::Cloud::Storage::Bucket, :soft_delete, :storage do
       }
     }
     let(:random_restore_token) {"random_string"}
-
+    
     before do
       hns_bucket.create_file file_path, file_name
     end
 
-
     it "restores a deleted file from bucket when correct restore token is provided"  do
-
+       binding.pry
       file = hns_bucket.file file_name
       file.delete
 

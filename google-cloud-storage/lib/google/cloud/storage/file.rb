@@ -1589,6 +1589,11 @@ module Google
           true
         end
 
+        # A universally unique identifier (UUID), along with the object's name and generation value
+        # required to restore a soft-deleted object only if its name and generation value do not uniquely identify it
+        #
+        # @return [String]
+
         def restore_token
           @gapi.restore_token
         end

@@ -514,6 +514,7 @@ class MockStorage < Minitest::Spec
       projection: projection,
       user_project: user_project,
       fields: fields,
+      restore_token: restore_token,
       options: options
     }
   end
