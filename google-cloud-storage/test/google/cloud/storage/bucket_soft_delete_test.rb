@@ -19,47 +19,50 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
-  let(:soft_delete_policy) do
-      soft_delete_policy_object(retention_duration_seconds: 10*24*60*60)
+  let :soft_delete_policy do
+    soft_delete_policy_object retention_duration_seconds: 10 * 24 * 60 * 60
   end
   let(:file_name) { "file.ext" }
   let(:file_hash) { random_file_hash bucket.name, file_name }
   let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
   let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
-  let(:generation) { 1234567890 }
+  let(:generation) { 1_234_567_890 }
   let(:soft_delete_time) { DateTime.now }
   let(:hard_delete_time) { soft_delete_time + 10 } # Soft delete time + 10 days
 
   it "knows its soft_delete_policy value" do
     _(bucket.soft_delete_policy).wont_be_nil
     _(bucket.soft_delete_policy.effective_time).must_be_kind_of DateTime
-    _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 604800
+    _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 604_800
   end
 
   it "can update its soft_delete_policy" do
     mock = Minitest::Mock.new
-    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, soft_delete_policy: soft_delete_policy),
-                [bucket_name, patch_bucket_gapi(soft_delete_policy: soft_delete_policy)], **patch_bucket_args(options: {retries: 0})
+    mock.expect :patch_bucket,
+                resp_bucket_gapi(bucket_hash, soft_delete_policy: soft_delete_policy),
+                [bucket_name, patch_bucket_gapi(soft_delete_policy: soft_delete_policy)],
+                **patch_bucket_args(options: { retries: 0 })
 
     bucket.service.mocked_service = mock
 
     bucket.soft_delete_policy = soft_delete_policy
 
     _(bucket.soft_delete_policy.effective_time).must_be_kind_of DateTime
-    _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 864000
+    _(bucket.soft_delete_policy.retention_duration_seconds).must_equal 864_000
 
     mock.verify
   end
 
   it "can fetch soft deleted file" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
+    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: { retries: 0 })
     file.service.mocked_service = mock
     file.delete
     mock.verify
 
-    mock.expect :get_object, get_file_gapi(bucket_name, file.name, soft_delete_time: soft_delete_time, hard_delete_time: hard_delete_time),
-                 [bucket_name, file.name], **get_object_args(soft_deleted: true, generation: generation)
+    mock.expect :get_object, get_file_gapi(bucket_name, file.name, soft_delete_time: soft_delete_time,
+                hard_delete_time: hard_delete_time),
+                [bucket_name, file.name], **get_object_args(soft_deleted: true, generation: generation)
     bucket.service.mocked_service = mock
     soft_deleted_file = bucket.file file.name, soft_deleted: true, generation: generation
     mock.verify
@@ -73,7 +76,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   it "can list soft deleted files" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(0),
-      [bucket_name], **list_objects_args(soft_deleted: true)
+                [bucket_name], **list_objects_args(soft_deleted: true)
     bucket.service.mocked_service = mock
     files = bucket.files soft_deleted: true
     mock.verify
@@ -81,7 +84,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
     _(files).must_be_empty
 
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
+    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: { retries: 0 })
     file.service.mocked_service = mock
     file.delete
     mock.verify
@@ -98,14 +101,14 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
 
   it "can restore soft deleted file" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
+    mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: { retries: 0 })
     file.service.mocked_service = mock
     file.delete
     mock.verify
 
     mock = Minitest::Mock.new
     mock.expect :restore_object, restore_file_gapi(bucket_name, file_name),
-      [bucket_name, file.name, generation], **restore_object_args()
+                [bucket_name, file.name, generation], **restore_object_args
     bucket.service.mocked_service = mock
     file = bucket.restore_file file_name, generation
     mock.verify
@@ -115,26 +118,25 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
   end
 
   describe "for hierarchical namespace buckets" do
-    
-    let(:bucket_hash) { 
-      hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new(enabled: true)
+    let :bucket_hash do
+      hierarchical_namespace = Google::Apis::StorageV1::Bucket::HierarchicalNamespace.new enabled: true
       random_bucket_hash name: bucket_name, hierarchical_namespace: hierarchical_namespace
-    }
+    end
     let(:file_name) { "file.ext" }
     let(:file_hash) { random_file_hash bucket.name, file_name }
     let(:file_gapi) { Google::Apis::StorageV1::Object.from_json file_hash.to_json }
     let(:file) { Google::Cloud::Storage::File.from_gapi file_gapi, storage.service }
-    let(:restore_token){ "test_token" }
+    let(:restore_token) { "test_token" }
 
     it "can restore soft deleted file" do
       mock = Minitest::Mock.new
-      mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: {retries: 0})
+      mock.expect :delete_object, nil, [bucket_name, file.name], **delete_object_args(options: { retries: 0 })
       file.service.mocked_service = mock
       file.delete
       mock.verify
       mock = Minitest::Mock.new
       mock.expect :restore_object, restore_file_gapi(bucket_name, file_name),
-        [bucket_name, file_name, generation], **restore_object_args(restore_token: restore_token)
+                  [bucket_name, file_name, generation], **restore_object_args(restore_token: restore_token)
       bucket.service.mocked_service = mock
       file = bucket.restore_file file_name, generation, restore_token: restore_token
       mock.verify
@@ -155,7 +157,7 @@ describe Google::Cloud::Storage::Bucket, :soft_delete_policy, :mock_storage do
     b
   end
 
-  def get_file_gapi bucket=nil, name = nil,
+  def get_file_gapi bucket = nil, name = nil,
                     soft_delete_time: nil,
                     hard_delete_time: nil
     file_hash = random_file_hash(bucket, name,

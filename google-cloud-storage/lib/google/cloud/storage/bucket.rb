@@ -1843,6 +1843,8 @@ module Google
         #   Name of the file.
         # @param [Fixnum] generation
         #   Selects a specific revision of this object.
+        # @param [String] restore_token
+        #   UUID generated specificly for softdeleted objects of HNS bucket
         # @param [Boolean] copy_source_acl
         #   If true, copies the source file's ACL; otherwise, uses the
         #   bucket's default file ACL. The default is false.
