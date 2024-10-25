@@ -83,6 +83,16 @@ module Google
             # Test IAM permissions on a repository.
             # IAM permission checks are not required on this method.
             rpc :TestIamPermissionsRepo, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # CreateBranchRule creates a branch rule in a given repository.
+            rpc :CreateBranchRule, ::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest, ::Google::Longrunning::Operation
+            # ListBranchRules lists branch rules in a given repository.
+            rpc :ListBranchRules, ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest, ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesResponse
+            # GetBranchRule gets a branch rule.
+            rpc :GetBranchRule, ::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest, ::Google::Cloud::SecureSourceManager::V1::BranchRule
+            # UpdateBranchRule updates a branch rule.
+            rpc :UpdateBranchRule, ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest, ::Google::Longrunning::Operation
+            # DeleteBranchRule deletes a branch rule.
+            rpc :DeleteBranchRule, ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
