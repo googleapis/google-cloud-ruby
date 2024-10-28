@@ -135,6 +135,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A collection of turns for multi-speaker synthesis.
+        # @!attribute [rw] turns
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1::MultiSpeakerMarkup::Turn>]
+        #     Required. Speaker turns.
+        class MultiSpeakerMarkup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A Multi-speaker turn.
+          # @!attribute [rw] speaker
+          #   @return [::String]
+          #     Required. The speaker of the turn, for example, 'O' or 'Q'. Please refer
+          #     to documentation for available speakers.
+          # @!attribute [rw] text
+          #   @return [::String]
+          #     Required. The text to speak.
+          class Turn
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Contains text input to be synthesized. Either `text` or `ssml` must be
         # supplied. Supplying both or neither returns
         # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. The
@@ -149,6 +171,10 @@ module Google
         #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For
         #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
+        # @!attribute [rw] multi_speaker_markup
+        #   @return [::Google::Cloud::TextToSpeech::V1::MultiSpeakerMarkup]
+        #     The multi-speaker input to be synthesized. Only applicable for
+        #     multi-speaker synthesis.
         # @!attribute [rw] custom_pronunciations
         #   @return [::Google::Cloud::TextToSpeech::V1::CustomPronunciations]
         #     Optional. The pronunciation customizations to be applied to the input. If
