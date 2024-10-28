@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.3.0 (2024-10-28)
+
+#### Features
+
+* add lite search API to allow public website search with API key ([#27495](https://github.com/googleapis/google-cloud-ruby/issues/27495)) 
+* add LOW_GROUNDED_ANSWER in answer skip reasons 
+* support query regex in control match rules 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
 ### 1.2.0 (2024-10-15)
 
 #### Features
