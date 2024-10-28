@@ -90,7 +90,7 @@ module Google
         #     Required. The user-provided ID to be assigned to the trigger.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the review, but do not
         #     post it.
         class CreateTriggerRequest
           include ::Google::Protobuf::MessageExts
@@ -112,7 +112,7 @@ module Google
         #     created. In this situation, `update_mask` is ignored.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the review, but do not
         #     post it.
         class UpdateTriggerRequest
           include ::Google::Protobuf::MessageExts
@@ -133,7 +133,7 @@ module Google
         #     but no action will be taken on the server.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the review, but do not
         #     post it.
         class DeleteTriggerRequest
           include ::Google::Protobuf::MessageExts
@@ -204,7 +204,7 @@ module Google
         #     Required. The user-provided ID to be assigned to the channel.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the review, but do not
         #     post it.
         class CreateChannelRequest
           include ::Google::Protobuf::MessageExts
@@ -222,7 +222,7 @@ module Google
         #     updated. To update all fields, provide a field mask of "*".
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the review, but do not
         #     post it.
         class UpdateChannelRequest
           include ::Google::Protobuf::MessageExts
@@ -235,7 +235,7 @@ module Google
         #     Required. The name of the channel to be deleted.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not
+        #     Optional. If set, validate the request and preview the review, but do not
         #     post it.
         class DeleteChannelRequest
           include ::Google::Protobuf::MessageExts
@@ -390,6 +390,519 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request message for the GetMessageBus method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the message bus to get.
+        class GetMessageBusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListMessageBuses method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection to list triggers on.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return on each page.
+        #
+        #     Note: The service may send fewer.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token; provide the value from the `next_page_token`
+        #     field in a previous call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided must match
+        #     the previous call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting order is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
+        #     `name desc, update_time`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter field that the list request will filter on.
+        #     Possible filtersare described in https://google.aip.dev/160.
+        class ListMessageBusesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListMessageBuses` method.
+        # @!attribute [rw] message_buses
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::MessageBus>]
+        #     The requested message buses, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to `ListMessageBuses` to request the next
+        #     page. If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListMessageBusesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the `ListMessageBusEnrollments` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent message bus to list enrollments on.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return on each page.
+        #
+        #     Note: The service may send fewer.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token; provide the value from the `next_page_token`
+        #     field in a previous call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided must match
+        #     the previous call that provided the page token.
+        class ListMessageBusEnrollmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListMessageBusEnrollments` method.`
+        # @!attribute [rw] enrollments
+        #   @return [::Array<::String>]
+        #     The requested enrollments, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to `ListMessageBusEnrollments` to request the
+        #     next page. If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListMessageBusEnrollmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the CreateMessageBus method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which to add this message bus.
+        # @!attribute [rw] message_bus
+        #   @return [::Google::Cloud::Eventarc::V1::MessageBus]
+        #     Required. The message bus to create.
+        # @!attribute [rw] message_bus_id
+        #   @return [::String]
+        #     Required. The user-provided ID to be assigned to the MessageBus. It should
+        #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$)
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class CreateMessageBusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdateMessageBus method.
+        # @!attribute [rw] message_bus
+        #   @return [::Google::Cloud::Eventarc::V1::MessageBus]
+        #     Required. The MessageBus to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The fields to be updated; only fields explicitly provided are
+        #     updated. If no field mask is provided, all provided fields in the request
+        #     are updated. To update all fields, provide a field mask of "*".
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the MessageBus is not found, a new MessageBus
+        #     will be created. In this situation, `update_mask` is ignored.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class UpdateMessageBusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the DeleteMessageBus method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the MessageBus to be deleted.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If provided, the MessageBus will only be deleted if the etag
+        #     matches the current etag on the resource.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the MessageBus is not found, the request will
+        #     succeed but no action will be taken on the server.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class DeleteMessageBusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetEnrollment method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Enrollment to get.
+        class GetEnrollmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListEnrollments method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection to list triggers on.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return on each page.
+        #
+        #     Note: The service may send fewer.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token; provide the value from the `next_page_token`
+        #     field in a previous call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided must match
+        #     the previous call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting order is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
+        #     `name desc, update_time`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter field that the list request will filter on.
+        #     Possible filtersare described in https://google.aip.dev/160.
+        class ListEnrollmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListEnrollments` method.
+        # @!attribute [rw] enrollments
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::Enrollment>]
+        #     The requested Enrollments, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to `ListEnrollments` to request the next
+        #     page. If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListEnrollmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the CreateEnrollment method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which to add this enrollment.
+        # @!attribute [rw] enrollment
+        #   @return [::Google::Cloud::Eventarc::V1::Enrollment]
+        #     Required. The enrollment to create.
+        # @!attribute [rw] enrollment_id
+        #   @return [::String]
+        #     Required. The user-provided ID to be assigned to the Enrollment. It should
+        #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class CreateEnrollmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdateEnrollment method.
+        # @!attribute [rw] enrollment
+        #   @return [::Google::Cloud::Eventarc::V1::Enrollment]
+        #     Required. The Enrollment to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The fields to be updated; only fields explicitly provided are
+        #     updated. If no field mask is provided, all provided fields in the request
+        #     are updated. To update all fields, provide a field mask of "*".
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the Enrollment is not found, a new Enrollment
+        #     will be created. In this situation, `update_mask` is ignored.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class UpdateEnrollmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the DeleteEnrollment method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Enrollment to be deleted.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If provided, the Enrollment will only be deleted if the etag
+        #     matches the current etag on the resource.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the Enrollment is not found, the request will
+        #     succeed but no action will be taken on the server.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class DeleteEnrollmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetPipeline method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the pipeline to get.
+        class GetPipelineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListPipelines method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection to list pipelines on.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return on each page.
+        #
+        #     Note: The service may send fewer.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token; provide the value from the `next_page_token`
+        #     field in a previous call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided must match
+        #     the previous call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting order is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
+        #     `name desc, update_time`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter field that the list request will filter on.
+        #     Possible filters are described in https://google.aip.dev/160.
+        class ListPipelinesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the ListPipelines method.
+        # @!attribute [rw] pipelines
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::Pipeline>]
+        #     The requested pipelines, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to `ListPipelines` to request the next
+        #     page. If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListPipelinesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the CreatePipeline method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which to add this pipeline.
+        # @!attribute [rw] pipeline
+        #   @return [::Google::Cloud::Eventarc::V1::Pipeline]
+        #     Required. The pipeline to create.
+        # @!attribute [rw] pipeline_id
+        #   @return [::String]
+        #     Required. The user-provided ID to be assigned to the Pipeline.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class CreatePipelineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdatePipeline method.
+        # @!attribute [rw] pipeline
+        #   @return [::Google::Cloud::Eventarc::V1::Pipeline]
+        #     Required. The Pipeline to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The fields to be updated; only fields explicitly provided are
+        #     updated. If no field mask is provided, all provided fields in the request
+        #     are updated. To update all fields, provide a field mask of "*".
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the Pipeline is not found, a new Pipeline
+        #     will be created. In this situation, `update_mask` is ignored.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class UpdatePipelineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the DeletePipeline method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Pipeline to be deleted.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If provided, the Pipeline will only be deleted if the etag
+        #     matches the current etag on the resource.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the Pipeline is not found, the request will
+        #     succeed but no action will be taken on the server.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class DeletePipelineRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetGoogleApiSource method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the google api source to get.
+        class GetGoogleApiSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListGoogleApiSources method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection to list GoogleApiSources on.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return on each page.
+        #
+        #     Note: The service may send fewer.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token; provide the value from the `next_page_token`
+        #     field in a previous call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided must match
+        #     the previous call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting order is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
+        #     `name desc, update_time`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The filter field that the list request will filter on.
+        #     Possible filtersare described in https://google.aip.dev/160.
+        class ListGoogleApiSourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListGoogleApiSources` method.
+        # @!attribute [rw] google_api_sources
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::GoogleApiSource>]
+        #     The requested GoogleApiSources, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to `ListMessageBusEnrollments` to request the
+        #     next page. If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListGoogleApiSourcesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the CreateGoogleApiSource method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which to add this google api source.
+        # @!attribute [rw] google_api_source
+        #   @return [::Google::Cloud::Eventarc::V1::GoogleApiSource]
+        #     Required. The google api source to create.
+        # @!attribute [rw] google_api_source_id
+        #   @return [::String]
+        #     Required. The user-provided ID to be assigned to the GoogleApiSource. It
+        #     should match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class CreateGoogleApiSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdateGoogleApiSource method.
+        # @!attribute [rw] google_api_source
+        #   @return [::Google::Cloud::Eventarc::V1::GoogleApiSource]
+        #     Required. The GoogleApiSource to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The fields to be updated; only fields explicitly provided are
+        #     updated. If no field mask is provided, all provided fields in the request
+        #     are updated. To update all fields, provide a field mask of "*".
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the GoogleApiSource is not found, a new
+        #     GoogleApiSource will be created. In this situation, `update_mask` is
+        #     ignored.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class UpdateGoogleApiSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the DeleteGoogleApiSource method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the GoogleApiSource to be deleted.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. If provided, the MessageBus will only be deleted if the etag
+        #     matches the current etag on the resource.
+        # @!attribute [rw] allow_missing
+        #   @return [::Boolean]
+        #     Optional. If set to true, and the MessageBus is not found, the request will
+        #     succeed but no action will be taken on the server.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, validate the request and preview the review, but do not
+        #     post it.
+        class DeleteGoogleApiSourceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the metadata of the long-running operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -410,8 +923,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
