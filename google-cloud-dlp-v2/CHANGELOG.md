@@ -1,5 +1,14 @@
 # Release History
 
+### 1.5.0 (2024-10-28)
+
+#### Features
+
+* discovery of BigQuery snapshots ([#27452](https://github.com/googleapis/google-cloud-ruby/issues/27452)) 
+#### Documentation
+
+* documentation revisions for data profiles 
+
 ### 1.4.0 (2024-09-30)
 
 #### Features
