@@ -700,6 +700,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
 
     list_repositories_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_repositories, name
@@ -707,6 +709,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -717,35 +721,35 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
       end
 
       # Use hash object
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_repositories parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_repositories ::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_repositories ::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_repositories(::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_repositories(::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1015,6 +1019,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
 
     list_packages_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_packages, name
@@ -1022,6 +1028,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -1032,35 +1040,35 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
       end
 
       # Use hash object
-      client.list_packages({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_packages parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_packages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_packages ::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_packages ::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_packages({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_packages(::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_packages(::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1205,6 +1213,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     page_token = "hello world"
     view = :VERSION_VIEW_UNSPECIFIED
     order_by = "hello world"
+    filter = "hello world"
 
     list_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_versions, name
@@ -1214,6 +1223,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
       assert_equal "hello world", request["page_token"]
       assert_equal :VERSION_VIEW_UNSPECIFIED, request["view"]
       assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -1224,35 +1234,35 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
       end
 
       # Use hash object
-      client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by }) do |response, operation|
+      client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_versions parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by do |response, operation|
+      client.list_versions parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_versions ::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by) do |response, operation|
+      client.list_versions ::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by }, grpc_options) do |response, operation|
+      client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_versions(::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by), grpc_options) do |response, operation|
+      client.list_versions(::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1455,6 +1465,66 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
     end
   end
 
+  def test_update_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::Version.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    version = {}
+    update_mask = {}
+
+    update_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_version, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1::Version), request["version"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_version({ version: version, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_version version: version, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_version ::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest.new(version: version, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_version({ version: version, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_version(::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest.new(version: version, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_version_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_files
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse.new
@@ -1581,6 +1651,129 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
 
       # Verify method calls
       assert_equal 5, get_file_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_file
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_file, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_file_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_file({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_file name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_file ::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_file({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_file(::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_file_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_file
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::File.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    file = {}
+    update_mask = {}
+
+    update_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_file, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1::File), request["file"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_file_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_file({ file: file, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_file file: file, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_file ::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest.new(file: file, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_file({ file: file, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_file(::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest.new(file: file, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_file_client_stub.call_rpc_count
     end
   end
 
@@ -1888,6 +2081,311 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
 
       # Verify method calls
       assert_equal 5, delete_tag_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::Rule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rule_id = "hello world"
+    rule = {}
+
+    create_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_rule, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["rule_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1::Rule), request["rule"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_rule({ parent: parent, rule_id: rule_id, rule: rule }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_rule parent: parent, rule_id: rule_id, rule: rule do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_rule ::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest.new(parent: parent, rule_id: rule_id, rule: rule) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_rule({ parent: parent, rule_id: rule_id, rule: rule }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_rule(::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest.new(parent: parent, rule_id: rule_id, rule: rule), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_rules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::ListRulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_rules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_rules, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_rules_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_rules ::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_rules(::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_rules_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::Rule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_rule, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_rule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_rule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_rule ::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_rule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_rule(::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::Rule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    rule = {}
+    update_mask = {}
+
+    update_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_rule, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1::Rule), request["rule"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_rule({ rule: rule, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_rule rule: rule, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_rule ::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_rule({ rule: rule, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_rule(::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_rule, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_rule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_rule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_rule ::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_rule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_rule(::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_rule_client_stub.call_rpc_count
     end
   end
 
@@ -2306,6 +2804,323 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientTest < Mini
 
       # Verify method calls
       assert_equal 5, update_vpcsc_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_package
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::Package.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    package = {}
+    update_mask = {}
+
+    update_package_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_package, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1::Package), request["package"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_package_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_package({ package: package, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_package package: package, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_package ::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest.new(package: package, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_package({ package: package, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_package(::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest.new(package: package, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_package_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_attachments
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_attachments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_attachments, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_attachments_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_attachments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_attachments parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_attachments ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_attachments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_attachments(::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_attachments_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_attachment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ArtifactRegistry::V1::Attachment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_attachment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_attachment, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_attachment_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_attachment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_attachment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_attachment ::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_attachment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_attachment(::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_attachment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_attachment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    attachment_id = "hello world"
+    attachment = {}
+
+    create_attachment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_attachment, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["attachment_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ArtifactRegistry::V1::Attachment), request["attachment"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_attachment_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_attachment({ parent: parent, attachment_id: attachment_id, attachment: attachment }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_attachment parent: parent, attachment_id: attachment_id, attachment: attachment do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_attachment ::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest.new(parent: parent, attachment_id: attachment_id, attachment: attachment) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_attachment({ parent: parent, attachment_id: attachment_id, attachment: attachment }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_attachment(::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest.new(parent: parent, attachment_id: attachment_id, attachment: attachment), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_attachment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_attachment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_attachment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_attachment, name
+      assert_kind_of ::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_attachment_client_stub do
+      # Create client
+      client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_attachment({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_attachment name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_attachment ::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_attachment({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_attachment(::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_attachment_client_stub.call_rpc_count
     end
   end
 

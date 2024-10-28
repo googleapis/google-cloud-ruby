@@ -34,6 +34,10 @@ module Google
         # @!attribute [rw] legacy_redirection_state
         #   @return [::Google::Cloud::ArtifactRegistry::V1::ProjectSettings::RedirectionState]
         #     The redirection state of the legacy repositories in this project.
+        # @!attribute [rw] pull_percent
+        #   @return [::Integer]
+        #     The percentage of pull traffic to redirect from GCR to AR when using
+        #     partial redirection.
         class ProjectSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51,6 +55,12 @@ module Google
 
             # Redirection is enabled, and has been finalized so cannot be reverted.
             REDIRECTION_FROM_GCR_IO_FINALIZED = 3
+
+            # Redirection is enabled and missing images are copied from GCR
+            REDIRECTION_FROM_GCR_IO_ENABLED_AND_COPYING = 5
+
+            # Redirection is partially enabled and missing images are copied from GCR
+            REDIRECTION_FROM_GCR_IO_PARTIAL_AND_COPYING = 6
           end
         end
 

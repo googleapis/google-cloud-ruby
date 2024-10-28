@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the ArtifactRegistry API.
           module Paths
             ##
+            # Create a fully-qualified Attachment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/attachments/{attachment}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param attachment [String]
+            #
+            # @return [::String]
+            def attachment_path project:, location:, repository:, attachment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/attachments/#{attachment}"
+            end
+
+            ##
             # Create a fully-qualified DockerImage resource string.
             #
             # The resource will be in the following format:
@@ -198,6 +219,27 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/repositories/#{repository}"
+            end
+
+            ##
+            # Create a fully-qualified Rule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/rules/{rule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param rule [String]
+            #
+            # @return [::String]
+            def rule_path project:, location:, repository:, rule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/rules/#{rule}"
             end
 
             ##

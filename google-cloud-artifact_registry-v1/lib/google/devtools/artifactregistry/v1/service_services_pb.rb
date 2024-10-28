@@ -101,10 +101,18 @@ module Google
             # Deletes multiple versions across a repository. The returned operation will
             # complete once the versions have been deleted.
             rpc :BatchDeleteVersions, ::Google::Cloud::ArtifactRegistry::V1::BatchDeleteVersionsRequest, ::Google::Longrunning::Operation
+            # Updates a version.
+            rpc :UpdateVersion, ::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest, ::Google::Cloud::ArtifactRegistry::V1::Version
             # Lists files.
             rpc :ListFiles, ::Google::Cloud::ArtifactRegistry::V1::ListFilesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse
             # Gets a file.
             rpc :GetFile, ::Google::Cloud::ArtifactRegistry::V1::GetFileRequest, ::Google::Cloud::ArtifactRegistry::V1::File
+            # Deletes a file and all of its content. It is only allowed on generic
+            # repositories. The returned operation will complete once the file has been
+            # deleted.
+            rpc :DeleteFile, ::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest, ::Google::Longrunning::Operation
+            # Updates a file.
+            rpc :UpdateFile, ::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest, ::Google::Cloud::ArtifactRegistry::V1::File
             # Lists tags.
             rpc :ListTags, ::Google::Cloud::ArtifactRegistry::V1::ListTagsRequest, ::Google::Cloud::ArtifactRegistry::V1::ListTagsResponse
             # Gets a tag.
@@ -115,6 +123,16 @@ module Google
             rpc :UpdateTag, ::Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest, ::Google::Cloud::ArtifactRegistry::V1::Tag
             # Deletes a tag.
             rpc :DeleteTag, ::Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest, ::Google::Protobuf::Empty
+            # Creates a rule.
+            rpc :CreateRule, ::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest, ::Google::Cloud::ArtifactRegistry::V1::Rule
+            # Lists rules.
+            rpc :ListRules, ::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListRulesResponse
+            # Gets a rule.
+            rpc :GetRule, ::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest, ::Google::Cloud::ArtifactRegistry::V1::Rule
+            # Updates a rule.
+            rpc :UpdateRule, ::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest, ::Google::Cloud::ArtifactRegistry::V1::Rule
+            # Deletes a rule.
+            rpc :DeleteRule, ::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest, ::Google::Protobuf::Empty
             # Updates the IAM policy for a given resource.
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets the IAM policy for a given resource.
@@ -129,6 +147,19 @@ module Google
             rpc :GetVPCSCConfig, ::Google::Cloud::ArtifactRegistry::V1::GetVPCSCConfigRequest, ::Google::Cloud::ArtifactRegistry::V1::VPCSCConfig
             # Updates the VPCSC Config for the Project.
             rpc :UpdateVPCSCConfig, ::Google::Cloud::ArtifactRegistry::V1::UpdateVPCSCConfigRequest, ::Google::Cloud::ArtifactRegistry::V1::VPCSCConfig
+            # Updates a package.
+            rpc :UpdatePackage, ::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest, ::Google::Cloud::ArtifactRegistry::V1::Package
+            # Lists attachments.
+            rpc :ListAttachments, ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest, ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsResponse
+            # Gets an attachment.
+            rpc :GetAttachment, ::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest, ::Google::Cloud::ArtifactRegistry::V1::Attachment
+            # Creates an attachment. The returned Operation will finish once the
+            # attachment has been created. Its response will be the created attachment.
+            rpc :CreateAttachment, ::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest, ::Google::Longrunning::Operation
+            # Deletes an attachment. The returned Operation will
+            # finish once the attachments has been deleted. It will not have any
+            # Operation metadata and will return a `google.protobuf.Empty` response.
+            rpc :DeleteAttachment, ::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

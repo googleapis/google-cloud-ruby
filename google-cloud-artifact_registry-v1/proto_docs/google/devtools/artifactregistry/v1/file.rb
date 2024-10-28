@@ -49,7 +49,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the file, for example:
-        #     "projects/p1/locations/us-central1/repositories/repo1/files/a%2Fb%2Fc.txt".
+        #     `projects/p1/locations/us-central1/repositories/repo1/files/a%2Fb%2Fc.txt`.
         #     If the file ID part contains slashes, they are escaped.
         # @!attribute [rw] size_bytes
         #   @return [::Integer]
@@ -70,9 +70,21 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the last attempt to refresh the file's data was
         #     made. Only set when the repository is remote.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Client specified annotations.
         class File
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request to list files.
@@ -87,16 +99,54 @@ module Google
         #
         #       * `name`
         #       * `owner`
+        #       * `annotations`
         #
-        #      An example of using a filter:
+        #     Examples of using a filter:
         #
-        #       * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
-        #       ID starting with "a/b/".
-        #       * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
-        #       Files owned by the version `1.0` in package `pkg1`.
+        #      To filter the results of your request to files with the name `my_file.txt`
+        #      in project `my-project` in the `us-central` region, in repository
+        #      `my-repo`, append the following filter expression to your request:
+        #
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-file.txt"`
+        #
+        #      You can also use wildcards to match any number of characters before or
+        #      after the value:
+        #
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/my-*"`
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file.txt"`
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/files/*file*"`
+        #
+        #      To filter the results of your request to files owned by the version `1.0`
+        #      in package `pkg1`, append the following filter expression to your request:
+        #
+        #       * `owner="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package/versions/1.0"`
+        #
+        #      To filter the results of your request to files with the annotation
+        #      key-value pair [`external_link`: `external_link_value`], append the
+        #      following filter expression to your request:
+        #
+        #       * `"annotations.external_link:external_link_value"`
+        #
+        #      To filter just for a specific annotation key `external_link`, append the
+        #      following filter expression to your request:
+        #
+        #       * `"annotations.external_link"`
+        #
+        #      If the annotation key or value contains special characters, you can escape
+        #      them by surrounding the value with backticks. For example, to filter the
+        #      results of your request to files with the annotation key-value pair
+        #      [`external.link`:`https://example.com/my-file`], append the following
+        #      filter expression to your request:
+        #
+        #       * `` "annotations.`external.link`:`https://example.com/my-file`" ``
+        #
+        #      You can also filter with annotations with a wildcard to
+        #      match any number of characters before or after the value:
+        #
+        #       * `` "annotations.*_link:`*example.com*`" ``
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of files to return.
+        #     The maximum number of files to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
@@ -126,6 +176,29 @@ module Google
         #   @return [::String]
         #     Required. The name of the file to retrieve.
         class GetFileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete a file.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the file to delete.
+        class DeleteFileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a file.
+        # @!attribute [rw] file
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::File]
+        #     Required. The File that replaces the resource on the server.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The update mask applies to the resource. For the `FieldMask`
+        #     definition, see
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        class UpdateFileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

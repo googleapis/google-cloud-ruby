@@ -37,9 +37,21 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the package was last updated. This includes publishing a new
         #     version of the package.
+        # @!attribute [rw] annotations
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Client specified annotations.
         class Package
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request to list packages.
@@ -52,6 +64,56 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression for filtering the results of the request. Filter
+        #     rules are case insensitive. The fields eligible for filtering are:
+        #
+        #       * `name`
+        #       * `annotations`
+        #
+        #     Examples of using a filter:
+        #
+        #      To filter the results of your request to packages with the name
+        #      `my-package` in project `my-project` in the `us-central` region, in
+        #      repository `my-repo`, append the following filter expression to your
+        #      request:
+        #
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-package"`
+        #
+        #      You can also use wildcards to match any number of characters before or
+        #      after the value:
+        #
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/my-*"`
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*package"`
+        #       * `name="projects/my-project/locations/us-central1/repositories/my-repo/packages/*pack*"`
+        #
+        #      To filter the results of your request to packages with the annotation
+        #      key-value pair [`external_link`: `external_link_value`], append the
+        #      following filter expression to your request":
+        #
+        #       * `"annotations.external_link:external_link_value"`
+        #
+        #      To filter the results just for a specific annotation key `external_link`,
+        #      append the following filter expression to your request:
+        #
+        #       * `"annotations.external_link"`
+        #
+        #      If the annotation key or value contains special characters, you can escape
+        #      them by surrounding the value with backticks. For example, to filter the
+        #      results of your request to packages with the annotation key-value pair
+        #      [`external.link`:`https://example.com/my-package`], append the following
+        #      filter expression to your request:
+        #
+        #       * `` "annotations.`external.link`:`https://example.com/my-package`" ``
+        #
+        #      You can also filter with annotations with a wildcard to
+        #      match any number of characters before or after the value:
+        #
+        #       * `` "annotations.*_link:`*example.com*`" ``
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The field to order the results by.
         class ListPackagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,6 +146,20 @@ module Google
         #   @return [::String]
         #     Required. The name of the package to delete.
         class DeletePackageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a package.
+        # @!attribute [rw] package
+        #   @return [::Google::Cloud::ArtifactRegistry::V1::Package]
+        #     The package that replaces the resource on the server.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The update mask applies to the resource. For the `FieldMask` definition,
+        #     see
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        class UpdatePackageRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
