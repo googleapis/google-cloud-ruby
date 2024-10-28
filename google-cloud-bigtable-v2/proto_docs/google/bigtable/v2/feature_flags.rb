@@ -58,6 +58,12 @@ module Google
         # @!attribute [rw] client_side_metrics_enabled
         #   @return [::Boolean]
         #     Notify the server that the client has client side metrics enabled.
+        # @!attribute [rw] traffic_director_enabled
+        #   @return [::Boolean]
+        #     Notify the server that the client using Traffic Director endpoint.
+        # @!attribute [rw] direct_access_requested
+        #   @return [::Boolean]
+        #     Notify the server that the client explicitly opted in for Direct Access.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

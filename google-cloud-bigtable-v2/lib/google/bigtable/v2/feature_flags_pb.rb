@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n&google/bigtable/v2/feature_flags.proto\x12\x12google.bigtable.v2\"\xdb\x01\n\x0c\x46\x65\x61tureFlags\x12\x15\n\rreverse_scans\x18\x01 \x01(\x08\x12\x1e\n\x16mutate_rows_rate_limit\x18\x03 \x01(\x08\x12\x1f\n\x17mutate_rows_rate_limit2\x18\x05 \x01(\x08\x12\"\n\x1alast_scanned_row_responses\x18\x04 \x01(\x08\x12\x16\n\x0erouting_cookie\x18\x06 \x01(\x08\x12\x12\n\nretry_info\x18\x07 \x01(\x08\x12#\n\x1b\x63lient_side_metrics_enabled\x18\x08 \x01(\x08\x42\xbb\x01\n\x16\x63om.google.bigtable.v2B\x11\x46\x65\x61tureFlagsProtoP\x01Z8cloud.google.com/go/bigtable/apiv2/bigtablepb;bigtablepb\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
+descriptor_data = "\n&google/bigtable/v2/feature_flags.proto\x12\x12google.bigtable.v2\"\x9e\x02\n\x0c\x46\x65\x61tureFlags\x12\x15\n\rreverse_scans\x18\x01 \x01(\x08\x12\x1e\n\x16mutate_rows_rate_limit\x18\x03 \x01(\x08\x12\x1f\n\x17mutate_rows_rate_limit2\x18\x05 \x01(\x08\x12\"\n\x1alast_scanned_row_responses\x18\x04 \x01(\x08\x12\x16\n\x0erouting_cookie\x18\x06 \x01(\x08\x12\x12\n\nretry_info\x18\x07 \x01(\x08\x12#\n\x1b\x63lient_side_metrics_enabled\x18\x08 \x01(\x08\x12 \n\x18traffic_director_enabled\x18\t \x01(\x08\x12\x1f\n\x17\x64irect_access_requested\x18\n \x01(\x08\x42\xbb\x01\n\x16\x63om.google.bigtable.v2B\x11\x46\x65\x61tureFlagsProtoP\x01Z8cloud.google.com/go/bigtable/apiv2/bigtablepb;bigtablepb\xaa\x02\x18Google.Cloud.Bigtable.V2\xca\x02\x18Google\\Cloud\\Bigtable\\V2\xea\x02\x1bGoogle::Cloud::Bigtable::V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
