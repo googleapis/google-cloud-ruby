@@ -11,6 +11,10 @@
   "tag-separator": "/",
   "sequential-calls": true,
   "packages": {
+    "google-ads-ad_manager": {
+      "component": "google-ads-ad_manager",
+      "version_file": "lib/google/ads/ad_manager/version.rb"
+    },
     "google-ads-ad_manager-v1": {
       "component": "google-ads-ad_manager-v1",
       "version_file": "lib/google/ads/ad_manager/v1/version.rb"
