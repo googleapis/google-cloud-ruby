@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.1.0 (2024-10-28)
+
+#### Features
+
+* Add branch rule APIs ([#27453](https://github.com/googleapis/google-cloud-ruby/issues/27453)) 
+* Add field `instance` to message `.google.cloud.securesourcemanager.v1.ListRepositoriesRequest` 
+* Add field `psc_allowed_projects` to message `.google.cloud.securesourcemanager.v1.Instance` 
+#### Documentation
+
+* A comment for field `instance` in message `.google.cloud.securesourcemanager.v1.Repository` is changed 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
