@@ -8,7 +8,7 @@
     "name": "admanager",
     "name_pretty": "Google Ad Manager V1 API",
     "product_documentation": "https://developers.google.com/ad-manager/api/beta",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Ad Manager API enables an app to integrate with Google Ad Manager. You can read Ad Manager data and run reports using the API. Note that google-ads-ad_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-ads-ad_manager instead. See the readme for more details.",
