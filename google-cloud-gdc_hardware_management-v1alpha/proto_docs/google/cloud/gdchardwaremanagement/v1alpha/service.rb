@@ -26,6 +26,10 @@ module Google
         #   @return [::String]
         #     Required. The project and location to list orders in.
         #     Format: `projects/{project}/locations/{location}`
+        #
+        #     To list orders across all locations, substitute `-` (the hyphen or
+        #     dash character) for the location and check the unreachable field in
+        #     the response message.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
@@ -53,7 +57,8 @@ module Google
         #     A token identifying a page of results the server should return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Locations that could not be reached. Only used for queries to the wildcard
+        #     location `-`. If non-empty, it indicates that the results are incomplete.
         class ListOrdersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,6 +186,10 @@ module Google
         #   @return [::String]
         #     Required. The project and location to list sites in.
         #     Format: `projects/{project}/locations/{location}`
+        #
+        #     To list sites across all locations, substitute `-` (the hyphen or
+        #     dash character) for the location and check the unreachable field in
+        #     the response message.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
@@ -208,7 +217,8 @@ module Google
         #     A token identifying a page of results the server should return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Locations that could not be reached. Only used for queries to the wildcard
+        #     location `-`. If non-empty, it indicates that the results are incomplete.
         class ListSitesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -266,6 +276,20 @@ module Google
         #     Optional. An optional unique identifier for this request. See
         #     [AIP-155](https://google.aip.dev/155).
         class UpdateSiteRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to delete a site.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the site.
+        #     Format: `projects/{project}/locations/{location}/sites/{site}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional unique identifier for this request. See
+        #     [AIP-155](https://google.aip.dev/155).
+        class DeleteSiteRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -386,6 +410,10 @@ module Google
         #   @return [::String]
         #     Required. The project and location to list hardware in.
         #     Format: `projects/{project}/locations/{location}`
+        #
+        #     To list hardware across all locations, substitute `-` (the hyphen or
+        #     dash character) for the location and check the unreachable field in
+        #     the response message.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
@@ -413,7 +441,8 @@ module Google
         #     A token identifying a page of results the server should return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Locations that could not be reached. Only used for queries to the wildcard
+        #     location `-`. If non-empty, it indicates that the results are incomplete.
         class ListHardwareResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -641,6 +670,10 @@ module Google
         #   @return [::String]
         #     Required. The project and location to list SKUs in.
         #     Format: `projects/{project}/locations/{location}`
+        #
+        #     To list SKUs across all locations, substitute `-` (the hyphen or
+        #     dash character) for the location and check the unreachable field in
+        #     the response message.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
@@ -668,7 +701,8 @@ module Google
         #     A token identifying a page of results the server should return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Locations that could not be reached. Only used for queries to the wildcard
+        #     location `-`. If non-empty, it indicates that the results are incomplete.
         class ListSkusResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -689,6 +723,10 @@ module Google
         #   @return [::String]
         #     Required. The project and location to list zones in.
         #     Format: `projects/{project}/locations/{location}`
+        #
+        #     To list zones across all locations, substitute `-` (the hyphen or
+        #     dash character) for the location and check the unreachable field in
+        #     the response message.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
@@ -716,7 +754,8 @@ module Google
         #     A token identifying a page of results the server should return.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Locations that could not be reached. Only used for queries to the wildcard
+        #     location `-`. If non-empty, it indicates that the results are incomplete.
         class ListZonesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

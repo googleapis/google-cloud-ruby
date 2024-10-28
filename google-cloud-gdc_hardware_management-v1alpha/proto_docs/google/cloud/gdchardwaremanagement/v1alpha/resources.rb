@@ -181,7 +181,7 @@ module Google
         #     Required. Contact information for this site.
         # @!attribute [rw] google_maps_pin_uri
         #   @return [::String]
-        #     Required. A URL to the Google Maps address location of the site.
+        #     Optional. A URL to the Google Maps address location of the site.
         #     An example value is `https://goo.gl/maps/xxxxxxxxx`.
         # @!attribute [rw] access_times
         #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::TimePeriod>]
@@ -357,16 +357,88 @@ module Google
         #     Format: `projects/{project}/locations/{location}/zones/{zone}`
         # @!attribute [rw] requested_installation_date
         #   @return [::Google::Type::Date]
-        #     Optional. Requested installation date for this hardware. This is
-        #     auto-populated when the order is accepted, if the hardware's HardwareGroup
-        #     specifies this. It can also be filled in by the customer.
+        #     Optional. Requested installation date for this hardware. If not specified,
+        #     this is auto-populated from the order's fulfillment_time upon submission or
+        #     from the HardwareGroup's requested_installation_date upon order acceptance.
         # @!attribute [r] actual_installation_date
         #   @return [::Google::Type::Date]
         #     Output only. Actual installation date for this hardware. Filled in by
         #     Google.
+        # @!attribute [r] machine_infos
+        #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware::MachineInfo>]
+        #     Output only. Per machine asset information needed for turnup.
         class Hardware
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message to describe the MAC address of a machine.
+          # @!attribute [r] address
+          #   @return [::String]
+          #     Output only. Address string.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware::MacAddress::AddressType]
+          #     Output only. Address type for this MAC address.
+          class MacAddress
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum for the different types of MAC address.
+            module AddressType
+              # Unspecified address type.
+              ADDRESS_TYPE_UNSPECIFIED = 0
+
+              # Address of a network interface card.
+              NIC = 1
+
+              # Address of a baseboard management controller.
+              BMC = 2
+
+              # Address of a virtual interface.
+              VIRTUAL = 3
+            end
+          end
+
+          # Information about individual disks on a machine.
+          # @!attribute [r] manufacturer
+          #   @return [::String]
+          #     Output only. Disk manufacturer.
+          # @!attribute [r] slot
+          #   @return [::Integer]
+          #     Output only. Disk slot number.
+          # @!attribute [r] serial_number
+          #   @return [::String]
+          #     Output only. Disk serial number.
+          # @!attribute [r] psid
+          #   @return [::String]
+          #     Output only. Disk PSID.
+          # @!attribute [r] part_number
+          #   @return [::String]
+          #     Output only. Disk part number.
+          # @!attribute [r] model_number
+          #   @return [::String]
+          #     Output only. Disk model number.
+          class DiskInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information about individual machines vendors will provide during turnup.
+          # @!attribute [r] service_tag
+          #   @return [::String]
+          #     Output only. Machine service tag.
+          # @!attribute [r] mac_addresses
+          #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware::MacAddress>]
+          #     Output only. Each associated MAC address.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. Machine name.
+          # @!attribute [r] disk_infos
+          #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware::DiskInfo>]
+          #     Output only. Information for each disk installed.
+          class MachineInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -783,7 +855,7 @@ module Google
         # Information for installation of a Hardware.
         # @!attribute [rw] rack_location
         #   @return [::String]
-        #     Optional. Location of the rack in the site e.g. Floor 2, Room 201, Row 7,
+        #     Required. Location of the rack in the site e.g. Floor 2, Room 201, Row 7,
         #     Rack 3.
         # @!attribute [rw] power_distance_meters
         #   @return [::Integer]
