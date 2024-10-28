@@ -104,6 +104,9 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. IPv6 address pools for cluster data plane external load
         #     balancing.
+        # @!attribute [r] connection_state
+        #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::ConnectionState]
+        #     Output only. The current connection state of the cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,6 +156,13 @@ module Google
             # @!attribute [rw] shared_deployment_policy
             #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::ControlPlane::SharedDeploymentPolicy]
             #     Policy configuration about how user applications are deployed.
+            # @!attribute [rw] control_plane_node_storage_schema
+            #   @return [::String]
+            #     Optional. Name for the storage schema of control plane nodes.
+            #
+            #     Warning: Configurable node local storage schema feature is an
+            #     experimental feature, and is not recommended for general use
+            #     in production clusters/nodepools.
             class Local
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -178,6 +188,9 @@ module Google
           # @!attribute [rw] ingress
           #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::SystemAddonsConfig::Ingress]
           #     Optional. Config for Ingress.
+          # @!attribute [rw] vm_service_config
+          #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::SystemAddonsConfig::VMServiceConfig]
+          #     Optional. Config for VM Service.
           class SystemAddonsConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,13 +208,21 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+
+            # VMServiceConfig defines the configuration for GDCE VM Service.
+            # @!attribute [rw] vmm_enabled
+            #   @return [::Boolean]
+            #     Optional. Whether VMM is enabled.
+            class VMServiceConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
-          # Configuration for Customer-managed KMS key support for remote control plane
-          # cluster disk encryption.
+          # Configuration for Customer-managed KMS key support for control plane nodes.
           # @!attribute [rw] kms_key
           #   @return [::String]
-          #     Immutable. The Cloud KMS CryptoKey e.g.
+          #     Optional. The Cloud KMS CryptoKey e.g.
           #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyRing}/cryptoKeys/\\{cryptoKey}
           #     to use for protecting control plane disks. If not specified, a
           #     Google-managed key will be used instead.
@@ -221,6 +242,9 @@ module Google
           #     field may be populated only if `kms_key_state` is not
           #     `KMS_KEY_STATE_KEY_AVAILABLE`. If populated, this field contains the
           #     error status reported by Cloud KMS.
+          # @!attribute [r] resource_state
+          #   @return [::Google::Cloud::EdgeContainer::V1::ResourceState]
+          #     Output only. The current resource state associated with the cmek.
           class ControlPlaneEncryption
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -316,6 +340,35 @@ module Google
           class SurvivabilityConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ConnectionState holds the current connection state from the cluster to
+          # Google.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::ConnectionState::State]
+          #     Output only. The current connection state.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time when the connection state was last changed.
+          class ConnectionState
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The connection state.
+            module State
+              # Unknown connection state.
+              STATE_UNSPECIFIED = 0
+
+              # This cluster is currently disconnected from Google.
+              DISCONNECTED = 1
+
+              # This cluster is currently connected to Google.
+              CONNECTED = 2
+
+              # This cluster is currently connected to Google, but may have recently
+              # reconnected after a disconnection. It is still syncing back.
+              CONNECTED_AND_SYNCING = 3
+            end
           end
 
           # @!attribute [rw] key
@@ -465,7 +518,7 @@ module Google
           # Configuration for CMEK support for edge machine local disk encryption.
           # @!attribute [rw] kms_key
           #   @return [::String]
-          #     Immutable. The Cloud KMS CryptoKey e.g.
+          #     Optional. The Cloud KMS CryptoKey e.g.
           #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyRing}/cryptoKeys/\\{cryptoKey}
           #     to use for protecting node local disks. If not specified, a
           #     Google-managed key will be used instead.
@@ -485,6 +538,9 @@ module Google
           #     field may be populated only if `kms_key_state` is not
           #     `KMS_KEY_STATE_KEY_AVAILABLE`. If populated, this field contains the
           #     error status reported by Cloud KMS.
+          # @!attribute [r] resource_state
+          #   @return [::Google::Cloud::EdgeContainer::V1::ResourceState]
+          #     Output only. The current resource state associated with the cmek.
           class LocalDiskEncryption
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -494,6 +550,13 @@ module Google
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. The Kubernetes node labels
+          # @!attribute [rw] node_storage_schema
+          #   @return [::String]
+          #     Optional. Name for the storage schema of worker nodes.
+          #
+          #     Warning: Configurable node local storage schema feature is an
+          #     experimental feature, and is not recommended for general use
+          #     in production clusters/nodepools.
           class NodeConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -621,12 +684,7 @@ module Google
           # @!attribute [rw] service_account
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::String]
-          #     Optional. The service account in the VPC project configured by user. It
-          #     is used to create/delete Cloud Router and Cloud HA VPNs for VPN
-          #     connection. If this SA is changed during/after a VPN connection is
-          #     created, you need to remove the Cloud Router and Cloud VPN resources in
-          #     |project_id|. It is in the form of
-          #     service-\\{project_number}@gcp-sa-edgecontainer.iam.gserviceaccount.com.
+          #     Optional. Deprecated: do not use.
           class VpcProject
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -732,6 +790,9 @@ module Google
         # @!attribute [rw] rack_types
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::EdgeContainer::V1::ZoneMetadata::RackType}]
         #     The map keyed by rack name and has value of RackType.
+        # @!attribute [rw] config_data
+        #   @return [::Google::Cloud::EdgeContainer::V1::ConfigData]
+        #     Config data for the zone.
         class ZoneMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -760,6 +821,18 @@ module Google
           end
         end
 
+        # Config data holds all the config related data for the zone.
+        # @!attribute [rw] available_external_lb_pools_ipv4
+        #   @return [::Array<::String>]
+        #     list of available v4 ip pools for external loadbalancer
+        # @!attribute [rw] available_external_lb_pools_ipv6
+        #   @return [::Array<::String>]
+        #     list of available v6 ip pools for external loadbalancer
+        class ConfigData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents quota for Edge Container resources.
         # @!attribute [rw] metric
         #   @return [::String]
@@ -779,6 +852,12 @@ module Google
         # @!attribute [rw] window
         #   @return [::Google::Cloud::EdgeContainer::V1::MaintenanceWindow]
         #     Specifies the maintenance window in which maintenance may be performed.
+        # @!attribute [rw] maintenance_exclusions
+        #   @return [::Array<::Google::Cloud::EdgeContainer::V1::MaintenanceExclusionWindow>]
+        #     Optional. Exclusions to automatic maintenance. Non-emergency maintenance
+        #     should not occur in these windows. Each exclusion has a unique name and may
+        #     be active or expired. The max number of maintenance exclusions allowed at a
+        #     given time is 3.
         class MaintenancePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -803,6 +882,18 @@ module Google
         #     this window recurs. They go on for the span of time between the start and
         #     end time.
         class RecurringTimeWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a maintenance exclusion window.
+        # @!attribute [rw] window
+        #   @return [::Google::Cloud::EdgeContainer::V1::TimeWindow]
+        #     Optional. The time window.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Optional. A unique (per cluster) id for the window.
+        class MaintenanceExclusionWindow
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -874,6 +965,18 @@ module Google
           # The key is unavailable for an unspecified reason. Dependent resources may
           # be inaccessible.
           KMS_KEY_STATE_KEY_UNAVAILABLE = 2
+        end
+
+        # Represents if the resource is in lock down state or pending.
+        module ResourceState
+          # Default value.
+          RESOURCE_STATE_UNSPECIFIED = 0
+
+          # The resource is in LOCK DOWN state.
+          RESOURCE_STATE_LOCK_DOWN = 1
+
+          # The resource is pending lock down.
+          RESOURCE_STATE_LOCK_DOWN_PENDING = 2
         end
       end
     end

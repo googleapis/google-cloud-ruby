@@ -50,9 +50,21 @@ module Google
         #   @return [::Array<::String>]
         #     Warnings that do not block the operation, but still hold relevant
         #     information for the end user to receive.
+        # @!attribute [rw] status_reason
+        #   @return [::Google::Cloud::EdgeContainer::V1::OperationMetadata::StatusReason]
+        #     Machine-readable status of the operation, if any.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates the reason for the status of the operation.
+          module StatusReason
+            # Reason unknown.
+            STATUS_REASON_UNSPECIFIED = 0
+
+            # The cluster upgrade is currently paused.
+            UPGRADE_PAUSED = 1
+          end
         end
 
         # Lists clusters in a location.
