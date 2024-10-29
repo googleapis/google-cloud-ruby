@@ -64,6 +64,14 @@ module Google
             # * For any conflict (such as IP already exists or IP part of an existing
             #   IP range), an error is returned.
             rpc :AddIpOverride, ::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideRequest, ::Google::Cloud::RecaptchaEnterprise::V1::AddIpOverrideResponse
+            # Removes an IP override from a key. The following restrictions hold:
+            # * If the IP isn't found in an existing IP override, a `NOT_FOUND` error
+            # is returned.
+            # * If the IP is found in an existing IP override, but the
+            # override type does not match, a `NOT_FOUND` error is returned.
+            rpc :RemoveIpOverride, ::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideRequest, ::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideResponse
+            # Lists all IP overrides for a key.
+            rpc :ListIpOverrides, ::Google::Cloud::RecaptchaEnterprise::V1::ListIpOverridesRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListIpOverridesResponse
             # Get some aggregated metrics for a Key. This data can be used to build
             # dashboards.
             rpc :GetMetrics, ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Metrics
