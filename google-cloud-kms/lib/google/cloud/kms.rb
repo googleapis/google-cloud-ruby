@@ -60,7 +60,8 @@ module Google
       #
       # ## About Autokey
       #
-      # Provides interfaces for using Cloud KMS Autokey to provision new
+      # Provides interfaces for using [Cloud KMS
+      # Autokey](https://cloud.google.com/kms/help/autokey) to provision new
       # CryptoKeys, ready for Customer Managed
       # Encryption Key (CMEK) use, on-demand. To support certain client tooling, this
       # feature is modeled around a KeyHandle
@@ -110,7 +111,8 @@ module Google
       #
       # ## About AutokeyAdmin
       #
-      # Provides interfaces for managing Cloud KMS Autokey folder-level
+      # Provides interfaces for managing [Cloud KMS
+      # Autokey](https://cloud.google.com/kms/help/autokey) folder-level
       # configurations. A configuration is inherited by all descendent projects. A
       # configuration at one folder overrides any other configurations in its
       # ancestry. Setting a configuration on a folder is a prerequisite for Cloud KMS

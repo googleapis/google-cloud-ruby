@@ -57,6 +57,79 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # V2 options customizing different types of data transfer schedule.
+          # This field supports existing time-based and manual transfer schedule. Also
+          # supports Event-Driven transfer schedule. ScheduleOptionsV2 cannot be used
+          # together with ScheduleOptions/Schedule.
+          # @!attribute [rw] time_based_schedule
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TimeBasedSchedule]
+          #     Time based transfer schedule options. This is the default schedule
+          #     option.
+          # @!attribute [rw] manual_schedule
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ManualSchedule]
+          #     Manual transfer schedule. If set, the transfer run will not be
+          #     auto-scheduled by the system, unless the client invokes
+          #     StartManualTransferRuns.  This is equivalent to
+          #     disable_auto_scheduling = true.
+          # @!attribute [rw] event_driven_schedule
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EventDrivenSchedule]
+          #     Event driven transfer schedule options. If set, the transfer will be
+          #     scheduled upon events arrial.
+          class ScheduleOptionsV2
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options customizing the time based transfer schedule.
+          # Options are migrated from the original ScheduleOptions message.
+          # @!attribute [rw] schedule
+          #   @return [::String]
+          #     Data transfer schedule.
+          #     If the data source does not support a custom schedule, this should be
+          #     empty. If it is empty, the default value for the data source will be used.
+          #     The specified times are in UTC.
+          #     Examples of valid format:
+          #     `1st,3rd monday of month 15:30`,
+          #     `every wed,fri of jan,jun 13:15`, and
+          #     `first sunday of quarter 00:00`.
+          #     See more explanation about the format here:
+          #     https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
+          #
+          #     NOTE: The minimum interval time between recurring transfers depends on the
+          #     data source; refer to the documentation for your data source.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Specifies time to start scheduling transfer runs. The first run will be
+          #     scheduled at or after the start time according to a recurrence pattern
+          #     defined in the schedule string. The start time can be changed at any
+          #     moment.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Defines time to stop scheduling transfer runs. A transfer run cannot be
+          #     scheduled at or after the end time. The end time can be changed at any
+          #     moment.
+          class TimeBasedSchedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options customizing manual transfers schedule.
+          class ManualSchedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options customizing EventDriven transfers schedule.
+          # @!attribute [rw] pubsub_subscription
+          #   @return [::String]
+          #     Pub/Sub subscription name used to receive events.
+          #     Only Google Cloud Storage data source support this option.
+          #     Format: projects/\\{project}/subscriptions/\\{subscription}
+          class EventDrivenSchedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Information about a user.
           # @!attribute [rw] email
           #   @return [::String]
@@ -116,6 +189,11 @@ module Google
           # @!attribute [rw] schedule_options
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleOptions]
           #     Options customizing the data transfer schedule.
+          # @!attribute [rw] schedule_options_v2
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleOptionsV2]
+          #     Options customizing different types of data transfer schedule.
+          #     This field replaces "schedule" and "schedule_options" fields.
+          #     ScheduleOptionsV2 cannot be used together with ScheduleOptions/Schedule.
           # @!attribute [rw] data_refresh_window_days
           #   @return [::Integer]
           #     The number of days to look back to automatically refresh the data.
@@ -166,6 +244,10 @@ module Google
           #     granted permissions to use the key. Read methods will return the key name
           #     applied in effect. Write methods will apply the key if it is present, or
           #     otherwise try to apply project default keys if it is absent.
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. Error code with detailed information about reason of the
+          #     latest config failure.
           class TransferConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

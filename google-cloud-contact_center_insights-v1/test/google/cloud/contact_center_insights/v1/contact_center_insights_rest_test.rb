@@ -306,6 +306,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    order_by = "hello world"
     view = :CONVERSATION_VIEW_UNSPECIFIED
 
     list_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -322,27 +323,27 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
         end
 
         # Use hash object
-        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }) do |_result, response|
+        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view do |_result, response|
+        client.list_conversations parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_conversations ::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view) do |_result, response|
+        client.list_conversations ::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view }, call_options) do |_result, response|
+        client.list_conversations({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_conversations(::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, view: view), call_options) do |_result, response|
+        client.list_conversations(::Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -755,6 +756,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     conversation_config = {}
     redaction_config = {}
     speech_config = {}
+    sample_size = 42
 
     ingest_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -770,27 +772,27 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
         end
 
         # Use hash object
-        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config }) do |_result, response|
+        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config do |_result, response|
+        client.ingest_conversations gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config) do |_result, response|
+        client.ingest_conversations ::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config }, call_options) do |_result, response|
+        client.ingest_conversations({ gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config), call_options) do |_result, response|
+        client.ingest_conversations(::Google::Cloud::ContactCenterInsights::V1::IngestConversationsRequest.new(gcs_source: gcs_source, transcript_object_config: transcript_object_config, parent: parent, conversation_config: conversation_config, redaction_config: redaction_config, speech_config: speech_config, sample_size: sample_size), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1234,6 +1236,117 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
 
         # Verify method calls
         assert_equal 5, undeploy_issue_model_client_stub.call_count
+      end
+    end
+  end
+
+  def test_export_issue_model
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_destination = {}
+    name = "hello world"
+
+    export_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.stub :transcode_export_issue_model_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, export_issue_model_client_stub do
+        # Create client
+        client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.export_issue_model({ gcs_destination: gcs_destination, name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.export_issue_model gcs_destination: gcs_destination, name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.export_issue_model ::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new(gcs_destination: gcs_destination, name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.export_issue_model({ gcs_destination: gcs_destination, name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.export_issue_model(::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest.new(gcs_destination: gcs_destination, name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, export_issue_model_client_stub.call_count
+      end
+    end
+  end
+
+  def test_import_issue_model
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_source = {}
+    parent = "hello world"
+    create_new_model = true
+
+    import_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.stub :transcode_import_issue_model_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_issue_model_client_stub do
+        # Create client
+        client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_issue_model({ gcs_source: gcs_source, parent: parent, create_new_model: create_new_model }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_issue_model gcs_source: gcs_source, parent: parent, create_new_model: create_new_model do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_issue_model ::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new(gcs_source: gcs_source, parent: parent, create_new_model: create_new_model) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_issue_model({ gcs_source: gcs_source, parent: parent, create_new_model: create_new_model }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_issue_model(::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest.new(gcs_source: gcs_source, parent: parent, create_new_model: create_new_model), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_issue_model_client_stub.call_count
       end
     end
   end
@@ -1944,6 +2057,114 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
 
         # Verify method calls
         assert_equal 5, update_settings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_encryption_spec
+    # Create test objects.
+    client_result = ::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_encryption_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.stub :transcode_get_encryption_spec_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_encryption_spec_client_stub do
+        # Create client
+        client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_encryption_spec({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_encryption_spec name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_encryption_spec ::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_encryption_spec({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_encryption_spec(::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_encryption_spec_client_stub.call_count
+      end
+    end
+  end
+
+  def test_initialize_encryption_spec
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    encryption_spec = {}
+
+    initialize_encryption_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::ServiceStub.stub :transcode_initialize_encryption_spec_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, initialize_encryption_spec_client_stub do
+        # Create client
+        client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.initialize_encryption_spec({ encryption_spec: encryption_spec }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.initialize_encryption_spec encryption_spec: encryption_spec do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.initialize_encryption_spec ::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.initialize_encryption_spec({ encryption_spec: encryption_spec }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.initialize_encryption_spec(::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest.new(encryption_spec: encryption_spec), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, initialize_encryption_spec_client_stub.call_count
       end
     end
   end

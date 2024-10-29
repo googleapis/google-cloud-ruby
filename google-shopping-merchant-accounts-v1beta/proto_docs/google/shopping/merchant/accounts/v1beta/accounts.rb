@@ -83,9 +83,12 @@ module Google
           #     account creation.
           # @!attribute [rw] service
           #   @return [::Array<::Google::Shopping::Merchant::Accounts::V1beta::CreateAndConfigureAccountRequest::AddAccountService>]
-          #     Optional. If specified, an account service between the account to be
-          #     created and the provider account is initialized as part of the
-          #     creation.
+          #     Required. An account service between the account to be created and the
+          #     provider account is initialized as part of the creation. At least one such
+          #     service needs to be provided. Currently exactly one of these needs to be
+          #     `account_aggregation`, which means you can only create sub accounts, not
+          #     standalone account through this method. Additional `account_management` or
+          #     `product_management` services may be provided.
           class CreateAndConfigureAccountRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,7 +96,10 @@ module Google
             # Reference to a Terms of Service resource.
             # @!attribute [rw] name
             #   @return [::String]
-            #     Required. The resource name of the terms of service version.
+            #     Required. The resource name of the terms of service version in the format
+            #     `termsOfService/{version}`. To retrieve the latest version, use the
+            #     [termsOfService.retrieveLatest](/merchant/api/reference/rest/accounts_v1beta/termsOfService/retrieveLatest)
+            #     method.
             # @!attribute [rw] region_code
             #   @return [::String]
             #     Required. Region code as defined by [CLDR](https://cldr.unicode.org/).
@@ -107,8 +113,10 @@ module Google
             # Additional instructions to add account services during creation of the
             # account.
             # @!attribute [rw] account_aggregation
-            #   @return [::Google::Protobuf::Empty]
-            #     The provider is an aggregator for the account.
+            #   @return [::Google::Shopping::Merchant::Accounts::V1beta::AccountAggregation]
+            #     The provider is an
+            #     [aggregator](https://support.google.com/merchants/answer/188487) for
+            #     the account. Payload for service type Account Aggregation.
             # @!attribute [rw] provider
             #   @return [::String]
             #     Optional. The provider of the service.
@@ -124,6 +132,10 @@ module Google
           #   @return [::String]
           #     Required. The name of the account to delete.
           #     Format: `accounts/{account}`
+          # @!attribute [rw] force
+          #   @return [::Boolean]
+          #     Optional. If set to `true`, the account is deleted even if it provides
+          #     services to other accounts or has processed offers.
           class DeleteAccountRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -24,6 +24,7 @@ require "google/cloud/ai_platform/v1/version"
 
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/credentials"
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/paths"
+require "google/cloud/ai_platform/v1/gen_ai_tuning_service/operations"
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/client"
 require "google/cloud/ai_platform/v1/gen_ai_tuning_service/rest"
 

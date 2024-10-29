@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-deploy-v1",
-    "version": "1.2.2",
+    "version": "1.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -795,6 +795,206 @@
         "method": {
           "short_name": "AbandonRelease",
           "full_name": "google.cloud.deploy.v1.CloudDeploy.AbandonRelease",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_CreateDeployPolicy_sync",
+      "title": "Snippet for the create_deploy_policy call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#create_deploy_policy.",
+      "file": "cloud_deploy/create_deploy_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_deploy_policy",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#create_deploy_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::CreateDeployPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "CreateDeployPolicy",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.CreateDeployPolicy",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_UpdateDeployPolicy_sync",
+      "title": "Snippet for the update_deploy_policy call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#update_deploy_policy.",
+      "file": "cloud_deploy/update_deploy_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_deploy_policy",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#update_deploy_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::UpdateDeployPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "UpdateDeployPolicy",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.UpdateDeployPolicy",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_DeleteDeployPolicy_sync",
+      "title": "Snippet for the delete_deploy_policy call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_deploy_policy.",
+      "file": "cloud_deploy/delete_deploy_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_deploy_policy",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#delete_deploy_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::DeleteDeployPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "DeleteDeployPolicy",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.DeleteDeployPolicy",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListDeployPolicies_sync",
+      "title": "Snippet for the list_deploy_policies call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#list_deploy_policies.",
+      "file": "cloud_deploy/list_deploy_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_deploy_policies",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_deploy_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListDeployPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListDeployPoliciesResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListDeployPolicies",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListDeployPolicies",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetDeployPolicy_sync",
+      "title": "Snippet for the get_deploy_policy call in the CloudDeploy service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Deploy::V1::CloudDeploy::Client#get_deploy_policy.",
+      "file": "cloud_deploy/get_deploy_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_deploy_policy",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_deploy_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetDeployPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::DeployPolicy",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetDeployPolicy",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetDeployPolicy",
           "service": {
             "short_name": "CloudDeploy",
             "full_name": "google.cloud.deploy.v1.CloudDeploy"

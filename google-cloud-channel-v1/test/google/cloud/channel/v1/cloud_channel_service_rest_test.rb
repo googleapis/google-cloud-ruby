@@ -191,6 +191,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     parent = "hello world"
     domain = "hello world"
+    primary_admin_email = "hello world"
 
     check_cloud_identity_accounts_exist_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -206,27 +207,27 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
         end
 
         # Use hash object
-        client.check_cloud_identity_accounts_exist({ parent: parent, domain: domain }) do |_result, response|
+        client.check_cloud_identity_accounts_exist({ parent: parent, domain: domain, primary_admin_email: primary_admin_email }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.check_cloud_identity_accounts_exist parent: parent, domain: domain do |_result, response|
+        client.check_cloud_identity_accounts_exist parent: parent, domain: domain, primary_admin_email: primary_admin_email do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.check_cloud_identity_accounts_exist ::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new(parent: parent, domain: domain) do |_result, response|
+        client.check_cloud_identity_accounts_exist ::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new(parent: parent, domain: domain, primary_admin_email: primary_admin_email) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.check_cloud_identity_accounts_exist({ parent: parent, domain: domain }, call_options) do |_result, response|
+        client.check_cloud_identity_accounts_exist({ parent: parent, domain: domain, primary_admin_email: primary_admin_email }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.check_cloud_identity_accounts_exist(::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new(parent: parent, domain: domain), call_options) do |_result, response|
+        client.check_cloud_identity_accounts_exist(::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new(parent: parent, domain: domain, primary_admin_email: primary_admin_email), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

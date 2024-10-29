@@ -66,9 +66,29 @@ module Google
         #     Cloud KMS Service Agent for this key project must be granted the
         #     `cloudkms.admin` role (or pertinent permissions). A request with an empty
         #     key project field will clear the configuration.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Kms::V1::AutokeyConfig::State]
+        #     Output only. The state for the AutokeyConfig.
         class AutokeyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The states AutokeyConfig can be in.
+          module State
+            # The state of the AutokeyConfig is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The AutokeyConfig is currently active.
+            ACTIVE = 1
+
+            # A previously configured key project has been deleted and the current
+            # AutokeyConfig is unusable.
+            KEY_PROJECT_DELETED = 2
+
+            # The AutokeyConfig is not yet initialized or has been reset to its default
+            # uninitialized state.
+            UNINITIALIZED = 3
+          end
         end
 
         # Request message for

@@ -19,43 +19,13 @@ require "google/gax/errors"
 require "google/rpc/status_pb"
 
 describe Google::Cloud::Error, :wrapped_gax do
-  def debug_info
-    Google::Rpc::DebugInfo.new detail: "status_detail"
-  end
-
-  def error_info
-    Google::Rpc::ErrorInfo.new reason: "ErrorInfo reason", domain: "ErrorInfo domain", metadata: {"foo": "bar"}
-  end
-
-  def localized_message
-    Google::Rpc::LocalizedMessage.new locale: "fr-CH", message: "c'est un message d'erreur"
-  end
-
-  def help
-    link = Google::Rpc::Help::Link.new description: "example description", url: "https://example.com/error"
-    Google::Rpc::Help.new links: [link]
-  end
-
   ##
   # Construct a new Google::Rpc::Status object and return its binary encoding
   #
   # @param extended_details [Boolean] 
   #    Whether to encode multiple error details. Default is one DebugInfo message.
   def encoded_protobuf extended_details: false
-    any_debug = Google::Protobuf::Any.new
-    any_debug.pack debug_info
-
-    any_message = Google::Protobuf::Any.new
-    any_message.pack localized_message
-
-    any_help = Google::Protobuf::Any.new
-    any_help.pack help
-
-    status_arr = [any_debug]
-    status_arr = [any_debug, any_message, any_help] if extended_details
-
-    status = Google::Rpc::Status.new details: status_arr
-
+    status = google_rpc_status extended_details: extended_details
     Google::Rpc::Status.encode status
   end
 

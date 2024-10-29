@@ -24,7 +24,7 @@ jobs:
       with:
         ruby-version: "3.3"
     - name: Install Bazel
-      uses: bazel-contrib/setup-bazel@0.8.5
+      uses: bazel-contrib/setup-bazel@0.9.0
     - name: Install tools
       run: |
         gem install --no-document toys

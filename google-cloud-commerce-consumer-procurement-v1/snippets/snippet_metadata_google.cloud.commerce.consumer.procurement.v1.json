@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-commerce-consumer-procurement-v1",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "language": "RUBY",
     "apis": [
       {
@@ -11,6 +11,206 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_GetLicensePool_sync",
+      "title": "Snippet for the get_license_pool call in the LicenseManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#get_license_pool.",
+      "file": "license_management_service/get_license_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_license_pool",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#get_license_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::GetLicensePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicensePool",
+        "client": {
+          "short_name": "LicenseManagementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client"
+        },
+        "method": {
+          "short_name": "GetLicensePool",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.GetLicensePool",
+          "service": {
+            "short_name": "LicenseManagementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_UpdateLicensePool_sync",
+      "title": "Snippet for the update_license_pool call in the LicenseManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#update_license_pool.",
+      "file": "license_management_service/update_license_pool.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_license_pool",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#update_license_pool",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::UpdateLicensePoolRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicensePool",
+        "client": {
+          "short_name": "LicenseManagementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client"
+        },
+        "method": {
+          "short_name": "UpdateLicensePool",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.UpdateLicensePool",
+          "service": {
+            "short_name": "LicenseManagementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_Assign_sync",
+      "title": "Snippet for the assign call in the LicenseManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#assign.",
+      "file": "license_management_service/assign.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "assign",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#assign",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignResponse",
+        "client": {
+          "short_name": "LicenseManagementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client"
+        },
+        "method": {
+          "short_name": "Assign",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.Assign",
+          "service": {
+            "short_name": "LicenseManagementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_Unassign_sync",
+      "title": "Snippet for the unassign call in the LicenseManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#unassign.",
+      "file": "license_management_service/unassign.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "unassign",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#unassign",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::UnassignRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::UnassignResponse",
+        "client": {
+          "short_name": "LicenseManagementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client"
+        },
+        "method": {
+          "short_name": "Unassign",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.Unassign",
+          "service": {
+            "short_name": "LicenseManagementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_LicenseManagementService_EnumerateLicensedUsers_sync",
+      "title": "Snippet for the enumerate_licensed_users call in the LicenseManagementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#enumerate_licensed_users.",
+      "file": "license_management_service/enumerate_licensed_users.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "enumerate_licensed_users",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client#enumerate_licensed_users",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::EnumerateLicensedUsersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::EnumerateLicensedUsersResponse",
+        "client": {
+          "short_name": "LicenseManagementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementService::Client"
+        },
+        "method": {
+          "short_name": "EnumerateLicensedUsers",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService.EnumerateLicensedUsers",
+          "service": {
+            "short_name": "LicenseManagementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.LicenseManagementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_PlaceOrder_sync",
       "title": "Snippet for the place_order call in the ConsumerProcurementService service",
@@ -127,6 +327,86 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_ModifyOrder_sync",
+      "title": "Snippet for the modify_order call in the ConsumerProcurementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#modify_order.",
+      "file": "consumer_procurement_service/modify_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "modify_order",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#modify_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ModifyOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConsumerProcurementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client"
+        },
+        "method": {
+          "short_name": "ModifyOrder",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.ModifyOrder",
+          "service": {
+            "short_name": "ConsumerProcurementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudcommerceconsumerprocurement_v1_generated_ConsumerProcurementService_CancelOrder_sync",
+      "title": "Snippet for the cancel_order call in the ConsumerProcurementService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#cancel_order.",
+      "file": "consumer_procurement_service/cancel_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_order",
+        "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client#cancel_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Commerce::Consumer::Procurement::V1::CancelOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConsumerProcurementService::Client",
+          "full_name": "::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementService::Client"
+        },
+        "method": {
+          "short_name": "CancelOrder",
+          "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.CancelOrder",
+          "service": {
+            "short_name": "ConsumerProcurementService",
+            "full_name": "google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

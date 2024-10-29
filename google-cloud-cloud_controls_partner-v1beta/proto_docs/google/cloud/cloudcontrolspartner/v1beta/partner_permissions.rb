@@ -48,6 +48,9 @@ module Google
 
             # Permission for External Key Manager connection status
             ASSURED_WORKLOADS_EKM_CONNECTION_STATUS = 4
+
+            # Permission for support case details for Access Transparency log entries
+            ACCESS_TRANSPARENCY_LOGS_SUPPORT_CASE_VIEWER = 5
           end
         end
 

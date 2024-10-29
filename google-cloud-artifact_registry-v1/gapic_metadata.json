@@ -120,6 +120,11 @@
                 "batch_delete_versions"
               ]
             },
+            "UpdateVersion": {
+              "methods": [
+                "update_version"
+              ]
+            },
             "ListFiles": {
               "methods": [
                 "list_files"
@@ -128,6 +133,16 @@
             "GetFile": {
               "methods": [
                 "get_file"
+              ]
+            },
+            "DeleteFile": {
+              "methods": [
+                "delete_file"
+              ]
+            },
+            "UpdateFile": {
+              "methods": [
+                "update_file"
               ]
             },
             "ListTags": {
@@ -153,6 +168,31 @@
             "DeleteTag": {
               "methods": [
                 "delete_tag"
+              ]
+            },
+            "CreateRule": {
+              "methods": [
+                "create_rule"
+              ]
+            },
+            "ListRules": {
+              "methods": [
+                "list_rules"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "get_rule"
+              ]
+            },
+            "UpdateRule": {
+              "methods": [
+                "update_rule"
+              ]
+            },
+            "DeleteRule": {
+              "methods": [
+                "delete_rule"
               ]
             },
             "SetIamPolicy": {
@@ -188,6 +228,31 @@
             "UpdateVPCSCConfig": {
               "methods": [
                 "update_vpcsc_config"
+              ]
+            },
+            "UpdatePackage": {
+              "methods": [
+                "update_package"
+              ]
+            },
+            "ListAttachments": {
+              "methods": [
+                "list_attachments"
+              ]
+            },
+            "GetAttachment": {
+              "methods": [
+                "get_attachment"
+              ]
+            },
+            "CreateAttachment": {
+              "methods": [
+                "create_attachment"
+              ]
+            },
+            "DeleteAttachment": {
+              "methods": [
+                "delete_attachment"
               ]
             }
           }

@@ -83,7 +83,7 @@ module Google
         #     listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of artifacts to return.
+        #     The maximum number of artifacts to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
@@ -162,7 +162,7 @@ module Google
         #     listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of artifacts to return.
+        #     The maximum number of artifacts to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
@@ -230,7 +230,7 @@ module Google
         #     listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of artifacts to return.
+        #     The maximum number of artifacts to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
@@ -302,7 +302,7 @@ module Google
         #     listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of artifacts to return.
+        #     The maximum number of artifacts to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.

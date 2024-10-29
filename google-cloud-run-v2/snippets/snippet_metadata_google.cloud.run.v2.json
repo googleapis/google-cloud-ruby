@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-run-v2",
-    "version": "0.16.1",
+    "version": "0.17.0",
     "language": "RUBY",
     "apis": [
       {
@@ -11,6 +11,46 @@
     ]
   },
   "snippets": [
+    {
+      "region_tag": "run_v2_generated_Builds_SubmitBuild_sync",
+      "title": "Snippet for the submit_build call in the Builds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Run::V2::Builds::Client#submit_build.",
+      "file": "builds/submit_build.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_build",
+        "full_name": "::Google::Cloud::Run::V2::Builds::Client#submit_build",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Run::V2::SubmitBuildRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Run::V2::SubmitBuildResponse",
+        "client": {
+          "short_name": "Builds::Client",
+          "full_name": "::Google::Cloud::Run::V2::Builds::Client"
+        },
+        "method": {
+          "short_name": "SubmitBuild",
+          "full_name": "google.cloud.run.v2.Builds.SubmitBuild",
+          "service": {
+            "short_name": "Builds",
+            "full_name": "google.cloud.run.v2.Builds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
     {
       "region_tag": "run_v2_generated_Executions_GetExecution_sync",
       "title": "Snippet for the get_execution call in the Executions service",

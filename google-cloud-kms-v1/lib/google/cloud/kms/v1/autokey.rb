@@ -33,7 +33,8 @@ module Google
     module Kms
       module V1
         ##
-        # Provides interfaces for using Cloud KMS Autokey to provision new
+        # Provides interfaces for using [Cloud KMS
+        # Autokey](https://cloud.google.com/kms/help/autokey) to provision new
         # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys}, ready for Customer Managed
         # Encryption Key (CMEK) use, on-demand. To support certain client tooling, this
         # feature is modeled around a {::Google::Cloud::Kms::V1::KeyHandle KeyHandle}

@@ -85,6 +85,8 @@ class ::Google::Cloud::Retail::V2::SearchService::ClientTest < Minitest::Test
     labels = {}
     spell_correction_spec = {}
     entity = "hello world"
+    conversational_search_spec = {}
+    tile_navigation_spec = {}
 
     search_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search, name
@@ -112,6 +114,8 @@ class ::Google::Cloud::Retail::V2::SearchService::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec), request["spell_correction_spec"]
       assert request.has_spell_correction_spec?
       assert_equal "hello world", request["entity"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec), request["conversational_search_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Retail::V2::SearchRequest::TileNavigationSpec), request["tile_navigation_spec"]
       refute_nil options
     end
 
@@ -122,35 +126,35 @@ class ::Google::Cloud::Retail::V2::SearchService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity }) do |response, operation|
+      client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity do |response, operation|
+      client.search placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search ::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity) do |response, operation|
+      client.search ::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity }, grpc_options) do |response, operation|
+      client.search({ placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search(::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity), grpc_options) do |response, operation|
+      client.search(::Google::Cloud::Retail::V2::SearchRequest.new(placement: placement, branch: branch, query: query, visitor_id: visitor_id, user_info: user_info, page_size: page_size, page_token: page_token, offset: offset, filter: filter, canonical_filter: canonical_filter, order_by: order_by, facet_specs: facet_specs, dynamic_facet_spec: dynamic_facet_spec, boost_spec: boost_spec, query_expansion_spec: query_expansion_spec, variant_rollup_keys: variant_rollup_keys, page_categories: page_categories, search_mode: search_mode, personalization_spec: personalization_spec, labels: labels, spell_correction_spec: spell_correction_spec, entity: entity, conversational_search_spec: conversational_search_spec, tile_navigation_spec: tile_navigation_spec), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

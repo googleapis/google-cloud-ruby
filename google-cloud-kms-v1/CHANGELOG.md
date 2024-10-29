@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 (2024-09-30)
+
+#### Features
+
+* Support pagination in the list_keys_handle RPC (BREAKING CHANGE) ([#27338](https://github.com/googleapis/google-cloud-ruby/issues/27338)) 
+* Support states for AutokeyConfig 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation

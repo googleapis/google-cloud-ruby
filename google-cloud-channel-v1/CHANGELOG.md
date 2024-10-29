@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 (2024-10-15)
+
+#### Features
+
+* Support for customer type and channel partner for CloudIdentityCustomerAccount 
+* Support for the primary_admin_email parameter to the check_cloud_identity_accounts_exist RPC 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation

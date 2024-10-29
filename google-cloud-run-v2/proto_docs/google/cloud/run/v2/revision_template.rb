@@ -88,13 +88,20 @@ module Google
         # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
         #     Optional. Sets the maximum number of requests that each serving instance
-        #     can receive.
+        #     can receive. If not specified or 0, defaults to 80 when requested
+        #     `CPU >= 1` and defaults to 1 when requested `CPU < 1`.
+        # @!attribute [rw] service_mesh
+        #   @return [::Google::Cloud::Run::V2::ServiceMesh]
+        #     Optional. Enables service mesh connectivity.
         # @!attribute [rw] session_affinity
         #   @return [::Boolean]
         #     Optional. Enable session affinity.
         # @!attribute [rw] health_check_disabled
         #   @return [::Boolean]
         #     Optional. Disables health checking containers during deployment.
+        # @!attribute [rw] node_selector
+        #   @return [::Google::Cloud::Run::V2::NodeSelector]
+        #     Optional. The node selector for the revision template.
         class RevisionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

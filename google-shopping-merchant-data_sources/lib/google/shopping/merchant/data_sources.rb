@@ -63,6 +63,40 @@ module Google
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
+
+        ##
+        # Create a new client object for FileUploadsService.
+        #
+        # By default, this returns an instance of
+        # [Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client](https://rubydoc.info/gems/google-shopping-merchant-data_sources-v1beta/Google/Shopping/Merchant/DataSources/V1beta/FileUploadsService/Client)
+        # for a gRPC client for version V1beta of the API.
+        # However, you can specify a different API version by passing it in the
+        # `version` parameter. If the FileUploadsService service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
+        #
+        # ## About FileUploadsService
+        #
+        # Service to manage data source file uploads.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [::Object] A client object for the specified version.
+        #
+        def self.file_uploads_service version: :v1beta, transport: :grpc, &block
+          require "google/shopping/merchant/data_sources/#{version.to_s.downcase}"
+
+          package_name = Google::Shopping::Merchant::DataSources
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          service_module = Google::Shopping::Merchant::DataSources.const_get(package_name).const_get(:FileUploadsService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
+          service_module.const_get(:Client).new(&block)
+        end
       end
     end
   end

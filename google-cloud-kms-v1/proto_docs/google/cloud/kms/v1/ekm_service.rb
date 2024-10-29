@@ -206,7 +206,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::EkmConnection EkmConnection} was created.
         # @!attribute [rw] service_resolvers
         #   @return [::Array<::Google::Cloud::Kms::V1::EkmConnection::ServiceResolver>]
-        #     A list of
+        #     Optional. A list of
         #     {::Google::Cloud::Kms::V1::EkmConnection::ServiceResolver ServiceResolvers} where
         #     the EKM can be reached. There should be one ServiceResolver per EKM
         #     replica. Currently, only a single

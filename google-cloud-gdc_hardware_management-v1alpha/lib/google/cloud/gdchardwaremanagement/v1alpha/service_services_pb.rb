@@ -53,6 +53,8 @@ module Google
             rpc :CreateSite, ::Google::Cloud::GDCHardwareManagement::V1alpha::CreateSiteRequest, ::Google::Longrunning::Operation
             # Updates the parameters of a site.
             rpc :UpdateSite, ::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateSiteRequest, ::Google::Longrunning::Operation
+            # Deletes a site.
+            rpc :DeleteSite, ::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest, ::Google::Longrunning::Operation
             # Lists hardware groups in a given order.
             rpc :ListHardwareGroups, ::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsRequest, ::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsResponse
             # Gets details of a hardware group.

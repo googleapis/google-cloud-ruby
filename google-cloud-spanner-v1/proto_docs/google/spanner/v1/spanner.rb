@@ -501,9 +501,19 @@ module Google
             # execution statistics information.
             PLAN = 1
 
-            # This mode returns both the query plan and the execution statistics along
-            # with the results.
+            # This mode returns the query plan, overall execution statistics,
+            # operator level execution statistics along with the results. This has a
+            # performance overhead compared to the other modes. It is not recommended
+            # to use this mode for production traffic.
             PROFILE = 2
+
+            # This mode returns the overall (but not operator-level) execution
+            # statistics along with the results.
+            WITH_STATS = 3
+
+            # This mode returns the query plan, overall (but not operator-level)
+            # execution statistics along with the results.
+            WITH_PLAN_AND_STATS = 4
           end
         end
 
@@ -634,6 +644,15 @@ module Google
         #   @return [::Google::Rpc::Status]
         #     If all DML statements are executed successfully, the status is `OK`.
         #     Otherwise, the error status of the first failed statement.
+        # @!attribute [rw] precommit_token
+        #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
+        #     Optional. A precommit token will be included if the read-write transaction
+        #     is on a multiplexed session.
+        #     The precommit token with the highest sequence number from this transaction
+        #     attempt should be passed to the
+        #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} request for this transaction.
+        #     This feature is not yet supported and will result in an UNIMPLEMENTED
+        #     error.
         class ExecuteBatchDmlResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -968,6 +987,14 @@ module Google
         #     request_options struct will not do anything. To set the priority for a
         #     transaction, set it on the reads and writes that are part of this
         #     transaction instead.
+        # @!attribute [rw] mutation_key
+        #   @return [::Google::Cloud::Spanner::V1::Mutation]
+        #     Optional. Required for read-write transactions on a multiplexed session
+        #     that commit mutations but do not perform any reads or queries. Clients
+        #     should randomly select one of the mutations from the mutation set and send
+        #     it as a part of this request.
+        #     This feature is not yet supported and will result in an UNIMPLEMENTED
+        #     error.
         class BeginTransactionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1011,6 +1038,14 @@ module Google
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
+        # @!attribute [rw] precommit_token
+        #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
+        #     Optional. If the read-write transaction was executed on a multiplexed
+        #     session, the precommit token with the highest sequence number received in
+        #     this transaction attempt, should be included here. Failing to do so will
+        #     result in a FailedPrecondition error.
+        #     This feature is not yet supported and will result in an UNIMPLEMENTED
+        #     error.
         class CommitRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

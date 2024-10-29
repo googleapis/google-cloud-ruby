@@ -114,7 +114,7 @@ module Google
           #     such as `en-US` or `sr-Latn`. If not value is provided, `en-US` will be
           #     used.
           # @!attribute [rw] time_zone
-          #   @return [::Google::Type::TimeZone]
+          #   @return [::String]
           #     Optional. The [IANA](https://www.iana.org/time-zones) timezone used to
           #     localize times in human-readable fields. For example 'America/Los_Angeles'.
           #     If not set, 'America/Los_Angeles' will be used.

@@ -186,7 +186,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project in which the assessment will be created,
+            #     Required. The name of the project in which the assessment is created,
             #     in the format `projects/{project_number}`.
             #   @param assessment [::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment, ::Hash]
             #     Required. The assessment details.
@@ -279,8 +279,8 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     `projects/{project_number}/assessments/{assessment_id}`.
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can
-            #     be left empty to provide reasons that apply to an event without concluding
+            #     Optional. The annotation that is assigned to the Event. This field can be
+            #     left empty to provide reasons that apply to an event without concluding
             #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Reason>]
             #     Optional. Reasons for the annotation that are assigned to the event.

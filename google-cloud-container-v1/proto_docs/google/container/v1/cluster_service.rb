@@ -380,9 +380,18 @@ module Google
         # @!attribute [rw] secondary_boot_disks
         #   @return [::Array<::Google::Cloud::Container::V1::SecondaryBootDisk>]
         #     List of secondary boot disks attached to the nodes.
+        # @!attribute [rw] storage_pools
+        #   @return [::Array<::String>]
+        #     List of Storage Pools where boot disks are provisioned.
         # @!attribute [rw] secondary_boot_disk_update_strategy
         #   @return [::Google::Cloud::Container::V1::SecondaryBootDiskUpdateStrategy]
         #     Secondary boot disk update strategy.
+        # @!attribute [r] effective_cgroup_mode
+        #   @return [::Google::Cloud::Container::V1::NodeConfig::EffectiveCgroupMode]
+        #     Output only. effective_cgroup_mode is the cgroup mode actually used by the
+        #     node pool. It is determined by the cgroup mode specified in the
+        #     LinuxNodeConfig or the default cgroup mode based on the cluster creation
+        #     version.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -412,6 +421,21 @@ module Google
           class ResourceLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible effective cgroup modes for the node.
+          module EffectiveCgroupMode
+            # EFFECTIVE_CGROUP_MODE_UNSPECIFIED means the cgroup configuration for the
+            # node pool is unspecified, i.e. the node pool is a Windows node pool.
+            EFFECTIVE_CGROUP_MODE_UNSPECIFIED = 0
+
+            # CGROUP_MODE_V1 means the node pool is configured to use cgroupv1 for the
+            # cgroup configuration.
+            EFFECTIVE_CGROUP_MODE_V1 = 1
+
+            # CGROUP_MODE_V2 means the node pool is configured to use cgroupv2 for the
+            # cgroup configuration.
+            EFFECTIVE_CGROUP_MODE_V2 = 2
           end
         end
 
@@ -475,7 +499,7 @@ module Google
         #   @return [::Boolean]
         #     Whether nodes have internal IP addresses only.
         #     If enable_private_nodes is not specified, then the value is derived from
-        #     [cluster.privateClusterConfig.enablePrivateNodes][google.container.v1beta1.PrivateClusterConfig.enablePrivateNodes]
+        #     [Cluster.NetworkConfig.default_enable_private_nodes][]
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1::NodeNetworkConfig::NetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
@@ -868,7 +892,8 @@ module Google
         # @!attribute [r] client_certificate
         #   @return [::String]
         #     Output only. Base64-encoded public certificate used by clients to
-        #     authenticate to the cluster endpoint.
+        #     authenticate to the cluster endpoint. Issued only if
+        #     client_certificate_config is set.
         # @!attribute [r] client_key
         #   @return [::String]
         #     Output only. Base64-encoded private key used by clients to authenticate
@@ -937,6 +962,9 @@ module Google
         # @!attribute [rw] stateful_ha_config
         #   @return [::Google::Cloud::Container::V1::StatefulHAConfig]
         #     Optional. Configuration for the StatefulHA add-on.
+        # @!attribute [rw] parallelstore_csi_driver_config
+        #   @return [::Google::Cloud::Container::V1::ParallelstoreCsiDriverConfig]
+        #     Configuration for the Cloud Storage Parallelstore CSI driver.
         # @!attribute [rw] ray_operator_config
         #   @return [::Google::Cloud::Container::V1::RayOperatorConfig]
         #     Optional. Configuration for Ray Operator addon.
@@ -1010,13 +1038,24 @@ module Google
 
         # Configuration options for private clusters.
         # @!attribute [rw] enable_private_nodes
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Whether nodes have internal IP addresses only. If enabled, all nodes are
         #     given only RFC 1918 private addresses and communicate with the master via
         #     private networking.
+        #
+        #     Deprecated: Use
+        #     {::Google::Cloud::Container::V1::NetworkConfig#default_enable_private_nodes NetworkConfig.default_enable_private_nodes}
+        #     instead.
         # @!attribute [rw] enable_private_endpoint
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Whether the master's internal IP address is used as the cluster endpoint.
+        #
+        #     Deprecated: Use
+        #     {::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::IPEndpointsConfig#enable_public_endpoint ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_public_endpoint}
+        #     instead. Note that the value of enable_public_endpoint is reversed: if
+        #     enable_private_endpoint is false, then enable_public_endpoint will be true.
         # @!attribute [rw] master_ipv4_cidr_block
         #   @return [::String]
         #     The IP range in CIDR notation to use for the hosted master network. This
@@ -1024,21 +1063,41 @@ module Google
         #     set of masters, as well as the ILB VIP. This range must not overlap with
         #     any other ranges in use within the cluster's network.
         # @!attribute [r] private_endpoint
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The internal IP address of this cluster's master endpoint.
+        #
+        #     Deprecated: Use
+        #     {::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::IPEndpointsConfig#private_endpoint ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint}
+        #     instead.
         # @!attribute [r] public_endpoint
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The external IP address of this cluster's master endpoint.
+        #
+        #     Deprecated:Use
+        #     {::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::IPEndpointsConfig#public_endpoint ControlPlaneEndpointsConfig.IPEndpointsConfig.public_endpoint}
+        #     instead.
         # @!attribute [r] peering_name
         #   @return [::String]
         #     Output only. The peering name in the customer VPC used by this cluster.
         # @!attribute [rw] master_global_access_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Container::V1::PrivateClusterMasterGlobalAccessConfig]
         #     Controls master global access settings.
+        #
+        #     Deprecated: Use
+        #     [ControlPlaneEndpointsConfig.IPEndpointsConfig.enable_global_access][]
+        #     instead.
         # @!attribute [rw] private_endpoint_subnetwork
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Subnet to provision the master's private endpoint during cluster creation.
         #     Specified in projects/*/regions/*/subnetworks/* format.
+        #
+        #     Deprecated: Use
+        #     {::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::IPEndpointsConfig#private_endpoint_subnetwork ControlPlaneEndpointsConfig.IPEndpointsConfig.private_endpoint_subnetwork}
+        #     instead.
         class PrivateClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1118,6 +1177,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for the Cloud Storage Parallelstore CSI driver.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Cloud Storage Parallelstore CSI driver is enabled for this
+        #     cluster.
+        class ParallelstoreCsiDriverConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration options for the Ray Operator add-on.
         # @!attribute [rw] enabled
         #   @return [::Boolean]
@@ -1165,6 +1234,9 @@ module Google
         # @!attribute [rw] gcp_public_cidrs_access_enabled
         #   @return [::Boolean]
         #     Whether master is accessbile via Google Compute Engine Public IP addresses.
+        # @!attribute [rw] private_endpoint_enforcement_enabled
+        #   @return [::Boolean]
+        #     Whether master authorized networks is enforced on private endpoint or not.
         class MasterAuthorizedNetworksConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1556,8 +1628,13 @@ module Google
         #   @return [::Google::Cloud::Container::V1::IPAllocationPolicy]
         #     Configuration for cluster IP allocation.
         # @!attribute [rw] master_authorized_networks_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Container::V1::MasterAuthorizedNetworksConfig]
         #     The configuration options for master authorized networks feature.
+        #
+        #     Deprecated: Use
+        #     {::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::IPEndpointsConfig#authorized_networks_config ControlPlaneEndpointsConfig.IPEndpointsConfig.authorized_networks_config}
+        #     instead.
         # @!attribute [rw] maintenance_policy
         #   @return [::Google::Cloud::Container::V1::MaintenancePolicy]
         #     Configure the maintenance policy for this cluster.
@@ -1754,18 +1831,34 @@ module Google
         # @!attribute [rw] security_posture_config
         #   @return [::Google::Cloud::Container::V1::SecurityPostureConfig]
         #     Enable/Disable Security Posture API features for the cluster.
+        # @!attribute [rw] control_plane_endpoints_config
+        #   @return [::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig]
+        #     Configuration for all cluster's control plane endpoints.
         # @!attribute [rw] enable_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
         #     Beta APIs Config
         # @!attribute [rw] enterprise_config
         #   @return [::Google::Cloud::Container::V1::EnterpriseConfig]
         #     GKE Enterprise Configuration.
+        # @!attribute [rw] secret_manager_config
+        #   @return [::Google::Cloud::Container::V1::SecretManagerConfig]
+        #     Secret CSI driver configuration.
+        # @!attribute [rw] compliance_posture_config
+        #   @return [::Google::Cloud::Container::V1::CompliancePostureConfig]
+        #     Enable/Disable Compliance Posture features for the cluster.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
         # @!attribute [r] satisfies_pzi
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] user_managed_keys_config
+        #   @return [::Google::Cloud::Container::V1::UserManagedKeysConfig]
+        #     The Custom keys configuration for the cluster.
+        # @!attribute [rw] rbac_binding_config
+        #   @return [::Google::Cloud::Container::V1::RBACBindingConfig]
+        #     RBACBindingConfig allows user to restrict ClusterRoleBindings an
+        #     RoleBindings that can be created.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1806,6 +1899,100 @@ module Google
             # The DEGRADED state indicates the cluster requires user action to restore
             # full functionality. Details can be found in the `statusMessage` field.
             DEGRADED = 6
+          end
+        end
+
+        # RBACBindingConfig allows user to restrict ClusterRoleBindings an RoleBindings
+        # that can be created.
+        # @!attribute [rw] enable_insecure_binding_system_unauthenticated
+        #   @return [::Boolean]
+        #     Setting this to true will allow any ClusterRoleBinding and RoleBinding
+        #     with subjets system:anonymous or system:unauthenticated.
+        # @!attribute [rw] enable_insecure_binding_system_authenticated
+        #   @return [::Boolean]
+        #     Setting this to true will allow any ClusterRoleBinding and RoleBinding
+        #     with subjects system:authenticated.
+        class RBACBindingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UserManagedKeysConfig holds the resource address to Keys which are used
+        # for signing certs and token that are used for communication within cluster.
+        # @!attribute [rw] cluster_ca
+        #   @return [::String]
+        #     The Certificate Authority Service caPool to use for the cluster CA in this
+        #     cluster.
+        # @!attribute [rw] etcd_api_ca
+        #   @return [::String]
+        #     Resource path of the Certificate Authority Service caPool to use for the
+        #     etcd API CA in this cluster.
+        # @!attribute [rw] etcd_peer_ca
+        #   @return [::String]
+        #     Resource path of the Certificate Authority Service caPool to use for the
+        #     etcd peer CA in this cluster.
+        # @!attribute [rw] service_account_signing_keys
+        #   @return [::Array<::String>]
+        #     The Cloud KMS cryptoKeyVersions to use for signing service account JWTs
+        #     issued by this cluster.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}`
+        # @!attribute [rw] service_account_verification_keys
+        #   @return [::Array<::String>]
+        #     The Cloud KMS cryptoKeyVersions to use for verifying service account JWTs
+        #     issued by this cluster.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{cryptoKey}/cryptoKeyVersions/{cryptoKeyVersion}`
+        # @!attribute [rw] aggregation_ca
+        #   @return [::String]
+        #     The Certificate Authority Service caPool to use for the aggregation CA in
+        #     this cluster.
+        # @!attribute [rw] control_plane_disk_encryption_key
+        #   @return [::String]
+        #     The Cloud KMS cryptoKey to use for Confidential Hyperdisk on the control
+        #     plane nodes.
+        # @!attribute [rw] gkeops_etcd_backup_encryption_key
+        #   @return [::String]
+        #     Resource path of the Cloud KMS cryptoKey to use for encryption of internal
+        #     etcd backups.
+        class UserManagedKeysConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CompliancePostureConfig defines the settings needed to enable/disable
+        # features for the Compliance Posture.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Container::V1::CompliancePostureConfig::Mode]
+        #     Defines the enablement mode for Compliance Posture.
+        # @!attribute [rw] compliance_standards
+        #   @return [::Array<::Google::Cloud::Container::V1::CompliancePostureConfig::ComplianceStandard>]
+        #     List of enabled compliance standards.
+        class CompliancePostureConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines the details of a compliance standard.
+          # @!attribute [rw] standard
+          #   @return [::String]
+          #     Name of the compliance standard.
+          class ComplianceStandard
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Mode defines enablement mode for Compliance Posture.
+          module Mode
+            # Default value not specified.
+            MODE_UNSPECIFIED = 0
+
+            # Disables Compliance Posture features on the cluster.
+            DISABLED = 1
+
+            # Enables Compliance Posture features on the cluster.
+            ENABLED = 2
           end
         end
 
@@ -1991,8 +2178,13 @@ module Google
         #     Warning: changing cluster locations will update the locations of all node
         #     pools and will result in nodes being added and/or removed.
         # @!attribute [rw] desired_master_authorized_networks_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Container::V1::MasterAuthorizedNetworksConfig]
         #     The desired configuration options for master authorized networks feature.
+        #
+        #     Deprecated: Use
+        #     desired_control_plane_endpoints_config.ip_endpoints_config.authorized_networks_config
+        #     instead.
         # @!attribute [rw] desired_cluster_autoscaling
         #   @return [::Google::Cloud::Container::V1::ClusterAutoscaling]
         #     Cluster-level autoscaling configuration.
@@ -2019,6 +2211,7 @@ module Google
         #   @return [::Google::Cloud::Container::V1::VerticalPodAutoscaling]
         #     Cluster-level Vertical Pod Autoscaling configuration.
         # @!attribute [rw] desired_private_cluster_config
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Container::V1::PrivateClusterConfig]
         #     The desired private cluster configuration. master_global_access_config is
         #     the only field that can be changed via this field.
@@ -2026,6 +2219,10 @@ module Google
         #     {::Google::Cloud::Container::V1::ClusterUpdate#desired_enable_private_endpoint ClusterUpdate.desired_enable_private_endpoint}
         #     for modifying other fields within
         #     {::Google::Cloud::Container::V1::PrivateClusterConfig PrivateClusterConfig}.
+        #
+        #     Deprecated: Use
+        #     desired_control_plane_endpoints_config.ip_endpoints_config.global_access
+        #     instead.
         # @!attribute [rw] desired_intra_node_visibility_config
         #   @return [::Google::Cloud::Container::V1::IntraNodeVisibilityConfig]
         #     The desired config of Intra-node visibility.
@@ -2064,8 +2261,24 @@ module Google
         #     ServiceExternalIPsConfig specifies the config for the use of Services with
         #     ExternalIPs field.
         # @!attribute [rw] desired_enable_private_endpoint
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
         #     Enable/Disable private endpoint for the cluster's master.
+        #
+        #     Deprecated: Use
+        #     desired_control_plane_endpoints_config.ip_endpoints_config.enable_public_endpoint
+        #     instead. Note that the value of enable_public_endpoint is reversed: if
+        #     enable_private_endpoint is false, then enable_public_endpoint will be true.
+        # @!attribute [rw] desired_default_enable_private_nodes
+        #   @return [::Boolean]
+        #     Override the default setting of whether future created
+        #     nodes have private IP addresses only, namely
+        #     {::Google::Cloud::Container::V1::NetworkConfig#default_enable_private_nodes NetworkConfig.default_enable_private_nodes}
+        # @!attribute [rw] desired_control_plane_endpoints_config
+        #   @return [::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig]
+        #     [Control plane
+        #     endpoints][google.container.v1.Cluster.control_plane_endpoints_config]
+        #     configuration.
         # @!attribute [rw] desired_master_version
         #   @return [::String]
         #     The Kubernetes version to change the master to.
@@ -2147,6 +2360,12 @@ module Google
         # @!attribute [rw] desired_enable_cilium_clusterwide_network_policy
         #   @return [::Boolean]
         #     Enable/Disable Cilium Clusterwide Network Policy for the cluster.
+        # @!attribute [rw] desired_secret_manager_config
+        #   @return [::Google::Cloud::Container::V1::SecretManagerConfig]
+        #     Enable/Disable Secret Manager Config.
+        # @!attribute [rw] desired_compliance_posture_config
+        #   @return [::Google::Cloud::Container::V1::CompliancePostureConfig]
+        #     Enable/Disable Compliance Posture features for the cluster.
         # @!attribute [rw] desired_node_kubelet_config
         #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
         #     The desired node kubelet config for the cluster.
@@ -2154,6 +2373,13 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
         #     The desired node kubelet config for all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] user_managed_keys_config
+        #   @return [::Google::Cloud::Container::V1::UserManagedKeysConfig]
+        #     The Custom keys configuration for the cluster.
+        # @!attribute [rw] desired_rbac_binding_config
+        #   @return [::Google::Cloud::Container::V1::RBACBindingConfig]
+        #     RBACBindingConfig allows user to restrict ClusterRoleBindings an
+        #     RoleBindings that can be created.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2686,6 +2912,10 @@ module Google
         # @!attribute [rw] queued_provisioning
         #   @return [::Google::Cloud::Container::V1::NodePool::QueuedProvisioning]
         #     Specifies the configuration of queued provisioning.
+        # @!attribute [rw] storage_pools
+        #   @return [::Array<::String>]
+        #     List of Storage Pools where boot disks are provisioned.
+        #     Existing Storage Pools will be replaced with storage-pools.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3186,6 +3416,9 @@ module Google
           # @!attribute [rw] valid_versions
           #   @return [::Array<::String>]
           #     List of valid versions for the channel.
+          # @!attribute [rw] upgrade_target_version
+          #   @return [::String]
+          #     The auto upgrade target version for clusters on the channel.
           class ReleaseChannelConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4565,6 +4798,13 @@ module Google
         # @!attribute [rw] enable_cilium_clusterwide_network_policy
         #   @return [::Boolean]
         #     Whether CiliumClusterwideNetworkPolicy is enabled on this cluster.
+        # @!attribute [rw] default_enable_private_nodes
+        #   @return [::Boolean]
+        #     Controls whether by default nodes have private IP addresses only.
+        #     It is invalid to specify both [PrivateClusterConfig.enablePrivateNodes][]
+        #     and this field at the same time.
+        #     To update the default setting, use
+        #     {::Google::Cloud::Container::V1::ClusterUpdate#desired_default_enable_private_nodes ClusterUpdate.desired_default_enable_private_nodes}
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5436,6 +5676,12 @@ module Google
 
             # kube-controller-manager
             CONTROLLER_MANAGER = 5
+
+            # kcp-sshd
+            KCP_SSHD = 7
+
+            # kcp connection logs
+            KCP_CONNECTION = 8
           end
         end
 
@@ -5620,6 +5866,79 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for all of the cluster's control plane endpoints.
+        # @!attribute [rw] dns_endpoint_config
+        #   @return [::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::DNSEndpointConfig]
+        #     DNS endpoint configuration.
+        # @!attribute [rw] ip_endpoints_config
+        #   @return [::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::IPEndpointsConfig]
+        #     IP endpoints configuration.
+        class ControlPlaneEndpointsConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Describes the configuration of a DNS endpoint.
+          # @!attribute [r] endpoint
+          #   @return [::String]
+          #     Output only. The cluster's DNS endpoint configuration.
+          #     A DNS format address. This is accessible from the public internet.
+          #     Ex: uid.us-central1.gke.goog.
+          #     Always present, but the behavior may change according to the value of
+          #     {::Google::Cloud::Container::V1::ControlPlaneEndpointsConfig::DNSEndpointConfig#allow_external_traffic DNSEndpointConfig.allow_external_traffic}.
+          # @!attribute [rw] allow_external_traffic
+          #   @return [::Boolean]
+          #     Controls whether user traffic is allowed over this endpoint. Note that
+          #     GCP-managed services may still use the endpoint even if this is false.
+          class DNSEndpointConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # IP endpoints configuration.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Controls whether to allow direct IP access.
+          # @!attribute [rw] enable_public_endpoint
+          #   @return [::Boolean]
+          #     Controls whether the control plane allows access through a public IP.
+          #     It is invalid to specify both
+          #     [PrivateClusterConfig.enablePrivateEndpoint][] and this field at the same
+          #     time.
+          # @!attribute [rw] global_access
+          #   @return [::Boolean]
+          #     Controls whether the control plane's private endpoint is accessible from
+          #     sources in other regions.
+          #     It is invalid to specify both
+          #     {::Google::Cloud::Container::V1::PrivateClusterMasterGlobalAccessConfig#enabled PrivateClusterMasterGlobalAccessConfig.enabled}
+          #     and this field at the same time.
+          # @!attribute [rw] authorized_networks_config
+          #   @return [::Google::Cloud::Container::V1::MasterAuthorizedNetworksConfig]
+          #     Configuration of authorized networks. If enabled, restricts access to the
+          #     control plane based on source IP.
+          #     It is invalid to specify both
+          #     [Cluster.masterAuthorizedNetworksConfig][] and this field at the same
+          #     time.
+          # @!attribute [r] public_endpoint
+          #   @return [::String]
+          #     Output only. The external IP address of this cluster's control plane.
+          #     Only populated if enabled.
+          # @!attribute [r] private_endpoint
+          #   @return [::String]
+          #     Output only. The internal IP address of this cluster's control plane.
+          #     Only populated if enabled.
+          # @!attribute [rw] private_endpoint_subnetwork
+          #   @return [::String]
+          #     Subnet to provision the master's private endpoint during cluster
+          #     creation. Specified in projects/*/regions/*/subnetworks/* format. It is
+          #     invalid to specify both
+          #     [PrivateClusterConfig.privateEndpointSubnetwork][] and this field at the
+          #     same time.
+          class IPEndpointsConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # LocalNvmeSsdBlockConfig contains configuration for using raw-block local
         # NVMe SSDs
         # @!attribute [rw] local_ssd_count
@@ -5701,7 +6020,7 @@ module Google
         # EnterpriseConfig is the cluster enterprise configuration.
         # @!attribute [r] cluster_tier
         #   @return [::Google::Cloud::Container::V1::EnterpriseConfig::ClusterTier]
-        #     Output only. cluster_tier specifies the premium tier of the cluster.
+        #     Output only. cluster_tier indicates the effective tier of the cluster.
         class EnterpriseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5717,6 +6036,15 @@ module Google
             # ENTERPRISE indicates a GKE Enterprise cluster.
             ENTERPRISE = 2
           end
+        end
+
+        # SecretManagerConfig is config for secret manager enablement.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enable/Disable Secret Manager Config.
+        class SecretManagerConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # SecondaryBootDisk represents a persistent disk attached to a node

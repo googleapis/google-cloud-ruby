@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2024-09-30)
+
+#### Features
+
+* Support for cluster node scaling factor ([#27353](https://github.com/googleapis/google-cloud-ruby/issues/27353)) 
+
 ### 1.3.0 (2024-09-11)
 
 #### Features

@@ -28,6 +28,9 @@ module Google
     # @!attribute [rw] destinations
     #   @return [::Array<::Google::Api::ClientLibraryDestination>]
     #     The destination where API teams want this client library to be published.
+    # @!attribute [rw] selective_gapic_generation
+    #   @return [::Google::Api::SelectiveGapicGeneration]
+    #     Configuration for which RPCs should be generated in the GAPIC client.
     class CommonLanguageSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -196,9 +199,26 @@ module Google
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
+    # @!attribute [rw] experimental_features
+    #   @return [::Google::Api::PythonSettings::ExperimentalFeatures]
+    #     Experimental features to be included during client library generation.
     class PythonSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # Experimental features to be included during client library generation.
+      # These fields will be deprecated once the feature graduates and is enabled
+      # by default.
+      # @!attribute [rw] rest_async_io_enabled
+      #   @return [::Boolean]
+      #     Enables generation of asynchronous REST clients if `rest` transport is
+      #     enabled. By default, asynchronous REST clients will not be generated.
+      #     This feature will be enabled by default 1 month after launching the
+      #     feature in preview packages.
+      class ExperimentalFeatures
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
     end
 
     # Settings for Node client libraries.
@@ -356,6 +376,17 @@ module Google
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
       end
+    end
+
+    # This message is used to configure the generation of a subset of the RPCs in
+    # a service for client libraries.
+    # @!attribute [rw] methods
+    #   @return [::Array<::String>]
+    #     An allowlist of the fully qualified names of RPCs that should be included
+    #     on public client surfaces.
+    class SelectiveGapicGeneration
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The organization for which the client libraries are being published.

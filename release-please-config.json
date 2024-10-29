@@ -11,6 +11,14 @@
   "tag-separator": "/",
   "sequential-calls": true,
   "packages": {
+    "google-ads-ad_manager": {
+      "component": "google-ads-ad_manager",
+      "version_file": "lib/google/ads/ad_manager/version.rb"
+    },
+    "google-ads-ad_manager-v1": {
+      "component": "google-ads-ad_manager-v1",
+      "version_file": "lib/google/ads/ad_manager/v1/version.rb"
+    },
     "google-analytics-admin": {
       "component": "google-analytics-admin",
       "version_file": "lib/google/analytics/admin/version.rb"
@@ -1027,6 +1035,14 @@
       "component": "google-cloud-optimization-v1",
       "version_file": "lib/google/cloud/optimization/v1/version.rb"
     },
+    "google-cloud-oracle_database": {
+      "component": "google-cloud-oracle_database",
+      "version_file": "lib/google/cloud/oracle_database/version.rb"
+    },
+    "google-cloud-oracle_database-v1": {
+      "component": "google-cloud-oracle_database-v1",
+      "version_file": "lib/google/cloud/oracle_database/v1/version.rb"
+    },
     "google-cloud-orchestration-airflow-service": {
       "component": "google-cloud-orchestration-airflow-service",
       "version_file": "lib/google/cloud/orchestration/airflow/service/version.rb"
@@ -1070,6 +1086,10 @@
     "google-cloud-parallelstore": {
       "component": "google-cloud-parallelstore",
       "version_file": "lib/google/cloud/parallelstore/version.rb"
+    },
+    "google-cloud-parallelstore-v1": {
+      "component": "google-cloud-parallelstore-v1",
+      "version_file": "lib/google/cloud/parallelstore/v1/version.rb"
     },
     "google-cloud-parallelstore-v1beta": {
       "component": "google-cloud-parallelstore-v1beta",

@@ -17,23 +17,25 @@ class RepoContext
 
   def self.load_kokoro_env
     return if @loaded_env
-
-    if ::ENV["KOKORO_GFILE_DIR"]
-      service_account = "#{::ENV['KOKORO_GFILE_DIR']}/service-account.json"
-      raise "#{service_account} is not a file" unless ::File.file? service_account
-      ::ENV["GOOGLE_APPLICATION_CREDENTIALS"] = service_account
-
-      filename = "#{::ENV['KOKORO_GFILE_DIR']}/ruby_env_vars.json"
-      raise "#{filename} is not a file" unless ::File.file? filename
-      env_vars = ::JSON.parse ::File.read filename
-      env_vars.each { |k, v| ::ENV[k] ||= v }
-    end
-
-    if ::ENV["KOKORO_KEYSTORE_DIR"]
-      ::ENV["DOCS_CREDENTIALS"] ||= "#{::ENV['KOKORO_KEYSTORE_DIR']}/73713_docuploader_service_account"
-      ::ENV["GITHUB_TOKEN"] ||= "#{::ENV['KOKORO_KEYSTORE_DIR']}/73713_yoshi-automation-github-key"
-    end
-
     @loaded_env = true
+
+    gfile_dir = ::ENV["KOKORO_GFILE_DIR"]
+    return unless gfile_dir
+
+    filename = "#{gfile_dir}/ruby_env_vars.json"
+    raise "#{filename} is not a file" unless ::File.file? filename
+    env_vars = ::JSON.parse ::File.read filename
+    env_vars.each { |k, v| ::ENV[k] ||= v }
+
+    filename = "#{gfile_dir}/secret_manager/ruby-main-ci-service-account"
+    if ::File.file? filename
+      ::ENV["GOOGLE_APPLICATION_CREDENTIALS"] = filename
+      ::ENV["GCLOUD_TEST_KEYFILE_JSON"] = File.read filename
+    end
+
+    filename = "#{gfile_dir}/secret_manager/ruby-firestore-ci-service-account"
+    if ::File.file? filename
+      ::ENV["FIRESTORE_TEST_KEYFILE_JSON"] = File.read filename
+    end
   end
 end

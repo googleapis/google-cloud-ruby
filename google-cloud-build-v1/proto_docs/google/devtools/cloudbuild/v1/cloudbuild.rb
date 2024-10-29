@@ -1971,15 +1971,18 @@ module Google
             NONE = 4
           end
 
-          # Default GCS log bucket behavior options.
+          # Default Cloud Storage log bucket behavior options.
           module DefaultLogsBucketBehavior
             # Unspecified.
             DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED = 0
 
             # Bucket is located in user-owned project in the same region as the
             # build. The builder service account must have access to create and write
-            # to GCS buckets in the build project.
+            # to Cloud Storage buckets in the build project.
             REGIONAL_USER_OWNED_BUCKET = 1
+
+            # Bucket is located in a Google-owned project and is not regionalized.
+            LEGACY_BUCKET = 2
           end
         end
 
@@ -2174,6 +2177,9 @@ module Google
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::NetworkConfig]
         #     Network configuration for the pool.
+        # @!attribute [rw] private_service_connect
+        #   @return [::Google::Cloud::Build::V1::PrivatePoolV1Config::PrivateServiceConnect]
+        #     Immutable. Private Service Connect(PSC) Network configuration for the pool.
         class PrivatePoolV1Config
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2239,6 +2245,39 @@ module Google
               # public internet egress.
               PUBLIC_EGRESS = 2
             end
+          end
+
+          # Defines the Private Service Connect network configuration for the pool.
+          # @!attribute [rw] network_attachment
+          #   @return [::String]
+          #     Required. Immutable. The network attachment that the worker network
+          #     interface is peered to. Must be in the format
+          #     `projects/{project}/regions/{region}/networkAttachments/{networkAttachment}`.
+          #     The region of network attachment must be the same as the worker pool.
+          #     See [Network
+          #     Attachments](https://cloud.google.com/vpc/docs/about-network-attachments)
+          # @!attribute [rw] public_ip_address_disabled
+          #   @return [::Boolean]
+          #     Required. Immutable. Disable public IP on the primary network interface.
+          #
+          #     If true, workers are created without any public address, which prevents
+          #     network egress to public IPs unless a network proxy is configured.
+          #     If false, workers are created with a public address which allows for
+          #     public internet egress. The public address only applies to traffic
+          #     through the primary network interface.
+          #     If `route_all_traffic` is set to true, all traffic will go through the
+          #     non-primary network interface, this boolean has no effect.
+          # @!attribute [rw] route_all_traffic
+          #   @return [::Boolean]
+          #     Immutable. Route all traffic through PSC interface. Enable this if you
+          #     want full control of traffic in the private pool. Configure Cloud NAT for
+          #     the subnet of network attachment if you need to access public Internet.
+          #
+          #     If false, Only route private IPs, e.g. 10.0.0.0/8, 172.16.0.0/12, and
+          #     192.168.0.0/16 through PSC interface.
+          class PrivateServiceConnect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 

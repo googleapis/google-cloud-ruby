@@ -426,6 +426,9 @@ module Google
           # is replaced with a single byte containing the block length. Only Speex
           # wideband is supported. `sample_rate_hertz` must be 16000.
           AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+
+          # 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+          AUDIO_ENCODING_ALAW = 8
         end
 
         # Variant of the specified [Speech
@@ -512,6 +515,9 @@ module Google
 
           # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
           OUTPUT_AUDIO_ENCODING_MULAW = 5
+
+          # 8-bit samples that compand 13-bit audio samples using G.711 PCMU/a-law.
+          OUTPUT_AUDIO_ENCODING_ALAW = 6
         end
       end
     end

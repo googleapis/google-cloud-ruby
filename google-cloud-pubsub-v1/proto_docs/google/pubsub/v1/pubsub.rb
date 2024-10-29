@@ -71,6 +71,13 @@ module Google
         # @!attribute [rw] aws_kinesis
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsKinesis]
         #     Optional. Amazon Kinesis Data Streams.
+        # @!attribute [rw] cloud_storage
+        #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage]
+        #     Optional. Cloud Storage.
+        # @!attribute [rw] platform_logs_settings
+        #   @return [::Google::Cloud::PubSub::V1::PlatformLogsSettings]
+        #     Optional. Platform Logs settings. If unset, no Platform Logs will be
+        #     generated.
         class IngestionDataSourceSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,6 +139,190 @@ module Google
               # The Kinesis consumer does not exist.
               CONSUMER_NOT_FOUND = 5
             end
+          end
+
+          # Ingestion settings for Cloud Storage.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::State]
+          #     Output only. An output-only field that indicates the state of the Cloud
+          #     Storage ingestion source.
+          # @!attribute [rw] bucket
+          #   @return [::String]
+          #     Optional. Cloud Storage bucket. The bucket name must be without any
+          #     prefix like "gs://". See the [bucket naming requirements]
+          #     (https://cloud.google.com/storage/docs/buckets#naming).
+          # @!attribute [rw] text_format
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::TextFormat]
+          #     Optional. Data from Cloud Storage will be interpreted as text.
+          # @!attribute [rw] avro_format
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::AvroFormat]
+          #     Optional. Data from Cloud Storage will be interpreted in Avro format.
+          # @!attribute [rw] pubsub_avro_format
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::PubSubAvroFormat]
+          #     Optional. It will be assumed data from Cloud Storage was written via
+          #     [Cloud Storage
+          #     subscriptions](https://cloud.google.com/pubsub/docs/cloudstorage).
+          # @!attribute [rw] minimum_object_create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. Only objects with a larger or equal creation timestamp will be
+          #     ingested.
+          # @!attribute [rw] match_glob
+          #   @return [::String]
+          #     Optional. Glob pattern used to match objects that will be ingested. If
+          #     unset, all objects will be ingested. See the [supported
+          #     patterns](https://cloud.google.com/storage/docs/json_api/v1/objects/list#list-objects-and-prefixes-using-glob).
+          class CloudStorage
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for reading Cloud Storage data in text format. Each line of
+            # text as specified by the delimiter will be set to the `data` field of a
+            # Pub/Sub message.
+            # @!attribute [rw] delimiter
+            #   @return [::String]
+            #     Optional. When unset, '\n' is used.
+            class TextFormat
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for reading Cloud Storage data in Avro binary format. The
+            # bytes of each object will be set to the `data` field of a Pub/Sub
+            # message.
+            class AvroFormat
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for reading Cloud Storage data written via [Cloud Storage
+            # subscriptions](https://cloud.google.com/pubsub/docs/cloudstorage). The
+            # data and attributes fields of the originally exported Pub/Sub message
+            # will be restored when publishing.
+            class PubSubAvroFormat
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Possible states for ingestion from Cloud Storage.
+            module State
+              # Default value. This value is unused.
+              STATE_UNSPECIFIED = 0
+
+              # Ingestion is active.
+              ACTIVE = 1
+
+              # Permission denied encountered while calling the Cloud Storage API. This
+              # can happen if the Pub/Sub SA has not been granted the
+              # [appropriate
+              # permissions](https://cloud.google.com/storage/docs/access-control/iam-permissions):
+              # - storage.objects.list: to list the objects in a bucket.
+              # - storage.objects.get: to read the objects in a bucket.
+              # - storage.buckets.get: to verify the bucket exists.
+              CLOUD_STORAGE_PERMISSION_DENIED = 2
+
+              # Permission denied encountered while publishing to the topic. This can
+              # happen if the Pub/Sub SA has not been granted the [appropriate publish
+              # permissions](https://cloud.google.com/pubsub/docs/access-control#pubsub.publisher)
+              PUBLISH_PERMISSION_DENIED = 3
+
+              # The provided Cloud Storage bucket doesn't exist.
+              BUCKET_NOT_FOUND = 4
+
+              # The Cloud Storage bucket has too many objects, ingestion will be
+              # paused.
+              TOO_MANY_OBJECTS = 5
+            end
+          end
+        end
+
+        # Settings for Platform Logs produced by Pub/Sub.
+        # @!attribute [rw] severity
+        #   @return [::Google::Cloud::PubSub::V1::PlatformLogsSettings::Severity]
+        #     Optional. The minimum severity level of Platform Logs that will be written.
+        class PlatformLogsSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Severity levels of Platform Logs.
+          module Severity
+            # Default value. Logs level is unspecified. Logs will be disabled.
+            SEVERITY_UNSPECIFIED = 0
+
+            # Logs will be disabled.
+            DISABLED = 1
+
+            # Debug logs and higher-severity logs will be written.
+            DEBUG = 2
+
+            # Info logs and higher-severity logs will be written.
+            INFO = 3
+
+            # Warning logs and higher-severity logs will be written.
+            WARNING = 4
+
+            # Only error logs will be written.
+            ERROR = 5
+          end
+        end
+
+        # Payload of the Platform Log entry sent when a failure is encountered while
+        # ingesting.
+        # @!attribute [rw] topic
+        #   @return [::String]
+        #     Required. Name of the import topic. Format is:
+        #     projects/\\{project_name}/topics/\\{topic_name}.
+        # @!attribute [rw] error_message
+        #   @return [::String]
+        #     Required. Error details explaining why ingestion to Pub/Sub has failed.
+        # @!attribute [rw] cloud_storage_failure
+        #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::CloudStorageFailure]
+        #     Optional. Failure when ingesting from Cloud Storage.
+        class IngestionFailureEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the reason why some data may have been left out of
+          # the desired Pub/Sub message due to the API message limits
+          # (https://cloud.google.com/pubsub/quotas#resource_limits). For example,
+          # when the number of attributes is larger than 100, the number of
+          # attributes is truncated to 100 to respect the limit on the attribute count.
+          # Other attribute limits are treated similarly. When the size of the desired
+          # message would've been larger than 10MB, the message won't be published at
+          # all, and ingestion of the subsequent messages will proceed as normal.
+          class ApiViolationReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Set when an Avro file is unsupported or its format is not valid. When this
+          # occurs, one or more Avro objects won't be ingested.
+          class AvroFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Failure when ingesting from a Cloud Storage source.
+          # @!attribute [rw] bucket
+          #   @return [::String]
+          #     Optional. Name of the Cloud Storage bucket used for ingestion.
+          # @!attribute [rw] object_name
+          #   @return [::String]
+          #     Optional. Name of the Cloud Storage object which contained the section
+          #     that couldn't be ingested.
+          # @!attribute [rw] object_generation
+          #   @return [::Integer]
+          #     Optional. Generation of the Cloud Storage object which contained the
+          #     section that couldn't be ingested.
+          # @!attribute [rw] avro_failure_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AvroFailureReason]
+          #     Optional. Failure encountered when parsing an Avro file.
+          # @!attribute [rw] api_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
+          #     Optional. The Pub/Sub API limits prevented the desired message from
+          #     being published.
+          class CloudStorageFailure
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -579,9 +770,30 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::Subscription::State]
         #     Output only. An output-only field indicating whether or not the
         #     subscription can receive messages.
+        # @!attribute [r] analytics_hub_subscription_info
+        #   @return [::Google::Cloud::PubSub::V1::Subscription::AnalyticsHubSubscriptionInfo]
+        #     Output only. Information about the associated Analytics Hub subscription.
+        #     Only set if the subscritpion is created by Analytics Hub.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Information about an associated Analytics Hub subscription
+          # (https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions).
+          # @!attribute [rw] listing
+          #   @return [::String]
+          #     Optional. The name of the associated Analytics Hub listing resource.
+          #     Pattern:
+          #     "projects/\\{project}/locations/\\{location}/dataExchanges/\\{data_exchange}/listings/\\{listing}"
+          # @!attribute [rw] subscription
+          #   @return [::String]
+          #     Optional. The name of the associated Analytics Hub subscription resource.
+          #     Pattern:
+          #     "projects/\\{project}/locations/\\{location}/subscriptions/\\{subscription}"
+          class AnalyticsHubSubscriptionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

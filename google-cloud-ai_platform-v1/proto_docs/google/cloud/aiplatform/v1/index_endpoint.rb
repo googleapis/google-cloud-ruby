@@ -240,6 +240,11 @@ module Google
         #     [d, e] is disallowed.
         #
         #     Note: we only support up to 5 deployment groups(not including 'default').
+        # @!attribute [rw] psc_automation_configs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::PSCAutomationConfig>]
+        #     Optional. If set for PSC deployed index, PSC connection will be
+        #     automatically created after deployment is done and the endpoint information
+        #     is populated in private_endpoints.psc_automated_endpoints.
         class DeployedIndex
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

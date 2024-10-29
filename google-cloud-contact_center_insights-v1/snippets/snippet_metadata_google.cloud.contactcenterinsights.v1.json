@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-contact_center_insights-v1",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "language": "RUBY",
     "apis": [
       {
@@ -852,6 +852,86 @@
       ]
     },
     {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ExportIssueModel_sync",
+      "title": "Snippet for the export_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#export_issue_model.",
+      "file": "contact_center_insights/export_issue_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "export_issue_model",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#export_issue_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ExportIssueModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ExportIssueModel",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ExportIssueModel",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ImportIssueModel_sync",
+      "title": "Snippet for the import_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#import_issue_model.",
+      "file": "contact_center_insights/import_issue_model.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_issue_model",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#import_issue_model",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ImportIssueModelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ImportIssueModel",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ImportIssueModel",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetIssue_sync",
       "title": "Snippet for the get_issue call in the ContactCenterInsights service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_issue.",
@@ -1367,6 +1447,86 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetEncryptionSpec_sync",
+      "title": "Snippet for the get_encryption_spec call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_encryption_spec.",
+      "file": "contact_center_insights/get_encryption_spec.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_encryption_spec",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_encryption_spec",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "GetEncryptionSpec",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetEncryptionSpec",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_InitializeEncryptionSpec_sync",
+      "title": "Snippet for the initialize_encryption_spec call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#initialize_encryption_spec.",
+      "file": "contact_center_insights/initialize_encryption_spec.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "initialize_encryption_spec",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#initialize_encryption_spec",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "InitializeEncryptionSpec",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.InitializeEncryptionSpec",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

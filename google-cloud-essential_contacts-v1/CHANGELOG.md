@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.2 (2024-10-15)
+
+#### Documentation
+
+* Note that Contact#validation_state is output-only ([#27436](https://github.com/googleapis/google-cloud-ruby/issues/27436)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation

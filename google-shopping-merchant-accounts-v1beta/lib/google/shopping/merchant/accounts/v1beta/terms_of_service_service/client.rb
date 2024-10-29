@@ -276,11 +276,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param region_code [::String]
-              #     Region code as defined by [CLDR](https://cldr.unicode.org/). This is either
-              #     a country when the ToS applies specifically to that country or 001 when it
-              #     applies globally.
+              #     Required. Region code as defined by [CLDR](https://cldr.unicode.org/). This
+              #     is either a country when the ToS applies specifically to that country or
+              #     001 when it applies globally.
               #   @param kind [::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceKind]
-              #     The Kind this terms of service version applies to.
+              #     Required. The Kind this terms of service version applies to.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1beta::TermsOfService]

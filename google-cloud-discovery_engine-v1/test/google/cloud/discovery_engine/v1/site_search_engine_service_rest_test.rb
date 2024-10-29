@@ -570,6 +570,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Rest::Clien
     # Create request parameters for a unary method.
     site_search_engine = "hello world"
     uris = ["hello world"]
+    site_credential = "hello world"
 
     recrawl_uris_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -585,27 +586,27 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Rest::Clien
         end
 
         # Use hash object
-        client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris }) do |_result, response|
+        client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.recrawl_uris site_search_engine: site_search_engine, uris: uris do |_result, response|
+        client.recrawl_uris site_search_engine: site_search_engine, uris: uris, site_credential: site_credential do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.recrawl_uris ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris) do |_result, response|
+        client.recrawl_uris ::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris }, call_options) do |_result, response|
+        client.recrawl_uris({ site_search_engine: site_search_engine, uris: uris, site_credential: site_credential }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.recrawl_uris(::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris), call_options) do |_result, response|
+        client.recrawl_uris(::Google::Cloud::DiscoveryEngine::V1::RecrawlUrisRequest.new(site_search_engine: site_search_engine, uris: uris, site_credential: site_credential), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

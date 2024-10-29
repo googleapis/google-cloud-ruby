@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0 (2024-10-07)
+
+#### Features
+
+* Support for the UPGRADING instance state 
+#### Documentation
+
+* Various updates to documentation content and formatting 
+
 ### 0.3.1 (2024-08-30)
 
 #### Documentation

@@ -41,6 +41,15 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # ReplicaSelection identifies replicas with common properties.
+            # @!attribute [rw] location
+            #   @return [::String]
+            #     Required. Name of the location of the replicas (e.g., "us-central1").
+            class ReplicaSelection
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Indicates the expected fulfillment period of an operation.
             module FulfillmentPeriod
               # Not specified.

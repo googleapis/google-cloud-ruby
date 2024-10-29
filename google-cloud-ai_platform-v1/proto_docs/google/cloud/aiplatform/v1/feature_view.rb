@@ -103,6 +103,10 @@ module Google
           #     The $\\{IANA_TIME_ZONE} may only be a valid string from IANA time zone
           #     database. For example, "CRON_TZ=America/New_York 1 * * * *", or
           #     "TZ=America/New_York 1 * * * *".
+          # @!attribute [rw] continuous
+          #   @return [::Boolean]
+          #     Optional. If true, syncs the FeatureView in a continuous manner to Online
+          #     Store.
           class SyncConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

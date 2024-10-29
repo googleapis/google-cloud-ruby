@@ -1,5 +1,24 @@
 # Changelog
 
+### 1.1.0 (2024-10-28)
+
+#### Features
+
+* add fields related to advertised routes to the RouteInfo proto 
+* add firewall policy URI to the FirewallInfo proto 
+* add load balancer name to the ForwardingRuleInfo proto 
+* add messages and fields related to Redis Clusters 
+* add messages and fields related to Redis Instances ([#27447](https://github.com/googleapis/google-cloud-ruby/issues/27447)) 
+* add more detailed abort and drop causes to corresponding enums 
+* add PSC network attachment URI to the InstanceInfo proto 
+* add PSC target fields to the ForwardingRuleInfo proto 
+* add region name field to the RouteInfo proto 
+* add region name to the ForwardingRuleInfo proto 
+* add subnet URI and region name to the NetworkInfo proto 
+#### Documentation
+
+* update outdated comments in the FirewallInfo proto 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation

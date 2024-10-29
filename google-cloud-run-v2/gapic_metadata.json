@@ -5,6 +5,20 @@
   "protoPackage": "google.cloud.run.v2",
   "libraryPackage": "::Google::Cloud::Run::V2",
   "services": {
+    "Builds": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Run::V2::Builds::Client",
+          "rpcs": {
+            "SubmitBuild": {
+              "methods": [
+                "submit_build"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Executions": {
       "clients": {
         "grpc": {

@@ -29,7 +29,13 @@ module Google
         #     Parent uses the format: accounts/\\{account_id}
         # @!attribute [rw] domain
         #   @return [::String]
-        #     Required. Domain to fetch for Cloud Identity account customer.
+        #     Required. Domain to fetch for Cloud Identity account customers, including
+        #     domain and team customers. For team customers, please use the domain for
+        #     their emails.
+        # @!attribute [rw] primary_admin_email
+        #   @return [::String]
+        #     Optional. Primary admin email to fetch for Cloud Identity account team
+        #     customer.
         class CheckCloudIdentityAccountsExistRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -53,6 +59,13 @@ module Google
         # @!attribute [rw] customer_cloud_identity_id
         #   @return [::String]
         #     If existing = true, the Cloud Identity ID of the customer.
+        # @!attribute [rw] customer_type
+        #   @return [::Google::Cloud::Channel::V1::CloudIdentityInfo::CustomerType]
+        #     If existing = true, the type of the customer.
+        # @!attribute [rw] channel_partner_cloud_identity_id
+        #   @return [::String]
+        #     If existing = true, and is 2-tier customer, the channel partner of the
+        #     customer.
         class CloudIdentityCustomerAccount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -171,6 +184,9 @@ module Google
         # @!attribute [rw] cloud_identity_id
         #   @return [::String]
         #     Required. Customer's Cloud Identity ID
+        # @!attribute [rw] primary_admin_email
+        #   @return [::String]
+        #     Required. Customer's primary admin email.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the reseller's account.

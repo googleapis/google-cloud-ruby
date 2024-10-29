@@ -40,10 +40,10 @@ module Google
         #     code. See [Supported
         #     languages](https://cloud.google.com/resource-manager/docs/managing-notification-contacts#supported-languages)
         #     for a list of supported languages.
-        # @!attribute [rw] validation_state
+        # @!attribute [r] validation_state
         #   @return [::Google::Cloud::EssentialContacts::V1::ValidationState]
-        #     The validity of the contact. A contact is considered valid if it is the
-        #     correct recipient for notifications for a particular resource.
+        #     Output only. The validity of the contact. A contact is considered valid if
+        #     it is the correct recipient for notifications for a particular resource.
         # @!attribute [rw] validate_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The last time the validation_state was updated, either manually or

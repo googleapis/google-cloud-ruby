@@ -124,7 +124,7 @@ module Google
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROY_SCHEDULED DESTROY_SCHEDULED}
         #     state before transitioning to
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::DESTROYED DESTROYED}.
-        #     If not specified at creation time, the default duration is 24 hours.
+        #     If not specified at creation time, the default duration is 30 days.
         # @!attribute [rw] crypto_key_backend
         #   @return [::String]
         #     Immutable. The resource name of the backend environment where the key

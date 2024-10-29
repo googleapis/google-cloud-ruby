@@ -201,7 +201,7 @@ module Google
               # Service calls
 
               ##
-              # Lists Instances in a given project and location.
+              # Lists all instances in a given project and location.
               #
               # @overload list_instances(request, options = nil)
               #   Pass arguments to `list_instances` via a request object, either of type
@@ -221,19 +221,18 @@ module Google
               #   @param parent [::String]
               #     Required. The project and location for which to retrieve instance
               #     information, in the format `projects/{project_id}/locations/{location}`.
-              #     For Parallelstore locations map to Google Cloud zones, for example
-              #     **us-central1-a**.
-              #     To retrieve instance information for all locations, use "-" for the
-              #     `{location}` value.
+              #
+              #     To retrieve instance information for all locations, use "-" as the value of
+              #     `{location}`.
               #   @param page_size [::Integer]
               #     Optional. Requested page size. Server may return fewer items than
-              #     requested. If unspecified, server will pick an appropriate default.
+              #     requested. If unspecified, the server will pick an appropriate default.
               #   @param page_token [::String]
               #     Optional. A token identifying a page of results the server should return.
               #   @param filter [::String]
-              #     Optional. Filtering results
+              #     Optional. Filtering results.
               #   @param order_by [::String]
-              #     Optional. Hint for how to order the results
+              #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Parallelstore::V1beta::ListInstancesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -298,7 +297,7 @@ module Google
               end
 
               ##
-              # Gets details of a single Instance.
+              # Gets details of a single instance.
               #
               # @overload get_instance(request, options = nil)
               #   Pass arguments to `get_instance` via a request object, either of type
@@ -398,10 +397,9 @@ module Google
               #   @param parent [::String]
               #     Required. The instance's project and location, in the format
               #     `projects/{project}/locations/{location}`.
-              #     Locations map to Google Cloud zones, for example **us-west1-b**.
+              #     Locations map to Google Cloud zones; for example, `us-west1-b`.
               #   @param instance_id [::String]
-              #     Required. The logical name of the Parallelstore instance in the user
-              #     project with the following restrictions:
+              #     Required. The name of the Parallelstore instance.
               #
               #     * Must contain only lowercase letters, numbers, and hyphens.
               #     * Must start with a letter.
@@ -492,7 +490,7 @@ module Google
               end
 
               ##
-              # Updates the parameters of a single Instance.
+              # Updates the parameters of a single instance.
               #
               # @overload update_instance(request, options = nil)
               #   Pass arguments to `update_instance` via a request object, either of type
@@ -510,12 +508,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Mask of fields to update .Field mask is used to specify the
+              #     Required. Mask of fields to update. Field mask is used to specify the
               #     fields to be overwritten in the Instance resource by the update. At least
               #     one path must be supplied in this field. The fields specified in the
               #     update_mask are relative to the resource, not the full request.
               #   @param instance [::Google::Cloud::Parallelstore::V1beta::Instance, ::Hash]
-              #     Required. The instance to update
+              #     Required. The instance to update.
               #   @param request_id [::String]
               #     Optional. An optional request ID to identify requests. Specify a unique
               #     request ID so that if you must retry your request, the server will know to
@@ -598,7 +596,7 @@ module Google
               end
 
               ##
-              # Deletes a single Instance.
+              # Deletes a single instance.
               #
               # @overload delete_instance(request, options = nil)
               #   Pass arguments to `delete_instance` via a request object, either of type
@@ -699,7 +697,7 @@ module Google
               end
 
               ##
-              # ImportData copies data from Cloud Storage to Parallelstore.
+              # Copies data from Cloud Storage to Parallelstore.
               #
               # @overload import_data(request, options = nil)
               #   Pass arguments to `import_data` via a request object, either of type
@@ -717,7 +715,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param source_gcs_bucket [::Google::Cloud::Parallelstore::V1beta::SourceGcsBucket, ::Hash]
-              #     Cloud Storage source.
+              #     The Cloud Storage source bucket and, optionally, path inside the bucket.
               #   @param destination_parallelstore [::Google::Cloud::Parallelstore::V1beta::DestinationParallelstore, ::Hash]
               #     Parallelstore destination.
               #   @param name [::String]
@@ -737,11 +735,17 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param service_account [::String]
-              #     Optional. User-specified Service Account (SA) credentials to be used when
+              #     Optional. User-specified service account credentials to be used when
               #     performing the transfer.
-              #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+              #
+              #     Use one of the following formats:
+              #
+              #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #
               #     If unspecified, the Parallelstore service agent is used:
-              #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+              #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -810,7 +814,7 @@ module Google
               end
 
               ##
-              # ExportData copies data from Parallelstore to Cloud Storage
+              # Copies data from Parallelstore to Cloud Storage.
               #
               # @overload export_data(request, options = nil)
               #   Pass arguments to `export_data` via a request object, either of type
@@ -850,9 +854,14 @@ module Google
               #   @param service_account [::String]
               #     Optional. User-specified Service Account (SA) credentials to be used when
               #     performing the transfer.
-              #     Format: `projects/{project_id}/serviceAccounts/{service_account}`
+              #     Use one of the following formats:
+              #
+              #     * `{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/{PROJECT_ID_OR_NUMBER}/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #     * `projects/-/serviceAccounts/{EMAIL_ADDRESS_OR_UNIQUE_ID}`
+              #
               #     If unspecified, the Parallelstore service agent is used:
-              #     service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com)
+              #     `service-<PROJECT_NUMBER>@gcp-sa-parallelstore.iam.gserviceaccount.com`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

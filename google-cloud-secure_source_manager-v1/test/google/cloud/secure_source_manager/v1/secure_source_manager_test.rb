@@ -330,6 +330,7 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    instance = "hello world"
 
     list_repositories_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_repositories, name
@@ -338,6 +339,7 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["instance"]
       refute_nil options
     end
 
@@ -348,35 +350,35 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
       end
 
       # Use hash object
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_repositories ::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_repositories ::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_repositories(::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_repositories(::Google::Cloud::SecureSourceManager::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, instance: instance), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -756,6 +758,330 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
 
       # Verify method calls
       assert_equal 5, test_iam_permissions_repo_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_branch_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    branch_rule = {}
+    branch_rule_id = "hello world"
+
+    create_branch_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_branch_rule, name
+      assert_kind_of ::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecureSourceManager::V1::BranchRule), request["branch_rule"]
+      assert_equal "hello world", request["branch_rule_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_branch_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_branch_rule({ parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_branch_rule parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_branch_rule ::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new(parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_branch_rule({ parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_branch_rule(::Google::Cloud::SecureSourceManager::V1::CreateBranchRuleRequest.new(parent: parent, branch_rule: branch_rule, branch_rule_id: branch_rule_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_branch_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_branch_rules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_branch_rules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_branch_rules, name
+      assert_kind_of ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_branch_rules_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_branch_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_branch_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_branch_rules ::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_branch_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_branch_rules(::Google::Cloud::SecureSourceManager::V1::ListBranchRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_branch_rules_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_branch_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecureSourceManager::V1::BranchRule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_branch_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_branch_rule, name
+      assert_kind_of ::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_branch_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_branch_rule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_branch_rule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_branch_rule ::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_branch_rule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_branch_rule(::Google::Cloud::SecureSourceManager::V1::GetBranchRuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_branch_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_branch_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    branch_rule = {}
+    validate_only = true
+    update_mask = {}
+
+    update_branch_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_branch_rule, name
+      assert_kind_of ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecureSourceManager::V1::BranchRule), request["branch_rule"]
+      assert_equal true, request["validate_only"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_branch_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_branch_rule({ branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_branch_rule branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_branch_rule ::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new(branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_branch_rule({ branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_branch_rule(::Google::Cloud::SecureSourceManager::V1::UpdateBranchRuleRequest.new(branch_rule: branch_rule, validate_only: validate_only, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_branch_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_branch_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    allow_missing = true
+
+    delete_branch_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_branch_rule, name
+      assert_kind_of ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["allow_missing"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_branch_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_branch_rule({ name: name, allow_missing: allow_missing }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_branch_rule name: name, allow_missing: allow_missing do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_branch_rule ::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new(name: name, allow_missing: allow_missing) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_branch_rule({ name: name, allow_missing: allow_missing }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_branch_rule(::Google::Cloud::SecureSourceManager::V1::DeleteBranchRuleRequest.new(name: name, allow_missing: allow_missing), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_branch_rule_client_stub.call_rpc_count
     end
   end
 

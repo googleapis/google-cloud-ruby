@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-09-30)
+
+#### Features
+
+* Support for legacy bucket behavior ([#27354](https://github.com/googleapis/google-cloud-ruby/issues/27354)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation

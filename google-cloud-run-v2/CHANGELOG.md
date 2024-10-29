@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.17.0 (2024-10-15)
+
+#### Features
+
+* Services now report all URLs serving traffic 
+* Support for disabling IAM permission check for invokers 
+* Support for revision node selector 
+* Support for service mesh connectivity 
+* Support for service scaling modes 
+* Support for the Builds service and submit_build RPC 
+
 ### 0.16.1 (2024-08-30)
 
 #### Documentation

@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 (2024-10-15)
+
+#### Features
+
+* Support for GenerativeQuestionService 
+* Support for the conversational_search_spec and tile_navigation_spec search parameters 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation

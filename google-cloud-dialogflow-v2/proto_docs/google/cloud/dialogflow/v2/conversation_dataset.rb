@@ -72,6 +72,14 @@ module Google
         #   @return [::Integer]
         #     Output only. The number of conversations this conversation dataset
         #     contains.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. A read only boolean field reflecting Zone Isolation status of
+        #     the dataset.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. A read only boolean field reflecting Zone Separation status of
+        #     the dataset.
         class ConversationDataset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

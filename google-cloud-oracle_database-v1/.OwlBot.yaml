@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/oracledatabase/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-oracle_database-v1/$1

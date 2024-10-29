@@ -203,6 +203,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NetworkAttachment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/networkAttachments/{networkattachment}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param networkattachment [String]
+            #
+            # @return [::String]
+            def network_attachment_path project:, region:, networkattachment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/networkAttachments/#{networkattachment}"
+            end
+
+            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:

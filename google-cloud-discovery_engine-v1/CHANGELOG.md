@@ -1,5 +1,27 @@
 # Changelog
 
+### 1.3.0 (2024-10-28)
+
+#### Features
+
+* add lite search API to allow public website search with API key ([#27495](https://github.com/googleapis/google-cloud-ruby/issues/27495)) 
+* add LOW_GROUNDED_ANSWER in answer skip reasons 
+* support query regex in control match rules 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 1.2.0 (2024-10-15)
+
+#### Features
+
+* Support for generate_grounded_content and stream_generate_grounded_content RPCs 
+* Support for setting a site credential in the recrawl_uris RPC 
+* Support for setting the maximum number of OneBox results when searching 
+#### Bug Fixes
+
+* Fixed identityMappingStores resource URLs 
+
 ### 1.1.0 (2024-09-11)
 
 #### Features

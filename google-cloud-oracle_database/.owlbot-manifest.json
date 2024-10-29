@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".toys.rb",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-oracle_database.gemspec",
+    "lib/google-cloud-oracle_database.rb",
+    "lib/google/cloud/oracle_database.rb",
+    "lib/google/cloud/oracle_database/version.rb",
+    "test/google/cloud/oracle_database/client_test.rb",
+    "test/google/cloud/oracle_database/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

@@ -71,6 +71,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.timeout = 60.0
+                  default_config.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -185,6 +190,7 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the terms of service version.
               #     Format: `accounts/{account}/termsOfServiceAgreementState/{identifier}`
+              #     The identifier format is: `{TermsOfServiceKind}-{country}`
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Accounts::V1beta::TermsOfServiceAgreementState]

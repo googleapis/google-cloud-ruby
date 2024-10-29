@@ -60,9 +60,43 @@ module Google
           #     Optional. The countries where the items may be displayed. Represented as a
           #     [CLDR territory
           #     code](https://github.com/unicode-org/cldr/blob/latest/common/main/en.xml).
+          # @!attribute [rw] default_rule
+          #   @return [::Google::Shopping::Merchant::DataSources::V1beta::PrimaryProductDataSource::DefaultRule]
+          #     Optional. Default rule management of the data source. If set, the linked
+          #     data sources will be replaced.
           class PrimaryProductDataSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Default rule management of the data source.
+            # @!attribute [rw] take_from_data_sources
+            #   @return [::Array<::Google::Shopping::Merchant::DataSources::V1beta::DataSourceReference>]
+            #     Required. The list of data sources linked in the [default
+            #     rule](https://support.google.com/merchants/answer/7450276).
+            #     This list is ordered by the default rule priority of joining the data.
+            #     It might include none or multiple references to `self` and supplemental
+            #     data sources.
+            #
+            #     The list must not be empty.
+            #
+            #     To link the data source to the default rule, you need to add a
+            #     new reference to this list (in sequential order).
+            #
+            #     To unlink the data source from the default rule, you need to remove the
+            #     given reference from this list. To create attribute rules that are
+            #     different from the default rule, see [Set up your attribute
+            #     rules](//support.google.com/merchants/answer/14994083).
+            #
+            #     Changing the order of this list will result in changing the priority of
+            #     data sources in the default rule.
+            #
+            #     For example, providing the following list: [`1001`, `self`] will
+            #     take attribute values from supplemental data source `1001`, and fallback
+            #     to `self` if the attribute is not set in `1001`.
+            class DefaultRule
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Data Source Channel.
             #
@@ -79,11 +113,18 @@ module Google
               LOCAL_PRODUCTS = 2
 
               # Unified data source for both local and online products.
+              # Note: Products management through the API is not possible for this
+              # channel.
               PRODUCTS = 3
             end
           end
 
-          # The supplemental data source for local and online products.
+          # The supplemental data source for local and online products. Supplemental API
+          # data sources must not have `feedLabel` and `contentLanguage` fields set. You
+          # can only use supplemental data sources to update existing products. For
+          # information about creating a supplemental data source, see [Create a
+          # supplemental data source and link it to the primary data
+          # source](/merchant/api/guides/data-sources/overview#create-supplemental-data-source).
           # @!attribute [rw] feed_label
           #   @return [::String]
           #     Optional. Immutable. The feed label that is specified on the data source
@@ -113,6 +154,11 @@ module Google
           #     If set, the data source will only accept products matching this
           #     combination. If unset, the data source will accept produts without that
           #     restriction.
+          # @!attribute [r] referencing_primary_data_sources
+          #   @return [::Array<::Google::Shopping::Merchant::DataSources::V1beta::DataSourceReference>]
+          #     Output only. The (unordered and deduplicated) list of all primary data
+          #     sources linked to this data source in either default or custom rules.
+          #     Supplemental data source cannot be deleted before all links are removed.
           class SupplementalProductDataSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -172,6 +218,26 @@ module Google
           #     Required. Immutable. The two-letter ISO 639-1 language of the items in the
           #     data source.
           class PromotionDataSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data source reference can be used to manage related data sources within the
+          # data source service.
+          # @!attribute [rw] self
+          #   @return [::Boolean]
+          #     Self should be used to reference the primary data source itself.
+          # @!attribute [rw] primary_data_source_name
+          #   @return [::String]
+          #     Optional. The name of the primary data source.
+          #     Format:
+          #     `accounts/{account}/dataSources/{datasource}`
+          # @!attribute [rw] supplemental_data_source_name
+          #   @return [::String]
+          #     Optional. The name of the supplemental data source.
+          #     Format:
+          #     `accounts/{account}/dataSources/{datasource}`
+          class DataSourceReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

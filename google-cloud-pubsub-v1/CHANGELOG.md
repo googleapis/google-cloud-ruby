@@ -1,5 +1,18 @@
 # Release History
 
+### 1.3.0 (2024-10-15)
+
+#### Features
+
+* Support for the IngestionFailureEvent type ([#27430](https://github.com/googleapis/google-cloud-ruby/issues/27430)) 
+
+### 1.2.0 (2024-09-30)
+
+#### Features
+
+* Support for Analytics Hub subscription info 
+* Support for Cloud Storage and platform logs settings in IngestionDataSourceSettings 
+
 ### 1.1.2 (2024-09-11)
 
 #### Documentation

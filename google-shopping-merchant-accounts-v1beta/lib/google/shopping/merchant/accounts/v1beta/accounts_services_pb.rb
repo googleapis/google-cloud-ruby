@@ -44,6 +44,9 @@ module Google
               # Deletes the specified account regardless of its type: standalone, MCA or
               # sub-account. Deleting an MCA leads to the deletion of all of its
               # sub-accounts. Executing this method requires admin access.
+              # The deletion succeeds only if the account does not provide services
+              # to any other account and has no processed offers. You can use the `force`
+              # parameter to override this.
               rpc :DeleteAccount, ::Google::Shopping::Merchant::Accounts::V1beta::DeleteAccountRequest, ::Google::Protobuf::Empty
               # Updates an account regardless of its type: standalone, MCA or sub-account.
               # Executing this method requires admin access.
@@ -52,7 +55,8 @@ module Google
               # constraints of the request such as page size or filters.
               # This is not just listing the sub-accounts of an MCA, but all accounts the
               # calling user has access to including other MCAs, linked accounts,
-              # standalone accounts and so on.
+              # standalone accounts and so on. If no filter is provided, then it returns
+              # accounts the user is directly added to.
               rpc :ListAccounts, ::Google::Shopping::Merchant::Accounts::V1beta::ListAccountsRequest, ::Google::Shopping::Merchant::Accounts::V1beta::ListAccountsResponse
               # List all sub-accounts for a given multi client account. This is a
               # convenience wrapper for the more powerful `ListAccounts` method. This

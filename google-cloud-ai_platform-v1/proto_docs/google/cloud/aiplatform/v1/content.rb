@@ -135,6 +135,12 @@ module Google
         # @!attribute [rw] stop_sequences
         #   @return [::Array<::String>]
         #     Optional. Stop sequences.
+        # @!attribute [rw] response_logprobs
+        #   @return [::Boolean]
+        #     Optional. If true, export the logprobs results in response.
+        # @!attribute [rw] logprobs
+        #   @return [::Integer]
+        #     Optional. Logit probabilities.
         # @!attribute [rw] presence_penalty
         #   @return [::Float]
         #     Optional. Positive penalties.
@@ -374,6 +380,9 @@ module Google
         # @!attribute [r] avg_logprobs
         #   @return [::Float]
         #     Output only. Average log probability score of the candidate.
+        # @!attribute [r] logprobs_result
+        #   @return [::Google::Cloud::AIPlatform::V1::LogprobsResult]
+        #     Output only. Log-likelihood scores for the response tokens and top tokens
         # @!attribute [r] finish_reason
         #   @return [::Google::Cloud::AIPlatform::V1::Candidate::FinishReason]
         #     Output only. The reason why the model stopped generating tokens.
@@ -438,6 +447,43 @@ module Google
           end
         end
 
+        # Logprobs Result
+        # @!attribute [rw] top_candidates
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::LogprobsResult::TopCandidates>]
+        #     Length = total number of decoding steps.
+        # @!attribute [rw] chosen_candidates
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::LogprobsResult::Candidate>]
+        #     Length = total number of decoding steps.
+        #     The chosen candidates may or may not be in top_candidates.
+        class LogprobsResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Candidate for the logprobs token and score.
+          # @!attribute [rw] token
+          #   @return [::String]
+          #     The candidate’s token string value.
+          # @!attribute [rw] token_id
+          #   @return [::Integer]
+          #     The candidate’s token id value.
+          # @!attribute [rw] log_probability
+          #   @return [::Float]
+          #     The candidate's log probability.
+          class Candidate
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Candidates with top log probabilities at each decoding step.
+          # @!attribute [rw] candidates
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::LogprobsResult::Candidate>]
+          #     Sorted by log probability in descending order.
+          class TopCandidates
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Segment of the content.
         # @!attribute [r] part_index
         #   @return [::Integer]
@@ -488,6 +534,9 @@ module Google
           # @!attribute [rw] title
           #   @return [::String]
           #     Title of the attribution.
+          # @!attribute [rw] text
+          #   @return [::String]
+          #     Text of the attribution.
           class RetrievedContext
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -527,6 +576,9 @@ module Google
         # @!attribute [rw] grounding_supports
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::GroundingSupport>]
         #     Optional. List of grounding support.
+        # @!attribute [r] retrieval_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::RetrievalMetadata]
+        #     Optional. Output only. Retrieval metadata.
         class GroundingMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -542,6 +594,19 @@ module Google
         #     Optional. Base64 encoded JSON representing array of <search term, search
         #     url> tuple.
         class SearchEntryPoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to retrieval in the grounding flow.
+        # @!attribute [rw] google_search_dynamic_retrieval_score
+        #   @return [::Float]
+        #     Optional. Score indicating how likely information from Google Search could
+        #     help answer the prompt. The score is in the range `[0, 1]`, where 0 is the
+        #     least likely and 1 is the most likely. This score is only populated when
+        #     Google Search grounding and dynamic retrieval is enabled. It will be
+        #     compared to the threshold to determine whether to trigger Google Search.
+        class RetrievalMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

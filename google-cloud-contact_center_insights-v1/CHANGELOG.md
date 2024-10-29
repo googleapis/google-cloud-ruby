@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.1.0 (2024-10-15)
+
+#### Features
+
+* CallAnalysisMetadata includes overall conversation-level silence during the call 
+* Issue resource includes representative description 
+* RuntimeAnnotation includes explicit input used for answer generation 
+* Support for conversation metadata in GcsSource 
+* Support for export_issue_model and import_issue_model 
+* Support for get_encryption_spec and initialize_encryption_spec 
+* Support for JSON metadata in Conversation 
+* Support for specifying result order when calling list_conversations 
+* Support for specifying sample size when calling ingest_conversations 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
