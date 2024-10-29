@@ -233,12 +233,10 @@ module Google
               op: :AND
             )
           )
-          if name_or_filter.is_a? Google::Cloud::Datastore::Filter
-            @grpc.filter.composite_filter.filters << name_or_filter.to_grpc
-          else
-            @grpc.filter.composite_filter.filters << \
-              Google::Cloud::Datastore::Filter.new(name_or_filter, operator, value).to_grpc
+          unless name_or_filter.is_a? Google::Cloud::Datastore::Filter
+            name_or_filter = Google::Cloud::Datastore::Filter.new name_or_filter, operator, value
           end
+          @grpc.filter.composite_filter.filters << name_or_filter.to_grpc
 
           self
         end
