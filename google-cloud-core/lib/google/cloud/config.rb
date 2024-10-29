@@ -356,7 +356,7 @@ module Google
       #
       def alias? key
         target = @validators[key.to_sym]
-        target.is_a?(::Symbol) ? target : nil
+        target.is_a?(::Symbol) ? target : nil # rubocop:disable Style/ReturnNilInPredicateMethodDefinition
       end
 
       ##
