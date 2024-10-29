@@ -6,7 +6,7 @@ gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-errors", path: "../google-cloud-errors"
 gem "google-cloud-pubsub", path: "../google-cloud-pubsub"
 gem "google-cloud-pubsub-v1", path: "../google-cloud-pubsub-v1"
-gem "minitest-reporters", "~> 1.5.0", require: false
+gem "minitest-reporters", ">= 1.5.0", "< 1.7.2", require: false
 gem "rake"
 
 gem "minitest"
