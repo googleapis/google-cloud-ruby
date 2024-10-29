@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.3.0 (2024-10-29)
+
+#### Features
+
+* add a DeleteSite method ([#27494](https://github.com/googleapis/google-cloud-ruby/issues/27494)) 
+* add MAC address and disk info to the Hardware resource 
+#### Documentation
+
+* annotate rack_location field as required; this was always enforced 
+
 ### 0.2.0 (2024-09-19)
 
 #### Features
