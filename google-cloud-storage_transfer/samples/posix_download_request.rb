@@ -34,6 +34,7 @@ def download_from_gcs project_id:, description:, sink_agent_pool_name:, destinat
     # gcs_source_path = 'foo/bar/'
 
 	require "google/cloud/storage_transfer"
+  require "pry"
 
 	transfer_job = {
 		project_id: project_id,
@@ -64,8 +65,17 @@ def download_from_gcs project_id:, description:, sink_agent_pool_name:, destinat
 	puts "Created and ran transfer job between #{source_bucket} and #{gcs_source_path} with name #{transfer_job_response.name}"
 end
 # [END storagetransfer_download_to_posix]
+
+project_id=  "storage-sdk-vendor"
+description= "test"
+sink_agent_pool_name=  "projects/storage-sdk-vendor/agentPools/shubhangi-test-pool"
+destination_directory= "/tmp/downloads/ruby_storagetransfer"
+source_bucket= "samplestorage3"
+gcs_source_path= "/"
+
+download_from_gcs project_id: project_id, description: description, sink_agent_pool_name: sink_agent_pool_name, destination_directory: destination_directory, source_bucket: source_bucket, gcs_source_path: gcs_source_path
   
-if $PROGRAM_NAME == __FILE__
-	download_from_gcs project_id: ARGV.shift, description: ARGV.shift, sink_agent_pool_name: ARGV.shift, destination_directory: ARGV.shift, source_bucket: ARGV.shift, gcs_source_path: ARGV.shift
-end
+# if $PROGRAM_NAME == __FILE__
+# 	download_from_gcs project_id: ARGV.shift, description: ARGV.shift, sink_agent_pool_name: ARGV.shift, destination_directory: ARGV.shift, source_bucket: ARGV.shift, gcs_source_path: ARGV.shift
+# end
   

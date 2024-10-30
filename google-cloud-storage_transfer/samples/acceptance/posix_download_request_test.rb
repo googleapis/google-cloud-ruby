@@ -34,6 +34,7 @@ describe "Storage Transfer Service from POSIX" do
 
   before do
     create_dummy_file
+    
     puts "Dummy file created"
     grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
   end
