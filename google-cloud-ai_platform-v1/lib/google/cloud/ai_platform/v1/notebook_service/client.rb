@@ -1352,6 +1352,103 @@ module Google
             end
 
             ##
+            # Stops a NotebookRuntime.
+            #
+            # @overload stop_notebook_runtime(request, options = nil)
+            #   Pass arguments to `stop_notebook_runtime` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload stop_notebook_runtime(name: nil)
+            #   Pass arguments to `stop_notebook_runtime` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the NotebookRuntime resource to be stopped.
+            #     Instead of checking whether the name is in valid NotebookRuntime resource
+            #     name format, directly throw NotFound exception if there is no such
+            #     NotebookRuntime in spanner.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest.new
+            #
+            #   # Call the stop_notebook_runtime method.
+            #   result = client.stop_notebook_runtime request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def stop_notebook_runtime request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.stop_notebook_runtime.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.stop_notebook_runtime.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.stop_notebook_runtime.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @notebook_service_stub.call_rpc :stop_notebook_runtime, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a NotebookExecutionJob.
             #
             # @overload create_notebook_execution_job(request, options = nil)
@@ -1966,6 +2063,11 @@ module Google
                 #
                 attr_reader :start_notebook_runtime
                 ##
+                # RPC-specific configuration for `stop_notebook_runtime`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :stop_notebook_runtime
+                ##
                 # RPC-specific configuration for `create_notebook_execution_job`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2010,6 +2112,8 @@ module Google
                   @upgrade_notebook_runtime = ::Gapic::Config::Method.new upgrade_notebook_runtime_config
                   start_notebook_runtime_config = parent_rpcs.start_notebook_runtime if parent_rpcs.respond_to? :start_notebook_runtime
                   @start_notebook_runtime = ::Gapic::Config::Method.new start_notebook_runtime_config
+                  stop_notebook_runtime_config = parent_rpcs.stop_notebook_runtime if parent_rpcs.respond_to? :stop_notebook_runtime
+                  @stop_notebook_runtime = ::Gapic::Config::Method.new stop_notebook_runtime_config
                   create_notebook_execution_job_config = parent_rpcs.create_notebook_execution_job if parent_rpcs.respond_to? :create_notebook_execution_job
                   @create_notebook_execution_job = ::Gapic::Config::Method.new create_notebook_execution_job_config
                   get_notebook_execution_job_config = parent_rpcs.get_notebook_execution_job if parent_rpcs.respond_to? :get_notebook_execution_job

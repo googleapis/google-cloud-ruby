@@ -8772,6 +8772,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_NotebookService_StopNotebookRuntime_sync",
+      "title": "Snippet for the stop_notebook_runtime call in the NotebookService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#stop_notebook_runtime.",
+      "file": "notebook_service/stop_notebook_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_notebook_runtime",
+        "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client#stop_notebook_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StopNotebookRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "StopNotebookRuntime",
+          "full_name": "google.cloud.aiplatform.v1.NotebookService.StopNotebookRuntime",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.aiplatform.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_NotebookService_CreateNotebookExecutionJob_sync",
       "title": "Snippet for the create_notebook_execution_job call in the NotebookService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::NotebookService::Client#create_notebook_execution_job.",
