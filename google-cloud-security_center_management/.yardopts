@@ -1,5 +1,5 @@
 --no-private
---title="Security Center Management API"
+--title="Security Command Center Management API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

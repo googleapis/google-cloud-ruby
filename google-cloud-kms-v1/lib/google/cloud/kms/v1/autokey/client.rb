@@ -461,8 +461,8 @@ module Google
             #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} can subsequently be obtained by
             #     including the
             #     {::Google::Cloud::Kms::V1::ListKeyHandlesResponse#next_page_token ListKeyHandlesResponse.next_page_token}
-            #     in a subsequent request.  If unspecified, at most
-            #     100 {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} will be returned.
+            #     in a subsequent request.  If unspecified, at most 100
+            #     {::Google::Cloud::Kms::V1::KeyHandle KeyHandles} will be returned.
             #   @param page_token [::String]
             #     Optional. Optional pagination token, returned earlier via
             #     {::Google::Cloud::Kms::V1::ListKeyHandlesResponse#next_page_token ListKeyHandlesResponse.next_page_token}.

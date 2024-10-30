@@ -265,10 +265,8 @@ module Google
                 #   @return [::Google::Protobuf::Struct]
                 #     Data representation.
                 #     The structured JSON data for the document.
-                #     It's populated from the struct data from the Document
-                #     , or the Chunk in
-                #     search result
-                #     .
+                #     It's populated from the struct data from the Document, or the
+                #     Chunk in search result.
                 class SearchResult
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -350,11 +348,14 @@ module Google
                 # Adversarial query classification type.
                 ADVERSARIAL_QUERY = 1
 
-                # Non-answer-seeking query classification type.
+                # Non-answer-seeking query classification type, for chit chat.
                 NON_ANSWER_SEEKING_QUERY = 2
 
                 # Jail-breaking query classification type.
                 JAIL_BREAKING_QUERY = 3
+
+                # Non-answer-seeking query classification type, for no clear intent.
+                NON_ANSWER_SEEKING_QUERY_V2 = 4
               end
             end
           end
@@ -382,7 +383,9 @@ module Google
             # The adversarial query ignored case.
             ADVERSARIAL_QUERY_IGNORED = 1
 
-            # The non-answer seeking query ignored case.
+            # The non-answer seeking query ignored case
+            #
+            # Google skips the answer if the query is chit chat.
             NON_ANSWER_SEEKING_QUERY_IGNORED = 2
 
             # The out-of-domain query ignored case.
@@ -414,6 +417,17 @@ module Google
             # Google skips the summary if there is a customer policy violation
             # detected. The policy is defined by the customer.
             CUSTOMER_POLICY_VIOLATION = 7
+
+            # The non-answer seeking query ignored case.
+            #
+            # Google skips the answer if the query doesn't have clear intent.
+            NON_ANSWER_SEEKING_QUERY_IGNORED_V2 = 8
+
+            # The low-grounded answer case.
+            #
+            # Google skips the answer if a well grounded answer was unable to be
+            # generated.
+            LOW_GROUNDED_ANSWER = 9
           end
         end
       end

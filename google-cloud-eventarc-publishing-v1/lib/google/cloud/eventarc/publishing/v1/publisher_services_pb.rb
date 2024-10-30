@@ -14,6 +14,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 require 'grpc'
 require 'google/cloud/eventarc/publishing/v1/publisher_pb'
@@ -60,6 +61,8 @@ module Google
               rpc :PublishChannelConnectionEvents, ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest, ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse
               # Publish events to a subscriber's channel.
               rpc :PublishEvents, ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest, ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse
+              # Publish events to a message bus.
+              rpc :Publish, ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest, ::Google::Cloud::Eventarc::Publishing::V1::PublishResponse
             end
 
             Stub = Service.rpc_stub_class

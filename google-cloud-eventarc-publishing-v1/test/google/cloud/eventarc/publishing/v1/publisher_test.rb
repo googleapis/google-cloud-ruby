@@ -179,6 +179,67 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::ClientTest < Minites
     end
   end
 
+  def test_publish
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::Publishing::V1::PublishResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    message_bus = "hello world"
+    proto_message = {}
+
+    publish_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :publish, name
+      assert_kind_of ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest, request
+      assert_equal "hello world", request["message_bus"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::Publishing::V1::CloudEvent), request["proto_message"]
+      assert_equal :proto_message, request.format
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, publish_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.publish({ message_bus: message_bus, proto_message: proto_message }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.publish message_bus: message_bus, proto_message: proto_message do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.publish ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.publish({ message_bus: message_bus, proto_message: proto_message }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.publish(::Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new(message_bus: message_bus, proto_message: proto_message), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, publish_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

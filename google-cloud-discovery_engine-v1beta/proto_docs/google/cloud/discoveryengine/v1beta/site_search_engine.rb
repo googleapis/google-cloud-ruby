@@ -157,6 +157,23 @@ module Google
             EXEMPTED = 3
           end
         end
+
+        # A sitemap for the SiteSearchEngine.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Public URI for the sitemap, e.g. `www.example.com/sitemap.xml`.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The fully qualified resource name of the sitemap.
+        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/sitemaps/*`
+        #     The `sitemap_id` suffix is system-generated.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The sitemap's creation time.
+        class Sitemap
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

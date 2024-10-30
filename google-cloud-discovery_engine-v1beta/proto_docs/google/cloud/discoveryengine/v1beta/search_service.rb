@@ -76,6 +76,11 @@ module Google
         #     is unset.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+        # @!attribute [rw] one_box_page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return for OneBox.
+        #     This applies to each OneBox type individually.
+        #     Default number is 10.
         # @!attribute [rw] data_store_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec>]
         #     Specs defining dataStores to filter on in a search call and configurations
@@ -313,6 +318,18 @@ module Google
         #     Default to Google defined threshold, leveraging a balance of
         #     precision and recall to deliver both highly accurate results and
         #     comprehensive coverage of relevant information.
+        # @!attribute [rw] personalization_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec]
+        #     The specification for personalization.
+        #
+        #     Notice that if both
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     are set,
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     overrides
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -335,6 +352,11 @@ module Google
           #     Required. Full resource name of
           #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}, such as
           #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}`.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     Optional. Filter specification to filter documents in the data store
+          #     specified by data_store field. For more information on filtering, see
+          #     [Filtering](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
           class DataStoreSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -791,6 +813,19 @@ module Google
             #     If this field is set to `false`, all search results are used regardless
             #     of relevance to generate answers. If set to `true`, only queries with
             #     high relevance search results will generate answers.
+            # @!attribute [rw] ignore_jail_breaking_query
+            #   @return [::Boolean]
+            #     Optional. Specifies whether to filter out jail-breaking queries. The
+            #     default value is `false`.
+            #
+            #     Google employs search-query classification to detect jail-breaking
+            #     queries. No summary is returned if the search query is classified as a
+            #     jail-breaking query. A user might add instructions to the query to
+            #     change the tone, style, language, content of the answer, or ask the
+            #     model to act as a different entity, e.g. "Reply in the tone of a
+            #     competing company's CEO". If this field is set to `true`, we skip
+            #     generating summaries for jail-breaking queries and return fallback
+            #     messages instead.
             # @!attribute [rw] model_prompt_spec
             #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec::ModelPromptSpec]
             #     If specified, the spec will be used to modify the prompt provided to
@@ -1060,6 +1095,30 @@ module Google
           class SessionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The specification for personalization.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec::Mode]
+          #     The personalization mode of the search request.
+          #     Defaults to
+          #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
+          class PersonalizationSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The personalization mode of each search request.
+            module Mode
+              # Default value. In this case, server behavior defaults to
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
+              MODE_UNSPECIFIED = 0
+
+              # Personalization is enabled if data quality requirements are met.
+              AUTO = 1
+
+              # Disable personalization.
+              DISABLED = 2
+            end
           end
 
           # @!attribute [rw] key
@@ -1401,6 +1460,7 @@ module Google
 
               # The non-summary seeking query ignored case.
               #
+              # Google skips the summary if the query is chit chat.
               # Only used when
               # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#ignore_non_summary_seeking_query SummarySpec.ignore_non_summary_seeking_query}
               # is set to `true`.
@@ -1443,6 +1503,14 @@ module Google
               # Google skips the summary if there is a customer policy violation
               # detected. The policy is defined by the customer.
               CUSTOMER_POLICY_VIOLATION = 8
+
+              # The non-answer seeking query ignored case.
+              #
+              # Google skips the summary if the query doesn't have clear intent.
+              # Only used when
+              # [SearchRequest.ContentSearchSpec.SummarySpec.ignore_non_answer_seeking_query]
+              # is set to `true`.
+              NON_SUMMARY_SEEKING_QUERY_IGNORED_V2 = 9
             end
           end
 
@@ -1672,6 +1740,9 @@ module Google
 
               # One Box result contains slack results.
               SLACK = 3
+
+              # One Box result contains Knowledge Graph search responses.
+              KNOWLEDGE_GRAPH = 4
             end
           end
         end

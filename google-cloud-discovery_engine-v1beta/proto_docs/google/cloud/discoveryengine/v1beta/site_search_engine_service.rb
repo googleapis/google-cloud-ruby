@@ -259,6 +259,137 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#create_sitemap SiteSearchEngineService.CreateSitemap}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource name of the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngine SiteSearchEngine},
+        #     such as
+        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine`.
+        # @!attribute [rw] sitemap
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Sitemap]
+        #     Required. The {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap} to
+        #     create.
+        class CreateSitemapRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#delete_sitemap SiteSearchEngineService.DeleteSitemap}
+        # method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Full resource name of
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}, such as
+        #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}`.
+        #
+        #     If the caller does not have permission to access the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}, regardless of
+        #     whether or not it exists, a PERMISSION_DENIED error is returned.
+        #
+        #     If the requested {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}
+        #     does not exist, a NOT_FOUND error is returned.
+        class DeleteSitemapRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#fetch_sitemaps SiteSearchEngineService.FetchSitemaps}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource name of the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngine SiteSearchEngine},
+        #     such as
+        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine`.
+        # @!attribute [rw] matcher
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest::Matcher]
+        #     Optional. If specified, fetches the matching
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s. If not specified,
+        #     fetches all {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s in the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}.
+        class FetchSitemapsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Matcher for the {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s by
+          # their uris.
+          # @!attribute [rw] uris
+          #   @return [::Array<::String>]
+          #     The {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap} uris.
+          class UrisMatcher
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Matcher for the {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s.
+          # Currently only supports uris matcher.
+          # @!attribute [rw] uris_matcher
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest::UrisMatcher]
+          #     Matcher by sitemap URIs.
+          class Matcher
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metadata related to the progress of the
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#create_sitemap SiteSearchEngineService.CreateSitemap}
+        # operation. This will be returned by the google.longrunning.Operation.metadata
+        # field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        class CreateSitemapMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#delete_sitemap SiteSearchEngineService.DeleteSitemap}
+        # operation. This will be returned by the google.longrunning.Operation.metadata
+        # field.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation create time.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Operation last update time. If the operation is done, this is also the
+        #     finish time.
+        class DeleteSitemapMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#fetch_sitemaps SiteSearchEngineService.FetchSitemaps}
+        # method.
+        # @!attribute [rw] sitemaps_metadata
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsResponse::SitemapMetadata>]
+        #     List of {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s fetched.
+        class FetchSitemapsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Contains a {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap} and its
+          # metadata.
+          # @!attribute [rw] sitemap
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Sitemap]
+          #     The {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}.
+          class SitemapMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for
         # {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#enable_advanced_site_search SiteSearchEngineService.EnableAdvancedSiteSearch}
         # method.
         # @!attribute [rw] site_search_engine
@@ -349,6 +480,11 @@ module Google
         #     an INVALID_ARGUMENT error is thrown. Each URI should match at least one
         #     {::Google::Cloud::DiscoveryEngine::V1beta::TargetSite TargetSite} in
         #     `site_search_engine`.
+        # @!attribute [rw] site_credential
+        #   @return [::String]
+        #     Optional. Full resource name of the [SiteCredential][], such as
+        #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/siteCredentials/*`.
+        #     Only set to crawl private URIs.
         class RecrawlUrisRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -419,9 +555,19 @@ module Google
         #     finish time.
         # @!attribute [rw] invalid_uris
         #   @return [::Array<::String>]
+        #     Unique URIs in the request that have invalid format. Sample limited to
+        #     1000.
+        # @!attribute [rw] invalid_uris_count
+        #   @return [::Integer]
+        #     Total number of unique URIs in the request that have invalid format.
+        # @!attribute [rw] uris_not_matching_target_sites
+        #   @return [::Array<::String>]
         #     Unique URIs in the request that don't match any TargetSite in the
         #     DataStore, only match TargetSites that haven't been fully indexed, or match
-        #     a TargetSite with type EXCLUDE.
+        #     a TargetSite with type EXCLUDE. Sample limited to 1000.
+        # @!attribute [rw] uris_not_matching_target_sites_count
+        #   @return [::Integer]
+        #     Total number of URIs that don't match any TargetSites.
         # @!attribute [rw] valid_uris_count
         #   @return [::Integer]
         #     Total number of unique URIs in the request that are not in invalid_uris.

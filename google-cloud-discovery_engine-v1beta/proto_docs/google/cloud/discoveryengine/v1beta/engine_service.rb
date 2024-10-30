@@ -179,7 +179,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the engine to pause.
         #     Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
         class PauseEngineRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -190,7 +190,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the engine to resume.
         #     Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
         class ResumeEngineRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -202,7 +202,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the engine to tune.
         #     Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
         class TuneEngineRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,7 +213,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the engine that this tune applies to.
         #     Format:
-        #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
         class TuneEngineMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
