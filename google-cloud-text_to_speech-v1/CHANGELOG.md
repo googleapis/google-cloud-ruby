@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2024-10-30)
+
+#### Features
+
+* add multi-speaker markup, which allows generating dialogue between multiple speakers ([#27521](https://github.com/googleapis/google-cloud-ruby/issues/27521)) 
+
 ### 1.3.0 (2024-10-24)
 
 #### Features
