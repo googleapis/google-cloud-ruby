@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2024-10-31)
+
+#### Features
+
+* Add PrivateServiceConnect option to WorkerPool ([#27512](https://github.com/googleapis/google-cloud-ruby/issues/27512)) 
+
 ### 1.1.0 (2024-09-30)
 
 #### Features
