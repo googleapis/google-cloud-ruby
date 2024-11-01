@@ -23,7 +23,7 @@ function msg { println "$*" >&2 ;}
 function println { printf '%s\n' "$(now) $*" ;}
 
 # Populates requested secrets set in SECRET_MANAGER_KEYS
-if [[ -z "${SECRET_MANAGER_PROJECT_ID}" ]]; then
+if [[ -z "${SECRET_MANAGER_PROJECT_ID-}" ]]; then
   msg "SECRET_MANAGER_PROJECT_ID is not set in environment variables, using default"
   SECRET_MANAGER_PROJECT_ID="cloud-devrel-kokoro-resources"
 fi
