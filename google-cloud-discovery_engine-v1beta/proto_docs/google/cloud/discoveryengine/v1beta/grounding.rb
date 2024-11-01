@@ -21,6 +21,16 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1beta
+        # Grounding configuration.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the GroundingConfig, of the form
+        #     `projects/{project}/locations/{location}/groundingConfigs/{grounding_config}`.
+        class GroundingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Grounding Fact.
         # @!attribute [rw] fact_text
         #   @return [::String]

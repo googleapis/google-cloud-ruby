@@ -64,6 +64,19 @@ module Google
         # @!attribute [rw] language_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::LanguageInfo]
         #     Language info for DataStore.
+        # @!attribute [rw] natural_language_query_understanding_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::NaturalLanguageQueryUnderstandingConfig]
+        #     Optional. Configuration for Natural Language Query Understanding.
+        # @!attribute [r] billing_estimation
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DataStore::BillingEstimation]
+        #     Output only. Data size estimation for billing.
+        # @!attribute [rw] workspace_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::WorkspaceConfig]
+        #     Config to store data store type configuration for workspace data. This
+        #     must be set when
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore#content_config DataStore.content_config}
+        #     is set as
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore::ContentConfig::GOOGLE_WORKSPACE DataStore.ContentConfig.GOOGLE_WORKSPACE}.
         # @!attribute [rw] document_processing_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DocumentProcessingConfig]
         #     Configuration for Document understanding and enrichment.
@@ -84,9 +97,46 @@ module Google
         #     The provided schema will be validated against certain rules on schema.
         #     Learn more from [this
         #     doc](https://cloud.google.com/generative-ai-app-builder/docs/provide-schema).
+        # @!attribute [rw] serving_config_data_store
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::DataStore::ServingConfigDataStore]
+        #     Optional. Stores serving config at DataStore level.
         class DataStore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Estimation of data size per data store.
+          # @!attribute [rw] structured_data_size
+          #   @return [::Integer]
+          #     Data size for structured data in terms of bytes.
+          # @!attribute [rw] unstructured_data_size
+          #   @return [::Integer]
+          #     Data size for unstructured data in terms of bytes.
+          # @!attribute [rw] website_data_size
+          #   @return [::Integer]
+          #     Data size for websites in terms of bytes.
+          # @!attribute [rw] structured_data_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Last updated timestamp for structured data.
+          # @!attribute [rw] unstructured_data_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Last updated timestamp for unstructured data.
+          # @!attribute [rw] website_data_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Last updated timestamp for websites.
+          class BillingEstimation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Stores information regarding the serving configurations at DataStore level.
+          # @!attribute [rw] disabled_for_serving
+          #   @return [::Boolean]
+          #     If set true, the DataStore will not be available for serving search
+          #     requests.
+          class ServingConfigDataStore
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Content config of the data store.
           module ContentConfig
@@ -103,6 +153,11 @@ module Google
 
             # The data store is used for public website search.
             PUBLIC_WEBSITE = 3
+
+            # The data store is used for workspace search. Details of workspace
+            # data store are specified in the
+            # {::Google::Cloud::DiscoveryEngine::V1beta::WorkspaceConfig WorkspaceConfig}.
+            GOOGLE_WORKSPACE = 4
           end
         end
 
@@ -126,6 +181,82 @@ module Google
         class LanguageInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for Natural Language Query Understanding.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::NaturalLanguageQueryUnderstandingConfig::Mode]
+        #     Mode of Natural Language Query Understanding. If this field is unset, the
+        #     behavior defaults to
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::NaturalLanguageQueryUnderstandingConfig::Mode::DISABLED NaturalLanguageQueryUnderstandingConfig.Mode.DISABLED}.
+        class NaturalLanguageQueryUnderstandingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode of Natural Language Query Understanding. When the
+          # NaturalLanguageQueryUnderstandingConfig.Mode is ENABLED, the natural
+          # language understanding capabilities will be enabled for a search request if
+          # the NaturalLanguageQueryUnderstandingSpec.FilterExtractionCondition in the
+          # SearchRequest is ENABLED.
+          module Mode
+            # Default value.
+            MODE_UNSPECIFIED = 0
+
+            # Natural Language Query Understanding is disabled.
+            DISABLED = 1
+
+            # Natural Language Query Understanding is enabled.
+            ENABLED = 2
+          end
+        end
+
+        # Config to store data store type configuration for workspace data
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::WorkspaceConfig::Type]
+        #     The Google Workspace data source.
+        # @!attribute [rw] dasher_customer_id
+        #   @return [::String]
+        #     Obfuscated Dasher customer ID.
+        # @!attribute [rw] super_admin_service_account
+        #   @return [::String]
+        #     Optional. The super admin service account for the workspace that will be
+        #     used for access token generation. For now we only use it for Native Google
+        #     Drive connector data ingestion.
+        # @!attribute [rw] super_admin_email_address
+        #   @return [::String]
+        #     Optional. The super admin email address for the workspace that will be used
+        #     for access token generation. For now we only use it for Native Google Drive
+        #     connector data ingestion.
+        class WorkspaceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the type of Workspace App supported by this DataStore
+          module Type
+            # Defaults to an unspecified Workspace type.
+            TYPE_UNSPECIFIED = 0
+
+            # Workspace Data Store contains Drive data
+            GOOGLE_DRIVE = 1
+
+            # Workspace Data Store contains Mail data
+            GOOGLE_MAIL = 2
+
+            # Workspace Data Store contains Sites data
+            GOOGLE_SITES = 3
+
+            # Workspace Data Store contains Calendar data
+            GOOGLE_CALENDAR = 4
+
+            # Workspace Data Store contains Chat data
+            GOOGLE_CHAT = 5
+
+            # Workspace Data Store contains Groups data
+            GOOGLE_GROUPS = 6
+
+            # Workspace Data Store contains Keep data
+            GOOGLE_KEEP = 7
+          end
         end
       end
     end

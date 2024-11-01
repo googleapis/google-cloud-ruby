@@ -672,7 +672,7 @@ module Google
               #   @param name [::String]
               #     Required. The name of the engine to pause.
               #     Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::Engine]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -755,7 +755,7 @@ module Google
               #   @param name [::String]
               #     Required. The name of the engine to resume.
               #     Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::Engine]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -838,7 +838,7 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the engine to tune.
               #     Format:
-              #     `projects/{project_number}/locations/{location_id}/collections/{collection_id}/engines/{engine_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection_id}/engines/{engine_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

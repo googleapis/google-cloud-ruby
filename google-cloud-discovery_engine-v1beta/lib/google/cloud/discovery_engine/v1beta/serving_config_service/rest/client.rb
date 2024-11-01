@@ -283,7 +283,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. The resource name of the ServingConfig to get. Format:
-              #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+              #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -363,7 +363,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. Full resource name of the parent resource. Format:
-              #     `projects/{project_number}/locations/{location}/collections/{collection}/engines/{engine}`
+              #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
               #   @param page_size [::Integer]
               #     Optional. Maximum number of results to return. If unspecified, defaults
               #     to 100. If a value greater than 100 is provided, at most 100 results are

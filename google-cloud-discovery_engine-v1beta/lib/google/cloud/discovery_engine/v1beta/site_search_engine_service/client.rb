@@ -897,6 +897,304 @@ module Google
             end
 
             ##
+            # Creates a {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}.
+            #
+            # @overload create_sitemap(request, options = nil)
+            #   Pass arguments to `create_sitemap` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::CreateSitemapRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::CreateSitemapRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_sitemap(parent: nil, sitemap: nil)
+            #   Pass arguments to `create_sitemap` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent resource name of the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngine SiteSearchEngine},
+            #     such as
+            #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine`.
+            #   @param sitemap [::Google::Cloud::DiscoveryEngine::V1beta::Sitemap, ::Hash]
+            #     Required. The {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap} to
+            #     create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::CreateSitemapRequest.new
+            #
+            #   # Call the create_sitemap method.
+            #   result = client.create_sitemap request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_sitemap request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::CreateSitemapRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_sitemap.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_sitemap.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_sitemap.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @site_search_engine_service_stub.call_rpc :create_sitemap, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}.
+            #
+            # @overload delete_sitemap(request, options = nil)
+            #   Pass arguments to `delete_sitemap` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::DeleteSitemapRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::DeleteSitemapRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_sitemap(name: nil)
+            #   Pass arguments to `delete_sitemap` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Full resource name of
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}, such as
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/siteSearchEngine/sitemaps/{sitemap}`.
+            #
+            #     If the caller does not have permission to access the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}, regardless of
+            #     whether or not it exists, a PERMISSION_DENIED error is returned.
+            #
+            #     If the requested {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}
+            #     does not exist, a NOT_FOUND error is returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::DeleteSitemapRequest.new
+            #
+            #   # Call the delete_sitemap method.
+            #   result = client.delete_sitemap request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_sitemap request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSitemapRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_sitemap.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_sitemap.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_sitemap.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @site_search_engine_service_stub.call_rpc :delete_sitemap, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetch {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s in a
+            # {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}.
+            #
+            # @overload fetch_sitemaps(request, options = nil)
+            #   Pass arguments to `fetch_sitemaps` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_sitemaps(parent: nil, matcher: nil)
+            #   Pass arguments to `fetch_sitemaps` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent resource name of the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngine SiteSearchEngine},
+            #     such as
+            #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine`.
+            #   @param matcher [::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest::Matcher, ::Hash]
+            #     Optional. If specified, fetches the matching
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s. If not specified,
+            #     fetches all {::Google::Cloud::DiscoveryEngine::V1beta::Sitemap Sitemap}s in the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest.new
+            #
+            #   # Call the fetch_sitemaps method.
+            #   result = client.fetch_sitemaps request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsResponse.
+            #   p result
+            #
+            def fetch_sitemaps request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_sitemaps.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_sitemaps.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_sitemaps.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @site_search_engine_service_stub.call_rpc :fetch_sitemaps, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Upgrade from basic site search to advanced site search.
             #
             # @overload enable_advanced_site_search(request, options = nil)
@@ -1103,7 +1401,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload recrawl_uris(site_search_engine: nil, uris: nil)
+            # @overload recrawl_uris(site_search_engine: nil, uris: nil, site_credential: nil)
             #   Pass arguments to `recrawl_uris` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1118,6 +1416,10 @@ module Google
             #     an INVALID_ARGUMENT error is thrown. Each URI should match at least one
             #     {::Google::Cloud::DiscoveryEngine::V1beta::TargetSite TargetSite} in
             #     `site_search_engine`.
+            #   @param site_credential [::String]
+            #     Optional. Full resource name of the [SiteCredential][], such as
+            #     `projects/*/locations/*/collections/*/dataStores/*/siteSearchEngine/siteCredentials/*`.
+            #     Only set to crawl private URIs.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1586,6 +1888,21 @@ module Google
                 #
                 attr_reader :list_target_sites
                 ##
+                # RPC-specific configuration for `create_sitemap`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_sitemap
+                ##
+                # RPC-specific configuration for `delete_sitemap`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_sitemap
+                ##
+                # RPC-specific configuration for `fetch_sitemaps`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_sitemaps
+                ##
                 # RPC-specific configuration for `enable_advanced_site_search`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1627,6 +1944,12 @@ module Google
                   @delete_target_site = ::Gapic::Config::Method.new delete_target_site_config
                   list_target_sites_config = parent_rpcs.list_target_sites if parent_rpcs.respond_to? :list_target_sites
                   @list_target_sites = ::Gapic::Config::Method.new list_target_sites_config
+                  create_sitemap_config = parent_rpcs.create_sitemap if parent_rpcs.respond_to? :create_sitemap
+                  @create_sitemap = ::Gapic::Config::Method.new create_sitemap_config
+                  delete_sitemap_config = parent_rpcs.delete_sitemap if parent_rpcs.respond_to? :delete_sitemap
+                  @delete_sitemap = ::Gapic::Config::Method.new delete_sitemap_config
+                  fetch_sitemaps_config = parent_rpcs.fetch_sitemaps if parent_rpcs.respond_to? :fetch_sitemaps
+                  @fetch_sitemaps = ::Gapic::Config::Method.new fetch_sitemaps_config
                   enable_advanced_site_search_config = parent_rpcs.enable_advanced_site_search if parent_rpcs.respond_to? :enable_advanced_site_search
                   @enable_advanced_site_search = ::Gapic::Config::Method.new enable_advanced_site_search_config
                   disable_advanced_site_search_config = parent_rpcs.disable_advanced_site_search if parent_rpcs.respond_to? :disable_advanced_site_search

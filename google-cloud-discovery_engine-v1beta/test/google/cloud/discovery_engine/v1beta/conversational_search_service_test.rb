@@ -449,6 +449,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
     session = "hello world"
     safety_spec = {}
     related_questions_spec = {}
+    grounding_spec = {}
     answer_generation_spec = {}
     search_spec = {}
     query_understanding_spec = {}
@@ -464,6 +465,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
       assert_equal "hello world", request["session"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SafetySpec), request["safety_spec"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::RelatedQuestionsSpec), request["related_questions_spec"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::GroundingSpec), request["grounding_spec"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::AnswerGenerationSpec), request["answer_generation_spec"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SearchSpec), request["search_spec"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::QueryUnderstandingSpec), request["query_understanding_spec"]
@@ -480,31 +482,31 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ConversationalSearchService::Cli
       end
 
       # Use hash object
-      client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }) do |response, operation|
+      client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels do |response, operation|
+      client.answer_query serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.answer_query ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels) do |response, operation|
+      client.answer_query ::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }, grpc_options) do |response, operation|
+      client.answer_query({ serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.answer_query(::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels), grpc_options) do |response, operation|
+      client.answer_query(::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest.new(serving_config: serving_config, query: query, session: session, safety_spec: safety_spec, related_questions_spec: related_questions_spec, grounding_spec: grounding_spec, answer_generation_spec: answer_generation_spec, search_spec: search_spec, query_understanding_spec: query_understanding_spec, asynchronous_mode: asynchronous_mode, user_pseudo_id: user_pseudo_id, user_labels: user_labels), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

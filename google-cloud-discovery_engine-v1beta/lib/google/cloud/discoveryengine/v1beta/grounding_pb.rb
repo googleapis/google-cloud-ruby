@@ -8,7 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n3google/cloud/discoveryengine/v1beta/grounding.proto\x12#google.cloud.discoveryengine.v1beta\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xad\x01\n\rGroundingFact\x12\x11\n\tfact_text\x18\x01 \x01(\t\x12V\n\nattributes\x18\x02 \x03(\x0b\x32\x42.google.cloud.discoveryengine.v1beta.GroundingFact.AttributesEntry\x1a\x31\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xd2\x01\n\tFactChunk\x12\x12\n\nchunk_text\x18\x01 \x01(\t\x12\x0e\n\x06source\x18\x02 \x01(\t\x12\r\n\x05index\x18\x04 \x01(\x05\x12[\n\x0fsource_metadata\x18\x03 \x03(\x0b\x32\x42.google.cloud.discoveryengine.v1beta.FactChunk.SourceMetadataEntry\x1a\x35\n\x13SourceMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x95\x02\n\'com.google.cloud.discoveryengine.v1betaB\x0eGroundingProtoP\x01ZQcloud.google.com/go/discoveryengine/apiv1beta/discoveryenginepb;discoveryenginepb\xa2\x02\x0f\x44ISCOVERYENGINE\xaa\x02#Google.Cloud.DiscoveryEngine.V1Beta\xca\x02#Google\\Cloud\\DiscoveryEngine\\V1beta\xea\x02&Google::Cloud::DiscoveryEngine::V1betab\x06proto3"
+descriptor_data = "\n3google/cloud/discoveryengine/v1beta/grounding.proto\x12#google.cloud.discoveryengine.v1beta\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\"\xa7\x01\n\x0fGroundingConfig\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02:\x80\x01\xea\x41}\n.discoveryengine.googleapis.com/GroundingConfig\x12Kprojects/{project}/locations/{location}/groundingConfigs/{grounding_config}\"\xad\x01\n\rGroundingFact\x12\x11\n\tfact_text\x18\x01 \x01(\t\x12V\n\nattributes\x18\x02 \x03(\x0b\x32\x42.google.cloud.discoveryengine.v1beta.GroundingFact.AttributesEntry\x1a\x31\n\x0f\x41ttributesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xd2\x01\n\tFactChunk\x12\x12\n\nchunk_text\x18\x01 \x01(\t\x12\x0e\n\x06source\x18\x02 \x01(\t\x12\r\n\x05index\x18\x04 \x01(\x05\x12[\n\x0fsource_metadata\x18\x03 \x03(\x0b\x32\x42.google.cloud.discoveryengine.v1beta.FactChunk.SourceMetadataEntry\x1a\x35\n\x13SourceMetadataEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x95\x02\n\'com.google.cloud.discoveryengine.v1betaB\x0eGroundingProtoP\x01ZQcloud.google.com/go/discoveryengine/apiv1beta/discoveryenginepb;discoveryenginepb\xa2\x02\x0f\x44ISCOVERYENGINE\xaa\x02#Google.Cloud.DiscoveryEngine.V1Beta\xca\x02#Google\\Cloud\\DiscoveryEngine\\V1beta\xea\x02&Google::Cloud::DiscoveryEngine::V1betab\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -38,6 +38,7 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1beta
+        GroundingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.discoveryengine.v1beta.GroundingConfig").msgclass
         GroundingFact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.discoveryengine.v1beta.GroundingFact").msgclass
         FactChunk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.discoveryengine.v1beta.FactChunk").msgclass
       end

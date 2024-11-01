@@ -26,6 +26,9 @@ module Google
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Condition::QueryTerm>]
         #     Search only
         #     A list of terms to match the query on.
+        #     Cannot be set when
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Condition#query_regex Condition.query_regex}
+        #     is set.
         #
         #     Maximum of 10 query terms.
         # @!attribute [rw] active_time_range
@@ -33,6 +36,12 @@ module Google
         #     Range of time(s) specifying when condition is active.
         #
         #     Maximum of 10 time ranges.
+        # @!attribute [rw] query_regex
+        #   @return [::String]
+        #     Optional. Query regex to match the whole search query.
+        #     Cannot be set when
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Condition#query_terms Condition.query_terms}
+        #     is set. This is currently supporting promotion use case.
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

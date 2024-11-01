@@ -187,6 +187,18 @@ module Google
         #     execute.
         #     Order does not matter.
         #     Maximum number of specifications is 100.
+        # @!attribute [rw] personalization_spec
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec]
+        #     The specification for personalization spec.
+        #
+        #     Notice that if both
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     are set,
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     overrides
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
         class ServingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -225,6 +237,10 @@ module Google
           #
           #     If unset, watch history demotion will not be applied. Content freshness
           #     demotion will still be applied.
+          # @!attribute [rw] demote_content_watched_past_days
+          #   @return [::Integer]
+          #     Optional. Specifies the number of days to look back for demoting watched
+          #     content. If set to zero or unset, defaults to the maximum of 365 days.
           # @!attribute [rw] content_freshness_cutoff_days
           #   @return [::Integer]
           #     Specifies the content freshness used for recommendation result.

@@ -35,6 +35,20 @@ module Google
 
             # Performs a search.
             rpc :Search, ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest, ::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse
+            # Performs a search. Similar to the
+            # [SearchService.Search][google.cloud.discoveryengine.v1beta.SearchService.Search]
+            # method, but a lite version that allows API key for authentication, where
+            # OAuth and IAM checks are not required.
+            #
+            # Only public website search is supported by this method. If data stores and
+            # engines not associated with public website search are specified, a
+            # `FAILED_PRECONDITION` error is returned.
+            #
+            # This method can be used for easy onboarding without having to implement an
+            # authentication backend. However, it is strongly recommended to use
+            # [SearchService.Search][google.cloud.discoveryengine.v1beta.SearchService.Search]
+            # instead with required OAuth and IAM checks to provide better data security.
+            rpc :SearchLite, ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest, ::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse
           end
 
           Stub = Service.rpc_stub_class

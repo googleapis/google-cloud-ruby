@@ -177,6 +177,120 @@ module Google
               # Service calls
 
               ##
+              # Generates grounded content.
+              #
+              # @overload generate_grounded_content(request, options = nil)
+              #   Pass arguments to `generate_grounded_content` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload generate_grounded_content(location: nil, system_instruction: nil, contents: nil, generation_spec: nil, grounding_spec: nil, user_labels: nil)
+              #   Pass arguments to `generate_grounded_content` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param location [::String]
+              #     Required. Location resource.
+              #
+              #     Format: `projects/{project}/locations/{location}`.
+              #   @param system_instruction [::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationContent, ::Hash]
+              #     Content of the system instruction for the current API.
+              #
+              #     These instructions will take priority over any other prompt instructions
+              #     if the selected model is supporting them.
+              #   @param contents [::Array<::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationContent, ::Hash>]
+              #     Content of the current conversation with the model.
+              #
+              #     For single-turn queries, this is a single instance. For multi-turn queries,
+              #     this is a repeated field that contains conversation history + latest
+              #     request.
+              #   @param generation_spec [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GenerationSpec, ::Hash]
+              #     Content generation specification.
+              #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSpec, ::Hash]
+              #     Grounding specification.
+              #   @param user_labels [::Hash{::String => ::String}]
+              #     The user labels applied to a resource must meet the following requirements:
+              #
+              #     * Each resource can have multiple labels, up to a maximum of 64.
+              #     * Each label must be a key-value pair.
+              #     * Keys have a minimum length of 1 character and a maximum length of 63
+              #       characters and cannot be empty. Values can be empty and have a maximum
+              #       length of 63 characters.
+              #     * Keys and values can contain only lowercase letters, numeric characters,
+              #       underscores, and dashes. All characters must use UTF-8 encoding, and
+              #       international characters are allowed.
+              #     * The key portion of a label must be unique. However, you can use the same
+              #       key with multiple resources.
+              #     * Keys must start with a lowercase letter or international character.
+              #
+              #     See [Google Cloud
+              #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+              #     for more details.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest.new
+              #
+              #   # Call the generate_grounded_content method.
+              #   result = client.generate_grounded_content request
+              #
+              #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse.
+              #   p result
+              #
+              def generate_grounded_content request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.generate_grounded_content.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.generate_grounded_content.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.generate_grounded_content.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @grounded_generation_service_stub.generate_grounded_content request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Performs a grounding check.
               #
               # @overload check_grounding(request, options = nil)
@@ -198,7 +312,7 @@ module Google
               #     Required. The resource name of the grounding config, such as
               #     `projects/*/locations/global/groundingConfigs/default_grounding_config`.
               #   @param answer_candidate [::String]
-              #     Answer candidate to check. Can have a maximum length of 1024 characters.
+              #     Answer candidate to check. It can have a maximum length of 4096 tokens.
               #   @param facts [::Array<::Google::Cloud::DiscoveryEngine::V1beta::GroundingFact, ::Hash>]
               #     List of facts for the grounding check.
               #     We support up to 200 facts.
@@ -297,17 +411,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # check_grounding to 20 seconds,
+              #   # generate_grounded_content to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
               #   ::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.check_grounding.timeout = 20.0
+              #     config.rpcs.generate_grounded_content.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
               #   client = ::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.check_grounding.timeout = 20.0
+              #     config.rpcs.generate_grounded_content.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -415,6 +529,11 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `generate_grounded_content`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :generate_grounded_content
+                  ##
                   # RPC-specific configuration for `check_grounding`
                   # @return [::Gapic::Config::Method]
                   #
@@ -422,6 +541,8 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
+                    generate_grounded_content_config = parent_rpcs.generate_grounded_content if parent_rpcs.respond_to? :generate_grounded_content
+                    @generate_grounded_content = ::Gapic::Config::Method.new generate_grounded_content_config
                     check_grounding_config = parent_rpcs.check_grounding if parent_rpcs.respond_to? :check_grounding
                     @check_grounding = ::Gapic::Config::Method.new check_grounding_config
 

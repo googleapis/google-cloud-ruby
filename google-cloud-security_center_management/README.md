@@ -1,4 +1,4 @@
-# Ruby Client for the Security Center Management API
+# Ruby Client for the Security Command Center Management API
 
 Management API for Security Command Center, a built-in security and risk management solution for Google Cloud. Use this API to programmatically update the settings and configuration of Security Command Center.
 

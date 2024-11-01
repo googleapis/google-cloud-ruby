@@ -1,4 +1,4 @@
-# Ruby Client for the Security Center Management V1 API
+# Ruby Client for the Security Command Center Management V1 API
 
 Management API for Security Command Center, a built-in security and risk management solution for Google Cloud. Use this API to programmatically update the settings and configuration of Security Command Center.
 
@@ -7,7 +7,7 @@ Management API for Security Command Center, a built-in security and risk managem
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Security Center Management V1 API. Most users should consider using
+specific version of the Security Command Center Management V1 API. Most users should consider using
 the main client gem,
 [google-cloud-security_center_management](https://rubygems.org/gems/google-cloud-security_center_management).
 See the section below titled *Which client should I use?* for more information.
