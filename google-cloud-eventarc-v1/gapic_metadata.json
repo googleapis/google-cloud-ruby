@@ -99,6 +99,111 @@
               "methods": [
                 "update_google_channel_config"
               ]
+            },
+            "GetMessageBus": {
+              "methods": [
+                "get_message_bus"
+              ]
+            },
+            "ListMessageBuses": {
+              "methods": [
+                "list_message_buses"
+              ]
+            },
+            "ListMessageBusEnrollments": {
+              "methods": [
+                "list_message_bus_enrollments"
+              ]
+            },
+            "CreateMessageBus": {
+              "methods": [
+                "create_message_bus"
+              ]
+            },
+            "UpdateMessageBus": {
+              "methods": [
+                "update_message_bus"
+              ]
+            },
+            "DeleteMessageBus": {
+              "methods": [
+                "delete_message_bus"
+              ]
+            },
+            "GetEnrollment": {
+              "methods": [
+                "get_enrollment"
+              ]
+            },
+            "ListEnrollments": {
+              "methods": [
+                "list_enrollments"
+              ]
+            },
+            "CreateEnrollment": {
+              "methods": [
+                "create_enrollment"
+              ]
+            },
+            "UpdateEnrollment": {
+              "methods": [
+                "update_enrollment"
+              ]
+            },
+            "DeleteEnrollment": {
+              "methods": [
+                "delete_enrollment"
+              ]
+            },
+            "GetPipeline": {
+              "methods": [
+                "get_pipeline"
+              ]
+            },
+            "ListPipelines": {
+              "methods": [
+                "list_pipelines"
+              ]
+            },
+            "CreatePipeline": {
+              "methods": [
+                "create_pipeline"
+              ]
+            },
+            "UpdatePipeline": {
+              "methods": [
+                "update_pipeline"
+              ]
+            },
+            "DeletePipeline": {
+              "methods": [
+                "delete_pipeline"
+              ]
+            },
+            "GetGoogleApiSource": {
+              "methods": [
+                "get_google_api_source"
+              ]
+            },
+            "ListGoogleApiSources": {
+              "methods": [
+                "list_google_api_sources"
+              ]
+            },
+            "CreateGoogleApiSource": {
+              "methods": [
+                "create_google_api_source"
+              ]
+            },
+            "UpdateGoogleApiSource": {
+              "methods": [
+                "update_google_api_source"
+              ]
+            },
+            "DeleteGoogleApiSource": {
+              "methods": [
+                "delete_google_api_source"
+              ]
             }
           }
         }

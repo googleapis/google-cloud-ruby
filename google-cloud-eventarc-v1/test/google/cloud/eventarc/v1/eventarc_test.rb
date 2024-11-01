@@ -1221,6 +1221,1412 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_message_bus
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::MessageBus.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_message_bus_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_message_bus, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::GetMessageBusRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_message_bus_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_message_bus({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_message_bus name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_message_bus ::Google::Cloud::Eventarc::V1::GetMessageBusRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_message_bus({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_message_bus(::Google::Cloud::Eventarc::V1::GetMessageBusRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_message_bus_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_message_buses
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::ListMessageBusesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_message_buses_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_message_buses, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::ListMessageBusesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_message_buses_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_message_buses({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_message_buses parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_message_buses ::Google::Cloud::Eventarc::V1::ListMessageBusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_message_buses({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_message_buses(::Google::Cloud::Eventarc::V1::ListMessageBusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_message_buses_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_message_bus_enrollments
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_message_bus_enrollments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_message_bus_enrollments, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_message_bus_enrollments_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_message_bus_enrollments({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_message_bus_enrollments parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_message_bus_enrollments ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_message_bus_enrollments({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_message_bus_enrollments(::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_message_bus_enrollments_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_message_bus
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    message_bus = {}
+    message_bus_id = "hello world"
+    validate_only = true
+
+    create_message_bus_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_message_bus, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::CreateMessageBusRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::MessageBus), request["message_bus"]
+      assert_equal "hello world", request["message_bus_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_message_bus_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_message_bus({ parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_message_bus parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_message_bus ::Google::Cloud::Eventarc::V1::CreateMessageBusRequest.new(parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_message_bus({ parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_message_bus(::Google::Cloud::Eventarc::V1::CreateMessageBusRequest.new(parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_message_bus_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_message_bus
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    message_bus = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_message_bus_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_message_bus, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::MessageBus), request["message_bus"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_message_bus_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_message_bus({ message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_message_bus message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_message_bus ::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest.new(message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_message_bus({ message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_message_bus(::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest.new(message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_message_bus_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_message_bus
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_message_bus_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_message_bus, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_message_bus_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_message_bus({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_message_bus name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_message_bus ::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_message_bus({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_message_bus(::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_message_bus_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_enrollment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::Enrollment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_enrollment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_enrollment, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::GetEnrollmentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_enrollment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_enrollment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_enrollment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_enrollment ::Google::Cloud::Eventarc::V1::GetEnrollmentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_enrollment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_enrollment(::Google::Cloud::Eventarc::V1::GetEnrollmentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_enrollment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_enrollments
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_enrollments_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_enrollments, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_enrollments_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_enrollments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_enrollments parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_enrollments ::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_enrollments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_enrollments(::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_enrollments_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_enrollment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    enrollment = {}
+    enrollment_id = "hello world"
+    validate_only = true
+
+    create_enrollment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_enrollment, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::Enrollment), request["enrollment"]
+      assert_equal "hello world", request["enrollment_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_enrollment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_enrollment({ parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_enrollment parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_enrollment ::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest.new(parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_enrollment({ parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_enrollment(::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest.new(parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_enrollment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_enrollment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    enrollment = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_enrollment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_enrollment, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::Enrollment), request["enrollment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_enrollment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_enrollment({ enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_enrollment enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_enrollment ::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest.new(enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_enrollment({ enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_enrollment(::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest.new(enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_enrollment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_enrollment
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_enrollment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_enrollment, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_enrollment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_enrollment({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_enrollment name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_enrollment ::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_enrollment({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_enrollment(::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_enrollment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_pipeline
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::Pipeline.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_pipeline_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_pipeline, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::GetPipelineRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_pipeline_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_pipeline({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_pipeline name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_pipeline ::Google::Cloud::Eventarc::V1::GetPipelineRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_pipeline({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_pipeline(::Google::Cloud::Eventarc::V1::GetPipelineRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_pipeline_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_pipelines
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::ListPipelinesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_pipelines_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_pipelines, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::ListPipelinesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_pipelines_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_pipelines({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_pipelines parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_pipelines ::Google::Cloud::Eventarc::V1::ListPipelinesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_pipelines({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_pipelines(::Google::Cloud::Eventarc::V1::ListPipelinesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_pipelines_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_pipeline
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    pipeline = {}
+    pipeline_id = "hello world"
+    validate_only = true
+
+    create_pipeline_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_pipeline, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::CreatePipelineRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::Pipeline), request["pipeline"]
+      assert_equal "hello world", request["pipeline_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_pipeline_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_pipeline({ parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_pipeline parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_pipeline ::Google::Cloud::Eventarc::V1::CreatePipelineRequest.new(parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_pipeline({ parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_pipeline(::Google::Cloud::Eventarc::V1::CreatePipelineRequest.new(parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_pipeline_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_pipeline
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    pipeline = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_pipeline_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_pipeline, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::UpdatePipelineRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::Pipeline), request["pipeline"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_pipeline_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_pipeline({ pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_pipeline pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_pipeline ::Google::Cloud::Eventarc::V1::UpdatePipelineRequest.new(pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_pipeline({ pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_pipeline(::Google::Cloud::Eventarc::V1::UpdatePipelineRequest.new(pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_pipeline_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_pipeline
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_pipeline_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_pipeline, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::DeletePipelineRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_pipeline_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_pipeline({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_pipeline name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_pipeline ::Google::Cloud::Eventarc::V1::DeletePipelineRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_pipeline({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_pipeline(::Google::Cloud::Eventarc::V1::DeletePipelineRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_pipeline_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_google_api_source
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::GoogleApiSource.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_google_api_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_google_api_source, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_google_api_source_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_google_api_source({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_google_api_source name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_google_api_source ::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_google_api_source({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_google_api_source(::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_google_api_source_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_google_api_sources
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_google_api_sources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_google_api_sources, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_google_api_sources_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_google_api_sources({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_google_api_sources parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_google_api_sources ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_google_api_sources({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_google_api_sources(::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_google_api_sources_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_google_api_source
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    google_api_source = {}
+    google_api_source_id = "hello world"
+    validate_only = true
+
+    create_google_api_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_google_api_source, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::GoogleApiSource), request["google_api_source"]
+      assert_equal "hello world", request["google_api_source_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_google_api_source_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_google_api_source({ parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_google_api_source parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_google_api_source ::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest.new(parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_google_api_source({ parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_google_api_source(::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest.new(parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_google_api_source_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_google_api_source
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    google_api_source = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_google_api_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_google_api_source, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Eventarc::V1::GoogleApiSource), request["google_api_source"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_google_api_source_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_google_api_source({ google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_google_api_source google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_google_api_source ::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest.new(google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_google_api_source({ google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_google_api_source(::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest.new(google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_google_api_source_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_google_api_source
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_google_api_source_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_google_api_source, name
+      assert_kind_of ::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      assert_equal true, request["allow_missing"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_google_api_source_client_stub do
+      # Create client
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_google_api_source({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_google_api_source name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_google_api_source ::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_google_api_source({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_google_api_source(::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_google_api_source_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

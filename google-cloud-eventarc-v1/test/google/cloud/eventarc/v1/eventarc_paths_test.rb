@@ -81,6 +81,30 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_enrollment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.enrollment_path project: "value0", location: "value1", enrollment: "value2"
+      assert_equal "projects/value0/locations/value1/enrollments/value2", path
+    end
+  end
+
+  def test_google_api_source_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.google_api_source_path project: "value0", location: "value1", google_api_source: "value2"
+      assert_equal "projects/value0/locations/value1/googleApiSources/value2", path
+    end
+  end
+
   def test_google_channel_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -102,6 +126,42 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_message_bus_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.message_bus_path project: "value0", location: "value1", message_bus: "value2"
+      assert_equal "projects/value0/locations/value1/messageBuses/value2", path
+    end
+  end
+
+  def test_network_attachment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_attachment_path project: "value0", region: "value1", networkattachment: "value2"
+      assert_equal "projects/value0/regions/value1/networkAttachments/value2", path
+    end
+  end
+
+  def test_pipeline_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.pipeline_path project: "value0", location: "value1", pipeline: "value2"
+      assert_equal "projects/value0/locations/value1/pipelines/value2", path
     end
   end
 
@@ -135,6 +195,18 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::ClientPathsTest < Minitest::Test
 
       path = client.service_account_path project: "value0", service_account: "value1"
       assert_equal "projects/value0/serviceAccounts/value1", path
+    end
+  end
+
+  def test_topic_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Eventarc::V1::Eventarc::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.topic_path project: "value0", topic: "value1"
+      assert_equal "projects/value0/topics/value1", path
     end
   end
 

@@ -73,6 +73,138 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.rpcs.get_trigger.timeout = 60.0
+                default_config.rpcs.get_trigger.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_triggers.timeout = 60.0
+                default_config.rpcs.list_triggers.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_trigger.timeout = 60.0
+
+                default_config.rpcs.update_trigger.timeout = 60.0
+
+                default_config.rpcs.delete_trigger.timeout = 60.0
+
+                default_config.rpcs.get_channel.timeout = 60.0
+                default_config.rpcs.get_channel.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_channels.timeout = 60.0
+                default_config.rpcs.list_channels.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_channel.timeout = 60.0
+
+                default_config.rpcs.update_channel.timeout = 60.0
+
+                default_config.rpcs.delete_channel.timeout = 60.0
+
+                default_config.rpcs.get_provider.timeout = 60.0
+                default_config.rpcs.get_provider.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_providers.timeout = 60.0
+                default_config.rpcs.list_providers.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.get_channel_connection.timeout = 60.0
+                default_config.rpcs.get_channel_connection.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_channel_connections.timeout = 60.0
+                default_config.rpcs.list_channel_connections.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_channel_connection.timeout = 60.0
+
+                default_config.rpcs.delete_channel_connection.timeout = 60.0
+
+                default_config.rpcs.get_google_channel_config.timeout = 60.0
+                default_config.rpcs.get_google_channel_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.update_google_channel_config.timeout = 60.0
+
+                default_config.rpcs.get_message_bus.timeout = 60.0
+                default_config.rpcs.get_message_bus.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_message_buses.timeout = 60.0
+                default_config.rpcs.list_message_buses.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_message_bus_enrollments.timeout = 60.0
+                default_config.rpcs.list_message_bus_enrollments.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_message_bus.timeout = 60.0
+
+                default_config.rpcs.update_message_bus.timeout = 60.0
+
+                default_config.rpcs.delete_message_bus.timeout = 60.0
+
+                default_config.rpcs.get_enrollment.timeout = 60.0
+                default_config.rpcs.get_enrollment.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_enrollments.timeout = 60.0
+                default_config.rpcs.list_enrollments.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_enrollment.timeout = 60.0
+
+                default_config.rpcs.update_enrollment.timeout = 60.0
+
+                default_config.rpcs.delete_enrollment.timeout = 60.0
+
+                default_config.rpcs.get_pipeline.timeout = 60.0
+                default_config.rpcs.get_pipeline.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_pipelines.timeout = 60.0
+                default_config.rpcs.list_pipelines.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_pipeline.timeout = 60.0
+
+                default_config.rpcs.update_pipeline.timeout = 60.0
+
+                default_config.rpcs.delete_pipeline.timeout = 60.0
+
+                default_config.rpcs.get_google_api_source.timeout = 60.0
+                default_config.rpcs.get_google_api_source.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.list_google_api_sources.timeout = 60.0
+                default_config.rpcs.list_google_api_sources.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
+                }
+
+                default_config.rpcs.create_google_api_source.timeout = 60.0
+
+                default_config.rpcs.update_google_api_source.timeout = 60.0
+
+                default_config.rpcs.delete_google_api_source.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -429,7 +561,7 @@ module Google
             #   @param trigger_id [::String]
             #     Required. The user-provided ID to be assigned to the trigger.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -533,7 +665,7 @@ module Google
             #     If set to true, and the trigger is not found, a new trigger will be
             #     created. In this situation, `update_mask` is ignored.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -636,7 +768,7 @@ module Google
             #     If set to true, and the trigger is not found, the request will succeed
             #     but no action will be taken on the server.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -929,7 +1061,7 @@ module Google
             #   @param channel_id [::String]
             #     Required. The user-provided ID to be assigned to the channel.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1030,7 +1162,7 @@ module Google
             #     If no field mask is provided, all provided fields in the request are
             #     updated. To update all fields, provide a field mask of "*".
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1127,7 +1259,7 @@ module Google
             #   @param name [::String]
             #     Required. The name of the channel to be deleted.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not
+            #     Optional. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1951,6 +2083,2118 @@ module Google
             end
 
             ##
+            # Get a single MessageBus.
+            #
+            # @overload get_message_bus(request, options = nil)
+            #   Pass arguments to `get_message_bus` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetMessageBusRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetMessageBusRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_message_bus(name: nil)
+            #   Pass arguments to `get_message_bus` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the message bus to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::MessageBus]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::MessageBus]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetMessageBusRequest.new
+            #
+            #   # Call the get_message_bus method.
+            #   result = client.get_message_bus request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::MessageBus.
+            #   p result
+            #
+            def get_message_bus request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetMessageBusRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_message_bus.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_message_bus.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_message_bus.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_message_bus, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List message buses.
+            #
+            # @overload list_message_buses(request, options = nil)
+            #   Pass arguments to `list_message_buses` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListMessageBusesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListMessageBusesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_message_buses(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_message_buses` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection to list triggers on.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return on each page.
+            #
+            #     Note: The service may send fewer.
+            #   @param page_token [::String]
+            #     Optional. The page token; provide the value from the `next_page_token`
+            #     field in a previous call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided must match
+            #     the previous call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting order is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
+            #     `name desc, update_time`.
+            #   @param filter [::String]
+            #     Optional. The filter field that the list request will filter on.
+            #     Possible filtersare described in https://google.aip.dev/160.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::MessageBus>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::MessageBus>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListMessageBusesRequest.new
+            #
+            #   # Call the list_message_buses method.
+            #   result = client.list_message_buses request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::MessageBus.
+            #     p item
+            #   end
+            #
+            def list_message_buses request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListMessageBusesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_message_buses.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_message_buses.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_message_buses.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_message_buses, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_message_buses, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List message bus enrollments.
+            #
+            # @overload list_message_bus_enrollments(request, options = nil)
+            #   Pass arguments to `list_message_bus_enrollments` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_message_bus_enrollments(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_message_bus_enrollments` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent message bus to list enrollments on.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return on each page.
+            #
+            #     Note: The service may send fewer.
+            #   @param page_token [::String]
+            #     Optional. The page token; provide the value from the `next_page_token`
+            #     field in a previous call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided must match
+            #     the previous call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest.new
+            #
+            #   # Call the list_message_bus_enrollments method.
+            #   result = client.list_message_bus_enrollments request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse.
+            #   p result
+            #
+            def list_message_bus_enrollments request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_message_bus_enrollments.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_message_bus_enrollments.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_message_bus_enrollments.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_message_bus_enrollments, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a new MessageBus in a particular project and location.
+            #
+            # @overload create_message_bus(request, options = nil)
+            #   Pass arguments to `create_message_bus` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::CreateMessageBusRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::CreateMessageBusRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_message_bus(parent: nil, message_bus: nil, message_bus_id: nil, validate_only: nil)
+            #   Pass arguments to `create_message_bus` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection in which to add this message bus.
+            #   @param message_bus [::Google::Cloud::Eventarc::V1::MessageBus, ::Hash]
+            #     Required. The message bus to create.
+            #   @param message_bus_id [::String]
+            #     Required. The user-provided ID to be assigned to the MessageBus. It should
+            #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$)
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::CreateMessageBusRequest.new
+            #
+            #   # Call the create_message_bus method.
+            #   result = client.create_message_bus request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_message_bus request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::CreateMessageBusRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_message_bus.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_message_bus.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_message_bus.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :create_message_bus, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a single message bus.
+            #
+            # @overload update_message_bus(request, options = nil)
+            #   Pass arguments to `update_message_bus` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_message_bus(message_bus: nil, update_mask: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `update_message_bus` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param message_bus [::Google::Cloud::Eventarc::V1::MessageBus, ::Hash]
+            #     Required. The MessageBus to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The fields to be updated; only fields explicitly provided are
+            #     updated. If no field mask is provided, all provided fields in the request
+            #     are updated. To update all fields, provide a field mask of "*".
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the MessageBus is not found, a new MessageBus
+            #     will be created. In this situation, `update_mask` is ignored.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::UpdateMessageBusRequest.new
+            #
+            #   # Call the update_message_bus method.
+            #   result = client.update_message_bus request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_message_bus request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_message_bus.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.message_bus&.name
+                header_params["message_bus.name"] = request.message_bus.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_message_bus.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_message_bus.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :update_message_bus, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a single message bus.
+            #
+            # @overload delete_message_bus(request, options = nil)
+            #   Pass arguments to `delete_message_bus` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_message_bus(name: nil, etag: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `delete_message_bus` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the MessageBus to be deleted.
+            #   @param etag [::String]
+            #     Optional. If provided, the MessageBus will only be deleted if the etag
+            #     matches the current etag on the resource.
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the MessageBus is not found, the request will
+            #     succeed but no action will be taken on the server.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::DeleteMessageBusRequest.new
+            #
+            #   # Call the delete_message_bus method.
+            #   result = client.delete_message_bus request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_message_bus request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_message_bus.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_message_bus.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_message_bus.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :delete_message_bus, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single Enrollment.
+            #
+            # @overload get_enrollment(request, options = nil)
+            #   Pass arguments to `get_enrollment` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetEnrollmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetEnrollmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_enrollment(name: nil)
+            #   Pass arguments to `get_enrollment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Enrollment to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::Enrollment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::Enrollment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetEnrollmentRequest.new
+            #
+            #   # Call the get_enrollment method.
+            #   result = client.get_enrollment request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::Enrollment.
+            #   p result
+            #
+            def get_enrollment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetEnrollmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_enrollment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_enrollment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_enrollment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_enrollment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List Enrollments.
+            #
+            # @overload list_enrollments(request, options = nil)
+            #   Pass arguments to `list_enrollments` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_enrollments(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_enrollments` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection to list triggers on.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return on each page.
+            #
+            #     Note: The service may send fewer.
+            #   @param page_token [::String]
+            #     Optional. The page token; provide the value from the `next_page_token`
+            #     field in a previous call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided must match
+            #     the previous call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting order is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
+            #     `name desc, update_time`.
+            #   @param filter [::String]
+            #     Optional. The filter field that the list request will filter on.
+            #     Possible filtersare described in https://google.aip.dev/160.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Enrollment>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Enrollment>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListEnrollmentsRequest.new
+            #
+            #   # Call the list_enrollments method.
+            #   result = client.list_enrollments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::Enrollment.
+            #     p item
+            #   end
+            #
+            def list_enrollments request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_enrollments.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_enrollments.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_enrollments.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_enrollments, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_enrollments, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a new Enrollment in a particular project and location.
+            #
+            # @overload create_enrollment(request, options = nil)
+            #   Pass arguments to `create_enrollment` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_enrollment(parent: nil, enrollment: nil, enrollment_id: nil, validate_only: nil)
+            #   Pass arguments to `create_enrollment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection in which to add this enrollment.
+            #   @param enrollment [::Google::Cloud::Eventarc::V1::Enrollment, ::Hash]
+            #     Required. The enrollment to create.
+            #   @param enrollment_id [::String]
+            #     Required. The user-provided ID to be assigned to the Enrollment. It should
+            #     match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::CreateEnrollmentRequest.new
+            #
+            #   # Call the create_enrollment method.
+            #   result = client.create_enrollment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_enrollment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_enrollment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_enrollment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_enrollment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :create_enrollment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a single Enrollment.
+            #
+            # @overload update_enrollment(request, options = nil)
+            #   Pass arguments to `update_enrollment` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_enrollment(enrollment: nil, update_mask: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `update_enrollment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param enrollment [::Google::Cloud::Eventarc::V1::Enrollment, ::Hash]
+            #     Required. The Enrollment to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The fields to be updated; only fields explicitly provided are
+            #     updated. If no field mask is provided, all provided fields in the request
+            #     are updated. To update all fields, provide a field mask of "*".
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the Enrollment is not found, a new Enrollment
+            #     will be created. In this situation, `update_mask` is ignored.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest.new
+            #
+            #   # Call the update_enrollment method.
+            #   result = client.update_enrollment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_enrollment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_enrollment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.enrollment&.name
+                header_params["enrollment.name"] = request.enrollment.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_enrollment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_enrollment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :update_enrollment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a single Enrollment.
+            #
+            # @overload delete_enrollment(request, options = nil)
+            #   Pass arguments to `delete_enrollment` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_enrollment(name: nil, etag: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `delete_enrollment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Enrollment to be deleted.
+            #   @param etag [::String]
+            #     Optional. If provided, the Enrollment will only be deleted if the etag
+            #     matches the current etag on the resource.
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the Enrollment is not found, the request will
+            #     succeed but no action will be taken on the server.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest.new
+            #
+            #   # Call the delete_enrollment method.
+            #   result = client.delete_enrollment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_enrollment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_enrollment.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_enrollment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_enrollment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :delete_enrollment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single Pipeline.
+            #
+            # @overload get_pipeline(request, options = nil)
+            #   Pass arguments to `get_pipeline` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetPipelineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetPipelineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_pipeline(name: nil)
+            #   Pass arguments to `get_pipeline` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the pipeline to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::Pipeline]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::Pipeline]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetPipelineRequest.new
+            #
+            #   # Call the get_pipeline method.
+            #   result = client.get_pipeline request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::Pipeline.
+            #   p result
+            #
+            def get_pipeline request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetPipelineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_pipeline.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_pipeline.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_pipeline.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_pipeline, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List pipelines.
+            #
+            # @overload list_pipelines(request, options = nil)
+            #   Pass arguments to `list_pipelines` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListPipelinesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListPipelinesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_pipelines(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_pipelines` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection to list pipelines on.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return on each page.
+            #
+            #     Note: The service may send fewer.
+            #   @param page_token [::String]
+            #     Optional. The page token; provide the value from the `next_page_token`
+            #     field in a previous call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided must match
+            #     the previous call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting order is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
+            #     `name desc, update_time`.
+            #   @param filter [::String]
+            #     Optional. The filter field that the list request will filter on.
+            #     Possible filters are described in https://google.aip.dev/160.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Pipeline>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Pipeline>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListPipelinesRequest.new
+            #
+            #   # Call the list_pipelines method.
+            #   result = client.list_pipelines request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::Pipeline.
+            #     p item
+            #   end
+            #
+            def list_pipelines request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListPipelinesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_pipelines.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_pipelines.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_pipelines.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_pipelines, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_pipelines, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a new Pipeline in a particular project and location.
+            #
+            # @overload create_pipeline(request, options = nil)
+            #   Pass arguments to `create_pipeline` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::CreatePipelineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::CreatePipelineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_pipeline(parent: nil, pipeline: nil, pipeline_id: nil, validate_only: nil)
+            #   Pass arguments to `create_pipeline` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection in which to add this pipeline.
+            #   @param pipeline [::Google::Cloud::Eventarc::V1::Pipeline, ::Hash]
+            #     Required. The pipeline to create.
+            #   @param pipeline_id [::String]
+            #     Required. The user-provided ID to be assigned to the Pipeline.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::CreatePipelineRequest.new
+            #
+            #   # Call the create_pipeline method.
+            #   result = client.create_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_pipeline request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::CreatePipelineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_pipeline.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_pipeline.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_pipeline.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :create_pipeline, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a single pipeline.
+            #
+            # @overload update_pipeline(request, options = nil)
+            #   Pass arguments to `update_pipeline` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::UpdatePipelineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::UpdatePipelineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_pipeline(pipeline: nil, update_mask: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `update_pipeline` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param pipeline [::Google::Cloud::Eventarc::V1::Pipeline, ::Hash]
+            #     Required. The Pipeline to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The fields to be updated; only fields explicitly provided are
+            #     updated. If no field mask is provided, all provided fields in the request
+            #     are updated. To update all fields, provide a field mask of "*".
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the Pipeline is not found, a new Pipeline
+            #     will be created. In this situation, `update_mask` is ignored.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::UpdatePipelineRequest.new
+            #
+            #   # Call the update_pipeline method.
+            #   result = client.update_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_pipeline request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::UpdatePipelineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_pipeline.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.pipeline&.name
+                header_params["pipeline.name"] = request.pipeline.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_pipeline.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_pipeline.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :update_pipeline, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a single pipeline.
+            #
+            # @overload delete_pipeline(request, options = nil)
+            #   Pass arguments to `delete_pipeline` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::DeletePipelineRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::DeletePipelineRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_pipeline(name: nil, etag: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `delete_pipeline` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Pipeline to be deleted.
+            #   @param etag [::String]
+            #     Optional. If provided, the Pipeline will only be deleted if the etag
+            #     matches the current etag on the resource.
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the Pipeline is not found, the request will
+            #     succeed but no action will be taken on the server.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::DeletePipelineRequest.new
+            #
+            #   # Call the delete_pipeline method.
+            #   result = client.delete_pipeline request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_pipeline request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::DeletePipelineRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_pipeline.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_pipeline.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_pipeline.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :delete_pipeline, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single GoogleApiSource.
+            #
+            # @overload get_google_api_source(request, options = nil)
+            #   Pass arguments to `get_google_api_source` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_google_api_source(name: nil)
+            #   Pass arguments to `get_google_api_source` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the google api source to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::GoogleApiSource]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::GoogleApiSource]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest.new
+            #
+            #   # Call the get_google_api_source method.
+            #   result = client.get_google_api_source request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::GoogleApiSource.
+            #   p result
+            #
+            def get_google_api_source request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_google_api_source.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_google_api_source.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_google_api_source.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_google_api_source, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List GoogleApiSources.
+            #
+            # @overload list_google_api_sources(request, options = nil)
+            #   Pass arguments to `list_google_api_sources` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_google_api_sources(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_google_api_sources` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection to list GoogleApiSources on.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of results to return on each page.
+            #
+            #     Note: The service may send fewer.
+            #   @param page_token [::String]
+            #     Optional. The page token; provide the value from the `next_page_token`
+            #     field in a previous call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided must match
+            #     the previous call that provided the page token.
+            #   @param order_by [::String]
+            #     Optional. The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting order is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
+            #     `name desc, update_time`.
+            #   @param filter [::String]
+            #     Optional. The filter field that the list request will filter on.
+            #     Possible filtersare described in https://google.aip.dev/160.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::GoogleApiSource>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::GoogleApiSource>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest.new
+            #
+            #   # Call the list_google_api_sources method.
+            #   result = client.list_google_api_sources request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::GoogleApiSource.
+            #     p item
+            #   end
+            #
+            def list_google_api_sources request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_google_api_sources.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_google_api_sources.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_google_api_sources.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_google_api_sources, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_google_api_sources, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a new GoogleApiSource in a particular project and location.
+            #
+            # @overload create_google_api_source(request, options = nil)
+            #   Pass arguments to `create_google_api_source` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_google_api_source(parent: nil, google_api_source: nil, google_api_source_id: nil, validate_only: nil)
+            #   Pass arguments to `create_google_api_source` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection in which to add this google api source.
+            #   @param google_api_source [::Google::Cloud::Eventarc::V1::GoogleApiSource, ::Hash]
+            #     Required. The google api source to create.
+            #   @param google_api_source_id [::String]
+            #     Required. The user-provided ID to be assigned to the GoogleApiSource. It
+            #     should match the format (^[a-z]([a-z0-9-]\\{0,61}[a-z0-9])?$).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest.new
+            #
+            #   # Call the create_google_api_source method.
+            #   result = client.create_google_api_source request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_google_api_source request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_google_api_source.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_google_api_source.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_google_api_source.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :create_google_api_source, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a single GoogleApiSource.
+            #
+            # @overload update_google_api_source(request, options = nil)
+            #   Pass arguments to `update_google_api_source` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_google_api_source(google_api_source: nil, update_mask: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `update_google_api_source` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param google_api_source [::Google::Cloud::Eventarc::V1::GoogleApiSource, ::Hash]
+            #     Required. The GoogleApiSource to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The fields to be updated; only fields explicitly provided are
+            #     updated. If no field mask is provided, all provided fields in the request
+            #     are updated. To update all fields, provide a field mask of "*".
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the GoogleApiSource is not found, a new
+            #     GoogleApiSource will be created. In this situation, `update_mask` is
+            #     ignored.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest.new
+            #
+            #   # Call the update_google_api_source method.
+            #   result = client.update_google_api_source request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_google_api_source request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_google_api_source.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.google_api_source&.name
+                header_params["google_api_source.name"] = request.google_api_source.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_google_api_source.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_google_api_source.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :update_google_api_source, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a single GoogleApiSource.
+            #
+            # @overload delete_google_api_source(request, options = nil)
+            #   Pass arguments to `delete_google_api_source` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_google_api_source(name: nil, etag: nil, allow_missing: nil, validate_only: nil)
+            #   Pass arguments to `delete_google_api_source` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the GoogleApiSource to be deleted.
+            #   @param etag [::String]
+            #     Optional. If provided, the MessageBus will only be deleted if the etag
+            #     matches the current etag on the resource.
+            #   @param allow_missing [::Boolean]
+            #     Optional. If set to true, and the MessageBus is not found, the request will
+            #     succeed but no action will be taken on the server.
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest.new
+            #
+            #   # Call the delete_google_api_source method.
+            #   result = client.delete_google_api_source request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_google_api_source request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_google_api_source.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_google_api_source.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_google_api_source.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :delete_google_api_source, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Eventarc API.
             #
             # This class represents the configuration for Eventarc,
@@ -2193,6 +4437,111 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_google_channel_config
+                ##
+                # RPC-specific configuration for `get_message_bus`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_message_bus
+                ##
+                # RPC-specific configuration for `list_message_buses`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_message_buses
+                ##
+                # RPC-specific configuration for `list_message_bus_enrollments`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_message_bus_enrollments
+                ##
+                # RPC-specific configuration for `create_message_bus`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_message_bus
+                ##
+                # RPC-specific configuration for `update_message_bus`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_message_bus
+                ##
+                # RPC-specific configuration for `delete_message_bus`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_message_bus
+                ##
+                # RPC-specific configuration for `get_enrollment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_enrollment
+                ##
+                # RPC-specific configuration for `list_enrollments`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_enrollments
+                ##
+                # RPC-specific configuration for `create_enrollment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_enrollment
+                ##
+                # RPC-specific configuration for `update_enrollment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_enrollment
+                ##
+                # RPC-specific configuration for `delete_enrollment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_enrollment
+                ##
+                # RPC-specific configuration for `get_pipeline`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_pipeline
+                ##
+                # RPC-specific configuration for `list_pipelines`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_pipelines
+                ##
+                # RPC-specific configuration for `create_pipeline`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_pipeline
+                ##
+                # RPC-specific configuration for `update_pipeline`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_pipeline
+                ##
+                # RPC-specific configuration for `delete_pipeline`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_pipeline
+                ##
+                # RPC-specific configuration for `get_google_api_source`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_google_api_source
+                ##
+                # RPC-specific configuration for `list_google_api_sources`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_google_api_sources
+                ##
+                # RPC-specific configuration for `create_google_api_source`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_google_api_source
+                ##
+                # RPC-specific configuration for `update_google_api_source`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_google_api_source
+                ##
+                # RPC-specific configuration for `delete_google_api_source`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_google_api_source
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2232,6 +4581,48 @@ module Google
                   @get_google_channel_config = ::Gapic::Config::Method.new get_google_channel_config_config
                   update_google_channel_config_config = parent_rpcs.update_google_channel_config if parent_rpcs.respond_to? :update_google_channel_config
                   @update_google_channel_config = ::Gapic::Config::Method.new update_google_channel_config_config
+                  get_message_bus_config = parent_rpcs.get_message_bus if parent_rpcs.respond_to? :get_message_bus
+                  @get_message_bus = ::Gapic::Config::Method.new get_message_bus_config
+                  list_message_buses_config = parent_rpcs.list_message_buses if parent_rpcs.respond_to? :list_message_buses
+                  @list_message_buses = ::Gapic::Config::Method.new list_message_buses_config
+                  list_message_bus_enrollments_config = parent_rpcs.list_message_bus_enrollments if parent_rpcs.respond_to? :list_message_bus_enrollments
+                  @list_message_bus_enrollments = ::Gapic::Config::Method.new list_message_bus_enrollments_config
+                  create_message_bus_config = parent_rpcs.create_message_bus if parent_rpcs.respond_to? :create_message_bus
+                  @create_message_bus = ::Gapic::Config::Method.new create_message_bus_config
+                  update_message_bus_config = parent_rpcs.update_message_bus if parent_rpcs.respond_to? :update_message_bus
+                  @update_message_bus = ::Gapic::Config::Method.new update_message_bus_config
+                  delete_message_bus_config = parent_rpcs.delete_message_bus if parent_rpcs.respond_to? :delete_message_bus
+                  @delete_message_bus = ::Gapic::Config::Method.new delete_message_bus_config
+                  get_enrollment_config = parent_rpcs.get_enrollment if parent_rpcs.respond_to? :get_enrollment
+                  @get_enrollment = ::Gapic::Config::Method.new get_enrollment_config
+                  list_enrollments_config = parent_rpcs.list_enrollments if parent_rpcs.respond_to? :list_enrollments
+                  @list_enrollments = ::Gapic::Config::Method.new list_enrollments_config
+                  create_enrollment_config = parent_rpcs.create_enrollment if parent_rpcs.respond_to? :create_enrollment
+                  @create_enrollment = ::Gapic::Config::Method.new create_enrollment_config
+                  update_enrollment_config = parent_rpcs.update_enrollment if parent_rpcs.respond_to? :update_enrollment
+                  @update_enrollment = ::Gapic::Config::Method.new update_enrollment_config
+                  delete_enrollment_config = parent_rpcs.delete_enrollment if parent_rpcs.respond_to? :delete_enrollment
+                  @delete_enrollment = ::Gapic::Config::Method.new delete_enrollment_config
+                  get_pipeline_config = parent_rpcs.get_pipeline if parent_rpcs.respond_to? :get_pipeline
+                  @get_pipeline = ::Gapic::Config::Method.new get_pipeline_config
+                  list_pipelines_config = parent_rpcs.list_pipelines if parent_rpcs.respond_to? :list_pipelines
+                  @list_pipelines = ::Gapic::Config::Method.new list_pipelines_config
+                  create_pipeline_config = parent_rpcs.create_pipeline if parent_rpcs.respond_to? :create_pipeline
+                  @create_pipeline = ::Gapic::Config::Method.new create_pipeline_config
+                  update_pipeline_config = parent_rpcs.update_pipeline if parent_rpcs.respond_to? :update_pipeline
+                  @update_pipeline = ::Gapic::Config::Method.new update_pipeline_config
+                  delete_pipeline_config = parent_rpcs.delete_pipeline if parent_rpcs.respond_to? :delete_pipeline
+                  @delete_pipeline = ::Gapic::Config::Method.new delete_pipeline_config
+                  get_google_api_source_config = parent_rpcs.get_google_api_source if parent_rpcs.respond_to? :get_google_api_source
+                  @get_google_api_source = ::Gapic::Config::Method.new get_google_api_source_config
+                  list_google_api_sources_config = parent_rpcs.list_google_api_sources if parent_rpcs.respond_to? :list_google_api_sources
+                  @list_google_api_sources = ::Gapic::Config::Method.new list_google_api_sources_config
+                  create_google_api_source_config = parent_rpcs.create_google_api_source if parent_rpcs.respond_to? :create_google_api_source
+                  @create_google_api_source = ::Gapic::Config::Method.new create_google_api_source_config
+                  update_google_api_source_config = parent_rpcs.update_google_api_source if parent_rpcs.respond_to? :update_google_api_source
+                  @update_google_api_source = ::Gapic::Config::Method.new update_google_api_source_config
+                  delete_google_api_source_config = parent_rpcs.delete_google_api_source if parent_rpcs.respond_to? :delete_google_api_source
+                  @delete_google_api_source = ::Gapic::Config::Method.new delete_google_api_source_config
 
                   yield self if block_given?
                 end

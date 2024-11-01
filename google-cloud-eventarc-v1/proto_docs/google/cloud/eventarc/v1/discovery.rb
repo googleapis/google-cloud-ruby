@@ -24,11 +24,12 @@ module Google
         # A representation of the Provider resource.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. In `projects/{project}/locations/{location}/providers/{provider_id}`
-        #     format.
+        #     Output only. In
+        #     `projects/{project}/locations/{location}/providers/{provider_id}` format.
         # @!attribute [r] display_name
         #   @return [::String]
-        #     Output only. Human friendly name for the Provider. For example "Cloud Storage".
+        #     Output only. Human friendly name for the Provider. For example "Cloud
+        #     Storage".
         # @!attribute [r] event_types
         #   @return [::Array<::Google::Cloud::Eventarc::V1::EventType>]
         #     Output only. Event types for this provider.
@@ -73,12 +74,12 @@ module Google
         #     Output only. Description of the purpose of the attribute.
         # @!attribute [r] required
         #   @return [::Boolean]
-        #     Output only. If true, the triggers for this provider should always specify a filter
-        #     on these attributes. Trigger creation will fail otherwise.
+        #     Output only. If true, the triggers for this provider should always specify
+        #     a filter on these attributes. Trigger creation will fail otherwise.
         # @!attribute [r] path_pattern_supported
         #   @return [::Boolean]
-        #     Output only. If true, the attribute accepts matching expressions in the Eventarc
-        #     PathPattern format.
+        #     Output only. If true, the attribute accepts matching expressions in the
+        #     Eventarc PathPattern format.
         class FilteringAttribute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

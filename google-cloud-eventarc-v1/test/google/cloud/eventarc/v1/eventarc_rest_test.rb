@@ -1073,6 +1073,1194 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_message_bus
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::MessageBus.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_get_message_bus_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_message_bus_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_message_bus({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_message_bus name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_message_bus ::Google::Cloud::Eventarc::V1::GetMessageBusRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_message_bus({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_message_bus(::Google::Cloud::Eventarc::V1::GetMessageBusRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_message_bus_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_message_buses
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::ListMessageBusesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_message_buses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_list_message_buses_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_message_buses_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_message_buses({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_message_buses parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_message_buses ::Google::Cloud::Eventarc::V1::ListMessageBusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_message_buses({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_message_buses(::Google::Cloud::Eventarc::V1::ListMessageBusesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_message_buses_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_message_bus_enrollments
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_message_bus_enrollments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_list_message_bus_enrollments_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_message_bus_enrollments_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_message_bus_enrollments({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_message_bus_enrollments parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_message_bus_enrollments ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_message_bus_enrollments({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_message_bus_enrollments(::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_message_bus_enrollments_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_message_bus
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    message_bus = {}
+    message_bus_id = "hello world"
+    validate_only = true
+
+    create_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_create_message_bus_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_message_bus_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_message_bus({ parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_message_bus parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_message_bus ::Google::Cloud::Eventarc::V1::CreateMessageBusRequest.new(parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_message_bus({ parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_message_bus(::Google::Cloud::Eventarc::V1::CreateMessageBusRequest.new(parent: parent, message_bus: message_bus, message_bus_id: message_bus_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_message_bus_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_message_bus
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    message_bus = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_update_message_bus_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_message_bus_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_message_bus({ message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_message_bus message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_message_bus ::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest.new(message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_message_bus({ message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_message_bus(::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest.new(message_bus: message_bus, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_message_bus_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_message_bus
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_delete_message_bus_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_message_bus_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_message_bus({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_message_bus name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_message_bus ::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_message_bus({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_message_bus(::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_message_bus_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_enrollment
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::Enrollment.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_get_enrollment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_enrollment_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_enrollment({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_enrollment name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_enrollment ::Google::Cloud::Eventarc::V1::GetEnrollmentRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_enrollment({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_enrollment(::Google::Cloud::Eventarc::V1::GetEnrollmentRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_enrollment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_enrollments
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_enrollments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_list_enrollments_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_enrollments_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_enrollments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_enrollments parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_enrollments ::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_enrollments({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_enrollments(::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_enrollments_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_enrollment
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    enrollment = {}
+    enrollment_id = "hello world"
+    validate_only = true
+
+    create_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_create_enrollment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_enrollment_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_enrollment({ parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_enrollment parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_enrollment ::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest.new(parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_enrollment({ parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_enrollment(::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest.new(parent: parent, enrollment: enrollment, enrollment_id: enrollment_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_enrollment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_enrollment
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    enrollment = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_update_enrollment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_enrollment_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_enrollment({ enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_enrollment enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_enrollment ::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest.new(enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_enrollment({ enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_enrollment(::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest.new(enrollment: enrollment, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_enrollment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_enrollment
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_delete_enrollment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_enrollment_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_enrollment({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_enrollment name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_enrollment ::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_enrollment({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_enrollment(::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_enrollment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_pipeline
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::Pipeline.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_get_pipeline_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_pipeline_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_pipeline({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_pipeline name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_pipeline ::Google::Cloud::Eventarc::V1::GetPipelineRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_pipeline({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_pipeline(::Google::Cloud::Eventarc::V1::GetPipelineRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_pipeline_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_pipelines
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::ListPipelinesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_pipelines_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_list_pipelines_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_pipelines_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_pipelines({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_pipelines parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_pipelines ::Google::Cloud::Eventarc::V1::ListPipelinesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_pipelines({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_pipelines(::Google::Cloud::Eventarc::V1::ListPipelinesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_pipelines_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_pipeline
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    pipeline = {}
+    pipeline_id = "hello world"
+    validate_only = true
+
+    create_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_create_pipeline_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_pipeline_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_pipeline({ parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_pipeline parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_pipeline ::Google::Cloud::Eventarc::V1::CreatePipelineRequest.new(parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_pipeline({ parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_pipeline(::Google::Cloud::Eventarc::V1::CreatePipelineRequest.new(parent: parent, pipeline: pipeline, pipeline_id: pipeline_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_pipeline_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_pipeline
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    pipeline = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_update_pipeline_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_pipeline_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_pipeline({ pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_pipeline pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_pipeline ::Google::Cloud::Eventarc::V1::UpdatePipelineRequest.new(pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_pipeline({ pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_pipeline(::Google::Cloud::Eventarc::V1::UpdatePipelineRequest.new(pipeline: pipeline, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_pipeline_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_pipeline
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_delete_pipeline_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_pipeline_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_pipeline({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_pipeline name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_pipeline ::Google::Cloud::Eventarc::V1::DeletePipelineRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_pipeline({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_pipeline(::Google::Cloud::Eventarc::V1::DeletePipelineRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_pipeline_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_google_api_source
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::GoogleApiSource.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_get_google_api_source_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_google_api_source_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_google_api_source({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_google_api_source name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_google_api_source ::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_google_api_source({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_google_api_source(::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_google_api_source_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_google_api_sources
+    # Create test objects.
+    client_result = ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_google_api_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_list_google_api_sources_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_google_api_sources_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_google_api_sources({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_google_api_sources parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_google_api_sources ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_google_api_sources({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_google_api_sources(::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_google_api_sources_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_google_api_source
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    google_api_source = {}
+    google_api_source_id = "hello world"
+    validate_only = true
+
+    create_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_create_google_api_source_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_google_api_source_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_google_api_source({ parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_google_api_source parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_google_api_source ::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest.new(parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_google_api_source({ parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_google_api_source(::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest.new(parent: parent, google_api_source: google_api_source, google_api_source_id: google_api_source_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_google_api_source_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_google_api_source
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    google_api_source = {}
+    update_mask = {}
+    allow_missing = true
+    validate_only = true
+
+    update_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_update_google_api_source_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_google_api_source_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_google_api_source({ google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_google_api_source google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_google_api_source ::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest.new(google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_google_api_source({ google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_google_api_source(::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest.new(google_api_source: google_api_source, update_mask: update_mask, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_google_api_source_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_google_api_source
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+    allow_missing = true
+    validate_only = true
+
+    delete_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ServiceStub.stub :transcode_delete_google_api_source_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_google_api_source_client_stub do
+        # Create client
+        client = ::Google::Cloud::Eventarc::V1::Eventarc::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_google_api_source({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_google_api_source name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_google_api_source ::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_google_api_source({ name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_google_api_source(::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest.new(name: name, etag: etag, allow_missing: allow_missing, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_google_api_source_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

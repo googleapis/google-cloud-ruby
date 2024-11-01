@@ -746,6 +746,804 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::MessageBus]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::MessageBus]
+              #   A result object deserialized from the server's reply
+              def get_message_bus request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_message_bus_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::MessageBus.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_message_buses REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListMessageBusesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListMessageBusesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::ListMessageBusesResponse]
+              #   A result object deserialized from the server's reply
+              def list_message_buses request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_message_buses_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::ListMessageBusesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_message_bus_enrollments REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse]
+              #   A result object deserialized from the server's reply
+              def list_message_bus_enrollments request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_message_bus_enrollments_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreateMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_message_bus request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_message_bus_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_message_bus request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_message_bus_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_message_bus request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_message_bus_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::Enrollment]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::Enrollment]
+              #   A result object deserialized from the server's reply
+              def get_enrollment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_enrollment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::Enrollment.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_enrollments REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse]
+              #   A result object deserialized from the server's reply
+              def list_enrollments request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_enrollments_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_enrollment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_enrollment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_enrollment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_enrollment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_enrollment request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_enrollment_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetPipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::Pipeline]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::Pipeline]
+              #   A result object deserialized from the server's reply
+              def get_pipeline request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_pipeline_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::Pipeline.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_pipelines REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListPipelinesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListPipelinesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::ListPipelinesResponse]
+              #   A result object deserialized from the server's reply
+              def list_pipelines request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_pipelines_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::ListPipelinesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreatePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_pipeline request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_pipeline_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdatePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_pipeline request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_pipeline_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeletePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_pipeline request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_pipeline_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::GoogleApiSource]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::GoogleApiSource]
+              #   A result object deserialized from the server's reply
+              def get_google_api_source request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_google_api_source_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::GoogleApiSource.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_google_api_sources REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse]
+              #   A result object deserialized from the server's reply
+              def list_google_api_sources request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_google_api_sources_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the create_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def create_google_api_source request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_google_api_source_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the update_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def update_google_api_source request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_google_api_source_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the delete_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Longrunning::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Longrunning::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_google_api_source request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_google_api_source_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the get_trigger REST call
@@ -1124,6 +1922,455 @@ module Google
                                                           body: "google_channel_config",
                                                           matches: [
                                                             ["google_channel_config.name", %r{^projects/[^/]+/locations/[^/]+/googleChannelConfig/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_message_bus_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/messageBuses/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_message_buses REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListMessageBusesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_message_buses_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/messageBuses",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_message_bus_enrollments REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_message_bus_enrollments_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}:listEnrollments",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/messageBuses/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreateMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_message_bus_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/messageBuses",
+                                                          body: "message_bus",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_message_bus_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{message_bus.name}",
+                                                          body: "message_bus",
+                                                          matches: [
+                                                            ["message_bus.name", %r{^projects/[^/]+/locations/[^/]+/messageBuses/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_message_bus REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_message_bus_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/messageBuses/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_enrollment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/enrollments/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_enrollments REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_enrollments_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/enrollments",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_enrollment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/enrollments",
+                                                          body: "enrollment",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_enrollment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{enrollment.name}",
+                                                          body: "enrollment",
+                                                          matches: [
+                                                            ["enrollment.name", %r{^projects/[^/]+/locations/[^/]+/enrollments/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_enrollment REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_enrollment_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/enrollments/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetPipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_pipeline_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/pipelines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_pipelines REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListPipelinesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_pipelines_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/pipelines",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreatePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_pipeline_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/pipelines",
+                                                          body: "pipeline",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdatePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_pipeline_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{pipeline.name}",
+                                                          body: "pipeline",
+                                                          matches: [
+                                                            ["pipeline.name", %r{^projects/[^/]+/locations/[^/]+/pipelines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_pipeline REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeletePipelineRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_pipeline_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/pipelines/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_google_api_source_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/googleApiSources/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_google_api_sources REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_google_api_sources_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/googleApiSources",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the create_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_google_api_source_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/googleApiSources",
+                                                          body: "google_api_source",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/locations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_google_api_source_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{google_api_source.name}",
+                                                          body: "google_api_source",
+                                                          matches: [
+                                                            ["google_api_source.name", %r{^projects/[^/]+/locations/[^/]+/googleApiSources/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_google_api_source REST call
+              #
+              # @param request_pb [::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_google_api_source_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/googleApiSources/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
