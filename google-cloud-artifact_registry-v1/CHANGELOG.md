@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.1.0 (2024-11-01)
+
+#### Features
+
+* Add Artifact Registry attachment API ([#27509](https://github.com/googleapis/google-cloud-ruby/issues/27509)) 
+* Add Artifact Registry custom remote support 
+* Add Artifact Registry generic repository support 
+* Add Artifact Registry rule APIs 
+* Add Artifact Registry server side resource filtering and sorting 
+* Add Artifact Registry UpdateFile and DeleteFile APIs 
+#### Documentation
+
+* Include max page size for all Artifact Registry APIs 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
