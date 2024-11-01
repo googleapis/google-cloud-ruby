@@ -148,8 +148,16 @@ if [[ -n "${KOKORO_BUILD_ID:-}" ]]; then
 	if [[ "${TRAMPOLINE_VERBOSE:-}" == "true" ]]; then
 	    gcloud auth list
 	fi
-	log_yellow "Configuring Container Registry access"
-	gcloud auth configure-docker --quiet
+        log_yellow "Configuring Container Registry access"
+        TRAMPOLINE_HOST=$(echo "${TRAMPOLINE_IMAGE}" | cut -d/ -f1)
+        if [[ ! "${TRAMPOLINE_HOST}" =~ "gcr.io" ]]; then
+            # If you need to specificy a host other than gcr.io, you have to run on an update version of gcloud.
+            echo "TRAMPOLINE_HOST: ${TRAMPOLINE_HOST}"
+            gcloud components update
+            gcloud auth configure-docker "${TRAMPOLINE_HOST}"
+        else
+            gcloud auth configure-docker --quiet
+        fi
     fi
     pass_down_envvars+=(
 	# KOKORO dynamic variables.
