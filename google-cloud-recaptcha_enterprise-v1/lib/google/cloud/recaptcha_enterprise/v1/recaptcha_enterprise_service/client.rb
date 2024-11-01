@@ -289,8 +289,8 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     `projects/{project}/assessments/{assessment}`.
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that is assigned to the Event. This field can
-            #     be left empty to provide reasons that apply to an event without concluding
+            #     Optional. The annotation that is assigned to the Event. This field can be
+            #     left empty to provide reasons that apply to an event without concluding
             #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
             #     Optional. Reasons for the annotation that are assigned to the event.
@@ -480,7 +480,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project that contains the keys that are
+            #     Required. The name of the project that contains the keys that is
             #     listed, in the format `projects/{project}`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of keys to return. Default is 10. Max limit is
@@ -1105,6 +1105,199 @@ module Google
             end
 
             ##
+            # Removes an IP override from a key. The following restrictions hold:
+            # * If the IP isn't found in an existing IP override, a `NOT_FOUND` error
+            # is returned.
+            # * If the IP is found in an existing IP override, but the
+            # override type does not match, a `NOT_FOUND` error is returned.
+            #
+            # @overload remove_ip_override(request, options = nil)
+            #   Pass arguments to `remove_ip_override` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_ip_override(name: nil, ip_override_data: nil)
+            #   Pass arguments to `remove_ip_override` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the key from which the IP override is removed, in the
+            #     format `projects/{project}/keys/{key}`.
+            #   @param ip_override_data [::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData, ::Hash]
+            #     Required. IP override to be removed from the key.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideRequest.new
+            #
+            #   # Call the remove_ip_override method.
+            #   result = client.remove_ip_override request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideResponse.
+            #   p result
+            #
+            def remove_ip_override request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::RemoveIpOverrideRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_ip_override.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.remove_ip_override.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_ip_override.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :remove_ip_override, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all IP overrides for a key.
+            #
+            # @overload list_ip_overrides(request, options = nil)
+            #   Pass arguments to `list_ip_overrides` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::ListIpOverridesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::ListIpOverridesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_ip_overrides(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_ip_overrides` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent key for which the IP overrides are listed, in the
+            #     format `projects/{project}/keys/{key}`.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of overrides to return. Default is 10. Max
+            #     limit is 100. If the number of overrides is less than the page_size, all
+            #     overrides are returned. If the page size is more than 100, it is coerced to
+            #     100.
+            #   @param page_token [::String]
+            #     Optional. The next_page_token value returned from a previous
+            #     ListIpOverridesRequest, if any.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::ListIpOverridesRequest.new
+            #
+            #   # Call the list_ip_overrides method.
+            #   result = client.list_ip_overrides request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData.
+            #     p item
+            #   end
+            #
+            def list_ip_overrides request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::ListIpOverridesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_ip_overrides.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_ip_overrides.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_ip_overrides.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :list_ip_overrides, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @recaptcha_enterprise_service_stub, :list_ip_overrides, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Get some aggregated metrics for a Key. This data can be used to build
             # dashboards.
             #
@@ -1213,7 +1406,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project this policy will apply to, in the format
+            #     Required. The name of the project this policy applies to, in the format
             #     `projects/{project}`.
             #   @param firewall_policy [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy, ::Hash]
             #     Required. Information to create the policy.
@@ -2260,6 +2453,16 @@ module Google
                 #
                 attr_reader :add_ip_override
                 ##
+                # RPC-specific configuration for `remove_ip_override`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_ip_override
+                ##
+                # RPC-specific configuration for `list_ip_overrides`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_ip_overrides
+                ##
                 # RPC-specific configuration for `get_metrics`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2332,6 +2535,10 @@ module Google
                   @migrate_key = ::Gapic::Config::Method.new migrate_key_config
                   add_ip_override_config = parent_rpcs.add_ip_override if parent_rpcs.respond_to? :add_ip_override
                   @add_ip_override = ::Gapic::Config::Method.new add_ip_override_config
+                  remove_ip_override_config = parent_rpcs.remove_ip_override if parent_rpcs.respond_to? :remove_ip_override
+                  @remove_ip_override = ::Gapic::Config::Method.new remove_ip_override_config
+                  list_ip_overrides_config = parent_rpcs.list_ip_overrides if parent_rpcs.respond_to? :list_ip_overrides
+                  @list_ip_overrides = ::Gapic::Config::Method.new list_ip_overrides_config
                   get_metrics_config = parent_rpcs.get_metrics if parent_rpcs.respond_to? :get_metrics
                   @get_metrics = ::Gapic::Config::Method.new get_metrics_config
                   create_firewall_policy_config = parent_rpcs.create_firewall_policy if parent_rpcs.respond_to? :create_firewall_policy

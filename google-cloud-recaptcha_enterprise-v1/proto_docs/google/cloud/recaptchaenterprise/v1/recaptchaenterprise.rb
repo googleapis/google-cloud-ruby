@@ -162,8 +162,8 @@ module Google
         #     `projects/{project}/assessments/{assessment}`.
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that is assigned to the Event. This field can
-        #     be left empty to provide reasons that apply to an event without concluding
+        #     Optional. The annotation that is assigned to the Event. This field can be
+        #     left empty to provide reasons that apply to an event without concluding
         #     whether the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
@@ -477,7 +477,7 @@ module Google
         # @!attribute [rw] express
         #   @return [::Boolean]
         #     Optional. Flag for a reCAPTCHA express request for an assessment without a
-        #     token. If enabled, `site_key` must reference an express key.
+        #     token. If enabled, `site_key` must reference an Express site key.
         # @!attribute [rw] requested_uri
         #   @return [::String]
         #     Optional. The URI resource the user requested that triggered an assessment.
@@ -500,7 +500,7 @@ module Google
         # @!attribute [rw] transaction_data
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TransactionData]
         #     Optional. Data describing a payment transaction to be assessed. Sending
-        #     this data enables reCAPTCHA Fraud Prevention and the
+        #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
         #     FraudPreventionAssessment component in the response.
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::UserInfo]
@@ -1023,7 +1023,7 @@ module Google
         # The list keys request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project that contains the keys that are
+        #     Required. The name of the project that contains the keys that is
         #     listed, in the format `projects/{project}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -1097,7 +1097,7 @@ module Google
         # The create firewall policy request message.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project this policy will apply to, in the format
+        #     Required. The name of the project this policy applies to, in the format
         #     `projects/{project}`.
         # @!attribute [rw] firewall_policy
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallPolicy]
@@ -1236,7 +1236,7 @@ module Google
         # @!attribute [rw] challenge_metrics
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::ChallengeMetrics>]
         #     Metrics are continuous and in order by dates, and in the granularity
-        #     of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
+        #     of day. Only challenge-based keys (CHECKBOX, INVISIBLE) have
         #     challenge-based data.
         class Metrics
           include ::Google::Protobuf::MessageExts
@@ -1276,7 +1276,7 @@ module Google
         #     Settings for keys that can be used by iOS apps.
         # @!attribute [rw] express_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ExpressKeySettings]
-        #     Settings specific to keys that can be used for reCAPTCHA Express.
+        #     Settings for keys that can be used by reCAPTCHA Express.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See [Creating and managing labels]
@@ -1307,12 +1307,12 @@ module Google
         # Options for user acceptance testing.
         # @!attribute [rw] testing_score
         #   @return [::Float]
-        #     Optional. All assessments for this Key will return this score. Must be
-        #     between 0 (likely not legitimate) and 1 (likely legitimate) inclusive.
+        #     Optional. All assessments for this Key return this score. Must be between 0
+        #     (likely not legitimate) and 1 (likely legitimate) inclusive.
         # @!attribute [rw] testing_challenge
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions::TestingChallenge]
         #     Optional. For challenge-based keys only (CHECKBOX, INVISIBLE), all
-        #     challenge requests for this site will return nocaptcha if NOCAPTCHA, or an
+        #     challenge requests for this site return nocaptcha if NOCAPTCHA, or an
         #     unsolvable challenge if CHALLENGE.
         class TestingOptions
           include ::Google::Protobuf::MessageExts
@@ -1338,7 +1338,7 @@ module Google
         # Settings specific to keys that can be used by websites.
         # @!attribute [rw] allow_all_domains
         #   @return [::Boolean]
-        #     Optional. If set to true, it means allowed_domains will not be enforced.
+        #     Optional. If set to true, it means allowed_domains are not enforced.
         # @!attribute [rw] allowed_domains
         #   @return [::Array<::String>]
         #     Optional. Domains or subdomains of websites allowed to use the key. All
@@ -1356,7 +1356,7 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings::ChallengeSecurityPreference]
         #     Optional. Settings for the frequency and difficulty at which this key
         #     triggers captcha challenges. This should only be specified for
-        #     IntegrationTypes CHECKBOX and INVISIBLE.
+        #     IntegrationTypes CHECKBOX and INVISIBLE and SCORE_AND_CHALLENGE.
         class WebKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1427,10 +1427,10 @@ module Google
         # @!attribute [rw] apple_developer_id
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AppleDeveloperId]
         #     Optional. Apple Developer account details for the app that is protected by
-        #     the reCAPTCHA Key. reCAPTCHA Enterprise leverages platform-specific checks
-        #     like Apple App Attest and Apple DeviceCheck to protect your app from abuse.
-        #     Providing these fields allows reCAPTCHA Enterprise to get a better
-        #     assessment of the integrity of your app.
+        #     the reCAPTCHA Key. reCAPTCHA leverages platform-specific checks like Apple
+        #     App Attest and Apple DeviceCheck to protect your app from abuse. Providing
+        #     these fields allows reCAPTCHA to get a better assessment of the integrity
+        #     of your app.
         class IOSKeySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1547,23 +1547,23 @@ module Google
         #     access to the requested resource.
         # @!attribute [rw] block
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::BlockAction]
-        #     This action will deny access to a given page. The user will get an HTTP
+        #     This action denies access to a given page. The user gets an HTTP
         #     error code.
         # @!attribute [rw] include_recaptcha_script
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::IncludeRecaptchaScriptAction]
-        #     This action will inject reCAPTCHA JavaScript code into the HTML page
+        #     This action injects reCAPTCHA JavaScript code into the HTML page
         #     returned by the site backend.
         # @!attribute [rw] redirect
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::RedirectAction]
-        #     This action will redirect the request to a ReCaptcha interstitial to
+        #     This action redirects the request to a reCAPTCHA interstitial to
         #     attach a token.
         # @!attribute [rw] substitute
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::SubstituteAction]
-        #     This action will transparently serve a different page to an offending
+        #     This action transparently serves a different page to an offending
         #     user.
         # @!attribute [rw] set_header
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::SetHeaderAction]
-        #     This action will set a custom header but allow the request to continue
+        #     This action sets a custom header but allow the request to continue
         #     to the customer backend.
         class FirewallAction
           include ::Google::Protobuf::MessageExts
@@ -1593,7 +1593,7 @@ module Google
           end
 
           # A redirect action returns a 307 (temporary redirect) response, pointing
-          # the user to a ReCaptcha interstitial page to attach a token.
+          # the user to a reCAPTCHA interstitial page to attach a token.
           class RedirectAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1809,6 +1809,58 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The removeIpOverride request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the key from which the IP override is removed, in the
+        #     format `projects/{project}/keys/{key}`.
+        # @!attribute [rw] ip_override_data
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData]
+        #     Required. IP override to be removed from the key.
+        class RemoveIpOverrideRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for RemoveIpOverride.
+        class RemoveIpOverrideResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The ListIpOverrides request message.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent key for which the IP overrides are listed, in the
+        #     format `projects/{project}/keys/{key}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of overrides to return. Default is 10. Max
+        #     limit is 100. If the number of overrides is less than the page_size, all
+        #     overrides are returned. If the page size is more than 100, it is coerced to
+        #     100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The next_page_token value returned from a previous
+        #     ListIpOverridesRequest, if any.
+        class ListIpOverridesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for ListIpOverrides.
+        # @!attribute [rw] ip_overrides
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::IpOverrideData>]
+        #     IP Overrides details.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results. If this field is empty, no keys
+        #     remain in the results.
+        class ListIpOverridesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A membership in a group of related accounts.
         # @!attribute [rw] name
         #   @return [::String]
@@ -1875,7 +1927,7 @@ module Google
             EXPRESS = 5
           end
 
-          # Web Application Firewalls supported by reCAPTCHA Enterprise.
+          # Web Application Firewalls supported by reCAPTCHA.
           module WafService
             # Undefined WAF
             WAF_SERVICE_UNSPECIFIED = 0
@@ -1888,6 +1940,9 @@ module Google
 
             # Cloudflare
             CLOUDFLARE = 4
+
+            # Akamai
+            AKAMAI = 5
           end
         end
 
