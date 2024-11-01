@@ -756,6 +756,7 @@
     "snippets/notebook_service/list_notebook_runtime_templates.rb",
     "snippets/notebook_service/list_notebook_runtimes.rb",
     "snippets/notebook_service/start_notebook_runtime.rb",
+    "snippets/notebook_service/stop_notebook_runtime.rb",
     "snippets/notebook_service/update_notebook_runtime_template.rb",
     "snippets/notebook_service/upgrade_notebook_runtime.rb",
     "snippets/persistent_resource_service/create_persistent_resource.rb",

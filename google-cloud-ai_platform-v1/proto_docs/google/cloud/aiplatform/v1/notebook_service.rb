@@ -384,6 +384,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::NotebookService::Client#stop_notebook_runtime NotebookService.StopNotebookRuntime}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NotebookRuntime resource to be stopped.
+        #     Instead of checking whether the name is in valid NotebookRuntime resource
+        #     name format, directly throw NotFound exception if there is no such
+        #     NotebookRuntime in spanner.
+        class StopNotebookRuntimeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata information for
+        # {::Google::Cloud::AIPlatform::V1::NotebookService::Client#stop_notebook_runtime NotebookService.StopNotebookRuntime}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        class StopNotebookRuntimeOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::NotebookService::Client#stop_notebook_runtime NotebookService.StopNotebookRuntime}.
+        class StopNotebookRuntimeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for [NotebookService.CreateNotebookExecutionJob]
         # @!attribute [rw] parent
         #   @return [::String]
