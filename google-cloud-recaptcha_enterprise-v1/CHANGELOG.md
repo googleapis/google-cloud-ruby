@@ -1,5 +1,15 @@
 # Release History
 
+### 1.3.0 (2024-11-04)
+
+#### Features
+
+* enable Akamai web application firewall 
+* support for ListIpOverrides and RemoveIpOverride ([#27532](https://github.com/googleapis/google-cloud-ruby/issues/27532)) 
+#### Documentation
+
+* minor updates to reference documentation 
+
 ### 1.2.0 (2024-08-30)
 
 #### Features
