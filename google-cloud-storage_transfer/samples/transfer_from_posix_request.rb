@@ -13,9 +13,12 @@
 # limitations under the License.
 
 # [START storagetransfer_transfer_from_posix]
-def posix_request project_id:, gcs_sink_bucket:, source_agent_pool_name:, root_directory:
+def posix_request project_id:, description:, gcs_sink_bucket:, source_agent_pool_name:, root_directory:
   # Your Google Cloud Project ID
   # # project_id = "your-project_id"
+
+  # A useful description for your transfer job
+  # description = 'My transfer job'
 
   # The name of the  GCS bucket to transfer objects to
   # gcs_sink_bucket = "your-sink-gcs-bucket"
@@ -31,6 +34,7 @@ def posix_request project_id:, gcs_sink_bucket:, source_agent_pool_name:, root_d
 
   transfer_job = {
     project_id: project_id,
+    description: description,
     transfer_spec: {
       source_agent_pool_name: source_agent_pool_name,
       posix_data_source: {
