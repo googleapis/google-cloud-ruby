@@ -477,6 +477,11 @@
                 "create_feature"
               ]
             },
+            "BatchCreateFeatures": {
+              "methods": [
+                "batch_create_features"
+              ]
+            },
             "GetFeature": {
               "methods": [
                 "get_feature"
