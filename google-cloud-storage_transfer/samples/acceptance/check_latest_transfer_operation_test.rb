@@ -20,7 +20,6 @@ describe "Storage Transfer Service check latest transfer operation" do
   let(:project) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
-  # {}let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
 
   before do
     grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name

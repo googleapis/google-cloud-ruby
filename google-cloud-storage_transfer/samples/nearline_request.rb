@@ -56,7 +56,7 @@ def create_daily_nearline_30_day_migration project_id:, description:, gcs_source
       start_time_of_day: {
         hours: start_date.hour,
         minutes: start_date.min,
-        seconds: start_date.sec + 5
+        seconds: start_date.sec
       }
     },
     status: :ENABLED
@@ -72,5 +72,5 @@ def create_daily_nearline_30_day_migration project_id:, description:, gcs_source
 end
 # [END storagetransfer_transfer_to_nearline]
 if $PROGRAM_NAME == __FILE__
-  create_daily_nearline_30_day_migration project_id: ARGV.shift, description: ARGV.shift ,gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, start_date: ARGV.shift
+  create_daily_nearline_30_day_migration project_id: ARGV.shift, description: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, start_date: ARGV.shift
 end
