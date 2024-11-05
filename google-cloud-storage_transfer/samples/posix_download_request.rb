@@ -14,68 +14,57 @@
 
 # [START storagetransfer_download_to_posix]
 def download_from_gcs project_id:, description:, sink_agent_pool_name:, destination_directory:, source_bucket:, gcs_source_path:
-	# Your Google Cloud Project ID
-	# project_id = "your-project_id"
+  # Your Google Cloud Project ID
+  # project_id = "your-project_id"
 
-	# A useful description for your transfer job
-	# description = 'My transfer job'
+  # A useful description for your transfer job
+  # description = 'My transfer job'
 
-	# The agent pool associated with the POSIX data sink.
-	# Defaults to 'projects/{project_id}/agentPools/transfer_service_default'
-	# sink_agent_pool_name = 'projects/my-project/agentPools/my-agent'
+  # The agent pool associated with the POSIX data sink.
+  # Defaults to 'projects/{project_id}/agentPools/transfer_service_default'
+  # sink_agent_pool_name = 'projects/my-project/agentPools/my-agent'
 
-	# The root directory path on the source filesystem
-	# root_directory = '/directory/to/transfer/source'
+  # The root directory path on the source filesystem
+  # root_directory = '/directory/to/transfer/source'
 
-	# Google Cloud Storage source bucket name
-    # source_bucket = 'my-gcs-source-bucket'
+  # Google Cloud Storage source bucket name
+  # source_bucket = 'my-gcs-source-bucket'
 
-    # An optional path on the Google Cloud Storage bucket to download from
-    # gcs_source_path = 'foo/bar/'
+  # An optional path on the Google Cloud Storage bucket to download from
+  # gcs_source_path = 'foo/bar/'
 
-	require "google/cloud/storage_transfer"
-  require "pry"
+  require "google/cloud/storage_transfer"
 
-	transfer_job = {
-		project_id: project_id,
-		description: description,
-		transfer_spec: {
-			sink_agent_pool_name: sink_agent_pool_name,
-			posix_data_sink: {
-				root_directory: destination_directory
-			},
-			gcs_data_source: {
-				bucket_name: source_bucket,
-				path: gcs_source_path
-			}
-		},
-		status: :ENABLED
-	}
+  transfer_job = {
+    project_id: project_id,
+    description: description,
+    transfer_spec: {
+      sink_agent_pool_name: sink_agent_pool_name,
+      posix_data_sink: {
+        root_directory: destination_directory
+      },
+      gcs_data_source: {
+        bucket_name: source_bucket,
+        path: gcs_source_path
+      }
+    },
+    status: :ENABLED
+  }
 
-	client = Google::Cloud::StorageTransfer.storage_transfer_service
+  client = Google::Cloud::StorageTransfer.storage_transfer_service
 
-	transfer_job_response = client.create_transfer_job transfer_job: transfer_job
+  transfer_job_response = client.create_transfer_job transfer_job: transfer_job
 
-	run_request = {
-		project_id: project_id,
-		job_name: transfer_job_response.name
-	}
-	client.run_transfer_job run_request
+  run_request = {
+    project_id: project_id,
+    job_name: transfer_job_response.name
+  }
+  client.run_transfer_job run_request
 
-	puts "Created and ran transfer job between #{source_bucket} and #{gcs_source_path} with name #{transfer_job_response.name}"
+  puts "Created and ran transfer job between #{source_bucket} and #{destination_directory} with name #{transfer_job_response.name}"
 end
 # [END storagetransfer_download_to_posix]
 
-project_id=  "storage-sdk-vendor"
-description= "test"
-sink_agent_pool_name=  "projects/storage-sdk-vendor/agentPools/shubhangi-test-pool"
-destination_directory= "/tmp/downloads/ruby_storagetransfer"
-source_bucket= "samplestorage3"
-gcs_source_path= "/"
-
-download_from_gcs project_id: project_id, description: description, sink_agent_pool_name: sink_agent_pool_name, destination_directory: destination_directory, source_bucket: source_bucket, gcs_source_path: gcs_source_path
-  
-# if $PROGRAM_NAME == __FILE__
-# 	download_from_gcs project_id: ARGV.shift, description: ARGV.shift, sink_agent_pool_name: ARGV.shift, destination_directory: ARGV.shift, source_bucket: ARGV.shift, gcs_source_path: ARGV.shift
-# end
-  
+if $PROGRAM_NAME == __FILE__
+  download_from_gcs project_id: ARGV.shift, description: ARGV.shift, sink_agent_pool_name: ARGV.shift, destination_directory: ARGV.shift, source_bucket: ARGV.shift, gcs_source_path: ARGV.shift
+end
