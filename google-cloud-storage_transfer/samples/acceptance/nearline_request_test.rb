@@ -16,6 +16,7 @@ require_relative "../nearline_request"
 
 describe "Storage Transfer Service To Nearline Transfer" do
   let(:project) { Google::Cloud::Storage.new }
+  let(:description) { "This is a nearline request transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_nearline_bucket_helper random_bucket_name }
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
@@ -34,7 +35,7 @@ describe "Storage Transfer Service To Nearline Transfer" do
 
   it "creates a transfer job" do
     out, _err = capture_io do
-      create_daily_nearline_30_day_migration project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
+      create_daily_nearline_30_day_migration project_id: project.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
@@ -45,7 +46,7 @@ describe "Storage Transfer Service To Nearline Transfer" do
   it "checks the file is created in destination bucket" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        create_daily_nearline_30_day_migration project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
+        create_daily_nearline_30_day_migration project_id: project.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
       end
     end
     # Object takes time to be created on bucket hence retrying
