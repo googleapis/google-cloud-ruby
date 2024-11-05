@@ -19,9 +19,10 @@ require "csv"
 
 describe "Storage Transfer Service manifest_request" do
   let(:project) { Google::Cloud::Storage.new }
+  let(:description) { "This is a posix download transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
-  let(:root_directory) { "/tmp/uploads" }
+  let(:root_directory) { Dir.mktmpdir }
   let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
   let(:dummy_file_path) { "#{root_directory}/#{dummy_file_name}" }
   let(:create_dummy_file) {
@@ -47,13 +48,14 @@ describe "Storage Transfer Service manifest_request" do
     grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
   end
   after do
-    # delete dummy file
-    if File.exist? dummy_file_path
-      File.delete dummy_file_path
-      puts "File deleted: #{dummy_file_path}"
+    # delete dummy file and folder
+    if Dir.exist? root_directory
+      FileUtils.rm_rf root_directory
+      puts "folder  deleted#{root_directory}."
     else
-      puts "File not found: #{dummy_file_path}"
+      puts "folder not found '#{root_directory}'"
     end
+    puts "Delete bucket"
     delete_bucket_helper source_bucket.name
     delete_bucket_helper sink_bucket.name
   end
@@ -61,7 +63,7 @@ describe "Storage Transfer Service manifest_request" do
   it "creates a transfer job" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
+        manifest_request project_id: project.project_id, description: description, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
     assert_includes out, "transferJobs"
@@ -72,7 +74,7 @@ describe "Storage Transfer Service manifest_request" do
   it "checks the file is created in destination bucket" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        manifest_request project_id: project.project_id, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
+        manifest_request project_id: project.project_id, description: description, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
     # Object takes time to be created on bucket hence retrying

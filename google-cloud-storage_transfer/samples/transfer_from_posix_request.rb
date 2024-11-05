@@ -60,5 +60,5 @@ end
 # [END storagetransfer_transfer_from_posix]
 
 if $PROGRAM_NAME == __FILE__
-  posix_request project_id: ARGV.shift, gcs_sink_bucket: ARGV.shift, source_agent_pool_name: ARGV.shift, root_directory: ARGV.shift
+  posix_request project_id: ARGV.shift, description: ARGV.shift, gcs_sink_bucket: ARGV.shift, source_agent_pool_name: ARGV.shift, root_directory: ARGV.shift
 end

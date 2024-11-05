@@ -17,6 +17,7 @@ require "google/cloud/pubsub"
 
 describe "Storage Transfer Service Event Driven Gcs Transfer" do
   let(:project) { Google::Cloud::Storage.new }
+  let(:description) { "This is an event driven gcs transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
   let :pubsub do
@@ -58,7 +59,7 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
 
   it "creates a transfer job" do
     out, _err = capture_io do
-      create_event_driven_gcs_transfer project_id: project.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name
+      create_event_driven_gcs_transfer project_id: project.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first

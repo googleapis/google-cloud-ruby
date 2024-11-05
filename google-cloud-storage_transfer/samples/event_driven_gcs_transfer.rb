@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # [START storagetransfer_create_event_driven_gcs_transfer]
-def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_bucket:, pubsub_id:
+def create_event_driven_gcs_transfer project_id:, description:, gcs_source_bucket:, gcs_sink_bucket:, pubsub_id:
   # Your Google Cloud Project ID
   # project_id = "your-project_id"
 
@@ -29,6 +29,7 @@ def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_b
 
   transfer_job = {
     project_id: project_id,
+    description: description,
     transfer_spec: {
       gcs_data_source: {
         bucket_name: gcs_source_bucket
@@ -53,5 +54,5 @@ def create_event_driven_gcs_transfer project_id:, gcs_source_bucket:, gcs_sink_b
 end
 # [END storagetransfer_create_event_driven_gcs_transfer]
 if $PROGRAM_NAME == __FILE__
-  create_event_driven_gcs_transfer project_id: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, pubsub_id: ARGV.shift
+  create_event_driven_gcs_transfer project_id: ARGV.shift, description: ARGV.shift, gcs_source_bucket: ARGV.shift, gcs_sink_bucket: ARGV.shift, pubsub_id: ARGV.shift
 end

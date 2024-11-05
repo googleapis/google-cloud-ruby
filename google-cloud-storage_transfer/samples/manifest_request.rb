@@ -15,7 +15,7 @@
 # [START storagetransfer_manifest_request]
 
 
-def manifest_request project_id:, gcs_sink_bucket:, manifest_location:, source_agent_pool_name:, root_directory:
+def manifest_request project_id:, description:, gcs_sink_bucket:, manifest_location:, source_agent_pool_name:, root_directory:
   # Your Google Cloud Project ID
   # # project_id = "your-project_id"
 
@@ -39,6 +39,7 @@ def manifest_request project_id:, gcs_sink_bucket:, manifest_location:, source_a
 
   transfer_job = {
     project_id: project_id,
+    description: description,
     transfer_spec: {
       source_agent_pool_name: source_agent_pool_name,
       posix_data_source: {
@@ -66,5 +67,5 @@ end
 # [END storagetransfer_manifest_request]
 
 if $PROGRAM_NAME == __FILE__
-  manifest_request project_id: ARGV.shift, gcs_sink_bucket: ARGV.shift, manifest_location: ARGV.shift, source_agent_pool_name: ARGV.shift, root_directory: ARGV.shift
+  manifest_request project_id: ARGV.shift, description: ARGV.shift, gcs_sink_bucket: ARGV.shift, manifest_location: ARGV.shift, source_agent_pool_name: ARGV.shift, root_directory: ARGV.shift
 end
