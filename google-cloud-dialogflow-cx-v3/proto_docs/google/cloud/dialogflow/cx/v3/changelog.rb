@@ -27,7 +27,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent containing the changelogs.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] filter
           #   @return [::String]
           #     The filter string. Supports filter by user_email, resource, type and
@@ -83,8 +83,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the changelog to get.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/changelogs/<Changelog ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/changelogs/<ChangelogID>`.
           class GetChangelogRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,8 +94,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The unique identifier of the changelog.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/changelogs/<Changelog ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/changelogs/<ChangelogID>`.
           # @!attribute [rw] user_email
           #   @return [::String]
           #     Email address of the authenticated user.

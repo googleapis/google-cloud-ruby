@@ -25,8 +25,8 @@ module Google
           # Settings for Generative AI.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/generativeSettings`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generativeSettings`.
           # @!attribute [rw] fallback_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::GenerativeSettings::FallbackSettings]
           #     Settings for Generative Fallback.

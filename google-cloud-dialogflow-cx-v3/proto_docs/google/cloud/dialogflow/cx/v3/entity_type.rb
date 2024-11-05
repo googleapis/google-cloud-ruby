@@ -56,8 +56,8 @@ module Google
           #     The unique identifier of the entity type.
           #     Required for
           #     {::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#update_entity_type EntityTypes.UpdateEntityType}.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/entityTypes/<Entity Type ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the entity type, unique within the
@@ -165,13 +165,12 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the parent agent to export entity types.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] entity_types
           #   @return [::Array<::String>]
           #     Required. The name of the entity types to export.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/entityTypes/<EntityType ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
           # @!attribute [rw] entity_types_uri
           #   @return [::String]
           #     Optional. The [Google Cloud
@@ -252,7 +251,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to import the entity types into.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] entity_types_uri
           #   @return [::String]
           #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
@@ -273,8 +272,8 @@ module Google
           # @!attribute [rw] target_entity_type
           #   @return [::String]
           #     Optional. The target entity type to import into.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/entity_types/<EntityType ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entity_types/<EntityTypeID>`.
           #     If set, there should be only one entity type included in
           #     [entity_types][google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.entity_types],
           #     of which the type should match the type of the target entity type. All
@@ -316,8 +315,8 @@ module Google
           # @!attribute [rw] entity_types
           #   @return [::Array<::String>]
           #     The unique identifier of the imported entity types.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/entity_types/<EntityType ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entity_types/<EntityTypeID>`.
           # @!attribute [rw] conflicting_resources
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportEntityTypesResponse::ConflictingResources]
           #     Info which resources have conflicts when
@@ -355,7 +354,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to list all entity types for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to list entity types for. The following fields are language
@@ -402,8 +401,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the entity type.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/entityTypes/<Entity Type ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to retrieve the entity type for. The following fields are
@@ -428,7 +427,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to create a entity type for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] entity_type
           #   @return [::Google::Cloud::Dialogflow::CX::V3::EntityType]
           #     Required. The entity type to create.
@@ -481,8 +480,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the entity type to delete.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/entityTypes/<Entity Type ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
           # @!attribute [rw] force
           #   @return [::Boolean]
           #     This field has no effect for entity type not being used.

@@ -91,9 +91,10 @@ module Google
           # @!attribute [rw] session
           #   @return [::String]
           #     Required. The name of the session this query is sent to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<Session
+          #     ID>` or
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
           #     If `Environment ID` is not specified, we assume default 'draft'
           #     environment.
           #     It's up to the API caller to choose an appropriate `Session ID`. It can be
@@ -207,9 +208,10 @@ module Google
           # @!attribute [rw] session
           #   @return [::String]
           #     The name of the session this query is sent to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+          #     or
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
           #     If `Environment ID` is not specified, we assume default 'draft'
           #     environment.
           #     It's up to the API caller to choose an appropriate `Session ID`. It can be
@@ -522,8 +524,8 @@ module Google
           #   @return [::String]
           #     The unique identifier of the {::Google::Cloud::Dialogflow::CX::V3::Page page} to
           #     override the [current page][QueryResult.current_page] in the session.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           #
           #     If `current_page` is specified, the previous state of the session will be
           #     ignored by Dialogflow, including the [previous
@@ -553,8 +555,8 @@ module Google
           # @!attribute [rw] flow_versions
           #   @return [::Array<::String>]
           #     A list of flow versions to override for the request.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/versions/<Version ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
           #
           #     If version 1 of flow X is included in this list, the traffic of
           #     flow X will go through version 1 regardless of the version configuration in
@@ -679,9 +681,93 @@ module Google
             #
             #     Setting to 0.0 means no boost applied. The boosting condition is
             #     ignored.
+            # @!attribute [rw] boost_control_spec
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec::BoostControlSpec]
+            #     Optional. Complex specification for custom ranking based on customer
+            #     defined attribute value.
             class ConditionBoostSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Specification for custom ranking based on customer specified attribute
+              # value. It provides more controls for customized ranking than the simple
+              # (condition, boost) combination above.
+              # @!attribute [rw] field_name
+              #   @return [::String]
+              #     Optional. The name of the field whose value will be used to determine
+              #     the boost amount.
+              # @!attribute [rw] attribute_type
+              #   @return [::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec::BoostControlSpec::AttributeType]
+              #     Optional. The attribute type to be used to determine the boost amount.
+              #     The attribute value can be derived from the field value of the
+              #     specified field_name. In the case of numerical it is straightforward
+              #     i.e. attribute_value = numerical_field_value. In the case of freshness
+              #     however, attribute_value = (time.now() - datetime_field_value).
+              # @!attribute [rw] interpolation_type
+              #   @return [::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec::BoostControlSpec::InterpolationType]
+              #     Optional. The interpolation type to be applied to connect the control
+              #     points listed below.
+              # @!attribute [rw] control_points
+              #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec::BoostControlSpec::ControlPoint>]
+              #     Optional. The control points used to define the curve. The monotonic
+              #     function (defined through the interpolation_type above) passes through
+              #     the control points listed here.
+              class BoostControlSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # The control points used to define the curve. The curve defined
+                # through these control points can only be monotonically increasing
+                # or decreasing(constant values are acceptable).
+                # @!attribute [rw] attribute_value
+                #   @return [::String]
+                #     Optional. Can be one of:
+                #     1. The numerical field value.
+                #     2. The duration spec for freshness:
+                #     The value must be formatted as an XSD `dayTimeDuration` value (a
+                #     restricted subset of an ISO 8601 duration value). The pattern for
+                #     this is: `[nD][T[nH][nM][nS]]`.
+                # @!attribute [rw] boost_amount
+                #   @return [::Float]
+                #     Optional. The value between -1 to 1 by which to boost the score if
+                #     the attribute_value evaluates to the value specified above.
+                class ControlPoint
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+                end
+
+                # The attribute(or function) for which the custom ranking is to be
+                # applied.
+                module AttributeType
+                  # Unspecified AttributeType.
+                  ATTRIBUTE_TYPE_UNSPECIFIED = 0
+
+                  # The value of the numerical field will be used to dynamically update
+                  # the boost amount. In this case, the attribute_value (the x value)
+                  # of the control point will be the actual value of the numerical
+                  # field for which the boost_amount is specified.
+                  NUMERICAL = 1
+
+                  # For the freshness use case the attribute value will be the duration
+                  # between the current time and the date in the datetime field
+                  # specified. The value must be formatted as an XSD `dayTimeDuration`
+                  # value (a restricted subset of an ISO 8601 duration value). The
+                  # pattern for this is: `[nD][T[nH][nM][nS]]`.
+                  # E.g. `5D`, `3DT12H30M`, `T24H`.
+                  FRESHNESS = 2
+                end
+
+                # The interpolation type to be applied. Default will be linear
+                # (Piecewise Linear).
+                module InterpolationType
+                  # Interpolation type is unspecified. In this case, it defaults to
+                  # Linear.
+                  INTERPOLATION_TYPE_UNSPECIFIED = 0
+
+                  # Piecewise linear interpolation will be applied.
+                  LINEAR = 1
+                end
+              end
             end
           end
 
@@ -765,8 +851,7 @@ module Google
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
@@ -904,8 +989,8 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals]
           #     Optional. Data store connection feature output signals.
           #     Filled only when data stores are involved in serving the query and
-          #     DetectIntentRequest.populate data_store_connection_quality_signals is set
-          #     to true in the request.
+          #     DetectIntentRequest.populate_data_store_connection_signals is set to true
+          #     in the request.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -925,8 +1010,8 @@ module Google
           # @!attribute [rw] intent
           #   @return [::String]
           #     Required. The unique identifier of the intent.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           class IntentInput
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1058,9 +1143,10 @@ module Google
           # @!attribute [rw] session
           #   @return [::String]
           #     Required. The name of the session this query is sent to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+          #     or
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`.
           #     If `Environment ID` is not specified, we assume default 'draft'
           #     environment.
           #     It's up to the API caller to choose an appropriate `Session ID`. It can be
@@ -1092,8 +1178,7 @@ module Google
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
@@ -1168,7 +1253,7 @@ module Google
           # @!attribute [rw] score
           #   @return [::Float]
           #     Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
-          #     sentiment).
+          #      sentiment).
           # @!attribute [rw] magnitude
           #   @return [::Float]
           #     A non-negative number in the [0, +inf) range, which represents the absolute

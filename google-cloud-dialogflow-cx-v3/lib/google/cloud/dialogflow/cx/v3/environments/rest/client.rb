@@ -214,8 +214,8 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to list all
-                #     environments for. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>`.
+                #     environments for. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 20 and
                 #     at most 100.
@@ -307,8 +307,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the
                 #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Environment]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -398,7 +397,7 @@ module Google
                 #   @param parent [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
                 #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param environment [::Google::Cloud::Dialogflow::CX::V3::Environment, ::Hash]
                 #     Required. The environment to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -588,8 +587,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the
                 #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -670,8 +668,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the environment to look up the history for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 100 and
                 #     at most 1000.
@@ -770,8 +768,8 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param environment [::String]
-                #     Required. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>/environments/<Environment ID>`.
+                #     Required. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -859,8 +857,8 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The environment to list results for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-                #     environments/<Environment ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 100 and
                 #     at most 1000.
@@ -960,12 +958,12 @@ module Google
                 #
                 #   @param environment [::String]
                 #     Required. The environment to deploy the flow to.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-                #     environments/<Environment ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 #   @param flow_version [::String]
                 #     Required. The flow version to deploy.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-                #     flows/<Flow ID>/versions/<Version ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Gapic::Operation]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

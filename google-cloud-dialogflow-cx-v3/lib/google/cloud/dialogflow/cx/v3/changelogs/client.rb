@@ -204,7 +204,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The agent containing the changelogs.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
               #   @param filter [::String]
               #     The filter string. Supports filter by user_email, resource, type and
               #     create_time. Some examples:
@@ -322,8 +322,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the changelog to get.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/changelogs/<Changelog ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/changelogs/<ChangelogID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::Changelog]

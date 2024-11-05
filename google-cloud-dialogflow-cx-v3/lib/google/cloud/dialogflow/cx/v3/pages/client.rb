@@ -204,8 +204,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The flow to list all pages for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #   @param language_code [::String]
               #     The language to list pages for. The following fields are language
               #     dependent:
@@ -324,8 +324,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the page.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
               #   @param language_code [::String]
               #     The language to retrieve the page for. The following fields are language
               #     dependent:
@@ -438,8 +438,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The flow to create a page for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #   @param page [::Google::Cloud::Dialogflow::CX::V3::Page, ::Hash]
               #     Required. The page to create.
               #   @param language_code [::String]
@@ -667,8 +667,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the page to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/Flows/<flow ID>/pages/<Page ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/Flows/<flowID>/pages/<PageID>`.
               #   @param force [::Boolean]
               #     This field has no effect for pages with no incoming transitions.
               #     For pages with incoming transitions:

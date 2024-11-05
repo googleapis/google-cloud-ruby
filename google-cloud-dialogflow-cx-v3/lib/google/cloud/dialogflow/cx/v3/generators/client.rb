@@ -204,7 +204,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The agent to list all generators for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
               #   @param language_code [::String]
               #     The language to list generators for.
               #   @param page_size [::Integer]
@@ -303,8 +303,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the generator.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/generators/<Generator ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
               #   @param language_code [::String]
               #     The language to list generators for.
               #
@@ -393,7 +393,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The agent to create a generator for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
               #   @param generator [::Google::Cloud::Dialogflow::CX::V3::Generator, ::Hash]
               #     Required. The generator to create.
               #   @param language_code [::String]
@@ -577,8 +577,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the generator to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/generators/<Generator ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
               #   @param force [::Boolean]
               #     This field has no effect for generators not being used.
               #     For generators that are used by pages/flows/transition route groups:

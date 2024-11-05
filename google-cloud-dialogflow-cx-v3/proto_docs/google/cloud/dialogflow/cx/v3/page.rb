@@ -45,8 +45,8 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::Pages::Client#update_page Pages.UpdatePage} method.
           #     {::Google::Cloud::Dialogflow::CX::V3::Pages::Client#create_page Pages.CreatePage}
           #     populates the name automatically.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the page, unique within the flow.
@@ -76,11 +76,10 @@ module Google
           #     *   If multiple transition route groups within a page contain the same
           #         intent, then the first group in the ordered list takes precedence.
           #
-          #     Format:`projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`
-          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/transitionRouteGroups/<TransitionRouteGroup ID>` for agent-level
-          #     groups.
+          #     Format:`projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/transitionRouteGroups/<TransitionRouteGroupID>`
+          #     or
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/transitionRouteGroups/<TransitionRouteGroupID>`
+          #     for agent-level groups.
           # @!attribute [rw] transition_routes
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::TransitionRoute>]
           #     A list of transitions for the transition rules of this page.
@@ -147,11 +146,12 @@ module Google
             # @!attribute [rw] entity_type
             #   @return [::String]
             #     Required. The entity type of the parameter.
-            #     Format: `projects/-/locations/-/agents/-/entityTypes/<System Entity Type
-            #     ID>` for system entity types (for example,
+            #     Format:
+            #     `projects/-/locations/-/agents/-/entityTypes/<SystemEntityTypeID>` for
+            #     system entity types (for example,
             #     `projects/-/locations/-/agents/-/entityTypes/sys.date`), or
-            #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-            #     ID>/entityTypes/<Entity Type ID>` for developer entity types.
+            #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`
+            #     for developer entity types.
             # @!attribute [rw] is_list
             #   @return [::Boolean]
             #     Indicates whether the parameter represents a list of values.
@@ -255,13 +255,13 @@ module Google
           # @!attribute [rw] target_page
           #   @return [::String]
           #     The target page to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           class EventHandler
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -293,8 +293,8 @@ module Google
           # @!attribute [rw] intent
           #   @return [::String]
           #     The unique identifier of an {::Google::Cloud::Dialogflow::CX::V3::Intent Intent}.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           #     Indicates that the transition can only happen when the given intent is
           #     matched.
           #     At least one of `intent` or `condition` must be specified. When both
@@ -319,13 +319,13 @@ module Google
           # @!attribute [rw] target_page
           #   @return [::String]
           #     The target page to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           class TransitionRoute
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,8 +336,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The flow to list all pages for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to list pages for. The following fields are language
@@ -393,8 +393,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the page.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to retrieve the page for. The following fields are language
@@ -428,8 +428,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The flow to create a page for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           # @!attribute [rw] page
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Page]
           #     Required. The page to create.
@@ -501,8 +501,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the page to delete.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/Flows/<flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/Flows/<flowID>/pages/<PageID>`.
           # @!attribute [rw] force
           #   @return [::Boolean]
           #     This field has no effect for pages with no incoming transitions.
@@ -538,13 +538,13 @@ module Google
           # @!attribute [rw] target_page
           #   @return [::String]
           #     The target page to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           # @!attribute [rw] data_store_connections
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::DataStoreConnection>]
           #     Optional. List of related data store connections.
