@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.2.0 (2024-10-25)
+
+#### Features
+
+* Add `HeadlineOfferSubscriptionCost` and `HeadlineOfferInstallment` to `Attributes` ([#27461](https://github.com/googleapis/google-cloud-ruby/issues/27461)) 
+* Add `SubscriptionPeriod` enum 
+
 ### 0.1.3 (2024-08-30)
 
 #### Documentation

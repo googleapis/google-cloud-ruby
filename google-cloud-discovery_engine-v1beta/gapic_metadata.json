@@ -15,6 +15,11 @@
                 "complete_query"
               ]
             },
+            "AdvancedCompleteQuery": {
+              "methods": [
+                "advanced_complete_query"
+              ]
+            },
             "ImportSuggestionDenyListEntries": {
               "methods": [
                 "import_suggestion_deny_list_entries"
@@ -81,6 +86,11 @@
             "Search": {
               "methods": [
                 "search"
+              ]
+            },
+            "SearchLite": {
+              "methods": [
+                "search_lite"
               ]
             }
           }
@@ -327,6 +337,16 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client",
           "rpcs": {
+            "StreamGenerateGroundedContent": {
+              "methods": [
+                "stream_generate_grounded_content"
+              ]
+            },
+            "GenerateGroundedContent": {
+              "methods": [
+                "generate_grounded_content"
+              ]
+            },
             "CheckGrounding": {
               "methods": [
                 "check_grounding"
@@ -566,6 +586,21 @@
             "ListTargetSites": {
               "methods": [
                 "list_target_sites"
+              ]
+            },
+            "CreateSitemap": {
+              "methods": [
+                "create_sitemap"
+              ]
+            },
+            "DeleteSitemap": {
+              "methods": [
+                "delete_sitemap"
+              ]
+            },
+            "FetchSitemaps": {
+              "methods": [
+                "fetch_sitemaps"
               ]
             },
             "EnableAdvancedSiteSearch": {

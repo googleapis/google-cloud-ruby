@@ -1285,6 +1285,11 @@
                 "start_notebook_runtime"
               ]
             },
+            "StopNotebookRuntime": {
+              "methods": [
+                "stop_notebook_runtime"
+              ]
+            },
             "CreateNotebookExecutionJob": {
               "methods": [
                 "create_notebook_execution_job"

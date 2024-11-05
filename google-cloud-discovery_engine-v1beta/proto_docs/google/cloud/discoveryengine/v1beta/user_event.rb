@@ -34,6 +34,7 @@ module Google
         #     * `view-item-list`: View of a panel or ordered list of Documents.
         #     * `view-home-page`: View of the home page.
         #     * `view-category-page`: View of a category page, e.g. Home > Men > Jeans
+        #     * `add-feedback`: Add a user feedback.
         #
         #     Retail-related values:
         #
@@ -244,6 +245,10 @@ module Google
         # @!attribute [rw] media_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::MediaInfo]
         #     Media-specific info.
+        # @!attribute [rw] panels
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::PanelInfo>]
+        #     Optional. List of panels associated with this event.
+        #     Used for page-level impression data.
         class UserEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -430,7 +435,7 @@ module Google
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} resource
         #     full name, of the form:
-        #     `projects/{project_id}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
+        #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
         # @!attribute [rw] uri
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} URI - only
@@ -478,6 +483,9 @@ module Google
         #     Must be set if
         #     {::Google::Cloud::DiscoveryEngine::V1beta::PanelInfo#panel_position panel_position}
         #     is set.
+        # @!attribute [rw] documents
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::DocumentInfo>]
+        #     Optional. The document IDs associated with this panel.
         class PanelInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

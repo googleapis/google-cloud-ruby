@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-artifact_registry-v1",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "language": "RUBY",
     "apis": [
       {
@@ -892,6 +892,46 @@
       ]
     },
     {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_UpdateVersion_sync",
+      "title": "Snippet for the update_version call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_version.",
+      "file": "artifact_registry/update_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_version",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::Version",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateVersion",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateVersion",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListFiles_sync",
       "title": "Snippet for the list_files call in the ArtifactRegistry service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_files.",
@@ -955,6 +995,86 @@
         "method": {
           "short_name": "GetFile",
           "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetFile",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_DeleteFile_sync",
+      "title": "Snippet for the delete_file call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_file.",
+      "file": "artifact_registry/delete_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_file",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteFile",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteFile",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_UpdateFile_sync",
+      "title": "Snippet for the update_file call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_file.",
+      "file": "artifact_registry/update_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_file",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::File",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateFile",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateFile",
           "service": {
             "short_name": "ArtifactRegistry",
             "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
@@ -1155,6 +1275,206 @@
         "method": {
           "short_name": "DeleteTag",
           "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteTag",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_CreateRule_sync",
+      "title": "Snippet for the create_rule call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#create_rule.",
+      "file": "artifact_registry/create_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rule",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#create_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::Rule",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "CreateRule",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.CreateRule",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListRules_sync",
+      "title": "Snippet for the list_rules call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_rules.",
+      "file": "artifact_registry/list_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rules",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::ListRulesResponse",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListRules",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.ListRules",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_GetRule_sync",
+      "title": "Snippet for the get_rule call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_rule.",
+      "file": "artifact_registry/get_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rule",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::Rule",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetRule",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetRule",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_UpdateRule_sync",
+      "title": "Snippet for the update_rule call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_rule.",
+      "file": "artifact_registry/update_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_rule",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::Rule",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdateRule",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.UpdateRule",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_DeleteRule_sync",
+      "title": "Snippet for the delete_rule call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_rule.",
+      "file": "artifact_registry/delete_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_rule",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteRule",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteRule",
           "service": {
             "short_name": "ArtifactRegistry",
             "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
@@ -1447,6 +1767,206 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_UpdatePackage_sync",
+      "title": "Snippet for the update_package call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_package.",
+      "file": "artifact_registry/update_package.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_package",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#update_package",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::Package",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "UpdatePackage",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.UpdatePackage",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_ListAttachments_sync",
+      "title": "Snippet for the list_attachments call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_attachments.",
+      "file": "artifact_registry/list_attachments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_attachments",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#list_attachments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsResponse",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "ListAttachments",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.ListAttachments",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_GetAttachment_sync",
+      "title": "Snippet for the get_attachment call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_attachment.",
+      "file": "artifact_registry/get_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attachment",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ArtifactRegistry::V1::Attachment",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "GetAttachment",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.GetAttachment",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_CreateAttachment_sync",
+      "title": "Snippet for the create_attachment call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#create_attachment.",
+      "file": "artifact_registry/create_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_attachment",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#create_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "CreateAttachment",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.CreateAttachment",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "artifactregistry_v1_generated_ArtifactRegistry_DeleteAttachment_sync",
+      "title": "Snippet for the delete_attachment call in the ArtifactRegistry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_attachment.",
+      "file": "artifact_registry/delete_attachment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_attachment",
+        "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#delete_attachment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ArtifactRegistry::Client",
+          "full_name": "::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client"
+        },
+        "method": {
+          "short_name": "DeleteAttachment",
+          "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry.DeleteAttachment",
+          "service": {
+            "short_name": "ArtifactRegistry",
+            "full_name": "google.devtools.artifactregistry.v1.ArtifactRegistry"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

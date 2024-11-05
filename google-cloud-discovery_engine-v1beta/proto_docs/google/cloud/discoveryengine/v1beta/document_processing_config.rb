@@ -22,11 +22,11 @@ module Google
     module DiscoveryEngine
       module V1beta
         # A singleton resource of
-        # {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}. It's empty when
-        # {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} is created, which
-        # defaults to digital parser. The first call to
-        # [DataStoreService.UpdateDocumentProcessingConfig][] method will initialize
-        # the config.
+        # {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore}. If it's empty
+        # when {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} is created
+        # and {::Google::Cloud::DiscoveryEngine::V1beta::DataStore DataStore} is set to
+        # {::Google::Cloud::DiscoveryEngine::V1beta::DataStore::ContentConfig::CONTENT_REQUIRED DataStore.ContentConfig.CONTENT_REQUIRED},
+        # the default parser will default to digital parser.
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of the Document Processing Config.
@@ -53,6 +53,8 @@ module Google
         #     * `docx`: Override parsing config for DOCX files, only digital parsing and
         #     layout parsing are supported.
         #     * `pptx`: Override parsing config for PPTX files, only digital parsing and
+        #     layout parsing are supported.
+        #     * `xlsm`: Override parsing config for XLSM files, only digital parsing and
         #     layout parsing are supported.
         #     * `xlsx`: Override parsing config for XLSX files, only digital parsing and
         #     layout parsing are supported.

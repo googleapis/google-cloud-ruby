@@ -50,6 +50,13 @@ module Google
             # Gets a list of
             # [TargetSite][google.cloud.discoveryengine.v1beta.TargetSite]s.
             rpc :ListTargetSites, ::Google::Cloud::DiscoveryEngine::V1beta::ListTargetSitesRequest, ::Google::Cloud::DiscoveryEngine::V1beta::ListTargetSitesResponse
+            # Creates a [Sitemap][google.cloud.discoveryengine.v1beta.Sitemap].
+            rpc :CreateSitemap, ::Google::Cloud::DiscoveryEngine::V1beta::CreateSitemapRequest, ::Google::Longrunning::Operation
+            # Deletes a [Sitemap][google.cloud.discoveryengine.v1beta.Sitemap].
+            rpc :DeleteSitemap, ::Google::Cloud::DiscoveryEngine::V1beta::DeleteSitemapRequest, ::Google::Longrunning::Operation
+            # Fetch [Sitemap][google.cloud.discoveryengine.v1beta.Sitemap]s in a
+            # [DataStore][google.cloud.discoveryengine.v1beta.DataStore].
+            rpc :FetchSitemaps, ::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest, ::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsResponse
             # Upgrade from basic site search to advanced site search.
             rpc :EnableAdvancedSiteSearch, ::Google::Cloud::DiscoveryEngine::V1beta::EnableAdvancedSiteSearchRequest, ::Google::Longrunning::Operation
             # Downgrade from advanced site search to basic site search.

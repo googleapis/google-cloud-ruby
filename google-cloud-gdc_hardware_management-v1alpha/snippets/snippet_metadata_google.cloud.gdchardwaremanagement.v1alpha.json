@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-gdc_hardware_management-v1alpha",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -395,6 +395,46 @@
         "method": {
           "short_name": "UpdateSite",
           "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_sync",
+      "title": "Snippet for the delete_site call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_site.",
+      "file": "gdc_hardware_management/delete_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_site",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteSite",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
           "service": {
             "short_name": "GDCHardwareManagement",
             "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"

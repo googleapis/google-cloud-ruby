@@ -35,6 +35,8 @@ module Google
 
             # Completes the specified user input with keyword suggestions.
             rpc :CompleteQuery, ::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryRequest, ::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryResponse
+            # Completes the user input with advanced keyword suggestions.
+            rpc :AdvancedCompleteQuery, ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest, ::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryResponse
             # Imports all
             # [SuggestionDenyListEntry][google.cloud.discoveryengine.v1beta.SuggestionDenyListEntry]
             # for a DataStore.

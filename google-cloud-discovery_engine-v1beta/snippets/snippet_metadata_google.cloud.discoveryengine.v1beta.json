@@ -52,6 +52,46 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1beta_generated_CompletionService_AdvancedCompleteQuery_sync",
+      "title": "Snippet for the advanced_complete_query call in the CompletionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#advanced_complete_query.",
+      "file": "completion_service/advanced_complete_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "advanced_complete_query",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#advanced_complete_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::AdvancedCompleteQueryResponse",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "AdvancedCompleteQuery",
+          "full_name": "google.cloud.discoveryengine.v1beta.CompletionService.AdvancedCompleteQuery",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.discoveryengine.v1beta.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1beta_generated_CompletionService_ImportSuggestionDenyListEntries_sync",
       "title": "Snippet for the import_suggestion_deny_list_entries call in the CompletionService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#import_suggestion_deny_list_entries.",
@@ -435,6 +475,46 @@
         "method": {
           "short_name": "Search",
           "full_name": "google.cloud.discoveryengine.v1beta.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SearchService_SearchLite_sync",
+      "title": "Snippet for the search_lite call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search_lite.",
+      "file": "search_service/search_lite.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_lite",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search_lite",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client"
+        },
+        "method": {
+          "short_name": "SearchLite",
+          "full_name": "google.cloud.discoveryengine.v1beta.SearchService.SearchLite",
           "service": {
             "short_name": "SearchService",
             "full_name": "google.cloud.discoveryengine.v1beta.SearchService"
@@ -1972,6 +2052,86 @@
       ]
     },
     {
+      "region_tag": "discoveryengine_v1beta_generated_GroundedGenerationService_StreamGenerateGroundedContent_sync",
+      "title": "Snippet for the stream_generate_grounded_content call in the GroundedGenerationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#stream_generate_grounded_content.",
+      "file": "grounded_generation_service/stream_generate_grounded_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_generate_grounded_content",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#stream_generate_grounded_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse",
+        "client": {
+          "short_name": "GroundedGenerationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client"
+        },
+        "method": {
+          "short_name": "StreamGenerateGroundedContent",
+          "full_name": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.StreamGenerateGroundedContent",
+          "service": {
+            "short_name": "GroundedGenerationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.GroundedGenerationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 55,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_GroundedGenerationService_GenerateGroundedContent_sync",
+      "title": "Snippet for the generate_grounded_content call in the GroundedGenerationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#generate_grounded_content.",
+      "file": "grounded_generation_service/generate_grounded_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_grounded_content",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#generate_grounded_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentResponse",
+        "client": {
+          "short_name": "GroundedGenerationService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client"
+        },
+        "method": {
+          "short_name": "GenerateGroundedContent",
+          "full_name": "google.cloud.discoveryengine.v1beta.GroundedGenerationService.GenerateGroundedContent",
+          "service": {
+            "short_name": "GroundedGenerationService",
+            "full_name": "google.cloud.discoveryengine.v1beta.GroundedGenerationService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "discoveryengine_v1beta_generated_GroundedGenerationService_CheckGrounding_sync",
       "title": "Snippet for the check_grounding call in the GroundedGenerationService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Client#check_grounding.",
@@ -3247,6 +3407,126 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_CreateSitemap_sync",
+      "title": "Snippet for the create_sitemap call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#create_sitemap.",
+      "file": "site_search_engine_service/create_sitemap.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_sitemap",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#create_sitemap",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::CreateSitemapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "CreateSitemap",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.CreateSitemap",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_DeleteSitemap_sync",
+      "title": "Snippet for the delete_sitemap call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#delete_sitemap.",
+      "file": "site_search_engine_service/delete_sitemap.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_sitemap",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#delete_sitemap",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::DeleteSitemapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSitemap",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.DeleteSitemap",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1beta_generated_SiteSearchEngineService_FetchSitemaps_sync",
+      "title": "Snippet for the fetch_sitemaps call in the SiteSearchEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#fetch_sitemaps.",
+      "file": "site_search_engine_service/fetch_sitemaps.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_sitemaps",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client#fetch_sitemaps",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1beta::FetchSitemapsResponse",
+        "client": {
+          "short_name": "SiteSearchEngineService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1beta::SiteSearchEngineService::Client"
+        },
+        "method": {
+          "short_name": "FetchSitemaps",
+          "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService.FetchSitemaps",
+          "service": {
+            "short_name": "SiteSearchEngineService",
+            "full_name": "google.cloud.discoveryengine.v1beta.SiteSearchEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

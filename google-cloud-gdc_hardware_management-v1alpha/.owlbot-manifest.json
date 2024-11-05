@@ -60,6 +60,7 @@
     "snippets/gdc_hardware_management/delete_hardware.rb",
     "snippets/gdc_hardware_management/delete_hardware_group.rb",
     "snippets/gdc_hardware_management/delete_order.rb",
+    "snippets/gdc_hardware_management/delete_site.rb",
     "snippets/gdc_hardware_management/delete_zone.rb",
     "snippets/gdc_hardware_management/get_change_log_entry.rb",
     "snippets/gdc_hardware_management/get_comment.rb",

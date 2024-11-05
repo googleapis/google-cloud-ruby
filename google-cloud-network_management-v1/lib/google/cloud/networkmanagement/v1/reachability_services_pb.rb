@@ -73,7 +73,7 @@ module Google
             #
             # If the endpoint specifications in `ConnectivityTest` are incomplete, the
             # reachability result returns a value of `AMBIGUOUS`. See the documentation
-            # in `ConnectivityTest` for for more details.
+            # in `ConnectivityTest` for more details.
             rpc :UpdateConnectivityTest, ::Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest, ::Google::Longrunning::Operation
             # Rerun an existing `ConnectivityTest`.
             # After the user triggers the rerun, the reachability analysis is performed

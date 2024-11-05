@@ -147,6 +147,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A collection of turns for multi-speaker synthesis.
+        # @!attribute [rw] turns
+        #   @return [::Array<::Google::Cloud::TextToSpeech::V1beta1::MultiSpeakerMarkup::Turn>]
+        #     Required. Speaker turns.
+        class MultiSpeakerMarkup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A Multi-speaker turn.
+          # @!attribute [rw] speaker
+          #   @return [::String]
+          #     Required. The speaker of the turn, for example, 'O' or 'Q'. Please refer
+          #     to documentation for available speakers.
+          # @!attribute [rw] text
+          #   @return [::String]
+          #     Required. The text to speak.
+          class Turn
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Contains text input to be synthesized. Either `text` or `ssml` must be
         # supplied. Supplying both or neither returns
         # [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. The
@@ -161,6 +183,10 @@ module Google
         #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For
         #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
+        # @!attribute [rw] multi_speaker_markup
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::MultiSpeakerMarkup]
+        #     The multi-speaker input to be synthesized. Only applicable for
+        #     multi-speaker synthesis.
         # @!attribute [rw] custom_pronunciations
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::CustomPronunciations]
         #     Optional. The pronunciation customizations to be applied to the input. If
@@ -211,6 +237,11 @@ module Google
         #     The configuration for a custom voice. If [CustomVoiceParams.model] is set,
         #     the service will choose the custom voice matching the specified
         #     configuration.
+        # @!attribute [rw] voice_clone
+        #   @return [::Google::Cloud::TextToSpeech::V1beta1::VoiceCloneParams]
+        #     Optional. The configuration for a voice clone. If
+        #     [VoiceCloneParams.voice_clone_key] is set, the service will choose the
+        #     voice clone matching the specified configuration.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -290,6 +321,15 @@ module Google
             # customer service system and played repeatedly.
             OFFLINE = 2
           end
+        end
+
+        # The configuration of Voice Clone feature.
+        # @!attribute [rw] voice_cloning_key
+        #   @return [::String]
+        #     Required. Created by GenerateVoiceCloningKey.
+        class VoiceCloneParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The message returned to the client by the `SynthesizeSpeech` method.

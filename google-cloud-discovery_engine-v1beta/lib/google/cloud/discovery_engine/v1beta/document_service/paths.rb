@@ -127,6 +127,31 @@ module Google
             end
 
             ##
+            # Create a fully-qualified FhirResource resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/datasets/{dataset}/fhirStores/{fhir_store}/fhir/{resource_type}/{fhir_resource_id}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param dataset [String]
+            # @param fhir_store [String]
+            # @param resource_type [String]
+            # @param fhir_resource_id [String]
+            #
+            # @return [::String]
+            def fhir_resource_path project:, location:, dataset:, fhir_store:, resource_type:, fhir_resource_id:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+              raise ::ArgumentError, "fhir_store cannot contain /" if fhir_store.to_s.include? "/"
+              raise ::ArgumentError, "resource_type cannot contain /" if resource_type.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/datasets/#{dataset}/fhirStores/#{fhir_store}/fhir/#{resource_type}/#{fhir_resource_id}"
+            end
+
+            ##
             # Create a fully-qualified FhirStore resource string.
             #
             # The resource will be in the following format:

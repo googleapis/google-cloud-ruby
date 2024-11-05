@@ -48,6 +48,10 @@ module Google
             # into its own standalone cluster.
             # Imperative only.
             rpc :PromoteCluster, ::Google::Cloud::AlloyDB::V1::PromoteClusterRequest, ::Google::Longrunning::Operation
+            # Switches the roles of PRIMARY and SECONDARY clusters without any data loss.
+            # This promotes the SECONDARY cluster to PRIMARY and sets up the original
+            # PRIMARY cluster to replicate from this newly promoted cluster.
+            rpc :SwitchoverCluster, ::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest, ::Google::Longrunning::Operation
             # Creates a new Cluster in a given project and location, with a volume
             # restored from the provided source, either a backup ID or a point-in-time
             # and a source cluster.
@@ -88,6 +92,8 @@ module Google
             # Restart an Instance in a cluster.
             # Imperative only.
             rpc :RestartInstance, ::Google::Cloud::AlloyDB::V1::RestartInstanceRequest, ::Google::Longrunning::Operation
+            # Executes a SQL statement in a database inside an AlloyDB instance.
+            rpc :ExecuteSql, ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest, ::Google::Cloud::AlloyDB::V1::ExecuteSqlResponse
             # Lists Backups in a given project and location.
             rpc :ListBackups, ::Google::Cloud::AlloyDB::V1::ListBackupsRequest, ::Google::Cloud::AlloyDB::V1::ListBackupsResponse
             # Gets details of a single Backup.
@@ -118,6 +124,8 @@ module Google
             rpc :UpdateUser, ::Google::Cloud::AlloyDB::V1::UpdateUserRequest, ::Google::Cloud::AlloyDB::V1::User
             # Deletes a single User.
             rpc :DeleteUser, ::Google::Cloud::AlloyDB::V1::DeleteUserRequest, ::Google::Protobuf::Empty
+            # Lists Databases in a given project and location.
+            rpc :ListDatabases, ::Google::Cloud::AlloyDB::V1::ListDatabasesRequest, ::Google::Cloud::AlloyDB::V1::ListDatabasesResponse
           end
 
           Stub = Service.rpc_stub_class

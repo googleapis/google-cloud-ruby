@@ -63,6 +63,18 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::ClientPathsTest
     end
   end
 
+  def test_fhir_resource_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.fhir_resource_path project: "value0", location: "value1", dataset: "value2", fhir_store: "value3", resource_type: "value4", fhir_resource_id: "value5"
+      assert_equal "projects/value0/locations/value1/datasets/value2/fhirStores/value3/fhir/value4/value5", path
+    end
+  end
+
   def test_fhir_store_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

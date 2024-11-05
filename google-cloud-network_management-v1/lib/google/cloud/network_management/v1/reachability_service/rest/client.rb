@@ -525,7 +525,7 @@ module Google
               #
               # If the endpoint specifications in `ConnectivityTest` are incomplete, the
               # reachability result returns a value of `AMBIGUOUS`. See the documentation
-              # in `ConnectivityTest` for for more details.
+              # in `ConnectivityTest` for more details.
               #
               # @overload update_connectivity_test(request, options = nil)
               #   Pass arguments to `update_connectivity_test` via a request object, either of type

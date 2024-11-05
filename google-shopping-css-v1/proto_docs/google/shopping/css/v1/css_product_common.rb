@@ -198,6 +198,13 @@ module Google
         # @!attribute [rw] custom_label_4
         #   @return [::String]
         #     Custom label 4 for custom grouping of items in a Shopping campaign.
+        # @!attribute [rw] headline_offer_installment
+        #   @return [::Google::Shopping::Css::V1::HeadlineOfferInstallment]
+        #     Number and amount of installments to pay for an item.
+        # @!attribute [rw] headline_offer_subscription_cost
+        #   @return [::Google::Shopping::Css::V1::HeadlineOfferSubscriptionCost]
+        #     Number of periods (months or years) and amount of payment per period
+        #     for an item with an associated subscription contract.
         class Attributes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -352,6 +359,51 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # The SubscriptionCost of the product.
+        # @!attribute [rw] period
+        #   @return [::Google::Shopping::Css::V1::SubscriptionPeriod]
+        #     The type of subscription period.
+        #     Supported values are:
+        #       * "`month`"
+        #       * "`year`"
+        # @!attribute [rw] period_length
+        #   @return [::Integer]
+        #     The number of subscription periods the buyer has to pay.
+        # @!attribute [rw] amount
+        #   @return [::Google::Shopping::Type::Price]
+        #     The amount the buyer has to pay per subscription period.
+        class HeadlineOfferSubscriptionCost
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A message that represents installment.
+        # @!attribute [rw] months
+        #   @return [::Integer]
+        #     The number of installments the buyer has to pay.
+        # @!attribute [rw] amount
+        #   @return [::Google::Shopping::Type::Price]
+        #     The amount the buyer has to pay per month.
+        # @!attribute [rw] downpayment
+        #   @return [::Google::Shopping::Type::Price]
+        #     The up-front down payment amount the buyer has to pay.
+        class HeadlineOfferInstallment
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The subscription period of the product.
+        module SubscriptionPeriod
+          # Indicates that the subscription period is unspecified.
+          SUBSCRIPTION_PERIOD_UNSPECIFIED = 0
+
+          # Indicates that the subscription period is month.
+          MONTH = 1
+
+          # Indicates that the subscription period is year.
+          YEAR = 2
         end
       end
     end

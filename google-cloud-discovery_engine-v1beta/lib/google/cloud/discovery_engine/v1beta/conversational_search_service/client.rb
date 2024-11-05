@@ -203,16 +203,16 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Conversation to get. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`.
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`.
             #     Use
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/-`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/-`
             #     to activate auto session mode, which automatically creates a new
             #     conversation inside a ConverseConversation session.
             #   @param query [::Google::Cloud::DiscoveryEngine::V1beta::TextInput, ::Hash]
             #     Required. Current user input.
             #   @param serving_config [::String]
             #     The resource name of the Serving Config to use. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/servingConfigs/{serving_config_id}`
             #     If this is not set, the default serving config will be used.
             #   @param conversation [::Google::Cloud::DiscoveryEngine::V1beta::Conversation, ::Hash]
             #     The conversation to be used by auto session only. The name field will be
@@ -350,7 +350,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Full resource name of parent data store. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}`
             #   @param conversation [::Google::Cloud::DiscoveryEngine::V1beta::Conversation, ::Hash]
             #     Required. The conversation to create.
             #
@@ -442,7 +442,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Conversation to delete. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -628,7 +628,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Conversation to get. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/conversations/{conversation_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::Conversation]
@@ -716,7 +716,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The data store resource name. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}`
             #   @param page_size [::Integer]
             #     Maximum number of results to return. If unspecified, defaults
             #     to 50. Max allowed value is 1000.
@@ -824,7 +824,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload answer_query(serving_config: nil, query: nil, session: nil, safety_spec: nil, related_questions_spec: nil, answer_generation_spec: nil, search_spec: nil, query_understanding_spec: nil, asynchronous_mode: nil, user_pseudo_id: nil, user_labels: nil)
+            # @overload answer_query(serving_config: nil, query: nil, session: nil, safety_spec: nil, related_questions_spec: nil, grounding_spec: nil, answer_generation_spec: nil, search_spec: nil, query_understanding_spec: nil, asynchronous_mode: nil, user_pseudo_id: nil, user_labels: nil)
             #   Pass arguments to `answer_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -849,6 +849,8 @@ module Google
             #     Model specification.
             #   @param related_questions_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::RelatedQuestionsSpec, ::Hash]
             #     Related questions specification.
+            #   @param grounding_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::GroundingSpec, ::Hash]
+            #     Optional. Grounding specification.
             #   @param answer_generation_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::AnswerGenerationSpec, ::Hash]
             #     Answer generation specification.
             #   @param search_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::SearchSpec, ::Hash]
@@ -856,6 +858,9 @@ module Google
             #   @param query_understanding_spec [::Google::Cloud::DiscoveryEngine::V1beta::AnswerQueryRequest::QueryUnderstandingSpec, ::Hash]
             #     Query understanding specification.
             #   @param asynchronous_mode [::Boolean]
+            #     Deprecated: This field is deprecated. Streaming Answer API will be
+            #     supported.
+            #
             #     Asynchronous mode control.
             #
             #     If enabled, the response will be returned with answer/session resource
@@ -979,7 +984,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Answer to get. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/engines/{engine_id}/sessions/{session_id}/answers/{answer_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine_id}/sessions/{session_id}/answers/{answer_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::Answer]
@@ -1069,7 +1074,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Full resource name of parent data store. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}`
             #   @param session [::Google::Cloud::DiscoveryEngine::V1beta::Session, ::Hash]
             #     Required. The session to create.
             #
@@ -1161,7 +1166,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Session to delete. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1346,7 +1351,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Session to get. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}/sessions/{session_id}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::Session]
@@ -1434,7 +1439,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The data store resource name. Format:
-            #     `projects/{project_number}/locations/{location_id}/collections/{collection}/dataStores/{data_store_id}`
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store_id}`
             #   @param page_size [::Integer]
             #     Maximum number of results to return. If unspecified, defaults
             #     to 50. Max allowed value is 1000.

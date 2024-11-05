@@ -60,6 +60,11 @@
                 "update_site"
               ]
             },
+            "DeleteSite": {
+              "methods": [
+                "delete_site"
+              ]
+            },
             "ListHardwareGroups": {
               "methods": [
                 "list_hardware_groups"

@@ -25,49 +25,47 @@ module Google
         # settings information such as top-level enablement in addition to individual
         # module settings. Service settings can be configured at the organization,
         # folder, or project level. Service settings at the organization or folder
-        # level are inherited by those in child folders and projects.
+        # level are inherited by those in descendant folders and projects.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The name of the service.
+        #     Identifier. The name of the service, in one of the following formats:
         #
-        #     Its format is:
+        #     * `organizations/{organization}/locations/{location}/securityCenterServices/{service}`
+        #     * `folders/{folder}/locations/{location}/securityCenterServices/{service}`
+        #     * `projects/{project}/locations/{location}/securityCenterServices/{service}`
         #
-        #       * organizations/\\{organization}/locations/\\{location}/securityCenterServices/\\{service}
-        #       * folders/\\{folder}/locations/\\{location}/securityCenterServices/\\{service}
-        #       * projects/\\{project}/locations/\\{location}/securityCenterServices/\\{service}
+        #     The following values are valid for `{service}`:
         #
-        #     The possible values for id \\{service} are:
-        #
-        #       * container-threat-detection
-        #       * event-threat-detection
-        #       * security-health-analytics
-        #       * vm-threat-detection
-        #       * web-security-scanner
+        #     * `container-threat-detection`
+        #     * `event-threat-detection`
+        #     * `security-health-analytics`
+        #     * `vm-threat-detection`
+        #     * `web-security-scanner`
         # @!attribute [rw] intended_enablement_state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService::EnablementState]
-        #     Optional. The intended state of enablement for the service at its level of
-        #     the resource hierarchy. A DISABLED state will override all module
-        #     enablement_states to DISABLED.
+        #     Optional. The intended enablement state for the service at its level of the
+        #     resource hierarchy. A `DISABLED` state will override all module enablement
+        #     states to `DISABLED`.
         # @!attribute [r] effective_enablement_state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService::EnablementState]
         #     Output only. The effective enablement state for the service at its level of
-        #     the resource hierarchy. If the intended state is set to INHERITED, the
+        #     the resource hierarchy. If the intended state is set to `INHERITED`, the
         #     effective state will be inherited from the enablement state of an ancestor.
         #     This state may differ from the intended enablement state due to billing
         #     eligibility or onboarding status.
         # @!attribute [rw] modules
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService::ModuleSettings}]
-        #     Optional. The configurations including the state of enablement for the
-        #     service's different modules. The absence of a module in the map implies its
+        #     Optional. The module configurations, including the enablement state for the
+        #     service's modules. The absence of a module in the map implies that its
         #     configuration is inherited from its parents.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the service was last updated. This could be due to an
-        #     explicit user update or due to a side effect of another system change such
+        #     explicit user update or due to a side effect of another system change, such
         #     as billing subscription expiry.
         # @!attribute [rw] service_config
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. Additional service specific configuration. Not all services will
+        #     Optional. Additional service-specific configuration. Not all services will
         #     utilize this field.
         class SecurityCenterService
           include ::Google::Protobuf::MessageExts
@@ -76,16 +74,15 @@ module Google
           # The settings for individual modules.
           # @!attribute [rw] intended_enablement_state
           #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService::EnablementState]
-          #     Optional. The intended state of enablement for the module at its level of
+          #     Optional. The intended enablement state for the module at its level of
           #     the resource hierarchy.
           # @!attribute [r] effective_enablement_state
           #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService::EnablementState]
           #     Output only. The effective enablement state for the module at its level
-          #     of the resource hierarchy. If the intended state is set to INHERITED, the
-          #     effective state will be inherited from the enablement state of an
-          #     ancestor. This state may
-          #     differ from the intended enablement state due to billing eligibility or
-          #     onboarding status.
+          #     of the resource hierarchy. If the intended state is set to `INHERITED`,
+          #     the effective state will be inherited from the enablement state of an
+          #     ancestor. This state may differ from the intended enablement state due to
+          #     billing eligibility or onboarding status.
           class ModuleSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,14 +97,13 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Represents the possible intended states of enablement for a service or
-          # module.
+          # Represents the possible enablement states for a service or module.
           module EnablementState
             # Default value. This value is unused.
             ENABLEMENT_STATE_UNSPECIFIED = 0
 
-            # State is inherited from the parent resource. Not a valid effective
-            # enablement state.
+            # State is inherited from the parent resource. Valid as an intended
+            # enablement state, but not as an effective enablement state.
             INHERITED = 1
 
             # State is enabled.
@@ -116,36 +112,35 @@ module Google
             # State is disabled.
             DISABLED = 3
 
-            # SCC is configured to ingest findings from this service but not enable
-            # this service. Not a valid intended_enablement_state (that is, this is a
-            # readonly state).
+            # Security Command Center is configured to ingest findings from this
+            # service, but not to enable this service. This state indicates that
+            # Security Command Center is misconfigured. You can't set this state
+            # yourself.
             INGEST_ONLY = 4
           end
         end
 
-        # An EffectiveSecurityHealthAnalyticsCustomModule is the representation of
-        # a Security Health Analytics custom module at a specified level of the
-        # resource hierarchy: organization, folder, or project. If a custom module is
-        # inherited from a parent organization or folder, the value of the
-        # `enablementState` property in EffectiveSecurityHealthAnalyticsCustomModule is
-        # set to the value that is effective in the parent, instead of  `INHERITED`.
-        # For example, if the module is enabled in a parent organization or folder, the
-        # effective enablement_state for the module in all child folders or projects is
-        # also `enabled`. EffectiveSecurityHealthAnalyticsCustomModule is read-only.
+        # The representation of a Security Health Analytics custom module at a
+        # specified level of the resource hierarchy: organization, folder, or project.
+        # If a custom module is inherited from an ancestor organization or folder, then
+        # the enablement state is set to the value that is effective in the parent, not
+        # to `INHERITED`. For example, if the module is enabled in an organization or
+        # folder, then the effective enablement state for the module is `ENABLED` in
+        # all descendant folders or projects.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The full resource name of the custom module, specified in one
-        #     of the following formats:
+        #     Identifier. The full resource name of the custom module, in one of the
+        #     following formats:
         #
-        #     * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-        #     * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-        #     * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+        #     * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+        #     * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+        #     * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
         # @!attribute [r] custom_config
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::CustomConfig]
         #     Output only. The user-specified configuration for the module.
         # @!attribute [r] enablement_state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::EffectiveSecurityHealthAnalyticsCustomModule::EnablementState]
-        #     Output only. The effective state of enablement for the module at the given
+        #     Output only. The effective enablement state for the module at the given
         #     level of the hierarchy.
         # @!attribute [r] display_name
         #   @return [::String]
@@ -158,7 +153,7 @@ module Google
 
           # The enablement state of the module.
           module EnablementState
-            # Unspecified enablement state.
+            # Default value. This value is unused.
             ENABLEMENT_STATE_UNSPECIFIED = 0
 
             # The module is enabled at the given level.
@@ -169,50 +164,56 @@ module Google
           end
         end
 
-        # Request message for listing effective Security Health Analytics custom
-        # modules.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_security_health_analytics_custom_modules SecurityCenterManagement.ListEffectiveSecurityHealthAnalyticsCustomModules}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of parent to list effective custom modules. specified in one
-        #     of the following formats:
+        #     Required. Name of parent to list effective custom modules, in one of the
+        #     following formats:
+        #
         #     * `organizations/{organization}/locations/{location}`
         #     * `folders/{folder}/locations/{location}`
-        #     or
-        #     `projects/{project}/locations/{location}`
+        #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return in a single response.
         #     Default is 10, minimum is 1, maximum is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. The value returned by the last call indicating a continuation.
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
+        #
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         class ListEffectiveSecurityHealthAnalyticsCustomModulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing effective Security Health Analytics custom
-        # modules.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_security_health_analytics_custom_modules SecurityCenterManagement.ListEffectiveSecurityHealthAnalyticsCustomModules}.
         # @!attribute [rw] effective_security_health_analytics_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::EffectiveSecurityHealthAnalyticsCustomModule>]
-        #     The list of EffectiveSecurityHealthAnalyticsCustomModule
+        #     The list of effective Security Health Analytics custom modules.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListEffectiveSecurityHealthAnalyticsCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting a EffectiveSecurityHealthAnalyticsCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_effective_security_health_analytics_custom_module SecurityCenterManagement.GetEffectiveSecurityHealthAnalyticsCustomModule}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full resource name of the custom module, specified in one of
         #     the following formats:
         #
-        #     * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-        #     * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
-        #     * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{effective_security_health_analytics_custom_module}`
+        #     * `organizations/organization/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+        #     * `folders/folder/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
+        #     * `projects/project/{location}/effectiveSecurityHealthAnalyticsCustomModules/{custom_module}`
         class GetEffectiveSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -222,20 +223,21 @@ module Google
         # including its full module name, display name, enablement state, and last
         # updated time. You can create a custom module at the organization, folder, or
         # project level. Custom modules that you create at the organization or folder
-        # level are inherited by the child folders and projects.
+        # level are inherited by the descendant folders and projects.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The full resource name of the custom module, specified in one
-        #     of the following formats:
-        #     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`
-        #     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`
-        #     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`
+        #     Identifier. The full resource name of the custom module, in one of the
+        #     following formats:
+        #
+        #     * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+        #     * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+        #     * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. The display name of the Security Health Analytics custom module.
         #     This display name becomes the finding category for all findings that are
-        #     returned by this custom module. The display name must be between 1 and
-        #     128 characters, start with a lowercase letter, and contain alphanumeric
+        #     returned by this custom module. The display name must be between 1 and 128
+        #     characters, start with a lowercase letter, and contain alphanumeric
         #     characters or underscores only.
         # @!attribute [rw] enablement_state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule::EnablementState]
@@ -254,27 +256,27 @@ module Google
         #     module.
         # @!attribute [rw] custom_config
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::CustomConfig]
-        #     Optional. The user specified custom configuration for the module.
+        #     Optional. The user-specified custom configuration for the module.
         class SecurityHealthAnalyticsCustomModule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Possible enablement states of a custom module.
           module EnablementState
-            # Unspecified enablement state.
+            # Default value. This value is unused.
             ENABLEMENT_STATE_UNSPECIFIED = 0
 
-            # The module is enabled at the given CRM resource.
+            # The module is enabled at the given organization, folder, or project.
             ENABLED = 1
 
-            # The module is disabled at the given CRM resource.
+            # The module is disabled at the given organization, folder, or project.
             DISABLED = 2
 
             # State is inherited from an ancestor module. The module will either
-            # be effectively ENABLED or DISABLED based on its closest non-inherited
-            # ancestor module in the CRM hierarchy. Attempting to set a top level
-            # module (module with no parent) to the INHERITED state will result in an
-            # INVALID_ARGUMENT error.
+            # be effectively `ENABLED` or `DISABLED` based on its closest non-inherited
+            # ancestor module in the resource hierarchy. If you try to set a top-level
+            # module (a module with no parent) to the `INHERITED` state, you receive an
+            # `INVALID_ARGUMENT` error.
             INHERITED = 3
           end
         end
@@ -284,8 +286,9 @@ module Google
         # detectors that generate custom findings for resources that you specify.
         # @!attribute [rw] predicate
         #   @return [::Google::Type::Expr]
-        #     Optional. The CEL expression to evaluate to produce findings. When the
-        #     expression evaluates to true against a resource, a finding is generated.
+        #     Optional. The Common Expression Language (CEL) expression to evaluate to
+        #     produce findings. When the expression evaluates to `true` against a
+        #     resource, a finding is generated.
         # @!attribute [rw] custom_output
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::CustomConfig::CustomOutputSpec]
         #     Optional. Custom output properties.
@@ -308,16 +311,14 @@ module Google
         #   @return [::String]
         #     Optional. An explanation of the recommended steps that security teams can
         #     take to resolve the detected issue. This explanation is returned with each
-        #     finding generated by this module in the `nextSteps` property of the finding
-        #     JSON.
+        #     finding generated by this module.
         class CustomConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A set of optional name-value pairs that define custom source properties to
           # return with each finding that is generated by the custom module. The custom
-          # source properties that are defined here are included in the finding JSON
-          # under `sourceProperties`.
+          # source properties that are defined here are included in the finding.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::CustomConfig::CustomOutputSpec::Property>]
           #     Optional. A list of custom output properties to add to the finding.
@@ -351,7 +352,7 @@ module Google
 
           # Defines the valid value options for the severity of a finding.
           module Severity
-            # Unspecified severity.
+            # Default value. This value is unused.
             SEVERITY_UNSPECIFIED = 0
 
             # Critical severity.
@@ -368,11 +369,12 @@ module Google
           end
         end
 
-        # Request message for listing Security Health Analytics custom modules.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_health_analytics_custom_modules SecurityCenterManagement.ListSecurityHealthAnalyticsCustomModules}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of parent organization, folder, or project in which to list
-        #     custom modules, specified in one of the following formats:
+        #     Required. Name of the parent organization, folder, or project in which to
+        #     list custom modules, in one of the following formats:
         #
         #     * `organizations/{organization}/locations/{location}`
         #     * `folders/{folder}/locations/{location}`
@@ -383,30 +385,36 @@ module Google
         #     Default is 10, minimum is 1, maximum is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A token identifying a page of results the server should return.
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
+        #
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         class ListSecurityHealthAnalyticsCustomModulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing Security Health Analytics custom modules.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_health_analytics_custom_modules SecurityCenterManagement.ListSecurityHealthAnalyticsCustomModules}.
         # @!attribute [rw] security_health_analytics_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule>]
-        #     The list of SecurityHealthAnalyticsCustomModules
+        #     The list of Security Health Analytics custom modules.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListSecurityHealthAnalyticsCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing descendant Security Health Analytics custom
-        # modules.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_security_health_analytics_custom_modules SecurityCenterManagement.ListDescendantSecurityHealthAnalyticsCustomModules}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the parent organization, folder, or project in which to
-        #     list custom modules, specified in one of the following formats:
+        #     list custom modules, in one of the following formats:
         #
         #     * `organizations/{organization}/locations/{location}`
         #     * `folders/{folder}/locations/{location}`
@@ -417,118 +425,147 @@ module Google
         #     Default is 10, minimum is 1, maximum is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A token identifying a page of results the server should return.
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
+        #
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         class ListDescendantSecurityHealthAnalyticsCustomModulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing descendant Security Health Analytics custom
-        # modules.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_security_health_analytics_custom_modules SecurityCenterManagement.ListDescendantSecurityHealthAnalyticsCustomModules}.
         # @!attribute [rw] security_health_analytics_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule>]
         #     The list of SecurityHealthAnalyticsCustomModules
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListDescendantSecurityHealthAnalyticsCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting a SecurityHealthAnalyticsCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_security_health_analytics_custom_module SecurityCenterManagement.GetSecurityHealthAnalyticsCustomModule}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. Name of the resource
+        #     Required. Name of the resource, in the format
+        #     `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`.
         class GetSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for creating a SecurityHealthAnalyticsCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#create_security_health_analytics_custom_module SecurityCenterManagement.CreateSecurityHealthAnalyticsCustomModule}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of the parent organization, folder, or project of the
-        #     module, specified in one of the following formats:
+        #     module, in one of the following formats:
         #
         #     * `organizations/{organization}/locations/{location}`
         #     * `folders/{folder}/locations/{location}`
         #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] security_health_analytics_custom_module
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule]
-        #     Required. The resource being created
+        #     Required. The resource being created.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will
-        #     done for the request (no module will be created). An OK response indicates
-        #     the request is valid while an error response indicates the request is
-        #     invalid. Note that a subsequent request to actually create the module could
-        #     still fail because:
-        #      1. the state could have changed (e.g. IAM permission lost) or
-        #      2. A failure occurred during creation of the module.
-        #     Defaults to false.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no module will be created. An `OK` response indicates that the
+        #     request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to create the module could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during creation of the module
+        #
+        #     Defaults to `false`.
         class CreateSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for updating a SecurityHealthAnalyticsCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_security_health_analytics_custom_module SecurityCenterManagement.UpdateSecurityHealthAnalyticsCustomModule}.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. The only fields that can be
-        #     updated are `enablement_state` and `custom_config`. If empty or set to the
-        #     wildcard value `*`, both `enablement_state` and `custom_config` are
-        #     updated.
+        #     Required. The fields to update. The following values are valid:
+        #
+        #     * `custom_config`
+        #     * `enablement_state`
+        #
+        #     If you omit this field or set it to the wildcard value `*`, then all
+        #     eligible fields are updated.
         # @!attribute [rw] security_health_analytics_custom_module
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityHealthAnalyticsCustomModule]
-        #     Required. The resource being updated
+        #     Required. The resource being updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will
-        #     done for the request (module will not be updated). An OK response indicates
-        #     the request is valid while an error response indicates the request is
-        #     invalid. Note that a subsequent request to actually update the module could
-        #     still fail because 1. the state could have changed (e.g. IAM permission
-        #     lost) or
-        #     2. A failure occurred while trying to update the module.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no module will be updated. An `OK` response indicates that the
+        #     request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to update the module could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during creation of the module
+        #
+        #     Defaults to `false`.
         class UpdateSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for deleting a SecurityHealthAnalyticsCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#delete_security_health_analytics_custom_module SecurityCenterManagement.DeleteSecurityHealthAnalyticsCustomModule}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the SHA custom module.
+        #     Required. The resource name of the SHA custom module, in one of the
+        #     following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-        #       * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
-        #       * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{security_health_analytics_custom_module}`.
+        #       * `organizations/{organization}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+        #       * `folders/{folder}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
+        #       * `projects/{project}/locations/{location}/securityHealthAnalyticsCustomModules/{custom_module}`
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will
-        #     done for the request (module will not be deleted). An OK response indicates
-        #     the request is valid while an error response indicates the request is
-        #     invalid. Note that a subsequent request to actually delete the module could
-        #     still fail because 1. the state could have changed (e.g. IAM permission
-        #     lost) or
-        #     2. A failure occurred while trying to delete the module.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no module will be deleted. An `OK` response indicates that the
+        #     request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to delete the module could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during deletion of the module
+        #
+        #     Defaults to `false`.
         class DeleteSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message to simulate a CustomConfig against a given test resource.
-        # Maximum size of the request is 4 MB by default.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#simulate_security_health_analytics_custom_module SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule}.
+        # The maximum size of the request is 4 MiB.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The relative resource name of the organization, project, or
-        #     folder. For more information about relative resource names, see [Relative
-        #     Resource
-        #     Name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-        #     Example: `organizations/{organization_id}`.
+        #     folder. For more information about relative resource names, see [AIP-122:
+        #     Resource names](https://google.aip.dev/122). Example:
+        #     `organizations/{organization_id}`.
         # @!attribute [rw] custom_config
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::CustomConfig]
         #     Required. The custom configuration that you need to test.
@@ -539,74 +576,79 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Manually constructed resource name. If the custom module evaluates against
-          # only the resource data, you can omit the `iam_policy_data` field. If it
-          # evaluates only the `iam_policy_data` field, you can omit the resource data.
+          # Manually constructed information about a resource.
           # @!attribute [rw] resource_type
           #   @return [::String]
-          #     Required. The type of the resource, for example,
+          #     Required. The type of the resource. For example,
           #     `compute.googleapis.com/Disk`.
           # @!attribute [rw] resource_data
           #   @return [::Google::Protobuf::Struct]
           #     Optional. A representation of the Google Cloud resource. Should match the
           #     Google Cloud resource JSON format.
+          #
+          #     If the custom module evaluates only the IAM allow policy, then you can
+          #     omit this field.
           # @!attribute [rw] iam_policy_data
           #   @return [::Google::Iam::V1::Policy]
-          #     Optional. A representation of the IAM policy.
+          #     Optional. A representation of the IAM allow policy.
+          #
+          #     If the custom module evaluates only the resource data, then you can omit
+          #     this field.
           class SimulatedResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # A subset of the fields of the Security Center Finding proto. The minimum set
-        # of fields needed to represent a simulated finding from a SHA custom module.
+        # The minimum set of fields needed to represent a simulated finding from a
+        # Security Health Analytics custom module.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The [relative resource
-        #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
-        #     of the finding. Example:
-        #     `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`,
-        #     `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`,
-        #     `projects/{project_id}/sources/{source_id}/findings/{finding_id}`.
+        #     Identifier. The [relative resource name](https://google.aip.dev/122) of the
+        #     finding, in one of the following formats:
+        #
+        #     * `organizations/{organization_id}/sources/{source_id}/findings/{finding_id}`
+        #     * `folders/{folder_id}/sources/{source_id}/findings/{finding_id}`
+        #     * `projects/{project_id}/sources/{source_id}/findings/{finding_id}`
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The relative resource name of the source the finding belongs to. See:
-        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-        #     This field is immutable after creation time.
-        #     For example:
-        #     `organizations/{organization_id}/sources/{source_id}`
+        #     The [relative resource name](https://google.aip.dev/122) of the source the
+        #     finding belongs to. For example,
+        #     `organizations/{organization_id}/sources/{source_id}`. This field is
+        #     immutable after creation time.
         # @!attribute [rw] resource_name
         #   @return [::String]
-        #     For findings on Google Cloud resources, the full resource
-        #     name of the Google Cloud resource this finding is for. See:
-        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
-        #     When the finding is for a non-Google Cloud resource, the resourceName can
-        #     be a customer or partner defined string. This field is immutable after
-        #     creation time.
+        #     For findings on Google Cloud resources, the
+        #     [full resource name](https://google.aip.dev/122#full-resource-names) of the
+        #     Google Cloud resource this finding is for. When the finding is for a
+        #     non-Google Cloud resource, the value can be a customer or partner defined
+        #     string. This field is immutable after creation time.
         # @!attribute [rw] category
         #   @return [::String]
-        #     The additional taxonomy group within findings from a given source.
-        #     This field is immutable after creation time.
-        #     Example: "XSS_FLASH_INJECTION"
+        #     The additional taxonomy group within findings from a given source. For
+        #     example, `XSS_FLASH_INJECTION`. This field is immutable after creation
+        #     time.
         # @!attribute [r] state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SimulatedFinding::State]
         #     Output only. The state of the finding.
         # @!attribute [rw] source_properties
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
-        #     Source specific properties. These properties are managed by the source
-        #     that writes the finding. The key names in the source_properties map must be
-        #     between 1 and 255 characters, and must start with a letter and contain
-        #     alphanumeric characters or underscores only.
+        #     Source-specific properties. These properties are managed by the source
+        #     that writes the finding. The key names must be between 1 and 255
+        #     characters; they must start with a letter and contain alphanumeric
+        #     characters or underscores only.
         # @!attribute [rw] event_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the finding was first detected. If an existing finding is updated,
-        #     then this is the time the update occurred.
+        #     then this is the time the update occurred. If the finding is later
+        #     resolved, then this time reflects when the finding was resolved.
+        #
         #     For example, if the finding represents an open firewall, this property
         #     captures the time the detector believes the firewall became open. The
-        #     accuracy is determined by the detector. If the finding is later resolved,
-        #     then this time reflects when the finding was resolved. This must not
-        #     be set to a value greater than the current timestamp.
+        #     accuracy is determined by the detector.
+        #
+        #     The event time must not be set to a value greater than the current
+        #     timestamp.
         # @!attribute [rw] severity
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SimulatedFinding::Severity]
         #     The severity of the finding. This field is managed by the source that
@@ -629,97 +671,92 @@ module Google
 
           # The state of the finding.
           module State
-            # Unspecified state.
+            # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
             # The finding requires attention and has not been addressed yet.
             ACTIVE = 1
 
-            # The finding has been fixed, triaged as a non-issue or otherwise addressed
-            # and is no longer active.
+            # The finding has been fixed, triaged as a non-issue, or otherwise
+            # addressed and is no longer active.
             INACTIVE = 2
           end
 
           # The severity of the finding.
           module Severity
-            # This value is used for findings when a source doesn't write a severity
-            # value.
+            # Default value. This value is unused.
             SEVERITY_UNSPECIFIED = 0
 
-            # Vulnerability:
-            # A critical vulnerability is easily discoverable by an external actor,
-            # exploitable, and results in the direct ability to execute arbitrary code,
-            # exfiltrate data, and otherwise gain additional access and privileges to
-            # cloud resources and workloads. Examples include publicly accessible
-            # unprotected user data and public SSH access with weak or no
-            # passwords.
+            # For vulnerabilities: A critical vulnerability is easily discoverable by
+            # an external actor, exploitable, and results in the direct ability to
+            # execute arbitrary code, exfiltrate data, and otherwise gain additional
+            # access and privileges to cloud resources and workloads. Examples include
+            # publicly accessible unprotected user data and public SSH access with weak
+            # or no passwords.
             #
-            # Threat:
-            # Indicates a threat that is able to access, modify, or delete data or
-            # execute unauthorized code within existing resources.
+            # For threats: Indicates a threat that is able to access, modify, or delete
+            # data or execute unauthorized code within existing resources.
             CRITICAL = 1
 
-            # Vulnerability:
-            # A high risk vulnerability can be easily discovered and exploited in
-            # combination with other vulnerabilities in order to gain direct access and
-            # the ability to execute arbitrary code, exfiltrate data, and otherwise
-            # gain additional access and privileges to cloud resources and workloads.
-            # An example is a database with weak or no passwords that is only
-            # accessible internally. This database could easily be compromised by an
-            # actor that had access to the internal network.
+            # For vulnerabilities: A high-risk vulnerability can be easily discovered
+            # and exploited in combination with other vulnerabilities in order to gain
+            # direct access and the ability to execute arbitrary code, exfiltrate data,
+            # and otherwise gain additional access and privileges to cloud resources
+            # and workloads. An example is a database with weak or no passwords that is
+            # only accessible internally. This database could easily be compromised by
+            # an actor that had access to the internal network.
             #
-            # Threat:
-            # Indicates a threat that is able to create new computational resources in
-            # an environment but not able to access data or execute code in existing
-            # resources.
+            # For threats: Indicates a threat that is able to create new computational
+            # resources in an environment but not able to access data or execute code
+            # in existing resources.
             HIGH = 2
 
-            # Vulnerability:
-            # A medium risk vulnerability could be used by an actor to gain access to
-            # resources or privileges that enable them to eventually (through multiple
-            # steps or a complex exploit) gain access and the ability to execute
-            # arbitrary code or exfiltrate data. An example is a service account with
-            # access to more projects than it should have. If an actor gains access to
-            # the service account, they could potentially use that access to manipulate
-            # a project the service account was not intended to.
+            # For vulnerabilities: A medium-risk vulnerability could be used by an
+            # actor to gain access to resources or privileges that enable them to
+            # eventually (through multiple steps or a complex exploit) gain access and
+            # the ability to execute arbitrary code or exfiltrate data. An example is a
+            # service account with access to more projects than it should have. If an
+            # actor gains access to the service account, they could potentially use
+            # that access to manipulate a project the service account was not intended
+            # to.
             #
-            # Threat:
-            # Indicates a threat that is able to cause operational impact but may not
-            # access data or execute unauthorized code.
+            # For threats: Indicates a threat that is able to cause operational impact
+            # but may not access data or execute unauthorized code.
             MEDIUM = 3
 
-            # Vulnerability:
-            # A low risk vulnerability hampers a security organization's ability to
-            # detect vulnerabilities or active threats in their deployment, or prevents
-            # the root cause investigation of security issues. An example is monitoring
-            # and logs being disabled for resource configurations and access.
+            # For vulnerabilities: A low-risk vulnerability hampers a security
+            # organization's ability to detect vulnerabilities or active threats in
+            # their deployment, or prevents the root cause investigation of security
+            # issues. An example is monitoring and logs being disabled for resource
+            # configurations and access.
             #
-            # Threat:
-            # Indicates a threat that has obtained minimal access to an environment but
-            # is not able to access data, execute code, or create resources.
+            # For threats: Indicates a threat that has obtained minimal access to an
+            # environment but is not able to access data, execute code, or create
+            # resources.
             LOW = 4
           end
 
-          # Represents what kind of Finding it is.
+          # Represents what kind of finding it is.
           module FindingClass
-            # Unspecified finding class.
+            # Default value. This value is unused.
             FINDING_CLASS_UNSPECIFIED = 0
 
             # Describes unwanted or malicious activity.
             THREAT = 1
 
             # Describes a potential weakness in software that increases risk to
-            # Confidentiality & Integrity & Availability.
+            # confidentiality, integrity, and availability.
             VULNERABILITY = 2
 
-            # Describes a potential weakness in cloud resource/asset configuration that
-            # increases risk.
+            # Describes a potential weakness in cloud resource or asset configuration
+            # that increases risk.
             MISCONFIGURATION = 3
 
             # Describes a security observation that is for informational purposes.
             OBSERVATION = 4
 
-            # Describes an error that prevents some SCC functionality.
+            # Describes an error that prevents Security Command Center from working
+            # correctly.
             SCC_ERROR = 5
 
             # Describes a potential security risk due to a change in the security
@@ -732,8 +769,8 @@ module Google
           end
         end
 
-        # Response message for simulating a `SecurityHealthAnalyticsCustomModule`
-        # against a given resource.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#simulate_security_health_analytics_custom_module SecurityCenterManagement.SimulateSecurityHealthAnalyticsCustomModule}.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SimulateSecurityHealthAnalyticsCustomModuleResponse::SimulatedResult]
         #     Result for test case in the corresponding request.
@@ -744,8 +781,8 @@ module Google
           # Possible test result.
           # @!attribute [rw] finding
           #   @return [::Google::Cloud::SecurityCenterManagement::V1::SimulatedFinding]
-          #     Finding that would be published for the test case,
-          #     if a violation is detected.
+          #     Finding that would be published for the test case if a violation is
+          #     detected.
           # @!attribute [rw] no_violation
           #   @return [::Google::Protobuf::Empty]
           #     Indicates that the test case does not trigger any violation.
@@ -758,45 +795,44 @@ module Google
           end
         end
 
-        # An EffectiveEventThreatDetectionCustomModule is the representation of
-        # EventThreatDetectionCustomModule at a given level taking hierarchy into
-        # account and resolving various fields accordingly. e.g. if the module is
-        # enabled at the ancestor level, effective modules at all descendant levels
-        # will have enablement_state set to ENABLED. Similarly, if module.inherited is
-        # set, then effective module's config will contain the ancestor's config
-        # details. EffectiveEventThreatDetectionCustomModule is read-only.
+        # The representation of an
+        # {::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule EventThreatDetectionCustomModule}
+        # at a given level, taking hierarchy into account and resolving various fields
+        # accordingly. For example, if the module is enabled at the ancestor level,
+        # then effective modules at all descendant levels will have their enablement
+        # state set to `ENABLED`. Similarly, if `module.inherited` is set, then the
+        # effective module's configuration will reflect the ancestor's configuration.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The resource name of the ETD custom module.
+        #     Identifier. The resource name of the Event Threat Detection custom module,
+        #     in one of the following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
-        #       * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
-        #       * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+        #     * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+        #     * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+        #     * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
         # @!attribute [r] config
         #   @return [::Google::Protobuf::Struct]
-        #     Output only. Config for the effective module.
+        #     Output only. Configuration for the effective module.
         # @!attribute [r] enablement_state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::EffectiveEventThreatDetectionCustomModule::EnablementState]
         #     Output only. The effective state of enablement for the module at the given
         #     level of the hierarchy.
         # @!attribute [r] type
         #   @return [::String]
-        #     Output only. Type for the module. e.g. CONFIGURABLE_BAD_IP.
+        #     Output only. Type for the module (for example, `CONFIGURABLE_BAD_IP`).
         # @!attribute [r] display_name
         #   @return [::String]
-        #     Output only. The human readable name to be displayed for the module.
+        #     Output only. The human-readable name of the module.
         # @!attribute [r] description
         #   @return [::String]
-        #     Output only. The description for the module.
+        #     Output only. A description of the module.
         class EffectiveEventThreatDetectionCustomModule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The enablement state of the module.
           module EnablementState
-            # Unspecified enablement state.
+            # Default value. This value is unused.
             ENABLEMENT_STATE_UNSPECIFIED = 0
 
             # The module is enabled at the given level.
@@ -807,91 +843,96 @@ module Google
           end
         end
 
-        # Request message for listing effective Event Threat Detection custom
-        # modules.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_event_threat_detection_custom_modules SecurityCenterManagement.ListEffectiveEventThreatDetectionCustomModules}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of parent to list effective custom modules. Its format is
-        #     `organizations/{organization}/locations/{location}`,
-        #     `folders/{folder}/locations/{location}`,
-        #     or
-        #     `projects/{project}/locations/{location}`
+        #     Required. Name of parent to list effective custom modules, in one of the
+        #     following formats:
+        #
+        #     * `organizations/{organization}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return in a single response.
         #     Default is 10, minimum is 1, maximum is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. The value returned by the last call indicating a continuation
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
+        #
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         class ListEffectiveEventThreatDetectionCustomModulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing effective Event Threat Detection custom
-        # modules.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_effective_event_threat_detection_custom_modules SecurityCenterManagement.ListEffectiveEventThreatDetectionCustomModules}.
         # @!attribute [rw] effective_event_threat_detection_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::EffectiveEventThreatDetectionCustomModule>]
-        #     The list of EffectiveEventThreatDetectionCustomModules
+        #     The list of effective Event Threat Detection custom modules.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListEffectiveEventThreatDetectionCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting a EffectiveEventThreatDetectionCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_effective_event_threat_detection_custom_module SecurityCenterManagement.GetEffectiveEventThreatDetectionCustomModule}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the ETD custom module.
+        #     Required. The resource name of the Event Threat Detection custom module, in
+        #     one of the following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
-        #       * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
-        #       * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{effective_event_threat_detection_custom_module}`.
+        #     * `organizations/{organization}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+        #     * `folders/{folder}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
+        #     * `projects/{project}/locations/{location}/effectiveEventThreatDetectionCustomModules/{custom_module}`
         class GetEffectiveEventThreatDetectionCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An event threat detection custom module is a Cloud SCC resource that contains
-        # the configuration and enablement state of a custom module, which enables ETD
-        # to write certain findings to Cloud SCC.
+        # A Security Command Center resource that contains the configuration and
+        # enablement state of a custom module, which enables Event Threat Detection to
+        # write certain findings to Security Command Center.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifier. The resource name of the ETD custom module.
+        #     Identifier. The resource name of the Event Threat Detection custom module,
+        #     in one of the following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-        #       * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-        #       * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+        #     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+        #     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+        #     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
         # @!attribute [rw] config
         #   @return [::Google::Protobuf::Struct]
-        #     Optional. Config for the module. For the resident module, its config value
-        #     is defined at this level. For the inherited module, its config value is
-        #     inherited from the ancestor module.
+        #     Optional. Configuration for the module. For the resident module, its
+        #     configuration value is defined at this level. For the inherited module, its
+        #     configuration value is inherited from the ancestor module.
         # @!attribute [r] ancestor_module
         #   @return [::String]
         #     Output only. The closest ancestor module that this module inherits the
         #     enablement state from. If empty, indicates that the custom module was
         #     created in the requesting parent organization, folder, or project. The
-        #     format is the same as the EventThreatDetectionCustomModule resource name.
+        #     format is the same as the custom module's resource name.
         # @!attribute [rw] enablement_state
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule::EnablementState]
         #     Optional. The state of enablement for the module at the given level of the
         #     hierarchy.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Optional. Type for the module. e.g. CONFIGURABLE_BAD_IP.
+        #     Optional. Type for the module. For example, `CONFIGURABLE_BAD_IP`.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. The human readable name to be displayed for the module.
+        #     Optional. The human-readable name of the module.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. The description for the module.
+        #     Optional. A description of the module.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the module was last updated.
@@ -913,63 +954,66 @@ module Google
             # The module is disabled at the given level.
             DISABLED = 2
 
-            # State is inherited from an ancestor module. The module will either
-            # be effectively ENABLED or DISABLED based on its closest non-inherited
-            # ancestor module in the CRM hierarchy. Attempting to set a top level
-            # module (module with no parent) to the INHERITED state will result in an
-            # error.
+            # State is inherited from an ancestor module. The module will either be
+            # effectively `ENABLED` or `DISABLED` based on its closest non-inherited
+            # ancestor module in the CRM hierarchy. If you try to set a top-level
+            # module (a module with no parent) to the `INHERITED` state, you receive an
+            # `INVALID_ARGUMENT` error.
             INHERITED = 3
           end
         end
 
-        # Request message for listing Event Threat Detection custom modules.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_event_threat_detection_custom_modules SecurityCenterManagement.ListEventThreatDetectionCustomModules}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of parent to list custom modules. Its format is
-        #     `organizations/{organization}/locations/{location}`,
-        #     `folders/{folder}/locations/{location}`,
-        #     or
-        #     `projects/{project}/locations/{location}`
+        #     Required. Name of parent to list custom modules, in one of the following
+        #     formats:
+        #
+        #     * `organizations/{organization}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of modules to return. The service may return
-        #     fewer than this value. If unspecified, at most 10 configs will be returned.
+        #     fewer than this value. If unspecified, at most 10 modules will be returned.
         #     The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous
-        #     `ListEventThreatDetectionCustomModules` call. Provide this to retrieve the
-        #     subsequent page.
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
         #
-        #     When paginating, all other parameters provided to
-        #     `ListEventThreatDetectionCustomModules` must match the call that provided
-        #     the page token.
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         class ListEventThreatDetectionCustomModulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing Event Threat Detection custom modules.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_event_threat_detection_custom_modules SecurityCenterManagement.ListEventThreatDetectionCustomModules}.
         # @!attribute [rw] event_threat_detection_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule>]
-        #     The list of EventThreatDetectionCustomModules
+        #     The list of custom modules.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListEventThreatDetectionCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing descendant Event Threat Detection custom
-        # modules.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_event_threat_detection_custom_modules SecurityCenterManagement.ListDescendantEventThreatDetectionCustomModules}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of parent to list custom modules. Its format is
-        #     `organizations/{organization}/locations/{location}`,
-        #     `folders/{folder}/locations/{location}`,
-        #     or
-        #     `projects/{project}/locations/{location}`
+        #     Required. Name of parent to list custom modules, in one of the following
+        #     formats:
+        #
+        #     * `organizations/{organization}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of modules to return. The service may return
@@ -977,62 +1021,74 @@ module Google
         #     The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A token identifying a page of results the server should return.
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
+        #
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         class ListDescendantEventThreatDetectionCustomModulesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing descendant Event Threat Detection custom
-        # modules.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_descendant_event_threat_detection_custom_modules SecurityCenterManagement.ListDescendantEventThreatDetectionCustomModules}.
         # @!attribute [rw] event_threat_detection_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule>]
-        #     The list of EventThreatDetectionCustomModules
+        #     The list of custom modules.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListDescendantEventThreatDetectionCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for getting a EventThreatDetectionCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_event_threat_detection_custom_module SecurityCenterManagement.GetEventThreatDetectionCustomModule}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the ETD custom module.
+        #     Required. The resource name of the Event Threat Detection custom module, in
+        #     one of the following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-        #       * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-        #       * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+        #     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+        #     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+        #     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
         class GetEventThreatDetectionCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for creating a EventThreatDetectionCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#create_event_threat_detection_custom_module SecurityCenterManagement.CreateEventThreatDetectionCustomModule}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of parent for the module. Its format is
-        #     `organizations/{organization}/locations/{location}`,
-        #     `folders/{folder}/locations/{location}`,
-        #     or
-        #     `projects/{project}/locations/{location}`
+        #     Required. Name of parent for the module, in one of the following formats:
+        #
+        #     * `organizations/{organization}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] event_threat_detection_custom_module
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule]
         #     Required. The module to create. The
-        #     event_threat_detection_custom_module.name will be ignored and server
-        #     generated.
+        #     {::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule#name EventThreatDetectionCustomModule.name}
+        #     field is ignored; Security Command Center generates the name.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will
-        #     done for the request (no module will be created). An OK response indicates
-        #     the request is valid while an error response indicates the request is
-        #     invalid. Note that a subsequent request to actually create the module could
-        #     still fail because 1. the state could have changed (e.g. IAM permission
-        #     lost) or
-        #     2. A failure occurred during creation of the module.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no module will be created. An `OK` response indicates that the
+        #     request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to create the module could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during creation of the module
+        #
+        #     Defaults to `false`.
         class CreateEventThreatDetectionCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1041,73 +1097,82 @@ module Google
         # Message for updating a EventThreatDetectionCustomModule
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     EventThreatDetectionCustomModule resource by the update.
-        #     The fields specified in the update_mask are relative to the resource, not
-        #     the full request. A field will be overwritten if it is in the mask. If the
-        #     user does not provide a mask then all fields will be overwritten.
+        #     Required. The fields to update. If omitted, then all fields are updated.
         # @!attribute [rw] event_threat_detection_custom_module
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::EventThreatDetectionCustomModule]
-        #     Required. The module being updated
+        #     Required. The module being updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will
-        #     done for the request (module will not be updated). An OK response indicates
-        #     the request is valid while an error response indicates the request is
-        #     invalid. Note that a subsequent request to actually update the module could
-        #     still fail because 1. the state could have changed (e.g. IAM permission
-        #     lost) or
-        #     2. A failure occurred while trying to update the module.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no module will be updated. An `OK` response indicates that the
+        #     request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to update the module could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during creation of the module
+        #
+        #     Defaults to `false`.
         class UpdateEventThreatDetectionCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Message for deleting a EventThreatDetectionCustomModule
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#delete_event_threat_detection_custom_module SecurityCenterManagement.DeleteEventThreatDetectionCustomModule}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the ETD custom module.
+        #     Required. The resource name of the Event Threat Detection custom module, in
+        #     one of the following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-        #       * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
-        #       * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{event_threat_detection_custom_module}`.
+        #     * `organizations/{organization}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+        #     * `folders/{folder}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
+        #     * `projects/{project}/locations/{location}/eventThreatDetectionCustomModules/{custom_module}`
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will
-        #     done for the request (module will not be deleted). An OK response indicates
-        #     the request is valid while an error response indicates the request is
-        #     invalid. Note that a subsequent request to actually delete the module could
-        #     still fail because 1. the state could have changed (e.g. IAM permission
-        #     lost) or
-        #     2. A failure occurred while trying to delete the module.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no module will be deleted. An `OK` response indicates that the
+        #     request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to delete the module could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during creation of the module
+        #
+        #     Defaults to `false`.
         class DeleteEventThreatDetectionCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to validate an Event Threat Detection custom module.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#validate_event_threat_detection_custom_module SecurityCenterManagement.ValidateEventThreatDetectionCustomModule}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Resource name of the parent to validate the Custom Module under.
+        #     Required. Resource name of the parent to validate the custom modules under,
+        #     in one of the following formats:
         #
-        #     Its format is:
-        #
-        #       * `organizations/{organization}/locations/{location}`.
+        #     * `organizations/{organization}/locations/{location}`
         # @!attribute [rw] raw_text
         #   @return [::String]
         #     Required. The raw text of the module's contents. Used to generate error
         #     messages.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Required. The type of the module (e.g. CONFIGURABLE_BAD_IP).
+        #     Required. The type of the module. For example, `CONFIGURABLE_BAD_IP`.
         class ValidateEventThreatDetectionCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response to validating an Event Threat Detection custom module.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#validate_event_threat_detection_custom_module SecurityCenterManagement.ValidateEventThreatDetectionCustomModule}.
         # @!attribute [rw] errors
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleResponse::CustomModuleValidationError>]
         #     A list of errors returned by the validator. If the list is empty, there
@@ -1117,24 +1182,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # An error encountered while validating the uploaded configuration of an
-          # Event Threat Detection Custom Module.
+          # Event Threat Detection custom module.
           # @!attribute [rw] description
           #   @return [::String]
-          #     A description of the error, suitable for human consumption. Required.
+          #     A human-readable description of the error.
           # @!attribute [rw] field_path
           #   @return [::String]
-          #     The path, in RFC 8901 JSON Pointer format, to the field that failed
-          #     validation. This may be left empty if no specific field is affected.
+          #     The path, in [RFC 6901: JSON
+          #     Pointer](https://datatracker.ietf.org/doc/html/rfc6901) format, to the
+          #     field that failed validation. Omitted if no specific field is affected.
           # @!attribute [rw] start
           #   @return [::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleResponse::Position]
           #     The initial position of the error in the uploaded text version of the
-          #     module. This field may be omitted if no specific position applies, or if
-          #     one could not be computed.
+          #     module. Omitted if no specific position applies, or if the position could
+          #     not be computed.
           # @!attribute [rw] end
           #   @return [::Google::Cloud::SecurityCenterManagement::V1::ValidateEventThreatDetectionCustomModuleResponse::Position]
-          #     The end position of the error in the uploaded text version of the
-          #     module. This field may be omitted if no specific position applies, or if
-          #     one could not be computed..
+          #     The end position of the error in the uploaded text version of the module.
+          #     Omitted if no specific position applies, or if the position could not be
+          #     computed.
           class CustomModuleValidationError
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1143,100 +1209,115 @@ module Google
           # A position in the uploaded text version of a module.
           # @!attribute [rw] line_number
           #   @return [::Integer]
-          #     The line position in the text
+          #     The line position in the text.
           # @!attribute [rw] column_number
           #   @return [::Integer]
-          #     The column position in the line
+          #     The column position in the line.
           class Position
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # Request message for getting a Security Command Center service.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#get_security_center_service SecurityCenterManagement.GetSecurityCenterService}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The Security Command Center service to retrieve.
+        #     Required. The Security Command Center service to retrieve, in one of the
+        #     following formats:
         #
-        #     Formats:
+        #     * organizations/\\{organization}/locations/\\{location}/securityCenterServices/\\{service}
+        #     * folders/\\{folder}/locations/\\{location}/securityCenterServices/\\{service}
+        #     * projects/\\{project}/locations/\\{location}/securityCenterServices/\\{service}
         #
-        #       * organizations/\\{organization}/locations/\\{location}/securityCenterServices/\\{service}
-        #       * folders/\\{folder}/locations/\\{location}/securityCenterServices/\\{service}
-        #       * projects/\\{project}/locations/\\{location}/securityCenterServices/\\{service}
+        #     The following values are valid for `{service}`:
         #
-        #     The possible values for id \\{service} are:
-        #
-        #       * container-threat-detection
-        #       * event-threat-detection
-        #       * security-health-analytics
-        #       * vm-threat-detection
-        #       * web-security-scanner
+        #     * `container-threat-detection`
+        #     * `event-threat-detection`
+        #     * `security-health-analytics`
+        #     * `vm-threat-detection`
+        #     * `web-security-scanner`
         # @!attribute [rw] show_eligible_modules_only
         #   @return [::Boolean]
-        #     Flag that, when set, will be used to filter the ModuleSettings that are
-        #     in scope. The default setting is that all modules will be shown.
+        #     Set to `true` to show only modules that are in scope. By default, all
+        #     modules are shown.
         class GetSecurityCenterServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing Security Command Center services.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_center_services SecurityCenterManagement.ListSecurityCenterServices}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the parent to list Security Command Center services.
+        #     Required. The name of the parent to list Security Command Center services,
+        #     in one of the following formats:
         #
-        #     Formats:
-        #
-        #       * organizations/\\{organization}/locations/\\{location}
-        #       * folders/\\{folder}/locations/\\{location}
-        #       * projects/\\{project}/locations/\\{location}
+        #     * `organizations/{organization}/locations/{location}`
+        #     * `folders/{folder}/locations/{location}`
+        #     * `projects/{project}/locations/{location}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return in a single response.
         #     Default is 10, minimum is 1, maximum is 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. The value returned by the last call indicating a continuation.
+        #     Optional. A pagination token returned from a previous request. Provide this
+        #     token to retrieve the next page of results.
+        #
+        #     When paginating, the rest of the request must match the request that
+        #     generated the page token.
         # @!attribute [rw] show_eligible_modules_only
         #   @return [::Boolean]
-        #     Flag that, when set, will be used to filter the ModuleSettings that are
-        #     in scope. The default setting is that all modules will be shown.
+        #     Flag that, when set, is used to filter the module settings that are shown.
+        #     The default setting is that all modules are shown.
         class ListSecurityCenterServicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing Security Command Center services.
+        # Response message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#list_security_center_services SecurityCenterManagement.ListSecurityCenterServices}.
         # @!attribute [rw] security_center_services
         #   @return [::Array<::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService>]
         #     The list of services.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token identifying a page of results the server should return.
+        #     A pagination token. To retrieve the next page of results, call the method
+        #     again with this token.
         class ListSecurityCenterServicesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for updating a Security Command Center service.
+        # Request message for
+        # {::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::Client#update_security_center_service SecurityCenterManagement.UpdateSecurityCenterService}.
         # @!attribute [rw] security_center_service
         #   @return [::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterService]
         #     Required. The updated service.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Possible values:
+        #     Required. The fields to update. Accepts the following values:
         #
-        #       * "intended_enablement_state"
-        #       * "modules"
+        #     * `intended_enablement_state`
+        #     * `modules`
+        #
+        #     If omitted, then all eligible fields are updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. When set to true, only validations (including IAM checks) will be
-        #     done for the request (service will not be updated). An OK response
-        #     indicates that the request is valid, while an error response indicates that
-        #     the request is invalid. Note that a subsequent request to actually update
-        #     the service could still fail for one of the following reasons:
-        #     - The state could have changed (e.g. IAM permission lost).
-        #     - A failure occurred while trying to delete the module.
+        #     Optional. When set to `true`, the request will be validated (including IAM
+        #     checks), but no service will be updated. An `OK` response indicates that
+        #     the request is valid, while an error response indicates that the request is
+        #     invalid.
+        #
+        #     If the request is valid, a subsequent request to update the service could
+        #     still fail for one of the following reasons:
+        #
+        #     *  The state of your cloud resources changed; for example, you lost a
+        #        required IAM permission
+        #     *  An error occurred during update of the service
+        #
+        #     Defaults to `false`.
         class UpdateSecurityCenterServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

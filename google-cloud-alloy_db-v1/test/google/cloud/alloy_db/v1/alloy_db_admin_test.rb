@@ -468,6 +468,73 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
     end
   end
 
+  def test_switchover_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+
+    switchover_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :switchover_cluster, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, switchover_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.switchover_cluster name: name, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.switchover_cluster ::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.switchover_cluster(::Google::Cloud::AlloyDB::V1::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, switchover_cluster_client_stub.call_rpc_count
+    end
+  end
+
   def test_restore_cluster
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -1240,6 +1307,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
     name = "hello world"
     request_id = "hello world"
     validate_only = true
+    node_ids = ["hello world"]
 
     restart_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :restart_instance, name
@@ -1247,6 +1315,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["request_id"]
       assert_equal true, request["validate_only"]
+      assert_equal ["hello world"], request["node_ids"]
       refute_nil options
     end
 
@@ -1257,35 +1326,35 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
+      client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.restart_instance name: name, request_id: request_id, validate_only: validate_only do |response, operation|
+      client.restart_instance name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.restart_instance ::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
+      client.restart_instance ::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+      client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.restart_instance(::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+      client.restart_instance(::Google::Cloud::AlloyDB::V1::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1293,6 +1362,73 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, restart_instance_client_stub.call_rpc_count
+    end
+  end
+
+  def test_execute_sql
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1::ExecuteSqlResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    password = "hello world"
+    instance = "hello world"
+    database = "hello world"
+    user = "hello world"
+    sql_statement = "hello world"
+
+    execute_sql_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :execute_sql, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest, request
+      assert_equal "hello world", request["password"]
+      assert_equal :password, request.user_credential
+      assert_equal "hello world", request["instance"]
+      assert_equal "hello world", request["database"]
+      assert_equal "hello world", request["user"]
+      assert_equal "hello world", request["sql_statement"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, execute_sql_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.execute_sql ::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.execute_sql(::Google::Cloud::AlloyDB::V1::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, execute_sql_client_stub.call_rpc_count
     end
   end
 
@@ -2149,6 +2285,75 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, delete_user_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_databases
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1::ListDatabasesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_databases_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_databases, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1::ListDatabasesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_databases_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_databases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_databases ::Google::Cloud::AlloyDB::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_databases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_databases(::Google::Cloud::AlloyDB::V1::ListDatabasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_databases_client_stub.call_rpc_count
     end
   end
 

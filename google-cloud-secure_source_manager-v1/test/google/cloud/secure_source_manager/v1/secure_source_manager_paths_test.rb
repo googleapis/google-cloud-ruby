@@ -33,6 +33,18 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     end
   end
 
+  def test_branch_rule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.branch_rule_path project: "value0", location: "value1", repository: "value2", branch_rule: "value3"
+      assert_equal "projects/value0/locations/value1/repositories/value2/branchRules/value3", path
+    end
+  end
+
   def test_ca_pool_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

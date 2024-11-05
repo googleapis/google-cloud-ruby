@@ -19,6 +19,11 @@
               "methods": [
                 "publish_events"
               ]
+            },
+            "Publish": {
+              "methods": [
+                "publish"
+              ]
             }
           }
         }

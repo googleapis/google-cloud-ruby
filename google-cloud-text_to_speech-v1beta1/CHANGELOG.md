@@ -1,5 +1,12 @@
 # Release History
 
+### 0.17.0 (2024-10-25)
+
+#### Features
+
+* add brand voice lite 
+* add multi-speaker markup, which allows generating dialogue between multiple speakers ([#27454](https://github.com/googleapis/google-cloud-ruby/issues/27454)) 
+
 ### 0.16.0 (2024-10-15)
 
 #### Features

@@ -189,7 +189,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, personalization_spec: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -239,6 +239,10 @@ module Google
               #     is unset.
               #
               #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+              #   @param one_box_page_size [::Integer]
+              #     The maximum number of results to return for OneBox.
+              #     This applies to each OneBox type individually.
+              #     Default number is 10.
               #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec, ::Hash>]
               #     Specs defining dataStores to filter on in a search call and configurations
               #     for those dataStores. This is only considered for engines with multiple
@@ -453,6 +457,17 @@ module Google
               #     Default to Google defined threshold, leveraging a balance of
               #     precision and recall to deliver both highly accurate results and
               #     comprehensive coverage of relevant information.
+              #   @param personalization_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec, ::Hash]
+              #     The specification for personalization.
+              #
+              #     Notice that if both
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+              #     and
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+              #     are set,
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+              #     overrides
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -509,6 +524,373 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @search_service_stub.search request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Performs a search. Similar to the
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::Client#search SearchService.Search}
+              # method, but a lite version that allows API key for authentication, where
+              # OAuth and IAM checks are not required.
+              #
+              # Only public website search is supported by this method. If data stores and
+              # engines not associated with public website search are specified, a
+              # `FAILED_PRECONDITION` error is returned.
+              #
+              # This method can be used for easy onboarding without having to implement an
+              # authentication backend. However, it is strongly recommended to use
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::Client#search SearchService.Search}
+              # instead with required OAuth and IAM checks to provide better data security.
+              #
+              # @overload search_lite(request, options = nil)
+              #   Pass arguments to `search_lite` via a request object, either of type
+              #   {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload search_lite(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, one_box_page_size: nil, data_store_specs: nil, filter: nil, canonical_filter: nil, order_by: nil, user_info: nil, language_code: nil, region_code: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, embedding_spec: nil, ranking_expression: nil, safe_search: nil, user_labels: nil, natural_language_query_understanding_spec: nil, search_as_you_type_spec: nil, session: nil, session_spec: nil, relevance_threshold: nil, personalization_spec: nil)
+              #   Pass arguments to `search_lite` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param serving_config [::String]
+              #     Required. The resource name of the Search serving config, such as
+              #     `projects/*/locations/global/collections/default_collection/engines/*/servingConfigs/default_serving_config`,
+              #     or
+              #     `projects/*/locations/global/collections/default_collection/dataStores/default_data_store/servingConfigs/default_serving_config`.
+              #     This field is used to identify the serving configuration name, set
+              #     of models used to make the search.
+              #   @param branch [::String]
+              #     The branch resource name, such as
+              #     `projects/*/locations/global/collections/default_collection/dataStores/default_data_store/branches/0`.
+              #
+              #     Use `default_branch` as the branch ID or leave this field empty, to search
+              #     documents under the default branch.
+              #   @param query [::String]
+              #     Raw search query.
+              #   @param image_query [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ImageQuery, ::Hash]
+              #     Raw image query.
+              #   @param page_size [::Integer]
+              #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
+              #     to return. The maximum allowed value depends on the data type. Values above
+              #     the maximum value are coerced to the maximum value.
+              #
+              #     * Websites with basic indexing: Default `10`, Maximum `25`.
+              #     * Websites with advanced indexing: Default `25`, Maximum `50`.
+              #     * Other: Default `50`, Maximum `100`.
+              #
+              #     If this field is negative, an  `INVALID_ARGUMENT` is returned.
+              #   @param page_token [::String]
+              #     A page token received from a previous
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::Client#search SearchService.Search}
+              #     call. Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::Client#search SearchService.Search}
+              #     must match the call that provided the page token. Otherwise, an
+              #      `INVALID_ARGUMENT`  error is returned.
+              #   @param offset [::Integer]
+              #     A 0-indexed integer that specifies the current offset (that is, starting
+              #     result location, amongst the
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s deemed by the API
+              #     as relevant) in search results. This field is only considered if
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#page_token page_token}
+              #     is unset.
+              #
+              #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
+              #   @param one_box_page_size [::Integer]
+              #     The maximum number of results to return for OneBox.
+              #     This applies to each OneBox type individually.
+              #     Default number is 10.
+              #   @param data_store_specs [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::DataStoreSpec, ::Hash>]
+              #     Specs defining dataStores to filter on in a search call and configurations
+              #     for those dataStores. This is only considered for engines with multiple
+              #     dataStores use case. For single dataStore within an engine, they should
+              #     use the specs at the top level.
+              #   @param filter [::String]
+              #     The filter syntax consists of an expression language for constructing a
+              #     predicate from one or more fields of the documents being filtered. Filter
+              #     expression is case-sensitive.
+              #
+              #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+              #
+              #     Filtering in Vertex AI Search is done by mapping the LHS filter key to a
+              #     key property defined in the Vertex AI Search backend -- this mapping is
+              #     defined by the customer in their schema. For example a media customer might
+              #     have a field 'name' in their schema. In this case the filter would look
+              #     like this: filter --> name:'ANY("king kong")'
+              #
+              #     For more information about filtering including syntax and filter
+              #     operators, see
+              #     [Filter](https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata)
+              #   @param canonical_filter [::String]
+              #     The default filter that is applied when a user performs a search without
+              #     checking any filters on the search page.
+              #
+              #     The filter applied to every search request when quality improvement such as
+              #     query expansion is needed. In the case a query does not have a sufficient
+              #     amount of results this filter will be used to determine whether or not to
+              #     enable the query expansion flow. The original filter will still be used for
+              #     the query expanded search.
+              #     This field is strongly recommended to achieve high search quality.
+              #
+              #     For more information about filter syntax, see
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#filter SearchRequest.filter}.
+              #   @param order_by [::String]
+              #     The order in which documents are returned. Documents can be ordered by
+              #     a field in an {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}
+              #     object. Leave it unset if ordered by relevance. `order_by` expression is
+              #     case-sensitive.
+              #
+              #     For more information on ordering the website search results, see
+              #     [Order web search
+              #     results](https://cloud.google.com/generative-ai-app-builder/docs/order-web-search-results).
+              #     For more information on ordering the healthcare search results, see
+              #     [Order healthcare search
+              #     results](https://cloud.google.com/generative-ai-app-builder/docs/order-hc-results).
+              #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
+              #   @param user_info [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo, ::Hash]
+              #     Information about the end user.
+              #     Highly recommended for analytics.
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::UserInfo#user_agent UserInfo.user_agent}
+              #     is used to deduce `device_type` for analytics.
+              #   @param language_code [::String]
+              #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+              #     information, see [Standard
+              #     fields](https://cloud.google.com/apis/design/standard_fields). This field
+              #     helps to better interpret the query. If a value isn't specified, the query
+              #     language code is automatically detected, which may not be accurate.
+              #   @param region_code [::String]
+              #     The Unicode country/region code (CLDR) of a location, such as "US" and
+              #     "419". For more information, see [Standard
+              #     fields](https://cloud.google.com/apis/design/standard_fields). If set,
+              #     then results will be boosted based on the region_code provided.
+              #   @param facet_specs [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec, ::Hash>]
+              #     Facet specifications for faceted search. If empty, no facets are returned.
+              #
+              #     A maximum of 100 values are allowed. Otherwise, an  `INVALID_ARGUMENT`
+              #     error is returned.
+              #   @param boost_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::BoostSpec, ::Hash]
+              #     Boost specification to boost certain documents.
+              #     For more information on boosting, see
+              #     [Boosting](https://cloud.google.com/generative-ai-app-builder/docs/boost-search-results)
+              #   @param params [::Hash{::String => ::Google::Protobuf::Value, ::Hash}]
+              #     Additional search parameters.
+              #
+              #     For public website search only, supported values are:
+              #
+              #     * `user_country_code`: string. Default empty. If set to non-empty, results
+              #        are restricted or boosted based on the location provided.
+              #        For example, `user_country_code: "au"`
+              #
+              #        For available codes see [Country
+              #        Codes](https://developers.google.com/custom-search/docs/json_api_reference#countryCodes)
+              #
+              #     * `search_type`: double. Default empty. Enables non-webpage searching
+              #        depending on the value. The only valid non-default value is 1,
+              #        which enables image searching.
+              #        For example, `search_type: 1`
+              #   @param query_expansion_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec, ::Hash]
+              #     The query expansion specification that specifies the conditions under which
+              #     query expansion occurs.
+              #   @param spell_correction_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SpellCorrectionSpec, ::Hash]
+              #     The spell correction specification that specifies the mode under
+              #     which spell correction takes effect.
+              #   @param user_pseudo_id [::String]
+              #     A unique identifier for tracking visitors. For example, this could be
+              #     implemented with an HTTP cookie, which should be able to uniquely identify
+              #     a visitor on a single device. This unique identifier should not change if
+              #     the visitor logs in or out of the website.
+              #
+              #     This field should NOT have a fixed value such as `unknown_visitor`.
+              #
+              #     This should be the same identifier as
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent#user_pseudo_id UserEvent.user_pseudo_id}
+              #     and
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryRequest#user_pseudo_id CompleteQueryRequest.user_pseudo_id}
+              #
+              #     The field must be a UTF-8 encoded string with a length limit of 128
+              #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
+              #   @param content_search_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec, ::Hash]
+              #     A specification for configuring the behavior of content search.
+              #   @param embedding_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec, ::Hash]
+              #     Uses the provided embedding to do additional semantic document retrieval.
+              #     The retrieval is based on the dot product of
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#vector SearchRequest.EmbeddingSpec.EmbeddingVector.vector}
+              #     and the document embedding that is provided in
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#field_path SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}.
+              #
+              #     If
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::EmbeddingSpec::EmbeddingVector#field_path SearchRequest.EmbeddingSpec.EmbeddingVector.field_path}
+              #     is not provided, it will use
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#embedding_config ServingConfig.EmbeddingConfig.field_path}.
+              #   @param ranking_expression [::String]
+              #     The ranking expression controls the customized ranking on retrieval
+              #     documents. This overrides
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#ranking_expression ServingConfig.ranking_expression}.
+              #     The ranking expression is a single function or multiple functions that are
+              #     joined by "+".
+              #
+              #       * ranking_expression = function, { " + ", function };
+              #
+              #     Supported functions:
+              #
+              #       * double * relevance_score
+              #       * double * dotProduct(embedding_field_path)
+              #
+              #     Function variables:
+              #
+              #       * `relevance_score`: pre-defined keywords, used for measure relevance
+              #       between query and document.
+              #       * `embedding_field_path`: the document embedding field
+              #       used with query embedding vector.
+              #       * `dotProduct`: embedding function between embedding_field_path and query
+              #       embedding vector.
+              #
+              #      Example ranking expression:
+              #
+              #        If document has an embedding field doc_embedding, the ranking expression
+              #        could be `0.5 * relevance_score + 0.3 * dotProduct(doc_embedding)`.
+              #   @param safe_search [::Boolean]
+              #     Whether to turn on safe search. This is only supported for
+              #     website search.
+              #   @param user_labels [::Hash{::String => ::String}]
+              #     The user labels applied to a resource must meet the following requirements:
+              #
+              #     * Each resource can have multiple labels, up to a maximum of 64.
+              #     * Each label must be a key-value pair.
+              #     * Keys have a minimum length of 1 character and a maximum length of 63
+              #       characters and cannot be empty. Values can be empty and have a maximum
+              #       length of 63 characters.
+              #     * Keys and values can contain only lowercase letters, numeric characters,
+              #       underscores, and dashes. All characters must use UTF-8 encoding, and
+              #       international characters are allowed.
+              #     * The key portion of a label must be unique. However, you can use the same
+              #       key with multiple resources.
+              #     * Keys must start with a lowercase letter or international character.
+              #
+              #     See [Google Cloud
+              #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+              #     for more details.
+              #   @param natural_language_query_understanding_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::NaturalLanguageQueryUnderstandingSpec, ::Hash]
+              #     If `naturalLanguageQueryUnderstandingSpec` is not specified, no additional
+              #     natural language query understanding will be done.
+              #   @param search_as_you_type_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SearchAsYouTypeSpec, ::Hash]
+              #     Search as you type configuration. Only supported for the
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::IndustryVertical::MEDIA IndustryVertical.MEDIA}
+              #     vertical.
+              #   @param session [::String]
+              #     The session resource name. Optional.
+              #
+              #     Session allows users to do multi-turn /search API calls or coordination
+              #     between /search API calls and /answer API calls.
+              #
+              #     Example #1 (multi-turn /search API calls):
+              #       1. Call /search API with the auto-session mode (see below).
+              #       2. Call /search API with the session ID generated in the first call.
+              #          Here, the previous search query gets considered in query
+              #          standing. I.e., if the first query is "How did Alphabet do in 2022?"
+              #          and the current query is "How about 2023?", the current query will
+              #          be interpreted as "How did Alphabet do in 2023?".
+              #
+              #     Example #2 (coordination between /search API calls and /answer API calls):
+              #       1. Call /search API with the auto-session mode (see below).
+              #       2. Call /answer API with the session ID generated in the first call.
+              #          Here, the answer generation happens in the context of the search
+              #          results from the first search call.
+              #
+              #     Auto-session mode: when `projects/.../sessions/-` is used, a new session
+              #     gets automatically created. Otherwise, users can use the create-session API
+              #     to create a session manually.
+              #
+              #     Multi-turn Search feature is currently at private GA stage. Please use
+              #     v1alpha or v1beta version instead before we launch this feature to public
+              #     GA. Or ask for allowlisting through Google Support team.
+              #   @param session_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SessionSpec, ::Hash]
+              #     Session specification.
+              #
+              #     Can be used only when `session` is set.
+              #   @param relevance_threshold [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::RelevanceThreshold]
+              #     The relevance threshold of the search results.
+              #
+              #     Default to Google defined threshold, leveraging a balance of
+              #     precision and recall to deliver both highly accurate results and
+              #     comprehensive coverage of relevant information.
+              #   @param personalization_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::PersonalizationSpec, ::Hash]
+              #     The specification for personalization.
+              #
+              #     Notice that if both
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+              #     and
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+              #     are set,
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+              #     overrides
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/discovery_engine/v1beta"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::DiscoveryEngine::V1beta::SearchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new
+              #
+              #   # Call the search_lite method.
+              #   result = client.search_lite request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult.
+              #     p item
+              #   end
+              #
+              def search_lite request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.search_lite.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DiscoveryEngine::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.search_lite.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.search_lite.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @search_service_stub.search_lite request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -654,11 +1036,18 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :search
+                  ##
+                  # RPC-specific configuration for `search_lite`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_lite
 
                   # @private
                   def initialize parent_rpcs = nil
                     search_config = parent_rpcs.search if parent_rpcs.respond_to? :search
                     @search = ::Gapic::Config::Method.new search_config
+                    search_lite_config = parent_rpcs.search_lite if parent_rpcs.respond_to? :search_lite
+                    @search_lite = ::Gapic::Config::Method.new search_lite_config
 
                     yield self if block_given?
                   end

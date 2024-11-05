@@ -70,6 +70,48 @@ module Google
             rpc :GetGoogleChannelConfig, ::Google::Cloud::Eventarc::V1::GetGoogleChannelConfigRequest, ::Google::Cloud::Eventarc::V1::GoogleChannelConfig
             # Update a single GoogleChannelConfig
             rpc :UpdateGoogleChannelConfig, ::Google::Cloud::Eventarc::V1::UpdateGoogleChannelConfigRequest, ::Google::Cloud::Eventarc::V1::GoogleChannelConfig
+            # Get a single MessageBus.
+            rpc :GetMessageBus, ::Google::Cloud::Eventarc::V1::GetMessageBusRequest, ::Google::Cloud::Eventarc::V1::MessageBus
+            # List message buses.
+            rpc :ListMessageBuses, ::Google::Cloud::Eventarc::V1::ListMessageBusesRequest, ::Google::Cloud::Eventarc::V1::ListMessageBusesResponse
+            # List message bus enrollments.
+            rpc :ListMessageBusEnrollments, ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsRequest, ::Google::Cloud::Eventarc::V1::ListMessageBusEnrollmentsResponse
+            # Create a new MessageBus in a particular project and location.
+            rpc :CreateMessageBus, ::Google::Cloud::Eventarc::V1::CreateMessageBusRequest, ::Google::Longrunning::Operation
+            # Update a single message bus.
+            rpc :UpdateMessageBus, ::Google::Cloud::Eventarc::V1::UpdateMessageBusRequest, ::Google::Longrunning::Operation
+            # Delete a single message bus.
+            rpc :DeleteMessageBus, ::Google::Cloud::Eventarc::V1::DeleteMessageBusRequest, ::Google::Longrunning::Operation
+            # Get a single Enrollment.
+            rpc :GetEnrollment, ::Google::Cloud::Eventarc::V1::GetEnrollmentRequest, ::Google::Cloud::Eventarc::V1::Enrollment
+            # List Enrollments.
+            rpc :ListEnrollments, ::Google::Cloud::Eventarc::V1::ListEnrollmentsRequest, ::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse
+            # Create a new Enrollment in a particular project and location.
+            rpc :CreateEnrollment, ::Google::Cloud::Eventarc::V1::CreateEnrollmentRequest, ::Google::Longrunning::Operation
+            # Update a single Enrollment.
+            rpc :UpdateEnrollment, ::Google::Cloud::Eventarc::V1::UpdateEnrollmentRequest, ::Google::Longrunning::Operation
+            # Delete a single Enrollment.
+            rpc :DeleteEnrollment, ::Google::Cloud::Eventarc::V1::DeleteEnrollmentRequest, ::Google::Longrunning::Operation
+            # Get a single Pipeline.
+            rpc :GetPipeline, ::Google::Cloud::Eventarc::V1::GetPipelineRequest, ::Google::Cloud::Eventarc::V1::Pipeline
+            # List pipelines.
+            rpc :ListPipelines, ::Google::Cloud::Eventarc::V1::ListPipelinesRequest, ::Google::Cloud::Eventarc::V1::ListPipelinesResponse
+            # Create a new Pipeline in a particular project and location.
+            rpc :CreatePipeline, ::Google::Cloud::Eventarc::V1::CreatePipelineRequest, ::Google::Longrunning::Operation
+            # Update a single pipeline.
+            rpc :UpdatePipeline, ::Google::Cloud::Eventarc::V1::UpdatePipelineRequest, ::Google::Longrunning::Operation
+            # Delete a single pipeline.
+            rpc :DeletePipeline, ::Google::Cloud::Eventarc::V1::DeletePipelineRequest, ::Google::Longrunning::Operation
+            # Get a single GoogleApiSource.
+            rpc :GetGoogleApiSource, ::Google::Cloud::Eventarc::V1::GetGoogleApiSourceRequest, ::Google::Cloud::Eventarc::V1::GoogleApiSource
+            # List GoogleApiSources.
+            rpc :ListGoogleApiSources, ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesRequest, ::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse
+            # Create a new GoogleApiSource in a particular project and location.
+            rpc :CreateGoogleApiSource, ::Google::Cloud::Eventarc::V1::CreateGoogleApiSourceRequest, ::Google::Longrunning::Operation
+            # Update a single GoogleApiSource.
+            rpc :UpdateGoogleApiSource, ::Google::Cloud::Eventarc::V1::UpdateGoogleApiSourceRequest, ::Google::Longrunning::Operation
+            # Delete a single GoogleApiSource.
+            rpc :DeleteGoogleApiSource, ::Google::Cloud::Eventarc::V1::DeleteGoogleApiSourceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -1,5 +1,17 @@
 # Release History
 
+### 1.4.0 (2024-10-30)
+
+#### Features
+
+* add multi-speaker markup, which allows generating dialogue between multiple speakers ([#27521](https://github.com/googleapis/google-cloud-ruby/issues/27521)) 
+
+### 1.3.0 (2024-10-24)
+
+#### Features
+
+* Add brand voice lite, which lets you clone a voice with just 10 seconds of audio ([#27459](https://github.com/googleapis/google-cloud-ruby/issues/27459)) 
+
 ### 1.2.0 (2024-10-15)
 
 #### Features

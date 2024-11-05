@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-discovery_engine-v1",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -435,6 +435,46 @@
         "method": {
           "short_name": "Search",
           "full_name": "google.cloud.discoveryengine.v1.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.discoveryengine.v1.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "discoveryengine_v1_generated_SearchService_SearchLite_sync",
+      "title": "Snippet for the search_lite call in the SearchService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite.",
+      "file": "search_service/search_lite.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_lite",
+        "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client#search_lite",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DiscoveryEngine::V1::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DiscoveryEngine::V1::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::DiscoveryEngine::V1::SearchService::Client"
+        },
+        "method": {
+          "short_name": "SearchLite",
+          "full_name": "google.cloud.discoveryengine.v1.SearchService.SearchLite",
           "service": {
             "short_name": "SearchService",
             "full_name": "google.cloud.discoveryengine.v1.SearchService"

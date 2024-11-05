@@ -632,6 +632,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
 
     list_repositories_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -647,27 +649,27 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
         end
 
         # Use hash object
-        client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_repositories parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_repositories parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_repositories ::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_repositories ::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_repositories({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_repositories(::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_repositories(::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -907,6 +909,8 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
 
     list_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -922,27 +926,27 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
         end
 
         # Use hash object
-        client.list_packages({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_packages parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_packages parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_packages ::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_packages ::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_packages({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_packages({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_packages(::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_packages(::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1073,6 +1077,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_token = "hello world"
     view = :VERSION_VIEW_UNSPECIFIED
     order_by = "hello world"
+    filter = "hello world"
 
     list_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1088,27 +1093,27 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
         end
 
         # Use hash object
-        client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by }) do |_result, response|
+        client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_versions parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by do |_result, response|
+        client.list_versions parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_versions ::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by) do |_result, response|
+        client.list_versions ::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by }, call_options) do |_result, response|
+        client.list_versions({ parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_versions(::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by), call_options) do |_result, response|
+        client.list_versions(::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, view: view, order_by: order_by, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1284,6 +1289,61 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     end
   end
 
+  def test_update_version
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::Version.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    version = {}
+    update_mask = {}
+
+    update_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_update_version_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_version_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_version({ version: version, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_version version: version, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_version ::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest.new(version: version, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_version({ version: version, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_version(::Google::Cloud::ArtifactRegistry::V1::UpdateVersionRequest.new(version: version, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_version_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_files
     # Create test objects.
     client_result = ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse.new
@@ -1392,6 +1452,115 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
 
         # Verify method calls
         assert_equal 5, get_file_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_file
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_delete_file_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_file_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_file({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_file name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_file ::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_file({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_file(::Google::Cloud::ArtifactRegistry::V1::DeleteFileRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_file_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_file
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::File.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    file = {}
+    update_mask = {}
+
+    update_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_update_file_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_file_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_file({ file: file, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_file file: file, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_file ::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest.new(file: file, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_file({ file: file, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_file(::Google::Cloud::ArtifactRegistry::V1::UpdateFileRequest.new(file: file, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_file_client_stub.call_count
       end
     end
   end
@@ -1668,6 +1837,281 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
 
         # Verify method calls
         assert_equal 5, delete_tag_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_rule
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::Rule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    rule_id = "hello world"
+    rule = {}
+
+    create_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_create_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_rule({ parent: parent, rule_id: rule_id, rule: rule }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_rule parent: parent, rule_id: rule_id, rule: rule do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_rule ::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest.new(parent: parent, rule_id: rule_id, rule: rule) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_rule({ parent: parent, rule_id: rule_id, rule: rule }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_rule(::Google::Cloud::ArtifactRegistry::V1::CreateRuleRequest.new(parent: parent, rule_id: rule_id, rule: rule), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_rules
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::ListRulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_list_rules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_rules_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_rules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_rules ::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_rules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_rules(::Google::Cloud::ArtifactRegistry::V1::ListRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_rules_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_rule
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::Rule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_get_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_rule({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_rule name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_rule ::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_rule({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_rule(::Google::Cloud::ArtifactRegistry::V1::GetRuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_rule
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::Rule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    rule = {}
+    update_mask = {}
+
+    update_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_update_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_rule({ rule: rule, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_rule rule: rule, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_rule ::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_rule({ rule: rule, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_rule(::Google::Cloud::ArtifactRegistry::V1::UpdateRuleRequest.new(rule: rule, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_rule
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_delete_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_rule({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_rule name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_rule ::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_rule({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_rule(::Google::Cloud::ArtifactRegistry::V1::DeleteRuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_rule_client_stub.call_count
       end
     end
   end
@@ -2052,6 +2496,282 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
 
         # Verify method calls
         assert_equal 5, update_vpcsc_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_package
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::Package.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    package = {}
+    update_mask = {}
+
+    update_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_update_package_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_package_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_package({ package: package, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_package package: package, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_package ::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest.new(package: package, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_package({ package: package, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_package(::Google::Cloud::ArtifactRegistry::V1::UpdatePackageRequest.new(package: package, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_package_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_attachments
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_attachments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_list_attachments_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_attachments_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_attachments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_attachments parent: parent, filter: filter, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_attachments ::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_attachments({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_attachments(::Google::Cloud::ArtifactRegistry::V1::ListAttachmentsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_attachments_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_attachment
+    # Create test objects.
+    client_result = ::Google::Cloud::ArtifactRegistry::V1::Attachment.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_get_attachment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_attachment_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_attachment({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_attachment name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_attachment ::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_attachment({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_attachment(::Google::Cloud::ArtifactRegistry::V1::GetAttachmentRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_attachment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_attachment
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    attachment_id = "hello world"
+    attachment = {}
+
+    create_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_create_attachment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_attachment_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_attachment({ parent: parent, attachment_id: attachment_id, attachment: attachment }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_attachment parent: parent, attachment_id: attachment_id, attachment: attachment do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_attachment ::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest.new(parent: parent, attachment_id: attachment_id, attachment: attachment) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_attachment({ parent: parent, attachment_id: attachment_id, attachment: attachment }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_attachment(::Google::Cloud::ArtifactRegistry::V1::CreateAttachmentRequest.new(parent: parent, attachment_id: attachment_id, attachment: attachment), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_attachment_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_attachment
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ServiceStub.stub :transcode_delete_attachment_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_attachment_client_stub do
+        # Create client
+        client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_attachment({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_attachment name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_attachment ::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_attachment({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_attachment(::Google::Cloud::ArtifactRegistry::V1::DeleteAttachmentRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_attachment_client_stub.call_count
       end
     end
   end

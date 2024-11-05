@@ -96,6 +96,8 @@ module Google
 
                     default_config.rpcs.publish_channel_connection_events.timeout = 60.0
 
+                    default_config.rpcs.publish.timeout = 60.0
+
                     default_config
                   end
                   yield @configure if block_given?
@@ -359,6 +361,98 @@ module Google
                 end
 
                 ##
+                # Publish events to a message bus.
+                #
+                # @overload publish(request, options = nil)
+                #   Pass arguments to `publish` via a request object, either of type
+                #   {::Google::Cloud::Eventarc::Publishing::V1::PublishRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Eventarc::Publishing::V1::PublishRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                #
+                # @overload publish(message_bus: nil, proto_message: nil, json_message: nil, avro_message: nil)
+                #   Pass arguments to `publish` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param message_bus [::String]
+                #     Required. The full name of the message bus to publish events to. Format:
+                #     `projects/{project}/locations/{location}/messageBuses/{messageBus}`.
+                #   @param proto_message [::Google::Cloud::Eventarc::Publishing::V1::CloudEvent, ::Hash]
+                #     The Protobuf format of the CloudEvent being published. Specification can
+                #     be found here:
+                #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/protobuf-format.md
+                #   @param json_message [::String]
+                #     The JSON format of the CloudEvent being published. Specification can be
+                #     found here:
+                #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+                #   @param avro_message [::String]
+                #     The Avro format of the CloudEvent being published. Specification can
+                #     be found here:
+                #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-format.md
+                # @yield [result, operation] Access the result along with the TransportOperation object
+                # @yieldparam result [::Google::Cloud::Eventarc::Publishing::V1::PublishResponse]
+                # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                #
+                # @return [::Google::Cloud::Eventarc::Publishing::V1::PublishResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/eventarc/publishing/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Eventarc::Publishing::V1::PublishRequest.new
+                #
+                #   # Call the publish method.
+                #   result = client.publish request
+                #
+                #   # The returned object is of type Google::Cloud::Eventarc::Publishing::V1::PublishResponse.
+                #   p result
+                #
+                def publish request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::Publishing::V1::PublishRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  call_metadata = @config.rpcs.publish.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Eventarc::Publishing::V1::VERSION,
+                    transports_version_send: [:rest]
+
+                  call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  options.apply_defaults timeout:      @config.rpcs.publish.timeout,
+                                         metadata:     call_metadata,
+                                         retry_policy: @config.rpcs.publish.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @publisher_stub.publish request, options do |result, operation|
+                    yield result, operation if block_given?
+                    return result
+                  end
+                rescue ::Gapic::Rest::Error => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the Publisher REST API.
                 #
                 # This class represents the configuration for Publisher REST,
@@ -501,6 +595,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :publish_events
+                    ##
+                    # RPC-specific configuration for `publish`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :publish
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -508,6 +607,8 @@ module Google
                       @publish_channel_connection_events = ::Gapic::Config::Method.new publish_channel_connection_events_config
                       publish_events_config = parent_rpcs.publish_events if parent_rpcs.respond_to? :publish_events
                       @publish_events = ::Gapic::Config::Method.new publish_events_config
+                      publish_config = parent_rpcs.publish if parent_rpcs.respond_to? :publish
+                      @publish = ::Gapic::Config::Method.new publish_config
 
                       yield self if block_given?
                     end
