@@ -28,6 +28,9 @@ module Google
     # @!attribute [rw] destinations
     #   @return [::Array<::Google::Api::ClientLibraryDestination>]
     #     The destination where API teams want this client library to be published.
+    # @!attribute [rw] selective_gapic_generation
+    #   @return [::Google::Api::SelectiveGapicGeneration]
+    #     Configuration for which RPCs should be generated in the GAPIC client.
     class CommonLanguageSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -212,6 +215,12 @@ module Google
       #     enabled. By default, asynchronous REST clients will not be generated.
       #     This feature will be enabled by default 1 month after launching the
       #     feature in preview packages.
+      # @!attribute [rw] protobuf_pythonic_types_enabled
+      #   @return [::Boolean]
+      #     Enables generation of protobuf code using new types that are more
+      #     Pythonic which are included in `protobuf>=5.29.x`. This feature will be
+      #     enabled by default 1 month after launching the feature in preview
+      #     packages.
       class ExperimentalFeatures
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -373,6 +382,17 @@ module Google
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
       end
+    end
+
+    # This message is used to configure the generation of a subset of the RPCs in
+    # a service for client libraries.
+    # @!attribute [rw] methods
+    #   @return [::Array<::String>]
+    #     An allowlist of the fully qualified names of RPCs that should be included
+    #     on public client surfaces.
+    class SelectiveGapicGeneration
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The organization for which the client libraries are being published.
