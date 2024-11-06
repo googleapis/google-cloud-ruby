@@ -1,0 +1,57 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.inventories.v1beta",
+  "libraryPackage": "::Google::Shopping::Merchant::Inventories::V1beta",
+  "services": {
+    "LocalInventoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client",
+          "rpcs": {
+            "ListLocalInventories": {
+              "methods": [
+                "list_local_inventories"
+              ]
+            },
+            "InsertLocalInventory": {
+              "methods": [
+                "insert_local_inventory"
+              ]
+            },
+            "DeleteLocalInventory": {
+              "methods": [
+                "delete_local_inventory"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionalInventoryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Inventories::V1beta::RegionalInventoryService::Client",
+          "rpcs": {
+            "ListRegionalInventories": {
+              "methods": [
+                "list_regional_inventories"
+              ]
+            },
+            "InsertRegionalInventory": {
+              "methods": [
+                "insert_regional_inventory"
+              ]
+            },
+            "DeleteRegionalInventory": {
+              "methods": [
+                "delete_regional_inventory"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
