@@ -1147,6 +1147,9 @@ module Google
               # @!attribute [rw] title
               #   @return [::String]
               #     Title of the document.
+              # @!attribute [rw] metadata
+              #   @return [::Google::Protobuf::Struct]
+              #     Metadata of the document.
               class Snippet
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods

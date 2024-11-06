@@ -370,6 +370,10 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::Sections]
           #     Optional. The customized sections chosen to return when requesting a
           #     summary of a conversation.
+          # @!attribute [rw] context_size
+          #   @return [::Integer]
+          #     Optional. The number of recent messages to include in the context.
+          #     Supported features: KNOWLEDGE_ASSIST.
           class SuggestionQueryConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

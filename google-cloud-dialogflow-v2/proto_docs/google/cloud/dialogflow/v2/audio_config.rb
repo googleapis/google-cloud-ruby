@@ -159,6 +159,9 @@ module Google
         # @!attribute [rw] enable_automatic_punctuation
         #   @return [::Boolean]
         #     Enable automatic punctuation option at the speech backend.
+        # @!attribute [rw] phrase_sets
+        #   @return [::Array<::String>]
+        #     A collection of phrase set resources to use for speech adaptation.
         # @!attribute [rw] opt_out_conformer_model_migration
         #   @return [::Boolean]
         #     If `true`, the request will opt out for STT conformer model migration.
@@ -291,6 +294,9 @@ module Google
         #     [Agent Speech
         #     settings](https://cloud.google.com/dialogflow/cx/docs/concept/agent#settings-speech)
         #     for model selection.
+        # @!attribute [rw] phrase_sets
+        #   @return [::Array<::String>]
+        #     List of names of Cloud Speech phrase sets that are used for transcription.
         # @!attribute [rw] audio_encoding
         #   @return [::Google::Cloud::Dialogflow::V2::AudioEncoding]
         #     Audio encoding of the audio content to process.
