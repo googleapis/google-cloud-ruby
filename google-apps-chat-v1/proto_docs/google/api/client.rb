@@ -215,6 +215,12 @@ module Google
       #     enabled. By default, asynchronous REST clients will not be generated.
       #     This feature will be enabled by default 1 month after launching the
       #     feature in preview packages.
+      # @!attribute [rw] protobuf_pythonic_types_enabled
+      #   @return [::Boolean]
+      #     Enables generation of protobuf code using new types that are more
+      #     Pythonic which are included in `protobuf>=5.29.x`. This feature will be
+      #     enabled by default 1 month after launching the feature in preview
+      #     packages.
       class ExperimentalFeatures
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
