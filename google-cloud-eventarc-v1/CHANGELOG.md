@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 (2024-11-07)
+
+#### Features
+
+* Publish Eventarc Advanced protos ([#27524](https://github.com/googleapis/google-cloud-ruby/issues/27524)) 
+#### Documentation
+
+* Clarified multiple comments in Eventarc Standard protos 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
