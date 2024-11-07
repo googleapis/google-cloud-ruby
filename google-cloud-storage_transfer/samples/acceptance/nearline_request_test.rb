@@ -39,5 +39,4 @@ describe "Storage Transfer Service To Nearline Transfer" do
     # delete transfer job
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
-
 end
