@@ -44,14 +44,14 @@ describe "Storage Transfer Service from POSIX" do
     else
       puts "folder not found '#{root_directory}'"
     end
-     puts "Delete bucket"
+    puts "Delete bucket"
     delete_bucket_helper sink_bucket.name
   end
 
   it "creates a transfer job" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        posix_request project_id: project.project_id, description:description, gcs_sink_bucket: sink_bucket.name, source_agent_pool_name: agent_pool_name, root_directory: root_directory
+        posix_request project_id: project.project_id, description: description, gcs_sink_bucket: sink_bucket.name, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
     assert_includes out, "transferJobs"
@@ -63,7 +63,7 @@ describe "Storage Transfer Service from POSIX" do
     create_dummy_file
     out, _err = capture_io do
       retry_resource_exhaustion do
-        posix_request project_id: project.project_id, description:description, gcs_sink_bucket: sink_bucket.name, source_agent_pool_name: agent_pool_name, root_directory: root_directory
+        posix_request project_id: project.project_id, description: description, gcs_sink_bucket: sink_bucket.name, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
 
