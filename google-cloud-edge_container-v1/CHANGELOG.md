@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.2.0 (2024-11-07)
+
+#### Features
+
+* add config data to zone metadata 
+* add connection state to cluster 
+* add maintenance exclusion window to maintenance policy 
+* add resource state to control plane encryption 
+* add resource state to local disk encryption 
+* add status reason to operation metadata 
+* add storage schema to local control plane config ([#27526](https://github.com/googleapis/google-cloud-ruby/issues/27526)) 
+* add storage schema to node config 
+* add VM service config to system addons config 
+
 ### 0.1.1 (2024-08-30)
 
 #### Documentation
