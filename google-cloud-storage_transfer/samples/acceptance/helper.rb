@@ -128,7 +128,7 @@ def retry_untill_tranfer_is_done
     result = yield
     return result if result.is_a? Google::Cloud::Storage::File
     puts "retry"
-    sleep rand(15..26)
+    sleep rand(25..30)
   end
 end
 

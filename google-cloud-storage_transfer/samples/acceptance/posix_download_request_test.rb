@@ -15,7 +15,7 @@
 require_relative "helper"
 require_relative "../posix_download_request"
 
-describe "Storage Transfer Service from POSIX" do
+describe "Storage Transfer Service  POSIX download" do
   let(:project) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_agent_pool_name) { "" }
@@ -76,6 +76,6 @@ def retry_destination_folder_check destination_file_path
   5.times do
     return true if File.exist? destination_file_path
     puts "retry destination folder check"
-    sleep rand(20..25)
+    sleep rand(25..35)
   end
 end
