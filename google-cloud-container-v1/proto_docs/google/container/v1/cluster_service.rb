@@ -40,6 +40,9 @@ module Google
         #     net.ipv4.tcp_rmem
         #     net.ipv4.tcp_wmem
         #     net.ipv4.tcp_tw_reuse
+        #     kernel.shmmni
+        #     kernel.shmmax
+        #     kernel.shmall
         # @!attribute [rw] cgroup_mode
         #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::CgroupMode]
         #     cgroup_mode specifies the cgroup mode to be used on the node.
@@ -386,6 +389,10 @@ module Google
         # @!attribute [rw] secondary_boot_disk_update_strategy
         #   @return [::Google::Cloud::Container::V1::SecondaryBootDiskUpdateStrategy]
         #     Secondary boot disk update strategy.
+        # @!attribute [rw] local_ssd_encryption_mode
+        #   @return [::Google::Cloud::Container::V1::NodeConfig::LocalSsdEncryptionMode]
+        #     Specifies which method should be used for encrypting the
+        #     Local SSDs attahced to the node.
         # @!attribute [r] effective_cgroup_mode
         #   @return [::Google::Cloud::Container::V1::NodeConfig::EffectiveCgroupMode]
         #     Output only. effective_cgroup_mode is the cgroup mode actually used by the
@@ -421,6 +428,26 @@ module Google
           class ResourceLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # LocalSsdEncryptionMode specifies the method used for encrypting the Local
+          # SSDs attached to the node.
+          module LocalSsdEncryptionMode
+            # The given node will be encrypted using keys managed by Google
+            # infrastructure and the keys will be deleted when the node is
+            # deleted.
+            LOCAL_SSD_ENCRYPTION_MODE_UNSPECIFIED = 0
+
+            # The given node will be encrypted using keys managed by Google
+            # infrastructure and the keys will be deleted when the node is
+            # deleted.
+            STANDARD_ENCRYPTION = 1
+
+            # The given node will opt-in for using ephemeral key for
+            # encryption of Local SSDs.
+            # The Local SSDs will not be able to recover data in case of node
+            # crash.
+            EPHEMERAL_KEY_ENCRYPTION = 2
           end
 
           # Possible effective cgroup modes for the node.
@@ -2066,6 +2093,9 @@ module Google
         #     NodeKubeletConfig controls the defaults for autoprovisioned node-pools.
         #
         #     Currently only `insecure_kubelet_readonly_port_enabled` can be set here.
+        # @!attribute [r] linux_node_config
+        #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig]
+        #     Output only. Configuration options for Linux nodes.
         class NodePoolAutoConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2380,6 +2410,15 @@ module Google
         #   @return [::Google::Cloud::Container::V1::RBACBindingConfig]
         #     RBACBindingConfig allows user to restrict ClusterRoleBindings an
         #     RoleBindings that can be created.
+        # @!attribute [rw] desired_enterprise_config
+        #   @return [::Google::Cloud::Container::V1::DesiredEnterpriseConfig]
+        #     The desired enterprise configuration for the cluster.
+        # @!attribute [rw] desired_node_pool_auto_config_linux_node_config
+        #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig]
+        #     The desired Linux node config for all auto-provisioned node pools
+        #     in autopilot clusters and node auto-provisioning enabled clusters.
+        #
+        #     Currently only `cgroup_mode` can be set here.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2406,6 +2445,15 @@ module Google
         #   @return [::Float]
         #     Output only. The utilization of the range.
         class RangeInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DesiredEnterpriseConfig is a wrapper used for updating enterprise_config.
+        # @!attribute [rw] desired_tier
+        #   @return [::Google::Cloud::Container::V1::EnterpriseConfig::ClusterTier]
+        #     desired_tier specifies the desired tier of the cluster.
+        class DesiredEnterpriseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4346,11 +4394,11 @@ module Google
         #     Is autoscaling enabled for this node pool.
         # @!attribute [rw] min_node_count
         #   @return [::Integer]
-        #     Minimum number of nodes for one location in the NodePool. Must be >= 1 and
-        #     <= max_node_count.
+        #     Minimum number of nodes for one location in the node pool. Must be greater
+        #     than or equal to 0 and less than or equal to max_node_count.
         # @!attribute [rw] max_node_count
         #   @return [::Integer]
-        #     Maximum number of nodes for one location in the NodePool. Must be >=
+        #     Maximum number of nodes for one location in the node pool. Must be >=
         #     min_node_count. There has to be enough quota to scale up the cluster.
         # @!attribute [rw] autoprovisioned
         #   @return [::Boolean]
@@ -4360,13 +4408,13 @@ module Google
         #     Location policy used when scaling up a nodepool.
         # @!attribute [rw] total_min_node_count
         #   @return [::Integer]
-        #     Minimum number of nodes in the node pool. Must be greater than 1 less than
-        #     total_max_node_count.
+        #     Minimum number of nodes in the node pool. Must be greater than or equal
+        #     to 0 and less than or equal to total_max_node_count.
         #     The total_*_node_count fields are mutually exclusive with the *_node_count
         #     fields.
         # @!attribute [rw] total_max_node_count
         #   @return [::Integer]
-        #     Maximum number of nodes in the node pool. Must be greater than
+        #     Maximum number of nodes in the node pool. Must be greater than or equal to
         #     total_min_node_count. There has to be enough quota to scale up the cluster.
         #     The total_*_node_count fields are mutually exclusive with the *_node_count
         #     fields.
@@ -5552,6 +5600,59 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # UpgradeInfoEvent is a notification sent to customers about the upgrade
+        # information of a resource.
+        # @!attribute [rw] resource_type
+        #   @return [::Google::Cloud::Container::V1::UpgradeResourceType]
+        #     The resource type associated with the upgrade.
+        # @!attribute [rw] operation
+        #   @return [::String]
+        #     The operation associated with this upgrade.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation was started.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation ended.
+        # @!attribute [rw] current_version
+        #   @return [::String]
+        #     The current version before the upgrade.
+        # @!attribute [rw] target_version
+        #   @return [::String]
+        #     The target version for the upgrade.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Optional relative path to the resource. For example in node pool upgrades,
+        #     the relative path of the node pool.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Container::V1::UpgradeInfoEvent::State]
+        #     Output only. The state of the upgrade.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     A brief description of the event.
+        class UpgradeInfoEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The state of the upgrade.
+          module State
+            # STATE_UNSPECIFIED indicates the state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # STARTED indicates the upgrade has started.
+            STARTED = 3
+
+            # SUCCEEDED indicates the upgrade has completed successfully.
+            SUCCEEDED = 4
+
+            # FAILED indicates the upgrade has failed.
+            FAILED = 5
+
+            # CANCELED indicates the upgrade has canceled.
+            CANCELED = 6
+          end
+        end
+
         # UpgradeAvailableEvent is a notification sent to customers when a new
         # available version is released.
         # @!attribute [rw] version
@@ -6021,6 +6122,9 @@ module Google
         # @!attribute [r] cluster_tier
         #   @return [::Google::Cloud::Container::V1::EnterpriseConfig::ClusterTier]
         #     Output only. cluster_tier indicates the effective tier of the cluster.
+        # @!attribute [rw] desired_tier
+        #   @return [::Google::Cloud::Container::V1::EnterpriseConfig::ClusterTier]
+        #     desired_tier specifies the desired tier of the cluster.
         class EnterpriseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
