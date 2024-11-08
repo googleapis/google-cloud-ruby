@@ -153,8 +153,14 @@ module Google
         #     Output only. Type of the load balancer the forwarding rule points to.
         # @!attribute [rw] gke_master_cluster
         #   @return [::String]
-        #     A cluster URI for [Google Kubernetes Engine
-        #     master](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture).
+        #     A cluster URI for [Google Kubernetes Engine cluster control
+        #     plane](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture).
+        # @!attribute [rw] fqdn
+        #   @return [::String]
+        #     DNS endpoint of [Google Kubernetes Engine cluster control
+        #     plane](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture).
+        #     Requires gke_master_cluster to be set, can't be used simultaneoulsly with
+        #     ip_address or network. Applicable only to destination endpoint.
         # @!attribute [rw] cloud_sql_instance
         #   @return [::String]
         #     A [Cloud SQL](https://cloud.google.com/sql) instance URI.
