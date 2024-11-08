@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2024-11-07)
+
+#### Features
+
+* Add feature flags proto for Direct Access ([#27523](https://github.com/googleapis/google-cloud-ruby/issues/27523)) 
+
 ### 1.2.1 (2024-08-30)
 
 #### Documentation
