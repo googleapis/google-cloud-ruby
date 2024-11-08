@@ -114,7 +114,7 @@ module Google
 
           # SSL mode options.
           module SslMode
-            # SSL mode not specified. Defaults to ENCRYPTED_ONLY.
+            # SSL mode is not specified. Defaults to ENCRYPTED_ONLY.
             SSL_MODE_UNSPECIFIED = 0
 
             # SSL connections are optional. CA verification not enforced.
@@ -126,7 +126,7 @@ module Google
             SSL_MODE_REQUIRE = 2
 
             # SSL connections are required. CA verification enforced.
-            # Clients must have certificates signed by a Cluster CA, e.g. via
+            # Clients must have certificates signed by a Cluster CA, for example, using
             # GenerateClientCertificate.
             SSL_MODE_VERIFY_CA = 3
 
@@ -320,6 +320,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # MaintenanceUpdatePolicy defines the policy for system updates.
+        # @!attribute [rw] maintenance_windows
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::MaintenanceUpdatePolicy::MaintenanceWindow>]
+        #     Preferred windows to perform maintenance. Currently limited to 1.
+        class MaintenanceUpdatePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # MaintenanceWindow specifies a preferred day and time for maintenance.
+          # @!attribute [rw] day
+          #   @return [::Google::Type::DayOfWeek]
+          #     Preferred day of the week for maintenance, e.g. MONDAY, TUESDAY, etc.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Preferred time to start the maintenance operation on the specified day.
+          #     Maintenance will start within 1 hour of this time.
+          class MaintenanceWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # MaintenanceSchedule stores the maintenance schedule generated from
+        # the MaintenanceUpdatePolicy, once a maintenance rollout is triggered, if
+        # MaintenanceWindow is set, and if there is no conflicting DenyPeriod.
+        # The schedule is cleared once the update takes place. This field cannot be
+        # manually changed; modify the MaintenanceUpdatePolicy instead.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The scheduled start time for the maintenance.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A cluster is a collection of regional AlloyDB resources. It can include a
         # primary instance and one or more read pool instances.
         # All cluster resources share a storage layer, which scales as needed.
@@ -329,6 +364,9 @@ module Google
         # @!attribute [r] migration_source
         #   @return [::Google::Cloud::AlloyDB::V1alpha::MigrationSource]
         #     Output only. Cluster created via DMS migration.
+        # @!attribute [r] cloudsql_backup_run_source
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::CloudSQLBackupRunSource]
+        #     Output only. Cluster created from CloudSQL snapshot.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The name of the cluster resource with the format:
@@ -379,7 +417,7 @@ module Google
         #     Required. The resource link for the VPC network in which cluster resources
         #     are created and from which they are accessible via Private IP. The network
         #     must belong to the same project as the cluster. It is specified in the
-        #     form: "projects/\\{project}/global/networks/\\{network_id}". This is required
+        #     form: `projects/{project}/global/networks/{network_id}`. This is required
         #     to create a cluster. Deprecated, use network_config.network instead.
         # @!attribute [rw] etag
         #   @return [::String]
@@ -445,6 +483,32 @@ module Google
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::PscConfig]
         #     Optional. The configuration for Private Service Connect (PSC) for the
         #     cluster.
+        # @!attribute [rw] maintenance_update_policy
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::MaintenanceUpdatePolicy]
+        #     Optional. The maintenance update policy determines when to allow or deny
+        #     updates.
+        # @!attribute [r] maintenance_schedule
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::MaintenanceSchedule]
+        #     Output only. The maintenance schedule for the cluster, generated for a
+        #     specific rollout if a maintenance window is set.
+        # @!attribute [rw] gemini_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::GeminiClusterConfig]
+        #     Optional. Configuration parameters related to the Gemini in Databases
+        #     add-on.
+        # @!attribute [rw] subscription_type
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::SubscriptionType]
+        #     Optional. Subscription type of the cluster.
+        # @!attribute [r] trial_metadata
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::TrialMetadata]
+        #     Output only. Metadata for free trial clusters
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #     ```
+        #     "123/environment": "production",
+        #     "123/costCenter": "marketing"
+        #     ```
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -456,7 +520,7 @@ module Google
           #     resources are created and from which they are accessible via Private IP.
           #     The network must belong to the same project as the cluster. It is
           #     specified in the form:
-          #     "projects/\\{project_number}/global/networks/\\{network_id}". This is
+          #     `projects/{project_number}/global/networks/{network_id}`. This is
           #     required to create a cluster.
           # @!attribute [rw] allocated_ip_range
           #   @return [::String]
@@ -500,7 +564,29 @@ module Google
           #   @return [::Boolean]
           #     Optional. Create an instance that allows connections from Private Service
           #     Connect endpoints to the instance.
+          # @!attribute [r] service_owned_project_number
+          #   @return [::Integer]
+          #     Output only. The project number that needs to be allowlisted on the
+          #     network attachment to enable outbound connectivity.
           class PscConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Contains information and all metadata related to TRIAL clusters.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     start time of the trial cluster.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     End time of the trial cluster.
+          # @!attribute [rw] upgrade_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Upgrade time of trial cluster to Standard cluster.
+          # @!attribute [rw] grace_end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     grace end time of the cluster.
+          class TrialMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -519,6 +605,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -663,6 +758,9 @@ module Google
         # @!attribute [rw] query_insights_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::QueryInsightsInstanceConfig]
         #     Configuration for query insights.
+        # @!attribute [rw] observability_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ObservabilityInstanceConfig]
+        #     Configuration for observability.
         # @!attribute [rw] read_pool_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::ReadPoolConfig]
         #     Read pool instance configuration.
@@ -712,7 +810,14 @@ module Google
         #     instance.
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceNetworkConfig]
-        #     Optional. Instance level network configuration.
+        #     Optional. Instance-level network configuration.
+        # @!attribute [rw] gemini_config
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::GeminiInstanceConfig]
+        #     Optional. Configuration parameters related to the Gemini in Databases
+        #     add-on.
+        # @!attribute [r] outbound_public_ip_addresses
+        #   @return [::Array<::String>]
+        #     Output only. All outbound public IP addresses configured for the instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -772,6 +877,51 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Observability Instance specific configuration.
+          # @!attribute [rw] enabled
+          #   @return [::Boolean]
+          #     Observability feature status for an instance.
+          #     This flag is turned "off" by default.
+          # @!attribute [rw] preserve_comments
+          #   @return [::Boolean]
+          #     Preserve comments in query string for an instance.
+          #     This flag is turned "off" by default.
+          # @!attribute [rw] track_wait_events
+          #   @return [::Boolean]
+          #     Track wait events during query execution for an instance.
+          #     This flag is turned "on" by default but tracking is enabled only after
+          #     observability enabled flag is also turned on.
+          # @!attribute [r] track_wait_event_types
+          #   @return [::Boolean]
+          #     Output only. Track wait event types during query execution for an
+          #     instance. This flag is turned "on" by default but tracking is enabled
+          #     only after observability enabled flag is also turned on. This is
+          #     read-only flag and only modifiable by producer API.
+          # @!attribute [rw] max_query_string_length
+          #   @return [::Integer]
+          #     Query string length. The default value is 10k.
+          # @!attribute [rw] record_application_tags
+          #   @return [::Boolean]
+          #     Record application tags for an instance.
+          #     This flag is turned "off" by default.
+          # @!attribute [rw] query_plans_per_minute
+          #   @return [::Integer]
+          #     Number of query execution plans captured by Insights per minute
+          #     for all queries combined. The default value is 200.
+          #     Any integer between 0 to 200 is considered valid.
+          # @!attribute [rw] track_active_queries
+          #   @return [::Boolean]
+          #     Track actively running queries on the instance.
+          #     If not set, this flag is "off" by default.
+          # @!attribute [rw] track_client_address
+          #   @return [::Boolean]
+          #     Track client address for an instance.
+          #     If not set, default value is "off".
+          class ObservabilityInstanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Configuration for a read pool instance.
           # @!attribute [rw] node_count
           #   @return [::Integer]
@@ -810,28 +960,20 @@ module Google
           #     connections to the database.
           # @!attribute [rw] ssl_config
           #   @return [::Google::Cloud::AlloyDB::V1alpha::SslConfig]
-          #     Optional. SSL config option for this instance.
+          #     Optional. SSL configuration option for this instance.
           class ClientConnectionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Configuration for setting up a PSC interface. This information needs to be
-          # provided by the customer.
-          # PSC interfaces will be created and added to VMs via SLM (adding a network
-          # interface will require recreating the VM). For HA instances this will be
-          # done via LDTM.
-          # @!attribute [rw] consumer_endpoint_ips
-          #   @return [::Array<::String>]
-          #     A list of endpoints in the consumer VPC the interface might initiate
-          #     outbound connections to. This list has to be provided when the PSC
-          #     interface is created.
-          # @!attribute [rw] network_attachment
+          # Configuration for setting up a PSC interface to enable outbound
+          # connectivity.
+          # @!attribute [rw] network_attachment_resource
           #   @return [::String]
-          #     The NetworkAttachment resource created in the consumer VPC to which the
-          #     PSC interface will be linked, in the form of:
+          #     The network attachment resource created in the consumer network to which
+          #     the PSC interface will be linked. This is of the format:
           #     "projects/$\\{CONSUMER_PROJECT}/regions/$\\{REGION}/networkAttachments/$\\{NETWORK_ATTACHMENT_NAME}".
-          #     NetworkAttachment has to be provided when the PSC interface is created.
+          #     The network attachment must be in the same region as the instance.
           class PscInterfaceConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -844,43 +986,37 @@ module Google
           #     Output only. The service attachment created when Private
           #     Service Connect (PSC) is enabled for the instance.
           #     The name of the resource will be in the format of
-          #     projects/<alloydb-tenant-project-number>/regions/<region-name>/serviceAttachments/<service-attachment-name>
+          #     `projects/<alloydb-tenant-project-number>/regions/<region-name>/serviceAttachments/<service-attachment-name>`
           # @!attribute [rw] allowed_consumer_projects
           #   @return [::Array<::String>]
           #     Optional. List of consumer projects that are allowed to create
           #     PSC endpoints to service-attachments to this instance.
-          # @!attribute [rw] allowed_consumer_networks
-          #   @return [::Array<::String>]
-          #     Optional. List of consumer networks that are allowed to create
-          #     PSC endpoints to service-attachments to this instance.
+          # @!attribute [r] psc_dns_name
+          #   @return [::String]
+          #     Output only. The DNS name of the instance for PSC connectivity.
+          #     Name convention: <uid>.<uid>.<region>.alloydb-psc.goog
           # @!attribute [rw] psc_interface_configs
           #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Instance::PscInterfaceConfig>]
           #     Optional. Configurations for setting up PSC interfaces attached to the
           #     instance which are used for outbound connectivity. Only primary instances
-          #     can have PSC interface attached. All the VMs created for the primary
-          #     instance will share the same configurations. Currently we only support 0
-          #     or 1 PSC interface.
-          # @!attribute [rw] outgoing_service_attachment_links
-          #   @return [::Array<::String>]
-          #     Optional. List of service attachments that this instance has created
-          #     endpoints to connect with. Currently, only a single outgoing service
-          #     attachment is supported per instance.
-          # @!attribute [rw] psc_enabled
-          #   @return [::Boolean]
-          #     Optional. Whether PSC connectivity is enabled for this instance.
-          #     This is populated by referencing the value from the parent cluster.
+          #     can have PSC interface attached. Currently we only support 0 or 1 PSC
+          #     interface.
           class PscInstanceConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Metadata related to instance level network configuration.
+          # Metadata related to instance-level network configuration.
           # @!attribute [rw] authorized_external_networks
           #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceNetworkConfig::AuthorizedNetwork>]
           #     Optional. A list of external network authorized to access this instance.
           # @!attribute [rw] enable_public_ip
           #   @return [::Boolean]
           #     Optional. Enabling public ip for the instance.
+          # @!attribute [rw] enable_outbound_public_ip
+          #   @return [::Boolean]
+          #     Optional. Enabling an outbound public IP address to support a database
+          #     server sending requests out into the internet.
           class InstanceNetworkConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1124,6 +1260,14 @@ module Google
         #     Output only. The database engine major version of the cluster this backup
         #     was created from. Any restored cluster created from this backup will have
         #     the same database version.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag keys/values directly bound to this
+        #     resource. For example:
+        #     ```
+        #     "123/environment": "production",
+        #     "123/costCenter": "marketing"
+        #     ```
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1168,6 +1312,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1306,6 +1459,10 @@ module Google
         # @!attribute [rw] user_type
         #   @return [::Google::Cloud::AlloyDB::V1alpha::User::UserType]
         #     Optional. Type of this user.
+        # @!attribute [rw] keep_extra_roles
+        #   @return [::Boolean]
+        #     Input only. If the user already exists and it has additional roles, keep
+        #     them granted.
         class User
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1328,7 +1485,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the resource in the form of
-        #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/databases/\\{database}.
+        #     `projects/{project}/locations/{location}/clusters/{cluster}/databases/{database}`.
         # @!attribute [rw] charset
         #   @return [::String]
         #     Optional. Charset for the database.
@@ -1390,6 +1547,24 @@ module Google
 
           # The database version is Postgres 15.
           POSTGRES_15 = 3
+
+          # The database version is Postgres 16.
+          POSTGRES_16 = 4
+        end
+
+        # Subscription_type added to distinguish between Standard and Trial
+        # subscriptions. By default, a subscription type is considered STANDARD unless
+        # explicitly specified.
+        module SubscriptionType
+          # This is an unknown subscription type. By default, the subscription type is
+          # STANDARD.
+          SUBSCRIPTION_TYPE_UNSPECIFIED = 0
+
+          # Standard subscription.
+          STANDARD = 1
+
+          # Trial subscription.
+          TRIAL = 2
         end
       end
     end

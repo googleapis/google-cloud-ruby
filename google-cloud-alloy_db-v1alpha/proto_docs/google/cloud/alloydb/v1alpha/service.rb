@@ -88,23 +88,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the create
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class CreateSecondaryClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -124,23 +124,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the create
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class CreateClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -160,23 +160,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the update
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     Optional. If set to true, update succeeds even if cluster is not found. In
@@ -184,6 +184,172 @@ module Google
         class UpdateClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Upgrades a cluster.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the cluster.
+        # @!attribute [rw] version
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
+        #     Required. The version the cluster is going to be upgraded to.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the Cluster.
+        #     If an etag is provided and does not match the current etag of the Cluster,
+        #     upgrade will be blocked and an ABORTED error will be returned.
+        class UpgradeClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # UpgradeClusterResponse contains the response for upgrade cluster operation.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
+        #     Status of upgrade operation.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     A user friendly message summarising the upgrade operation details and the
+        #     next steps for the user if there is any.
+        # @!attribute [rw] cluster_upgrade_details
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::ClusterUpgradeDetails>]
+        #     Array of upgrade details for the current cluster and all the secondary
+        #     clusters associated with this cluster.
+        class UpgradeClusterResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Stage information for different stages in the upgrade process.
+          # @!attribute [rw] stage
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Stage]
+          #     The stage.
+          # @!attribute [rw] status
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
+          #     Status of the stage.
+          # @!attribute [rw] logs_url
+          #   @return [::String]
+          #     logs_url is the URL for the logs associated with a stage if that stage
+          #     has logs. Right now, only three stages have logs: ALLOYDB_PRECHECK,
+          #     PG_UPGRADE_CHECK, PRIMARY_INSTANCE_UPGRADE.
+          class StageInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details regarding the upgrade of instaces associated with a cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Normalized name of the instance.
+          # @!attribute [rw] upgrade_status
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
+          #     Upgrade status of the instance.
+          # @!attribute [rw] instance_type
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::Instance::InstanceType]
+          #     Instance type.
+          class InstanceUpgradeDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Upgrade details of a cluster. This cluster can be primary or secondary.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Normalized name of the cluster
+          # @!attribute [rw] upgrade_status
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
+          #     Upgrade status of the cluster.
+          # @!attribute [rw] cluster_type
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::Cluster::ClusterType]
+          #     Cluster type which can either be primary or secondary.
+          # @!attribute [rw] database_version
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
+          #     Database version of the cluster after the upgrade operation. This will be
+          #     the target version if the upgrade was successful otherwise it remains the
+          #     same as that before the upgrade operation.
+          # @!attribute [rw] stage_info
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::StageInfo>]
+          #     Array containing stage info associated with this cluster.
+          # @!attribute [rw] instance_upgrade_details
+          #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::InstanceUpgradeDetails>]
+          #     Upgrade details of the instances directly associated with this cluster.
+          class ClusterUpgradeDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Status of upgrade operation.
+          module Status
+            # Unspecified status.
+            STATUS_UNSPECIFIED = 0
+
+            # Not started.
+            NOT_STARTED = 4
+
+            # In progress.
+            IN_PROGRESS = 5
+
+            # Operation succeeded.
+            SUCCESS = 1
+
+            # Operation failed.
+            FAILED = 2
+
+            # Operation partially succeeded.
+            PARTIAL_SUCCESS = 3
+
+            # Cancel is in progress.
+            CANCEL_IN_PROGRESS = 6
+
+            # Cancellation complete.
+            CANCELLED = 7
+          end
+
+          # Stage in the upgrade.
+          module Stage
+            # Unspecified stage.
+            STAGE_UNSPECIFIED = 0
+
+            # Pre-upgrade custom checks, not covered by pg_upgrade.
+            ALLOYDB_PRECHECK = 1
+
+            # Pre-upgrade pg_upgrade checks.
+            PG_UPGRADE_CHECK = 2
+
+            # Clone the original cluster.
+            PREPARE_FOR_UPGRADE = 5
+
+            # Upgrade the primary instance(downtime).
+            PRIMARY_INSTANCE_UPGRADE = 3
+
+            # This stage is read pool upgrade.
+            READ_POOL_INSTANCES_UPGRADE = 4
+
+            # Rollback in case of critical failures.
+            ROLLBACK = 6
+
+            # Cleanup.
+            CLEANUP = 7
+          end
         end
 
         # Message for deleting a Cluster
@@ -194,14 +360,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -213,12 +379,43 @@ module Google
         #     deletion will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the delete.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     Optional. Whether to cascade delete child instances for given cluster.
         class DeleteClusterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for switching over to a cluster
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the resource. For the required format, see the
+        #     comment on the Cluster.name field
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
+        class SwitchoverClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -231,9 +428,9 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
@@ -250,8 +447,9 @@ module Google
         #     deletion will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the delete.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class PromoteClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -279,23 +477,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the import
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class RestoreClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -370,23 +568,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the create
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class CreateInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -406,23 +604,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the create
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class CreateSecondaryInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,14 +646,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -551,7 +749,7 @@ module Google
             STATE_UNSPECIFIED = 0
 
             # Instance is pending creation and has not yet been picked up for
-            # processsing in the backend.
+            # processing in the backend.
             PENDING_CREATE = 1
 
             # The instance is active and running.
@@ -587,23 +785,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the update
-        #     request.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     Optional. If set to true, update succeeds even if instance is not found. In
@@ -621,14 +819,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -640,8 +838,9 @@ module Google
         #     deletion will be blocked and an ABORTED error will be returned.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the delete.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class DeleteInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -655,22 +854,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the failover.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class FailoverInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -687,23 +887,23 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the fault
-        #     injection.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
         class InjectFaultRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -726,25 +926,115 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Optional. If set, performs request validation (e.g. permission checks and
-        #     any other type of validation), but do not actually execute the restart.
+        #     Optional. If set, performs request validation, for example, permission
+        #     checks and any other type of validation, but does not actually execute the
+        #     create request.
+        # @!attribute [rw] node_ids
+        #   @return [::Array<::String>]
+        #     Optional. Full name of the nodes as obtained from INSTANCE_VIEW_FULL to
+        #     restart upon. Applicable only to read instances.
         class RestartInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for ExecuteSql rpc.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Optional. The database native user’s password.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. The instance where the SQL will be executed. For the required
+        #     format, see the comment on the Instance.name field.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Name of the database where the query will be executed.
+        #     Note - Value provided should be the same as expected from `SELECT
+        #     current_database();` and NOT as a resource reference.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     Required. Database user to be used for executing the SQL.
+        #     Note - Value provided should be the same as expected from
+        #     `SELECT current_user;` and NOT as a resource reference.
+        # @!attribute [rw] sql_statement
+        #   @return [::String]
+        #     Required. SQL statement to execute on database. Any valid statement is
+        #     permitted, including DDL, DML, DQL statements.
+        class ExecuteSqlRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Execute a SQL statement response.
+        # @!attribute [rw] sql_results
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::SqlResult>]
+        #     SqlResult represents the results for the execution of sql statements.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlMetadata]
+        #     Any additional metadata information regarding the execution of the sql
+        #     statement.
+        class ExecuteSqlResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Any additional metadata information regarding the execution of the SQL
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Message related to SQL execution. Marked as core content since it
+        #     can potentially contain details related to the query or result set. This
+        #     field can be used to convey messages such as "when the SQL result set
+        #     exceeds the acceptable response size limits."
+        # @!attribute [rw] partial_result
+        #   @return [::Boolean]
+        #     Set to true if SQL returned a result set larger than the acceptable
+        #     response size limits and the result was truncated.
+        # @!attribute [rw] sql_statement_execution_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     The time duration taken to execute the sql statement.
+        # @!attribute [rw] status
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlMetadata::Status]
+        #     Status of SQL execution.
+        class ExecuteSqlMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status contains all valid Status a SQL execution can end up in.
+          module Status
+            # The status is unknown.
+            STATUS_UNSPECIFIED = 0
+
+            # No error during SQL execution i.e. All SQL statements ran to completion.
+            # The "message" will be empty.
+            OK = 1
+
+            # Same as OK, except indicates that only partial results were
+            # returned. The "message" field will contain details on why results were
+            # truncated.
+            PARTIAL = 2
+
+            # Error during SQL execution. Atleast 1 SQL statement execution resulted in
+            # a error. Side effects of other statements are rolled back.  The "message"
+            # field will contain human readable error given by Postgres of the first
+            # bad SQL statement. SQL execution errors don't constitute API errors as
+            # defined in https://google.aip.dev/193 but will be returned as part of
+            # this message.
+            ERROR = 3
+          end
         end
 
         # Message for requesting list of Backups
@@ -806,14 +1096,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -841,14 +1131,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -874,14 +1164,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -943,14 +1233,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1005,14 +1295,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1026,6 +1316,12 @@ module Google
         # @!attribute [r] batch_create_instances_metadata
         #   @return [::Google::Cloud::AlloyDB::V1alpha::BatchCreateInstancesMetadata]
         #     Output only. BatchCreateInstances related metadata.
+        # @!attribute [r] promote_cluster_status
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::PromoteClusterStatus]
+        #     Output only. PromoteClusterStatus related metadata.
+        # @!attribute [r] upgrade_cluster_status
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterStatus]
+        #     Output only. UpgradeClusterStatus related metadata.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the operation was created.
@@ -1054,6 +1350,104 @@ module Google
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for current status of the database during Promote Cluster operation.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::PromoteClusterStatus::State]
+        #     Output only. The current state of the promoted secondary's database.
+        #     Once the operation is complete, the final state of the database in the
+        #     LRO can be one of:
+        #       1. PROMOTE_CLUSTER_AVAILABLE_FOR_READ, indicating that the promote
+        #       operation has failed mid-way, the database is still only available for
+        #       read.
+        #       2. PROMOTE_CLUSTER_COMPLETED, indicating that a promote operation
+        #       completed successfully. The database is available for both read and write
+        #       requests
+        class PromoteClusterStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # State contains all valid states of the database during promote cluster
+          # operation. This is used for status reporting through the LRO metadata.
+          module State
+            # The state of the database is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The database is only available for read.
+            PROMOTE_CLUSTER_AVAILABLE_FOR_READ = 1
+
+            # The database is available for both read and write. The promote operation
+            # is near completion.
+            PROMOTE_CLUSTER_AVAILABLE_FOR_WRITE = 2
+
+            # The promote operation is completed and the database is available for
+            # write.
+            PROMOTE_CLUSTER_COMPLETED = 3
+          end
+        end
+
+        # Message for current status of the Major Version Upgrade operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
+        #     Cluster Major Version Upgrade state.
+        # @!attribute [rw] cancellable
+        #   @return [::Boolean]
+        #     Whether the operation is cancellable.
+        # @!attribute [rw] source_version
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
+        #     Source database major version.
+        # @!attribute [rw] target_version
+        #   @return [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
+        #     Target database major version.
+        # @!attribute [rw] stages
+        #   @return [::Array<::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterStatus::StageStatus>]
+        #     Status of all upgrade stages.
+        class UpgradeClusterStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Status of an upgrade stage.
+          # @!attribute [rw] read_pool_instances_upgrade
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterStatus::ReadPoolInstancesUpgradeStageStatus]
+          #     Read pool instances upgrade metadata.
+          # @!attribute [rw] stage
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Stage]
+          #     Upgrade stage.
+          # @!attribute [rw] state
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterResponse::Status]
+          #     State of this stage.
+          class StageStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Read pool instances upgrade specific status.
+          # @!attribute [rw] upgrade_stats
+          #   @return [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterStatus::ReadPoolInstancesUpgradeStageStatus::Stats]
+          #     Read pool instances upgrade statistics.
+          class ReadPoolInstancesUpgradeStageStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Upgrade stats for read pool instances.
+            # @!attribute [rw] not_started
+            #   @return [::Integer]
+            #     Number of read pool instances for which upgrade has not started.
+            # @!attribute [rw] ongoing
+            #   @return [::Integer]
+            #     Number of read pool instances undergoing upgrade.
+            # @!attribute [rw] success
+            #   @return [::Integer]
+            #     Number of read pool instances successfully upgraded.
+            # @!attribute [rw] failed
+            #   @return [::Integer]
+            #     Number of read pool instances which failed to upgrade.
+            class Stats
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # Message for requesting list of Users
@@ -1116,14 +1510,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1151,14 +1545,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes since the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1183,14 +1577,14 @@ module Google
         # @!attribute [rw] request_id
         #   @return [::String]
         #     Optional. An optional request ID to identify requests. Specify a unique
-        #     request ID so that if you must retry your request, the server will know to
-        #     ignore the request if it has already been completed. The server will
-        #     guarantee that for at least 60 minutes after the first request.
+        #     request ID so that if you must retry your request, the server ignores the
+        #     request if it has already been completed. The server guarantees that for at
+        #     least 60 minutes since the first request.
         #
         #     For example, consider a situation where you make an initial request and
         #     the request times out. If you make the request again with the same request
-        #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, will ignore the second request. This prevents
+        #     ID, the server can check if the original operation with the same request ID
+        #     was received, and if so, ignores the second request. This prevents
         #     clients from accidentally creating duplicate commitments.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1211,9 +1605,9 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of databases to return. The service may return
-        #     fewer than this value. If unspecified, an appropriate number of databases
-        #     will be returned. The max value will be 2000, values above max will be
-        #     coerced to max.
+        #     fewer than this value. If unspecified, 2000 is the default page_size. The
+        #     max value of page_size will be 4000, values above max will be coerced to
+        #     max.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListDatabases` call.
