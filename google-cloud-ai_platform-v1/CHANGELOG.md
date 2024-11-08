@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.56.0 (2024-11-07)
+
+#### Features
+
+* add StopNotebookRuntime method ([#27538](https://github.com/googleapis/google-cloud-ruby/issues/27538)) 
+
 ### 0.55.0 (2024-10-25)
 
 #### Features
