@@ -124,14 +124,9 @@ module Google
         #     characters.
         # @!attribute [rw] value
         #   @return [::String]
-        #     Variable references $(VAR_NAME) are expanded
-        #     using the previous defined environment variables in the container and
-        #     any route environment variables. If a variable cannot be resolved,
-        #     the reference in the input string will be unchanged. The $(VAR_NAME)
-        #     syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped
-        #     references will never be expanded, regardless of whether the variable
-        #     exists or not.
+        #     Literal value of the environment variable.
         #     Defaults to "", and the maximum length is 32768 bytes.
+        #     Variable references are not supported in Cloud Run.
         # @!attribute [rw] value_source
         #   @return [::Google::Cloud::Run::V2::EnvVarSource]
         #     Source for the environment variable's value.
@@ -368,6 +363,10 @@ module Google
         # @!attribute [rw] read_only
         #   @return [::Boolean]
         #     If true, the volume will be mounted as read only for all mounts.
+        # @!attribute [rw] mount_options
+        #   @return [::Array<::String>]
+        #     A list of additional flags to pass to the gcsfuse CLI.
+        #     Options should be specified without the leading "--".
         class GCSVolumeSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
