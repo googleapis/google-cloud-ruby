@@ -37,7 +37,7 @@ module Google
         #     User should provide a [FunctionResponse][content.part.function_response]
         #     for each function call in the next turn. Based on the function responses,
         #     Model will generate the final response back to the user.
-        #     Maximum 64 function declarations can be provided.
+        #     Maximum 128 function declarations can be provided.
         # @!attribute [rw] retrieval
         #   @return [::Google::Cloud::AIPlatform::V1::Retrieval]
         #     Optional. Retrieval tool type.
@@ -55,9 +55,9 @@ module Google
 
         # Structured representation of a function declaration as defined by the
         # [OpenAPI 3.0 specification](https://spec.openapis.org/oas/v3.0.3). Included
-        # in this declaration are the function name and parameters. This
-        # FunctionDeclaration is a representation of a block of code that can be used
-        # as a `Tool` by the model and executed by the client.
+        # in this declaration are the function name, description, parameters and
+        # response type. This FunctionDeclaration is a representation of a block of
+        # code that can be used as a `Tool` by the model and executed by the client.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the function to call.
@@ -84,6 +84,11 @@ module Google
         #        type: INTEGER
         #     required:
         #      - param1
+        # @!attribute [rw] response
+        #   @return [::Google::Cloud::AIPlatform::V1::Schema]
+        #     Optional. Describes the output from this function in JSON Schema format.
+        #     Reflects the Open API 3.03 Response Object. The Schema defines the type
+        #     used for the response value of the function.
         class FunctionDeclaration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -116,6 +121,9 @@ module Google
         # @!attribute [rw] response
         #   @return [::Google::Protobuf::Struct]
         #     Required. The function response in JSON object format.
+        #     Use "output" key to specify function output and "error" key to specify
+        #     error details (if any). If "output" and "error" keys are not specified,
+        #     then whole "response" is treated as function output.
         class FunctionResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

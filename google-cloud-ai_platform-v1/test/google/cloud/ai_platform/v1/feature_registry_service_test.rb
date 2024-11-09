@@ -448,6 +448,71 @@ class ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::ClientTest < Mini
     end
   end
 
+  def test_batch_create_features
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_features_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_create_features, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::CreateFeatureRequest, request["requests"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_create_features_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_create_features({ parent: parent, requests: requests }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_create_features parent: parent, requests: requests do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_create_features ::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new(parent: parent, requests: requests) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_create_features({ parent: parent, requests: requests }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_create_features(::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new(parent: parent, requests: requests), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_create_features_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_feature
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::Feature.new
