@@ -557,10 +557,10 @@ module Google
               #
               #     status.state = ACTIVE AND labels.env = staging AND labels.starred = *
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataproc::V1::Job>]
+              # @yieldparam result [::Google::Cloud::Dataproc::V1::ListJobsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataproc::V1::Job>]
+              # @return [::Google::Cloud::Dataproc::V1::ListJobsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -612,7 +612,6 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @job_controller_stub.list_jobs request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @job_controller_stub, :list_jobs, "jobs", request, result, options
                   yield result, operation if block_given?
                   return result
                 end

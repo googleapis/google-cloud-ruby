@@ -792,10 +792,10 @@ module Google
               #     Optional. The page token, returned by a previous call, to request the
               #     next page of results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataproc::V1::WorkflowTemplate>]
+              # @yieldparam result [::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataproc::V1::WorkflowTemplate>]
+              # @return [::Google::Cloud::Dataproc::V1::ListWorkflowTemplatesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -847,7 +847,6 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workflow_template_service_stub.list_workflow_templates request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @workflow_template_service_stub, :list_workflow_templates, "templates", request, result, options
                   yield result, operation if block_given?
                   return result
                 end

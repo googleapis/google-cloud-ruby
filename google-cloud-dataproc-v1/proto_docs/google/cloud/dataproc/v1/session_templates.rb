@@ -109,6 +109,9 @@ module Google
         # @!attribute [rw] jupyter_session
         #   @return [::Google::Cloud::Dataproc::V1::JupyterConfig]
         #     Optional. Jupyter session config.
+        # @!attribute [rw] spark_connect_session
+        #   @return [::Google::Cloud::Dataproc::V1::SparkConnectConfig]
+        #     Optional. Spark Connect session config.
         # @!attribute [r] creator
         #   @return [::String]
         #     Output only. The email address of the user who created the template.

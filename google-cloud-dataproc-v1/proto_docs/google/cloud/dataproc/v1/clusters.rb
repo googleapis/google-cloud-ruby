@@ -263,8 +263,39 @@ module Google
         # Encryption settings for the cluster.
         # @!attribute [rw] gce_pd_kms_key_name
         #   @return [::String]
-        #     Optional. The Cloud KMS key name to use for PD disk encryption for all
-        #     instances in the cluster.
+        #     Optional. The Cloud KMS key resource name to use for persistent disk
+        #     encryption for all instances in the cluster. See [Use CMEK with cluster
+        #     data]
+        #     (https://cloud.google.com//dataproc/docs/concepts/configuring-clusters/customer-managed-encryption#use_cmek_with_cluster_data)
+        #     for more information.
+        # @!attribute [rw] kms_key
+        #   @return [::String]
+        #     Optional. The Cloud KMS key resource name to use for cluster persistent
+        #     disk and job argument encryption. See [Use CMEK with cluster data]
+        #     (https://cloud.google.com//dataproc/docs/concepts/configuring-clusters/customer-managed-encryption#use_cmek_with_cluster_data)
+        #     for more information.
+        #
+        #     When this key resource name is provided, the following job arguments of
+        #     the following job types submitted to the cluster are encrypted using CMEK:
+        #
+        #     * [FlinkJob
+        #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/FlinkJob)
+        #     * [HadoopJob
+        #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/HadoopJob)
+        #     * [SparkJob
+        #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkJob)
+        #     * [SparkRJob
+        #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkRJob)
+        #     * [PySparkJob
+        #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/PySparkJob)
+        #     * [SparkSqlJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkSqlJob)
+        #       scriptVariables and queryList.queries
+        #     * [HiveJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/HiveJob)
+        #       scriptVariables and queryList.queries
+        #     * [PigJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PigJob)
+        #       scriptVariables and queryList.queries
+        #     * [PrestoJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PrestoJob)
+        #       scriptVariables and queryList.queries
         class EncryptionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -309,12 +340,22 @@ module Google
         #     * `sub0`
         # @!attribute [rw] internal_ip_only
         #   @return [::Boolean]
-        #     Optional. If true, all instances in the cluster will only have internal IP
-        #     addresses. By default, clusters are not restricted to internal IP
-        #     addresses, and will have ephemeral external IP addresses assigned to each
-        #     instance. This `internal_ip_only` restriction can only be enabled for
-        #     subnetwork enabled networks, and all off-cluster dependencies must be
-        #     configured to be accessible without external IP addresses.
+        #     Optional. This setting applies to subnetwork-enabled networks. It is set to
+        #     `true` by default in clusters created with image versions 2.2.x.
+        #
+        #     When set to `true`:
+        #
+        #     * All cluster VMs have internal IP addresses.
+        #     * [Google Private Access]
+        #     (https://cloud.google.com/vpc/docs/private-google-access)
+        #     must be enabled to access Dataproc and other Google Cloud APIs.
+        #     * Off-cluster dependencies must be configured to be accessible
+        #     without external IP addresses.
+        #
+        #     When set to `false`:
+        #
+        #     * Cluster VMs are not restricted to internal IP addresses.
+        #     * Ephemeral external IP addresses are assigned to each cluster VM.
         # @!attribute [rw] private_ipv6_google_access
         #   @return [::Google::Cloud::Dataproc::V1::GceClusterConfig::PrivateIpv6GoogleAccess]
         #     Optional. The type of IPv6 access for a cluster.
@@ -349,8 +390,8 @@ module Google
         #     * https://www.googleapis.com/auth/devstorage.full_control
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
-        #     The Compute Engine tags to add to all instances (see [Tagging
-        #     instances](https://cloud.google.com/compute/docs/label-or-tag-resources#tags)).
+        #     The Compute Engine network tags to add to all instances (see [Tagging
+        #     instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The Compute Engine metadata entries to add to all instances (see
@@ -651,6 +692,10 @@ module Google
 
         # Instance flexibility Policy allowing a mixture of VM shapes and provisioning
         # models.
+        # @!attribute [rw] provisioning_model_mix
+        #   @return [::Google::Cloud::Dataproc::V1::InstanceFlexibilityPolicy::ProvisioningModelMix]
+        #     Optional. Defines how the Group selects the provisioning model to ensure
+        #     required reliability.
         # @!attribute [rw] instance_selection_list
         #   @return [::Array<::Google::Cloud::Dataproc::V1::InstanceFlexibilityPolicy::InstanceSelection>]
         #     Optional. List of instance selection options that the group will use when
@@ -661,6 +706,31 @@ module Google
         class InstanceFlexibilityPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines how Dataproc should create VMs with a mixture of provisioning
+          # models.
+          # @!attribute [rw] standard_capacity_base
+          #   @return [::Integer]
+          #     Optional. The base capacity that will always use Standard VMs to avoid
+          #     risk of more preemption than the minimum capacity you need. Dataproc will
+          #     create only standard VMs until it reaches standard_capacity_base, then it
+          #     will start using standard_capacity_percent_above_base to mix Spot with
+          #     Standard VMs. eg. If 15 instances are requested and
+          #     standard_capacity_base is 5, Dataproc will create 5 standard VMs and then
+          #     start mixing spot and standard VMs for remaining 10 instances.
+          # @!attribute [rw] standard_capacity_percent_above_base
+          #   @return [::Integer]
+          #     Optional. The percentage of target capacity that should use Standard VM.
+          #     The remaining percentage will use Spot VMs. The percentage applies only
+          #     to the capacity above standard_capacity_base. eg. If 15 instances are
+          #     requested and standard_capacity_base is 5 and
+          #     standard_capacity_percent_above_base is 30, Dataproc will create 5
+          #     standard VMs and then start mixing spot and standard VMs for remaining 10
+          #     instances. The mix will be 30% standard and 70% spot.
+          class ProvisioningModelMix
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Defines machines types and a rank to which the machines types belong.
           # @!attribute [rw] machine_types
@@ -704,15 +774,15 @@ module Google
         #
         #     Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
-        #     * `projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
-        #     * `nvidia-tesla-k80`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-t4`
+        #     * `projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-t4`
+        #     * `nvidia-tesla-t4`
         #
         #     **Auto Zone Exception**: If you are using the Dataproc
         #     [Auto Zone
         #     Placement](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/auto-zone#using_auto_zone_placement)
         #     feature, you must use the short name of the accelerator type
-        #     resource, for example, `nvidia-tesla-k80`.
+        #     resource, for example, `nvidia-tesla-t4`.
         # @!attribute [rw] accelerator_count
         #   @return [::Integer]
         #     The number of the accelerator cards of this type exposed to this instance.
@@ -750,6 +820,17 @@ module Google
         #     "nvme" (Non-Volatile Memory Express).
         #     See [local SSD
         #     performance](https://cloud.google.com/compute/docs/disks/local-ssd#performance).
+        # @!attribute [rw] boot_disk_provisioned_iops
+        #   @return [::Integer]
+        #     Optional. Indicates how many IOPS to provision for the disk. This sets the
+        #     number of I/O operations per second that the disk can handle. Note: This
+        #     field is only supported if boot_disk_type is hyperdisk-balanced.
+        # @!attribute [rw] boot_disk_provisioned_throughput
+        #   @return [::Integer]
+        #     Optional. Indicates how much throughput to provision for the disk. This
+        #     sets the number of throughput mb per second that the disk can handle.
+        #     Values must be greater than or equal to 1. Note: This field is only
+        #     supported if boot_disk_type is hyperdisk-balanced.
         class DiskConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -940,7 +1021,7 @@ module Google
         #     principal password.
         # @!attribute [rw] kms_key_uri
         #   @return [::String]
-        #     Optional. The uri of the KMS key used to encrypt various sensitive
+        #     Optional. The URI of the KMS key used to encrypt sensitive
         #     files.
         # @!attribute [rw] keystore_uri
         #   @return [::String]
@@ -1026,7 +1107,7 @@ module Google
         #   @return [::String]
         #     Optional. The version of software inside the cluster. It must be one of the
         #     supported [Dataproc
-        #     Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported_dataproc_versions),
+        #     Versions](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#supported-dataproc-image-versions),
         #     such as "1.2" (including a subminor version, such as "1.2.29"), or the
         #     ["preview"
         #     version](https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-versions#other_versions).
@@ -1225,6 +1306,9 @@ module Google
 
             # hivemetastore metric source
             HIVEMETASTORE = 7
+
+            # flink metric source
+            FLINK = 8
           end
         end
 
@@ -1494,12 +1578,12 @@ module Google
         #     where **field** is one of `status.state`, `clusterName`, or `labels.[KEY]`,
         #     and `[KEY]` is a label key. **value** can be `*` to match all values.
         #     `status.state` can be one of the following: `ACTIVE`, `INACTIVE`,
-        #     `CREATING`, `RUNNING`, `ERROR`, `DELETING`, or `UPDATING`. `ACTIVE`
-        #     contains the `CREATING`, `UPDATING`, and `RUNNING` states. `INACTIVE`
-        #     contains the `DELETING` and `ERROR` states.
-        #     `clusterName` is the name of the cluster provided at creation time.
-        #     Only the logical `AND` operator is supported; space-separated items are
-        #     treated as having an implicit `AND` operator.
+        #     `CREATING`, `RUNNING`, `ERROR`, `DELETING`, `UPDATING`, `STOPPING`, or
+        #     `STOPPED`. `ACTIVE` contains the `CREATING`, `UPDATING`, and `RUNNING`
+        #     states. `INACTIVE` contains the `DELETING`, `ERROR`, `STOPPING`, and
+        #     `STOPPED` states. `clusterName` is the name of the cluster provided at
+        #     creation time. Only the logical `AND` operator is supported;
+        #     space-separated items are treated as having an implicit `AND` operator.
         #
         #     Example filter:
         #
@@ -1543,7 +1627,7 @@ module Google
         #     Required. The cluster name.
         # @!attribute [rw] tarball_gcs_dir
         #   @return [::String]
-        #     Optional. The output Cloud Storage directory for the diagnostic
+        #     Optional. (Optional) The output Cloud Storage directory for the diagnostic
         #     tarball. If not specified, a task-specific directory in the cluster's
         #     staging bucket will be used.
         # @!attribute [rw] tarball_access

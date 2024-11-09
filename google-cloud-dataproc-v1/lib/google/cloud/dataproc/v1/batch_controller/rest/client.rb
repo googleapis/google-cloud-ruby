@@ -422,10 +422,10 @@ module Google
               #
               #     See https://google.aip.dev/132#ordering for more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataproc::V1::Batch>]
+              # @yieldparam result [::Google::Cloud::Dataproc::V1::ListBatchesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataproc::V1::Batch>]
+              # @return [::Google::Cloud::Dataproc::V1::ListBatchesResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -477,7 +477,6 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @batch_controller_stub.list_batches request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @batch_controller_stub, :list_batches, "batches", request, result, options
                   yield result, operation if block_given?
                   return result
                 end

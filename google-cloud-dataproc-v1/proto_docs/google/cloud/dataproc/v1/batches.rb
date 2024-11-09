@@ -112,6 +112,11 @@ module Google
         #   @return [::String]
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. List of Batches that could not be included in the response.
+        #     Attempting to get one of these resources may indicate why it was not
+        #     included in the list response.
         class ListBatchesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
