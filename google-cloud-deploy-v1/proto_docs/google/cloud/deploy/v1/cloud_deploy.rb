@@ -340,9 +340,35 @@ module Google
           #   @return [::String]
           #     Optional. The label to use when selecting Pods for the Deployment and
           #     Service resources. This label must already be present in both resources.
+          # @!attribute [rw] route_destinations
+          #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig::GatewayServiceMesh::RouteDestinations]
+          #     Optional. Route destinations allow configuring the Gateway API HTTPRoute
+          #     to be deployed to additional clusters. This option is available for
+          #     multi-cluster service mesh set ups that require the route to exist in the
+          #     clusters that call the service. If unspecified, the HTTPRoute will only
+          #     be deployed to the Target cluster.
           class GatewayServiceMesh
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information about route destinations for the Gateway API service mesh.
+            # @!attribute [rw] destination_ids
+            #   @return [::Array<::String>]
+            #     Required. The clusters where the Gateway API HTTPRoute resource will be
+            #     deployed to. Valid entries include the associated entities IDs
+            #     configured in the Target resource and "@self" to include the Target
+            #     cluster.
+            # @!attribute [rw] propagate_service
+            #   @return [::Boolean]
+            #     Optional. Whether to propagate the Kubernetes Service to the route
+            #     destination clusters. The Service will always be deployed to the Target
+            #     cluster even if the HTTPRoute is not. This option may be used to
+            #     facilitiate successful DNS lookup in the route destination clusters.
+            #     Can only be set to true if destinations are specified.
+            class RouteDestinations
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Information about the Kubernetes Service networking configuration.
@@ -763,6 +789,16 @@ module Google
         # @!attribute [rw] custom_target
         #   @return [::Google::Cloud::Deploy::V1::CustomTarget]
         #     Optional. Information specifying a Custom Target.
+        # @!attribute [rw] associated_entities
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Deploy::V1::AssociatedEntities}]
+        #     Optional. Map of entity IDs to their associated entities. Associated
+        #     entities allows specifying places other than the deployment target for
+        #     specific features. For example, the Gateway API canary can be configured to
+        #     deploy the HTTPRoute to a different cluster(s) than the deployment cluster
+        #     using associated entities. An entity ID must consist of lower-case letters,
+        #     numbers, and hyphens, start with a letter and end with a letter or a
+        #     number, and have a max length of 63 characters. In other words, it must
+        #     match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. This checksum is computed by the server based on the value of
@@ -798,6 +834,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Deploy::V1::AssociatedEntities]
+          class AssociatedEntitiesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -973,6 +1018,18 @@ module Google
         #     Required. The name of the CustomTargetType. Format must be
         #     `projects/{project}/locations/{location}/customTargetTypes/{custom_target_type}`.
         class CustomTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information about entities associated with a `Target`.
+        # @!attribute [rw] gke_clusters
+        #   @return [::Array<::Google::Cloud::Deploy::V1::GkeCluster>]
+        #     Optional. Information specifying GKE clusters as associated entities.
+        # @!attribute [rw] anthos_clusters
+        #   @return [::Array<::Google::Cloud::Deploy::V1::AnthosCluster>]
+        #     Optional. Information specifying Anthos clusters as associated entities.
+        class AssociatedEntities
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2539,6 +2596,9 @@ module Google
         # @!attribute [r] rolled_back_by_rollouts
         #   @return [::Array<::String>]
         #     Output only. Names of `Rollouts` that rolled back this `Rollout`.
+        # @!attribute [r] active_repair_automation_run
+        #   @return [::String]
+        #     Output only. The AutomationRun actively repairing the rollout.
         class Rollout
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3809,6 +3869,14 @@ module Google
         #     Required. ID of the rule. This id must be unique in the `Automation`
         #     resource to which this rule belongs. The format is
         #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+        # @!attribute [rw] phases
+        #   @return [::Array<::String>]
+        #     Optional. Phases within which jobs are subject to automatic repair actions
+        #     on failure. Proceeds only after phase name matched any one in the list, or
+        #     for all phases if unspecified. This value must consist of lower-case
+        #     letters, numbers, and hyphens, start with a letter and end with a letter or
+        #     a number, and have a max length of 63 characters. In other words, it must
+        #     match the following regex: `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
         # @!attribute [rw] jobs
         #   @return [::Array<::String>]
         #     Optional. Jobs to repair. Proceeds only after job name matched any one in
@@ -3821,7 +3889,54 @@ module Google
         # @!attribute [r] condition
         #   @return [::Google::Cloud::Deploy::V1::AutomationRuleCondition]
         #     Output only. Information around the state of the 'Automation' rule.
+        # @!attribute [rw] repair_phases
+        #   @return [::Array<::Google::Cloud::Deploy::V1::RepairPhaseConfig>]
+        #     Required. Defines the types of automatic repair phases for failed jobs.
         class RepairRolloutRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration of the repair phase.
+        # @!attribute [rw] retry
+        #   @return [::Google::Cloud::Deploy::V1::Retry]
+        #     Optional. Retries a failed job.
+        # @!attribute [rw] rollback
+        #   @return [::Google::Cloud::Deploy::V1::Rollback]
+        #     Optional. Rolls back a `Rollout`.
+        class RepairPhaseConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retries the failed job.
+        # @!attribute [rw] attempts
+        #   @return [::Integer]
+        #     Required. Total number of retries. Retry is skipped if set to 0; The
+        #     minimum value is 1, and the maximum value is 10.
+        # @!attribute [rw] wait
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. How long to wait for the first retry. Default is 0, and the
+        #     maximum value is 14d.
+        # @!attribute [rw] backoff_mode
+        #   @return [::Google::Cloud::Deploy::V1::BackoffMode]
+        #     Optional. The pattern of how wait time will be increased. Default is
+        #     linear. Backoff mode will be ignored if `wait` is 0.
+        class Retry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Rolls back a `Rollout`.
+        # @!attribute [rw] destination_phase
+        #   @return [::String]
+        #     Optional. The starting phase ID for the `Rollout`. If unspecified, the
+        #     `Rollout` will start in the stable phase.
+        # @!attribute [rw] disable_rollback_if_rollout_pending
+        #   @return [::Boolean]
+        #     Optional. If pending rollout exists on the target, the rollback operation
+        #     will be aborted.
+        class Rollback
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4145,6 +4260,9 @@ module Google
         # @!attribute [r] rollout
         #   @return [::String]
         #     Output only. The name of the rollout that initiates the `AutomationRun`.
+        # @!attribute [r] current_repair_phase_index
+        #   @return [::Integer]
+        #     Output only. The index of the current repair action in the repair sequence.
         # @!attribute [r] repair_phases
         #   @return [::Array<::Google::Cloud::Deploy::V1::RepairPhase>]
         #     Output only. Records of the repair attempts. Each repair phase may have
@@ -4222,6 +4340,9 @@ module Google
         # @!attribute [r] state_desc
         #   @return [::String]
         #     Output only. Description of the state of the Rollback.
+        # @!attribute [r] disable_rollback_if_rollout_pending
+        #   @return [::Boolean]
+        #     Output only. If active rollout exists on the target, abort this rollback.
         class RollbackAttempt
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
