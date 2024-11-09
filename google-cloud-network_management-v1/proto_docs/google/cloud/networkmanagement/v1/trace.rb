@@ -1538,6 +1538,10 @@ module Google
             # Packet from the unknown peered network is dropped due to no known route
             # from the source network to the destination IP address.
             NO_KNOWN_ROUTE_FROM_PEERED_NETWORK_TO_DESTINATION = 82
+
+            # Sending packets processed by the Private NAT Gateways to the Private
+            # Service Connect endpoints is not supported.
+            PRIVATE_NAT_TO_PSC_ENDPOINT_UNSUPPORTED = 83
           end
         end
 
@@ -1551,10 +1555,13 @@ module Google
         #     URI of a GKE cluster network.
         # @!attribute [rw] internal_ip
         #   @return [::String]
-        #     Internal IP address of a GKE cluster master.
+        #     Internal IP address of a GKE cluster control plane.
         # @!attribute [rw] external_ip
         #   @return [::String]
-        #     External IP address of a GKE cluster master.
+        #     External IP address of a GKE cluster control plane.
+        # @!attribute [rw] dns_endpoint
+        #   @return [::String]
+        #     DNS endpoint of a GKE cluster control plane.
         class GKEMasterInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
