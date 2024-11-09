@@ -203,6 +203,10 @@ module Google
           #   @return [::Boolean]
           #     Optional. Indicates match is case insensitive. The default value is
           #     `false` if missing.
+          # @!attribute [rw] contextual_translation_enabled
+          #   @return [::Boolean]
+          #     Optional. If set to true, the glossary will be used for contextual
+          #     translation.
           class GlossaryConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
