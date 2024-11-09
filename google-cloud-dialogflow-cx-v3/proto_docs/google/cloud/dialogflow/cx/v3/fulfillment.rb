@@ -43,8 +43,8 @@ module Google
           # @!attribute [rw] webhook
           #   @return [::String]
           #     The webhook to call.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/webhooks/<Webhook ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
           # @!attribute [rw] return_partial_responses
           #   @return [::Boolean]
           #     Whether Dialogflow should return currently queued fulfillment response

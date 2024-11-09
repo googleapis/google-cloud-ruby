@@ -199,9 +199,8 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
-                #     list all environments for. Format: `projects/<Project
-                #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-                #     ID>`.
+                #     list all environments for. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 20 and
                 #     at most 100.
@@ -293,8 +292,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the
                 #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/experiments/<ExperimentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -376,8 +374,7 @@ module Google
                 #   @param parent [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
                 #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 #   @param experiment [::Google::Cloud::Dialogflow::CX::V3::Experiment, ::Hash]
                 #     Required. The experiment to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -543,8 +540,7 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the
                 #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/experiments/<ExperimentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -626,8 +622,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the experiment to start.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/experiments/<ExperimentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -708,8 +704,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the experiment to stop.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>/experiments/<Experiment ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/experiments/<ExperimentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Experiment]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -101,7 +101,8 @@ module Google
             # The text response message.
             # @!attribute [rw] text
             #   @return [::Array<::String>]
-            #     Required. A collection of text responses.
+            #     Required. A collection of text response variants. If multiple variants
+            #     are defined, only one text response variant is returned at runtime.
             # @!attribute [r] allow_playback_interruption
             #   @return [::Boolean]
             #     Output only. Whether the playback of this message can be interrupted by

@@ -35,8 +35,8 @@ module Google
           #     method.
           #     {::Google::Cloud::Dialogflow::CX::V3::Intents::Client#create_intent Intents.CreateIntent}
           #     populates the name automatically.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the intent, unique within the agent.
@@ -145,11 +145,12 @@ module Google
             # @!attribute [rw] entity_type
             #   @return [::String]
             #     Required. The entity type of the parameter.
-            #     Format: `projects/-/locations/-/agents/-/entityTypes/<System Entity Type
-            #     ID>` for system entity types (for example,
+            #     Format:
+            #     `projects/-/locations/-/agents/-/entityTypes/<SystemEntityTypeID>` for
+            #     system entity types (for example,
             #     `projects/-/locations/-/agents/-/entityTypes/sys.date`), or
-            #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-            #     ID>/entityTypes/<Entity Type ID>` for developer entity types.
+            #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`
+            #     for developer entity types.
             # @!attribute [rw] is_list
             #   @return [::Boolean]
             #     Indicates whether the parameter represents a list of values.
@@ -181,7 +182,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to list all intents for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to list intents for. The following fields are language
@@ -229,8 +230,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the intent.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to retrieve the intent for. The following fields are language
@@ -253,7 +254,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to create an intent for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] intent
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Intent]
           #     Required. The intent to create.
@@ -303,8 +304,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the intent to delete.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           class DeleteIntentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -315,7 +316,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to import the intents into.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] intents_uri
           #   @return [::String]
           #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
@@ -375,8 +376,8 @@ module Google
           # @!attribute [rw] intents
           #   @return [::Array<::String>]
           #     The unique identifier of the imported intents.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] conflicting_resources
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportIntentsResponse::ConflictingResources]
           #     Info which resources have conflicts when
@@ -414,13 +415,12 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The name of the parent agent to export intents.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] intents
           #   @return [::Array<::String>]
           #     Required. The name of the intents to export.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] intents_uri
           #   @return [::String]
           #     Optional. The [Google Cloud

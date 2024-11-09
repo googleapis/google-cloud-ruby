@@ -222,7 +222,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The agent to create a flow for.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
               #   @param flow [::Google::Cloud::Dialogflow::CX::V3::Flow, ::Hash]
               #     Required. The flow to create.
               #   @param language_code [::String]
@@ -324,8 +324,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the flow to delete.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #   @param force [::Boolean]
               #     This field has no effect for flows with no incoming transitions.
               #     For flows with incoming transitions:
@@ -423,7 +423,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The agent containing the flows.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 100 and
               #     at most 1000.
@@ -534,8 +534,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the flow to get.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #   @param language_code [::String]
               #     The language to retrieve the flow for. The following fields are language
               #     dependent:
@@ -756,8 +756,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The flow to train.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -854,8 +854,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The flow to validate.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #   @param language_code [::String]
               #     If not specified, the agent's default language is used.
               #
@@ -945,8 +945,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The flow name.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>/validationResult`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/validationResult`.
               #   @param language_code [::String]
               #     If not specified, the agent's default language is used.
               #
@@ -1048,7 +1048,7 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The agent to import the flow into.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+              #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
               #   @param flow_uri [::String]
               #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
               #     to import flow from. The format of this URI must be
@@ -1172,8 +1172,8 @@ module Google
               #
               #   @param name [::String]
               #     Required. The name of the flow to export.
-              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/flows/<Flow ID>`.
+              #     Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
               #   @param flow_uri [::String]
               #     Optional. The [Google Cloud
               #     Storage](https://cloud.google.com/storage/docs/) URI to export the flow to.

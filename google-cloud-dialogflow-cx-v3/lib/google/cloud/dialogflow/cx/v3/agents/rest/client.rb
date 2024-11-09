@@ -217,7 +217,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The location to list all agents for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 100 and
                 #     at most 1000.
@@ -307,7 +307,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the agent.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Agent]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -391,7 +391,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The location to create a agent for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>`.
                 #   @param agent [::Google::Cloud::Dialogflow::CX::V3::Agent, ::Hash]
                 #     Required. The agent to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -559,7 +559,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the agent to delete.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -648,7 +648,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the agent to export.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param agent_uri [::String]
                 #     Optional. The [Google Cloud
                 #     Storage](https://cloud.google.com/storage/docs/) URI to export the agent
@@ -665,8 +665,8 @@ module Google
                 #     is assumed.
                 #   @param environment [::String]
                 #     Optional. Environment name. If not set, draft environment is assumed.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/environments/<Environment ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
                 #   @param git_destination [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::GitDestination, ::Hash]
                 #     Optional. The Git branch to export the agent to.
                 #   @param include_bigquery_export_settings [::Boolean]
@@ -774,7 +774,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the agent to restore into.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param agent_uri [::String]
                 #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
                 #     to restore agent from. The format of this URI must be
@@ -880,7 +880,7 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The agent to validate.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param language_code [::String]
                 #     If not specified, the agent's default language is used.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -963,8 +963,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The agent name.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/validationResult`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/validationResult`.
                 #   @param language_code [::String]
                 #     If not specified, the agent's default language is used.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1045,8 +1045,8 @@ module Google
                 #   the default parameter values, pass an empty Hash as a request object (see above).
                 #
                 #   @param name [::String]
-                #     Required. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>/generativeSettings`.
+                #     Required. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generativeSettings`.
                 #   @param language_code [::String]
                 #     Required. Language code of the generative settings.
                 # @yield [result, operation] Access the result along with the TransportOperation object

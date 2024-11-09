@@ -129,7 +129,7 @@ module Google
             # Define behaviors on logging.
             # @!attribute [rw] enable_stackdriver_logging
             #   @return [::Boolean]
-            #     Enables StackDriver logging.
+            #     Enables Google Cloud Logging.
             # @!attribute [rw] enable_interaction_logging
             #   @return [::Boolean]
             #     Enables DF Interaction logging.

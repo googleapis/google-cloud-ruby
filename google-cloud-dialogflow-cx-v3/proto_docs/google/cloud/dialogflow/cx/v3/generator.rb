@@ -32,8 +32,8 @@ module Google
           #     Must be set for the
           #     {::Google::Cloud::Dialogflow::CX::V3::Generators::Client#update_generator Generators.UpdateGenerator}
           #     method. [Generators.CreateGenerate][] populates the name automatically.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/generators/<Generator ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the generator, unique within the
@@ -46,6 +46,9 @@ module Google
           # @!attribute [rw] placeholders
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Generator::Placeholder>]
           #     Optional. List of custom placeholders in the prompt text.
+          # @!attribute [rw] model_parameter
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Generator::ModelParameter]
+          #     Parameters passed to the LLM to configure its behavior.
           class Generator
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -58,6 +61,36 @@ module Google
             #   @return [::String]
             #     Custom placeholder value in the prompt text.
             class Placeholder
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Parameters to be passed to the LLM. If not set, default values will be
+            # used.
+            # @!attribute [rw] temperature
+            #   @return [::Float]
+            #     The temperature used for sampling. Temperature sampling occurs after both
+            #     topP and topK have been applied.
+            #     Valid range: [0.0, 1.0]
+            #     Low temperature = less random. High temperature = more random.
+            # @!attribute [rw] max_decode_steps
+            #   @return [::Integer]
+            #     The maximum number of tokens to generate.
+            # @!attribute [rw] top_p
+            #   @return [::Float]
+            #     If set, only the tokens comprising the top top_p probability mass are
+            #     considered. If both top_p and top_k are
+            #     set, top_p will be used for further refining candidates selected with
+            #     top_k.
+            #     Valid range: (0.0, 1.0].
+            #     Small topP = less random. Large topP = more random.
+            # @!attribute [rw] top_k
+            #   @return [::Integer]
+            #     If set, the sampling process in each step is limited to the top_k tokens
+            #     with highest probabilities.
+            #     Valid range: [1, 40] or 1000+.
+            #     Small topK = less random. Large topK = more random.
+            class ModelParameter
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -77,7 +110,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to list all generators for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to list generators for.
@@ -113,8 +146,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the generator.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/generators/<Generator ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language to list generators for.
@@ -128,7 +161,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to create a generator for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] generator
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Generator]
           #     Required. The generator to create.
@@ -164,8 +197,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the generator to delete.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/generators/<Generator ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/generators/<GeneratorID>`.
           # @!attribute [rw] force
           #   @return [::Boolean]
           #     This field has no effect for generators not being used.

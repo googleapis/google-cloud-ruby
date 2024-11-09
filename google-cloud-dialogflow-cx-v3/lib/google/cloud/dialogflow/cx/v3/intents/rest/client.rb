@@ -212,7 +212,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to list all intents for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param language_code [::String]
                 #     The language to list intents for. The following fields are language
                 #     dependent:
@@ -315,8 +315,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the intent.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/intents/<Intent ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
                 #   @param language_code [::String]
                 #     The language to retrieve the intent for. The following fields are language
                 #     dependent:
@@ -411,7 +411,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to create an intent for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param intent [::Google::Cloud::Dialogflow::CX::V3::Intent, ::Hash]
                 #     Required. The intent to create.
                 #   @param language_code [::String]
@@ -603,8 +603,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the intent to delete.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/intents/<Intent ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -693,7 +693,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to import the intents into.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param intents_uri [::String]
                 #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
                 #     to import intents from. The format of this URI must be
@@ -804,12 +804,11 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The name of the parent agent to export intents.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param intents [::Array<::String>]
                 #     Required. The name of the intents to export.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/intents/<Intent ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
                 #   @param intents_uri [::String]
                 #     Optional. The [Google Cloud
                 #     Storage](https://cloud.google.com/storage/docs/) URI to export the
