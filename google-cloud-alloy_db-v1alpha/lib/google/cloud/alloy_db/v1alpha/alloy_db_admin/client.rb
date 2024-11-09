@@ -129,11 +129,6 @@ module Google
                   initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
-                default_config.rpcs.list_databases.timeout = 60.0
-                default_config.rpcs.list_databases.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
                 default_config
               end
               yield @configure if block_given?
@@ -489,22 +484,22 @@ module Google
             #     Required. The resource being created
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the create
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -607,22 +602,22 @@ module Google
             #     Required. The resource being updated
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the update
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #   @param allow_missing [::Boolean]
             #     Optional. If set to true, update succeeds even if cluster is not found. In
             #     that case, a new cluster is created and `update_mask` is ignored.
@@ -701,6 +696,125 @@ module Google
             end
 
             ##
+            # Upgrades a single Cluster.
+            # Imperative only.
+            #
+            # @overload upgrade_cluster(request, options = nil)
+            #   Pass arguments to `upgrade_cluster` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upgrade_cluster(name: nil, version: nil, request_id: nil, validate_only: nil, etag: nil)
+            #   Pass arguments to `upgrade_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the cluster.
+            #   @param version [::Google::Cloud::AlloyDB::V1alpha::DatabaseVersion]
+            #     Required. The version the cluster is going to be upgraded to.
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
+            #   @param etag [::String]
+            #     Optional. The current etag of the Cluster.
+            #     If an etag is provided and does not match the current etag of the Cluster,
+            #     upgrade will be blocked and an ABORTED error will be returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1alpha::UpgradeClusterRequest.new
+            #
+            #   # Call the upgrade_cluster method.
+            #   result = client.upgrade_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def upgrade_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::UpgradeClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upgrade_cluster.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.upgrade_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upgrade_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :upgrade_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single Cluster.
             #
             # @overload delete_cluster(request, options = nil)
@@ -723,14 +837,14 @@ module Google
             #     comment on the Cluster.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -740,8 +854,9 @@ module Google
             #     If an etag is provided and does not match the current etag of the Cluster,
             #     deletion will be blocked and an ABORTED error will be returned.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the delete.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #   @param force [::Boolean]
             #     Optional. Whether to cascade delete child instances for given cluster.
             #
@@ -844,9 +959,9 @@ module Google
             #     comment on the Cluster.name field
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
@@ -861,8 +976,9 @@ module Google
             #     If an etag is provided and does not match the current etag of the Cluster,
             #     deletion will be blocked and an ABORTED error will be returned.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the delete.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -938,6 +1054,121 @@ module Google
             end
 
             ##
+            # Switches the roles of PRIMARY and SECONDARY clusters without any data loss.
+            # This promotes the SECONDARY cluster to PRIMARY and sets up the original
+            # PRIMARY cluster to replicate from this newly promoted cluster.
+            #
+            # @overload switchover_cluster(request, options = nil)
+            #   Pass arguments to `switchover_cluster` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1alpha::SwitchoverClusterRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1alpha::SwitchoverClusterRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload switchover_cluster(name: nil, request_id: nil, validate_only: nil)
+            #   Pass arguments to `switchover_cluster` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the resource. For the required format, see the
+            #     comment on the Cluster.name field
+            #   @param request_id [::String]
+            #     Optional. An optional request ID to identify requests. Specify a unique
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
+            #
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #   @param validate_only [::Boolean]
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1alpha::SwitchoverClusterRequest.new
+            #
+            #   # Call the switchover_cluster method.
+            #   result = client.switchover_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def switchover_cluster request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::SwitchoverClusterRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.switchover_cluster.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.switchover_cluster.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.switchover_cluster.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :switchover_cluster, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a new Cluster in a given project and location, with a volume
             # restored from the provided source, either a backup ID or a point-in-time
             # and a source cluster.
@@ -971,22 +1202,22 @@ module Google
             #     Required. The resource being created
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the import
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1089,22 +1320,22 @@ module Google
             #     Required. Configuration of the requesting object (the secondary cluster).
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the create
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1400,22 +1631,22 @@ module Google
             #     Required. The resource being created
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the create
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1517,22 +1748,22 @@ module Google
             #     Required. The resource being created
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the create
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1640,14 +1871,14 @@ module Google
             #     Required. Resources being created.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1754,22 +1985,22 @@ module Google
             #     Required. The resource being updated
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the update
-            #     request.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #   @param allow_missing [::Boolean]
             #     Optional. If set to true, update succeeds even if instance is not found. In
             #     that case, a new instance is created and `update_mask` is ignored.
@@ -1870,14 +2101,14 @@ module Google
             #     comment on the Instance.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -1887,8 +2118,9 @@ module Google
             #     If an etag is provided and does not match the current etag of the Instance,
             #     deletion will be blocked and an ABORTED error will be returned.
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the delete.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1988,21 +2220,22 @@ module Google
             #     comment on the Instance.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the failover.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2103,22 +2336,22 @@ module Google
             #     comment on the Instance.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the fault
-            #     injection.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2207,7 +2440,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload restart_instance(name: nil, request_id: nil, validate_only: nil)
+            # @overload restart_instance(name: nil, request_id: nil, validate_only: nil, node_ids: nil)
             #   Pass arguments to `restart_instance` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2217,21 +2450,25 @@ module Google
             #     comment on the Instance.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
             #     not supported (00000000-0000-0000-0000-000000000000).
             #   @param validate_only [::Boolean]
-            #     Optional. If set, performs request validation (e.g. permission checks and
-            #     any other type of validation), but do not actually execute the restart.
+            #     Optional. If set, performs request validation, for example, permission
+            #     checks and any other type of validation, but does not actually execute the
+            #     create request.
+            #   @param node_ids [::Array<::String>]
+            #     Optional. Full name of the nodes as obtained from INSTANCE_VIEW_FULL to
+            #     restart upon. Applicable only to read instances.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -2299,6 +2536,106 @@ module Google
 
               @alloy_db_admin_stub.call_rpc :restart_instance, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Executes a SQL statement in a database inside an AlloyDB instance.
+            #
+            # @overload execute_sql(request, options = nil)
+            #   Pass arguments to `execute_sql` via a request object, either of type
+            #   {::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload execute_sql(password: nil, instance: nil, database: nil, user: nil, sql_statement: nil)
+            #   Pass arguments to `execute_sql` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param password [::String]
+            #     Optional. The database native user’s password.
+            #   @param instance [::String]
+            #     Required. The instance where the SQL will be executed. For the required
+            #     format, see the comment on the Instance.name field.
+            #   @param database [::String]
+            #     Required. Name of the database where the query will be executed.
+            #     Note - Value provided should be the same as expected from `SELECT
+            #     current_database();` and NOT as a resource reference.
+            #   @param user [::String]
+            #     Required. Database user to be used for executing the SQL.
+            #     Note - Value provided should be the same as expected from
+            #     `SELECT current_user;` and NOT as a resource reference.
+            #   @param sql_statement [::String]
+            #     Required. SQL statement to execute on database. Any valid statement is
+            #     permitted, including DDL, DML, DQL statements.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/alloy_db/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AlloyDB::V1alpha::AlloyDBAdmin::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest.new
+            #
+            #   # Call the execute_sql method.
+            #   result = client.execute_sql request
+            #
+            #   # The returned object is of type Google::Cloud::AlloyDB::V1alpha::ExecuteSqlResponse.
+            #   p result
+            #
+            def execute_sql request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1alpha::ExecuteSqlRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.execute_sql.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AlloyDB::V1alpha::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.instance
+                header_params["instance"] = request.instance
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.execute_sql.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.execute_sql.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @alloy_db_admin_stub.call_rpc :execute_sql, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2518,14 +2855,14 @@ module Google
             #     Required. The resource being created
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -2635,14 +2972,14 @@ module Google
             #     Required. The resource being updated
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -2750,14 +3087,14 @@ module Google
             #     the Backup.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -2972,14 +3309,14 @@ module Google
             #      * projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -3088,14 +3425,14 @@ module Google
             #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/instances/\\{instance}
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -3379,14 +3716,14 @@ module Google
             #     Required. The resource being created
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -3488,14 +3825,14 @@ module Google
             #     Required. The resource being updated
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes since the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -3594,14 +3931,14 @@ module Google
             #     comment on the User.name field.
             #   @param request_id [::String]
             #     Optional. An optional request ID to identify requests. Specify a unique
-            #     request ID so that if you must retry your request, the server will know to
-            #     ignore the request if it has already been completed. The server will
-            #     guarantee that for at least 60 minutes after the first request.
+            #     request ID so that if you must retry your request, the server ignores the
+            #     request if it has already been completed. The server guarantees that for at
+            #     least 60 minutes since the first request.
             #
             #     For example, consider a situation where you make an initial request and
             #     the request times out. If you make the request again with the same request
-            #     ID, the server can check if original operation with the same request ID
-            #     was received, and if so, will ignore the second request. This prevents
+            #     ID, the server can check if the original operation with the same request ID
+            #     was received, and if so, ignores the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
             #
             #     The request ID must be a valid UUID with the exception that zero UUID is
@@ -3697,9 +4034,9 @@ module Google
             #     Required. Parent value for ListDatabasesRequest.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of databases to return. The service may return
-            #     fewer than this value. If unspecified, an appropriate number of databases
-            #     will be returned. The max value will be 2000, values above max will be
-            #     coerced to max.
+            #     fewer than this value. If unspecified, 2000 is the default page_size. The
+            #     max value of page_size will be 4000, values above max will be coerced to
+            #     max.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous `ListDatabases` call.
             #     This should be provided to retrieve the subsequent page.
@@ -3952,6 +4289,11 @@ module Google
                 #
                 attr_reader :update_cluster
                 ##
+                # RPC-specific configuration for `upgrade_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upgrade_cluster
+                ##
                 # RPC-specific configuration for `delete_cluster`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3961,6 +4303,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :promote_cluster
+                ##
+                # RPC-specific configuration for `switchover_cluster`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :switchover_cluster
                 ##
                 # RPC-specific configuration for `restore_cluster`
                 # @return [::Gapic::Config::Method]
@@ -4021,6 +4368,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :restart_instance
+                ##
+                # RPC-specific configuration for `execute_sql`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :execute_sql
                 ##
                 # RPC-specific configuration for `list_backups`
                 # @return [::Gapic::Config::Method]
@@ -4102,10 +4454,14 @@ module Google
                   @create_cluster = ::Gapic::Config::Method.new create_cluster_config
                   update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
+                  upgrade_cluster_config = parent_rpcs.upgrade_cluster if parent_rpcs.respond_to? :upgrade_cluster
+                  @upgrade_cluster = ::Gapic::Config::Method.new upgrade_cluster_config
                   delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
                   promote_cluster_config = parent_rpcs.promote_cluster if parent_rpcs.respond_to? :promote_cluster
                   @promote_cluster = ::Gapic::Config::Method.new promote_cluster_config
+                  switchover_cluster_config = parent_rpcs.switchover_cluster if parent_rpcs.respond_to? :switchover_cluster
+                  @switchover_cluster = ::Gapic::Config::Method.new switchover_cluster_config
                   restore_cluster_config = parent_rpcs.restore_cluster if parent_rpcs.respond_to? :restore_cluster
                   @restore_cluster = ::Gapic::Config::Method.new restore_cluster_config
                   create_secondary_cluster_config = parent_rpcs.create_secondary_cluster if parent_rpcs.respond_to? :create_secondary_cluster
@@ -4130,6 +4486,8 @@ module Google
                   @inject_fault = ::Gapic::Config::Method.new inject_fault_config
                   restart_instance_config = parent_rpcs.restart_instance if parent_rpcs.respond_to? :restart_instance
                   @restart_instance = ::Gapic::Config::Method.new restart_instance_config
+                  execute_sql_config = parent_rpcs.execute_sql if parent_rpcs.respond_to? :execute_sql
+                  @execute_sql = ::Gapic::Config::Method.new execute_sql_config
                   list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
                   @list_backups = ::Gapic::Config::Method.new list_backups_config
                   get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
