@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/cloud/dialogflow/v2/participant_pb'
 
 
-descriptor_data = "\n<google/cloud/dialogflow/v2/human_agent_assistant_event.proto\x12\x1agoogle.cloud.dialogflow.v2\x1a,google/cloud/dialogflow/v2/participant.proto\"\x8f\x01\n\x18HumanAgentAssistantEvent\x12\x14\n\x0c\x63onversation\x18\x01 \x01(\t\x12\x13\n\x0bparticipant\x18\x03 \x01(\t\x12H\n\x12suggestion_results\x18\x05 \x03(\x0b\x32,.google.cloud.dialogflow.v2.SuggestionResultB\xa6\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x1dHumanAgentAssistantEventProtoP\x01Z>cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb\xf8\x01\x01\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3"
+descriptor_data = "\n<google/cloud/dialogflow/v2/human_agent_assistant_event.proto\x12\x1agoogle.cloud.dialogflow.v2\x1a,google/cloud/dialogflow/v2/participant.proto\"\x8f\x01\n\x18HumanAgentAssistantEvent\x12\x14\n\x0c\x63onversation\x18\x01 \x01(\t\x12\x13\n\x0bparticipant\x18\x03 \x01(\t\x12H\n\x12suggestion_results\x18\x05 \x03(\x0b\x32,.google.cloud.dialogflow.v2.SuggestionResultB\xa3\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x1dHumanAgentAssistantEventProtoP\x01Z>cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
