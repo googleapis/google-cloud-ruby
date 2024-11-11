@@ -93,6 +93,8 @@ namespace :samples do
         Bundler.with_clean_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
           sh "bundle update"
+          sh "gcloud transfer agents install --pool=transfer_service_default --mount-directories=/"
+
           sh "bundle exec rake test"
         end
       end
@@ -107,6 +109,8 @@ namespace :samples do
         Bundler.with_clean_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
           sh "bundle update"
+          sh "gcloud transfer agents install --pool=transfer_service_default --mount-directories=/"
+
           sh "bundle exec rake test"
         end
       end
