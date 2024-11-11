@@ -95,9 +95,12 @@ namespace :samples do
     if File.directory? "samples"
       Dir.chdir "samples" do
         Bundler.with_clean_env do
+          keyfile ||=
+            ENV["GOOGLE_CLOUD_TEST_KEYFILE"] ||
+            ENV["GCLOUD_TEST_KEYFILE"]
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
           sh "bundle update"
-          install_storage_transfer_agent("transfer_service_default", keyfile)
+          install_storage_transfer_agent "transfer_service_default", keyfile
           sh "bundle exec rake test"
         end
       end
@@ -110,9 +113,12 @@ namespace :samples do
     if File.directory? "samples"
       Dir.chdir "samples" do
         Bundler.with_clean_env do
+          keyfile ||=
+            ENV["GOOGLE_CLOUD_TEST_KEYFILE"] ||
+            ENV["GCLOUD_TEST_KEYFILE"]
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
           sh "bundle update"
-          install_storage_transfer_agent("transfer_service_default", keyfile)
+          install_storage_transfer_agent "transfer_service_default", keyfile
           sh "bundle exec rake test"
         end
       end
