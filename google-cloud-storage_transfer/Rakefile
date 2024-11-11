@@ -180,8 +180,9 @@ def header str, token = "#"
   puts ""
 end
 
-
-def install_storage_transfer_agent(agent_pool_id, service_account_key_path)
+def install_storage_transfer_agen agent_pool_id, service_account_key_path
+  require "fileutils"
+  require "open-uri"
   # URL to the agent installer script
   installer_url = "https://storage.googleapis.com/storage-transfer-public/transfer_agent_installer_no_prompt.sh"
   installer_script = "transfer_agent_installer_no_prompt.sh"
