@@ -116,9 +116,9 @@ module Google
         #     Google. Only set it if you cannot wait for the response to return a
         #     auto-generated one to you.
         #
-        #     The conversation ID must be compliant with the regression fomula
+        #     The conversation ID must be compliant with the regression formula
         #     `[a-zA-Z][a-zA-Z0-9_-]*` with the characters length in range of [3,64].
-        #     If the field is provided, the caller is resposible for
+        #     If the field is provided, the caller is responsible for
         #     1. the uniqueness of the ID, otherwise the request will be rejected.
         #     2. the consistency for whether to use custom ID or not under a project to
         #     better ensure uniqueness.
@@ -496,9 +496,223 @@ module Google
         #     triggered.
         #     Format: `projects/<Project ID>/locations/<Location
         #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+        # @!attribute [rw] query_source
+        #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::QuerySource]
+        #     Optional. The source of the query in the request.
+        # @!attribute [rw] end_user_metadata
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Information about the end-user to improve the relevance and
+        #     accuracy of generative answers.
+        #
+        #     This will be interpreted and used by a language model, so, for good
+        #     results, the data should be self-descriptive, and in a simple structure.
+        #
+        #     Example:
+        #
+        #     ```json
+        #     {
+        #       "subscription plan": "Business Premium Plus",
+        #       "devices owned": [
+        #         \\{"model": "Google Pixel 7"},
+        #         \\{"model": "Google Pixel Tablet"}
+        #       ]
+        #     }
+        #     ```
+        # @!attribute [rw] search_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig]
+        #     Optional. Configuration specific to search queries with data stores.
+        # @!attribute [rw] exact_search
+        #   @return [::Boolean]
+        #     Optional. Whether to search the query exactly without query rewrite.
         class SearchKnowledgeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration specific to search queries with data stores.
+          # @!attribute [rw] boost_specs
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs>]
+          #     Optional. Boost specifications for data stores.
+          # @!attribute [rw] filter_specs
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::FilterSpecs>]
+          #     Optional. Filter specification for data store queries.
+          class SearchConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Boost specifications for data stores.
+            # @!attribute [rw] data_stores
+            #   @return [::Array<::String>]
+            #     Optional. Data Stores where the boosting configuration is applied. The
+            #     full names of the referenced data stores. Formats:
+            #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
+            #     `projects/{project}/locations/{location}/dataStores/{data_store}`
+            # @!attribute [rw] spec
+            #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec>]
+            #     Optional. A list of boosting specifications.
+            class BoostSpecs
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Boost specification to boost certain documents.
+              # A copy of google.cloud.discoveryengine.v1main.BoostSpec, field
+              # documentation is available at
+              # https://cloud.google.com/generative-ai-app-builder/docs/reference/rest/v1alpha/BoostSpec
+              # @!attribute [rw] condition_boost_specs
+              #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec>]
+              #     Optional. Condition boost specifications. If a document matches
+              #     multiple conditions in the specifictions, boost scores from these
+              #     specifications are all applied and combined in a non-linear way.
+              #     Maximum number of specifications is 20.
+              class BoostSpec
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                # Boost applies to documents which match a condition.
+                # @!attribute [rw] condition
+                #   @return [::String]
+                #     Optional. An expression which specifies a boost condition. The
+                #     syntax and supported fields are the same as a filter expression.
+                #     Examples:
+                #
+                #     * To boost documents with document ID "doc_1" or "doc_2", and
+                #     color
+                #       "Red" or "Blue":
+                #         * (id: ANY("doc_1", "doc_2")) AND (color: ANY("Red","Blue"))
+                # @!attribute [rw] boost
+                #   @return [::Float]
+                #     Optional. Strength of the condition boost, which should be in [-1,
+                #     1]. Negative boost means demotion. Default is 0.0.
+                #
+                #     Setting to 1.0 gives the document a big promotion. However, it does
+                #     not necessarily mean that the boosted document will be the top
+                #     result at all times, nor that other documents will be excluded.
+                #     Results could still be shown even when none of them matches the
+                #     condition. And results that are significantly more relevant to the
+                #     search query can still trump your heavily favored but irrelevant
+                #     documents.
+                #
+                #     Setting to -1.0 gives the document a big demotion. However, results
+                #     that are deeply relevant might still be shown. The document will
+                #     have an upstream battle to get a fairly high ranking, but it is not
+                #     blocked out completely.
+                #
+                #     Setting to 0.0 means no boost applied. The boosting condition is
+                #     ignored.
+                # @!attribute [rw] boost_control_spec
+                #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec::BoostControlSpec]
+                #     Optional. Complex specification for custom ranking based on
+                #     customer defined attribute value.
+                class ConditionBoostSpec
+                  include ::Google::Protobuf::MessageExts
+                  extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                  # Specification for custom ranking based on customer specified
+                  # attribute
+                  # value. It provides more controls for customized ranking than the
+                  # simple (condition, boost) combination above.
+                  # @!attribute [rw] field_name
+                  #   @return [::String]
+                  #     Optional. The name of the field whose value will be used to
+                  #     determine the boost amount.
+                  # @!attribute [rw] attribute_type
+                  #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec::BoostControlSpec::AttributeType]
+                  #     Optional. The attribute type to be used to determine the boost
+                  #     amount. The attribute value can be derived from the field value
+                  #     of the specified field_name. In the case of numerical it is
+                  #     straightforward i.e. attribute_value = numerical_field_value. In
+                  #     the case of freshness however, attribute_value = (time.now() -
+                  #     datetime_field_value).
+                  # @!attribute [rw] interpolation_type
+                  #   @return [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec::BoostControlSpec::InterpolationType]
+                  #     Optional. The interpolation type to be applied to connect the
+                  #     control points listed below.
+                  # @!attribute [rw] control_points
+                  #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec::BoostControlSpec::ControlPoint>]
+                  #     Optional. The control points used to define the curve. The
+                  #     monotonic function (defined through the interpolation_type above)
+                  #     passes through the control points listed here.
+                  class BoostControlSpec
+                    include ::Google::Protobuf::MessageExts
+                    extend ::Google::Protobuf::MessageExts::ClassMethods
+
+                    # The control points used to define the curve. The curve defined
+                    # through these control points can only be monotonically increasing
+                    # or decreasing(constant values are acceptable).
+                    class ControlPoint
+                      include ::Google::Protobuf::MessageExts
+                      extend ::Google::Protobuf::MessageExts::ClassMethods
+                    end
+
+                    # The attribute(or function) for which the custom ranking is to be
+                    # applied.
+                    module AttributeType
+                      # Unspecified AttributeType.
+                      ATTRIBUTE_TYPE_UNSPECIFIED = 0
+
+                      # The value of the numerical field will be used to dynamically
+                      # update the boost amount. In this case, the attribute_value (the
+                      # x value) of the control point will be the actual value of the
+                      # numerical field for which the boost_amount is specified.
+                      NUMERICAL = 1
+
+                      # For the freshness use case the attribute value will be the
+                      # duration between the current time and the date in the datetime
+                      # field specified. The value must be formatted as an XSD
+                      # `dayTimeDuration` value (a restricted subset of an ISO 8601
+                      # duration value). The pattern for this is:
+                      # `[nD][T[nH][nM][nS]]`. E.g. `5D`, `3DT12H30M`, `T24H`.
+                      FRESHNESS = 2
+                    end
+
+                    # The interpolation type to be applied. Default will be linear
+                    # (Piecewise Linear).
+                    module InterpolationType
+                      # Interpolation type is unspecified. In this case, it defaults to
+                      # Linear.
+                      INTERPOLATION_TYPE_UNSPECIFIED = 0
+
+                      # Piecewise linear interpolation will be applied.
+                      LINEAR = 1
+                    end
+                  end
+                end
+              end
+            end
+
+            # Filter specification for data store queries.
+            # @!attribute [rw] data_stores
+            #   @return [::Array<::String>]
+            #     Optional. The data store where the filter configuration is applied.
+            #     Full resource name of data store, such as
+            #     projects/\\{project}/locations/\\{location}/collections/\\{collectionId}/
+            #     dataStores/\\{dataStoreId}.
+            # @!attribute [rw] filter
+            #   @return [::String]
+            #     Optional. The filter expression to be applied.
+            #     Expression syntax is documented at
+            #     https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata#filter-expression-syntax
+            class FilterSpecs
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # The source of the query. We use QuerySource to distinguish queries directly
+          # entered by agents and suggested queries from
+          # {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_knowledge_assist Participants.SuggestKnowledgeAssist}.
+          # If SUGGESTED_QUERY source is specified, we will treat it as a continuation
+          # of a SuggestKnowledgeAssist call.
+          module QuerySource
+            # Unknown query source.
+            QUERY_SOURCE_UNSPECIFIED = 0
+
+            # The query is from agents.
+            AGENT_QUERY = 1
+
+            # The query is a suggested query from
+            # {::Google::Cloud::Dialogflow::V2::Participants::Client#suggest_knowledge_assist Participants.SuggestKnowledgeAssist}.
+            SUGGESTED_QUERY = 2
+          end
         end
 
         # The response message for
@@ -545,6 +759,9 @@ module Google
           # @!attribute [rw] snippet
           #   @return [::String]
           #     The relevant snippet of the article.
+          # @!attribute [rw] metadata
+          #   @return [::Google::Protobuf::Struct]
+          #     Metadata associated with the article.
           class AnswerSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
