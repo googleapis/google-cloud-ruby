@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2024-11-11)
+
+#### Features
+
+* Adds Contextual Glossary support for Translation and AdaptiveMt ([#27582](https://github.com/googleapis/google-cloud-ruby/issues/27582)) 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
