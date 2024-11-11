@@ -88,12 +88,16 @@ end
 
 namespace :samples do
   task :latest do
+    agent_pool_id = "transfer_service_default"
+    keyfile ||=
+    ENV["GOOGLE_CLOUD_TEST_KEYFILE"] ||
+    ENV["GCLOUD_TEST_KEYFILE"]
     if File.directory? "samples"
       Dir.chdir "samples" do
         Bundler.with_clean_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
           sh "bundle update"
-          create_agent_pool
+          install_storage_transfer_agent(agent_pool_id, keyfile)
           sh "bundle exec rake test"
         end
       end
@@ -108,7 +112,7 @@ namespace :samples do
         Bundler.with_clean_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
           sh "bundle update"
-          create_agent_pool
+          install_storage_transfer_agent(agent_pool_id, keyfile)
           sh "bundle exec rake test"
         end
       end
@@ -170,17 +174,30 @@ def header str, token = "#"
   puts ""
 end
 
-def create_agent_pool
-  require "google/cloud/storage_transfer/v1"
-  project ||=
-  ENV["GOOGLE_CLOUD_TEST_PROJECT"] ||
-  ENV["GCLOUD_TEST_PROJECT"]
-  # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new
-  # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new(project_id: project, agent_pool_id: "test-pool")
 
-  # Call the create_agent_pool method.
-  result = client.create_agent_pool request
-  puts result
+def install_storage_transfer_agent(agent_pool_id, service_account_key_path)
+  # URL to the agent installer script
+  installer_url = "https://storage.googleapis.com/storage-transfer-public/transfer_agent_installer_no_prompt.sh"
+  installer_script = "transfer_agent_installer_no_prompt.sh"
+
+  # Download the installer script
+  puts "Downloading the Storage Transfer Service agent installer..."
+  File.open(installer_script, "wb") do |file|
+    file.write URI.open(installer_url).read
+  end
+  puts "Downloaded the installer script."
+
+  # Make the installer script executable
+  FileUtils.chmod("+x", installer_script)
+
+  # Run the installer script with the agent pool ID and service account key path
+  install_command = <<~BASH
+    sudo bash #{installer_script} -a #{agent_pool_id} -k #{service_account_key_path}
+  BASH
+  puts "Running installation command..."
+  system(install_command)
+
+  # Verify the agent service status
+  puts "Verifying agent service status..."
+  system("sudo service google-storagetransfer-agent status")
 end
