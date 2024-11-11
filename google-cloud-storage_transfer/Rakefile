@@ -93,8 +93,7 @@ namespace :samples do
         Bundler.with_clean_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
           sh "bundle update"
-          sh "gcloud transfer agents install --pool=transfer_service_default --mount-directories=/"
-
+          create_agent_pool
           sh "bundle exec rake test"
         end
       end
@@ -109,8 +108,7 @@ namespace :samples do
         Bundler.with_clean_env do
           ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
           sh "bundle update"
-          sh "gcloud transfer agents install --pool=transfer_service_default --mount-directories=/"
-
+          create_agent_pool
           sh "bundle exec rake test"
         end
       end
@@ -170,4 +168,16 @@ def header str, token = "#"
   puts "#{token * 3} #{str} #{token * 3}"
   puts token * line_length
   puts ""
+end
+
+def create_agent_pool
+  require "google/cloud/storage_transfer/v1"
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new
+
+  # Call the create_agent_pool method.
+  result = client.create_agent_pool request
+  puts result
 end
