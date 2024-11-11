@@ -172,10 +172,13 @@ end
 
 def create_agent_pool
   require "google/cloud/storage_transfer/v1"
+  project ||=
+  ENV["GOOGLE_CLOUD_TEST_PROJECT"] ||
+  ENV["GCLOUD_TEST_PROJECT"]
   # Create a client object. The client can be reused for multiple calls.
   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Rest::Client.new
   # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new
+  request = Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new(project_id: project, agent_pool_id: "test-pool")
 
   # Call the create_agent_pool method.
   result = client.create_agent_pool request
