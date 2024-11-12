@@ -97,6 +97,10 @@ module Google
         # @!attribute [rw] tool_parameter_kv_match_input
         #   @return [::Google::Cloud::AIPlatform::V1::ToolParameterKVMatchInput]
         #     Input for tool parameter key value match metric.
+        # @!attribute [rw] comet_input
+        #   @return [::Google::Cloud::AIPlatform::V1::CometInput]
+        #     Translation metrics.
+        #     Input for Comet metric.
         # @!attribute [rw] metricx_input
         #   @return [::Google::Cloud::AIPlatform::V1::MetricxInput]
         #     Input for Metricx metric.
@@ -186,6 +190,10 @@ module Google
         # @!attribute [rw] tool_parameter_kv_match_results
         #   @return [::Google::Cloud::AIPlatform::V1::ToolParameterKVMatchResults]
         #     Results for tool parameter key value match metric.
+        # @!attribute [rw] comet_result
+        #   @return [::Google::Cloud::AIPlatform::V1::CometResult]
+        #     Translation metrics.
+        #     Result for Comet metric.
         # @!attribute [rw] metricx_result
         #   @return [::Google::Cloud::AIPlatform::V1::MetricxResult]
         #     Result for Metricx metric.
@@ -1394,6 +1402,70 @@ module Google
         #   @return [::Float]
         #     Output only. Tool parameter key value match score.
         class ToolParameterKVMatchMetricValue
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Input for Comet metric.
+        # @!attribute [rw] metric_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::CometSpec]
+        #     Required. Spec for comet metric.
+        # @!attribute [rw] instance
+        #   @return [::Google::Cloud::AIPlatform::V1::CometInstance]
+        #     Required. Comet instance.
+        class CometInput
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spec for Comet metric.
+        # @!attribute [rw] version
+        #   @return [::Google::Cloud::AIPlatform::V1::CometSpec::CometVersion]
+        #     Required. Which version to use for evaluation.
+        # @!attribute [rw] source_language
+        #   @return [::String]
+        #     Optional. Source language in BCP-47 format.
+        # @!attribute [rw] target_language
+        #   @return [::String]
+        #     Optional. Target language in BCP-47 format. Covers both prediction and
+        #     reference.
+        class CometSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Comet version options.
+          module CometVersion
+            # Comet version unspecified.
+            COMET_VERSION_UNSPECIFIED = 0
+
+            # Comet 22 for translation + source + reference
+            # (source-reference-combined).
+            COMET_22_SRC_REF = 2
+          end
+        end
+
+        # Spec for Comet instance - The fields used for evaluation are dependent on the
+        # comet version.
+        # @!attribute [rw] prediction
+        #   @return [::String]
+        #     Required. Output of the evaluated model.
+        # @!attribute [rw] reference
+        #   @return [::String]
+        #     Optional. Ground truth used to compare against the prediction.
+        # @!attribute [rw] source
+        #   @return [::String]
+        #     Optional. Source text in original language.
+        class CometInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Spec for Comet result - calculates the comet score for the given instance
+        # using the version specified in the spec.
+        # @!attribute [r] score
+        #   @return [::Float]
+        #     Output only. Comet score. Range depends on version.
+        class CometResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -424,8 +424,8 @@ module Google
             #   @param page_token [::String]
             #     Optional. The standard list page token.
             #     Typically obtained via
-            #     [ListPersistentResourceResponse.next_page_token][] of the previous
-            #     [PersistentResourceService.ListPersistentResource][] call.
+            #     {::Google::Cloud::AIPlatform::V1::ListPersistentResourcesResponse#next_page_token ListPersistentResourcesResponse.next_page_token}
+            #     of the previous [PersistentResourceService.ListPersistentResource][] call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::PersistentResource>]

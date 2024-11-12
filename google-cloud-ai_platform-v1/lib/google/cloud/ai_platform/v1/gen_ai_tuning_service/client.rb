@@ -411,8 +411,9 @@ module Google
             #     Optional. The standard list page size.
             #   @param page_token [::String]
             #     Optional. The standard list page token.
-            #     Typically obtained via [ListTuningJob.next_page_token][] of the
-            #     previous GenAiTuningService.ListTuningJob][] call.
+            #     Typically obtained via
+            #     {::Google::Cloud::AIPlatform::V1::ListTuningJobsResponse#next_page_token ListTuningJobsResponse.next_page_token}
+            #     of the previous GenAiTuningService.ListTuningJob][] call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::TuningJob>]

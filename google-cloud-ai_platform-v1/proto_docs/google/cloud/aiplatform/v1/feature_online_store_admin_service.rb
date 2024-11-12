@@ -320,7 +320,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [FeatureOnlineStoreAdminService.DeleteFeatureViews][].
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#delete_feature_view FeatureOnlineStoreAdminService.DeleteFeatureView}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the FeatureView to be deleted.

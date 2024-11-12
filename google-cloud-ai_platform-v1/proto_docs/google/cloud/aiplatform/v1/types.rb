@@ -71,35 +71,35 @@ module Google
         #     be set.  The values hold the flattened representation of the tensor in
         #     row major order.
         #
-        #     [BOOL][google.aiplatform.master.Tensor.DataType.BOOL]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::BOOL BOOL}
         # @!attribute [rw] string_val
         #   @return [::Array<::String>]
-        #     [STRING][google.aiplatform.master.Tensor.DataType.STRING]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::STRING STRING}
         # @!attribute [rw] bytes_val
         #   @return [::Array<::String>]
-        #     [STRING][google.aiplatform.master.Tensor.DataType.STRING]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::STRING STRING}
         # @!attribute [rw] float_val
         #   @return [::Array<::Float>]
-        #     [FLOAT][google.aiplatform.master.Tensor.DataType.FLOAT]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::FLOAT FLOAT}
         # @!attribute [rw] double_val
         #   @return [::Array<::Float>]
-        #     [DOUBLE][google.aiplatform.master.Tensor.DataType.DOUBLE]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::DOUBLE DOUBLE}
         # @!attribute [rw] int_val
         #   @return [::Array<::Integer>]
-        #     [INT_8][google.aiplatform.master.Tensor.DataType.INT8]
-        #     [INT_16][google.aiplatform.master.Tensor.DataType.INT16]
-        #     [INT_32][google.aiplatform.master.Tensor.DataType.INT32]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::INT8 INT_8}
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::INT16 INT_16}
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::INT32 INT_32}
         # @!attribute [rw] int64_val
         #   @return [::Array<::Integer>]
-        #     [INT64][google.aiplatform.master.Tensor.DataType.INT64]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::INT64 INT64}
         # @!attribute [rw] uint_val
         #   @return [::Array<::Integer>]
-        #     [UINT8][google.aiplatform.master.Tensor.DataType.UINT8]
-        #     [UINT16][google.aiplatform.master.Tensor.DataType.UINT16]
-        #     [UINT32][google.aiplatform.master.Tensor.DataType.UINT32]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::UINT8 UINT8}
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::UINT16 UINT16}
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::UINT32 UINT32}
         # @!attribute [rw] uint64_val
         #   @return [::Array<::Integer>]
-        #     [UINT64][google.aiplatform.master.Tensor.DataType.UINT64]
+        #     {::Google::Cloud::AIPlatform::V1::Tensor::DataType::UINT64 UINT64}
         # @!attribute [rw] list_val
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tensor>]
         #     A list of tensor values.

@@ -206,7 +206,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload evaluate_instances(exact_match_input: nil, bleu_input: nil, rouge_input: nil, fluency_input: nil, coherence_input: nil, safety_input: nil, groundedness_input: nil, fulfillment_input: nil, summarization_quality_input: nil, pairwise_summarization_quality_input: nil, summarization_helpfulness_input: nil, summarization_verbosity_input: nil, question_answering_quality_input: nil, pairwise_question_answering_quality_input: nil, question_answering_relevance_input: nil, question_answering_helpfulness_input: nil, question_answering_correctness_input: nil, pointwise_metric_input: nil, pairwise_metric_input: nil, tool_call_valid_input: nil, tool_name_match_input: nil, tool_parameter_key_match_input: nil, tool_parameter_kv_match_input: nil, metricx_input: nil, location: nil)
+            # @overload evaluate_instances(exact_match_input: nil, bleu_input: nil, rouge_input: nil, fluency_input: nil, coherence_input: nil, safety_input: nil, groundedness_input: nil, fulfillment_input: nil, summarization_quality_input: nil, pairwise_summarization_quality_input: nil, summarization_helpfulness_input: nil, summarization_verbosity_input: nil, question_answering_quality_input: nil, pairwise_question_answering_quality_input: nil, question_answering_relevance_input: nil, question_answering_helpfulness_input: nil, question_answering_correctness_input: nil, pointwise_metric_input: nil, pairwise_metric_input: nil, tool_call_valid_input: nil, tool_name_match_input: nil, tool_parameter_key_match_input: nil, tool_parameter_kv_match_input: nil, comet_input: nil, metricx_input: nil, location: nil)
             #   Pass arguments to `evaluate_instances` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -263,6 +263,9 @@ module Google
             #     Input for tool parameter key match metric.
             #   @param tool_parameter_kv_match_input [::Google::Cloud::AIPlatform::V1::ToolParameterKVMatchInput, ::Hash]
             #     Input for tool parameter key value match metric.
+            #   @param comet_input [::Google::Cloud::AIPlatform::V1::CometInput, ::Hash]
+            #     Translation metrics.
+            #     Input for Comet metric.
             #   @param metricx_input [::Google::Cloud::AIPlatform::V1::MetricxInput, ::Hash]
             #     Input for Metricx metric.
             #   @param location [::String]

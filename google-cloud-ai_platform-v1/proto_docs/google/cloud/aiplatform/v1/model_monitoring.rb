@@ -213,9 +213,9 @@ module Google
         #   @return [::Boolean]
         #     Dump the anomalies to Cloud Logging. The anomalies will be put to json
         #     payload encoded from proto
-        #     [google.cloud.aiplatform.logging.ModelMonitoringAnomaliesLogEntry][].
-        #     This can be further sinked to Pub/Sub or any other services supported
-        #     by Cloud Logging.
+        #     {::Google::Cloud::AIPlatform::V1::ModelMonitoringStatsAnomalies ModelMonitoringStatsAnomalies}.
+        #     This can be further synced to Pub/Sub or any other services supported by
+        #     Cloud Logging.
         # @!attribute [rw] notification_channels
         #   @return [::Array<::String>]
         #     Resource names of the NotificationChannels to send alert.

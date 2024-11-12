@@ -623,7 +623,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [FeaturestoreService.DeleteEntityTypes][].
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#delete_entity_type FeaturestoreService.DeleteEntityType}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the EntityType to be deleted.

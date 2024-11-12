@@ -225,8 +225,10 @@ module Google
         # @!attribute [rw] deployed_index
         #   @return [::Google::Cloud::AIPlatform::V1::DeployedIndex]
         #     Required. The DeployedIndex to be updated within the IndexEndpoint.
-        #     Currently, the updatable fields are [DeployedIndex][automatic_resources]
-        #     and [DeployedIndex][dedicated_resources]
+        #     Currently, the updatable fields are
+        #     {::Google::Cloud::AIPlatform::V1::DeployedIndex#automatic_resources DeployedIndex.automatic_resources}
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::DeployedIndex#dedicated_resources DeployedIndex.dedicated_resources}
         class MutateDeployedIndexRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
