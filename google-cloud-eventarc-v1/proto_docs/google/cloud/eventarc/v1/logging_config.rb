@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Eventarc
       module V1
-        # The configuration for Platform Telemetry logging for Eventarc Avdvanced
+        # The configuration for Platform Telemetry logging for Eventarc Advanced
         # resources.
         # @!attribute [rw] log_severity
         #   @return [::Google::Cloud::Eventarc::V1::LoggingConfig::LogSeverity]
