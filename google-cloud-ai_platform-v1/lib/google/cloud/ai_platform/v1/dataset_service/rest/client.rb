@@ -1895,6 +1895,8 @@ module Google
 
               ##
               # Lists Annotations belongs to a dataitem
+              # This RPC is only available in InternalDatasetService. It is only used for
+              # exporting conversation data to CCAI Insights.
               #
               # @overload list_annotations(request, options = nil)
               #   Pass arguments to `list_annotations` via a request object, either of type

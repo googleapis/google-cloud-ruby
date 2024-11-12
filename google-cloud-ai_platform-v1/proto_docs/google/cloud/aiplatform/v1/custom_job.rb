@@ -331,10 +331,10 @@ module Google
         # All parameters related to queuing and scheduling of custom jobs.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
-        #     The maximum job running time. The default is 7 days.
+        #     Optional. The maximum job running time. The default is 7 days.
         # @!attribute [rw] restart_job_on_worker_restart
         #   @return [::Boolean]
-        #     Restarts the entire CustomJob if a worker gets restarted.
+        #     Optional. Restarts the entire CustomJob if a worker gets restarted.
         #     This feature can be used by distributed training jobs that are not
         #     resilient to workers leaving and joining a job.
         # @!attribute [rw] strategy

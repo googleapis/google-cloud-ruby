@@ -1058,6 +1058,7 @@ module Google
               #       * `feature_registry_source.feature_groups`
               #       * `sync_config`
               #       * `sync_config.cron`
+              #       * `optimized_config.automatic_resources`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

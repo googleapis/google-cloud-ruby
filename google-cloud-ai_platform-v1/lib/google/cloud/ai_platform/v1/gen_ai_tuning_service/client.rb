@@ -584,8 +584,6 @@ module Google
 
             ##
             # Rebase a TunedModel.
-            # Creates a LongRunningOperation that takes a legacy Tuned GenAI model
-            # Reference and creates a TuningJob based on newly available model.
             #
             # @overload rebase_tuned_model(request, options = nil)
             #   Pass arguments to `rebase_tuned_model` via a request object, either of type

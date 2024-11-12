@@ -54,8 +54,6 @@ module Google
             # `CANCELLED`.
             rpc :CancelTuningJob, ::Google::Cloud::AIPlatform::V1::CancelTuningJobRequest, ::Google::Protobuf::Empty
             # Rebase a TunedModel.
-            # Creates a LongRunningOperation that takes a legacy Tuned GenAI model
-            # Reference and creates a TuningJob based on newly available model.
             rpc :RebaseTunedModel, ::Google::Cloud::AIPlatform::V1::RebaseTunedModelRequest, ::Google::Longrunning::Operation
           end
 
