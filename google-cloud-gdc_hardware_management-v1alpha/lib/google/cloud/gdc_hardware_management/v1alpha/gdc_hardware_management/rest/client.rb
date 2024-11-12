@@ -3478,7 +3478,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload signal_zone_state(name: nil, request_id: nil, state_signal: nil)
+              # @overload signal_zone_state(name: nil, request_id: nil, state_signal: nil, provisioning_state_signal: nil)
               #   Pass arguments to `signal_zone_state` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3490,7 +3490,11 @@ module Google
               #     Optional. An optional unique identifier for this request. See
               #     [AIP-155](https://google.aip.dev/155).
               #   @param state_signal [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::StateSignal]
-              #     Required. The state signal to send for this zone.
+              #     Optional. The state signal to send for this zone. Either state_signal or
+              #     provisioning_state_signal must be set, but not both.
+              #   @param provisioning_state_signal [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::ProvisioningStateSignal]
+              #     Optional. The provisioning state signal to send for this zone. Either
+              #     state_signal or provisioning_state_signal must be set, but not both.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -842,7 +842,12 @@ module Google
         #     [AIP-155](https://google.aip.dev/155).
         # @!attribute [rw] state_signal
         #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::StateSignal]
-        #     Required. The state signal to send for this zone.
+        #     Optional. The state signal to send for this zone. Either state_signal or
+        #     provisioning_state_signal must be set, but not both.
+        # @!attribute [rw] provisioning_state_signal
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest::ProvisioningStateSignal]
+        #     Optional. The provisioning state signal to send for this zone. Either
+        #     state_signal or provisioning_state_signal must be set, but not both.
         class SignalZoneStateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -860,6 +865,18 @@ module Google
 
             # The Zone failed in factory turnup checks.
             FACTORY_TURNUP_CHECKS_FAILED = 2
+          end
+
+          # Valid provisioning state signals for a zone.
+          module ProvisioningStateSignal
+            # Provisioning state signal is unspecified.
+            PROVISIONING_STATE_SIGNAL_UNSPECIFIED = 0
+
+            # Provisioning is in progress.
+            PROVISIONING_IN_PROGRESS = 1
+
+            # Provisioning is complete.
+            PROVISIONING_COMPLETE = 2
           end
         end
 

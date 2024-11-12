@@ -378,6 +378,10 @@ module Google
           # @!attribute [r] type
           #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware::MacAddress::AddressType]
           #     Output only. Address type for this MAC address.
+          # @!attribute [r] ipv4_address
+          #   @return [::String]
+          #     Output only. Static IP address (if used) that is associated with the MAC
+          #     address. Only applicable for VIRTUAL MAC address type.
           class MacAddress
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -642,6 +646,9 @@ module Google
         # @!attribute [r] subscription_configs
         #   @return [::Array<::Google::Cloud::GDCHardwareManagement::V1alpha::SubscriptionConfig>]
         #     Output only. Subscription configurations for this zone.
+        # @!attribute [r] provisioning_state
+        #   @return [::Google::Cloud::GDCHardwareManagement::V1alpha::Zone::ProvisioningState]
+        #     Output only. Provisioning state for configurations like MAC addresses.
         class Zone
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -680,6 +687,21 @@ module Google
 
             # The Zone has been cancelled.
             CANCELLED = 4
+          end
+
+          # Valid provisioning states for configurations like MAC addresses.
+          module ProvisioningState
+            # Provisioning state is unspecified.
+            PROVISIONING_STATE_UNSPECIFIED = 0
+
+            # Provisioning is required. Set by Google.
+            PROVISIONING_REQUIRED = 1
+
+            # Provisioning is in progress. Set by customer.
+            PROVISIONING_IN_PROGRESS = 2
+
+            # Provisioning is complete. Set by customer.
+            PROVISIONING_COMPLETE = 3
           end
         end
 
@@ -919,6 +941,17 @@ module Google
         #     Optional. An IPv4 subnet for the kubernetes network.
         #     If unspecified, the kubernetes subnet will be the same as the management
         #     subnet.
+        # @!attribute [rw] dns_ipv4_addresses
+        #   @return [::Array<::String>]
+        #     Optional. DNS nameservers.
+        #     The GDC Infrastructure will resolve DNS queries via these IPs.
+        #     If unspecified, Google DNS is used.
+        # @!attribute [rw] kubernetes_primary_vlan_id
+        #   @return [::Integer]
+        #     Optional. Kubernetes VLAN ID.
+        #     By default, the kubernetes node, including the primary kubernetes network,
+        #     are in the same VLAN as the machine management network.
+        #     For network segmentation purposes, these can optionally be separated.
         class ZoneNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
