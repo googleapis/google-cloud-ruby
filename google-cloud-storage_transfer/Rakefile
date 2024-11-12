@@ -105,6 +105,7 @@ namespace :samples do
     if File.directory? "samples"
       Dir.chdir "samples" do
         Bundler.with_clean_env do
+          ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
           sh "bundle update"
           sh "bundle exec rake test"
         end
@@ -166,4 +167,3 @@ def header str, token = "#"
   puts token * line_length
   puts ""
 end
-
