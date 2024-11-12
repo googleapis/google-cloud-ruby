@@ -88,11 +88,18 @@ module Google
         # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
         #     Optional. Sets the maximum number of requests that each serving instance
-        #     can receive. If not specified or 0, defaults to 80 when requested
-        #     `CPU >= 1` and defaults to 1 when requested `CPU < 1`.
+        #     can receive. If not specified or 0, concurrency defaults to 80 when
+        #     requested `CPU >= 1` and defaults to 1 when requested `CPU < 1`.
         # @!attribute [rw] service_mesh
         #   @return [::Google::Cloud::Run::V2::ServiceMesh]
         #     Optional. Enables service mesh connectivity.
+        # @!attribute [rw] encryption_key_revocation_action
+        #   @return [::Google::Cloud::Run::V2::EncryptionKeyRevocationAction]
+        #     Optional. The action to take if the encryption key is revoked.
+        # @!attribute [rw] encryption_key_shutdown_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. If encryption_key_revocation_action is SHUTDOWN, the duration
+        #     before shutting down all instances. The minimum increment is 1 hour.
         # @!attribute [rw] session_affinity
         #   @return [::Boolean]
         #     Optional. Enable session affinity.
