@@ -92,7 +92,7 @@ module Google
 
           def error_msg attr_name
             "Service account credentials '#{attr_name}' is missing. To generate service account credentials " \
-            "see https://cloud.google.com/iam/docs/service-accounts"
+              "see https://cloud.google.com/iam/docs/service-accounts"
           end
 
           def post_object options
@@ -145,8 +145,8 @@ module Google
 
           def generate_signed_url issuer, signed_string, expires, query
             url = "#{ext_url}?GoogleAccessId=#{url_escape issuer}" \
-              "&Expires=#{expires}" \
-              "&Signature=#{url_escape signed_string}"
+                  "&Expires=#{expires}" \
+                  "&Signature=#{url_escape signed_string}"
 
             query&.each do |name, value|
               url << "&#{url_escape name}=#{url_escape value}"

@@ -537,9 +537,8 @@ describe "Files Snippets" do
       # For some weird (as yet unidentified) reason, keeping file as the first value
       # makes the http request fail intermittently with a 400 error.
       # Moving file as the last entry in the form_data array works fine.
-      form_data = []
-      post_object.fields.each do |key, value|
-        form_data.push [key, value]
+      form_data = post_object.fields.map do |key, value|
+        [key, value]
       end
       form_data.push ["file", File.open(data)]
 

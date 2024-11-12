@@ -182,7 +182,7 @@ module Google
               @origin = Array(origin)
               @methods = Array(methods)
               @headers = Array(headers)
-              @max_age = (max_age || 1800)
+              @max_age = max_age || 1800
             end
 
             # @private
@@ -195,7 +195,7 @@ module Google
 
             # @private
             def self.from_gapi gapi
-              new gapi.origin.dup, gapi.http_method.dup, \
+              new gapi.origin.dup, gapi.http_method.dup,
                   headers: gapi.response_header.dup,
                   max_age: gapi.max_age_seconds
             end

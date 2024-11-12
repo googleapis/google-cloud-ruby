@@ -3187,9 +3187,9 @@ module Google
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
-          patch_args = Hash[attributes.map do |attr|
+          patch_args = attributes.to_h do |attr|
             [attr, @gapi.send(attr)]
-          end]
+          end
           patch_gapi = API::Bucket.new(**patch_args)
           @gapi = service.patch_bucket name,
                                        patch_gapi,
@@ -3207,9 +3207,9 @@ module Google
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
-          update_args = Hash[attributes.map do |attr|
+          update_args = attributes.to_h do |attr|
             [attr, @gapi.send(attr)]
-          end]
+          end
           update_gapi = API::Bucket.new(**update_args)
           @gapi = service.update_bucket name,
                                         update_gapi,
