@@ -886,7 +886,6 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :post,
                                                           uri_template: "/v1beta/{name}:cancel",
-                                                          body: "*",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/operations/[^/]+/?$}, false]
                                                           ]

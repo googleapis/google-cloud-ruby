@@ -199,7 +199,7 @@ module Google
                 #   @param parent [::String]
                 #     Required. The location to create an
                 #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>`.
                 #   @param security_settings [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings, ::Hash]
                 #     Required. The security settings to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -283,8 +283,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. Resource name of the settings.
-                #     Format: `projects/<Project ID>/locations/<Location
-                #     ID>/securitySettings/<security settings ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/securitySettings/<securitysettingsID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -448,7 +448,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The location to list all security settings for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 20 and
                 #     at most 100.
@@ -540,8 +540,8 @@ module Google
                 #   @param name [::String]
                 #     Required. The name of the
                 #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings SecuritySettings} to
-                #     delete. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/securitySettings/<Security Settings ID>`.
+                #     delete. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/securitySettings/<SecuritySettingsID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]

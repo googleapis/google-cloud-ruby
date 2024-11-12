@@ -33,8 +33,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the environment.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the environment (unique in an agent).
@@ -65,8 +65,11 @@ module Google
             # Configuration for the version.
             # @!attribute [rw] version
             #   @return [::String]
-            #     Required. Format: projects/<Project ID>/locations/<Location
-            #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>.
+            #     Required. Both flow and playbook versions are supported.
+            #     Format for flow version:
+            #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>.
+            #     Format for playbook version:
+            #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/versions/<VersionID>.
             class VersionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -76,8 +79,8 @@ module Google
             # @!attribute [rw] test_cases
             #   @return [::Array<::String>]
             #     A list of test case names to run. They should be under the same agent.
-            #     Format of each test case name: `projects/<Project ID>/locations/
-            #     <Location ID>/agents/<AgentID>/testCases/<TestCase ID>`
+            #     Format of each test case name:
+            #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>`
             # @!attribute [rw] enable_continuous_run
             #   @return [::Boolean]
             #     Whether to run test cases in
@@ -112,8 +115,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to list all
-          #     environments for. Format: `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>`.
+          #     environments for. Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 20 and
@@ -149,8 +152,7 @@ module Google
           #   @return [::String]
           #     Required. The name of the
           #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment}. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           class GetEnvironmentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -162,7 +164,7 @@ module Google
           #   @return [::String]
           #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Agent Agent} to create an
           #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} for. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] environment
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Environment]
           #     Required. The environment to create.
@@ -190,8 +192,7 @@ module Google
           #   @return [::String]
           #     Required. The name of the
           #     {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to delete. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           class DeleteEnvironmentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -202,8 +203,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the environment to look up the history for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 100 and
@@ -236,9 +237,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name for the continuous test result. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment
-          #     ID>/continuousTestResults/<ContinuousTestResult ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/continuousTestResults/<ContinuousTestResultID>`.
           # @!attribute [rw] result
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ContinuousTestResult::AggregatedTestResult]
           #     The result of this continuous test run, i.e. whether all the tests in this
@@ -270,8 +269,8 @@ module Google
           # {::Google::Cloud::Dialogflow::CX::V3::Environments::Client#run_continuous_test Environments.RunContinuousTest}.
           # @!attribute [rw] environment
           #   @return [::String]
-          #     Required. Format: `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/environments/<Environment ID>`.
+          #     Required. Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           class RunContinuousTestRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,8 +302,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The environment to list results for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-          #     environments/<Environment ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 100 and
@@ -335,13 +334,13 @@ module Google
           # @!attribute [rw] environment
           #   @return [::String]
           #     Required. The environment to deploy the flow to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-          #     environments/<Environment ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           # @!attribute [rw] flow_version
           #   @return [::String]
           #     Required. The flow version to deploy.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-          #     flows/<Flow ID>/versions/<Version ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
           class DeployFlowRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -356,8 +355,7 @@ module Google
           #   @return [::String]
           #     The name of the flow version
           #     {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
-          #     environments/<Environment ID>/deployments/<Deployment ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
           class DeployFlowResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

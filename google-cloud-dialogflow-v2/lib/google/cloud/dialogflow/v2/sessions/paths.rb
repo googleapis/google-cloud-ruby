@@ -110,6 +110,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified PhraseSet resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param phrase_set [String]
+            #
+            # @return [::String]
+            def phrase_set_path project:, location:, phrase_set:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/phraseSets/#{phrase_set}"
+            end
+
+            ##
             # Create a fully-qualified Session resource string.
             #
             # @overload session_path(project:, session:)

@@ -205,9 +205,8 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
-              #     list all environments for. Format: `projects/<Project
-              #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-              #     ID>`.
+              #     list all environments for. Format:
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return in a single page. By default 20 and
               #     at most 100.
@@ -306,8 +305,7 @@ module Google
               #   @param name [::String]
               #     Required. The name of the
               #     {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}. Format:
-              #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-              #     ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
+              #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::Deployment]

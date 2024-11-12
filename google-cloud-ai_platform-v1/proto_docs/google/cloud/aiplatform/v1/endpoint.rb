@@ -266,9 +266,22 @@ module Google
         #     requests directly to the deployed model services running on Cloud via
         #     private services access. This field is populated if
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} is configured.
+        # @!attribute [rw] system_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     System labels to apply to Model Garden deployments.
+        #     System labels are managed by Google for internal use only.
         class DeployedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class SystemLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # PrivateEndpoints proto is used to provide paths for users to send

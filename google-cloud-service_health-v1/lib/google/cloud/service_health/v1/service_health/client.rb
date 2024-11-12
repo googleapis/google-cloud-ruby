@@ -251,7 +251,8 @@ module Google
             #     response. The expression takes the following forms: <br>
             #     *   field=value for `category` and `state`<br>
             #     *   field &lt;, >, &lt;=, or >= value for `update_time` <br>
-            #     Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+            #     Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`,
+            #     `event_impacts.product.product_name:"Eventarc"`
             #     <br>
             #
             #     Multiple filter queries are separated by spaces. Example:
@@ -261,7 +262,7 @@ module Google
             #     AND and OR expressions explicitly.
             #
             #     Filter is supported for the following fields: `category`, `state`,
-            #     `update_time`
+            #     `update_time`, `event_impacts.product.product_name`
             #   @param view [::Google::Cloud::ServiceHealth::V1::EventView]
             #     Optional. Event fields to include in response.
             #
@@ -477,7 +478,7 @@ module Google
             #     *   field=value for `category` and `state`
             #     *   field &lt;, >, &lt;=, or >= value for `update_time`
             #
-            #     Examples: `category=INCIDENT`, `update_time>=2000-01-01T11:30:00-04:00`
+            #     Examples: `category=INCIDENT`, `update_time>="2000-01-01T11:30:00-04:00"`
             #
             #     Multiple filter queries are space-separated. Example:
             #     `category=INCIDENT state=ACTIVE`.

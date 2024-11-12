@@ -46,6 +46,8 @@ module Google
             rpc :DeleteFeatureGroup, ::Google::Cloud::AIPlatform::V1::DeleteFeatureGroupRequest, ::Google::Longrunning::Operation
             # Creates a new Feature in a given FeatureGroup.
             rpc :CreateFeature, ::Google::Cloud::AIPlatform::V1::CreateFeatureRequest, ::Google::Longrunning::Operation
+            # Creates a batch of Features in a given FeatureGroup.
+            rpc :BatchCreateFeatures, ::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest, ::Google::Longrunning::Operation
             # Gets details of a single Feature.
             rpc :GetFeature, ::Google::Cloud::AIPlatform::V1::GetFeatureRequest, ::Google::Cloud::AIPlatform::V1::Feature
             # Lists Features in a given FeatureGroup.

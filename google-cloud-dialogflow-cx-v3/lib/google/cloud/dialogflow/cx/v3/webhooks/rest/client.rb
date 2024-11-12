@@ -198,7 +198,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to list all webhooks for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 100 and
                 #     at most 1000.
@@ -288,8 +288,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the webhook.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/webhooks/<Webhook ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Webhook]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -369,7 +369,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to create a webhook for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param webhook [::Google::Cloud::Dialogflow::CX::V3::Webhook, ::Hash]
                 #     Required. The webhook to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -533,8 +533,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the webhook to delete.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/webhooks/<Webhook ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
                 #   @param force [::Boolean]
                 #     This field has no effect for webhook not being used.
                 #     For webhooks that are used by pages/flows/transition route groups:

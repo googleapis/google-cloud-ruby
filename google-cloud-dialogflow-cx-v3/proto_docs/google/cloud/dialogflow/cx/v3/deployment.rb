@@ -29,13 +29,13 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the deployment.
-          #     Format: projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>/deployments/<Deployment ID>.
+          #     Format:
+          #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>.
           # @!attribute [rw] flow_version
           #   @return [::String]
           #     The name of the flow version for this deployment.
-          #     Format: projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/versions/<Verion ID>.
+          #     Format:
+          #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VerionID>.
           # @!attribute [rw] state
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Deployment::State]
           #     The current state of the deployment.
@@ -56,13 +56,13 @@ module Google
             # @!attribute [rw] deployment_test_results
             #   @return [::Array<::String>]
             #     Results of test cases running before the deployment.
-            #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-            #     ID>/testCases/<TestCase ID>/results/<TestCaseResult ID>`.
+            #     Format:
+            #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/testCases/<TestCaseID>/results/<TestCaseResultID>`.
             # @!attribute [rw] experiment
             #   @return [::String]
             #     The name of the experiment triggered by this deployment.
-            #     Format: projects/<Project ID>/locations/<Location ID>/agents/<Agent
-            #     ID>/environments/<Environment ID>/experiments/<Experiment ID>.
+            #     Format:
+            #     projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/experiments/<ExperimentID>.
             class Result
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -89,9 +89,8 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Environment Environment} to
-          #     list all environments for. Format: `projects/<Project
-          #     ID>/locations/<Location ID>/agents/<Agent ID>/environments/<Environment
-          #     ID>`.
+          #     list all environments for. Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 20 and
@@ -127,8 +126,7 @@ module Google
           #   @return [::String]
           #     Required. The name of the
           #     {::Google::Cloud::Dialogflow::CX::V3::Deployment Deployment}. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/environments/<Environment ID>/deployments/<Deployment ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/deployments/<DeploymentID>`.
           class GetDeploymentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

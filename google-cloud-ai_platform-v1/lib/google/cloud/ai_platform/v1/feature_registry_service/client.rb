@@ -236,7 +236,7 @@ module Google
             #     Required. The ID to use for this FeatureGroup, which will become the final
             #     component of the FeatureGroup's resource name.
             #
-            #     This value may be up to 60 characters, and valid characters are
+            #     This value may be up to 128 characters, and valid characters are
             #     `[a-z0-9_]`. The first character cannot be a number.
             #
             #     The value must be unique within the project and location.
@@ -842,6 +842,109 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @feature_registry_service_stub.call_rpc :create_feature, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a batch of Features in a given FeatureGroup.
+            #
+            # @overload batch_create_features(request, options = nil)
+            #   Pass arguments to `batch_create_features` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_create_features(parent: nil, requests: nil)
+            #   Pass arguments to `batch_create_features` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the EntityType/FeatureGroup to create the
+            #     batch of Features under. Format:
+            #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+            #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
+            #   @param requests [::Array<::Google::Cloud::AIPlatform::V1::CreateFeatureRequest, ::Hash>]
+            #     Required. The request message specifying the Features to create. All
+            #     Features must be created under the same parent EntityType / FeatureGroup.
+            #     The `parent` field in each child request message can be omitted. If
+            #     `parent` is set in a child request, then the value must match the `parent`
+            #     value in this request message.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest.new
+            #
+            #   # Call the batch_create_features method.
+            #   result = client.batch_create_features request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def batch_create_features request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::BatchCreateFeaturesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_create_features.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_create_features.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_create_features.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @feature_registry_service_stub.call_rpc :batch_create_features, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -1486,6 +1589,11 @@ module Google
                 #
                 attr_reader :create_feature
                 ##
+                # RPC-specific configuration for `batch_create_features`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_create_features
+                ##
                 # RPC-specific configuration for `get_feature`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1520,6 +1628,8 @@ module Google
                   @delete_feature_group = ::Gapic::Config::Method.new delete_feature_group_config
                   create_feature_config = parent_rpcs.create_feature if parent_rpcs.respond_to? :create_feature
                   @create_feature = ::Gapic::Config::Method.new create_feature_config
+                  batch_create_features_config = parent_rpcs.batch_create_features if parent_rpcs.respond_to? :batch_create_features
+                  @batch_create_features = ::Gapic::Config::Method.new batch_create_features_config
                   get_feature_config = parent_rpcs.get_feature if parent_rpcs.respond_to? :get_feature
                   @get_feature = ::Gapic::Config::Method.new get_feature_config
                   list_features_config = parent_rpcs.list_features if parent_rpcs.respond_to? :list_features

@@ -213,8 +213,8 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Flow Flow} to list all
-                #     versions for. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>/flows/<Flow ID>`.
+                #     versions for. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
                 #   @param page_size [::Integer]
                 #     The maximum number of items to return in a single page. By default 20 and
                 #     at most 100.
@@ -304,8 +304,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Version Version}.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/flows/<Flow ID>/versions/<Version ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Cloud::Dialogflow::CX::V3::Version]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -395,8 +395,7 @@ module Google
                 #   @param parent [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Flow Flow} to create an
                 #     {::Google::Cloud::Dialogflow::CX::V3::Version Version} for. Format:
-                #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/flows/<Flow ID>`.
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
                 #   @param version [::Google::Cloud::Dialogflow::CX::V3::Version, ::Hash]
                 #     Required. The version to create.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -568,8 +567,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the {::Google::Cloud::Dialogflow::CX::V3::Version Version}
-                #     to delete. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+                #     to delete. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
                 # @yield [result, operation] Access the result along with the TransportOperation object
                 # @yieldparam result [::Google::Protobuf::Empty]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -658,8 +657,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The {::Google::Cloud::Dialogflow::CX::V3::Version Version} to be loaded
-                #     to draft flow. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+                #     to draft flow. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
                 #   @param allow_override_agent_resources [::Boolean]
                 #     This field is used to prevent accidental overwrite of other agent
                 #     resources, which can potentially impact other flow's behavior. If
@@ -754,13 +753,13 @@ module Google
                 #     Required. Name of the base flow version to compare with the target version.
                 #     Use version ID `0` to indicate the draft version of the specified flow.
                 #
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/
-                #     <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
                 #   @param target_version [::String]
                 #     Required. Name of the target flow version to compare with the
                 #     base version. Use version ID `0` to indicate the draft version of the
-                #     specified flow. Format: `projects/<Project ID>/locations/<Location
-                #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+                #     specified flow. Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/versions/<VersionID>`.
                 #   @param language_code [::String]
                 #     The language to compare the flow versions for.
                 #

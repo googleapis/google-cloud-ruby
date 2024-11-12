@@ -33,8 +33,8 @@ module Google
           #     {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook Webhooks.UpdateWebhook}
           #     method.
           #     {::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook Webhooks.CreateWebhook}
-          #     populates the name automatically. Format: `projects/<Project
-          #     ID>/locations/<Location ID>/agents/<Agent ID>/webhooks/<Webhook ID>`.
+          #     populates the name automatically. Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the webhook, unique within the agent.
@@ -228,8 +228,8 @@ module Google
             #   @return [::String]
             #     Required. The name of [Service
             #     Directory](https://cloud.google.com/service-directory) service.
-            #     Format: `projects/<Project ID>/locations/<Location
-            #     ID>/namespaces/<Namespace ID>/services/<Service ID>`.
+            #     Format:
+            #     `projects/<ProjectID>/locations/<LocationID>/namespaces/<NamespaceID>/services/<ServiceID>`.
             #     `Location ID` of the service directory must be the same as the location
             #     of the agent.
             # @!attribute [rw] generic_web_service
@@ -246,7 +246,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to list all webhooks for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The maximum number of items to return in a single page. By default 100 and
@@ -279,8 +279,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the webhook.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/webhooks/<Webhook ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
           class GetWebhookRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -291,7 +291,7 @@ module Google
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The agent to create a webhook for.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+          #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
           # @!attribute [rw] webhook
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook]
           #     Required. The webhook to create.
@@ -319,8 +319,8 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The name of the webhook to delete.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/webhooks/<Webhook ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/webhooks/<WebhookID>`.
           # @!attribute [rw] force
           #   @return [::Boolean]
           #     This field has no effect for webhook not being used.
@@ -356,8 +356,7 @@ module Google
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
-          #     `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/intents/<Intent ID>`.
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
@@ -428,8 +427,8 @@ module Google
             #   @return [::String]
             #     Always present. The unique identifier of the last matched
             #     {::Google::Cloud::Dialogflow::CX::V3::Intent intent}.
-            #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-            #     ID>/intents/<Intent ID>`.
+            #     Format:
+            #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
             # @!attribute [rw] display_name
             #   @return [::String]
             #     Always present. The display name of the last matched
@@ -475,7 +474,7 @@ module Google
             # @!attribute [rw] score
             #   @return [::Float]
             #     Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
-            #     sentiment).
+            #      sentiment).
             # @!attribute [rw] magnitude
             #   @return [::Float]
             #     A non-negative number in the [0, +inf) range, which represents the
@@ -507,13 +506,13 @@ module Google
           # @!attribute [rw] target_page
           #   @return [::String]
           #     The target page to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>`.
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
           class WebhookResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -551,9 +550,8 @@ module Google
           #     Always present for
           #     {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for
           #     {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}. The
-          #     unique identifier of the current page. Format: `projects/<Project
-          #     ID>/locations/<Location ID>/agents/<Agent ID>/flows/<Flow ID>/pages/<Page
-          #     ID>`.
+          #     unique identifier of the current page. Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Always present for
@@ -656,9 +654,10 @@ module Google
           #     unique identifier of the
           #     {::Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest#session session}. This
           #     field can be used by the webhook to identify a session.
-          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/sessions/<Session ID>` or `projects/<Project ID>/locations/<Location
-          #     ID>/agents/<Agent ID>/environments/<Environment ID>/sessions/<Session ID>`
+          #     Format:
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/sessions/<SessionID>`
+          #     or
+          #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/environments/<EnvironmentID>/sessions/<SessionID>`
           #     if environment is specified.
           # @!attribute [rw] parameters
           #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]

@@ -212,8 +212,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the entity type.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/entityTypes/<Entity Type ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
                 #   @param language_code [::String]
                 #     The language to retrieve the entity type for. The following fields are
                 #     language dependent:
@@ -310,7 +310,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to create a entity type for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param entity_type [::Google::Cloud::Dialogflow::CX::V3::EntityType, ::Hash]
                 #     Required. The entity type to create.
                 #   @param language_code [::String]
@@ -505,8 +505,8 @@ module Google
                 #
                 #   @param name [::String]
                 #     Required. The name of the entity type to delete.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/entityTypes/<Entity Type ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
                 #   @param force [::Boolean]
                 #     This field has no effect for entity type not being used.
                 #     For entity types that are used by intents or pages:
@@ -599,7 +599,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to list all entity types for.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param language_code [::String]
                 #     The language to list entity types for. The following fields are language
                 #     dependent:
@@ -702,12 +702,11 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The name of the parent agent to export entity types.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param entity_types [::Array<::String>]
                 #     Required. The name of the entity types to export.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/entityTypes/<EntityType ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entityTypes/<EntityTypeID>`.
                 #   @param entity_types_uri [::String]
                 #     Optional. The [Google Cloud
                 #     Storage](https://cloud.google.com/storage/docs/) URI to export the entity
@@ -824,7 +823,7 @@ module Google
                 #
                 #   @param parent [::String]
                 #     Required. The agent to import the entity types into.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>`.
+                #     Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
                 #   @param entity_types_uri [::String]
                 #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
                 #     to import entity types from. The format of this URI must be
@@ -841,8 +840,8 @@ module Google
                 #     Required. Merge option for importing entity types.
                 #   @param target_entity_type [::String]
                 #     Optional. The target entity type to import into.
-                #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
-                #     ID>/entity_types/<EntityType ID>`.
+                #     Format:
+                #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/entity_types/<EntityTypeID>`.
                 #     If set, there should be only one entity type included in
                 #     [entity_types][google.cloud.dialogflow.cx.v3.ImportEntityTypesRequest.entity_types],
                 #     of which the type should match the type of the target entity type. All

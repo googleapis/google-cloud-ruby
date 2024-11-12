@@ -41,6 +41,9 @@ module Google
             rpc :CreateCluster, ::Google::Cloud::AlloyDB::V1beta::CreateClusterRequest, ::Google::Longrunning::Operation
             # Updates the parameters of a single Cluster.
             rpc :UpdateCluster, ::Google::Cloud::AlloyDB::V1beta::UpdateClusterRequest, ::Google::Longrunning::Operation
+            # Upgrades a single Cluster.
+            # Imperative only.
+            rpc :UpgradeCluster, ::Google::Cloud::AlloyDB::V1beta::UpgradeClusterRequest, ::Google::Longrunning::Operation
             # Deletes a single Cluster.
             rpc :DeleteCluster, ::Google::Cloud::AlloyDB::V1beta::DeleteClusterRequest, ::Google::Longrunning::Operation
             # Promotes a SECONDARY cluster. This turns down replication
@@ -48,6 +51,10 @@ module Google
             # into its own standalone cluster.
             # Imperative only.
             rpc :PromoteCluster, ::Google::Cloud::AlloyDB::V1beta::PromoteClusterRequest, ::Google::Longrunning::Operation
+            # Switches the roles of PRIMARY and SECONDARY clusters without any data loss.
+            # This promotes the SECONDARY cluster to PRIMARY and sets up the original
+            # PRIMARY cluster to replicate from this newly promoted cluster.
+            rpc :SwitchoverCluster, ::Google::Cloud::AlloyDB::V1beta::SwitchoverClusterRequest, ::Google::Longrunning::Operation
             # Creates a new Cluster in a given project and location, with a volume
             # restored from the provided source, either a backup ID or a point-in-time
             # and a source cluster.
@@ -88,6 +95,8 @@ module Google
             # Restart an Instance in a cluster.
             # Imperative only.
             rpc :RestartInstance, ::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest, ::Google::Longrunning::Operation
+            # Executes a SQL statement in a database inside an AlloyDB instance.
+            rpc :ExecuteSql, ::Google::Cloud::AlloyDB::V1beta::ExecuteSqlRequest, ::Google::Cloud::AlloyDB::V1beta::ExecuteSqlResponse
             # Lists Backups in a given project and location.
             rpc :ListBackups, ::Google::Cloud::AlloyDB::V1beta::ListBackupsRequest, ::Google::Cloud::AlloyDB::V1beta::ListBackupsResponse
             # Gets details of a single Backup.

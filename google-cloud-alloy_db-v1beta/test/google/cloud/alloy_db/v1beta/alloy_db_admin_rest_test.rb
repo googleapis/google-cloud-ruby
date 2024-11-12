@@ -299,6 +299,64 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
     end
   end
 
+  def test_upgrade_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    version = :DATABASE_VERSION_UNSPECIFIED
+    request_id = "hello world"
+    validate_only = true
+    etag = "hello world"
+
+    upgrade_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_upgrade_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, upgrade_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.upgrade_cluster name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.upgrade_cluster ::Google::Cloud::AlloyDB::V1beta::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.upgrade_cluster({ name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.upgrade_cluster(::Google::Cloud::AlloyDB::V1beta::UpgradeClusterRequest.new(name: name, version: version, request_id: request_id, validate_only: validate_only, etag: etag), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, upgrade_cluster_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_cluster
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -410,6 +468,62 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
 
         # Verify method calls
         assert_equal 5, promote_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_switchover_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+
+    switchover_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_switchover_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, switchover_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.switchover_cluster name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.switchover_cluster ::Google::Cloud::AlloyDB::V1beta::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.switchover_cluster({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.switchover_cluster(::Google::Cloud::AlloyDB::V1beta::SwitchoverClusterRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, switchover_cluster_client_stub.call_count
       end
     end
   end
@@ -1055,6 +1169,7 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
     name = "hello world"
     request_id = "hello world"
     validate_only = true
+    node_ids = ["hello world"]
 
     restart_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1070,32 +1185,90 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+        client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.restart_instance name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+        client.restart_instance name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.restart_instance ::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+        client.restart_instance ::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+        client.restart_instance({ name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.restart_instance(::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+        client.restart_instance(::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest.new(name: name, request_id: request_id, validate_only: validate_only, node_ids: node_ids), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, restart_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_execute_sql
+    # Create test objects.
+    client_result = ::Google::Cloud::AlloyDB::V1beta::ExecuteSqlResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    password = "hello world"
+    instance = "hello world"
+    database = "hello world"
+    user = "hello world"
+    sql_statement = "hello world"
+
+    execute_sql_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_execute_sql_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, execute_sql_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.execute_sql password: password, instance: instance, database: database, user: user, sql_statement: sql_statement do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.execute_sql ::Google::Cloud::AlloyDB::V1beta::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.execute_sql({ password: password, instance: instance, database: database, user: user, sql_statement: sql_statement }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.execute_sql(::Google::Cloud::AlloyDB::V1beta::ExecuteSqlRequest.new(password: password, instance: instance, database: database, user: user, sql_statement: sql_statement), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, execute_sql_client_stub.call_count
       end
     end
   end

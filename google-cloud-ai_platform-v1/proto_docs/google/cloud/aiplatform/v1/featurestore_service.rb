@@ -668,18 +668,21 @@ module Google
 
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#batch_create_features FeaturestoreService.BatchCreateFeatures}.
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#batch_create_features FeatureRegistryService.BatchCreateFeatures}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the EntityType to create the batch of
-        #     Features under. Format:
+        #     Required. The resource name of the EntityType/FeatureGroup to create the
+        #     batch of Features under. Format:
         #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entity_type}`
+        #     `projects/{project}/locations/{location}/featureGroups/{feature_group}`
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::CreateFeatureRequest>]
         #     Required. The request message specifying the Features to create. All
-        #     Features must be created under the same parent EntityType. The `parent`
-        #     field in each child request message can be omitted. If `parent` is set in a
-        #     child request, then the value must match the `parent` value in this request
-        #     message.
+        #     Features must be created under the same parent EntityType / FeatureGroup.
+        #     The `parent` field in each child request message can be omitted. If
+        #     `parent` is set in a child request, then the value must match the `parent`
+        #     value in this request message.
         class BatchCreateFeaturesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
