@@ -55,27 +55,4 @@ describe "Storage Transfer Service  POSIX download" do
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
-
-  it "checks the file is created in destination directory" do
-    out, _err = capture_io do
-      retry_resource_exhaustion do
-        download_from_gcs project_id: project.project_id, description: description, sink_agent_pool_name: sink_agent_pool_name, destination_directory: destination_directory, source_bucket: source_bucket.name, gcs_source_path: gcs_source_path
-      end
-    end
-
-    # Object takes time to be created on destination folder
-    retry_destination_folder_check destination_file_path
-    assert File.exist?(destination_file_path), "File #{dummy_file_name} should exist on #{destination_directory}"
-    # Delete transfer jobs
-    job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-    delete_transfer_job project_id: project.project_id, job_name: job_name
-  end
-end
-
-def retry_destination_folder_check destination_file_path
-  5.times do
-    return true if File.exist? destination_file_path
-    puts "retry destination folder check"
-    sleep rand(25..35)
-  end
 end

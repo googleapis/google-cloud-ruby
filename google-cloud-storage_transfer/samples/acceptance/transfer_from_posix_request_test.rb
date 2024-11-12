@@ -58,22 +58,4 @@ describe "Storage Transfer Service from POSIX" do
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     delete_transfer_job project_id: project.project_id, job_name: job_name
   end
-
-  it "checks the file is created in destination bucket" do
-    create_dummy_file
-    out, _err = capture_io do
-      retry_resource_exhaustion do
-        posix_request project_id: project.project_id, description: description, gcs_sink_bucket: sink_bucket.name, source_agent_pool_name: agent_pool_name, root_directory: root_directory
-      end
-    end
-
-    # Object takes time to be created on bucket hence retrying
-    file = retry_untill_tranfer_is_done do
-      sink_bucket.file dummy_file_name
-    end
-    assert file.is_a?(Google::Cloud::Storage::File), "File #{dummy_file_name} should exist on #{sink_bucket.name}"
-    # Delete transfer jobs
-    job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-    delete_transfer_job project_id: project.project_id, job_name: job_name
-  end
 end

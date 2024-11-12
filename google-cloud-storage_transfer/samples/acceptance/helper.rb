@@ -123,15 +123,6 @@ def delete_bucket_helper bucket_name
   end
 end
 
-def retry_untill_tranfer_is_done
-  5.times do
-    result = yield
-    return result if result.is_a? Google::Cloud::Storage::File
-    puts "retry"
-    sleep rand(25..30)
-  end
-end
-
 def retry_resource_exhaustion
   5.times do
     return yield
