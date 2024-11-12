@@ -179,3 +179,31 @@ def header str, token = "#"
   puts token * line_length
   puts ""
 end
+
+def install_storage_transfer_agent agent_pool_id, service_account_key_path
+  require 'open-uri'
+  # URL to the agent installer script
+  installer_url = "https://storage.googleapis.com/storage-transfer-public/transfer_agent_installer_no_prompt.sh"
+  installer_script = "transfer_agent_installer_no_prompt.sh"
+
+  # Download the installer script
+  puts "Downloading the Storage Transfer Service agent installer..."
+  File.open(installer_script, "wb") do |file|
+    file.write URI.open(installer_url).read
+  end
+  puts "Downloaded the installer script."
+
+  # Make the installer script executable
+  FileUtils.chmod("+x", installer_script)
+
+  # Run the installer script with the agent pool ID and service account key path
+  install_command = <<~BASH
+    sudo bash #{installer_script} -a #{agent_pool_id} -k #{service_account_key_path}
+  BASH
+  puts "Running installation command..."
+  system(install_command)
+
+  # Verify the agent service status
+  puts "Verifying agent service status..."
+  system("sudo service google-storagetransfer-agent status")
+end
