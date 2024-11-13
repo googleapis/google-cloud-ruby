@@ -1,5 +1,32 @@
 # Changelog
 
+### 0.10.0 (2024-11-13)
+
+### ⚠ BREAKING CHANGES
+
+* deprecated various PSC instance configuration fields ([#27581](https://github.com/googleapis/google-cloud-ruby/issues/27581))
+
+#### Features
+
+* add more observability options on the Instance level 
+* add new API to execute SQL statements 
+* add new API to perform a promotion or switchover on secondary instances 
+* add new API to upgrade a cluster 
+* add new CloudSQL backup resource 
+* add new cluster and instance level configurations to interact with Gemini 
+* add new PSC instance configuration setting and output the PSC DNS name 
+* add optional field to keep extra roles on a user if it already exists 
+* add support for Free Trials 
+* add support to schedule maintenance 
+* additional field to set tags on a backup or cluster 
+* support for obtaining the public ip addresses of an instance and enabling outbound public ip 
+#### Bug Fixes
+
+* deprecated various PSC instance configuration fields ([#27581](https://github.com/googleapis/google-cloud-ruby/issues/27581)) 
+#### Documentation
+
+* various typo fixes, correcting the formatting, and clarifications on the request_id and validate_only fields in API requests and on the page_size when listing the database 
+
 ### 0.9.0 (2024-08-30)
 
 #### Features
