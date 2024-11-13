@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2024-11-13)
+
+#### Features
+
+* add options of client_certificate_settings, bigquery_export_settings, bearer_token_config and boost_control_spec; add support of ALAW encoding ([#27559](https://github.com/googleapis/google-cloud-ruby/issues/27559)) 
+
 ### 1.1.1 (2024-08-30)
 
 #### Documentation
