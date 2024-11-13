@@ -1,5 +1,12 @@
 # Release History
 
+### 1.3.0 (2024-11-13)
+
+#### Features
+
+* add options of query_source, search_config and context_size 
+* added support for ALAW encoding 
+
 ### 1.2.0 (2024-09-30)
 
 #### Features
