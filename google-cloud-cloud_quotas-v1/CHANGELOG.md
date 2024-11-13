@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.1.0 (2024-11-13)
+
+#### Features
+
+* A new value `NOT_ENOUGH_USAGE_HISTORY` is added to enum `IneligibilityReason` 
+* A new value `NOT_SUPPORTED` is added to enum `IneligibilityReason` ([#27600](https://github.com/googleapis/google-cloud-ruby/issues/27600)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
