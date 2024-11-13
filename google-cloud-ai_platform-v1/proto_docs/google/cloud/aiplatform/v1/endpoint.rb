@@ -266,6 +266,9 @@ module Google
         #     requests directly to the deployed model services running on Cloud via
         #     private services access. This field is populated if
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#network network} is configured.
+        # @!attribute [rw] faster_deployment_config
+        #   @return [::Google::Cloud::AIPlatform::V1::FasterDeploymentConfig]
+        #     Configuration for faster model deployment.
         # @!attribute [rw] system_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     System labels to apply to Model Garden deployments.
@@ -324,6 +327,15 @@ module Google
         #     most special characters will become underscores). If no table name is
         #     given, a new table will be created with name `request_response_logging`
         class PredictRequestResponseLoggingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for faster model deployment.
+        # @!attribute [rw] fast_tryout_enabled
+        #   @return [::Boolean]
+        #     If true, enable fast tryout feature for this deployed model.
+        class FasterDeploymentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
