@@ -14,7 +14,6 @@
 
 # [START storagetransfer_manifest_request]
 
-
 def manifest_request project_id:, description:, gcs_sink_bucket:, manifest_location:, source_agent_pool_name:, root_directory:
   # Your Google Cloud Project ID
   # # project_id = "your-project_id"

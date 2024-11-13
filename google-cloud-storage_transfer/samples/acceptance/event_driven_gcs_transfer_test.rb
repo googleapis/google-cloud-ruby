@@ -16,7 +16,7 @@ require_relative "../event_driven_gcs_transfer"
 require "google/cloud/pubsub"
 
 describe "Storage Transfer Service Event Driven Gcs Transfer" do
-  let(:project) { Google::Cloud::Storage.new }
+  let(:storage) { Google::Cloud::Storage.new }
   let(:description) { "This is an event driven gcs transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
@@ -41,10 +41,10 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
   let(:filename_prefix) { "my-prefix" }
   let(:payload) { "NONE" }
   before do
-    grant_pubsub_permissions project_id: project.project_id, topic: topic, subscription: subscription
+    grant_pubsub_permissions project_id: storage.project_id, topic: topic, subscription: subscription
     create_dummy_file
-    grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
-    grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: source_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: sink_bucket.name
 
     source_bucket.create_notification topic.name, custom_attrs: custom_attrs,
                                                             event_types: event_types,
@@ -59,10 +59,10 @@ describe "Storage Transfer Service Event Driven Gcs Transfer" do
 
   it "creates a transfer job" do
     out, _err = capture_io do
-      create_event_driven_gcs_transfer project_id: project.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name
+      create_event_driven_gcs_transfer project_id: storage.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, pubsub_id: subscription.name
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-    delete_transfer_job project_id: project.project_id, job_name: job_name
+    delete_transfer_job project_id: storage.project_id, job_name: job_name
   end
 end

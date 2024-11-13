@@ -16,7 +16,7 @@ require_relative "helper"
 require_relative "../posix_download_request"
 
 describe "Storage Transfer Service  POSIX download" do
-  let(:project) { Google::Cloud::Storage.new }
+  let(:storage) { Google::Cloud::Storage.new }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_agent_pool_name) { "" }
   let(:description) { "This is a posix download transfer job" }
@@ -30,14 +30,14 @@ describe "Storage Transfer Service  POSIX download" do
   before do
     create_dummy_file
     puts "Dummy file created"
-    grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: source_bucket.name
   end
 
   after do
     # delete dummy file and folder
     if Dir.exist? destination_directory
       FileUtils.rm_rf destination_directory
-      puts "folder  deleted#{destination_directory}."
+      puts "folder deleted#{destination_directory}."
     else
       puts "folder not found '#{destination_directory}'"
     end
@@ -48,11 +48,11 @@ describe "Storage Transfer Service  POSIX download" do
   it "creates a transfer job" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        download_from_gcs project_id: project.project_id, description: description, sink_agent_pool_name: sink_agent_pool_name, destination_directory: destination_directory, source_bucket: source_bucket.name, gcs_source_path: gcs_source_path
+        download_from_gcs project_id: storage.project_id, description: description, sink_agent_pool_name: sink_agent_pool_name, destination_directory: destination_directory, source_bucket: source_bucket.name, gcs_source_path: gcs_source_path
       end
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-    delete_transfer_job project_id: project.project_id, job_name: job_name
+    delete_transfer_job project_id: storage.project_id, job_name: job_name
   end
 end

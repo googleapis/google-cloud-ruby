@@ -16,7 +16,7 @@ require_relative "helper"
 require_relative "../posix_to_posix_request"
 
 describe "Storage Transfer Service POSIX to POSIX" do
-  let(:project) { Google::Cloud::Storage.new }
+  let(:storage) { Google::Cloud::Storage.new }
   let(:intermediate_bucket) { create_bucket_helper random_bucket_name }
   let(:source_agent_pool_name) { "" }
   let(:sink_agent_pool_name) { "" }
@@ -34,7 +34,7 @@ describe "Storage Transfer Service POSIX to POSIX" do
   before do
     create_dummy_file
     puts "Dummy file created"
-    grant_sts_permissions project_id: project.project_id, bucket_name: intermediate_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: intermediate_bucket.name
   end
 
   after do
@@ -49,9 +49,9 @@ describe "Storage Transfer Service POSIX to POSIX" do
     # delete dummy destination file and folder
     if Dir.exist? destination_directory
       FileUtils.rm_rf destination_directory
-      puts "Destination folder deleted#{destination_directory}."
+      puts "Destination folder deleted #{destination_directory}."
     else
-      puts "Destination folder not found '#{destination_directory}'"
+      puts "Destination folder not found #{destination_directory}"
     end
 
     puts "Delete bucket"
@@ -61,11 +61,11 @@ describe "Storage Transfer Service POSIX to POSIX" do
   it "creates a transfer job" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        transfer_between_posix project_id: project.project_id, description: description, source_agent_pool_name: source_agent_pool_name, sink_agent_pool_name: sink_agent_pool_name, root_directory: root_directory, destination_directory: destination_directory, intermediate_bucket: intermediate_bucket.name
+        transfer_between_posix project_id: storage.project_id, description: description, source_agent_pool_name: source_agent_pool_name, sink_agent_pool_name: sink_agent_pool_name, root_directory: root_directory, destination_directory: destination_directory, intermediate_bucket: intermediate_bucket.name
       end
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-    delete_transfer_job project_id: project.project_id, job_name: job_name
+    delete_transfer_job project_id: storage.project_id, job_name: job_name
   end
 end

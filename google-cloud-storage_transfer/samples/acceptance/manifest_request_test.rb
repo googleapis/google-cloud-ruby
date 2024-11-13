@@ -18,7 +18,7 @@ require "csv"
 
 
 describe "Storage Transfer Service manifest_request" do
-  let(:project) { Google::Cloud::Storage.new }
+  let(:storage) { Google::Cloud::Storage.new }
   let(:description) { "This is a posix download transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
   let(:sink_bucket) { create_bucket_helper random_bucket_name }
@@ -44,8 +44,8 @@ describe "Storage Transfer Service manifest_request" do
 
   before do
     create_manifest_file
-    grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
-    grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: source_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: sink_bucket.name
   end
   after do
     # delete dummy file and folder
@@ -63,11 +63,11 @@ describe "Storage Transfer Service manifest_request" do
   it "creates a transfer job" do
     out, _err = capture_io do
       retry_resource_exhaustion do
-        manifest_request project_id: project.project_id, description: description, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
+        manifest_request project_id: storage.project_id, description: description, gcs_sink_bucket: sink_bucket.name, manifest_location: manifest_location, source_agent_pool_name: agent_pool_name, root_directory: root_directory
       end
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
-    delete_transfer_job project_id: project.project_id, job_name: job_name
+    delete_transfer_job project_id: storage.project_id, job_name: job_name
   end
 end

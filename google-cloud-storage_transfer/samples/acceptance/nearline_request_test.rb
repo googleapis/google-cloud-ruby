@@ -15,14 +15,14 @@ require_relative "helper"
 require_relative "../nearline_request"
 
 describe "Storage Transfer Service To Nearline Transfer" do
-  let(:project) { Google::Cloud::Storage.new }
+  let(:storage) { Google::Cloud::Storage.new }
   let(:description) { "This is a nearline request transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
-  let(:sink_bucket) { create_nearline_bucket_helper random_bucket_name }
+  let(:sink_bucket) { create_bucket_helper random_bucket_name, storage_class: "nearline" }
 
   before do
-    grant_sts_permissions project_id: project.project_id, bucket_name: source_bucket.name
-    grant_sts_permissions project_id: project.project_id, bucket_name: sink_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: source_bucket.name
+    grant_sts_permissions project_id: storage.project_id, bucket_name: sink_bucket.name
   end
 
   after do
@@ -32,11 +32,11 @@ describe "Storage Transfer Service To Nearline Transfer" do
 
   it "creates a transfer job" do
     out, _err = capture_io do
-      create_daily_nearline_30_day_migration project_id: project.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
+      create_daily_nearline_30_day_migration project_id: storage.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
     end
     assert_includes out, "transferJobs"
     job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
     # delete transfer job
-    delete_transfer_job project_id: project.project_id, job_name: job_name
+    delete_transfer_job project_id: storage.project_id, job_name: job_name
   end
 end

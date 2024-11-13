@@ -98,17 +98,10 @@ def random_bucket_name
   "ruby-storagetransfer-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
 end
 
-def create_bucket_helper bucket_name
+def create_bucket_helper bucket_name, storage_class: nil
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
-    storage_client.create_bucket bucket_name
-  end
-end
-
-def create_nearline_bucket_helper bucket_name
-  storage_client = Google::Cloud::Storage.new
-  retry_resource_exhaustion do
-    storage_client.create_bucket bucket_name, storage_class: "NEARLINE"
+    storage_client.create_bucket(bucket_name, storage_class: storage_class || nil)
   end
 end
 
