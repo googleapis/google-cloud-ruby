@@ -1,5 +1,19 @@
 # Release History
 
+### 1.4.0 (2024-11-13)
+
+#### Features
+
+* add desired_enterprise_config,desired_node_pool_auto_config_linux_node_config to ClusterUpdate. 
+* add desired_tier to EnterpriseConfig. 
+* add DesiredEnterpriseConfig proto message 
+* add LinuxNodeConfig in NodePoolAutoConfig 
+* add LocalSsdEncryptionMode in NodeConfig ([#27579](https://github.com/googleapis/google-cloud-ruby/issues/27579)) 
+* add UpgradeInfoEvent proto message 
+#### Documentation
+
+* Minor documentation updates 
+
 ### 1.3.0 (2024-10-15)
 
 #### Features
