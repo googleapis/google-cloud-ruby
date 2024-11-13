@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.57.0 (2024-11-13)
+
+#### Features
+
+* add BatchCreateFeatures rpc to feature_registry_service.proto 
+* add system labels field to model garden deployments ([#27555](https://github.com/googleapis/google-cloud-ruby/issues/27555)) 
+* added support for specifying function response type in `FunctionDeclaration` 
+#### Documentation
+
+* A comment for field `feature_group_id` in message `.google.cloud.aiplatform.v1.CreateFeatureGroupRequest` is changed 
+* A comment for message `BatchCreateFeaturesRequest` is modified to call out BatchCreateFeatures 
+* updated the maximum number of function declarations from 64 to 128 
+
 ### 0.56.0 (2024-11-07)
 
 #### Features
