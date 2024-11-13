@@ -1,5 +1,12 @@
 # Release History
 
+### 1.1.0 (2024-11-13)
+
+#### Features
+
+* Add FindNearest API to the stable branch 
+* Support for field update operators in the Datastore API and resolution strategies when there is a conflict at write time ([#27412](https://github.com/googleapis/google-cloud-ruby/issues/27412)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
