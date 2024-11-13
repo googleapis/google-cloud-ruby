@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.2 (2024-11-13)
+
+#### Documentation
+
+* add missing doc comments ([#27574](https://github.com/googleapis/google-cloud-ruby/issues/27574)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
