@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.18.0 (2024-11-13)
+
+#### Features
+
+* Add EncryptionKeyRevocationAction and shutdown duration configuration to Services ([#27604](https://github.com/googleapis/google-cloud-ruby/issues/27604)) 
+* support advanced configurations options for cloud storage volumes by setting `mount_options` in the GCSVolumeSource configuration ([#27583](https://github.com/googleapis/google-cloud-ruby/issues/27583)) 
+#### Documentation
+
+* A comment for field `max_instance_request_concurrency` in message `.google.cloud.run.v2.RevisionTemplate` is changed 
+* For field `invoker_iam_disabled` in message `.google.cloud.run.v2.Service`, clarify that feature is available by invitation only 
+* formatting updates 
+* Update docs for field `value` in message `.google.cloud.run.v2.EnvVar` to reflect Cloud Run product capabilities 
+
 ### 0.17.0 (2024-10-15)
 
 #### Features
