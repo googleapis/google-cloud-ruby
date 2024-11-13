@@ -5,7 +5,7 @@
 require 'google/protobuf'
 
 
-descriptor_data = "\n-google/cloud/datacatalog/v1beta1/common.proto\x12 google.cloud.datacatalog.v1beta1*U\n\x10IntegratedSystem\x12!\n\x1dINTEGRATED_SYSTEM_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x42IGQUERY\x10\x01\x12\x10\n\x0c\x43LOUD_PUBSUB\x10\x02*j\n\x0eManagingSystem\x12\x1f\n\x1bMANAGING_SYSTEM_UNSPECIFIED\x10\x00\x12\x1c\n\x18MANAGING_SYSTEM_DATAPLEX\x10\x01\x12\x19\n\x15MANAGING_SYSTEM_OTHER\x10\x02\x42\xdf\x01\n$com.google.cloud.datacatalog.v1beta1P\x01ZFcloud.google.com/go/datacatalog/apiv1beta1/datacatalogpb;datacatalogpb\xf8\x01\x01\xaa\x02 Google.Cloud.DataCatalog.V1Beta1\xca\x02 Google\\Cloud\\DataCatalog\\V1beta1\xea\x02#Google::Cloud::DataCatalog::V1beta1b\x06proto3"
+descriptor_data = "\n-google/cloud/datacatalog/v1beta1/common.proto\x12 google.cloud.datacatalog.v1beta1*U\n\x10IntegratedSystem\x12!\n\x1dINTEGRATED_SYSTEM_UNSPECIFIED\x10\x00\x12\x0c\n\x08\x42IGQUERY\x10\x01\x12\x10\n\x0c\x43LOUD_PUBSUB\x10\x02*j\n\x0eManagingSystem\x12\x1f\n\x1bMANAGING_SYSTEM_UNSPECIFIED\x10\x00\x12\x1c\n\x18MANAGING_SYSTEM_DATAPLEX\x10\x01\x12\x19\n\x15MANAGING_SYSTEM_OTHER\x10\x02\x42\xdc\x01\n$com.google.cloud.datacatalog.v1beta1P\x01ZFcloud.google.com/go/datacatalog/apiv1beta1/datacatalogpb;datacatalogpb\xaa\x02 Google.Cloud.DataCatalog.V1Beta1\xca\x02 Google\\Cloud\\DataCatalog\\V1beta1\xea\x02#Google::Cloud::DataCatalog::V1beta1b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
