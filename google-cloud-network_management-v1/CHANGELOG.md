@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.2.0 (2024-11-13)
+
+#### Features
+
+* add DNS endpoint of Google Kubernetes Engine cluster control plane ([#27577](https://github.com/googleapis/google-cloud-ruby/issues/27577)) 
+* add more detailed drop causes to corresponding enum 
+#### Documentation
+
+* update outdated comments 
+
 ### 1.1.0 (2024-10-28)
 
 #### Features
