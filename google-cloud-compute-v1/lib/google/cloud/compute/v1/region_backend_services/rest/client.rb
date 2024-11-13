@@ -738,7 +738,7 @@ module Google
               end
 
               ##
-              # Retrieves an aggregated list of all usable backend services in the specified project in the given region.
+              # Retrieves a list of all usable backend services in the specified project in the given region.
               #
               # @overload list_usable(request, options = nil)
               #   Pass arguments to `list_usable` via a request object, either of type

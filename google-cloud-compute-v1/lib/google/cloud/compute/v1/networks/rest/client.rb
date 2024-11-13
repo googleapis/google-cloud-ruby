@@ -830,7 +830,7 @@ module Google
               end
 
               ##
-              # Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.
+              # Patches the specified network with the data included in the request. Only routingConfig can be modified.
               #
               # @overload patch(request, options = nil)
               #   Pass arguments to `patch` via a request object, either of type
