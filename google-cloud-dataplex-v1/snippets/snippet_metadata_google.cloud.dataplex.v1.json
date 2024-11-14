@@ -2212,6 +2212,166 @@
       ]
     },
     {
+      "region_tag": "dataplex_v1_generated_CatalogService_CreateMetadataJob_sync",
+      "title": "Snippet for the create_metadata_job call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#create_metadata_job.",
+      "file": "catalog_service/create_metadata_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_metadata_job",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#create_metadata_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "CreateMetadataJob",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.CreateMetadataJob",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_GetMetadataJob_sync",
+      "title": "Snippet for the get_metadata_job call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#get_metadata_job.",
+      "file": "catalog_service/get_metadata_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_metadata_job",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#get_metadata_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::GetMetadataJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::MetadataJob",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "GetMetadataJob",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.GetMetadataJob",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_ListMetadataJobs_sync",
+      "title": "Snippet for the list_metadata_jobs call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#list_metadata_jobs.",
+      "file": "catalog_service/list_metadata_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_metadata_jobs",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#list_metadata_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "ListMetadataJobs",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.ListMetadataJobs",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_CatalogService_CancelMetadataJob_sync",
+      "title": "Snippet for the cancel_metadata_job call in the CatalogService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::CatalogService::Client#cancel_metadata_job.",
+      "file": "catalog_service/cancel_metadata_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "cancel_metadata_job",
+        "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client#cancel_metadata_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "CancelMetadataJob",
+          "full_name": "google.cloud.dataplex.v1.CatalogService.CancelMetadataJob",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.dataplex.v1.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataplex_v1_generated_ContentService_CreateContent_sync",
       "title": "Snippet for the create_content call in the ContentService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataplex::V1::ContentService::Client#create_content.",

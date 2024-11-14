@@ -293,6 +293,26 @@
               "methods": [
                 "search_entries"
               ]
+            },
+            "CreateMetadataJob": {
+              "methods": [
+                "create_metadata_job"
+              ]
+            },
+            "GetMetadataJob": {
+              "methods": [
+                "get_metadata_job"
+              ]
+            },
+            "ListMetadataJobs": {
+              "methods": [
+                "list_metadata_jobs"
+              ]
+            },
+            "CancelMetadataJob": {
+              "methods": [
+                "cancel_metadata_job"
+              ]
             }
           }
         }

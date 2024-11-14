@@ -150,6 +150,14 @@ module Google
                 uri_method: :get,
                 uri_template: "/v1/{resource}:getIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/entryLinkTypes/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/aspectTypes/[^/]+/?$}, false]
                 ],
                 body: nil
@@ -167,6 +175,38 @@ module Google
                 uri_template: "/v1/{resource}:getIamPolicy",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/governanceRules/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/categories/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/terms/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :get,
+                uri_template: "/v1/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: nil
               )
@@ -257,6 +297,14 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/entryLinkTypes/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/aspectTypes/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -274,6 +322,38 @@ module Google
                 uri_template: "/v1/{resource}:setIamPolicy",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/governanceRules/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/categories/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/terms/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: "*"
               )
@@ -364,6 +444,14 @@ module Google
                 uri_method: :post,
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/entryLinkTypes/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/aspectTypes/[^/]+/?$}, false]
                 ],
                 body: "*"
@@ -381,6 +469,38 @@ module Google
                 uri_template: "/v1/{resource}:testIamPermissions",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/governanceRules/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/categories/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/glossaries/[^/]+/terms/[^/]+/?$}, false]
+                ],
+                body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/v1/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^organizations/[^/]+/locations/[^/]+/encryptionConfigs/[^/]+/?$}, false]
                 ],
                 body: "*"
               )

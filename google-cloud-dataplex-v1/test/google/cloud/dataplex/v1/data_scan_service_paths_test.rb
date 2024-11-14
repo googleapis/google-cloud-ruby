@@ -33,6 +33,18 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientPathsTest < Minitest
     end
   end
 
+  def test_connection_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.connection_path project: "value0", location: "value1", connection: "value2"
+      assert_equal "projects/value0/locations/value1/connections/value2", path
+    end
+  end
+
   def test_data_scan_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -54,6 +66,18 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientPathsTest < Minitest
 
       path = client.data_scan_job_path project: "value0", location: "value1", data_scan: "value2", job: "value3"
       assert_equal "projects/value0/locations/value1/dataScans/value2/jobs/value3", path
+    end
+  end
+
+  def test_dataset_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dataset_path project: "value0", dataset: "value1"
+      assert_equal "projects/value0/datasets/value1", path
     end
   end
 

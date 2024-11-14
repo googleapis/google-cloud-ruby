@@ -260,10 +260,9 @@ module Google
           #     named process arguments (`--key=value`).
           # @!attribute [rw] sql_script_file
           #   @return [::String]
-          #     A reference to a query file. This can be the Cloud Storage URI of the
-          #     query file or it can the path to a SqlScript Content. The execution
-          #     args are used to declare a set of script variables
-          #     (`set key="value";`).
+          #     A reference to a query file. This should be the Cloud Storage URI of
+          #     the query file. The execution args are used to declare a set of script
+          #     variables (`set key="value";`).
           # @!attribute [rw] sql_script
           #   @return [::String]
           #     The query text.

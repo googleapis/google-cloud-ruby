@@ -276,7 +276,7 @@ module Google
         #   @return [::String]
         #     The dimension name a rule belongs to. Supported dimensions are
         #     ["COMPLETENESS", "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS",
-        #     "INTEGRITY"]
+        #     "FRESHNESS", "VOLUME"]
         class DataQualityDimension
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,7 +336,8 @@ module Google
         #   @return [::String]
         #     Required. The dimension a rule belongs to. Results are also aggregated at
         #     the dimension level. Supported dimensions are **["COMPLETENESS",
-        #     "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "INTEGRITY"]**
+        #     "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "FRESHNESS",
+        #     "VOLUME"]**
         # @!attribute [rw] threshold
         #   @return [::Float]
         #     Optional. The minimum ratio of **passing_rows / total_rows** required to
@@ -359,6 +360,10 @@ module Google
         #     Optional. Description of the rule.
         #
         #     * The maximum length is 1,024 characters.
+        # @!attribute [rw] suspended
+        #   @return [::Boolean]
+        #     Optional. Whether the Rule is active or suspended.
+        #     Default is false.
         class DataQualityRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

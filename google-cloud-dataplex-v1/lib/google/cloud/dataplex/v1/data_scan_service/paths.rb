@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the DataScanService API.
           module Paths
             ##
+            # Create a fully-qualified Connection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/connections/{connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param connection [String]
+            #
+            # @return [::String]
+            def connection_path project:, location:, connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/connections/#{connection}"
+            end
+
+            ##
             # Create a fully-qualified DataScan resource string.
             #
             # The resource will be in the following format:
@@ -62,6 +81,23 @@ module Google
               raise ::ArgumentError, "data_scan cannot contain /" if data_scan.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/dataScans/#{data_scan}/jobs/#{job}"
+            end
+
+            ##
+            # Create a fully-qualified Dataset resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/datasets/{dataset}`
+            #
+            # @param project [String]
+            # @param dataset [String]
+            #
+            # @return [::String]
+            def dataset_path project:, dataset:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/datasets/#{dataset}"
             end
 
             ##
