@@ -25,10 +25,10 @@ module Google
       module V1
         module CatalogService
           # The primary resources offered by this service are EntryGroups, EntryTypes,
-          # AspectTypes, Entry and Aspect which collectively allow a data administrator
-          # to organize, manage, secure and catalog data across their organization
-          # located across cloud projects in a variety of storage systems including Cloud
-          # Storage and BigQuery.
+          # AspectTypes, and Entries. They collectively let data administrators organize,
+          # manage, secure, and catalog data located across cloud projects in their
+          # organization in a variety of storage systems, including Cloud Storage and
+          # BigQuery.
           class Service
 
             include ::GRPC::GenericService
@@ -37,35 +37,35 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.dataplex.v1.CatalogService'
 
-            # Creates an EntryType
+            # Creates an EntryType.
             rpc :CreateEntryType, ::Google::Cloud::Dataplex::V1::CreateEntryTypeRequest, ::Google::Longrunning::Operation
-            # Updates a EntryType resource.
+            # Updates an EntryType.
             rpc :UpdateEntryType, ::Google::Cloud::Dataplex::V1::UpdateEntryTypeRequest, ::Google::Longrunning::Operation
-            # Deletes a EntryType resource.
+            # Deletes an EntryType.
             rpc :DeleteEntryType, ::Google::Cloud::Dataplex::V1::DeleteEntryTypeRequest, ::Google::Longrunning::Operation
             # Lists EntryType resources in a project and location.
             rpc :ListEntryTypes, ::Google::Cloud::Dataplex::V1::ListEntryTypesRequest, ::Google::Cloud::Dataplex::V1::ListEntryTypesResponse
-            # Retrieves a EntryType resource.
+            # Gets an EntryType.
             rpc :GetEntryType, ::Google::Cloud::Dataplex::V1::GetEntryTypeRequest, ::Google::Cloud::Dataplex::V1::EntryType
-            # Creates an AspectType
+            # Creates an AspectType.
             rpc :CreateAspectType, ::Google::Cloud::Dataplex::V1::CreateAspectTypeRequest, ::Google::Longrunning::Operation
-            # Updates a AspectType resource.
+            # Updates an AspectType.
             rpc :UpdateAspectType, ::Google::Cloud::Dataplex::V1::UpdateAspectTypeRequest, ::Google::Longrunning::Operation
-            # Deletes a AspectType resource.
+            # Deletes an AspectType.
             rpc :DeleteAspectType, ::Google::Cloud::Dataplex::V1::DeleteAspectTypeRequest, ::Google::Longrunning::Operation
             # Lists AspectType resources in a project and location.
             rpc :ListAspectTypes, ::Google::Cloud::Dataplex::V1::ListAspectTypesRequest, ::Google::Cloud::Dataplex::V1::ListAspectTypesResponse
-            # Retrieves a AspectType resource.
+            # Gets an AspectType.
             rpc :GetAspectType, ::Google::Cloud::Dataplex::V1::GetAspectTypeRequest, ::Google::Cloud::Dataplex::V1::AspectType
-            # Creates an EntryGroup
+            # Creates an EntryGroup.
             rpc :CreateEntryGroup, ::Google::Cloud::Dataplex::V1::CreateEntryGroupRequest, ::Google::Longrunning::Operation
-            # Updates a EntryGroup resource.
+            # Updates an EntryGroup.
             rpc :UpdateEntryGroup, ::Google::Cloud::Dataplex::V1::UpdateEntryGroupRequest, ::Google::Longrunning::Operation
-            # Deletes a EntryGroup resource.
+            # Deletes an EntryGroup.
             rpc :DeleteEntryGroup, ::Google::Cloud::Dataplex::V1::DeleteEntryGroupRequest, ::Google::Longrunning::Operation
             # Lists EntryGroup resources in a project and location.
             rpc :ListEntryGroups, ::Google::Cloud::Dataplex::V1::ListEntryGroupsRequest, ::Google::Cloud::Dataplex::V1::ListEntryGroupsResponse
-            # Retrieves a EntryGroup resource.
+            # Gets an EntryGroup.
             rpc :GetEntryGroup, ::Google::Cloud::Dataplex::V1::GetEntryGroupRequest, ::Google::Cloud::Dataplex::V1::EntryGroup
             # Creates an Entry.
             rpc :CreateEntry, ::Google::Cloud::Dataplex::V1::CreateEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
@@ -73,14 +73,38 @@ module Google
             rpc :UpdateEntry, ::Google::Cloud::Dataplex::V1::UpdateEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
             # Deletes an Entry.
             rpc :DeleteEntry, ::Google::Cloud::Dataplex::V1::DeleteEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
-            # Lists entries within an entry group.
+            # Lists Entries within an EntryGroup.
             rpc :ListEntries, ::Google::Cloud::Dataplex::V1::ListEntriesRequest, ::Google::Cloud::Dataplex::V1::ListEntriesResponse
-            # Gets a single entry.
+            # Gets an Entry.
+            #
+            # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
+            # changing. For more information, see [Changes to BigQuery metadata stored in
+            # Dataplex
+            # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
             rpc :GetEntry, ::Google::Cloud::Dataplex::V1::GetEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
-            # Looks up a single entry.
+            # Looks up a single Entry by name using the permission on the source system.
+            #
+            # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
+            # changing. For more information, see [Changes to BigQuery metadata stored in
+            # Dataplex
+            # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
             rpc :LookupEntry, ::Google::Cloud::Dataplex::V1::LookupEntryRequest, ::Google::Cloud::Dataplex::V1::Entry
-            # Searches for entries matching given query and scope.
+            # Searches for Entries matching the given query and scope.
             rpc :SearchEntries, ::Google::Cloud::Dataplex::V1::SearchEntriesRequest, ::Google::Cloud::Dataplex::V1::SearchEntriesResponse
+            # Creates a metadata job. For example, use a metadata job to import Dataplex
+            # Catalog entries and aspects from a third-party system into Dataplex.
+            rpc :CreateMetadataJob, ::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest, ::Google::Longrunning::Operation
+            # Gets a metadata job.
+            rpc :GetMetadataJob, ::Google::Cloud::Dataplex::V1::GetMetadataJobRequest, ::Google::Cloud::Dataplex::V1::MetadataJob
+            # Lists metadata jobs.
+            rpc :ListMetadataJobs, ::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest, ::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse
+            # Cancels a metadata job.
+            #
+            # If you cancel a metadata import job that is in progress, the changes in the
+            # job might be partially applied. We recommend that you reset the state of
+            # the entry groups in your project by running another metadata job that
+            # reverts the changes from the canceled job.
+            rpc :CancelMetadataJob, ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

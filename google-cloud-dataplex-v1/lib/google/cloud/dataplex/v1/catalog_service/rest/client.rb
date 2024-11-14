@@ -32,10 +32,10 @@ module Google
             # REST client for the CatalogService service.
             #
             # The primary resources offered by this service are EntryGroups, EntryTypes,
-            # AspectTypes, Entry and Aspect which collectively allow a data administrator
-            # to organize, manage, secure and catalog data across their organization
-            # located across cloud projects in a variety of storage systems including Cloud
-            # Storage and BigQuery.
+            # AspectTypes, and Entries. They collectively let data administrators organize,
+            # manage, secure, and catalog data located across cloud projects in their
+            # organization in a variety of storage systems, including Cloud Storage and
+            # BigQuery.
             #
             class Client
               # @private
@@ -284,7 +284,7 @@ module Google
               # Service calls
 
               ##
-              # Creates an EntryType
+              # Creates an EntryType.
               #
               # @overload create_entry_type(request, options = nil)
               #   Pass arguments to `create_entry_type` via a request object, either of type
@@ -304,14 +304,14 @@ module Google
               #   @param parent [::String]
               #     Required. The resource name of the EntryType, of the form:
               #     projects/\\{project_number}/locations/\\{location_id}
-              #     where `location_id` refers to a GCP region.
+              #     where `location_id` refers to a Google Cloud region.
               #   @param entry_type_id [::String]
               #     Required. EntryType identifier.
               #   @param entry_type [::Google::Cloud::Dataplex::V1::EntryType, ::Hash]
-              #     Required. EntryType Resource
+              #     Required. EntryType Resource.
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the request, but do not perform mutations.
-              #     The default is false.
+              #     Optional. The service validates the request without performing any
+              #     mutations. The default is false.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -380,7 +380,7 @@ module Google
               end
 
               ##
-              # Updates a EntryType resource.
+              # Updates an EntryType.
               #
               # @overload update_entry_type(request, options = nil)
               #   Pass arguments to `update_entry_type` via a request object, either of type
@@ -398,12 +398,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param entry_type [::Google::Cloud::Dataplex::V1::EntryType, ::Hash]
-              #     Required. EntryType Resource
+              #     Required. EntryType Resource.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. Mask of fields to update.
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the request, but do not perform mutations.
-              #     The default is false.
+              #     Optional. The service validates the request without performing any
+              #     mutations. The default is false.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -472,7 +472,7 @@ module Google
               end
 
               ##
-              # Deletes a EntryType resource.
+              # Deletes an EntryType.
               #
               # @overload delete_entry_type(request, options = nil)
               #   Pass arguments to `delete_entry_type` via a request object, either of type
@@ -494,7 +494,7 @@ module Google
               #     `projects/{project_number}/locations/{location_id}/entryTypes/{entry_type_id}`.
               #   @param etag [::String]
               #     Optional. If the client provided etag value does not match the current etag
-              #     value, the DeleteEntryTypeRequest method returns an ABORTED error response
+              #     value, the DeleteEntryTypeRequest method returns an ABORTED error response.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -583,27 +583,28 @@ module Google
               #   @param parent [::String]
               #     Required. The resource name of the EntryType location, of the form:
               #     `projects/{project_number}/locations/{location_id}`
-              #     where `location_id` refers to a GCP region.
+              #     where `location_id` refers to a Google Cloud region.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of EntryTypes to return. The service may return
-              #     fewer than this value. If unspecified, at most 10 EntryTypes will be
-              #     returned. The maximum value is 1000; values above 1000 will be coerced to
+              #     fewer than this value. If unspecified, the service returns at most 10
+              #     EntryTypes. The maximum value is 1000; values above 1000 will be coerced to
               #     1000.
               #   @param page_token [::String]
               #     Optional. Page token received from a previous `ListEntryTypes` call.
               #     Provide this to retrieve the subsequent page. When paginating, all other
-              #     parameters provided to `ListEntryTypes` must match the call that provided
-              #     the page token.
+              #     parameters you provided to `ListEntryTypes` must match the call that
+              #     provided the page token.
               #   @param filter [::String]
               #     Optional. Filter request. Filters are case-sensitive.
-              #     The following formats are supported:
+              #     The service supports the following formats:
               #
-              #     labels.key1 = "value1"
-              #     labels:key1
-              #     name = "value"
-              #     These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+              #     * labels.key1 = "value1"
+              #     * labels:key1
+              #     * name = "value"
+              #
+              #     These restrictions can be conjoined with AND, OR, and NOT conjunctions.
               #   @param order_by [::String]
-              #     Optional. Order by fields (`name` or `create_time`) for the result.
+              #     Optional. Orders the result by `name` or `create_time` fields.
               #     If not specified, the ordering is undefined.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::ListEntryTypesResponse]
@@ -669,7 +670,7 @@ module Google
               end
 
               ##
-              # Retrieves a EntryType resource.
+              # Gets an EntryType.
               #
               # @overload get_entry_type(request, options = nil)
               #   Pass arguments to `get_entry_type` via a request object, either of type
@@ -749,7 +750,7 @@ module Google
               end
 
               ##
-              # Creates an AspectType
+              # Creates an AspectType.
               #
               # @overload create_aspect_type(request, options = nil)
               #   Pass arguments to `create_aspect_type` via a request object, either of type
@@ -769,14 +770,14 @@ module Google
               #   @param parent [::String]
               #     Required. The resource name of the AspectType, of the form:
               #     projects/\\{project_number}/locations/\\{location_id}
-              #     where `location_id` refers to a GCP region.
+              #     where `location_id` refers to a Google Cloud region.
               #   @param aspect_type_id [::String]
               #     Required. AspectType identifier.
               #   @param aspect_type [::Google::Cloud::Dataplex::V1::AspectType, ::Hash]
-              #     Required. AspectType Resource
+              #     Required. AspectType Resource.
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the request, but do not perform mutations.
-              #     The default is false.
+              #     Optional. The service validates the request without performing any
+              #     mutations. The default is false.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -845,7 +846,7 @@ module Google
               end
 
               ##
-              # Updates a AspectType resource.
+              # Updates an AspectType.
               #
               # @overload update_aspect_type(request, options = nil)
               #   Pass arguments to `update_aspect_type` via a request object, either of type
@@ -937,7 +938,7 @@ module Google
               end
 
               ##
-              # Deletes a AspectType resource.
+              # Deletes an AspectType.
               #
               # @overload delete_aspect_type(request, options = nil)
               #   Pass arguments to `delete_aspect_type` via a request object, either of type
@@ -959,7 +960,8 @@ module Google
               #     `projects/{project_number}/locations/{location_id}/aspectTypes/{aspect_type_id}`.
               #   @param etag [::String]
               #     Optional. If the client provided etag value does not match the current etag
-              #     value, the DeleteAspectTypeRequest method returns an ABORTED error response
+              #     value, the DeleteAspectTypeRequest method returns an ABORTED error
+              #     response.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1048,27 +1050,28 @@ module Google
               #   @param parent [::String]
               #     Required. The resource name of the AspectType location, of the form:
               #     `projects/{project_number}/locations/{location_id}`
-              #     where `location_id` refers to a GCP region.
+              #     where `location_id` refers to a Google Cloud region.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of AspectTypes to return. The service may return
-              #     fewer than this value. If unspecified, at most 10 AspectTypes will be
-              #     returned. The maximum value is 1000; values above 1000 will be coerced to
-              #     1000.
+              #     fewer than this value. If unspecified, the service returns at most 10
+              #     AspectTypes. The maximum value is 1000; values above 1000 will be coerced
+              #     to 1000.
               #   @param page_token [::String]
               #     Optional. Page token received from a previous `ListAspectTypes` call.
               #     Provide this to retrieve the subsequent page. When paginating, all other
-              #     parameters provided to `ListAspectTypes` must match the call that provided
-              #     the page token.
+              #     parameters you provide to `ListAspectTypes` must match the call that
+              #     provided the page token.
               #   @param filter [::String]
               #     Optional. Filter request. Filters are case-sensitive.
-              #     The following formats are supported:
+              #     The service supports the following formats:
               #
-              #     labels.key1 = "value1"
-              #     labels:key1
-              #     name = "value"
-              #     These restrictions can be coinjoined with AND, OR and NOT conjunctions.
+              #     * labels.key1 = "value1"
+              #     * labels:key1
+              #     * name = "value"
+              #
+              #     These restrictions can be conjoined with AND, OR, and NOT conjunctions.
               #   @param order_by [::String]
-              #     Optional. Order by fields (`name` or `create_time`) for the result.
+              #     Optional. Orders the result by `name` or `create_time` fields.
               #     If not specified, the ordering is undefined.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::ListAspectTypesResponse]
@@ -1134,7 +1137,7 @@ module Google
               end
 
               ##
-              # Retrieves a AspectType resource.
+              # Gets an AspectType.
               #
               # @overload get_aspect_type(request, options = nil)
               #   Pass arguments to `get_aspect_type` via a request object, either of type
@@ -1214,7 +1217,7 @@ module Google
               end
 
               ##
-              # Creates an EntryGroup
+              # Creates an EntryGroup.
               #
               # @overload create_entry_group(request, options = nil)
               #   Pass arguments to `create_entry_group` via a request object, either of type
@@ -1238,10 +1241,10 @@ module Google
               #   @param entry_group_id [::String]
               #     Required. EntryGroup identifier.
               #   @param entry_group [::Google::Cloud::Dataplex::V1::EntryGroup, ::Hash]
-              #     Required. EntryGroup Resource
+              #     Required. EntryGroup Resource.
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the request, but do not perform mutations.
-              #     The default is false.
+              #     Optional. The service validates the request without performing any
+              #     mutations. The default is false.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1310,7 +1313,7 @@ module Google
               end
 
               ##
-              # Updates a EntryGroup resource.
+              # Updates an EntryGroup.
               #
               # @overload update_entry_group(request, options = nil)
               #   Pass arguments to `update_entry_group` via a request object, either of type
@@ -1328,12 +1331,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param entry_group [::Google::Cloud::Dataplex::V1::EntryGroup, ::Hash]
-              #     Required. EntryGroup Resource
+              #     Required. EntryGroup Resource.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. Mask of fields to update.
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the request, but do not perform mutations.
-              #     The default is false.
+              #     Optional. The service validates the request, without performing any
+              #     mutations. The default is false.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1402,7 +1405,7 @@ module Google
               end
 
               ##
-              # Deletes a EntryGroup resource.
+              # Deletes an EntryGroup.
               #
               # @overload delete_entry_group(request, options = nil)
               #   Pass arguments to `delete_entry_group` via a request object, either of type
@@ -1424,7 +1427,8 @@ module Google
               #     `projects/{project_number}/locations/{location_id}/entryGroups/{entry_group_id}`.
               #   @param etag [::String]
               #     Optional. If the client provided etag value does not match the current etag
-              #     value, the DeleteEntryGroupRequest method returns an ABORTED error response
+              #     value, the DeleteEntryGroupRequest method returns an ABORTED error
+              #     response.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1513,17 +1517,17 @@ module Google
               #   @param parent [::String]
               #     Required. The resource name of the entryGroup location, of the form:
               #     `projects/{project_number}/locations/{location_id}`
-              #     where `location_id` refers to a GCP region.
+              #     where `location_id` refers to a Google Cloud region.
               #   @param page_size [::Integer]
               #     Optional. Maximum number of EntryGroups to return. The service may return
-              #     fewer than this value. If unspecified, at most 10 EntryGroups will be
-              #     returned. The maximum value is 1000; values above 1000 will be coerced to
-              #     1000.
+              #     fewer than this value. If unspecified, the service returns at most 10
+              #     EntryGroups. The maximum value is 1000; values above 1000 will be coerced
+              #     to 1000.
               #   @param page_token [::String]
               #     Optional. Page token received from a previous `ListEntryGroups` call.
               #     Provide this to retrieve the subsequent page. When paginating, all other
-              #     parameters provided to `ListEntryGroups` must match the call that provided
-              #     the page token.
+              #     parameters you provide to `ListEntryGroups` must match the call that
+              #     provided the page token.
               #   @param filter [::String]
               #     Optional. Filter request.
               #   @param order_by [::String]
@@ -1592,7 +1596,7 @@ module Google
               end
 
               ##
-              # Retrieves a EntryGroup resource.
+              # Gets an EntryGroup.
               #
               # @overload get_entry_group(request, options = nil)
               #   Pass arguments to `get_entry_group` via a request object, either of type
@@ -1695,20 +1699,21 @@ module Google
               #   @param entry_id [::String]
               #     Required. Entry identifier. It has to be unique within an Entry Group.
               #
-              #     Entries corresponding to Google Cloud resources use Entry ID format based
-              #     on Full Resource Names
-              #     (https://cloud.google.com/apis/design/resource_names#full_resource_name).
-              #     The format is a Full Resource Name of the resource without the
-              #     prefix double slashes in the API Service Name part of Full Resource Name.
-              #     This allows retrieval of entries using their associated resource name.
+              #     Entries corresponding to Google Cloud resources use an Entry ID format
+              #     based on [full resource
+              #     names](https://cloud.google.com/apis/design/resource_names#full_resource_name).
+              #     The format is a full resource name of the resource without the
+              #     prefix double slashes in the API service name part of the full resource
+              #     name. This allows retrieval of entries using their associated resource
+              #     name.
               #
-              #     For example if the Full Resource Name of a resource is
+              #     For example, if the full resource name of a resource is
               #     `//library.googleapis.com/shelves/shelf1/books/book2`,
               #     then the suggested entry_id is
               #     `library.googleapis.com/shelves/shelf1/books/book2`.
               #
               #     It is also suggested to follow the same convention for entries
-              #     corresponding to resources from other providers or systems than Google
+              #     corresponding to resources from providers or systems other than Google
               #     Cloud.
               #
               #     The maximum size of the field is 4000 characters.
@@ -1797,28 +1802,34 @@ module Google
               #     Optional. Mask of fields to update. To update Aspects, the update_mask must
               #     contain the value "aspects".
               #
-              #     If the update_mask is empty, all modifiable fields present in the request
-              #     will be updated.
+              #     If the update_mask is empty, the service will update all modifiable fields
+              #     present in the request.
               #   @param allow_missing [::Boolean]
-              #     Optional. If set to true and the entry does not exist, it will be created.
+              #     Optional. If set to true and the entry doesn't exist, the service will
+              #     create it.
               #   @param delete_missing_aspects [::Boolean]
-              #     Optional. If set to true and the aspect_keys specify aspect ranges, any
-              #     existing aspects from that range not provided in the request will be
-              #     deleted.
+              #     Optional. If set to true and the aspect_keys specify aspect ranges, the
+              #     service deletes any existing aspects from that range that weren't provided
+              #     in the request.
               #   @param aspect_keys [::Array<::String>]
-              #     Optional. The map keys of the Aspects which should be modified. Supports
-              #     the following syntaxes:
-              #     * <aspect_type_reference> - matches aspect on given type and empty path
-              #     * <aspect_type_reference>@path - matches aspect on given type and specified
-              #     path
-              #     * <aspect_type_reference>* - matches aspects on given type for all paths
-              #     * *@path - matches aspects of all types on the given path
+              #     Optional. The map keys of the Aspects which the service should modify. It
+              #     supports the following syntaxes:
               #
-              #     Existing aspects matching the syntax will not be removed unless
+              #     * `<aspect_type_reference>` - matches an aspect of the given type and empty
+              #     path.
+              #     * `<aspect_type_reference>@path` - matches an aspect of the given type and
+              #     specified path. For example, to attach an aspect to a field that is
+              #     specified by the `schema` aspect, the path should have the format
+              #     `Schema.<field_name>`.
+              #     * `<aspect_type_reference>*` - matches aspects of the given type for all
+              #     paths.
+              #     * `*@path` - matches aspects of all types on the given path.
+              #
+              #     The service will not remove existing aspects matching the syntax unless
               #     `delete_missing_aspects` is set to true.
               #
-              #     If this field is left empty, it will be treated as specifying exactly those
-              #     Aspects present in the request.
+              #     If this field is left empty, the service treats it as specifying
+              #     exactly those Aspects present in the request.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::Entry]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1959,7 +1970,7 @@ module Google
               end
 
               ##
-              # Lists entries within an entry group.
+              # Lists Entries within an EntryGroup.
               #
               # @overload list_entries(request, options = nil)
               #   Pass arguments to `list_entries` via a request object, either of type
@@ -1980,23 +1991,35 @@ module Google
               #     Required. The resource name of the parent Entry Group:
               #     `projects/{project}/locations/{location}/entryGroups/{entry_group}`.
               #   @param page_size [::Integer]
+              #     Optional. Number of items to return per page. If there are remaining
+              #     results, the service returns a next_page_token. If unspecified, the service
+              #     returns at most 10 Entries. The maximum value is 100; values above 100 will
+              #     be coerced to 100.
               #   @param page_token [::String]
-              #     Optional. The pagination token returned by a previous request.
+              #     Optional. Page token received from a previous `ListEntries` call. Provide
+              #     this to retrieve the subsequent page.
               #   @param filter [::String]
-              #     Optional. A filter on the entries to return.
-              #     Filters are case-sensitive.
-              #     The request can be filtered by the following fields:
-              #     entry_type, entry_source.display_name.
-              #     The comparison operators are =, !=, <, >, <=, >= (strings are compared
-              #     according to lexical order)
-              #     The logical operators AND, OR, NOT can be used
-              #     in the filter. Wildcard "*" can be used, but for entry_type the full
-              #     project id or number needs to be provided. Example filter expressions:
-              #     "entry_source.display_name=AnExampleDisplayName"
-              #     "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
-              #     "entry_type=projects/example-project/locations/us/entryTypes/a* OR
-              #      entry_type=projects/another-project/locations/*"
-              #     "NOT entry_source.display_name=AnotherExampleDisplayName"
+              #     Optional. A filter on the entries to return. Filters are case-sensitive.
+              #     You can filter the request by the following fields:
+              #
+              #     * entry_type
+              #     * entry_source.display_name
+              #
+              #     The comparison operators are =, !=, <, >, <=, >=. The service compares
+              #     strings according to lexical order.
+              #
+              #     You can use the logical operators AND, OR, NOT in the filter.
+              #
+              #     You can use Wildcard "*", but for entry_type you need to provide the
+              #     full project id or number.
+              #
+              #     Example filter expressions:
+              #
+              #     * "entry_source.display_name=AnExampleDisplayName"
+              #     * "entry_type=projects/example-project/locations/global/entryTypes/example-entry_type"
+              #     * "entry_type=projects/example-project/locations/us/entryTypes/a* OR
+              #     entry_type=projects/another-project/locations/*"
+              #     * "NOT entry_source.display_name=AnotherExampleDisplayName"
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::Entry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2062,7 +2085,12 @@ module Google
               end
 
               ##
-              # Gets a single entry.
+              # Gets an Entry.
+              #
+              # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
+              # changing. For more information, see [Changes to BigQuery metadata stored in
+              # Dataplex
+              # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
               #
               # @overload get_entry(request, options = nil)
               #   Pass arguments to `get_entry` via a request object, either of type
@@ -2083,13 +2111,14 @@ module Google
               #     Required. The resource name of the Entry:
               #     `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
               #   @param view [::Google::Cloud::Dataplex::V1::EntryView]
-              #     Optional. View for controlling which parts of an entry are to be returned.
+              #     Optional. View to control which parts of an entry the service should
+              #     return.
               #   @param aspect_types [::Array<::String>]
               #     Optional. Limits the aspects returned to the provided aspect types.
-              #     Only works if the CUSTOM view is selected.
+              #     It only works for CUSTOM view.
               #   @param paths [::Array<::String>]
               #     Optional. Limits the aspects returned to those associated with the provided
-              #     paths within the Entry. Only works if the CUSTOM view is selected.
+              #     paths within the Entry. It only works for CUSTOM view.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::Entry]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2150,7 +2179,12 @@ module Google
               end
 
               ##
-              # Looks up a single entry.
+              # Looks up a single Entry by name using the permission on the source system.
+              #
+              # **Caution**: The BigQuery metadata that is stored in Dataplex Catalog is
+              # changing. For more information, see [Changes to BigQuery metadata stored in
+              # Dataplex
+              # Catalog](https://cloud.google.com/dataplex/docs/biqquery-metadata-changes).
               #
               # @overload lookup_entry(request, options = nil)
               #   Pass arguments to `lookup_entry` via a request object, either of type
@@ -2171,13 +2205,14 @@ module Google
               #     Required. The project to which the request should be attributed in the
               #     following form: `projects/{project}/locations/{location}`.
               #   @param view [::Google::Cloud::Dataplex::V1::EntryView]
-              #     Optional. View for controlling which parts of an entry are to be returned.
+              #     Optional. View to control which parts of an entry the service should
+              #     return.
               #   @param aspect_types [::Array<::String>]
               #     Optional. Limits the aspects returned to the provided aspect types.
-              #     Only works if the CUSTOM view is selected.
+              #     It only works for CUSTOM view.
               #   @param paths [::Array<::String>]
               #     Optional. Limits the aspects returned to those associated with the provided
-              #     paths within the Entry. Only works if the CUSTOM view is selected.
+              #     paths within the Entry. It only works for CUSTOM view.
               #   @param entry [::String]
               #     Required. The resource name of the Entry:
               #     `projects/{project}/locations/{location}/entryGroups/{entry_group}/entries/{entry}`.
@@ -2241,7 +2276,7 @@ module Google
               end
 
               ##
-              # Searches for entries matching given query and scope.
+              # Searches for Entries matching the given query and scope.
               #
               # @overload search_entries(request, options = nil)
               #   Pass arguments to `search_entries` via a request object, either of type
@@ -2264,15 +2299,19 @@ module Google
               #   @param query [::String]
               #     Required. The query against which entries in scope should be matched.
               #   @param page_size [::Integer]
-              #     Optional. Pagination.
+              #     Optional. Number of results in the search page. If <=0, then defaults
+              #     to 10. Max limit for page_size is 1000. Throws an invalid argument for
+              #     page_size > 1000.
               #   @param page_token [::String]
+              #     Optional. Page token received from a previous `SearchEntries` call. Provide
+              #     this to retrieve the subsequent page.
               #   @param order_by [::String]
-              #     Optional. Ordering of the results. Supported options to be added later.
+              #     Optional. Specifies the ordering of results.
               #   @param scope [::String]
-              #     Optional. The scope under which the search should be operating. Should
-              #     either be organizations/<org_id> or projects/<project_ref>. If left
-              #     unspecified, it will default to the organization where the project provided
-              #     in `name` is located.
+              #     Optional. The scope under which the search should be operating. It must
+              #     either be `organizations/<org_id>` or `projects/<project_ref>`. If it is
+              #     unspecified, it defaults to the organization where the project provided in
+              #     `name` is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Dataplex::V1::SearchEntriesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2329,6 +2368,374 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.search_entries request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a metadata job. For example, use a metadata job to import Dataplex
+              # Catalog entries and aspects from a third-party system into Dataplex.
+              #
+              # @overload create_metadata_job(request, options = nil)
+              #   Pass arguments to `create_metadata_job` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_metadata_job(parent: nil, metadata_job: nil, metadata_job_id: nil, validate_only: nil)
+              #   Pass arguments to `create_metadata_job` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the parent location, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}`
+              #   @param metadata_job [::Google::Cloud::Dataplex::V1::MetadataJob, ::Hash]
+              #     Required. The metadata job resource.
+              #   @param metadata_job_id [::String]
+              #     Optional. The metadata job ID. If not provided, a unique ID is generated
+              #     with the prefix `metadata-job-`.
+              #   @param validate_only [::Boolean]
+              #     Optional. The service validates the request without performing any
+              #     mutations. The default is false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new
+              #
+              #   # Call the create_metadata_job method.
+              #   result = client.create_metadata_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_metadata_job request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_metadata_job.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_metadata_job.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_metadata_job.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.create_metadata_job request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a metadata job.
+              #
+              # @overload get_metadata_job(request, options = nil)
+              #   Pass arguments to `get_metadata_job` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::GetMetadataJobRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::GetMetadataJobRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_metadata_job(name: nil)
+              #   Pass arguments to `get_metadata_job` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the metadata job, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::MetadataJob]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::MetadataJob]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new
+              #
+              #   # Call the get_metadata_job method.
+              #   result = client.get_metadata_job request
+              #
+              #   # The returned object is of type Google::Cloud::Dataplex::V1::MetadataJob.
+              #   p result
+              #
+              def get_metadata_job request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::GetMetadataJobRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_metadata_job.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_metadata_job.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_metadata_job.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.get_metadata_job request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists metadata jobs.
+              #
+              # @overload list_metadata_jobs(request, options = nil)
+              #   Pass arguments to `list_metadata_jobs` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_metadata_jobs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_metadata_jobs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the parent location, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}`
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of metadata jobs to return. The service might
+              #     return fewer jobs than this value. If unspecified, at most 10 jobs are
+              #     returned. The maximum value is 1,000.
+              #   @param page_token [::String]
+              #     Optional. The page token received from a previous `ListMetadataJobs` call.
+              #     Provide this token to retrieve the subsequent page of results. When
+              #     paginating, all other parameters that are provided to the
+              #     `ListMetadataJobs` request must match the call that provided the page
+              #     token.
+              #   @param filter [::String]
+              #     Optional. Filter request. Filters are case-sensitive.
+              #     The service supports the following formats:
+              #
+              #     * `labels.key1 = "value1"`
+              #     * `labels:key1`
+              #     * `name = "value"`
+              #
+              #     You can combine filters with `AND`, `OR`, and `NOT` operators.
+              #   @param order_by [::String]
+              #     Optional. The field to sort the results by, either `name` or `create_time`.
+              #     If not specified, the ordering is undefined.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new
+              #
+              #   # Call the list_metadata_jobs method.
+              #   result = client.list_metadata_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Dataplex::V1::MetadataJob.
+              #     p item
+              #   end
+              #
+              def list_metadata_jobs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_metadata_jobs.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_metadata_jobs.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_metadata_jobs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.list_metadata_jobs request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Cancels a metadata job.
+              #
+              # If you cancel a metadata import job that is in progress, the changes in the
+              # job might be partially applied. We recommend that you reset the state of
+              # the entry groups in your project by running another metadata job that
+              # reverts the changes from the canceled job.
+              #
+              # @overload cancel_metadata_job(request, options = nil)
+              #   Pass arguments to `cancel_metadata_job` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_metadata_job(name: nil)
+              #   Pass arguments to `cancel_metadata_job` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the job, in the format
+              #     `projects/{project_id_or_number}/locations/{location_id}/metadataJobs/{metadata_job_id}`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dataplex/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new
+              #
+              #   # Call the cancel_metadata_job method.
+              #   result = client.cancel_metadata_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def cancel_metadata_job request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_metadata_job.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_metadata_job.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_metadata_job.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @catalog_service_stub.cancel_metadata_job request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -2586,6 +2993,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :search_entries
+                  ##
+                  # RPC-specific configuration for `create_metadata_job`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_metadata_job
+                  ##
+                  # RPC-specific configuration for `get_metadata_job`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_metadata_job
+                  ##
+                  # RPC-specific configuration for `list_metadata_jobs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_metadata_jobs
+                  ##
+                  # RPC-specific configuration for `cancel_metadata_job`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_metadata_job
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2633,6 +3060,14 @@ module Google
                     @lookup_entry = ::Gapic::Config::Method.new lookup_entry_config
                     search_entries_config = parent_rpcs.search_entries if parent_rpcs.respond_to? :search_entries
                     @search_entries = ::Gapic::Config::Method.new search_entries_config
+                    create_metadata_job_config = parent_rpcs.create_metadata_job if parent_rpcs.respond_to? :create_metadata_job
+                    @create_metadata_job = ::Gapic::Config::Method.new create_metadata_job_config
+                    get_metadata_job_config = parent_rpcs.get_metadata_job if parent_rpcs.respond_to? :get_metadata_job
+                    @get_metadata_job = ::Gapic::Config::Method.new get_metadata_job_config
+                    list_metadata_jobs_config = parent_rpcs.list_metadata_jobs if parent_rpcs.respond_to? :list_metadata_jobs
+                    @list_metadata_jobs = ::Gapic::Config::Method.new list_metadata_jobs_config
+                    cancel_metadata_job_config = parent_rpcs.cancel_metadata_job if parent_rpcs.respond_to? :cancel_metadata_job
+                    @cancel_metadata_job = ::Gapic::Config::Method.new cancel_metadata_job_config
 
                     yield self if block_given?
                   end

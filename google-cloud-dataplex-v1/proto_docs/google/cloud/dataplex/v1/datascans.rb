@@ -340,16 +340,22 @@ module Google
         #     Output only. The type of DataScan.
         # @!attribute [rw] data_quality_spec
         #   @return [::Google::Cloud::Dataplex::V1::DataQualitySpec]
-        #     DataQualityScan related setting.
+        #     Settings for a data quality scan.
         # @!attribute [rw] data_profile_spec
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec]
-        #     DataProfileScan related setting.
+        #     Settings for a data profile scan.
+        # @!attribute [rw] data_discovery_spec
+        #   @return [::Google::Cloud::Dataplex::V1::DataDiscoverySpec]
+        #     Settings for a data discovery scan.
         # @!attribute [r] data_quality_result
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult]
-        #     Output only. The result of the data quality scan.
+        #     Output only. The result of a data quality scan.
         # @!attribute [r] data_profile_result
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult]
-        #     Output only. The result of the data profile scan.
+        #     Output only. The result of a data profile scan.
+        # @!attribute [r] data_discovery_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult]
+        #     Output only. The result of a data discovery scan.
         class DataScan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -407,6 +413,9 @@ module Google
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System generated globally unique ID for the DataScanJob.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the DataScanJob was created.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the DataScanJob was started.
@@ -424,16 +433,22 @@ module Google
         #     Output only. The type of the parent DataScan.
         # @!attribute [r] data_quality_spec
         #   @return [::Google::Cloud::Dataplex::V1::DataQualitySpec]
-        #     Output only. DataQualityScan related setting.
+        #     Output only. Settings for a data quality scan.
         # @!attribute [r] data_profile_spec
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileSpec]
-        #     Output only. DataProfileScan related setting.
+        #     Output only. Settings for a data profile scan.
+        # @!attribute [r] data_discovery_spec
+        #   @return [::Google::Cloud::Dataplex::V1::DataDiscoverySpec]
+        #     Output only. Settings for a data discovery scan.
         # @!attribute [r] data_quality_result
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityResult]
-        #     Output only. The result of the data quality scan.
+        #     Output only. The result of a data quality scan.
         # @!attribute [r] data_profile_result
         #   @return [::Google::Cloud::Dataplex::V1::DataProfileResult]
-        #     Output only. The result of the data profile scan.
+        #     Output only. The result of a data profile scan.
+        # @!attribute [r] data_discovery_result
+        #   @return [::Google::Cloud::Dataplex::V1::DataDiscoveryResult]
+        #     Output only. The result of a data discovery scan.
         class DataScanJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -463,16 +478,19 @@ module Google
           end
         end
 
-        # The type of DataScan.
+        # The type of data scan.
         module DataScanType
-          # The DataScan type is unspecified.
+          # The data scan type is unspecified.
           DATA_SCAN_TYPE_UNSPECIFIED = 0
 
-          # Data Quality scan.
+          # Data quality scan.
           DATA_QUALITY = 1
 
-          # Data Profile scan.
+          # Data profile scan.
           DATA_PROFILE = 2
+
+          # Data discovery scan.
+          DATA_DISCOVERY = 3
         end
       end
     end

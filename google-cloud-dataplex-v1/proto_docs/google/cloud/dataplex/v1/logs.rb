@@ -37,6 +37,9 @@ module Google
         # @!attribute [rw] data_location
         #   @return [::String]
         #     The data location associated with the event.
+        # @!attribute [rw] datascan_id
+        #   @return [::String]
+        #     The id of the associated datascan for standalone discovery.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::EventType]
         #     The type of the event being logged.
@@ -52,6 +55,9 @@ module Google
         # @!attribute [rw] action
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::ActionDetails]
         #     Details about the action associated with the event.
+        # @!attribute [rw] table
+        #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::TableDetails]
+        #     Details about the BigQuery table publishing associated with the event.
         class DiscoveryEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,6 +96,18 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Details about the published table.
+          # @!attribute [rw] table
+          #   @return [::String]
+          #     The fully-qualified resource name of the table resource.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::TableType]
+          #     The type of the table resource.
+          class TableDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Details about the partition.
           # @!attribute [rw] partition
           #   @return [::String]
@@ -116,6 +134,9 @@ module Google
           #   @return [::String]
           #     The type of action.
           #     Eg. IncompatibleDataSchema, InvalidDataFormat
+          # @!attribute [rw] issue
+          #   @return [::String]
+          #     The human readable issue associated with the action.
           class ActionDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,6 +167,18 @@ module Google
 
             # An event representing a partition being deleted.
             PARTITION_DELETED = 7
+
+            # An event representing a table being published.
+            TABLE_PUBLISHED = 10
+
+            # An event representing a table being updated.
+            TABLE_UPDATED = 11
+
+            # An event representing a table being skipped in publishing.
+            TABLE_IGNORED = 12
+
+            # An event representing a table being deleted.
+            TABLE_DELETED = 13
           end
 
           # The type of the entity.
@@ -158,6 +191,21 @@ module Google
 
             # Entities representing unstructured data.
             FILESET = 2
+          end
+
+          # The type of the published table.
+          module TableType
+            # An unspecified table type.
+            TABLE_TYPE_UNSPECIFIED = 0
+
+            # External table type.
+            EXTERNAL_TABLE = 1
+
+            # BigLake table type.
+            BIGLAKE_TABLE = 2
+
+            # Object table type for unstructured data.
+            OBJECT_TABLE = 3
           end
         end
 
@@ -436,7 +484,6 @@ module Google
 
         # These messages contain information about the execution of a datascan.
         # The monitored resource is 'DataScan'
-        # Next ID: 13
         # @!attribute [rw] data_source
         #   @return [::String]
         #     The data source of the data scan
@@ -646,6 +693,9 @@ module Google
 
             # Data scan for data quality.
             DATA_QUALITY = 2
+
+            # Data scan for data discovery.
+            DATA_DISCOVERY = 4
           end
 
           # The job state of the data scan.

@@ -119,6 +119,25 @@ module Google
               "projects/#{project}/locations/#{location}"
             end
 
+            ##
+            # Create a fully-qualified MetadataJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/metadataJobs/{metadata_job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param metadata_job [String]
+            #
+            # @return [::String]
+            def metadata_job_path project:, location:, metadata_job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/metadataJobs/#{metadata_job}"
+            end
+
             extend self
           end
         end

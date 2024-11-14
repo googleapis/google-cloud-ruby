@@ -1309,6 +1309,229 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     end
   end
 
+  def test_create_metadata_job
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    metadata_job = {}
+    metadata_job_id = "hello world"
+    validate_only = true
+
+    create_metadata_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_create_metadata_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_metadata_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_metadata_job({ parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_metadata_job parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_metadata_job ::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new(parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_metadata_job({ parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_metadata_job(::Google::Cloud::Dataplex::V1::CreateMetadataJobRequest.new(parent: parent, metadata_job: metadata_job, metadata_job_id: metadata_job_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_metadata_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_metadata_job
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::MetadataJob.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_metadata_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_get_metadata_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_metadata_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_metadata_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_metadata_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_metadata_job ::Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_metadata_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_metadata_job(::Google::Cloud::Dataplex::V1::GetMetadataJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_metadata_job_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_metadata_jobs
+    # Create test objects.
+    client_result = ::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_metadata_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_list_metadata_jobs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_metadata_jobs_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_metadata_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_metadata_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_metadata_jobs ::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_metadata_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_metadata_jobs(::Google::Cloud::Dataplex::V1::ListMetadataJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_metadata_jobs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_cancel_metadata_job
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    cancel_metadata_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ServiceStub.stub :transcode_cancel_metadata_job_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, cancel_metadata_job_client_stub do
+        # Create client
+        client = ::Google::Cloud::Dataplex::V1::CatalogService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.cancel_metadata_job({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.cancel_metadata_job name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.cancel_metadata_job ::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.cancel_metadata_job({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.cancel_metadata_job(::Google::Cloud::Dataplex::V1::CancelMetadataJobRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, cancel_metadata_job_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 
