@@ -424,7 +424,7 @@ module Google
         # {::Google::Cloud::DataCatalog::V1::Tag Tag}.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource name of an entry in URL format.
+        #     Output only. Identifier. The resource name of an entry in URL format.
         #
         #     Note: The entry itself and its child resources might not be
         #     stored in the location specified in its name.
@@ -542,6 +542,9 @@ module Google
         # @!attribute [rw] model_spec
         #   @return [::Google::Cloud::DataCatalog::V1::ModelSpec]
         #     Model specification.
+        # @!attribute [rw] feature_online_store_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::FeatureOnlineStoreSpec]
+        #     FeatureonlineStore spec for Vertex AI Feature Store.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of an entry.
@@ -907,6 +910,15 @@ module Google
 
             # The Model is saved or tuned from Model Garden.
             MODEL_GARDEN = 4
+
+            # The Model is saved or tuned from Genie.
+            GENIE = 5
+
+            # The Model is uploaded by text embedding finetuning pipeline.
+            CUSTOM_TEXT_EMBEDDING = 6
+
+            # The Model is saved or tuned from Marketplace.
+            MARKETPLACE = 7
           end
         end
 
@@ -1002,6 +1014,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Detail description of the source information of a Vertex Feature Online
+        # Store.
+        # @!attribute [r] storage_type
+        #   @return [::Google::Cloud::DataCatalog::V1::FeatureOnlineStoreSpec::StorageType]
+        #     Output only. Type of underelaying storage for the FeatureOnlineStore.
+        class FeatureOnlineStoreSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Type of underlaying storage type.
+          module StorageType
+            # Should not be used.
+            STORAGE_TYPE_UNSPECIFIED = 0
+
+            # Underlsying storgae is Bigtable.
+            BIGTABLE = 1
+
+            # Underlaying is optimized online server (Lightning).
+            OPTIMIZED = 2
+          end
+        end
+
         # Business Context of the entry.
         # @!attribute [rw] entry_overview
         #   @return [::Google::Cloud::DataCatalog::V1::EntryOverview]
@@ -1057,7 +1091,7 @@ module Google
         # Data Catalog {::Google::Cloud::DataCatalog::V1::Entry Entry} resources.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the entry group in URL format.
+        #     Identifier. The resource name of the entry group in URL format.
         #
         #     Note: The entry group itself and its child resources might not be
         #     stored in the location specified in its name.
@@ -1648,6 +1682,15 @@ module Google
           # For more information, see [Looker Look API]
           # (https://developers.looker.com/api/explorer/4.0/methods/Look).
           LOOK = 18
+
+          # Feature Online Store resource in Vertex AI Feature Store.
+          FEATURE_ONLINE_STORE = 19
+
+          # Feature View resource in Vertex AI Feature Store.
+          FEATURE_VIEW = 20
+
+          # Feature Group resource in Vertex AI Feature Store.
+          FEATURE_GROUP = 21
         end
       end
     end
