@@ -45,6 +45,18 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
     end
   end
 
+  def test_analysis_rule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.analysis_rule_path project: "value0", location: "value1", analysis_rule: "value2"
+      assert_equal "projects/value0/locations/value1/analysisRules/value2", path
+    end
+  end
+
   def test_conversation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -78,6 +90,18 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
       path = client.encryption_spec_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1/encryptionSpec", path
+    end
+  end
+
+  def test_feedback_label_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.feedback_label_path project: "value0", location: "value1", conversation: "value2", feedback_label: "value3"
+      assert_equal "projects/value0/locations/value1/conversations/value2/feedbackLabels/value3", path
     end
   end
 
@@ -141,6 +165,54 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
 
       path = client.phrase_matcher_path project: "value0", location: "value1", phrase_matcher: "value2"
       assert_equal "projects/value0/locations/value1/phraseMatchers/value2", path
+    end
+  end
+
+  def test_qa_question_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.qa_question_path project: "value0", location: "value1", qa_scorecard: "value2", revision: "value3", qa_question: "value4"
+      assert_equal "projects/value0/locations/value1/qaScorecards/value2/revisions/value3/qaQuestions/value4", path
+    end
+  end
+
+  def test_qa_scorecard_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.qa_scorecard_path project: "value0", location: "value1", qa_scorecard: "value2"
+      assert_equal "projects/value0/locations/value1/qaScorecards/value2", path
+    end
+  end
+
+  def test_qa_scorecard_result_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.qa_scorecard_result_path project: "value0", location: "value1", qa_scorecard_result: "value2"
+      assert_equal "projects/value0/locations/value1/qaScorecardResults/value2", path
+    end
+  end
+
+  def test_qa_scorecard_revision_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.qa_scorecard_revision_path project: "value0", location: "value1", qa_scorecard: "value2", revision: "value3"
+      assert_equal "projects/value0/locations/value1/qaScorecards/value2/revisions/value3", path
     end
   end
 

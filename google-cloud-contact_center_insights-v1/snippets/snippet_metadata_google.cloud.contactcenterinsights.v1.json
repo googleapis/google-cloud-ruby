@@ -1452,6 +1452,206 @@
       ]
     },
     {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateAnalysisRule_sync",
+      "title": "Snippet for the create_analysis_rule call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_analysis_rule.",
+      "file": "contact_center_insights/create_analysis_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_analysis_rule",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_analysis_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::AnalysisRule",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateAnalysisRule",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateAnalysisRule",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetAnalysisRule_sync",
+      "title": "Snippet for the get_analysis_rule call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_analysis_rule.",
+      "file": "contact_center_insights/get_analysis_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_analysis_rule",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_analysis_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::AnalysisRule",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "GetAnalysisRule",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetAnalysisRule",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListAnalysisRules_sync",
+      "title": "Snippet for the list_analysis_rules call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_analysis_rules.",
+      "file": "contact_center_insights/list_analysis_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_analysis_rules",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_analysis_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesResponse",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ListAnalysisRules",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListAnalysisRules",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateAnalysisRule_sync",
+      "title": "Snippet for the update_analysis_rule call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_analysis_rule.",
+      "file": "contact_center_insights/update_analysis_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_analysis_rule",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_analysis_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::AnalysisRule",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "UpdateAnalysisRule",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateAnalysisRule",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteAnalysisRule_sync",
+      "title": "Snippet for the delete_analysis_rule call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_analysis_rule.",
+      "file": "contact_center_insights/delete_analysis_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_analysis_rule",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_analysis_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteAnalysisRule",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteAnalysisRule",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetEncryptionSpec_sync",
       "title": "Snippet for the get_encryption_spec call in the ContactCenterInsights service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_encryption_spec.",
@@ -1727,6 +1927,1046 @@
         {
           "start": 20,
           "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_QueryMetrics_sync",
+      "title": "Snippet for the query_metrics call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#query_metrics.",
+      "file": "contact_center_insights/query_metrics.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_metrics",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#query_metrics",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "QueryMetrics",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.QueryMetrics",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateQaQuestion_sync",
+      "title": "Snippet for the create_qa_question call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_qa_question.",
+      "file": "contact_center_insights/create_qa_question.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_qa_question",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_qa_question",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaQuestion",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateQaQuestion",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateQaQuestion",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetQaQuestion_sync",
+      "title": "Snippet for the get_qa_question call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_qa_question.",
+      "file": "contact_center_insights/get_qa_question.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_qa_question",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_qa_question",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaQuestion",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "GetQaQuestion",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetQaQuestion",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateQaQuestion_sync",
+      "title": "Snippet for the update_qa_question call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_qa_question.",
+      "file": "contact_center_insights/update_qa_question.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_qa_question",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_qa_question",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaQuestion",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "UpdateQaQuestion",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateQaQuestion",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteQaQuestion_sync",
+      "title": "Snippet for the delete_qa_question call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_qa_question.",
+      "file": "contact_center_insights/delete_qa_question.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_qa_question",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_qa_question",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteQaQuestion",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteQaQuestion",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListQaQuestions_sync",
+      "title": "Snippet for the list_qa_questions call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_qa_questions.",
+      "file": "contact_center_insights/list_qa_questions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_qa_questions",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_qa_questions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsResponse",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ListQaQuestions",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListQaQuestions",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateQaScorecard_sync",
+      "title": "Snippet for the create_qa_scorecard call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_qa_scorecard.",
+      "file": "contact_center_insights/create_qa_scorecard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_qa_scorecard",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_qa_scorecard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecard",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateQaScorecard",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateQaScorecard",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetQaScorecard_sync",
+      "title": "Snippet for the get_qa_scorecard call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_qa_scorecard.",
+      "file": "contact_center_insights/get_qa_scorecard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_qa_scorecard",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_qa_scorecard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecard",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "GetQaScorecard",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetQaScorecard",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateQaScorecard_sync",
+      "title": "Snippet for the update_qa_scorecard call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_qa_scorecard.",
+      "file": "contact_center_insights/update_qa_scorecard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_qa_scorecard",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_qa_scorecard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecard",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "UpdateQaScorecard",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateQaScorecard",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteQaScorecard_sync",
+      "title": "Snippet for the delete_qa_scorecard call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_qa_scorecard.",
+      "file": "contact_center_insights/delete_qa_scorecard.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_qa_scorecard",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_qa_scorecard",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteQaScorecard",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteQaScorecard",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListQaScorecards_sync",
+      "title": "Snippet for the list_qa_scorecards call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_qa_scorecards.",
+      "file": "contact_center_insights/list_qa_scorecards.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_qa_scorecards",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_qa_scorecards",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsResponse",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ListQaScorecards",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListQaScorecards",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateQaScorecardRevision_sync",
+      "title": "Snippet for the create_qa_scorecard_revision call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_qa_scorecard_revision.",
+      "file": "contact_center_insights/create_qa_scorecard_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_qa_scorecard_revision",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_qa_scorecard_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateQaScorecardRevision",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateQaScorecardRevision",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetQaScorecardRevision_sync",
+      "title": "Snippet for the get_qa_scorecard_revision call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_qa_scorecard_revision.",
+      "file": "contact_center_insights/get_qa_scorecard_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_qa_scorecard_revision",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_qa_scorecard_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "GetQaScorecardRevision",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetQaScorecardRevision",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_TuneQaScorecardRevision_sync",
+      "title": "Snippet for the tune_qa_scorecard_revision call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#tune_qa_scorecard_revision.",
+      "file": "contact_center_insights/tune_qa_scorecard_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "tune_qa_scorecard_revision",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#tune_qa_scorecard_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "TuneQaScorecardRevision",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.TuneQaScorecardRevision",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeployQaScorecardRevision_sync",
+      "title": "Snippet for the deploy_qa_scorecard_revision call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#deploy_qa_scorecard_revision.",
+      "file": "contact_center_insights/deploy_qa_scorecard_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deploy_qa_scorecard_revision",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#deploy_qa_scorecard_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeployQaScorecardRevision",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeployQaScorecardRevision",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UndeployQaScorecardRevision_sync",
+      "title": "Snippet for the undeploy_qa_scorecard_revision call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#undeploy_qa_scorecard_revision.",
+      "file": "contact_center_insights/undeploy_qa_scorecard_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undeploy_qa_scorecard_revision",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#undeploy_qa_scorecard_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "UndeployQaScorecardRevision",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UndeployQaScorecardRevision",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteQaScorecardRevision_sync",
+      "title": "Snippet for the delete_qa_scorecard_revision call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_qa_scorecard_revision.",
+      "file": "contact_center_insights/delete_qa_scorecard_revision.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_qa_scorecard_revision",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_qa_scorecard_revision",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteQaScorecardRevision",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteQaScorecardRevision",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListQaScorecardRevisions_sync",
+      "title": "Snippet for the list_qa_scorecard_revisions call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_qa_scorecard_revisions.",
+      "file": "contact_center_insights/list_qa_scorecard_revisions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_qa_scorecard_revisions",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_qa_scorecard_revisions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsResponse",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ListQaScorecardRevisions",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListQaScorecardRevisions",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateFeedbackLabel_sync",
+      "title": "Snippet for the create_feedback_label call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_feedback_label.",
+      "file": "contact_center_insights/create_feedback_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_feedback_label",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_feedback_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateFeedbackLabel",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateFeedbackLabel",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListFeedbackLabels_sync",
+      "title": "Snippet for the list_feedback_labels call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_feedback_labels.",
+      "file": "contact_center_insights/list_feedback_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_feedback_labels",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_feedback_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsResponse",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ListFeedbackLabels",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListFeedbackLabels",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetFeedbackLabel_sync",
+      "title": "Snippet for the get_feedback_label call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_feedback_label.",
+      "file": "contact_center_insights/get_feedback_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_feedback_label",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_feedback_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "GetFeedbackLabel",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.GetFeedbackLabel",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateFeedbackLabel_sync",
+      "title": "Snippet for the update_feedback_label call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_feedback_label.",
+      "file": "contact_center_insights/update_feedback_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_feedback_label",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_feedback_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "UpdateFeedbackLabel",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateFeedbackLabel",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteFeedbackLabel_sync",
+      "title": "Snippet for the delete_feedback_label call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_feedback_label.",
+      "file": "contact_center_insights/delete_feedback_label.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_feedback_label",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_feedback_label",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteFeedbackLabel",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteFeedbackLabel",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListAllFeedbackLabels_sync",
+      "title": "Snippet for the list_all_feedback_labels call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_all_feedback_labels.",
+      "file": "contact_center_insights/list_all_feedback_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_all_feedback_labels",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_all_feedback_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsResponse",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "ListAllFeedbackLabels",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.ListAllFeedbackLabels",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkUploadFeedbackLabels_sync",
+      "title": "Snippet for the bulk_upload_feedback_labels call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_upload_feedback_labels.",
+      "file": "contact_center_insights/bulk_upload_feedback_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_upload_feedback_labels",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_upload_feedback_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "BulkUploadFeedbackLabels",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkUploadFeedbackLabels",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkDownloadFeedbackLabels_sync",
+      "title": "Snippet for the bulk_download_feedback_labels call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_download_feedback_labels.",
+      "file": "contact_center_insights/bulk_download_feedback_labels.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "bulk_download_feedback_labels",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_download_feedback_labels",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "BulkDownloadFeedbackLabels",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.BulkDownloadFeedbackLabels",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]

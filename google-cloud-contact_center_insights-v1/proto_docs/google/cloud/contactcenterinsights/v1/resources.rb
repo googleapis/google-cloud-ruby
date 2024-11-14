@@ -59,16 +59,16 @@ module Google
         #     the conversation.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     A map for the user to specify any custom fields. A maximum of 20 labels per
-        #     conversation is allowed, with a maximum of 256 characters per entry.
+        #     A map for the user to specify any custom fields. A maximum of 100 labels
+        #     per conversation is allowed, with a maximum of 256 characters per entry.
         # @!attribute [rw] quality_metadata
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::QualityMetadata]
         #     Conversation metadata related to quality management.
         # @!attribute [rw] metadata_json
         #   @return [::String]
-        #     Input only. JSON Metadata encoded as a string.
+        #     Input only. JSON metadata encoded as a string.
         #     This field is primarily used by Insights integrations with various telphony
-        #     systems and must be in one of Insights' supported formats.
+        #     systems and must be in one of Insight's supported formats.
         # @!attribute [r] transcript
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation::Transcript]
         #     Output only. The conversation transcript.
@@ -363,6 +363,9 @@ module Google
           # @!attribute [rw] issue_model_result
           #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModelResult]
           #     Overall conversation-level issue modeling result.
+          # @!attribute [rw] qa_scorecard_results
+          #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaScorecardResult>]
+          #     Results of scoring QaScorecards.
           class CallAnalysisMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -405,6 +408,32 @@ module Google
         #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::IssueAssignment>]
         #     All the matched issues.
         class IssueModelResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a conversation, resource, and label provided by the user.
+        # @!attribute [rw] label
+        #   @return [::String]
+        #     String label.
+        # @!attribute [rw] qa_answer_label
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::QaAnswer::AnswerValue]
+        #     QaAnswer label.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. Resource name of the FeedbackLabel.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/conversations/\\{conversation}/feedbackLabels/\\{feedback_label}
+        # @!attribute [rw] labeled_resource
+        #   @return [::String]
+        #     Resource name of the resource to be labeled.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Create time of the label.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Update time of the label.
+        class FeedbackLabel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1121,8 +1150,52 @@ module Google
           end
         end
 
+        # The CCAI Insights project wide analysis rule. This rule will be applied to
+        # all conversations that match the filter defined in the rule. For a
+        # conversation matches the filter, the annotators specified in the rule will be
+        # run. If a conversation matches multiple rules, a union of all the annotators
+        # will be run. One project can have multiple analysis rules.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the analysis rule.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/analysisRules/\\{analysis_rule}
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which this analysis rule was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time at which this analysis rule was updated.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Display Name of the analysis rule.
+        # @!attribute [rw] conversation_filter
+        #   @return [::String]
+        #     Filter for the conversations that should apply this analysis
+        #     rule. An empty filter means this analysis rule applies to all
+        #     conversations.
+        # @!attribute [rw] annotator_selector
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector]
+        #     Selector of annotators to run and the phrase matchers to use for
+        #     conversations that matches the conversation_filter. If not specified, NO
+        #     annotators will be run.
+        # @!attribute [rw] analysis_percentage
+        #   @return [::Float]
+        #     Percentage of conversations that we should apply this analysis setting
+        #     automatically, between [0, 1]. For example, 0.1 means 10%. Conversations
+        #     are sampled in a determenestic way. The original runtime_percentage &
+        #     upload percentage will be replaced by defining filters on the conversation.
+        # @!attribute [rw] active
+        #   @return [::Boolean]
+        #     If true, apply this rule to conversations. Otherwise, this rule is
+        #     inactive and saved as a draft.
+        class AnalysisRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A customer-managed encryption key specification that can be applied to all
-        # created resources (e.g. Conversation).
+        # created resources (e.g. `Conversation`).
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name of the encryption key specification resource.
@@ -1132,8 +1205,8 @@ module Google
         #   @return [::String]
         #     Required. The name of customer-managed encryption key that is used to
         #     secure a resource and its sub-resources. If empty, the resource is secured
-        #     by the default Google encryption key. Only the key in the same location as
-        #     this resource is allowed to be used for encryption. Format:
+        #     by our default encryption key. Only the key in the same location as this
+        #     resource is allowed to be used for encryption. Format:
         #     `projects/{project}/locations/{location}/keyRings/{keyRing}/cryptoKeys/{key}`
         class EncryptionSpec
           include ::Google::Protobuf::MessageExts
@@ -1599,6 +1672,12 @@ module Google
         # @!attribute [rw] summarization_config
         #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::SummarizationConfig]
         #     Configuration for the summarization annotator.
+        # @!attribute [rw] run_qa_annotator
+        #   @return [::Boolean]
+        #     Whether to run the QA annotator.
+        # @!attribute [rw] qa_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::QaConfig]
+        #     Configuration for the QA annotator.
         class AnnotatorSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1628,6 +1707,416 @@ module Google
               BASELINE_MODEL_V2_0 = 2
             end
           end
+
+          # Configuration for the QA feature.
+          # @!attribute [rw] scorecard_list
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::QaConfig::ScorecardList]
+          #     A manual list of scorecards to score.
+          class QaConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Container for a list of scorecards.
+            # @!attribute [rw] qa_scorecard_revisions
+            #   @return [::Array<::String>]
+            #     List of QaScorecardRevisions.
+            class ScorecardList
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # A single question to be scored by the Insights QA feature.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The resource name of the question.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/qaScorecards/\\{qa_scorecard}/revisions/\\{revision}/qaQuestions/\\{qa_question}
+        # @!attribute [rw] abbreviation
+        #   @return [::String]
+        #     Short, descriptive string, used in the UI where it's not practical
+        #     to display the full question body. E.g., "Greeting".
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which this question was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time at which the question was updated.
+        # @!attribute [rw] question_body
+        #   @return [::String]
+        #     Question text. E.g., "Did the agent greet the customer?"
+        # @!attribute [rw] answer_instructions
+        #   @return [::String]
+        #     Instructions describing how to determine the answer.
+        # @!attribute [rw] answer_choices
+        #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaQuestion::AnswerChoice>]
+        #     A list of valid answers to the question, which the LLM must choose from.
+        # @!attribute [rw] tags
+        #   @return [::Array<::String>]
+        #     User-defined list of arbitrary tags for the question. Used for
+        #     grouping/organization and for weighting the score of each question.
+        # @!attribute [rw] order
+        #   @return [::Integer]
+        #     Defines the order of the question within its parent scorecard revision.
+        # @!attribute [rw] metrics
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::QaQuestion::Metrics]
+        #     Metrics of the underlying tuned LLM over a holdout/test set while fine
+        #     tuning the underlying LLM for the given question. This field will only be
+        #     populated if and only if the question is part of a scorecard revision that
+        #     has been tuned.
+        # @!attribute [rw] tuning_metadata
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::QaQuestion::TuningMetadata]
+        #     Metadata about the tuning operation for the question.This field will only
+        #     be populated if and only if the question is part of a scorecard revision
+        #     that has been tuned.
+        class QaQuestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message representing a possible answer to the question.
+          # @!attribute [rw] str_value
+          #   @return [::String]
+          #     String value.
+          # @!attribute [rw] num_value
+          #   @return [::Float]
+          #     Numerical value.
+          # @!attribute [rw] bool_value
+          #   @return [::Boolean]
+          #     Boolean value.
+          # @!attribute [rw] na_value
+          #   @return [::Boolean]
+          #     A value of "Not Applicable (N/A)". If provided, this field may only
+          #     be set to `true`. If a question receives this answer, it will be
+          #     excluded from any score calculations.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     A short string used as an identifier.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     Numerical score of the answer, used for generating the overall score of
+          #     a QaScorecardResult. If the answer uses na_value, this field is unused.
+          class AnswerChoice
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A wrapper representing metrics calculated against a test-set on a LLM that
+          # was fine tuned for this question.
+          # @!attribute [r] accuracy
+          #   @return [::Float]
+          #     Output only. Accuracy of the model. Measures the percentage of correct
+          #     answers the model gave on the test set.
+          class Metrics
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata about the tuning operation for the question. Will only be set if a
+          # scorecard containing this question has been tuned.
+          # @!attribute [rw] total_valid_label_count
+          #   @return [::Integer]
+          #     Total number of valid labels provided for the question at the time of
+          #     tuining.
+          # @!attribute [rw] dataset_validation_warnings
+          #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::DatasetValidationWarning>]
+          #     A list of any applicable data validation warnings about the question's
+          #     feedback labels.
+          # @!attribute [rw] tuning_error
+          #   @return [::String]
+          #     Error status of the tuning operation for the question. Will only be set
+          #     if the tuning operation failed.
+          class TuningMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A QaScorecard represents a collection of questions to be scored during
+        # analysis.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The scorecard name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/qaScorecards/\\{qa_scorecard}
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The user-specified display name of the scorecard.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     A text description explaining the intent of the scorecard.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which this scorecard was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time at which the scorecard was updated.
+        class QaScorecard
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A revision of a QaScorecard.
+        #
+        # Modifying published scorecard fields would invalidate existing scorecard
+        # results — the questions may have changed, or the score weighting will make
+        # existing scores impossible to understand. So changes must create a new
+        # revision, rather than modifying the existing resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the scorecard revision.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/qaScorecards/\\{qa_scorecard}/revisions/\\{revision}
+        # @!attribute [rw] snapshot
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+        #     The snapshot of the scorecard at the time of this revision's creation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the revision was created.
+        # @!attribute [r] alternate_ids
+        #   @return [::Array<::String>]
+        #     Output only. Alternative IDs for this revision of the scorecard, e.g.,
+        #     `latest`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision::State]
+        #     Output only. State of the scorecard revision, indicating whether it's ready
+        #     to be used in analysis.
+        class QaScorecardRevision
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum representing the set of states a scorecard revision may be in.
+          module State
+            # Unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The scorecard revision can be edited.
+            EDITABLE = 12
+
+            # Scorecard model training is in progress.
+            TRAINING = 2
+
+            # Scorecard revision model training failed.
+            TRAINING_FAILED = 9
+
+            # The revision can be used in analysis.
+            READY = 11
+
+            # Scorecard is being deleted.
+            DELETING = 7
+
+            # Scorecard model training was explicitly cancelled by the user.
+            TRAINING_CANCELLED = 14
+          end
+        end
+
+        # An answer to a QaQuestion.
+        # @!attribute [rw] qa_question
+        #   @return [::String]
+        #     The QaQuestion answered by this answer.
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     The conversation the answer applies to.
+        # @!attribute [rw] question_body
+        #   @return [::String]
+        #     Question text. E.g., "Did the agent greet the customer?"
+        # @!attribute [rw] answer_value
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::QaAnswer::AnswerValue]
+        #     The main answer value, incorporating any manual edits if they exist.
+        # @!attribute [rw] tags
+        #   @return [::Array<::String>]
+        #     User-defined list of arbitrary tags. Matches the value from
+        #     QaScorecard.ScorecardQuestion.tags. Used for grouping/organization and
+        #     for weighting the score of each answer.
+        # @!attribute [rw] answer_sources
+        #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaAnswer::AnswerSource>]
+        #     List of all individual answers given to the question.
+        class QaAnswer
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message for holding the value of a
+          # {::Google::Cloud::ContactCenterInsights::V1::QaAnswer QaAnswer}.
+          # {::Google::Cloud::ContactCenterInsights::V1::QaQuestion::AnswerChoice QaQuestion.AnswerChoice}
+          # defines the possible answer values for a question.
+          # @!attribute [rw] str_value
+          #   @return [::String]
+          #     String value.
+          # @!attribute [rw] num_value
+          #   @return [::Float]
+          #     Numerical value.
+          # @!attribute [rw] bool_value
+          #   @return [::Boolean]
+          #     Boolean value.
+          # @!attribute [rw] na_value
+          #   @return [::Boolean]
+          #     A value of "Not Applicable (N/A)". Should only ever be `true`.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     A short string used as an identifier. Matches the value used in
+          #     QaQuestion.AnswerChoice.key.
+          # @!attribute [r] score
+          #   @return [::Float]
+          #     Output only. Numerical score of the answer.
+          # @!attribute [r] potential_score
+          #   @return [::Float]
+          #     Output only. The maximum potential score of the question.
+          # @!attribute [r] normalized_score
+          #   @return [::Float]
+          #     Output only. Normalized score of the questions. Calculated as score /
+          #     potential_score.
+          class AnswerValue
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A question may have multiple answers from varying sources, one of which
+          # becomes the "main" answer above. AnswerSource represents each individual
+          # answer.
+          # @!attribute [rw] source_type
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::QaAnswer::AnswerSource::SourceType]
+          #     What created the answer.
+          # @!attribute [rw] answer_value
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::QaAnswer::AnswerValue]
+          #     The answer value from this source.
+          class AnswerSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # What created the answer.
+            module SourceType
+              # Source type is unspecified.
+              SOURCE_TYPE_UNSPECIFIED = 0
+
+              # Answer was system-generated; created during an Insights analysis.
+              SYSTEM_GENERATED = 1
+
+              # Answer was created by a human via manual edit.
+              MANUAL_EDIT = 2
+            end
+          end
+        end
+
+        # The results of scoring a single conversation against a QaScorecard. Contains
+        # a collection of QaAnswers and aggregate score.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The name of the scorecard result.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/qaScorecardResults/\\{qa_scorecard_result}
+        # @!attribute [rw] qa_scorecard_revision
+        #   @return [::String]
+        #     The QaScorecardRevision scored by this result.
+        # @!attribute [rw] conversation
+        #   @return [::String]
+        #     The conversation scored by this result.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the revision was created.
+        # @!attribute [rw] agent_id
+        #   @return [::String]
+        #     ID of the agent that handled the conversation.
+        # @!attribute [rw] qa_answers
+        #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaAnswer>]
+        #     Set of QaAnswers represented in the result.
+        # @!attribute [rw] score
+        #   @return [::Float]
+        #     The overall numerical score of the result, incorporating any manual edits
+        #     if they exist.
+        # @!attribute [rw] potential_score
+        #   @return [::Float]
+        #     The maximum potential overall score of the scorecard. Any questions
+        #     answered using `na_value` are excluded from this calculation.
+        # @!attribute [rw] normalized_score
+        #   @return [::Float]
+        #     The normalized score, which is the score divided by the potential score.
+        #     Any manual edits are included if they exist.
+        # @!attribute [rw] qa_tag_results
+        #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaScorecardResult::QaTagResult>]
+        #     Collection of tags and their scores.
+        # @!attribute [rw] score_sources
+        #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaScorecardResult::ScoreSource>]
+        #     List of all individual score sets.
+        class QaScorecardResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Tags and their corresponding results.
+          # @!attribute [rw] tag
+          #   @return [::String]
+          #     The tag the score applies to.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The score the tag applies to.
+          # @!attribute [rw] potential_score
+          #   @return [::Float]
+          #     The potential score the tag applies to.
+          # @!attribute [rw] normalized_score
+          #   @return [::Float]
+          #     The normalized score the tag applies to.
+          class QaTagResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A scorecard result may have multiple sets of scores from varying sources,
+          # one of which becomes the "main" answer above. A ScoreSource represents
+          # each individual set of scores.
+          # @!attribute [rw] source_type
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecardResult::ScoreSource::SourceType]
+          #     What created the score.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     The overall numerical score of the result.
+          # @!attribute [rw] potential_score
+          #   @return [::Float]
+          #     The maximum potential overall score of the scorecard. Any questions
+          #     answered using `na_value` are excluded from this calculation.
+          # @!attribute [rw] normalized_score
+          #   @return [::Float]
+          #     The normalized score, which is the score divided by the potential score.
+          # @!attribute [rw] qa_tag_results
+          #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::QaScorecardResult::QaTagResult>]
+          #     Collection of tags and their scores.
+          class ScoreSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # What created the score.
+            module SourceType
+              # Source type is unspecified.
+              SOURCE_TYPE_UNSPECIFIED = 0
+
+              # Score is derived only from system-generated answers.
+              SYSTEM_GENERATED_ONLY = 1
+
+              # Score is derived from both system-generated answers, and includes
+              # any manual edits if they exist.
+              INCLUDES_MANUAL_EDITS = 2
+            end
+          end
+        end
+
+        # Enum for the different types of issues a tuning dataset can have.
+        # These warnings are currentlyraised when trying to validate a dataset for
+        # tuning a scorecard.
+        module DatasetValidationWarning
+          # Unspecified data validation warning.
+          DATASET_VALIDATION_WARNING_UNSPECIFIED = 0
+
+          # A non-trivial percentage of the feedback labels are invalid.
+          TOO_MANY_INVALID_FEEDBACK_LABELS = 1
+
+          # The quantity of valid feedback labels provided is less than the
+          # recommended minimum.
+          INSUFFICIENT_FEEDBACK_LABELS = 2
+
+          # One or more of the answers have less than the recommended minimum of
+          # feedback labels.
+          INSUFFICIENT_FEEDBACK_LABELS_PER_ANSWER = 3
+
+          # All the labels in the dataset come from a single answer choice.
+          ALL_FEEDBACK_LABELS_HAVE_THE_SAME_ANSWER = 4
         end
       end
     end

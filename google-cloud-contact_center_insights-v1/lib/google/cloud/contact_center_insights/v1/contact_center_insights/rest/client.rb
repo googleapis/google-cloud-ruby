@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/contactcenterinsights/v1/contact_center_insights_pb"
 require "google/cloud/contact_center_insights/v1/contact_center_insights/rest/service_stub"
+require "google/iam/v1/rest"
 
 module Google
   module Cloud
@@ -164,6 +165,13 @@ module Google
                   universe_domain: @config.universe_domain,
                   credentials: credentials
                 )
+
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @contact_center_insights_stub.endpoint
+                  config.universe_domain = @contact_center_insights_stub.universe_domain
+                end
               end
 
               ##
@@ -172,6 +180,13 @@ module Google
               # @return [::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the IAMPolicy.
+              #
+              # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
+              #
+              attr_reader :iam_policy_client
 
               # Service calls
 
@@ -3313,6 +3328,424 @@ module Google
               end
 
               ##
+              # Creates a analysis rule.
+              #
+              # @overload create_analysis_rule(request, options = nil)
+              #   Pass arguments to `create_analysis_rule` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_analysis_rule(parent: nil, analysis_rule: nil)
+              #   Pass arguments to `create_analysis_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the analysis rule. Required. The location
+              #     to create a analysis rule for. Format: `projects/<Project
+              #     ID>/locations/<Location ID>` or `projects/<Project
+              #     Number>/locations/<Location ID>`
+              #   @param analysis_rule [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule, ::Hash]
+              #     Required. The analysis rule resource to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new
+              #
+              #   # Call the create_analysis_rule method.
+              #   result = client.create_analysis_rule request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::AnalysisRule.
+              #   p result
+              #
+              def create_analysis_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_analysis_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_analysis_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_analysis_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.create_analysis_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get a analysis rule.
+              #
+              # @overload get_analysis_rule(request, options = nil)
+              #   Pass arguments to `get_analysis_rule` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_analysis_rule(name: nil)
+              #   Pass arguments to `get_analysis_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the AnalysisRule to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new
+              #
+              #   # Call the get_analysis_rule method.
+              #   result = client.get_analysis_rule request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::AnalysisRule.
+              #   p result
+              #
+              def get_analysis_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_analysis_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_analysis_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_analysis_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.get_analysis_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists analysis rules.
+              #
+              # @overload list_analysis_rules(request, options = nil)
+              #   Pass arguments to `list_analysis_rules` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_analysis_rules(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_analysis_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the analysis rules.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of analysis rule to return in the response. If
+              #     this value is zero, the service will select a default size. A call may
+              #     return fewer objects than requested. A non-empty `next_page_token` in the
+              #     response indicates that more data is available.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last `ListAnalysisRulesResponse`;
+              #     indicates that this is a continuation of a prior `ListAnalysisRules` call
+              #     and the system should return the next page of data.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::AnalysisRule>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::AnalysisRule>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new
+              #
+              #   # Call the list_analysis_rules method.
+              #   result = client.list_analysis_rules request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule.
+              #     p item
+              #   end
+              #
+              def list_analysis_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_analysis_rules.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_analysis_rules.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_analysis_rules.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.list_analysis_rules request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_analysis_rules, "analysis_rules", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a analysis rule.
+              #
+              # @overload update_analysis_rule(request, options = nil)
+              #   Pass arguments to `update_analysis_rule` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_analysis_rule(analysis_rule: nil, update_mask: nil)
+              #   Pass arguments to `update_analysis_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param analysis_rule [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule, ::Hash]
+              #     Required. The new analysis rule.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. The list of fields to be updated.
+              #     If the update_mask is not provided, the update will be applied to all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::AnalysisRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new
+              #
+              #   # Call the update_analysis_rule method.
+              #   result = client.update_analysis_rule request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::AnalysisRule.
+              #   p result
+              #
+              def update_analysis_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_analysis_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_analysis_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_analysis_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.update_analysis_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a analysis rule.
+              #
+              # @overload delete_analysis_rule(request, options = nil)
+              #   Pass arguments to `delete_analysis_rule` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_analysis_rule(name: nil)
+              #   Pass arguments to `delete_analysis_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the analysis rule to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new
+              #
+              #   # Call the delete_analysis_rule method.
+              #   result = client.delete_analysis_rule request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_analysis_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_analysis_rule.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_analysis_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_analysis_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.delete_analysis_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets location-level encryption key specification.
               #
               # @overload get_encryption_spec(request, options = nil)
@@ -3392,9 +3825,9 @@ module Google
               end
 
               ##
-              # Initializes a location-level encryption key specification.  An error will
-              # be thrown if the location has resources already created before the
-              # initialization. Once the encryption specification is initialized at a
+              # Initializes a location-level encryption key specification. An error will
+              # result if the location has resources already created before the
+              # initialization. After the encryption specification is initialized at a
               # location, it is immutable and all newly created resources under the
               # location will be encrypted with the existing specification.
               #
@@ -3417,7 +3850,7 @@ module Google
               #     Required. The encryption spec used for CMEK encryption. It is required that
               #     the kms key is in the same region as the endpoint. The same key will be
               #     used for all provisioned resources, if encryption is available. If the
-              #     kms_key_name is left empty, no encryption will be enforced.
+              #     `kms_key_name` field is left empty, no encryption will be enforced.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3902,6 +4335,2328 @@ module Google
               end
 
               ##
+              # Query metrics.
+              #
+              # @overload query_metrics(request, options = nil)
+              #   Pass arguments to `query_metrics` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload query_metrics(location: nil, filter: nil, time_granularity: nil, dimensions: nil, measure_mask: nil)
+              #   Pass arguments to `query_metrics` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param location [::String]
+              #     Required. The location of the data.
+              #     "projects/\\{project}/locations/\\{location}"
+              #   @param filter [::String]
+              #     Required. Filter to select a subset of conversations to compute the
+              #     metrics. Must specify a window of the conversation create time to compute
+              #     the metrics. The returned metrics will be from the range [DATE(starting
+              #     create time), DATE(ending create time)).
+              #   @param time_granularity [::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest::TimeGranularity]
+              #     The time granularity of each data point in the time series.
+              #     Defaults to NONE if this field is unspecified.
+              #   @param dimensions [::Array<::Google::Cloud::ContactCenterInsights::V1::Dimension, ::Hash>]
+              #     The dimensions that determine the grouping key for the query. Defaults to
+              #     no dimension if this field is unspecified. If a dimension is specified,
+              #     its key must also be specified. Each dimension's key must be unique.
+              #
+              #     If a time granularity is also specified, metric values in the dimension
+              #     will be bucketed by this granularity.
+              #
+              #     Up to one dimension is supported for now.
+              #   @param measure_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Measures to return. Defaults to all measures if this field is unspecified.
+              #     A valid mask should traverse from the `measure` field from the response.
+              #     For example, a path from a measure mask to get the conversation count is
+              #     "conversation_measure.count".
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new
+              #
+              #   # Call the query_metrics method.
+              #   result = client.query_metrics request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def query_metrics request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.query_metrics.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.query_metrics.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.query_metrics.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.query_metrics request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Create a QaQuestion.
+              #
+              # @overload create_qa_question(request, options = nil)
+              #   Pass arguments to `create_qa_question` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_qa_question(parent: nil, qa_question: nil, qa_question_id: nil)
+              #   Pass arguments to `create_qa_question` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the QaQuestion.
+              #   @param qa_question [::Google::Cloud::ContactCenterInsights::V1::QaQuestion, ::Hash]
+              #     Required. The QaQuestion to create.
+              #   @param qa_question_id [::String]
+              #     Optional. A unique ID for the new question. This ID will become the final
+              #     component of the question's resource name. If no ID is specified, a
+              #     server-generated ID will be used.
+              #
+              #     This value should be 4-64 characters and must match the regular
+              #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaQuestion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaQuestion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new
+              #
+              #   # Call the create_qa_question method.
+              #   result = client.create_qa_question request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaQuestion.
+              #   p result
+              #
+              def create_qa_question request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_qa_question.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_qa_question.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_qa_question.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.create_qa_question request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a QaQuestion.
+              #
+              # @overload get_qa_question(request, options = nil)
+              #   Pass arguments to `get_qa_question` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_qa_question(name: nil)
+              #   Pass arguments to `get_qa_question` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaQuestion to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaQuestion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaQuestion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new
+              #
+              #   # Call the get_qa_question method.
+              #   result = client.get_qa_question request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaQuestion.
+              #   p result
+              #
+              def get_qa_question request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_qa_question.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_qa_question.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_qa_question.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.get_qa_question request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a QaQuestion.
+              #
+              # @overload update_qa_question(request, options = nil)
+              #   Pass arguments to `update_qa_question` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_qa_question(qa_question: nil, update_mask: nil)
+              #   Pass arguments to `update_qa_question` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param qa_question [::Google::Cloud::ContactCenterInsights::V1::QaQuestion, ::Hash]
+              #     Required. The QaQuestion to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. All possible fields can be
+              #     updated by passing `*`, or a subset of the following updateable fields can
+              #     be provided:
+              #
+              #     * `abbreviation`
+              #     * `answer_choices`
+              #     * `answer_instructions`
+              #     * `order`
+              #     * `question_body`
+              #     * `tags`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaQuestion]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaQuestion]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new
+              #
+              #   # Call the update_qa_question method.
+              #   result = client.update_qa_question request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaQuestion.
+              #   p result
+              #
+              def update_qa_question request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_qa_question.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_qa_question.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_qa_question.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.update_qa_question request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a QaQuestion.
+              #
+              # @overload delete_qa_question(request, options = nil)
+              #   Pass arguments to `delete_qa_question` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_qa_question(name: nil)
+              #   Pass arguments to `delete_qa_question` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaQuestion to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new
+              #
+              #   # Call the delete_qa_question method.
+              #   result = client.delete_qa_question request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_qa_question request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_qa_question.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_qa_question.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_qa_question.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.delete_qa_question request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists QaQuestions.
+              #
+              # @overload list_qa_questions(request, options = nil)
+              #   Pass arguments to `list_qa_questions` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_qa_questions(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_qa_questions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the questions.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of questions to return in the response. If the
+              #     value is zero, the service will select a default size. A call might return
+              #     fewer objects than requested. A non-empty `next_page_token` in the response
+              #     indicates that more data is available.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last `ListQaQuestionsResponse`. This
+              #     value indicates that this is a continuation of a prior `ListQaQuestions`
+              #     call and that the system should return the next page of data.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::QaQuestion>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::QaQuestion>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new
+              #
+              #   # Call the list_qa_questions method.
+              #   result = client.list_qa_questions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::QaQuestion.
+              #     p item
+              #   end
+              #
+              def list_qa_questions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_qa_questions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_qa_questions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_qa_questions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.list_qa_questions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_qa_questions, "qa_questions", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Create a QaScorecard.
+              #
+              # @overload create_qa_scorecard(request, options = nil)
+              #   Pass arguments to `create_qa_scorecard` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_qa_scorecard(parent: nil, qa_scorecard: nil, qa_scorecard_id: nil)
+              #   Pass arguments to `create_qa_scorecard` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the QaScorecard.
+              #   @param qa_scorecard [::Google::Cloud::ContactCenterInsights::V1::QaScorecard, ::Hash]
+              #     Required. The QaScorecard to create.
+              #   @param qa_scorecard_id [::String]
+              #     Optional. A unique ID for the new QaScorecard. This ID will become the
+              #     final component of the QaScorecard's resource name. If no ID is specified,
+              #     a server-generated ID will be used.
+              #
+              #     This value should be 4-64 characters and must match the regular
+              #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new
+              #
+              #   # Call the create_qa_scorecard method.
+              #   result = client.create_qa_scorecard request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecard.
+              #   p result
+              #
+              def create_qa_scorecard request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_qa_scorecard.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_qa_scorecard.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_qa_scorecard.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.create_qa_scorecard request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a QaScorecard.
+              #
+              # @overload get_qa_scorecard(request, options = nil)
+              #   Pass arguments to `get_qa_scorecard` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_qa_scorecard(name: nil)
+              #   Pass arguments to `get_qa_scorecard` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaScorecard to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new
+              #
+              #   # Call the get_qa_scorecard method.
+              #   result = client.get_qa_scorecard request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecard.
+              #   p result
+              #
+              def get_qa_scorecard request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_qa_scorecard.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_qa_scorecard.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_qa_scorecard.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.get_qa_scorecard request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a QaScorecard.
+              #
+              # @overload update_qa_scorecard(request, options = nil)
+              #   Pass arguments to `update_qa_scorecard` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_qa_scorecard(qa_scorecard: nil, update_mask: nil)
+              #   Pass arguments to `update_qa_scorecard` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param qa_scorecard [::Google::Cloud::ContactCenterInsights::V1::QaScorecard, ::Hash]
+              #     Required. The QaScorecard to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. All possible fields can be
+              #     updated by passing `*`, or a subset of the following updateable fields can
+              #     be provided:
+              #
+              #     * `description`
+              #     * `display_name`
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecard]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new
+              #
+              #   # Call the update_qa_scorecard method.
+              #   result = client.update_qa_scorecard request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecard.
+              #   p result
+              #
+              def update_qa_scorecard request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_qa_scorecard.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_qa_scorecard.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_qa_scorecard.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.update_qa_scorecard request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a QaScorecard.
+              #
+              # @overload delete_qa_scorecard(request, options = nil)
+              #   Pass arguments to `delete_qa_scorecard` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_qa_scorecard(name: nil, force: nil)
+              #   Pass arguments to `delete_qa_scorecard` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaScorecard to delete.
+              #   @param force [::Boolean]
+              #     Optional. If set to true, all of this QaScorecard's child resources will
+              #     also be deleted. Otherwise, the request will only succeed if it has none.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new
+              #
+              #   # Call the delete_qa_scorecard method.
+              #   result = client.delete_qa_scorecard request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_qa_scorecard request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_qa_scorecard.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_qa_scorecard.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_qa_scorecard.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.delete_qa_scorecard request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists QaScorecards.
+              #
+              # @overload list_qa_scorecards(request, options = nil)
+              #   Pass arguments to `list_qa_scorecards` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_qa_scorecards(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_qa_scorecards` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the scorecards.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of scorecards to return in the response. If
+              #     the value is zero, the service will select a default size. A call might
+              #     return fewer objects than requested. A non-empty `next_page_token` in the
+              #     response indicates that more data is available.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last `ListQaScorecardsResponse`. This
+              #     value indicates that this is a continuation of a prior `ListQaScorecards`
+              #     call and that the system should return the next page of data.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::QaScorecard>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::QaScorecard>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new
+              #
+              #   # Call the list_qa_scorecards method.
+              #   result = client.list_qa_scorecards request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::QaScorecard.
+              #     p item
+              #   end
+              #
+              def list_qa_scorecards request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_qa_scorecards.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_qa_scorecards.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_qa_scorecards.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.list_qa_scorecards request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_qa_scorecards, "qa_scorecards", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a QaScorecardRevision.
+              #
+              # @overload create_qa_scorecard_revision(request, options = nil)
+              #   Pass arguments to `create_qa_scorecard_revision` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_qa_scorecard_revision(parent: nil, qa_scorecard_revision: nil, qa_scorecard_revision_id: nil)
+              #   Pass arguments to `create_qa_scorecard_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the QaScorecardRevision.
+              #   @param qa_scorecard_revision [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision, ::Hash]
+              #     Required. The QaScorecardRevision to create.
+              #   @param qa_scorecard_revision_id [::String]
+              #     Optional. A unique ID for the new QaScorecardRevision. This ID will become
+              #     the final component of the QaScorecardRevision's resource name. If no ID is
+              #     specified, a server-generated ID will be used.
+              #
+              #     This value should be 4-64 characters and must match the regular
+              #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new
+              #
+              #   # Call the create_qa_scorecard_revision method.
+              #   result = client.create_qa_scorecard_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.
+              #   p result
+              #
+              def create_qa_scorecard_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_qa_scorecard_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_qa_scorecard_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_qa_scorecard_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.create_qa_scorecard_revision request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets a QaScorecardRevision.
+              #
+              # @overload get_qa_scorecard_revision(request, options = nil)
+              #   Pass arguments to `get_qa_scorecard_revision` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_qa_scorecard_revision(name: nil)
+              #   Pass arguments to `get_qa_scorecard_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaScorecardRevision to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new
+              #
+              #   # Call the get_qa_scorecard_revision method.
+              #   result = client.get_qa_scorecard_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.
+              #   p result
+              #
+              def get_qa_scorecard_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_qa_scorecard_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_qa_scorecard_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_qa_scorecard_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.get_qa_scorecard_revision request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Fine tune one or more QaModels.
+              #
+              # @overload tune_qa_scorecard_revision(request, options = nil)
+              #   Pass arguments to `tune_qa_scorecard_revision` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload tune_qa_scorecard_revision(parent: nil, filter: nil, validate_only: nil)
+              #   Pass arguments to `tune_qa_scorecard_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource for new fine tuning job instance.
+              #   @param filter [::String]
+              #     Required. Filter for selecting the feedback labels that needs to be
+              #     used for training.
+              #     This filter can be used to limit the feedback labels used for tuning to a
+              #     feedback labels created or updated for a specific time-window etc.
+              #   @param validate_only [::Boolean]
+              #     Optional. Run in validate only mode, no fine tuning will actually run.
+              #     Data quality validations like training data distributions will run.
+              #     Even when set to false, the data quality validations will still run but
+              #     once the validations complete we will proceed with the fine tune, if
+              #     applicable.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new
+              #
+              #   # Call the tune_qa_scorecard_revision method.
+              #   result = client.tune_qa_scorecard_revision request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def tune_qa_scorecard_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.tune_qa_scorecard_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.tune_qa_scorecard_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.tune_qa_scorecard_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.tune_qa_scorecard_revision request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deploy a QaScorecardRevision.
+              #
+              # @overload deploy_qa_scorecard_revision(request, options = nil)
+              #   Pass arguments to `deploy_qa_scorecard_revision` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload deploy_qa_scorecard_revision(name: nil)
+              #   Pass arguments to `deploy_qa_scorecard_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaScorecardRevision to deploy.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new
+              #
+              #   # Call the deploy_qa_scorecard_revision method.
+              #   result = client.deploy_qa_scorecard_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.
+              #   p result
+              #
+              def deploy_qa_scorecard_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.deploy_qa_scorecard_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.deploy_qa_scorecard_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.deploy_qa_scorecard_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.deploy_qa_scorecard_revision request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Undeploy a QaScorecardRevision.
+              #
+              # @overload undeploy_qa_scorecard_revision(request, options = nil)
+              #   Pass arguments to `undeploy_qa_scorecard_revision` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload undeploy_qa_scorecard_revision(name: nil)
+              #   Pass arguments to `undeploy_qa_scorecard_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaScorecardRevision to undeploy.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new
+              #
+              #   # Call the undeploy_qa_scorecard_revision method.
+              #   result = client.undeploy_qa_scorecard_revision request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.
+              #   p result
+              #
+              def undeploy_qa_scorecard_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.undeploy_qa_scorecard_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.undeploy_qa_scorecard_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.undeploy_qa_scorecard_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.undeploy_qa_scorecard_revision request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a QaScorecardRevision.
+              #
+              # @overload delete_qa_scorecard_revision(request, options = nil)
+              #   Pass arguments to `delete_qa_scorecard_revision` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_qa_scorecard_revision(name: nil, force: nil)
+              #   Pass arguments to `delete_qa_scorecard_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the QaScorecardRevision to delete.
+              #   @param force [::Boolean]
+              #     Optional. If set to true, all of this QaScorecardRevision's child resources
+              #     will also be deleted. Otherwise, the request will only succeed if it has
+              #     none.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new
+              #
+              #   # Call the delete_qa_scorecard_revision method.
+              #   result = client.delete_qa_scorecard_revision request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_qa_scorecard_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_qa_scorecard_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_qa_scorecard_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_qa_scorecard_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.delete_qa_scorecard_revision request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all revisions under the parent QaScorecard.
+              #
+              # @overload list_qa_scorecard_revisions(request, options = nil)
+              #   Pass arguments to `list_qa_scorecard_revisions` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_qa_scorecard_revisions(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_qa_scorecard_revisions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the scorecard revisions. To list all
+              #     revisions of all scorecards, substitute the QaScorecard ID with a '-'
+              #     character.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of scorecard revisions to return in the
+              #     response. If the value is zero, the service will select a default size. A
+              #     call might return fewer objects than requested. A non-empty
+              #     `next_page_token` in the response indicates that more data is available.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last
+              #     `ListQaScorecardRevisionsResponse`. This value indicates that this is a
+              #     continuation of a prior `ListQaScorecardRevisions` call and that the system
+              #     should return the next page of data.
+              #   @param filter [::String]
+              #     Optional. A filter to reduce results to a specific subset. Useful for
+              #     querying scorecard revisions with specific properties.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new
+              #
+              #   # Call the list_qa_scorecard_revisions method.
+              #   result = client.list_qa_scorecard_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.
+              #     p item
+              #   end
+              #
+              def list_qa_scorecard_revisions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_qa_scorecard_revisions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_qa_scorecard_revisions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_qa_scorecard_revisions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.list_qa_scorecard_revisions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_qa_scorecard_revisions, "qa_scorecard_revisions", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Create feedback label.
+              #
+              # @overload create_feedback_label(request, options = nil)
+              #   Pass arguments to `create_feedback_label` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_feedback_label(parent: nil, feedback_label_id: nil, feedback_label: nil)
+              #   Pass arguments to `create_feedback_label` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the feedback label.
+              #   @param feedback_label_id [::String]
+              #     Optional. The ID of the feedback label to create.
+              #     If one is not specified it will be generated by the server.
+              #   @param feedback_label [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel, ::Hash]
+              #     Required. The feedback label to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new
+              #
+              #   # Call the create_feedback_label method.
+              #   result = client.create_feedback_label request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.
+              #   p result
+              #
+              def create_feedback_label request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_feedback_label.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_feedback_label.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_feedback_label.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.create_feedback_label request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List feedback labels.
+              #
+              # @overload list_feedback_labels(request, options = nil)
+              #   Pass arguments to `list_feedback_labels` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_feedback_labels(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_feedback_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of the feedback labels.
+              #   @param filter [::String]
+              #     Optional. A filter to reduce results to a specific subset. Supports
+              #     disjunctions (OR) and conjunctions (AND). Automatically sorts by
+              #     conversation ID. To sort by all feedback labels in a project see
+              #     ListAllFeedbackLabels.
+              #
+              #     Supported fields:
+              #
+              #     * `issue_model_id`
+              #     * `qa_question_id`
+              #     * `qa_scorecard_id`
+              #     * `min_create_time`
+              #     * `max_create_time`
+              #     * `min_update_time`
+              #     * `max_update_time`
+              #     * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of feedback labels to return in the response.
+              #     A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+              #     zero or unspecified, a default page size of 100 will be chosen. Note that a
+              #     call might return fewer results than the requested page size.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last `ListFeedbackLabelsResponse`. This
+              #     value indicates that this is a continuation of a prior `ListFeedbackLabels`
+              #     call and that the system should return the next page of data.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new
+              #
+              #   # Call the list_feedback_labels method.
+              #   result = client.list_feedback_labels request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.
+              #     p item
+              #   end
+              #
+              def list_feedback_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_feedback_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_feedback_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_feedback_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.list_feedback_labels request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_feedback_labels, "feedback_labels", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Get feedback label.
+              #
+              # @overload get_feedback_label(request, options = nil)
+              #   Pass arguments to `get_feedback_label` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_feedback_label(name: nil)
+              #   Pass arguments to `get_feedback_label` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the feedback label to get.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new
+              #
+              #   # Call the get_feedback_label method.
+              #   result = client.get_feedback_label request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.
+              #   p result
+              #
+              def get_feedback_label request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_feedback_label.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_feedback_label.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_feedback_label.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.get_feedback_label request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Update feedback label.
+              #
+              # @overload update_feedback_label(request, options = nil)
+              #   Pass arguments to `update_feedback_label` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_feedback_label(feedback_label: nil, update_mask: nil)
+              #   Pass arguments to `update_feedback_label` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param feedback_label [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel, ::Hash]
+              #     Required. The feedback label to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new
+              #
+              #   # Call the update_feedback_label method.
+              #   result = client.update_feedback_label request
+              #
+              #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.
+              #   p result
+              #
+              def update_feedback_label request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_feedback_label.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_feedback_label.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_feedback_label.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.update_feedback_label request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Delete feedback label.
+              #
+              # @overload delete_feedback_label(request, options = nil)
+              #   Pass arguments to `delete_feedback_label` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_feedback_label(name: nil)
+              #   Pass arguments to `delete_feedback_label` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the feedback label to delete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new
+              #
+              #   # Call the delete_feedback_label method.
+              #   result = client.delete_feedback_label request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_feedback_label request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_feedback_label.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_feedback_label.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_feedback_label.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.delete_feedback_label request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # List all feedback labels by project number.
+              #
+              # @overload list_all_feedback_labels(request, options = nil)
+              #   Pass arguments to `list_all_feedback_labels` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_all_feedback_labels(parent: nil, page_size: nil, page_token: nil, filter: nil)
+              #   Pass arguments to `list_all_feedback_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The parent resource of all feedback labels per project.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of feedback labels to return in the response.
+              #     A valid page size ranges from 0 to 100,000 inclusive. If the page size is
+              #     zero or unspecified, a default page size of 100 will be chosen. Note that a
+              #     call might return fewer results than the requested page size.
+              #   @param page_token [::String]
+              #     Optional. The value returned by the last `ListAllFeedbackLabelsResponse`.
+              #     This value indicates that this is a continuation of a prior
+              #     `ListAllFeedbackLabels` call and that the system should return the next
+              #     page of data.
+              #   @param filter [::String]
+              #     Optional. A filter to reduce results to a specific subset in the entire
+              #     project. Supports disjunctions (OR) and conjunctions (AND).
+              #
+              #     Supported fields:
+              #
+              #     * `issue_model_id`
+              #     * `qa_question_id`
+              #     * `min_create_time`
+              #     * `max_create_time`
+              #     * `min_update_time`
+              #     * `max_update_time`
+              #     * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new
+              #
+              #   # Call the list_all_feedback_labels method.
+              #   result = client.list_all_feedback_labels request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.
+              #     p item
+              #   end
+              #
+              def list_all_feedback_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_all_feedback_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_all_feedback_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_all_feedback_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.list_all_feedback_labels request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_all_feedback_labels, "feedback_labels", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Upload feedback labels in bulk.
+              #
+              # @overload bulk_upload_feedback_labels(request, options = nil)
+              #   Pass arguments to `bulk_upload_feedback_labels` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload bulk_upload_feedback_labels(gcs_source: nil, parent: nil, validate_only: nil)
+              #   Pass arguments to `bulk_upload_feedback_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param gcs_source [::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest::GcsSource, ::Hash]
+              #     A cloud storage bucket source.
+              #   @param parent [::String]
+              #     Required. The parent resource for new feedback labels.
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, upload will not happen and the labels will be validated.
+              #     If not set, then default behavior will be to upload the labels after
+              #     validation is complete.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new
+              #
+              #   # Call the bulk_upload_feedback_labels method.
+              #   result = client.bulk_upload_feedback_labels request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def bulk_upload_feedback_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.bulk_upload_feedback_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.bulk_upload_feedback_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.bulk_upload_feedback_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.bulk_upload_feedback_labels request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Download feedback labels in bulk.
+              #
+              # @overload bulk_download_feedback_labels(request, options = nil)
+              #   Pass arguments to `bulk_download_feedback_labels` via a request object, either of type
+              #   {::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload bulk_download_feedback_labels(gcs_destination: nil, parent: nil, filter: nil, max_download_count: nil, feedback_label_type: nil, conversation_filter: nil, template_qa_scorecard_id: nil)
+              #   Pass arguments to `bulk_download_feedback_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param gcs_destination [::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest::GcsDestination, ::Hash]
+              #     A cloud storage bucket destination.
+              #   @param parent [::String]
+              #     Required. The parent resource for new feedback labels.
+              #   @param filter [::String]
+              #     Optional. A filter to reduce results to a specific subset. Supports
+              #     disjunctions (OR) and conjunctions (AND).
+              #
+              #     Supported fields:
+              #
+              #     * `issue_model_id`
+              #     * `qa_question_id`
+              #     * `qa_scorecard_id`
+              #     * `min_create_time`
+              #     * `max_create_time`
+              #     * `min_update_time`
+              #     * `max_update_time`
+              #     * `feedback_label_type`: QUALITY_AI, TOPIC_MODELING
+              #   @param max_download_count [::Integer]
+              #     Optional. Limits the maximum number of feedback labels that will be
+              #     downloaded. The first `N` feedback labels will be downloaded.
+              #   @param feedback_label_type [::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest::FeedbackLabelType]
+              #     Optional. The type of feedback labels that will be downloaded.
+              #   @param conversation_filter [::String]
+              #     Optional. Filter parent conversations to download feedback labels for.
+              #     When specified, the feedback labels will be downloaded for the
+              #     conversations that match the filter.
+              #     If `template_qa_scorecard_id` is set, all the conversations that match the
+              #     filter will be paired with the questions under the scorecard for labeling.
+              #   @param template_qa_scorecard_id [::Array<::String>]
+              #     Optional. If set, a template for labeling conversations and scorecard
+              #     questions will be created from the conversation_filter and the questions
+              #     under the scorecard(s). The feedback label `filter` will be ignored.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/contact_center_insights/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new
+              #
+              #   # Call the bulk_download_feedback_labels method.
+              #   result = client.bulk_download_feedback_labels request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def bulk_download_feedback_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.bulk_download_feedback_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.bulk_download_feedback_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.bulk_download_feedback_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @contact_center_insights_stub.bulk_download_feedback_labels request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the ContactCenterInsights REST API.
               #
               # This class represents the configuration for ContactCenterInsights REST,
@@ -4215,6 +6970,31 @@ module Google
                   #
                   attr_reader :update_settings
                   ##
+                  # RPC-specific configuration for `create_analysis_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_analysis_rule
+                  ##
+                  # RPC-specific configuration for `get_analysis_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_analysis_rule
+                  ##
+                  # RPC-specific configuration for `list_analysis_rules`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_analysis_rules
+                  ##
+                  # RPC-specific configuration for `update_analysis_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_analysis_rule
+                  ##
+                  # RPC-specific configuration for `delete_analysis_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_analysis_rule
+                  ##
                   # RPC-specific configuration for `get_encryption_spec`
                   # @return [::Gapic::Config::Method]
                   #
@@ -4249,6 +7029,136 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_view
+                  ##
+                  # RPC-specific configuration for `query_metrics`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :query_metrics
+                  ##
+                  # RPC-specific configuration for `create_qa_question`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_qa_question
+                  ##
+                  # RPC-specific configuration for `get_qa_question`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_qa_question
+                  ##
+                  # RPC-specific configuration for `update_qa_question`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_qa_question
+                  ##
+                  # RPC-specific configuration for `delete_qa_question`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_qa_question
+                  ##
+                  # RPC-specific configuration for `list_qa_questions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_qa_questions
+                  ##
+                  # RPC-specific configuration for `create_qa_scorecard`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_qa_scorecard
+                  ##
+                  # RPC-specific configuration for `get_qa_scorecard`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_qa_scorecard
+                  ##
+                  # RPC-specific configuration for `update_qa_scorecard`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_qa_scorecard
+                  ##
+                  # RPC-specific configuration for `delete_qa_scorecard`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_qa_scorecard
+                  ##
+                  # RPC-specific configuration for `list_qa_scorecards`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_qa_scorecards
+                  ##
+                  # RPC-specific configuration for `create_qa_scorecard_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_qa_scorecard_revision
+                  ##
+                  # RPC-specific configuration for `get_qa_scorecard_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_qa_scorecard_revision
+                  ##
+                  # RPC-specific configuration for `tune_qa_scorecard_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :tune_qa_scorecard_revision
+                  ##
+                  # RPC-specific configuration for `deploy_qa_scorecard_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :deploy_qa_scorecard_revision
+                  ##
+                  # RPC-specific configuration for `undeploy_qa_scorecard_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :undeploy_qa_scorecard_revision
+                  ##
+                  # RPC-specific configuration for `delete_qa_scorecard_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_qa_scorecard_revision
+                  ##
+                  # RPC-specific configuration for `list_qa_scorecard_revisions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_qa_scorecard_revisions
+                  ##
+                  # RPC-specific configuration for `create_feedback_label`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_feedback_label
+                  ##
+                  # RPC-specific configuration for `list_feedback_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_feedback_labels
+                  ##
+                  # RPC-specific configuration for `get_feedback_label`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_feedback_label
+                  ##
+                  # RPC-specific configuration for `update_feedback_label`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_feedback_label
+                  ##
+                  # RPC-specific configuration for `delete_feedback_label`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_feedback_label
+                  ##
+                  # RPC-specific configuration for `list_all_feedback_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_all_feedback_labels
+                  ##
+                  # RPC-specific configuration for `bulk_upload_feedback_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :bulk_upload_feedback_labels
+                  ##
+                  # RPC-specific configuration for `bulk_download_feedback_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :bulk_download_feedback_labels
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -4324,6 +7234,16 @@ module Google
                     @get_settings = ::Gapic::Config::Method.new get_settings_config
                     update_settings_config = parent_rpcs.update_settings if parent_rpcs.respond_to? :update_settings
                     @update_settings = ::Gapic::Config::Method.new update_settings_config
+                    create_analysis_rule_config = parent_rpcs.create_analysis_rule if parent_rpcs.respond_to? :create_analysis_rule
+                    @create_analysis_rule = ::Gapic::Config::Method.new create_analysis_rule_config
+                    get_analysis_rule_config = parent_rpcs.get_analysis_rule if parent_rpcs.respond_to? :get_analysis_rule
+                    @get_analysis_rule = ::Gapic::Config::Method.new get_analysis_rule_config
+                    list_analysis_rules_config = parent_rpcs.list_analysis_rules if parent_rpcs.respond_to? :list_analysis_rules
+                    @list_analysis_rules = ::Gapic::Config::Method.new list_analysis_rules_config
+                    update_analysis_rule_config = parent_rpcs.update_analysis_rule if parent_rpcs.respond_to? :update_analysis_rule
+                    @update_analysis_rule = ::Gapic::Config::Method.new update_analysis_rule_config
+                    delete_analysis_rule_config = parent_rpcs.delete_analysis_rule if parent_rpcs.respond_to? :delete_analysis_rule
+                    @delete_analysis_rule = ::Gapic::Config::Method.new delete_analysis_rule_config
                     get_encryption_spec_config = parent_rpcs.get_encryption_spec if parent_rpcs.respond_to? :get_encryption_spec
                     @get_encryption_spec = ::Gapic::Config::Method.new get_encryption_spec_config
                     initialize_encryption_spec_config = parent_rpcs.initialize_encryption_spec if parent_rpcs.respond_to? :initialize_encryption_spec
@@ -4338,6 +7258,58 @@ module Google
                     @update_view = ::Gapic::Config::Method.new update_view_config
                     delete_view_config = parent_rpcs.delete_view if parent_rpcs.respond_to? :delete_view
                     @delete_view = ::Gapic::Config::Method.new delete_view_config
+                    query_metrics_config = parent_rpcs.query_metrics if parent_rpcs.respond_to? :query_metrics
+                    @query_metrics = ::Gapic::Config::Method.new query_metrics_config
+                    create_qa_question_config = parent_rpcs.create_qa_question if parent_rpcs.respond_to? :create_qa_question
+                    @create_qa_question = ::Gapic::Config::Method.new create_qa_question_config
+                    get_qa_question_config = parent_rpcs.get_qa_question if parent_rpcs.respond_to? :get_qa_question
+                    @get_qa_question = ::Gapic::Config::Method.new get_qa_question_config
+                    update_qa_question_config = parent_rpcs.update_qa_question if parent_rpcs.respond_to? :update_qa_question
+                    @update_qa_question = ::Gapic::Config::Method.new update_qa_question_config
+                    delete_qa_question_config = parent_rpcs.delete_qa_question if parent_rpcs.respond_to? :delete_qa_question
+                    @delete_qa_question = ::Gapic::Config::Method.new delete_qa_question_config
+                    list_qa_questions_config = parent_rpcs.list_qa_questions if parent_rpcs.respond_to? :list_qa_questions
+                    @list_qa_questions = ::Gapic::Config::Method.new list_qa_questions_config
+                    create_qa_scorecard_config = parent_rpcs.create_qa_scorecard if parent_rpcs.respond_to? :create_qa_scorecard
+                    @create_qa_scorecard = ::Gapic::Config::Method.new create_qa_scorecard_config
+                    get_qa_scorecard_config = parent_rpcs.get_qa_scorecard if parent_rpcs.respond_to? :get_qa_scorecard
+                    @get_qa_scorecard = ::Gapic::Config::Method.new get_qa_scorecard_config
+                    update_qa_scorecard_config = parent_rpcs.update_qa_scorecard if parent_rpcs.respond_to? :update_qa_scorecard
+                    @update_qa_scorecard = ::Gapic::Config::Method.new update_qa_scorecard_config
+                    delete_qa_scorecard_config = parent_rpcs.delete_qa_scorecard if parent_rpcs.respond_to? :delete_qa_scorecard
+                    @delete_qa_scorecard = ::Gapic::Config::Method.new delete_qa_scorecard_config
+                    list_qa_scorecards_config = parent_rpcs.list_qa_scorecards if parent_rpcs.respond_to? :list_qa_scorecards
+                    @list_qa_scorecards = ::Gapic::Config::Method.new list_qa_scorecards_config
+                    create_qa_scorecard_revision_config = parent_rpcs.create_qa_scorecard_revision if parent_rpcs.respond_to? :create_qa_scorecard_revision
+                    @create_qa_scorecard_revision = ::Gapic::Config::Method.new create_qa_scorecard_revision_config
+                    get_qa_scorecard_revision_config = parent_rpcs.get_qa_scorecard_revision if parent_rpcs.respond_to? :get_qa_scorecard_revision
+                    @get_qa_scorecard_revision = ::Gapic::Config::Method.new get_qa_scorecard_revision_config
+                    tune_qa_scorecard_revision_config = parent_rpcs.tune_qa_scorecard_revision if parent_rpcs.respond_to? :tune_qa_scorecard_revision
+                    @tune_qa_scorecard_revision = ::Gapic::Config::Method.new tune_qa_scorecard_revision_config
+                    deploy_qa_scorecard_revision_config = parent_rpcs.deploy_qa_scorecard_revision if parent_rpcs.respond_to? :deploy_qa_scorecard_revision
+                    @deploy_qa_scorecard_revision = ::Gapic::Config::Method.new deploy_qa_scorecard_revision_config
+                    undeploy_qa_scorecard_revision_config = parent_rpcs.undeploy_qa_scorecard_revision if parent_rpcs.respond_to? :undeploy_qa_scorecard_revision
+                    @undeploy_qa_scorecard_revision = ::Gapic::Config::Method.new undeploy_qa_scorecard_revision_config
+                    delete_qa_scorecard_revision_config = parent_rpcs.delete_qa_scorecard_revision if parent_rpcs.respond_to? :delete_qa_scorecard_revision
+                    @delete_qa_scorecard_revision = ::Gapic::Config::Method.new delete_qa_scorecard_revision_config
+                    list_qa_scorecard_revisions_config = parent_rpcs.list_qa_scorecard_revisions if parent_rpcs.respond_to? :list_qa_scorecard_revisions
+                    @list_qa_scorecard_revisions = ::Gapic::Config::Method.new list_qa_scorecard_revisions_config
+                    create_feedback_label_config = parent_rpcs.create_feedback_label if parent_rpcs.respond_to? :create_feedback_label
+                    @create_feedback_label = ::Gapic::Config::Method.new create_feedback_label_config
+                    list_feedback_labels_config = parent_rpcs.list_feedback_labels if parent_rpcs.respond_to? :list_feedback_labels
+                    @list_feedback_labels = ::Gapic::Config::Method.new list_feedback_labels_config
+                    get_feedback_label_config = parent_rpcs.get_feedback_label if parent_rpcs.respond_to? :get_feedback_label
+                    @get_feedback_label = ::Gapic::Config::Method.new get_feedback_label_config
+                    update_feedback_label_config = parent_rpcs.update_feedback_label if parent_rpcs.respond_to? :update_feedback_label
+                    @update_feedback_label = ::Gapic::Config::Method.new update_feedback_label_config
+                    delete_feedback_label_config = parent_rpcs.delete_feedback_label if parent_rpcs.respond_to? :delete_feedback_label
+                    @delete_feedback_label = ::Gapic::Config::Method.new delete_feedback_label_config
+                    list_all_feedback_labels_config = parent_rpcs.list_all_feedback_labels if parent_rpcs.respond_to? :list_all_feedback_labels
+                    @list_all_feedback_labels = ::Gapic::Config::Method.new list_all_feedback_labels_config
+                    bulk_upload_feedback_labels_config = parent_rpcs.bulk_upload_feedback_labels if parent_rpcs.respond_to? :bulk_upload_feedback_labels
+                    @bulk_upload_feedback_labels = ::Gapic::Config::Method.new bulk_upload_feedback_labels_config
+                    bulk_download_feedback_labels_config = parent_rpcs.bulk_download_feedback_labels if parent_rpcs.respond_to? :bulk_download_feedback_labels
+                    @bulk_download_feedback_labels = ::Gapic::Config::Method.new bulk_download_feedback_labels_config
 
                     yield self if block_given?
                   end

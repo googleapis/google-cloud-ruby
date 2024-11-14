@@ -190,6 +190,31 @@
                 "update_settings"
               ]
             },
+            "CreateAnalysisRule": {
+              "methods": [
+                "create_analysis_rule"
+              ]
+            },
+            "GetAnalysisRule": {
+              "methods": [
+                "get_analysis_rule"
+              ]
+            },
+            "ListAnalysisRules": {
+              "methods": [
+                "list_analysis_rules"
+              ]
+            },
+            "UpdateAnalysisRule": {
+              "methods": [
+                "update_analysis_rule"
+              ]
+            },
+            "DeleteAnalysisRule": {
+              "methods": [
+                "delete_analysis_rule"
+              ]
+            },
             "GetEncryptionSpec": {
               "methods": [
                 "get_encryption_spec"
@@ -223,6 +248,136 @@
             "DeleteView": {
               "methods": [
                 "delete_view"
+              ]
+            },
+            "QueryMetrics": {
+              "methods": [
+                "query_metrics"
+              ]
+            },
+            "CreateQaQuestion": {
+              "methods": [
+                "create_qa_question"
+              ]
+            },
+            "GetQaQuestion": {
+              "methods": [
+                "get_qa_question"
+              ]
+            },
+            "UpdateQaQuestion": {
+              "methods": [
+                "update_qa_question"
+              ]
+            },
+            "DeleteQaQuestion": {
+              "methods": [
+                "delete_qa_question"
+              ]
+            },
+            "ListQaQuestions": {
+              "methods": [
+                "list_qa_questions"
+              ]
+            },
+            "CreateQaScorecard": {
+              "methods": [
+                "create_qa_scorecard"
+              ]
+            },
+            "GetQaScorecard": {
+              "methods": [
+                "get_qa_scorecard"
+              ]
+            },
+            "UpdateQaScorecard": {
+              "methods": [
+                "update_qa_scorecard"
+              ]
+            },
+            "DeleteQaScorecard": {
+              "methods": [
+                "delete_qa_scorecard"
+              ]
+            },
+            "ListQaScorecards": {
+              "methods": [
+                "list_qa_scorecards"
+              ]
+            },
+            "CreateQaScorecardRevision": {
+              "methods": [
+                "create_qa_scorecard_revision"
+              ]
+            },
+            "GetQaScorecardRevision": {
+              "methods": [
+                "get_qa_scorecard_revision"
+              ]
+            },
+            "TuneQaScorecardRevision": {
+              "methods": [
+                "tune_qa_scorecard_revision"
+              ]
+            },
+            "DeployQaScorecardRevision": {
+              "methods": [
+                "deploy_qa_scorecard_revision"
+              ]
+            },
+            "UndeployQaScorecardRevision": {
+              "methods": [
+                "undeploy_qa_scorecard_revision"
+              ]
+            },
+            "DeleteQaScorecardRevision": {
+              "methods": [
+                "delete_qa_scorecard_revision"
+              ]
+            },
+            "ListQaScorecardRevisions": {
+              "methods": [
+                "list_qa_scorecard_revisions"
+              ]
+            },
+            "CreateFeedbackLabel": {
+              "methods": [
+                "create_feedback_label"
+              ]
+            },
+            "ListFeedbackLabels": {
+              "methods": [
+                "list_feedback_labels"
+              ]
+            },
+            "GetFeedbackLabel": {
+              "methods": [
+                "get_feedback_label"
+              ]
+            },
+            "UpdateFeedbackLabel": {
+              "methods": [
+                "update_feedback_label"
+              ]
+            },
+            "DeleteFeedbackLabel": {
+              "methods": [
+                "delete_feedback_label"
+              ]
+            },
+            "ListAllFeedbackLabels": {
+              "methods": [
+                "list_all_feedback_labels"
+              ]
+            },
+            "BulkUploadFeedbackLabels": {
+              "methods": [
+                "bulk_upload_feedback_labels"
+              ]
+            },
+            "BulkDownloadFeedbackLabels": {
+              "methods": [
+                "bulk_download_feedback_labels"
               ]
             }
           }
