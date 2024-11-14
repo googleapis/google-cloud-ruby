@@ -1,5 +1,50 @@
 # Changelog
 
+### 0.58.0 (2024-11-14)
+
+#### Features
+
+* add BYOSA field to tuning_job 
+* add fast_tryout_enabled to FasterDeploymentConfig v1 proto ([#27596](https://github.com/googleapis/google-cloud-ruby/issues/27596)) 
+* COMET added to evaluation service proto 
+* metricX added to evaluation service proto 
+#### Documentation
+
+* A comment for field `annotation_schema_uri` in message `.google.cloud.aiplatform.v1.ExportDataConfig` is changed 
+* A comment for field `attributions` in message `.google.cloud.aiplatform.v1.Explanation` is changed 
+* A comment for field `bool_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `bytes_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `data_stats` in message `.google.cloud.aiplatform.v1.Model` is changed 
+* A comment for field `deployed_index` in message `.google.cloud.aiplatform.v1.MutateDeployedIndexRequest` is changed 
+* A comment for field `double_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `enable_logging` in message `.google.cloud.aiplatform.v1.ModelMonitoringAlertConfig` is changed 
+* A comment for field `float_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `int_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `int64_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `next_page_token` in message `.google.cloud.aiplatform.v1.ListNotebookExecutionJobsResponse` is changed 
+* A comment for field `page_token` in message `.google.cloud.aiplatform.v1.ListFeatureGroupsRequest` is changed 
+* A comment for field `page_token` in message `.google.cloud.aiplatform.v1.ListNotebookExecutionJobsRequest` is changed 
+* A comment for field `page_token` in message `.google.cloud.aiplatform.v1.ListPersistentResourcesRequest` is changed 
+* A comment for field `page_token` in message `.google.cloud.aiplatform.v1.ListTuningJobsRequest` is changed 
+* A comment for field `predictions` in message `.google.cloud.aiplatform.v1.EvaluatedAnnotation` is changed 
+* A comment for field `request` in message `.google.cloud.aiplatform.v1.BatchMigrateResourcesOperationMetadata` is changed 
+* A comment for field `restart_job_on_worker_restart` in message `.google.cloud.aiplatform.v1.Scheduling` is changed 
+* A comment for field `saved_query_id` in message `.google.cloud.aiplatform.v1.ExportDataConfig` is changed 
+* A comment for field `string_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `timeout` in message `.google.cloud.aiplatform.v1.Scheduling` is changed 
+* A comment for field `uint_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `uint64_val` in message `.google.cloud.aiplatform.v1.Tensor` is changed 
+* A comment for field `update_mask` in message `.google.cloud.aiplatform.v1.UpdateFeatureViewRequest` is changed 
+* A comment for message `DeleteEntityTypeRequest` is changed 
+* A comment for message `DeleteFeatureViewRequest` is changed 
+* A comment for message `GetDatasetRequest` is changed 
+* A comment for message `GetDatasetVersionRequest` is changed 
+* A comment for message `ListPersistentResourcesRequest` is changed 
+* A comment for message `StreamingReadFeatureValuesRequest` is changed 
+* A comment for method `ListAnnotations` in service `DatasetService` is changed 
+* A comment for method `RebaseTunedModel` in service `GenAiTuningService` is changed 
+* A comment for method `ResumeSchedule` in service `ScheduleService` is changed 
+
 ### 0.57.0 (2024-11-13)
 
 #### Features
