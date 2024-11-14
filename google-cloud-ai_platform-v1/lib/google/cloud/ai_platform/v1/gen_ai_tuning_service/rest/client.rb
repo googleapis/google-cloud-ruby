@@ -392,8 +392,9 @@ module Google
               #     Optional. The standard list page size.
               #   @param page_token [::String]
               #     Optional. The standard list page token.
-              #     Typically obtained via [ListTuningJob.next_page_token][] of the
-              #     previous GenAiTuningService.ListTuningJob][] call.
+              #     Typically obtained via
+              #     {::Google::Cloud::AIPlatform::V1::ListTuningJobsResponse#next_page_token ListTuningJobsResponse.next_page_token}
+              #     of the previous GenAiTuningService.ListTuningJob][] call.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AIPlatform::V1::TuningJob>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -551,8 +552,6 @@ module Google
 
               ##
               # Rebase a TunedModel.
-              # Creates a LongRunningOperation that takes a legacy Tuned GenAI model
-              # Reference and creates a TuningJob based on newly available model.
               #
               # @overload rebase_tuned_model(request, options = nil)
               #   Pass arguments to `rebase_tuned_model` via a request object, either of type

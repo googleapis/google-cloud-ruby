@@ -61,8 +61,9 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The standard list page token.
-        #     Typically obtained via [ListTuningJob.next_page_token][] of the
-        #     previous GenAiTuningService.ListTuningJob][] call.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListTuningJobsResponse#next_page_token ListTuningJobsResponse.next_page_token}
+        #     of the previous GenAiTuningService.ListTuningJob][] call.
         class ListTuningJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

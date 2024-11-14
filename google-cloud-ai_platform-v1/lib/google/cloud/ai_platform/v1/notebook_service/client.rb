@@ -1675,7 +1675,8 @@ module Google
             #   @param page_token [::String]
             #     Optional. The standard list page token.
             #     Typically obtained via
-            #     [ListNotebookExecutionJobs.next_page_token][] of the previous
+            #     {::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsResponse#next_page_token ListNotebookExecutionJobsResponse.next_page_token}
+            #     of the previous
             #     {::Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_execution_jobs NotebookService.ListNotebookExecutionJobs}
             #     call.
             #   @param order_by [::String]

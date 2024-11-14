@@ -48,8 +48,8 @@ module Google
         #     If users set
         #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#top_k ExplanationParameters.top_k},
         #     the attributions are sorted by
-        #     [instance_output_value][Attributions.instance_output_value] in descending
-        #     order. If
+        #     {::Google::Cloud::AIPlatform::V1::Attribution#instance_output_value instance_output_value}
+        #     in descending order. If
         #     {::Google::Cloud::AIPlatform::V1::ExplanationParameters#output_indices ExplanationParameters.output_indices}
         #     is specified, the attributions are stored by
         #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index}

@@ -38,7 +38,7 @@ module Google
         #
         #     For false positive, there is one and only one prediction, which doesn't
         #     match any ground truth annotation of the corresponding
-        #     [data_item_view_id][EvaluatedAnnotation.data_item_view_id].
+        #     {::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation#evaluated_data_item_view_id data_item_view_id}.
         #
         #     For false negative, there are zero or more predictions which are similar to
         #     the only ground truth annotation in

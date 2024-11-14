@@ -314,12 +314,14 @@ module Google
         #       * `feature_registry_source.feature_groups`
         #       * `sync_config`
         #       * `sync_config.cron`
+        #       * `optimized_config.automatic_resources`
         class UpdateFeatureViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [FeatureOnlineStoreAdminService.DeleteFeatureViews][].
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Client#delete_feature_view FeatureOnlineStoreAdminService.DeleteFeatureView}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the FeatureView to be deleted.

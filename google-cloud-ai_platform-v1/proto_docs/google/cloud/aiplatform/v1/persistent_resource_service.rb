@@ -90,7 +90,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [PersistentResourceService.ListPersistentResource][].
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::PersistentResourceService::Client#list_persistent_resources PersistentResourceService.ListPersistentResources}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the Location to list the PersistentResources
@@ -102,8 +103,8 @@ module Google
         #   @return [::String]
         #     Optional. The standard list page token.
         #     Typically obtained via
-        #     [ListPersistentResourceResponse.next_page_token][] of the previous
-        #     [PersistentResourceService.ListPersistentResource][] call.
+        #     {::Google::Cloud::AIPlatform::V1::ListPersistentResourcesResponse#next_page_token ListPersistentResourcesResponse.next_page_token}
+        #     of the previous [PersistentResourceService.ListPersistentResource][] call.
         class ListPersistentResourcesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

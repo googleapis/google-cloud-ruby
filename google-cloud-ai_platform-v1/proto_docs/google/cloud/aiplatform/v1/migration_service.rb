@@ -251,7 +251,7 @@ module Google
           # @!attribute [rw] request
           #   @return [::Google::Cloud::AIPlatform::V1::MigrateResourceRequest]
           #     It's the same as the value in
-          #     [MigrateResourceRequest.migrate_resource_requests][].
+          #     {::Google::Cloud::AIPlatform::V1::BatchMigrateResourcesRequest#migrate_resource_requests BatchMigrateResourcesRequest.migrate_resource_requests}.
           class PartialResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

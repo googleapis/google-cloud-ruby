@@ -483,7 +483,8 @@ module Google
         #   @return [::String]
         #     Optional. The standard list page token.
         #     Typically obtained via
-        #     [ListNotebookExecutionJobs.next_page_token][] of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsResponse#next_page_token ListNotebookExecutionJobsResponse.next_page_token}
+        #     of the previous
         #     {::Google::Cloud::AIPlatform::V1::NotebookService::Client#list_notebook_execution_jobs NotebookService.ListNotebookExecutionJobs}
         #     call.
         # @!attribute [rw] order_by
@@ -511,8 +512,9 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve next page of results.
-        #     Pass to [ListNotebookExecutionJobs.page_token][] to obtain that
-        #     page.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListNotebookExecutionJobsRequest#page_token ListNotebookExecutionJobsRequest.page_token}
+        #     to obtain that page.
         class ListNotebookExecutionJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

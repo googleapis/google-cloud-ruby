@@ -170,7 +170,7 @@ module Google
         end
 
         # Request message for
-        # [FeaturestoreOnlineServingService.StreamingFeatureValuesRead][].
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreOnlineServingService::Client#streaming_read_feature_values FeaturestoreOnlineServingService.StreamingReadFeatureValues}.
         # @!attribute [rw] entity_type
         #   @return [::String]
         #     Required. The resource name of the entities' type.

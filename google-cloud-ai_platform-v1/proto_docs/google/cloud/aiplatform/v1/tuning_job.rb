@@ -96,6 +96,15 @@ module Google
         #     Customer-managed encryption key options for a TuningJob. If this is set,
         #     then all resources created by the TuningJob will be encrypted with the
         #     provided encryption key.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     The service account that the tuningJob workload runs as.
+        #     If not specified, the Vertex AI Secure Fine-Tuned Service Agent in the
+        #     project will be used. See
+        #     https://cloud.google.com/iam/docs/service-agents#vertex-ai-secure-fine-tuning-service-agent
+        #
+        #     Users starting the pipeline must have the `iam.serviceAccounts.actAs`
+        #     permission on this service account.
         class TuningJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

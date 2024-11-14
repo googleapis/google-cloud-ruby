@@ -90,12 +90,12 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
-        #     [FeatureGroupAdminService.ListFeatureGroups][] call.
-        #     Provide this to retrieve the subsequent page.
+        #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_feature_groups FeatureRegistryService.ListFeatureGroups}
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     [FeatureGroupAdminService.ListFeatureGroups][] must
-        #     match the call that provided the page token.
+        #     {::Google::Cloud::AIPlatform::V1::FeatureRegistryService::Client#list_feature_groups FeatureRegistryService.ListFeatureGroups}
+        #     must match the call that provided the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     A comma-separated list of fields to order by, sorted in ascending order.

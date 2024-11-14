@@ -923,8 +923,10 @@ module Google
             #     `projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}`
             #   @param deployed_index [::Google::Cloud::AIPlatform::V1::DeployedIndex, ::Hash]
             #     Required. The DeployedIndex to be updated within the IndexEndpoint.
-            #     Currently, the updatable fields are [DeployedIndex][automatic_resources]
-            #     and [DeployedIndex][dedicated_resources]
+            #     Currently, the updatable fields are
+            #     {::Google::Cloud::AIPlatform::V1::DeployedIndex#automatic_resources DeployedIndex.automatic_resources}
+            #     and
+            #     {::Google::Cloud::AIPlatform::V1::DeployedIndex#dedicated_resources DeployedIndex.dedicated_resources}
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
