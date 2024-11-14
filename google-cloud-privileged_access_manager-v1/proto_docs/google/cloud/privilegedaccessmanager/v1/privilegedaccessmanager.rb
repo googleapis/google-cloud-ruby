@@ -154,7 +154,7 @@ module Google
             end
           end
 
-          # AdditionalNotificationTargets includes email addresses to be notified.
+          # `AdditionalNotificationTargets` includes email addresses to be notified.
           # @!attribute [rw] admin_email_recipients
           #   @return [::Array<::String>]
           #     Optional. Additional email addresses to be notified when a principal
@@ -190,7 +190,7 @@ module Google
           end
         end
 
-        # AccessControlEntry is used to control who can do some operation.
+        # `AccessControlEntry` is used to control who can do some operation.
         # @!attribute [rw] principals
         #   @return [::Array<::String>]
         #     Optional. Users who are allowed for the operation. Each entry should be a
@@ -267,7 +267,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # GcpIamAccess represents IAM based access control on a Google Cloud
+          # `GcpIamAccess` represents IAM based access control on a Google Cloud
           # resource. Refer to https://cloud.google.com/iam/docs to understand more
           # about IAM.
           # @!attribute [rw] resource_type
@@ -283,7 +283,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # IAM Role bindings that are created after a successful grant.
+            # IAM role bindings that are created after a successful grant.
             # @!attribute [rw] role
             #   @return [::String]
             #     Required. IAM role to be granted.
@@ -434,7 +434,7 @@ module Google
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, ignores the second request and returns the
         #     previous operation's response. This prevents clients from accidentally
-        #     creating duplicate commitments.
+        #     creating duplicate entitlements.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
@@ -457,8 +457,7 @@ module Google
         #     For example, consider a situation where you make an initial request and the
         #     request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
-        #     was received, and if so, ignores the second request. This prevents
-        #     clients from accidentally creating duplicate commitments.
+        #     was received, and if so, ignores the second request.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
@@ -492,8 +491,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # This is to ensure that the `Grants` and `ProducerGrants` proto are byte
-        # compatible.
         # A grant represents a request from a user for obtaining the access specified
         # in an entitlement they are eligible for.
         # @!attribute [rw] name
@@ -921,7 +918,7 @@ module Google
         #     request times out. If you make the request again with the same request
         #     ID, the server can check if original operation with the same request ID
         #     was received, and if so, ignores the second request. This prevents
-        #     clients from accidentally creating duplicate commitments.
+        #     clients from accidentally creating duplicate grants.
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
