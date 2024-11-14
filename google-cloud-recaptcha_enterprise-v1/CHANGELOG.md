@@ -1,5 +1,12 @@
 # Release History
 
+### 1.4.0 (2024-11-14)
+
+#### Features
+
+* A new enum `Challenge` is added ([#27608](https://github.com/googleapis/google-cloud-ruby/issues/27608)) 
+* A new field `challenge` is added to message `.google.cloud.recaptchaenterprise.v1.RiskAnalysis` 
+
 ### 1.3.0 (2024-11-04)
 
 #### Features
