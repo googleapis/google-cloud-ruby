@@ -1,5 +1,12 @@
 # Release History
 
+### 1.4.0 (2024-11-14)
+
+#### Features
+
+* add options of query_source, search_config, end_user_metadata and exact_search ([#27597](https://github.com/googleapis/google-cloud-ruby/issues/27597)) 
+* expose metadata in AnswerSource 
+
 ### 1.3.0 (2024-11-13)
 
 #### Features
