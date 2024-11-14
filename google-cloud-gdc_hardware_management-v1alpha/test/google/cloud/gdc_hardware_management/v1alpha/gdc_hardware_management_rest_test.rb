@@ -1985,6 +1985,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     name = "hello world"
     request_id = "hello world"
     state_signal = :STATE_SIGNAL_UNSPECIFIED
+    provisioning_state_signal = :PROVISIONING_STATE_SIGNAL_UNSPECIFIED
 
     signal_zone_state_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -2000,27 +2001,27 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
         end
 
         # Use hash object
-        client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal }) do |_result, response|
+        client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.signal_zone_state name: name, request_id: request_id, state_signal: state_signal do |_result, response|
+        client.signal_zone_state name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.signal_zone_state ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal) do |_result, response|
+        client.signal_zone_state ::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal }, call_options) do |_result, response|
+        client.signal_zone_state({ name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.signal_zone_state(::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal), call_options) do |_result, response|
+        client.signal_zone_state(::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest.new(name: name, request_id: request_id, state_signal: state_signal, provisioning_state_signal: provisioning_state_signal), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
