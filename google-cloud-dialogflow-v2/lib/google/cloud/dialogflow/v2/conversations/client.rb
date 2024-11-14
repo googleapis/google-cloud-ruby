@@ -232,9 +232,9 @@ module Google
             #     Google. Only set it if you cannot wait for the response to return a
             #     auto-generated one to you.
             #
-            #     The conversation ID must be compliant with the regression fomula
+            #     The conversation ID must be compliant with the regression formula
             #     `[a-zA-Z][a-zA-Z0-9_-]*` with the characters length in range of [3,64].
-            #     If the field is provided, the caller is resposible for
+            #     If the field is provided, the caller is responsible for
             #     1. the uniqueness of the ID, otherwise the request will be rejected.
             #     2. the consistency for whether to use custom ID or not under a project to
             #     better ensure uniqueness.
@@ -1015,7 +1015,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_knowledge(parent: nil, query: nil, conversation_profile: nil, session_id: nil, conversation: nil, latest_message: nil)
+            # @overload search_knowledge(parent: nil, query: nil, conversation_profile: nil, session_id: nil, conversation: nil, latest_message: nil, query_source: nil, end_user_metadata: nil, search_config: nil, exact_search: nil)
             #   Pass arguments to `search_knowledge` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1047,6 +1047,30 @@ module Google
             #     triggered.
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+            #   @param query_source [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::QuerySource]
+            #     Optional. The source of the query in the request.
+            #   @param end_user_metadata [::Google::Protobuf::Struct, ::Hash]
+            #     Optional. Information about the end-user to improve the relevance and
+            #     accuracy of generative answers.
+            #
+            #     This will be interpreted and used by a language model, so, for good
+            #     results, the data should be self-descriptive, and in a simple structure.
+            #
+            #     Example:
+            #
+            #     ```json
+            #     {
+            #       "subscription plan": "Business Premium Plus",
+            #       "devices owned": [
+            #         \\{"model": "Google Pixel 7"},
+            #         \\{"model": "Google Pixel Tablet"}
+            #       ]
+            #     }
+            #     ```
+            #   @param search_config [::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig, ::Hash]
+            #     Optional. Configuration specific to search queries with data stores.
+            #   @param exact_search [::Boolean]
+            #     Optional. Whether to search the query exactly without query rewrite.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::SearchKnowledgeResponse]

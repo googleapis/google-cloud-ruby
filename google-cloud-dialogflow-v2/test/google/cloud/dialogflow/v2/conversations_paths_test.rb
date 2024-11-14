@@ -105,6 +105,21 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientPathsTest < Minitest
     end
   end
 
+  def test_data_store_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_store_path project: "value0", location: "value1", collection: "value2", data_store: "value3"
+      assert_equal "projects/value0/locations/value1/collections/value2/dataStores/value3", path
+
+      path = client.data_store_path project: "value0", location: "value1", data_store: "value2"
+      assert_equal "projects/value0/locations/value1/dataStores/value2", path
+    end
+  end
+
   def test_document_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

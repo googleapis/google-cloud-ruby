@@ -165,7 +165,6 @@ module Google
 
         # Providing examples in the generator (i.e. building a few-shot generator)
         # helps convey the desired format of the LLM response.
-        # NEXT_ID: 10
         # @!attribute [rw] conversation_context
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationContext]
         #     Optional. Conversation transcripts.

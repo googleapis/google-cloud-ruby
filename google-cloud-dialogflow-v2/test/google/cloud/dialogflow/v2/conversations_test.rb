@@ -578,6 +578,10 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     session_id = "hello world"
     conversation = "hello world"
     latest_message = "hello world"
+    query_source = :QUERY_SOURCE_UNSPECIFIED
+    end_user_metadata = {}
+    search_config = {}
+    exact_search = true
 
     search_knowledge_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_knowledge, name
@@ -588,6 +592,10 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       assert_equal "hello world", request["session_id"]
       assert_equal "hello world", request["conversation"]
       assert_equal "hello world", request["latest_message"]
+      assert_equal :QUERY_SOURCE_UNSPECIFIED, request["query_source"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["end_user_metadata"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig), request["search_config"]
+      assert_equal true, request["exact_search"]
       refute_nil options
     end
 
@@ -598,31 +606,31 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.search_knowledge({ parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message }) do |response, operation|
+      client.search_knowledge({ parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message, query_source: query_source, end_user_metadata: end_user_metadata, search_config: search_config, exact_search: exact_search }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_knowledge parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message do |response, operation|
+      client.search_knowledge parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message, query_source: query_source, end_user_metadata: end_user_metadata, search_config: search_config, exact_search: exact_search do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_knowledge ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new(parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message) do |response, operation|
+      client.search_knowledge ::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new(parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message, query_source: query_source, end_user_metadata: end_user_metadata, search_config: search_config, exact_search: exact_search) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_knowledge({ parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message }, grpc_options) do |response, operation|
+      client.search_knowledge({ parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message, query_source: query_source, end_user_metadata: end_user_metadata, search_config: search_config, exact_search: exact_search }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_knowledge(::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new(parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message), grpc_options) do |response, operation|
+      client.search_knowledge(::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest.new(parent: parent, query: query, conversation_profile: conversation_profile, session_id: session_id, conversation: conversation, latest_message: latest_message, query_source: query_source, end_user_metadata: end_user_metadata, search_config: search_config, exact_search: exact_search), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
