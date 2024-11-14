@@ -104,6 +104,16 @@ module Google
         #     for applicable tests only. The details are updated when creating a new
         #     test, updating an existing test, or triggering a one-time rerun of an
         #     existing test.
+        # @!attribute [rw] round_trip
+        #   @return [::Boolean]
+        #     Whether run analysis for the return path from destination to source.
+        #     Default value is false.
+        # @!attribute [r] return_reachability_details
+        #   @return [::Google::Cloud::NetworkManagement::V1::ReachabilityDetails]
+        #     Output only. The reachability details of this test from the latest run for
+        #     the return path. The details are updated when creating a new test,
+        #     updating an existing test, or triggering a one-time rerun of an existing
+        #     test.
         # @!attribute [rw] bypass_firewall_checks
         #   @return [::Boolean]
         #     Whether the test should skip firewall checking.
