@@ -286,7 +286,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param operation [::String]
-              #     Name of the Operations resource to delete.
+              #     Name of the Operations resource to delete, or its unique numeric identifier.
               #   @param project [::String]
               #     Project ID for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -367,7 +367,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param operation [::String]
-              #     Name of the Operations resource to return.
+              #     Name of the Operations resource to return, or its unique numeric identifier.
               #   @param project [::String]
               #     Project ID for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -538,7 +538,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param operation [::String]
-              #     Name of the Operations resource to return.
+              #     Name of the Operations resource to return, or its unique numeric identifier.
               #   @param project [::String]
               #     Project ID for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
