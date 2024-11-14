@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.4.0 (2024-11-14)
+
+#### Features
+
+* add DNS address, Kubernetes primary VLAN ID, and provisioning state to the Zone resource ([#27605](https://github.com/googleapis/google-cloud-ruby/issues/27605)) 
+* add MAC address-associated IP address to the Hardware resource 
+* add provisioning_state_signal field in SignalZoneState method request 
+#### Documentation
+
+* change state_signal field in SignalZoneState method request as optional 
+
 ### 0.3.0 (2024-10-29)
 
 #### Features
