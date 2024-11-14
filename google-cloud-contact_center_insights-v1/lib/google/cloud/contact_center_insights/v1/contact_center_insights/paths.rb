@@ -46,6 +46,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AnalysisRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/analysisRules/{analysis_rule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param analysis_rule [String]
+            #
+            # @return [::String]
+            def analysis_rule_path project:, location:, analysis_rule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/analysisRules/#{analysis_rule}"
+            end
+
+            ##
             # Create a fully-qualified Conversation resource string.
             #
             # The resource will be in the following format:
@@ -98,6 +117,27 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/encryptionSpec"
+            end
+
+            ##
+            # Create a fully-qualified FeedbackLabel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/conversations/{conversation}/feedbackLabels/{feedback_label}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param conversation [String]
+            # @param feedback_label [String]
+            #
+            # @return [::String]
+            def feedback_label_path project:, location:, conversation:, feedback_label:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "conversation cannot contain /" if conversation.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/conversations/#{conversation}/feedbackLabels/#{feedback_label}"
             end
 
             ##
@@ -219,6 +259,88 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/phraseMatchers/#{phrase_matcher}"
+            end
+
+            ##
+            # Create a fully-qualified QaQuestion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}/qaQuestions/{qa_question}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param qa_scorecard [String]
+            # @param revision [String]
+            # @param qa_question [String]
+            #
+            # @return [::String]
+            def qa_question_path project:, location:, qa_scorecard:, revision:, qa_question:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "qa_scorecard cannot contain /" if qa_scorecard.to_s.include? "/"
+              raise ::ArgumentError, "revision cannot contain /" if revision.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/qaScorecards/#{qa_scorecard}/revisions/#{revision}/qaQuestions/#{qa_question}"
+            end
+
+            ##
+            # Create a fully-qualified QaScorecard resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param qa_scorecard [String]
+            #
+            # @return [::String]
+            def qa_scorecard_path project:, location:, qa_scorecard:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/qaScorecards/#{qa_scorecard}"
+            end
+
+            ##
+            # Create a fully-qualified QaScorecardResult resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/qaScorecardResults/{qa_scorecard_result}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param qa_scorecard_result [String]
+            #
+            # @return [::String]
+            def qa_scorecard_result_path project:, location:, qa_scorecard_result:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/qaScorecardResults/#{qa_scorecard_result}"
+            end
+
+            ##
+            # Create a fully-qualified QaScorecardRevision resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/qaScorecards/{qa_scorecard}/revisions/{revision}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param qa_scorecard [String]
+            # @param revision [String]
+            #
+            # @return [::String]
+            def qa_scorecard_revision_path project:, location:, qa_scorecard:, revision:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "qa_scorecard cannot contain /" if qa_scorecard.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/qaScorecards/#{qa_scorecard}/revisions/#{revision}"
             end
 
             ##

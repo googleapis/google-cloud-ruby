@@ -113,11 +113,21 @@ module Google
             rpc :GetSettings, ::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest, ::Google::Cloud::ContactCenterInsights::V1::Settings
             # Updates project-level settings.
             rpc :UpdateSettings, ::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest, ::Google::Cloud::ContactCenterInsights::V1::Settings
+            # Creates a analysis rule.
+            rpc :CreateAnalysisRule, ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest, ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule
+            # Get a analysis rule.
+            rpc :GetAnalysisRule, ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest, ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule
+            # Lists analysis rules.
+            rpc :ListAnalysisRules, ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest, ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesResponse
+            # Updates a analysis rule.
+            rpc :UpdateAnalysisRule, ::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest, ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule
+            # Deletes a analysis rule.
+            rpc :DeleteAnalysisRule, ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest, ::Google::Protobuf::Empty
             # Gets location-level encryption key specification.
             rpc :GetEncryptionSpec, ::Google::Cloud::ContactCenterInsights::V1::GetEncryptionSpecRequest, ::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec
-            # Initializes a location-level encryption key specification.  An error will
-            # be thrown if the location has resources already created before the
-            # initialization. Once the encryption specification is initialized at a
+            # Initializes a location-level encryption key specification. An error will
+            # result if the location has resources already created before the
+            # initialization. After the encryption specification is initialized at a
             # location, it is immutable and all newly created resources under the
             # location will be encrypted with the existing specification.
             rpc :InitializeEncryptionSpec, ::Google::Cloud::ContactCenterInsights::V1::InitializeEncryptionSpecRequest, ::Google::Longrunning::Operation
@@ -131,6 +141,58 @@ module Google
             rpc :UpdateView, ::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest, ::Google::Cloud::ContactCenterInsights::V1::View
             # Deletes a view.
             rpc :DeleteView, ::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest, ::Google::Protobuf::Empty
+            # Query metrics.
+            rpc :QueryMetrics, ::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest, ::Google::Longrunning::Operation
+            # Create a QaQuestion.
+            rpc :CreateQaQuestion, ::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaQuestion
+            # Gets a QaQuestion.
+            rpc :GetQaQuestion, ::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaQuestion
+            # Updates a QaQuestion.
+            rpc :UpdateQaQuestion, ::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaQuestion
+            # Deletes a QaQuestion.
+            rpc :DeleteQaQuestion, ::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest, ::Google::Protobuf::Empty
+            # Lists QaQuestions.
+            rpc :ListQaQuestions, ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest, ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsResponse
+            # Create a QaScorecard.
+            rpc :CreateQaScorecard, ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecard
+            # Gets a QaScorecard.
+            rpc :GetQaScorecard, ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecard
+            # Updates a QaScorecard.
+            rpc :UpdateQaScorecard, ::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecard
+            # Deletes a QaScorecard.
+            rpc :DeleteQaScorecard, ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest, ::Google::Protobuf::Empty
+            # Lists QaScorecards.
+            rpc :ListQaScorecards, ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest, ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsResponse
+            # Creates a QaScorecardRevision.
+            rpc :CreateQaScorecardRevision, ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision
+            # Gets a QaScorecardRevision.
+            rpc :GetQaScorecardRevision, ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision
+            # Fine tune one or more QaModels.
+            rpc :TuneQaScorecardRevision, ::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest, ::Google::Longrunning::Operation
+            # Deploy a QaScorecardRevision.
+            rpc :DeployQaScorecardRevision, ::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision
+            # Undeploy a QaScorecardRevision.
+            rpc :UndeployQaScorecardRevision, ::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest, ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision
+            # Deletes a QaScorecardRevision.
+            rpc :DeleteQaScorecardRevision, ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest, ::Google::Protobuf::Empty
+            # Lists all revisions under the parent QaScorecard.
+            rpc :ListQaScorecardRevisions, ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest, ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsResponse
+            # Create feedback label.
+            rpc :CreateFeedbackLabel, ::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest, ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel
+            # List feedback labels.
+            rpc :ListFeedbackLabels, ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest, ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsResponse
+            # Get feedback label.
+            rpc :GetFeedbackLabel, ::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest, ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel
+            # Update feedback label.
+            rpc :UpdateFeedbackLabel, ::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest, ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel
+            # Delete feedback label.
+            rpc :DeleteFeedbackLabel, ::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest, ::Google::Protobuf::Empty
+            # List all feedback labels by project number.
+            rpc :ListAllFeedbackLabels, ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest, ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsResponse
+            # Upload feedback labels in bulk.
+            rpc :BulkUploadFeedbackLabels, ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest, ::Google::Longrunning::Operation
+            # Download feedback labels in bulk.
+            rpc :BulkDownloadFeedbackLabels, ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -2318,6 +2318,309 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
     end
   end
 
+  def test_create_analysis_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    analysis_rule = {}
+
+    create_analysis_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_analysis_rule, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule), request["analysis_rule"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_analysis_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_analysis_rule({ parent: parent, analysis_rule: analysis_rule }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_analysis_rule parent: parent, analysis_rule: analysis_rule do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new(parent: parent, analysis_rule: analysis_rule) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_analysis_rule({ parent: parent, analysis_rule: analysis_rule }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRuleRequest.new(parent: parent, analysis_rule: analysis_rule), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_analysis_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_analysis_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_analysis_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_analysis_rule, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_analysis_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_analysis_rule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_analysis_rule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_analysis_rule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::GetAnalysisRuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_analysis_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_analysis_rules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_analysis_rules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_analysis_rules, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_analysis_rules_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_analysis_rules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_analysis_rules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_analysis_rules ::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_analysis_rules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_analysis_rules(::Google::Cloud::ContactCenterInsights::V1::ListAnalysisRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_analysis_rules_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_analysis_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    analysis_rule = {}
+    update_mask = {}
+
+    update_analysis_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_analysis_rule, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::AnalysisRule), request["analysis_rule"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_analysis_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_analysis_rule({ analysis_rule: analysis_rule, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_analysis_rule analysis_rule: analysis_rule, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new(analysis_rule: analysis_rule, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_analysis_rule({ analysis_rule: analysis_rule, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::UpdateAnalysisRuleRequest.new(analysis_rule: analysis_rule, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_analysis_rule_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_analysis_rule
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_analysis_rule_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_analysis_rule, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_analysis_rule_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_analysis_rule({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_analysis_rule name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_analysis_rule ::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_analysis_rule({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_analysis_rule(::Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_analysis_rule_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_encryption_spec
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::ContactCenterInsights::V1::EncryptionSpec.new
@@ -2739,6 +3042,1641 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientT
 
       # Verify method calls
       assert_equal 5, delete_view_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_metrics
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    location = "hello world"
+    filter = "hello world"
+    time_granularity = :TIME_GRANULARITY_UNSPECIFIED
+    dimensions = [{}]
+    measure_mask = {}
+
+    query_metrics_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_metrics, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest, request
+      assert_equal "hello world", request["location"]
+      assert_equal "hello world", request["filter"]
+      assert_equal :TIME_GRANULARITY_UNSPECIFIED, request["time_granularity"]
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::Dimension, request["dimensions"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["measure_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_metrics_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.query_metrics({ location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.query_metrics location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.query_metrics ::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new(location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.query_metrics({ location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.query_metrics(::Google::Cloud::ContactCenterInsights::V1::QueryMetricsRequest.new(location: location, filter: filter, time_granularity: time_granularity, dimensions: dimensions, measure_mask: measure_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_metrics_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_qa_question
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaQuestion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    qa_question = {}
+    qa_question_id = "hello world"
+
+    create_qa_question_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_qa_question, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::QaQuestion), request["qa_question"]
+      assert_equal "hello world", request["qa_question_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_qa_question_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_qa_question({ parent: parent, qa_question: qa_question, qa_question_id: qa_question_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_qa_question parent: parent, qa_question: qa_question, qa_question_id: qa_question_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_qa_question ::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new(parent: parent, qa_question: qa_question, qa_question_id: qa_question_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_qa_question({ parent: parent, qa_question: qa_question, qa_question_id: qa_question_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_qa_question(::Google::Cloud::ContactCenterInsights::V1::CreateQaQuestionRequest.new(parent: parent, qa_question: qa_question, qa_question_id: qa_question_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_qa_question_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_qa_question
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaQuestion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_qa_question_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_qa_question, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_qa_question_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_qa_question({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_qa_question name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_qa_question ::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_qa_question({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_qa_question(::Google::Cloud::ContactCenterInsights::V1::GetQaQuestionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_qa_question_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_qa_question
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaQuestion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    qa_question = {}
+    update_mask = {}
+
+    update_qa_question_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_qa_question, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::QaQuestion), request["qa_question"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_qa_question_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_qa_question({ qa_question: qa_question, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_qa_question qa_question: qa_question, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_qa_question ::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new(qa_question: qa_question, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_qa_question({ qa_question: qa_question, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_qa_question(::Google::Cloud::ContactCenterInsights::V1::UpdateQaQuestionRequest.new(qa_question: qa_question, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_qa_question_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_qa_question
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_qa_question_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_qa_question, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_qa_question_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_qa_question({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_qa_question name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_qa_question ::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_qa_question({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_qa_question(::Google::Cloud::ContactCenterInsights::V1::DeleteQaQuestionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_qa_question_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_qa_questions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_qa_questions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_qa_questions, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_qa_questions_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_qa_questions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_qa_questions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_qa_questions ::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_qa_questions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_qa_questions(::Google::Cloud::ContactCenterInsights::V1::ListQaQuestionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_qa_questions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_qa_scorecard
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecard.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    qa_scorecard = {}
+    qa_scorecard_id = "hello world"
+
+    create_qa_scorecard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_qa_scorecard, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::QaScorecard), request["qa_scorecard"]
+      assert_equal "hello world", request["qa_scorecard_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_qa_scorecard_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_qa_scorecard({ parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_qa_scorecard parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new(parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_qa_scorecard({ parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRequest.new(parent: parent, qa_scorecard: qa_scorecard, qa_scorecard_id: qa_scorecard_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_qa_scorecard_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_qa_scorecard
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecard.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_qa_scorecard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_qa_scorecard, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_qa_scorecard_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_qa_scorecard({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_qa_scorecard name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_qa_scorecard({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_qa_scorecard_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_qa_scorecard
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecard.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    qa_scorecard = {}
+    update_mask = {}
+
+    update_qa_scorecard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_qa_scorecard, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::QaScorecard), request["qa_scorecard"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_qa_scorecard_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_qa_scorecard({ qa_scorecard: qa_scorecard, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_qa_scorecard qa_scorecard: qa_scorecard, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new(qa_scorecard: qa_scorecard, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_qa_scorecard({ qa_scorecard: qa_scorecard, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::UpdateQaScorecardRequest.new(qa_scorecard: qa_scorecard, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_qa_scorecard_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_qa_scorecard
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_qa_scorecard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_qa_scorecard, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_qa_scorecard_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_qa_scorecard({ name: name, force: force }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_qa_scorecard name: name, force: force do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_qa_scorecard ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new(name: name, force: force) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_qa_scorecard({ name: name, force: force }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_qa_scorecard(::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRequest.new(name: name, force: force), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_qa_scorecard_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_qa_scorecards
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_qa_scorecards_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_qa_scorecards, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_qa_scorecards_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_qa_scorecards({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_qa_scorecards parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_qa_scorecards ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_qa_scorecards({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_qa_scorecards(::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_qa_scorecards_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_qa_scorecard_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    qa_scorecard_revision = {}
+    qa_scorecard_revision_id = "hello world"
+
+    create_qa_scorecard_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_qa_scorecard_revision, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision), request["qa_scorecard_revision"]
+      assert_equal "hello world", request["qa_scorecard_revision_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_qa_scorecard_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_qa_scorecard_revision({ parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_qa_scorecard_revision parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new(parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_qa_scorecard_revision({ parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::CreateQaScorecardRevisionRequest.new(parent: parent, qa_scorecard_revision: qa_scorecard_revision, qa_scorecard_revision_id: qa_scorecard_revision_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_qa_scorecard_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_qa_scorecard_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_qa_scorecard_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_qa_scorecard_revision, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_qa_scorecard_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_qa_scorecard_revision({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_qa_scorecard_revision name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::GetQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_qa_scorecard_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_tune_qa_scorecard_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    validate_only = true
+
+    tune_qa_scorecard_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :tune_qa_scorecard_revision, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, tune_qa_scorecard_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.tune_qa_scorecard_revision({ parent: parent, filter: filter, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.tune_qa_scorecard_revision parent: parent, filter: filter, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.tune_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new(parent: parent, filter: filter, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.tune_qa_scorecard_revision({ parent: parent, filter: filter, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.tune_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::TuneQaScorecardRevisionRequest.new(parent: parent, filter: filter, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, tune_qa_scorecard_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_deploy_qa_scorecard_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    deploy_qa_scorecard_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :deploy_qa_scorecard_revision, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, deploy_qa_scorecard_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.deploy_qa_scorecard_revision({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.deploy_qa_scorecard_revision name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.deploy_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.deploy_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.deploy_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::DeployQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, deploy_qa_scorecard_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_undeploy_qa_scorecard_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::QaScorecardRevision.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    undeploy_qa_scorecard_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :undeploy_qa_scorecard_revision, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, undeploy_qa_scorecard_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.undeploy_qa_scorecard_revision({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.undeploy_qa_scorecard_revision name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.undeploy_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.undeploy_qa_scorecard_revision({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.undeploy_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::UndeployQaScorecardRevisionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, undeploy_qa_scorecard_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_qa_scorecard_revision
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    force = true
+
+    delete_qa_scorecard_revision_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_qa_scorecard_revision, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_qa_scorecard_revision_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_qa_scorecard_revision({ name: name, force: force }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_qa_scorecard_revision name: name, force: force do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_qa_scorecard_revision ::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new(name: name, force: force) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_qa_scorecard_revision({ name: name, force: force }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_qa_scorecard_revision(::Google::Cloud::ContactCenterInsights::V1::DeleteQaScorecardRevisionRequest.new(name: name, force: force), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_qa_scorecard_revision_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_qa_scorecard_revisions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_qa_scorecard_revisions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_qa_scorecard_revisions, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_qa_scorecard_revisions_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_qa_scorecard_revisions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_qa_scorecard_revisions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_qa_scorecard_revisions ::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_qa_scorecard_revisions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_qa_scorecard_revisions(::Google::Cloud::ContactCenterInsights::V1::ListQaScorecardRevisionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_qa_scorecard_revisions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_feedback_label
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    feedback_label_id = "hello world"
+    feedback_label = {}
+
+    create_feedback_label_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_feedback_label, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["feedback_label_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel), request["feedback_label"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_feedback_label_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_feedback_label({ parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_feedback_label parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_feedback_label ::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new(parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_feedback_label({ parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_feedback_label(::Google::Cloud::ContactCenterInsights::V1::CreateFeedbackLabelRequest.new(parent: parent, feedback_label_id: feedback_label_id, feedback_label: feedback_label), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_feedback_label_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_feedback_labels
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_feedback_labels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_feedback_labels, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_feedback_labels_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_feedback_labels({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_feedback_labels parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_feedback_labels({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::ListFeedbackLabelsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_feedback_labels_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_feedback_label
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_feedback_label_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_feedback_label, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_feedback_label_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_feedback_label({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_feedback_label name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_feedback_label ::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_feedback_label({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_feedback_label(::Google::Cloud::ContactCenterInsights::V1::GetFeedbackLabelRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_feedback_label_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_feedback_label
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    feedback_label = {}
+    update_mask = {}
+
+    update_feedback_label_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_feedback_label, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::FeedbackLabel), request["feedback_label"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_feedback_label_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_feedback_label({ feedback_label: feedback_label, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_feedback_label feedback_label: feedback_label, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_feedback_label ::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new(feedback_label: feedback_label, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_feedback_label({ feedback_label: feedback_label, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_feedback_label(::Google::Cloud::ContactCenterInsights::V1::UpdateFeedbackLabelRequest.new(feedback_label: feedback_label, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_feedback_label_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_feedback_label
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_feedback_label_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_feedback_label, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_feedback_label_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_feedback_label({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_feedback_label name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_feedback_label ::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_feedback_label({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_feedback_label(::Google::Cloud::ContactCenterInsights::V1::DeleteFeedbackLabelRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_feedback_label_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_all_feedback_labels
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    list_all_feedback_labels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_all_feedback_labels, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_all_feedback_labels_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_all_feedback_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_all_feedback_labels parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_all_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_all_feedback_labels({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_all_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::ListAllFeedbackLabelsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_all_feedback_labels_client_stub.call_rpc_count
+    end
+  end
+
+  def test_bulk_upload_feedback_labels
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_source = {}
+    parent = "hello world"
+    validate_only = true
+
+    bulk_upload_feedback_labels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :bulk_upload_feedback_labels, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest::GcsSource), request["gcs_source"]
+      assert_equal :gcs_source, request.source
+      assert_equal "hello world", request["parent"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, bulk_upload_feedback_labels_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.bulk_upload_feedback_labels({ gcs_source: gcs_source, parent: parent, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.bulk_upload_feedback_labels gcs_source: gcs_source, parent: parent, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.bulk_upload_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new(gcs_source: gcs_source, parent: parent, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.bulk_upload_feedback_labels({ gcs_source: gcs_source, parent: parent, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.bulk_upload_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::BulkUploadFeedbackLabelsRequest.new(gcs_source: gcs_source, parent: parent, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, bulk_upload_feedback_labels_client_stub.call_rpc_count
+    end
+  end
+
+  def test_bulk_download_feedback_labels
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_destination = {}
+    parent = "hello world"
+    filter = "hello world"
+    max_download_count = 42
+    feedback_label_type = :FEEDBACK_LABEL_TYPE_UNSPECIFIED
+    conversation_filter = "hello world"
+    template_qa_scorecard_id = ["hello world"]
+
+    bulk_download_feedback_labels_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :bulk_download_feedback_labels, name
+      assert_kind_of ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest::GcsDestination), request["gcs_destination"]
+      assert_equal :gcs_destination, request.destination
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["max_download_count"]
+      assert_equal :FEEDBACK_LABEL_TYPE_UNSPECIFIED, request["feedback_label_type"]
+      assert_equal "hello world", request["conversation_filter"]
+      assert_equal ["hello world"], request["template_qa_scorecard_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, bulk_download_feedback_labels_client_stub do
+      # Create client
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.bulk_download_feedback_labels({ gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.bulk_download_feedback_labels gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.bulk_download_feedback_labels ::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new(gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.bulk_download_feedback_labels({ gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.bulk_download_feedback_labels(::Google::Cloud::ContactCenterInsights::V1::BulkDownloadFeedbackLabelsRequest.new(gcs_destination: gcs_destination, parent: parent, filter: filter, max_download_count: max_download_count, feedback_label_type: feedback_label_type, conversation_filter: conversation_filter, template_qa_scorecard_id: template_qa_scorecard_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, bulk_download_feedback_labels_client_stub.call_rpc_count
     end
   end
 
