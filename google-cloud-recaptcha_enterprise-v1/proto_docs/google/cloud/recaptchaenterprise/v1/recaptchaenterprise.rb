@@ -742,6 +742,9 @@ module Google
         #   @return [::Array<::String>]
         #     Output only. Extended verdict reasons to be used for experimentation only.
         #     The set of possible reasons is subject to change.
+        # @!attribute [r] challenge
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::Challenge]
+        #     Output only. Challenge information for SCORE_AND_CHALLENGE keys
         class RiskAnalysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -773,6 +776,22 @@ module Google
 
             # The request matches behavioral characteristics of chargebacks for fraud.
             SUSPECTED_CHARGEBACK = 7
+          end
+
+          # Challenge information for SCORE_AND_CHALLENGE keys
+          module Challenge
+            # Default unspecified type.
+            CHALLENGE_UNSPECIFIED = 0
+
+            # No challenge was presented for solving.
+            NOCAPTCHA = 1
+
+            # A solution was submitted that was correct.
+            PASSED = 2
+
+            # A solution was submitted that was incorrect or otherwise
+            # deemed suspicious.
+            FAILED = 3
           end
         end
 
