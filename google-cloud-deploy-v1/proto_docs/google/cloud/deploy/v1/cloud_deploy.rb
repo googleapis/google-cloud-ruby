@@ -3801,7 +3801,47 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::RepairRolloutRule]
         #     Optional. The `RepairRolloutRule` will automatically repair a failed
         #     rollout.
+        # @!attribute [rw] timed_promote_release_rule
+        #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseRule]
+        #     Optional. The `TimedPromoteReleaseRule` will automatically promote a
+        #     release from the current target(s) to the specified target(s) on a
+        #     configured schedule.
         class AutomationRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The `TimedPromoteReleaseRule` will automatically promote a release from the
+        # current target(s) to the specified target(s) on a configured schedule.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Required. ID of the rule. This ID must be unique in the `Automation`
+        #     resource to which this rule belongs. The format is
+        #     `[a-z]([a-z0-9-]{0,61}[a-z0-9])?`.
+        # @!attribute [rw] destination_target_id
+        #   @return [::String]
+        #     Optional. The ID of the stage in the pipeline to which this `Release` is
+        #     deploying. If unspecified, default it to the next stage in the promotion
+        #     flow. The value of this field could be one of the following:
+        #
+        #     * The last segment of a target name
+        #     * "@next", the next target in the promotion sequence
+        # @!attribute [rw] schedule
+        #   @return [::String]
+        #     Required. Schedule in crontab format. e.g. "0 9 * * 1" for every Monday at
+        #     9am.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     Required. The time zone in IANA format [IANA Time Zone
+        #     Database](https://www.iana.org/time-zones) (e.g. America/New_York).
+        # @!attribute [r] condition
+        #   @return [::Google::Cloud::Deploy::V1::AutomationRuleCondition]
+        #     Output only. Information around the state of the Automation rule.
+        # @!attribute [rw] destination_phase
+        #   @return [::String]
+        #     Optional. The starting phase of the rollout created by this rule. Default
+        #     to the first phase.
+        class TimedPromoteReleaseRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3946,9 +3986,38 @@ module Google
         # @!attribute [rw] targets_present_condition
         #   @return [::Google::Cloud::Deploy::V1::TargetsPresentCondition]
         #     Optional. Details around targets enumerated in the rule.
+        # @!attribute [rw] timed_promote_release_condition
+        #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseCondition]
+        #     Optional. TimedPromoteReleaseCondition contains rule conditions specific
+        #     to a an Automation with a timed promote release rule defined.
         class AutomationRuleCondition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `TimedPromoteReleaseCondition` contains conditions specific to an Automation
+        # with a Timed Promote Release rule defined.
+        # @!attribute [r] next_promotion_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. When the next scheduled promotion(s) will occur.
+        # @!attribute [r] targets_list
+        #   @return [::Array<::Google::Cloud::Deploy::V1::TimedPromoteReleaseCondition::Targets>]
+        #     Output only. A list of targets involved in the upcoming timed promotion(s).
+        class TimedPromoteReleaseCondition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The targets involved in a single timed promotion.
+          # @!attribute [rw] source_target_id
+          #   @return [::String]
+          #     Optional. The source target ID.
+          # @!attribute [rw] destination_target_id
+          #   @return [::String]
+          #     Optional. The destination target ID.
+          class Targets
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The request object for `CreateAutomation`.
@@ -4152,9 +4221,9 @@ module Google
         #     time.
         # @!attribute [r] target_id
         #   @return [::String]
-        #     Output only. The ID of the target that represents the promotion stage that
-        #     initiates the `AutomationRun`. The value of this field is the last segment
-        #     of a target name.
+        #     Output only. The ID of the source target that initiates the
+        #     `AutomationRun`. The value of this field is the last segment of a target
+        #     name.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Deploy::V1::AutomationRun::State]
         #     Output only. Current state of the `AutomationRun`.
@@ -4185,6 +4254,10 @@ module Google
         # @!attribute [r] repair_rollout_operation
         #   @return [::Google::Cloud::Deploy::V1::RepairRolloutOperation]
         #     Output only. Repairs a failed 'Rollout'.
+        # @!attribute [r] timed_promote_release_operation
+        #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseOperation]
+        #     Output only. Promotes a release to a specified 'Target' as defined in a
+        #     Timed Promote Release rule.
         # @!attribute [r] wait_until_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Earliest time the `AutomationRun` will attempt to resume.
@@ -4275,6 +4348,23 @@ module Google
         #   @return [::String]
         #     Output only. The job ID for the Job to repair.
         class RepairRolloutOperation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains the information of an automated timed promote-release operation.
+        # @!attribute [r] target_id
+        #   @return [::String]
+        #     Output only. The ID of the target that represents the promotion stage to
+        #     which the release will be promoted. The value of this field is the last
+        #     segment of a target name.
+        # @!attribute [r] release
+        #   @return [::String]
+        #     Output only. The name of the release to be promoted.
+        # @!attribute [r] phase
+        #   @return [::String]
+        #     Output only. The starting phase of the rollout created by this operation.
+        class TimedPromoteReleaseOperation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
