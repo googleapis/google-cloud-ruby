@@ -1,5 +1,27 @@
 # Release History
 
+### 1.1.0 (2024-11-14)
+
+#### Features
+
+* A new enum `DataplexTransferStatus` is added 
+* A new field `dataplex_transfer_status` is added to message `.google.cloud.datacatalog.v1.TagTemplate` 
+* A new field `feature_online_store_spec` is added to message `.google.cloud.datacatalog.v1.Entry` ([#27611](https://github.com/googleapis/google-cloud-ruby/issues/27611)) 
+* A new message `FeatureOnlineStoreSpec` is added 
+* A new value `CUSTOM_TEXT_EMBEDDING` is added to enum `ModelSourceType` 
+* A new value `FEATURE_GROUP` is added to enum `EntryType` 
+* A new value `FEATURE_ONLINE_STORE` is added to enum `EntryType` 
+* A new value `FEATURE_VIEW` is added to enum `EntryType` 
+* A new value `GENIE` is added to enum `ModelSourceType` 
+* A new value `MARKETPLACE` is added to enum `ModelSourceType` 
+#### Documentation
+
+* A comment for field `name` in message `.google.cloud.datacatalog.v1.Entry` is changed 
+* A comment for field `name` in message `.google.cloud.datacatalog.v1.EntryGroup` is changed 
+* A comment for field `name` in message `.google.cloud.datacatalog.v1.Tag` is changed 
+* A comment for field `name` in message `.google.cloud.datacatalog.v1.TagTemplate` is changed 
+* A comment for field `name` in message `.google.cloud.datacatalog.v1.TagTemplateField` is changed 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
