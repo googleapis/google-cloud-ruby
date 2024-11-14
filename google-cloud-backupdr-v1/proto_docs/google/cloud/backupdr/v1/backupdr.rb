@@ -128,7 +128,7 @@ module Google
         #   @return [::String]
         #     Output only. The OAuth 2.0 client id is required to make API calls to the
         #     BackupDR instance API of this ManagementServer. This is the value that
-        #     should be provided in the ‘aud’ field of the OIDC ID Token (see openid
+        #     should be provided in the 'aud' field of the OIDC ID Token (see openid
         #     specification
         #     https://openid.net/specs/openid-connect-core-1_0.html#IDToken).
         # @!attribute [r] workforce_identity_based_oauth2_client_id
@@ -201,10 +201,11 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location for which to retrieve management servers
-        #     information, in the format `projects/{project_id}/locations/{location}`. In
-        #     Cloud BackupDR, locations map to GCP regions, for example **us-central1**.
-        #     To retrieve management servers for all locations, use "-" for the
-        #     `{location}` value.
+        #     information, in the format 'projects/\\{project_id}/locations/\\{location}'. In
+        #     Cloud BackupDR, locations map to Google Cloud regions, for example
+        #     **us-central1**. To retrieve management servers for all locations, use "-"
+        #     for the
+        #     '\\{location}' value.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Requested page size. Server may return fewer items than
@@ -229,7 +230,7 @@ module Google
         #     The list of ManagementServer instances in the project for the specified
         #     location.
         #
-        #     If the `{location}` value in the request is "-", the response contains a
+        #     If the '\\{location}' value in the request is "-", the response contains a
         #     list of instances from all locations. In case any location is unreachable,
         #     the response will only return management servers in reachable locations and
         #     the 'unreachable' field will be populated with a list of unreachable
@@ -249,7 +250,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the management server resource name, in the format
-        #     `projects/{project_id}/locations/{location}/managementServers/{resource_name}`
+        #     'projects/\\{project_id}/locations/\\{location}/managementServers/\\{resource_name}'
         class GetManagementServerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -259,8 +260,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The management server project and location in the format
-        #     `projects/{project_id}/locations/{location}`. In Cloud Backup and DR
-        #     locations map to GCP regions, for example **us-central1**.
+        #     'projects/\\{project_id}/locations/\\{location}'. In Cloud Backup and DR
+        #     locations map to Google Cloud regions, for example **us-central1**.
         # @!attribute [rw] management_server_id
         #   @return [::String]
         #     Required. The name of the management server to create. The name must be
@@ -335,7 +336,7 @@ module Google
         #     of the operation. Operations that have successfully been cancelled
         #     have [Operation.error][] value with a
         #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     'Code.CANCELLED'.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

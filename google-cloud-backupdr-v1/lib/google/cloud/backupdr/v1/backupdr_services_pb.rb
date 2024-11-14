@@ -41,6 +41,54 @@ module Google
             rpc :CreateManagementServer, ::Google::Cloud::BackupDR::V1::CreateManagementServerRequest, ::Google::Longrunning::Operation
             # Deletes a single ManagementServer.
             rpc :DeleteManagementServer, ::Google::Cloud::BackupDR::V1::DeleteManagementServerRequest, ::Google::Longrunning::Operation
+            # Creates a new BackupVault in a given project and location.
+            rpc :CreateBackupVault, ::Google::Cloud::BackupDR::V1::CreateBackupVaultRequest, ::Google::Longrunning::Operation
+            # Lists BackupVaults in a given project and location.
+            rpc :ListBackupVaults, ::Google::Cloud::BackupDR::V1::ListBackupVaultsRequest, ::Google::Cloud::BackupDR::V1::ListBackupVaultsResponse
+            # FetchUsableBackupVaults lists usable BackupVaults in a given project and
+            # location. Usable BackupVault are the ones that user has
+            # backupdr.backupVaults.get permission.
+            rpc :FetchUsableBackupVaults, ::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsRequest, ::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsResponse
+            # Gets details of a BackupVault.
+            rpc :GetBackupVault, ::Google::Cloud::BackupDR::V1::GetBackupVaultRequest, ::Google::Cloud::BackupDR::V1::BackupVault
+            # Updates the settings of a BackupVault.
+            rpc :UpdateBackupVault, ::Google::Cloud::BackupDR::V1::UpdateBackupVaultRequest, ::Google::Longrunning::Operation
+            # Deletes a BackupVault.
+            rpc :DeleteBackupVault, ::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest, ::Google::Longrunning::Operation
+            # Lists DataSources in a given project and location.
+            rpc :ListDataSources, ::Google::Cloud::BackupDR::V1::ListDataSourcesRequest, ::Google::Cloud::BackupDR::V1::ListDataSourcesResponse
+            # Gets details of a DataSource.
+            rpc :GetDataSource, ::Google::Cloud::BackupDR::V1::GetDataSourceRequest, ::Google::Cloud::BackupDR::V1::DataSource
+            # Updates the settings of a DataSource.
+            rpc :UpdateDataSource, ::Google::Cloud::BackupDR::V1::UpdateDataSourceRequest, ::Google::Longrunning::Operation
+            # Lists Backups in a given project and location.
+            rpc :ListBackups, ::Google::Cloud::BackupDR::V1::ListBackupsRequest, ::Google::Cloud::BackupDR::V1::ListBackupsResponse
+            # Gets details of a Backup.
+            rpc :GetBackup, ::Google::Cloud::BackupDR::V1::GetBackupRequest, ::Google::Cloud::BackupDR::V1::Backup
+            # Updates the settings of a Backup.
+            rpc :UpdateBackup, ::Google::Cloud::BackupDR::V1::UpdateBackupRequest, ::Google::Longrunning::Operation
+            # Deletes a Backup.
+            rpc :DeleteBackup, ::Google::Cloud::BackupDR::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
+            # Restore from a Backup
+            rpc :RestoreBackup, ::Google::Cloud::BackupDR::V1::RestoreBackupRequest, ::Google::Longrunning::Operation
+            # Create a BackupPlan
+            rpc :CreateBackupPlan, ::Google::Cloud::BackupDR::V1::CreateBackupPlanRequest, ::Google::Longrunning::Operation
+            # Gets details of a single BackupPlan.
+            rpc :GetBackupPlan, ::Google::Cloud::BackupDR::V1::GetBackupPlanRequest, ::Google::Cloud::BackupDR::V1::BackupPlan
+            # Lists BackupPlans in a given project and location.
+            rpc :ListBackupPlans, ::Google::Cloud::BackupDR::V1::ListBackupPlansRequest, ::Google::Cloud::BackupDR::V1::ListBackupPlansResponse
+            # Deletes a single BackupPlan.
+            rpc :DeleteBackupPlan, ::Google::Cloud::BackupDR::V1::DeleteBackupPlanRequest, ::Google::Longrunning::Operation
+            # Create a BackupPlanAssociation
+            rpc :CreateBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::CreateBackupPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Gets details of a single BackupPlanAssociation.
+            rpc :GetBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::GetBackupPlanAssociationRequest, ::Google::Cloud::BackupDR::V1::BackupPlanAssociation
+            # Lists BackupPlanAssociations in a given project and location.
+            rpc :ListBackupPlanAssociations, ::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsRequest, ::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsResponse
+            # Deletes a single BackupPlanAssociation.
+            rpc :DeleteBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest, ::Google::Longrunning::Operation
+            # Triggers a new Backup.
+            rpc :TriggerBackup, ::Google::Cloud::BackupDR::V1::TriggerBackupRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
