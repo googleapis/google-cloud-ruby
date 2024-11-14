@@ -52,7 +52,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.privilegedaccessmanager.v1.PrivilegedAccessManager'
 
-            # CheckOnboardingStatus reports the onboarding status for a
+            # `CheckOnboardingStatus` reports the onboarding status for a
             # project/folder/organization. Any findings reported by this API need to be
             # fixed before PAM can be used on the resource.
             rpc :CheckOnboardingStatus, ::Google::Cloud::PrivilegedAccessManager::V1::CheckOnboardingStatusRequest, ::Google::Cloud::PrivilegedAccessManager::V1::CheckOnboardingStatusResponse
@@ -67,7 +67,7 @@ module Google
             # location.
             rpc :CreateEntitlement, ::Google::Cloud::PrivilegedAccessManager::V1::CreateEntitlementRequest, ::Google::Longrunning::Operation
             # Deletes a single entitlement. This method can only be called when there
-            # are no in-progress (ACTIVE/ACTIVATING/REVOKING) grants under the
+            # are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the
             # entitlement.
             rpc :DeleteEntitlement, ::Google::Cloud::PrivilegedAccessManager::V1::DeleteEntitlementRequest, ::Google::Longrunning::Operation
             # Updates the entitlement specified in the request. Updated fields in the
@@ -98,7 +98,8 @@ module Google
             rpc :SearchGrants, ::Google::Cloud::PrivilegedAccessManager::V1::SearchGrantsRequest, ::Google::Cloud::PrivilegedAccessManager::V1::SearchGrantsResponse
             # Get details of a single grant.
             rpc :GetGrant, ::Google::Cloud::PrivilegedAccessManager::V1::GetGrantRequest, ::Google::Cloud::PrivilegedAccessManager::V1::Grant
-            # Creates a new grant in a given project and location.
+            # Creates a new grant in a given project/folder/organization and
+            # location.
             rpc :CreateGrant, ::Google::Cloud::PrivilegedAccessManager::V1::CreateGrantRequest, ::Google::Cloud::PrivilegedAccessManager::V1::Grant
             # `ApproveGrant` is used to approve a grant. This method can only be called
             # on a grant when it's in the `APPROVAL_AWAITED` state. This operation can't

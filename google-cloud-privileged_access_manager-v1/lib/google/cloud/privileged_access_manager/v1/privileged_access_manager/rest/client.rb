@@ -206,7 +206,7 @@ module Google
               # Service calls
 
               ##
-              # CheckOnboardingStatus reports the onboarding status for a
+              # `CheckOnboardingStatus` reports the onboarding status for a
               # project/folder/organization. Any findings reported by this API need to be
               # fixed before PAM can be used on the resource.
               #
@@ -606,7 +606,7 @@ module Google
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, ignores the second request and returns the
               #     previous operation's response. This prevents clients from accidentally
-              #     creating duplicate commitments.
+              #     creating duplicate entitlements.
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
@@ -679,7 +679,7 @@ module Google
 
               ##
               # Deletes a single entitlement. This method can only be called when there
-              # are no in-progress (ACTIVE/ACTIVATING/REVOKING) grants under the
+              # are no in-progress (`ACTIVE`/`ACTIVATING`/`REVOKING`) grants under the
               # entitlement.
               #
               # @overload delete_entitlement(request, options = nil)
@@ -708,8 +708,7 @@ module Google
               #     For example, consider a situation where you make an initial request and the
               #     request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
-              #     was received, and if so, ignores the second request. This prevents
-              #     clients from accidentally creating duplicate commitments.
+              #     was received, and if so, ignores the second request.
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
@@ -1167,7 +1166,8 @@ module Google
               end
 
               ##
-              # Creates a new grant in a given project and location.
+              # Creates a new grant in a given project/folder/organization and
+              # location.
               #
               # @overload create_grant(request, options = nil)
               #   Pass arguments to `create_grant` via a request object, either of type
@@ -1199,7 +1199,7 @@ module Google
               #     request times out. If you make the request again with the same request
               #     ID, the server can check if original operation with the same request ID
               #     was received, and if so, ignores the second request. This prevents
-              #     clients from accidentally creating duplicate commitments.
+              #     clients from accidentally creating duplicate grants.
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
