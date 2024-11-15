@@ -7,7 +7,7 @@ gem "google-cloud-video_intelligence-v1beta2", path: "../google-cloud-video_inte
 gem "google-cloud-video_intelligence-v1p1beta1", path: "../google-cloud-video_intelligence-v1p1beta1"
 gem "google-cloud-video_intelligence-v1p2beta1", path: "../google-cloud-video_intelligence-v1p2beta1"
 
-gem "google-style", "~> 1.27.1"
+gem "google-style", ">= 1.27.1", "< 1.30.2"
 gem "minitest", "~> 5.22"
 gem "minitest-focus", "~> 1.4"
 gem "minitest-rg", "~> 5.3"

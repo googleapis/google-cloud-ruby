@@ -6,7 +6,7 @@ gem "google-cloud-errors", path: "../google-cloud-errors"
 
 gem "autotest-suffix", "~> 1.1"
 gem "googleauth", "~> 1.0"
-gem "google-style", "~> 1.27.1"
+gem "google-style", ">= 1.27.1", "< 1.30.2"
 gem "minitest", "~> 5.14"
 gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.1"
