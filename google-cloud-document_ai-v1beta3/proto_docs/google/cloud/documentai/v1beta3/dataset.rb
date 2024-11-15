@@ -162,6 +162,12 @@ module Google
         # @!attribute [rw] document_schema
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentSchema]
         #     Optional. Schema of the dataset.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class DatasetSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
