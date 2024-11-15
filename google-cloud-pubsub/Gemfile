@@ -14,7 +14,7 @@ gem "minitest-autotest", "~> 1.0"
 gem "minitest-focus", "~> 1.1"
 gem "minitest-reporters", "~> 1.5.0", require: false
 gem "minitest-rg", "~> 5.2"
-gem "pry", "~> 0.14.1"
+gem "pry", ">= 0.14.1", "< 0.16"
 gem "rake"
 gem "redcarpet", "~> 3.0"
 gem "retriable", "~> 3.1"
