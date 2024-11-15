@@ -57,8 +57,27 @@ def grant_sts_permissions project_id:, bucket_name:
   end
 end
 
+def grant_pubsub_permissions project_id:, topic:, subscription:
+  storage_client = Google::Cloud::Storage.new
+  storage_transfer_client = Google::Cloud::StorageTransfer.storage_transfer_service
+  request = { project_id: project_id }
+  response = storage_transfer_client.get_google_service_account request
+  email = response.account_email
+  member = "serviceAccount:#{email}"
+  topic.policy do |p|
+    p.add "roles/pubsub.publisher",
+          "serviceAccount:#{storage_client.service_account_email}"
+  end
+  subscription.policy do |p|
+    p.add "roles/pubsub.subscriber", member
+  end
+
+  topic.update_policy topic.policy
+  subscription.update_policy subscription.policy
+end
+
 def delete_transfer_job project_id:, job_name:
-  client = Google::Cloud::StorageTransfer.storage_transfer_service
+  storage_transfer_client = Google::Cloud::StorageTransfer.storage_transfer_service
 
   transfer_job = {
     name: job_name,
@@ -71,7 +90,7 @@ def delete_transfer_job project_id:, job_name:
     transfer_job: transfer_job
   }
 
-  client.update_transfer_job delete_request
+  storage_transfer_client.update_transfer_job delete_request
 end
 
 def random_bucket_name
@@ -79,10 +98,10 @@ def random_bucket_name
   "ruby-storagetransfer-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
 end
 
-def create_bucket_helper bucket_name
+def create_bucket_helper bucket_name, storage_class: nil
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
-    storage_client.create_bucket bucket_name
+    storage_client.create_bucket(bucket_name, storage_class: storage_class || nil)
   end
 end
 

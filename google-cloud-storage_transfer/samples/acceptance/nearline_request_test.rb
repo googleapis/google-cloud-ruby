@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,19 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 require_relative "helper"
-require_relative "../quickstart"
+require_relative "../nearline_request"
 
-describe "Storage Transfer Service Quickstart" do
+describe "Storage Transfer Service To Nearline Transfer" do
   let(:storage) { Google::Cloud::Storage.new }
+  let(:description) { "This is a nearline request transfer job" }
   let(:source_bucket) { create_bucket_helper random_bucket_name }
-  let(:sink_bucket) { create_bucket_helper random_bucket_name }
-  let(:dummy_file_name) { "ruby_storagetransfer_samples_dummy_#{SecureRandom.hex}.txt" }
+  let(:sink_bucket) { create_bucket_helper random_bucket_name, storage_class: "nearline" }
 
   before do
-    # create dummy file in source bucket
-    source_bucket.create_file StringIO.new("this is dummy"), dummy_file_name
     grant_sts_permissions project_id: storage.project_id, bucket_name: source_bucket.name
     grant_sts_permissions project_id: storage.project_id, bucket_name: sink_bucket.name
   end
@@ -34,17 +31,12 @@ describe "Storage Transfer Service Quickstart" do
   end
 
   it "creates a transfer job" do
-    grant_sts_permissions project_id: storage.project_id, bucket_name: source_bucket.name
-    grant_sts_permissions project_id: storage.project_id, bucket_name: sink_bucket.name
     out, _err = capture_io do
-      retry_resource_exhaustion do
-        quickstart project_id: storage.project_id, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name
-      end
+      create_daily_nearline_30_day_migration project_id: storage.project_id, description: description, gcs_source_bucket: source_bucket.name, gcs_sink_bucket: sink_bucket.name, start_date: Time.now
     end
-
     assert_includes out, "transferJobs"
-    job_name = out.scan(%r{transferJobs/\d+})[0]
-
+    job_name = out.scan(%r{(transferJobs/.*)}).flatten.first
+    # delete transfer job
     delete_transfer_job project_id: storage.project_id, job_name: job_name
   end
 end
