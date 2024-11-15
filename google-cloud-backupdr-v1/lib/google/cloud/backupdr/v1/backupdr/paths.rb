@@ -25,6 +25,107 @@ module Google
           # Path helper methods for the BackupDR API.
           module Paths
             ##
+            # Create a fully-qualified Backup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}/backups/{backup}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backupvault [String]
+            # @param datasource [String]
+            # @param backup [String]
+            #
+            # @return [::String]
+            def backup_path project:, location:, backupvault:, datasource:, backup:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "backupvault cannot contain /" if backupvault.to_s.include? "/"
+              raise ::ArgumentError, "datasource cannot contain /" if datasource.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupVaults/#{backupvault}/dataSources/#{datasource}/backups/#{backup}"
+            end
+
+            ##
+            # Create a fully-qualified BackupPlan resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupPlans/{backup_plan}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_plan [String]
+            #
+            # @return [::String]
+            def backup_plan_path project:, location:, backup_plan:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupPlans/#{backup_plan}"
+            end
+
+            ##
+            # Create a fully-qualified BackupPlanAssociation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupPlanAssociations/{backup_plan_association}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backup_plan_association [String]
+            #
+            # @return [::String]
+            def backup_plan_association_path project:, location:, backup_plan_association:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupPlanAssociations/#{backup_plan_association}"
+            end
+
+            ##
+            # Create a fully-qualified BackupVault resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupVaults/{backupvault}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backupvault [String]
+            #
+            # @return [::String]
+            def backup_vault_path project:, location:, backupvault:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupVaults/#{backupvault}"
+            end
+
+            ##
+            # Create a fully-qualified DataSource resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/backupVaults/{backupvault}/dataSources/{datasource}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param backupvault [String]
+            # @param datasource [String]
+            #
+            # @return [::String]
+            def data_source_path project:, location:, backupvault:, datasource:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "backupvault cannot contain /" if backupvault.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/backupVaults/#{backupvault}/dataSources/#{datasource}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
