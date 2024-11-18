@@ -136,6 +136,11 @@ module Google
         # @!attribute [rw] scaling_mode
         #   @return [::Google::Cloud::Run::V2::ServiceScaling::ScalingMode]
         #     Optional. The scaling mode for the service.
+        # @!attribute [rw] manual_instance_count
+        #   @return [::Integer]
+        #     Optional. total instance count for the service in manual scaling mode. This
+        #     number of instances is divided among all revisions with specified traffic
+        #     based on the percent of traffic they are receiving.
         class ServiceScaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
