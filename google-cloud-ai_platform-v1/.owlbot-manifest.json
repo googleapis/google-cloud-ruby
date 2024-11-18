@@ -581,6 +581,7 @@
     "snippets/endpoint_service/mutate_deployed_model.rb",
     "snippets/endpoint_service/undeploy_model.rb",
     "snippets/endpoint_service/update_endpoint.rb",
+    "snippets/endpoint_service/update_endpoint_long_running.rb",
     "snippets/evaluation_service/evaluate_instances.rb",
     "snippets/feature_online_store_admin_service/create_feature_online_store.rb",
     "snippets/feature_online_store_admin_service/create_feature_view.rb",

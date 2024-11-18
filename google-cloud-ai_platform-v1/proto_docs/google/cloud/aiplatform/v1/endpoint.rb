@@ -135,6 +135,9 @@ module Google
         #     dedicated_endpoint_enabled is true.
         #     Format:
         #     `https://{endpoint_id}.{region}-{project_number}.prediction.vertexai.goog`.
+        # @!attribute [rw] client_connection_config
+        #   @return [::Google::Cloud::AIPlatform::V1::ClientConnectionConfig]
+        #     Configurations that are applied to the endpoint for online prediction.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
@@ -336,6 +339,15 @@ module Google
         #   @return [::Boolean]
         #     If true, enable fast tryout feature for this deployed model.
         class FasterDeploymentConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configurations (e.g. inference timeout) that are applied on your endpoints.
+        # @!attribute [rw] inference_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Customizable online prediction request timeout.
+        class ClientConnectionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

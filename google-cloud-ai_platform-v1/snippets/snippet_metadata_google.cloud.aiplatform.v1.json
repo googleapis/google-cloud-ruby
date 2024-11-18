@@ -1172,6 +1172,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_EndpointService_UpdateEndpointLongRunning_sync",
+      "title": "Snippet for the update_endpoint_long_running call in the EndpointService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint_long_running.",
+      "file": "endpoint_service/update_endpoint_long_running.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_endpoint_long_running",
+        "full_name": "::Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint_long_running",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "EndpointService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::EndpointService::Client"
+        },
+        "method": {
+          "short_name": "UpdateEndpointLongRunning",
+          "full_name": "google.cloud.aiplatform.v1.EndpointService.UpdateEndpointLongRunning",
+          "service": {
+            "short_name": "EndpointService",
+            "full_name": "google.cloud.aiplatform.v1.EndpointService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_EndpointService_DeleteEndpoint_sync",
       "title": "Snippet for the delete_endpoint call in the EndpointService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::EndpointService::Client#delete_endpoint.",

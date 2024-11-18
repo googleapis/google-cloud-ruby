@@ -173,6 +173,11 @@
                 "update_endpoint"
               ]
             },
+            "UpdateEndpointLongRunning": {
+              "methods": [
+                "update_endpoint_long_running"
+              ]
+            },
             "DeleteEndpoint": {
               "methods": [
                 "delete_endpoint"
