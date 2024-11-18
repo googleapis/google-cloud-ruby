@@ -44,6 +44,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
             # Create a fully-qualified GitRepositoryLink resource string.
             #
             # The resource will be in the following format:
@@ -98,6 +119,27 @@ module Google
               raise ::ArgumentError, "secret cannot contain /" if secret.to_s.include? "/"
 
               "projects/#{project}/secrets/#{secret}/versions/#{secret_version}"
+            end
+
+            ##
+            # Create a fully-qualified Service resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param namespace [String]
+            # @param service [String]
+            #
+            # @return [::String]
+            def service_path project:, location:, namespace:, service:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
             end
 
             extend self
