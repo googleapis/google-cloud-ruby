@@ -198,6 +198,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Reservation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project_id_or_number}/zones/{zone}/reservations/{reservation_name}`
+            #
+            # @param project_id_or_number [String]
+            # @param zone [String]
+            # @param reservation_name [String]
+            #
+            # @return [::String]
+            def reservation_path project_id_or_number:, zone:, reservation_name:
+              raise ::ArgumentError, "project_id_or_number cannot contain /" if project_id_or_number.to_s.include? "/"
+              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
+
+              "projects/#{project_id_or_number}/zones/#{zone}/reservations/#{reservation_name}"
+            end
+
+            ##
             # Create a fully-qualified Schedule resource string.
             #
             # The resource will be in the following format:
@@ -214,6 +233,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/schedules/#{schedule}"
+            end
+
+            ##
+            # Create a fully-qualified Subnetwork resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/regions/{region}/subnetworks/{subnetwork}`
+            #
+            # @param project [String]
+            # @param region [String]
+            # @param subnetwork [String]
+            #
+            # @return [::String]
+            def subnetwork_path project:, region:, subnetwork:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "region cannot contain /" if region.to_s.include? "/"
+
+              "projects/#{project}/regions/#{region}/subnetworks/#{subnetwork}"
             end
 
             extend self

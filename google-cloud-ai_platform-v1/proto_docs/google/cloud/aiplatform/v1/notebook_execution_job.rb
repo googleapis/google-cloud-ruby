@@ -35,6 +35,9 @@ module Google
         # @!attribute [rw] notebook_runtime_template_resource_name
         #   @return [::String]
         #     The NotebookRuntimeTemplate to source compute configuration from.
+        # @!attribute [rw] custom_environment_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::CustomEnvironmentSpec]
+        #     The custom compute configuration for an execution job.
         # @!attribute [rw] gcs_output_uri
         #   @return [::String]
         #     The Cloud Storage location to upload the result to. Format:
@@ -130,6 +133,21 @@ module Google
           #   @return [::String]
           #     The base64-encoded contents of the input notebook file.
           class DirectNotebookSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Compute configuration to use for an execution job.
+          # @!attribute [rw] machine_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::MachineSpec]
+          #     The specification of a single machine for the execution job.
+          # @!attribute [rw] persistent_disk_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::PersistentDiskSpec]
+          #     The specification of a persistent disk to attach for the execution job.
+          # @!attribute [rw] network_spec
+          #   @return [::Google::Cloud::AIPlatform::V1::NetworkSpec]
+          #     The network configuration to use for the execution job.
+          class CustomEnvironmentSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
