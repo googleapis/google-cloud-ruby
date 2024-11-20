@@ -1933,9 +1933,9 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [rw] skaffold_version
         #   @return [::String]
-        #     The Skaffold version to use when operating on this release, such as
-        #     "1.20.0". Not all versions are valid; Cloud Deploy supports a specific set
-        #     of versions.
+        #     Optional. The Skaffold version to use when operating on this release, such
+        #     as "1.20.0". Not all versions are valid; Cloud Deploy supports a specific
+        #     set of versions.
         #
         #     If unset, the most recent supported Skaffold version will be used.
         # @!attribute [r] target_artifacts
@@ -3123,9 +3123,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
