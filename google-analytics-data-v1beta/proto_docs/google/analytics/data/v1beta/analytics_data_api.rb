@@ -27,7 +27,7 @@ module Google
         # as in your `runReport` request.
         # @!attribute [rw] property
         #   @return [::String]
-        #     A Google Analytics GA4 property identifier whose events are tracked. To
+        #     A Google Analytics property identifier whose events are tracked. To
         #     learn more, see [where to find your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
         #     `property` should be the same value as in your `runReport` request.
@@ -93,7 +93,7 @@ module Google
         # The request to generate a report.
         # @!attribute [rw] property
         #   @return [::String]
-        #     A Google Analytics GA4 property identifier whose events are tracked.
+        #     A Google Analytics property identifier whose events are tracked.
         #     Specified in the URL path and not the body. To learn more, see [where to
         #     find your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -153,9 +153,13 @@ module Google
         #   @return [::Array<::Google::Analytics::Data::V1beta::MetricAggregation>]
         #     Aggregation of metrics. Aggregated metric values will be shown in rows
         #     where the dimension_values are set to "RESERVED_(MetricAggregation)".
+        #     Aggregates including both comparisons and multiple date ranges will
+        #     be aggregated based on the date ranges.
         # @!attribute [rw] order_bys
         #   @return [::Array<::Google::Analytics::Data::V1beta::OrderBy>]
         #     Specifies how rows are ordered in the response.
+        #     Requests including both comparisons and multiple date ranges will
+        #     have order bys applied on the comparisons.
         # @!attribute [rw] currency_code
         #   @return [::String]
         #     A currency code in ISO4217 format, such as "AED", "USD", "JPY".
@@ -171,15 +175,15 @@ module Google
         #     removed by a filter.
         #
         #     Regardless of this `keep_empty_rows` setting, only data recorded by the
-        #     Google Analytics (GA4) property can be displayed in a report.
+        #     Google Analytics property can be displayed in a report.
         #
         #     For example if a property never logs a `purchase` event, then a query for
         #     the `eventName` dimension and  `eventCount` metric will not have a row
         #     eventName: "purchase" and eventCount: 0.
         # @!attribute [rw] return_property_quota
         #   @return [::Boolean]
-        #     Toggles whether to return the current state of this Analytics Property's
-        #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        #     Toggles whether to return the current state of this Google Analytics
+        #     property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
         # @!attribute [rw] comparisons
         #   @return [::Array<::Google::Analytics::Data::V1beta::Comparison>]
         #     Optional. The configuration of comparisons requested and displayed. The
@@ -226,7 +230,7 @@ module Google
         #     Metadata for the report.
         # @!attribute [rw] property_quota
         #   @return [::Google::Analytics::Data::V1beta::PropertyQuota]
-        #     This Analytics Property's quota state including this request.
+        #     This Google Analytics property's quota state including this request.
         # @!attribute [rw] kind
         #   @return [::String]
         #     Identifies what kind of resource this message is. This `kind` is always the
@@ -240,7 +244,7 @@ module Google
         # The request to generate a pivot report.
         # @!attribute [rw] property
         #   @return [::String]
-        #     A Google Analytics GA4 property identifier whose events are tracked.
+        #     A Google Analytics property identifier whose events are tracked.
         #     Specified in the URL path and not the body. To learn more, see [where to
         #     find your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -294,15 +298,15 @@ module Google
         #     removed by a filter.
         #
         #     Regardless of this `keep_empty_rows` setting, only data recorded by the
-        #     Google Analytics (GA4) property can be displayed in a report.
+        #     Google Analytics property can be displayed in a report.
         #
         #     For example if a property never logs a `purchase` event, then a query for
         #     the `eventName` dimension and  `eventCount` metric will not have a row
         #     eventName: "purchase" and eventCount: 0.
         # @!attribute [rw] return_property_quota
         #   @return [::Boolean]
-        #     Toggles whether to return the current state of this Analytics Property's
-        #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        #     Toggles whether to return the current state of this Google Analytics
+        #     property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
         # @!attribute [rw] comparisons
         #   @return [::Array<::Google::Analytics::Data::V1beta::Comparison>]
         #     Optional. The configuration of comparisons requested and displayed. The
@@ -374,7 +378,7 @@ module Google
         #     Metadata for the report.
         # @!attribute [rw] property_quota
         #   @return [::Google::Analytics::Data::V1beta::PropertyQuota]
-        #     This Analytics Property's quota state including this request.
+        #     This Google Analytics property's quota state including this request.
         # @!attribute [rw] kind
         #   @return [::String]
         #     Identifies what kind of resource this message is. This `kind` is always the
@@ -388,7 +392,7 @@ module Google
         # The batch request containing multiple report requests.
         # @!attribute [rw] property
         #   @return [::String]
-        #     A Google Analytics GA4 property identifier whose events are tracked.
+        #     A Google Analytics property identifier whose events are tracked.
         #     Specified in the URL path and not the body. To learn more, see [where to
         #     find your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -423,7 +427,7 @@ module Google
         # The batch request containing multiple pivot report requests.
         # @!attribute [rw] property
         #   @return [::String]
-        #     A Google Analytics GA4 property identifier whose events are tracked.
+        #     A Google Analytics property identifier whose events are tracked.
         #     Specified in the URL path and not the body. To learn more, see [where to
         #     find your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -460,7 +464,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the metadata to retrieve. This name field is
         #     specified in the URL path and not URL parameters. Property is a numeric
-        #     Google Analytics GA4 Property identifier. To learn more, see [where to find
+        #     Google Analytics property identifier. To learn more, see [where to find
         #     your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
         #
@@ -477,7 +481,7 @@ module Google
         # The request to generate a realtime report.
         # @!attribute [rw] property
         #   @return [::String]
-        #     A Google Analytics GA4 property identifier whose events are tracked.
+        #     A Google Analytics property identifier whose events are tracked.
         #     Specified in the URL path and not the body. To learn more, see [where to
         #     find your Property
         #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -516,8 +520,9 @@ module Google
         #     Specifies how rows are ordered in the response.
         # @!attribute [rw] return_property_quota
         #   @return [::Boolean]
-        #     Toggles whether to return the current state of this Analytics Property's
-        #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+        #     Toggles whether to return the current state of this Google Analytics
+        #     property's Realtime quota. Quota is returned in
+        #     [PropertyQuota](#PropertyQuota).
         # @!attribute [rw] minute_ranges
         #   @return [::Array<::Google::Analytics::Data::V1beta::MinuteRange>]
         #     The minute ranges of event data to read. If unspecified, one minute range
@@ -560,7 +565,8 @@ module Google
         #     only 50 rows.
         # @!attribute [rw] property_quota
         #   @return [::Google::Analytics::Data::V1beta::PropertyQuota]
-        #     This Analytics Property's Realtime quota state including this request.
+        #     This Google Analytics property's Realtime quota state including this
+        #     request.
         # @!attribute [rw] kind
         #   @return [::String]
         #     Identifies what kind of resource this message is. This `kind` is always the

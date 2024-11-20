@@ -52,14 +52,14 @@ module Google
             # your data.
             rpc :RunPivotReport, ::Google::Analytics::Data::V1beta::RunPivotReportRequest, ::Google::Analytics::Data::V1beta::RunPivotReportResponse
             # Returns multiple reports in a batch. All reports must be for the same
-            # GA4 Property.
+            # Google Analytics property.
             rpc :BatchRunReports, ::Google::Analytics::Data::V1beta::BatchRunReportsRequest, ::Google::Analytics::Data::V1beta::BatchRunReportsResponse
             # Returns multiple pivot reports in a batch. All reports must be for the same
-            # GA4 Property.
+            # Google Analytics property.
             rpc :BatchRunPivotReports, ::Google::Analytics::Data::V1beta::BatchRunPivotReportsRequest, ::Google::Analytics::Data::V1beta::BatchRunPivotReportsResponse
             # Returns metadata for dimensions and metrics available in reporting methods.
             # Used to explore the dimensions and metrics. In this method, a Google
-            # Analytics GA4 Property Identifier is specified in the request, and
+            # Analytics property identifier is specified in the request, and
             # the metadata response includes Custom dimensions and metrics as well as
             # Universal metadata.
             #
