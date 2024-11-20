@@ -1952,6 +1952,169 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     end
   end
 
+  def test_set_config
+    # Create test objects.
+    client_result = ::Google::Cloud::DataCatalog::V1::MigrationConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    tag_template_migration = :TAG_TEMPLATE_MIGRATION_UNSPECIFIED
+
+    set_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_set_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_config({ name: name, tag_template_migration: tag_template_migration }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_config name: name, tag_template_migration: tag_template_migration do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_config ::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_config({ name: name, tag_template_migration: tag_template_migration }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_config(::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_retrieve_config
+    # Create test objects.
+    client_result = ::Google::Cloud::DataCatalog::V1::OrganizationConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    retrieve_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_retrieve_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, retrieve_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.retrieve_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.retrieve_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.retrieve_config ::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.retrieve_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.retrieve_config(::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, retrieve_config_client_stub.call_count
+      end
+    end
+  end
+
+  def test_retrieve_effective_config
+    # Create test objects.
+    client_result = ::Google::Cloud::DataCatalog::V1::MigrationConfig.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    retrieve_effective_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ServiceStub.stub :transcode_retrieve_effective_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, retrieve_effective_config_client_stub do
+        # Create client
+        client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.retrieve_effective_config({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.retrieve_effective_config name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.retrieve_effective_config ::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.retrieve_effective_config({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.retrieve_effective_config(::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, retrieve_effective_config_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

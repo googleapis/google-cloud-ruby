@@ -1372,6 +1372,126 @@
       ]
     },
     {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_SetConfig_sync",
+      "title": "Snippet for the set_config call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_config.",
+      "file": "data_catalog/set_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_config",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::SetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::MigrationConfig",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "SetConfig",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.SetConfig",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_RetrieveConfig_sync",
+      "title": "Snippet for the retrieve_config call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_config.",
+      "file": "data_catalog/retrieve_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_config",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::OrganizationConfig",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "RetrieveConfig",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.RetrieveConfig",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datacatalog_v1_generated_DataCatalog_RetrieveEffectiveConfig_sync",
+      "title": "Snippet for the retrieve_effective_config call in the DataCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_effective_config.",
+      "file": "data_catalog/retrieve_effective_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_effective_config",
+        "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_effective_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DataCatalog::V1::MigrationConfig",
+        "client": {
+          "short_name": "DataCatalog::Client",
+          "full_name": "::Google::Cloud::DataCatalog::V1::DataCatalog::Client"
+        },
+        "method": {
+          "short_name": "RetrieveEffectiveConfig",
+          "full_name": "google.cloud.datacatalog.v1.DataCatalog.RetrieveEffectiveConfig",
+          "service": {
+            "short_name": "DataCatalog",
+            "full_name": "google.cloud.datacatalog.v1.DataCatalog"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "datacatalog_v1_generated_PolicyTagManager_CreateTaxonomy_sync",
       "title": "Snippet for the create_taxonomy call in the PolicyTagManager service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_taxonomy.",

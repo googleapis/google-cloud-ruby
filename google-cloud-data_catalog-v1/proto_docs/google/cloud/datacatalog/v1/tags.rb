@@ -58,6 +58,9 @@ module Google
         #
         #     Tag template defines valid field IDs. A tag
         #     must have at least 1 field and at most 500 fields.
+        # @!attribute [r] dataplex_transfer_status
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplate::DataplexTransferStatus]
+        #     Output only. Denotes the transfer status of the Tag Template.
         class Tag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -196,6 +199,10 @@ module Google
             # Deprecated: Individual TagTemplate migration is deprecated in favor of
             # organization or project wide TagTemplate migration opt-in.
             MIGRATED = 1
+
+            # TagTemplate and its tags are auto-copied to Dataplex service.
+            # Visible in both services. Editable in Dataplex, read-only in DataCatalog.
+            TRANSFERRED = 2
           end
         end
 

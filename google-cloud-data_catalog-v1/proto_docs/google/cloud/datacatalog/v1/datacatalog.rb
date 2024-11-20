@@ -1087,8 +1087,8 @@ module Google
 
         # Entry group metadata.
         #
-        # An `EntryGroup` resource represents a logical grouping of zero or more
-        # Data Catalog {::Google::Cloud::DataCatalog::V1::Entry Entry} resources.
+        #  An `EntryGroup` resource represents a logical grouping of zero or more
+        #  Data Catalog {::Google::Cloud::DataCatalog::V1::Entry Entry} resources.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the entry group in URL format.
@@ -1107,6 +1107,13 @@ module Google
         # @!attribute [r] data_catalog_timestamps
         #   @return [::Google::Cloud::DataCatalog::V1::SystemTimestamps]
         #     Output only. Timestamps of the entry group. Default value is empty.
+        # @!attribute [rw] transferred_to_dataplex
+        #   @return [::Boolean]
+        #     Optional. When set to [true], it means DataCatalog EntryGroup was
+        #     transferred to Dataplex Catalog Service. It makes EntryGroup and its
+        #     Entries to be read-only in DataCatalog. However, new Tags on EntryGroup and
+        #     its Entries can be created. After setting the flag to [true] it cannot be
+        #     unset.
         class EntryGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1610,6 +1617,81 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_config SetConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The organization or project whose config is being specified.
+        # @!attribute [rw] tag_template_migration
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplateMigration]
+        #     Opt-in status for the migration of Tag Templates to Dataplex.
+        # @!attribute [rw] catalog_ui_experience
+        #   @return [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
+        #     Opt-in status for the UI switch to Dataplex.
+        class SetConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_config RetrieveConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The organization whose config is being retrieved.
+        class RetrieveConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_effective_config RetrieveEffectiveConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource whose effective config is being retrieved.
+        class RetrieveEffectiveConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The configuration related to the migration from Data Catalog to Dataplex that
+        # has been applied to an organization and any projects under it. It is the
+        # response message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_config RetrieveConfig}.
+        # @!attribute [rw] config
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::MigrationConfig}]
+        #     Map of organizations and project resource names and their configuration.
+        #     The format for the map keys is `organizations/{organizationId}` or
+        #     `projects/{projectId}`.
+        class OrganizationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::DataCatalog::V1::MigrationConfig]
+          class ConfigEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The configuration related to the migration to Dataplex applied to an
+        # organization or project.
+        # It is the response message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#set_config SetConfig} and
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#retrieve_effective_config RetrieveEffectiveConfig}.
+        # @!attribute [rw] tag_template_migration
+        #   @return [::Google::Cloud::DataCatalog::V1::TagTemplateMigration]
+        #     Opt-in status for the migration of Tag Templates to Dataplex.
+        # @!attribute [rw] catalog_ui_experience
+        #   @return [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
+        #     Opt-in status for the UI switch to Dataplex.
+        class MigrationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Metadata automatically ingested from Google Cloud resources like BigQuery
         # tables or Pub/Sub topics always uses enum values from `EntryType` as the type
         # of entry.
@@ -1691,6 +1773,32 @@ module Google
 
           # Feature Group resource in Vertex AI Feature Store.
           FEATURE_GROUP = 21
+        end
+
+        # Configuration related to the opt-in status for the migration of TagTemplates
+        # to Dataplex.
+        module TagTemplateMigration
+          # Default value. Migration of Tag Templates from Data Catalog to Dataplex is
+          # not performed.
+          TAG_TEMPLATE_MIGRATION_UNSPECIFIED = 0
+
+          # Migration of Tag Templates from Data Catalog to Dataplex is enabled.
+          TAG_TEMPLATE_MIGRATION_ENABLED = 1
+
+          # Migration of Tag Templates from Data Catalog to Dataplex is disabled.
+          TAG_TEMPLATE_MIGRATION_DISABLED = 2
+        end
+
+        # Configuration related to the opt-in status for the UI switch to Dataplex.
+        module CatalogUIExperience
+          # Default value. The default UI is Dataplex.
+          CATALOG_UI_EXPERIENCE_UNSPECIFIED = 0
+
+          # The UI is Dataplex.
+          CATALOG_UI_EXPERIENCE_ENABLED = 1
+
+          # The UI is Data Catalog.
+          CATALOG_UI_EXPERIENCE_DISABLED = 2
         end
       end
     end

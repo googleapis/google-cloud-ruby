@@ -3682,6 +3682,275 @@ module Google
             end
 
             ##
+            # Sets the configuration related to the migration to Dataplex for an
+            # organization or project.
+            #
+            # @overload set_config(request, options = nil)
+            #   Pass arguments to `set_config` via a request object, either of type
+            #   {::Google::Cloud::DataCatalog::V1::SetConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DataCatalog::V1::SetConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_config(name: nil, tag_template_migration: nil, catalog_ui_experience: nil)
+            #   Pass arguments to `set_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The organization or project whose config is being specified.
+            #   @param tag_template_migration [::Google::Cloud::DataCatalog::V1::TagTemplateMigration]
+            #     Opt-in status for the migration of Tag Templates to Dataplex.
+            #   @param catalog_ui_experience [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
+            #     Opt-in status for the UI switch to Dataplex.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DataCatalog::V1::MigrationConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DataCatalog::V1::MigrationConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::SetConfigRequest.new
+            #
+            #   # Call the set_config method.
+            #   result = client.set_config request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::MigrationConfig.
+            #   p result
+            #
+            def set_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::SetConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_catalog_stub.call_rpc :set_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves the configuration related to the migration from Data Catalog to
+            # Dataplex for a specific organization, including all the projects under it
+            # which have a separate configuration set.
+            #
+            # @overload retrieve_config(request, options = nil)
+            #   Pass arguments to `retrieve_config` via a request object, either of type
+            #   {::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload retrieve_config(name: nil)
+            #   Pass arguments to `retrieve_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The organization whose config is being retrieved.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DataCatalog::V1::OrganizationConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DataCatalog::V1::OrganizationConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new
+            #
+            #   # Call the retrieve_config method.
+            #   result = client.retrieve_config request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::OrganizationConfig.
+            #   p result
+            #
+            def retrieve_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.retrieve_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.retrieve_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.retrieve_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_catalog_stub.call_rpc :retrieve_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves the effective configuration related to the migration from Data
+            # Catalog to Dataplex for a specific organization or project. If there is no
+            # specific configuration set for the resource, the setting is checked
+            # hierarchicahlly through the ancestors of the resource, starting from the
+            # resource itself.
+            #
+            # @overload retrieve_effective_config(request, options = nil)
+            #   Pass arguments to `retrieve_effective_config` via a request object, either of type
+            #   {::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload retrieve_effective_config(name: nil)
+            #   Pass arguments to `retrieve_effective_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource whose effective config is being retrieved.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DataCatalog::V1::MigrationConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DataCatalog::V1::MigrationConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new
+            #
+            #   # Call the retrieve_effective_config method.
+            #   result = client.retrieve_effective_config request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::MigrationConfig.
+            #   p result
+            #
+            def retrieve_effective_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.retrieve_effective_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.retrieve_effective_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.retrieve_effective_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @data_catalog_stub.call_rpc :retrieve_effective_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DataCatalog API.
             #
             # This class represents the configuration for DataCatalog,
@@ -4004,6 +4273,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :import_entries
+                ##
+                # RPC-specific configuration for `set_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_config
+                ##
+                # RPC-specific configuration for `retrieve_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :retrieve_config
+                ##
+                # RPC-specific configuration for `retrieve_effective_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :retrieve_effective_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4075,6 +4359,12 @@ module Google
                   @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                   import_entries_config = parent_rpcs.import_entries if parent_rpcs.respond_to? :import_entries
                   @import_entries = ::Gapic::Config::Method.new import_entries_config
+                  set_config_config = parent_rpcs.set_config if parent_rpcs.respond_to? :set_config
+                  @set_config = ::Gapic::Config::Method.new set_config_config
+                  retrieve_config_config = parent_rpcs.retrieve_config if parent_rpcs.respond_to? :retrieve_config
+                  @retrieve_config = ::Gapic::Config::Method.new retrieve_config_config
+                  retrieve_effective_config_config = parent_rpcs.retrieve_effective_config if parent_rpcs.respond_to? :retrieve_effective_config
+                  @retrieve_effective_config = ::Gapic::Config::Method.new retrieve_effective_config_config
 
                   yield self if block_given?
                 end
