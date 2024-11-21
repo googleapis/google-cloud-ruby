@@ -67,6 +67,7 @@
     "snippets/datastream/list_stream_objects.rb",
     "snippets/datastream/list_streams.rb",
     "snippets/datastream/lookup_stream_object.rb",
+    "snippets/datastream/run_stream.rb",
     "snippets/datastream/start_backfill_job.rb",
     "snippets/datastream/stop_backfill_job.rb",
     "snippets/datastream/update_connection_profile.rb",

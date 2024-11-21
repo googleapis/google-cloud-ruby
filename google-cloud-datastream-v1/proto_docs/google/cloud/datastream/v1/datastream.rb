@@ -48,6 +48,9 @@ module Google
         # @!attribute [rw] postgresql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
         #     PostgreSQL RDBMS to enrich with child data objects and metadata.
+        # @!attribute [rw] sql_server_rdbms
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
+        #     SQLServer RDBMS to enrich with child data objects and metadata.
         class DiscoverConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -63,6 +66,9 @@ module Google
         # @!attribute [rw] postgresql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
         #     Enriched PostgreSQL RDBMS object.
+        # @!attribute [rw] sql_server_rdbms
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
+        #     Enriched SQLServer RDBMS object.
         class DiscoverConnectionProfileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -400,6 +406,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for running a stream.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the stream resource to start, in the format:
+        #     projects/\\{project_id}/locations/\\{location}/streams/\\{stream_name}
+        # @!attribute [rw] cdc_strategy
+        #   @return [::Google::Cloud::Datastream::V1::CdcStrategy]
+        #     Optional. The CDC strategy of the stream. If not set, the system's default
+        #     value will be used.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. Update the stream without validating it.
+        class RunStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for fetching a specific stream object.
         # @!attribute [rw] name
         #   @return [::String]
@@ -514,9 +537,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

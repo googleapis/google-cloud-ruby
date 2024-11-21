@@ -59,6 +59,9 @@ module Google
             rpc :UpdateStream, ::Google::Cloud::Datastream::V1::UpdateStreamRequest, ::Google::Longrunning::Operation
             # Use this method to delete a stream.
             rpc :DeleteStream, ::Google::Cloud::Datastream::V1::DeleteStreamRequest, ::Google::Longrunning::Operation
+            # Use this method to start, resume or recover a stream with a non default CDC
+            # strategy.
+            rpc :RunStream, ::Google::Cloud::Datastream::V1::RunStreamRequest, ::Google::Longrunning::Operation
             # Use this method to get details about a stream object.
             rpc :GetStreamObject, ::Google::Cloud::Datastream::V1::GetStreamObjectRequest, ::Google::Cloud::Datastream::V1::StreamObject
             # Use this method to look up a stream object by its source object identifier.
