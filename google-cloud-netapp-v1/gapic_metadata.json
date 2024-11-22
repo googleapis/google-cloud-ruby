@@ -195,6 +195,16 @@
                 "reverse_replication_direction"
               ]
             },
+            "EstablishPeering": {
+              "methods": [
+                "establish_peering"
+              ]
+            },
+            "SyncReplication": {
+              "methods": [
+                "sync_replication"
+              ]
+            },
             "CreateBackupVault": {
               "methods": [
                 "create_backup_vault"
