@@ -423,6 +423,17 @@ module Google
         #
         #     If the field is set to `true` but the request does not set
         #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
+        # @!attribute [rw] last_statement
+        #   @return [::Boolean]
+        #     Optional. If set to true, this statement marks the end of the transaction.
+        #     The transaction should be committed or aborted after this statement
+        #     executes, and attempts to execute any other requests against this
+        #     transaction (including reads and queries) will be rejected.
+        #
+        #     For DML statements, setting this option may cause some error reporting to
+        #     be deferred until commit time (e.g. validation of unique constraints).
+        #     Given this, successful execution of a DML statement should not be assumed
+        #     until a subsequent Commit call completes successfully.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -549,6 +560,17 @@ module Google
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
+        # @!attribute [rw] last_statements
+        #   @return [::Boolean]
+        #     Optional. If set to true, this request marks the end of the transaction.
+        #     The transaction should be committed or aborted after these statements
+        #     execute, and attempts to execute any other requests against this
+        #     transaction (including reads and queries) will be rejected.
+        #
+        #     Setting this option may cause some error reporting to be deferred until
+        #     commit time (e.g. validation of unique constraints). Given this, successful
+        #     execution of statements should not be assumed until a subsequent Commit
+        #     call completes successfully.
         class ExecuteBatchDmlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
