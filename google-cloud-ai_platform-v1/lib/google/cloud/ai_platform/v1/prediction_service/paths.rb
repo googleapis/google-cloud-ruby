@@ -69,6 +69,25 @@ module Google
               resource.call(**args)
             end
 
+            ##
+            # Create a fully-qualified RagCorpus resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param rag_corpus [String]
+            #
+            # @return [::String]
+            def rag_corpus_path project:, location:, rag_corpus:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/ragCorpora/#{rag_corpus}"
+            end
+
             extend self
           end
         end

@@ -129,6 +129,164 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # The Google Drive location for the input content.
+        # @!attribute [rw] resource_ids
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::GoogleDriveSource::ResourceId>]
+        #     Required. Google Drive resource IDs.
+        class GoogleDriveSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type and ID of the Google Drive resource.
+          # @!attribute [rw] resource_type
+          #   @return [::Google::Cloud::AIPlatform::V1::GoogleDriveSource::ResourceId::ResourceType]
+          #     Required. The type of the Google Drive resource.
+          # @!attribute [rw] resource_id
+          #   @return [::String]
+          #     Required. The ID of the Google Drive resource.
+          class ResourceId
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of the Google Drive resource.
+            module ResourceType
+              # Unspecified resource type.
+              RESOURCE_TYPE_UNSPECIFIED = 0
+
+              # File resource type.
+              RESOURCE_TYPE_FILE = 1
+
+              # Folder resource type.
+              RESOURCE_TYPE_FOLDER = 2
+            end
+          end
+        end
+
+        # The input content is encapsulated and uploaded in the request.
+        class DirectUploadSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The Slack source for the ImportRagFilesRequest.
+        # @!attribute [rw] channels
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::SlackSource::SlackChannels>]
+        #     Required. The Slack channels.
+        class SlackSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # SlackChannels contains the Slack channels and corresponding access token.
+          # @!attribute [rw] channels
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::SlackSource::SlackChannels::SlackChannel>]
+          #     Required. The Slack channel IDs.
+          # @!attribute [rw] api_key_config
+          #   @return [::Google::Cloud::AIPlatform::V1::ApiAuth::ApiKeyConfig]
+          #     Required. The SecretManager secret version resource name (e.g.
+          #     projects/\\{project}/secrets/\\{secret}/versions/\\{version}) storing the
+          #     Slack channel access token that has access to the slack channel IDs.
+          #     See: https://api.slack.com/tutorials/tracks/getting-a-token.
+          class SlackChannels
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # SlackChannel contains the Slack channel ID and the time range to import.
+            # @!attribute [rw] channel_id
+            #   @return [::String]
+            #     Required. The Slack channel ID.
+            # @!attribute [rw] start_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Optional. The starting timestamp for messages to import.
+            # @!attribute [rw] end_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Optional. The ending timestamp for messages to import.
+            class SlackChannel
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # The Jira source for the ImportRagFilesRequest.
+        # @!attribute [rw] jira_queries
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::JiraSource::JiraQueries>]
+        #     Required. The Jira queries.
+        class JiraSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # JiraQueries contains the Jira queries and corresponding authentication.
+          # @!attribute [rw] projects
+          #   @return [::Array<::String>]
+          #     A list of Jira projects to import in their entirety.
+          # @!attribute [rw] custom_queries
+          #   @return [::Array<::String>]
+          #     A list of custom Jira queries to import. For information about JQL (Jira
+          #     Query Language), see
+          #     https://support.atlassian.com/jira-service-management-cloud/docs/use-advanced-search-with-jira-query-language-jql/
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     Required. The Jira email address.
+          # @!attribute [rw] server_uri
+          #   @return [::String]
+          #     Required. The Jira server URI.
+          # @!attribute [rw] api_key_config
+          #   @return [::Google::Cloud::AIPlatform::V1::ApiAuth::ApiKeyConfig]
+          #     Required. The SecretManager secret version resource name (e.g.
+          #     projects/\\{project}/secrets/\\{secret}/versions/\\{version}) storing the
+          #     Jira API key. See [Manage API tokens for your Atlassian
+          #     account](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).
+          class JiraQueries
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The SharePointSources to pass to ImportRagFiles.
+        # @!attribute [rw] share_point_sources
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::SharePointSources::SharePointSource>]
+        #     The SharePoint sources.
+        class SharePointSources
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # An individual SharePointSource.
+          # @!attribute [rw] sharepoint_folder_path
+          #   @return [::String]
+          #     The path of the SharePoint folder to download from.
+          # @!attribute [rw] sharepoint_folder_id
+          #   @return [::String]
+          #     The ID of the SharePoint folder to download from.
+          # @!attribute [rw] drive_name
+          #   @return [::String]
+          #     The name of the drive to download from.
+          # @!attribute [rw] drive_id
+          #   @return [::String]
+          #     The ID of the drive to download from.
+          # @!attribute [rw] client_id
+          #   @return [::String]
+          #     The Application ID for the app registered in Microsoft Azure Portal.
+          #     The application must also be configured with MS Graph permissions
+          #     "Files.ReadAll", "Sites.ReadAll" and BrowserSiteLists.Read.All.
+          # @!attribute [rw] client_secret
+          #   @return [::Google::Cloud::AIPlatform::V1::ApiAuth::ApiKeyConfig]
+          #     The application secret for the app registered in Azure.
+          # @!attribute [rw] tenant_id
+          #   @return [::String]
+          #     Unique identifier of the Azure Active Directory Instance.
+          # @!attribute [rw] sharepoint_site_name
+          #   @return [::String]
+          #     The name of the SharePoint site to download from. This can be the site
+          #     name or the site id.
+          # @!attribute [r] file_id
+          #   @return [::String]
+          #     Output only. The SharePoint file id. Output only.
+          class SharePointSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
       end
     end
   end

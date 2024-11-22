@@ -133,6 +133,10 @@ module Google
         # @!attribute [rw] vertex_ai_search
         #   @return [::Google::Cloud::AIPlatform::V1::VertexAISearch]
         #     Set to use data source powered by Vertex AI Search.
+        # @!attribute [rw] vertex_rag_store
+        #   @return [::Google::Cloud::AIPlatform::V1::VertexRagStore]
+        #     Set to use data source powered by Vertex RAG store.
+        #     User data is uploaded via the VertexRagDataService.
         # @!attribute [rw] disable_attribution
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
@@ -140,6 +144,45 @@ module Google
         class Retrieval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retrieve from Vertex RAG Store for grounding.
+        # @!attribute [rw] rag_resources
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::VertexRagStore::RagResource>]
+        #     Optional. The representation of the rag source. It can be used to specify
+        #     corpus only or ragfiles. Currently only support one corpus or multiple
+        #     files from one corpus. In the future we may open up multiple corpora
+        #     support.
+        # @!attribute [rw] similarity_top_k
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Integer]
+        #     Optional. Number of top k results to return from the selected corpora.
+        # @!attribute [rw] vector_distance_threshold
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Float]
+        #     Optional. Only return results with vector distance smaller than the
+        #     threshold.
+        # @!attribute [rw] rag_retrieval_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagRetrievalConfig]
+        #     Optional. The retrieval config for the Rag query.
+        class VertexRagStore
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The definition of the Rag resource.
+          # @!attribute [rw] rag_corpus
+          #   @return [::String]
+          #     Optional. RagCorpora resource name.
+          #     Format:
+          #     `projects/{project}/locations/{location}/ragCorpora/{rag_corpus}`
+          # @!attribute [rw] rag_file_ids
+          #   @return [::Array<::String>]
+          #     Optional. rag_file_id. The files should be in the same rag_corpus set in
+          #     rag_corpus field.
+          class RagResource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Retrieve from Vertex AI Search datastore for grounding.
@@ -225,6 +268,35 @@ module Google
             # Model will not predict any function call. Model behavior is same as when
             # not passing any function declarations.
             NONE = 3
+          end
+        end
+
+        # Specifies the context retrieval config.
+        # @!attribute [rw] top_k
+        #   @return [::Integer]
+        #     Optional. The number of contexts to retrieve.
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::AIPlatform::V1::RagRetrievalConfig::Filter]
+        #     Optional. Config for filters.
+        class RagRetrievalConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Config for filters.
+          # @!attribute [rw] vector_distance_threshold
+          #   @return [::Float]
+          #     Optional. Only returns contexts with vector distance smaller than the
+          #     threshold.
+          # @!attribute [rw] vector_similarity_threshold
+          #   @return [::Float]
+          #     Optional. Only returns contexts with vector similarity larger than the
+          #     threshold.
+          # @!attribute [rw] metadata_filter
+          #   @return [::String]
+          #     Optional. String for metadata filtering.
+          class Filter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

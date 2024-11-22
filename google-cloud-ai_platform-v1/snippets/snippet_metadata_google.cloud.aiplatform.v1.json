@@ -11452,6 +11452,526 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_CreateRagCorpus_sync",
+      "title": "Snippet for the create_rag_corpus call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#create_rag_corpus.",
+      "file": "vertex_rag_data_service/create_rag_corpus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_rag_corpus",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#create_rag_corpus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateRagCorpusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "CreateRagCorpus",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.CreateRagCorpus",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_UpdateRagCorpus_sync",
+      "title": "Snippet for the update_rag_corpus call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_corpus.",
+      "file": "vertex_rag_data_service/update_rag_corpus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_rag_corpus",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#update_rag_corpus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateRagCorpusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "UpdateRagCorpus",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.UpdateRagCorpus",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_GetRagCorpus_sync",
+      "title": "Snippet for the get_rag_corpus call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_corpus.",
+      "file": "vertex_rag_data_service/get_rag_corpus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rag_corpus",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_corpus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetRagCorpusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::RagCorpus",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "GetRagCorpus",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagCorpus",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_ListRagCorpora_sync",
+      "title": "Snippet for the list_rag_corpora call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#list_rag_corpora.",
+      "file": "vertex_rag_data_service/list_rag_corpora.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rag_corpora",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#list_rag_corpora",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListRagCorporaRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListRagCorporaResponse",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "ListRagCorpora",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.ListRagCorpora",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_DeleteRagCorpus_sync",
+      "title": "Snippet for the delete_rag_corpus call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#delete_rag_corpus.",
+      "file": "vertex_rag_data_service/delete_rag_corpus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_rag_corpus",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#delete_rag_corpus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteRagCorpusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "DeleteRagCorpus",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagCorpus",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_UploadRagFile_sync",
+      "title": "Snippet for the upload_rag_file call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#upload_rag_file.",
+      "file": "vertex_rag_data_service/upload_rag_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upload_rag_file",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#upload_rag_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UploadRagFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::UploadRagFileResponse",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "UploadRagFile",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.UploadRagFile",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_ImportRagFiles_sync",
+      "title": "Snippet for the import_rag_files call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#import_rag_files.",
+      "file": "vertex_rag_data_service/import_rag_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_rag_files",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#import_rag_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ImportRagFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "ImportRagFiles",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.ImportRagFiles",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_GetRagFile_sync",
+      "title": "Snippet for the get_rag_file call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_file.",
+      "file": "vertex_rag_data_service/get_rag_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_rag_file",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#get_rag_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetRagFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::RagFile",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "GetRagFile",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.GetRagFile",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_ListRagFiles_sync",
+      "title": "Snippet for the list_rag_files call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#list_rag_files.",
+      "file": "vertex_rag_data_service/list_rag_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_rag_files",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#list_rag_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListRagFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListRagFilesResponse",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "ListRagFiles",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.ListRagFiles",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagDataService_DeleteRagFile_sync",
+      "title": "Snippet for the delete_rag_file call in the VertexRagDataService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#delete_rag_file.",
+      "file": "vertex_rag_data_service/delete_rag_file.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_rag_file",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client#delete_rag_file",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteRagFileRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VertexRagDataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client"
+        },
+        "method": {
+          "short_name": "DeleteRagFile",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagDataService.DeleteRagFile",
+          "service": {
+            "short_name": "VertexRagDataService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagDataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_RetrieveContexts_sync",
+      "title": "Snippet for the retrieve_contexts call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#retrieve_contexts.",
+      "file": "vertex_rag_service/retrieve_contexts.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_contexts",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#retrieve_contexts",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::RetrieveContextsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::RetrieveContextsResponse",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveContexts",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.RetrieveContexts",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_AugmentPrompt_sync",
+      "title": "Snippet for the augment_prompt call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#augment_prompt.",
+      "file": "vertex_rag_service/augment_prompt.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "augment_prompt",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#augment_prompt",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::AugmentPromptRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::AugmentPromptResponse",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "AugmentPrompt",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.AugmentPrompt",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_VertexRagService_CorroborateContent_sync",
+      "title": "Snippet for the corroborate_content call in the VertexRagService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VertexRagService::Client#corroborate_content.",
+      "file": "vertex_rag_service/corroborate_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "corroborate_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client#corroborate_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CorroborateContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::CorroborateContentResponse",
+        "client": {
+          "short_name": "VertexRagService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client"
+        },
+        "method": {
+          "short_name": "CorroborateContent",
+          "full_name": "google.cloud.aiplatform.v1.VertexRagService.CorroborateContent",
+          "service": {
+            "short_name": "VertexRagService",
+            "full_name": "google.cloud.aiplatform.v1.VertexRagService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_VizierService_CreateStudy_sync",
       "title": "Snippet for the create_study call in the VizierService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::VizierService::Client#create_study.",
