@@ -25,6 +25,7 @@
     "lib/google/iam/v1/logging/audit_data_pb.rb",
     "lib/google/iam/v1/options_pb.rb",
     "lib/google/iam/v1/policy_pb.rb",
+    "lib/google/iam/v1/resource_policy_member_pb.rb",
     "lib/google/iam/v1/rest.rb",
     "lib/google/iam/v1/version.rb",
     "proto_docs/README.md",
