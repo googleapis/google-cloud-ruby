@@ -193,11 +193,11 @@ module Google
         #     puts bucket.name
         #   end
         #
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil , soft_deleted: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project
+            prefix: prefix, token: token, max: max, user_project: user_project,options: {soft_deleted: soft_deleted}
           Bucket::List.from_gapi \
-            gapi, service, prefix, max, user_project: user_project
+            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted
         end
         alias find_buckets buckets
 
@@ -259,6 +259,8 @@ module Google
         #
         def bucket bucket_name,
                    skip_lookup: false,
+                   generation: nil,
+                   soft_deleted: nil,
                    if_metageneration_match: nil,
                    if_metageneration_not_match: nil,
                    user_project: nil
@@ -269,8 +271,15 @@ module Google
           gapi = service.get_bucket bucket_name,
                                     if_metageneration_match: if_metageneration_match,
                                     if_metageneration_not_match: if_metageneration_not_match,
-                                    user_project: user_project
-          Bucket.from_gapi gapi, service, user_project: user_project
+                                    user_project: user_project,
+                                    options: {
+                                      soft_deleted: soft_deleted,
+                                    generation: generation
+
+                                    }
+
+          binding.pry
+          Bucket.from_gapi gapi, service, user_project: user_project,soft_deleted: soft_deleted,generation: generation
         rescue Google::Cloud::NotFoundError
           nil
         end

@@ -23,6 +23,8 @@ require "google/cloud/storage/notification"
 require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "pathname"
+require "pry"
+
 
 module Google
   module Cloud
@@ -81,6 +83,8 @@ module Google
         #   files = bucket.files # Billed to "my-other-project"
         #
         attr_accessor :user_project
+        attr_accessor :soft_deleted
+        attr_accessor :generation
 
         ##
         # @private Create an empty Bucket object.
@@ -220,6 +224,10 @@ module Google
             end
           end
           cors_builder.freeze # always return frozen objects
+        end
+
+        def generation
+          @gapi.generation
         end
 
         ##
@@ -2450,6 +2458,10 @@ module Google
                            policy: policy
         end
 
+        def generation
+          @gapi.generation
+        end
+
         ##
         # Generate a `PostObject` that includes the fields and URL to
         # upload objects via HTML forms. The resulting `PostObject` is
@@ -3144,11 +3156,12 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, service, user_project: nil
+        def self.from_gapi gapi, service, user_project: nil, soft_deleted: nil
           new.tap do |b|
             b.gapi = gapi
             b.service = service
             b.user_project = user_project
+            b.soft_deleted = soft_deleted
           end
         end
 
