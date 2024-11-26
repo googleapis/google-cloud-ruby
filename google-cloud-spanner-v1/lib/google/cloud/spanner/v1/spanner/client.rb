@@ -752,7 +752,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil)
+            # @overload execute_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil)
             #   Pass arguments to `execute_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -838,6 +838,16 @@ module Google
             #
             #     If the field is set to `true` but the request does not set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
+            #   @param last_statement [::Boolean]
+            #     Optional. If set to true, this statement marks the end of the transaction.
+            #     The transaction should be committed or aborted after this statement
+            #     executes, and attempts to execute any other requests against this
+            #     transaction (including reads and queries) will be rejected.
+            #
+            #     For DML statements, setting this option may cause some error reporting to
+            #     be deferred until commit time (e.g. validation of unique constraints).
+            #     Given this, successful execution of a DML statement should not be assumed
+            #     until a subsequent Commit call completes successfully.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ResultSet]
@@ -921,7 +931,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil)
+            # @overload execute_streaming_sql(session: nil, transaction: nil, sql: nil, params: nil, param_types: nil, resume_token: nil, query_mode: nil, partition_token: nil, seqno: nil, query_options: nil, request_options: nil, directed_read_options: nil, data_boost_enabled: nil, last_statement: nil)
             #   Pass arguments to `execute_streaming_sql` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1007,6 +1017,16 @@ module Google
             #
             #     If the field is set to `true` but the request does not set
             #     `partition_token`, the API returns an `INVALID_ARGUMENT` error.
+            #   @param last_statement [::Boolean]
+            #     Optional. If set to true, this statement marks the end of the transaction.
+            #     The transaction should be committed or aborted after this statement
+            #     executes, and attempts to execute any other requests against this
+            #     transaction (including reads and queries) will be rejected.
+            #
+            #     For DML statements, setting this option may cause some error reporting to
+            #     be deferred until commit time (e.g. validation of unique constraints).
+            #     Given this, successful execution of a DML statement should not be assumed
+            #     until a subsequent Commit call completes successfully.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Spanner::V1::PartialResultSet>]
@@ -1100,7 +1120,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload execute_batch_dml(session: nil, transaction: nil, statements: nil, seqno: nil, request_options: nil)
+            # @overload execute_batch_dml(session: nil, transaction: nil, statements: nil, seqno: nil, request_options: nil, last_statements: nil)
             #   Pass arguments to `execute_batch_dml` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1131,6 +1151,16 @@ module Google
             #     handled requests will yield the same response as the first execution.
             #   @param request_options [::Google::Cloud::Spanner::V1::RequestOptions, ::Hash]
             #     Common options for this request.
+            #   @param last_statements [::Boolean]
+            #     Optional. If set to true, this request marks the end of the transaction.
+            #     The transaction should be committed or aborted after these statements
+            #     execute, and attempts to execute any other requests against this
+            #     transaction (including reads and queries) will be rejected.
+            #
+            #     Setting this option may cause some error reporting to be deferred until
+            #     commit time (e.g. validation of unique constraints). Given this, successful
+            #     execution of statements should not be assumed until a subsequent Commit
+            #     call completes successfully.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::ExecuteBatchDmlResponse]
