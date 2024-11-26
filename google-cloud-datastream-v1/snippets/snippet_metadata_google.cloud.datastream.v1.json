@@ -452,6 +452,46 @@
       ]
     },
     {
+      "region_tag": "datastream_v1_generated_Datastream_RunStream_sync",
+      "title": "Snippet for the run_stream call in the Datastream service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1::Datastream::Client#run_stream.",
+      "file": "datastream/run_stream.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_stream",
+        "full_name": "::Google::Cloud::Datastream::V1::Datastream::Client#run_stream",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastream::V1::RunStreamRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Datastream::Client",
+          "full_name": "::Google::Cloud::Datastream::V1::Datastream::Client"
+        },
+        "method": {
+          "short_name": "RunStream",
+          "full_name": "google.cloud.datastream.v1.Datastream.RunStream",
+          "service": {
+            "short_name": "Datastream",
+            "full_name": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "datastream_v1_generated_Datastream_GetStreamObject_sync",
       "title": "Snippet for the get_stream_object call in the Datastream service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Datastream::V1::Datastream::Client#get_stream_object.",

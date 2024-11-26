@@ -22,6 +22,7 @@ module Google
     module Datastream
       module V1
         # Oracle database profile.
+        # Next ID: 10.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the Oracle connection.
@@ -33,13 +34,24 @@ module Google
         #     Required. Username for the Oracle connection.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Required. Password for the Oracle connection.
+        #     Optional. Password for the Oracle connection. Mutually exclusive with the
+        #     `secret_manager_stored_password` field.
         # @!attribute [rw] database_service
         #   @return [::String]
         #     Required. Database for the Oracle connection.
         # @!attribute [rw] connection_attributes
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Connection string attributes
+        # @!attribute [rw] oracle_ssl_config
+        #   @return [::Google::Cloud::Datastream::V1::OracleSslConfig]
+        #     Optional. SSL configuration for the Oracle connection.
+        # @!attribute [rw] oracle_asm_config
+        #   @return [::Google::Cloud::Datastream::V1::OracleAsmConfig]
+        #     Optional. Configuration for Oracle ASM connection.
+        # @!attribute [rw] secret_manager_stored_password
+        #   @return [::String]
+        #     Optional. A reference to a Secret Manager resource name storing the Oracle
+        #     connection password. Mutually exclusive with the `password` field.
         class OracleProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -54,7 +66,44 @@ module Google
           end
         end
 
+        # Configuration for Oracle Automatic Storage Management (ASM) connection.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Required. Hostname for the Oracle ASM connection.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Required. Port for the Oracle ASM connection.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Username for the Oracle ASM connection.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Required. Password for the Oracle ASM connection.
+        # @!attribute [rw] asm_service
+        #   @return [::String]
+        #     Required. ASM service name for the Oracle ASM connection.
+        # @!attribute [rw] connection_attributes
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Connection string attributes
+        # @!attribute [rw] oracle_ssl_config
+        #   @return [::Google::Cloud::Datastream::V1::OracleSslConfig]
+        #     Optional. SSL configuration for the Oracle connection.
+        class OracleAsmConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConnectionAttributesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # MySQL database profile.
+        # Next ID: 7.
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the MySQL connection.
@@ -66,7 +115,8 @@ module Google
         #     Required. Username for the MySQL connection.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Required. Input only. Password for the MySQL connection.
+        #     Optional. Input only. Password for the MySQL connection. Mutually exclusive
+        #     with the `secret_manager_stored_password` field.
         # @!attribute [rw] ssl_config
         #   @return [::Google::Cloud::Datastream::V1::MysqlSslConfig]
         #     SSL configuration for the MySQL connection.
@@ -87,11 +137,35 @@ module Google
         #     Required. Username for the PostgreSQL connection.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Required. Password for the PostgreSQL connection.
+        #     Optional. Password for the PostgreSQL connection. Mutually exclusive with
+        #     the `secret_manager_stored_password` field.
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. Database for the PostgreSQL connection.
         class PostgresqlProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SQLServer database profile.
+        # Next ID: 8.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Required. Hostname for the SQLServer connection.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port for the SQLServer connection, default value is 1433.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Username for the SQLServer connection.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Optional. Password for the SQLServer connection. Mutually exclusive with
+        #     the `secret_manager_stored_password` field.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Database for the SQLServer connection.
+        class SqlServerProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -295,6 +369,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Oracle SSL configuration information.
+        # @!attribute [rw] ca_certificate
+        #   @return [::String]
+        #     Input only. PEM-encoded certificate of the CA that signed the source
+        #     database server's certificate.
+        # @!attribute [r] ca_certificate_set
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the ca_certificate field has been set for
+        #     this Connection-Profile.
+        class OracleSslConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A set of reusable connection configurations to be used as a source or
         # destination for a stream.
         # @!attribute [r] name
@@ -327,6 +415,9 @@ module Google
         # @!attribute [rw] postgresql_profile
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlProfile]
         #     PostgreSQL Connection Profile configuration.
+        # @!attribute [rw] sql_server_profile
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerProfile]
+        #     SQLServer Connection Profile configuration.
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::Datastream::V1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
@@ -438,7 +529,13 @@ module Google
         #     Drop large object values.
         # @!attribute [rw] stream_large_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::StreamLargeObjects]
-        #     Stream large object values. NOTE: This feature is currently experimental.
+        #     Stream large object values.
+        # @!attribute [rw] log_miner
+        #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::LogMiner]
+        #     Use LogMiner.
+        # @!attribute [rw] binary_log_parser
+        #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::BinaryLogParser]
+        #     Use Binary Log Parser.
         class OracleSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -453,6 +550,42 @@ module Google
           class StreamLargeObjects
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration to use LogMiner CDC method.
+          class LogMiner
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration to use Binary Log Parser CDC technique.
+          # @!attribute [rw] oracle_asm_log_file_access
+          #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::BinaryLogParser::OracleAsmLogFileAccess]
+          #     Use Oracle ASM.
+          # @!attribute [rw] log_file_directories
+          #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::BinaryLogParser::LogFileDirectories]
+          #     Use Oracle directories.
+          class BinaryLogParser
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration to use Oracle ASM to access the log files.
+            class OracleAsmLogFileAccess
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration to specify the Oracle directories to access the log files.
+            # @!attribute [rw] online_log_directory
+            #   @return [::String]
+            #     Required. Oracle directory for online logs.
+            # @!attribute [rw] archived_log_directory
+            #   @return [::String]
+            #     Required. Oracle directory for archived logs.
+            class LogFileDirectories
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
 
@@ -546,6 +679,107 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # SQLServer Column.
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     Column name.
+        # @!attribute [rw] data_type
+        #   @return [::String]
+        #     The SQLServer data type.
+        # @!attribute [rw] length
+        #   @return [::Integer]
+        #     Column length.
+        # @!attribute [rw] precision
+        #   @return [::Integer]
+        #     Column precision.
+        # @!attribute [rw] scale
+        #   @return [::Integer]
+        #     Column scale.
+        # @!attribute [rw] primary_key
+        #   @return [::Boolean]
+        #     Whether or not the column represents a primary key.
+        # @!attribute [rw] nullable
+        #   @return [::Boolean]
+        #     Whether or not the column can accept a null value.
+        # @!attribute [rw] ordinal_position
+        #   @return [::Integer]
+        #     The ordinal position of the column in the table.
+        class SqlServerColumn
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SQLServer table.
+        # @!attribute [rw] table
+        #   @return [::String]
+        #     Table name.
+        # @!attribute [rw] columns
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SqlServerColumn>]
+        #     SQLServer columns in the schema.
+        #     When unspecified as part of include/exclude objects,
+        #     includes/excludes everything.
+        class SqlServerTable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SQLServer schema.
+        # @!attribute [rw] schema
+        #   @return [::String]
+        #     Schema name.
+        # @!attribute [rw] tables
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SqlServerTable>]
+        #     Tables in the schema.
+        class SqlServerSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SQLServer database structure.
+        # @!attribute [rw] schemas
+        #   @return [::Array<::Google::Cloud::Datastream::V1::SqlServerSchema>]
+        #     SQLServer schemas in the database server.
+        class SqlServerRdbms
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SQLServer data source configuration
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
+        #     SQLServer objects to include in the stream.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
+        #     SQLServer objects to exclude from the stream.
+        # @!attribute [rw] max_concurrent_cdc_tasks
+        #   @return [::Integer]
+        #     Max concurrent CDC tasks.
+        # @!attribute [rw] max_concurrent_backfill_tasks
+        #   @return [::Integer]
+        #     Max concurrent backfill tasks.
+        # @!attribute [rw] transaction_logs
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerTransactionLogs]
+        #     CDC reader reads from transaction logs.
+        # @!attribute [rw] change_tables
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerChangeTables]
+        #     CDC reader reads from change tables.
+        class SqlServerSourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration to use Transaction Logs CDC read method.
+        class SqlServerTransactionLogs
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration to use Change Tables CDC read method.
+        class SqlServerChangeTables
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # MySQL Column.
         # @!attribute [rw] column
         #   @return [::String]
@@ -631,9 +865,27 @@ module Google
         #     Maximum number of concurrent backfill tasks. The number should be non
         #     negative. If not set (or set to 0), the system's default value will be
         #     used.
+        # @!attribute [rw] binary_log_position
+        #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig::BinaryLogPosition]
+        #     Use Binary log position based replication.
+        # @!attribute [rw] gtid
+        #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig::Gtid]
+        #     Use GTID based replication.
         class MysqlSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Use Binary log position based replication.
+          class BinaryLogPosition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Use GTID based replication.
+          class Gtid
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The configuration of the stream source.
@@ -650,6 +902,9 @@ module Google
         # @!attribute [rw] postgresql_source_config
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlSourceConfig]
         #     PostgreSQL data source configuration.
+        # @!attribute [rw] sql_server_source_config
+        #   @return [::Google::Cloud::Datastream::V1::SqlServerSourceConfig]
+        #     SQLServer data source configuration.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -733,6 +988,12 @@ module Google
         #     the stream. Editing this field will only affect new tables created in the
         #     future, but existing tables will not be impacted. Lower values mean that
         #     queries will return fresher data, but may result in higher cost.
+        # @!attribute [rw] merge
+        #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::Merge]
+        #     The standard mode
+        # @!attribute [rw] append_only
+        #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::AppendOnly]
+        #     Append only mode
         class BigQueryDestinationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -741,6 +1002,8 @@ module Google
           # @!attribute [rw] dataset_id
           #   @return [::String]
           #     The dataset ID of the target dataset.
+          #     DatasetIds allowed characters:
+          #     https://cloud.google.com/bigquery/docs/reference/rest/v2/datasets#datasetreference.
           class SingleTargetDataset
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -779,6 +1042,20 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # AppendOnly mode defines that all changes to a table will be written to the
+          # destination table.
+          class AppendOnly
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Merge mode defines that all changes to a table will be merged at the
+          # destination table.
+          class Merge
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -839,6 +1116,10 @@ module Google
         #     If provided, it will be used to encrypt the data.
         #     If left blank, data will be encrypted using an internal Stream-specific
         #     encryption key provisioned through KMS.
+        # @!attribute [r] last_recovery_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. If the stream was recovered, the time of the last recovery.
+        #     Note: This field is currently experimental.
         class Stream
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -854,6 +1135,9 @@ module Google
           # @!attribute [rw] postgresql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
           #     PostgreSQL data source objects to avoid backfilling.
+          # @!attribute [rw] sql_server_excluded_objects
+          #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
+          #     SQLServer data source objects to avoid backfilling
           class BackfillAllStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -946,6 +1230,9 @@ module Google
         # @!attribute [rw] postgresql_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::PostgresqlObjectIdentifier]
         #     PostgreSQL data source object identifier.
+        # @!attribute [rw] sql_server_identifier
+        #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::SqlServerObjectIdentifier]
+        #     SQLServer data source object identifier.
         class SourceObjectIdentifier
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -985,12 +1272,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # SQLServer data source object identifier.
+          # @!attribute [rw] schema
+          #   @return [::String]
+          #     Required. The schema name.
+          # @!attribute [rw] table
+          #   @return [::String]
+          #     Required. The table name.
+          class SqlServerObjectIdentifier
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Represents a backfill job on a specific stream object.
-        # @!attribute [rw] state
+        # @!attribute [r] state
         #   @return [::Google::Cloud::Datastream::V1::BackfillJob::State]
-        #     Backfill job state.
+        #     Output only. Backfill job state.
         # @!attribute [rw] trigger
         #   @return [::Google::Cloud::Datastream::V1::BackfillJob::Trigger]
         #     Backfill job's triggering reason.
@@ -1096,9 +1395,9 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     A short description of the validation.
-        # @!attribute [rw] state
+        # @!attribute [r] state
         #   @return [::Google::Cloud::Datastream::V1::Validation::State]
-        #     Validation execution status.
+        #     Output only. Validation execution status.
         # @!attribute [rw] message
         #   @return [::Array<::Google::Cloud::Datastream::V1::ValidationMessage>]
         #     Messages reflecting the validation results.
@@ -1122,6 +1421,9 @@ module Google
 
             # Validation passed.
             PASSED = 3
+
+            # Validation executed with warnings.
+            WARNING = 4
           end
         end
 
@@ -1162,6 +1464,81 @@ module Google
             # Definitely cause issues with the Stream.
             ERROR = 2
           end
+        end
+
+        # The strategy that the stream uses for CDC replication.
+        # @!attribute [rw] most_recent_start_position
+        #   @return [::Google::Cloud::Datastream::V1::CdcStrategy::MostRecentStartPosition]
+        #     Optional. Start replicating from the most recent position in the source.
+        # @!attribute [rw] next_available_start_position
+        #   @return [::Google::Cloud::Datastream::V1::CdcStrategy::NextAvailableStartPosition]
+        #     Optional. Resume replication from the next available position in the
+        #     source.
+        # @!attribute [rw] specific_start_position
+        #   @return [::Google::Cloud::Datastream::V1::CdcStrategy::SpecificStartPosition]
+        #     Optional. Start replicating from a specific position in the source.
+        class CdcStrategy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # CDC strategy to start replicating from the most recent position in the
+          # source.
+          class MostRecentStartPosition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # CDC strategy to resume replication from the next available position in the
+          # source.
+          class NextAvailableStartPosition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # CDC strategy to start replicating from a specific position in the source.
+          # @!attribute [rw] mysql_log_position
+          #   @return [::Google::Cloud::Datastream::V1::MysqlLogPosition]
+          #     MySQL specific log position to start replicating from.
+          # @!attribute [rw] oracle_scn_position
+          #   @return [::Google::Cloud::Datastream::V1::OracleScnPosition]
+          #     Oracle SCN to start replicating from.
+          # @!attribute [rw] sql_server_lsn_position
+          #   @return [::Google::Cloud::Datastream::V1::SqlServerLsnPosition]
+          #     SqlServer LSN to start replicating from.
+          class SpecificStartPosition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # SQL Server LSN position
+        # @!attribute [rw] lsn
+        #   @return [::String]
+        #     Required. Log sequence number (LSN) from where Logs will be read
+        class SqlServerLsnPosition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Oracle SCN position
+        # @!attribute [rw] scn
+        #   @return [::Integer]
+        #     Required. SCN number from where Logs will be read
+        class OracleScnPosition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # MySQL log position
+        # @!attribute [rw] log_file
+        #   @return [::String]
+        #     Required. The binary log file name.
+        # @!attribute [rw] log_position
+        #   @return [::Integer]
+        #     Optional. The position within the binary log file. Default is head of file.
+        class MysqlLogPosition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

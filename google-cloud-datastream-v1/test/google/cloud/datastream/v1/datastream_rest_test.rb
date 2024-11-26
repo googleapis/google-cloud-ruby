@@ -695,6 +695,62 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     end
   end
 
+  def test_run_stream
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    cdc_strategy = {}
+    force = true
+
+    run_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Datastream::V1::Datastream::Rest::ServiceStub.stub :transcode_run_stream_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, run_stream_client_stub do
+        # Create client
+        client = ::Google::Cloud::Datastream::V1::Datastream::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.run_stream({ name: name, cdc_strategy: cdc_strategy, force: force }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.run_stream name: name, cdc_strategy: cdc_strategy, force: force do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.run_stream ::Google::Cloud::Datastream::V1::RunStreamRequest.new(name: name, cdc_strategy: cdc_strategy, force: force) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.run_stream({ name: name, cdc_strategy: cdc_strategy, force: force }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.run_stream(::Google::Cloud::Datastream::V1::RunStreamRequest.new(name: name, cdc_strategy: cdc_strategy, force: force), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, run_stream_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_stream_object
     # Create test objects.
     client_result = ::Google::Cloud::Datastream::V1::StreamObject.new

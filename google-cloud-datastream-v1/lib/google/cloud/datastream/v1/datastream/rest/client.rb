@@ -742,7 +742,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil)
+              # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil, sql_server_rdbms: nil)
               #   Pass arguments to `discover_connection_profile` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -765,6 +765,8 @@ module Google
               #     MySQL RDBMS to enrich with child data objects and metadata.
               #   @param postgresql_rdbms [::Google::Cloud::Datastream::V1::PostgresqlRdbms, ::Hash]
               #     PostgreSQL RDBMS to enrich with child data objects and metadata.
+              #   @param sql_server_rdbms [::Google::Cloud::Datastream::V1::SqlServerRdbms, ::Hash]
+              #     SQLServer RDBMS to enrich with child data objects and metadata.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1315,6 +1317,100 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.delete_stream request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Use this method to start, resume or recover a stream with a non default CDC
+              # strategy.
+              #
+              # @overload run_stream(request, options = nil)
+              #   Pass arguments to `run_stream` via a request object, either of type
+              #   {::Google::Cloud::Datastream::V1::RunStreamRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Datastream::V1::RunStreamRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload run_stream(name: nil, cdc_strategy: nil, force: nil)
+              #   Pass arguments to `run_stream` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Name of the stream resource to start, in the format:
+              #     projects/\\{project_id}/locations/\\{location}/streams/\\{stream_name}
+              #   @param cdc_strategy [::Google::Cloud::Datastream::V1::CdcStrategy, ::Hash]
+              #     Optional. The CDC strategy of the stream. If not set, the system's default
+              #     value will be used.
+              #   @param force [::Boolean]
+              #     Optional. Update the stream without validating it.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/datastream/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastream::V1::Datastream::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastream::V1::RunStreamRequest.new
+              #
+              #   # Call the run_stream method.
+              #   result = client.run_stream request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def run_stream request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Datastream::V1::RunStreamRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.run_stream.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Datastream::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.run_stream.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.run_stream.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @datastream_stub.run_stream request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   return result
@@ -2797,6 +2893,11 @@ module Google
                   #
                   attr_reader :delete_stream
                   ##
+                  # RPC-specific configuration for `run_stream`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :run_stream
+                  ##
                   # RPC-specific configuration for `get_stream_object`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2891,6 +2992,8 @@ module Google
                     @update_stream = ::Gapic::Config::Method.new update_stream_config
                     delete_stream_config = parent_rpcs.delete_stream if parent_rpcs.respond_to? :delete_stream
                     @delete_stream = ::Gapic::Config::Method.new delete_stream_config
+                    run_stream_config = parent_rpcs.run_stream if parent_rpcs.respond_to? :run_stream
+                    @run_stream = ::Gapic::Config::Method.new run_stream_config
                     get_stream_object_config = parent_rpcs.get_stream_object if parent_rpcs.respond_to? :get_stream_object
                     @get_stream_object = ::Gapic::Config::Method.new get_stream_object_config
                     lookup_stream_object_config = parent_rpcs.lookup_stream_object if parent_rpcs.respond_to? :lookup_stream_object

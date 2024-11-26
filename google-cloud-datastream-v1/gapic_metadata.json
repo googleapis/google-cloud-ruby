@@ -65,6 +65,11 @@
                 "delete_stream"
               ]
             },
+            "RunStream": {
+              "methods": [
+                "run_stream"
+              ]
+            },
             "GetStreamObject": {
               "methods": [
                 "get_stream_object"
