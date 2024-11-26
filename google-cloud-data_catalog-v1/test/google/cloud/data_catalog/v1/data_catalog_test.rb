@@ -2151,6 +2151,183 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientTest < Minitest::Test
     end
   end
 
+  def test_set_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DataCatalog::V1::MigrationConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    tag_template_migration = :TAG_TEMPLATE_MIGRATION_UNSPECIFIED
+
+    set_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_config, name
+      assert_kind_of ::Google::Cloud::DataCatalog::V1::SetConfigRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :TAG_TEMPLATE_MIGRATION_UNSPECIFIED, request["tag_template_migration"]
+      assert_equal :tag_template_migration, request.configuration
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.set_config({ name: name, tag_template_migration: tag_template_migration }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.set_config name: name, tag_template_migration: tag_template_migration do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.set_config ::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.set_config({ name: name, tag_template_migration: tag_template_migration }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.set_config(::Google::Cloud::DataCatalog::V1::SetConfigRequest.new(name: name, tag_template_migration: tag_template_migration), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_retrieve_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DataCatalog::V1::OrganizationConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    retrieve_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :retrieve_config, name
+      assert_kind_of ::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, retrieve_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.retrieve_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.retrieve_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.retrieve_config ::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.retrieve_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.retrieve_config(::Google::Cloud::DataCatalog::V1::RetrieveConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, retrieve_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_retrieve_effective_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DataCatalog::V1::MigrationConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    retrieve_effective_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :retrieve_effective_config, name
+      assert_kind_of ::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, retrieve_effective_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.retrieve_effective_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.retrieve_effective_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.retrieve_effective_config ::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.retrieve_effective_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.retrieve_effective_config(::Google::Cloud::DataCatalog::V1::RetrieveEffectiveConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, retrieve_effective_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

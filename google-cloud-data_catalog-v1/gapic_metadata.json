@@ -179,6 +179,21 @@
               "methods": [
                 "import_entries"
               ]
+            },
+            "SetConfig": {
+              "methods": [
+                "set_config"
+              ]
+            },
+            "RetrieveConfig": {
+              "methods": [
+                "retrieve_config"
+              ]
+            },
+            "RetrieveEffectiveConfig": {
+              "methods": [
+                "retrieve_effective_config"
+              ]
             }
           }
         }
