@@ -77,9 +77,9 @@ module Google
         # @!attribute [rw] active_directory_id
         #   @return [::String]
         #     Required. ID of the active directory to create. Must be unique within the
-        #     parent resource. Must contain only letters, numbers, underscore and hyphen,
-        #     with the first character a letter or underscore, the last a letter or
-        #     underscore or a number, and a 63 character maximum.
+        #     parent resource. Must contain only letters, numbers and hyphen, with the
+        #     first character a letter , the last a letter or a number, and a 63
+        #     character maximum.
         class CreateActiveDirectoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,6 +221,9 @@ module Google
 
             # Active Directory State is Error
             ERROR = 6
+
+            # Active Directory State is Diagnosing.
+            DIAGNOSING = 7
           end
         end
       end

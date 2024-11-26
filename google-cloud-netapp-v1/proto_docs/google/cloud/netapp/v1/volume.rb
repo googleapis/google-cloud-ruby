@@ -74,9 +74,9 @@ module Google
         # @!attribute [rw] volume_id
         #   @return [::String]
         #     Required. Id of the requesting volume. Must be unique within the parent
-        #     resource. Must contain only letters, numbers, underscore and hyphen, with
-        #     the first character a letter or underscore, the last a letter or underscore
-        #     or a number, and a 63 character maximum.
+        #     resource. Must contain only letters, numbers and hyphen, with the first
+        #     character a letter, the last a letter or a number,
+        #     and a 63 character maximum.
         # @!attribute [rw] volume
         #   @return [::Google::Cloud::NetApp::V1::Volume]
         #     Required. The volume being created.
@@ -254,6 +254,9 @@ module Google
         # @!attribute [r] cold_tier_size_gib
         #   @return [::Integer]
         #     Output only. Size of the volume cold tier data in GiB.
+        # @!attribute [rw] hybrid_replication_parameters
+        #   @return [::Google::Cloud::NetApp::V1::HybridReplicationParameters]
+        #     Optional. The Hybrid Replication parameters for the volume.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -292,6 +295,14 @@ module Google
 
             # Volume State is Error
             ERROR = 7
+
+            # Volume State is Preparing. Note that this is different from CREATING
+            # where CREATING means the volume is being created, while PREPARING means
+            # the volume is created and now being prepared for the replication.
+            PREPARING = 8
+
+            # Volume State is Read Only
+            READ_ONLY = 9
           end
         end
 
@@ -531,6 +542,51 @@ module Google
             # When paused, tiering won't be performed on new data. Existing data stays
             # tiered until accessed.
             PAUSED = 2
+          end
+        end
+
+        # The Hybrid Replication parameters for the volume.
+        # @!attribute [rw] replication
+        #   @return [::String]
+        #     Required. Desired Identifier (name) of the replication which will be created for this volume.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}`
+        # @!attribute [rw] peer_volume_name
+        #   @return [::String]
+        #     Required. Name of the user's local source volume to be peered with the
+        #     destination volume.
+        # @!attribute [rw] peer_cluster_name
+        #   @return [::String]
+        #     Required. Name of the user's local source cluster to be peered with the
+        #     destination cluster.
+        # @!attribute [rw] peer_svm_name
+        #   @return [::String]
+        #     Required. Name of the user's local source vserver svm to be peered with the
+        #     destination vserver svm.
+        # @!attribute [rw] peer_ip_addresses
+        #   @return [::Array<::String>]
+        #     Required. List of node ip addresses to be peered with.
+        # @!attribute [rw] cluster_location
+        #   @return [::String]
+        #     Optional. Name of source cluster location associated with the Hybrid
+        #     replication. This is a free-form field for the display purpose only.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of the replication.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Labels to be added to the replication as the key value pairs.
+        class HybridReplicationParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 

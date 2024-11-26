@@ -457,9 +457,9 @@ module Google
               #     Required. Value for parent.
               #   @param storage_pool_id [::String]
               #     Required. Id of the requesting storage pool. Must be unique within the
-              #     parent resource. Must contain only letters, numbers, underscore and hyphen,
-              #     with the first character a letter or underscore, the last a letter or
-              #     underscore or a number, and a 63 character maximum.
+              #     parent resource. Must contain only letters, numbers and hyphen, with the
+              #     first character a letter, the last a letter or a number, and a 63 character
+              #     maximum.
               #   @param storage_pool [::Google::Cloud::NetApp::V1::StoragePool, ::Hash]
               #     Required. The required parameters to create a new storage pool.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1069,9 +1069,9 @@ module Google
               #     Required. Value for parent.
               #   @param volume_id [::String]
               #     Required. Id of the requesting volume. Must be unique within the parent
-              #     resource. Must contain only letters, numbers, underscore and hyphen, with
-              #     the first character a letter or underscore, the last a letter or underscore
-              #     or a number, and a 63 character maximum.
+              #     resource. Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a number,
+              #     and a 63 character maximum.
               #   @param volume [::Google::Cloud::NetApp::V1::Volume, ::Hash]
               #     Required. The volume being created.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1618,9 +1618,9 @@ module Google
               #     Required. A snapshot resource
               #   @param snapshot_id [::String]
               #     Required. ID of the snapshot to create. Must be unique within the parent
-              #     resource. Must contain only letters, numbers, underscore and hyphen, with
-              #     the first character a letter or underscore, the last a letter or underscore
-              #     or a number, and a 63 character maximum.
+              #     resource. Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a
+              #     number, and a 63 character maximum.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2062,9 +2062,9 @@ module Google
               #     Required. Fields of the to be created active directory.
               #   @param active_directory_id [::String]
               #     Required. ID of the active directory to create. Must be unique within the
-              #     parent resource. Must contain only letters, numbers, underscore and hyphen,
-              #     with the first character a letter or underscore, the last a letter or
-              #     underscore or a number, and a 63 character maximum.
+              #     parent resource. Must contain only letters, numbers and hyphen, with the
+              #     first character a letter , the last a letter or a number, and a 63
+              #     character maximum.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2426,9 +2426,9 @@ module Google
               #     Required. Value for parent.
               #   @param kms_config_id [::String]
               #     Required. Id of the requesting KmsConfig. Must be unique within the parent
-              #     resource. Must contain only letters, numbers, underscore and hyphen, with
-              #     the first character a letter or underscore, the last a letter or underscore
-              #     or a number, and a 63 character maximum.
+              #     resource. Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a
+              #     number, and a 63 character maximum.
               #   @param kms_config [::Google::Cloud::NetApp::V1::KmsConfig, ::Hash]
               #     Required. The required parameters to create a new KmsConfig.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -3123,9 +3123,9 @@ module Google
               #     Required. A replication resource
               #   @param replication_id [::String]
               #     Required. ID of the replication to create. Must be unique within the parent
-              #     resource. Must contain only letters, numbers, underscore and hyphen, with
-              #     the first character a letter or underscore, the last a letter or underscore
-              #     or a number, and a 63 character maximum.
+              #     resource. Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a
+              #     number, and a 63 character maximum.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3644,6 +3644,194 @@ module Google
               end
 
               ##
+              # Establish replication peering.
+              #
+              # @overload establish_peering(request, options = nil)
+              #   Pass arguments to `establish_peering` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::EstablishPeeringRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::EstablishPeeringRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload establish_peering(name: nil, peer_cluster_name: nil, peer_svm_name: nil, peer_ip_addresses: nil, peer_volume_name: nil)
+              #   Pass arguments to `establish_peering` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the replication, in the format of
+              #     projects/\\{project_id}/locations/\\{location}/volumes/\\{volume_id}/replications/\\{replication_id}.
+              #   @param peer_cluster_name [::String]
+              #     Required. Name of the user's local source cluster to be peered with the
+              #     destination cluster.
+              #   @param peer_svm_name [::String]
+              #     Required. Name of the user's local source vserver svm to be peered with the
+              #     destination vserver svm.
+              #   @param peer_ip_addresses [::Array<::String>]
+              #     Optional. List of IPv4 ip addresses to be used for peering.
+              #   @param peer_volume_name [::String]
+              #     Required. Name of the user's local source volume to be peered with the
+              #     destination volume.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::EstablishPeeringRequest.new
+              #
+              #   # Call the establish_peering method.
+              #   result = client.establish_peering request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def establish_peering request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::EstablishPeeringRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.establish_peering.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.establish_peering.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.establish_peering.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.establish_peering request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Syncs the replication. This will invoke one time volume data transfer from
+              # source to destination.
+              #
+              # @overload sync_replication(request, options = nil)
+              #   Pass arguments to `sync_replication` via a request object, either of type
+              #   {::Google::Cloud::NetApp::V1::SyncReplicationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::NetApp::V1::SyncReplicationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload sync_replication(name: nil)
+              #   Pass arguments to `sync_replication` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the replication, in the format of
+              #     projects/\\{project_id}/locations/\\{location}/volumes/\\{volume_id}/replications/\\{replication_id}.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/netapp/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::NetApp::V1::NetApp::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::NetApp::V1::SyncReplicationRequest.new
+              #
+              #   # Call the sync_replication method.
+              #   result = client.sync_replication request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def sync_replication request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::SyncReplicationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.sync_replication.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::NetApp::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.sync_replication.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.sync_replication.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @net_app_stub.sync_replication request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates new backup vault
               #
               # @overload create_backup_vault(request, options = nil)
@@ -3667,8 +3855,8 @@ module Google
               #   @param backup_vault_id [::String]
               #     Required. The ID to use for the backupVault.
               #     The ID must be unique within the specified location.
-              #     Must contain only letters, numbers, underscore and hyphen, with the first
-              #     character a letter or underscore, the last a letter or underscore or a
+              #     Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a
               #     number, and a 63 character maximum.
               #   @param backup_vault [::Google::Cloud::NetApp::V1::BackupVault, ::Hash]
               #     Required. A backupVault resource
@@ -4121,8 +4309,8 @@ module Google
               #   @param backup_id [::String]
               #     Required. The ID to use for the backup.
               #     The ID must be unique within the specified backupVault.
-              #     Must contain only letters, numbers, underscore and hyphen, with the first
-              #     character a letter or underscore, the last a letter or underscore or a
+              #     Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a
               #     number, and a 63 character maximum.
               #   @param backup [::Google::Cloud::NetApp::V1::Backup, ::Hash]
               #     Required. A backup resource
@@ -4585,8 +4773,8 @@ module Google
               #   @param backup_policy_id [::String]
               #     Required. The ID to use for the backup policy.
               #     The ID must be unique within the specified location.
-              #     Must contain only letters, numbers, underscore and hyphen, with the first
-              #     character a letter or underscore, the last a letter or underscore or a
+              #     Must contain only letters, numbers and hyphen, with the first
+              #     character a letter, the last a letter or a
               #     number, and a 63 character maximum.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
@@ -5334,6 +5522,16 @@ module Google
                   #
                   attr_reader :reverse_replication_direction
                   ##
+                  # RPC-specific configuration for `establish_peering`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :establish_peering
+                  ##
+                  # RPC-specific configuration for `sync_replication`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :sync_replication
+                  ##
                   # RPC-specific configuration for `create_backup_vault`
                   # @return [::Gapic::Config::Method]
                   #
@@ -5485,6 +5683,10 @@ module Google
                     @resume_replication = ::Gapic::Config::Method.new resume_replication_config
                     reverse_replication_direction_config = parent_rpcs.reverse_replication_direction if parent_rpcs.respond_to? :reverse_replication_direction
                     @reverse_replication_direction = ::Gapic::Config::Method.new reverse_replication_direction_config
+                    establish_peering_config = parent_rpcs.establish_peering if parent_rpcs.respond_to? :establish_peering
+                    @establish_peering = ::Gapic::Config::Method.new establish_peering_config
+                    sync_replication_config = parent_rpcs.sync_replication if parent_rpcs.respond_to? :sync_replication
+                    @sync_replication = ::Gapic::Config::Method.new sync_replication_config
                     create_backup_vault_config = parent_rpcs.create_backup_vault if parent_rpcs.respond_to? :create_backup_vault
                     @create_backup_vault = ::Gapic::Config::Method.new create_backup_vault_config
                     get_backup_vault_config = parent_rpcs.get_backup_vault if parent_rpcs.respond_to? :get_backup_vault

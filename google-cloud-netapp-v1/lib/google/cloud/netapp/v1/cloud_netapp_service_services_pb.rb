@@ -113,6 +113,11 @@ module Google
             # Reverses direction of replication. Source becomes destination and
             # destination becomes source.
             rpc :ReverseReplicationDirection, ::Google::Cloud::NetApp::V1::ReverseReplicationDirectionRequest, ::Google::Longrunning::Operation
+            # Establish replication peering.
+            rpc :EstablishPeering, ::Google::Cloud::NetApp::V1::EstablishPeeringRequest, ::Google::Longrunning::Operation
+            # Syncs the replication. This will invoke one time volume data transfer from
+            # source to destination.
+            rpc :SyncReplication, ::Google::Cloud::NetApp::V1::SyncReplicationRequest, ::Google::Longrunning::Operation
             # Creates new backup vault
             rpc :CreateBackupVault, ::Google::Cloud::NetApp::V1::CreateBackupVaultRequest, ::Google::Longrunning::Operation
             # Returns the description of the specified backup vault

@@ -2441,6 +2441,140 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientTest < Minitest::Test
     end
   end
 
+  def test_establish_peering
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_cluster_name = "hello world"
+    peer_svm_name = "hello world"
+    peer_ip_addresses = ["hello world"]
+    peer_volume_name = "hello world"
+
+    establish_peering_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :establish_peering, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::EstablishPeeringRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["peer_cluster_name"]
+      assert_equal "hello world", request["peer_svm_name"]
+      assert_equal ["hello world"], request["peer_ip_addresses"]
+      assert_equal "hello world", request["peer_volume_name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, establish_peering_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.establish_peering name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.establish_peering ::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.establish_peering({ name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.establish_peering(::Google::Cloud::NetApp::V1::EstablishPeeringRequest.new(name: name, peer_cluster_name: peer_cluster_name, peer_svm_name: peer_svm_name, peer_ip_addresses: peer_ip_addresses, peer_volume_name: peer_volume_name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, establish_peering_client_stub.call_rpc_count
+    end
+  end
+
+  def test_sync_replication
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    sync_replication_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :sync_replication, name
+      assert_kind_of ::Google::Cloud::NetApp::V1::SyncReplicationRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, sync_replication_client_stub do
+      # Create client
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.sync_replication({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.sync_replication name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.sync_replication ::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.sync_replication({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.sync_replication(::Google::Cloud::NetApp::V1::SyncReplicationRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, sync_replication_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_backup_vault
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
