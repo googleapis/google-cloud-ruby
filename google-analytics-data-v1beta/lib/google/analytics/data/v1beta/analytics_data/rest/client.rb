@@ -218,7 +218,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param property [::String]
-              #     A Google Analytics GA4 property identifier whose events are tracked.
+              #     A Google Analytics property identifier whose events are tracked.
               #     Specified in the URL path and not the body. To learn more, see [where to
               #     find your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -270,8 +270,12 @@ module Google
               #   @param metric_aggregations [::Array<::Google::Analytics::Data::V1beta::MetricAggregation>]
               #     Aggregation of metrics. Aggregated metric values will be shown in rows
               #     where the dimension_values are set to "RESERVED_(MetricAggregation)".
+              #     Aggregates including both comparisons and multiple date ranges will
+              #     be aggregated based on the date ranges.
               #   @param order_bys [::Array<::Google::Analytics::Data::V1beta::OrderBy, ::Hash>]
               #     Specifies how rows are ordered in the response.
+              #     Requests including both comparisons and multiple date ranges will
+              #     have order bys applied on the comparisons.
               #   @param currency_code [::String]
               #     A currency code in ISO4217 format, such as "AED", "USD", "JPY".
               #     If the field is empty, the report uses the property's default currency.
@@ -284,14 +288,14 @@ module Google
               #     removed by a filter.
               #
               #     Regardless of this `keep_empty_rows` setting, only data recorded by the
-              #     Google Analytics (GA4) property can be displayed in a report.
+              #     Google Analytics property can be displayed in a report.
               #
               #     For example if a property never logs a `purchase` event, then a query for
               #     the `eventName` dimension and  `eventCount` metric will not have a row
               #     eventName: "purchase" and eventCount: 0.
               #   @param return_property_quota [::Boolean]
-              #     Toggles whether to return the current state of this Analytics Property's
-              #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+              #     Toggles whether to return the current state of this Google Analytics
+              #     property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
               #   @param comparisons [::Array<::Google::Analytics::Data::V1beta::Comparison, ::Hash>]
               #     Optional. The configuration of comparisons requested and displayed. The
               #     request only requires a comparisons field in order to receive a comparison
@@ -378,7 +382,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param property [::String]
-              #     A Google Analytics GA4 property identifier whose events are tracked.
+              #     A Google Analytics property identifier whose events are tracked.
               #     Specified in the URL path and not the body. To learn more, see [where to
               #     find your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -423,14 +427,14 @@ module Google
               #     removed by a filter.
               #
               #     Regardless of this `keep_empty_rows` setting, only data recorded by the
-              #     Google Analytics (GA4) property can be displayed in a report.
+              #     Google Analytics property can be displayed in a report.
               #
               #     For example if a property never logs a `purchase` event, then a query for
               #     the `eventName` dimension and  `eventCount` metric will not have a row
               #     eventName: "purchase" and eventCount: 0.
               #   @param return_property_quota [::Boolean]
-              #     Toggles whether to return the current state of this Analytics Property's
-              #     quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+              #     Toggles whether to return the current state of this Google Analytics
+              #     property's quota. Quota is returned in [PropertyQuota](#PropertyQuota).
               #   @param comparisons [::Array<::Google::Analytics::Data::V1beta::Comparison, ::Hash>]
               #     Optional. The configuration of comparisons requested and displayed. The
               #     request requires both a comparisons field and a comparisons dimension to
@@ -496,7 +500,7 @@ module Google
 
               ##
               # Returns multiple reports in a batch. All reports must be for the same
-              # GA4 Property.
+              # Google Analytics property.
               #
               # @overload batch_run_reports(request, options = nil)
               #   Pass arguments to `batch_run_reports` via a request object, either of type
@@ -514,7 +518,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param property [::String]
-              #     A Google Analytics GA4 property identifier whose events are tracked.
+              #     A Google Analytics property identifier whose events are tracked.
               #     Specified in the URL path and not the body. To learn more, see [where to
               #     find your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -587,7 +591,7 @@ module Google
 
               ##
               # Returns multiple pivot reports in a batch. All reports must be for the same
-              # GA4 Property.
+              # Google Analytics property.
               #
               # @overload batch_run_pivot_reports(request, options = nil)
               #   Pass arguments to `batch_run_pivot_reports` via a request object, either of type
@@ -605,7 +609,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param property [::String]
-              #     A Google Analytics GA4 property identifier whose events are tracked.
+              #     A Google Analytics property identifier whose events are tracked.
               #     Specified in the URL path and not the body. To learn more, see [where to
               #     find your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -679,7 +683,7 @@ module Google
               ##
               # Returns metadata for dimensions and metrics available in reporting methods.
               # Used to explore the dimensions and metrics. In this method, a Google
-              # Analytics GA4 Property Identifier is specified in the request, and
+              # Analytics property identifier is specified in the request, and
               # the metadata response includes Custom dimensions and metrics as well as
               # Universal metadata.
               #
@@ -706,7 +710,7 @@ module Google
               #   @param name [::String]
               #     Required. The resource name of the metadata to retrieve. This name field is
               #     specified in the URL path and not URL parameters. Property is a numeric
-              #     Google Analytics GA4 Property identifier. To learn more, see [where to find
+              #     Google Analytics property identifier. To learn more, see [where to find
               #     your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
               #
@@ -801,7 +805,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param property [::String]
-              #     A Google Analytics GA4 property identifier whose events are tracked.
+              #     A Google Analytics property identifier whose events are tracked.
               #     Specified in the URL path and not the body. To learn more, see [where to
               #     find your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
@@ -832,8 +836,9 @@ module Google
               #   @param order_bys [::Array<::Google::Analytics::Data::V1beta::OrderBy, ::Hash>]
               #     Specifies how rows are ordered in the response.
               #   @param return_property_quota [::Boolean]
-              #     Toggles whether to return the current state of this Analytics Property's
-              #     Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+              #     Toggles whether to return the current state of this Google Analytics
+              #     property's Realtime quota. Quota is returned in
+              #     [PropertyQuota](#PropertyQuota).
               #   @param minute_ranges [::Array<::Google::Analytics::Data::V1beta::MinuteRange, ::Hash>]
               #     The minute ranges of event data to read. If unspecified, one minute range
               #     for the last 30 minutes will be used. If multiple minute ranges are
@@ -927,7 +932,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param property [::String]
-              #     A Google Analytics GA4 property identifier whose events are tracked. To
+              #     A Google Analytics property identifier whose events are tracked. To
               #     learn more, see [where to find your Property
               #     ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
               #     `property` should be the same value as in your `runReport` request.

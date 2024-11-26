@@ -273,6 +273,9 @@ module Google
         # @!attribute [rw] between_filter
         #   @return [::Google::Analytics::Data::V1beta::Filter::BetweenFilter]
         #     A filter for two values.
+        # @!attribute [rw] empty_filter
+        #   @return [::Google::Analytics::Data::V1beta::Filter::EmptyFilter]
+        #     A filter for empty values such as "(not set)" and "" values.
         class Filter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -370,6 +373,12 @@ module Google
           #   @return [::Google::Analytics::Data::V1beta::NumericValue]
           #     Ends with this number.
           class BetweenFilter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Filter for empty values.
+          class EmptyFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1156,8 +1165,8 @@ module Google
           TYPE_KILOMETERS = 13
         end
 
-        # Categories of data that you may be restricted from viewing on certain GA4
-        # properties.
+        # Categories of data that you may be restricted from viewing on certain
+        # Google Analytics properties.
         module RestrictedMetricType
           # Unspecified type.
           RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
