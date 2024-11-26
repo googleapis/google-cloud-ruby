@@ -157,6 +157,9 @@ module Google
         end
 
         # Options to modify claims in the token to generate custom-purpose tokens.
+        # @!attribute [rw] aws_principal_tags_options
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions::AwsPrincipalTagsOptions]
+        #     Optional. Options for the Limited AWS token type.
         # @!attribute [rw] audience
         #   @return [::String]
         #     Optional. Optional string to issue the token with a custom audience claim.
@@ -172,6 +175,37 @@ module Google
         class TokenOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Token options that only apply to the AWS Principal Tags token type.
+          # @!attribute [rw] allowed_principal_tags
+          #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions::AwsPrincipalTagsOptions::AllowedPrincipalTags]
+          #     Optional. Principal tags to allow in the token.
+          class AwsPrincipalTagsOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Allowed principal tags is used to define what principal tags will be
+            # placed in the token.
+            # @!attribute [rw] container_image_signatures
+            #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions::AwsPrincipalTagsOptions::AllowedPrincipalTags::ContainerImageSignatures]
+            #     Optional. Container image signatures allowed in the token.
+            class AllowedPrincipalTags
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Allowed Container Image Signatures. Key IDs are required to allow this
+              # claim to fit within the narrow AWS IAM restrictions.
+              # @!attribute [rw] key_ids
+              #   @return [::Array<::String>]
+              #     Optional. List of key ids to filter into the Principal tags. Only
+              #     keys that have been validated and added to the token will be filtered
+              #     into principal tags. Unrecognized key ids will be ignored.
+              class ContainerImageSignatures
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+          end
         end
 
         # TPM2 data containing everything necessary to validate any platform state
@@ -308,6 +342,9 @@ module Google
 
           # Limited claim token type for AWS integration
           TOKEN_TYPE_LIMITED_AWS = 3
+
+          # Principal-tag-based token for AWS integration
+          TOKEN_TYPE_AWS_PRINCIPALTAGS = 4
         end
       end
     end
