@@ -1535,6 +1535,20 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1/{name}/operations",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}/operations",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/ragFiles/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}/operations",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/schedules/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -2159,6 +2173,20 @@ module Google
                                                           uri_template: "/v1/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/notebookRuntimeTemplates/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/ragFiles/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -2809,6 +2837,20 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/v1/{name}",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/ragFiles/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -3446,6 +3488,20 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/v1/{name}:cancel",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/ragFiles/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:cancel",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/studies/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -4056,6 +4112,20 @@ module Google
                                                           uri_template: "/v1/{name}:wait",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/notebookRuntimeTemplates/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:wait",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{name}:wait",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/ragCorpora/[^/]+/ragFiles/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(

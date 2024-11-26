@@ -161,6 +161,28 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint_long_running EndpointService.UpdateEndpointLongRunning}.
+        # @!attribute [rw] endpoint
+        #   @return [::Google::Cloud::AIPlatform::V1::Endpoint]
+        #     Required. The Endpoint which replaces the resource on the server. Currently
+        #     we only support updating the `client_connection_config` field, all the
+        #     other fields' update will be blocked.
+        class UpdateEndpointLongRunningRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Runtime operation information for
+        # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#update_endpoint_long_running EndpointService.UpdateEndpointLongRunning}.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The operation generic information.
+        class UpdateEndpointOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::EndpointService::Client#delete_endpoint EndpointService.DeleteEndpoint}.
         # @!attribute [rw] name
         #   @return [::String]

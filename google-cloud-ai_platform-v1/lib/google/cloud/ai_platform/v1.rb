@@ -42,6 +42,8 @@ require "google/cloud/ai_platform/v1/pipeline_service"
 require "google/cloud/ai_platform/v1/schedule_service"
 require "google/cloud/ai_platform/v1/specialist_pool_service"
 require "google/cloud/ai_platform/v1/tensorboard_service"
+require "google/cloud/ai_platform/v1/vertex_rag_data_service"
+require "google/cloud/ai_platform/v1/vertex_rag_service"
 require "google/cloud/ai_platform/v1/vizier_service"
 require "google/cloud/ai_platform/v1/version"
 

@@ -41,6 +41,8 @@ module Google
             rpc :ListEndpoints, ::Google::Cloud::AIPlatform::V1::ListEndpointsRequest, ::Google::Cloud::AIPlatform::V1::ListEndpointsResponse
             # Updates an Endpoint.
             rpc :UpdateEndpoint, ::Google::Cloud::AIPlatform::V1::UpdateEndpointRequest, ::Google::Cloud::AIPlatform::V1::Endpoint
+            # Updates an Endpoint with a long running operation.
+            rpc :UpdateEndpointLongRunning, ::Google::Cloud::AIPlatform::V1::UpdateEndpointLongRunningRequest, ::Google::Longrunning::Operation
             # Deletes an Endpoint.
             rpc :DeleteEndpoint, ::Google::Cloud::AIPlatform::V1::DeleteEndpointRequest, ::Google::Longrunning::Operation
             # Deploys a Model into this Endpoint, creating a DeployedModel within it.

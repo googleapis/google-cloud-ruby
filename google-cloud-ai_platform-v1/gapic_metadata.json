@@ -173,6 +173,11 @@
                 "update_endpoint"
               ]
             },
+            "UpdateEndpointLongRunning": {
+              "methods": [
+                "update_endpoint_long_running"
+              ]
+            },
             "DeleteEndpoint": {
               "methods": [
                 "delete_endpoint"
@@ -1658,6 +1663,89 @@
             "ExportTensorboardTimeSeriesData": {
               "methods": [
                 "export_tensorboard_time_series_data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VertexRagDataService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::VertexRagDataService::Client",
+          "rpcs": {
+            "CreateRagCorpus": {
+              "methods": [
+                "create_rag_corpus"
+              ]
+            },
+            "UpdateRagCorpus": {
+              "methods": [
+                "update_rag_corpus"
+              ]
+            },
+            "GetRagCorpus": {
+              "methods": [
+                "get_rag_corpus"
+              ]
+            },
+            "ListRagCorpora": {
+              "methods": [
+                "list_rag_corpora"
+              ]
+            },
+            "DeleteRagCorpus": {
+              "methods": [
+                "delete_rag_corpus"
+              ]
+            },
+            "UploadRagFile": {
+              "methods": [
+                "upload_rag_file"
+              ]
+            },
+            "ImportRagFiles": {
+              "methods": [
+                "import_rag_files"
+              ]
+            },
+            "GetRagFile": {
+              "methods": [
+                "get_rag_file"
+              ]
+            },
+            "ListRagFiles": {
+              "methods": [
+                "list_rag_files"
+              ]
+            },
+            "DeleteRagFile": {
+              "methods": [
+                "delete_rag_file"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VertexRagService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::VertexRagService::Client",
+          "rpcs": {
+            "RetrieveContexts": {
+              "methods": [
+                "retrieve_contexts"
+              ]
+            },
+            "AugmentPrompt": {
+              "methods": [
+                "augment_prompt"
+              ]
+            },
+            "CorroborateContent": {
+              "methods": [
+                "corroborate_content"
               ]
             }
           }
