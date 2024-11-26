@@ -25,6 +25,15 @@ module Google
         # @!attribute [rw] github_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubConfig]
         #     Configuration for connections to github.com.
+        # @!attribute [rw] github_enterprise_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubEnterpriseConfig]
+        #     Configuration for connections to an instance of GitHub Enterprise.
+        # @!attribute [rw] gitlab_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabConfig]
+        #     Configuration for connections to gitlab.com.
+        # @!attribute [rw] gitlab_enterprise_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabEnterpriseConfig]
+        #     Configuration for connections to an instance of GitLab Enterprise.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the connection, in the format
@@ -65,6 +74,10 @@ module Google
         #   @return [::String]
         #     Output only. A system-assigned unique identifier for a the
         #     GitRepositoryLink.
+        # @!attribute [rw] crypto_key_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::CryptoKeyConfig]
+        #     Optional. The crypto key configuration. This field is used by the
+        #     Customer-Managed Encryption Keys (CMEK) feature.
         class Connection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,6 +99,18 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # The crypto key configuration. This field is used by the Customer-managed
+        # encryption keys (CMEK) feature.
+        # @!attribute [rw] key_reference
+        #   @return [::String]
+        #     Required. The name of the key which is used to encrypt/decrypt customer
+        #     data. For key in Cloud KMS, the key should be in the format of
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
+        class CryptoKeyConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Describes stage and necessary actions to be taken by the
@@ -161,6 +186,61 @@ module Google
           end
         end
 
+        # Configuration for connections to an instance of GitHub Enterprise.
+        # @!attribute [rw] host_uri
+        #   @return [::String]
+        #     Required. The URI of the GitHub Enterprise host this connection is for.
+        # @!attribute [rw] app_id
+        #   @return [::Integer]
+        #     Optional. ID of the GitHub App created from the manifest.
+        # @!attribute [r] app_slug
+        #   @return [::String]
+        #     Output only. The URL-friendly name of the GitHub App.
+        # @!attribute [rw] private_key_secret_version
+        #   @return [::String]
+        #     Optional. SecretManager resource containing the private key of the GitHub
+        #     App, formatted as `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Optional. SecretManager resource containing the webhook secret of the
+        #     GitHub App, formatted as `projects/*/secrets/*/versions/*`.
+        # @!attribute [rw] app_installation_id
+        #   @return [::Integer]
+        #     Optional. ID of the installation of the GitHub App.
+        # @!attribute [r] installation_uri
+        #   @return [::String]
+        #     Output only. The URI to navigate to in order to manage the installation
+        #     associated with this GitHubEnterpriseConfig.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ServiceDirectoryConfig]
+        #     Optional. Configuration for using Service Directory to privately connect to
+        #     a GitHub Enterprise server. This should only be set if the GitHub
+        #     Enterprise server is hosted on-premises and not reachable by public
+        #     internet. If this field is left empty, calls to the GitHub Enterprise
+        #     server will be made over the public internet.
+        # @!attribute [r] server_version
+        #   @return [::String]
+        #     Output only. GitHub Enterprise version installed at the host_uri.
+        # @!attribute [rw] ssl_ca_certificate
+        #   @return [::String]
+        #     Optional. SSL certificate to use for requests to GitHub Enterprise.
+        class GitHubEnterpriseConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ServiceDirectoryConfig represents Service Directory configuration for a
+        # connection.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The Service Directory service name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/namespaces/\\{namespace}/services/\\{service}.
+        class ServiceDirectoryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents an OAuth token of the account that authorized the Connection,
         # and associated metadata.
         # @!attribute [rw] oauth_token_secret_version
@@ -171,6 +251,85 @@ module Google
         #   @return [::String]
         #     Output only. The username associated with this token.
         class OAuthCredential
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for connections to gitlab.com.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. Immutable. SecretManager resource containing the webhook secret
+        #     of a GitLab project, formatted as `projects/*/secrets/*/versions/*`. This
+        #     is used to validate webhooks.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. A GitLab personal access token with the minimum `read_api` scope
+        #     access and a minimum role of `reporter`. The GitLab Projects visible to
+        #     this Personal Access Token will control which Projects Developer Connect
+        #     has access to.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. A GitLab personal access token with the minimum `api` scope
+        #     access and a minimum role of `maintainer`. The GitLab Projects visible to
+        #     this Personal Access Token will control which Projects Developer Connect
+        #     has access to.
+        class GitLabConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a personal access token that authorized the Connection,
+        # and associated metadata.
+        # @!attribute [rw] user_token_secret_version
+        #   @return [::String]
+        #     Required. A SecretManager resource containing the user token that
+        #     authorizes the Developer Connect connection. Format:
+        #     `projects/*/secrets/*/versions/*`.
+        # @!attribute [r] username
+        #   @return [::String]
+        #     Output only. The username associated with this token.
+        class UserCredential
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for connections to an instance of GitLab Enterprise.
+        # @!attribute [rw] host_uri
+        #   @return [::String]
+        #     Required. The URI of the GitLab Enterprise host this connection is for.
+        # @!attribute [rw] webhook_secret_secret_version
+        #   @return [::String]
+        #     Required. Immutable. SecretManager resource containing the webhook secret
+        #     of a GitLab project, formatted as `projects/*/secrets/*/versions/*`. This
+        #     is used to validate webhooks.
+        # @!attribute [rw] read_authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. A GitLab personal access token with the minimum `read_api` scope
+        #     access and a minimum role of `reporter`. The GitLab Projects visible to
+        #     this Personal Access Token will control which Projects Developer Connect
+        #     has access to.
+        # @!attribute [rw] authorizer_credential
+        #   @return [::Google::Cloud::DeveloperConnect::V1::UserCredential]
+        #     Required. A GitLab personal access token with the minimum `api` scope
+        #     access and a minimum role of `maintainer`. The GitLab Projects visible to
+        #     this Personal Access Token will control which Projects Developer Connect
+        #     has access to.
+        # @!attribute [rw] service_directory_config
+        #   @return [::Google::Cloud::DeveloperConnect::V1::ServiceDirectoryConfig]
+        #     Optional. Configuration for using Service Directory to privately connect to
+        #     a GitLab Enterprise instance. This should only be set if the GitLab
+        #     Enterprise server is hosted on-premises and not reachable by public
+        #     internet. If this field is left empty, calls to the GitLab Enterprise
+        #     server will be made over the public internet.
+        # @!attribute [rw] ssl_ca_certificate
+        #   @return [::String]
+        #     Optional. SSL Certificate Authority certificate to use for requests to
+        #     GitLab Enterprise instance.
+        # @!attribute [r] server_version
+        #   @return [::String]
+        #     Output only. Version of the GitLab Enterprise server running on the
+        #     `host_uri`.
+        class GitLabEnterpriseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -349,9 +508,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have been cancelled successfully
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -396,6 +556,9 @@ module Google
         #   @return [::String]
         #     Output only. A system-assigned unique identifier for a the
         #     GitRepositoryLink.
+        # @!attribute [r] webhook_id
+        #   @return [::String]
+        #     Output only. External ID of the webhook created for the repository.
         class GitRepositoryLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
