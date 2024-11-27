@@ -899,7 +899,7 @@ module Google
         def table table_id, skip_lookup: nil, view: nil
           ensure_service!
           return Table.new_reference project_id, dataset_id, table_id, service if skip_lookup
-          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          gapi = service.get_project_table project_id, dataset_id, table_id, metadata_view: view
           Table.from_gapi gapi, service, metadata_view: view
         rescue Google::Cloud::NotFoundError
           nil
@@ -2444,7 +2444,7 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_dataset dataset_id
+          @gapi = service.get_project_dataset project_id, dataset_id
           @reference = nil
           @exists = nil
           self
@@ -2927,7 +2927,7 @@ module Google
             configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
               load:    Google::Apis::BigqueryV2::JobConfigurationLoad.new(
                 destination_table: Google::Apis::BigqueryV2::TableReference.new(
-                  project_id: @service.project,
+                  project_id: project_id,
                   dataset_id: dataset_id,
                   table_id:   table_id
                 )
