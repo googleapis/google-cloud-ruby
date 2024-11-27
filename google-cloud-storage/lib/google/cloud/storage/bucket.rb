@@ -2458,10 +2458,6 @@ module Google
                            policy: policy
         end
 
-        def generation
-          @gapi.generation
-        end
-
         ##
         # Generate a `PostObject` that includes the fields and URL to
         # upload objects via HTML forms. The resulting `PostObject` is
@@ -3156,11 +3152,12 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, service, user_project: nil, soft_deleted: nil
+        def self.from_gapi gapi, service, user_project: nil,generation: nil, soft_deleted: nil
           new.tap do |b|
             b.gapi = gapi
             b.service = service
             b.user_project = user_project
+            b.generation = generation
             b.soft_deleted = soft_deleted
           end
         end
