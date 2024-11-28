@@ -3152,7 +3152,7 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, service, user_project: nil,generation: nil, soft_deleted: nil
+        def self.from_gapi gapi, service, user_project: nil, generation: nil, soft_deleted: nil
           new.tap do |b|
             b.gapi = gapi
             b.service = service

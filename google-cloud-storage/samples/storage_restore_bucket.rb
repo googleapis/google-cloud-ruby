@@ -63,7 +63,7 @@ def delete_bucket bucket_name:
 end
 # [END storage_delete_bucket]
 
-bucket_name = "ruby_try_1"
+bucket_name = "ruby_try_6"
 delete_bucket bucket_name: bucket_name
 
 #{}compose_file bucket_name: ARGV.shift if $PROGRAM_NAME == __FILE__

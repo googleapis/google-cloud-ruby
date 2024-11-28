@@ -14,7 +14,6 @@
 
 
 require "delegate"
-require "pry"
 
 module Google
   module Cloud
@@ -147,16 +146,16 @@ module Google
           # @private New Bucket::List from a Google API Client
           # Google::Apis::StorageV1::Buckets object.
           def self.from_gapi gapi_list, service, prefix = nil, max = nil,
-                             user_project: nil, soft_deleted: nil
-              buckets = new(Array(gapi_list.items).map do |gapi_object|
-                Bucket.from_gapi gapi_object, service, user_project: user_project, soft_deleted: soft_deleted
-              end)
-              buckets.instance_variable_set :@token, gapi_list.next_page_token
-              buckets.instance_variable_set :@service, service
-              buckets.instance_variable_set :@prefix, prefix
-              buckets.instance_variable_set :@max, max
-              buckets.instance_variable_set :@user_project, user_project
-              buckets
+                             user_project: nil
+            buckets = new(Array(gapi_list.items).map do |gapi_object|
+              Bucket.from_gapi gapi_object, service, user_project: user_project
+            end)
+            buckets.instance_variable_set :@token, gapi_list.next_page_token
+            buckets.instance_variable_set :@service, service
+            buckets.instance_variable_set :@prefix, prefix
+            buckets.instance_variable_set :@max, max
+            buckets.instance_variable_set :@user_project, user_project
+            buckets
           end
 
           protected
