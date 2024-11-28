@@ -193,9 +193,9 @@ module Google
         #     puts bucket.name
         #   end
         #
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil , soft_deleted: nil
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project,options: {soft_deleted: soft_deleted}
+            prefix: prefix, token: token, max: max, user_project: user_project, options: { soft_deleted: soft_deleted }
           Bucket::List.from_gapi \
             gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted
         end
