@@ -1373,11 +1373,11 @@ module Google
         # Retrieves an existing dataset by ID.
         #
         # @param [String] dataset_id The ID of a dataset.
-        # @param [String] project_id The GCP Project where the dataset lives.
         # @param [Boolean] skip_lookup Optionally create just a local reference
         #   object without verifying that the resource exists on the BigQuery
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
+        # @param [String] project_id The GCP Project where the dataset lives.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
