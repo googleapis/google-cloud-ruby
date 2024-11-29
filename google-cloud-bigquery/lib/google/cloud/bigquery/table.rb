@@ -2850,7 +2850,7 @@ module Google
         #
         def reload!
           ensure_service!
-          @gapi = service.get_project_table project_id, dataset_id, table_id, metadata_view: metadata_view
+          @gapi = service.get_table dataset_id, table_id, metadata_view: metadata_view
           @reference = nil
           @exists = nil
           self

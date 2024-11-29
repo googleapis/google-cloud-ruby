@@ -104,11 +104,14 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :bigquery do
     # update
 
     materialized_view.enable_refresh = true
-    materialized_view.refresh_interval_ms = 1_800_000
 
     materialized_view.reload!
     _(materialized_view.table_id).must_equal materialized_view_id
     _(materialized_view.enable_refresh?).must_equal true
+
+    materialized_view.refresh_interval_ms = 1_800_000
+
+    materialized_view.reload!
     _(materialized_view.refresh_interval_ms).must_equal 1_800_000
 
     # delete
