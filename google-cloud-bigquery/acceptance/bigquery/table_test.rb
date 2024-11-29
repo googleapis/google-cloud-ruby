@@ -182,6 +182,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "loads and reloads table with partial projection of table metadata" do
+    _(table.table_id).must_equal table_id # ensure table is created
     %w[unspecified basic storage full].each do |view|
       table = dataset.table table_id, view: view
       _(table.table_id).must_equal table_id
