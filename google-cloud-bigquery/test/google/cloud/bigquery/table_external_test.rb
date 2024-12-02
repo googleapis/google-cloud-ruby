@@ -69,7 +69,6 @@ describe Google::Cloud::Bigquery::Table, :external, :mock_bigquery do
     mock = Minitest::Mock.new
     mock.expect :patch_table, table_gapi,
       [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
-    mock.expect :get_table, response_table_gapi, [project, dataset_id, table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.external = bigquery.external "gs://my-bucket/path/to/file.json" do |json|
