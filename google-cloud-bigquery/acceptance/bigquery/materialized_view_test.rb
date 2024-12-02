@@ -64,7 +64,6 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :bigquery do
   end
   let(:materialized_view_id) { "materialized_view_#{SecureRandom.hex(16)}" }
 
-  focus
   it "creates, gets, updates and deletes a materialized view" do
     create_job = dataset.query_job create_table_query
     create_job.wait_until_done!
