@@ -3081,7 +3081,7 @@ module Google
             configuration: Google::Apis::BigqueryV2::JobConfiguration.new(
               load:    Google::Apis::BigqueryV2::JobConfigurationLoad.new(
                 destination_table: Google::Apis::BigqueryV2::TableReference.new(
-                  project_id: @service.project,
+                  project_id: project_id,
                   dataset_id: dataset_id,
                   table_id:   table_id
                 )

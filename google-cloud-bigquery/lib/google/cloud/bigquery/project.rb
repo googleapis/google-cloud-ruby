@@ -1111,6 +1111,7 @@ module Google
         #   Note: This will work only for tables in _SESSION dataset
         #         else the property will be ignored by the backend.
         # @param [string] session_id Session ID in which the load job must run.
+        # @param [string] project_id Project ID where the destination table exists.
         #
         # @yield [updater] A block for setting the schema and other
         #   options for the destination table. The schema can be omitted if the
@@ -1138,10 +1139,10 @@ module Google
                      projection_fields: nil, jagged_rows: nil, quoted_newlines: nil, encoding: nil,
                      delimiter: nil, ignore_unknown: nil, max_bad_records: nil, quote: nil,
                      skip_leading: nil, schema: nil, job_id: nil, prefix: nil, labels: nil, autodetect: nil,
-                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, &block
+                     null_marker: nil, dryrun: nil, create_session: nil, session_id: nil, project_id: nil, &block
           ensure_service!
           dataset_id ||= "_SESSION" unless create_session.nil? && session_id.nil?
-          session_dataset = dataset dataset_id, skip_lookup: true
+          session_dataset = dataset dataset_id, skip_lookup: true, project_id: project_id
           table = session_dataset.table table_id, skip_lookup: true
           table.load_job  files,
                           format: format, create: create, write: write, projection_fields: projection_fields,
@@ -1376,6 +1377,7 @@ module Google
         #   object without verifying that the resource exists on the BigQuery
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
+        # @param [String] project_id The GCP Project where the dataset lives.
         #
         # @return [Google::Cloud::Bigquery::Dataset, nil] Returns `nil` if the
         #   dataset does not exist.
@@ -1388,6 +1390,14 @@ module Google
         #   dataset = bigquery.dataset "my_dataset"
         #   puts dataset.name
         #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset", project_id: "another_project"
+        #   puts dataset.name
+        #
         # @example Avoid retrieving the dataset resource with `skip_lookup`:
         #   require "google/cloud/bigquery"
         #
@@ -1395,10 +1405,11 @@ module Google
         #
         #   dataset = bigquery.dataset "my_dataset", skip_lookup: true
         #
-        def dataset dataset_id, skip_lookup: nil
+        def dataset dataset_id, skip_lookup: nil, project_id: nil
           ensure_service!
-          return Dataset.new_reference project, dataset_id, service if skip_lookup
-          gapi = service.get_dataset dataset_id
+          project_id ||= project
+          return Dataset.new_reference project_id, dataset_id, service if skip_lookup
+          gapi = service.get_project_dataset project_id, dataset_id
           Dataset.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil

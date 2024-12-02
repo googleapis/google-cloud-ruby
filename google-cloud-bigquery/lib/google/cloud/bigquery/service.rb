@@ -110,9 +110,15 @@ module Google
         ##
         # Returns the dataset specified by datasetID.
         def get_dataset dataset_id
+          get_project_dataset @project, dataset_id
+        end
+
+        ##
+        # Gets the specified dataset resource by full dataset reference.
+        def get_project_dataset project_id, dataset_id
           # The get operation is considered idempotent
           execute backoff: true do
-            service.get_dataset @project, dataset_id
+            service.get_dataset project_id, dataset_id
           end
         end
 
