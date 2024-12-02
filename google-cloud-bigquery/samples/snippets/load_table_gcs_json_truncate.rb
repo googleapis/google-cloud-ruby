@@ -16,7 +16,6 @@ require "google/cloud/bigquery"
 
 def load_table_gcs_json_truncate dataset_id = "your_dataset_id",
                                  table_id   = "your_table_id"
-
   bigquery = Google::Cloud::Bigquery.new
   dataset  = bigquery.dataset dataset_id
   gcs_uri  = "gs://cloud-samples-data/bigquery/us-states/us-states.json"
