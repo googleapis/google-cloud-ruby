@@ -503,10 +503,10 @@ module Google
           #     storage and accessing.
           # @!attribute [rw] reservation
           #   @return [::String]
-          #     Optional. If specified, VMs will consume only the specified reservation.
-          #     If not specified (default), VMs will consume any applicable reservation.
-          #     Additionally, VMs will not consume any reservation if "NO_RESERVATION"
-          #     is specified.
+          #     Optional. If not specified (default), VMs will consume any applicable
+          #     reservation. If "NO_RESERVATION" is specified, VMs will not consume any
+          #     reservation. Otherwise, if specified, VMs will consume only the specified
+          #     reservation.
           class InstancePolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
