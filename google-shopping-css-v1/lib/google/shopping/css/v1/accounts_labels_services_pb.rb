@@ -33,7 +33,7 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.shopping.css.v1.AccountLabelsService'
 
-            # Lists the labels assigned to an account.
+            # Lists the labels owned by an account.
             rpc :ListAccountLabels, ::Google::Shopping::Css::V1::ListAccountLabelsRequest, ::Google::Shopping::Css::V1::ListAccountLabelsResponse
             # Creates a new label, not assigned to any account.
             rpc :CreateAccountLabel, ::Google::Shopping::Css::V1::CreateAccountLabelRequest, ::Google::Shopping::Css::V1::AccountLabel
