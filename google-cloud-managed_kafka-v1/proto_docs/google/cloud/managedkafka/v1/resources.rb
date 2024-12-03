@@ -48,6 +48,12 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::ManagedKafka::V1::Cluster::State]
         #     Output only. The current state of the cluster.
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
