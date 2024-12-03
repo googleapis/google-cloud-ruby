@@ -75,6 +75,24 @@ module Google
         #     and according to state. If any spokes are inactive,
         #     the summary also lists the reasons they are inactive,
         #     including a count for each reason.
+        # @!attribute [rw] policy_mode
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyMode]
+        #     Optional. The policy mode of this hub. This field can be either
+        #     PRESET or CUSTOM. If unspecified, the
+        #     policy_mode defaults to PRESET.
+        # @!attribute [rw] preset_topology
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::PresetTopology]
+        #     Optional. The topology implemented in this hub. Currently, this field is
+        #     only used when policy_mode = PRESET. The available preset topologies are
+        #     MESH and STAR. If preset_topology is unspecified and policy_mode = PRESET,
+        #     the preset_topology defaults to MESH. When policy_mode = CUSTOM,
+        #     the preset_topology is set to PRESET_TOPOLOGY_UNSPECIFIED.
+        # @!attribute [rw] export_psc
+        #   @return [::Boolean]
+        #     Optional. Whether Private Service Connect transitivity is enabled for the
+        #     hub. If true, Private Service Connect endpoints in VPC spokes attached to
+        #     the hub are made accessible to other VPC spokes attached to the hub.
+        #     The default value is false.
         class Hub
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,6 +171,9 @@ module Google
         # @!attribute [rw] linked_vpc_network
         #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedVpcNetwork]
         #     Optional. VPC network that is associated with the spoke.
+        # @!attribute [rw] linked_producer_vpc_network
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::LinkedProducerVpcNetwork]
+        #     Optional. The linked producer VPC that is associated with the spoke.
         # @!attribute [r] unique_id
         #   @return [::String]
         #     Output only. The Google-generated UUID for the spoke. This value is unique
@@ -304,9 +325,24 @@ module Google
         #     Example: projects/12345/locations/global/spokes/SPOKE
         # @!attribute [r] location
         #   @return [::String]
-        #     Output only. The location of the route.
+        #     Output only. The origin location of the route.
         #     Uses the following form: "projects/\\{project}/locations/\\{location}"
         #     Example: projects/1234/locations/us-central1
+        # @!attribute [r] priority
+        #   @return [::Integer]
+        #     Output only. The priority of this route. Priority is used to break ties in
+        #     cases where a destination matches more than one route. In these cases the
+        #     route with the lowest-numbered priority value wins.
+        # @!attribute [rw] next_hop_vpn_tunnel
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::NextHopVPNTunnel]
+        #     Immutable. The next-hop VPN tunnel for packets on this route.
+        # @!attribute [rw] next_hop_router_appliance_instance
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::NextHopRouterApplianceInstance]
+        #     Immutable. The next-hop Router appliance instance for packets on this
+        #     route.
+        # @!attribute [rw] next_hop_interconnect_attachment
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::NextHopInterconnectAttachment]
+        #     Immutable. The next-hop VLAN attachment for packets on this route.
         class Route
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -350,6 +386,14 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::NetworkConnectivity::V1::State]
         #     Output only. The current lifecycle state of this group.
+        # @!attribute [rw] auto_accept
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::AutoAccept]
+        #     Optional. The auto-accept setting for this group.
+        # @!attribute [r] route_table
+        #   @return [::String]
+        #     Output only. The name of the route table that corresponds to this group.
+        #     They use the following form:
+        #     `projects/{project_number}/locations/global/hubs/{hub_id}/routeTables/{route_table_id}`
         class Group
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -362,6 +406,23 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # The auto-accept setting for a group controls whether
+        # proposed spokes are automatically attached to the hub. If auto-accept is
+        # enabled, the spoke immediately is attached to the hub and becomes part of the
+        # group. In this case, the new spoke is in the ACTIVE state.
+        # If auto-accept is disabled, the spoke goes to the INACTIVE
+        # state, and it must be reviewed and accepted by a hub
+        # administrator.
+        # @!attribute [rw] auto_accept_projects
+        #   @return [::Array<::String>]
+        #     A list of project ids or project numbers for which you want
+        #     to enable auto-accept. The auto-accept setting is applied to
+        #     spokes being created or updated in these projects.
+        class AutoAccept
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for
@@ -581,6 +642,153 @@ module Google
         class ListHubSpokesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#query_hub_status HubService.QueryHubStatus}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the hub.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return per page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. An expression that filters the list of results.
+        #     The filter can be used to filter the results by the following fields:
+        #       * `psc_propagation_status.source_spoke`
+        #       * `psc_propagation_status.source_group`
+        #       * `psc_propagation_status.source_forwarding_rule`
+        #       * `psc_propagation_status.target_spoke`
+        #       * `psc_propagation_status.target_group`
+        #       * `psc_propagation_status.code`
+        #       * `psc_propagation_status.message`
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort the results in ascending order by the specified fields.
+        #     A comma-separated list of any of these fields:
+        #       * `psc_propagation_status.source_spoke`
+        #       * `psc_propagation_status.source_group`
+        #       * `psc_propagation_status.source_forwarding_rule`
+        #       * `psc_propagation_status.target_spoke`
+        #       * `psc_propagation_status.target_group`
+        #       * `psc_propagation_status.code`
+        #     If `group_by` is set, the value of the `order_by` field must be the
+        #     same as or a subset of the `group_by` field.
+        # @!attribute [rw] group_by
+        #   @return [::String]
+        #     Optional. Aggregate the results by the specified fields.
+        #     A comma-separated list of any of these fields:
+        #       * `psc_propagation_status.source_spoke`
+        #       * `psc_propagation_status.source_group`
+        #       * `psc_propagation_status.source_forwarding_rule`
+        #       * `psc_propagation_status.target_spoke`
+        #       * `psc_propagation_status.target_group`
+        #       * `psc_propagation_status.code`
+        class QueryHubStatusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#query_hub_status HubService.QueryHubStatus}.
+        # @!attribute [rw] hub_status_entries
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::HubStatusEntry>]
+        #     The list of hub status.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token for the next page of the response. To see more results,
+        #     use this value as the page_token for your next request. If this value
+        #     is empty, there are no more results.
+        class QueryHubStatusResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A hub status entry represents the status of a set of propagated Private
+        # Service Connect connections grouped by certain fields.
+        # @!attribute [rw] count
+        #   @return [::Integer]
+        #     The number of propagated Private Service Connect connections with this
+        #     status. If the `group_by` field was not set in the request message, the
+        #     value of this field is 1.
+        # @!attribute [rw] group_by
+        #   @return [::String]
+        #     The fields that this entry is grouped by. This has the same value as the
+        #     `group_by` field in the request message.
+        # @!attribute [rw] psc_propagation_status
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::PscPropagationStatus]
+        #     The Private Service Connect propagation status.
+        class HubStatusEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The status of one or more propagated Private Service Connect connections in a
+        # hub.
+        # @!attribute [rw] source_spoke
+        #   @return [::String]
+        #     The name of the spoke that the source forwarding rule belongs to.
+        # @!attribute [rw] source_group
+        #   @return [::String]
+        #     The name of the group that the source spoke belongs to.
+        # @!attribute [rw] source_forwarding_rule
+        #   @return [::String]
+        #     The name of the forwarding rule exported to the hub.
+        # @!attribute [rw] target_spoke
+        #   @return [::String]
+        #     The name of the spoke that the source forwarding rule propagates to.
+        # @!attribute [rw] target_group
+        #   @return [::String]
+        #     The name of the group that the target spoke belongs to.
+        # @!attribute [rw] code
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::PscPropagationStatus::Code]
+        #     The propagation status.
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The human-readable summary of the Private Service Connect connection
+        #     propagation status.
+        class PscPropagationStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Code enum represents the state of the Private Service Connect
+          # propagation.
+          module Code
+            # The code is unspecified.
+            CODE_UNSPECIFIED = 0
+
+            # The propagated Private Service Connect connection is ready.
+            READY = 1
+
+            # The Private Service Connect connection is propagating. This is a
+            # transient state.
+            PROPAGATING = 2
+
+            # The Private Service Connect connection propagation failed because the VPC
+            # network or the project of the target spoke has exceeded the connection
+            # limit set by the producer.
+            ERROR_PRODUCER_PROPAGATED_CONNECTION_LIMIT_EXCEEDED = 3
+
+            # The Private Service Connect connection propagation failed because the NAT
+            # IP subnet space has been exhausted. It is equivalent to the `Needs
+            # attention` status of the Private Service Connect connection. See
+            # https://cloud.google.com/vpc/docs/about-accessing-vpc-hosted-services-endpoints#connection-statuses.
+            ERROR_PRODUCER_NAT_IP_SPACE_EXHAUSTED = 4
+
+            # The Private Service Connect connection propagation failed because the
+            # `PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK` quota in the
+            # producer VPC network has been exceeded.
+            ERROR_PRODUCER_QUOTA_EXCEEDED = 5
+
+            # The Private Service Connect connection propagation failed because the
+            # `PSC_PROPAGATED_CONNECTIONS_PER_VPC_NETWORK` quota in the consumer
+            # VPC network has been exceeded.
+            ERROR_CONSUMER_QUOTA_EXCEEDED = 6
+          end
         end
 
         # The request for
@@ -967,6 +1175,11 @@ module Google
         # @!attribute [r] vpc_network
         #   @return [::String]
         #     Output only. The VPC network where these VPN tunnels are located.
+        # @!attribute [rw] include_import_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges allowed to be included during import from hub (does not
+        #     control transit connectivity). The only allowed value for now is
+        #     "ALL_IPV4_RANGES".
         class LinkedVpnTunnels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -987,6 +1200,11 @@ module Google
         # @!attribute [r] vpc_network
         #   @return [::String]
         #     Output only. The VPC network where these VLAN attachments are located.
+        # @!attribute [rw] include_import_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges allowed to be included during import from hub (does not
+        #     control transit connectivity). The only allowed value for now is
+        #     "ALL_IPV4_RANGES".
         class LinkedInterconnectAttachments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1008,6 +1226,11 @@ module Google
         #   @return [::String]
         #     Output only. The VPC network where these router appliance instances are
         #     located.
+        # @!attribute [rw] include_import_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges allowed to be included during import from hub (does not
+        #     control transit connectivity). The only allowed value for now is
+        #     "ALL_IPV4_RANGES".
         class LinkedRouterApplianceInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1020,7 +1243,41 @@ module Google
         # @!attribute [rw] exclude_export_ranges
         #   @return [::Array<::String>]
         #     Optional. IP ranges encompassing the subnets to be excluded from peering.
+        # @!attribute [rw] include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges allowed to be included from peering.
+        # @!attribute [r] producer_vpc_spokes
+        #   @return [::Array<::String>]
+        #     Output only. The list of Producer VPC spokes that this VPC spoke is a
+        #     service consumer VPC spoke for. These producer VPCs are connected through
+        #     VPC peering to this spoke's backing VPC network.
         class LinkedVpcNetwork
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Immutable. The URI of the Service Consumer VPC that the Producer VPC is
+        #     peered with.
+        # @!attribute [r] service_consumer_vpc_spoke
+        #   @return [::String]
+        #     Output only. The Service Consumer Network spoke.
+        # @!attribute [rw] peering
+        #   @return [::String]
+        #     Immutable. The name of the VPC peering between the Service Consumer VPC and
+        #     the Producer VPC (defined in the Tenant project) which is added to the NCC
+        #     hub. This peering must be in ACTIVE state.
+        # @!attribute [r] producer_network
+        #   @return [::String]
+        #     Output only. The URI of the Producer VPC.
+        # @!attribute [rw] exclude_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges encompassing the subnets to be excluded from peering.
+        # @!attribute [rw] include_export_ranges
+        #   @return [::Array<::String>]
+        #     Optional. IP ranges allowed to be included from peering.
+        class LinkedProducerVpcNetwork
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1053,6 +1310,58 @@ module Google
         #   @return [::String]
         #     The URI of the VPC network resource
         class NextHopVpcNetwork
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A route next hop that leads to a VPN tunnel resource.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the VPN tunnel resource.
+        # @!attribute [rw] vpc_network
+        #   @return [::String]
+        #     The VPC network where this VPN tunnel is located.
+        # @!attribute [rw] site_to_site_data_transfer
+        #   @return [::Boolean]
+        #     Indicates whether site-to-site data transfer is allowed for this VPN tunnel
+        #     resource. Data transfer is available only in [supported
+        #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
+        class NextHopVPNTunnel
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A route next hop that leads to a Router appliance instance.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the Router appliance instance.
+        # @!attribute [rw] vpc_network
+        #   @return [::String]
+        #     The VPC network where this VM is located.
+        # @!attribute [rw] site_to_site_data_transfer
+        #   @return [::Boolean]
+        #     Indicates whether site-to-site data transfer is allowed for this Router
+        #     appliance instance resource. Data transfer is available only in [supported
+        #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
+        class NextHopRouterApplianceInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A route next hop that leads to an interconnect attachment resource.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the interconnect attachment resource.
+        # @!attribute [rw] vpc_network
+        #   @return [::String]
+        #     The VPC network where this interconnect attachment is located.
+        # @!attribute [rw] site_to_site_data_transfer
+        #   @return [::Boolean]
+        #     Indicates whether site-to-site data transfer is allowed for this
+        #     interconnect attachment resource. Data transfer is available only in
+        #     [supported
+        #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
+        class NextHopInterconnectAttachment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1131,6 +1440,40 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for
+        # {::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_group HubService.UpdateGroup}
+        # method.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. In the case of an update to an existing group, field mask is used
+        #     to specify the fields to be overwritten. The fields specified in the
+        #     update_mask are relative to the resource, not the full request. A field is
+        #     overwritten if it is in the mask. If the user does not provide a mask, then
+        #     all fields are overwritten.
+        # @!attribute [rw] group
+        #   @return [::Google::Cloud::NetworkConnectivity::V1::Group]
+        #     Required. The state that the group should be in after the update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID so
+        #     that if you must retry your request, the server knows to ignore the request
+        #     if it has already been completed. The server guarantees that a request
+        #     doesn't result in creation of duplicate commitments for at least 60
+        #     minutes.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check to see whether the original operation
+        #     was received. If it was, the server ignores the second request. This
+        #     behavior prevents clients from mistakenly creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID, with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Supported features for a location
         module LocationFeature
           # No publicly supported feature in this location
@@ -1155,6 +1498,11 @@ module Google
           # The route leads to a destination within the secondary address range of the
           # VPC network's subnet.
           VPC_SECONDARY_SUBNET = 2
+
+          # The route leads to a destination in a dynamic route. Dynamic routes are
+          # derived from Border Gateway Protocol (BGP) advertisements received from an
+          # NCC hybrid spoke.
+          DYNAMIC_ROUTE = 3
         end
 
         # The State enum represents the lifecycle stage of a Network Connectivity
@@ -1206,6 +1554,35 @@ module Google
 
           # Spokes associated with VPC networks.
           VPC_NETWORK = 4
+
+          # Spokes that are backed by a producer VPC network.
+          PRODUCER_VPC_NETWORK = 7
+        end
+
+        # This enum controls the policy mode used in a hub.
+        module PolicyMode
+          # Policy mode is unspecified. It defaults to PRESET
+          # with preset_topology = MESH.
+          POLICY_MODE_UNSPECIFIED = 0
+
+          # Hub uses one of the preset topologies.
+          PRESET = 1
+        end
+
+        # The list of available preset topologies.
+        module PresetTopology
+          # Preset topology is unspecified. When policy_mode = PRESET,
+          # it defaults to MESH.
+          PRESET_TOPOLOGY_UNSPECIFIED = 0
+
+          # Mesh topology is implemented. Group `default` is automatically created.
+          # All spokes in the hub are added to group `default`.
+          MESH = 2
+
+          # Star topology is implemented. Two groups, `center` and `edge`, are
+          # automatically created along with hub creation. Spokes have to join one of
+          # the groups during creation.
+          STAR = 3
         end
       end
     end

@@ -252,6 +252,46 @@
       ]
     },
     {
+      "region_tag": "networkconnectivity_v1_generated_HubService_QueryHubStatus_sync",
+      "title": "Snippet for the query_hub_status call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#query_hub_status.",
+      "file": "hub_service/query_hub_status.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_hub_status",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#query_hub_status",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusResponse",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "QueryHubStatus",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.QueryHubStatus",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "networkconnectivity_v1_generated_HubService_ListSpokes_sync",
       "title": "Snippet for the list_spokes call in the HubService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#list_spokes.",
@@ -767,6 +807,46 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkconnectivity_v1_generated_HubService_UpdateGroup_sync",
+      "title": "Snippet for the update_group call in the HubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_group.",
+      "file": "hub_service/update_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_group",
+        "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client#update_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkConnectivity::V1::UpdateGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "HubService::Client",
+          "full_name": "::Google::Cloud::NetworkConnectivity::V1::HubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateGroup",
+          "full_name": "google.cloud.networkconnectivity.v1.HubService.UpdateGroup",
+          "service": {
+            "short_name": "HubService",
+            "full_name": "google.cloud.networkconnectivity.v1.HubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
           "type": "FULL"
         }
       ]
