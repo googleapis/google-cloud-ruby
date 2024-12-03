@@ -700,6 +700,97 @@ module Google
               end
 
               ##
+              # Fail over a reservation to the secondary location. The operation should be
+              # done in the current secondary location, which will be promoted to the
+              # new primary location for the reservation.
+              # Attempting to failover a reservation in the current primary location will
+              # fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+              #
+              # @overload failover_reservation(request, options = nil)
+              #   Pass arguments to `failover_reservation` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload failover_reservation(name: nil)
+              #   Pass arguments to `failover_reservation` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Resource name of the reservation to failover. E.g.,
+              #        `projects/myproject/locations/US/reservations/team1-prod`
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Reservation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest.new
+              #
+              #   # Call the failover_reservation method.
+              #   result = client.failover_reservation request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Reservation.
+              #   p result
+              #
+              def failover_reservation request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.failover_reservation.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
+                metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.failover_reservation.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.failover_reservation.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_service_stub.call_rpc :failover_reservation, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Creates a new capacity commitment resource.
               #
               # @overload create_capacity_commitment(request, options = nil)
@@ -2517,6 +2608,11 @@ module Google
                   #
                   attr_reader :update_reservation
                   ##
+                  # RPC-specific configuration for `failover_reservation`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :failover_reservation
+                  ##
                   # RPC-specific configuration for `create_capacity_commitment`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2609,6 +2705,8 @@ module Google
                     @delete_reservation = ::Gapic::Config::Method.new delete_reservation_config
                     update_reservation_config = parent_rpcs.update_reservation if parent_rpcs.respond_to? :update_reservation
                     @update_reservation = ::Gapic::Config::Method.new update_reservation_config
+                    failover_reservation_config = parent_rpcs.failover_reservation if parent_rpcs.respond_to? :failover_reservation
+                    @failover_reservation = ::Gapic::Config::Method.new failover_reservation_config
                     create_capacity_commitment_config = parent_rpcs.create_capacity_commitment if parent_rpcs.respond_to? :create_capacity_commitment
                     @create_capacity_commitment = ::Gapic::Config::Method.new create_capacity_commitment_config
                     list_capacity_commitments_config = parent_rpcs.list_capacity_commitments if parent_rpcs.respond_to? :list_capacity_commitments

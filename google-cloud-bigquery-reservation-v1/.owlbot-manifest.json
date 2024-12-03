@@ -45,6 +45,7 @@
     "snippets/reservation_service/delete_assignment.rb",
     "snippets/reservation_service/delete_capacity_commitment.rb",
     "snippets/reservation_service/delete_reservation.rb",
+    "snippets/reservation_service/failover_reservation.rb",
     "snippets/reservation_service/get_bi_reservation.rb",
     "snippets/reservation_service/get_capacity_commitment.rb",
     "snippets/reservation_service/get_reservation.rb",
