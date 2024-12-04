@@ -90,6 +90,12 @@ module Google
         #       involving a mix of small and large directories.
         #     * `DIRECTORY_STRIPE_LEVEL_MAX`: recommended for directories with a large
         #       number of files.
+        # @!attribute [rw] deployment_type
+        #   @return [::Google::Cloud::Parallelstore::V1beta::DeploymentType]
+        #     Optional. The deployment type of the instance. Allowed values are:
+        #
+        #     * `SCRATCH`: the instance is a scratch instance.
+        #     * `PERSISTENT`: the instance is a persistent instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -601,6 +607,19 @@ module Google
 
           # Maximum directory striping
           DIRECTORY_STRIPE_LEVEL_MAX = 3
+        end
+
+        # Represents the deployment type for the instance.
+        module DeploymentType
+          # Default Deployment Type
+          # It is equivalent to SCRATCH
+          DEPLOYMENT_TYPE_UNSPECIFIED = 0
+
+          # Scratch
+          SCRATCH = 1
+
+          # Persistent
+          PERSISTENT = 2
         end
       end
     end
