@@ -83,7 +83,6 @@ module Google
 
         def list_entries resources: nil, filter: nil, order: nil, token: nil,
                          max: nil, projects: nil
-
           project_ids = Array(projects).map { |p| "projects/#{p}" }
           resource_names = Array(resources) + project_ids
           resource_names = ["projects/#{@project}"] if resource_names.empty?
