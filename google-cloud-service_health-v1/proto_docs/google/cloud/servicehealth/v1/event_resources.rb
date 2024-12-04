@@ -356,6 +356,9 @@ module Google
         # @!attribute [rw] product_name
         #   @return [::String]
         #     Google Cloud product impacted by the event. Example: `"Google Cloud SQL"`
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     Unique identifier for the product.
         class Product
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
