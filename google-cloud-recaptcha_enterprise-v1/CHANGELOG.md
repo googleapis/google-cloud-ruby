@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.1 (2024-12-04)
+
+#### Documentation
+
+* Clarify that challenge information is also returned for INVISIBLE keys ([#27683](https://github.com/googleapis/google-cloud-ruby/issues/27683)) 
+
 ### 1.4.0 (2024-11-14)
 
 #### Features
