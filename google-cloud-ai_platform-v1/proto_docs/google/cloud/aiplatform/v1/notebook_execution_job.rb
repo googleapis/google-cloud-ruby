@@ -48,6 +48,9 @@ module Google
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account to run the execution as.
+        # @!attribute [rw] workbench_runtime
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::WorkbenchRuntime]
+        #     The Workbench runtime configuration to use for the notebook execution.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of this NotebookExecutionJob. Format:
@@ -90,11 +93,16 @@ module Google
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
         #     System reserved label keys are prefixed with "aiplatform.googleapis.com/"
         #     and are immutable.
+        # @!attribute [rw] kernel_name
+        #   @return [::String]
+        #     The name of the kernel to use during notebook execution. If unset, the
+        #     default kernel is used.
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for the notebook execution job.
         #     This field is auto-populated if the
-        #     [NotebookService.NotebookRuntimeTemplate][] has an encryption spec.
+        #     {::Google::Cloud::AIPlatform::V1::NotebookRuntimeTemplate NotebookRuntimeTemplate}
+        #     has an encryption spec.
         class NotebookExecutionJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -148,6 +156,12 @@ module Google
           #   @return [::Google::Cloud::AIPlatform::V1::NetworkSpec]
           #     The network configuration to use for the execution job.
           class CustomEnvironmentSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for a Workbench Instances-based environment.
+          class WorkbenchRuntime
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
