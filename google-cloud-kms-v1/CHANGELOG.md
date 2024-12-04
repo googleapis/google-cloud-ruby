@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.1 (2024-12-04)
+
+#### Documentation
+
+* Updated CryptoKeyVersionAlgorithm description ([#27672](https://github.com/googleapis/google-cloud-ruby/issues/27672)) 
+
 ### 1.2.0 (2024-11-07)
 
 #### Features
