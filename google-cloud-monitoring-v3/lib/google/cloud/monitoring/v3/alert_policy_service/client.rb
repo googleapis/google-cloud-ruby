@@ -221,24 +221,25 @@ module Google
             #     {::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#get_alert_policy GetAlertPolicy}
             #     operation, instead.
             #   @param filter [::String]
-            #     If provided, this field specifies the criteria that must be met by
-            #     alert policies to be included in the response.
+            #     Optional. If provided, this field specifies the criteria that must be met
+            #     by alert policies to be included in the response.
             #
             #     For more details, see [sorting and
             #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
             #   @param order_by [::String]
-            #     A comma-separated list of fields by which to sort the result. Supports
-            #     the same set of field references as the `filter` field. Entries can be
-            #     prefixed with a minus sign to sort by the field in descending order.
+            #     Optional. A comma-separated list of fields by which to sort the result.
+            #     Supports the same set of field references as the `filter` field. Entries
+            #     can be prefixed with a minus sign to sort by the field in descending order.
             #
             #     For more details, see [sorting and
             #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
             #   @param page_size [::Integer]
-            #     The maximum number of results to return in a single response.
+            #     Optional. The maximum number of results to return in a single response.
             #   @param page_token [::String]
-            #     If this field is not empty then it must contain the `nextPageToken` value
-            #     returned by a previous call to this method.  Using this field causes the
-            #     method to return more results from the previous method call.
+            #     Optional. If this field is not empty then it must contain the
+            #     `nextPageToken` value returned by a previous call to this method.  Using
+            #     this field causes the method to return more results from the previous
+            #     method call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Monitoring::V3::AlertPolicy>]

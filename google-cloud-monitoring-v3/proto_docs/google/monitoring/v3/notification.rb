@@ -78,7 +78,7 @@ module Google
         #     field.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The full REST resource name for this channel. The format is:
+        #     Identifier. The full REST resource name for this channel. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/notificationChannels/[CHANNEL_ID]
         #

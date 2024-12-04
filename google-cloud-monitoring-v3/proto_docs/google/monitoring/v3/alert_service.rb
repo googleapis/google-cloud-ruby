@@ -74,27 +74,28 @@ module Google
         #     operation, instead.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     If provided, this field specifies the criteria that must be met by
-        #     alert policies to be included in the response.
+        #     Optional. If provided, this field specifies the criteria that must be met
+        #     by alert policies to be included in the response.
         #
         #     For more details, see [sorting and
         #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     A comma-separated list of fields by which to sort the result. Supports
-        #     the same set of field references as the `filter` field. Entries can be
-        #     prefixed with a minus sign to sort by the field in descending order.
+        #     Optional. A comma-separated list of fields by which to sort the result.
+        #     Supports the same set of field references as the `filter` field. Entries
+        #     can be prefixed with a minus sign to sort by the field in descending order.
         #
         #     For more details, see [sorting and
         #     filtering](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering).
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of results to return in a single response.
+        #     Optional. The maximum number of results to return in a single response.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     If this field is not empty then it must contain the `nextPageToken` value
-        #     returned by a previous call to this method.  Using this field causes the
-        #     method to return more results from the previous method call.
+        #     Optional. If this field is not empty then it must contain the
+        #     `nextPageToken` value returned by a previous call to this method.  Using
+        #     this field causes the method to return more results from the previous
+        #     method call.
         class ListAlertPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
