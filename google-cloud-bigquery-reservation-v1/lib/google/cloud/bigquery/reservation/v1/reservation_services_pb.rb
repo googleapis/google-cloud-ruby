@@ -60,6 +60,12 @@ module Google
               rpc :DeleteReservation, ::Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest, ::Google::Protobuf::Empty
               # Updates an existing reservation resource.
               rpc :UpdateReservation, ::Google::Cloud::Bigquery::Reservation::V1::UpdateReservationRequest, ::Google::Cloud::Bigquery::Reservation::V1::Reservation
+              # Fail over a reservation to the secondary location. The operation should be
+              # done in the current secondary location, which will be promoted to the
+              # new primary location for the reservation.
+              # Attempting to failover a reservation in the current primary location will
+              # fail with the error code `google.rpc.Code.FAILED_PRECONDITION`.
+              rpc :FailoverReservation, ::Google::Cloud::Bigquery::Reservation::V1::FailoverReservationRequest, ::Google::Cloud::Bigquery::Reservation::V1::Reservation
               # Creates a new capacity commitment resource.
               rpc :CreateCapacityCommitment, ::Google::Cloud::Bigquery::Reservation::V1::CreateCapacityCommitmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment
               # Lists all the capacity commitments for the admin project.

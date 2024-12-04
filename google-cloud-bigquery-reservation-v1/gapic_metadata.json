@@ -35,6 +35,11 @@
                 "update_reservation"
               ]
             },
+            "FailoverReservation": {
+              "methods": [
+                "failover_reservation"
+              ]
+            },
             "CreateCapacityCommitment": {
               "methods": [
                 "create_capacity_commitment"
