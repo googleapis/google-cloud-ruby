@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.3.0 (2024-12-04)
+
+#### Features
+
+* Add EstablishPeering API for Onprem Migration 
+* Add new Active Directory state for AD Diagnostics support 
+* Add Sync API for Replications 
+* Enable creation of Onprem Migration in CreateVolume ([#27656](https://github.com/googleapis/google-cloud-ruby/issues/27656)) 
+
 ### 1.2.0 (2024-09-19)
 
 #### Features
