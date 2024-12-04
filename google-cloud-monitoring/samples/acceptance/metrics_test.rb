@@ -68,7 +68,7 @@ describe "metrics", :monitoring do
       out, _err = capture_io do
         get_metric_descriptor project_id: project_id, metric_type: type
       end
-      assert_match(/Number of bytes in log entries streamed into log buckets. Excluded logs are not counted./, out)
+      assert_match(/Total bytes of log entries/, out)
     end
   end
 
