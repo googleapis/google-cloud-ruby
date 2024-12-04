@@ -175,7 +175,7 @@ module Google
             # Service calls
 
             ##
-            # Lists the labels assigned to an account.
+            # Lists the labels owned by an account.
             #
             # @overload list_account_labels(request, options = nil)
             #   Pass arguments to `list_account_labels` via a request object, either of type
