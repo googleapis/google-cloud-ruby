@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2024-12-04)
+
+#### Features
+
+* Filters now support empty values ([#27653](https://github.com/googleapis/google-cloud-ruby/issues/27653)) 
+
 ### 0.13.1 (2024-08-30)
 
 #### Documentation
