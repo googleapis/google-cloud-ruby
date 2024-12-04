@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.0 (2024-12-04)
+
+#### Features
+
+* Support for manual instance count ([#27649](https://github.com/googleapis/google-cloud-ruby/issues/27649)) 
+
 ### 0.18.0 (2024-11-13)
 
 #### Features
