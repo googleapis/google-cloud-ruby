@@ -50,6 +50,9 @@ module Google
             # specified hub and location. The list includes both spokes that are attached
             # to the hub and spokes that have been proposed but not yet accepted.
             rpc :ListHubSpokes, ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListHubSpokesResponse
+            # Query the Private Service Connect propagation status of a Network
+            # Connectivity Center hub.
+            rpc :QueryHubStatus, ::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusRequest, ::Google::Cloud::NetworkConnectivity::V1::QueryHubStatusResponse
             # Lists the Network Connectivity Center spokes in a specified project and
             # location.
             rpc :ListSpokes, ::Google::Cloud::NetworkConnectivity::V1::ListSpokesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListSpokesResponse
@@ -73,14 +76,16 @@ module Google
             rpc :GetRouteTable, ::Google::Cloud::NetworkConnectivity::V1::GetRouteTableRequest, ::Google::Cloud::NetworkConnectivity::V1::RouteTable
             # Gets details about the specified route.
             rpc :GetRoute, ::Google::Cloud::NetworkConnectivity::V1::GetRouteRequest, ::Google::Cloud::NetworkConnectivity::V1::Route
-            # Lists routes in a given project.
+            # Lists routes in a given route table.
             rpc :ListRoutes, ::Google::Cloud::NetworkConnectivity::V1::ListRoutesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListRoutesResponse
-            # Lists route tables in a given project.
+            # Lists route tables in a given hub.
             rpc :ListRouteTables, ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesRequest, ::Google::Cloud::NetworkConnectivity::V1::ListRouteTablesResponse
             # Gets details about a Network Connectivity Center group.
             rpc :GetGroup, ::Google::Cloud::NetworkConnectivity::V1::GetGroupRequest, ::Google::Cloud::NetworkConnectivity::V1::Group
             # Lists groups in a given hub.
             rpc :ListGroups, ::Google::Cloud::NetworkConnectivity::V1::ListGroupsRequest, ::Google::Cloud::NetworkConnectivity::V1::ListGroupsResponse
+            # Updates the parameters of a Network Connectivity Center group.
+            rpc :UpdateGroup, ::Google::Cloud::NetworkConnectivity::V1::UpdateGroupRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

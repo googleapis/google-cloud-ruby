@@ -40,6 +40,11 @@
                 "list_hub_spokes"
               ]
             },
+            "QueryHubStatus": {
+              "methods": [
+                "query_hub_status"
+              ]
+            },
             "ListSpokes": {
               "methods": [
                 "list_spokes"
@@ -103,6 +108,11 @@
             "ListGroups": {
               "methods": [
                 "list_groups"
+              ]
+            },
+            "UpdateGroup": {
+              "methods": [
+                "update_group"
               ]
             }
           }
