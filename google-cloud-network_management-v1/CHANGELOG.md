@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.3.0 (2024-12-04)
+
+#### Features
+
+* add round-trip mode ([#27614](https://github.com/googleapis/google-cloud-ruby/issues/27614)) 
+
 ### 1.2.0 (2024-11-13)
 
 #### Features
