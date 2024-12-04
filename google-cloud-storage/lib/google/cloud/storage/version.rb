@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Storage
-      VERSION = "1.52.0".freeze
+      VERSION = "1.53.0".freeze
     end
   end
 end
