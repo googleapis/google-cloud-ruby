@@ -1,5 +1,19 @@
 # Changelog
 
+### 1.1.0 (2024-12-04)
+
+#### Features
+
+* Support for dynamic routes 
+* Support for IP ranges allowed to be included during import from hub 
+* Support for the auto_accept and route_table fields on the Group resource 
+* Support for the linked_producer_vpc_network field on the Spoke resource 
+* Support for the policy_mode, preset_topology, and export_psc fields on the Hub resource 
+* Support for the priority, next_hop_vpn_tunnel, next_hop_router_appliance_instance, and next_hop_interconnect_attachment fields on the Route resource 
+* Support for the producer_vpc_spokes field on the LinkedVpcNetwork resource 
+* Support for the query_hub_status RPC 
+* Support for the update_group RPC 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
