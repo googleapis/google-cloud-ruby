@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.3 (2024-12-04)
+
+#### Documentation
+
+* Updated CryptoKeyVersionAlgorithm description ([#27673](https://github.com/googleapis/google-cloud-ruby/issues/27673)) 
+
 ### 0.11.2 (2024-09-30)
 
 #### Documentation
