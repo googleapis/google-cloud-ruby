@@ -1,5 +1,12 @@
 # Release History
 
+### 1.53.0 (2024-12-04)
+
+#### Features
+
+* add integration test for universe domain ([#27384](https://github.com/googleapis/google-cloud-ruby/issues/27384)) 
+* fetch file and bucket details from url ([#27322](https://github.com/googleapis/google-cloud-ruby/issues/27322)) 
+
 ### 1.52.0 (2024-05-31)
 
 #### Features
