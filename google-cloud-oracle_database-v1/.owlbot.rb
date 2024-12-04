@@ -21,10 +21,4 @@ OwlBot.modifier path: "proto_docs/google/cloud/oracledatabase/v1/location_metada
                "`::Google::Cloud::Location::Location`"
 end
 
-# Remove path tests due to
-# https://github.com/googleapis/gapic-generator-ruby/issues/1115
-OwlBot.modifier path: %r{google/cloud/oracle_database/v1/\w+_paths_test\.rb$} do
-  nil
-end
-
 OwlBot.move_files
