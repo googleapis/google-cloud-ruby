@@ -1,5 +1,43 @@
 # Changelog
 
+### 1.1.0 (2024-12-04)
+
+#### Features
+
+* A new enum `TableType` is added 
+* A new field `datascan_id` is added to message `.google.cloud.dataplex.v1.DiscoveryEvent` 
+* A new field `suspended` is added to DataScans 
+* A new field `table` is added to message `.google.cloud.dataplex.v1.DiscoveryEvent` 
+* A new message `TableDetails` is added 
+* Add a DATA_DISCOVERY enum type in DataScanEvent 
+* Add a DataDiscoveryAppliedConfigs message 
+* Add a TABLE_DELETED field in DiscoveryEvent 
+* Add a TABLE_IGNORED field in DiscoveryEvent 
+* Add a TABLE_PUBLISHED field in DiscoveryEvent 
+* Add a TABLE_UPDATED field in DiscoveryEvent 
+* Add an Issue field to DiscoveryEvent.ActionDetails to output the action message in Cloud Logs 
+* add annotations in CreateMetadataJob, GetMetadataJob, ListMetaDataJobs and CancelMetadataJob for cloud audit logging 
+* Add data_version field to AspectSource 
+* Add new Data Discovery scan type in Datascan 
+* expose create time in DataScanJobAPI 
+* expose create time to customers 
+* release metadata export in private preview 
+* release MetadataJob APIs and related resources in GA 
+* update Go Bigtable import path 
+* update Go Datastore import path ([#27636](https://github.com/googleapis/google-cloud-ruby/issues/27636)) 
+#### Documentation
+
+* A comment for message `DataScanEvent` is changed 
+* Add comment for field `status` in message `.google.cloud.dataplex.v1.MetadataJob` per https://linter.aip.dev/192/has-comments 
+* Add comment for field `type` in message `.google.cloud.dataplex.v1.MetadataJob` per https://linter.aip.dev/192/has-comments 
+* Add Identifier for `name` in message `.google.cloud.dataplex.v1.MetadataJob` per https://google.aip.dev/cloud/2510 
+* add info about schema changes for BigQuery metadata in Dataplex Catalog 
+* Add link to fully qualified names documentation 
+* correct API documentation 
+* correct the dimensions for data quality rules 
+* Dataplex Tasks do not support Dataplex Content path as a direct input anymore 
+* Scrub descriptions for standalone discovery scans 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
