@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2024-12-04)
+
+#### Features
+
+* Added satisfies_pzi and satisfies_pzs fields to Cluster resource ([#27690](https://github.com/googleapis/google-cloud-ruby/issues/27690)) 
+
 ### 0.1.3 (2024-08-27)
 
 #### Documentation
