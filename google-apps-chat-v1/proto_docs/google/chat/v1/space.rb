@@ -135,6 +135,15 @@ module Google
         #     Optional. Space permission settings for existing spaces. Input for
         #     updating exact space permission settings, where existing permission
         #     settings are replaced. Output lists current permission settings.
+        # @!attribute [r] import_mode_expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the space will be automatically deleted by the
+        #     system if it remains in import mode.
+        #
+        #     Each space created in import mode must exit this mode before this expire
+        #     time using `spaces.completeImport`.
+        #
+        #     This field is only populated for spaces that were created with import mode.
         class Space
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
