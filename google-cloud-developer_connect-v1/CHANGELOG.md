@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.2.0 (2024-12-04)
+
+#### Features
+
+* Added CMEK connection config 
+* Added GitHub Enterprise and GitLab connection configs 
+* GitRepositoryLink reports the webhook ID 
+
 ### 0.1.1 (2024-08-30)
 
 #### Documentation
