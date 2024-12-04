@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-12-04)
+
+#### Features
+
+* Support for product ID field ([#27674](https://github.com/googleapis/google-cloud-ruby/issues/27674)) 
+
 ### 1.0.2 (2024-11-13)
 
 #### Documentation
