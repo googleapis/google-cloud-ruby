@@ -744,7 +744,8 @@ module Google
         #     The set of possible reasons is subject to change.
         # @!attribute [r] challenge
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::RiskAnalysis::Challenge]
-        #     Output only. Challenge information for SCORE_AND_CHALLENGE keys
+        #     Output only. Challenge information for SCORE_AND_CHALLENGE and INVISIBLE
+        #     keys
         class RiskAnalysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -778,7 +779,7 @@ module Google
             SUSPECTED_CHARGEBACK = 7
           end
 
-          # Challenge information for SCORE_AND_CHALLENGE keys
+          # Challenge information for SCORE_AND_CHALLENGE and INVISIBLE keys
           module Challenge
             # Default unspecified type.
             CHALLENGE_UNSPECIFIED = 0
@@ -1828,7 +1829,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The removeIpOverride request message.
+        # The RemoveIpOverride request message.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the key from which the IP override is removed, in the
