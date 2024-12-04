@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-12-04)
+
+#### Features
+
+* Added currency field to BillingAccount ([#27688](https://github.com/googleapis/google-cloud-ruby/issues/27688)) 
+
 ### 1.0.2 (2024-08-30)
 
 #### Documentation
