@@ -144,7 +144,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Represents an example that the agent is trained on.
-          # @!attribute [rw] name
+          # @!attribute [r] name
           #   @return [::String]
           #     Output only. The unique identifier of this training phrase.
           # @!attribute [rw] type

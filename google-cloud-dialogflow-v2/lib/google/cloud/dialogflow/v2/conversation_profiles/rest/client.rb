@@ -366,7 +366,9 @@ module Google
               ##
               # Creates a conversation profile in the specified project.
               #
-              # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
+              # {::Google::Cloud::Dialogflow::V2::ConversationProfile#create_time ConversationProfile.create_time}
+              # and
+              # {::Google::Cloud::Dialogflow::V2::ConversationProfile#update_time ConversationProfile.update_time}
               # aren't populated in the response. You can retrieve them via
               # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::Client#get_conversation_profile GetConversationProfile}
               # API.
@@ -453,7 +455,9 @@ module Google
               ##
               # Updates the specified conversation profile.
               #
-              # [ConversationProfile.CreateTime][] and [ConversationProfile.UpdateTime][]
+              # {::Google::Cloud::Dialogflow::V2::ConversationProfile#create_time ConversationProfile.create_time}
+              # and
+              # {::Google::Cloud::Dialogflow::V2::ConversationProfile#update_time ConversationProfile.update_time}
               # aren't populated in the response. You can retrieve them via
               # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::Client#get_conversation_profile GetConversationProfile}
               # API.
