@@ -1,5 +1,14 @@
 # Release History
 
+### 1.51.0 (2024-12-04)
+
+#### Features
+
+* load jobs with dest tables in another project ([#27681](https://github.com/googleapis/google-cloud-ruby/issues/27681)) 
+#### Bug Fixes
+
+* remove reload! call on patch_table ([#27684](https://github.com/googleapis/google-cloud-ruby/issues/27684)) 
+
 ### 1.50.0 (2024-06-27)
 
 #### Features
