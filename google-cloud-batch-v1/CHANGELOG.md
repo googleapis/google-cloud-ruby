@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.2 (2024-12-04)
+
+#### Documentation
+
+* Revised labels and reservation field descriptions ([#27680](https://github.com/googleapis/google-cloud-ruby/issues/27680)) 
+
 ### 0.19.1 (2024-10-02)
 
 #### Documentation
