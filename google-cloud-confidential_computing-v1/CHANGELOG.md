@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2024-12-04)
+
+#### Features
+
+* Support for the AWS Principal Tags token type ([#27659](https://github.com/googleapis/google-cloud-ruby/issues/27659)) 
+
 ### 1.1.2 (2024-08-30)
 
 #### Documentation
