@@ -207,7 +207,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for [ConversationDatasets][CreateConversationDataset].
+        # Metadata for [CreateConversationDataset][].
         # @!attribute [rw] conversation_dataset
         #   @return [::String]
         #     The resource name of the conversation dataset that will be created. Format:
@@ -218,7 +218,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for [ConversationDatasets][DeleteConversationDataset].
+        # Metadata for [DeleteConversationDataset][].
         class DeleteConversationDatasetOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

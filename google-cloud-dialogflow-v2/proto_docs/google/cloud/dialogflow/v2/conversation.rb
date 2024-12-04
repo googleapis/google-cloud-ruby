@@ -293,9 +293,11 @@ module Google
         # @!attribute [rw] context_size
         #   @return [::Integer]
         #     Number of messages prior to and including
-        #     [last_conversation_message][] used to compile the suggestion. It may be
-        #     smaller than the [SuggestSummaryRequest.context_size][] field in the
-        #     request if there weren't that many messages in the conversation.
+        #     {::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse#latest_message latest_message}
+        #     used to compile the suggestion. It may be smaller than the
+        #     {::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest#context_size SuggestConversationSummaryRequest.context_size}
+        #     field in the request if there weren't that many messages in the
+        #     conversation.
         class SuggestConversationSummaryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -390,9 +392,11 @@ module Google
         # @!attribute [rw] context_size
         #   @return [::Integer]
         #     Number of messages prior to and including
-        #     [last_conversation_message][] used to compile the suggestion. It may be
-        #     smaller than the [GenerateStatelessSummaryRequest.context_size][] field in
-        #     the request if there weren't that many messages in the conversation.
+        #     {::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse#latest_message latest_message}
+        #     used to compile the suggestion. It may be smaller than the
+        #     {::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest#max_context_size GenerateStatelessSummaryRequest.max_context_size}
+        #     field in the request if there weren't that many messages in the
+        #     conversation.
         class GenerateStatelessSummaryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

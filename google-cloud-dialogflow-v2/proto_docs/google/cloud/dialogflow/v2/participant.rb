@@ -50,9 +50,9 @@ module Google
         #        Dialogflow adds the obfuscated user id with the participant.
         #
         #     2. If you set this field in
-        #        [AnalyzeContent][google.cloud.dialogflow.v2.AnalyzeContentRequest.obfuscated_external_user_id]
+        #        {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest#participant AnalyzeContent}
         #        or
-        #        [StreamingAnalyzeContent][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest.obfuscated_external_user_id],
+        #        {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest#participant StreamingAnalyzeContent},
         #        Dialogflow will update
         #        {::Google::Cloud::Dialogflow::V2::Participant#obfuscated_external_user_id Participant.obfuscated_external_user_id}.
         #
@@ -310,8 +310,9 @@ module Google
         # @!attribute [rw] automated_agent_reply
         #   @return [::Google::Cloud::Dialogflow::V2::AutomatedAgentReply]
         #     Only set if a Dialogflow automated agent has responded.
-        #     Note that: [AutomatedAgentReply.detect_intent_response.output_audio][]
-        #     and [AutomatedAgentReply.detect_intent_response.output_audio_config][]
+        #     Note that in [AutomatedAgentReply.DetectIntentResponse][],
+        #     [Sessions.DetectIntentResponse.output_audio][]
+        #     and [Sessions.DetectIntentResponse.output_audio_config][]
         #     are always empty, use
         #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse#reply_audio reply_audio}
         #     instead.
@@ -450,7 +451,8 @@ module Google
         #     and
         #     {::Google::Cloud::Dialogflow::V2::AudioEncoding::AUDIO_ENCODING_MULAW AudioEncoding.AUDIO_ENCODING_MULAW}
         #     - Lifecycle: conversation should be in `Assist Stage`, go to
-        #       [Conversation.CreateConversation][] for more information.
+        #       {::Google::Cloud::Dialogflow::V2::Conversations::Client#create_conversation Conversations.CreateConversation}
+        #       for more information.
         #
         #     InvalidArgument Error will be returned if the one of restriction checks
         #     failed.
@@ -516,9 +518,9 @@ module Google
         #     has content.
         # @!attribute [rw] automated_agent_reply
         #   @return [::Google::Cloud::Dialogflow::V2::AutomatedAgentReply]
-        #     Only set if a Dialogflow automated agent has responded.
-        #     Note that: [AutomatedAgentReply.detect_intent_response.output_audio][]
-        #     and [AutomatedAgentReply.detect_intent_response.output_audio_config][]
+        #     Note that in [AutomatedAgentReply.DetectIntentResponse][],
+        #     [Sessions.DetectIntentResponse.output_audio][]
+        #     and [Sessions.DetectIntentResponse.output_audio_config][]
         #     are always empty, use
         #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#reply_audio reply_audio}
         #     instead.
