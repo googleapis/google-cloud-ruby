@@ -2,10 +2,6 @@
 
 ### 1.4.0 (2024-12-04)
 
-### ⚠ BREAKING CHANGES
-
-* added new fields for the Automation Repair rule ([#27525](https://github.com/googleapis/google-cloud-ruby/issues/27525))
-
 #### Features
 
 * A new field `timed_promote_release_condition` is added to message `.google.cloud.deploy.v1.AutomationRuleCondition` 
@@ -16,8 +12,8 @@
 * A new message `TimedPromoteReleaseRule` is added 
 * added new fields for the Automation Repair rule ([#27525](https://github.com/googleapis/google-cloud-ruby/issues/27525)) 
 * added route destination related fields to Gateway service mesh message 
-* Bump version to 1.4.0 
 * Support for GkeCluster#dns_endpoint ([#27685](https://github.com/googleapis/google-cloud-ruby/issues/27685)) 
+
 #### Documentation
 
 * A comment for field `target_id` in message `.google.cloud.deploy.v1.AutomationRun` is changed 
