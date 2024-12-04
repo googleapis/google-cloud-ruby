@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2024-12-04)
+
+#### Features
+
+* Chat Apps can now retrieve import mode expire time ([#27692](https://github.com/googleapis/google-cloud-ruby/issues/27692)) 
+
 ### 0.5.1 (2024-10-08)
 
 #### Documentation
