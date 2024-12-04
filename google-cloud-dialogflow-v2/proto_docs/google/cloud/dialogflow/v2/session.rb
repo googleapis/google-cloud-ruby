@@ -79,7 +79,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The message returned from the DetectIntent method.
+        # The message returned from the [DetectIntent][] method.
         # @!attribute [rw] response_id
         #   @return [::String]
         #     The unique identifier of the response. It can be used to
@@ -226,8 +226,8 @@ module Google
         #     was not set.
         #
         #     This field is not guaranteed to be accurate or set. In particular this
-        #     field isn't set for StreamingDetectIntent since the streaming endpoint has
-        #     separate confidence estimates per portion of the audio in
+        #     field isn't set for [StreamingDetectIntent][] since the streaming endpoint
+        #     has separate confidence estimates per portion of the audio in
         #     StreamingRecognitionResult.
         # @!attribute [rw] action
         #   @return [::String]
@@ -316,8 +316,7 @@ module Google
         end
 
         # The top-level message sent by the client to the
-        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent}
-        # method.
+        # [StreamingDetectIntent][] method.
         #
         # Multiple request messages should be sent in order:
         #
@@ -493,11 +492,13 @@ module Google
         end
 
         # The top-level message returned from the
-        # `StreamingDetectIntent` method.
+        # [StreamingDetectIntent][] method.
         #
         # Multiple response messages can be returned in order:
         #
-        # 1.  If the `StreamingDetectIntentRequest.input_audio` field was
+        # 1.  If the
+        # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio StreamingDetectIntentRequest.input_audio}
+        # field was
         #     set, the `recognition_result` field is populated for one
         #     or more messages.
         #     See the
@@ -537,7 +538,8 @@ module Google
         # @!attribute [rw] debugging_info
         #   @return [::Google::Cloud::Dialogflow::V2::CloudConversationDebuggingInfo]
         #     Debugging info that would get populated when
-        #     `StreamingDetectIntentRequest.enable_debugging_info` is set to true.
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#enable_debugging_info StreamingDetectIntentRequest.enable_debugging_info}
+        #     is set to true.
         class StreamingDetectIntentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -711,9 +713,9 @@ module Google
         # The result of sentiment analysis. Sentiment analysis inspects user input
         # and identifies the prevailing subjective opinion, especially to determine a
         # user's attitude as positive, negative, or neutral.
-        # For [Participants.DetectIntent][], it needs to be configured in
+        # For [DetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#query_params DetectIntentRequest.query_params}.
-        # For [Participants.StreamingDetectIntent][], it needs to be configured in
+        # For [StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
         # And for
         # {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}

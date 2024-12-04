@@ -705,7 +705,7 @@ module Google
         end
 
         # The request message for
-        # [ConversationProfiles.SetSuggestionFeature][].
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#set_suggestion_feature_config ConversationProfiles.SetSuggestionFeatureConfig}.
         # @!attribute [rw] conversation_profile
         #   @return [::String]
         #     Required. The Conversation Profile to add or update the suggestion feature
@@ -723,7 +723,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for [ConversationProfiles.ClearFeature][].
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#clear_suggestion_feature_config ConversationProfiles.ClearSuggestionFeatureConfig}.
         # @!attribute [rw] conversation_profile
         #   @return [::String]
         #     Required. The Conversation Profile to add or update the suggestion feature
@@ -741,7 +742,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a [ConversationProfile.SetSuggestionFeatureConfig][]
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#set_suggestion_feature_config ConversationProfiles.SetSuggestionFeatureConfig}
         # operation.
         # @!attribute [rw] conversation_profile
         #   @return [::String]
@@ -763,7 +765,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a [ConversationProfile.ClearSuggestionFeatureConfig][]
+        # Metadata for a
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#clear_suggestion_feature_config ConversationProfiles.ClearSuggestionFeatureConfig}
         # operation.
         # @!attribute [rw] conversation_profile
         #   @return [::String]

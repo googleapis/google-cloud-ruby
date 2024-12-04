@@ -47,8 +47,9 @@ module Google
         #    returned to the customers.
         # 2. The customer uses the
         # {::Google::Cloud::Dialogflow::V2::AnswerRecord#name AnswerRecord.name} to call the
-        #    [UpdateAnswerRecord][] method to send feedback about a specific answer
-        #    that they believe is wrong.
+        #    {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client#update_answer_record AnswerRecords.UpdateAnswerRecord}
+        #    method to send feedback about a specific answer that they believe is
+        #    wrong.
         # @!attribute [rw] name
         #   @return [::String]
         #     The unique identifier of this answer record.
