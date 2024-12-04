@@ -27,7 +27,7 @@ module Google
         # `interval.start_time` through `interval.end_time`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the `Snooze`. The format is:
+        #     Required. Identifier. The name of the `Snooze`. The format is:
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/snoozes/[SNOOZE_ID]
         #
