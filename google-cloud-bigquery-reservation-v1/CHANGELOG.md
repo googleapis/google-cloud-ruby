@@ -1,5 +1,13 @@
 # Release History
 
+### 1.1.0 (2024-12-04)
+
+#### Features
+
+* Support for CapacityCommitment#is_flat_rate 
+* Support for replica location fields in the Reservation resource 
+* Support for the failover_reservation RPC 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
