@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.11.0 (2024-12-04)
+
+#### Features
+
+* Support for the run_stream RPC 
+* The discover_connection_profile RPC supports the sql_server_rdbms request parameter and response field 
+
 ### 0.10.1 (2024-08-30)
 
 #### Documentation
