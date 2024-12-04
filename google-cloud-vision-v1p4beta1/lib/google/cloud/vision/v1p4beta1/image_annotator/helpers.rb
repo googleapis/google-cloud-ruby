@@ -81,7 +81,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :CROP_HINTS, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -179,7 +178,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :DOCUMENT_TEXT_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -277,7 +275,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :FACE_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -375,7 +372,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :IMAGE_PROPERTIES, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -473,7 +469,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :LABEL_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -571,7 +566,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :LANDMARK_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -669,7 +663,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :LOGO_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -767,7 +760,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :OBJECT_LOCALIZATION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -865,7 +857,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :PRODUCT_SEARCH, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -963,7 +954,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :SAFE_SEARCH_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -1061,7 +1051,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :TEXT_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
@@ -1159,7 +1148,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: :WEB_DETECTION, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|

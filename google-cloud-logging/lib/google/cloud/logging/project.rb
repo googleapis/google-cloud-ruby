@@ -360,7 +360,6 @@ module Google
         def async_writer max_batch_count: 10_000, max_batch_bytes: 10_000_000,
                          max_queue_size: 100, interval: 5, threads: 10,
                          partial_success: false
-
           AsyncWriter.new self, max_count: max_batch_count,
                                 max_bytes: max_batch_bytes,
                                 max_queue: max_queue_size,

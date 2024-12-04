@@ -82,7 +82,6 @@ module Google
                 destination: nil,
                 image_context: nil,
                 &block
-
               feature = { type: <%= feature_type.inspect %>, max_results: max_results }
               images << image if image
               formatted_images = images.map do |img|
