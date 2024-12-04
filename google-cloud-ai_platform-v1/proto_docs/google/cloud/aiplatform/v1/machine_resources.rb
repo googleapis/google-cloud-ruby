@@ -89,6 +89,14 @@ module Google
         #     quotas. Specifically, you will be charged for (max_replica_count *
         #     number of cores in the selected machine type) and (max_replica_count *
         #     number of GPUs per replica in the selected machine type).
+        # @!attribute [rw] required_replica_count
+        #   @return [::Integer]
+        #     Optional. Number of required available replicas for the deployment to
+        #     succeed. This field is only needed when partial model deployment/mutation
+        #     is desired. If set, the model deploy/mutate operation will succeed once
+        #     available_replica_count reaches required_replica_count, and the rest of
+        #     the replicas will be retried. If not set, the default
+        #     required_replica_count will be min_replica_count.
         # @!attribute [rw] autoscaling_metric_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::AutoscalingMetricSpec>]
         #     Immutable. The metric specifications that overrides a resource

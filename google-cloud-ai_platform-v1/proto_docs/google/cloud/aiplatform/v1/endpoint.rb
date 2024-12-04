@@ -272,6 +272,9 @@ module Google
         # @!attribute [rw] faster_deployment_config
         #   @return [::Google::Cloud::AIPlatform::V1::FasterDeploymentConfig]
         #     Configuration for faster model deployment.
+        # @!attribute [r] status
+        #   @return [::Google::Cloud::AIPlatform::V1::DeployedModel::Status]
+        #     Output only. Runtime status of the deployed model.
         # @!attribute [rw] system_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     System labels to apply to Model Garden deployments.
@@ -279,6 +282,21 @@ module Google
         class DeployedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Runtime status of the deployed model.
+          # @!attribute [r] message
+          #   @return [::String]
+          #     Output only. The latest deployed model's status message (if any).
+          # @!attribute [r] last_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time at which the status was last updated.
+          # @!attribute [r] available_replica_count
+          #   @return [::Integer]
+          #     Output only. The number of available replicas of the deployed model.
+          class Status
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
