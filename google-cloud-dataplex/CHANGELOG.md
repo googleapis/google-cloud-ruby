@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.5.0 (2024-12-04)
+
+#### Features
+
+* update Go Bigtable import path 
+* update Go Datastore import path ([#27635](https://github.com/googleapis/google-cloud-ruby/issues/27635)) 
+
 ### 1.4.1 (2024-08-08)
 
 #### Documentation
