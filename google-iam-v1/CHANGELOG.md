@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-12-04)
+
+#### Features
+
+* support for the ResourcePolicyMember type ([#27658](https://github.com/googleapis/google-cloud-ruby/issues/27658)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
