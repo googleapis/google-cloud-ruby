@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.59.0 (2024-12-04)
+
+#### Features
+
+* Support for DedicatedResources#required_replica_count field 
+* Support for DeployedModel#status field 
+* Support for Endpoint#client_connection_config 
+* Support for NotebookExecutionJob#custom_environment_spec 
+* Support for REST resource paths that include RAG corpora 
+* Support for Retrieval#vertex_rag_store 
+* Support for the update_endpoint_long_running RPC in the EndpointService 
+* Support for VertexRagDataService and all associated RPCs and types 
+* Support for VertexRagService and all associated RPCs and types 
+
 ### 0.58.0 (2024-11-14)
 
 #### Features
