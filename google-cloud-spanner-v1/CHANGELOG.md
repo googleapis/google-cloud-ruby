@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2024-12-04)
+
+#### Features
+
+* Support for signaling the end of a transaction in SQL execution RPCs ([#27657](https://github.com/googleapis/google-cloud-ruby/issues/27657)) 
+
 ### 1.2.0 (2024-10-15)
 
 #### Features
