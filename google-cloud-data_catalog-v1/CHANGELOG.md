@@ -1,5 +1,12 @@
 # Release History
 
+### 1.2.0 (2024-12-04)
+
+#### Features
+
+* Support for dataplex transfers 
+* Support for the set_config, retrieve_config, and retrieve_effective_config RPCs 
+
 ### 1.1.0 (2024-11-14)
 
 #### Features
