@@ -19,7 +19,7 @@ desc "Tombstone a gem in RubyGems after we think it's no longer useful"
 required_arg :gem_name
 optional_arg :gem_version
 flag :info_url, "--info-url=URL", default: ""
-flag :rubygems_api_token, "--rubygems-api-token=TOKEN"
+flag :rubygems_api_token, "--rubygems-api-token=TOKEN", default: ENV["RUBYGEMS_API_TOKEN"]
 flag :release, "--[no-]release"
 flag :tmpdir, "--tmpdir=PATH"
 
@@ -55,12 +55,14 @@ def run
 end
 
 def load_kokoro_env
-  kokoro_gfile_dir = ENV["KOKORO_GFILE_DIR"]
-  return unless kokoro_gfile_dir
-  filename = File.join kokoro_gfile_dir, "ruby_env_vars.json"
-  raise "#{filename} is not a file" unless File.file? filename
-  env_vars = JSON.parse File.read filename
-  env_vars.each { |k, v| ENV[k] ||= v }
+  return if rubygems_api_token
+  keystore_dir = ENV["KOKORO_KEYSTORE_DIR"]
+  raise "No rubygems token given, and no Kokoro keystore dir found." unless keystore_dir
+  token_filename = File.join keystore_dir, "73713_rubygems-publish-key"
+  raise "No rubygems token given, and #{token_filename} not found." unless File.file? token_filename
+  token_data = File.read token_filename
+  set :rubygems_api_token, token_data
+  puts "Rubygems API token acquired from keystore."
 end
 
 def ensure_gem_version
@@ -96,7 +98,7 @@ end
 def release_gem
   puts "Releasing #{gem_name}-#{gem_version}.gem", :bold
   env = {
-    "GEM_HOST_API_KEY" => rubygems_api_token || ENV["RUBYGEMS_API_TOKEN"]
+    "GEM_HOST_API_KEY" => rubygems_api_token
   }
   exec ["gem", "push", "#{gem_name}-#{gem_version}.gem"], env: env
 end
