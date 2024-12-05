@@ -55,6 +55,8 @@ module Google
       # `version` parameter. If the DatasetService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About DatasetService
       #
@@ -62,9 +64,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.dataset_service version: :v1, &block
+      def self.dataset_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -72,6 +75,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:DatasetService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -85,6 +89,8 @@ module Google
       # `version` parameter. If the DeploymentResourcePoolService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About DeploymentResourcePoolService
       #
@@ -92,9 +98,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.deployment_resource_pool_service version: :v1, &block
+      def self.deployment_resource_pool_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -102,6 +109,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:DeploymentResourcePoolService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -115,6 +123,8 @@ module Google
       # `version` parameter. If the EndpointService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About EndpointService
       #
@@ -122,9 +132,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.endpoint_service version: :v1, &block
+      def self.endpoint_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -132,6 +143,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:EndpointService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -145,6 +157,8 @@ module Google
       # `version` parameter. If the EvaluationService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About EvaluationService
       #
@@ -152,9 +166,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.evaluation_service version: :v1, &block
+      def self.evaluation_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -162,6 +177,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:EvaluationService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -175,6 +191,8 @@ module Google
       # `version` parameter. If the FeatureOnlineStoreAdminService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About FeatureOnlineStoreAdminService
       #
@@ -183,9 +201,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.feature_online_store_admin_service version: :v1, &block
+      def self.feature_online_store_admin_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -193,6 +212,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeatureOnlineStoreAdminService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -206,6 +226,8 @@ module Google
       # `version` parameter. If the FeaturestoreOnlineServingService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About FeaturestoreOnlineServingService
       #
@@ -213,9 +235,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.featurestore_online_serving_service version: :v1, &block
+      def self.featurestore_online_serving_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -223,6 +246,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeaturestoreOnlineServingService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -236,6 +260,8 @@ module Google
       # `version` parameter. If the FeatureOnlineStoreService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About FeatureOnlineStoreService
       #
@@ -243,9 +269,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.feature_online_store_service version: :v1, &block
+      def self.feature_online_store_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -253,6 +280,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeatureOnlineStoreService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -266,6 +294,8 @@ module Google
       # `version` parameter. If the FeaturestoreService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About FeaturestoreService
       #
@@ -273,9 +303,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.featurestore_service version: :v1, &block
+      def self.featurestore_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -283,6 +314,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeaturestoreService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -296,6 +328,8 @@ module Google
       # `version` parameter. If the FeatureRegistryService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About FeatureRegistryService
       #
@@ -304,9 +338,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.feature_registry_service version: :v1, &block
+      def self.feature_registry_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -314,6 +349,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:FeatureRegistryService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -327,6 +363,8 @@ module Google
       # `version` parameter. If the GenAiTuningService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About GenAiTuningService
       #
@@ -334,9 +372,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.gen_ai_tuning_service version: :v1, &block
+      def self.gen_ai_tuning_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -344,6 +383,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:GenAiTuningService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -357,6 +397,8 @@ module Google
       # `version` parameter. If the IndexEndpointService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About IndexEndpointService
       #
@@ -364,9 +406,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.index_endpoint_service version: :v1, &block
+      def self.index_endpoint_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -374,6 +417,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:IndexEndpointService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -387,6 +431,8 @@ module Google
       # `version` parameter. If the IndexService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About IndexService
       #
@@ -394,9 +440,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.index_service version: :v1, &block
+      def self.index_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -404,6 +451,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:IndexService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -417,6 +465,8 @@ module Google
       # `version` parameter. If the JobService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About JobService
       #
@@ -424,9 +474,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.job_service version: :v1, &block
+      def self.job_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -434,6 +485,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:JobService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -447,6 +499,8 @@ module Google
       # `version` parameter. If the PredictionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PredictionService
       #
@@ -454,9 +508,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.prediction_service version: :v1, &block
+      def self.prediction_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -464,6 +519,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:PredictionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -477,6 +533,8 @@ module Google
       # `version` parameter. If the LlmUtilityService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About LlmUtilityService
       #
@@ -484,9 +542,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.llm_utility_service version: :v1, &block
+      def self.llm_utility_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -494,6 +553,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:LlmUtilityService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -507,6 +567,8 @@ module Google
       # `version` parameter. If the MatchService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About MatchService
       #
@@ -515,9 +577,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.match_service version: :v1, &block
+      def self.match_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -525,6 +588,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:MatchService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -538,6 +602,8 @@ module Google
       # `version` parameter. If the MetadataService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About MetadataService
       #
@@ -545,9 +611,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.metadata_service version: :v1, &block
+      def self.metadata_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -555,6 +622,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:MetadataService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -568,6 +636,8 @@ module Google
       # `version` parameter. If the MigrationService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About MigrationService
       #
@@ -576,9 +646,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.migration_service version: :v1, &block
+      def self.migration_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -586,6 +657,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:MigrationService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -599,6 +671,8 @@ module Google
       # `version` parameter. If the ModelGardenService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ModelGardenService
       #
@@ -606,9 +680,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.model_garden_service version: :v1, &block
+      def self.model_garden_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -616,6 +691,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:ModelGardenService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -629,6 +705,8 @@ module Google
       # `version` parameter. If the ModelService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ModelService
       #
@@ -636,9 +714,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.model_service version: :v1, &block
+      def self.model_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -646,6 +725,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:ModelService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -659,6 +739,8 @@ module Google
       # `version` parameter. If the NotebookService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About NotebookService
       #
@@ -666,9 +748,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.notebook_service version: :v1, &block
+      def self.notebook_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -676,6 +759,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:NotebookService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -689,6 +773,8 @@ module Google
       # `version` parameter. If the PersistentResourceService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PersistentResourceService
       #
@@ -696,9 +782,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.persistent_resource_service version: :v1, &block
+      def self.persistent_resource_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -706,6 +793,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:PersistentResourceService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -719,6 +807,8 @@ module Google
       # `version` parameter. If the PipelineService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PipelineService
       #
@@ -728,9 +818,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.pipeline_service version: :v1, &block
+      def self.pipeline_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -738,6 +829,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:PipelineService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -751,6 +843,8 @@ module Google
       # `version` parameter. If the ScheduleService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ScheduleService
       #
@@ -759,9 +853,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.schedule_service version: :v1, &block
+      def self.schedule_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -769,6 +864,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:ScheduleService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -782,6 +878,8 @@ module Google
       # `version` parameter. If the SpecialistPoolService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About SpecialistPoolService
       #
@@ -794,9 +892,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.specialist_pool_service version: :v1, &block
+      def self.specialist_pool_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -804,6 +903,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:SpecialistPoolService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -817,6 +917,8 @@ module Google
       # `version` parameter. If the TensorboardService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About TensorboardService
       #
@@ -824,9 +926,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.tensorboard_service version: :v1, &block
+      def self.tensorboard_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -834,6 +937,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:TensorboardService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -847,6 +951,8 @@ module Google
       # `version` parameter. If the VertexRagDataService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About VertexRagDataService
       #
@@ -854,9 +960,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.vertex_rag_data_service version: :v1, &block
+      def self.vertex_rag_data_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -864,6 +971,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:VertexRagDataService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -877,6 +985,8 @@ module Google
       # `version` parameter. If the VertexRagService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About VertexRagService
       #
@@ -884,9 +994,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.vertex_rag_service version: :v1, &block
+      def self.vertex_rag_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -894,6 +1005,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:VertexRagService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -907,6 +1019,8 @@ module Google
       # `version` parameter. If the VizierService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About VizierService
       #
@@ -918,9 +1032,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.vizier_service version: :v1, &block
+      def self.vizier_service version: :v1, transport: :grpc, &block
         require "google/cloud/ai_platform/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::AIPlatform
@@ -928,6 +1043,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::AIPlatform.const_get(package_name).const_get(:VizierService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
