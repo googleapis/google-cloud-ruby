@@ -98,11 +98,11 @@ module Google
         scope             ||= configure.scope
         retries           ||= configure.retries
         timeout           ||= configure.timeout
-        open_timeout      ||= (configure.open_timeout || timeout)
-        read_timeout      ||= (configure.read_timeout || timeout)
-        send_timeout      ||= (configure.send_timeout || timeout)
+        open_timeout      ||= configure.open_timeout || timeout
+        read_timeout      ||= configure.read_timeout || timeout
+        send_timeout      ||= configure.send_timeout || timeout
         endpoint          ||= configure.endpoint
-        credentials       ||= (keyfile || default_credentials(scope: scope))
+        credentials       ||= keyfile || default_credentials(scope: scope)
         max_elapsed_time  ||= configure.max_elapsed_time
         base_interval     ||= configure.base_interval
         max_interval      ||= configure.max_interval

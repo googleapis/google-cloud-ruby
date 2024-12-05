@@ -303,7 +303,7 @@ describe "Buckets Snippets" do
       assert bucket.uniform_bucket_level_access?
 
       # get_uniform_bucket_level_access
-      assert_output "Uniform bucket-level access is enabled for #{bucket.name}.\nBucket "\
+      assert_output "Uniform bucket-level access is enabled for #{bucket.name}.\nBucket " \
                     "will be locked on #{bucket.uniform_bucket_level_access_locked_at}.\n" do
         get_uniform_bucket_level_access bucket_name: bucket.name
       end

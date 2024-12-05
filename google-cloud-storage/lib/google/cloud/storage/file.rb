@@ -2072,9 +2072,9 @@ module Google
         def self.gapi_from_attrs gapi, attributes
           attributes.flatten!
           return nil if attributes.empty?
-          attr_params = Hash[attributes.map do |attr|
-                               [attr, gapi.send(attr)]
-                             end]
+          attr_params = attributes.to_h do |attr|
+            [attr, gapi.send(attr)]
+          end
           # Sending nil metadata results in an Apiary runtime error:
           # NoMethodError: undefined method `each' for nil:NilClass
           attr_params.reject! { |k, v| k == :metadata && v.nil? }
@@ -2240,10 +2240,8 @@ module Google
           [dest_bucket, dest_path]
         end
 
-        # rubocop:disable Style/MultipleComparison
-
         def verify_file! file, verify = :md5
-          verify_md5    = verify == :md5    || verify == :all
+          verify_md5    = verify == :md5 || verify == :all
           verify_crc32c = verify == :crc32c || verify == :all
           Verifier.verify_md5! self, file    if verify_md5    && md5
           Verifier.verify_crc32c! self, file if verify_crc32c && crc32c
