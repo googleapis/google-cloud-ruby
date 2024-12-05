@@ -1,0 +1,17 @@
+{
+    "api_id": "iam.googleapis.com",
+    "api_shortname": "iam",
+    "client_documentation": "https://rubydoc.info/gems/google-iam-v2",
+    "distribution_name": "google-iam-v2",
+    "is_cloud": false,
+    "language": "ruby",
+    "name": "iam",
+    "name_pretty": "IAM V2 API",
+    "product_documentation": "https://cloud.google.com/iam",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Manages identity and access control policies for Google Cloud Platform resources. Note that google-iam-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-iam-client instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/iam",
+    "library_type": "GAPIC_AUTO"
+}
