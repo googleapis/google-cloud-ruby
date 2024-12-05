@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.60.0 (2024-12-05)
+
+#### Features
+
+* Support for workbench runtime configuration and custom kernel on NotebookExecutionJob ([#27723](https://github.com/googleapis/google-cloud-ruby/issues/27723)) 
+
 ### 0.59.0 (2024-12-04)
 
 #### Features
