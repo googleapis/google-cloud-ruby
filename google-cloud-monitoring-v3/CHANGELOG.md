@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 (2024-12-05)
+
+#### Features
+
+* Added support for notification prompts in AlertPolicy ([#27693](https://github.com/googleapis/google-cloud-ruby/issues/27693)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
