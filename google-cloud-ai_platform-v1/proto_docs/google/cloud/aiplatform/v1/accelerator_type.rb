@@ -54,6 +54,9 @@ module Google
           # Nvidia H100 80Gb GPU.
           NVIDIA_H100_80GB = 13
 
+          # Nvidia H100 Mega 80Gb GPU.
+          NVIDIA_H100_MEGA_80GB = 14
+
           # TPU v2.
           TPU_V2 = 6
 
