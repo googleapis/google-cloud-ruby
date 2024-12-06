@@ -124,14 +124,6 @@ module Google
             # Lists operations that match the specified filter in the request. If the
             # server doesn't support this method, it returns `UNIMPLEMENTED`.
             #
-            # NOTE: the `name` binding allows API services to override the binding
-            # to use different resource name schemes, such as `users/*/operations`. To
-            # override the binding, API services can add a binding such as
-            # `"/v1/{name=users/*}/operations"` to their service configuration.
-            # For backwards compatibility, the default name includes the operations
-            # collection id, however overriding users must ensure the name binding
-            # is the parent resource, without the operations collection id.
-            #
             # @overload list_operations(request, options = nil)
             #   Pass arguments to `list_operations` via a request object, either of type
             #   {::Google::Longrunning::ListOperationsRequest} or an equivalent Hash.
@@ -421,8 +413,9 @@ module Google
             # other methods to check whether the cancellation succeeded or whether the
             # operation completed despite cancellation. On successful cancellation,
             # the operation is not deleted; instead, it becomes an operation with
-            # an {::Google::Longrunning::Operation#error Operation.error} value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-            # corresponding to `Code.CANCELLED`.
+            # an {::Google::Longrunning::Operation#error Operation.error} value with a
+            # {::Google::Rpc::Status#code google.rpc.Status.code} of `1`, corresponding to
+            # `Code.CANCELLED`.
             #
             # @overload cancel_operation(request, options = nil)
             #   Pass arguments to `cancel_operation` via a request object, either of type
