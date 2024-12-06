@@ -935,6 +935,10 @@
       "component": "google-cloud-memorystore-v1",
       "version_file": "lib/google/cloud/memorystore/v1/version.rb"
     },
+    "google-cloud-memorystore-v1beta": {
+      "component": "google-cloud-memorystore-v1beta",
+      "version_file": "lib/google/cloud/memorystore/v1beta/version.rb"
+    },
     "google-cloud-metastore": {
       "component": "google-cloud-metastore",
       "version_file": "lib/google/cloud/metastore/version.rb"
