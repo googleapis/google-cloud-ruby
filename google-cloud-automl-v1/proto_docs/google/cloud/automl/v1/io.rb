@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AutoML
       module V1
-        # Input configuration for {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} action.
+        # Input configuration for
+        # {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} action.
         #
         # The format of input depends on dataset_metadata the Dataset into which
         # the import is happening has. As input source the
@@ -37,10 +38,10 @@ module Google
         # The formats are represented in EBNF with commas being literal and with
         # non-terminal symbols defined near the end of this comment. The formats are:
         #
-        # <h4>AutoML Vision</h4>
+        # #### AutoML Vision
         #
         #
-        # <div class="ds-selector-tabs"><section><h5>Classification</h5>
+        # ##### Classification
         #
         # See [Preparing your training
         # data](https://cloud.google.com/vision/automl/docs/prepare) for more
@@ -77,7 +78,7 @@ module Google
         #     UNASSIGNED,gs://folder/image4.jpg
         #
         #
-        # </section><section><h5>Object Detection</h5>
+        # ##### Object Detection
         # See [Preparing your training
         # data](https://cloud.google.com/vision/automl/object-detection/docs/prepare)
         # for more information.
@@ -119,10 +120,10 @@ module Google
         # </div>
         #
         #
-        # <h4>AutoML Video Intelligence</h4>
+        # #### AutoML Video Intelligence
         #
         #
-        # <div class="ds-selector-tabs"><section><h5>Classification</h5>
+        # ##### Classification
         #
         # See [Preparing your training
         # data](https://cloud.google.com/video-intelligence/automl/docs/prepare) for
@@ -165,7 +166,7 @@ module Google
         #
         #
         #
-        # </section><section><h5>Object Tracking</h5>
+        # ##### Object Tracking
         #
         # See [Preparing your training
         # data](/video-intelligence/automl/object-tracking/docs/prepare) for more
@@ -216,14 +217,12 @@ module Google
         #      gs://folder/video1.avi,bike,,12.50,.45,.45,,,.55,.55,,
         #      gs://folder/video2.avi,car,1,0,.1,.9,,,.9,.1,,
         #      gs://folder/video2.avi,,,,,,,,,,,
-        #   </section>
-        # </div>
         #
         #
-        # <h4>AutoML Natural Language</h4>
+        # #### AutoML Natural Language
         #
         #
-        # <div class="ds-selector-tabs"><section><h5>Entity Extraction</h5>
+        # ##### Entity Extraction
         #
         # See [Preparing your training
         # data](/natural-language/automl/entity-analysis/docs/prepare) for more
@@ -406,7 +405,7 @@ module Google
         #
         #
         #
-        # </section><section><h5>Classification</h5>
+        # ##### Classification
         #
         # See [Preparing your training
         # data](https://cloud.google.com/natural-language/automl/docs/prepare) for more
@@ -453,7 +452,7 @@ module Google
         #
         #
         #
-        # </section><section><h5>Sentiment Analysis</h5>
+        # ##### Sentiment Analysis
         #
         # See [Preparing your training
         # data](https://cloud.google.com/natural-language/automl/docs/prepare) for more
@@ -510,13 +509,10 @@ module Google
         #     gs://folder/content.txt,3
         #     TEST,gs://folder/document.pdf
         #     VALIDATE,gs://folder/text_files.zip,2
-        #   </section>
-        # </div>
         #
         #
         #
-        # <h4>AutoML Tables</h4><div class="ui-datasection-main"><section
-        # class="selected">
+        # #### AutoML Tables
         #
         # See [Preparing your training
         # data](https://cloud.google.com/automl-tables/docs/prepare) for more
@@ -555,8 +551,6 @@ module Google
         # and between 1000 and 100,000,000 rows, inclusive. There are at most 5
         # import data running in parallel.
         #
-        #   </section>
-        # </div>
         #
         #
         # **Input field definitions:**
@@ -635,15 +629,16 @@ module Google
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::AutoML::V1::GcsSource]
         #     The Google Cloud Storage location for the input content.
-        #     For {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData}, `gcs_source` points to a CSV file with
-        #     a structure described in {::Google::Cloud::AutoML::V1::InputConfig InputConfig}.
+        #     For {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData},
+        #     `gcs_source` points to a CSV file with a structure described in
+        #     {::Google::Cloud::AutoML::V1::InputConfig InputConfig}.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional domain-specific parameters describing the semantic of the
         #     imported data, any string must be up to 25000
         #     characters long.
         #
-        #     <h4>AutoML Tables</h4>
+        #     #### AutoML Tables
         #
         #     `schema_inference_version`
         #     : (integer) This value must be supplied.
@@ -675,8 +670,8 @@ module Google
         # non-terminal symbols defined near the end of this comment. The formats
         # are:
         #
-        # <h4>AutoML Vision</h4>
-        # <div class="ds-selector-tabs"><section><h5>Classification</h5>
+        # #### AutoML Vision
+        # ##### Classification
         #
         # One or more CSV files where each line is a single column:
         #
@@ -692,7 +687,7 @@ module Google
         #     gs://folder/image2.gif
         #     gs://folder/image3.png
         #
-        # </section><section><h5>Object Detection</h5>
+        # ##### Object Detection
         #
         # One or more CSV files where each line is a single column:
         #
@@ -707,11 +702,9 @@ module Google
         #     gs://folder/image1.jpeg
         #     gs://folder/image2.gif
         #     gs://folder/image3.png
-        #   </section>
-        # </div>
         #
-        # <h4>AutoML Video Intelligence</h4>
-        # <div class="ds-selector-tabs"><section><h5>Classification</h5>
+        # #### AutoML Video Intelligence
+        # ##### Classification
         #
         # One or more CSV files where each line is a single column:
         #
@@ -730,7 +723,7 @@ module Google
         #     gs://folder/video1.mp4,20,60
         #     gs://folder/vid2.mov,0,inf
         #
-        # </section><section><h5>Object Tracking</h5>
+        # ##### Object Tracking
         #
         # One or more CSV files where each line is a single column:
         #
@@ -748,11 +741,9 @@ module Google
         #     gs://folder/video1.mp4,10,40
         #     gs://folder/video1.mp4,20,60
         #     gs://folder/vid2.mov,0,inf
-        #   </section>
-        # </div>
         #
-        # <h4>AutoML Natural Language</h4>
-        # <div class="ds-selector-tabs"><section><h5>Classification</h5>
+        # #### AutoML Natural Language
+        # ##### Classification
         #
         # One or more CSV files where each line is a single column:
         #
@@ -769,7 +760,7 @@ module Google
         #     gs://folder/text2.pdf
         #     gs://folder/text3.tif
         #
-        # </section><section><h5>Sentiment Analysis</h5>
+        # ##### Sentiment Analysis
         # One or more CSV files where each line is a single column:
         #
         #     GCS_FILE_PATH
@@ -785,7 +776,7 @@ module Google
         #     gs://folder/text2.pdf
         #     gs://folder/text3.tif
         #
-        # </section><section><h5>Entity Extraction</h5>
+        # ##### Entity Extraction
         #
         # One or more JSONL (JSON Lines) files that either provide inline text or
         # documents. You can only use one format, either inline text or documents,
@@ -855,11 +846,8 @@ module Google
         #          }
         #        }
         #      }
-        #   </section>
-        # </div>
         #
-        # <h4>AutoML Tables</h4><div class="ui-datasection-main"><section
-        # class="selected">
+        # #### AutoML Tables
         #
         # See [Preparing your training
         # data](https://cloud.google.com/automl-tables/docs/predict-batch) for more
@@ -905,8 +893,6 @@ module Google
         # input feature column specs must contain values compatible with the
         # column spec's data types. Prediction on all the rows of the table
         # will be attempted.
-        #   </section>
-        # </div>
         #
         # **Input field definitions:**
         #
@@ -990,9 +976,10 @@ module Google
         #           filled with precisely the same data as this obtained on import.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::AutoML::V1::GcsDestination]
-        #     Required. The Google Cloud Storage location where the output is to be written to.
-        #     For Image Object Detection, Text Extraction, Video Classification and
-        #     Tables, in the given directory a new directory will be created with name:
+        #     Required. The Google Cloud Storage location where the output is to be
+        #     written to. For Image Object Detection, Text Extraction, Video
+        #     Classification and Tables, in the given directory a new directory will be
+        #     created with name:
         #     export_data-<dataset-display-name>-<timestamp-of-export-call> where
         #     timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. All export
         #     output will be written into that directory.
@@ -1252,8 +1239,8 @@ module Google
         #           represented as a STRUCT, and containing only `code` and `message`.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::AutoML::V1::GcsDestination]
-        #     Required. The Google Cloud Storage location of the directory where the output is to
-        #     be written to.
+        #     Required. The Google Cloud Storage location of the directory where the
+        #     output is to be written to.
         class BatchPredictOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1262,8 +1249,9 @@ module Google
         # Output configuration for ModelExport Action.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::AutoML::V1::GcsDestination]
-        #     Required. The Google Cloud Storage location where the model is to be written to.
-        #     This location may only be set for the following model formats:
+        #     Required. The Google Cloud Storage location where the model is to be
+        #     written to. This location may only be set for the following model
+        #     formats:
         #       "tflite", "edgetpu_tflite", "tf_saved_model", "tf_js", "core_ml".
         #
         #      Under the directory given as the destination a new one with name
