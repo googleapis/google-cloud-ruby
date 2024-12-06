@@ -931,6 +931,10 @@
       "component": "google-cloud-memcache-v1beta2",
       "version_file": "lib/google/cloud/memcache/v1beta2/version.rb"
     },
+    "google-cloud-memorystore": {
+      "component": "google-cloud-memorystore",
+      "version_file": "lib/google/cloud/memorystore/version.rb"
+    },
     "google-cloud-memorystore-v1": {
       "component": "google-cloud-memorystore-v1",
       "version_file": "lib/google/cloud/memorystore/v1/version.rb"
