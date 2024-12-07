@@ -34,7 +34,6 @@ require "google/cloud/config"
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
   config.add_field! :lib_version,   nil, match: ::String
-  config.add_field! :interceptors,  nil, match: ::Array
   config.add_field! :timeout,       nil, match: ::Numeric
   config.add_field! :metadata,      nil, match: ::Hash
   config.add_field! :retry_policy,  nil, match: [::Hash, ::Proc]
@@ -50,8 +49,8 @@ module Google
         # Create a new client object for GatewayControl.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1beta1/latest/Google-Cloud-GkeConnect-Gateway-V1beta1-GatewayControl-Client)
-        # for a gRPC client for version V1beta1 of the API.
+        # [Google::Cloud::GkeConnect::Gateway::V1::GatewayControl::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1/latest/Google-Cloud-GkeConnect-Gateway-V1-GatewayControl-Rest-Client)
+        # for a REST client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the GatewayControl service is
         # supported by that API version, and the corresponding gem is available, the
@@ -62,10 +61,10 @@ module Google
         # GatewayControl is the control plane API for Connect Gateway.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.gateway_control version: :v1beta1, &block
+        def self.gateway_control version: :v1, &block
           require "google/cloud/gke_connect/gateway/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::GkeConnect::Gateway
@@ -73,7 +72,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::GkeConnect::Gateway.const_get(package_name).const_get(:GatewayControl)
-          service_module.const_get(:Client).new(&block)
+          service_module.const_get(:Rest).const_get(:Client).new(&block)
         end
 
         ##
@@ -88,8 +87,6 @@ module Google
         #   The library name as recorded in instrumentation and logging.
         # * `lib_version` (*type:* `String`) -
         #   The library version as recorded in instrumentation and logging.
-        # * `interceptors` (*type:* `Array<GRPC::ClientInterceptor>`) -
-        #   An array of interceptors that are run before calls are executed.
         # * `timeout` (*type:* `Numeric`) -
         #   Default timeout in seconds.
         # * `metadata` (*type:* `Hash{Symbol=>String}`) -
