@@ -490,6 +490,13 @@ module Google
             #     pairs, which can contain sensitive values such as a password, a token, or a
             #     key. The values for all keys have to be base64-encoded strings. For details
             #     see: https://kubernetes.io/docs/concepts/configuration/secret/
+            #
+            #     Example:
+            #
+            #     {
+            #       "example": "ZXhhbXBsZV92YWx1ZQ==",
+            #       "another-example": "YW5vdGhlcl9leGFtcGxlX3ZhbHVl"
+            #     }
             class UserWorkloadsSecret
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -527,6 +534,13 @@ module Google
             #     Optional. The "data" field of Kubernetes ConfigMap, organized in key-value
             #     pairs. For details see:
             #     https://kubernetes.io/docs/concepts/configuration/configmap/
+            #
+            #     Example:
+            #
+            #     {
+            #       "example_key": "example_value",
+            #       "another_key": "another_value"
+            #     }
             class UserWorkloadsConfigMap
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -811,13 +825,14 @@ module Google
             #     composer-1.*.*-airflow-*.*.*.
             # @!attribute [rw] software_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::SoftwareConfig]
-            #     The configuration settings for software inside the environment.
+            #     Optional. The configuration settings for software inside the environment.
             # @!attribute [rw] node_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::NodeConfig]
-            #     The configuration used for the Kubernetes Engine cluster.
+            #     Optional. The configuration used for the Kubernetes Engine cluster.
             # @!attribute [rw] private_environment_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PrivateEnvironmentConfig]
-            #     The configuration used for the Private IP Cloud Composer environment.
+            #     Optional. The configuration used for the Private IP Cloud Composer
+            #     environment.
             # @!attribute [rw] web_server_network_access_control
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::WebServerNetworkAccessControl]
             #     Optional. The network-level access control policy for the Airflow web
@@ -1044,7 +1059,7 @@ module Google
             # Specifies the selection and configuration of software inside the environment.
             # @!attribute [rw] image_version
             #   @return [::String]
-            #     The version of the software running in the environment.
+            #     Optional. The version of the software running in the environment.
             #     This encapsulates both the version of Cloud Composer functionality and the
             #     version of Apache Airflow. It must match the regular expression
             #     `composer-([0-9]+(\.[0-9]+\.[0-9]+(-preview\.[0-9]+)?)?|latest)-airflow-([0-9]+(\.[0-9]+(\.[0-9]+)?)?)`.
@@ -1718,14 +1733,14 @@ module Google
             # An environment for running orchestration tasks.
             # @!attribute [rw] name
             #   @return [::String]
-            #     The resource name of the environment, in the form:
+            #     Identifier. The resource name of the environment, in the form:
             #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
             #
             #     EnvironmentId must start with a lowercase letter followed by up to 63
             #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
             # @!attribute [rw] config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::EnvironmentConfig]
-            #     Configuration parameters for this environment.
+            #     Optional. Configuration parameters for this environment.
             # @!attribute [rw] uuid
             #   @return [::String]
             #     Output only. The UUID (Universally Unique IDentifier) associated with this
