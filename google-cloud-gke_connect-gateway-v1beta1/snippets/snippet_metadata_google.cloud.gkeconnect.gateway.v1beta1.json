@@ -14,12 +14,12 @@
     {
       "region_tag": "connectgateway_v1beta1_generated_GatewayControl_GenerateCredentials_sync",
       "title": "Snippet for the generate_credentials call in the GatewayControl service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client#generate_credentials.",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Rest::Client#generate_credentials.",
       "file": "gateway_control/generate_credentials.rb",
       "language": "RUBY",
       "client_method": {
         "short_name": "generate_credentials",
-        "full_name": "::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client#generate_credentials",
+        "full_name": "::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Rest::Client#generate_credentials",
         "async": false,
         "parameters": [
           {
@@ -29,8 +29,8 @@
         ],
         "result_type": "::Google::Cloud::GkeConnect::Gateway::V1beta1::GenerateCredentialsResponse",
         "client": {
-          "short_name": "GatewayControl::Client",
-          "full_name": "::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client"
+          "short_name": "GatewayControl::Rest::Client",
+          "full_name": "::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Rest::Client"
         },
         "method": {
           "short_name": "GenerateCredentials",

@@ -16,7 +16,6 @@
     "lib/google-cloud-gke_connect-gateway-v1beta1.rb",
     "lib/google/cloud/gke_connect/gateway/v1beta1.rb",
     "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_control.rb",
-    "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_control/client.rb",
     "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_control/credentials.rb",
     "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_control/rest.rb",
     "lib/google/cloud/gke_connect/gateway/v1beta1/gateway_control/rest/client.rb",
@@ -36,7 +35,6 @@
     "snippets/gateway_control/generate_credentials.rb",
     "snippets/snippet_metadata_google.cloud.gkeconnect.gateway.v1beta1.json",
     "test/google/cloud/gke_connect/gateway/v1beta1/gateway_control_rest_test.rb",
-    "test/google/cloud/gke_connect/gateway/v1beta1/gateway_control_test.rb",
     "test/helper.rb"
   ],
   "static": [

@@ -306,9 +306,28 @@ module Google
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
+    # @!attribute [rw] renamed_services
+    #   @return [::Google::Protobuf::Map{::String => ::String}]
+    #     Map of service names to renamed services. Keys are the package relative
+    #     service names and values are the name to be used for the service client
+    #     and call options.
+    #
+    #     publishing:
+    #       go_settings:
+    #         renamed_services:
+    #           Publisher: TopicAdmin
     class GoSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # @!attribute [rw] key
+      #   @return [::String]
+      # @!attribute [rw] value
+      #   @return [::String]
+      class RenamedServicesEntry
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
     end
 
     # Describes the generator configuration for a method.
