@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.19.3 (2024-12-08)
+
+#### Documentation
+
+* Clarified some options for logs ([#27745](https://github.com/googleapis/google-cloud-ruby/issues/27745)) 
+
 ### 0.19.2 (2024-12-04)
 
 #### Documentation
