@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.2 (2024-12-08)
+
+#### Documentation
+
+* Removed some incorrect HTML from documentation ([#27744](https://github.com/googleapis/google-cloud-ruby/issues/27744)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
