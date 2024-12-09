@@ -24,7 +24,7 @@ module Google
         # A message in a Google Chat space.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name of the message.
+        #     Identifier. Resource name of the message.
         #
         #     Format: `spaces/{space}/messages/{message}`
         #
@@ -66,10 +66,10 @@ module Google
         #     Google Chat. If the message is never deleted, this field is empty.
         # @!attribute [rw] text
         #   @return [::String]
-        #     Plain-text body of the message. The first link to an image, video, or web
-        #     page generates a
-        #     [preview chip](https://developers.google.com/workspace/chat/preview-links).
-        #     You can also [@mention a Google Chat
+        #     Optional. Plain-text body of the message. The first link to an image,
+        #     video, or web page generates a [preview
+        #     chip](https://developers.google.com/workspace/chat/preview-links). You can
+        #     also [@mention a Google Chat
         #     user](https://developers.google.com/workspace/chat/format-messages#messages-@mention),
         #     or everyone in the space.
         #
@@ -111,7 +111,7 @@ module Google
         #     `cards_v2` can have a maximum size of 32 KB.
         # @!attribute [rw] cards_v2
         #   @return [::Array<::Google::Apps::Chat::V1::CardWithId>]
-        #     An array of
+        #     Optional. An array of
         #     [cards](https://developers.google.com/workspace/chat/api/reference/rest/v1/cards).
         #
         #     Only Chat apps can create cards. If your Chat app [authenticates as a
@@ -130,17 +130,17 @@ module Google
         #     The thread the message belongs to. For example usage, see
         #     [Start or reply to a message
         #     thread](https://developers.google.com/workspace/chat/create-messages#create-message-thread).
-        # @!attribute [rw] space
+        # @!attribute [r] space
         #   @return [::Google::Apps::Chat::V1::Space]
-        #     If your Chat app [authenticates as a
+        #     Output only. If your Chat app [authenticates as a
         #     user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user),
-        #     the output populates the
+        #     the output only populates the
         #     [space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces)
         #     `name`.
         # @!attribute [rw] fallback_text
         #   @return [::String]
-        #     A plain-text description of the message's cards, used when the actual cards
-        #     can't be displayed—for example, mobile notifications.
+        #     Optional. A plain-text description of the message's cards, used when the
+        #     actual cards can't be displayed—for example, mobile notifications.
         # @!attribute [rw] action_response
         #   @return [::Google::Apps::Chat::V1::ActionResponse]
         #     Input only. Parameters that a Chat app can use to configure how its
@@ -154,7 +154,7 @@ module Google
         #     Output only. Slash command information, if applicable.
         # @!attribute [rw] attachment
         #   @return [::Array<::Google::Apps::Chat::V1::Attachment>]
-        #     User-uploaded attachment.
+        #     Optional. User-uploaded attachment.
         # @!attribute [r] matched_url
         #   @return [::Google::Apps::Chat::V1::MatchedUrl]
         #     Output only. A URL in `spaces.messages.text` that matches a link preview
@@ -181,10 +181,10 @@ module Google
         #     Output only. The list of emoji reaction summaries on the message.
         # @!attribute [rw] private_message_viewer
         #   @return [::Google::Apps::Chat::V1::User]
-        #     Immutable. Input for creating a message, otherwise output only. The user
-        #     that can view the message. When set, the message is private and only
-        #     visible to the specified user and the Chat app. To include this field in
-        #     your request, you must call the Chat API using [app
+        #     Optional. Immutable. Input for creating a message, otherwise output only.
+        #     The user that can view the message. When set, the message is private and
+        #     only visible to the specified user and the Chat app. To include this field
+        #     in your request, you must call the Chat API using [app
         #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
         #     and omit the following:
         #
@@ -207,10 +207,10 @@ module Google
         #     Output only. GIF images that are attached to the message.
         # @!attribute [rw] accessory_widgets
         #   @return [::Array<::Google::Apps::Chat::V1::AccessoryWidget>]
-        #     One or more interactive widgets that appear at the bottom of a message.
-        #     You can add accessory widgets to messages that contain text, cards, or both
-        #     text and cards. Not supported for messages that contain dialogs. For
-        #     details, see [Add interactive widgets at the bottom of a
+        #     Optional. One or more interactive widgets that appear at the bottom of a
+        #     message. You can add accessory widgets to messages that contain text,
+        #     cards, or both text and cards. Not supported for messages that contain
+        #     dialogs. For details, see [Add interactive widgets at the bottom of a
         #     message](https://developers.google.com/workspace/chat/create-messages#add-accessory-widgets).
         #
         #     Creating a message with accessory widgets requires [app
@@ -254,7 +254,7 @@ module Google
         # field to determine what happens if no matching thread is found.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name of the thread.
+        #     Identifier. Resource name of the thread.
         #
         #     Example: `spaces/{space}/threads/{thread}`
         # @!attribute [rw] thread_key
@@ -301,8 +301,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response of the updated widget.
-          # Used to provide autocomplete options for a widget.
+          # For `selectionInput` widgets, returns autocomplete suggestions for a
+          # multiselect menu.
           # @!attribute [rw] suggestions
           #   @return [::Google::Apps::Chat::V1::ActionResponse::SelectionItems]
           #     List of widget autocomplete results
@@ -384,8 +384,8 @@ module Google
         #     (https://developers.google.com/workspace/chat/create-messages#name_a_created_message).
         # @!attribute [rw] force
         #   @return [::Boolean]
-        #     When `true`, deleting a message also deletes its threaded replies. When
-        #     `false`, if a message has threaded replies, deletion fails.
+        #     Optional. When `true`, deleting a message also deletes its threaded
+        #     replies. When `false`, if a message has threaded replies, deletion fails.
         #
         #     Only applies when [authenticating as a
         #     user](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
@@ -458,6 +458,12 @@ module Google
         #   @return [::Google::Apps::Chat::V1::CreateMessageRequest::MessageReplyOption]
         #     Optional. Specifies whether a message starts a thread or replies to one.
         #     Only supported in named spaces.
+        #
+        #     When [responding to user
+        #     interactions](https://developers.google.com/workspace/chat/receive-respond-interactions),
+        #     this field is ignored. For interactions within a thread, the reply is
+        #     created in the same thread. Otherwise, the reply is created as a new
+        #     thread.
         # @!attribute [rw] message_id
         #   @return [::String]
         #     Optional. A custom ID for a message. Lets Chat apps get, update, or delete
@@ -510,8 +516,8 @@ module Google
         #     Format: `spaces/{space}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of messages returned. The service might return fewer
-        #     messages than this value.
+        #     Optional. The maximum number of messages returned. The service might return
+        #     fewer messages than this value.
         #
         #     If unspecified, at most 25 are returned.
         #
@@ -521,17 +527,15 @@ module Google
         #     Negative values return an `INVALID_ARGUMENT` error.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional, if resuming from a previous query.
-        #
-        #     A page token received from a previous list messages call. Provide this
-        #     parameter to retrieve the subsequent page.
+        #     Optional. A page token received from a previous list messages call. Provide
+        #     this parameter to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided should match the call that
         #     provided the page token. Passing different values to the other parameters
         #     might lead to unexpected results.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     A query filter.
+        #     Optional. A query filter.
         #
         #     You can filter messages by date (`create_time`) and thread (`thread.name`).
         #
@@ -570,10 +574,8 @@ module Google
         #     error.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional, if resuming from a previous query.
-        #
-        #     How the list of messages is ordered. Specify a value to order by an
-        #     ordering operation. Valid ordering operation values are as follows:
+        #     Optional. How the list of messages is ordered. Specify a value to order by
+        #     an ordering operation. Valid ordering operation values are as follows:
         #
         #     - `ASC` for ascending.
         #
@@ -582,8 +584,9 @@ module Google
         #     The default ordering is `create_time ASC`.
         # @!attribute [rw] show_deleted
         #   @return [::Boolean]
-        #     Whether to include deleted messages. Deleted messages include deleted time
-        #     and metadata about their deletion, but message content is unavailable.
+        #     Optional. Whether to include deleted messages. Deleted messages include
+        #     deleted time and metadata about their deletion, but message content is
+        #     unavailable.
         class ListMessagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

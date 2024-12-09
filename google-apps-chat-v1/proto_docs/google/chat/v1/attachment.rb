@@ -24,7 +24,7 @@ module Google
         # An attachment in Google Chat.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name of the attachment, in the form
+        #     Optional. Resource name of the attachment, in the form
         #     `spaces/{space}/messages/{message}/attachments/{attachment}`.
         # @!attribute [r] content_name
         #   @return [::String]
@@ -34,8 +34,9 @@ module Google
         #     Output only. The content type (MIME type) of the file.
         # @!attribute [rw] attachment_data_ref
         #   @return [::Google::Apps::Chat::V1::AttachmentDataRef]
-        #     A reference to the attachment data. This field is used with the media API
-        #     to download the attachment data.
+        #     Optional. A reference to the attachment data. This field is used to
+        #     create or update messages with attachments, or with the media API to
+        #     download the attachment data.
         # @!attribute [r] drive_data_ref
         #   @return [::Google::Apps::Chat::V1::DriveDataRef]
         #     Output only. A reference to the Google Drive attachment. This field is
@@ -82,13 +83,13 @@ module Google
         # A reference to the attachment data.
         # @!attribute [rw] resource_name
         #   @return [::String]
-        #     The resource name of the attachment data. This field is used with the media
-        #     API to download the attachment data.
+        #     Optional. The resource name of the attachment data. This field is used with
+        #     the media API to download the attachment data.
         # @!attribute [rw] attachment_upload_token
         #   @return [::String]
-        #     Opaque token containing a reference to an uploaded attachment. Treated by
-        #     clients as an opaque string and used to create or update Chat messages with
-        #     attachments.
+        #     Optional. Opaque token containing a reference to an uploaded attachment.
+        #     Treated by clients as an opaque string and used to create or update Chat
+        #     messages with attachments.
         class AttachmentDataRef
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

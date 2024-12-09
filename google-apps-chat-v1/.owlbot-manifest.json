@@ -49,6 +49,7 @@
     "proto_docs/README.md",
     "proto_docs/google/api/client.rb",
     "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/field_info.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/apps/card/v1/card.rb",

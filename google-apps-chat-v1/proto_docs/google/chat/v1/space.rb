@@ -25,7 +25,7 @@ module Google
         # or 1:1 messages between a user and a Chat app.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Resource name of the space.
+        #     Identifier. Resource name of the space.
         #
         #     Format: `spaces/{space}`
         #
@@ -42,8 +42,8 @@ module Google
         #     The type of a space.
         # @!attribute [rw] space_type
         #   @return [::Google::Apps::Chat::V1::Space::SpaceType]
-        #     The type of space. Required when creating a space or updating the space
-        #     type of a space. Output only for other usage.
+        #     Optional. The type of space. Required when creating a space or updating the
+        #     space type of a space. Output only for other usage.
         # @!attribute [rw] single_user_bot_dm
         #   @return [::Boolean]
         #     Optional. Whether the space is a DM between a Chat app and a single
@@ -55,7 +55,7 @@ module Google
         #     Whether messages are threaded in this space.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The space's display name. Required when [creating a
+        #     Optional. The space's display name. Required when [creating a
         #     space](https://developers.google.com/workspace/chat/api/reference/rest/v1/spaces/create)
         #     with a `spaceType` of `SPACE`. If you receive the error message
         #     `ALREADY_EXISTS` when creating a space or updating the `displayName`, try a
@@ -67,9 +67,9 @@ module Google
         #     Supports up to 128 characters.
         # @!attribute [rw] external_user_allowed
         #   @return [::Boolean]
-        #     Immutable. Whether this space permits any Google Chat user as a member.
-        #     Input when creating a space in a Google Workspace organization. Omit this
-        #     field when creating spaces in the following conditions:
+        #     Optional. Immutable. Whether this space permits any Google Chat user as a
+        #     member. Input when creating a space in a Google Workspace organization.
+        #     Omit this field when creating spaces in the following conditions:
         #
         #       * The authenticated user uses a consumer account (unmanaged user
         #         account). By default, a space created by a consumer account permits any
@@ -81,15 +81,18 @@ module Google
         #     Output only. The threading state in the Chat space.
         # @!attribute [rw] space_details
         #   @return [::Google::Apps::Chat::V1::Space::SpaceDetails]
-        #     Details about the space including description and rules.
+        #     Optional. Details about the space including description and rules.
         # @!attribute [rw] space_history_state
         #   @return [::Google::Apps::Chat::V1::HistoryState]
-        #     The message history state for messages and threads in this space.
+        #     Optional. The message history state for messages and threads in this space.
         # @!attribute [rw] import_mode
         #   @return [::Boolean]
         #     Optional. Whether this space is created in `Import Mode` as part of a data
         #     migration into Google Workspace. While spaces are being imported, they
         #     aren't visible to users until the import is complete.
+        #
+        #     Creating a space in `Import Mode`requires [user
+        #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Immutable. For spaces created in Chat, the time the space was
@@ -166,13 +169,13 @@ module Google
           end
 
           # Represents the count of memberships of a space, grouped into categories.
-          # @!attribute [rw] joined_direct_human_user_count
+          # @!attribute [r] joined_direct_human_user_count
           #   @return [::Integer]
-          #     Count of human users that have directly joined the space, not counting
-          #     users joined by having membership in a joined group.
-          # @!attribute [rw] joined_group_count
+          #     Output only. Count of human users that have directly joined the space,
+          #     not counting users joined by having membership in a joined group.
+          # @!attribute [r] joined_group_count
           #   @return [::Integer]
-          #     Count of all groups that have directly joined the space.
+          #     Output only. Count of all groups that have directly joined the space.
           class MembershipCount
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,8 +201,23 @@ module Google
           #     To use the default target audience for the Google Workspace organization,
           #     set to `audiences/default`.
           #
+          #     Reading the target audience supports:
+          #
+          #     - [User
+          #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user)
+          #
+          #     - [App
+          #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app)
+          #     with [administrator
+          #     approval](https://support.google.com/a?p=chat-app-auth)
+          #     with the `chat.app.spaces` scope in [Developer
+          #     Preview](https://developers.google.com/workspace/preview).
+          #
           #     This field is not populated when using the `chat.bot` scope with [app
           #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-app).
+          #
+          #     Setting the target audience requires [user
+          #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
           class AccessSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,6 +237,9 @@ module Google
               # invited to the space can also discover and access the space. To learn
               # more, see [Make a space discoverable to specific
               # users](https://developers.google.com/workspace/chat/space-target-audience).
+              #
+              # Creating discoverable spaces requires [user
+              # authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
               DISCOVERABLE = 2
             end
           end
@@ -230,28 +251,29 @@ module Google
           # `PredefinedPermissionSettings` field in your request.
           # @!attribute [rw] manage_members_and_groups
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for managing members and groups in a space.
+          #     Optional. Setting for managing members and groups in a space.
           # @!attribute [rw] modify_space_details
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for updating space name, avatar, description and guidelines.
+          #     Optional. Setting for updating space name, avatar, description and
+          #     guidelines.
           # @!attribute [rw] toggle_history
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for toggling space history on and off.
+          #     Optional. Setting for toggling space history on and off.
           # @!attribute [rw] use_at_mention_all
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for using @all in a space.
+          #     Optional. Setting for using @all in a space.
           # @!attribute [rw] manage_apps
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for managing apps in a space.
+          #     Optional. Setting for managing apps in a space.
           # @!attribute [rw] manage_webhooks
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for managing webhooks in a space.
+          #     Optional. Setting for managing webhooks in a space.
           # @!attribute [r] post_messages
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
           #     Output only. Setting for posting messages in a space.
           # @!attribute [rw] reply_messages
           #   @return [::Google::Apps::Chat::V1::Space::PermissionSetting]
-          #     Setting for replying to messages in a space.
+          #     Optional. Setting for replying to messages in a space.
           class PermissionSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -260,10 +282,10 @@ module Google
           # Represents a space permission setting.
           # @!attribute [rw] managers_allowed
           #   @return [::Boolean]
-          #     Whether spaces managers have this permission.
+          #     Optional. Whether spaces managers have this permission.
           # @!attribute [rw] members_allowed
           #   @return [::Boolean]
-          #     Whether non-manager members have this permission.
+          #     Optional. Whether non-manager members have this permission.
           class PermissionSetting
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,15 +363,13 @@ module Google
         # @!attribute [rw] space
         #   @return [::Google::Apps::Chat::V1::Space]
         #     Required. The `displayName` and `spaceType` fields must be populated.  Only
-        #     `SpaceType.SPACE` is supported.
+        #     `SpaceType.SPACE`  and `SpaceType.GROUP_CHAT` are supported.
+        #     `SpaceType.GROUP_CHAT` can only be used if `importMode` is set to true.
         #
         #     If you receive the error message `ALREADY_EXISTS`,
         #     try a different `displayName`. An existing space within the Google
         #     Workspace organization might already use this display name.
         #
-        #     If you're a member of the [Developer Preview
-        #     program](https://developers.google.com/workspace/preview),
-        #     `SpaceType.GROUP_CHAT` can be used if `importMode` is set to true.
         #
         #     The space `name` is assigned on the server so anything specified in this
         #     field will be ignored.
@@ -434,7 +454,7 @@ module Google
         #     Format: `spaces/{space}`
         # @!attribute [rw] use_admin_access
         #   @return [::Boolean]
-        #     When `true`, the method runs using the user's Google Workspace
+        #     Optional. When `true`, the method runs using the user's Google Workspace
         #     administrator privileges.
         #
         #     The calling user must be a Google Workspace administrator with the
@@ -540,7 +560,7 @@ module Google
         #     - `permission_settings.replyMessages`
         # @!attribute [rw] use_admin_access
         #   @return [::Boolean]
-        #     When `true`, the method runs using the user's Google Workspace
+        #     Optional. When `true`, the method runs using the user's Google Workspace
         #     administrator privileges.
         #
         #     The calling user must be a Google Workspace administrator with the
@@ -716,7 +736,7 @@ module Google
         #     Format: `spaces/{space}`
         # @!attribute [rw] use_admin_access
         #   @return [::Boolean]
-        #     When `true`, the method runs using the user's Google Workspace
+        #     Optional. When `true`, the method runs using the user's Google Workspace
         #     administrator privileges.
         #
         #     The calling user must be a Google Workspace administrator with the

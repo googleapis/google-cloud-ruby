@@ -24,7 +24,7 @@ module Google
         # A reaction to a message.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the reaction.
+        #     Identifier. The resource name of the reaction.
         #
         #     Format: `spaces/{space}/messages/{message}/reactions/{reaction}`
         # @!attribute [r] user
@@ -32,7 +32,7 @@ module Google
         #     Output only. The user who created the reaction.
         # @!attribute [rw] emoji
         #   @return [::Google::Apps::Chat::V1::Emoji]
-        #     The emoji used in the reaction.
+        #     Required. The emoji used in the reaction.
         class Reaction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -41,7 +41,7 @@ module Google
         # An emoji that is used as a reaction to a message.
         # @!attribute [rw] unicode
         #   @return [::String]
-        #     A basic emoji represented by a unicode string.
+        #     Optional. A basic emoji represented by a unicode string.
         # @!attribute [r] custom_emoji
         #   @return [::Google::Apps::Chat::V1::CustomEmoji]
         #     Output only. A custom emoji.
@@ -60,12 +60,12 @@ module Google
         end
 
         # The number of people who reacted to a message with a specific emoji.
-        # @!attribute [rw] emoji
+        # @!attribute [r] emoji
         #   @return [::Google::Apps::Chat::V1::Emoji]
-        #     Emoji associated with the reactions.
-        # @!attribute [rw] reaction_count
+        #     Output only. Emoji associated with the reactions.
+        # @!attribute [r] reaction_count
         #   @return [::Integer]
-        #     The total number of reactions using the associated emoji.
+        #     Output only. The total number of reactions using the associated emoji.
         class EmojiReactionSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
