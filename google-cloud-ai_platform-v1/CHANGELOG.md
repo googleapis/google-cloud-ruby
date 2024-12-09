@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.61.0 (2024-12-09)
+
+#### Features
+
+* Support for the NVIDIA_H100_MEGA_80GB accelerator type ([#27756](https://github.com/googleapis/google-cloud-ruby/issues/27756)) 
+
 ### 0.60.0 (2024-12-05)
 
 #### Features
