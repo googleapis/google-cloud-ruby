@@ -31,6 +31,10 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientPathsTest <
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_autoscaling_policy_path
