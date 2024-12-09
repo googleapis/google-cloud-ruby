@@ -29,11 +29,11 @@ require "google/cloud/gke_connect/gateway/v1beta1"
 # client as shown in https://cloud.google.com/ruby/docs/reference.
 #
 # This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client#generate_credentials.
+# Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Rest::Client#generate_credentials.
 #
 def generate_credentials
   # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client.new
+  client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Rest::Client.new
 
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::GkeConnect::Gateway::V1beta1::GenerateCredentialsRequest.new

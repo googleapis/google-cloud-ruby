@@ -26,11 +26,6 @@ module Google
         ##
         # API client module.
         #
-        # @example Load this package, including all its services, and instantiate a gRPC client
-        #
-        #     require "google/cloud/gke_connect/gateway/v1beta1"
-        #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayControl::Client.new
-        #
         # @example Load this package, including all its services, and instantiate a REST client
         #
         #     require "google/cloud/gke_connect/gateway/v1beta1"
