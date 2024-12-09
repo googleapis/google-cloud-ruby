@@ -461,7 +461,7 @@
   "google-cloud-memcache-v1beta2+FILLER": "0.0.0",
   "google-cloud-memorystore": "0.0.1",
   "google-cloud-memorystore+FILLER": "0.0.0",
-  "google-cloud-memorystore-v1": "0.0.1",
+  "google-cloud-memorystore-v1": "0.1.0",
   "google-cloud-memorystore-v1+FILLER": "0.0.0",
   "google-cloud-memorystore-v1beta": "0.0.1",
   "google-cloud-memorystore-v1beta+FILLER": "0.0.0",

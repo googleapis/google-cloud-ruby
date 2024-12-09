@@ -1,2 +1,9 @@
-# Release History
+# Changelog
 
+### 0.1.0 (2024-12-09)
+
+#### Features
+
+* Initial generation of google-cloud-memorystore-v1 ([#27754](https://github.com/googleapis/google-cloud-ruby/issues/27754)) 
+
+## Release History
