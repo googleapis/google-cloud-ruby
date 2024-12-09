@@ -8,7 +8,7 @@
     "name": "memorystore",
     "name_pretty": "Memorystore API",
     "product_documentation": "https://cloud.google.com/memorystore/docs/valkey",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-memorystore is the official client library for the Memorystore API.",
