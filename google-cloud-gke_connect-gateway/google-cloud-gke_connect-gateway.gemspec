@@ -23,5 +23,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.7"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-gke_connect-gateway-v1beta1", ">= 0.5", "< 2.a"
+  gem.add_dependency "google-cloud-gke_connect-gateway-v1", ">= 0.2", "< 2.a"
 end
