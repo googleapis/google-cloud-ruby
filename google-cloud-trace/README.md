@@ -1,4 +1,6 @@
+
 # google-cloud-trace
+### _This library is not currently actively maintained.  We recommend using [OpenTelemetry](https://opentelemetry.io/docs/languages/ruby/) for Cloud Trace instrumentation instead._
 
 [Stackdriver Trace](https://cloud.google.com/trace/) is a distributed tracing
 system that collects latency data from your applications and displays it in the
