@@ -101,10 +101,11 @@ module Google
           #     is currently no way to get back the auto assigned google product
           #     categories through the API.
           # @!attribute [rw] gtin
-          #   @return [::String]
-          #     Global Trade Item Number
+          #   @return [::Array<::String>]
+          #     Global Trade Item Numbers
           #     ([GTIN](https://support.google.com/merchants/answer/188494#gtin)) of the
           #     item.
+          #     You can provide up to 10 GTINs.
           # @!attribute [rw] item_group_id
           #   @return [::String]
           #     Shared identifier for all variants of the same product.
@@ -220,8 +221,7 @@ module Google
           #     Tax information.
           # @!attribute [rw] tax_category
           #   @return [::String]
-          #     The tax category of the product, used to configure detailed tax nexus
-          #     in account-level tax settings.
+          #     The tax category of the product.
           # @!attribute [rw] energy_efficiency_class
           #   @return [::String]
           #     The energy efficiency class as defined in EU directive 2010/30/EU.
@@ -531,6 +531,17 @@ module Google
           # @!attribute [rw] loyalty_points
           #   @return [::Integer]
           #     The amount of loyalty points earned on a purchase.
+          # @!attribute [rw] member_price_effective_date
+          #   @return [::Google::Type::Interval]
+          #     A date range during which the item is eligible for member price. If not
+          #     specified, the member price is always applicable. The date range is
+          #     represented by a pair of ISO 8601 dates separated by a space,
+          #     comma, or slash.
+          # @!attribute [rw] shipping_label
+          #   @return [::String]
+          #     The label of the shipping benefit. If the field has value, this offer has
+          #     loyalty shipping benefit. If the field value isn't provided, the item is
+          #     not eligible for loyalty shipping for the given loyalty tier.
           class LoyaltyProgram
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -572,48 +583,48 @@ module Google
           #     Minimum handling time (inclusive) between when the order is received and
           #     shipped in business days. 0 means that the order is shipped on the same
           #     day as it is received if it happens before the cut-off time.
-          #     [minHandlingTime][google.shopping.content.bundles.Products.Shipping.min_handling_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#min_handling_time minHandlingTime}
           #     can only be present together with
-          #     [maxHandlingTime][google.shopping.content.bundles.Products.Shipping.max_handling_time];
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_handling_time maxHandlingTime};
           #     but it is not required if
-          #     [maxHandlingTime][google.shopping.content.bundles.Products.Shipping.max_handling_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_handling_time maxHandlingTime}
           #     is present.
           # @!attribute [rw] max_handling_time
           #   @return [::Integer]
           #     Maximum handling time (inclusive) between when the order is received and
           #     shipped in business days. 0 means that the order is shipped on the same
           #     day as it is received if it happens before the cut-off time. Both
-          #     [maxHandlingTime][google.shopping.content.bundles.Products.Shipping.max_handling_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_handling_time maxHandlingTime}
           #     and
-          #     [maxTransitTime][google.shopping.content.bundles.Products.Shipping.max_transit_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_transit_time maxTransitTime}
           #     are required if providing shipping speeds.
-          #     [minHandlingTime][google.shopping.content.bundles.Products.Shipping.min_handling_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#min_handling_time minHandlingTime}
           #     is optional if
-          #     [maxHandlingTime][google.shopping.content.bundles.Products.Shipping.max_handling_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_handling_time maxHandlingTime}
           #     is present.
           # @!attribute [rw] min_transit_time
           #   @return [::Integer]
           #     Minimum transit time (inclusive) between when the order has shipped and
           #     when it is delivered in business days. 0 means that the order is
           #     delivered on the same day as it ships.
-          #     [minTransitTime][google.shopping.content.bundles.Products.Shipping.min_transit_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#min_transit_time minTransitTime}
           #     can only be present together with
-          #     [maxTransitTime][google.shopping.content.bundles.Products.Shipping.max_transit_time];
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_transit_time maxTransitTime};
           #     but it is not required if
-          #     [maxTransitTime][google.shopping.content.bundles.Products.Shipping.max_transit_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_transit_time maxTransitTime}
           #     is present.
           # @!attribute [rw] max_transit_time
           #   @return [::Integer]
           #     Maximum transit time (inclusive) between when the order has shipped and
           #     when it is delivered in business days. 0 means that the order is
           #     delivered on the same day as it ships. Both
-          #     [maxHandlingTime][google.shopping.content.bundles.Products.Shipping.max_handling_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_handling_time maxHandlingTime}
           #     and
-          #     [maxTransitTime][google.shopping.content.bundles.Products.Shipping.max_transit_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_transit_time maxTransitTime}
           #     are required if providing shipping speeds.
-          #     [minTransitTime][google.shopping.content.bundles.Products.Shipping.min_transit_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#min_transit_time minTransitTime}
           #     is optional if
-          #     [maxTransitTime][google.shopping.content.bundles.Products.Shipping.max_transit_time]
+          #     {::Google::Shopping::Merchant::Products::V1beta::Shipping#max_transit_time maxTransitTime}
           #     is present.
           class Shipping
             include ::Google::Protobuf::MessageExts

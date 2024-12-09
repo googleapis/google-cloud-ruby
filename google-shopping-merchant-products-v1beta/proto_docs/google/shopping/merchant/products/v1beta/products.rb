@@ -23,10 +23,10 @@ module Google
       module Products
         module V1beta
           # The processed product, built from multiple [product
-          # inputs][[google.shopping.content.bundles.Products.ProductInput] after
-          # applying rules and supplemental data sources. This processed product matches
-          # what is shown in your Merchant Center account and in Shopping ads and other
-          # surfaces across Google. Each product is built from exactly one primary
+          # inputs][google.shopping.merchant.products.v1main.ProductInput]
+          # after applying rules and supplemental data sources. This processed product
+          # matches what is shown in your Merchant Center account and in Shopping ads and
+          # other surfaces across Google. Each product is built from exactly one primary
           # data source product input, and multiple supplemental data source inputs.
           # After inserting, updating, or deleting a product input, it may take
           # several minutes before the updated processed product can be retrieved.
@@ -39,7 +39,10 @@ module Google
           #   @return [::String]
           #     The name of the product.
           #     Format:
-          #     `"{product.name=accounts/{account}/products/{product}}"`
+          #     `"{product.name=accounts/{account}/products/{product}}"` where the last
+          #     section `product` consists of 4 parts:
+          #     channel~content_language~feed_label~offer_id
+          #     example for product name is "accounts/123/products/online~en~US~sku123"
           # @!attribute [r] channel
           #   @return [::Google::Shopping::Type::Channel::ChannelEnum]
           #     Output only. The
@@ -104,6 +107,10 @@ module Google
           #   @return [::String]
           #     Required. The name of the product to retrieve.
           #     Format: `accounts/{account}/products/{product}`
+          #     where the last section `product` consists of 4 parts:
+          #     channel~content_language~feed_label~offer_id
+          #     example for product name is
+          #     "accounts/123/products/online~en~US~sku123"
           class GetProductRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,7 +125,7 @@ module Google
           #   @return [::Integer]
           #     The maximum number of products to return. The service may return fewer than
           #     this value.
-          #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+          #     The maximum value is 250; values above 250 will be coerced to 250.
           #     If unspecified, the maximum number of products will be returned.
           # @!attribute [rw] page_token
           #   @return [::String]

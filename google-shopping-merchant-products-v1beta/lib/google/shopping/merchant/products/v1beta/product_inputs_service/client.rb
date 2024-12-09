@@ -293,6 +293,10 @@ module Google
               #   @param name [::String]
               #     Required. The name of the product input resource to delete.
               #     Format: accounts/\\{account}/productInputs/\\{product}
+              #     where the last section `product` consists of 4 parts:
+              #     channel~content_language~feed_label~offer_id
+              #     example for product name is
+              #     "accounts/123/productInputs/online~en~US~sku123"
               #   @param data_source [::String]
               #     Required. The primary or supplemental data source from which the product
               #     input should be deleted. Format:

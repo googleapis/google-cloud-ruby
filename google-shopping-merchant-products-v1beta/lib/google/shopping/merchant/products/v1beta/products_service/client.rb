@@ -194,6 +194,10 @@ module Google
               #   @param name [::String]
               #     Required. The name of the product to retrieve.
               #     Format: `accounts/{account}/products/{product}`
+              #     where the last section `product` consists of 4 parts:
+              #     channel~content_language~feed_label~offer_id
+              #     example for product name is
+              #     "accounts/123/products/online~en~US~sku123"
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Shopping::Merchant::Products::V1beta::Product]
@@ -289,7 +293,7 @@ module Google
               #   @param page_size [::Integer]
               #     The maximum number of products to return. The service may return fewer than
               #     this value.
-              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #     The maximum value is 250; values above 250 will be coerced to 250.
               #     If unspecified, the maximum number of products will be returned.
               #   @param page_token [::String]
               #     A page token, received from a previous `ListProducts` call.
