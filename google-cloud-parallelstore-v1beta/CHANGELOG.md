@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2024-12-09)
+
+#### Features
+
+* Support for Instance deployment type ([#27726](https://github.com/googleapis/google-cloud-ruby/issues/27726)) 
+
 ### 0.4.0 (2024-10-07)
 
 #### Features
