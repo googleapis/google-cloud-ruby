@@ -30,7 +30,8 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Who deleted the message and how it was deleted.
+          # Who deleted the message and how it was deleted. More values may be added in
+          # the future.
           module DeletionType
             # This value is unused.
             DELETION_TYPE_UNSPECIFIED = 0
