@@ -31,6 +31,10 @@ class ::Google::Apps::Meet::V2::ConferenceRecordsService::ClientPathsTest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_conference_record_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::AIPlatform::V1::SpecialistPoolService::ClientPathsTest < 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_location_path

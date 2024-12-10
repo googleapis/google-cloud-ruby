@@ -33,24 +33,24 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_featurestore
@@ -82,7 +86,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     featurestore = {}
     featurestore_id = "hello world"
 
-    create_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     order_by = "hello world"
     read_mask = {}
 
-    list_featurestores_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_featurestores_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     featurestore = {}
     update_mask = {}
 
-    update_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -305,7 +309,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     name = "hello world"
     force = true
 
-    delete_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_featurestore_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -361,7 +365,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     entity_type = {}
     entity_type_id = "hello world"
 
-    create_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -415,7 +419,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -474,7 +478,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     order_by = "hello world"
     read_mask = {}
 
-    list_entity_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_entity_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -529,7 +533,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     entity_type = {}
     update_mask = {}
 
-    update_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -584,7 +588,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     name = "hello world"
     force = true
 
-    delete_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_entity_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -640,7 +644,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     feature = {}
     feature_id = "hello world"
 
-    create_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -695,7 +699,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     parent = "hello world"
     requests = [{}]
 
-    batch_create_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_create_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -749,7 +753,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -809,7 +813,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     read_mask = {}
     latest_stats_count = 42
 
-    list_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -864,7 +868,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     feature = {}
     update_mask = {}
 
-    update_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -918,7 +922,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_feature_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -979,7 +983,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     worker_count = 42
     disable_ingestion_analysis = true
 
-    import_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1038,7 +1042,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     entity_type_specs = [{}]
     start_time = {}
 
-    batch_read_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_read_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1096,7 +1100,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     feature_selector = {}
     settings = [{}]
 
-    export_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1151,7 +1155,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     select_entity = {}
     entity_type = "hello world"
 
-    delete_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_feature_values_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1208,7 +1212,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Rest::ClientTest < M
     page_size = 42
     page_token = "hello world"
 
-    search_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

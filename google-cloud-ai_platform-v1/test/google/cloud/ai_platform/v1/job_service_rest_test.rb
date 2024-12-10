@@ -33,24 +33,24 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_custom_job
@@ -81,7 +85,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     parent = "hello world"
     custom_job = {}
 
-    create_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -135,7 +139,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     page_token = "hello world"
     read_mask = {}
 
-    list_custom_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_custom_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_custom_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -356,7 +360,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     parent = "hello world"
     data_labeling_job = {}
 
-    create_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -410,7 +414,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -469,7 +473,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     read_mask = {}
     order_by = "hello world"
 
-    list_data_labeling_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_data_labeling_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -523,7 +527,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -577,7 +581,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_data_labeling_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -632,7 +636,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     parent = "hello world"
     hyperparameter_tuning_job = {}
 
-    create_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -686,7 +690,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -744,7 +748,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     page_token = "hello world"
     read_mask = {}
 
-    list_hyperparameter_tuning_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_hyperparameter_tuning_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -798,7 +802,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -852,7 +856,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_hyperparameter_tuning_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -907,7 +911,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     parent = "hello world"
     nas_job = {}
 
-    create_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -961,7 +965,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1019,7 +1023,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     page_token = "hello world"
     read_mask = {}
 
-    list_nas_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_nas_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1073,7 +1077,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1127,7 +1131,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_nas_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1181,7 +1185,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_nas_trial_detail_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_nas_trial_detail_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1237,7 +1241,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     page_size = 42
     page_token = "hello world"
 
-    list_nas_trial_details_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_nas_trial_details_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1292,7 +1296,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     parent = "hello world"
     batch_prediction_job = {}
 
-    create_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1346,7 +1350,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1404,7 +1408,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     page_token = "hello world"
     read_mask = {}
 
-    list_batch_prediction_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_batch_prediction_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1458,7 +1462,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1512,7 +1516,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_batch_prediction_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1567,7 +1571,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     parent = "hello world"
     model_deployment_monitoring_job = {}
 
-    create_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1628,7 +1632,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     start_time = {}
     end_time = {}
 
-    search_model_deployment_monitoring_stats_anomalies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_model_deployment_monitoring_stats_anomalies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1682,7 +1686,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1740,7 +1744,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     page_token = "hello world"
     read_mask = {}
 
-    list_model_deployment_monitoring_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_model_deployment_monitoring_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1795,7 +1799,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     model_deployment_monitoring_job = {}
     update_mask = {}
 
-    update_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1849,7 +1853,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1903,7 +1907,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    pause_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    pause_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1957,7 +1961,7 @@ class ::Google::Cloud::AIPlatform::V1::JobService::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    resume_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    resume_model_deployment_monitoring_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

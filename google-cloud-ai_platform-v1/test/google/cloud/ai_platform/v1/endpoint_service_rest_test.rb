@@ -33,24 +33,24 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_endpoint
@@ -82,7 +86,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     endpoint = {}
     endpoint_id = "hello world"
 
-    create_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     read_mask = {}
     order_by = "hello world"
 
-    list_endpoints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_endpoints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     endpoint = {}
     update_mask = {}
 
-    update_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -304,7 +308,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     # Create request parameters for a unary method.
     endpoint = {}
 
-    update_endpoint_long_running_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_endpoint_long_running_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -358,7 +362,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_endpoint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -414,7 +418,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     deployed_model = {}
     traffic_split = {}
 
-    deploy_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    deploy_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -470,7 +474,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     deployed_model_id = "hello world"
     traffic_split = {}
 
-    undeploy_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undeploy_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -526,7 +530,7 @@ class ::Google::Cloud::AIPlatform::V1::EndpointService::Rest::ClientTest < Minit
     deployed_model = {}
     update_mask = {}
 
-    mutate_deployed_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    mutate_deployed_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

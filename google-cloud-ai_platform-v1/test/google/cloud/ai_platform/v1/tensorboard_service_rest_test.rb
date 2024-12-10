@@ -33,24 +33,24 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_tensorboard
@@ -81,7 +85,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     parent = "hello world"
     tensorboard = {}
 
-    create_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -135,7 +139,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -190,7 +194,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     update_mask = {}
     tensorboard = {}
 
-    update_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -249,7 +253,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     order_by = "hello world"
     read_mask = {}
 
-    list_tensorboards_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_tensorboards_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -303,7 +307,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_tensorboard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     tensorboard = "hello world"
 
-    read_tensorboard_usage_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    read_tensorboard_usage_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     tensorboard = "hello world"
 
-    read_tensorboard_size_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    read_tensorboard_size_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -467,7 +471,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     tensorboard_experiment = {}
     tensorboard_experiment_id = "hello world"
 
-    create_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -521,7 +525,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -576,7 +580,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     update_mask = {}
     tensorboard_experiment = {}
 
-    update_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -635,7 +639,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     order_by = "hello world"
     read_mask = {}
 
-    list_tensorboard_experiments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_tensorboard_experiments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -689,7 +693,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_tensorboard_experiment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -745,7 +749,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     tensorboard_run = {}
     tensorboard_run_id = "hello world"
 
-    create_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -800,7 +804,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     parent = "hello world"
     requests = [{}]
 
-    batch_create_tensorboard_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_create_tensorboard_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -854,7 +858,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -909,7 +913,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     update_mask = {}
     tensorboard_run = {}
 
-    update_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -968,7 +972,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     order_by = "hello world"
     read_mask = {}
 
-    list_tensorboard_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_tensorboard_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1022,7 +1026,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_tensorboard_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1077,7 +1081,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     parent = "hello world"
     requests = [{}]
 
-    batch_create_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_create_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1133,7 +1137,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     tensorboard_time_series_id = "hello world"
     tensorboard_time_series = {}
 
-    create_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1187,7 +1191,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1242,7 +1246,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     update_mask = {}
     tensorboard_time_series = {}
 
-    update_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1301,7 +1305,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     order_by = "hello world"
     read_mask = {}
 
-    list_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1355,7 +1359,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_tensorboard_time_series_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1410,7 +1414,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     tensorboard = "hello world"
     time_series = ["hello world"]
 
-    batch_read_tensorboard_time_series_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_read_tensorboard_time_series_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1466,7 +1470,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     max_data_points = 42
     filter = "hello world"
 
-    read_tensorboard_time_series_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    read_tensorboard_time_series_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1521,7 +1525,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     time_series = "hello world"
     blob_ids = ["hello world"]
 
-    read_tensorboard_blob_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:|
+    read_tensorboard_blob_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1576,7 +1580,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     tensorboard_experiment = "hello world"
     write_run_data_requests = [{}]
 
-    write_tensorboard_experiment_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    write_tensorboard_experiment_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1631,7 +1635,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     tensorboard_run = "hello world"
     time_series_data = [{}]
 
-    write_tensorboard_run_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    write_tensorboard_run_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1689,7 +1693,7 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     page_token = "hello world"
     order_by = "hello world"
 
-    export_tensorboard_time_series_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_tensorboard_time_series_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

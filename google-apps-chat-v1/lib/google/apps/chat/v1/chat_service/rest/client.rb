@@ -296,8 +296,28 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @chat_service_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
+              end
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @chat_service_stub.logger
               end
 
               # Service calls
@@ -448,7 +468,6 @@ module Google
 
                 @chat_service_stub.create_message request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -611,7 +630,7 @@ module Google
                 @chat_service_stub.list_messages request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_messages, "messages", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -804,7 +823,7 @@ module Google
                 @chat_service_stub.list_memberships request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_memberships, "memberships", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -919,7 +938,6 @@ module Google
 
                 @chat_service_stub.get_membership request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1018,7 +1036,6 @@ module Google
 
                 @chat_service_stub.get_message request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1137,7 +1154,6 @@ module Google
 
                 @chat_service_stub.update_message request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1245,7 +1261,6 @@ module Google
 
                 @chat_service_stub.delete_message request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1332,7 +1347,6 @@ module Google
 
                 @chat_service_stub.get_attachment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1423,7 +1437,6 @@ module Google
 
                 @chat_service_stub.upload_attachment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1557,7 +1570,7 @@ module Google
                 @chat_service_stub.list_spaces request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_spaces, "spaces", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1768,7 +1781,7 @@ module Google
                 @chat_service_stub.search_spaces request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :search_spaces, "spaces", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1872,7 +1885,6 @@ module Google
 
                 @chat_service_stub.get_space request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1988,7 +2000,6 @@ module Google
 
                 @chat_service_stub.create_space request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2177,7 +2188,6 @@ module Google
 
                 @chat_service_stub.set_up_space request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2352,7 +2362,6 @@ module Google
 
                 @chat_service_stub.update_space request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2460,7 +2469,6 @@ module Google
 
                 @chat_service_stub.delete_space request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2549,7 +2557,6 @@ module Google
 
                 @chat_service_stub.complete_import_space request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2662,7 +2669,6 @@ module Google
 
                 @chat_service_stub.find_direct_message request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2825,7 +2831,6 @@ module Google
 
                 @chat_service_stub.create_membership request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2936,7 +2941,6 @@ module Google
 
                 @chat_service_stub.update_membership request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3055,7 +3059,6 @@ module Google
 
                 @chat_service_stub.delete_membership request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3144,7 +3147,6 @@ module Google
 
                 @chat_service_stub.create_reaction request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3292,7 +3294,7 @@ module Google
                 @chat_service_stub.list_reactions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_reactions, "reactions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3379,7 +3381,6 @@ module Google
 
                 @chat_service_stub.delete_reaction request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3478,7 +3479,6 @@ module Google
 
                 @chat_service_stub.get_space_read_state request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3590,7 +3590,6 @@ module Google
 
                 @chat_service_stub.update_space_read_state request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3690,7 +3689,6 @@ module Google
 
                 @chat_service_stub.get_thread_read_state request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3787,7 +3785,6 @@ module Google
 
                 @chat_service_stub.get_space_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3953,7 +3950,7 @@ module Google
                 @chat_service_stub.list_space_events request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @chat_service_stub, :list_space_events, "space_events", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4033,6 +4030,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -4054,6 +4056,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

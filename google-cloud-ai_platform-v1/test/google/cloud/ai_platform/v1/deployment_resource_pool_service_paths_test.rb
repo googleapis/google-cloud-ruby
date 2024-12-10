@@ -31,6 +31,10 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::ClientPath
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_deployment_resource_pool_path
