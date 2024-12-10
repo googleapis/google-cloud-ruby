@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
 ### 0.5.1 (2024-08-30)
 
 #### Documentation
