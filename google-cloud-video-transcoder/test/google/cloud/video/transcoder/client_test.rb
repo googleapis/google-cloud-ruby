@@ -31,6 +31,10 @@ class Google::Cloud::Video::Transcoder::ClientConstructionMinitest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_transcoder_service_grpc
