@@ -31,6 +31,10 @@ class ::Google::Cloud::Tasks::V2beta3::CloudTasks::ClientPathsTest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_location_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_blueprint_path

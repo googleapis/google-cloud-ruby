@@ -31,6 +31,10 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeech::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_model_path

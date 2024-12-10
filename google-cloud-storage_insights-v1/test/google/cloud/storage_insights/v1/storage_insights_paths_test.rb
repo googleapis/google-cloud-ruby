@@ -31,6 +31,10 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_location_path

@@ -33,24 +33,24 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_orchestration_clusters
@@ -84,7 +88,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     filter = "hello world"
     order_by = "hello world"
 
-    list_orchestration_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_orchestration_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_orchestration_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_orchestration_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     orchestration_cluster = {}
     request_id = "hello world"
 
-    create_orchestration_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_orchestration_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     name = "hello world"
     request_id = "hello world"
 
-    delete_orchestration_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_orchestration_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -308,7 +312,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     filter = "hello world"
     order_by = "hello world"
 
-    list_edge_slms_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_edge_slms_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -362,7 +366,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_edge_slm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_edge_slm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -419,7 +423,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     edge_slm = {}
     request_id = "hello world"
 
-    create_edge_slm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_edge_slm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -474,7 +478,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     name = "hello world"
     request_id = "hello world"
 
-    delete_edge_slm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_edge_slm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -530,7 +534,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     blueprint_id = "hello world"
     blueprint = {}
 
-    create_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -585,7 +589,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     blueprint = {}
     update_mask = {}
 
-    update_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -640,7 +644,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     name = "hello world"
     view = :BLUEPRINT_VIEW_UNSPECIFIED
 
-    get_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -694,7 +698,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -751,7 +755,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_blueprints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_blueprints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -805,7 +809,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    approve_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    approve_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -859,7 +863,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    propose_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    propose_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -913,7 +917,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    reject_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reject_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -969,7 +973,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_blueprint_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_blueprint_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1026,7 +1030,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    search_blueprint_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_blueprint_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1083,7 +1087,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    search_deployment_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_deployment_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1137,7 +1141,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    discard_blueprint_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    discard_blueprint_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1193,7 +1197,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_public_blueprints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_public_blueprints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1247,7 +1251,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_public_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_public_blueprint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1303,7 +1307,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     deployment_id = "hello world"
     deployment = {}
 
-    create_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1358,7 +1362,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     deployment = {}
     update_mask = {}
 
-    update_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1413,7 +1417,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     name = "hello world"
     view = :DEPLOYMENT_VIEW_UNSPECIFIED
 
-    get_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1467,7 +1471,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    remove_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    remove_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1524,7 +1528,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1580,7 +1584,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_deployment_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_deployment_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1634,7 +1638,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    discard_deployment_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    discard_deployment_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1688,7 +1692,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    apply_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    apply_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1742,7 +1746,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    compute_deployment_status_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    compute_deployment_status_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1797,7 +1801,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     name = "hello world"
     revision_id = "hello world"
 
-    rollback_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    rollback_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1851,7 +1855,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_hydrated_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_hydrated_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1907,7 +1911,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_hydrated_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_hydrated_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1962,7 +1966,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     hydrated_deployment = {}
     update_mask = {}
 
-    update_hydrated_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_hydrated_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2016,7 +2020,7 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    apply_hydrated_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    apply_hydrated_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
