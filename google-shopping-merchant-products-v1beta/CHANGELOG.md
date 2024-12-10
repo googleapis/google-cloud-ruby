@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.2.0 (2024-12-10)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed the gtin attribute type to properly reflect that it can include multiple GTINs
+
+#### Features
+
+* Provide opt-in debug logging 
+* Support the member_price_effective_date and shipping_label fields on LoyaltyProgram 
+#### Bug Fixes
+
+* Fixed the gtin attribute type to properly reflect that it can include multiple GTINs 
+#### Documentation
+
+* Some clarifications and cross-reference links in the reference documentation 
+
 ### 0.1.2 (2024-08-30)
 
 #### Documentation
