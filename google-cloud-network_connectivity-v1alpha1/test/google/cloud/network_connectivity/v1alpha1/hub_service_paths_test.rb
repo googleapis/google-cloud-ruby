@@ -31,6 +31,10 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientPathsTes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_hub_path

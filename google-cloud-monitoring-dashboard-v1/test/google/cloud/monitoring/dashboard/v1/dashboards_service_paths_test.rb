@@ -31,6 +31,10 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientPaths
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_alert_policy_path

@@ -33,24 +33,24 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_services
@@ -84,7 +88,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     filter = "hello world"
     order_by = "hello world"
 
-    list_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     service = {}
     request_id = "hello world"
 
-    create_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -251,7 +255,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     service = {}
     request_id = "hello world"
 
-    update_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -306,7 +310,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     name = "hello world"
     request_id = "hello world"
 
-    delete_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -364,7 +368,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     filter = "hello world"
     order_by = "hello world"
 
-    list_metadata_imports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_metadata_imports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -418,7 +422,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_metadata_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_metadata_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     metadata_import = {}
     request_id = "hello world"
 
-    create_metadata_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_metadata_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -531,7 +535,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     metadata_import = {}
     request_id = "hello world"
 
-    update_metadata_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_metadata_import_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     request_id = "hello world"
     database_dump_type = :TYPE_UNSPECIFIED
 
-    export_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -645,7 +649,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     restore_type = :RESTORE_TYPE_UNSPECIFIED
     request_id = "hello world"
 
-    restore_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    restore_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -703,7 +707,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     filter = "hello world"
     order_by = "hello world"
 
-    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -757,7 +761,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -814,7 +818,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     backup = {}
     request_id = "hello world"
 
-    create_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -869,7 +873,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     name = "hello world"
     request_id = "hello world"
 
-    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -924,7 +928,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     resource = "hello world"
     asynchronous = true
 
-    remove_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    remove_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -979,7 +983,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     service = "hello world"
     query = "hello world"
 
-    query_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    query_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1036,7 +1040,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     db_name = "hello world"
     destination_db_name = "hello world"
 
-    move_table_to_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    move_table_to_database_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1092,7 +1096,7 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::ClientTest < 
     resource_name = "hello world"
     location_uri = "hello world"
 
-    alter_metadata_resource_location_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    alter_metadata_resource_location_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

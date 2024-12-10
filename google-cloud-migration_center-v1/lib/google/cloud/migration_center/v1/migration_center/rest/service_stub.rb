@@ -30,7 +30,8 @@ module Google
             # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
-              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
+              # @private
+              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
                 # These require statements are intentionally placed here to initialize
                 # the REST modules only when it's required.
                 require "gapic/rest"
@@ -40,7 +41,9 @@ module Google
                                                              universe_domain: universe_domain,
                                                              credentials: credentials,
                                                              numeric_enums: true,
-                                                             raise_faraday_errors: false
+                                                             service_name: self.class,
+                                                             raise_faraday_errors: false,
+                                                             logger: logger
               end
 
               ##
@@ -59,6 +62,15 @@ module Google
               #
               def endpoint
                 @client_stub.endpoint
+              end
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger stub: false
+                stub ? @client_stub.stub_logger : @client_stub.logger
               end
 
               ##
@@ -87,16 +99,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_assets",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListAssetsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -125,16 +139,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_asset",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::Asset.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -163,16 +179,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_asset",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::Asset.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -201,16 +219,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_update_assets",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::BatchUpdateAssetsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -239,16 +259,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_asset",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -277,16 +299,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_delete_assets",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -315,16 +339,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "report_asset_frames",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ReportAssetFramesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -353,16 +379,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "aggregate_assets_values",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::AggregateAssetsValuesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -391,16 +419,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_import_job",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -429,16 +459,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_import_jobs",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListImportJobsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -467,16 +499,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_import_job",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ImportJob.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -505,16 +539,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_import_job",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -543,16 +579,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_import_job",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -581,16 +619,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "validate_import_job",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -619,16 +659,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "run_import_job",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -657,16 +699,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_import_data_file",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ImportDataFile.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -695,16 +739,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_import_data_files",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListImportDataFilesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -733,16 +779,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_import_data_file",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -771,16 +819,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_import_data_file",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -809,16 +859,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_groups",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListGroupsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -847,16 +899,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_group",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::Group.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -885,16 +939,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_group",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -923,16 +979,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_group",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -961,16 +1019,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_group",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -999,16 +1059,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "add_assets_to_group",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1037,16 +1099,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "remove_assets_from_group",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1075,16 +1139,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_error_frames",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListErrorFramesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1113,16 +1179,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_error_frame",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ErrorFrame.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1151,16 +1219,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_sources",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListSourcesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1189,16 +1259,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_source",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::Source.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1227,16 +1299,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_source",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1265,16 +1339,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_source",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1303,16 +1379,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_source",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1341,16 +1419,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_preference_sets",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListPreferenceSetsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1379,16 +1459,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_preference_set",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::PreferenceSet.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1417,16 +1499,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_preference_set",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1455,16 +1539,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_preference_set",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1493,16 +1579,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_preference_set",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1531,16 +1619,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_settings",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::Settings.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1569,16 +1659,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_settings",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1607,16 +1699,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_report_config",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1645,16 +1739,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_report_config",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ReportConfig.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1683,16 +1779,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_report_configs",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListReportConfigsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1721,16 +1819,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_report_config",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1759,16 +1859,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_report",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1797,16 +1899,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_report",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::Report.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1835,16 +1939,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_reports",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::MigrationCenter::V1::ListReportsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1873,16 +1979,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_report",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
