@@ -41,9 +41,10 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
       @requests << @block&.call(*args, **kwargs)
 
-      yield @response, @operation if block_given?
-
-      @response
+      catch :response do
+        yield @response, @operation if block_given?
+        @response
+      end
     end
 
     def endpoint
@@ -52,6 +53,10 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 

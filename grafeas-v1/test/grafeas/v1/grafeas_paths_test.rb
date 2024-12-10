@@ -31,6 +31,10 @@ class ::Grafeas::V1::Grafeas::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_note_path

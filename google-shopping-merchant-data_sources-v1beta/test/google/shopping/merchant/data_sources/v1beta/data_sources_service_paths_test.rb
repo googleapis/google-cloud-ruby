@@ -31,6 +31,10 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_account_path

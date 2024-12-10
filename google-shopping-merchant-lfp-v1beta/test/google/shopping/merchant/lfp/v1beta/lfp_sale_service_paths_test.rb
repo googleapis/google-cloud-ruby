@@ -31,6 +31,10 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpSaleService::ClientPathsTest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_lfp_sale_path
