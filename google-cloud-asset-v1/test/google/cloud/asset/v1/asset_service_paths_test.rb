@@ -31,6 +31,10 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_feed_path

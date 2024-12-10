@@ -33,24 +33,24 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_management_servers
@@ -84,7 +88,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    list_management_servers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_management_servers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_management_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_management_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     management_server = {}
     request_id = "hello world"
 
-    create_management_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_management_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     name = "hello world"
     request_id = "hello world"
 
-    delete_management_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_management_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -308,7 +312,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     request_id = "hello world"
     validate_only = true
 
-    create_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -367,7 +371,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     view = :BACKUP_VAULT_VIEW_UNSPECIFIED
 
-    list_backup_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backup_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -425,7 +429,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    fetch_usable_backup_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_usable_backup_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -480,7 +484,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     name = "hello world"
     view = :BACKUP_VAULT_VIEW_UNSPECIFIED
 
-    get_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -538,7 +542,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     validate_only = true
     force = true
 
-    update_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -597,7 +601,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     validate_only = true
     allow_missing = true
 
-    delete_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -655,7 +659,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    list_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -709,7 +713,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_data_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_data_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -766,7 +770,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     request_id = "hello world"
     allow_missing = true
 
-    update_data_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_data_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -825,7 +829,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     view = :BACKUP_VIEW_UNSPECIFIED
 
-    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -880,7 +884,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     name = "hello world"
     view = :BACKUP_VIEW_UNSPECIFIED
 
-    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -936,7 +940,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     backup = {}
     request_id = "hello world"
 
-    update_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -991,7 +995,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     name = "hello world"
     request_id = "hello world"
 
-    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1048,7 +1052,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     compute_instance_target_environment = {}
     compute_instance_restore_properties = {}
 
-    restore_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    restore_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1105,7 +1109,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     backup_plan = {}
     request_id = "hello world"
 
-    create_backup_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1159,7 +1163,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1217,7 +1221,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    list_backup_plans_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backup_plans_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1272,7 +1276,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     name = "hello world"
     request_id = "hello world"
 
-    delete_backup_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_plan_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1329,7 +1333,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     backup_plan_association = {}
     request_id = "hello world"
 
-    create_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1383,7 +1387,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1440,7 +1444,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     filter = "hello world"
 
-    list_backup_plan_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backup_plan_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1495,7 +1499,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     name = "hello world"
     request_id = "hello world"
 
-    delete_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_plan_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1551,7 +1555,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     rule_id = "hello world"
     request_id = "hello world"
 
-    trigger_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    trigger_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
