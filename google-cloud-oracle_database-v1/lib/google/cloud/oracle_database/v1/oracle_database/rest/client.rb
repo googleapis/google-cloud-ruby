@@ -230,8 +230,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @oracle_database_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -239,6 +250,7 @@ module Google
                   config.endpoint = @oracle_database_stub.endpoint
                   config.universe_domain = @oracle_database_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @oracle_database_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -255,6 +267,15 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @oracle_database_stub.logger
+              end
 
               # Service calls
 
@@ -343,7 +364,7 @@ module Google
                 @oracle_database_stub.list_cloud_exadata_infrastructures request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_cloud_exadata_infrastructures, "cloud_exadata_infrastructures", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -424,7 +445,6 @@ module Google
 
                 @oracle_database_stub.get_cloud_exadata_infrastructure request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -528,7 +548,7 @@ module Google
                 @oracle_database_stub.create_cloud_exadata_infrastructure request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -630,7 +650,7 @@ module Google
                 @oracle_database_stub.delete_cloud_exadata_infrastructure request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -723,7 +743,7 @@ module Google
                 @oracle_database_stub.list_cloud_vm_clusters request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_cloud_vm_clusters, "cloud_vm_clusters", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -803,7 +823,6 @@ module Google
 
                 @oracle_database_stub.get_cloud_vm_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -907,7 +926,7 @@ module Google
                 @oracle_database_stub.create_cloud_vm_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1008,7 +1027,7 @@ module Google
                 @oracle_database_stub.delete_cloud_vm_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1099,7 +1118,7 @@ module Google
                 @oracle_database_stub.list_entitlements request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_entitlements, "entitlements", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1190,7 +1209,7 @@ module Google
                 @oracle_database_stub.list_db_servers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_db_servers, "db_servers", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1281,7 +1300,7 @@ module Google
                 @oracle_database_stub.list_db_nodes request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_db_nodes, "db_nodes", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1374,7 +1393,7 @@ module Google
                 @oracle_database_stub.list_gi_versions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_gi_versions, "gi_versions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1465,7 +1484,7 @@ module Google
                 @oracle_database_stub.list_db_system_shapes request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_db_system_shapes, "db_system_shapes", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1560,7 +1579,7 @@ module Google
                 @oracle_database_stub.list_autonomous_databases request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_autonomous_databases, "autonomous_databases", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1640,7 +1659,6 @@ module Google
 
                 @oracle_database_stub.get_autonomous_database request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1744,7 +1762,7 @@ module Google
                 @oracle_database_stub.create_autonomous_database request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1841,7 +1859,7 @@ module Google
                 @oracle_database_stub.delete_autonomous_database request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1931,7 +1949,7 @@ module Google
                 @oracle_database_stub.restore_autonomous_database request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2020,7 +2038,6 @@ module Google
 
                 @oracle_database_stub.generate_autonomous_database_wallet request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2112,7 +2129,7 @@ module Google
                 @oracle_database_stub.list_autonomous_db_versions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_autonomous_db_versions, "autonomous_db_versions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2208,7 +2225,7 @@ module Google
                 @oracle_database_stub.list_autonomous_database_character_sets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_autonomous_database_character_sets, "autonomous_database_character_sets", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2307,7 +2324,7 @@ module Google
                 @oracle_database_stub.list_autonomous_database_backups request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @oracle_database_stub, :list_autonomous_database_backups, "autonomous_database_backups", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2387,6 +2404,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -2415,6 +2437,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

@@ -31,6 +31,10 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Tes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_custom_constraint_path

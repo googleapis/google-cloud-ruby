@@ -33,24 +33,24 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -67,6 +67,10 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
@@ -87,7 +91,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     display_name = "hello world"
     rollout = {}
 
-    execute_patch_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    execute_patch_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -141,7 +145,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_patch_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_patch_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_patch_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_patch_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -252,7 +256,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     page_token = "hello world"
     filter = "hello world"
 
-    list_patch_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_patch_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     page_token = "hello world"
     filter = "hello world"
 
-    list_patch_job_instance_details_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_patch_job_instance_details_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -365,7 +369,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     patch_deployment_id = "hello world"
     patch_deployment = {}
 
-    create_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -419,7 +423,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     page_size = 42
     page_token = "hello world"
 
-    list_patch_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_patch_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -529,7 +533,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -584,7 +588,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     patch_deployment = {}
     update_mask = {}
 
-    update_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -638,7 +642,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    pause_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    pause_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -692,7 +696,7 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    resume_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    resume_patch_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

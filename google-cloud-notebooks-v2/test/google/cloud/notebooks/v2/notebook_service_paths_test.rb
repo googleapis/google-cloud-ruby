@@ -31,6 +31,10 @@ class ::Google::Cloud::Notebooks::V2::NotebookService::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_instance_path

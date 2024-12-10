@@ -31,6 +31,10 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientPathsTest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_lb_route_extension_path
