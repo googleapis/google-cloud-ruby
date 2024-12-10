@@ -31,6 +31,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AutofeedSettingsService::C
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_autofeed_settings_path

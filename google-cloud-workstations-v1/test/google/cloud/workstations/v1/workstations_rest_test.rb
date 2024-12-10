@@ -33,24 +33,24 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_workstation_cluster
@@ -80,7 +84,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_workstation_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_workstation_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     workstation_cluster = {}
     validate_only = true
 
-    create_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     validate_only = true
     allow_missing = true
 
-    update_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -307,7 +311,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     etag = "hello world"
     force = true
 
-    delete_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_workstation_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -361,7 +365,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -417,7 +421,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_workstation_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_workstation_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -473,7 +477,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_usable_workstation_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_usable_workstation_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -530,7 +534,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     workstation_config = {}
     validate_only = true
 
-    create_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -587,7 +591,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     validate_only = true
     allow_missing = true
 
-    update_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -644,7 +648,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     etag = "hello world"
     force = true
 
-    delete_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_workstation_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -698,7 +702,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -754,7 +758,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_workstations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_workstations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -810,7 +814,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_usable_workstations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_usable_workstations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -867,7 +871,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     workstation = {}
     validate_only = true
 
-    create_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -924,7 +928,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     validate_only = true
     allow_missing = true
 
-    update_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -980,7 +984,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     validate_only = true
     etag = "hello world"
 
-    delete_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1036,7 +1040,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     validate_only = true
     etag = "hello world"
 
-    start_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1092,7 +1096,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     validate_only = true
     etag = "hello world"
 
-    stop_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    stop_workstation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1147,7 +1151,7 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     expire_time = {}
     workstation = "hello world"
 
-    generate_access_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    generate_access_token_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

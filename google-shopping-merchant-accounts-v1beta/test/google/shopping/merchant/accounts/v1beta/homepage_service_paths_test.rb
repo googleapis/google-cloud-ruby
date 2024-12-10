@@ -31,6 +31,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::HomepageService::ClientPat
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_homepage_path

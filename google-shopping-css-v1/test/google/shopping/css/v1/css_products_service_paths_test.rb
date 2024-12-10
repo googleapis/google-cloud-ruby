@@ -31,6 +31,10 @@ class ::Google::Shopping::Css::V1::CssProductsService::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_account_path
