@@ -33,24 +33,24 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_initialize_zone
@@ -80,7 +84,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    initialize_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    initialize_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_zones_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_zones_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_networks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_networks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -304,7 +308,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -358,7 +362,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    diagnose_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    diagnose_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -415,7 +419,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     network = {}
     request_id = "hello world"
 
-    create_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -470,7 +474,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -528,7 +532,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_subnets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_subnets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -582,7 +586,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -639,7 +643,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     subnet = {}
     request_id = "hello world"
 
-    create_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -695,7 +699,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     subnet = {}
     request_id = "hello world"
 
-    update_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -750,7 +754,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -808,7 +812,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_interconnects_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_interconnects_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -862,7 +866,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_interconnect_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_interconnect_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -916,7 +920,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    diagnose_interconnect_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    diagnose_interconnect_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -974,7 +978,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_interconnect_attachments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_interconnect_attachments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1028,7 +1032,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_interconnect_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_interconnect_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1085,7 +1089,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     interconnect_attachment = {}
     request_id = "hello world"
 
-    create_interconnect_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_interconnect_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1140,7 +1144,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_interconnect_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_interconnect_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1198,7 +1202,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_routers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_routers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1252,7 +1256,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1306,7 +1310,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    diagnose_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    diagnose_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1363,7 +1367,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     router = {}
     request_id = "hello world"
 
-    create_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1419,7 +1423,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     router = {}
     request_id = "hello world"
 
-    update_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1474,7 +1478,7 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_router_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

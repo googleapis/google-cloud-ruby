@@ -33,24 +33,24 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_trigger
@@ -80,7 +84,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_triggers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_triggers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     trigger_id = "hello world"
     validate_only = true
 
-    create_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -252,7 +256,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    update_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    delete_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -363,7 +367,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -420,7 +424,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     order_by = "hello world"
 
-    list_channels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_channels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -477,7 +481,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     channel_id = "hello world"
     validate_only = true
 
-    create_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -533,7 +537,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     update_mask = {}
     validate_only = true
 
-    update_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     name = "hello world"
     validate_only = true
 
-    delete_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_channel_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -642,7 +646,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_provider_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_provider_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -700,7 +704,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_providers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_providers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -754,7 +758,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_channel_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_channel_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -810,7 +814,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_channel_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_channel_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -866,7 +870,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     channel_connection = {}
     channel_connection_id = "hello world"
 
-    create_channel_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_channel_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -920,7 +924,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_channel_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_channel_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -974,7 +978,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_google_channel_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_google_channel_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1029,7 +1033,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     google_channel_config = {}
     update_mask = {}
 
-    update_google_channel_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_google_channel_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1083,7 +1087,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1141,7 +1145,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_message_buses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_message_buses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1197,7 +1201,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_message_bus_enrollments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_message_bus_enrollments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1254,7 +1258,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     message_bus_id = "hello world"
     validate_only = true
 
-    create_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1311,7 +1315,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    update_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1368,7 +1372,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    delete_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_message_bus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1422,7 +1426,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1480,7 +1484,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_enrollments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_enrollments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1537,7 +1541,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     enrollment_id = "hello world"
     validate_only = true
 
-    create_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1594,7 +1598,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    update_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1651,7 +1655,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    delete_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_enrollment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1705,7 +1709,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1763,7 +1767,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_pipelines_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_pipelines_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1820,7 +1824,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     pipeline_id = "hello world"
     validate_only = true
 
-    create_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1877,7 +1881,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    update_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1934,7 +1938,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    delete_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_pipeline_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1988,7 +1992,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2046,7 +2050,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_google_api_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_google_api_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2103,7 +2107,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     google_api_source_id = "hello world"
     validate_only = true
 
-    create_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2160,7 +2164,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    update_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2217,7 +2221,7 @@ class ::Google::Cloud::Eventarc::V1::Eventarc::Rest::ClientTest < Minitest::Test
     allow_missing = true
     validate_only = true
 
-    delete_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_google_api_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

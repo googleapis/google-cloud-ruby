@@ -33,24 +33,24 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_instances
@@ -84,7 +88,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     order_by = "hello world"
     filter = "hello world"
 
-    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -194,7 +198,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     instance_id = "hello world"
     instance = {}
 
-    create_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -249,7 +253,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     update_mask = {}
     instance = {}
 
-    update_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -305,7 +309,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     file_share = "hello world"
     source_backup = "hello world"
 
-    restore_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    restore_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -360,7 +364,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     name = "hello world"
     target_snapshot_id = "hello world"
 
-    revert_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    revert_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -415,7 +419,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     name = "hello world"
     force = true
 
-    delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -473,7 +477,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     order_by = "hello world"
     filter = "hello world"
 
-    list_snapshots_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_snapshots_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -527,7 +531,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -583,7 +587,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     snapshot_id = "hello world"
     snapshot = {}
 
-    create_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -637,7 +641,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -692,7 +696,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     update_mask = {}
     snapshot = {}
 
-    update_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -750,7 +754,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     order_by = "hello world"
     filter = "hello world"
 
-    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -804,7 +808,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -860,7 +864,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     backup = {}
     backup_id = "hello world"
 
-    create_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -914,7 +918,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -969,7 +973,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     backup = {}
     update_mask = {}
 
-    update_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
