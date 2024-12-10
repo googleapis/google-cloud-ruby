@@ -31,6 +31,10 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientPathsTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_channel_partner_link_path

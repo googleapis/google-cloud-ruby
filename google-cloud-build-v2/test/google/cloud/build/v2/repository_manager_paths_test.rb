@@ -31,6 +31,10 @@ class ::Google::Cloud::Build::V2::RepositoryManager::ClientPathsTest < Minitest:
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_connection_path

@@ -243,14 +243,26 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @data_migration_service_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
 
               @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @data_migration_service_stub.endpoint
                 config.universe_domain = @data_migration_service_stub.universe_domain
+                config.logger = @data_migration_service_stub.logger if config.respond_to? :logger=
               end
 
               @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
@@ -258,6 +270,7 @@ module Google
                 config.quota_project = @quota_project_id
                 config.endpoint = @data_migration_service_stub.endpoint
                 config.universe_domain = @data_migration_service_stub.universe_domain
+                config.logger = @data_migration_service_stub.logger if config.respond_to? :logger=
               end
             end
 
@@ -281,6 +294,15 @@ module Google
             # @return [Google::Iam::V1::IAMPolicy::Client]
             #
             attr_reader :iam_policy_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @data_migration_service_stub.logger
+            end
 
             # Service calls
 
@@ -393,7 +415,7 @@ module Google
               @data_migration_service_stub.call_rpc :list_migration_jobs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_migration_jobs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -479,7 +501,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :get_migration_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -587,7 +608,7 @@ module Google
               @data_migration_service_stub.call_rpc :create_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -692,7 +713,7 @@ module Google
               @data_migration_service_stub.call_rpc :update_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -798,7 +819,7 @@ module Google
               @data_migration_service_stub.call_rpc :delete_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -895,7 +916,7 @@ module Google
               @data_migration_service_stub.call_rpc :start_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -989,7 +1010,7 @@ module Google
               @data_migration_service_stub.call_rpc :stop_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1084,7 +1105,7 @@ module Google
               @data_migration_service_stub.call_rpc :resume_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1179,7 +1200,7 @@ module Google
               @data_migration_service_stub.call_rpc :promote_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1280,7 +1301,7 @@ module Google
               @data_migration_service_stub.call_rpc :verify_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1379,7 +1400,7 @@ module Google
               @data_migration_service_stub.call_rpc :restart_migration_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1474,7 +1495,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :generate_ssh_script, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1575,7 +1595,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :generate_tcp_proxy_script, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1690,7 +1709,7 @@ module Google
               @data_migration_service_stub.call_rpc :list_connection_profiles, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_connection_profiles, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1776,7 +1795,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :get_connection_profile, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1890,7 +1908,7 @@ module Google
               @data_migration_service_stub.call_rpc :create_connection_profile, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2003,7 +2021,7 @@ module Google
               @data_migration_service_stub.call_rpc :update_connection_profile, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2110,7 +2128,7 @@ module Google
               @data_migration_service_stub.call_rpc :delete_connection_profile, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2218,7 +2236,7 @@ module Google
               @data_migration_service_stub.call_rpc :create_private_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2304,7 +2322,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :get_private_connection, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2415,7 +2432,7 @@ module Google
               @data_migration_service_stub.call_rpc :list_private_connections, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_private_connections, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2517,7 +2534,7 @@ module Google
               @data_migration_service_stub.call_rpc :delete_private_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2603,7 +2620,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :get_conversion_workspace, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2713,7 +2729,7 @@ module Google
               @data_migration_service_stub.call_rpc :list_conversion_workspaces, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_conversion_workspaces, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2819,7 +2835,7 @@ module Google
               @data_migration_service_stub.call_rpc :create_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2924,7 +2940,7 @@ module Google
               @data_migration_service_stub.call_rpc :update_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3029,7 +3045,7 @@ module Google
               @data_migration_service_stub.call_rpc :delete_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3129,7 +3145,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :create_mapping_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3223,7 +3238,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :delete_mapping_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3325,7 +3339,7 @@ module Google
               @data_migration_service_stub.call_rpc :list_mapping_rules, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :list_mapping_rules, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3417,7 +3431,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :get_mapping_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3522,7 +3535,7 @@ module Google
               @data_migration_service_stub.call_rpc :seed_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3626,7 +3639,7 @@ module Google
               @data_migration_service_stub.call_rpc :import_mapping_rules, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3731,7 +3744,7 @@ module Google
               @data_migration_service_stub.call_rpc :convert_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3827,7 +3840,7 @@ module Google
               @data_migration_service_stub.call_rpc :commit_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3921,7 +3934,7 @@ module Google
               @data_migration_service_stub.call_rpc :rollback_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4030,7 +4043,7 @@ module Google
               @data_migration_service_stub.call_rpc :apply_conversion_workspace, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4151,7 +4164,7 @@ module Google
               @data_migration_service_stub.call_rpc :describe_database_entities, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_migration_service_stub, :describe_database_entities, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4254,7 +4267,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :search_background_jobs, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4345,7 +4357,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :describe_conversion_workspace_revisions, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4437,7 +4448,6 @@ module Google
 
               @data_migration_service_stub.call_rpc :fetch_static_ips, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4526,6 +4536,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -4550,6 +4565,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

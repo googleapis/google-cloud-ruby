@@ -31,6 +31,10 @@ class ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::ClientPathsTest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_billing_account_path

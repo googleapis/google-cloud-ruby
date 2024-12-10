@@ -33,24 +33,24 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_customers
@@ -83,7 +87,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     filter = "hello world"
 
-    list_customers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_customers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     domain = "hello world"
     primary_admin_email = "hello world"
 
-    check_cloud_identity_accounts_exist_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    check_cloud_identity_accounts_exist_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     parent = "hello world"
     customer = {}
 
-    create_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -303,7 +307,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     customer = {}
     update_mask = {}
 
-    update_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -416,7 +420,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     channel_partner_id = "hello world"
     customer = "hello world"
 
-    import_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -473,7 +477,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     user = {}
     validate_only = true
 
-    provision_cloud_identity_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    provision_cloud_identity_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -529,7 +533,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_size = 42
     page_token = "hello world"
 
-    list_entitlements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_entitlements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     auth_token = "hello world"
     language_code = "hello world"
 
-    list_transferable_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_transferable_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -648,7 +652,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     language_code = "hello world"
     billing_account = "hello world"
 
-    list_transferable_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_transferable_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -702,7 +706,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -758,7 +762,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     entitlement = {}
     request_id = "hello world"
 
-    create_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -815,7 +819,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     request_id = "hello world"
     purchase_order_id = "hello world"
 
-    change_parameters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    change_parameters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -871,7 +875,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     renewal_settings = {}
     request_id = "hello world"
 
-    change_renewal_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    change_renewal_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -930,7 +934,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     request_id = "hello world"
     billing_account = "hello world"
 
-    change_offer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    change_offer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -985,7 +989,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    start_paid_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_paid_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1040,7 +1044,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    suspend_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    suspend_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1095,7 +1099,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    cancel_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1150,7 +1154,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    activate_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    activate_entitlement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1207,7 +1211,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     auth_token = "hello world"
     request_id = "hello world"
 
-    transfer_entitlements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    transfer_entitlements_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1263,7 +1267,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     entitlements = [{}]
     request_id = "hello world"
 
-    transfer_entitlements_to_google_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    transfer_entitlements_to_google_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1320,7 +1324,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     view = :UNSPECIFIED
 
-    list_channel_partner_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_channel_partner_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1375,7 +1379,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     name = "hello world"
     view = :UNSPECIFIED
 
-    get_channel_partner_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_channel_partner_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1430,7 +1434,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     parent = "hello world"
     channel_partner_link = {}
 
-    create_channel_partner_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_channel_partner_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1486,7 +1490,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     channel_partner_link = {}
     update_mask = {}
 
-    update_channel_partner_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_channel_partner_link_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1540,7 +1544,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1597,7 +1601,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     filter = "hello world"
 
-    list_customer_repricing_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_customer_repricing_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1652,7 +1656,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     parent = "hello world"
     customer_repricing_config = {}
 
-    create_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1706,7 +1710,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     customer_repricing_config = {}
 
-    update_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1760,7 +1764,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_customer_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1814,7 +1818,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1871,7 +1875,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     filter = "hello world"
 
-    list_channel_partner_repricing_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_channel_partner_repricing_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1926,7 +1930,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     parent = "hello world"
     channel_partner_repricing_config = {}
 
-    create_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1980,7 +1984,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     channel_partner_repricing_config = {}
 
-    update_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2034,7 +2038,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_channel_partner_repricing_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2090,7 +2094,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_size = 42
     page_token = "hello world"
 
-    list_sku_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_sku_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2146,7 +2150,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_size = 42
     page_token = "hello world"
 
-    list_sku_group_billable_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_sku_group_billable_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2200,7 +2204,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     entitlement = "hello world"
 
-    lookup_offer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    lookup_offer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2257,7 +2261,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     language_code = "hello world"
 
-    list_products_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_products_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2315,7 +2319,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     language_code = "hello world"
 
-    list_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2374,7 +2378,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     language_code = "hello world"
     show_future_offers = true
 
-    list_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2432,7 +2436,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     language_code = "hello world"
 
-    list_purchasable_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_purchasable_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2490,7 +2494,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     language_code = "hello world"
 
-    list_purchasable_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_purchasable_offers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2545,7 +2549,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     customer = "hello world"
     skus = ["hello world"]
 
-    query_eligible_billing_accounts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    query_eligible_billing_accounts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2600,7 +2604,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     account = "hello world"
     service_account = "hello world"
 
-    register_subscriber_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    register_subscriber_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2655,7 +2659,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     account = "hello world"
     service_account = "hello world"
 
-    unregister_subscriber_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    unregister_subscriber_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2711,7 +2715,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_size = 42
     page_token = "hello world"
 
-    list_subscribers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_subscribers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2768,7 +2772,7 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     page_token = "hello world"
     filter = "hello world"
 
-    list_entitlement_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_entitlement_changes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
