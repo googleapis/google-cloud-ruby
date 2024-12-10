@@ -31,6 +31,10 @@ class Google::Cloud::DataFusion::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_data_fusion_grpc

@@ -30,6 +30,10 @@ class Google::Cloud::DataQnA::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_auto_suggestion_service_grpc
