@@ -33,24 +33,24 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -67,6 +67,10 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
@@ -88,7 +92,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     transliteration_config = {}
     labels = {}
 
-    translate_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    translate_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -144,7 +148,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     contents = ["hello world"]
     source_language_code = "hello world"
 
-    romanize_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    romanize_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -202,7 +206,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     mime_type = "hello world"
     labels = {}
 
-    detect_language_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    detect_language_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -258,7 +262,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     display_language_code = "hello world"
     model = "hello world"
 
-    get_supported_languages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_supported_languages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -323,7 +327,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     enable_shadow_removal_native_pdf = true
     enable_rotation_correction = true
 
-    translate_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    translate_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -384,7 +388,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     glossaries = {}
     labels = {}
 
-    batch_translate_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_translate_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -448,7 +452,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     enable_shadow_removal_native_pdf = true
     enable_rotation_correction = true
 
-    batch_translate_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_translate_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -503,7 +507,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     glossary = {}
 
-    create_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -558,7 +562,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     glossary = {}
     update_mask = {}
 
-    update_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -615,7 +619,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_token = "hello world"
     filter = "hello world"
 
-    list_glossaries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_glossaries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -669,7 +673,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -723,7 +727,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_glossary_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -777,7 +781,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -833,7 +837,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_glossary_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_glossary_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -888,7 +892,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     glossary_entry = {}
 
-    create_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -942,7 +946,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     glossary_entry = {}
 
-    update_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -996,7 +1000,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_glossary_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1051,7 +1055,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     dataset = {}
 
-    create_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1105,7 +1109,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1161,7 +1165,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_datasets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_datasets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1215,7 +1219,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1270,7 +1274,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     adaptive_mt_dataset = {}
 
-    create_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1324,7 +1328,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1378,7 +1382,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_adaptive_mt_dataset_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1435,7 +1439,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_token = "hello world"
     filter = "hello world"
 
-    list_adaptive_mt_datasets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_adaptive_mt_datasets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1493,7 +1497,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     reference_sentence_config = {}
     glossary_config = {}
 
-    adaptive_mt_translate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    adaptive_mt_translate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1547,7 +1551,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1601,7 +1605,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1656,7 +1660,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     file_input_source = {}
 
-    import_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_adaptive_mt_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1712,7 +1716,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_adaptive_mt_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_adaptive_mt_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1768,7 +1772,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_adaptive_mt_sentences_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_adaptive_mt_sentences_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1823,7 +1827,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     dataset = "hello world"
     input_config = {}
 
-    import_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1878,7 +1882,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     dataset = "hello world"
     output_config = {}
 
-    export_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1935,7 +1939,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_examples_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_examples_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1990,7 +1994,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     parent = "hello world"
     model = {}
 
-    create_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2047,7 +2051,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_models_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_models_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2101,7 +2105,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2155,7 +2159,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

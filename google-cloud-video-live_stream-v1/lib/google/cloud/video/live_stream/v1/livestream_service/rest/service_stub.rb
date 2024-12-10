@@ -31,7 +31,8 @@ module Google
               # including transcoding, making the REST call, and deserialing the response.
               #
               class ServiceStub
-                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
+                # @private
+                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
                   # These require statements are intentionally placed here to initialize
                   # the REST modules only when it's required.
                   require "gapic/rest"
@@ -41,7 +42,9 @@ module Google
                                                                universe_domain: universe_domain,
                                                                credentials: credentials,
                                                                numeric_enums: true,
-                                                               raise_faraday_errors: false
+                                                               service_name: self.class,
+                                                               raise_faraday_errors: false,
+                                                               logger: logger
                 end
 
                 ##
@@ -60,6 +63,15 @@ module Google
                 #
                 def endpoint
                   @client_stub.endpoint
+                end
+
+                ##
+                # The logger used for request/response debug logging.
+                #
+                # @return [Logger]
+                #
+                def logger stub: false
+                  stub ? @client_stub.stub_logger : @client_stub.logger
                 end
 
                 ##
@@ -88,16 +100,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_channel",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -126,16 +140,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_channels",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -164,16 +180,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_channel",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Channel.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -202,16 +220,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_channel",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -240,16 +260,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_channel",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -278,16 +300,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "start_channel",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -316,16 +340,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "stop_channel",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -354,16 +380,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_input",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -392,16 +420,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_inputs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::ListInputsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -430,16 +460,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_input",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Input.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -468,16 +500,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_input",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -506,16 +540,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_input",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -544,16 +580,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_event",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Event.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -582,16 +620,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_events",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::ListEventsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -620,16 +660,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_event",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Event.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -658,16 +700,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_event",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -696,16 +740,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_clips",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::ListClipsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -734,16 +780,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_clip",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Clip.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -772,16 +820,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_clip",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -810,16 +860,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_clip",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -848,16 +900,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_asset",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -886,16 +940,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_asset",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -924,16 +980,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_asset",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Asset.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -962,16 +1020,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_assets",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1000,16 +1060,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_pool",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Video::LiveStream::V1::Pool.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1038,16 +1100,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_pool",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##

@@ -31,6 +31,10 @@ class ::Google::Cloud::Tpu::V1::Tpu::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_accelerator_type_path
