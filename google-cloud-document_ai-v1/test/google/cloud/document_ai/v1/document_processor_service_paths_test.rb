@@ -31,6 +31,10 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::ClientPathsTest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_evaluation_path

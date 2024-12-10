@@ -33,24 +33,24 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_detect_intent
@@ -83,7 +87,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     query_input = {}
     output_audio_config = {}
 
-    detect_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    detect_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -140,7 +144,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     query_input = {}
     output_audio_config = {}
 
-    server_streaming_detect_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:|
+    server_streaming_detect_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, is_server_streaming:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     query_input = {}
     persist_parameter_changes = true
 
-    match_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    match_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -253,7 +257,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     match = {}
     output_audio_config = {}
 
-    fulfill_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fulfill_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -310,7 +314,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     answer_feedback = {}
     update_mask = {}
 
-    submit_answer_feedback_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    submit_answer_feedback_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

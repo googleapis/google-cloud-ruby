@@ -33,24 +33,24 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_search_domains
@@ -81,7 +85,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     query = "hello world"
     location = "hello world"
 
-    search_domains_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_domains_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     domain_name = "hello world"
     location = "hello world"
 
-    retrieve_register_parameters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    retrieve_register_parameters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     yearly_price = {}
     validate_only = true
 
-    register_domain_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    register_domain_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     domain_name = "hello world"
     location = "hello world"
 
-    retrieve_transfer_parameters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    retrieve_transfer_parameters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     authorization_code = {}
     validate_only = true
 
-    transfer_domain_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    transfer_domain_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -366,7 +370,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     filter = "hello world"
 
-    list_registrations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_registrations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -420,7 +424,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     registration = {}
     update_mask = {}
 
-    update_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -531,7 +535,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     management_settings = {}
     update_mask = {}
 
-    configure_management_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    configure_management_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     update_mask = {}
     validate_only = true
 
-    configure_dns_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    configure_dns_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -646,7 +650,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     contact_notices = [:CONTACT_NOTICE_UNSPECIFIED]
     validate_only = true
 
-    configure_contact_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    configure_contact_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -700,7 +704,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    export_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -754,7 +758,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_registration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -808,7 +812,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     registration = "hello world"
 
-    retrieve_authorization_code_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    retrieve_authorization_code_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -862,7 +866,7 @@ class ::Google::Cloud::Domains::V1::Domains::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     registration = "hello world"
 
-    reset_authorization_code_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reset_authorization_code_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

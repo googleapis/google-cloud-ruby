@@ -31,6 +31,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_column_data_profile_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::GroundedGenerationService::Clien
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_grounding_config_path

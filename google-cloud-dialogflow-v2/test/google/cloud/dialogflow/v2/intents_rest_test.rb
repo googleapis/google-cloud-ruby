@@ -33,24 +33,24 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_intents
@@ -84,7 +88,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
 
-    list_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -140,7 +144,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     language_code = "hello world"
     intent_view = :INTENT_VIEW_UNSPECIFIED
 
-    get_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     language_code = "hello world"
     intent_view = :INTENT_VIEW_UNSPECIFIED
 
-    create_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -254,7 +258,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     update_mask = {}
     intent_view = :INTENT_VIEW_UNSPECIFIED
 
-    update_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -308,7 +312,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_intent_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -366,7 +370,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     update_mask = {}
     intent_view = :INTENT_VIEW_UNSPECIFIED
 
-    batch_update_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_update_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -421,7 +425,7 @@ class ::Google::Cloud::Dialogflow::V2::Intents::Rest::ClientTest < Minitest::Tes
     parent = "hello world"
     intents = [{}]
 
-    batch_delete_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_delete_intents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

@@ -31,6 +31,10 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientPathsTest <
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_connection_path

@@ -347,14 +347,26 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @dlp_service_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @dlp_service_stub.endpoint
                   config.universe_domain = @dlp_service_stub.universe_domain
+                  config.logger = @dlp_service_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -364,6 +376,15 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @dlp_service_stub.logger
+              end
 
               # Service calls
 
@@ -478,7 +499,6 @@ module Google
 
                 @dlp_service_stub.inspect_content request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -591,7 +611,6 @@ module Google
 
                 @dlp_service_stub.redact_image request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -724,7 +743,6 @@ module Google
 
                 @dlp_service_stub.deidentify_content request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -852,7 +870,6 @@ module Google
 
                 @dlp_service_stub.reidentify_content request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -947,7 +964,6 @@ module Google
 
                 @dlp_service_stub.list_info_types request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1058,7 +1074,6 @@ module Google
 
                 @dlp_service_stub.create_inspect_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1146,7 +1161,6 @@ module Google
 
                 @dlp_service_stub.update_inspect_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1230,7 +1244,6 @@ module Google
 
                 @dlp_service_stub.get_inspect_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1358,7 +1371,7 @@ module Google
                 @dlp_service_stub.list_inspect_templates request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_inspect_templates, "inspect_templates", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1442,7 +1455,6 @@ module Google
 
                 @dlp_service_stub.delete_inspect_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1553,7 +1565,6 @@ module Google
 
                 @dlp_service_stub.create_deidentify_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1642,7 +1653,6 @@ module Google
 
                 @dlp_service_stub.update_deidentify_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1726,7 +1736,6 @@ module Google
 
                 @dlp_service_stub.get_deidentify_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1854,7 +1863,7 @@ module Google
                 @dlp_service_stub.list_deidentify_templates request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_deidentify_templates, "deidentify_templates", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1939,7 +1948,6 @@ module Google
 
                 @dlp_service_stub.delete_deidentify_template request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2046,7 +2054,6 @@ module Google
 
                 @dlp_service_stub.create_job_trigger request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2133,7 +2140,6 @@ module Google
 
                 @dlp_service_stub.update_job_trigger request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2217,7 +2223,6 @@ module Google
 
                 @dlp_service_stub.hybrid_inspect_job_trigger request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2300,7 +2305,6 @@ module Google
 
                 @dlp_service_stub.get_job_trigger request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2453,7 +2457,7 @@ module Google
                 @dlp_service_stub.list_job_triggers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_job_triggers, "job_triggers", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2536,7 +2540,6 @@ module Google
 
                 @dlp_service_stub.delete_job_trigger request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2617,7 +2620,6 @@ module Google
 
                 @dlp_service_stub.activate_job_trigger request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2717,7 +2719,6 @@ module Google
 
                 @dlp_service_stub.create_discovery_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2801,7 +2802,6 @@ module Google
 
                 @dlp_service_stub.update_discovery_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2881,7 +2881,6 @@ module Google
 
                 @dlp_service_stub.get_discovery_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2993,7 +2992,7 @@ module Google
                 @dlp_service_stub.list_discovery_configs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_discovery_configs, "discovery_configs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3073,7 +3072,6 @@ module Google
 
                 @dlp_service_stub.delete_discovery_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3188,7 +3186,6 @@ module Google
 
                 @dlp_service_stub.create_dlp_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3343,7 +3340,7 @@ module Google
                 @dlp_service_stub.list_dlp_jobs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_dlp_jobs, "jobs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3427,7 +3424,6 @@ module Google
 
                 @dlp_service_stub.get_dlp_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3513,7 +3509,6 @@ module Google
 
                 @dlp_service_stub.delete_dlp_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3599,7 +3594,6 @@ module Google
 
                 @dlp_service_stub.cancel_dlp_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3709,7 +3703,6 @@ module Google
 
                 @dlp_service_stub.create_stored_info_type request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3800,7 +3793,6 @@ module Google
 
                 @dlp_service_stub.update_stored_info_type request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3884,7 +3876,6 @@ module Google
 
                 @dlp_service_stub.get_stored_info_type request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4009,7 +4000,7 @@ module Google
                 @dlp_service_stub.list_stored_info_types request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_stored_info_types, "stored_info_types", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4093,7 +4084,6 @@ module Google
 
                 @dlp_service_stub.delete_stored_info_type request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4221,7 +4211,7 @@ module Google
                 @dlp_service_stub.list_project_data_profiles request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_project_data_profiles, "project_data_profiles", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4362,7 +4352,7 @@ module Google
                 @dlp_service_stub.list_table_data_profiles request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_table_data_profiles, "table_data_profiles", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4505,7 +4495,7 @@ module Google
                 @dlp_service_stub.list_column_data_profiles request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_column_data_profiles, "column_data_profiles", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4585,7 +4575,6 @@ module Google
 
                 @dlp_service_stub.get_project_data_profile request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4731,7 +4720,7 @@ module Google
                 @dlp_service_stub.list_file_store_data_profiles request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_file_store_data_profiles, "file_store_data_profiles", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4811,7 +4800,6 @@ module Google
 
                 @dlp_service_stub.get_file_store_data_profile request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4891,7 +4879,6 @@ module Google
 
                 @dlp_service_stub.delete_file_store_data_profile request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4971,7 +4958,6 @@ module Google
 
                 @dlp_service_stub.get_table_data_profile request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5051,7 +5037,6 @@ module Google
 
                 @dlp_service_stub.get_column_data_profile request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5131,7 +5116,6 @@ module Google
 
                 @dlp_service_stub.delete_table_data_profile request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5215,7 +5199,6 @@ module Google
 
                 @dlp_service_stub.hybrid_inspect_dlp_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5295,7 +5278,6 @@ module Google
 
                 @dlp_service_stub.finish_dlp_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5384,7 +5366,6 @@ module Google
 
                 @dlp_service_stub.create_connection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5464,7 +5445,6 @@ module Google
 
                 @dlp_service_stub.get_connection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5558,7 +5538,7 @@ module Google
                 @dlp_service_stub.list_connections request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :list_connections, "connections", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5651,7 +5631,7 @@ module Google
                 @dlp_service_stub.search_connections request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dlp_service_stub, :search_connections, "connections", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5731,7 +5711,6 @@ module Google
 
                 @dlp_service_stub.delete_connection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5815,7 +5794,6 @@ module Google
 
                 @dlp_service_stub.update_connection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5895,6 +5873,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -5916,6 +5899,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

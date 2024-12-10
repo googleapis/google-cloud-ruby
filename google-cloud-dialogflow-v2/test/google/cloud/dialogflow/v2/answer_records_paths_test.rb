@@ -31,6 +31,10 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_answer_record_path

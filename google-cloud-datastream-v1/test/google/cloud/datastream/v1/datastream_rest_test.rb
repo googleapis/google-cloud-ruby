@@ -33,24 +33,24 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_connection_profiles
@@ -84,7 +88,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     filter = "hello world"
     order_by = "hello world"
 
-    list_connection_profiles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_connection_profiles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     validate_only = true
     force = true
 
-    create_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -255,7 +259,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     validate_only = true
     force = true
 
-    update_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -310,7 +314,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     name = "hello world"
     request_id = "hello world"
 
-    delete_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -367,7 +371,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     full_hierarchy = true
     oracle_rdbms = {}
 
-    discover_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    discover_connection_profile_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -425,7 +429,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     filter = "hello world"
     order_by = "hello world"
 
-    list_streams_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_streams_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -479,7 +483,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -538,7 +542,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     validate_only = true
     force = true
 
-    create_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -596,7 +600,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     validate_only = true
     force = true
 
-    update_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -651,7 +655,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     name = "hello world"
     request_id = "hello world"
 
-    delete_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -707,7 +711,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     cdc_strategy = {}
     force = true
 
-    run_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    run_stream_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -761,7 +765,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_stream_object_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_stream_object_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -816,7 +820,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     parent = "hello world"
     source_object_identifier = {}
 
-    lookup_stream_object_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    lookup_stream_object_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -872,7 +876,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     page_size = 42
     page_token = "hello world"
 
-    list_stream_objects_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_stream_objects_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -926,7 +930,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     object = "hello world"
 
-    start_backfill_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_backfill_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -980,7 +984,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     object = "hello world"
 
-    stop_backfill_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    stop_backfill_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1036,7 +1040,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     page_size = 42
     page_token = "hello world"
 
-    fetch_static_ips_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_static_ips_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1094,7 +1098,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     request_id = "hello world"
     force = true
 
-    create_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1148,7 +1152,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1206,7 +1210,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     filter = "hello world"
     order_by = "hello world"
 
-    list_private_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_private_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1262,7 +1266,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     request_id = "hello world"
     force = true
 
-    delete_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1319,7 +1323,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     route = {}
     request_id = "hello world"
 
-    create_route_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_route_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1373,7 +1377,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_route_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_route_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1431,7 +1435,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     filter = "hello world"
     order_by = "hello world"
 
-    list_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1486,7 +1490,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::Rest::ClientTest < Minitest::
     name = "hello world"
     request_id = "hello world"
 
-    delete_route_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_route_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

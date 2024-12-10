@@ -31,6 +31,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_branch_path

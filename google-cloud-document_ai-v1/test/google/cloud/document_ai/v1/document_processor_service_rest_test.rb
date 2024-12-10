@@ -33,24 +33,24 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -67,6 +67,10 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
@@ -86,7 +90,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     labels = {}
     imageless_mode = true
 
-    process_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    process_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -145,7 +149,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     process_options = {}
     labels = {}
 
-    batch_process_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_process_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -199,7 +203,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     parent = "hello world"
 
-    fetch_processor_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_processor_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -255,7 +259,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     page_size = 42
     page_token = "hello world"
 
-    list_processor_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_processor_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_processor_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_processor_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -365,7 +369,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     page_size = 42
     page_token = "hello world"
 
-    list_processors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_processors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -419,7 +423,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -478,7 +482,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     input_data = {}
     base_processor_version = "hello world"
 
-    train_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    train_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -532,7 +536,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     page_size = 42
     page_token = "hello world"
 
-    list_processor_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_processor_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -642,7 +646,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -696,7 +700,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    deploy_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    deploy_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -750,7 +754,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    undeploy_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undeploy_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -805,7 +809,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     parent = "hello world"
     processor = {}
 
-    create_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -859,7 +863,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -913,7 +917,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    enable_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enable_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -967,7 +971,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    disable_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    disable_processor_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1022,7 +1026,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     processor = "hello world"
     default_processor_version = "hello world"
 
-    set_default_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_default_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1080,7 +1084,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     priority = :DEFAULT
     document_schema = {}
 
-    review_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    review_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1135,7 +1139,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     processor_version = "hello world"
     evaluation_documents = {}
 
-    evaluate_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    evaluate_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1189,7 +1193,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_evaluation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_evaluation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1245,7 +1249,7 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::ClientTes
     page_size = 42
     page_token = "hello world"
 
-    list_evaluations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_evaluations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

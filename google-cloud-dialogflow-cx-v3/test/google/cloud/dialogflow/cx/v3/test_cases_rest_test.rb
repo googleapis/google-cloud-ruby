@@ -33,24 +33,24 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_test_cases
@@ -83,7 +87,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     page_token = "hello world"
     view = :TEST_CASE_VIEW_UNSPECIFIED
 
-    list_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     parent = "hello world"
     names = ["hello world"]
 
-    batch_delete_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_delete_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     parent = "hello world"
     test_case = {}
 
-    create_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -302,7 +306,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     test_case = {}
     update_mask = {}
 
-    update_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     name = "hello world"
     environment = "hello world"
 
-    run_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    run_test_case_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -413,7 +417,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     environment = "hello world"
     test_cases = ["hello world"]
 
-    batch_run_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_run_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -468,7 +472,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     agent = "hello world"
     type = :COVERAGE_TYPE_UNSPECIFIED
 
-    calculate_coverage_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    calculate_coverage_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -523,7 +527,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     parent = "hello world"
     gcs_uri = "hello world"
 
-    import_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -580,7 +584,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     data_format = :DATA_FORMAT_UNSPECIFIED
     filter = "hello world"
 
-    export_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_test_cases_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -637,7 +641,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     page_token = "hello world"
     filter = "hello world"
 
-    list_test_case_results_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_test_case_results_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -691,7 +695,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::TestCases::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_test_case_result_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_test_case_result_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
