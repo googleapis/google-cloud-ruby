@@ -22,7 +22,7 @@ module Google
     module Merchant
       module Reports
         module V1beta
-          VERSION = "0.6.2"
+          VERSION = "0.7.0"
         end
       end
     end
