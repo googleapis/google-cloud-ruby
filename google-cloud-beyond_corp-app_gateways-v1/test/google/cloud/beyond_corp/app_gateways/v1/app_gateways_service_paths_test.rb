@@ -31,6 +31,10 @@ class ::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::ClientPa
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_app_gateway_path

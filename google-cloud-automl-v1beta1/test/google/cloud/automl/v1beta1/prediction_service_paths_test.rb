@@ -31,6 +31,10 @@ class ::Google::Cloud::AutoML::V1beta1::PredictionService::ClientPathsTest < Min
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_model_path

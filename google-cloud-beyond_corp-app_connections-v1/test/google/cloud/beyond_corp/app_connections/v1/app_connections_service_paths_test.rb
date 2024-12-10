@@ -31,6 +31,10 @@ class ::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Cl
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_app_connection_path

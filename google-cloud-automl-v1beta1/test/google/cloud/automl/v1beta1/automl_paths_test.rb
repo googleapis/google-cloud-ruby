@@ -31,6 +31,10 @@ class ::Google::Cloud::AutoML::V1beta1::AutoML::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_annotation_spec_path
