@@ -31,6 +31,10 @@ class Google::Cloud::Video::LiveStream::ClientConstructionMinitest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_livestream_service_grpc

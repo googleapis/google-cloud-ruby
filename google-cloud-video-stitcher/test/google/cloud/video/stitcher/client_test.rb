@@ -30,6 +30,10 @@ class Google::Cloud::Video::Stitcher::ClientConstructionMinitest < Minitest::Tes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_video_stitcher_service_grpc

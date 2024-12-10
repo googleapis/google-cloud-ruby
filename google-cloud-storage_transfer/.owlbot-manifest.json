@@ -23,8 +23,22 @@
     ".OwlBot.yaml",
     "samples/Gemfile",
     "samples/Rakefile",
+    "samples/acceptance/check_latest_transfer_operation_test.rb",
+    "samples/acceptance/event_driven_gcs_transfer_test.rb",
     "samples/acceptance/helper.rb",
+    "samples/acceptance/manifest_request_test.rb",
+    "samples/acceptance/nearline_request_test.rb",
+    "samples/acceptance/posix_download_request_test.rb",
+    "samples/acceptance/posix_to_posix_request_test.rb",
     "samples/acceptance/quickstart_test.rb",
-    "samples/quickstart.rb"
+    "samples/acceptance/transfer_from_posix_request_test.rb",
+    "samples/check_latest_transfer_operation.rb",
+    "samples/event_driven_gcs_transfer.rb",
+    "samples/manifest_request.rb",
+    "samples/nearline_request.rb",
+    "samples/posix_download_request.rb",
+    "samples/posix_to_posix_request.rb",
+    "samples/quickstart.rb",
+    "samples/transfer_from_posix_request.rb"
   ]
 }

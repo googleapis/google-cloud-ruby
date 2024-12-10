@@ -31,6 +31,10 @@ class Google::Cloud::StorageInsights::ClientConstructionMinitest < Minitest::Tes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_storage_insights_grpc
