@@ -31,6 +31,10 @@ class Google::Cloud::Eventarc::Publishing::ClientConstructionMinitest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_publisher_grpc

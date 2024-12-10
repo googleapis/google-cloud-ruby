@@ -31,6 +31,10 @@ class Google::Cloud::GDCHardwareManagement::ClientConstructionMinitest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_gdc_hardware_management_grpc

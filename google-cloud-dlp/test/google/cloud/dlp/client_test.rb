@@ -31,6 +31,10 @@ class Google::Cloud::Dlp::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_dlp_service_grpc
