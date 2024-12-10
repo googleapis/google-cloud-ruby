@@ -31,6 +31,10 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_certificate_path

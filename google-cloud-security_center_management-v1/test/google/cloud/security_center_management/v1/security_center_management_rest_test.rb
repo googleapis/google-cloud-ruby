@@ -33,24 +33,24 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_effective_security_health_analytics_custom_modules
@@ -82,7 +86,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_size = 42
     page_token = "hello world"
 
-    list_effective_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_effective_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_effective_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_effective_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_size = 42
     page_token = "hello world"
 
-    list_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_size = 42
     page_token = "hello world"
 
-    list_descendant_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_descendant_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -302,7 +306,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -358,7 +362,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     security_health_analytics_custom_module = {}
     validate_only = true
 
-    create_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -414,7 +418,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     security_health_analytics_custom_module = {}
     validate_only = true
 
-    update_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -469,7 +473,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     name = "hello world"
     validate_only = true
 
-    delete_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -525,7 +529,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     custom_config = {}
     resource = {}
 
-    simulate_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    simulate_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -581,7 +585,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_size = 42
     page_token = "hello world"
 
-    list_effective_event_threat_detection_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_effective_event_threat_detection_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -635,7 +639,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_effective_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_effective_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -691,7 +695,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_size = 42
     page_token = "hello world"
 
-    list_event_threat_detection_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_event_threat_detection_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -747,7 +751,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_size = 42
     page_token = "hello world"
 
-    list_descendant_event_threat_detection_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_descendant_event_threat_detection_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -801,7 +805,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -857,7 +861,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     event_threat_detection_custom_module = {}
     validate_only = true
 
-    create_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -913,7 +917,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     event_threat_detection_custom_module = {}
     validate_only = true
 
-    update_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -968,7 +972,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     name = "hello world"
     validate_only = true
 
-    delete_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1024,7 +1028,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     raw_text = "hello world"
     type = "hello world"
 
-    validate_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    validate_event_threat_detection_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1079,7 +1083,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     name = "hello world"
     show_eligible_modules_only = true
 
-    get_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1136,7 +1140,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     page_token = "hello world"
     show_eligible_modules_only = true
 
-    list_security_center_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_security_center_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1192,7 +1196,7 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::R
     update_mask = {}
     validate_only = true
 
-    update_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_security_center_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

@@ -31,6 +31,10 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::ClientPathsTes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_finding_path
