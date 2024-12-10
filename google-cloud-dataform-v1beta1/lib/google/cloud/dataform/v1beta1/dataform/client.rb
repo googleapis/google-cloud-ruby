@@ -160,14 +160,26 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @dataform_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
 
               @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @dataform_stub.endpoint
                 config.universe_domain = @dataform_stub.universe_domain
+                config.logger = @dataform_stub.logger if config.respond_to? :logger=
               end
 
               @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
@@ -175,6 +187,7 @@ module Google
                 config.quota_project = @quota_project_id
                 config.endpoint = @dataform_stub.endpoint
                 config.universe_domain = @dataform_stub.universe_domain
+                config.logger = @dataform_stub.logger if config.respond_to? :logger=
               end
             end
 
@@ -191,6 +204,15 @@ module Google
             # @return [Google::Iam::V1::IAMPolicy::Client]
             #
             attr_reader :iam_policy_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @dataform_stub.logger
+            end
 
             # Service calls
 
@@ -296,7 +318,7 @@ module Google
               @dataform_stub.call_rpc :list_repositories, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :list_repositories, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -382,7 +404,6 @@ module Google
 
               @dataform_stub.call_rpc :get_repository, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -474,7 +495,6 @@ module Google
 
               @dataform_stub.call_rpc :create_repository, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -563,7 +583,6 @@ module Google
 
               @dataform_stub.call_rpc :update_repository, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -653,7 +672,6 @@ module Google
 
               @dataform_stub.call_rpc :delete_repository, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -749,7 +767,6 @@ module Google
 
               @dataform_stub.call_rpc :commit_repository_changes, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -841,7 +858,6 @@ module Google
 
               @dataform_stub.call_rpc :read_repository_file, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -951,7 +967,7 @@ module Google
               @dataform_stub.call_rpc :query_repository_directory_contents, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_repository_directory_contents, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1053,7 +1069,7 @@ module Google
               @dataform_stub.call_rpc :fetch_repository_history, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :fetch_repository_history, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1139,7 +1155,6 @@ module Google
 
               @dataform_stub.call_rpc :compute_repository_access_token_status, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1225,7 +1240,6 @@ module Google
 
               @dataform_stub.call_rpc :fetch_remote_branches, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1333,7 +1347,7 @@ module Google
               @dataform_stub.call_rpc :list_workspaces, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :list_workspaces, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1419,7 +1433,6 @@ module Google
 
               @dataform_stub.call_rpc :get_workspace, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1511,7 +1524,6 @@ module Google
 
               @dataform_stub.call_rpc :create_workspace, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1597,7 +1609,6 @@ module Google
 
               @dataform_stub.call_rpc :delete_workspace, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1683,7 +1694,6 @@ module Google
 
               @dataform_stub.call_rpc :install_npm_packages, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1775,7 +1785,6 @@ module Google
 
               @dataform_stub.call_rpc :pull_git_commits, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1865,7 +1874,6 @@ module Google
 
               @dataform_stub.call_rpc :push_git_commits, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1951,7 +1959,6 @@ module Google
 
               @dataform_stub.call_rpc :fetch_file_git_statuses, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2041,7 +2048,6 @@ module Google
 
               @dataform_stub.call_rpc :fetch_git_ahead_behind, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2134,7 +2140,6 @@ module Google
 
               @dataform_stub.call_rpc :commit_workspace_changes, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2225,7 +2230,6 @@ module Google
 
               @dataform_stub.call_rpc :reset_workspace_changes, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2314,7 +2318,6 @@ module Google
 
               @dataform_stub.call_rpc :fetch_file_diff, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2419,7 +2422,7 @@ module Google
               @dataform_stub.call_rpc :query_directory_contents, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_directory_contents, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2508,7 +2511,6 @@ module Google
 
               @dataform_stub.call_rpc :make_directory, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2597,7 +2599,6 @@ module Google
 
               @dataform_stub.call_rpc :remove_directory, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2690,7 +2691,6 @@ module Google
 
               @dataform_stub.call_rpc :move_directory, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2779,7 +2779,6 @@ module Google
 
               @dataform_stub.call_rpc :read_file, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2868,7 +2867,6 @@ module Google
 
               @dataform_stub.call_rpc :remove_file, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2960,7 +2958,6 @@ module Google
 
               @dataform_stub.call_rpc :move_file, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3050,7 +3047,6 @@ module Google
 
               @dataform_stub.call_rpc :write_file, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3152,7 +3148,7 @@ module Google
               @dataform_stub.call_rpc :list_release_configs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :list_release_configs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3238,7 +3234,6 @@ module Google
 
               @dataform_stub.call_rpc :get_release_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3330,7 +3325,6 @@ module Google
 
               @dataform_stub.call_rpc :create_release_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3419,7 +3413,6 @@ module Google
 
               @dataform_stub.call_rpc :update_release_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3505,7 +3498,6 @@ module Google
 
               @dataform_stub.call_rpc :delete_release_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3607,7 +3599,7 @@ module Google
               @dataform_stub.call_rpc :list_compilation_results, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :list_compilation_results, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3693,7 +3685,6 @@ module Google
 
               @dataform_stub.call_rpc :get_compilation_result, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3782,7 +3773,6 @@ module Google
 
               @dataform_stub.call_rpc :create_compilation_result, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3888,7 +3878,7 @@ module Google
               @dataform_stub.call_rpc :query_compilation_result_actions, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_compilation_result_actions, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3990,7 +3980,7 @@ module Google
               @dataform_stub.call_rpc :list_workflow_configs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :list_workflow_configs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4076,7 +4066,6 @@ module Google
 
               @dataform_stub.call_rpc :get_workflow_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4168,7 +4157,6 @@ module Google
 
               @dataform_stub.call_rpc :create_workflow_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4257,7 +4245,6 @@ module Google
 
               @dataform_stub.call_rpc :update_workflow_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4343,7 +4330,6 @@ module Google
 
               @dataform_stub.call_rpc :delete_workflow_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4451,7 +4437,7 @@ module Google
               @dataform_stub.call_rpc :list_workflow_invocations, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :list_workflow_invocations, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4537,7 +4523,6 @@ module Google
 
               @dataform_stub.call_rpc :get_workflow_invocation, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4626,7 +4611,6 @@ module Google
 
               @dataform_stub.call_rpc :create_workflow_invocation, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4712,7 +4696,6 @@ module Google
 
               @dataform_stub.call_rpc :delete_workflow_invocation, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4798,7 +4781,6 @@ module Google
 
               @dataform_stub.call_rpc :cancel_workflow_invocation, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4901,7 +4883,7 @@ module Google
               @dataform_stub.call_rpc :query_workflow_invocation_actions, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @dataform_stub, :query_workflow_invocation_actions, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4990,6 +4972,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -5014,6 +5001,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

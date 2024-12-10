@@ -31,6 +31,10 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientPathsTest < Minitest:
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_aspect_type_path

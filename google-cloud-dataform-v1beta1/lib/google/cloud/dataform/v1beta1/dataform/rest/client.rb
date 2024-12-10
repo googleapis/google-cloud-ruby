@@ -153,8 +153,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @dataform_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -162,6 +173,7 @@ module Google
                   config.endpoint = @dataform_stub.endpoint
                   config.universe_domain = @dataform_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @dataform_stub.logger if config.respond_to? :logger=
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -170,6 +182,7 @@ module Google
                   config.endpoint = @dataform_stub.endpoint
                   config.universe_domain = @dataform_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @dataform_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -186,6 +199,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @dataform_stub.logger
+              end
 
               # Service calls
 
@@ -283,7 +305,6 @@ module Google
 
                 @dataform_stub.list_repositories request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -362,7 +383,6 @@ module Google
 
                 @dataform_stub.get_repository request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -447,7 +467,6 @@ module Google
 
                 @dataform_stub.create_repository request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -529,7 +548,6 @@ module Google
 
                 @dataform_stub.update_repository request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -612,7 +630,6 @@ module Google
 
                 @dataform_stub.delete_repository request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -701,7 +718,6 @@ module Google
 
                 @dataform_stub.commit_repository_changes request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -786,7 +802,6 @@ module Google
 
                 @dataform_stub.read_repository_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -889,7 +904,7 @@ module Google
                 @dataform_stub.query_repository_directory_contents request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :query_repository_directory_contents, "directory_entries", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -984,7 +999,7 @@ module Google
                 @dataform_stub.fetch_repository_history request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :fetch_repository_history, "commits", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1063,7 +1078,6 @@ module Google
 
                 @dataform_stub.compute_repository_access_token_status request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1142,7 +1156,6 @@ module Google
 
                 @dataform_stub.fetch_remote_branches request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1242,7 +1255,6 @@ module Google
 
                 @dataform_stub.list_workspaces request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1321,7 +1333,6 @@ module Google
 
                 @dataform_stub.get_workspace request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1406,7 +1417,6 @@ module Google
 
                 @dataform_stub.create_workspace request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1485,7 +1495,6 @@ module Google
 
                 @dataform_stub.delete_workspace request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1564,7 +1573,6 @@ module Google
 
                 @dataform_stub.install_npm_packages request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1649,7 +1657,6 @@ module Google
 
                 @dataform_stub.pull_git_commits request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1732,7 +1739,6 @@ module Google
 
                 @dataform_stub.push_git_commits request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1811,7 +1817,6 @@ module Google
 
                 @dataform_stub.fetch_file_git_statuses request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1894,7 +1899,6 @@ module Google
 
                 @dataform_stub.fetch_git_ahead_behind request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1980,7 +1984,6 @@ module Google
 
                 @dataform_stub.commit_workspace_changes request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2064,7 +2067,6 @@ module Google
 
                 @dataform_stub.reset_workspace_changes request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2146,7 +2148,6 @@ module Google
 
                 @dataform_stub.fetch_file_diff request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2244,7 +2245,7 @@ module Google
                 @dataform_stub.query_directory_contents request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :query_directory_contents, "directory_entries", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2326,7 +2327,6 @@ module Google
 
                 @dataform_stub.make_directory request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2408,7 +2408,6 @@ module Google
 
                 @dataform_stub.remove_directory request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2494,7 +2493,6 @@ module Google
 
                 @dataform_stub.move_directory request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2576,7 +2574,6 @@ module Google
 
                 @dataform_stub.read_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2658,7 +2655,6 @@ module Google
 
                 @dataform_stub.remove_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2743,7 +2739,6 @@ module Google
 
                 @dataform_stub.move_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2826,7 +2821,6 @@ module Google
 
                 @dataform_stub.write_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2920,7 +2914,6 @@ module Google
 
                 @dataform_stub.list_release_configs request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2999,7 +2992,6 @@ module Google
 
                 @dataform_stub.get_release_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3084,7 +3076,6 @@ module Google
 
                 @dataform_stub.create_release_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3166,7 +3157,6 @@ module Google
 
                 @dataform_stub.update_release_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3245,7 +3235,6 @@ module Google
 
                 @dataform_stub.delete_release_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3339,7 +3328,6 @@ module Google
 
                 @dataform_stub.list_compilation_results request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3418,7 +3406,6 @@ module Google
 
                 @dataform_stub.get_compilation_result request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3500,7 +3487,6 @@ module Google
 
                 @dataform_stub.create_compilation_result request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3599,7 +3585,7 @@ module Google
                 @dataform_stub.query_compilation_result_actions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :query_compilation_result_actions, "compilation_result_actions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3693,7 +3679,6 @@ module Google
 
                 @dataform_stub.list_workflow_configs request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3772,7 +3757,6 @@ module Google
 
                 @dataform_stub.get_workflow_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3857,7 +3841,6 @@ module Google
 
                 @dataform_stub.create_workflow_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3939,7 +3922,6 @@ module Google
 
                 @dataform_stub.update_workflow_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4018,7 +4000,6 @@ module Google
 
                 @dataform_stub.delete_workflow_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4118,7 +4099,6 @@ module Google
 
                 @dataform_stub.list_workflow_invocations request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4197,7 +4177,6 @@ module Google
 
                 @dataform_stub.get_workflow_invocation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4279,7 +4258,6 @@ module Google
 
                 @dataform_stub.create_workflow_invocation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4358,7 +4336,6 @@ module Google
 
                 @dataform_stub.delete_workflow_invocation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4437,7 +4414,6 @@ module Google
 
                 @dataform_stub.cancel_workflow_invocation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4533,7 +4509,7 @@ module Google
                 @dataform_stub.query_workflow_invocation_actions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :query_workflow_invocation_actions, "workflow_invocation_actions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4613,6 +4589,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -4641,6 +4622,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

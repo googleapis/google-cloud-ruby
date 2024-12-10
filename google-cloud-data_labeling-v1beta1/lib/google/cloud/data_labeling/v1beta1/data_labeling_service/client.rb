@@ -293,8 +293,19 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @data_labeling_service_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
             end
 
             ##
@@ -303,6 +314,15 @@ module Google
             # @return [::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @data_labeling_service_stub.logger
+            end
 
             # Service calls
 
@@ -389,7 +409,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :create_dataset, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -476,7 +495,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_dataset, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -579,7 +597,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_datasets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_datasets, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -666,7 +684,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :delete_dataset, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -770,7 +787,7 @@ module Google
               @data_labeling_service_stub.call_rpc :import_data, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -878,7 +895,7 @@ module Google
               @data_labeling_service_stub.call_rpc :export_data, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -966,7 +983,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_data_item, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1070,7 +1086,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_data_items, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_data_items, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1158,7 +1174,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_annotated_dataset, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1261,7 +1276,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_annotated_datasets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_annotated_datasets, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1349,7 +1364,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :delete_annotated_dataset, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1465,7 +1479,7 @@ module Google
               @data_labeling_service_stub.call_rpc :label_image, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1581,7 +1595,7 @@ module Google
               @data_labeling_service_stub.call_rpc :label_video, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1689,7 +1703,7 @@ module Google
               @data_labeling_service_stub.call_rpc :label_text, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1781,7 +1795,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_example, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1886,7 +1899,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_examples, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_examples, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1977,7 +1990,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :create_annotation_spec_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2064,7 +2076,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_annotation_spec_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2167,7 +2178,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_annotation_spec_sets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_annotation_spec_sets, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2254,7 +2265,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :delete_annotation_spec_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2351,7 +2361,7 @@ module Google
               @data_labeling_service_stub.call_rpc :create_instruction, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2438,7 +2448,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_instruction, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2541,7 +2550,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_instructions, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_instructions, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2628,7 +2637,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :delete_instruction, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2717,7 +2725,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_evaluation, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2852,7 +2859,7 @@ module Google
               @data_labeling_service_stub.call_rpc :search_evaluations, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :search_evaluations, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2959,7 +2966,7 @@ module Google
               @data_labeling_service_stub.call_rpc :search_example_comparisons, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :search_example_comparisons, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3048,7 +3055,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :create_evaluation_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3149,7 +3155,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :update_evaluation_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3237,7 +3242,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :get_evaluation_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3326,7 +3330,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :pause_evaluation_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3415,7 +3418,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :resume_evaluation_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3503,7 +3505,6 @@ module Google
 
               @data_labeling_service_stub.call_rpc :delete_evaluation_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3614,7 +3615,7 @@ module Google
               @data_labeling_service_stub.call_rpc :list_evaluation_jobs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @data_labeling_service_stub, :list_evaluation_jobs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3703,6 +3704,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -3727,6 +3733,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

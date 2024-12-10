@@ -31,6 +31,10 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::ClientPathsTest < Minitest:
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_entry_path

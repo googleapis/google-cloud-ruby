@@ -31,6 +31,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientPathsTe
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_annotated_dataset_path
