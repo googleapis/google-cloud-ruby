@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
 ### 1.2.0 (2024-11-11)
 
 #### Features
