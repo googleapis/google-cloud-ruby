@@ -4,6 +4,12 @@
 
 * Clarify Finding#event_time description
 
+### 0.15.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
 ### 0.14.2 (2024-08-30)
 
 #### Documentation
