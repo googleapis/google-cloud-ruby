@@ -31,6 +31,10 @@ class Google::Shopping::Merchant::Quota::ClientConstructionMinitest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_quota_service_grpc

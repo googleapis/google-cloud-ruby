@@ -31,6 +31,10 @@ class Google::Identity::AccessContextManager::ClientConstructionMinitest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_access_context_manager_grpc

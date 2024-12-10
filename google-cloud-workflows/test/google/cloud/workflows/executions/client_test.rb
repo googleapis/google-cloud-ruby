@@ -30,6 +30,10 @@ class Google::Cloud::Workflows::Executions::ClientConstructionMinitest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_executions_grpc

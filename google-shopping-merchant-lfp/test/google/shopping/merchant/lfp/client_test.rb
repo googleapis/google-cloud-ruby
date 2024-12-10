@@ -31,6 +31,10 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_lfp_inventory_service_grpc

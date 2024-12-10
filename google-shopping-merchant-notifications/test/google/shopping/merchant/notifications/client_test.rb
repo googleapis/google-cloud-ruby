@@ -31,6 +31,10 @@ class Google::Shopping::Merchant::Notifications::ClientConstructionMinitest < Mi
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_notifications_api_service_grpc
