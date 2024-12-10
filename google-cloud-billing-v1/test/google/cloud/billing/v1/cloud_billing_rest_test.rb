@@ -33,24 +33,24 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_billing_account
@@ -80,7 +84,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     filter = "hello world"
     parent = "hello world"
 
-    list_billing_accounts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_billing_accounts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     account = {}
     update_mask = {}
 
-    update_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     billing_account = {}
     parent = "hello world"
 
-    create_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -304,7 +308,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     page_size = 42
     page_token = "hello world"
 
-    list_project_billing_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_project_billing_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -358,7 +362,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_project_billing_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_project_billing_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -413,7 +417,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     name = "hello world"
     project_billing_info = {}
 
-    update_project_billing_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_project_billing_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -468,7 +472,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     resource = "hello world"
     options = {}
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -524,7 +528,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     policy = {}
     update_mask = {}
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -579,7 +583,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     resource = "hello world"
     permissions = ["hello world"]
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -634,7 +638,7 @@ class ::Google::Cloud::Billing::V1::CloudBilling::Rest::ClientTest < Minitest::T
     name = "hello world"
     destination_parent = "hello world"
 
-    move_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    move_billing_account_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

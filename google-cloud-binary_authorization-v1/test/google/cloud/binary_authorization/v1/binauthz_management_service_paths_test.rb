@@ -31,6 +31,10 @@ class ::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Clien
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_attestor_path

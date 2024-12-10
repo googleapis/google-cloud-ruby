@@ -31,6 +31,10 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerMonitor
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_violation_path
