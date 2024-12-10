@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+
 ### 0.17.0 (2024-10-25)
 
 #### Features
