@@ -172,8 +172,19 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @os_config_zonal_service_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
             end
 
             ##
@@ -182,6 +193,15 @@ module Google
             # @return [::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @os_config_zonal_service_stub.logger
+            end
 
             # Service calls
 
@@ -293,7 +313,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :create_os_policy_assignment, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -397,7 +417,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :update_os_policy_assignment, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -490,7 +510,6 @@ module Google
 
               @os_config_zonal_service_stub.call_rpc :get_os_policy_assignment, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -589,7 +608,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :list_os_policy_assignments, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_os_policy_assignments, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -686,7 +705,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :list_os_policy_assignment_revisions, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_os_policy_assignment_revisions, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -791,7 +810,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :delete_os_policy_assignment, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -888,7 +907,6 @@ module Google
 
               @os_config_zonal_service_stub.call_rpc :get_instance_os_policies_compliance, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -996,7 +1014,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :list_instance_os_policies_compliances, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_instance_os_policies_compliances, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1091,7 +1109,6 @@ module Google
 
               @os_config_zonal_service_stub.call_rpc :get_os_policy_assignment_report, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1212,7 +1229,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :list_os_policy_assignment_reports, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_os_policy_assignment_reports, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1309,7 +1326,6 @@ module Google
 
               @os_config_zonal_service_stub.call_rpc :get_inventory, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1416,7 +1432,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :list_inventories, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_inventories, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1510,7 +1526,6 @@ module Google
 
               @os_config_zonal_service_stub.call_rpc :get_vulnerability_report, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1614,7 +1629,7 @@ module Google
               @os_config_zonal_service_stub.call_rpc :list_vulnerability_reports, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @os_config_zonal_service_stub, :list_vulnerability_reports, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1703,6 +1718,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -1727,6 +1747,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

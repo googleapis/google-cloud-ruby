@@ -159,8 +159,19 @@ module Google
                       endpoint: @config.endpoint,
                       endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                       universe_domain: @config.universe_domain,
-                      credentials: credentials
+                      credentials: credentials,
+                      logger: @config.logger
                     )
+
+                    @environments_stub.logger(stub: true)&.info do |entry|
+                      entry.set_system_name
+                      entry.set_service
+                      entry.message = "Created client for #{entry.service}"
+                      entry.set_credentials_fields credentials
+                      entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                      entry.set "defaultTimeout", @config.timeout if @config.timeout
+                      entry.set "quotaProject", @quota_project_id if @quota_project_id
+                    end
                   end
 
                   ##
@@ -169,6 +180,15 @@ module Google
                   # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Operations]
                   #
                   attr_reader :operations_client
+
+                  ##
+                  # The logger used for request/response debug logging.
+                  #
+                  # @return [Logger]
+                  #
+                  def logger
+                    @environments_stub.logger
+                  end
 
                   # Service calls
 
@@ -256,7 +276,7 @@ module Google
                     @environments_stub.create_environment request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -336,7 +356,6 @@ module Google
 
                     @environments_stub.get_environment request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -425,7 +444,7 @@ module Google
                     @environments_stub.list_environments request, options do |result, operation|
                       result = ::Gapic::Rest::PagedEnumerable.new @environments_stub, :list_environments, "environments", request, result, options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -640,7 +659,7 @@ module Google
                     @environments_stub.update_environment request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -728,7 +747,7 @@ module Google
                     @environments_stub.delete_environment request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -817,7 +836,6 @@ module Google
 
                     @environments_stub.execute_airflow_command request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -906,7 +924,6 @@ module Google
 
                     @environments_stub.stop_airflow_command request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -994,7 +1011,6 @@ module Google
 
                     @environments_stub.poll_airflow_command request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1095,7 +1111,7 @@ module Google
                     @environments_stub.list_workloads request, options do |result, operation|
                       result = ::Gapic::Rest::PagedEnumerable.new @environments_stub, :list_workloads, "workloads", request, result, options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1211,7 +1227,7 @@ module Google
                     @environments_stub.check_upgrade request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1296,7 +1312,6 @@ module Google
 
                     @environments_stub.create_user_workloads_secret request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1380,7 +1395,6 @@ module Google
 
                     @environments_stub.get_user_workloads_secret request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1473,7 +1487,7 @@ module Google
                     @environments_stub.list_user_workloads_secrets request, options do |result, operation|
                       result = ::Gapic::Rest::PagedEnumerable.new @environments_stub, :list_user_workloads_secrets, "user_workloads_secrets", request, result, options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1555,7 +1569,6 @@ module Google
 
                     @environments_stub.update_user_workloads_secret request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1638,7 +1651,6 @@ module Google
 
                     @environments_stub.delete_user_workloads_secret request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1723,7 +1735,6 @@ module Google
 
                     @environments_stub.create_user_workloads_config_map request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1806,7 +1817,6 @@ module Google
 
                     @environments_stub.get_user_workloads_config_map request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1899,7 +1909,7 @@ module Google
                     @environments_stub.list_user_workloads_config_maps request, options do |result, operation|
                       result = ::Gapic::Rest::PagedEnumerable.new @environments_stub, :list_user_workloads_config_maps, "user_workloads_config_maps", request, result, options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1981,7 +1991,6 @@ module Google
 
                     @environments_stub.update_user_workloads_config_map request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2064,7 +2073,6 @@ module Google
 
                     @environments_stub.delete_user_workloads_config_map request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2158,7 +2166,7 @@ module Google
                     @environments_stub.save_snapshot request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2264,7 +2272,7 @@ module Google
                     @environments_stub.load_snapshot request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2352,7 +2360,7 @@ module Google
                     @environments_stub.database_failover request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
                       yield result, operation if block_given?
-                      return result
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2432,7 +2440,6 @@ module Google
 
                     @environments_stub.fetch_database_properties request, options do |result, operation|
                       yield result, operation if block_given?
-                      return result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2512,6 +2519,11 @@ module Google
                   #   default endpoint URL. The default value of nil uses the environment
                   #   universe (usually the default "googleapis.com" universe).
                   #   @return [::String,nil]
+                  # @!attribute [rw] logger
+                  #   A custom logger to use for request/response debug logging, or the value
+                  #   `:default` (the default) to construct a default logger, or `nil` to
+                  #   explicitly disable logging.
+                  #   @return [::Logger,:default,nil]
                   #
                   class Configuration
                     extend ::Gapic::Config
@@ -2533,6 +2545,7 @@ module Google
                     config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                     config_attr :quota_project, nil, ::String, nil
                     config_attr :universe_domain, nil, ::String, nil
+                    config_attr :logger, :default, ::Logger, nil, :default
 
                     # @private
                     def initialize parent_config = nil

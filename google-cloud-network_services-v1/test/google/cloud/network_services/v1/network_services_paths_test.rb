@@ -31,6 +31,10 @@ class ::Google::Cloud::NetworkServices::V1::NetworkServices::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_authorization_policy_path

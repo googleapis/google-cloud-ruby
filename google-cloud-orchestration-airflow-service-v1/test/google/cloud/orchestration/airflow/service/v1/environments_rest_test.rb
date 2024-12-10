@@ -33,24 +33,24 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_environment
@@ -81,7 +85,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     parent = "hello world"
     environment = {}
 
-    create_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -135,7 +139,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -191,7 +195,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     page_size = 42
     page_token = "hello world"
 
-    list_environments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_environments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     environment = {}
     update_mask = {}
 
-    update_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -358,7 +362,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     subcommand = "hello world"
     parameters = ["hello world"]
 
-    execute_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    execute_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -416,7 +420,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     pod_namespace = "hello world"
     force = true
 
-    stop_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    stop_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -474,7 +478,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     pod_namespace = "hello world"
     next_line_number = 42
 
-    poll_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    poll_airflow_command_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -531,7 +535,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     page_token = "hello world"
     filter = "hello world"
 
-    list_workloads_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_workloads_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -586,7 +590,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     environment = "hello world"
     image_version = "hello world"
 
-    check_upgrade_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    check_upgrade_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -641,7 +645,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     parent = "hello world"
     user_workloads_secret = {}
 
-    create_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -695,7 +699,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -751,7 +755,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     page_size = 42
     page_token = "hello world"
 
-    list_user_workloads_secrets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_user_workloads_secrets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -805,7 +809,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     user_workloads_secret = {}
 
-    update_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -859,7 +863,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_user_workloads_secret_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -914,7 +918,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     parent = "hello world"
     user_workloads_config_map = {}
 
-    create_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -968,7 +972,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1024,7 +1028,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     page_size = 42
     page_token = "hello world"
 
-    list_user_workloads_config_maps_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_user_workloads_config_maps_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1078,7 +1082,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     user_workloads_config_map = {}
 
-    update_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1132,7 +1136,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_user_workloads_config_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1187,7 +1191,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     environment = "hello world"
     snapshot_location = "hello world"
 
-    save_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    save_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1246,7 +1250,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     skip_airflow_overrides_setting = true
     skip_gcs_data_copying = true
 
-    load_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    load_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1300,7 +1304,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     environment = "hello world"
 
-    database_failover_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    database_failover_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1354,7 +1358,7 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::
     # Create request parameters for a unary method.
     environment = "hello world"
 
-    fetch_database_properties_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_database_properties_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

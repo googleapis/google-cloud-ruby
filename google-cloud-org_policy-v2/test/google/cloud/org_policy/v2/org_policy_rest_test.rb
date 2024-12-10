@@ -33,24 +33,24 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_constraints
@@ -82,7 +86,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     page_size = 42
     page_token = "hello world"
 
-    list_constraints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_constraints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     page_size = 42
     page_token = "hello world"
 
-    list_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -246,7 +250,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_effective_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_effective_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     parent = "hello world"
     policy = {}
 
-    create_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -356,7 +360,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     policy = {}
     update_mask = {}
 
-    update_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     name = "hello world"
     etag = "hello world"
 
-    delete_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -466,7 +470,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     parent = "hello world"
     custom_constraint = {}
 
-    create_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -520,7 +524,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     custom_constraint = {}
 
-    update_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -574,7 +578,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -630,7 +634,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     page_size = 42
     page_token = "hello world"
 
-    list_custom_constraints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_custom_constraints_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -684,7 +688,7 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_custom_constraint_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

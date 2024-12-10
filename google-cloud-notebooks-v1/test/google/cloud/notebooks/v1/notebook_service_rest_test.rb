@@ -33,24 +33,24 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_instances
@@ -82,7 +86,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     instance_id = "hello world"
     instance = {}
 
-    create_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     parent = "hello world"
     instance_id = "hello world"
 
-    register_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    register_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -303,7 +307,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     type = :ACCELERATOR_TYPE_UNSPECIFIED
     core_count = 42
 
-    set_instance_accelerator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_instance_accelerator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -358,7 +362,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     machine_type = "hello world"
 
-    set_instance_machine_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_instance_machine_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -413,7 +417,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     config = {}
 
-    update_instance_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_instance_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -468,7 +472,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     shielded_instance_config = {}
 
-    update_shielded_instance_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_shielded_instance_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -523,7 +527,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     labels = {}
 
-    set_instance_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_instance_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -578,7 +582,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     items = {}
 
-    update_instance_metadata_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_instance_metadata_items_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -632,7 +636,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -686,7 +690,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    start_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -740,7 +744,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    stop_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    stop_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -794,7 +798,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    reset_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reset_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -850,7 +854,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     vm_id = "hello world"
     metadata = {}
 
-    report_instance_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    report_instance_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -905,7 +909,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     notebook_instance = "hello world"
     type = :UPGRADE_TYPE_UNSPECIFIED
 
-    is_instance_upgradeable_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    is_instance_upgradeable_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -959,7 +963,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_instance_health_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_instance_health_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1014,7 +1018,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     type = :UPGRADE_TYPE_UNSPECIFIED
 
-    upgrade_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    upgrade_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1069,7 +1073,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     target_snapshot = "hello world"
 
-    rollback_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    rollback_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1124,7 +1128,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     name = "hello world"
     diagnostic_config = {}
 
-    diagnose_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    diagnose_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1180,7 +1184,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     vm_id = "hello world"
     type = :UPGRADE_TYPE_UNSPECIFIED
 
-    upgrade_instance_internal_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    upgrade_instance_internal_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1236,7 +1240,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_environments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_environments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1290,7 +1294,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1346,7 +1350,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     environment_id = "hello world"
     environment = {}
 
-    create_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1400,7 +1404,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_environment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1458,7 +1462,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_schedules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_schedules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1512,7 +1516,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1566,7 +1570,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1622,7 +1626,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     schedule_id = "hello world"
     schedule = {}
 
-    create_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1676,7 +1680,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    trigger_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    trigger_schedule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1734,7 +1738,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_executions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_executions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1788,7 +1792,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1842,7 +1846,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1898,7 +1902,7 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::Rest::ClientTest < Minite
     execution_id = "hello world"
     execution = {}
 
-    create_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_execution_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
