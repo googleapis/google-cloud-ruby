@@ -35,6 +35,10 @@ class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_config_channel_args

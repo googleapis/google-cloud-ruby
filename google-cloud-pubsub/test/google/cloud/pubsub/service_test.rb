@@ -29,6 +29,10 @@ describe Google::Cloud::PubSub::Service do
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   let(:project) { "test" }
