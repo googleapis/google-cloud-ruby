@@ -31,6 +31,10 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_cdn_key_path

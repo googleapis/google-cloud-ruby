@@ -41,9 +41,10 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
 
       @requests << @block&.call(*args, **kwargs)
 
-      yield @response, @operation if block_given?
-
-      @response
+      catch :response do
+        yield @response, @operation if block_given?
+        @response
+      end
     end
 
     def endpoint
@@ -52,6 +53,10 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
