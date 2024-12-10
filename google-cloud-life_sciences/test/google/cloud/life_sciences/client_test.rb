@@ -31,6 +31,10 @@ class Google::Cloud::LifeSciences::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_workflows_service_grpc

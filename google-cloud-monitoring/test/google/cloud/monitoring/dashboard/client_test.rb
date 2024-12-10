@@ -31,6 +31,10 @@ class Google::Cloud::Monitoring::Dashboard::ClientConstructionMinitest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_dashboards_service_grpc

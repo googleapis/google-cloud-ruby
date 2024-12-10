@@ -30,6 +30,10 @@ class Google::Cloud::ManagedIdentities::ClientConstructionMinitest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_managed_identities_service_grpc

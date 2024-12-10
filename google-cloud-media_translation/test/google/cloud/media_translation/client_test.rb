@@ -30,6 +30,10 @@ class Google::Cloud::MediaTranslation::ClientConstructionMinitest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_speech_translation_service_grpc
