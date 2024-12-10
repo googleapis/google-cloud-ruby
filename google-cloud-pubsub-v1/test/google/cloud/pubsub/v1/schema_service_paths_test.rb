@@ -31,6 +31,10 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientPathsTest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_project_path
