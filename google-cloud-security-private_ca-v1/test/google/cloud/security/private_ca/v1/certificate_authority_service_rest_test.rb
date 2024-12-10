@@ -33,24 +33,24 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -67,6 +67,10 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
@@ -85,7 +89,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     validate_only = true
     issuing_certificate_authority_id = "hello world"
 
-    create_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -139,7 +143,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     filter = "hello world"
     order_by = "hello world"
 
-    list_certificates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_certificates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -253,7 +257,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     reason = :REVOCATION_REASON_UNSPECIFIED
     request_id = "hello world"
 
-    revoke_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    revoke_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     update_mask = {}
     request_id = "hello world"
 
-    update_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_certificate_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -366,7 +370,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     subordinate_config = {}
     request_id = "hello world"
 
-    activate_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    activate_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -423,7 +427,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     certificate_authority = {}
     request_id = "hello world"
 
-    create_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -479,7 +483,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     request_id = "hello world"
     ignore_dependent_resources = true
 
-    disable_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    disable_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -534,7 +538,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     name = "hello world"
     request_id = "hello world"
 
-    enable_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enable_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
 
-    fetch_certificate_authority_csr_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_certificate_authority_csr_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -642,7 +646,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -700,7 +704,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     filter = "hello world"
     order_by = "hello world"
 
-    list_certificate_authorities_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_certificate_authorities_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -755,7 +759,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     name = "hello world"
     request_id = "hello world"
 
-    undelete_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -813,7 +817,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     skip_grace_period = true
     ignore_dependent_resources = true
 
-    delete_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -869,7 +873,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     update_mask = {}
     request_id = "hello world"
 
-    update_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_certificate_authority_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -926,7 +930,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ca_pool = {}
     request_id = "hello world"
 
-    create_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -982,7 +986,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     update_mask = {}
     request_id = "hello world"
 
-    update_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1036,7 +1040,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1094,7 +1098,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     filter = "hello world"
     order_by = "hello world"
 
-    list_ca_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_ca_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1150,7 +1154,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     request_id = "hello world"
     ignore_dependent_resources = true
 
-    delete_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_ca_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1205,7 +1209,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     ca_pool = "hello world"
     request_id = "hello world"
 
-    fetch_ca_certs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_ca_certs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1259,7 +1263,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_certificate_revocation_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_certificate_revocation_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1317,7 +1321,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     filter = "hello world"
     order_by = "hello world"
 
-    list_certificate_revocation_lists_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_certificate_revocation_lists_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1373,7 +1377,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     update_mask = {}
     request_id = "hello world"
 
-    update_certificate_revocation_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_certificate_revocation_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1430,7 +1434,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     certificate_template = {}
     request_id = "hello world"
 
-    create_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1485,7 +1489,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     name = "hello world"
     request_id = "hello world"
 
-    delete_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1539,7 +1543,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1597,7 +1601,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     filter = "hello world"
     order_by = "hello world"
 
-    list_certificate_templates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_certificate_templates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1653,7 +1657,7 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Res
     update_mask = {}
     request_id = "hello world"
 
-    update_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_certificate_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

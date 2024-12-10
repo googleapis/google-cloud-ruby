@@ -31,6 +31,10 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_effective_event_threat_detection_custom_module_path

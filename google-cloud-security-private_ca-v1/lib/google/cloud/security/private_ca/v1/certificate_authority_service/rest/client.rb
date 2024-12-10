@@ -167,8 +167,19 @@ module Google
                     endpoint: @config.endpoint,
                     endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                     universe_domain: @config.universe_domain,
-                    credentials: credentials
+                    credentials: credentials,
+                    logger: @config.logger
                   )
+
+                  @certificate_authority_service_stub.logger(stub: true)&.info do |entry|
+                    entry.set_system_name
+                    entry.set_service
+                    entry.message = "Created client for #{entry.service}"
+                    entry.set_credentials_fields credentials
+                    entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                    entry.set "defaultTimeout", @config.timeout if @config.timeout
+                    entry.set "quotaProject", @quota_project_id if @quota_project_id
+                  end
 
                   @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                     config.credentials = credentials
@@ -176,6 +187,7 @@ module Google
                     config.endpoint = @certificate_authority_service_stub.endpoint
                     config.universe_domain = @certificate_authority_service_stub.universe_domain
                     config.bindings_override = @config.bindings_override
+                    config.logger = @certificate_authority_service_stub.logger if config.respond_to? :logger=
                   end
 
                   @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -184,6 +196,7 @@ module Google
                     config.endpoint = @certificate_authority_service_stub.endpoint
                     config.universe_domain = @certificate_authority_service_stub.universe_domain
                     config.bindings_override = @config.bindings_override
+                    config.logger = @certificate_authority_service_stub.logger if config.respond_to? :logger=
                   end
                 end
 
@@ -207,6 +220,15 @@ module Google
                 # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
                 #
                 attr_reader :iam_policy_client
+
+                ##
+                # The logger used for request/response debug logging.
+                #
+                # @return [Logger]
+                #
+                def logger
+                  @certificate_authority_service_stub.logger
+                end
 
                 # Service calls
 
@@ -340,7 +362,6 @@ module Google
 
                   @certificate_authority_service_stub.create_certificate request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -421,7 +442,6 @@ module Google
 
                   @certificate_authority_service_stub.get_certificate request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -526,7 +546,6 @@ module Google
 
                   @certificate_authority_service_stub.list_certificates request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -625,7 +644,6 @@ module Google
 
                   @certificate_authority_service_stub.revoke_certificate request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -723,7 +741,6 @@ module Google
 
                   @certificate_authority_service_stub.update_certificate request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -841,7 +858,7 @@ module Google
                   @certificate_authority_service_stub.activate_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -954,7 +971,7 @@ module Google
                   @certificate_authority_service_stub.create_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1063,7 +1080,7 @@ module Google
                   @certificate_authority_service_stub.disable_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1167,7 +1184,7 @@ module Google
                   @certificate_authority_service_stub.enable_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1258,7 +1275,6 @@ module Google
 
                   @certificate_authority_service_stub.fetch_certificate_authority_csr request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1341,7 +1357,6 @@ module Google
 
                   @certificate_authority_service_stub.get_certificate_authority request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1444,7 +1459,6 @@ module Google
 
                   @certificate_authority_service_stub.list_certificate_authorities request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1549,7 +1563,7 @@ module Google
                   @certificate_authority_service_stub.undelete_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1665,7 +1679,7 @@ module Google
                   @certificate_authority_service_stub.delete_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1771,7 +1785,7 @@ module Google
                   @certificate_authority_service_stub.update_certificate_authority request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1880,7 +1894,7 @@ module Google
                   @certificate_authority_service_stub.create_ca_pool request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1984,7 +1998,7 @@ module Google
                   @certificate_authority_service_stub.update_ca_pool request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2064,7 +2078,6 @@ module Google
 
                   @certificate_authority_service_stub.get_ca_pool request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2164,7 +2177,6 @@ module Google
 
                   @certificate_authority_service_stub.list_ca_pools request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2272,7 +2284,7 @@ module Google
                   @certificate_authority_service_stub.delete_ca_pool request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2370,7 +2382,6 @@ module Google
 
                   @certificate_authority_service_stub.fetch_ca_certs request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2454,7 +2465,6 @@ module Google
 
                   @certificate_authority_service_stub.get_certificate_revocation_list request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2556,7 +2566,6 @@ module Google
 
                   @certificate_authority_service_stub.list_certificate_revocation_lists request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2662,7 +2671,7 @@ module Google
                   @certificate_authority_service_stub.update_certificate_revocation_list request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2774,7 +2783,7 @@ module Google
                   @certificate_authority_service_stub.create_certificate_template request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2878,7 +2887,7 @@ module Google
                   @certificate_authority_service_stub.delete_certificate_template request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2961,7 +2970,6 @@ module Google
 
                   @certificate_authority_service_stub.get_certificate_template request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -3063,7 +3071,6 @@ module Google
 
                   @certificate_authority_service_stub.list_certificate_templates request, options do |result, operation|
                     yield result, operation if block_given?
-                    return result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -3169,7 +3176,7 @@ module Google
                   @certificate_authority_service_stub.update_certificate_template request, options do |result, operation|
                     result = ::Gapic::Operation.new result, @operations_client, options: options
                     yield result, operation if block_given?
-                    return result
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -3249,6 +3256,11 @@ module Google
                 #   default endpoint URL. The default value of nil uses the environment
                 #   universe (usually the default "googleapis.com" universe).
                 #   @return [::String,nil]
+                # @!attribute [rw] logger
+                #   A custom logger to use for request/response debug logging, or the value
+                #   `:default` (the default) to construct a default logger, or `nil` to
+                #   explicitly disable logging.
+                #   @return [::Logger,:default,nil]
                 #
                 class Configuration
                   extend ::Gapic::Config
@@ -3277,6 +3289,7 @@ module Google
                   # by the host service.
                   # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                   config_attr :bindings_override, {}, ::Hash, nil
+                  config_attr :logger, :default, ::Logger, nil, :default
 
                   # @private
                   def initialize parent_config = nil

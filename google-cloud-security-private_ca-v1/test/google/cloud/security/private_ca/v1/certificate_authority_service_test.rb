@@ -41,9 +41,10 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Cli
 
       @requests << @block&.call(*args, **kwargs)
 
-      yield @response, @operation if block_given?
-
-      @response
+      catch :response do
+        yield @response, @operation if block_given?
+        @response
+      end
     end
 
     def endpoint
@@ -52,6 +53,10 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Cli
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 

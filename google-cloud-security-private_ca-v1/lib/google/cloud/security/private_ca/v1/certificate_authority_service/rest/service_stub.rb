@@ -31,7 +31,8 @@ module Google
               # including transcoding, making the REST call, and deserialing the response.
               #
               class ServiceStub
-                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
+                # @private
+                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
                   # These require statements are intentionally placed here to initialize
                   # the REST modules only when it's required.
                   require "gapic/rest"
@@ -41,7 +42,9 @@ module Google
                                                                universe_domain: universe_domain,
                                                                credentials: credentials,
                                                                numeric_enums: true,
-                                                               raise_faraday_errors: false
+                                                               service_name: self.class,
+                                                               raise_faraday_errors: false,
+                                                               logger: logger
                 end
 
                 ##
@@ -60,6 +63,15 @@ module Google
                 #
                 def endpoint
                   @client_stub.endpoint
+                end
+
+                ##
+                # The logger used for request/response debug logging.
+                #
+                # @return [Logger]
+                #
+                def logger stub: false
+                  stub ? @client_stub.stub_logger : @client_stub.logger
                 end
 
                 ##
@@ -88,16 +100,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_certificate",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::Certificate.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -126,16 +140,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_certificate",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::Certificate.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -164,16 +180,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_certificates",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::ListCertificatesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -202,16 +220,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "revoke_certificate",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::Certificate.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -240,16 +260,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_certificate",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::Certificate.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -278,16 +300,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "activate_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -316,16 +340,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -354,16 +380,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "disable_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -392,16 +420,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "enable_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -430,16 +460,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "fetch_certificate_authority_csr",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::FetchCertificateAuthorityCsrResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -468,16 +500,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -506,16 +540,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_certificate_authorities",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -544,16 +580,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "undelete_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -582,16 +620,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -620,16 +660,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_certificate_authority",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -658,16 +700,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_ca_pool",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -696,16 +740,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_ca_pool",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -734,16 +780,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_ca_pool",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::CaPool.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -772,16 +820,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_ca_pools",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -810,16 +860,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_ca_pool",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -848,16 +900,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "fetch_ca_certs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::FetchCaCertsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -886,16 +940,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_certificate_revocation_list",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -924,16 +980,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_certificate_revocation_lists",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -962,16 +1020,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_certificate_revocation_list",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1000,16 +1060,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_certificate_template",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1038,16 +1100,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_certificate_template",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1076,16 +1140,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_certificate_template",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1114,16 +1180,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_certificate_templates",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -1152,16 +1220,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_certificate_template",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##

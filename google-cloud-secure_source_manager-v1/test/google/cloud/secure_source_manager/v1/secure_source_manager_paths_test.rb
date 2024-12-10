@@ -31,6 +31,10 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_branch_rule_path

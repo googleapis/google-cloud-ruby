@@ -31,6 +31,10 @@ class ::Google::Cloud::SecretManager::V1beta2::SecretManagerService::ClientPaths
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_location_path

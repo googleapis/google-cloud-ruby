@@ -164,8 +164,19 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @security_center_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
             end
 
             ##
@@ -174,6 +185,15 @@ module Google
             # @return [::Google::Cloud::SecurityCenter::V2::SecurityCenter::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @security_center_stub.logger
+            end
 
             # Service calls
 
@@ -262,7 +282,6 @@ module Google
 
               @security_center_stub.call_rpc :batch_create_resource_value_configs, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -393,7 +412,7 @@ module Google
               @security_center_stub.call_rpc :bulk_mute_findings, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -489,7 +508,6 @@ module Google
 
               @security_center_stub.call_rpc :create_big_query_export, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -588,7 +606,6 @@ module Google
 
               @security_center_stub.call_rpc :create_finding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -699,7 +716,6 @@ module Google
 
               @security_center_stub.call_rpc :create_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -797,7 +813,6 @@ module Google
 
               @security_center_stub.call_rpc :create_notification_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -887,7 +902,6 @@ module Google
 
               @security_center_stub.call_rpc :create_source, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -979,7 +993,6 @@ module Google
 
               @security_center_stub.call_rpc :delete_big_query_export, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1090,7 +1103,6 @@ module Google
 
               @security_center_stub.call_rpc :delete_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1184,7 +1196,6 @@ module Google
 
               @security_center_stub.call_rpc :delete_notification_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1270,7 +1281,6 @@ module Google
 
               @security_center_stub.call_rpc :delete_resource_value_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1362,7 +1372,6 @@ module Google
 
               @security_center_stub.call_rpc :get_big_query_export, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1453,7 +1462,6 @@ module Google
 
               @security_center_stub.call_rpc :get_simulation, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1542,7 +1550,6 @@ module Google
 
               @security_center_stub.call_rpc :get_valued_resource, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1632,7 +1639,6 @@ module Google
 
               @security_center_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1743,7 +1749,6 @@ module Google
 
               @security_center_stub.call_rpc :get_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1837,7 +1842,6 @@ module Google
 
               @security_center_stub.call_rpc :get_notification_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1924,7 +1928,6 @@ module Google
 
               @security_center_stub.call_rpc :get_resource_value_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2011,7 +2014,6 @@ module Google
 
               @security_center_stub.call_rpc :get_source, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2194,7 +2196,7 @@ module Google
               @security_center_stub.call_rpc :group_findings, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :group_findings, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2304,7 +2306,7 @@ module Google
               @security_center_stub.call_rpc :list_attack_paths, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_attack_paths, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2412,7 +2414,7 @@ module Google
               @security_center_stub.call_rpc :list_big_query_exports, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_big_query_exports, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2608,7 +2610,7 @@ module Google
               @security_center_stub.call_rpc :list_findings, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_findings, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2731,7 +2733,7 @@ module Google
               @security_center_stub.call_rpc :list_mute_configs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_mute_configs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2833,7 +2835,7 @@ module Google
               @security_center_stub.call_rpc :list_notification_configs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_notification_configs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2940,7 +2942,7 @@ module Google
               @security_center_stub.call_rpc :list_resource_value_configs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_resource_value_configs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3040,7 +3042,7 @@ module Google
               @security_center_stub.call_rpc :list_sources, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_sources, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3166,7 +3168,7 @@ module Google
               @security_center_stub.call_rpc :list_valued_resources, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_valued_resources, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3269,7 +3271,6 @@ module Google
 
               @security_center_stub.call_rpc :set_finding_state, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3367,7 +3368,6 @@ module Google
 
               @security_center_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3470,7 +3470,6 @@ module Google
 
               @security_center_stub.call_rpc :set_mute, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3562,7 +3561,6 @@ module Google
 
               @security_center_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3651,7 +3649,6 @@ module Google
 
               @security_center_stub.call_rpc :update_big_query_export, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3742,7 +3739,6 @@ module Google
 
               @security_center_stub.call_rpc :update_external_system, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3843,7 +3839,6 @@ module Google
 
               @security_center_stub.call_rpc :update_finding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3948,7 +3943,6 @@ module Google
 
               @security_center_stub.call_rpc :update_mute_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4039,7 +4033,6 @@ module Google
 
               @security_center_stub.call_rpc :update_notification_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4132,7 +4125,6 @@ module Google
 
               @security_center_stub.call_rpc :update_resource_value_config, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4226,7 +4218,6 @@ module Google
 
               @security_center_stub.call_rpc :update_security_marks, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4316,7 +4307,6 @@ module Google
 
               @security_center_stub.call_rpc :update_source, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4405,6 +4395,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -4429,6 +4424,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil
