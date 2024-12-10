@@ -31,6 +31,10 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_billing_account_path

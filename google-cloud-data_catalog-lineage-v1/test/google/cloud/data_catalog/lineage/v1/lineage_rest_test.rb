@@ -33,24 +33,24 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_process_open_lineage_run_event
@@ -82,7 +86,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     open_lineage = {}
     request_id = "hello world"
 
-    process_open_lineage_run_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    process_open_lineage_run_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     process = {}
     request_id = "hello world"
 
-    create_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -194,7 +198,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     update_mask = {}
     allow_missing = true
 
-    update_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -304,7 +308,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_processes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_processes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -359,7 +363,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     name = "hello world"
     allow_missing = true
 
-    delete_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -415,7 +419,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     run = {}
     request_id = "hello world"
 
-    create_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -471,7 +475,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     update_mask = {}
     allow_missing = true
 
-    update_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -525,7 +529,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -581,7 +585,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -636,7 +640,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     name = "hello world"
     allow_missing = true
 
-    delete_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -692,7 +696,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     lineage_event = {}
     request_id = "hello world"
 
-    create_lineage_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_lineage_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -746,7 +750,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_lineage_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_lineage_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -802,7 +806,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    list_lineage_events_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_lineage_events_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -857,7 +861,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     name = "hello world"
     allow_missing = true
 
-    delete_lineage_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_lineage_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -914,7 +918,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    search_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_links_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -971,7 +975,7 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     page_size = 42
     page_token = "hello world"
 
-    batch_search_link_processes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_search_link_processes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

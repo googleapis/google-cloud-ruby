@@ -237,8 +237,28 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @cluster_manager_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
+              end
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @cluster_manager_stub.logger
               end
 
               # Service calls
@@ -328,7 +348,6 @@ module Google
 
                 @cluster_manager_stub.list_clusters request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -420,7 +439,6 @@ module Google
 
                 @cluster_manager_stub.get_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -525,7 +543,6 @@ module Google
 
                 @cluster_manager_stub.create_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -619,7 +636,6 @@ module Google
 
                 @cluster_manager_stub.update_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -811,7 +827,6 @@ module Google
 
                 @cluster_manager_stub.update_node_pool request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -909,7 +924,6 @@ module Google
 
                 @cluster_manager_stub.set_node_pool_autoscaling request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1013,7 +1027,6 @@ module Google
 
                 @cluster_manager_stub.set_logging_service request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1117,7 +1130,6 @@ module Google
 
                 @cluster_manager_stub.set_monitoring_service request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1212,7 +1224,6 @@ module Google
 
                 @cluster_manager_stub.set_addons_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1315,7 +1326,6 @@ module Google
 
                 @cluster_manager_stub.set_locations request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1418,7 +1428,6 @@ module Google
 
                 @cluster_manager_stub.update_master request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1516,7 +1525,6 @@ module Google
 
                 @cluster_manager_stub.set_master_auth request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1616,7 +1624,6 @@ module Google
 
                 @cluster_manager_stub.delete_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1706,7 +1713,6 @@ module Google
 
                 @cluster_manager_stub.list_operations request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1798,7 +1804,6 @@ module Google
 
                 @cluster_manager_stub.get_operation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1890,7 +1895,6 @@ module Google
 
                 @cluster_manager_stub.cancel_operation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1979,7 +1983,6 @@ module Google
 
                 @cluster_manager_stub.get_server_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2060,7 +2063,6 @@ module Google
 
                 @cluster_manager_stub.get_json_web_keys request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2152,7 +2154,6 @@ module Google
 
                 @cluster_manager_stub.list_node_pools request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2248,7 +2249,6 @@ module Google
 
                 @cluster_manager_stub.get_node_pool request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2343,7 +2343,6 @@ module Google
 
                 @cluster_manager_stub.create_node_pool request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2439,7 +2438,6 @@ module Google
 
                 @cluster_manager_stub.delete_node_pool request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2521,7 +2519,6 @@ module Google
 
                 @cluster_manager_stub.complete_node_pool_upgrade request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2621,7 +2618,6 @@ module Google
 
                 @cluster_manager_stub.rollback_node_pool_upgrade request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2719,7 +2715,6 @@ module Google
 
                 @cluster_manager_stub.set_node_pool_management request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2820,7 +2815,6 @@ module Google
 
                 @cluster_manager_stub.set_labels request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2914,7 +2908,6 @@ module Google
 
                 @cluster_manager_stub.set_legacy_abac request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3008,7 +3001,6 @@ module Google
 
                 @cluster_manager_stub.start_ip_rotation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3100,7 +3092,6 @@ module Google
 
                 @cluster_manager_stub.complete_ip_rotation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3200,7 +3191,6 @@ module Google
 
                 @cluster_manager_stub.set_node_pool_size request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3294,7 +3284,6 @@ module Google
 
                 @cluster_manager_stub.set_network_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3387,7 +3376,6 @@ module Google
 
                 @cluster_manager_stub.set_maintenance_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3485,7 +3473,7 @@ module Google
                 @cluster_manager_stub.list_usable_subnetworks request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @cluster_manager_stub, :list_usable_subnetworks, "subnetworks", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3566,7 +3554,6 @@ module Google
 
                 @cluster_manager_stub.check_autopilot_compatibility request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3646,6 +3633,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -3667,6 +3659,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

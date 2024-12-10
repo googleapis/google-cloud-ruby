@@ -31,6 +31,10 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::ClientPathsTest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_lineage_event_path

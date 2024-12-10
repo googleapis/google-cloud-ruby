@@ -33,24 +33,24 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_clusters
@@ -82,7 +86,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     zone = "hello world"
     parent = "hello world"
 
-    list_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -139,7 +143,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     cluster_id = "hello world"
     name = "hello world"
 
-    get_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -196,7 +200,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     cluster = {}
     parent = "hello world"
 
-    create_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -254,7 +258,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     update = {}
     name = "hello world"
 
-    update_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -339,7 +343,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     queued_provisioning = {}
     storage_pools = ["hello world"]
 
-    update_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -398,7 +402,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     autoscaling = {}
     name = "hello world"
 
-    set_node_pool_autoscaling_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_node_pool_autoscaling_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -456,7 +460,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     logging_service = "hello world"
     name = "hello world"
 
-    set_logging_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_logging_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -514,7 +518,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     monitoring_service = "hello world"
     name = "hello world"
 
-    set_monitoring_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_monitoring_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -572,7 +576,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     addons_config = {}
     name = "hello world"
 
-    set_addons_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_addons_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -630,7 +634,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     locations = ["hello world"]
     name = "hello world"
 
-    set_locations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_locations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -688,7 +692,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     master_version = "hello world"
     name = "hello world"
 
-    update_master_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_master_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -747,7 +751,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     update = {}
     name = "hello world"
 
-    set_master_auth_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_master_auth_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -804,7 +808,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     cluster_id = "hello world"
     name = "hello world"
 
-    delete_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -860,7 +864,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     zone = "hello world"
     parent = "hello world"
 
-    list_operations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_operations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -917,7 +921,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     operation_id = "hello world"
     name = "hello world"
 
-    get_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -974,7 +978,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     operation_id = "hello world"
     name = "hello world"
 
-    cancel_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1030,7 +1034,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     zone = "hello world"
     name = "hello world"
 
-    get_server_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_server_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1084,7 +1088,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     parent = "hello world"
 
-    get_json_web_keys_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_json_web_keys_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1141,7 +1145,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     cluster_id = "hello world"
     parent = "hello world"
 
-    list_node_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_node_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1199,7 +1203,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     node_pool_id = "hello world"
     name = "hello world"
 
-    get_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1257,7 +1261,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     node_pool = {}
     parent = "hello world"
 
-    create_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1315,7 +1319,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     node_pool_id = "hello world"
     name = "hello world"
 
-    delete_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_node_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1369,7 +1373,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    complete_node_pool_upgrade_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    complete_node_pool_upgrade_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1428,7 +1432,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     name = "hello world"
     respect_pdb = true
 
-    rollback_node_pool_upgrade_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    rollback_node_pool_upgrade_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1487,7 +1491,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     management = {}
     name = "hello world"
 
-    set_node_pool_management_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_node_pool_management_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1546,7 +1550,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     label_fingerprint = "hello world"
     name = "hello world"
 
-    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1604,7 +1608,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     enabled = true
     name = "hello world"
 
-    set_legacy_abac_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_legacy_abac_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1662,7 +1666,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     name = "hello world"
     rotate_credentials = true
 
-    start_ip_rotation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_ip_rotation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1719,7 +1723,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     cluster_id = "hello world"
     name = "hello world"
 
-    complete_ip_rotation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    complete_ip_rotation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1778,7 +1782,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     node_count = 42
     name = "hello world"
 
-    set_node_pool_size_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_node_pool_size_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1836,7 +1840,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     network_policy = {}
     name = "hello world"
 
-    set_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1894,7 +1898,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     maintenance_policy = {}
     name = "hello world"
 
-    set_maintenance_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_maintenance_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1951,7 +1955,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     page_size = 42
     page_token = "hello world"
 
-    list_usable_subnetworks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_usable_subnetworks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2005,7 +2009,7 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    check_autopilot_compatibility_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    check_autopilot_compatibility_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
