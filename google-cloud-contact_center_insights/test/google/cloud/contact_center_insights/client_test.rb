@@ -31,6 +31,10 @@ class Google::Cloud::ContactCenterInsights::ClientConstructionMinitest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_contact_center_insights_grpc
