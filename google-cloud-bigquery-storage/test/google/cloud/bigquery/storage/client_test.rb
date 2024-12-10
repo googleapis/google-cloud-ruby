@@ -30,6 +30,10 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_big_query_read_grpc

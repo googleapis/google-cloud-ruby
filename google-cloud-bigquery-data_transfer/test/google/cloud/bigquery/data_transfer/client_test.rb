@@ -31,6 +31,10 @@ class Google::Cloud::Bigquery::DataTransfer::ClientConstructionMinitest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_data_transfer_service_grpc

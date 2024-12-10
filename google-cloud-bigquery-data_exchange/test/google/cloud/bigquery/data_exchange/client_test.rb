@@ -30,6 +30,10 @@ class Google::Cloud::Bigquery::DataExchange::ClientConstructionMinitest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_analytics_hub_service_grpc

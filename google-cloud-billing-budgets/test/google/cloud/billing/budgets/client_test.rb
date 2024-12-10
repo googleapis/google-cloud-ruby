@@ -31,6 +31,10 @@ class Google::Cloud::Billing::Budgets::ClientConstructionMinitest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_budget_service_grpc
