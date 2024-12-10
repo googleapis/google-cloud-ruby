@@ -31,6 +31,10 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientPathsTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_log_metric_path
