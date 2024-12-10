@@ -385,7 +385,7 @@
   "google-cloud-gdc_hardware_management-v1alpha+FILLER": "0.0.0",
   "google-cloud-gke_backup": "1.2.1",
   "google-cloud-gke_backup+FILLER": "0.0.0",
-  "google-cloud-gke_backup-v1": "0.10.1",
+  "google-cloud-gke_backup-v1": "0.11.0",
   "google-cloud-gke_backup-v1+FILLER": "0.0.0",
   "google-cloud-gke_connect-gateway": "1.1.0",
   "google-cloud-gke_connect-gateway+FILLER": "0.0.0",
