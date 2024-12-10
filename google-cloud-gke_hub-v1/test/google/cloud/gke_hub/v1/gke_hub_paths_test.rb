@@ -31,6 +31,10 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_feature_path
