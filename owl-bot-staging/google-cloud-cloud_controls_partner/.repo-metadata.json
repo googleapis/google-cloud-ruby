@@ -1,0 +1,17 @@
+{
+    "api_id": "cloudcontrolspartner.googleapis.com",
+    "api_shortname": "cloudcontrolspartner",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_controls_partner/latest",
+    "distribution_name": "google-cloud-cloud_controls_partner",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "cloudcontrolspartner",
+    "name_pretty": "Cloud Controls Partner API",
+    "product_documentation": "https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners/reference/rest",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides insights about your customers and their Assured Workloads based on your Sovereign Controls by Partners offering.",
+    "ruby-cloud-product-url": "https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners/reference/rest",
+    "library_type": "GAPIC_AUTO"
+}
