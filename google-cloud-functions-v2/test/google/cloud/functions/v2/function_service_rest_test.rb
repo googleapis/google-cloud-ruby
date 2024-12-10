@@ -33,24 +33,24 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_function
@@ -81,7 +85,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     name = "hello world"
     revision = "hello world"
 
-    get_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -139,7 +143,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_functions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_functions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     function = {}
     function_id = "hello world"
 
-    create_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     function = {}
     update_mask = {}
 
-    update_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -304,7 +308,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_function_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -360,7 +364,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     kms_key_name = "hello world"
     environment = :ENVIRONMENT_UNSPECIFIED
 
-    generate_upload_url_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    generate_upload_url_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -414,7 +418,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    generate_download_url_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    generate_download_url_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -469,7 +473,7 @@ class ::Google::Cloud::Functions::V2::FunctionService::Rest::ClientTest < Minite
     parent = "hello world"
     filter = "hello world"
 
-    list_runtimes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_runtimes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

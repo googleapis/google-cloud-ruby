@@ -31,6 +31,10 @@ class ::Google::Cloud::EdgeContainer::V1::EdgeContainer::ClientPathsTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_cluster_path

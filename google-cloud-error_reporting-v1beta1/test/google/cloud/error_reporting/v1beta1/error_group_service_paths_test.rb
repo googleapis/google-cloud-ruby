@@ -31,6 +31,10 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientPathsTe
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_error_group_path

@@ -33,24 +33,24 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_contact
@@ -81,7 +85,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     parent = "hello world"
     contact = {}
 
-    create_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     contact = {}
     update_mask = {}
 
-    update_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     page_size = 42
     page_token = "hello world"
 
-    list_contacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_contacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -246,7 +250,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -300,7 +304,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_contact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     page_size = 42
     page_token = "hello world"
 
-    compute_contacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    compute_contacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -413,7 +417,7 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Cl
     resource = "hello world"
     notification_category = :NOTIFICATION_CATEGORY_UNSPECIFIED
 
-    send_test_message_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    send_test_message_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

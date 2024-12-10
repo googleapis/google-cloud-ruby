@@ -31,6 +31,10 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_backup_path
