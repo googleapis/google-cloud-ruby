@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_data_exchange_path

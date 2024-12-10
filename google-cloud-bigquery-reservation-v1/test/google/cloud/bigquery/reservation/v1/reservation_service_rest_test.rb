@@ -33,24 +33,24 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_reservation
@@ -82,7 +86,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     reservation_id = "hello world"
     reservation = {}
 
-    create_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     page_size = 42
     page_token = "hello world"
 
-    list_reservations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_reservations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -246,7 +250,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     reservation = {}
     update_mask = {}
 
-    update_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -355,7 +359,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    failover_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    failover_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -412,7 +416,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     enforce_single_admin_project_per_org = true
     capacity_commitment_id = "hello world"
 
-    create_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -468,7 +472,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     page_size = 42
     page_token = "hello world"
 
-    list_capacity_commitments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_capacity_commitments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -522,7 +526,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -577,7 +581,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     name = "hello world"
     force = true
 
-    delete_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -632,7 +636,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     capacity_commitment = {}
     update_mask = {}
 
-    update_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -687,7 +691,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     name = "hello world"
     slot_count = 42
 
-    split_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    split_capacity_commitment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -742,7 +746,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     parent = "hello world"
     capacity_commitment_ids = ["hello world"]
 
-    merge_capacity_commitments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    merge_capacity_commitments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -798,7 +802,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     assignment = {}
     assignment_id = "hello world"
 
-    create_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -854,7 +858,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     page_size = 42
     page_token = "hello world"
 
-    list_assignments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_assignments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -908,7 +912,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -965,7 +969,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     page_size = 42
     page_token = "hello world"
 
-    search_assignments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_assignments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1022,7 +1026,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     page_size = 42
     page_token = "hello world"
 
-    search_all_assignments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_all_assignments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1078,7 +1082,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     destination_id = "hello world"
     assignment_id = "hello world"
 
-    move_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    move_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1133,7 +1137,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     assignment = {}
     update_mask = {}
 
-    update_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_assignment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1187,7 +1191,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_bi_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_bi_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1242,7 +1246,7 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Clie
     bi_reservation = {}
     update_mask = {}
 
-    update_bi_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_bi_reservation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

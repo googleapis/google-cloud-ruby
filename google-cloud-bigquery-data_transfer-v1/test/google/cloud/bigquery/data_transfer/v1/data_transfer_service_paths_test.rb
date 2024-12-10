@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientPa
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_data_source_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientPathsT
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_cluster_path

@@ -31,7 +31,8 @@ module Google
               # including transcoding, making the REST call, and deserialing the response.
               #
               class ServiceStub
-                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
+                # @private
+                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
                   # These require statements are intentionally placed here to initialize
                   # the REST modules only when it's required.
                   require "gapic/rest"
@@ -41,7 +42,9 @@ module Google
                                                                universe_domain: universe_domain,
                                                                credentials: credentials,
                                                                numeric_enums: true,
-                                                               raise_faraday_errors: false
+                                                               service_name: self.class,
+                                                               raise_faraday_errors: false,
+                                                               logger: logger
                 end
 
                 ##
@@ -60,6 +63,15 @@ module Google
                 #
                 def endpoint
                   @client_stub.endpoint
+                end
+
+                ##
+                # The logger used for request/response debug logging.
+                #
+                # @return [Logger]
+                #
+                def logger stub: false
+                  stub ? @client_stub.stub_logger : @client_stub.logger
                 end
 
                 ##
@@ -88,16 +100,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_data_source",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::DataSource.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -126,16 +140,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_data_sources",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -164,16 +180,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_transfer_config",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -202,16 +220,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_transfer_config",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -240,16 +260,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_transfer_config",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -278,16 +300,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_transfer_config",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -316,16 +340,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_transfer_configs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferConfigsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -354,16 +380,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "schedule_transfer_runs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleTransferRunsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -392,16 +420,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "start_manual_transfer_runs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -430,16 +460,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_transfer_run",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -468,16 +500,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_transfer_run",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -506,16 +540,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_transfer_runs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -544,16 +580,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_transfer_logs",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -582,16 +620,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "check_valid_creds",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -620,16 +660,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "enroll_data_sources",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -658,16 +700,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "unenroll_data_sources",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##

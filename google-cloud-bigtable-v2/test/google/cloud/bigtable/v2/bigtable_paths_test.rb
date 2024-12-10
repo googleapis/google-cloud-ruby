@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_authorized_view_path
