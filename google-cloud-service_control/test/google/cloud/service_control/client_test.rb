@@ -31,6 +31,10 @@ class Google::Cloud::ServiceControl::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_quota_controller_grpc
