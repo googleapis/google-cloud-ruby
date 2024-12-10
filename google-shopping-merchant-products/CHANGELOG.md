@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 (2024-12-10)
+
+#### Documentation
+
+* Updated the gem description ([#27763](https://github.com/googleapis/google-cloud-ruby/issues/27763)) 
+
 ### 0.1.1 (2024-08-08)
 
 #### Documentation
