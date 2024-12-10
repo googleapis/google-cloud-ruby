@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-shopping-merchant-products-v1beta",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "language": "RUBY",
     "apis": [
       {
