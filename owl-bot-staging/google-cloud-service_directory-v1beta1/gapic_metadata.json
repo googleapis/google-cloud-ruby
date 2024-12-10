@@ -1,0 +1,122 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.servicedirectory.v1beta1",
+  "libraryPackage": "::Google::Cloud::ServiceDirectory::V1beta1",
+  "services": {
+    "LookupService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client",
+          "rpcs": {
+            "ResolveService": {
+              "methods": [
+                "resolve_service"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegistrationService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client",
+          "rpcs": {
+            "CreateNamespace": {
+              "methods": [
+                "create_namespace"
+              ]
+            },
+            "ListNamespaces": {
+              "methods": [
+                "list_namespaces"
+              ]
+            },
+            "GetNamespace": {
+              "methods": [
+                "get_namespace"
+              ]
+            },
+            "UpdateNamespace": {
+              "methods": [
+                "update_namespace"
+              ]
+            },
+            "DeleteNamespace": {
+              "methods": [
+                "delete_namespace"
+              ]
+            },
+            "CreateService": {
+              "methods": [
+                "create_service"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "update_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            },
+            "CreateEndpoint": {
+              "methods": [
+                "create_endpoint"
+              ]
+            },
+            "ListEndpoints": {
+              "methods": [
+                "list_endpoints"
+              ]
+            },
+            "GetEndpoint": {
+              "methods": [
+                "get_endpoint"
+              ]
+            },
+            "UpdateEndpoint": {
+              "methods": [
+                "update_endpoint"
+              ]
+            },
+            "DeleteEndpoint": {
+              "methods": [
+                "delete_endpoint"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
