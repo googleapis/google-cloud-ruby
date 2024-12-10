@@ -31,6 +31,10 @@ class ::Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Clien
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_promotion_path
