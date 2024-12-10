@@ -31,6 +31,10 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::ClientPathsT
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_instance_path

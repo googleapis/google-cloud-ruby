@@ -31,6 +31,10 @@ class ::Google::Cloud::Speech::V1::Adaptation::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_custom_class_path

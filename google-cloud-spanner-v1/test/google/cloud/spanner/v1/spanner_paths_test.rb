@@ -31,6 +31,10 @@ class ::Google::Cloud::Spanner::V1::Spanner::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_database_path
