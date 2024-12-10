@@ -21,8 +21,22 @@ require "gapic/grpc/service_stub"
 require "google/cloud/bigtable/v2/bigtable"
 
 class ::Google::Cloud::Bigtable::V2::Bigtable::HelpersTest < Minitest::Test
+  class DummyStub
+    def endpoint
+      "endpoint.example.com"
+    end
+
+    def universe_domain
+      "example.com"
+    end
+
+    def stub_logger
+      nil
+    end
+  end
+
   def test_config_channel_args
-    ::Gapic::ServiceStub.stub :new, nil do
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
       ::Google::Auth::Credentials.stub :default, :my_creds do
         ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
           channel_args = config.channel_args

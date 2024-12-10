@@ -25,6 +25,10 @@ describe Google::Cloud::PubSub::Service do
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   let(:project) { "test" }
