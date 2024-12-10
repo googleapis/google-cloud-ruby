@@ -31,6 +31,10 @@ class Google::Cloud::BinaryAuthorization::ClientConstructionMinitest < Minitest:
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_binauthz_management_service_grpc

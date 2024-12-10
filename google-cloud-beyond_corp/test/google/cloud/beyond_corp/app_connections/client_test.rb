@@ -30,6 +30,10 @@ class Google::Cloud::BeyondCorp::AppConnections::ClientConstructionMinitest < Mi
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_app_connections_service_grpc

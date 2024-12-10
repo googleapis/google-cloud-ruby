@@ -30,6 +30,10 @@ class Google::Cloud::BeyondCorp::AppGateways::ClientConstructionMinitest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_app_gateways_service_grpc
