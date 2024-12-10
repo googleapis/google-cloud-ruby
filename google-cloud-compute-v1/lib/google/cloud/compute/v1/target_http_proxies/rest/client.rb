@@ -391,7 +391,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -562,7 +562,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -745,7 +745,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -838,7 +838,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
