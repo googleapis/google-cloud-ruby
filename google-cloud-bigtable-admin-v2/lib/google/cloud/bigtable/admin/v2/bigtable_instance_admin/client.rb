@@ -246,8 +246,19 @@ module Google
                   universe_domain: @config.universe_domain,
                   channel_args: @config.channel_args,
                   interceptors: @config.interceptors,
-                  channel_pool_config: @config.channel_pool
+                  channel_pool_config: @config.channel_pool,
+                  logger: @config.logger
                 )
+
+                @bigtable_instance_admin_stub.stub_logger&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
               end
 
               ##
@@ -256,6 +267,15 @@ module Google
               # @return [::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @bigtable_instance_admin_stub.logger
+              end
 
               # Service calls
 
@@ -367,7 +387,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :create_instance, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -454,7 +474,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :get_instance, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -543,7 +562,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :list_instances, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -653,7 +671,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :update_instance, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -751,7 +768,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :partial_update_instance, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -838,7 +855,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :delete_instance, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -946,7 +962,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :create_cluster, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1033,7 +1049,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :get_cluster, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1125,7 +1140,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :list_clusters, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1241,7 +1255,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :update_cluster, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1349,7 +1363,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :partial_update_cluster, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1436,7 +1450,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :delete_cluster, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1532,7 +1545,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :create_app_profile, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1619,7 +1631,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :get_app_profile, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1726,7 +1737,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :list_app_profiles, request, options: options do |response, operation|
                   response = ::Gapic::PagedEnumerable.new @bigtable_instance_admin_stub, :list_app_profiles, request, response, operation, options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1825,7 +1836,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :update_app_profile, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1915,7 +1926,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :delete_app_profile, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2006,7 +2016,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2105,7 +2114,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2197,7 +2205,6 @@ module Google
 
                 @bigtable_instance_admin_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
                   yield response, operation if block_given?
-                  return response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2312,7 +2319,7 @@ module Google
                 @bigtable_instance_admin_stub.call_rpc :list_hot_tablets, request, options: options do |response, operation|
                   response = ::Gapic::PagedEnumerable.new @bigtable_instance_admin_stub, :list_hot_tablets, request, response, operation, options
                   yield response, operation if block_given?
-                  return response
+                  throw :response, response
                 end
               rescue ::GRPC::BadStatus => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2401,6 +2408,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -2425,6 +2437,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientPathsTe
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_app_profile_path

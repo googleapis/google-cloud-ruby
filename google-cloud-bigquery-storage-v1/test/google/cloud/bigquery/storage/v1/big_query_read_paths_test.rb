@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientPathsTest < Mi
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_project_path

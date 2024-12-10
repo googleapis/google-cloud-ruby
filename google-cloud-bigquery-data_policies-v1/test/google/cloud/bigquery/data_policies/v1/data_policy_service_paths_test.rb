@@ -31,6 +31,10 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::ClientPath
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_data_policy_path

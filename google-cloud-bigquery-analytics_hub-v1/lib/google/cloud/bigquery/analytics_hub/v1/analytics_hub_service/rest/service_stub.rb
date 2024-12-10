@@ -31,7 +31,8 @@ module Google
               # including transcoding, making the REST call, and deserialing the response.
               #
               class ServiceStub
-                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
+                # @private
+                def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
                   # These require statements are intentionally placed here to initialize
                   # the REST modules only when it's required.
                   require "gapic/rest"
@@ -41,7 +42,9 @@ module Google
                                                                universe_domain: universe_domain,
                                                                credentials: credentials,
                                                                numeric_enums: false,
-                                                               raise_faraday_errors: false
+                                                               service_name: self.class,
+                                                               raise_faraday_errors: false,
+                                                               logger: logger
                 end
 
                 ##
@@ -60,6 +63,15 @@ module Google
                 #
                 def endpoint
                   @client_stub.endpoint
+                end
+
+                ##
+                # The logger used for request/response debug logging.
+                #
+                # @return [Logger]
+                #
+                def logger stub: false
+                  stub ? @client_stub.stub_logger : @client_stub.logger
                 end
 
                 ##
@@ -88,16 +100,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_data_exchanges",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListDataExchangesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -126,16 +140,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_org_data_exchanges",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListOrgDataExchangesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -164,16 +180,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_data_exchange",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -202,16 +220,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_data_exchange",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -240,16 +260,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_data_exchange",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::DataExchange.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -278,16 +300,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_data_exchange",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -316,16 +340,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_listings",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListListingsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -354,16 +380,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_listing",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -392,16 +420,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "create_listing",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -430,16 +460,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "update_listing",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::Listing.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -468,16 +500,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_listing",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -506,16 +540,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "subscribe_listing",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -544,16 +580,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "subscribe_data_exchange",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -582,16 +620,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "refresh_subscription",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -620,16 +660,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_subscription",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::Subscription.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -658,16 +700,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_subscriptions",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSubscriptionsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -696,16 +740,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "list_shared_resource_subscriptions",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::ListSharedResourceSubscriptionsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -734,16 +780,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "revoke_subscription",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Cloud::Bigquery::AnalyticsHub::V1::RevokeSubscriptionResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -772,16 +820,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "delete_subscription",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -810,16 +860,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "get_iam_policy",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Iam::V1::Policy.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -848,16 +900,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "set_iam_policy",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Iam::V1::Policy.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##
@@ -886,16 +940,18 @@ module Google
 
                   response = @client_stub.make_http_request(
                     verb,
-                    uri:     uri,
-                    body:    body || "",
-                    params:  query_string_params,
+                    uri: uri,
+                    body: body || "",
+                    params: query_string_params,
+                    method_name: "test_iam_permissions",
                     options: options
                   )
                   operation = ::Gapic::Rest::TransportOperation.new response
                   result = ::Google::Iam::V1::TestIamPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                  yield result, operation if block_given?
-                  result
+                  catch :response do
+                    yield result, operation if block_given?
+                    result
+                  end
                 end
 
                 ##

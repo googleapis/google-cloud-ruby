@@ -33,24 +33,24 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_data_source
@@ -80,7 +84,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_data_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_data_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     page_token = "hello world"
     page_size = 42
 
-    list_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -194,7 +198,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     version_info = "hello world"
     service_account_name = "hello world"
 
-    create_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -252,7 +256,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     version_info = "hello world"
     service_account_name = "hello world"
 
-    update_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -306,7 +310,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -360,7 +364,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_transfer_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -417,7 +421,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     page_token = "hello world"
     page_size = 42
 
-    list_transfer_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_transfer_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -473,7 +477,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     start_time = {}
     end_time = {}
 
-    schedule_transfer_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    schedule_transfer_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -528,7 +532,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     parent = "hello world"
     requested_time_range = {}
 
-    start_manual_transfer_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_manual_transfer_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -582,7 +586,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_transfer_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_transfer_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -636,7 +640,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_transfer_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_transfer_run_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -694,7 +698,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     page_size = 42
     run_attempt = :RUN_ATTEMPT_UNSPECIFIED
 
-    list_transfer_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_transfer_runs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -751,7 +755,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     page_size = 42
     message_types = [:MESSAGE_SEVERITY_UNSPECIFIED]
 
-    list_transfer_logs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_transfer_logs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -805,7 +809,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     # Create request parameters for a unary method.
     name = "hello world"
 
-    check_valid_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    check_valid_creds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -860,7 +864,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     name = "hello world"
     data_source_ids = ["hello world"]
 
-    enroll_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enroll_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -915,7 +919,7 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     name = "hello world"
     data_source_ids = ["hello world"]
 
-    unenroll_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    unenroll_data_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

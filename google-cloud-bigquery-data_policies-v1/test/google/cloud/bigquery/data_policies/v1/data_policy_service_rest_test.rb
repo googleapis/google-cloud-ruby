@@ -33,24 +33,24 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_data_policy
@@ -81,7 +85,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     parent = "hello world"
     data_policy = {}
 
-    create_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     data_policy = {}
     update_mask = {}
 
-    update_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -191,7 +195,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     name = "hello world"
     new_data_policy_id = "hello world"
 
-    rename_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    rename_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -245,7 +249,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -299,7 +303,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_data_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -356,7 +360,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     page_token = "hello world"
     filter = "hello world"
 
-    list_data_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_data_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     resource = "hello world"
     options = {}
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -467,7 +471,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     policy = {}
     update_mask = {}
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -522,7 +526,7 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicyService::Rest::Clie
     resource = "hello world"
     permissions = ["hello world"]
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
