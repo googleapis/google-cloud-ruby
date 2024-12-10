@@ -33,24 +33,24 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_add_rule
@@ -84,7 +88,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     security_policy_rule_resource = {}
     validate_only = true
 
-    add_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    add_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -141,7 +145,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     request_id = "hello world"
     security_policy = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     region = "hello world"
     security_policy = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -254,7 +258,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     region = "hello world"
     security_policy = "hello world"
 
-    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -312,7 +316,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     security_policy_resource = {}
     validate_only = true
 
-    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -372,7 +376,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -431,7 +435,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     security_policy_resource = {}
     update_mask = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -491,7 +495,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     update_mask = "hello world"
     validate_only = true
 
-    patch_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    patch_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -548,7 +552,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
     region = "hello world"
     security_policy = "hello world"
 
-    remove_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    remove_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,6 +592,64 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ClientTest < M
 
         # Verify method calls
         assert_equal 5, remove_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_labels
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    region = "hello world"
+    region_set_labels_request_resource = {}
+    request_id = "hello world"
+    resource = "hello world"
+
+    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::ServiceStub.stub :transcode_set_labels_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.set_labels ::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.set_labels(::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_labels_client_stub.call_count
       end
     end
   end
