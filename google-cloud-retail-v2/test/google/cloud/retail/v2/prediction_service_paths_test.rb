@@ -31,6 +31,10 @@ class ::Google::Cloud::Retail::V2::PredictionService::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_product_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_assessment_path

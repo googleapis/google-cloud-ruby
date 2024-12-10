@@ -31,6 +31,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientPath
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_catalog_path

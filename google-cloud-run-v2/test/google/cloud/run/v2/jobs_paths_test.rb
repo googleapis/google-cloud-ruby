@@ -31,6 +31,10 @@ class ::Google::Cloud::Run::V2::Jobs::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_connector_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_insight_path

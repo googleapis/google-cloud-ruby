@@ -33,24 +33,24 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_instances
@@ -82,7 +86,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     page_size = 42
     page_token = "hello world"
 
-    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -190,7 +194,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_instance_auth_string_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_instance_auth_string_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -246,7 +250,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     instance_id = "hello world"
     instance = {}
 
-    create_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     update_mask = {}
     instance = {}
 
-    update_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -356,7 +360,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     name = "hello world"
     redis_version = "hello world"
 
-    upgrade_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    upgrade_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     name = "hello world"
     input_config = {}
 
-    import_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -466,7 +470,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     name = "hello world"
     output_config = {}
 
-    export_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -521,7 +525,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     name = "hello world"
     data_protection_mode = :DATA_PROTECTION_MODE_UNSPECIFIED
 
-    failover_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    failover_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -575,7 +579,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -631,7 +635,7 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     reschedule_type = :RESCHEDULE_TYPE_UNSPECIFIED
     schedule_time = {}
 
-    reschedule_maintenance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reschedule_maintenance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

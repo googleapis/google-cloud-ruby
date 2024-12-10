@@ -31,6 +31,10 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientPathsTe
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_certificate_authority_path
