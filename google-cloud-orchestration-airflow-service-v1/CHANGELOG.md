@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.2.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+#### Documentation
+
+* Minor documentation updates ([#27757](https://github.com/googleapis/google-cloud-ruby/issues/27757)) 
+
 ### 1.1.0 (2024-09-19)
 
 #### Features
