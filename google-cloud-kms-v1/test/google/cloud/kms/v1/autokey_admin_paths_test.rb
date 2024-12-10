@@ -31,6 +31,10 @@ class ::Google::Cloud::Kms::V1::AutokeyAdmin::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_autokey_config_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientPa
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_domain_path

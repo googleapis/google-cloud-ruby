@@ -31,6 +31,10 @@ class ::Google::Cloud::Memcache::V1::CloudMemcache::ClientPathsTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_instance_path

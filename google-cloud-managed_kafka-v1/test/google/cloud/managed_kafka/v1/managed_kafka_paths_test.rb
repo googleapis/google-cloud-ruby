@@ -31,6 +31,10 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_cluster_path
