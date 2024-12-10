@@ -31,6 +31,10 @@ class Google::Cloud::AlloyDB::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_alloy_db_admin_grpc

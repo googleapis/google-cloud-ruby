@@ -31,6 +31,10 @@ class Google::Cloud::ArtifactRegistry::ClientConstructionMinitest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_artifact_registry_grpc
