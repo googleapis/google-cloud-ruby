@@ -31,6 +31,10 @@ class Google::Shopping::Merchant::Conversions::ClientConstructionMinitest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_conversion_sources_service_grpc

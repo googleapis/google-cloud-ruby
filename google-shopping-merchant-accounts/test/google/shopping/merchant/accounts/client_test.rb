@@ -31,6 +31,10 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_account_tax_service_grpc

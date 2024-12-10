@@ -31,6 +31,10 @@ class Google::Shopping::Merchant::Promotions::ClientConstructionMinitest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_promotions_service_grpc
