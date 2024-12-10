@@ -31,6 +31,10 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_analysis_path

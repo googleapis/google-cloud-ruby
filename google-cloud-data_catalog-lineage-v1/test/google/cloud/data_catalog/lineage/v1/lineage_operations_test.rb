@@ -41,9 +41,10 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::OperationsTest < Minit
 
       @requests << @block&.call(*args, **kwargs)
 
-      yield @response, @operation if block_given?
-
-      @response
+      catch :response do
+        yield @response, @operation if block_given?
+        @response
+      end
     end
 
     def endpoint
@@ -52,6 +53,10 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::OperationsTest < Minit
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
