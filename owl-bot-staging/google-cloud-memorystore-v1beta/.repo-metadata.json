@@ -1,0 +1,17 @@
+{
+    "api_id": "memorystore.googleapis.com",
+    "api_shortname": "memorystore",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-memorystore-v1beta/latest",
+    "distribution_name": "google-cloud-memorystore-v1beta",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "memorystore",
+    "name_pretty": "Memorystore V1BETA API",
+    "product_documentation": "https://cloud.google.com/memorystore/docs/valkey",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-memorystore-v1beta is the official client library for the Memorystore V1BETA API. Note that google-cloud-memorystore-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-memorystore instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/valkey",
+    "library_type": "GAPIC_AUTO"
+}
