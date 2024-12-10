@@ -31,6 +31,10 @@ class Google::Cloud::Kms::Inventory::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_key_dashboard_service_grpc

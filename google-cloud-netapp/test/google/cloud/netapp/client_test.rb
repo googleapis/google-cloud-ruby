@@ -31,6 +31,10 @@ class Google::Cloud::NetApp::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_netapp_grpc

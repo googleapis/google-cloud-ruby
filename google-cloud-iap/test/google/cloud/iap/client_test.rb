@@ -31,6 +31,10 @@ class Google::Cloud::Iap::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_identity_aware_proxy_admin_service_grpc

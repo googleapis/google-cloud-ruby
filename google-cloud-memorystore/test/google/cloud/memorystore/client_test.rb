@@ -30,6 +30,10 @@ class Google::Cloud::Memorystore::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_memorystore_rest
