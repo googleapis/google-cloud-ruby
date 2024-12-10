@@ -31,6 +31,10 @@ class ::Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthoritySe
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_external_account_key_path

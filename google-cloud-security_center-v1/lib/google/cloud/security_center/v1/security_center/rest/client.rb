@@ -267,8 +267,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @security_center_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
               end
 
               ##
@@ -277,6 +288,15 @@ module Google
               # @return [::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @security_center_stub.logger
+              end
 
               # Service calls
 
@@ -393,7 +413,7 @@ module Google
                 @security_center_stub.bulk_mute_findings request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -482,7 +502,6 @@ module Google
 
                 @security_center_stub.create_security_health_analytics_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -565,7 +584,6 @@ module Google
 
                 @security_center_stub.create_source request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -653,7 +671,6 @@ module Google
 
                 @security_center_stub.create_finding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -741,7 +758,6 @@ module Google
 
                 @security_center_stub.create_mute_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -831,7 +847,6 @@ module Google
 
                 @security_center_stub.create_notification_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -916,7 +931,6 @@ module Google
 
                 @security_center_stub.delete_mute_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -998,7 +1012,6 @@ module Google
 
                 @security_center_stub.delete_notification_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1083,7 +1096,6 @@ module Google
 
                 @security_center_stub.delete_security_health_analytics_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1167,7 +1179,6 @@ module Google
 
                 @security_center_stub.get_simulation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1249,7 +1260,6 @@ module Google
 
                 @security_center_stub.get_valued_resource request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1331,7 +1341,6 @@ module Google
 
                 @security_center_stub.get_big_query_export request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1414,7 +1423,6 @@ module Google
 
                 @security_center_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1499,7 +1507,6 @@ module Google
 
                 @security_center_stub.get_mute_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1581,7 +1588,6 @@ module Google
 
                 @security_center_stub.get_notification_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1661,7 +1667,6 @@ module Google
 
                 @security_center_stub.get_organization_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1744,7 +1749,6 @@ module Google
 
                 @security_center_stub.get_effective_security_health_analytics_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1827,7 +1831,6 @@ module Google
 
                 @security_center_stub.get_security_health_analytics_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1907,7 +1910,6 @@ module Google
 
                 @security_center_stub.get_source request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2116,7 +2118,7 @@ module Google
                 @security_center_stub.group_assets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :group_assets, "group_by_results", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2325,7 +2327,7 @@ module Google
                 @security_center_stub.group_findings request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :group_findings, "group_by_results", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2539,7 +2541,7 @@ module Google
                 @security_center_stub.list_assets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_assets, "list_assets_results", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2632,7 +2634,7 @@ module Google
                 @security_center_stub.list_descendant_security_health_analytics_custom_modules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_descendant_security_health_analytics_custom_modules, "security_health_analytics_custom_modules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2852,7 +2854,7 @@ module Google
                 @security_center_stub.list_findings request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_findings, "list_findings_results", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2949,7 +2951,7 @@ module Google
                 @security_center_stub.list_mute_configs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_mute_configs, "mute_configs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3042,7 +3044,7 @@ module Google
                 @security_center_stub.list_notification_configs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_notification_configs, "notification_configs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3136,7 +3138,7 @@ module Google
                 @security_center_stub.list_effective_security_health_analytics_custom_modules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_effective_security_health_analytics_custom_modules, "effective_security_health_analytics_custom_modules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3230,7 +3232,7 @@ module Google
                 @security_center_stub.list_security_health_analytics_custom_modules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_security_health_analytics_custom_modules, "security_health_analytics_custom_modules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3323,7 +3325,7 @@ module Google
                 @security_center_stub.list_sources request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_sources, "sources", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3416,7 +3418,7 @@ module Google
                 @security_center_stub.run_asset_discovery request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3504,7 +3506,6 @@ module Google
 
                 @security_center_stub.set_finding_state request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3590,7 +3591,6 @@ module Google
 
                 @security_center_stub.set_mute request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3681,7 +3681,6 @@ module Google
 
                 @security_center_stub.set_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3766,7 +3765,6 @@ module Google
 
                 @security_center_stub.test_iam_permissions request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3853,7 +3851,6 @@ module Google
 
                 @security_center_stub.simulate_security_health_analytics_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3936,7 +3933,6 @@ module Google
 
                 @security_center_stub.update_external_system request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4029,7 +4025,6 @@ module Google
 
                 @security_center_stub.update_finding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4111,7 +4106,6 @@ module Google
 
                 @security_center_stub.update_mute_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4195,7 +4189,6 @@ module Google
 
                 @security_center_stub.update_notification_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4278,7 +4271,6 @@ module Google
 
                 @security_center_stub.update_organization_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4365,7 +4357,6 @@ module Google
 
                 @security_center_stub.update_security_health_analytics_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4448,7 +4439,6 @@ module Google
 
                 @security_center_stub.update_source request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4538,7 +4528,6 @@ module Google
 
                 @security_center_stub.update_security_marks request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4626,7 +4615,6 @@ module Google
 
                 @security_center_stub.create_big_query_export request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4708,7 +4696,6 @@ module Google
 
                 @security_center_stub.delete_big_query_export request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4790,7 +4777,6 @@ module Google
 
                 @security_center_stub.update_big_query_export request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4890,7 +4876,7 @@ module Google
                 @security_center_stub.list_big_query_exports request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_big_query_exports, "big_query_exports", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4982,7 +4968,6 @@ module Google
 
                 @security_center_stub.create_event_threat_detection_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5069,7 +5054,6 @@ module Google
 
                 @security_center_stub.delete_event_threat_detection_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5154,7 +5138,6 @@ module Google
 
                 @security_center_stub.get_event_threat_detection_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5258,7 +5241,7 @@ module Google
                 @security_center_stub.list_descendant_event_threat_detection_custom_modules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_descendant_event_threat_detection_custom_modules, "event_threat_detection_custom_modules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5363,7 +5346,7 @@ module Google
                 @security_center_stub.list_event_threat_detection_custom_modules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_event_threat_detection_custom_modules, "event_threat_detection_custom_modules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5450,7 +5433,6 @@ module Google
 
                 @security_center_stub.update_event_threat_detection_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5540,7 +5522,6 @@ module Google
 
                 @security_center_stub.validate_event_threat_detection_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5626,7 +5607,6 @@ module Google
 
                 @security_center_stub.get_effective_event_threat_detection_custom_module request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5731,7 +5711,7 @@ module Google
                 @security_center_stub.list_effective_event_threat_detection_custom_modules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_effective_event_threat_detection_custom_modules, "effective_event_threat_detection_custom_modules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5815,7 +5795,6 @@ module Google
 
                 @security_center_stub.batch_create_resource_value_configs request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5894,7 +5873,6 @@ module Google
 
                 @security_center_stub.delete_resource_value_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5974,7 +5952,6 @@ module Google
 
                 @security_center_stub.get_resource_value_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6074,7 +6051,7 @@ module Google
                 @security_center_stub.list_resource_value_configs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_resource_value_configs, "resource_value_configs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6156,7 +6133,6 @@ module Google
 
                 @security_center_stub.update_resource_value_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6279,7 +6255,7 @@ module Google
                 @security_center_stub.list_valued_resources request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_valued_resources, "valued_resources", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6382,7 +6358,7 @@ module Google
                 @security_center_stub.list_attack_paths request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @security_center_stub, :list_attack_paths, "attack_paths", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6462,6 +6438,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -6483,6 +6464,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil
