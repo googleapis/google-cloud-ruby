@@ -17,6 +17,8 @@ Lint/DeprecatedOpenSSLConstant:
   Enabled: false
 Metrics/AbcSize:
     Max: 40
+Metrics/BlockLength:
+  Enabled: false
 Metrics/ClassLength:
   Enabled: false
 Metrics/MethodLength:
