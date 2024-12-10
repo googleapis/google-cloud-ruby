@@ -31,6 +31,10 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_lookup_service_grpc

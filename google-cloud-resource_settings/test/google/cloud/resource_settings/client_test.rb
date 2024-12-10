@@ -31,6 +31,10 @@ class Google::Cloud::ResourceSettings::ClientConstructionMinitest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_resource_settings_service_grpc
