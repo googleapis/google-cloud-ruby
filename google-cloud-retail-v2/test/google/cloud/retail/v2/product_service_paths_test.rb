@@ -31,6 +31,10 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientPathsTest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_branch_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::ClientPathsTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_tag_binding_path

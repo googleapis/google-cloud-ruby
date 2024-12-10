@@ -33,24 +33,24 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_folder
@@ -80,7 +84,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     page_token = "hello world"
     show_deleted = true
 
-    list_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     page_token = "hello world"
     query = "hello world"
 
-    search_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_folders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     folder = {}
 
-    create_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -302,7 +306,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     folder = {}
     update_mask = {}
 
-    update_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     name = "hello world"
     destination_parent = "hello world"
 
-    move_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    move_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -465,7 +469,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    undelete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_folder_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -520,7 +524,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     resource = "hello world"
     options = {}
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -576,7 +580,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     policy = {}
     update_mask = {}
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -631,7 +635,7 @@ class ::Google::Cloud::ResourceManager::V3::Folders::Rest::ClientTest < Minitest
     resource = "hello world"
     permissions = ["hello world"]
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
