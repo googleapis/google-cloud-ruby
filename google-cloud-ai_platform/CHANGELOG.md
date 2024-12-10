@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.5.0 (2024-12-10)
+
+#### Features
+
+* Support for REST clients 
+* Support for VertexRagService and VertexRagDataService 
+
 ### 1.4.1 (2024-08-08)
 
 #### Documentation
