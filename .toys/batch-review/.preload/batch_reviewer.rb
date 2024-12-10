@@ -68,6 +68,8 @@ module Yoshi
                omit_users: nil,
                only_labels: nil,
                omit_labels: nil,
+               only_ids: nil,
+               omit_ids: nil,
                expect_paths: nil,
                expect_changed_paths: nil,
                expect_added_paths: nil,
@@ -92,6 +94,8 @@ module Yoshi
       @pull_request_filter.omit_users omit_users
       @pull_request_filter.only_labels only_labels
       @pull_request_filter.omit_labels omit_labels
+      @pull_request_filter.only_ids Array(only_ids).map{ |spec| parse_ids spec }
+      @pull_request_filter.omit_ids Array(omit_ids).map{ |spec| parse_ids spec }
       @diff_expectations = preset.diff_expectations
       Array(expect_paths).each { |expr| @diff_expectations.expect_paths expr }
       Array(expect_changed_paths).each { |expr| @diff_expectations.expect_changed_paths expr }
@@ -137,6 +141,24 @@ module Yoshi
     end
 
     private
+
+    def parse_ids expr
+      case expr
+      when /^(\d+)$/
+        num = Regexp.last_match[1].to_i
+        num..num
+      when /^(\d+)-(\d+)$/
+        num1 = Regexp.last_match[1].to_i
+        num2 = Regexp.last_match[2].to_i
+        num1..num2
+      when Range
+        expr
+      when Integer
+        expr..expr
+      else
+        raise "Unknown IDs format: #{expr.inspect}"
+      end
+    end
 
     def parse_diff_expectations expr
       path_exprs = []
@@ -382,6 +404,8 @@ module Yoshi
         clear_omit_users!
         clear_only_labels!
         clear_omit_labels!
+        clear_only_ids!
+        clear_omit_ids!
         omit_labels "do not merge"
         yield self if block_given?
       end
@@ -416,6 +440,16 @@ module Yoshi
         self
       end
 
+      def only_ids ids
+        @only_ids += Array(ids)
+        self
+      end
+
+      def omit_ids ids
+        @omit_ids += Array(ids)
+        self
+      end
+
       def clear_only_titles!
         @only_titles = []
         self
@@ -446,6 +480,16 @@ module Yoshi
         self
       end
 
+      def clear_only_ids!
+        @only_ids = []
+        self
+      end
+
+      def clear_omit_ids!
+        @omit_ids = []
+        self
+      end
+
       def clone
         copy = PullRequestFilter.new
         copy.clear_omit_labels!
@@ -455,10 +499,15 @@ module Yoshi
         copy.omit_users @omit_users
         copy.only_labels @only_labels
         copy.omit_labels @omit_labels
+        copy.only_ids @only_ids
+        copy.omit_ids @omit_ids
         copy
       end
 
       def match? pr_resource
+        number = pr_resource["number"].to_i
+        return false if !@only_ids.empty? && !@only_ids.any? { |range| range === number }
+        return false if !@omit_ids.empty? && @omit_ids.any? { |range| range === number }
         title = pr_resource["title"]
         return false if !@only_titles.empty? && !@only_titles.any? { |pattern| pattern === title }
         return false if !@omit_titles.empty? && @omit_titles.any? { |pattern| pattern === title }
@@ -846,6 +895,10 @@ module Yoshi
                desc: "pull request label to select"
           flag :omit_label, accept: String, handler: :push, default: [],
                desc: "pull request label to omit"
+          flag :only_ids, accept: String, handler: :push, default: [],
+               desc: "pull request ID or range of IDs to select"
+          flag :omit_ids, accept: String, handler: :push, default: [],
+               desc: "pull request ID or range of IDs to omit"
         end
 
         flag_group desc: "Diff expectations" do
@@ -900,6 +953,8 @@ module Yoshi
                                 omit_users: omit_user,
                                 only_labels: only_label,
                                 omit_labels: omit_label,
+                                only_ids: only_ids,
+                                omit_ids: omit_ids,
                                 expect_paths: expect_path,
                                 expect_changed_paths: expect_changed_path,
                                 expect_added_paths: expect_added_path,
