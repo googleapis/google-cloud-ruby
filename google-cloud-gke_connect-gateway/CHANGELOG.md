@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2024-12-10)
+
+### ⚠ BREAKING CHANGES
+
+* Updated from v1beta1 to v1 of the service, and switch the backend from gRPC to REST ([#27743](https://github.com/googleapis/google-cloud-ruby/issues/27743))
+
+#### Features
+
+* Updated from v1beta1 to v1 of the service, and switch the backend from gRPC to REST ([#27743](https://github.com/googleapis/google-cloud-ruby/issues/27743)) 
+
 ### 1.1.0 (2024-08-26)
 
 ### ⚠ BREAKING CHANGES
