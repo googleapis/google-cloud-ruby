@@ -3427,7 +3427,7 @@ module Google
         #     The CacheKeyPolicy for this CdnPolicy.
         # @!attribute [rw] cache_mode
         #   @return [::String]
-        #     Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached. If no value is provided for cdnPolicy.cacheMode, it defaults to CACHE_ALL_STATIC.
+        #     Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
         #     Check the CacheMode enum for the list of possible values.
         # @!attribute [rw] client_ttl
         #   @return [::Integer]
@@ -3460,7 +3460,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached. If no value is provided for cdnPolicy.cacheMode, it defaults to CACHE_ALL_STATIC.
+          # Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
           module CacheMode
             # A value indicating that the enum field is not set.
             UNDEFINED_CACHE_MODE = 0
@@ -3881,7 +3881,7 @@ module Google
         #     The CacheKeyPolicy for this CdnPolicy.
         # @!attribute [rw] cache_mode
         #   @return [::String]
-        #     Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached. If no value is provided for cdnPolicy.cacheMode, it defaults to CACHE_ALL_STATIC.
+        #     Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
         #     Check the CacheMode enum for the list of possible values.
         # @!attribute [rw] client_ttl
         #   @return [::Integer]
@@ -3914,7 +3914,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached. If no value is provided for cdnPolicy.cacheMode, it defaults to CACHE_ALL_STATIC.
+          # Specifies the cache setting for all responses from this backend. The possible values are: USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server. FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content. CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
           module CacheMode
             # A value indicating that the enum field is not set.
             UNDEFINED_CACHE_MODE = 0
@@ -4922,12 +4922,6 @@ module Google
             MEMORY_OPTIMIZED = 281_753_417
 
             MEMORY_OPTIMIZED_M3 = 276_301_372
-
-            MEMORY_OPTIMIZED_X4_16TB = 183_089_120
-
-            MEMORY_OPTIMIZED_X4_24TB = 183_116_989
-
-            MEMORY_OPTIMIZED_X4_32TB = 183_144_858
 
             STORAGE_OPTIMIZED_Z3 = 316_796_085
 
@@ -9800,18 +9794,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A request message for NetworkProfiles.Get. See the method description for details.
-        # @!attribute [rw] network_profile
-        #   @return [::String]
-        #     Name of the network profile to return.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        class GetNetworkProfileRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # A request message for Networks.Get. See the method description for details.
         # @!attribute [rw] network
         #   @return [::String]
@@ -10451,7 +10433,7 @@ module Google
         #     Project ID for this request.
         # @!attribute [rw] start
         #   @return [::Integer]
-        #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console. Note that the negative start is bounded by the retained buffer size, and the returned serial console output will not exceed the max buffer size.
+        #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console.
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -11781,13 +11763,13 @@ module Google
         #     For routeRules within a given pathMatcher, priority determines the order in which a load balancer interprets routeRules. RouteRules are evaluated in order of priority, from the lowest to highest number. The priority of a rule decreases as its number increases (1, 2, 3, N+1). The first rule that matches the request is applied. You cannot configure two or more routeRules with the same priority. Priority for each rule must be set to a number from 0 to 2147483647 inclusive. Priority numbers can have gaps, which enable you to add or remove rules in the future without affecting the rest of the rules. For example, 1, 2, 3, 4, 5, 9, 12, 16 is a valid series of priority numbers to which you could add rules numbered from 6 to 8, 10 to 11, and 13 to 15 in the future without any impact on existing rules.
         # @!attribute [rw] route_action
         #   @return [::Google::Cloud::Compute::V1::HttpRouteAction]
-        #     In response to a matching matchRule, the load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. Only one of urlRedirect, service or routeAction.weightedBackendService can be set. URL maps for classic Application Load Balancers only support the urlRewrite action within a route rule's routeAction.
+        #     In response to a matching matchRule, the load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. If routeAction specifies any weightedBackendServices, service must not be set. Conversely if service is set, routeAction cannot contain any weightedBackendServices. Only one of urlRedirect, service or routeAction.weightedBackendService must be set. URL maps for classic Application Load Balancers only support the urlRewrite action within a route rule's routeAction.
         # @!attribute [rw] service
         #   @return [::String]
-        #     The full or partial URL of the backend service resource to which traffic is directed if this rule is matched. If routeAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. Only one of urlRedirect, service or routeAction.weightedBackendService can be set.
+        #     The full or partial URL of the backend service resource to which traffic is directed if this rule is matched. If routeAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. However, if service is specified, routeAction cannot contain any weightedBackendServices. Conversely, if routeAction specifies any weightedBackendServices, service must not be specified. Only one of urlRedirect, service or routeAction.weightedBackendService must be set.
         # @!attribute [rw] url_redirect
         #   @return [::Google::Cloud::Compute::V1::HttpRedirectAction]
-        #     When this rule is matched, the request is redirected to a URL specified by urlRedirect. Only one of urlRedirect, service or routeAction.weightedBackendService can be set. Not supported when the URL map is bound to a target gRPC proxy.
+        #     When this rule is matched, the request is redirected to a URL specified by urlRedirect. If urlRedirect is specified, service or routeAction must not be set. Not supported when the URL map is bound to a target gRPC proxy.
         class HttpRouteRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -13801,9 +13783,6 @@ module Google
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] The URL for this managed instance group. The server defines this URL.
-        # @!attribute [rw] standby_policy
-        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStandbyPolicy]
-        #     Standby policy for stopped and suspended instances.
         # @!attribute [rw] stateful_policy
         #   @return [::Google::Cloud::Compute::V1::StatefulPolicy]
         #     Stateful configuration for this Instanced Group Manager
@@ -13816,12 +13795,6 @@ module Google
         # @!attribute [rw] target_size
         #   @return [::Integer]
         #     The target number of running instances for this managed instance group. You can reduce this number by using the instanceGroupManager deleteInstances or abandonInstances methods. Resizing the group also changes this number.
-        # @!attribute [rw] target_stopped_size
-        #   @return [::Integer]
-        #     The target number of stopped instances for this managed instance group. This number changes when you: - Stop instance using the stopInstances method or start instances using the startInstances method. - Manually change the targetStoppedSize using the update method.
-        # @!attribute [rw] target_suspended_size
-        #   @return [::Integer]
-        #     The target number of suspended instances for this managed instance group. This number changes when you: - Suspend instance using the suspendInstances method or resume instances using the resumeInstances method. - Manually change the targetSuspendedSize using the update method.
         # @!attribute [rw] update_policy
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerUpdatePolicy]
         #     The update policy for this managed instance group.
@@ -14143,30 +14116,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # @!attribute [rw] initial_delay_sec
-        #   @return [::Integer]
-        #     Specifies the number of seconds that the MIG should wait to suspend or stop a VM after that VM was created. The initial delay gives the initialization script the time to prepare your VM for a quick scale out. The value of initial delay must be between 0 and 3600 seconds. The default value is 0.
-        # @!attribute [rw] mode
-        #   @return [::String]
-        #     Defines how a MIG resumes or starts VMs from a standby pool when the group scales out. The default mode is `MANUAL`.
-        #     Check the Mode enum for the list of possible values.
-        class InstanceGroupManagerStandbyPolicy
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Defines how a MIG resumes or starts VMs from a standby pool when the group scales out. The default mode is `MANUAL`.
-          module Mode
-            # A value indicating that the enum field is not set.
-            UNDEFINED_MODE = 0
-
-            # MIG does not automatically resume or start VMs in the standby pool when the group scales out.
-            MANUAL = 119_397_318
-
-            # MIG automatically resumes or starts VMs in the standby pool when the group scales out, and replenishes the standby pool afterwards.
-            SCALE_OUT_POOL = 635_394
-          end
-        end
-
         # @!attribute [rw] all_instances_config
         #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerStatusAllInstancesConfig]
         #     [Output only] Status of all-instances configuration on the group.
@@ -14456,14 +14405,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to resume. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class InstanceGroupManagersResumeInstancesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # @!attribute [rw] instance_group_managers
         #   @return [::Array<::Google::Cloud::Compute::V1::InstanceGroupManager>]
         #     [Output Only] The list of managed instance groups that are contained in the specified project and zone.
@@ -14490,36 +14431,6 @@ module Google
         #   @return [::Array<::String>]
         #     The list of target pool URLs that instances in this managed instance group belong to. The managed instance group applies these target pools to all of the instances in the group. Existing instances and new instances in the group all receive these target pool settings.
         class InstanceGroupManagersSetTargetPoolsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to start. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class InstanceGroupManagersStartInstancesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] force_stop
-        #   @return [::Boolean]
-        #     If this flag is set to true, the Instance Group Manager will proceed to stop the instances, skipping initialization on them.
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to stop. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class InstanceGroupManagersStopInstancesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] force_suspend
-        #   @return [::Boolean]
-        #     If this flag is set to true, the Instance Group Manager will proceed to suspend the instances, skipping initialization on them.
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to suspend. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class InstanceGroupManagersSuspendInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16306,7 +16217,7 @@ module Google
         #     [Output Only] Availability zone for this InterconnectLocation. Within a metropolitan area (metro), maintenance will not be simultaneously scheduled in more than one availability zone. Example: "zone1" or "zone2".
         # @!attribute [rw] available_features
         #   @return [::Array<::String>]
-        #     [Output only] List of features available at this InterconnectLocation, which can take one of the following values: - IF_MACSEC
+        #     [Output only] List of features available at this InterconnectLocation, which can take one of the following values: - MACSEC
         #     Check the AvailableFeatures enum for the list of possible values.
         # @!attribute [rw] available_link_types
         #   @return [::Array<::String>]
@@ -16875,7 +16786,6 @@ module Google
         #     Name of the resource. The name must be 1-63 characters long and comply with RFC1035.
         # @!attribute [rw] resource_requirements
         #   @return [::Google::Cloud::Compute::V1::LicenseResourceRequirements]
-        #     [Input Only] Deprecated.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -16969,10 +16879,10 @@ module Google
 
         # @!attribute [rw] min_guest_cpu_count
         #   @return [::Integer]
-        #     [Input Only] Deprecated. This field no longer reflects the minimum number of guest cpus required to use the Instance.
+        #     Minimum number of guest cpus required to use the Instance. Enforced at Instance creation and Instance start.
         # @!attribute [rw] min_memory_mb
         #   @return [::Integer]
-        #     [Input Only] Deprecated. This field no longer reflects the minimum memory required to use the Instance.
+        #     Minimum memory required to use the Instance. Enforced at Instance creation and Instance start.
         class LicenseResourceRequirements
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -18248,30 +18158,6 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListNetworkFirewallPoliciesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for NetworkProfiles.List. See the method description for details.
-        # @!attribute [rw] filter
-        #   @return [::String]
-        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
-        # @!attribute [rw] max_results
-        #   @return [::Integer]
-        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-        # @!attribute [rw] order_by
-        #   @return [::String]
-        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] return_partial_success
-        #   @return [::Boolean]
-        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
-        class ListNetworkProfilesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -20810,9 +20696,6 @@ module Google
         #   @return [::String]
         #     The network firewall policy enforcement order. Can be either AFTER_CLASSIC_FIREWALL or BEFORE_CLASSIC_FIREWALL. Defaults to AFTER_CLASSIC_FIREWALL if the field is not specified.
         #     Check the NetworkFirewallPolicyEnforcementOrder enum for the list of possible values.
-        # @!attribute [rw] network_profile
-        #   @return [::String]
-        #     A full or partial URL of the network profile to apply to this network. This field can be set only at resource creation time. For example, the following are valid URLs: - https://www.googleapis.com/compute/\\{api_version}/projects/\\{project_id}/global/networkProfiles/\\{network_profile_name} - projects/\\{project_id}/global/networkProfiles/\\{network_profile_name}
         # @!attribute [rw] peerings
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkPeering>]
         #     [Output Only] A list of network peerings for the resource.
@@ -21546,12 +21429,6 @@ module Google
             # IDPF
             IDPF = 2_242_641
 
-            # IRDMA
-            IRDMA = 69_927_695
-
-            # MRDMA
-            MRDMA = 73_621_779
-
             # No type specified.
             UNSPECIFIED_NIC_TYPE = 67_411_801
 
@@ -21687,449 +21564,7 @@ module Google
           end
         end
 
-        # NetworkProfile represents a Google managed network profile resource.
-        # @!attribute [rw] creation_timestamp
-        #   @return [::String]
-        #     [Output Only] Creation timestamp in RFC3339 text format.
-        # @!attribute [rw] description
-        #   @return [::String]
-        #     [Output Only] An optional description of this resource.
-        # @!attribute [rw] features
-        #   @return [::Google::Cloud::Compute::V1::NetworkProfileNetworkFeatures]
-        #     [Output Only] Features supported by the network.
-        # @!attribute [rw] id
-        #   @return [::Integer]
-        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
-        # @!attribute [rw] kind
-        #   @return [::String]
-        #     [Output Only] Type of the resource. Always compute#networkProfile for network profiles.
-        # @!attribute [rw] location
-        #   @return [::Google::Cloud::Compute::V1::NetworkProfileLocation]
-        #     [Output Only] Location to which the network is restricted.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     [Output Only] Name of the resource.
-        # @!attribute [rw] self_link
-        #   @return [::String]
-        #     [Output Only] Server-defined URL for the resource.
-        # @!attribute [rw] self_link_with_id
-        #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource with the resource id.
-        # @!attribute [rw] zone
-        #   @return [::String]
-        #     [Output Only] Zone to which the network is restricted.
-        class NetworkProfile
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] name
-        #   @return [::String]
-        # @!attribute [rw] scope
-        #   @return [::String]
-        #     Check the Scope enum for the list of possible values.
-        class NetworkProfileLocation
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-
-          module Scope
-            # A value indicating that the enum field is not set.
-            UNDEFINED_SCOPE = 0
-
-            REGION = 266_017_524
-
-            ZONE = 2_759_596
-          end
-        end
-
-        # @!attribute [rw] address_purposes
-        #   @return [::Array<::String>]
-        #     Specifies what address purposes are supported. If empty, all address purposes are supported.
-        #     Check the AddressPurposes enum for the list of possible values.
-        # @!attribute [rw] allow_alias_ip_ranges
-        #   @return [::String]
-        #     Specifies whether alias IP ranges (and secondary address ranges) are allowed.
-        #     Check the AllowAliasIpRanges enum for the list of possible values.
-        # @!attribute [rw] allow_auto_mode_subnet
-        #   @return [::String]
-        #     Specifies whether auto mode subnet creation is allowed.
-        #     Check the AllowAutoModeSubnet enum for the list of possible values.
-        # @!attribute [rw] allow_class_d_firewalls
-        #   @return [::String]
-        #     Specifies whether firewalls for Class D address ranges are supported.
-        #     Check the AllowClassDFirewalls enum for the list of possible values.
-        # @!attribute [rw] allow_cloud_nat
-        #   @return [::String]
-        #     Specifies whether cloud NAT creation is allowed.
-        #     Check the AllowCloudNat enum for the list of possible values.
-        # @!attribute [rw] allow_cloud_router
-        #   @return [::String]
-        #     Specifies whether cloud router creation is allowed.
-        #     Check the AllowCloudRouter enum for the list of possible values.
-        # @!attribute [rw] allow_external_ip_access
-        #   @return [::String]
-        #     Specifies whether VMs are allowed to have external IP access on network interfaces connected to this VPC.
-        #     Check the AllowExternalIpAccess enum for the list of possible values.
-        # @!attribute [rw] allow_interconnect
-        #   @return [::String]
-        #     Specifies whether Cloud Interconnect creation is allowed.
-        #     Check the AllowInterconnect enum for the list of possible values.
-        # @!attribute [rw] allow_load_balancing
-        #   @return [::String]
-        #     Specifies whether cloud load balancing is allowed.
-        #     Check the AllowLoadBalancing enum for the list of possible values.
-        # @!attribute [rw] allow_multi_nic_in_same_network
-        #   @return [::String]
-        #     Specifies whether multi-nic in the same network is allowed.
-        #     Check the AllowMultiNicInSameNetwork enum for the list of possible values.
-        # @!attribute [rw] allow_packet_mirroring
-        #   @return [::String]
-        #     Specifies whether Packet Mirroring 1.0 is supported.
-        #     Check the AllowPacketMirroring enum for the list of possible values.
-        # @!attribute [rw] allow_private_google_access
-        #   @return [::String]
-        #     Specifies whether private Google access is allowed.
-        #     Check the AllowPrivateGoogleAccess enum for the list of possible values.
-        # @!attribute [rw] allow_psc
-        #   @return [::String]
-        #     Specifies whether PSC creation is allowed.
-        #     Check the AllowPsc enum for the list of possible values.
-        # @!attribute [rw] allow_same_network_unicast
-        #   @return [::String]
-        #     Specifies whether unicast within the same network is allowed.
-        #     Check the AllowSameNetworkUnicast enum for the list of possible values.
-        # @!attribute [rw] allow_static_routes
-        #   @return [::String]
-        #     Specifies whether static route creation is allowed.
-        #     Check the AllowStaticRoutes enum for the list of possible values.
-        # @!attribute [rw] allow_sub_interfaces
-        #   @return [::String]
-        #     Specifies whether sub interfaces are allowed.
-        #     Check the AllowSubInterfaces enum for the list of possible values.
-        # @!attribute [rw] allow_vpc_peering
-        #   @return [::String]
-        #     Specifies whether VPC peering is allowed.
-        #     Check the AllowVpcPeering enum for the list of possible values.
-        # @!attribute [rw] allow_vpn
-        #   @return [::String]
-        #     Specifies whether VPN creation is allowed.
-        #     Check the AllowVpn enum for the list of possible values.
-        # @!attribute [rw] interface_types
-        #   @return [::Array<::String>]
-        #     If set, limits the interface types that the network supports. If empty, all interface types are supported.
-        #     Check the InterfaceTypes enum for the list of possible values.
-        # @!attribute [rw] subnet_purposes
-        #   @return [::Array<::String>]
-        #     Specifies which subnetwork purposes are supported.
-        #     Check the SubnetPurposes enum for the list of possible values.
-        # @!attribute [rw] subnet_stack_types
-        #   @return [::Array<::String>]
-        #     Specifies which subnetwork stack types are supported.
-        #     Check the SubnetStackTypes enum for the list of possible values.
-        # @!attribute [rw] unicast
-        #   @return [::String]
-        #     Specifies which type of unicast is supported.
-        #     Check the Unicast enum for the list of possible values.
-        class NetworkProfileNetworkFeatures
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-
-          module AddressPurposes
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ADDRESS_PURPOSES = 0
-
-            # DNS resolver address in the subnetwork.
-            DNS_RESOLVER = 476_114_556
-
-            # VM internal/alias IP, Internal LB service IP, etc.
-            GCE_ENDPOINT = 230_515_243
-
-            # A regional internal IP address range reserved for the VLAN attachment that is used in HA VPN over Cloud Interconnect. This regional internal IP address range must not overlap with any IP address range of subnet/route in the VPC network and its peering networks. After the VLAN attachment is created with the reserved IP address range, when creating a new VPN gateway, its interface IP address is allocated from the associated VLAN attachment’s IP address range.
-            IPSEC_INTERCONNECT = 340_437_251
-
-            # External IP automatically reserved for Cloud NAT.
-            NAT_AUTO = 163_666_477
-
-            # A private network IP address that can be used to configure Private Service Connect. This purpose can be specified only for GLOBAL addresses of Type INTERNAL
-            PRIVATE_SERVICE_CONNECT = 48_134_724
-
-            # A regional internal IP address range reserved for Serverless.
-            SERVERLESS = 270_492_508
-
-            # A private network IP address that can be shared by multiple Internal Load Balancer forwarding rules.
-            SHARED_LOADBALANCER_VIP = 294_447_572
-
-            # IP range for peer networks.
-            VPC_PEERING = 400_800_170
-          end
-
-          # Specifies whether alias IP ranges (and secondary address ranges) are allowed.
-          module AllowAliasIpRanges
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_ALIAS_IP_RANGES = 0
-
-            ALIAS_IP_RANGES_ALLOWED = 464_867_048
-
-            ALIAS_IP_RANGES_BLOCKED = 281_030_444
-          end
-
-          # Specifies whether auto mode subnet creation is allowed.
-          module AllowAutoModeSubnet
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_AUTO_MODE_SUBNET = 0
-
-            AUTO_MODE_SUBNET_ALLOWED = 391_042_610
-
-            AUTO_MODE_SUBNET_BLOCKED = 207_206_006
-          end
-
-          # Specifies whether firewalls for Class D address ranges are supported.
-          module AllowClassDFirewalls
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_CLASS_D_FIREWALLS = 0
-
-            CLASS_D_FIREWALLS_ALLOWED = 348_219_386
-
-            CLASS_D_FIREWALLS_BLOCKED = 164_382_782
-          end
-
-          # Specifies whether cloud NAT creation is allowed.
-          module AllowCloudNat
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_CLOUD_NAT = 0
-
-            CLOUD_NAT_ALLOWED = 245_931_296
-
-            CLOUD_NAT_BLOCKED = 62_094_692
-          end
-
-          # Specifies whether cloud router creation is allowed.
-          module AllowCloudRouter
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_CLOUD_ROUTER = 0
-
-            CLOUD_ROUTER_ALLOWED = 365_388_284
-
-            CLOUD_ROUTER_BLOCKED = 181_551_680
-          end
-
-          # Specifies whether VMs are allowed to have external IP access on network interfaces connected to this VPC.
-          module AllowExternalIpAccess
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_EXTERNAL_IP_ACCESS = 0
-
-            EXTERNAL_IP_ACCESS_ALLOWED = 109_530_193
-
-            EXTERNAL_IP_ACCESS_BLOCKED = 462_564_501
-          end
-
-          # Specifies whether Cloud Interconnect creation is allowed.
-          module AllowInterconnect
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_INTERCONNECT = 0
-
-            INTERCONNECT_ALLOWED = 162_845_399
-
-            INTERCONNECT_BLOCKED = 515_879_707
-          end
-
-          # Specifies whether cloud load balancing is allowed.
-          module AllowLoadBalancing
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_LOAD_BALANCING = 0
-
-            LOAD_BALANCING_ALLOWED = 28_407_977
-
-            LOAD_BALANCING_BLOCKED = 381_442_285
-          end
-
-          # Specifies whether multi-nic in the same network is allowed.
-          module AllowMultiNicInSameNetwork
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_MULTI_NIC_IN_SAME_NETWORK = 0
-
-            MULTI_NIC_IN_SAME_NETWORK_ALLOWED = 457_555_419
-
-            MULTI_NIC_IN_SAME_NETWORK_BLOCKED = 273_718_815
-          end
-
-          # Specifies whether Packet Mirroring 1.0 is supported.
-          module AllowPacketMirroring
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_PACKET_MIRRORING = 0
-
-            PACKET_MIRRORING_ALLOWED = 92_416_245
-
-            PACKET_MIRRORING_BLOCKED = 445_450_553
-          end
-
-          # Specifies whether private Google access is allowed.
-          module AllowPrivateGoogleAccess
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_PRIVATE_GOOGLE_ACCESS = 0
-
-            PRIVATE_GOOGLE_ACCESS_ALLOWED = 220_787_351
-
-            PRIVATE_GOOGLE_ACCESS_BLOCKED = 36_950_747
-          end
-
-          # Specifies whether PSC creation is allowed.
-          module AllowPsc
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_PSC = 0
-
-            PSC_ALLOWED = 171_559_657
-
-            PSC_BLOCKED = 524_593_965
-          end
-
-          # Specifies whether unicast within the same network is allowed.
-          module AllowSameNetworkUnicast
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_SAME_NETWORK_UNICAST = 0
-
-            SAME_NETWORK_UNICAST_ALLOWED = 159_732_814
-
-            SAME_NETWORK_UNICAST_BLOCKED = 512_767_122
-          end
-
-          # Specifies whether static route creation is allowed.
-          module AllowStaticRoutes
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_STATIC_ROUTES = 0
-
-            STATIC_ROUTES_ALLOWED = 409_048_964
-
-            STATIC_ROUTES_BLOCKED = 225_212_360
-          end
-
-          # Specifies whether sub interfaces are allowed.
-          module AllowSubInterfaces
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_SUB_INTERFACES = 0
-
-            SUBINTERFACES_ALLOWED = 158_685_891
-
-            SUBINTERFACES_BLOCKED = 511_720_199
-          end
-
-          # Specifies whether VPC peering is allowed.
-          module AllowVpcPeering
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_VPC_PEERING = 0
-
-            VPC_PEERING_ALLOWED = 261_465_075
-
-            VPC_PEERING_BLOCKED = 77_628_471
-          end
-
-          # Specifies whether VPN creation is allowed.
-          module AllowVpn
-            # A value indicating that the enum field is not set.
-            UNDEFINED_ALLOW_VPN = 0
-
-            VPN_ALLOWED = 162_163_997
-
-            VPN_BLOCKED = 515_198_305
-          end
-
-          module InterfaceTypes
-            # A value indicating that the enum field is not set.
-            UNDEFINED_INTERFACE_TYPES = 0
-
-            # GVNIC
-            GVNIC = 68_209_305
-
-            # IDPF
-            IDPF = 2_242_641
-
-            # IRDMA
-            IRDMA = 69_927_695
-
-            # MRDMA
-            MRDMA = 73_621_779
-
-            # No type specified.
-            UNSPECIFIED_NIC_TYPE = 67_411_801
-
-            # VIRTIO
-            VIRTIO_NET = 452_123_481
-          end
-
-          module SubnetPurposes
-            # A value indicating that the enum field is not set.
-            UNDEFINED_SUBNET_PURPOSES = 0
-
-            SUBNET_PURPOSE_CUSTOM_HARDWARE = 283_160_275
-
-            SUBNET_PURPOSE_PRIVATE = 404_371_008
-          end
-
-          module SubnetStackTypes
-            # A value indicating that the enum field is not set.
-            UNDEFINED_SUBNET_STACK_TYPES = 0
-
-            SUBNET_STACK_TYPE_IPV4_IPV6 = 41_454_485
-
-            SUBNET_STACK_TYPE_IPV4_ONLY = 41_631_034
-
-            SUBNET_STACK_TYPE_IPV6_ONLY = 98_889_336
-          end
-
-          # Specifies which type of unicast is supported.
-          module Unicast
-            # A value indicating that the enum field is not set.
-            UNDEFINED_UNICAST = 0
-
-            UNICAST_SDN = 379_954_157
-
-            UNICAST_ULL = 379_956_325
-          end
-        end
-
-        # Contains a list of network profiles.
-        # @!attribute [rw] etag
-        #   @return [::String]
-        # @!attribute [rw] id
-        #   @return [::String]
-        #     [Output Only] Unique identifier for the resource; defined by the server.
-        # @!attribute [rw] items
-        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkProfile>]
-        #     A list of NetworkProfile resources.
-        # @!attribute [rw] kind
-        #   @return [::String]
-        #     [Output Only] Type of resource. Always compute#networkProfileList for network profiles.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
-        # @!attribute [rw] self_link
-        #   @return [::String]
-        #     [Output Only] Server-defined URL for this resource.
-        # @!attribute [rw] unreachables
-        #   @return [::Array<::String>]
-        #     [Output Only] Unreachable resources. end_interface: MixerListResponseWithEtagBuilder
-        # @!attribute [rw] warning
-        #   @return [::Google::Cloud::Compute::V1::Warning]
-        #     [Output Only] Informational warning message.
-        class NetworkProfilesListResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # A routing configuration attached to a network resource. The message includes the list of routers associated with the network, and a flag indicating the type of routing behavior to enforce network-wide.
-        # @!attribute [rw] bgp_always_compare_med
-        #   @return [::Boolean]
-        #     Enable comparison of Multi-Exit Discriminators (MED) across routes with different neighbor ASNs when using the STANDARD BGP best path selection algorithm.
-        # @!attribute [rw] bgp_best_path_selection_mode
-        #   @return [::String]
-        #     The BGP best path selection algorithm to be employed within this network for dynamic routes learned by Cloud Routers. Can be LEGACY (default) or STANDARD.
-        #     Check the BgpBestPathSelectionMode enum for the list of possible values.
-        # @!attribute [rw] bgp_inter_region_cost
-        #   @return [::String]
-        #     Allows to define a preferred approach for handling inter-region cost in the selection process when using the STANDARD BGP best path selection algorithm. Can be DEFAULT or ADD_COST_TO_MED.
-        #     Check the BgpInterRegionCost enum for the list of possible values.
         # @!attribute [rw] routing_mode
         #   @return [::String]
         #     The network-wide routing mode to use. If set to REGIONAL, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network's Cloud Routers will advertise routes with all subnets of this network, across regions.
@@ -22137,26 +21572,6 @@ module Google
         class NetworkRoutingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # The BGP best path selection algorithm to be employed within this network for dynamic routes learned by Cloud Routers. Can be LEGACY (default) or STANDARD.
-          module BgpBestPathSelectionMode
-            # A value indicating that the enum field is not set.
-            UNDEFINED_BGP_BEST_PATH_SELECTION_MODE = 0
-
-            LEGACY = 94_234_569
-
-            STANDARD = 484_642_493
-          end
-
-          # Allows to define a preferred approach for handling inter-region cost in the selection process when using the STANDARD BGP best path selection algorithm. Can be DEFAULT or ADD_COST_TO_MED.
-          module BgpInterRegionCost
-            # A value indicating that the enum field is not set.
-            UNDEFINED_BGP_INTER_REGION_COST = 0
-
-            ADD_COST_TO_MED = 490_583_004
-
-            DEFAULT = 115_302_945
-          end
 
           # The network-wide routing mode to use. If set to REGIONAL, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network's Cloud Routers will advertise routes with all subnets of this network, across regions.
           module RoutingMode
@@ -24463,13 +23878,13 @@ module Google
         #     defaultCustomErrorResponsePolicy specifies how the Load Balancer returns error responses when BackendServiceor BackendBucket responds with an error. This policy takes effect at the PathMatcher level and applies only when no policy has been defined for the error code at lower levels like RouteRule and PathRule within this PathMatcher. If an error code does not have a policy defined in defaultCustomErrorResponsePolicy, then a policy defined for the error code in UrlMap.defaultCustomErrorResponsePolicy takes effect. For example, consider a UrlMap with the following configuration: - UrlMap.defaultCustomErrorResponsePolicy is configured with policies for 5xx and 4xx errors - A RouteRule for /coming_soon/ is configured for the error code 404. If the request is for www.myotherdomain.com and a 404 is encountered, the policy under UrlMap.defaultCustomErrorResponsePolicy takes effect. If a 404 response is encountered for the request www.example.com/current_events/, the pathMatcher's policy takes effect. If however, the request for www.example.com/coming_soon/ encounters a 404, the policy in RouteRule.customErrorResponsePolicy takes effect. If any of the requests in this example encounter a 500 error code, the policy at UrlMap.defaultCustomErrorResponsePolicy takes effect. When used in conjunction with pathMatcher.defaultRouteAction.retryPolicy, retries take precedence. Only once all retries are exhausted, the defaultCustomErrorResponsePolicy is applied. While attempting a retry, if load balancer is successful in reaching the service, the defaultCustomErrorResponsePolicy is ignored and the response from the service is returned to the client. defaultCustomErrorResponsePolicy is supported only for global external Application Load Balancers.
         # @!attribute [rw] default_route_action
         #   @return [::Google::Cloud::Compute::V1::HttpRouteAction]
-        #     defaultRouteAction takes effect when none of the pathRules or routeRules match. The load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. Only one of defaultUrlRedirect, defaultService or defaultRouteAction.weightedBackendService can be set. URL maps for classic Application Load Balancers only support the urlRewrite action within a path matcher's defaultRouteAction.
+        #     defaultRouteAction takes effect when none of the pathRules or routeRules match. The load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. If defaultRouteAction specifies any weightedBackendServices, defaultService must not be set. Conversely if defaultService is set, defaultRouteAction cannot contain any weightedBackendServices. If defaultRouteAction is specified, don't set defaultUrlRedirect. If defaultRouteAction.weightedBackendServices is specified, don't set defaultService. URL maps for classic Application Load Balancers only support the urlRewrite action within a path matcher's defaultRouteAction.
         # @!attribute [rw] default_service
         #   @return [::String]
-        #     The full or partial URL to the BackendService resource. This URL is used if none of the pathRules or routeRules defined by this PathMatcher are matched. For example, the following are all valid URLs to a BackendService resource: - https://www.googleapis.com/compute/v1/projects/project /global/backendServices/backendService - compute/v1/projects/project/global/backendServices/backendService - global/backendServices/backendService If defaultRouteAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. Only one of defaultUrlRedirect, defaultService or defaultRouteAction.weightedBackendService can be set. Authorization requires one or more of the following Google IAM permissions on the specified resource default_service: - compute.backendBuckets.use - compute.backendServices.use
+        #     The full or partial URL to the BackendService resource. This URL is used if none of the pathRules or routeRules defined by this PathMatcher are matched. For example, the following are all valid URLs to a BackendService resource: - https://www.googleapis.com/compute/v1/projects/project /global/backendServices/backendService - compute/v1/projects/project/global/backendServices/backendService - global/backendServices/backendService If defaultRouteAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any weightedBackendServices. Conversely, if defaultRouteAction specifies any weightedBackendServices, defaultService must not be specified. If defaultService is specified, then set either defaultUrlRedirect or defaultRouteAction.weightedBackendService. Don't set both. Authorization requires one or more of the following Google IAM permissions on the specified resource default_service: - compute.backendBuckets.use - compute.backendServices.use
         # @!attribute [rw] default_url_redirect
         #   @return [::Google::Cloud::Compute::V1::HttpRedirectAction]
-        #     When none of the specified pathRules or routeRules match, the request is redirected to a URL specified by defaultUrlRedirect. Only one of defaultUrlRedirect, defaultService or defaultRouteAction.weightedBackendService can be set. Not supported when the URL map is bound to a target gRPC proxy.
+        #     When none of the specified pathRules or routeRules match, the request is redirected to a URL specified by defaultUrlRedirect. If defaultUrlRedirect is specified, then set either defaultService or defaultRouteAction. Don't set both. Not supported when the URL map is bound to a target gRPC proxy.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -24499,13 +23914,13 @@ module Google
         #     The list of path patterns to match. Each must start with / and the only place a * is allowed is at the end following a /. The string fed to the path matcher does not include any text after the first ? or #, and those chars are not allowed here.
         # @!attribute [rw] route_action
         #   @return [::Google::Cloud::Compute::V1::HttpRouteAction]
-        #     In response to a matching path, the load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. Only one of urlRedirect, service or routeAction.weightedBackendService can be set. URL maps for classic Application Load Balancers only support the urlRewrite action within a path rule's routeAction.
+        #     In response to a matching path, the load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. If routeAction specifies any weightedBackendServices, service must not be set. Conversely if service is set, routeAction cannot contain any weightedBackendServices. Only one of routeAction or urlRedirect must be set. URL maps for classic Application Load Balancers only support the urlRewrite action within a path rule's routeAction.
         # @!attribute [rw] service
         #   @return [::String]
-        #     The full or partial URL of the backend service resource to which traffic is directed if this rule is matched. If routeAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. Only one of urlRedirect, service or routeAction.weightedBackendService can be set.
+        #     The full or partial URL of the backend service resource to which traffic is directed if this rule is matched. If routeAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. However, if service is specified, routeAction cannot contain any weightedBackendServices. Conversely, if routeAction specifies any weightedBackendServices, service must not be specified. Only one of urlRedirect, service or routeAction.weightedBackendService must be set.
         # @!attribute [rw] url_redirect
         #   @return [::Google::Cloud::Compute::V1::HttpRedirectAction]
-        #     When a path pattern is matched, the request is redirected to a URL specified by urlRedirect. Only one of urlRedirect, service or routeAction.weightedBackendService can be set. Not supported when the URL map is bound to a target gRPC proxy.
+        #     When a path pattern is matched, the request is redirected to a URL specified by urlRedirect. If urlRedirect is specified, service or routeAction must not be set. Not supported when the URL map is bound to a target gRPC proxy.
         class PathRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -24516,7 +23931,7 @@ module Google
         #     Fingerprint of this per-instance config. This field can be used in optimistic locking. It is ignored when inserting a per-instance config. An up-to-date fingerprint must be provided in order to update an existing per-instance configuration or the field needs to be unset.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of a per-instance configuration and its corresponding instance. Serves as a merge key during UpdatePerInstanceConfigs operations, that is, if a per-instance configuration with the same name exists then it will be updated, otherwise a new one will be created for the VM instance with the same name. An attempt to create a per-instance configuration for a VM instance that either doesn't exist or is not part of the group will result in an error.
+        #     The name of a per-instance configuration and its corresponding instance. Serves as a merge key during UpdatePerInstanceConfigs operations, that is, if a per-instance configuration with the same name exists then it will be updated, otherwise a new one will be created for the VM instance with the same name. An attempt to create a per-instance configconfiguration for a VM instance that either doesn't exist or is not part of the group will result in an error.
         # @!attribute [rw] preserved_state
         #   @return [::Google::Cloud::Compute::V1::PreservedState]
         #     The intended preserved state for the given instance. Does not contain preserved state generated from a stateful policy.
@@ -24786,7 +24201,7 @@ module Google
         #     An optional textual description of the resource.
         # @!attribute [rw] enabled_features
         #   @return [::Array<::String>]
-        #     An optional list of restricted features enabled for use on this project.
+        #     Restricted features enabled for use on this project.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server. This is *not* the project ID, and is just a unique ID used by Compute Engine to identify resources.
@@ -24804,7 +24219,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] usage_export_location
         #   @return [::Google::Cloud::Compute::V1::UsageExportLocation]
-        #     An optional naming prefix for daily usage reports and the Google Cloud Storage bucket where they are stored.
+        #     The naming prefix for daily usage reports and the Google Cloud Storage bucket where they are stored.
         # @!attribute [rw] vm_dns_setting
         #   @return [::String]
         #     [Output Only] Default internal DNS setting used by VMs running in this project.
@@ -25834,9 +25249,6 @@ module Google
             # Success is reported, but some results may be missing due to errors
             PARTIAL_SUCCESS = 39_966_469
 
-            # Quota information is not available to client requests (e.g: regions.list).
-            QUOTA_INFO_UNAVAILABLE = 304_294_182
-
             # The user attempted to use a resource that requires a TOS they have not accepted.
             REQUIRED_TOS_AGREEMENT = 3_745_539
 
@@ -26276,14 +25688,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to resume. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class RegionInstanceGroupManagersResumeInstancesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of the target pools information, which is a hash of the contents. This field is used for optimistic locking when you update the target pool entries. This field is optional.
@@ -26299,36 +25703,6 @@ module Google
         #   @return [::String]
         #     URL of the InstanceTemplate resource from which all new instances will be created.
         class RegionInstanceGroupManagersSetTemplateRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to start. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class RegionInstanceGroupManagersStartInstancesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] force_stop
-        #   @return [::Boolean]
-        #     If this flag is set to true, the Instance Group Manager will proceed to stop the instances, skipping initialization on them.
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to stop. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class RegionInstanceGroupManagersStopInstancesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # @!attribute [rw] force_suspend
-        #   @return [::Boolean]
-        #     If this flag is set to true, the Instance Group Manager will proceed to suspend the instances, skipping initialization on them.
-        # @!attribute [rw] instances
-        #   @return [::Array<::String>]
-        #     The URLs of one or more instances to suspend. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
-        class RegionInstanceGroupManagersSuspendInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27554,7 +26928,7 @@ module Google
         # Contains output only fields. Use this sub-message for actual values set on Instance attributes as compared to the value requested by the user (intent) in their instance CRUD calls.
         # @!attribute [rw] physical_host
         #   @return [::String]
-        #     [Output Only] The precise location of your instance within the zone's data center, including the block, sub-block, and host. The field is formatted as follows: blockId/subBlockId/hostId.
+        #     [Output Only] An opaque ID of the host on which the VM is running.
         # @!attribute [rw] scheduling
         #   @return [::Google::Cloud::Compute::V1::ResourceStatusScheduling]
         # @!attribute [rw] upcoming_maintenance
@@ -27586,48 +26960,6 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class ResumeInstanceRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for InstanceGroupManagers.ResumeInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     The name of the managed instance group.
-        # @!attribute [rw] instance_group_managers_resume_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagersResumeInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        # @!attribute [rw] zone
-        #   @return [::String]
-        #     The name of the zone where the managed instance group is located.
-        class ResumeInstancesInstanceGroupManagerRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for RegionInstanceGroupManagers.ResumeInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     Name of the managed instance group.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] region
-        #   @return [::String]
-        #     Name of the region scoping this request.
-        # @!attribute [rw] region_instance_group_managers_resume_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersResumeInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        class ResumeInstancesRegionInstanceGroupManagerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27669,22 +27001,12 @@ module Google
         # @!attribute [rw] next_hop_instance
         #   @return [::String]
         #     The URL to an instance that should handle matching packets. You can specify this as a full or partial URL. For example: https://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/
-        # @!attribute [rw] next_hop_inter_region_cost
-        #   @return [::Integer]
-        #     [Output only] Internal fixed region-to-region cost that Google Cloud calculates based on factors such as network performance, distance, and available bandwidth between regions.
         # @!attribute [rw] next_hop_ip
         #   @return [::String]
         #     The network IP address of an instance that should handle matching packets. Both IPv6 address and IPv4 addresses are supported. Must specify an IPv4 address in dot-decimal notation (e.g. 192.0.2.99) or an IPv6 address in RFC 4291 format (e.g. 2001:db8::2d9:51:0:0 or 2001:db8:0:0:2d9:51:0:0). IPv6 addresses will be displayed using RFC 5952 compressed format (e.g. 2001:db8::2d9:51:0:0). Should never be an IPv4-mapped IPv6 address.
-        # @!attribute [rw] next_hop_med
-        #   @return [::Integer]
-        #     [Output Only] Multi-Exit Discriminator, a BGP route metric that indicates the desirability of a particular route in a network.
         # @!attribute [rw] next_hop_network
         #   @return [::String]
         #     The URL of the local network if it should handle matching packets.
-        # @!attribute [rw] next_hop_origin
-        #   @return [::String]
-        #     [Output Only] Indicates the origin of the route. Can be IGP (Interior Gateway Protocol), EGP (Exterior Gateway Protocol), or INCOMPLETE.
-        #     Check the NextHopOrigin enum for the list of possible values.
         # @!attribute [rw] next_hop_peering
         #   @return [::String]
         #     [Output Only] The network peering name that should handle matching packets, which should conform to RFC1035.
@@ -27714,18 +27036,6 @@ module Google
         class Route
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # [Output Only] Indicates the origin of the route. Can be IGP (Interior Gateway Protocol), EGP (Exterior Gateway Protocol), or INCOMPLETE.
-          module NextHopOrigin
-            # A value indicating that the enum field is not set.
-            UNDEFINED_NEXT_HOP_ORIGIN = 0
-
-            EGP = 68_590
-
-            IGP = 72_434
-
-            INCOMPLETE = 11_941_214
-          end
 
           # [Output only] The status of the route.
           module RouteStatus
@@ -29558,7 +28868,7 @@ module Google
         #     Action to take for requests that are under the configured rate limit threshold. Valid option is "allow" only.
         # @!attribute [rw] enforce_on_key
         #   @return [::String]
-        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL.
+        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP.
         #     Check the EnforceOnKey enum for the list of possible values.
         # @!attribute [rw] enforce_on_key_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig>]
@@ -29579,7 +28889,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL.
+          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP.
           module EnforceOnKey
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
@@ -29600,8 +28910,6 @@ module Google
 
             TLS_JA3_FINGERPRINT = 327_127_933
 
-            TLS_JA4_FINGERPRINT = 33_724_926
-
             USER_IP = 34_009_627
 
             XFF_IP = 438_707_118
@@ -29613,13 +28921,13 @@ module Google
         #     Rate limit key name applicable only for the following key types: HTTP_HEADER -- Name of the HTTP header whose value is taken as the key value. HTTP_COOKIE -- Name of the HTTP cookie whose value is taken as the key value.
         # @!attribute [rw] enforce_on_key_type
         #   @return [::String]
-        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKeyConfigs" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL.
+        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKeyConfigs" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP.
         #     Check the EnforceOnKeyType enum for the list of possible values.
         class SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKeyConfigs" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP. - TLS_JA4_FINGERPRINT: JA4 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL.
+          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKeyConfigs" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates. - TLS_JA3_FINGERPRINT: JA3 TLS/SSL fingerprint if the client connects using HTTPS, HTTP/2 or HTTP/3. If not available, the key type defaults to ALL. - USER_IP: The IP address of the originating client, which is resolved based on "userIpRequestHeaders" configured with the security policy. If there is no "userIpRequestHeaders" configuration or an IP address cannot be resolved from it, the key type defaults to IP.
           module EnforceOnKeyType
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY_TYPE = 0
@@ -29639,8 +28947,6 @@ module Google
             SNI = 82_254
 
             TLS_JA3_FINGERPRINT = 327_127_933
-
-            TLS_JA4_FINGERPRINT = 33_724_926
 
             USER_IP = 34_009_627
 
@@ -30975,27 +30281,6 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetLabelsRegionInstantSnapshotRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for RegionSecurityPolicies.SetLabels. See the method description for details.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] region
-        #   @return [::String]
-        #     The region for this request.
-        # @!attribute [rw] region_set_labels_request_resource
-        #   @return [::Google::Cloud::Compute::V1::RegionSetLabelsRequest]
-        #     The body resource for this request
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        # @!attribute [rw] resource
-        #   @return [::String]
-        #     Name or id of the resource for this request.
-        class SetLabelsRegionSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -32717,48 +32002,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A request message for InstanceGroupManagers.StartInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     The name of the managed instance group.
-        # @!attribute [rw] instance_group_managers_start_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagersStartInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        # @!attribute [rw] zone
-        #   @return [::String]
-        #     The name of the zone where the managed instance group is located.
-        class StartInstancesInstanceGroupManagerRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for RegionInstanceGroupManagers.StartInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     Name of the managed instance group.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] region
-        #   @return [::String]
-        #     Name of the region scoping this request.
-        # @!attribute [rw] region_instance_group_managers_start_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersStartInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        class StartInstancesRegionInstanceGroupManagerRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # A request message for Instances.StartWithEncryptionKey. See the method description for details.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -32971,48 +32214,6 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class StopInstanceRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for InstanceGroupManagers.StopInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     The name of the managed instance group.
-        # @!attribute [rw] instance_group_managers_stop_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagersStopInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        # @!attribute [rw] zone
-        #   @return [::String]
-        #     The name of the zone where the managed instance group is located.
-        class StopInstancesInstanceGroupManagerRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for RegionInstanceGroupManagers.StopInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     The name of the managed instance group.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] region
-        #   @return [::String]
-        #     Name of the region scoping this request.
-        # @!attribute [rw] region_instance_group_managers_stop_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersStopInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        class StopInstancesRegionInstanceGroupManagerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -33513,7 +32714,7 @@ module Google
         #     Check the PrivateIpv6GoogleAccess enum for the list of possible values.
         # @!attribute [rw] purpose
         #   @return [::String]
-        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
@@ -33572,7 +32773,7 @@ module Google
             ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288_210_263
           end
 
-          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -33582,9 +32783,6 @@ module Google
 
             # Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.
             INTERNAL_HTTPS_LOAD_BALANCER = 248_748_889
-
-            # Subnetwork will be used for Migration from one peered VPC to another. (a transient state of subnetwork while migrating resources from one project to another).
-            PEER_MIGRATION = 491_902_225
 
             # Regular user created or automatically created subnet.
             PRIVATE = 403_485_027
@@ -33838,48 +33036,6 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class SuspendInstanceRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for InstanceGroupManagers.SuspendInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     The name of the managed instance group.
-        # @!attribute [rw] instance_group_managers_suspend_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagersSuspendInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        # @!attribute [rw] zone
-        #   @return [::String]
-        #     The name of the zone where the managed instance group is located.
-        class SuspendInstancesInstanceGroupManagerRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A request message for RegionInstanceGroupManagers.SuspendInstances. See the method description for details.
-        # @!attribute [rw] instance_group_manager
-        #   @return [::String]
-        #     Name of the managed instance group.
-        # @!attribute [rw] project
-        #   @return [::String]
-        #     Project ID for this request.
-        # @!attribute [rw] region
-        #   @return [::String]
-        #     Name of the region scoping this request.
-        # @!attribute [rw] region_instance_group_managers_suspend_instances_request_resource
-        #   @return [::Google::Cloud::Compute::V1::RegionInstanceGroupManagersSuspendInstancesRequest]
-        #     The body resource for this request
-        # @!attribute [rw] request_id
-        #   @return [::String]
-        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-        class SuspendInstancesRegionInstanceGroupManagerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -34177,7 +33333,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a Target HTTPS Proxy resource. Google Compute Engine has two Target HTTPS Proxy resources: * [Global](/compute/docs/reference/rest/v1/targetHttpsProxies) * [Regional](/compute/docs/reference/rest/v1/regionTargetHttpsProxies) A target HTTPS proxy is a component of Google Cloud HTTPS load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTPS proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.
+        # Represents a Target HTTPS Proxy resource. Google Compute Engine has two Target HTTPS Proxy resources: * [Global](/compute/docs/reference/rest/v1/targetHttpsProxies) * [Regional](/compute/docs/reference/rest/v1/regionTargetHttpsProxies) A target HTTPS proxy is a component of GCP HTTPS load balancers. * targetHttpProxies are used by global external Application Load Balancers, classic Application Load Balancers, cross-region internal Application Load Balancers, and Traffic Director. * regionTargetHttpProxies are used by regional internal Application Load Balancers and regional external Application Load Balancers. Forwarding rules reference a target HTTPS proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and Forwarding rule concepts.
         # @!attribute [rw] authorization_policy
         #   @return [::String]
         #     Optional. A URL referring to a networksecurity.AuthorizationPolicy resource that describes how the proxy should authorize inbound traffic. If left blank, access will not be restricted by an authorization policy. Refer to the AuthorizationPolicy resource for additional details. authorizationPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. Note: This field currently has no impact.
@@ -34266,9 +33422,6 @@ module Google
 
             # This enables TLS 1.3 0-RTT, and only allows Early Data to be included on requests with safe HTTP methods (GET, HEAD, OPTIONS, TRACE) without query parameters. Requests that send Early Data with non-idempotent HTTP methods or with query parameters will be rejected with a HTTP 425.
             STRICT = 308_826_825
-
-            # This enables TLS 1.3 Early Data for requests with any HTTP method including non-idempotent methods list POST. This mode does not enforce any other limitations. This may be valuable for gRPC use cases. However, we do not recommend this method unless you have evaluated your security stance and mitigated the risk of replay attacks using other mechanisms.
-            UNRESTRICTED = 457_266_100
           end
         end
 
@@ -36200,13 +35353,13 @@ module Google
         #     defaultCustomErrorResponsePolicy specifies how the Load Balancer returns error responses when BackendServiceor BackendBucket responds with an error. This policy takes effect at the load balancer level and applies only when no policy has been defined for the error code at lower levels like PathMatcher, RouteRule and PathRule within this UrlMap. For example, consider a UrlMap with the following configuration: - defaultCustomErrorResponsePolicy containing policies for responding to 5xx and 4xx errors - A PathMatcher configured for *.example.com has defaultCustomErrorResponsePolicy for 4xx. If a request for http://www.example.com/ encounters a 404, the policy in pathMatcher.defaultCustomErrorResponsePolicy will be enforced. When the request for http://www.example.com/ encounters a 502, the policy in UrlMap.defaultCustomErrorResponsePolicy will be enforced. When a request that does not match any host in *.example.com such as http://www.myotherexample.com/, encounters a 404, UrlMap.defaultCustomErrorResponsePolicy takes effect. When used in conjunction with defaultRouteAction.retryPolicy, retries take precedence. Only once all retries are exhausted, the defaultCustomErrorResponsePolicy is applied. While attempting a retry, if load balancer is successful in reaching the service, the defaultCustomErrorResponsePolicy is ignored and the response from the service is returned to the client. defaultCustomErrorResponsePolicy is supported only for global external Application Load Balancers.
         # @!attribute [rw] default_route_action
         #   @return [::Google::Cloud::Compute::V1::HttpRouteAction]
-        #     defaultRouteAction takes effect when none of the hostRules match. The load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. Only one of defaultUrlRedirect, defaultService or defaultRouteAction.weightedBackendService can be set. URL maps for classic Application Load Balancers only support the urlRewrite action within defaultRouteAction. defaultRouteAction has no effect when the URL map is bound to a target gRPC proxy that has the validateForProxyless field set to true.
+        #     defaultRouteAction takes effect when none of the hostRules match. The load balancer performs advanced routing actions, such as URL rewrites and header transformations, before forwarding the request to the selected backend. If defaultRouteAction specifies any weightedBackendServices, defaultService must not be set. Conversely if defaultService is set, defaultRouteAction cannot contain any weightedBackendServices. Only one of defaultRouteAction or defaultUrlRedirect must be set. URL maps for classic Application Load Balancers only support the urlRewrite action within defaultRouteAction. defaultRouteAction has no effect when the URL map is bound to a target gRPC proxy that has the validateForProxyless field set to true.
         # @!attribute [rw] default_service
         #   @return [::String]
-        #     The full or partial URL of the defaultService resource to which traffic is directed if none of the hostRules match. If defaultRouteAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. Only one of defaultUrlRedirect, defaultService or defaultRouteAction.weightedBackendService can be set. defaultService has no effect when the URL map is bound to a target gRPC proxy that has the validateForProxyless field set to true.
+        #     The full or partial URL of the defaultService resource to which traffic is directed if none of the hostRules match. If defaultRouteAction is also specified, advanced routing actions, such as URL rewrites, take effect before sending the request to the backend. However, if defaultService is specified, defaultRouteAction cannot contain any defaultRouteAction.weightedBackendServices. Conversely, if defaultRouteAction specifies any defaultRouteAction.weightedBackendServices, defaultService must not be specified. If defaultService is specified, then set either defaultUrlRedirect , or defaultRouteAction.weightedBackendService Don't set both. defaultService has no effect when the URL map is bound to a target gRPC proxy that has the validateForProxyless field set to true.
         # @!attribute [rw] default_url_redirect
         #   @return [::Google::Cloud::Compute::V1::HttpRedirectAction]
-        #     When none of the specified hostRules match, the request is redirected to a URL specified by defaultUrlRedirect. Only one of defaultUrlRedirect, defaultService or defaultRouteAction.weightedBackendService can be set. Not supported when the URL map is bound to a target gRPC proxy.
+        #     When none of the specified hostRules match, the request is redirected to a URL specified by defaultUrlRedirect. If defaultUrlRedirect is specified, defaultService or defaultRouteAction must not be set. Not supported when the URL map is bound to a target gRPC proxy.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -36445,7 +35598,7 @@ module Google
         #     Network URL.
         # @!attribute [rw] purpose
         #   @return [::String]
-        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] role
         #   @return [::String]
@@ -36477,7 +35630,7 @@ module Google
             INTERNAL = 279_295_677
           end
 
-          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -36487,9 +35640,6 @@ module Google
 
             # Subnet reserved for Internal HTTP(S) Load Balancing. This is a legacy purpose, please use REGIONAL_MANAGED_PROXY instead.
             INTERNAL_HTTPS_LOAD_BALANCER = 248_748_889
-
-            # Subnetwork will be used for Migration from one peered VPC to another. (a transient state of subnetwork while migrating resources from one project to another).
-            PEER_MIGRATION = 491_902_225
 
             # Regular user created or automatically created subnet.
             PRIVATE = 403_485_027
@@ -37304,9 +36454,6 @@ module Google
             # Success is reported, but some results may be missing due to errors
             PARTIAL_SUCCESS = 39_966_469
 
-            # Quota information is not available to client requests (e.g: regions.list).
-            QUOTA_INFO_UNAVAILABLE = 304_294_182
-
             # The user attempted to use a resource that requires a TOS they have not accepted.
             REQUIRED_TOS_AGREEMENT = 3_745_539
 
@@ -37411,9 +36558,6 @@ module Google
 
             # Success is reported, but some results may be missing due to errors
             PARTIAL_SUCCESS = 39_966_469
-
-            # Quota information is not available to client requests (e.g: regions.list).
-            QUOTA_INFO_UNAVAILABLE = 304_294_182
 
             # The user attempted to use a resource that requires a TOS they have not accepted.
             REQUIRED_TOS_AGREEMENT = 3_745_539

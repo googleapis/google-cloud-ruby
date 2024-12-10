@@ -30,8 +30,7 @@ module Google
             # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
-              # @private
-              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
+              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
                 # These require statements are intentionally placed here to initialize
                 # the REST modules only when it's required.
                 require "gapic/rest"
@@ -41,9 +40,7 @@ module Google
                                                              universe_domain: universe_domain,
                                                              credentials: credentials,
                                                              numeric_enums: false,
-                                                             service_name: self.class,
-                                                             raise_faraday_errors: false,
-                                                             logger: logger
+                                                             raise_faraday_errors: false
               end
 
               ##
@@ -62,15 +59,6 @@ module Google
               #
               def endpoint
                 @client_stub.endpoint
-              end
-
-              ##
-              # The logger used for request/response debug logging.
-              #
-              # @return [Logger]
-              #
-              def logger stub: false
-                stub ? @client_stub.stub_logger : @client_stub.logger
               end
 
               ##
@@ -99,18 +87,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "add_rule",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -139,18 +125,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "delete",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -179,18 +163,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::SecurityPolicy.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -219,18 +201,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get_rule",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::SecurityPolicyRule.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -259,18 +239,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "insert",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -299,18 +277,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "list",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::SecurityPolicyList.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -339,18 +315,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "patch",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -379,18 +353,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "patch_rule",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -419,58 +391,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "remove_rule",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
 
-              ##
-              # Baseline implementation for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def set_labels request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_set_labels_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "set_labels",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -677,30 +607,6 @@ module Google
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["region", %r{^[^/]+/?$}, false],
                                                             ["security_policy", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_set_labels_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/securityPolicies/{resource}/setLabels",
-                                                          body: "region_set_labels_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["region", %r{^[^/]+/?$}, false],
-                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

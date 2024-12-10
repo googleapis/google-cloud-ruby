@@ -33,24 +33,24 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}, method_name: nil
-      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
+    def make_get_request uri:, params: {}, options: {}
+      make_http_request :get, uri: uri, body: nil, params: params, options: options
     end
 
-    def make_delete_request uri:, params: {}, options: {}, method_name: nil
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
+    def make_delete_request uri:, params: {}, options: {}
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
-      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
+    def make_post_request uri:, body: nil, params: {}, options: {}
+      make_http_request :post, uri: uri, body: body, params: params, options: options
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
-      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
+    def make_patch_request uri:, body:, params: {}, options: {}
+      make_http_request :patch, uri: uri, body: body, params: params, options: options
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
-      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
+    def make_put_request uri:, body:, params: {}, options: {}
+      make_http_request :put, uri: uri, body: body, params: params, options: options
     end
 
     def make_http_request *args, **kwargs
@@ -68,10 +68,6 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     def universe_domain
       "example.com"
     end
-
-    def stub_logger
-      nil
-    end
   end
 
   def test_abandon_instances
@@ -88,7 +84,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    abandon_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    abandon_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -149,7 +145,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     return_partial_success = true
     service_project_number = 42
 
-    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,7 +202,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     project = "hello world"
     zone = "hello world"
 
-    apply_updates_to_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    apply_updates_to_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -264,7 +260,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    create_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    create_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -321,7 +317,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -379,7 +375,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    delete_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    delete_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -436,7 +432,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     project = "hello world"
     zone = "hello world"
 
-    delete_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    delete_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -492,7 +488,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     project = "hello world"
     zone = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -549,7 +545,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -609,7 +605,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     return_partial_success = true
     zone = "hello world"
 
-    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -670,7 +666,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     return_partial_success = true
     zone = "hello world"
 
-    list_errors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    list_errors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -731,7 +727,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     return_partial_success = true
     zone = "hello world"
 
-    list_managed_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    list_managed_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -792,7 +788,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     return_partial_success = true
     zone = "hello world"
 
-    list_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    list_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -850,7 +846,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -908,7 +904,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    patch_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    patch_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -966,7 +962,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    recreate_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    recreate_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1024,7 +1020,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     size = 42
     zone = "hello world"
 
-    resize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    resize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1068,64 +1064,6 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     end
   end
 
-  def test_resume_instances
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    instance_group_manager = "hello world"
-    instance_group_managers_resume_instances_request_resource = {}
-    project = "hello world"
-    request_id = "hello world"
-    zone = "hello world"
-
-    resume_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ServiceStub.stub :transcode_resume_instances_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, resume_instances_client_stub do
-        # Create client
-        client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.resume_instances({ instance_group_manager: instance_group_manager, instance_group_managers_resume_instances_request_resource: instance_group_managers_resume_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.resume_instances instance_group_manager: instance_group_manager, instance_group_managers_resume_instances_request_resource: instance_group_managers_resume_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.resume_instances ::Google::Cloud::Compute::V1::ResumeInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_resume_instances_request_resource: instance_group_managers_resume_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.resume_instances({ instance_group_manager: instance_group_manager, instance_group_managers_resume_instances_request_resource: instance_group_managers_resume_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.resume_instances(::Google::Cloud::Compute::V1::ResumeInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_resume_instances_request_resource: instance_group_managers_resume_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, resume_instances_client_stub.call_count
-      end
-    end
-  end
-
   def test_set_instance_template
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -1140,7 +1078,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    set_instance_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    set_instance_template_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1198,7 +1136,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    set_target_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    set_target_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1242,180 +1180,6 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     end
   end
 
-  def test_start_instances
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    instance_group_manager = "hello world"
-    instance_group_managers_start_instances_request_resource = {}
-    project = "hello world"
-    request_id = "hello world"
-    zone = "hello world"
-
-    start_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ServiceStub.stub :transcode_start_instances_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, start_instances_client_stub do
-        # Create client
-        client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.start_instances({ instance_group_manager: instance_group_manager, instance_group_managers_start_instances_request_resource: instance_group_managers_start_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.start_instances instance_group_manager: instance_group_manager, instance_group_managers_start_instances_request_resource: instance_group_managers_start_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.start_instances ::Google::Cloud::Compute::V1::StartInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_start_instances_request_resource: instance_group_managers_start_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.start_instances({ instance_group_manager: instance_group_manager, instance_group_managers_start_instances_request_resource: instance_group_managers_start_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.start_instances(::Google::Cloud::Compute::V1::StartInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_start_instances_request_resource: instance_group_managers_start_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, start_instances_client_stub.call_count
-      end
-    end
-  end
-
-  def test_stop_instances
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    instance_group_manager = "hello world"
-    instance_group_managers_stop_instances_request_resource = {}
-    project = "hello world"
-    request_id = "hello world"
-    zone = "hello world"
-
-    stop_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ServiceStub.stub :transcode_stop_instances_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, stop_instances_client_stub do
-        # Create client
-        client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.stop_instances({ instance_group_manager: instance_group_manager, instance_group_managers_stop_instances_request_resource: instance_group_managers_stop_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.stop_instances instance_group_manager: instance_group_manager, instance_group_managers_stop_instances_request_resource: instance_group_managers_stop_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.stop_instances ::Google::Cloud::Compute::V1::StopInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_stop_instances_request_resource: instance_group_managers_stop_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.stop_instances({ instance_group_manager: instance_group_manager, instance_group_managers_stop_instances_request_resource: instance_group_managers_stop_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.stop_instances(::Google::Cloud::Compute::V1::StopInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_stop_instances_request_resource: instance_group_managers_stop_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, stop_instances_client_stub.call_count
-      end
-    end
-  end
-
-  def test_suspend_instances
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    instance_group_manager = "hello world"
-    instance_group_managers_suspend_instances_request_resource = {}
-    project = "hello world"
-    request_id = "hello world"
-    zone = "hello world"
-
-    suspend_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ServiceStub.stub :transcode_suspend_instances_request, ["", "", {}] do
-      Gapic::Rest::ClientStub.stub :new, suspend_instances_client_stub do
-        # Create client
-        client = ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client.new do |config|
-          config.credentials = :dummy_value
-        end
-
-        # Use hash object
-        client.suspend_instances({ instance_group_manager: instance_group_manager, instance_group_managers_suspend_instances_request_resource: instance_group_managers_suspend_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use named arguments
-        client.suspend_instances instance_group_manager: instance_group_manager, instance_group_managers_suspend_instances_request_resource: instance_group_managers_suspend_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object
-        client.suspend_instances ::Google::Cloud::Compute::V1::SuspendInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_suspend_instances_request_resource: instance_group_managers_suspend_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use hash object with options
-        client.suspend_instances({ instance_group_manager: instance_group_manager, instance_group_managers_suspend_instances_request_resource: instance_group_managers_suspend_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Use protobuf object with options
-        client.suspend_instances(::Google::Cloud::Compute::V1::SuspendInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_suspend_instances_request_resource: instance_group_managers_suspend_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response.underlying_op
-        end
-
-        # Verify method calls
-        assert_equal 5, suspend_instances_client_stub.call_count
-      end
-    end
-  end
-
   def test_update_per_instance_configs
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -1430,7 +1194,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
     request_id = "hello world"
     zone = "hello world"
 
-    update_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    update_per_instance_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

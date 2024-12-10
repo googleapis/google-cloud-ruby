@@ -282,19 +282,8 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials,
-                  logger: @config.logger
+                  credentials: credentials
                 )
-
-                @instances_stub.logger(stub: true)&.info do |entry|
-                  entry.set_system_name
-                  entry.set_service
-                  entry.message = "Created client for #{entry.service}"
-                  entry.set_credentials_fields credentials
-                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
-                  entry.set "defaultTimeout", @config.timeout if @config.timeout
-                  entry.set "quotaProject", @quota_project_id if @quota_project_id
-                end
               end
 
               ##
@@ -303,15 +292,6 @@ module Google
               # @return [::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client]
               #
               attr_reader :zone_operations
-
-              ##
-              # The logger used for request/response debug logging.
-              #
-              # @return [Logger]
-              #
-              def logger
-                @instances_stub.logger
-              end
 
               # Service calls
 
@@ -407,7 +387,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -503,7 +483,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -597,7 +577,7 @@ module Google
                 @instances_stub.aggregated_list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :aggregated_list, "items", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -695,7 +675,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -789,7 +769,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -883,7 +863,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -981,7 +961,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1077,7 +1057,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1160,6 +1140,7 @@ module Google
 
                 @instances_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1244,6 +1225,7 @@ module Google
 
                 @instances_stub.get_effective_firewalls request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1330,6 +1312,7 @@ module Google
 
                 @instances_stub.get_guest_attributes request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1414,6 +1397,7 @@ module Google
 
                 @instances_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1496,6 +1480,7 @@ module Google
 
                 @instances_stub.get_screenshot request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1526,7 +1511,7 @@ module Google
               #   @param project [::String]
               #     Project ID for this request.
               #   @param start [::Integer]
-              #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console. Note that the negative start is bounded by the retained buffer size, and the returned serial console output will not exceed the max buffer size.
+              #     Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`. If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value. You can also provide a negative start position, which translates to the most recent number of bytes written to the serial port. For example, -3 is interpreted as the most recent 3 bytes written to the serial console.
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1582,6 +1567,7 @@ module Google
 
                 @instances_stub.get_serial_port_output request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1664,6 +1650,7 @@ module Google
 
                 @instances_stub.get_shielded_instance_identity request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1761,7 +1748,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1853,7 +1840,7 @@ module Google
                 @instances_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1947,7 +1934,7 @@ module Google
                 @instances_stub.list_referrers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @instances_stub, :list_referrers, "items", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2041,7 +2028,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2137,7 +2124,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2231,7 +2218,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2325,7 +2312,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2408,6 +2395,7 @@ module Google
 
                 @instances_stub.send_diagnostic_interrupt request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2503,7 +2491,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2601,7 +2589,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2686,6 +2674,7 @@ module Google
 
                 @instances_stub.set_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2781,7 +2770,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2877,7 +2866,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2973,7 +2962,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3069,7 +3058,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3165,7 +3154,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3261,7 +3250,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3357,7 +3346,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3453,7 +3442,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3549,7 +3538,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3645,7 +3634,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3741,7 +3730,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3837,7 +3826,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3931,7 +3920,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4027,7 +4016,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4123,7 +4112,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4219,7 +4208,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4304,6 +4293,7 @@ module Google
 
                 @instances_stub.test_iam_permissions request, options do |result, operation|
                   yield result, operation if block_given?
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4405,7 +4395,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4503,7 +4493,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4599,7 +4589,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4697,7 +4687,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4793,7 +4783,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  result
+                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4873,11 +4863,6 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
-              # @!attribute [rw] logger
-              #   A custom logger to use for request/response debug logging, or the value
-              #   `:default` (the default) to construct a default logger, or `nil` to
-              #   explicitly disable logging.
-              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -4899,7 +4884,6 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
-                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

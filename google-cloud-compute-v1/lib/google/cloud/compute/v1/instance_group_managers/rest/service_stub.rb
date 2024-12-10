@@ -30,8 +30,7 @@ module Google
             # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
-              # @private
-              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
+              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
                 # These require statements are intentionally placed here to initialize
                 # the REST modules only when it's required.
                 require "gapic/rest"
@@ -41,9 +40,7 @@ module Google
                                                              universe_domain: universe_domain,
                                                              credentials: credentials,
                                                              numeric_enums: false,
-                                                             service_name: self.class,
-                                                             raise_faraday_errors: false,
-                                                             logger: logger
+                                                             raise_faraday_errors: false
               end
 
               ##
@@ -62,15 +59,6 @@ module Google
               #
               def endpoint
                 @client_stub.endpoint
-              end
-
-              ##
-              # The logger used for request/response debug logging.
-              #
-              # @return [Logger]
-              #
-              def logger stub: false
-                stub ? @client_stub.stub_logger : @client_stub.logger
               end
 
               ##
@@ -99,18 +87,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "abandon_instances",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -139,18 +125,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "aggregated_list",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceGroupManagerAggregatedList.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -179,18 +163,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "apply_updates_to_instances",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -219,18 +201,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "create_instances",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -259,18 +239,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "delete",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -299,18 +277,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "delete_instances",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -339,18 +315,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "delete_per_instance_configs",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -379,18 +353,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "get",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceGroupManager.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -419,18 +391,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "insert",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -459,18 +429,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "list",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceGroupManagerList.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -499,18 +467,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "list_errors",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceGroupManagersListErrorsResponse.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -539,18 +505,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "list_managed_instances",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceGroupManagersListManagedInstancesResponse.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -579,18 +543,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "list_per_instance_configs",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::InstanceGroupManagersListPerInstanceConfigsResp.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -619,18 +581,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "patch",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -659,18 +619,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "patch_per_instance_configs",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -699,18 +657,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "recreate_instances",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -739,58 +695,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "resize",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
 
-              ##
-              # Baseline implementation for the resume_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ResumeInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def resume_instances request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_resume_instances_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "resume_instances",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -819,18 +733,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "set_instance_template",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -859,138 +771,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "set_target_pools",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
 
-              ##
-              # Baseline implementation for the start_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StartInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def start_instances request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_start_instances_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "start_instances",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the stop_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StopInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def stop_instances request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_stop_instances_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "stop_instances",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
-              end
-
-              ##
-              # Baseline implementation for the suspend_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SuspendInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam operation [::Gapic::Rest::TransportOperation]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def suspend_instances request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = ServiceStub.transcode_suspend_instances_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split "=", 2 }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "suspend_instances",
-                  options: options
-                )
-                operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -1019,18 +809,16 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri: uri,
-                  body: body || "",
-                  params: query_string_params,
-                  method_name: "update_per_instance_configs",
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-                catch :response do
-                  yield result, operation if block_given?
-                  result
-                end
+
+                yield result, operation if block_given?
+                result
               end
 
               ##
@@ -1432,30 +1220,6 @@ module Google
               ##
               # @private
               #
-              # GRPC transcoding helper method for the resume_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ResumeInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_resume_instances_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}/resumeInstances",
-                                                          body: "instance_group_managers_resume_instances_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["instance_group_manager", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
               # GRPC transcoding helper method for the set_instance_template REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::SetInstanceTemplateInstanceGroupManagerRequest]
@@ -1492,78 +1256,6 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}/setTargetPools",
                                                           body: "instance_group_managers_set_target_pools_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["instance_group_manager", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the start_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StartInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_start_instances_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}/startInstances",
-                                                          body: "instance_group_managers_start_instances_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["instance_group_manager", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the stop_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StopInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_stop_instances_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}/stopInstances",
-                                                          body: "instance_group_managers_stop_instances_request_resource",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false],
-                                                            ["zone", %r{^[^/]+/?$}, false],
-                                                            ["instance_group_manager", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the suspend_instances REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SuspendInstancesInstanceGroupManagerRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def self.transcode_suspend_instances_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}/suspendInstances",
-                                                          body: "instance_group_managers_suspend_instances_request_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["zone", %r{^[^/]+/?$}, false],

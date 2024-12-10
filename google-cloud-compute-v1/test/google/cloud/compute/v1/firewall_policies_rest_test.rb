@@ -33,24 +33,24 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}, method_name: nil
-      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
+    def make_get_request uri:, params: {}, options: {}
+      make_http_request :get, uri: uri, body: nil, params: params, options: options
     end
 
-    def make_delete_request uri:, params: {}, options: {}, method_name: nil
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
+    def make_delete_request uri:, params: {}, options: {}
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
-      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
+    def make_post_request uri:, body: nil, params: {}, options: {}
+      make_http_request :post, uri: uri, body: body, params: params, options: options
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
-      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
+    def make_patch_request uri:, body:, params: {}, options: {}
+      make_http_request :patch, uri: uri, body: body, params: params, options: options
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
-      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
+    def make_put_request uri:, body:, params: {}, options: {}
+      make_http_request :put, uri: uri, body: body, params: params, options: options
     end
 
     def make_http_request *args, **kwargs
@@ -68,10 +68,6 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     def universe_domain
       "example.com"
     end
-
-    def stub_logger
-      nil
-    end
   end
 
   def test_add_association
@@ -87,7 +83,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     replace_existing_association = true
     request_id = "hello world"
 
-    add_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    add_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -143,7 +139,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     firewall_policy_rule_resource = {}
     request_id = "hello world"
 
-    add_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    add_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -199,7 +195,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     request_id = "hello world"
     source_firewall_policy = "hello world"
 
-    clone_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    clone_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -254,7 +250,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     firewall_policy = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -308,7 +304,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     firewall_policy = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -363,7 +359,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     firewall_policy = "hello world"
     name = "hello world"
 
-    get_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    get_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -418,7 +414,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     options_requested_policy_version = 42
     resource = "hello world"
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -473,7 +469,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     firewall_policy = "hello world"
     priority = 42
 
-    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -529,7 +525,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     parent_id = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +584,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     parent_id = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -642,7 +638,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     target_resource = "hello world"
 
-    list_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    list_associations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -698,7 +694,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     parent_id = "hello world"
     request_id = "hello world"
 
-    move_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    move_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -754,7 +750,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     firewall_policy_resource = {}
     request_id = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -811,7 +807,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     priority = 42
     request_id = "hello world"
 
-    patch_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    patch_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -867,7 +863,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     name = "hello world"
     request_id = "hello world"
 
-    remove_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    remove_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -923,7 +919,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     priority = 42
     request_id = "hello world"
 
-    remove_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    remove_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -978,7 +974,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     global_organization_set_policy_request_resource = {}
     resource = "hello world"
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1033,7 +1029,7 @@ class ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ClientTest < Minites
     resource = "hello world"
     test_permissions_request_resource = {}
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
