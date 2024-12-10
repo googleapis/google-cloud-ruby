@@ -33,24 +33,24 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_api
@@ -82,7 +86,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     api_id = "hello world"
     api = {}
 
-    create_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_apis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_apis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     api = {}
     update_mask = {}
 
-    update_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -303,7 +307,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     name = "hello world"
     force = true
 
-    delete_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -359,7 +363,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     version_id = "hello world"
     version = {}
 
-    create_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -413,7 +417,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -470,7 +474,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -525,7 +529,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     version = {}
     update_mask = {}
 
-    update_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -580,7 +584,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     name = "hello world"
     force = true
 
-    delete_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -636,7 +640,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     spec_id = "hello world"
     spec = {}
 
-    create_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -690,7 +694,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -744,7 +748,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_spec_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_spec_contents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -801,7 +805,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_specs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_specs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -856,7 +860,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     spec = {}
     update_mask = {}
 
-    update_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -910,7 +914,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -964,7 +968,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_api_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_api_operation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1021,7 +1025,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_api_operations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_api_operations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1075,7 +1079,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_definition_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_definition_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1131,7 +1135,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     deployment_id = "hello world"
     deployment = {}
 
-    create_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1185,7 +1189,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1242,7 +1246,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_deployments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1297,7 +1301,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     deployment = {}
     update_mask = {}
 
-    update_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1351,7 +1355,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_deployment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1407,7 +1411,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     attribute_id = "hello world"
     attribute = {}
 
-    create_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1461,7 +1465,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1516,7 +1520,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     attribute = {}
     update_mask = {}
 
-    update_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1570,7 +1574,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_attribute_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1627,7 +1631,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_attributes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_attributes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1685,7 +1689,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    search_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1741,7 +1745,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     external_api_id = "hello world"
     external_api = {}
 
-    create_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1795,7 +1799,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1850,7 +1854,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     external_api = {}
     update_mask = {}
 
-    update_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1904,7 +1908,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_external_api_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1960,7 +1964,7 @@ class ::Google::Cloud::ApiHub::V1::ApiHub::Rest::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
 
-    list_external_apis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_external_apis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

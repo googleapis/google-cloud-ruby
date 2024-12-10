@@ -321,8 +321,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @registry_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -330,6 +341,7 @@ module Google
                   config.endpoint = @registry_stub.endpoint
                   config.universe_domain = @registry_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @registry_stub.logger if config.respond_to? :logger=
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -338,6 +350,7 @@ module Google
                   config.endpoint = @registry_stub.endpoint
                   config.universe_domain = @registry_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @registry_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -354,6 +367,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @registry_stub.logger
+              end
 
               # Service calls
 
@@ -450,7 +472,7 @@ module Google
                 @registry_stub.list_apis request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_apis, "apis", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -530,7 +552,6 @@ module Google
 
                 @registry_stub.get_api request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -620,7 +641,6 @@ module Google
 
                 @registry_stub.create_api request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -710,7 +730,6 @@ module Google
 
                 @registry_stub.update_api request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -794,7 +813,6 @@ module Google
 
                 @registry_stub.delete_api request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -893,7 +911,7 @@ module Google
                 @registry_stub.list_api_versions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_api_versions, "api_versions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -973,7 +991,6 @@ module Google
 
                 @registry_stub.get_api_version request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1063,7 +1080,6 @@ module Google
 
                 @registry_stub.create_api_version request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1153,7 +1169,6 @@ module Google
 
                 @registry_stub.update_api_version request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1237,7 +1252,6 @@ module Google
 
                 @registry_stub.delete_api_version request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1336,7 +1350,7 @@ module Google
                 @registry_stub.list_api_specs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_api_specs, "api_specs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1416,7 +1430,6 @@ module Google
 
                 @registry_stub.get_api_spec request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1499,7 +1512,6 @@ module Google
 
                 @registry_stub.get_api_spec_contents request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1589,7 +1601,6 @@ module Google
 
                 @registry_stub.create_api_spec request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1679,7 +1690,6 @@ module Google
 
                 @registry_stub.update_api_spec request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1763,7 +1773,6 @@ module Google
 
                 @registry_stub.delete_api_spec request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1845,7 +1854,6 @@ module Google
 
                 @registry_stub.tag_api_spec_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1935,7 +1943,7 @@ module Google
                 @registry_stub.list_api_spec_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_api_spec_revisions, "api_specs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2020,7 +2028,6 @@ module Google
 
                 @registry_stub.rollback_api_spec request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2103,7 +2110,6 @@ module Google
 
                 @registry_stub.delete_api_spec_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2202,7 +2208,7 @@ module Google
                 @registry_stub.list_api_deployments request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_api_deployments, "api_deployments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2282,7 +2288,6 @@ module Google
 
                 @registry_stub.get_api_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2372,7 +2377,6 @@ module Google
 
                 @registry_stub.create_api_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2462,7 +2466,6 @@ module Google
 
                 @registry_stub.update_api_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2546,7 +2549,6 @@ module Google
 
                 @registry_stub.delete_api_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2629,7 +2631,6 @@ module Google
 
                 @registry_stub.tag_api_deployment_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2719,7 +2720,7 @@ module Google
                 @registry_stub.list_api_deployment_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_api_deployment_revisions, "api_deployments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2804,7 +2805,6 @@ module Google
 
                 @registry_stub.rollback_api_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2887,7 +2887,6 @@ module Google
 
                 @registry_stub.delete_api_deployment_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2986,7 +2985,7 @@ module Google
                 @registry_stub.list_artifacts request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @registry_stub, :list_artifacts, "artifacts", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3066,7 +3065,6 @@ module Google
 
                 @registry_stub.get_artifact request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3149,7 +3147,6 @@ module Google
 
                 @registry_stub.get_artifact_contents request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3239,7 +3236,6 @@ module Google
 
                 @registry_stub.create_artifact request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3321,7 +3317,6 @@ module Google
 
                 @registry_stub.replace_artifact request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3401,7 +3396,6 @@ module Google
 
                 @registry_stub.delete_artifact request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3481,6 +3475,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -3509,6 +3508,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

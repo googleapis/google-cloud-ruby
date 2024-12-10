@@ -31,6 +31,10 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_backup_path
