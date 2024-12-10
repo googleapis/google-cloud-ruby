@@ -172,8 +172,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @artifact_registry_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -181,6 +192,7 @@ module Google
                   config.endpoint = @artifact_registry_stub.endpoint
                   config.universe_domain = @artifact_registry_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @artifact_registry_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -197,6 +209,15 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @artifact_registry_stub.logger
+              end
 
               # Service calls
 
@@ -285,7 +306,7 @@ module Google
                 @artifact_registry_stub.list_docker_images request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_docker_images, "docker_images", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -364,7 +385,6 @@ module Google
 
                 @artifact_registry_stub.get_docker_image request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -453,7 +473,7 @@ module Google
                 @artifact_registry_stub.list_maven_artifacts request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_maven_artifacts, "maven_artifacts", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -532,7 +552,6 @@ module Google
 
                 @artifact_registry_stub.get_maven_artifact request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -621,7 +640,7 @@ module Google
                 @artifact_registry_stub.list_npm_packages request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_npm_packages, "npm_packages", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -700,7 +719,6 @@ module Google
 
                 @artifact_registry_stub.get_npm_package request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -789,7 +807,7 @@ module Google
                 @artifact_registry_stub.list_python_packages request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_python_packages, "python_packages", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -868,7 +886,6 @@ module Google
 
                 @artifact_registry_stub.get_python_package request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -960,7 +977,7 @@ module Google
                 @artifact_registry_stub.import_apt_artifacts request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1052,7 +1069,7 @@ module Google
                 @artifact_registry_stub.import_yum_artifacts request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1163,7 +1180,7 @@ module Google
                 @artifact_registry_stub.list_repositories request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_repositories, "repositories", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1242,7 +1259,6 @@ module Google
 
                 @artifact_registry_stub.get_repository request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1335,7 +1351,7 @@ module Google
                 @artifact_registry_stub.create_repository request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1418,7 +1434,6 @@ module Google
 
                 @artifact_registry_stub.update_repository request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1507,7 +1522,7 @@ module Google
                 @artifact_registry_stub.delete_repository request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1643,7 +1658,7 @@ module Google
                 @artifact_registry_stub.list_packages request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_packages, "packages", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1722,7 +1737,6 @@ module Google
 
                 @artifact_registry_stub.get_package request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1810,7 +1824,7 @@ module Google
                 @artifact_registry_stub.delete_package request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1948,7 +1962,7 @@ module Google
                 @artifact_registry_stub.list_versions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_versions, "versions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2029,7 +2043,6 @@ module Google
 
                 @artifact_registry_stub.get_version request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2120,7 +2133,7 @@ module Google
                 @artifact_registry_stub.delete_version request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2213,7 +2226,7 @@ module Google
                 @artifact_registry_stub.batch_delete_versions request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2296,7 +2309,6 @@ module Google
 
                 @artifact_registry_stub.update_version request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2438,7 +2450,7 @@ module Google
                 @artifact_registry_stub.list_files request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_files, "files", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2517,7 +2529,6 @@ module Google
 
                 @artifact_registry_stub.get_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2606,7 +2617,7 @@ module Google
                 @artifact_registry_stub.delete_file request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2689,7 +2700,6 @@ module Google
 
                 @artifact_registry_stub.update_file request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2807,7 +2817,7 @@ module Google
                 @artifact_registry_stub.list_tags request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_tags, "tags", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2886,7 +2896,6 @@ module Google
 
                 @artifact_registry_stub.get_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2969,7 +2978,6 @@ module Google
 
                 @artifact_registry_stub.create_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3052,7 +3060,6 @@ module Google
 
                 @artifact_registry_stub.update_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3131,7 +3138,6 @@ module Google
 
                 @artifact_registry_stub.delete_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3214,7 +3220,6 @@ module Google
 
                 @artifact_registry_stub.create_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3304,7 +3309,7 @@ module Google
                 @artifact_registry_stub.list_rules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_rules, "rules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3383,7 +3388,6 @@ module Google
 
                 @artifact_registry_stub.get_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3466,7 +3470,6 @@ module Google
 
                 @artifact_registry_stub.update_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3545,7 +3548,6 @@ module Google
 
                 @artifact_registry_stub.delete_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3636,7 +3638,6 @@ module Google
 
                 @artifact_registry_stub.set_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3719,7 +3720,6 @@ module Google
 
                 @artifact_registry_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3804,7 +3804,6 @@ module Google
 
                 @artifact_registry_stub.test_iam_permissions request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3883,7 +3882,6 @@ module Google
 
                 @artifact_registry_stub.get_project_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3964,7 +3962,6 @@ module Google
 
                 @artifact_registry_stub.update_project_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4043,7 +4040,6 @@ module Google
 
                 @artifact_registry_stub.get_vpcsc_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4124,7 +4120,6 @@ module Google
 
                 @artifact_registry_stub.update_vpcsc_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4207,7 +4202,6 @@ module Google
 
                 @artifact_registry_stub.update_package request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4302,7 +4296,7 @@ module Google
                 @artifact_registry_stub.list_attachments request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @artifact_registry_stub, :list_attachments, "attachments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4381,7 +4375,6 @@ module Google
 
                 @artifact_registry_stub.get_attachment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4474,7 +4467,7 @@ module Google
                 @artifact_registry_stub.create_attachment request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4563,7 +4556,7 @@ module Google
                 @artifact_registry_stub.delete_attachment request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4643,6 +4636,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -4671,6 +4669,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

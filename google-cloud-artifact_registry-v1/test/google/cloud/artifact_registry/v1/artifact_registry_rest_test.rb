@@ -33,24 +33,24 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_docker_images
@@ -83,7 +87,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_token = "hello world"
     order_by = "hello world"
 
-    list_docker_images_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_docker_images_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_docker_image_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_docker_image_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_size = 42
     page_token = "hello world"
 
-    list_maven_artifacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_maven_artifacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_maven_artifact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_maven_artifact_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -303,7 +307,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_size = 42
     page_token = "hello world"
 
-    list_npm_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_npm_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_npm_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_npm_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -413,7 +417,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_size = 42
     page_token = "hello world"
 
-    list_python_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_python_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -467,7 +471,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_python_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_python_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -522,7 +526,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     gcs_source = {}
     parent = "hello world"
 
-    import_apt_artifacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_apt_artifacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -577,7 +581,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     gcs_source = {}
     parent = "hello world"
 
-    import_yum_artifacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_yum_artifacts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -635,7 +639,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     filter = "hello world"
     order_by = "hello world"
 
-    list_repositories_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_repositories_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -689,7 +693,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -745,7 +749,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     repository_id = "hello world"
     repository = {}
 
-    create_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -800,7 +804,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     repository = {}
     update_mask = {}
 
-    update_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -854,7 +858,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_repository_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -912,7 +916,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     filter = "hello world"
     order_by = "hello world"
 
-    list_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_packages_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -966,7 +970,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1020,7 +1024,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1079,7 +1083,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     order_by = "hello world"
     filter = "hello world"
 
-    list_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1134,7 +1138,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     name = "hello world"
     view = :VERSION_VIEW_UNSPECIFIED
 
-    get_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1189,7 +1193,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     name = "hello world"
     force = true
 
-    delete_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1245,7 +1249,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     names = ["hello world"]
     validate_only = true
 
-    batch_delete_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_delete_versions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1300,7 +1304,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     version = {}
     update_mask = {}
 
-    update_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1358,7 +1362,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_token = "hello world"
     order_by = "hello world"
 
-    list_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_files_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1412,7 +1416,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1466,7 +1470,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1521,7 +1525,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     file = {}
     update_mask = {}
 
-    update_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_file_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1578,7 +1582,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_size = 42
     page_token = "hello world"
 
-    list_tags_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_tags_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1632,7 +1636,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1688,7 +1692,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     tag_id = "hello world"
     tag = {}
 
-    create_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1743,7 +1747,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     tag = {}
     update_mask = {}
 
-    update_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1797,7 +1801,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_tag_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1853,7 +1857,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     rule_id = "hello world"
     rule = {}
 
-    create_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1909,7 +1913,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_size = 42
     page_token = "hello world"
 
-    list_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1963,7 +1967,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2018,7 +2022,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     rule = {}
     update_mask = {}
 
-    update_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2072,7 +2076,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2128,7 +2132,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     policy = {}
     update_mask = {}
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2183,7 +2187,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     resource = "hello world"
     options = {}
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2238,7 +2242,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     resource = "hello world"
     permissions = ["hello world"]
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2292,7 +2296,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_project_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_project_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2347,7 +2351,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     project_settings = {}
     update_mask = {}
 
-    update_project_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_project_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2401,7 +2405,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_vpcsc_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_vpcsc_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2456,7 +2460,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     vpcsc_config = {}
     update_mask = {}
 
-    update_vpcsc_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_vpcsc_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2511,7 +2515,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     package = {}
     update_mask = {}
 
-    update_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_package_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2568,7 +2572,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     page_size = 42
     page_token = "hello world"
 
-    list_attachments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_attachments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2622,7 +2626,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2678,7 +2682,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     attachment_id = "hello world"
     attachment = {}
 
-    create_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2732,7 +2736,7 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::ClientTest 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_attachment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
