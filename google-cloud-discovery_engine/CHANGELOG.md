@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2024-12-10)
+
+#### Features
+
+* Support for the SearchTuningService ([#27290](https://github.com/googleapis/google-cloud-ruby/issues/27290)) 
+
 ### 1.0.1 (2024-08-08)
 
 #### Documentation
