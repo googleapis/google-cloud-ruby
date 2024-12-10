@@ -31,6 +31,10 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::ClientPathsTest 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_tunnel_dest_group_path

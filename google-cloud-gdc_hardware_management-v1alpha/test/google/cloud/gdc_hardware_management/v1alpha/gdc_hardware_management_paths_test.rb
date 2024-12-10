@@ -31,6 +31,10 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_change_log_entry_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_authorization_path

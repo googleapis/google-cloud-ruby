@@ -31,6 +31,10 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::ClientPathsTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_azure_client_path

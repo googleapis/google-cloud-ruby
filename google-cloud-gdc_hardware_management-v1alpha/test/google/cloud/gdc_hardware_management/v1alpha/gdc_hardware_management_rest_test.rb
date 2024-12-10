@@ -33,24 +33,24 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_orders
@@ -84,7 +88,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_orders_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     order = {}
     request_id = "hello world"
 
-    create_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -251,7 +255,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     order = {}
     request_id = "hello world"
 
-    update_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -307,7 +311,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     request_id = "hello world"
     force = true
 
-    delete_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -363,7 +367,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     request_id = "hello world"
     type = :TYPE_UNSPECIFIED
 
-    submit_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    submit_order_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -421,7 +425,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_sites_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_sites_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -532,7 +536,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     site = {}
     request_id = "hello world"
 
-    create_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     site = {}
     request_id = "hello world"
 
-    update_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -643,7 +647,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     name = "hello world"
     request_id = "hello world"
 
-    delete_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_site_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -701,7 +705,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_hardware_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_hardware_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -755,7 +759,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -812,7 +816,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     hardware_group = {}
     request_id = "hello world"
 
-    create_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -868,7 +872,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     hardware_group = {}
     request_id = "hello world"
 
-    update_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -923,7 +927,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     name = "hello world"
     request_id = "hello world"
 
-    delete_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_hardware_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -981,7 +985,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1035,7 +1039,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1091,7 +1095,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     hardware_id = "hello world"
     hardware = {}
 
-    create_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1147,7 +1151,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     hardware = {}
     request_id = "hello world"
 
-    update_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1202,7 +1206,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     name = "hello world"
     request_id = "hello world"
 
-    delete_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_hardware_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1260,7 +1264,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_comments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_comments_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1314,7 +1318,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1371,7 +1375,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     comment = {}
     request_id = "hello world"
 
-    create_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1426,7 +1430,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     name = "hello world"
     action_type = :ACTION_TYPE_UNSPECIFIED
 
-    record_action_on_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    record_action_on_comment_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1484,7 +1488,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_change_log_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_change_log_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1538,7 +1542,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_change_log_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_change_log_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1596,7 +1600,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_skus_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1650,7 +1654,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_sku_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_sku_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1708,7 +1712,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     filter = "hello world"
     order_by = "hello world"
 
-    list_zones_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_zones_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1762,7 +1766,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1819,7 +1823,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     zone = {}
     request_id = "hello world"
 
-    create_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1875,7 +1879,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     zone = {}
     request_id = "hello world"
 
-    update_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1930,7 +1934,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     name = "hello world"
     request_id = "hello world"
 
-    delete_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1987,7 +1991,7 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     state_signal = :STATE_SIGNAL_UNSPECIFIED
     provisioning_state_signal = :PROVISIONING_STATE_SIGNAL_UNSPECIFIED
 
-    signal_zone_state_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    signal_zone_state_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
