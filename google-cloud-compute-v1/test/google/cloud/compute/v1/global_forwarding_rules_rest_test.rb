@@ -33,24 +33,24 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_delete
@@ -82,7 +86,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     project = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     forwarding_rule = "hello world"
     project = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -193,7 +197,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     project = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -252,7 +256,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     project = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     project = "hello world"
     request_id = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -365,7 +369,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     project = "hello world"
     resource = "hello world"
 
-    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -422,7 +426,7 @@ class ::Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::ClientTest < Mi
     request_id = "hello world"
     target_reference_resource = {}
 
-    set_target_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_target_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
