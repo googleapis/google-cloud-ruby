@@ -98,6 +98,8 @@ module Google
 
                   default_config.rpcs.remove_rule.timeout = 600.0
 
+                  default_config.rpcs.set_labels.timeout = 600.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -183,8 +185,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @region_security_policies_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
               end
 
               ##
@@ -193,6 +206,15 @@ module Google
               # @return [::Google::Cloud::Compute::V1::RegionOperations::Rest::Client]
               #
               attr_reader :region_operations
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @region_security_policies_stub.logger
+              end
 
               # Service calls
 
@@ -286,7 +308,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -380,7 +402,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -463,7 +485,6 @@ module Google
 
                 @region_security_policies_stub.get request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -548,7 +569,6 @@ module Google
 
                 @region_security_policies_stub.get_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -644,7 +664,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -736,7 +756,7 @@ module Google
                 @region_security_policies_stub.list request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @region_security_policies_stub, :list, "items", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -834,7 +854,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -934,7 +954,7 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1028,7 +1048,103 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
-                  return result
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Sets the labels on a security policy. To learn more about labels, read the Labeling Resources documentation.
+              #
+              # @overload set_labels(request, options = nil)
+              #   Pass arguments to `set_labels` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload set_labels(project: nil, region: nil, region_set_labels_request_resource: nil, request_id: nil, resource: nil)
+              #   Pass arguments to `set_labels` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The region for this request.
+              #   @param region_set_labels_request_resource [::Google::Cloud::Compute::V1::RegionSetLabelsRequest, ::Hash]
+              #     The body resource for this request
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest.new
+              #
+              #   # Call the set_labels method.
+              #   result = client.set_labels request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::Operation.
+              #   p result
+              #
+              def set_labels request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetLabelsRegionSecurityPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_labels.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_labels.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @region_security_policies_stub.set_labels request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1108,6 +1224,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -1129,6 +1250,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil
@@ -1212,6 +1334,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :remove_rule
+                  ##
+                  # RPC-specific configuration for `set_labels`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_labels
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -1233,6 +1360,8 @@ module Google
                     @patch_rule = ::Gapic::Config::Method.new patch_rule_config
                     remove_rule_config = parent_rpcs.remove_rule if parent_rpcs.respond_to? :remove_rule
                     @remove_rule = ::Gapic::Config::Method.new remove_rule_config
+                    set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
+                    @set_labels = ::Gapic::Config::Method.new set_labels_config
 
                     yield self if block_given?
                   end
