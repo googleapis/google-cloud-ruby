@@ -31,6 +31,10 @@ class Google::Cloud::PhishingProtection::ClientConstructionMinitest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_phishing_protection_service_grpc

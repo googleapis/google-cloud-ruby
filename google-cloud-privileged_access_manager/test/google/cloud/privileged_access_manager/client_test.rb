@@ -31,6 +31,10 @@ class Google::Cloud::PrivilegedAccessManager::ClientConstructionMinitest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_privileged_access_manager_grpc

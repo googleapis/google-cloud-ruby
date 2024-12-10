@@ -31,6 +31,10 @@ class Google::Cloud::Orchestration::Airflow::Service::ClientConstructionMinitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_environments_grpc
