@@ -709,7 +709,7 @@
   "google-cloud-storage+FILLER": "0.0.0",
   "google-cloud-storage-control": "1.0.1",
   "google-cloud-storage-control+FILLER": "0.0.0",
-  "google-cloud-storage-control-v2": "1.0.1",
+  "google-cloud-storage-control-v2": "1.1.0",
   "google-cloud-storage-control-v2+FILLER": "0.0.0",
   "google-cloud-storage_insights": "1.2.1",
   "google-cloud-storage_insights+FILLER": "0.0.0",
