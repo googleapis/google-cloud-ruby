@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.8.0 (2024-12-10)
+
+### ⚠ BREAKING CHANGES
+
+* Dropped the nonfunctional gRPC client ([#27598](https://github.com/googleapis/google-cloud-ruby/issues/27598))
+
+#### Features
+
+* Provide opt-in debug logging 
+#### Bug Fixes
+
+* Dropped the nonfunctional gRPC client ([#27598](https://github.com/googleapis/google-cloud-ruby/issues/27598)) 
+
 ### 0.7.1 (2024-08-30)
 
 #### Documentation
