@@ -31,6 +31,10 @@ class ::Google::Cloud::VisionAI::V1::AppPlatform::ClientPathsTest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_application_path

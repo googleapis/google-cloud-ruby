@@ -31,6 +31,10 @@ class ::Google::Cloud::Vision::V1p4beta1::ProductSearch::ClientPathsTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_location_path

@@ -33,24 +33,24 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_public_operators
@@ -84,7 +88,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     filter = "hello world"
     order_by = "hello world"
 
-    list_public_operators_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_public_operators_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -139,7 +143,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     parent = "hello world"
     queries = [{}]
 
-    resolve_operator_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    resolve_operator_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     filter = "hello world"
     order_by = "hello world"
 
-    list_operators_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_operators_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -251,7 +255,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -308,7 +312,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     operator = {}
     request_id = "hello world"
 
-    create_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -364,7 +368,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     operator = {}
     request_id = "hello world"
 
-    update_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -419,7 +423,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    delete_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_operator_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -477,7 +481,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     filter = "hello world"
     order_by = "hello world"
 
-    list_analyses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_analyses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -531,7 +535,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     analysis = {}
     request_id = "hello world"
 
-    create_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -644,7 +648,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     analysis = {}
     request_id = "hello world"
 
-    update_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -699,7 +703,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    delete_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -757,7 +761,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     filter = "hello world"
     order_by = "hello world"
 
-    list_processes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_processes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -811,7 +815,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -868,7 +872,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     process = {}
     request_id = "hello world"
 
-    create_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -924,7 +928,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     process = {}
     request_id = "hello world"
 
-    update_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -979,7 +983,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     name = "hello world"
     request_id = "hello world"
 
-    delete_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1036,7 +1040,7 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     options = {}
     batch_id = "hello world"
 
-    batch_run_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_run_process_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

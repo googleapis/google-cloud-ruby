@@ -31,6 +31,10 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::ClientPathsTest < Minit
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_analysis_path
