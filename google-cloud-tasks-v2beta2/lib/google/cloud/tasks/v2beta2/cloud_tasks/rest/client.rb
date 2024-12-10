@@ -216,8 +216,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @cloud_tasks_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -225,6 +236,7 @@ module Google
                   config.endpoint = @cloud_tasks_stub.endpoint
                   config.universe_domain = @cloud_tasks_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @cloud_tasks_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -234,6 +246,15 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @cloud_tasks_stub.logger
+              end
 
               # Service calls
 
@@ -353,7 +374,7 @@ module Google
                 @cloud_tasks_stub.list_queues request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @cloud_tasks_stub, :list_queues, "queues", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -438,7 +459,6 @@ module Google
 
                 @cloud_tasks_stub.get_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -538,7 +558,6 @@ module Google
 
                 @cloud_tasks_stub.create_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -643,7 +662,6 @@ module Google
 
                 @cloud_tasks_stub.update_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -735,7 +753,6 @@ module Google
 
                 @cloud_tasks_stub.delete_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -820,7 +837,6 @@ module Google
 
                 @cloud_tasks_stub.purge_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -907,7 +923,6 @@ module Google
 
                 @cloud_tasks_stub.pause_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1001,7 +1016,6 @@ module Google
 
                 @cloud_tasks_stub.resume_queue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1092,7 +1106,6 @@ module Google
 
                 @cloud_tasks_stub.get_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1193,7 +1206,6 @@ module Google
 
                 @cloud_tasks_stub.set_iam_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1285,7 +1297,6 @@ module Google
 
                 @cloud_tasks_stub.test_iam_permissions request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1411,7 +1422,7 @@ module Google
                 @cloud_tasks_stub.list_tasks request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @cloud_tasks_stub, :list_tasks, "tasks", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1505,7 +1516,6 @@ module Google
 
                 @cloud_tasks_stub.get_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1643,7 +1653,6 @@ module Google
 
                 @cloud_tasks_stub.create_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1727,7 +1736,6 @@ module Google
 
                 @cloud_tasks_stub.delete_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1910,7 +1918,6 @@ module Google
 
                 @cloud_tasks_stub.lease_tasks request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2009,7 +2016,6 @@ module Google
 
                 @cloud_tasks_stub.acknowledge_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2120,7 +2126,6 @@ module Google
 
                 @cloud_tasks_stub.renew_lease request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2225,7 +2230,6 @@ module Google
 
                 @cloud_tasks_stub.cancel_lease request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2348,7 +2352,6 @@ module Google
 
                 @cloud_tasks_stub.run_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2428,6 +2431,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -2456,6 +2464,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

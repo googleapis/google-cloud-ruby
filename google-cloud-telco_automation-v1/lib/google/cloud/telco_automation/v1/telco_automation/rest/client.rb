@@ -162,8 +162,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @telco_automation_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -171,6 +182,7 @@ module Google
                   config.endpoint = @telco_automation_stub.endpoint
                   config.universe_domain = @telco_automation_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @telco_automation_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -187,6 +199,15 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @telco_automation_stub.logger
+              end
 
               # Service calls
 
@@ -276,7 +297,6 @@ module Google
 
                 @telco_automation_stub.list_orchestration_clusters request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -355,7 +375,6 @@ module Google
 
                 @telco_automation_stub.get_orchestration_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -462,7 +481,7 @@ module Google
                 @telco_automation_stub.create_orchestration_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -563,7 +582,7 @@ module Google
                 @telco_automation_stub.delete_orchestration_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -655,7 +674,6 @@ module Google
 
                 @telco_automation_stub.list_edge_slms request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -734,7 +752,6 @@ module Google
 
                 @telco_automation_stub.get_edge_slm request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -841,7 +858,7 @@ module Google
                 @telco_automation_stub.create_edge_slm request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -942,7 +959,7 @@ module Google
                 @telco_automation_stub.delete_edge_slm request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1027,7 +1044,6 @@ module Google
 
                 @telco_automation_stub.create_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1109,7 +1125,6 @@ module Google
 
                 @telco_automation_stub.update_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1195,7 +1210,6 @@ module Google
 
                 @telco_automation_stub.get_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1277,7 +1291,6 @@ module Google
 
                 @telco_automation_stub.delete_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1372,7 +1385,7 @@ module Google
                 @telco_automation_stub.list_blueprints request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_blueprints, "blueprints", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1452,7 +1465,6 @@ module Google
 
                 @telco_automation_stub.approve_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1531,7 +1543,6 @@ module Google
 
                 @telco_automation_stub.propose_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1610,7 +1621,6 @@ module Google
 
                 @telco_automation_stub.reject_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1699,7 +1709,7 @@ module Google
                 @telco_automation_stub.list_blueprint_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_blueprint_revisions, "blueprints", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1799,7 +1809,7 @@ module Google
                 @telco_automation_stub.search_blueprint_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :search_blueprint_revisions, "blueprints", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1900,7 +1910,7 @@ module Google
                 @telco_automation_stub.search_deployment_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :search_deployment_revisions, "deployments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1981,7 +1991,6 @@ module Google
 
                 @telco_automation_stub.discard_blueprint_changes request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2073,7 +2082,7 @@ module Google
                 @telco_automation_stub.list_public_blueprints request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_public_blueprints, "public_blueprints", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2152,7 +2161,6 @@ module Google
 
                 @telco_automation_stub.get_public_blueprint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2237,7 +2245,6 @@ module Google
 
                 @telco_automation_stub.create_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2319,7 +2326,6 @@ module Google
 
                 @telco_automation_stub.update_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2406,7 +2412,6 @@ module Google
 
                 @telco_automation_stub.get_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2486,7 +2491,6 @@ module Google
 
                 @telco_automation_stub.remove_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2581,7 +2585,7 @@ module Google
                 @telco_automation_stub.list_deployments request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_deployments, "deployments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2670,7 +2674,7 @@ module Google
                 @telco_automation_stub.list_deployment_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_deployment_revisions, "deployments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2751,7 +2755,6 @@ module Google
 
                 @telco_automation_stub.discard_deployment_changes request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2830,7 +2833,6 @@ module Google
 
                 @telco_automation_stub.apply_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2909,7 +2911,6 @@ module Google
 
                 @telco_automation_stub.compute_deployment_status request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2991,7 +2992,6 @@ module Google
 
                 @telco_automation_stub.rollback_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3070,7 +3070,6 @@ module Google
 
                 @telco_automation_stub.get_hydrated_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3162,7 +3161,7 @@ module Google
                 @telco_automation_stub.list_hydrated_deployments request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_hydrated_deployments, "hydrated_deployments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3244,7 +3243,6 @@ module Google
 
                 @telco_automation_stub.update_hydrated_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3323,7 +3321,6 @@ module Google
 
                 @telco_automation_stub.apply_hydrated_deployment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3403,6 +3400,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -3431,6 +3433,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

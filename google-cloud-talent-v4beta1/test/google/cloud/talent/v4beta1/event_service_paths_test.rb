@@ -31,6 +31,10 @@ class ::Google::Cloud::Talent::V4beta1::EventService::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_project_path
