@@ -184,14 +184,26 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @warehouse_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @warehouse_stub.endpoint
                   config.universe_domain = @warehouse_stub.universe_domain
+                  config.logger = @warehouse_stub.logger if config.respond_to? :logger=
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -199,6 +211,7 @@ module Google
                   config.quota_project = @quota_project_id
                   config.endpoint = @warehouse_stub.endpoint
                   config.universe_domain = @warehouse_stub.universe_domain
+                  config.logger = @warehouse_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -222,6 +235,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @warehouse_stub.logger
+              end
 
               # Service calls
 
@@ -310,7 +332,6 @@ module Google
 
                 @warehouse_stub.create_asset request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -395,7 +416,6 @@ module Google
 
                 @warehouse_stub.update_asset request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -476,7 +496,6 @@ module Google
 
                 @warehouse_stub.get_asset request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -578,7 +597,7 @@ module Google
                 @warehouse_stub.list_assets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_assets, "assets", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -667,7 +686,7 @@ module Google
                 @warehouse_stub.delete_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -767,7 +786,7 @@ module Google
                 @warehouse_stub.upload_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -850,7 +869,6 @@ module Google
 
                 @warehouse_stub.generate_retrieval_url request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -939,7 +957,7 @@ module Google
                 @warehouse_stub.analyze_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1033,7 +1051,7 @@ module Google
                 @warehouse_stub.index_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1127,7 +1145,7 @@ module Google
                 @warehouse_stub.remove_index_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1229,7 +1247,7 @@ module Google
                 @warehouse_stub.view_indexed_assets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :view_indexed_assets, "indexed_assets", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1328,7 +1346,7 @@ module Google
                 @warehouse_stub.create_index request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1424,7 +1442,7 @@ module Google
                 @warehouse_stub.update_index request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1505,7 +1523,6 @@ module Google
 
                 @warehouse_stub.get_index request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1602,7 +1619,7 @@ module Google
                 @warehouse_stub.list_indexes request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_indexes, "indexes", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1692,7 +1709,7 @@ module Google
                 @warehouse_stub.delete_index request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1781,7 +1798,7 @@ module Google
                 @warehouse_stub.create_corpus request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1860,7 +1877,6 @@ module Google
 
                 @warehouse_stub.get_corpus request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1941,7 +1957,6 @@ module Google
 
                 @warehouse_stub.update_corpus request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2043,7 +2058,7 @@ module Google
                 @warehouse_stub.list_corpora request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_corpora, "corpora", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2123,7 +2138,6 @@ module Google
 
                 @warehouse_stub.delete_corpus request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2212,7 +2226,7 @@ module Google
                 @warehouse_stub.analyze_corpus request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2295,7 +2309,6 @@ module Google
 
                 @warehouse_stub.create_data_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2378,7 +2391,6 @@ module Google
 
                 @warehouse_stub.update_data_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2459,7 +2471,6 @@ module Google
 
                 @warehouse_stub.get_data_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2540,7 +2551,6 @@ module Google
 
                 @warehouse_stub.delete_data_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2636,7 +2646,7 @@ module Google
                 @warehouse_stub.list_data_schemas request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_data_schemas, "data_schemas", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2727,7 +2737,6 @@ module Google
 
                 @warehouse_stub.create_annotation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2808,7 +2817,6 @@ module Google
 
                 @warehouse_stub.get_annotation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2920,7 +2928,7 @@ module Google
                 @warehouse_stub.list_annotations request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_annotations, "annotations", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3004,7 +3012,6 @@ module Google
 
                 @warehouse_stub.update_annotation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3085,7 +3092,6 @@ module Google
 
                 @warehouse_stub.delete_annotation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3173,7 +3179,6 @@ module Google
 
                 @warehouse_stub.clip_asset request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3262,7 +3267,6 @@ module Google
 
                 @warehouse_stub.generate_hls_uri request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3358,7 +3362,7 @@ module Google
                 @warehouse_stub.import_assets request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3460,7 +3464,6 @@ module Google
 
                 @warehouse_stub.create_search_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3559,7 +3562,6 @@ module Google
 
                 @warehouse_stub.update_search_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3640,7 +3642,6 @@ module Google
 
                 @warehouse_stub.get_search_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3724,7 +3725,6 @@ module Google
 
                 @warehouse_stub.delete_search_config request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3821,7 +3821,7 @@ module Google
                 @warehouse_stub.list_search_configs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_search_configs, "search_configs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3906,7 +3906,6 @@ module Google
 
                 @warehouse_stub.create_search_hypernym request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3991,7 +3990,6 @@ module Google
 
                 @warehouse_stub.update_search_hypernym request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4072,7 +4070,6 @@ module Google
 
                 @warehouse_stub.get_search_hypernym request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4153,7 +4150,6 @@ module Google
 
                 @warehouse_stub.delete_search_hypernym request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4250,7 +4246,7 @@ module Google
                 @warehouse_stub.list_search_hypernyms request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_search_hypernyms, "search_hypernyms", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4362,7 +4358,6 @@ module Google
 
                 @warehouse_stub.search_assets request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4466,7 +4461,7 @@ module Google
                 @warehouse_stub.search_index_endpoint request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :search_index_endpoint, "search_result_items", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4563,7 +4558,7 @@ module Google
                 @warehouse_stub.create_index_endpoint request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4642,7 +4637,6 @@ module Google
 
                 @warehouse_stub.get_index_endpoint request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4745,7 +4739,7 @@ module Google
                 @warehouse_stub.list_index_endpoints request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_index_endpoints, "index_endpoints", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4840,7 +4834,7 @@ module Google
                 @warehouse_stub.update_index_endpoint request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4927,7 +4921,7 @@ module Google
                 @warehouse_stub.delete_index_endpoint request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5018,7 +5012,7 @@ module Google
                 @warehouse_stub.deploy_index request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5107,7 +5101,7 @@ module Google
                 @warehouse_stub.undeploy_index request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5205,7 +5199,7 @@ module Google
                 @warehouse_stub.create_collection request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5293,7 +5287,7 @@ module Google
                 @warehouse_stub.delete_collection request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5373,7 +5367,6 @@ module Google
 
                 @warehouse_stub.get_collection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5464,7 +5457,6 @@ module Google
 
                 @warehouse_stub.update_collection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5559,7 +5551,7 @@ module Google
                 @warehouse_stub.list_collections request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :list_collections, "collections", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5638,7 +5630,6 @@ module Google
 
                 @warehouse_stub.add_collection_item request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5717,7 +5708,6 @@ module Google
 
                 @warehouse_stub.remove_collection_item request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5813,7 +5803,7 @@ module Google
                 @warehouse_stub.view_collection_items request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :view_collection_items, "items", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5893,6 +5883,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -5914,6 +5909,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

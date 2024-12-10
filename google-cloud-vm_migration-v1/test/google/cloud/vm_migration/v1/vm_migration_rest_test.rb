@@ -33,24 +33,24 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_sources
@@ -84,7 +88,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_sources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     source = {}
     request_id = "hello world"
 
-    create_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -251,7 +255,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     source = {}
     request_id = "hello world"
 
-    update_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -306,7 +310,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -361,7 +365,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     source = "hello world"
     force_refresh = true
 
-    fetch_inventory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_inventory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -420,7 +424,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_utilization_reports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_utilization_reports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     view = :UTILIZATION_REPORT_VIEW_UNSPECIFIED
 
-    get_utilization_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_utilization_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -532,7 +536,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     utilization_report_id = "hello world"
     request_id = "hello world"
 
-    create_utilization_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_utilization_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -587,7 +591,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_utilization_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_utilization_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -645,7 +649,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_datacenter_connectors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_datacenter_connectors_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -699,7 +703,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_datacenter_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_datacenter_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -756,7 +760,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     datacenter_connector = {}
     request_id = "hello world"
 
-    create_datacenter_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_datacenter_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -811,7 +815,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_datacenter_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_datacenter_connector_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -866,7 +870,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     datacenter_connector = "hello world"
     request_id = "hello world"
 
-    upgrade_appliance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    upgrade_appliance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -923,7 +927,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     migrating_vm = {}
     request_id = "hello world"
 
-    create_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -982,7 +986,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     order_by = "hello world"
     view = :MIGRATING_VM_VIEW_UNSPECIFIED
 
-    list_migrating_vms_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_migrating_vms_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1037,7 +1041,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     view = :MIGRATING_VM_VIEW_UNSPECIFIED
 
-    get_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1093,7 +1097,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     migrating_vm = {}
     request_id = "hello world"
 
-    update_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1147,7 +1151,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_migrating_vm_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1201,7 +1205,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     migrating_vm = "hello world"
 
-    start_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    start_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1255,7 +1259,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     migrating_vm = "hello world"
 
-    resume_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    resume_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1309,7 +1313,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     migrating_vm = "hello world"
 
-    pause_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    pause_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1363,7 +1367,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     migrating_vm = "hello world"
 
-    finalize_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    finalize_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1420,7 +1424,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     clone_job = {}
     request_id = "hello world"
 
-    create_clone_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_clone_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1474,7 +1478,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_clone_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_clone_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1532,7 +1536,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_clone_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_clone_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1586,7 +1590,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_clone_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_clone_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1643,7 +1647,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     cutover_job = {}
     request_id = "hello world"
 
-    create_cutover_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_cutover_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1697,7 +1701,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    cancel_cutover_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    cancel_cutover_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1755,7 +1759,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_cutover_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_cutover_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1809,7 +1813,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_cutover_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_cutover_job_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1867,7 +1871,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1921,7 +1925,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1978,7 +1982,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     group = {}
     request_id = "hello world"
 
-    create_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2034,7 +2038,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     group = {}
     request_id = "hello world"
 
-    update_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2089,7 +2093,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2144,7 +2148,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     group = "hello world"
     migrating_vm = "hello world"
 
-    add_group_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    add_group_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2199,7 +2203,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     group = "hello world"
     migrating_vm = "hello world"
 
-    remove_group_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    remove_group_migration_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2257,7 +2261,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_target_projects_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_target_projects_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2311,7 +2315,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2368,7 +2372,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     target_project = {}
     request_id = "hello world"
 
-    create_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2424,7 +2428,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     target_project = {}
     request_id = "hello world"
 
-    update_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2479,7 +2483,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     name = "hello world"
     request_id = "hello world"
 
-    delete_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_target_project_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2537,7 +2541,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     filter = "hello world"
     order_by = "hello world"
 
-    list_replication_cycles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_replication_cycles_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2591,7 +2595,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_replication_cycle_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_replication_cycle_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

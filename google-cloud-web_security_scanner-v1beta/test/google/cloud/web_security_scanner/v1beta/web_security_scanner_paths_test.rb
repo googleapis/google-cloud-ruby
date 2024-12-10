@@ -31,6 +31,10 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientPat
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_finding_path

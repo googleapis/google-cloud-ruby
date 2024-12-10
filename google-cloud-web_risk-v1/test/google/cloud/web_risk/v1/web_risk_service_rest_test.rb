@@ -33,24 +33,24 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_compute_threat_list_diff
@@ -82,7 +86,7 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
     version_token = "hello world"
     constraints = {}
 
-    compute_threat_list_diff_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    compute_threat_list_diff_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
     uri = "hello world"
     threat_types = [:THREAT_TYPE_UNSPECIFIED]
 
-    search_uris_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_uris_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
     hash_prefix = "hello world"
     threat_types = [:THREAT_TYPE_UNSPECIFIED]
 
-    search_hashes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_hashes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
     parent = "hello world"
     submission = {}
 
-    create_submission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_submission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -304,7 +308,7 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::Rest::ClientTest < Minitest:
     threat_info = {}
     threat_discovery = {}
 
-    submit_uri_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    submit_uri_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

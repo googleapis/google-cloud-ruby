@@ -31,6 +31,10 @@ class ::Google::Cloud::Workflows::V1::Workflows::ClientPathsTest < Minitest::Tes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_crypto_key_path

@@ -333,8 +333,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @vmware_engine_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -342,6 +353,7 @@ module Google
                   config.endpoint = @vmware_engine_stub.endpoint
                   config.universe_domain = @vmware_engine_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @vmware_engine_stub.logger if config.respond_to? :logger=
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -350,6 +362,7 @@ module Google
                   config.endpoint = @vmware_engine_stub.endpoint
                   config.universe_domain = @vmware_engine_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @vmware_engine_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -373,6 +386,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @vmware_engine_stub.logger
+              end
 
               # Service calls
 
@@ -501,7 +523,6 @@ module Google
 
                 @vmware_engine_stub.list_private_clouds request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -584,7 +605,6 @@ module Google
 
                 @vmware_engine_stub.get_private_cloud request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -701,7 +721,7 @@ module Google
                 @vmware_engine_stub.create_private_cloud request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -804,7 +824,7 @@ module Google
                 @vmware_engine_stub.update_private_cloud request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -927,7 +947,7 @@ module Google
                 @vmware_engine_stub.delete_private_cloud request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1024,7 +1044,7 @@ module Google
                 @vmware_engine_stub.undelete_private_cloud request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1142,7 +1162,6 @@ module Google
 
                 @vmware_engine_stub.list_clusters request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1225,7 +1244,6 @@ module Google
 
                 @vmware_engine_stub.get_cluster request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1339,7 +1357,7 @@ module Google
                 @vmware_engine_stub.create_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1444,7 +1462,7 @@ module Google
                 @vmware_engine_stub.update_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1541,7 +1559,7 @@ module Google
                 @vmware_engine_stub.delete_cluster request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1641,7 +1659,7 @@ module Google
                 @vmware_engine_stub.list_nodes request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_nodes, "nodes", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1722,7 +1740,6 @@ module Google
 
                 @vmware_engine_stub.get_node request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1854,7 +1871,6 @@ module Google
 
                 @vmware_engine_stub.list_external_addresses request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1956,7 +1972,7 @@ module Google
                 @vmware_engine_stub.fetch_network_policy_external_addresses request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :fetch_network_policy_external_addresses, "external_addresses", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2039,7 +2055,6 @@ module Google
 
                 @vmware_engine_stub.get_external_address request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2162,7 +2177,7 @@ module Google
                 @vmware_engine_stub.create_external_address request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2276,7 +2291,7 @@ module Google
                 @vmware_engine_stub.update_external_address request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2384,7 +2399,7 @@ module Google
                 @vmware_engine_stub.delete_external_address request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2483,7 +2498,6 @@ module Google
 
                 @vmware_engine_stub.list_subnets request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2566,7 +2580,6 @@ module Google
 
                 @vmware_engine_stub.get_subnet request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2664,7 +2677,7 @@ module Google
                 @vmware_engine_stub.update_subnet request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2795,7 +2808,6 @@ module Google
 
                 @vmware_engine_stub.list_external_access_rules request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2878,7 +2890,6 @@ module Google
 
                 @vmware_engine_stub.get_external_access_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2999,7 +3010,7 @@ module Google
                 @vmware_engine_stub.create_external_access_rule request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3108,7 +3119,7 @@ module Google
                 @vmware_engine_stub.update_external_access_rule request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3214,7 +3225,7 @@ module Google
                 @vmware_engine_stub.delete_external_access_rule request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3347,7 +3358,6 @@ module Google
 
                 @vmware_engine_stub.list_logging_servers request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3430,7 +3440,6 @@ module Google
 
                 @vmware_engine_stub.get_logging_server request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3551,7 +3560,7 @@ module Google
                 @vmware_engine_stub.create_logging_server request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3660,7 +3669,7 @@ module Google
                 @vmware_engine_stub.update_logging_server request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3766,7 +3775,7 @@ module Google
                 @vmware_engine_stub.delete_logging_server request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3890,7 +3899,6 @@ module Google
 
                 @vmware_engine_stub.list_node_types request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3973,7 +3981,6 @@ module Google
 
                 @vmware_engine_stub.get_node_type request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4057,7 +4064,6 @@ module Google
 
                 @vmware_engine_stub.show_nsx_credentials request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4152,7 +4158,6 @@ module Google
 
                 @vmware_engine_stub.show_vcenter_credentials request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4259,7 +4264,7 @@ module Google
                 @vmware_engine_stub.reset_nsx_credentials request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4376,7 +4381,7 @@ module Google
                 @vmware_engine_stub.reset_vcenter_credentials request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4459,7 +4464,6 @@ module Google
 
                 @vmware_engine_stub.get_dns_forwarding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4568,7 +4572,7 @@ module Google
                 @vmware_engine_stub.update_dns_forwarding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4654,7 +4658,6 @@ module Google
 
                 @vmware_engine_stub.get_network_peering request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4784,7 +4787,6 @@ module Google
 
                 @vmware_engine_stub.list_network_peerings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4906,7 +4908,7 @@ module Google
                 @vmware_engine_stub.create_network_peering request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5015,7 +5017,7 @@ module Google
                 @vmware_engine_stub.delete_network_peering request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5125,7 +5127,7 @@ module Google
                 @vmware_engine_stub.update_network_peering request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5229,7 +5231,7 @@ module Google
                 @vmware_engine_stub.list_peering_routes request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_peering_routes, "peering_routes", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5350,7 +5352,7 @@ module Google
                 @vmware_engine_stub.create_hcx_activation_key request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5450,7 +5452,6 @@ module Google
 
                 @vmware_engine_stub.list_hcx_activation_keys request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5533,7 +5534,6 @@ module Google
 
                 @vmware_engine_stub.get_hcx_activation_key request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5616,7 +5616,6 @@ module Google
 
                 @vmware_engine_stub.get_network_policy request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5746,7 +5745,6 @@ module Google
 
                 @vmware_engine_stub.list_network_policies request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5870,7 +5868,7 @@ module Google
                 @vmware_engine_stub.create_network_policy request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5989,7 +5987,7 @@ module Google
                 @vmware_engine_stub.update_network_policy request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6097,7 +6095,7 @@ module Google
                 @vmware_engine_stub.delete_network_policy request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6229,7 +6227,6 @@ module Google
 
                 @vmware_engine_stub.list_management_dns_zone_bindings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6312,7 +6309,6 @@ module Google
 
                 @vmware_engine_stub.get_management_dns_zone_binding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6440,7 +6436,7 @@ module Google
                 @vmware_engine_stub.create_management_dns_zone_binding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6549,7 +6545,7 @@ module Google
                 @vmware_engine_stub.update_management_dns_zone_binding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6657,7 +6653,7 @@ module Google
                 @vmware_engine_stub.delete_management_dns_zone_binding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6764,7 +6760,7 @@ module Google
                 @vmware_engine_stub.repair_management_dns_zone_binding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6889,7 +6885,7 @@ module Google
                 @vmware_engine_stub.create_vmware_engine_network request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7000,7 +6996,7 @@ module Google
                 @vmware_engine_stub.update_vmware_engine_network request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7114,7 +7110,7 @@ module Google
                 @vmware_engine_stub.delete_vmware_engine_network request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7200,7 +7196,6 @@ module Google
 
                 @vmware_engine_stub.get_vmware_engine_network request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7329,7 +7324,6 @@ module Google
 
                 @vmware_engine_stub.list_vmware_engine_networks request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7450,7 +7444,7 @@ module Google
                 @vmware_engine_stub.create_private_connection request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7535,7 +7529,6 @@ module Google
 
                 @vmware_engine_stub.get_private_connection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7664,7 +7657,6 @@ module Google
 
                 @vmware_engine_stub.list_private_connections request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7774,7 +7766,7 @@ module Google
                 @vmware_engine_stub.update_private_connection request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7882,7 +7874,7 @@ module Google
                 @vmware_engine_stub.delete_private_connection request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7979,7 +7971,7 @@ module Google
                 @vmware_engine_stub.list_private_connection_peering_routes request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_private_connection_peering_routes, "peering_routes", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8093,7 +8085,7 @@ module Google
                 @vmware_engine_stub.grant_dns_bind_permission request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8179,7 +8171,6 @@ module Google
 
                 @vmware_engine_stub.get_dns_bind_permission request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8292,7 +8283,7 @@ module Google
                 @vmware_engine_stub.revoke_dns_bind_permission request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8372,6 +8363,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -8400,6 +8396,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

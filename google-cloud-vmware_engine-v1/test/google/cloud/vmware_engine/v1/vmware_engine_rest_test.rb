@@ -33,24 +33,24 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_private_clouds
@@ -84,7 +88,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_private_clouds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_private_clouds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -138,7 +142,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -196,7 +200,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     request_id = "hello world"
     validate_only = true
 
-    create_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -252,7 +256,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     request_id = "hello world"
 
-    update_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     force = true
     delay_hours = 42
 
-    delete_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -364,7 +368,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    undelete_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_private_cloud_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -422,7 +426,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_clusters_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -476,7 +480,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -534,7 +538,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     request_id = "hello world"
     validate_only = true
 
-    create_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -591,7 +595,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     request_id = "hello world"
     validate_only = true
 
-    update_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -646,7 +650,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -702,7 +706,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_nodes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_nodes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -756,7 +760,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_node_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_node_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -814,7 +818,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_external_addresses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_external_addresses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -870,7 +874,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    fetch_network_policy_external_addresses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    fetch_network_policy_external_addresses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -924,7 +928,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -981,7 +985,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     external_address_id = "hello world"
     request_id = "hello world"
 
-    create_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1037,7 +1041,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     external_address = {}
     request_id = "hello world"
 
-    update_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1092,7 +1096,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_external_address_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1148,7 +1152,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_subnets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_subnets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1202,7 +1206,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1257,7 +1261,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     subnet = {}
 
-    update_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_subnet_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1315,7 +1319,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_external_access_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_external_access_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1369,7 +1373,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1426,7 +1430,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     external_access_rule_id = "hello world"
     request_id = "hello world"
 
-    create_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1482,7 +1486,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     external_access_rule = {}
     request_id = "hello world"
 
-    update_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1537,7 +1541,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_external_access_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1595,7 +1599,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_logging_servers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_logging_servers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1649,7 +1653,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1706,7 +1710,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     logging_server_id = "hello world"
     request_id = "hello world"
 
-    create_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1762,7 +1766,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     logging_server = {}
     request_id = "hello world"
 
-    update_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1817,7 +1821,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_logging_server_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1874,7 +1878,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_token = "hello world"
     filter = "hello world"
 
-    list_node_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_node_types_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1928,7 +1932,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_node_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_node_type_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1982,7 +1986,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     private_cloud = "hello world"
 
-    show_nsx_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    show_nsx_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2037,7 +2041,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     private_cloud = "hello world"
     username = "hello world"
 
-    show_vcenter_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    show_vcenter_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2092,7 +2096,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     private_cloud = "hello world"
     request_id = "hello world"
 
-    reset_nsx_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reset_nsx_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2148,7 +2152,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     request_id = "hello world"
     username = "hello world"
 
-    reset_vcenter_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reset_vcenter_credentials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2202,7 +2206,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_dns_forwarding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_dns_forwarding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2258,7 +2262,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     request_id = "hello world"
 
-    update_dns_forwarding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_dns_forwarding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2312,7 +2316,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2370,7 +2374,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_network_peerings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_network_peerings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2427,7 +2431,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     network_peering = {}
     request_id = "hello world"
 
-    create_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2482,7 +2486,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2538,7 +2542,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     request_id = "hello world"
 
-    update_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_network_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2595,7 +2599,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_token = "hello world"
     filter = "hello world"
 
-    list_peering_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_peering_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2652,7 +2656,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     hcx_activation_key_id = "hello world"
     request_id = "hello world"
 
-    create_hcx_activation_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_hcx_activation_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2708,7 +2712,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_hcx_activation_keys_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_hcx_activation_keys_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2762,7 +2766,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_hcx_activation_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_hcx_activation_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2816,7 +2820,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2874,7 +2878,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_network_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_network_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2931,7 +2935,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     network_policy = {}
     request_id = "hello world"
 
-    create_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2987,7 +2991,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     request_id = "hello world"
 
-    update_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3042,7 +3046,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_network_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3100,7 +3104,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_management_dns_zone_bindings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_management_dns_zone_bindings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3154,7 +3158,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3211,7 +3215,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     management_dns_zone_binding_id = "hello world"
     request_id = "hello world"
 
-    create_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3267,7 +3271,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     management_dns_zone_binding = {}
     request_id = "hello world"
 
-    update_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3322,7 +3326,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3377,7 +3381,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    repair_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    repair_management_dns_zone_binding_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3434,7 +3438,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     vmware_engine_network = {}
     request_id = "hello world"
 
-    create_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3490,7 +3494,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     request_id = "hello world"
 
-    update_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3546,7 +3550,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     request_id = "hello world"
     etag = "hello world"
 
-    delete_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3600,7 +3604,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_vmware_engine_network_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3658,7 +3662,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_vmware_engine_networks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_vmware_engine_networks_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3715,7 +3719,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     private_connection = {}
     request_id = "hello world"
 
-    create_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3769,7 +3773,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3827,7 +3831,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     filter = "hello world"
     order_by = "hello world"
 
-    list_private_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_private_connections_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3883,7 +3887,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     update_mask = {}
     request_id = "hello world"
 
-    update_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3938,7 +3942,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     name = "hello world"
     request_id = "hello world"
 
-    delete_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_private_connection_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3994,7 +3998,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     page_size = 42
     page_token = "hello world"
 
-    list_private_connection_peering_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_private_connection_peering_routes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -4050,7 +4054,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     principal = {}
     request_id = "hello world"
 
-    grant_dns_bind_permission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    grant_dns_bind_permission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -4104,7 +4108,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_dns_bind_permission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_dns_bind_permission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -4160,7 +4164,7 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::ClientTest < Minite
     principal = {}
     request_id = "hello world"
 
-    revoke_dns_bind_permission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    revoke_dns_bind_permission_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

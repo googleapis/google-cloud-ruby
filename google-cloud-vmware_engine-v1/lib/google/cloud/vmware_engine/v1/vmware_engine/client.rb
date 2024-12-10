@@ -340,14 +340,26 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @vmware_engine_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
 
               @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @vmware_engine_stub.endpoint
                 config.universe_domain = @vmware_engine_stub.universe_domain
+                config.logger = @vmware_engine_stub.logger if config.respond_to? :logger=
               end
 
               @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
@@ -355,6 +367,7 @@ module Google
                 config.quota_project = @quota_project_id
                 config.endpoint = @vmware_engine_stub.endpoint
                 config.universe_domain = @vmware_engine_stub.universe_domain
+                config.logger = @vmware_engine_stub.logger if config.respond_to? :logger=
               end
             end
 
@@ -378,6 +391,15 @@ module Google
             # @return [Google::Iam::V1::IAMPolicy::Client]
             #
             attr_reader :iam_policy_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @vmware_engine_stub.logger
+            end
 
             # Service calls
 
@@ -514,7 +536,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_private_clouds, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_private_clouds, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -604,7 +626,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_private_cloud, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -728,7 +749,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_private_cloud, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -838,7 +859,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_private_cloud, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -968,7 +989,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_private_cloud, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1072,7 +1093,7 @@ module Google
               @vmware_engine_stub.call_rpc :undelete_private_cloud, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1198,7 +1219,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_clusters, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_clusters, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1288,7 +1309,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_cluster, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1409,7 +1429,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_cluster, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1521,7 +1541,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_cluster, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1625,7 +1645,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_cluster, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1732,7 +1752,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_nodes, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_nodes, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1820,7 +1840,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_node, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1960,7 +1979,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_external_addresses, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_external_addresses, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2069,7 +2088,7 @@ module Google
               @vmware_engine_stub.call_rpc :fetch_network_policy_external_addresses, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :fetch_network_policy_external_addresses, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2159,7 +2178,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_external_address, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2289,7 +2307,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_external_address, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2410,7 +2428,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_external_address, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2525,7 +2543,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_external_address, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2632,7 +2650,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_subnets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_subnets, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2722,7 +2740,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_subnet, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2827,7 +2844,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_subnet, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2966,7 +2983,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_external_access_rules, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_external_access_rules, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3056,7 +3073,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_external_access_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3184,7 +3200,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_external_access_rule, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3300,7 +3316,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_external_access_rule, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3413,7 +3429,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_external_access_rule, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3554,7 +3570,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_logging_servers, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_logging_servers, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3644,7 +3660,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_logging_server, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3772,7 +3787,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_logging_server, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3888,7 +3903,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_logging_server, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4001,7 +4016,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_logging_server, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4133,7 +4148,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_node_types, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_node_types, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4223,7 +4238,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_node_type, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4314,7 +4328,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :show_nsx_credentials, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4416,7 +4429,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :show_vcenter_credentials, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4530,7 +4542,7 @@ module Google
               @vmware_engine_stub.call_rpc :reset_nsx_credentials, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4654,7 +4666,7 @@ module Google
               @vmware_engine_stub.call_rpc :reset_vcenter_credentials, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4744,7 +4756,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_dns_forwarding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4860,7 +4871,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_dns_forwarding, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4953,7 +4964,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_network_peering, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5091,7 +5101,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_network_peerings, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_network_peerings, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5220,7 +5230,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_network_peering, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5336,7 +5346,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_network_peering, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5453,7 +5463,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_network_peering, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5564,7 +5574,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_peering_routes, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_peering_routes, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5692,7 +5702,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_hcx_activation_key, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5800,7 +5810,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_hcx_activation_keys, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_hcx_activation_keys, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5890,7 +5900,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_hcx_activation_key, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5980,7 +5989,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_network_policy, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6118,7 +6126,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_network_policies, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_network_policies, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6249,7 +6257,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_network_policy, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6375,7 +6383,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_network_policy, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6490,7 +6498,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_network_policy, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6630,7 +6638,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_management_dns_zone_bindings, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_management_dns_zone_bindings, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6720,7 +6728,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_management_dns_zone_binding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6855,7 +6862,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_management_dns_zone_binding, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6971,7 +6978,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_management_dns_zone_binding, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7086,7 +7093,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_management_dns_zone_binding, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7200,7 +7207,7 @@ module Google
               @vmware_engine_stub.call_rpc :repair_management_dns_zone_binding, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7332,7 +7339,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_vmware_engine_network, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7450,7 +7457,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_vmware_engine_network, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7571,7 +7578,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_vmware_engine_network, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7664,7 +7671,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_vmware_engine_network, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7801,7 +7807,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_vmware_engine_networks, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_vmware_engine_networks, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7929,7 +7935,7 @@ module Google
               @vmware_engine_stub.call_rpc :create_private_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8021,7 +8027,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_private_connection, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8158,7 +8163,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_private_connections, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_private_connections, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8275,7 +8280,7 @@ module Google
               @vmware_engine_stub.call_rpc :update_private_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8390,7 +8395,7 @@ module Google
               @vmware_engine_stub.call_rpc :delete_private_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8494,7 +8499,7 @@ module Google
               @vmware_engine_stub.call_rpc :list_private_connection_peering_routes, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_private_connection_peering_routes, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8615,7 +8620,7 @@ module Google
               @vmware_engine_stub.call_rpc :grant_dns_bind_permission, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8708,7 +8713,6 @@ module Google
 
               @vmware_engine_stub.call_rpc :get_dns_bind_permission, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8828,7 +8832,7 @@ module Google
               @vmware_engine_stub.call_rpc :revoke_dns_bind_permission, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8917,6 +8921,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -8941,6 +8950,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

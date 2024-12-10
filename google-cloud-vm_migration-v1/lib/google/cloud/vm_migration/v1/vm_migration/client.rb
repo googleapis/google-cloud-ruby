@@ -174,14 +174,26 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @vm_migration_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
 
               @location_client = Google::Cloud::Location::Locations::Client.new do |config|
                 config.credentials = credentials
                 config.quota_project = @quota_project_id
                 config.endpoint = @vm_migration_stub.endpoint
                 config.universe_domain = @vm_migration_stub.universe_domain
+                config.logger = @vm_migration_stub.logger if config.respond_to? :logger=
               end
 
               @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
@@ -189,6 +201,7 @@ module Google
                 config.quota_project = @quota_project_id
                 config.endpoint = @vm_migration_stub.endpoint
                 config.universe_domain = @vm_migration_stub.universe_domain
+                config.logger = @vm_migration_stub.logger if config.respond_to? :logger=
               end
             end
 
@@ -212,6 +225,15 @@ module Google
             # @return [Google::Iam::V1::IAMPolicy::Client]
             #
             attr_reader :iam_policy_client
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @vm_migration_stub.logger
+            end
 
             # Service calls
 
@@ -315,7 +337,7 @@ module Google
               @vm_migration_stub.call_rpc :list_sources, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_sources, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -401,7 +423,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_source, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -513,7 +534,7 @@ module Google
               @vm_migration_stub.call_rpc :create_source, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -627,7 +648,7 @@ module Google
               @vm_migration_stub.call_rpc :update_source, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -735,7 +756,7 @@ module Google
               @vm_migration_stub.call_rpc :delete_source, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -828,7 +849,6 @@ module Google
 
               @vm_migration_stub.call_rpc :fetch_inventory, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -937,7 +957,7 @@ module Google
               @vm_migration_stub.call_rpc :list_utilization_reports, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_utilization_reports, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1026,7 +1046,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_utilization_report, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1143,7 +1162,7 @@ module Google
               @vm_migration_stub.call_rpc :create_utilization_report, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1251,7 +1270,7 @@ module Google
               @vm_migration_stub.call_rpc :delete_utilization_report, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1358,7 +1377,7 @@ module Google
               @vm_migration_stub.call_rpc :list_datacenter_connectors, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_datacenter_connectors, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1444,7 +1463,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_datacenter_connector, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1559,7 +1577,7 @@ module Google
               @vm_migration_stub.call_rpc :create_datacenter_connector, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1667,7 +1685,7 @@ module Google
               @vm_migration_stub.call_rpc :delete_datacenter_connector, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1776,7 +1794,7 @@ module Google
               @vm_migration_stub.call_rpc :upgrade_appliance, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1888,7 +1906,7 @@ module Google
               @vm_migration_stub.call_rpc :create_migrating_vm, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1996,7 +2014,7 @@ module Google
               @vm_migration_stub.call_rpc :list_migrating_vms, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_migrating_vms, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2084,7 +2102,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_migrating_vm, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2198,7 +2215,7 @@ module Google
               @vm_migration_stub.call_rpc :update_migrating_vm, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2292,7 +2309,7 @@ module Google
               @vm_migration_stub.call_rpc :delete_migrating_vm, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2387,7 +2404,7 @@ module Google
               @vm_migration_stub.call_rpc :start_migration, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2484,7 +2501,7 @@ module Google
               @vm_migration_stub.call_rpc :resume_migration, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2580,7 +2597,7 @@ module Google
               @vm_migration_stub.call_rpc :pause_migration, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2675,7 +2692,7 @@ module Google
               @vm_migration_stub.call_rpc :finalize_migration, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2787,7 +2804,7 @@ module Google
               @vm_migration_stub.call_rpc :create_clone_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2881,7 +2898,7 @@ module Google
               @vm_migration_stub.call_rpc :cancel_clone_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2987,7 +3004,7 @@ module Google
               @vm_migration_stub.call_rpc :list_clone_jobs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_clone_jobs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3073,7 +3090,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_clone_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3187,7 +3203,7 @@ module Google
               @vm_migration_stub.call_rpc :create_cutover_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3281,7 +3297,7 @@ module Google
               @vm_migration_stub.call_rpc :cancel_cutover_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3387,7 +3403,7 @@ module Google
               @vm_migration_stub.call_rpc :list_cutover_jobs, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_cutover_jobs, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3473,7 +3489,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_cutover_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3579,7 +3594,7 @@ module Google
               @vm_migration_stub.call_rpc :list_groups, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_groups, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3665,7 +3680,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_group, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3777,7 +3791,7 @@ module Google
               @vm_migration_stub.call_rpc :create_group, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3891,7 +3905,7 @@ module Google
               @vm_migration_stub.call_rpc :update_group, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3999,7 +4013,7 @@ module Google
               @vm_migration_stub.call_rpc :delete_group, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4095,7 +4109,7 @@ module Google
               @vm_migration_stub.call_rpc :add_group_migration, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4191,7 +4205,7 @@ module Google
               @vm_migration_stub.call_rpc :remove_group_migration, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4300,7 +4314,7 @@ module Google
               @vm_migration_stub.call_rpc :list_target_projects, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_target_projects, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4389,7 +4403,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_target_project, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4504,7 +4517,7 @@ module Google
               @vm_migration_stub.call_rpc :create_target_project, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4621,7 +4634,7 @@ module Google
               @vm_migration_stub.call_rpc :update_target_project, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4732,7 +4745,7 @@ module Google
               @vm_migration_stub.call_rpc :delete_target_project, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4838,7 +4851,7 @@ module Google
               @vm_migration_stub.call_rpc :list_replication_cycles, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vm_migration_stub, :list_replication_cycles, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4924,7 +4937,6 @@ module Google
 
               @vm_migration_stub.call_rpc :get_replication_cycle, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5013,6 +5025,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -5037,6 +5054,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil
