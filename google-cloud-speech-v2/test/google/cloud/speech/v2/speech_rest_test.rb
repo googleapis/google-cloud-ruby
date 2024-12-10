@@ -33,24 +33,24 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_recognizer
@@ -83,7 +87,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     recognizer_id = "hello world"
     parent = "hello world"
 
-    create_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -140,7 +144,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     show_deleted = true
 
-    list_recognizers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_recognizers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -194,7 +198,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     update_mask = {}
     validate_only = true
 
-    update_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -307,7 +311,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     allow_missing = true
     etag = "hello world"
 
-    delete_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -363,7 +367,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     validate_only = true
     etag = "hello world"
 
-    undelete_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_recognizer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -420,7 +424,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     config_mask = {}
     content = "hello world"
 
-    recognize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    recognize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -479,7 +483,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     recognition_output_config = {}
     processing_strategy = :PROCESSING_STRATEGY_UNSPECIFIED
 
-    batch_recognize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_recognize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -533,7 +537,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -588,7 +592,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     config = {}
     update_mask = {}
 
-    update_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -645,7 +649,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     custom_class_id = "hello world"
     parent = "hello world"
 
-    create_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -702,7 +706,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     show_deleted = true
 
-    list_custom_classes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_custom_classes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -756,7 +760,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -812,7 +816,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     update_mask = {}
     validate_only = true
 
-    update_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -869,7 +873,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     allow_missing = true
     etag = "hello world"
 
-    delete_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -925,7 +929,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     validate_only = true
     etag = "hello world"
 
-    undelete_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_custom_class_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -982,7 +986,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     phrase_set_id = "hello world"
     parent = "hello world"
 
-    create_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1039,7 +1043,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     page_token = "hello world"
     show_deleted = true
 
-    list_phrase_sets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_phrase_sets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1093,7 +1097,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1149,7 +1153,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     update_mask = {}
     validate_only = true
 
-    update_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1206,7 +1210,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     allow_missing = true
     etag = "hello world"
 
-    delete_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1262,7 +1266,7 @@ class ::Google::Cloud::Speech::V2::Speech::Rest::ClientTest < Minitest::Test
     validate_only = true
     etag = "hello world"
 
-    undelete_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_phrase_set_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

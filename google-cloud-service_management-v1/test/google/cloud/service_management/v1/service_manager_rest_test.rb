@@ -33,24 +33,24 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_services
@@ -83,7 +87,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     page_token = "hello world"
     consumer_id = "hello world"
 
-    list_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     # Create request parameters for a unary method.
     service_name = "hello world"
 
-    get_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -191,7 +195,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     # Create request parameters for a unary method.
     service = {}
 
-    create_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -245,7 +249,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     # Create request parameters for a unary method.
     service_name = "hello world"
 
-    delete_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -299,7 +303,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     # Create request parameters for a unary method.
     service_name = "hello world"
 
-    undelete_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undelete_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -355,7 +359,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     page_token = "hello world"
     page_size = 42
 
-    list_service_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_service_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     config_id = "hello world"
     view = :BASIC
 
-    get_service_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_service_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -466,7 +470,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     service_name = "hello world"
     service_config = {}
 
-    create_service_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_service_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -522,7 +526,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     config_source = {}
     validate_only = true
 
-    submit_config_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    submit_config_source_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -579,7 +583,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     page_size = 42
     filter = "hello world"
 
-    list_service_rollouts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_service_rollouts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -634,7 +638,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     service_name = "hello world"
     rollout_id = "hello world"
 
-    get_service_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_service_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -689,7 +693,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     service_name = "hello world"
     rollout = {}
 
-    create_service_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_service_rollout_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -744,7 +748,7 @@ class ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::ClientTest <
     new_config = {}
     old_config = {}
 
-    generate_config_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    generate_config_report_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

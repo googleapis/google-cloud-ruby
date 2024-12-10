@@ -33,24 +33,24 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_enable_service
@@ -80,7 +84,7 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    enable_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enable_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     disable_dependent_services = true
     check_if_service_has_usage = :CHECK_IF_SERVICE_HAS_USAGE_UNSPECIFIED
 
-    disable_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    disable_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -190,7 +194,7 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     page_token = "hello world"
     filter = "hello world"
 
-    list_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -302,7 +306,7 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     parent = "hello world"
     service_ids = ["hello world"]
 
-    batch_enable_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_enable_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     parent = "hello world"
     names = ["hello world"]
 
-    batch_get_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_get_services_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

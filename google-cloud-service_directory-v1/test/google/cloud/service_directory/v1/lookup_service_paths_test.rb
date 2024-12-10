@@ -31,6 +31,10 @@ class ::Google::Cloud::ServiceDirectory::V1::LookupService::ClientPathsTest < Mi
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_service_path
