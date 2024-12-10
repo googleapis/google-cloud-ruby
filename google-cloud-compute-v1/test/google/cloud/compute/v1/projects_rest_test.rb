@@ -33,24 +33,24 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_disable_xpn_host
@@ -81,7 +85,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    disable_xpn_host_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    disable_xpn_host_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -137,7 +141,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     projects_disable_xpn_resource_request_resource = {}
     request_id = "hello world"
 
-    disable_xpn_resource_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    disable_xpn_resource_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    enable_xpn_host_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enable_xpn_host_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     projects_enable_xpn_resource_request_resource = {}
     request_id = "hello world"
 
-    enable_xpn_resource_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enable_xpn_resource_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -302,7 +306,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     project = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -356,7 +360,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     project = "hello world"
 
-    get_xpn_host_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_xpn_host_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -415,7 +419,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    get_xpn_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_xpn_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     projects_list_xpn_hosts_request_resource = {}
     return_partial_success = true
 
-    list_xpn_hosts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_xpn_hosts_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -531,7 +535,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    move_disk_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    move_disk_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -587,7 +591,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    move_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    move_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -643,7 +647,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     projects_set_cloud_armor_tier_request_resource = {}
     request_id = "hello world"
 
-    set_cloud_armor_tier_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_cloud_armor_tier_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -699,7 +703,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    set_common_instance_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_common_instance_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -755,7 +759,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     projects_set_default_network_tier_request_resource = {}
     request_id = "hello world"
 
-    set_default_network_tier_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_default_network_tier_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -811,7 +815,7 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     request_id = "hello world"
     usage_export_location_resource = {}
 
-    set_usage_export_bucket_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    set_usage_export_bucket_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
