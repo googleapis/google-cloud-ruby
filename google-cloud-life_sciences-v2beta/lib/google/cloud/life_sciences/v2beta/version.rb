@@ -21,7 +21,7 @@ module Google
   module Cloud
     module LifeSciences
       module V2beta
-        VERSION = "0.8.2"
+        VERSION = "0.9.0"
       end
     end
   end
