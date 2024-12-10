@@ -33,24 +33,24 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -67,6 +67,10 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
@@ -85,7 +89,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     output_config = {}
     relationship_types = ["hello world"]
 
-    export_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -145,7 +149,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     page_token = "hello world"
     relationship_types = ["hello world"]
 
-    list_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -203,7 +207,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     read_time_window = {}
     relationship_types = ["hello world"]
 
-    batch_get_assets_history_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_get_assets_history_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -259,7 +263,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     feed_id = "hello world"
     feed = {}
 
-    create_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -313,7 +317,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -367,7 +371,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     parent = "hello world"
 
-    list_feeds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_feeds_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -422,7 +426,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     feed = {}
     update_mask = {}
 
-    update_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -476,7 +480,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_feed_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -536,7 +540,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     order_by = "hello world"
     read_mask = {}
 
-    search_all_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_all_resources_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -595,7 +599,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     asset_types = ["hello world"]
     order_by = "hello world"
 
-    search_all_iam_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    search_all_iam_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -651,7 +655,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     saved_analysis_query = "hello world"
     execution_timeout = {}
 
-    analyze_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    analyze_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -707,7 +711,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     saved_analysis_query = "hello world"
     output_config = {}
 
-    analyze_iam_policy_longrunning_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    analyze_iam_policy_longrunning_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -763,7 +767,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     destination_parent = "hello world"
     view = :ANALYSIS_VIEW_UNSPECIFIED
 
-    analyze_move_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    analyze_move_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -823,7 +827,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     read_time_window = {}
     output_config = {}
 
-    query_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    query_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -879,7 +883,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     saved_query = {}
     saved_query_id = "hello world"
 
-    create_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -933,7 +937,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -990,7 +994,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
 
-    list_saved_queries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_saved_queries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1045,7 +1049,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     saved_query = {}
     update_mask = {}
 
-    update_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1099,7 +1103,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_saved_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1154,7 +1158,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     scope = "hello world"
     names = ["hello world"]
 
-    batch_get_effective_iam_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_get_effective_iam_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1212,7 +1216,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
 
-    analyze_org_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    analyze_org_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1270,7 +1274,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
 
-    analyze_org_policy_governed_containers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    analyze_org_policy_governed_containers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1328,7 +1332,7 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     page_size = 42
     page_token = "hello world"
 
-    analyze_org_policy_governed_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    analyze_org_policy_governed_assets_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

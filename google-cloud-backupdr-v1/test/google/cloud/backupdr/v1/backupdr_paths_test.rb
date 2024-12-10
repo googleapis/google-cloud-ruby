@@ -31,6 +31,10 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_backup_path
