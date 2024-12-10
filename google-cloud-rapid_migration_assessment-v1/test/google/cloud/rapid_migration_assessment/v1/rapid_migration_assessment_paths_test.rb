@@ -31,6 +31,10 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::C
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_annotation_path

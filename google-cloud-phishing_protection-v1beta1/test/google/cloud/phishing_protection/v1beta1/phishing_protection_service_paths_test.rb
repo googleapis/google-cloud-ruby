@@ -31,6 +31,10 @@ class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::C
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_project_path

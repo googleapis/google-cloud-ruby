@@ -31,6 +31,10 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_replay_path

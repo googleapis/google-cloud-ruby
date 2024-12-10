@@ -31,6 +31,10 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_address_path
