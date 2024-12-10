@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ServiceDirectory
       module V1beta1
-        VERSION = "0.15.2"
+        VERSION = "0.16.0"
       end
     end
   end
