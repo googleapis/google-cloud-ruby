@@ -33,24 +33,24 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_authorization_policies
@@ -82,7 +86,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     page_size = 42
     page_token = "hello world"
 
-    list_authorization_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_authorization_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     authorization_policy_id = "hello world"
     authorization_policy = {}
 
-    create_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -247,7 +251,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     update_mask = {}
     authorization_policy = {}
 
-    update_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_authorization_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     page_size = 42
     page_token = "hello world"
 
-    list_server_tls_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_server_tls_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -411,7 +415,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -467,7 +471,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     server_tls_policy_id = "hello world"
     server_tls_policy = {}
 
-    create_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -522,7 +526,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     update_mask = {}
     server_tls_policy = {}
 
-    update_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -576,7 +580,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_server_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -632,7 +636,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     page_size = 42
     page_token = "hello world"
 
-    list_client_tls_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_client_tls_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -686,7 +690,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -742,7 +746,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     client_tls_policy_id = "hello world"
     client_tls_policy = {}
 
-    create_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -797,7 +801,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     update_mask = {}
     client_tls_policy = {}
 
-    update_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -851,7 +855,7 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_client_tls_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

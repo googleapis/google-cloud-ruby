@@ -31,6 +31,10 @@ class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_alert_policy_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_active_directory_path

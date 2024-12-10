@@ -33,24 +33,24 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_list_storage_pools
@@ -84,7 +88,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_storage_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_storage_pools_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -140,7 +144,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     storage_pool_id = "hello world"
     storage_pool = {}
 
-    create_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -194,7 +198,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -249,7 +253,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     storage_pool = {}
 
-    update_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -303,7 +307,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_storage_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    switch_active_replica_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    switch_active_replica_zone_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -415,7 +419,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    list_volumes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_volumes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -469,7 +473,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -525,7 +529,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     volume_id = "hello world"
     volume = {}
 
-    create_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -580,7 +584,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     volume = {}
 
-    update_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -635,7 +639,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     name = "hello world"
     force = true
 
-    delete_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -690,7 +694,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     name = "hello world"
     snapshot_id = "hello world"
 
-    revert_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    revert_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -748,7 +752,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_snapshots_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_snapshots_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -802,7 +806,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -858,7 +862,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     snapshot = {}
     snapshot_id = "hello world"
 
-    create_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -912,7 +916,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -967,7 +971,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     snapshot = {}
 
-    update_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_snapshot_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1025,7 +1029,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    list_active_directories_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_active_directories_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1079,7 +1083,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1135,7 +1139,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     active_directory = {}
     active_directory_id = "hello world"
 
-    create_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1190,7 +1194,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     active_directory = {}
 
-    update_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1244,7 +1248,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_active_directory_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1302,7 +1306,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_kms_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_kms_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1358,7 +1362,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     kms_config_id = "hello world"
     kms_config = {}
 
-    create_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1412,7 +1416,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1467,7 +1471,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     kms_config = {}
 
-    update_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1521,7 +1525,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    encrypt_volumes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    encrypt_volumes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1575,7 +1579,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    verify_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    verify_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1629,7 +1633,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_kms_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1687,7 +1691,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_replications_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_replications_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1741,7 +1745,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1797,7 +1801,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     replication = {}
     replication_id = "hello world"
 
-    create_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1851,7 +1855,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1906,7 +1910,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     replication = {}
 
-    update_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1961,7 +1965,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     name = "hello world"
     force = true
 
-    stop_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    stop_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2015,7 +2019,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    resume_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    resume_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2069,7 +2073,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    reverse_replication_direction_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    reverse_replication_direction_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2127,7 +2131,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     peer_ip_addresses = ["hello world"]
     peer_volume_name = "hello world"
 
-    establish_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    establish_peering_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2181,7 +2185,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    sync_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    sync_replication_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2237,7 +2241,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     backup_vault_id = "hello world"
     backup_vault = {}
 
-    create_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2291,7 +2295,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2349,7 +2353,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_backup_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backup_vaults_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2404,7 +2408,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     backup_vault = {}
 
-    update_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2458,7 +2462,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2514,7 +2518,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     backup_id = "hello world"
     backup = {}
 
-    create_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2568,7 +2572,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2626,7 +2630,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     order_by = "hello world"
     filter = "hello world"
 
-    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2680,7 +2684,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2735,7 +2739,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     backup = {}
 
-    update_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2791,7 +2795,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     backup_policy = {}
     backup_policy_id = "hello world"
 
-    create_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2845,7 +2849,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2903,7 +2907,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     filter = "hello world"
     order_by = "hello world"
 
-    list_backup_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_backup_policies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2958,7 +2962,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     update_mask = {}
     backup_policy = {}
 
-    update_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3012,7 +3016,7 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_backup_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

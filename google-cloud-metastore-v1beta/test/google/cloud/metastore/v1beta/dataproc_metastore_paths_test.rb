@@ -31,6 +31,10 @@ class ::Google::Cloud::Metastore::V1beta::DataprocMetastore::ClientPathsTest < M
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_backup_path

@@ -31,6 +31,10 @@ class ::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::ClientPathsT
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_metrics_scope_path
