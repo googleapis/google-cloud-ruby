@@ -159,8 +159,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @model_service_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -168,6 +179,7 @@ module Google
                   config.endpoint = @model_service_stub.endpoint
                   config.universe_domain = @model_service_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @model_service_stub.logger if config.respond_to? :logger=
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -176,6 +188,7 @@ module Google
                   config.endpoint = @model_service_stub.endpoint
                   config.universe_domain = @model_service_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @model_service_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -199,6 +212,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @model_service_stub.logger
+              end
 
               # Service calls
 
@@ -303,7 +325,7 @@ module Google
                 @model_service_stub.upload_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -393,7 +415,6 @@ module Google
 
                 @model_service_stub.get_model request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -519,7 +540,7 @@ module Google
                 @model_service_stub.list_models request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @model_service_stub, :list_models, "models", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -635,7 +656,7 @@ module Google
                 @model_service_stub.list_model_versions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @model_service_stub, :list_model_versions, "models", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -735,7 +756,6 @@ module Google
 
                 @model_service_stub.update_model request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -825,7 +845,7 @@ module Google
                 @model_service_stub.update_explanation_dataset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -920,7 +940,7 @@ module Google
                 @model_service_stub.delete_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1016,7 +1036,7 @@ module Google
                 @model_service_stub.delete_model_version request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1111,7 +1131,6 @@ module Google
 
                 @model_service_stub.merge_version_aliases request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1205,7 +1224,7 @@ module Google
                 @model_service_stub.export_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1315,7 +1334,7 @@ module Google
                 @model_service_stub.copy_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1397,7 +1416,6 @@ module Google
 
                 @model_service_stub.import_model_evaluation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1480,7 +1498,6 @@ module Google
 
                 @model_service_stub.batch_import_model_evaluation_slices request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1563,7 +1580,6 @@ module Google
 
                 @model_service_stub.batch_import_evaluated_annotations request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1644,7 +1660,6 @@ module Google
 
                 @model_service_stub.get_model_evaluation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1742,7 +1757,7 @@ module Google
                 @model_service_stub.list_model_evaluations request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @model_service_stub, :list_model_evaluations, "model_evaluations", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1823,7 +1838,6 @@ module Google
 
                 @model_service_stub.get_model_evaluation_slice request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1924,7 +1938,7 @@ module Google
                 @model_service_stub.list_model_evaluation_slices request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @model_service_stub, :list_model_evaluation_slices, "model_evaluation_slices", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2004,6 +2018,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -2032,6 +2051,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

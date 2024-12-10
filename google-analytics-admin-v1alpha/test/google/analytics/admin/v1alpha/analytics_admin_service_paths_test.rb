@@ -31,6 +31,10 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_access_binding_path

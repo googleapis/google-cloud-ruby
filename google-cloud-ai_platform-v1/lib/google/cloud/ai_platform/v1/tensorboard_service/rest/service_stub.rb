@@ -30,7 +30,8 @@ module Google
             # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
-              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:
+              # @private
+              def initialize endpoint:, endpoint_template:, universe_domain:, credentials:, logger:
                 # These require statements are intentionally placed here to initialize
                 # the REST modules only when it's required.
                 require "gapic/rest"
@@ -40,7 +41,9 @@ module Google
                                                              universe_domain: universe_domain,
                                                              credentials: credentials,
                                                              numeric_enums: true,
-                                                             raise_faraday_errors: false
+                                                             service_name: self.class,
+                                                             raise_faraday_errors: false,
+                                                             logger: logger
               end
 
               ##
@@ -59,6 +62,15 @@ module Google
               #
               def endpoint
                 @client_stub.endpoint
+              end
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger stub: false
+                stub ? @client_stub.stub_logger : @client_stub.logger
               end
 
               ##
@@ -87,16 +99,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_tensorboard",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -125,16 +139,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_tensorboard",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::Tensorboard.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -163,16 +179,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_tensorboard",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -201,16 +219,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_tensorboards",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ListTensorboardsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -239,16 +259,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_tensorboard",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -277,16 +299,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "read_tensorboard_usage",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -315,16 +339,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "read_tensorboard_size",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ReadTensorboardSizeResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -353,16 +379,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_tensorboard_experiment",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardExperiment.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -391,16 +419,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_tensorboard_experiment",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardExperiment.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -429,16 +459,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_tensorboard_experiment",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardExperiment.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -467,16 +499,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_tensorboard_experiments",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ListTensorboardExperimentsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -505,16 +539,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_tensorboard_experiment",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -543,16 +579,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_tensorboard_run",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardRun.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -581,16 +619,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_create_tensorboard_runs",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardRunsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -619,16 +659,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_tensorboard_run",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardRun.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -657,16 +699,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_tensorboard_run",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardRun.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -695,16 +739,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_tensorboard_runs",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ListTensorboardRunsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -733,16 +779,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_tensorboard_run",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -771,16 +819,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_create_tensorboard_time_series",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::BatchCreateTensorboardTimeSeriesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -809,16 +859,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "create_tensorboard_time_series",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -847,16 +899,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_tensorboard_time_series",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -885,16 +939,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_tensorboard_time_series",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::TensorboardTimeSeries.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -923,16 +979,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_tensorboard_time_series",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ListTensorboardTimeSeriesResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -961,16 +1019,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_tensorboard_time_series",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -999,16 +1059,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "batch_read_tensorboard_time_series_data",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::BatchReadTensorboardTimeSeriesDataResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1037,16 +1099,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "read_tensorboard_time_series_data",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ReadTensorboardTimeSeriesDataResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1075,6 +1139,7 @@ module Google
                   uri: uri,
                   body: body || "",
                   params: query_string_params,
+                  method_name: "read_tensorboard_blob_data",
                   options: options,
                   is_server_streaming: true,
                   &block
@@ -1108,16 +1173,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "write_tensorboard_experiment_data",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::WriteTensorboardExperimentDataResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1146,16 +1213,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "write_tensorboard_run_data",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::WriteTensorboardRunDataResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##
@@ -1184,16 +1253,18 @@ module Google
 
                 response = @client_stub.make_http_request(
                   verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "export_tensorboard_time_series_data",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, operation if block_given?
-                result
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
               end
 
               ##

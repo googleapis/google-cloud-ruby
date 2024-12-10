@@ -33,24 +33,24 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_study
@@ -81,7 +85,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     parent = "hello world"
     study = {}
 
-    create_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -135,7 +139,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -191,7 +195,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     page_token = "hello world"
     page_size = 42
 
-    list_studies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_studies_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -245,7 +249,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -300,7 +304,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     parent = "hello world"
     display_name = "hello world"
 
-    lookup_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    lookup_study_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -357,7 +361,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     client_id = "hello world"
     contexts = [{}]
 
-    suggest_trials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    suggest_trials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -412,7 +416,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     parent = "hello world"
     trial = {}
 
-    create_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -466,7 +470,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -522,7 +526,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     page_token = "hello world"
     page_size = 42
 
-    list_trials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_trials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -577,7 +581,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     trial_name = "hello world"
     measurement = {}
 
-    add_trial_measurement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    add_trial_measurement_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -634,7 +638,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     trial_infeasible = true
     infeasible_reason = "hello world"
 
-    complete_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    complete_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -688,7 +692,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -742,7 +746,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     trial_name = "hello world"
 
-    check_trial_early_stopping_state_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    check_trial_early_stopping_state_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -796,7 +800,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     name = "hello world"
 
-    stop_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    stop_trial_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -850,7 +854,7 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::Rest::ClientTest < Minites
     # Create request parameters for a unary method.
     parent = "hello world"
 
-    list_optimal_trials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_optimal_trials_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

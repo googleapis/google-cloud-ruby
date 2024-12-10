@@ -303,8 +303,28 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @chat_service_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
+            end
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @chat_service_stub.logger
             end
 
             # Service calls
@@ -462,7 +482,6 @@ module Google
 
               @chat_service_stub.call_rpc :create_message, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -632,7 +651,7 @@ module Google
               @chat_service_stub.call_rpc :list_messages, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_messages, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -832,7 +851,7 @@ module Google
               @chat_service_stub.call_rpc :list_memberships, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_memberships, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -954,7 +973,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_membership, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1060,7 +1078,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_message, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1186,7 +1203,6 @@ module Google
 
               @chat_service_stub.call_rpc :update_message, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1301,7 +1317,6 @@ module Google
 
               @chat_service_stub.call_rpc :delete_message, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1395,7 +1410,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_attachment, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1493,7 +1507,6 @@ module Google
 
               @chat_service_stub.call_rpc :upload_attachment, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1626,7 +1639,7 @@ module Google
               @chat_service_stub.call_rpc :list_spaces, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_spaces, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1836,7 +1849,7 @@ module Google
               @chat_service_stub.call_rpc :search_spaces, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @chat_service_stub, :search_spaces, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1947,7 +1960,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_space, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2062,7 +2074,6 @@ module Google
 
               @chat_service_stub.call_rpc :create_space, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2250,7 +2261,6 @@ module Google
 
               @chat_service_stub.call_rpc :set_up_space, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2432,7 +2442,6 @@ module Google
 
               @chat_service_stub.call_rpc :update_space, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2547,7 +2556,6 @@ module Google
 
               @chat_service_stub.call_rpc :delete_space, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2643,7 +2651,6 @@ module Google
 
               @chat_service_stub.call_rpc :complete_import_space, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2755,7 +2762,6 @@ module Google
 
               @chat_service_stub.call_rpc :find_direct_message, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2925,7 +2931,6 @@ module Google
 
               @chat_service_stub.call_rpc :create_membership, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3043,7 +3048,6 @@ module Google
 
               @chat_service_stub.call_rpc :update_membership, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3169,7 +3173,6 @@ module Google
 
               @chat_service_stub.call_rpc :delete_membership, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3265,7 +3268,6 @@ module Google
 
               @chat_service_stub.call_rpc :create_reaction, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3420,7 +3422,7 @@ module Google
               @chat_service_stub.call_rpc :list_reactions, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_reactions, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3514,7 +3516,6 @@ module Google
 
               @chat_service_stub.call_rpc :delete_reaction, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3620,7 +3621,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_space_read_state, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3739,7 +3739,6 @@ module Google
 
               @chat_service_stub.call_rpc :update_space_read_state, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3846,7 +3845,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_thread_read_state, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3950,7 +3948,6 @@ module Google
 
               @chat_service_stub.call_rpc :get_space_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4123,7 +4120,7 @@ module Google
               @chat_service_stub.call_rpc :list_space_events, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @chat_service_stub, :list_space_events, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4212,6 +4209,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -4236,6 +4238,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

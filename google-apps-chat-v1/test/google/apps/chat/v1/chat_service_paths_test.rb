@@ -31,6 +31,10 @@ class ::Google::Apps::Chat::V1::ChatService::ClientPathsTest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_attachment_path

@@ -202,8 +202,28 @@ module Google
                 universe_domain: @config.universe_domain,
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors,
-                channel_pool_config: @config.channel_pool
+                channel_pool_config: @config.channel_pool,
+                logger: @config.logger
               )
+
+              @analytics_admin_service_stub.stub_logger&.info do |entry|
+                entry.set_system_name
+                entry.set_service
+                entry.message = "Created client for #{entry.service}"
+                entry.set_credentials_fields credentials
+                entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                entry.set "defaultTimeout", @config.timeout if @config.timeout
+                entry.set "quotaProject", @quota_project_id if @quota_project_id
+              end
+            end
+
+            ##
+            # The logger used for request/response debug logging.
+            #
+            # @return [Logger]
+            #
+            def logger
+              @analytics_admin_service_stub.logger
             end
 
             # Service calls
@@ -290,7 +310,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_account, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -389,7 +408,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_accounts, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_accounts, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -487,7 +506,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_account, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -579,7 +597,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_account, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -660,7 +677,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :provision_account_ticket, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -751,7 +767,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_account_summaries, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_account_summaries, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -839,7 +855,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_property, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -956,7 +971,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_properties, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_properties, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1035,7 +1050,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_property, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1133,7 +1147,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_property, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1226,7 +1239,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_property, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1318,7 +1330,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_firebase_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1406,7 +1417,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_firebase_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1510,7 +1520,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_firebase_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_firebase_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1601,7 +1611,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_global_site_tag, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1689,7 +1698,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_google_ads_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1780,7 +1788,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_google_ads_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1866,7 +1873,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_google_ads_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -1967,7 +1973,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_google_ads_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_google_ads_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2057,7 +2063,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_data_sharing_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2145,7 +2150,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_measurement_protocol_secret, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2248,7 +2252,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_measurement_protocol_secrets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_measurement_protocol_secrets, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2337,7 +2341,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_measurement_protocol_secret, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2425,7 +2428,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_measurement_protocol_secret, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2514,7 +2516,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_measurement_protocol_secret, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2613,7 +2614,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :acknowledge_user_data_collection, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2701,7 +2701,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2790,7 +2789,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2878,7 +2876,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -2967,7 +2964,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_sk_ad_network_conversion_value_schema, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3073,7 +3069,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_sk_ad_network_conversion_value_schemas, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_sk_ad_network_conversion_value_schemas, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3198,7 +3194,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :search_change_history_events, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :search_change_history_events, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3285,7 +3281,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_google_signals_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3377,7 +3372,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_google_signals_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3469,7 +3463,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_conversion_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3564,7 +3557,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_conversion_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3655,7 +3647,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_conversion_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3746,7 +3737,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_conversion_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3852,7 +3842,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_conversion_events, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_conversion_events, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -3941,7 +3931,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_key_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4033,7 +4022,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_key_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4121,7 +4109,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_key_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4209,7 +4196,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_key_event, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4311,7 +4297,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_key_events, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_key_events, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4398,7 +4384,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_display_video360_advertiser_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4500,7 +4485,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_display_video360_advertiser_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_display_video360_advertiser_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4592,7 +4577,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_display_video360_advertiser_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4679,7 +4663,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_display_video360_advertiser_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4769,7 +4752,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_display_video360_advertiser_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4856,7 +4838,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -4959,7 +4940,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_display_video360_advertiser_link_proposals, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_display_video360_advertiser_link_proposals, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5047,7 +5028,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5135,7 +5115,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5224,7 +5203,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :approve_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5315,7 +5293,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :cancel_display_video360_advertiser_link_proposal, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5403,7 +5380,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_custom_dimension, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5493,7 +5469,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_custom_dimension, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5594,7 +5569,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_custom_dimensions, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_custom_dimensions, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5681,7 +5656,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :archive_custom_dimension, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5768,7 +5742,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_custom_dimension, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5856,7 +5829,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_custom_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -5946,7 +5918,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_custom_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6047,7 +6018,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_custom_metrics, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_custom_metrics, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6134,7 +6105,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :archive_custom_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6221,7 +6191,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_custom_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6310,7 +6279,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_data_retention_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6402,7 +6370,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_data_retention_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6490,7 +6457,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_data_stream, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6577,7 +6543,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_data_stream, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6667,7 +6632,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_data_stream, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6768,7 +6732,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_data_streams, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_data_streams, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6855,7 +6819,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_data_stream, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -6944,7 +6907,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_audience, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7047,7 +7009,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_audiences, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_audiences, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7135,7 +7097,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_audience, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7227,7 +7188,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_audience, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7313,7 +7273,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :archive_audience, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7400,7 +7359,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_search_ads360_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7502,7 +7460,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_search_ads360_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_search_ads360_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7590,7 +7548,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_search_ads360_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7677,7 +7634,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_search_ads360_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7767,7 +7723,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_search_ads360_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7854,7 +7809,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_attribution_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7946,7 +7900,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_attribution_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8121,7 +8074,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :run_access_report, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8211,7 +8163,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_access_binding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8300,7 +8251,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_access_binding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8386,7 +8336,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_access_binding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8474,7 +8423,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_access_binding, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8577,7 +8525,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_access_bindings, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_access_bindings, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8674,7 +8622,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :batch_create_access_bindings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8770,7 +8717,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :batch_get_access_bindings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8865,7 +8811,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :batch_update_access_bindings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8958,7 +8903,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :batch_delete_access_bindings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9045,7 +8989,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_expanded_data_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9146,7 +9089,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_expanded_data_sets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_expanded_data_sets, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9234,7 +9177,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_expanded_data_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9327,7 +9269,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_expanded_data_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9413,7 +9354,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_expanded_data_set, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9500,7 +9440,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_channel_group, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9602,7 +9541,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_channel_groups, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_channel_groups, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9691,7 +9630,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_channel_group, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9784,7 +9722,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_channel_group, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9871,7 +9808,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_channel_group, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -9956,7 +9892,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :set_automated_ga4_configuration_opt_out, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10039,7 +9974,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :fetch_automated_ga4_configuration_opt_out, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10127,7 +10061,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_big_query_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10215,7 +10148,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_big_query_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10318,7 +10250,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_big_query_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_big_query_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10405,7 +10337,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_big_query_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10497,7 +10428,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_big_query_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10588,7 +10518,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_enhanced_measurement_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10682,7 +10611,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_enhanced_measurement_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10767,7 +10695,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_connected_site_tag, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10852,7 +10779,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_connected_site_tag, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -10935,7 +10861,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :list_connected_site_tags, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11018,7 +10943,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :fetch_connected_ga4_property, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11106,7 +11030,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_ad_sense_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11196,7 +11119,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_ad_sense_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11284,7 +11206,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_ad_sense_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11387,7 +11308,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_ad_sense_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_ad_sense_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11474,7 +11395,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_event_create_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11575,7 +11495,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_event_create_rules, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_event_create_rules, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11663,7 +11583,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_event_create_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11756,7 +11675,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_event_create_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11843,7 +11761,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_event_create_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -11930,7 +11847,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_event_edit_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12031,7 +11947,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_event_edit_rules, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_event_edit_rules, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12119,7 +12035,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_event_edit_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12212,7 +12127,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_event_edit_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12298,7 +12212,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_event_edit_rule, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12388,7 +12301,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :reorder_event_edit_rules, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12480,7 +12392,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_data_redaction_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12569,7 +12480,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_data_redaction_settings, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12657,7 +12567,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_calculated_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12755,7 +12664,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_calculated_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12856,7 +12764,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_calculated_metrics, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_calculated_metrics, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -12946,7 +12854,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_calculated_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13034,7 +12941,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_calculated_metric, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13115,7 +13021,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_rollup_property, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13206,7 +13111,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_rollup_property_source_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13311,7 +13215,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_rollup_property_source_links, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_rollup_property_source_links, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13402,7 +13306,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_rollup_property_source_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13492,7 +13395,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_rollup_property_source_link, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13573,7 +13475,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :provision_subproperty, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13662,7 +13563,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :create_subproperty_event_filter, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13751,7 +13651,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :get_subproperty_event_filter, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13855,7 +13754,7 @@ module Google
               @analytics_admin_service_stub.call_rpc :list_subproperty_event_filters, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_subproperty_event_filters, request, response, operation, options
                 yield response, operation if block_given?
-                return response
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -13946,7 +13845,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :update_subproperty_event_filter, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -14035,7 +13933,6 @@ module Google
 
               @analytics_admin_service_stub.call_rpc :delete_subproperty_event_filter, request, options: options do |response, operation|
                 yield response, operation if block_given?
-                return response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -14124,6 +14021,11 @@ module Google
             #   default endpoint URL. The default value of nil uses the environment
             #   universe (usually the default "googleapis.com" universe).
             #   @return [::String,nil]
+            # @!attribute [rw] logger
+            #   A custom logger to use for request/response debug logging, or the value
+            #   `:default` (the default) to construct a default logger, or `nil` to
+            #   explicitly disable logging.
+            #   @return [::Logger,:default,nil]
             #
             class Configuration
               extend ::Gapic::Config
@@ -14148,6 +14050,7 @@ module Google
               config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
               config_attr :quota_project, nil, ::String, nil
               config_attr :universe_domain, nil, ::String, nil
+              config_attr :logger, :default, ::Logger, nil, :default
 
               # @private
               def initialize parent_config = nil

@@ -195,8 +195,28 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @analytics_admin_service_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
+              end
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @analytics_admin_service_stub.logger
               end
 
               # Service calls
@@ -276,7 +296,6 @@ module Google
 
                 @analytics_admin_service_stub.get_account request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -376,7 +395,7 @@ module Google
                 @analytics_admin_service_stub.list_accounts request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_accounts, "accounts", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -467,7 +486,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_account request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -552,7 +570,6 @@ module Google
 
                 @analytics_admin_service_stub.update_account request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -634,7 +651,6 @@ module Google
 
                 @analytics_admin_service_stub.provision_account_ticket request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -726,7 +742,7 @@ module Google
                 @analytics_admin_service_stub.list_account_summaries request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_account_summaries, "account_summaries", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -807,7 +823,6 @@ module Google
 
                 @analytics_admin_service_stub.get_property request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -925,7 +940,7 @@ module Google
                 @analytics_admin_service_stub.list_properties request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_properties, "properties", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1005,7 +1020,6 @@ module Google
 
                 @analytics_admin_service_stub.create_property request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1096,7 +1110,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_property request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1182,7 +1195,6 @@ module Google
 
                 @analytics_admin_service_stub.update_property request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1267,7 +1279,6 @@ module Google
 
                 @analytics_admin_service_stub.create_firebase_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1348,7 +1359,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_firebase_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1445,7 +1455,7 @@ module Google
                 @analytics_admin_service_stub.list_firebase_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_firebase_links, "firebase_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1529,7 +1539,6 @@ module Google
 
                 @analytics_admin_service_stub.get_global_site_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1610,7 +1619,6 @@ module Google
 
                 @analytics_admin_service_stub.create_google_ads_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1694,7 +1702,6 @@ module Google
 
                 @analytics_admin_service_stub.update_google_ads_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1773,7 +1780,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_google_ads_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1867,7 +1873,7 @@ module Google
                 @analytics_admin_service_stub.list_google_ads_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_google_ads_links, "google_ads_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1950,7 +1956,6 @@ module Google
 
                 @analytics_admin_service_stub.get_data_sharing_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2031,7 +2036,6 @@ module Google
 
                 @analytics_admin_service_stub.get_measurement_protocol_secret request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2127,7 +2131,7 @@ module Google
                 @analytics_admin_service_stub.list_measurement_protocol_secrets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_measurement_protocol_secrets, "measurement_protocol_secrets", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2209,7 +2213,6 @@ module Google
 
                 @analytics_admin_service_stub.create_measurement_protocol_secret request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2290,7 +2293,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_measurement_protocol_secret request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2372,7 +2374,6 @@ module Google
 
                 @analytics_admin_service_stub.update_measurement_protocol_secret request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2464,7 +2465,6 @@ module Google
 
                 @analytics_admin_service_stub.acknowledge_user_data_collection request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2545,7 +2545,6 @@ module Google
 
                 @analytics_admin_service_stub.get_sk_ad_network_conversion_value_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2627,7 +2626,6 @@ module Google
 
                 @analytics_admin_service_stub.create_sk_ad_network_conversion_value_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2708,7 +2706,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_sk_ad_network_conversion_value_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2790,7 +2787,6 @@ module Google
 
                 @analytics_admin_service_stub.update_sk_ad_network_conversion_value_schema request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2889,7 +2885,7 @@ module Google
                 @analytics_admin_service_stub.list_sk_ad_network_conversion_value_schemas request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_sk_ad_network_conversion_value_schemas, "skadnetwork_conversion_value_schemas", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3007,7 +3003,7 @@ module Google
                 @analytics_admin_service_stub.search_change_history_events request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :search_change_history_events, "change_history_events", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3087,7 +3083,6 @@ module Google
 
                 @analytics_admin_service_stub.get_google_signals_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3172,7 +3167,6 @@ module Google
 
                 @analytics_admin_service_stub.update_google_signals_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3255,7 +3249,6 @@ module Google
 
                 @analytics_admin_service_stub.create_conversion_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3341,7 +3334,6 @@ module Google
 
                 @analytics_admin_service_stub.update_conversion_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3423,7 +3415,6 @@ module Google
 
                 @analytics_admin_service_stub.get_conversion_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3505,7 +3496,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_conversion_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3602,7 +3592,7 @@ module Google
                 @analytics_admin_service_stub.list_conversion_events request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_conversion_events, "conversion_events", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3684,7 +3674,6 @@ module Google
 
                 @analytics_admin_service_stub.create_key_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3769,7 +3758,6 @@ module Google
 
                 @analytics_admin_service_stub.update_key_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3850,7 +3838,6 @@ module Google
 
                 @analytics_admin_service_stub.get_key_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3931,7 +3918,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_key_event request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4026,7 +4012,7 @@ module Google
                 @analytics_admin_service_stub.list_key_events request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_key_events, "key_events", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4106,7 +4092,6 @@ module Google
 
                 @analytics_admin_service_stub.get_display_video360_advertiser_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4201,7 +4186,7 @@ module Google
                 @analytics_admin_service_stub.list_display_video360_advertiser_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_display_video360_advertiser_links, "display_video_360_advertiser_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4286,7 +4271,6 @@ module Google
 
                 @analytics_admin_service_stub.create_display_video360_advertiser_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4366,7 +4350,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_display_video360_advertiser_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4449,7 +4432,6 @@ module Google
 
                 @analytics_admin_service_stub.update_display_video360_advertiser_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4529,7 +4511,6 @@ module Google
 
                 @analytics_admin_service_stub.get_display_video360_advertiser_link_proposal request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4625,7 +4606,7 @@ module Google
                 @analytics_admin_service_stub.list_display_video360_advertiser_link_proposals request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_display_video360_advertiser_link_proposals, "display_video_360_advertiser_link_proposals", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4706,7 +4687,6 @@ module Google
 
                 @analytics_admin_service_stub.create_display_video360_advertiser_link_proposal request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4787,7 +4767,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_display_video360_advertiser_link_proposal request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4869,7 +4848,6 @@ module Google
 
                 @analytics_admin_service_stub.approve_display_video360_advertiser_link_proposal request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4953,7 +4931,6 @@ module Google
 
                 @analytics_admin_service_stub.cancel_display_video360_advertiser_link_proposal request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5034,7 +5011,6 @@ module Google
 
                 @analytics_admin_service_stub.create_custom_dimension request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5117,7 +5093,6 @@ module Google
 
                 @analytics_admin_service_stub.update_custom_dimension request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5211,7 +5186,7 @@ module Google
                 @analytics_admin_service_stub.list_custom_dimensions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_custom_dimensions, "custom_dimensions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5291,7 +5266,6 @@ module Google
 
                 @analytics_admin_service_stub.archive_custom_dimension request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5371,7 +5345,6 @@ module Google
 
                 @analytics_admin_service_stub.get_custom_dimension request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5452,7 +5425,6 @@ module Google
 
                 @analytics_admin_service_stub.create_custom_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5535,7 +5507,6 @@ module Google
 
                 @analytics_admin_service_stub.update_custom_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5629,7 +5600,7 @@ module Google
                 @analytics_admin_service_stub.list_custom_metrics request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_custom_metrics, "custom_metrics", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5709,7 +5680,6 @@ module Google
 
                 @analytics_admin_service_stub.archive_custom_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5789,7 +5759,6 @@ module Google
 
                 @analytics_admin_service_stub.get_custom_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5871,7 +5840,6 @@ module Google
 
                 @analytics_admin_service_stub.get_data_retention_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5956,7 +5924,6 @@ module Google
 
                 @analytics_admin_service_stub.update_data_retention_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6037,7 +6004,6 @@ module Google
 
                 @analytics_admin_service_stub.create_data_stream request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6117,7 +6083,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_data_stream request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6200,7 +6165,6 @@ module Google
 
                 @analytics_admin_service_stub.update_data_stream request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6294,7 +6258,7 @@ module Google
                 @analytics_admin_service_stub.list_data_streams request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_data_streams, "data_streams", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6374,7 +6338,6 @@ module Google
 
                 @analytics_admin_service_stub.get_data_stream request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6456,7 +6419,6 @@ module Google
 
                 @analytics_admin_service_stub.get_audience request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6552,7 +6514,7 @@ module Google
                 @analytics_admin_service_stub.list_audiences request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_audiences, "audiences", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6633,7 +6595,6 @@ module Google
 
                 @analytics_admin_service_stub.create_audience request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6718,7 +6679,6 @@ module Google
 
                 @analytics_admin_service_stub.update_audience request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6797,7 +6757,6 @@ module Google
 
                 @analytics_admin_service_stub.archive_audience request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6877,7 +6836,6 @@ module Google
 
                 @analytics_admin_service_stub.get_search_ads360_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6972,7 +6930,7 @@ module Google
                 @analytics_admin_service_stub.list_search_ads360_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_search_ads360_links, "search_ads_360_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7053,7 +7011,6 @@ module Google
 
                 @analytics_admin_service_stub.create_search_ads360_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7133,7 +7090,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_search_ads360_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7216,7 +7172,6 @@ module Google
 
                 @analytics_admin_service_stub.update_search_ads360_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7296,7 +7251,6 @@ module Google
 
                 @analytics_admin_service_stub.get_attribution_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7381,7 +7335,6 @@ module Google
 
                 @analytics_admin_service_stub.update_attribution_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7549,7 +7502,6 @@ module Google
 
                 @analytics_admin_service_stub.run_access_report request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7632,7 +7584,6 @@ module Google
 
                 @analytics_admin_service_stub.create_access_binding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7714,7 +7665,6 @@ module Google
 
                 @analytics_admin_service_stub.get_access_binding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7793,7 +7743,6 @@ module Google
 
                 @analytics_admin_service_stub.update_access_binding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7874,7 +7823,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_access_binding request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7970,7 +7918,7 @@ module Google
                 @analytics_admin_service_stub.list_access_bindings request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_access_bindings, "access_bindings", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8060,7 +8008,6 @@ module Google
 
                 @analytics_admin_service_stub.batch_create_access_bindings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8149,7 +8096,6 @@ module Google
 
                 @analytics_admin_service_stub.batch_get_access_bindings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8237,7 +8183,6 @@ module Google
 
                 @analytics_admin_service_stub.batch_update_access_bindings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8323,7 +8268,6 @@ module Google
 
                 @analytics_admin_service_stub.batch_delete_access_bindings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8403,7 +8347,6 @@ module Google
 
                 @analytics_admin_service_stub.get_expanded_data_set request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8497,7 +8440,7 @@ module Google
                 @analytics_admin_service_stub.list_expanded_data_sets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_expanded_data_sets, "expanded_data_sets", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8578,7 +8521,6 @@ module Google
 
                 @analytics_admin_service_stub.create_expanded_data_set request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8664,7 +8606,6 @@ module Google
 
                 @analytics_admin_service_stub.update_expanded_data_set request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8743,7 +8684,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_expanded_data_set request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8823,7 +8763,6 @@ module Google
 
                 @analytics_admin_service_stub.get_channel_group request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -8918,7 +8857,7 @@ module Google
                 @analytics_admin_service_stub.list_channel_groups request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_channel_groups, "channel_groups", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9000,7 +8939,6 @@ module Google
 
                 @analytics_admin_service_stub.create_channel_group request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9086,7 +9024,6 @@ module Google
 
                 @analytics_admin_service_stub.update_channel_group request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9166,7 +9103,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_channel_group request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9252,7 +9188,6 @@ module Google
 
                 @analytics_admin_service_stub.set_automated_ga4_configuration_opt_out request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9336,7 +9271,6 @@ module Google
 
                 @analytics_admin_service_stub.fetch_automated_ga4_configuration_opt_out request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9417,7 +9351,6 @@ module Google
 
                 @analytics_admin_service_stub.create_big_query_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9498,7 +9431,6 @@ module Google
 
                 @analytics_admin_service_stub.get_big_query_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9594,7 +9526,7 @@ module Google
                 @analytics_admin_service_stub.list_big_query_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_big_query_links, "bigquery_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9674,7 +9606,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_big_query_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9759,7 +9690,6 @@ module Google
 
                 @analytics_admin_service_stub.update_big_query_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9843,7 +9773,6 @@ module Google
 
                 @analytics_admin_service_stub.get_enhanced_measurement_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -9930,7 +9859,6 @@ module Google
 
                 @analytics_admin_service_stub.update_enhanced_measurement_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10016,7 +9944,6 @@ module Google
 
                 @analytics_admin_service_stub.create_connected_site_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10102,7 +10029,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_connected_site_tag request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10186,7 +10112,6 @@ module Google
 
                 @analytics_admin_service_stub.list_connected_site_tags request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10270,7 +10195,6 @@ module Google
 
                 @analytics_admin_service_stub.fetch_connected_ga4_property request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10351,7 +10275,6 @@ module Google
 
                 @analytics_admin_service_stub.get_ad_sense_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10434,7 +10357,6 @@ module Google
 
                 @analytics_admin_service_stub.create_ad_sense_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10515,7 +10437,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_ad_sense_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10611,7 +10532,7 @@ module Google
                 @analytics_admin_service_stub.list_ad_sense_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_ad_sense_links, "adsense_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10691,7 +10612,6 @@ module Google
 
                 @analytics_admin_service_stub.get_event_create_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10785,7 +10705,7 @@ module Google
                 @analytics_admin_service_stub.list_event_create_rules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_event_create_rules, "event_create_rules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10866,7 +10786,6 @@ module Google
 
                 @analytics_admin_service_stub.create_event_create_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -10952,7 +10871,6 @@ module Google
 
                 @analytics_admin_service_stub.update_event_create_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11032,7 +10950,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_event_create_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11112,7 +11029,6 @@ module Google
 
                 @analytics_admin_service_stub.get_event_edit_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11206,7 +11122,7 @@ module Google
                 @analytics_admin_service_stub.list_event_edit_rules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_event_edit_rules, "event_edit_rules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11287,7 +11203,6 @@ module Google
 
                 @analytics_admin_service_stub.create_event_edit_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11373,7 +11288,6 @@ module Google
 
                 @analytics_admin_service_stub.update_event_edit_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11452,7 +11366,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_event_edit_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11535,7 +11448,6 @@ module Google
 
                 @analytics_admin_service_stub.reorder_event_edit_rules request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11620,7 +11532,6 @@ module Google
 
                 @analytics_admin_service_stub.update_data_redaction_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11702,7 +11613,6 @@ module Google
 
                 @analytics_admin_service_stub.get_data_redaction_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11783,7 +11693,6 @@ module Google
 
                 @analytics_admin_service_stub.get_calculated_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11874,7 +11783,6 @@ module Google
 
                 @analytics_admin_service_stub.create_calculated_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -11968,7 +11876,7 @@ module Google
                 @analytics_admin_service_stub.list_calculated_metrics request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_calculated_metrics, "calculated_metrics", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12051,7 +11959,6 @@ module Google
 
                 @analytics_admin_service_stub.update_calculated_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12132,7 +12039,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_calculated_metric request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12214,7 +12120,6 @@ module Google
 
                 @analytics_admin_service_stub.create_rollup_property request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12298,7 +12203,6 @@ module Google
 
                 @analytics_admin_service_stub.get_rollup_property_source_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12396,7 +12300,7 @@ module Google
                 @analytics_admin_service_stub.list_rollup_property_source_links request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_rollup_property_source_links, "rollup_property_source_links", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12480,7 +12384,6 @@ module Google
 
                 @analytics_admin_service_stub.create_rollup_property_source_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12563,7 +12466,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_rollup_property_source_link request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12645,7 +12547,6 @@ module Google
 
                 @analytics_admin_service_stub.provision_subproperty request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12727,7 +12628,6 @@ module Google
 
                 @analytics_admin_service_stub.create_subproperty_event_filter request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12809,7 +12709,6 @@ module Google
 
                 @analytics_admin_service_stub.get_subproperty_event_filter request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12906,7 +12805,7 @@ module Google
                 @analytics_admin_service_stub.list_subproperty_event_filters request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_subproperty_event_filters, "subproperty_event_filters", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -12990,7 +12889,6 @@ module Google
 
                 @analytics_admin_service_stub.update_subproperty_event_filter request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -13072,7 +12970,6 @@ module Google
 
                 @analytics_admin_service_stub.delete_subproperty_event_filter request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -13152,6 +13049,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -13173,6 +13075,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

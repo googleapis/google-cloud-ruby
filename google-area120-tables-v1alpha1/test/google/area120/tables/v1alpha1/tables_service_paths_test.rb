@@ -31,6 +31,10 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientPathsTest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_row_path
