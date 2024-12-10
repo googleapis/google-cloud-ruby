@@ -34,6 +34,31 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable the API.](https://console.cloud.google.com/apis/library/cloudprivatecatalog.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
 
+## Debug Logging
+
+This library comes with opt-in Debug Logging that can help you troubleshoot
+your application's integration with the API. When logging is activated, key
+events such as requests and responses, along with data payloads and metadata
+such as headers and client configuration, are logged to the standard error
+stream.
+
+**WARNING:** Client Library Debug Logging includes your data payloads in
+plaintext, which could include sensitive data such as PII for yourself or your
+customers, private keys, or other security data that could be compromising if
+leaked. Always practice good data hygiene with your application logs, and follow
+the principle of least access. Google also recommends that Client Library Debug
+Logging be enabled only temporarily during active debugging, and not used
+permanently in production.
+
+To enable logging, set the environment variable `GOOGLE_SDK_RUBY_LOGGING_GEMS`
+to the value `all`. Alternatively, you can set the value to a comma-delimited
+list of client library gem names. This will select the default logging behavior,
+which writes logs to the standard error stream. On a local workstation, this may
+result in logs appearing on the console. When running on a Google Cloud hosting
+service such as [Google Cloud Run](https://cloud.google.com/run), this generally
+results in logs appearing alongside your application logs in the
+[Google Cloud Logging](https://cloud.google.com/logging/) service.
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 2.7+.

@@ -31,6 +31,10 @@ class Google::Cloud::NetworkSecurity::ClientConstructionMinitest < Minitest::Tes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_network_security_grpc

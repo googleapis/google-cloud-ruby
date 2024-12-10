@@ -31,6 +31,10 @@ class Google::Cloud::Optimization::ClientConstructionMinitest < Minitest::Test
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_fleet_routing_grpc
