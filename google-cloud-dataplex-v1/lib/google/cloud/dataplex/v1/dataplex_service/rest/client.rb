@@ -270,8 +270,19 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @dataplex_service_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
                   config.credentials = credentials
@@ -279,6 +290,7 @@ module Google
                   config.endpoint = @dataplex_service_stub.endpoint
                   config.universe_domain = @dataplex_service_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @dataplex_service_stub.logger if config.respond_to? :logger=
                 end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
@@ -287,6 +299,7 @@ module Google
                   config.endpoint = @dataplex_service_stub.endpoint
                   config.universe_domain = @dataplex_service_stub.universe_domain
                   config.bindings_override = @config.bindings_override
+                  config.logger = @dataplex_service_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -310,6 +323,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @dataplex_service_stub.logger
+              end
 
               # Service calls
 
@@ -410,7 +432,7 @@ module Google
                 @dataplex_service_stub.create_lake request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -503,7 +525,7 @@ module Google
                 @dataplex_service_stub.update_lake request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -592,7 +614,7 @@ module Google
                 @dataplex_service_stub.delete_lake request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -689,7 +711,6 @@ module Google
 
                 @dataplex_service_stub.list_lakes request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -769,7 +790,6 @@ module Google
 
                 @dataplex_service_stub.get_lake request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -863,7 +883,7 @@ module Google
                 @dataplex_service_stub.list_lake_actions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_lake_actions, "actions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -966,7 +986,7 @@ module Google
                 @dataplex_service_stub.create_zone request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1059,7 +1079,7 @@ module Google
                 @dataplex_service_stub.update_zone request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1148,7 +1168,7 @@ module Google
                 @dataplex_service_stub.delete_zone request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1245,7 +1265,7 @@ module Google
                 @dataplex_service_stub.list_zones request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_zones, "zones", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1325,7 +1345,6 @@ module Google
 
                 @dataplex_service_stub.get_zone request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1419,7 +1438,7 @@ module Google
                 @dataplex_service_stub.list_zone_actions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_zone_actions, "actions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1521,7 +1540,7 @@ module Google
                 @dataplex_service_stub.create_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1614,7 +1633,7 @@ module Google
                 @dataplex_service_stub.update_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1703,7 +1722,7 @@ module Google
                 @dataplex_service_stub.delete_asset request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1801,7 +1820,7 @@ module Google
                 @dataplex_service_stub.list_assets request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_assets, "assets", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1881,7 +1900,6 @@ module Google
 
                 @dataplex_service_stub.get_asset request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1975,7 +1993,7 @@ module Google
                 @dataplex_service_stub.list_asset_actions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_asset_actions, "actions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2070,7 +2088,7 @@ module Google
                 @dataplex_service_stub.create_task request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2163,7 +2181,7 @@ module Google
                 @dataplex_service_stub.update_task request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2251,7 +2269,7 @@ module Google
                 @dataplex_service_stub.delete_task request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2347,7 +2365,6 @@ module Google
 
                 @dataplex_service_stub.list_tasks request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2427,7 +2444,6 @@ module Google
 
                 @dataplex_service_stub.get_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2521,7 +2537,7 @@ module Google
                 @dataplex_service_stub.list_jobs request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_jobs, "jobs", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2617,7 +2633,6 @@ module Google
 
                 @dataplex_service_stub.run_task request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2697,7 +2712,6 @@ module Google
 
                 @dataplex_service_stub.get_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2777,7 +2791,6 @@ module Google
 
                 @dataplex_service_stub.cancel_job request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2877,7 +2890,7 @@ module Google
                 @dataplex_service_stub.create_environment request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2970,7 +2983,7 @@ module Google
                 @dataplex_service_stub.update_environment request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3059,7 +3072,7 @@ module Google
                 @dataplex_service_stub.delete_environment request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3158,7 +3171,7 @@ module Google
                 @dataplex_service_stub.list_environments request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_environments, "environments", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3238,7 +3251,6 @@ module Google
 
                 @dataplex_service_stub.get_environment request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3342,7 +3354,7 @@ module Google
                 @dataplex_service_stub.list_sessions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @dataplex_service_stub, :list_sessions, "sessions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3422,6 +3434,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -3450,6 +3467,7 @@ module Google
                 # by the host service.
                 # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
                 config_attr :bindings_override, {}, ::Hash, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

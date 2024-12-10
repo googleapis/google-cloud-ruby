@@ -31,6 +31,10 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientPathsTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_compilation_result_path

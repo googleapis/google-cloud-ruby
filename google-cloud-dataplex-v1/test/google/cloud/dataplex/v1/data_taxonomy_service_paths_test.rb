@@ -31,6 +31,10 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientPathsTest < Mini
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_data_attribute_path

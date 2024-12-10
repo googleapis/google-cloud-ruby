@@ -31,6 +31,10 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_asset_path
