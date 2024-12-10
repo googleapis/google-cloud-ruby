@@ -31,6 +31,10 @@ class ::Google::Maps::FleetEngine::V1::TripService::ClientPathsTest < Minitest::
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_trip_path

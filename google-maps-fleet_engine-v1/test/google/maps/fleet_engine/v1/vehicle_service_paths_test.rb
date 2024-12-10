@@ -31,6 +31,10 @@ class ::Google::Maps::FleetEngine::V1::VehicleService::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_vehicle_path
