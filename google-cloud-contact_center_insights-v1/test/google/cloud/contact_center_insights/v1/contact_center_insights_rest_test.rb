@@ -33,24 +33,24 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_create_conversation
@@ -82,7 +86,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     conversation = {}
     conversation_id = "hello world"
 
-    create_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -140,7 +144,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     redaction_config = {}
     speech_config = {}
 
-    upload_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    upload_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -195,7 +199,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     conversation = {}
     update_mask = {}
 
-    update_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -250,7 +254,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     name = "hello world"
     view = :CONVERSATION_VIEW_UNSPECIFIED
 
-    get_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -309,7 +313,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     order_by = "hello world"
     view = :CONVERSATION_VIEW_UNSPECIFIED
 
-    list_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -364,7 +368,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     name = "hello world"
     force = true
 
-    delete_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -419,7 +423,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     analysis = {}
 
-    create_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -473,7 +477,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -530,7 +534,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_token = "hello world"
     filter = "hello world"
 
-    list_analyses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_analyses_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -584,7 +588,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_analysis_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -641,7 +645,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     analysis_percentage = 3.5
     annotator_selector = {}
 
-    bulk_analyze_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    bulk_analyze_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -698,7 +702,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     max_delete_count = 42
     force = true
 
-    bulk_delete_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    bulk_delete_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -758,7 +762,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     speech_config = {}
     sample_size = 42
 
-    ingest_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    ingest_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -816,7 +820,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     kms_key = "hello world"
     write_disposition = :WRITE_DISPOSITION_UNSPECIFIED
 
-    export_insights_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_insights_data_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -871,7 +875,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     issue_model = {}
 
-    create_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -926,7 +930,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     issue_model = {}
     update_mask = {}
 
-    update_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -980,7 +984,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1034,7 +1038,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     parent = "hello world"
 
-    list_issue_models_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_issue_models_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1088,7 +1092,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1142,7 +1146,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    deploy_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    deploy_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1196,7 +1200,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    undeploy_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undeploy_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1251,7 +1255,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     gcs_destination = {}
     name = "hello world"
 
-    export_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    export_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1307,7 +1311,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     create_new_model = true
 
-    import_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_issue_model_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1361,7 +1365,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_issue_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_issue_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1415,7 +1419,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     parent = "hello world"
 
-    list_issues_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_issues_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1470,7 +1474,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     issue = {}
     update_mask = {}
 
-    update_issue_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_issue_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1524,7 +1528,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_issue_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_issue_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1578,7 +1582,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     issue_model = "hello world"
 
-    calculate_issue_model_stats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    calculate_issue_model_stats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1633,7 +1637,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     phrase_matcher = {}
 
-    create_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1687,7 +1691,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1744,7 +1748,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_token = "hello world"
     filter = "hello world"
 
-    list_phrase_matchers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_phrase_matchers_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1798,7 +1802,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1853,7 +1857,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     phrase_matcher = {}
     update_mask = {}
 
-    update_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_phrase_matcher_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1908,7 +1912,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     location = "hello world"
     filter = "hello world"
 
-    calculate_stats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    calculate_stats_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -1962,7 +1966,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2017,7 +2021,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     settings = {}
     update_mask = {}
 
-    update_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_settings_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2072,7 +2076,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     analysis_rule = {}
 
-    create_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2126,7 +2130,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2182,7 +2186,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_size = 42
     page_token = "hello world"
 
-    list_analysis_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_analysis_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2237,7 +2241,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     analysis_rule = {}
     update_mask = {}
 
-    update_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2291,7 +2295,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_analysis_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2345,7 +2349,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_encryption_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_encryption_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2399,7 +2403,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     encryption_spec = {}
 
-    initialize_encryption_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    initialize_encryption_spec_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2454,7 +2458,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     view = {}
 
-    create_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2508,7 +2512,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2564,7 +2568,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_size = 42
     page_token = "hello world"
 
-    list_views_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_views_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2619,7 +2623,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     view = {}
     update_mask = {}
 
-    update_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2673,7 +2677,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_view_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2731,7 +2735,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     dimensions = [{}]
     measure_mask = {}
 
-    query_metrics_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    query_metrics_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2787,7 +2791,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     qa_question = {}
     qa_question_id = "hello world"
 
-    create_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2841,7 +2845,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2896,7 +2900,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     qa_question = {}
     update_mask = {}
 
-    update_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -2950,7 +2954,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_qa_question_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3006,7 +3010,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_size = 42
     page_token = "hello world"
 
-    list_qa_questions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_qa_questions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3062,7 +3066,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     qa_scorecard = {}
     qa_scorecard_id = "hello world"
 
-    create_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3116,7 +3120,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3171,7 +3175,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     qa_scorecard = {}
     update_mask = {}
 
-    update_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3226,7 +3230,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     name = "hello world"
     force = true
 
-    delete_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_qa_scorecard_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3282,7 +3286,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_size = 42
     page_token = "hello world"
 
-    list_qa_scorecards_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_qa_scorecards_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3338,7 +3342,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     qa_scorecard_revision = {}
     qa_scorecard_revision_id = "hello world"
 
-    create_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3392,7 +3396,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3448,7 +3452,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     filter = "hello world"
     validate_only = true
 
-    tune_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    tune_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3502,7 +3506,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    deploy_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    deploy_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3556,7 +3560,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    undeploy_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    undeploy_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3611,7 +3615,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     name = "hello world"
     force = true
 
-    delete_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_qa_scorecard_revision_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3668,7 +3672,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_token = "hello world"
     filter = "hello world"
 
-    list_qa_scorecard_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_qa_scorecard_revisions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3724,7 +3728,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     feedback_label_id = "hello world"
     feedback_label = {}
 
-    create_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3781,7 +3785,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_size = 42
     page_token = "hello world"
 
-    list_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3835,7 +3839,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3890,7 +3894,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     feedback_label = {}
     update_mask = {}
 
-    update_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -3944,7 +3948,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_feedback_label_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -4001,7 +4005,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     page_token = "hello world"
     filter = "hello world"
 
-    list_all_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_all_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -4057,7 +4061,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     parent = "hello world"
     validate_only = true
 
-    bulk_upload_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    bulk_upload_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -4117,7 +4121,7 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::C
     conversation_filter = "hello world"
     template_qa_scorecard_id = ["hello world"]
 
-    bulk_download_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    bulk_download_feedback_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

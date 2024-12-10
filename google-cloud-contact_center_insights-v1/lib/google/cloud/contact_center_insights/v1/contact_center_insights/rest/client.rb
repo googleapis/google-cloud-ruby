@@ -163,14 +163,26 @@ module Google
                   endpoint: @config.endpoint,
                   endpoint_template: DEFAULT_ENDPOINT_TEMPLATE,
                   universe_domain: @config.universe_domain,
-                  credentials: credentials
+                  credentials: credentials,
+                  logger: @config.logger
                 )
+
+                @contact_center_insights_stub.logger(stub: true)&.info do |entry|
+                  entry.set_system_name
+                  entry.set_service
+                  entry.message = "Created client for #{entry.service}"
+                  entry.set_credentials_fields credentials
+                  entry.set "customEndpoint", @config.endpoint if @config.endpoint
+                  entry.set "defaultTimeout", @config.timeout if @config.timeout
+                  entry.set "quotaProject", @quota_project_id if @quota_project_id
+                end
 
                 @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.quota_project = @quota_project_id
                   config.endpoint = @contact_center_insights_stub.endpoint
                   config.universe_domain = @contact_center_insights_stub.universe_domain
+                  config.logger = @contact_center_insights_stub.logger if config.respond_to? :logger=
                 end
               end
 
@@ -187,6 +199,15 @@ module Google
               # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
               #
               attr_reader :iam_policy_client
+
+              ##
+              # The logger used for request/response debug logging.
+              #
+              # @return [Logger]
+              #
+              def logger
+                @contact_center_insights_stub.logger
+              end
 
               # Service calls
 
@@ -274,7 +295,6 @@ module Google
 
                 @contact_center_insights_stub.create_conversation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -378,7 +398,7 @@ module Google
                 @contact_center_insights_stub.upload_conversation request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -472,7 +492,6 @@ module Google
 
                 @contact_center_insights_stub.update_conversation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -553,7 +572,6 @@ module Google
 
                 @contact_center_insights_stub.get_conversation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -667,7 +685,7 @@ module Google
                 @contact_center_insights_stub.list_conversations request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_conversations, "conversations", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -750,7 +768,6 @@ module Google
 
                 @contact_center_insights_stub.delete_conversation request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -840,7 +857,7 @@ module Google
                 @contact_center_insights_stub.create_analysis request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -919,7 +936,6 @@ module Google
 
                 @contact_center_insights_stub.get_analysis request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1015,7 +1031,7 @@ module Google
                 @contact_center_insights_stub.list_analyses request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_analyses, "analyses", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1094,7 +1110,6 @@ module Google
 
                 @contact_center_insights_stub.delete_analysis request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1189,7 +1204,7 @@ module Google
                 @contact_center_insights_stub.bulk_analyze_conversations request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1286,7 +1301,7 @@ module Google
                 @contact_center_insights_stub.bulk_delete_conversations request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1392,7 +1407,7 @@ module Google
                 @contact_center_insights_stub.ingest_conversations request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1490,7 +1505,7 @@ module Google
                 @contact_center_insights_stub.export_insights_data request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1579,7 +1594,7 @@ module Google
                 @contact_center_insights_stub.create_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1660,7 +1675,6 @@ module Google
 
                 @contact_center_insights_stub.update_issue_model request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1739,7 +1753,6 @@ module Google
 
                 @contact_center_insights_stub.get_issue_model request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1818,7 +1831,6 @@ module Google
 
                 @contact_center_insights_stub.list_issue_models request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1905,7 +1917,7 @@ module Google
                 @contact_center_insights_stub.delete_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1993,7 +2005,7 @@ module Google
                 @contact_center_insights_stub.deploy_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2081,7 +2093,7 @@ module Google
                 @contact_center_insights_stub.undeploy_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2170,7 +2182,7 @@ module Google
                 @contact_center_insights_stub.export_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2263,7 +2275,7 @@ module Google
                 @contact_center_insights_stub.import_issue_model request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2342,7 +2354,6 @@ module Google
 
                 @contact_center_insights_stub.get_issue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2421,7 +2432,6 @@ module Google
 
                 @contact_center_insights_stub.list_issues request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2502,7 +2512,6 @@ module Google
 
                 @contact_center_insights_stub.update_issue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2581,7 +2590,6 @@ module Google
 
                 @contact_center_insights_stub.delete_issue request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2660,7 +2668,6 @@ module Google
 
                 @contact_center_insights_stub.calculate_issue_model_stats request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2744,7 +2751,6 @@ module Google
 
                 @contact_center_insights_stub.create_phrase_matcher request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2823,7 +2829,6 @@ module Google
 
                 @contact_center_insights_stub.get_phrase_matcher request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2919,7 +2924,7 @@ module Google
                 @contact_center_insights_stub.list_phrase_matchers request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_phrase_matchers, "phrase_matchers", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2998,7 +3003,6 @@ module Google
 
                 @contact_center_insights_stub.delete_phrase_matcher request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3079,7 +3083,6 @@ module Google
 
                 @contact_center_insights_stub.update_phrase_matcher request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3161,7 +3164,6 @@ module Google
 
                 @contact_center_insights_stub.calculate_stats request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3240,7 +3242,6 @@ module Google
 
                 @contact_center_insights_stub.get_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3321,7 +3322,6 @@ module Google
 
                 @contact_center_insights_stub.update_settings request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3405,7 +3405,6 @@ module Google
 
                 @contact_center_insights_stub.create_analysis_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3484,7 +3483,6 @@ module Google
 
                 @contact_center_insights_stub.get_analysis_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3577,7 +3575,7 @@ module Google
                 @contact_center_insights_stub.list_analysis_rules request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_analysis_rules, "analysis_rules", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3660,7 +3658,6 @@ module Google
 
                 @contact_center_insights_stub.update_analysis_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3739,7 +3736,6 @@ module Google
 
                 @contact_center_insights_stub.delete_analysis_rule request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3818,7 +3814,6 @@ module Google
 
                 @contact_center_insights_stub.get_encryption_spec request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3912,7 +3907,7 @@ module Google
                 @contact_center_insights_stub.initialize_encryption_spec request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3996,7 +3991,6 @@ module Google
 
                 @contact_center_insights_stub.create_view request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4075,7 +4069,6 @@ module Google
 
                 @contact_center_insights_stub.get_view request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4168,7 +4161,7 @@ module Google
                 @contact_center_insights_stub.list_views request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_views, "views", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4249,7 +4242,6 @@ module Google
 
                 @contact_center_insights_stub.update_view request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4328,7 +4320,6 @@ module Google
 
                 @contact_center_insights_stub.delete_view request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4438,7 +4429,7 @@ module Google
                 @contact_center_insights_stub.query_metrics request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4526,7 +4517,6 @@ module Google
 
                 @contact_center_insights_stub.create_qa_question request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4605,7 +4595,6 @@ module Google
 
                 @contact_center_insights_stub.get_qa_question request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4695,7 +4684,6 @@ module Google
 
                 @contact_center_insights_stub.update_qa_question request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4774,7 +4762,6 @@ module Google
 
                 @contact_center_insights_stub.delete_qa_question request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4867,7 +4854,7 @@ module Google
                 @contact_center_insights_stub.list_qa_questions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_qa_questions, "qa_questions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4955,7 +4942,6 @@ module Google
 
                 @contact_center_insights_stub.create_qa_scorecard request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5034,7 +5020,6 @@ module Google
 
                 @contact_center_insights_stub.get_qa_scorecard request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5120,7 +5105,6 @@ module Google
 
                 @contact_center_insights_stub.update_qa_scorecard request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5202,7 +5186,6 @@ module Google
 
                 @contact_center_insights_stub.delete_qa_scorecard request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5295,7 +5278,7 @@ module Google
                 @contact_center_insights_stub.list_qa_scorecards request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_qa_scorecards, "qa_scorecards", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5383,7 +5366,6 @@ module Google
 
                 @contact_center_insights_stub.create_qa_scorecard_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5462,7 +5444,6 @@ module Google
 
                 @contact_center_insights_stub.get_qa_scorecard_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5560,7 +5541,7 @@ module Google
                 @contact_center_insights_stub.tune_qa_scorecard_revision request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5639,7 +5620,6 @@ module Google
 
                 @contact_center_insights_stub.deploy_qa_scorecard_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5718,7 +5698,6 @@ module Google
 
                 @contact_center_insights_stub.undeploy_qa_scorecard_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5801,7 +5780,6 @@ module Google
 
                 @contact_center_insights_stub.delete_qa_scorecard_revision request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5900,7 +5878,7 @@ module Google
                 @contact_center_insights_stub.list_qa_scorecard_revisions request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_qa_scorecard_revisions, "qa_scorecard_revisions", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5984,7 +5962,6 @@ module Google
 
                 @contact_center_insights_stub.create_feedback_label request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6093,7 +6070,7 @@ module Google
                 @contact_center_insights_stub.list_feedback_labels request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_feedback_labels, "feedback_labels", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6172,7 +6149,6 @@ module Google
 
                 @contact_center_insights_stub.get_feedback_label request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6253,7 +6229,6 @@ module Google
 
                 @contact_center_insights_stub.update_feedback_label request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6332,7 +6307,6 @@ module Google
 
                 @contact_center_insights_stub.delete_feedback_label request, options do |result, operation|
                   yield result, operation if block_given?
-                  return result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6439,7 +6413,7 @@ module Google
                 @contact_center_insights_stub.list_all_feedback_labels request, options do |result, operation|
                   result = ::Gapic::Rest::PagedEnumerable.new @contact_center_insights_stub, :list_all_feedback_labels, "feedback_labels", request, result, options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6532,7 +6506,7 @@ module Google
                 @contact_center_insights_stub.bulk_upload_feedback_labels request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6650,7 +6624,7 @@ module Google
                 @contact_center_insights_stub.bulk_download_feedback_labels request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
-                  return result
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6730,6 +6704,11 @@ module Google
               #   default endpoint URL. The default value of nil uses the environment
               #   universe (usually the default "googleapis.com" universe).
               #   @return [::String,nil]
+              # @!attribute [rw] logger
+              #   A custom logger to use for request/response debug logging, or the value
+              #   `:default` (the default) to construct a default logger, or `nil` to
+              #   explicitly disable logging.
+              #   @return [::Logger,:default,nil]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -6751,6 +6730,7 @@ module Google
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
                 config_attr :universe_domain, nil, ::String, nil
+                config_attr :logger, :default, ::Logger, nil, :default
 
                 # @private
                 def initialize parent_config = nil

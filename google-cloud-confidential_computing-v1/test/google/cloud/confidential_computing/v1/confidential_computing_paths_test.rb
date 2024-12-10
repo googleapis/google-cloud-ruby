@@ -31,6 +31,10 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientP
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_challenge_path

@@ -33,24 +33,24 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_license_pool
@@ -80,7 +84,7 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_license_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_license_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -135,7 +139,7 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     license_pool = {}
     update_mask = {}
 
-    update_license_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_license_pool_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -190,7 +194,7 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     parent = "hello world"
     usernames = ["hello world"]
 
-    assign_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    assign_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -245,7 +249,7 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     parent = "hello world"
     usernames = ["hello world"]
 
-    unassign_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    unassign_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -301,7 +305,7 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::LicenseManagementSer
     page_size = 42
     page_token = "hello world"
 
-    enumerate_licensed_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    enumerate_licensed_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

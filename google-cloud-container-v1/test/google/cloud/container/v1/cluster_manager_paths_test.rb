@@ -31,6 +31,10 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_ca_pool_path
