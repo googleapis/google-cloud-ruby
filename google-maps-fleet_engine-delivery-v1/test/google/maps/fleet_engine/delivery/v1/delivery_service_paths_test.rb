@@ -31,6 +31,10 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientPathsTes
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_delivery_vehicle_path

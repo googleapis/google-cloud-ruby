@@ -31,6 +31,10 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientPathsTest < Minitest
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_service_account_path
