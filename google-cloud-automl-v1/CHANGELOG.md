@@ -1,5 +1,14 @@
 # Release History
 
+### 1.1.0 (2024-12-10)
+
+#### Features
+
+* Provide opt-in debug logging 
+#### Documentation
+
+* Removed some incorrect HTML from documentation ([#27744](https://github.com/googleapis/google-cloud-ruby/issues/27744)) 
+
 ### 1.0.1 (2024-08-30)
 
 #### Documentation
