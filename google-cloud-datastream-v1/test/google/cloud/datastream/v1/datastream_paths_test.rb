@@ -31,6 +31,10 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientPathsTest < Minitest::T
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_connection_profile_path

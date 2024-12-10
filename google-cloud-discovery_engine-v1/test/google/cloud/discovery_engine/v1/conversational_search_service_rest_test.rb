@@ -33,24 +33,24 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -67,6 +67,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
 
     def universe_domain
       "example.com"
+    end
+
+    def stub_logger
+      nil
     end
   end
 
@@ -88,7 +92,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     filter = "hello world"
     boost_spec = {}
 
-    converse_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    converse_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -143,7 +147,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     parent = "hello world"
     conversation = {}
 
-    create_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -197,7 +201,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -252,7 +256,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     conversation = {}
     update_mask = {}
 
-    update_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -306,7 +310,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_conversation_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -364,7 +368,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     filter = "hello world"
     order_by = "hello world"
 
-    list_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_conversations_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -428,7 +432,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     user_pseudo_id = "hello world"
     user_labels = {}
 
-    answer_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    answer_query_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -482,7 +486,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_answer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_answer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -537,7 +541,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     parent = "hello world"
     session = {}
 
-    create_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -591,7 +595,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -646,7 +650,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     session = {}
     update_mask = {}
 
-    update_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -700,7 +704,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_session_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -758,7 +762,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     filter = "hello world"
     order_by = "hello world"
 
-    list_sessions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_sessions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

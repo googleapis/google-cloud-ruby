@@ -33,24 +33,24 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
       @requests = []
     end
 
-    def make_get_request uri:, params: {}, options: {}
-      make_http_request :get, uri: uri, body: nil, params: params, options: options
+    def make_get_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :get, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_delete_request uri:, params: {}, options: {}
-      make_http_request :delete, uri: uri, body: nil, params: params, options: options
+    def make_delete_request uri:, params: {}, options: {}, method_name: nil
+      make_http_request :delete, uri: uri, body: nil, params: params, options: options, method_name: method_name
     end
 
-    def make_post_request uri:, body: nil, params: {}, options: {}
-      make_http_request :post, uri: uri, body: body, params: params, options: options
+    def make_post_request uri:, body: nil, params: {}, options: {}, method_name: nil
+      make_http_request :post, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_patch_request uri:, body:, params: {}, options: {}
-      make_http_request :patch, uri: uri, body: body, params: params, options: options
+    def make_patch_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :patch, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
-    def make_put_request uri:, body:, params: {}, options: {}
-      make_http_request :put, uri: uri, body: body, params: params, options: options
+    def make_put_request uri:, body:, params: {}, options: {}, method_name: nil
+      make_http_request :put, uri: uri, body: body, params: params, options: options, method_name: method_name
     end
 
     def make_http_request *args, **kwargs
@@ -68,6 +68,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_get_document
@@ -80,7 +84,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    get_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    get_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -136,7 +140,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     page_size = 42
     page_token = "hello world"
 
-    list_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    list_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -192,7 +196,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     document = {}
     document_id = "hello world"
 
-    create_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    create_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -248,7 +252,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     allow_missing = true
     update_mask = {}
 
-    update_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    update_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -302,7 +306,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     # Create request parameters for a unary method.
     name = "hello world"
 
-    delete_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    delete_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -362,7 +366,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     auto_generate_ids = true
     id_field = "hello world"
 
-    import_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    import_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -420,7 +424,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     error_config = {}
     force = true
 
-    purge_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    purge_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -475,7 +479,7 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     parent = "hello world"
     matcher = {}
 
-    batch_get_documents_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+    batch_get_documents_metadata_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"

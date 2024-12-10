@@ -31,6 +31,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::ClientPathsT
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_deidentify_template_path

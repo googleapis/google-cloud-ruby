@@ -31,6 +31,10 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientPathsTest < Minites
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_knowledge_base_path

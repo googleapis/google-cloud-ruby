@@ -31,6 +31,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::Pages::ClientPathsTest < Minitest::Te
     def universe_domain
       "example.com"
     end
+
+    def stub_logger
+      nil
+    end
   end
 
   def test_entity_type_path
