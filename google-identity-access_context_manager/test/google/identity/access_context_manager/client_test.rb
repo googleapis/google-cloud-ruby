@@ -35,6 +35,10 @@ class Google::Identity::AccessContextManager::ClientConstructionMinitest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_access_context_manager_grpc

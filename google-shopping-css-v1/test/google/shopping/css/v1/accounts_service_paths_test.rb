@@ -35,6 +35,10 @@ class ::Google::Shopping::Css::V1::AccountsService::ClientPathsTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_account_path

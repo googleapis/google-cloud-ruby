@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountTaxService::Rest::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_account_tax

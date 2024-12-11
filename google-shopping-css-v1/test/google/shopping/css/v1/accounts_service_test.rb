@@ -58,6 +58,10 @@ class ::Google::Shopping::Css::V1::AccountsService::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_child_accounts

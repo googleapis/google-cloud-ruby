@@ -35,6 +35,10 @@ class Google::Maps::FleetEngine::Delivery::ClientConstructionMinitest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_delivery_service_grpc

@@ -72,6 +72,10 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_generate_access_token

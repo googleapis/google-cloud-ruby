@@ -72,6 +72,10 @@ class ::Google::Shopping::Css::V1::CssProductsService::Rest::ClientTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_css_product

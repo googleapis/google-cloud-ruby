@@ -35,6 +35,10 @@ class Google::Iam::Credentials::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_iam_credentials_grpc

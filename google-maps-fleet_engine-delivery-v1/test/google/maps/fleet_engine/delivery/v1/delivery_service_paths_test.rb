@@ -35,6 +35,10 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientPathsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_delivery_vehicle_path
