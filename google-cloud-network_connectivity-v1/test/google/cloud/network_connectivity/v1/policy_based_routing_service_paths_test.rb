@@ -35,6 +35,10 @@ class ::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoutingService::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

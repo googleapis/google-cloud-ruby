@@ -34,6 +34,10 @@ class Google::Cloud::Monitoring::MetricsScope::ClientConstructionMinitest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_metrics_scopes_grpc

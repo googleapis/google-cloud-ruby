@@ -58,6 +58,10 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_alert_policies

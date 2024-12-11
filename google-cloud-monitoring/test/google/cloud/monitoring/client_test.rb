@@ -34,6 +34,10 @@ class Google::Cloud::Monitoring::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_alert_policy_service_grpc

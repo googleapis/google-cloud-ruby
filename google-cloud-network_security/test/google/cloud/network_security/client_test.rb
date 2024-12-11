@@ -35,6 +35,10 @@ class Google::Cloud::NetworkSecurity::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_network_security_grpc

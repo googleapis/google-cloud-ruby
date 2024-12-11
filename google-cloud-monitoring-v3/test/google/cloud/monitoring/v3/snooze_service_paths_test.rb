@@ -35,6 +35,10 @@ class ::Google::Cloud::Monitoring::V3::SnoozeService::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_alert_policy_path

@@ -35,6 +35,10 @@ class ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::ClientPathsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_hub_path

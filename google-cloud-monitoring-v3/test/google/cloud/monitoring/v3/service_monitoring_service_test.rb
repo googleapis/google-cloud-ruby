@@ -58,6 +58,10 @@ class ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_service

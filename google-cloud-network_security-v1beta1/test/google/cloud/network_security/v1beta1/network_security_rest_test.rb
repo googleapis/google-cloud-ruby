@@ -72,6 +72,10 @@ class ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_authorization_policies

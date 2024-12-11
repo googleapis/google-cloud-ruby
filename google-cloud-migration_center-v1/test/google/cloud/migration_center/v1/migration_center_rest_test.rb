@@ -72,6 +72,10 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::Rest::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_assets

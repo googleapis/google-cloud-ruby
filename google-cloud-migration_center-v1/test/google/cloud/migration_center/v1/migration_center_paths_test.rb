@@ -35,6 +35,10 @@ class ::Google::Cloud::MigrationCenter::V1::MigrationCenter::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_asset_path
