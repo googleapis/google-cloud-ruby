@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::Lfp::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_lfp_inventory_service_grpc

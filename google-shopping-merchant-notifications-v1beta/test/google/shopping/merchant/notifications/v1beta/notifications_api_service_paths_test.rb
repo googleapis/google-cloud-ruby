@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Notifications::V1beta::NotificationsApiServi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_account_path

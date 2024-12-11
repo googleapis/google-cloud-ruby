@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpStoreService::Rest::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_lfp_store

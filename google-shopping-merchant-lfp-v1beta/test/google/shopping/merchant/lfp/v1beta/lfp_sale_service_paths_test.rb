@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Lfp::V1beta::LfpSaleService::ClientPathsTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_lfp_sale_path

@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::RegionalInventoryServic
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_product_path

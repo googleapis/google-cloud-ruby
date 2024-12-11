@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::Notifications::ClientConstructionMinitest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_notifications_api_service_grpc

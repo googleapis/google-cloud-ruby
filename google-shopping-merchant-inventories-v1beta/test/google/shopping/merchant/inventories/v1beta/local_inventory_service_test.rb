@@ -58,6 +58,10 @@ class ::Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_local_inventories

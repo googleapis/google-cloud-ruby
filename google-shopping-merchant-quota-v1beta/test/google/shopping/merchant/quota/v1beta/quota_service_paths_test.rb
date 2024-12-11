@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Quota::V1beta::QuotaService::ClientPathsTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_account_path

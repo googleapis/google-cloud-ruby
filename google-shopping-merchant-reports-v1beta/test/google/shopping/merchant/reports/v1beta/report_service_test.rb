@@ -58,6 +58,10 @@ class ::Google::Shopping::Merchant::Reports::V1beta::ReportService::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_search

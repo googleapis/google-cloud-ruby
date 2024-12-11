@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Quota::V1beta::QuotaService::Rest::ClientTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_quota_groups

@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::Quota::ClientConstructionMinitest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_quota_service_grpc

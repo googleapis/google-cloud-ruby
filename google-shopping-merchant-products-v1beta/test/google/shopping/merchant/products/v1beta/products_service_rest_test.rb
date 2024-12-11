@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Products::V1beta::ProductsService::Rest::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_product

@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_account_path

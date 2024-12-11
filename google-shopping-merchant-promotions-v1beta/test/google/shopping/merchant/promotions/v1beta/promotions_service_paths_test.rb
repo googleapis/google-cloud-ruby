@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_promotion_path

@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Res
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_data_source

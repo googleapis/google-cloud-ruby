@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::Promotions::ClientConstructionMinitest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_promotions_service_grpc

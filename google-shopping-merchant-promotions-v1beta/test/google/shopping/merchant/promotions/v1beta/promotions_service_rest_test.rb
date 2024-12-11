@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Promotions::V1beta::PromotionsService::Rest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_insert_promotion

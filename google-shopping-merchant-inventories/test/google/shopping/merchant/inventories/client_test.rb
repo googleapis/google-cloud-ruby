@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::Inventories::ClientConstructionMinitest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_local_inventory_service_grpc
