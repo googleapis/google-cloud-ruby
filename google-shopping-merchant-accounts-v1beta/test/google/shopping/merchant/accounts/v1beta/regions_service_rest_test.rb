@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::RegionsService::Rest::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_region

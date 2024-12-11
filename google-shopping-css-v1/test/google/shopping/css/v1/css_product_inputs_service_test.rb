@@ -58,6 +58,10 @@ class ::Google::Shopping::Css::V1::CssProductInputsService::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_insert_css_product_input

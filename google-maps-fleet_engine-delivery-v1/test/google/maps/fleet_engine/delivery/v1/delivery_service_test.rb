@@ -58,6 +58,10 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_delivery_vehicle

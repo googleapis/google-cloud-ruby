@@ -58,6 +58,10 @@ class ::Google::Iam::V2::Policies::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_policies

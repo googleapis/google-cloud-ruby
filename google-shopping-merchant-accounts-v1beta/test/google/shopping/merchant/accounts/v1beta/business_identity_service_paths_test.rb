@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::BusinessIdentityService::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_business_identity_path

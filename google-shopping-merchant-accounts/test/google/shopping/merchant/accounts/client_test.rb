@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_account_tax_service_grpc

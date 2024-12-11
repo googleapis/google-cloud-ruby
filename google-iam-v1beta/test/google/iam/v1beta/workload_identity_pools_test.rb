@@ -58,6 +58,10 @@ class ::Google::Iam::V1beta::WorkloadIdentityPools::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_workload_identity_pools

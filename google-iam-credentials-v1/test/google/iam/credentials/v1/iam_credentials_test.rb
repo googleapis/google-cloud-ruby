@@ -58,6 +58,10 @@ class ::Google::Iam::Credentials::V1::IAMCredentials::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_generate_access_token

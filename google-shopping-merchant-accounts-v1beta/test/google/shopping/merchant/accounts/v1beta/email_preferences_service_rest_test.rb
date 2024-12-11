@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::EmailPreferencesService::R
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_email_preferences

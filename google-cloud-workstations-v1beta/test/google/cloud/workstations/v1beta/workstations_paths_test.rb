@@ -35,6 +35,10 @@ class ::Google::Cloud::Workstations::V1beta::Workstations::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

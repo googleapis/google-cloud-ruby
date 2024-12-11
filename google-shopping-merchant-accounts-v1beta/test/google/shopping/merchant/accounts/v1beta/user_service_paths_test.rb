@@ -35,6 +35,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::UserService::ClientPathsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_account_path

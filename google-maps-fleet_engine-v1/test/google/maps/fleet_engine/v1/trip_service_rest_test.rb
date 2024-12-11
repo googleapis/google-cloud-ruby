@@ -72,6 +72,10 @@ class ::Google::Maps::FleetEngine::V1::TripService::Rest::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_trip

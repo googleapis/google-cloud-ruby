@@ -72,6 +72,10 @@ class ::Google::Cloud::Workstations::V1::Workstations::Rest::ClientTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_workstation_cluster

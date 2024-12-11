@@ -72,6 +72,10 @@ class ::Google::Shopping::Merchant::Accounts::V1beta::AccountIssueService::Rest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_account_issues
