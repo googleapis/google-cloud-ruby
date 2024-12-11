@@ -35,6 +35,10 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::ClientPathsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_cdn_key_path

@@ -72,6 +72,10 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::ClientTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_channel

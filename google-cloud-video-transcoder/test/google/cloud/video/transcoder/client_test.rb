@@ -35,6 +35,10 @@ class Google::Cloud::Video::Transcoder::ClientConstructionMinitest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_transcoder_service_grpc

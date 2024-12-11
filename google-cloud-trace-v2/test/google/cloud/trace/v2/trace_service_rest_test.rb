@@ -72,6 +72,10 @@ class ::Google::Cloud::Trace::V2::TraceService::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_batch_write_spans

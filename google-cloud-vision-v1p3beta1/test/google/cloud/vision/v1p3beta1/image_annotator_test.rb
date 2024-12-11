@@ -58,6 +58,10 @@ class ::Google::Cloud::Vision::V1p3beta1::ImageAnnotator::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_batch_annotate_images

@@ -58,6 +58,10 @@ class ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::OperationsTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

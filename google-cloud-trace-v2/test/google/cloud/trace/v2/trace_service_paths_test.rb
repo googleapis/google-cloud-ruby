@@ -35,6 +35,10 @@ class ::Google::Cloud::Trace::V2::TraceService::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path

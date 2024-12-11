@@ -58,6 +58,10 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_job

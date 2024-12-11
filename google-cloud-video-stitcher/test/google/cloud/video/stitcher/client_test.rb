@@ -34,6 +34,10 @@ class Google::Cloud::Video::Stitcher::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_video_stitcher_service_grpc

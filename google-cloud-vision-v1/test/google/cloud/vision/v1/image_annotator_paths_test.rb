@@ -35,6 +35,10 @@ class ::Google::Cloud::Vision::V1::ImageAnnotator::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_product_set_path

@@ -58,6 +58,10 @@ class ::Google::Cloud::Vision::V1::ProductSearch::OperationsTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

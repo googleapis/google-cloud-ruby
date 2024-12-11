@@ -35,6 +35,10 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientPathsTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_adaptive_mt_dataset_path

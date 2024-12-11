@@ -58,6 +58,10 @@ class ::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceS
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_streaming_annotate_video
