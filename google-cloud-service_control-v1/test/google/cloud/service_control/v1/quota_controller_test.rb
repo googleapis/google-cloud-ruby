@@ -58,6 +58,10 @@ class ::Google::Cloud::ServiceControl::V1::QuotaController::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_allocate_quota

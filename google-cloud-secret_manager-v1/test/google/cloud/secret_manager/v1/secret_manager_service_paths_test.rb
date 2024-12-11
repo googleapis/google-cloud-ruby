@@ -35,6 +35,10 @@ class ::Google::Cloud::SecretManager::V1::SecretManagerService::ClientPathsTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

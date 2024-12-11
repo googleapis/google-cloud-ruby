@@ -58,6 +58,10 @@ class ::Google::Cloud::SecretManager::V1beta1::SecretManagerService::ClientTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_secrets

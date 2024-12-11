@@ -35,6 +35,10 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientPaths
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_branch_rule_path

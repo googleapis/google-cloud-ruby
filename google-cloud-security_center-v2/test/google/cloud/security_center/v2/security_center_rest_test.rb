@@ -72,6 +72,10 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_batch_create_resource_value_configs

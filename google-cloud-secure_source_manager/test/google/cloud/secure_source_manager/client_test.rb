@@ -35,6 +35,10 @@ class Google::Cloud::SecureSourceManager::ClientConstructionMinitest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_secure_source_manager_grpc

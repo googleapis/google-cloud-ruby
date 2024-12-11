@@ -72,6 +72,10 @@ class ::Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_external_account_key
