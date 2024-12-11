@@ -72,6 +72,10 @@ class ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Rest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_workload

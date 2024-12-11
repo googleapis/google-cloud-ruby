@@ -58,6 +58,10 @@ class ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_validate_attestation_occurrence

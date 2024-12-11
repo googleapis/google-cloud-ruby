@@ -35,6 +35,10 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::ClientPathsTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_channel_partner_link_path

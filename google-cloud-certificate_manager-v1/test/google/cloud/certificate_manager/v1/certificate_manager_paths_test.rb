@@ -35,6 +35,10 @@ class ::Google::Cloud::CertificateManager::V1::CertificateManager::ClientPathsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_ca_pool_path

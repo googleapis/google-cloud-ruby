@@ -35,6 +35,10 @@ class Google::Cloud::Channel::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_cloud_channel_reports_service_grpc

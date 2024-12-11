@@ -72,6 +72,10 @@ class ::Google::Cloud::Billing::V1::CloudCatalog::Rest::ClientTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_services

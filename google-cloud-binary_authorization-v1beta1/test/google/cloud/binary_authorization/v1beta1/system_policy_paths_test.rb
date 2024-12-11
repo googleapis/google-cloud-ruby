@@ -35,6 +35,10 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::ClientPathsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_policy_path
