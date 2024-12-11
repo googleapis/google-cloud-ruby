@@ -35,6 +35,10 @@ class Google::Cloud::Bigquery::Connection::ClientConstructionMinitest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_connection_service_grpc

@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientPathsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path

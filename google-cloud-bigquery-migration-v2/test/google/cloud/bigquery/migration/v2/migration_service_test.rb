@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_migration_workflow

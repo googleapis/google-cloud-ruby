@@ -35,6 +35,10 @@ class Google::Cloud::Bigquery::DataTransfer::ClientConstructionMinitest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_data_transfer_service_grpc

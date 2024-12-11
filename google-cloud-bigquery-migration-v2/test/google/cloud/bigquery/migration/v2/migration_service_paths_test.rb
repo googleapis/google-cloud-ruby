@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigquery::Migration::V2::MigrationService::ClientPathsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

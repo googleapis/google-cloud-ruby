@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientPathsT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_cluster_path

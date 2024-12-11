@@ -34,6 +34,10 @@ class Google::Cloud::BeyondCorp::AppConnections::ClientConstructionMinitest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_app_connections_service_grpc

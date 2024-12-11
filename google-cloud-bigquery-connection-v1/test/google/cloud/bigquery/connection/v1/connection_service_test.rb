@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_connection

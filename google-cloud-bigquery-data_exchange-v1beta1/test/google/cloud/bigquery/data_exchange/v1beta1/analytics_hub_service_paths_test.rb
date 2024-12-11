@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_data_exchange_path

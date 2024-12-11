@@ -72,6 +72,10 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Cl
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_data_source
