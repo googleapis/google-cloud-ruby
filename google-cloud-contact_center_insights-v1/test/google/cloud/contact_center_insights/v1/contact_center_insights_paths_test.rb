@@ -35,6 +35,10 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_analysis_path

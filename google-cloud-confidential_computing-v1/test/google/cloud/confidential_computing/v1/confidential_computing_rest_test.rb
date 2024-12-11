@@ -72,6 +72,10 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::Rest::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_challenge

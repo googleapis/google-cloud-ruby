@@ -35,6 +35,10 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_topic_path

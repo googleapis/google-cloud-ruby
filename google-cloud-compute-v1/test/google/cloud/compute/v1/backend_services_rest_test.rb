@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::BackendServices::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_add_signed_url_key

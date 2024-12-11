@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::VpnTunnels::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_aggregated_list

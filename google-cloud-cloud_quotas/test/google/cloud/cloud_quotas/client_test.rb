@@ -35,6 +35,10 @@ class Google::Cloud::CloudQuotas::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_cloud_quotas_grpc

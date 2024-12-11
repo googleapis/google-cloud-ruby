@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_disable_xpn_host

@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_delete

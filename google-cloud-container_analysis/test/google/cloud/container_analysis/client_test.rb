@@ -34,6 +34,10 @@ class Google::Cloud::ContainerAnalysis::ClientConstructionMinitest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_container_analysis_grpc

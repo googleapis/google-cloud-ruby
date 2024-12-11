@@ -72,6 +72,10 @@ class ::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Rest::ClientTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_process_open_lineage_run_event

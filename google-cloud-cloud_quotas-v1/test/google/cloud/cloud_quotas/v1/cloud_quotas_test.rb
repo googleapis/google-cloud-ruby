@@ -58,6 +58,10 @@ class ::Google::Cloud::CloudQuotas::V1::CloudQuotas::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_quota_infos

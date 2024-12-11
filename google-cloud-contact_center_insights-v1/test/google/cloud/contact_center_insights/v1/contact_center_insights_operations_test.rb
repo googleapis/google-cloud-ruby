@@ -58,6 +58,10 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Operati
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations
