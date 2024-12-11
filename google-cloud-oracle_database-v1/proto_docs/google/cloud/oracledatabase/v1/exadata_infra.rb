@@ -94,21 +94,21 @@ module Google
         # @!attribute [r] oci_url
         #   @return [::String]
         #     Output only. Deep link to the OCI console to view this resource.
-        # @!attribute [rw] cpu_count
+        # @!attribute [r] cpu_count
         #   @return [::Integer]
-        #     Optional. The number of enabled CPU cores.
+        #     Output only. The number of enabled CPU cores.
         # @!attribute [r] max_cpu_count
         #   @return [::Integer]
         #     Output only. The total number of CPU cores available.
-        # @!attribute [rw] memory_size_gb
+        # @!attribute [r] memory_size_gb
         #   @return [::Integer]
-        #     Optional. The memory allocated in GBs.
+        #     Output only. The memory allocated in GBs.
         # @!attribute [r] max_memory_gb
         #   @return [::Integer]
         #     Output only. The total memory available in GBs.
-        # @!attribute [rw] db_node_storage_size_gb
+        # @!attribute [r] db_node_storage_size_gb
         #   @return [::Integer]
-        #     Optional. The local node storage allocated in GBs.
+        #     Output only. The local node storage allocated in GBs.
         # @!attribute [r] max_db_node_storage_size_gb
         #   @return [::Integer]
         #     Output only. The total local node storage available in GBs.
