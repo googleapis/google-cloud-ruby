@@ -1089,7 +1089,7 @@ module Google
             end
 
             ##
-            # Lists {::Google::Cloud::ConfigService::V1::Resource Resource}s in a given revision.
+            # Lists {::Google::Cloud::ConfigService::V1::Resource Resources} in a given revision.
             #
             # @overload list_resources(request, options = nil)
             #   Pass arguments to `list_resources` via a request object, either of type
