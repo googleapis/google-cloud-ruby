@@ -35,6 +35,10 @@ class ::Google::Cloud::DeveloperConnect::V1::DeveloperConnect::ClientPathsTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_connection_path

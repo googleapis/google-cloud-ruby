@@ -58,6 +58,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchTuningService::OperationsT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

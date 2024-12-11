@@ -35,6 +35,10 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientPathsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_knowledge_base_path

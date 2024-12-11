@@ -58,6 +58,10 @@ class ::Google::Cloud::Datastream::V1alpha1::Datastream::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_connection_profiles

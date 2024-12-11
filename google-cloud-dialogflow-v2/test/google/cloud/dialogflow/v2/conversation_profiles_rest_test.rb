@@ -72,6 +72,10 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_conversation_profiles

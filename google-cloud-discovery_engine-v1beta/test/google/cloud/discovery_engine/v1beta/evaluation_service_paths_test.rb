@@ -35,6 +35,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::EvaluationService::ClientPathsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_branch_path

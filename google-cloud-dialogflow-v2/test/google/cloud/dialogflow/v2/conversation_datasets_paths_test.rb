@@ -35,6 +35,10 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_conversation_dataset_path

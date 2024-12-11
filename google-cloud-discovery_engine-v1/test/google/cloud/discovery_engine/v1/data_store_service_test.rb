@@ -58,6 +58,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_data_store

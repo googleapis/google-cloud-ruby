@@ -58,6 +58,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::UserEventService::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_write_user_event

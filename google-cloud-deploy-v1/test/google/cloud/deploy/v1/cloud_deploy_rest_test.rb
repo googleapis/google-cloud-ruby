@@ -72,6 +72,10 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_delivery_pipelines

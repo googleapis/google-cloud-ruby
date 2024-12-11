@@ -35,6 +35,10 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_dataset_path

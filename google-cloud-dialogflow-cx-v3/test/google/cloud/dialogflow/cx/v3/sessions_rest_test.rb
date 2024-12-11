@@ -72,6 +72,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_detect_intent

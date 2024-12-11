@@ -58,6 +58,10 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Operations
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

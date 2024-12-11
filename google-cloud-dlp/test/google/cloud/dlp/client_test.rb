@@ -35,6 +35,10 @@ class Google::Cloud::Dlp::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_dlp_service_grpc

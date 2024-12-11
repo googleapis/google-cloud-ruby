@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::Rest::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_site_search_engine

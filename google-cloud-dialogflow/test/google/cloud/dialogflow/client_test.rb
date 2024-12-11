@@ -35,6 +35,10 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_agents_grpc

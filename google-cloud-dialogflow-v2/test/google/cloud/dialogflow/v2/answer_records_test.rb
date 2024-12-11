@@ -58,6 +58,10 @@ class ::Google::Cloud::Dialogflow::V2::AnswerRecords::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_answer_records

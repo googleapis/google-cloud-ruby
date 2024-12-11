@@ -72,6 +72,10 @@ class ::Google::Cloud::Dialogflow::V2::Participants::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_participant

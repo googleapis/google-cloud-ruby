@@ -35,6 +35,10 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_automation_path

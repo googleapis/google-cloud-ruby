@@ -35,6 +35,10 @@ class Google::Cloud::DiscoveryEngine::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_completion_service_grpc
