@@ -23,3 +23,4 @@
 /google-cloud-translate*/.           @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
 /google-cloud-video_intelligence*/.  @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
 /google-cloud-vision*/.              @googleapis/ruby-team yoshi-approver @googleapis/ml-apis
+/google-cloud-secret_manager*/.      @googleapis/ruby-team @yoshi-approver @GoogleCloudPlatform/cloud-secrets-team
