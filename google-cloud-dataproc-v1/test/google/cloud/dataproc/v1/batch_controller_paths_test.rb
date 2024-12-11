@@ -35,6 +35,10 @@ class ::Google::Cloud::Dataproc::V1::BatchController::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_batch_path

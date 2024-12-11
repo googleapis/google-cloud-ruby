@@ -35,6 +35,10 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::ClientPathsTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_autoscaling_policy_path

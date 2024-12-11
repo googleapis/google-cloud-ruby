@@ -72,6 +72,10 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Rest::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_workflow_template

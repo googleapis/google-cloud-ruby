@@ -58,6 +58,10 @@ class ::Google::Cloud::Dataproc::V1::JobController::OperationsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

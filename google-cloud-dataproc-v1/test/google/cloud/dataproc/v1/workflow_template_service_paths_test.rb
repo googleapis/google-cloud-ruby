@@ -35,6 +35,10 @@ class ::Google::Cloud::Dataproc::V1::WorkflowTemplateService::ClientPathsTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_crypto_key_path

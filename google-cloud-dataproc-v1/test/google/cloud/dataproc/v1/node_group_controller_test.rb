@@ -58,6 +58,10 @@ class ::Google::Cloud::Dataproc::V1::NodeGroupController::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_node_group

@@ -72,6 +72,10 @@ class ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::ClientTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_autoscaling_policy

@@ -58,6 +58,10 @@ class ::Google::Cloud::Dataproc::V1::SessionTemplateController::ClientTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_session_template
