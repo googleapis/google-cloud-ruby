@@ -58,6 +58,10 @@ class ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::ClientTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_troubleshoot_iam_policy

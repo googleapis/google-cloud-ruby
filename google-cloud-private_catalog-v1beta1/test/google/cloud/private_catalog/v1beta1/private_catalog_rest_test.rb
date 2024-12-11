@@ -72,6 +72,10 @@ class ::Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_search_catalogs

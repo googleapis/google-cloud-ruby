@@ -35,6 +35,10 @@ class Google::Cloud::PolicyTroubleshooter::Iam::ClientConstructionMinitest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_policy_troubleshooter_grpc

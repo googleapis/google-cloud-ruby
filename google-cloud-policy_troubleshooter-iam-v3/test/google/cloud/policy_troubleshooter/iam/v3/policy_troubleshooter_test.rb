@@ -58,6 +58,10 @@ class ::Google::Cloud::PolicyTroubleshooter::Iam::V3::PolicyTroubleshooter::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_troubleshoot_iam_policy

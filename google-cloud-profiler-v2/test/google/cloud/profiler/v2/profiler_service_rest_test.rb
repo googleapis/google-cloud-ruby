@@ -72,6 +72,10 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_profile

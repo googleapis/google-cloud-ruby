@@ -72,6 +72,10 @@ class ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_troubleshoot_iam_policy

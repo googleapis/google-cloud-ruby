@@ -58,6 +58,10 @@ class ::Google::Cloud::PubSub::V1::Publisher::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_topic
