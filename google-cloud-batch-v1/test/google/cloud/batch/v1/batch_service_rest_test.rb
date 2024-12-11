@@ -72,6 +72,10 @@ class ::Google::Cloud::Batch::V1::BatchService::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_job

@@ -58,6 +58,10 @@ class ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_workload

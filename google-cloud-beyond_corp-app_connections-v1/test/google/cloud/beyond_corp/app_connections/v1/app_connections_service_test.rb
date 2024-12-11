@@ -58,6 +58,10 @@ class ::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Cl
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_app_connections

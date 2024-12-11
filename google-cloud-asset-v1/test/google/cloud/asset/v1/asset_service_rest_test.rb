@@ -72,6 +72,10 @@ class ::Google::Cloud::Asset::V1::AssetService::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_export_assets

@@ -35,6 +35,10 @@ class Google::Cloud::ArtifactRegistry::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_artifact_registry_grpc

@@ -72,6 +72,10 @@ class ::Google::Cloud::AutoML::V1::AutoML::Rest::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_dataset

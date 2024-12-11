@@ -72,6 +72,10 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_import_apt_artifacts

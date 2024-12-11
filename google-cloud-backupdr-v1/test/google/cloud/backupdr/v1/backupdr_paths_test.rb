@@ -35,6 +35,10 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_backup_path
