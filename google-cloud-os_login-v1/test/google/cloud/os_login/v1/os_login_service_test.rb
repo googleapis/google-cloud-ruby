@@ -58,6 +58,10 @@ class ::Google::Cloud::OsLogin::V1::OsLoginService::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_ssh_public_key

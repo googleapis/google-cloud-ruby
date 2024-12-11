@@ -35,6 +35,10 @@ class Google::Cloud::OsLogin::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_os_login_service_grpc

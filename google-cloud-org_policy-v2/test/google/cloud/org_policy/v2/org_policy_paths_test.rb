@@ -35,6 +35,10 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientPathsTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_custom_constraint_path

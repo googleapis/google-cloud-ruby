@@ -72,6 +72,10 @@ class ::Google::Cloud::NetworkServices::V1::DepService::Rest::ClientTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_lb_traffic_extensions

@@ -58,6 +58,10 @@ class ::Google::Cloud::OrgPolicy::V2::OrgPolicy::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_constraints

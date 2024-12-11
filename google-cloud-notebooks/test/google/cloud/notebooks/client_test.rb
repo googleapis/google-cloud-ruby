@@ -35,6 +35,10 @@ class Google::Cloud::Notebooks::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_notebook_service_grpc

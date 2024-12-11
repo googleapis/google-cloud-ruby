@@ -58,6 +58,10 @@ class ::Google::Cloud::Notebooks::V1beta1::NotebookService::OperationsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

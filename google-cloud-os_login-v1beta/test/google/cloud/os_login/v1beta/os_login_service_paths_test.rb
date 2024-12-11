@@ -35,6 +35,10 @@ class ::Google::Cloud::OsLogin::V1beta::OsLoginService::ClientPathsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_posix_account_path

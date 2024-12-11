@@ -58,6 +58,10 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::ClientTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_runtimes

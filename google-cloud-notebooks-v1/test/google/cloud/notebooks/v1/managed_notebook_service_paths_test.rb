@@ -35,6 +35,10 @@ class ::Google::Cloud::Notebooks::V1::ManagedNotebookService::ClientPathsTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path
