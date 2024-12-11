@@ -35,6 +35,10 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_crypto_key_path

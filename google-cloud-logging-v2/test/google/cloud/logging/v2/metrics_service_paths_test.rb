@@ -35,6 +35,10 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientPathsTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_log_metric_path

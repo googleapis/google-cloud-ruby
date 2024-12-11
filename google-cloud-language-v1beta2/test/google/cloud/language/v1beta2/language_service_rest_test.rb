@@ -72,6 +72,10 @@ class ::Google::Cloud::Language::V1beta2::LanguageService::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_analyze_sentiment

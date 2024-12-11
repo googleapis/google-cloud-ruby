@@ -58,6 +58,10 @@ class ::Google::Cloud::ManagedKafka::V1::ManagedKafka::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_clusters

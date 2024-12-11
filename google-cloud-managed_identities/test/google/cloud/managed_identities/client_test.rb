@@ -34,6 +34,10 @@ class Google::Cloud::ManagedIdentities::ClientConstructionMinitest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_managed_identities_service_grpc

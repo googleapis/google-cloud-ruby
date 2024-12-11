@@ -35,6 +35,10 @@ class Google::Cloud::Language::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_language_service_grpc

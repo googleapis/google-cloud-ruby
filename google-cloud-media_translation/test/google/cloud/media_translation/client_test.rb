@@ -34,6 +34,10 @@ class Google::Cloud::MediaTranslation::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_speech_translation_service_grpc
