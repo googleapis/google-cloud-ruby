@@ -72,6 +72,10 @@ class ::Google::Cloud::Memcache::V1::CloudMemcache::Rest::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_instances

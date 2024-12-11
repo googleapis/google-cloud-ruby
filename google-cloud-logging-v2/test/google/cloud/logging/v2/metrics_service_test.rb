@@ -58,6 +58,10 @@ class ::Google::Cloud::Logging::V2::MetricsService::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_log_metrics

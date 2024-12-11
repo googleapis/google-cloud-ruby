@@ -72,6 +72,10 @@ class ::Google::Cloud::LifeSciences::V2beta::WorkflowsService::Rest::ClientTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_run_pipeline

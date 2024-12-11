@@ -58,6 +58,10 @@ class ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_microsoft_ad_domain

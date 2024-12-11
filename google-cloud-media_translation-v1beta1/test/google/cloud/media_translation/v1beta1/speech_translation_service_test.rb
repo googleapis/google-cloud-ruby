@@ -58,6 +58,10 @@ class ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_streaming_translate_speech

@@ -35,6 +35,10 @@ class ::Google::Cloud::Memcache::V1beta2::CloudMemcache::ClientPathsTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_instance_path
