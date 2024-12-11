@@ -35,6 +35,10 @@ class ::Google::Cloud::Talent::V4::EventService::ClientPathsTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_tenant_path

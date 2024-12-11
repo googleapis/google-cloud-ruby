@@ -72,6 +72,10 @@ class ::Google::Cloud::Talent::V4beta1::Completion::Rest::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_complete_query

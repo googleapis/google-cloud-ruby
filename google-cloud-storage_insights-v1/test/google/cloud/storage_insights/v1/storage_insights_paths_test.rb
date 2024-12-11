@@ -35,6 +35,10 @@ class ::Google::Cloud::StorageInsights::V1::StorageInsights::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

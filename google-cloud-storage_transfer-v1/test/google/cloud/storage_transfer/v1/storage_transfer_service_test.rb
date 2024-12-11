@@ -58,6 +58,10 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_google_service_account

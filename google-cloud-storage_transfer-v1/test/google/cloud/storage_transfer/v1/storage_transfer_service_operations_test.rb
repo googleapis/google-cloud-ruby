@@ -58,6 +58,10 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::OperationsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

@@ -72,6 +72,10 @@ class ::Google::Cloud::Talent::V4::EventService::Rest::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_client_event

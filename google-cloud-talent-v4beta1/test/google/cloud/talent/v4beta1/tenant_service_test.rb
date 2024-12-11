@@ -58,6 +58,10 @@ class ::Google::Cloud::Talent::V4beta1::TenantService::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_tenant

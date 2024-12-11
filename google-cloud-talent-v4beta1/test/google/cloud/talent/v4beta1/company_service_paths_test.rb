@@ -35,6 +35,10 @@ class ::Google::Cloud::Talent::V4beta1::CompanyService::ClientPathsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_company_path

@@ -35,6 +35,10 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Client
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_model_path
