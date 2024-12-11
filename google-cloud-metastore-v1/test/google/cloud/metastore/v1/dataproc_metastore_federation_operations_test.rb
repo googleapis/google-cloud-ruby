@@ -58,6 +58,10 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastoreFederation::OperationsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

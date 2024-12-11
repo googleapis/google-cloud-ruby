@@ -35,6 +35,10 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::ClientPathsTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_backup_path

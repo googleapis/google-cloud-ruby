@@ -58,6 +58,10 @@ class ::Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_metrics_scope

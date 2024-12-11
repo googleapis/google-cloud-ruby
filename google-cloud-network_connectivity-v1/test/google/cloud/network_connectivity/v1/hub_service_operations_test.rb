@@ -58,6 +58,10 @@ class ::Google::Cloud::NetworkConnectivity::V1::HubService::OperationsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

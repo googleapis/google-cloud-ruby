@@ -35,6 +35,10 @@ class Google::Cloud::Metastore::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_dataproc_metastore_grpc

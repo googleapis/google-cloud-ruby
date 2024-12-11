@@ -58,6 +58,10 @@ class ::Google::Cloud::Monitoring::V3::QueryService::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_query_time_series

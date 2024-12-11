@@ -72,6 +72,10 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_dashboard

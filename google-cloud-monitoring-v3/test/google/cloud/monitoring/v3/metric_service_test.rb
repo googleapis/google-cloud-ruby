@@ -58,6 +58,10 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_monitored_resource_descriptors

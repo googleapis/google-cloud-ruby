@@ -58,6 +58,10 @@ class ::Google::Cloud::NetworkManagement::V1::ReachabilityService::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_connectivity_tests

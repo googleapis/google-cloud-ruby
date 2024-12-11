@@ -72,6 +72,10 @@ class ::Google::Cloud::Metastore::V1::DataprocMetastore::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_services

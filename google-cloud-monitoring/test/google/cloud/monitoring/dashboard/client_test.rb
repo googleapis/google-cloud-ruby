@@ -35,6 +35,10 @@ class Google::Cloud::Monitoring::Dashboard::ClientConstructionMinitest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_dashboards_service_grpc

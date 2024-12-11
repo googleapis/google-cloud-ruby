@@ -58,6 +58,10 @@ class ::Google::Cloud::NetApp::V1::NetApp::OperationsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

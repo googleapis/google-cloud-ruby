@@ -35,6 +35,10 @@ class ::Google::Cloud::Monitoring::V3::AlertPolicyService::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_alert_policy_path

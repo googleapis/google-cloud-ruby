@@ -34,6 +34,10 @@ class Google::Cloud::NetworkConnectivity::ClientConstructionMinitest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_hub_service_grpc
