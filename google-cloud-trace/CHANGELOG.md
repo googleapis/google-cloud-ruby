@@ -1,5 +1,11 @@
 # Release History
 
+### 0.44.1 (2024-12-11)
+
+#### Documentation
+
+* Updated readme to reflect that the instrumentation is deprecated ([#27728](https://github.com/googleapis/google-cloud-ruby/issues/27728)) 
+
 ### 0.44.0 (2024-07-09)
 
 #### Features
