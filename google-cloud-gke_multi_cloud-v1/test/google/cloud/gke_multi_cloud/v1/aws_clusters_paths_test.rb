@@ -35,6 +35,10 @@ class ::Google::Cloud::GkeMultiCloud::V1::AwsClusters::ClientPathsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_aws_cluster_path

@@ -35,6 +35,10 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::ClientPathsTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path

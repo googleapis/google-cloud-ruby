@@ -35,6 +35,10 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyTrackingService::ClientPathsTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_organization_path

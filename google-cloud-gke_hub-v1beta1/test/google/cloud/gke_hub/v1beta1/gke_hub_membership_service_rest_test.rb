@@ -72,6 +72,10 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_memberships

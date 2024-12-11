@@ -35,6 +35,10 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::ClientPathsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_attached_cluster_path

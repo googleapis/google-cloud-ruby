@@ -72,6 +72,10 @@ class ::Google::Cloud::Kms::Inventory::V1::KeyDashboardService::Rest::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_crypto_keys

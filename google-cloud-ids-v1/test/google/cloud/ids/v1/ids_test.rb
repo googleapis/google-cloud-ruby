@@ -58,6 +58,10 @@ class ::Google::Cloud::IDS::V1::IDS::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_endpoints

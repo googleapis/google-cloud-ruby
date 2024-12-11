@@ -34,6 +34,10 @@ class Google::Cloud::GkeConnect::Gateway::ClientConstructionMinitest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_gateway_control_rest

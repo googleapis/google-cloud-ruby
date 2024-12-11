@@ -72,6 +72,10 @@ class ::Google::Cloud::GkeConnect::Gateway::V1::GatewayControl::Rest::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_generate_credentials
