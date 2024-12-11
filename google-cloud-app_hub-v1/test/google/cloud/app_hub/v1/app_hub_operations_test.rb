@@ -58,6 +58,10 @@ class ::Google::Cloud::AppHub::V1::AppHub::OperationsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

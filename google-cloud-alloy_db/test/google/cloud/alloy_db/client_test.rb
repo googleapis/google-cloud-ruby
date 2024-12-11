@@ -35,6 +35,10 @@ class Google::Cloud::AlloyDB::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_alloy_db_admin_grpc

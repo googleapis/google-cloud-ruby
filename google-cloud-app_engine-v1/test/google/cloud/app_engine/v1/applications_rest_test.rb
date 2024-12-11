@@ -72,6 +72,10 @@ class ::Google::Cloud::AppEngine::V1::Applications::Rest::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_application

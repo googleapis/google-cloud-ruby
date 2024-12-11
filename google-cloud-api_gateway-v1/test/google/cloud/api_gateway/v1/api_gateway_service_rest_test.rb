@@ -72,6 +72,10 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::ClientTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_gateways

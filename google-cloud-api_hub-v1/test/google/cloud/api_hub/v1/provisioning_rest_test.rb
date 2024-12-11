@@ -72,6 +72,10 @@ class ::Google::Cloud::ApiHub::V1::Provisioning::Rest::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_api_hub_instance

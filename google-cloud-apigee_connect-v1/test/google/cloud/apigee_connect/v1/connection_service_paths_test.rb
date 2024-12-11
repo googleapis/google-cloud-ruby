@@ -35,6 +35,10 @@ class ::Google::Cloud::ApigeeConnect::V1::ConnectionService::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_endpoint_path

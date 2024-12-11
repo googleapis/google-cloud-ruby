@@ -58,6 +58,10 @@ class ::Google::Cloud::ApigeeRegistry::V1::Provisioning::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_instance

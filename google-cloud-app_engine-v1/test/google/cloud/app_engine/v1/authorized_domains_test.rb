@@ -58,6 +58,10 @@ class ::Google::Cloud::AppEngine::V1::AuthorizedDomains::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_authorized_domains

@@ -72,6 +72,10 @@ class ::Google::Cloud::AppEngine::V1::Versions::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_versions

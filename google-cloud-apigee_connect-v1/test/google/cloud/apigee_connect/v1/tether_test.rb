@@ -58,6 +58,10 @@ class ::Google::Cloud::ApigeeConnect::V1::Tether::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_egress

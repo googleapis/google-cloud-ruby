@@ -72,6 +72,10 @@ class ::Google::Cloud::ApiHub::V1::LintingService::Rest::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_style_guide
