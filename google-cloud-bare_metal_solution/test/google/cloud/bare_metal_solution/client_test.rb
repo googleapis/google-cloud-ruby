@@ -35,6 +35,10 @@ class Google::Cloud::BareMetalSolution::ClientConstructionMinitest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_bare_metal_solution_grpc

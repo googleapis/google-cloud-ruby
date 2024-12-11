@@ -58,6 +58,10 @@ class ::Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Cl
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_client_gateways

@@ -58,6 +58,10 @@ class ::Google::Cloud::AutoML::V1::PredictionService::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_predict

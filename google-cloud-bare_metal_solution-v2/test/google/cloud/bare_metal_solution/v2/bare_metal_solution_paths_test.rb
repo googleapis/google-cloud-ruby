@@ -35,6 +35,10 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientPathsTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_instance_path

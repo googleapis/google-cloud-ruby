@@ -58,6 +58,10 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::OperationsTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

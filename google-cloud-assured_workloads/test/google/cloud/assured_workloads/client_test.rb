@@ -35,6 +35,10 @@ class Google::Cloud::AssuredWorkloads::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_assured_workloads_service_grpc

@@ -58,6 +58,10 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_management_servers

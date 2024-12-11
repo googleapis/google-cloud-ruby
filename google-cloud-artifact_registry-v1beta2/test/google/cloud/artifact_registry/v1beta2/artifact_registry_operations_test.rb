@@ -58,6 +58,10 @@ class ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::OperationsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

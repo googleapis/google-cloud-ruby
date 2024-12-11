@@ -58,6 +58,10 @@ class ::Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Operatio
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations
