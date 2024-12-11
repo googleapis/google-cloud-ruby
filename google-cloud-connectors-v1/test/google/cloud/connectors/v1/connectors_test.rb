@@ -58,6 +58,10 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_connections

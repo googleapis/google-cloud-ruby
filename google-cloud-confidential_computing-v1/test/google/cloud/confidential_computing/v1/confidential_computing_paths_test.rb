@@ -35,6 +35,10 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientP
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_challenge_path

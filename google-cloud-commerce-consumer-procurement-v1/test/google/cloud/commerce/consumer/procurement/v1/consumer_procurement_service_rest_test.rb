@@ -72,6 +72,10 @@ class ::Google::Cloud::Commerce::Consumer::Procurement::V1::ConsumerProcurementS
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_place_order

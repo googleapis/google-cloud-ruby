@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::ClientTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_attach_network_endpoints

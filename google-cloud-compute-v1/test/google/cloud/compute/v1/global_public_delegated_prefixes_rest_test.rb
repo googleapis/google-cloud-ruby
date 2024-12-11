@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::GlobalPublicDelegatedPrefixes::Rest::ClientT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_delete

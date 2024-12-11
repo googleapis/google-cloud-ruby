@@ -35,6 +35,10 @@ class ::Google::Cloud::Connectors::V1::Connectors::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_connection_path

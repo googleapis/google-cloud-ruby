@@ -35,6 +35,10 @@ class ::Google::Cloud::Container::V1::ClusterManager::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_ca_pool_path

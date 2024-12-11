@@ -72,6 +72,10 @@ class ::Google::Cloud::Container::V1::ClusterManager::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_clusters

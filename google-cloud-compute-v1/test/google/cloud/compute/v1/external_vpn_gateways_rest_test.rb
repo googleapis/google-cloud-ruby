@@ -72,6 +72,10 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_delete

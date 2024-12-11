@@ -72,6 +72,10 @@ class ::Google::Cloud::ConfigService::V1::Config::Rest::ClientTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_deployments
