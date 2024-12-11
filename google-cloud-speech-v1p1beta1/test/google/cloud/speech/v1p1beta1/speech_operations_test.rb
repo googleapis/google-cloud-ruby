@@ -58,6 +58,10 @@ class ::Google::Cloud::Speech::V1p1beta1::Speech::OperationsTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

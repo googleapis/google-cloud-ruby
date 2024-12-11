@@ -72,6 +72,10 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::Rest::ClientTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_enable_service

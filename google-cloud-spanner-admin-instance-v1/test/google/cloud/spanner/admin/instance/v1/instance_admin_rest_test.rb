@@ -72,6 +72,10 @@ class ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_instance_configs

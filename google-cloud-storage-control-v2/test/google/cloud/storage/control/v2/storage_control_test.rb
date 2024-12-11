@@ -58,6 +58,10 @@ class ::Google::Cloud::Storage::Control::V2::StorageControl::ClientTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_folder

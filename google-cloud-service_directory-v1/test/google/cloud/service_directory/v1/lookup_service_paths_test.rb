@@ -35,6 +35,10 @@ class ::Google::Cloud::ServiceDirectory::V1::LookupService::ClientPathsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_service_path

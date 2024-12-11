@@ -72,6 +72,10 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_databases

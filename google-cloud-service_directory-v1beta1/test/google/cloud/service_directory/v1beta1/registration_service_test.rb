@@ -58,6 +58,10 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_namespace

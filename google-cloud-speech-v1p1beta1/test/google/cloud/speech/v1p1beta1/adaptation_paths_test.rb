@@ -35,6 +35,10 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_custom_class_path
