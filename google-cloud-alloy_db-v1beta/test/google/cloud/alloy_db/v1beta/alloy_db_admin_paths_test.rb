@@ -35,6 +35,10 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_backup_path

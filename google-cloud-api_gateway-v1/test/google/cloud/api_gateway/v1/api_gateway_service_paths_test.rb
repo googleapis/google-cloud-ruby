@@ -35,6 +35,10 @@ class ::Google::Cloud::ApiGateway::V1::ApiGatewayService::ClientPathsTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_api_path

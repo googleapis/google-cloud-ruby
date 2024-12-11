@@ -35,6 +35,10 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_key_path

@@ -35,6 +35,10 @@ class ::Google::Cloud::ApigeeRegistry::V1::Provisioning::ClientPathsTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_instance_path

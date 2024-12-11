@@ -35,6 +35,10 @@ class ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::ClientPathsTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_attachment_path

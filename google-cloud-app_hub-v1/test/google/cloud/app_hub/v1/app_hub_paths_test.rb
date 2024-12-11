@@ -35,6 +35,10 @@ class ::Google::Cloud::AppHub::V1::AppHub::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_application_path

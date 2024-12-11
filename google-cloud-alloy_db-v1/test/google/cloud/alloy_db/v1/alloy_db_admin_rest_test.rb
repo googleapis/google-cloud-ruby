@@ -72,6 +72,10 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_clusters

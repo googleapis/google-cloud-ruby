@@ -72,6 +72,10 @@ class ::Google::Cloud::ApiHub::V1::ApiHubDependencies::Rest::ClientTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_dependency

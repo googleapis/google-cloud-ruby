@@ -72,6 +72,10 @@ class ::Google::Cloud::ApiHub::V1::RuntimeProjectAttachmentService::Rest::Client
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_runtime_project_attachment

@@ -58,6 +58,10 @@ class ::Google::Cloud::ApiKeys::V2::ApiKeys::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_key
