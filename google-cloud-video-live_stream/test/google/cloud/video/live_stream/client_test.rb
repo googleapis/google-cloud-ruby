@@ -35,6 +35,10 @@ class Google::Cloud::Video::LiveStream::ClientConstructionMinitest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_livestream_service_grpc

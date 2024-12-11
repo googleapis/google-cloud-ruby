@@ -35,6 +35,10 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientPathsTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_asset_path

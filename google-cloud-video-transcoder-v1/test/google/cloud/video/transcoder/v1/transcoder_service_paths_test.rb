@@ -35,6 +35,10 @@ class ::Google::Cloud::Video::Transcoder::V1::TranscoderService::ClientPathsTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_job_path

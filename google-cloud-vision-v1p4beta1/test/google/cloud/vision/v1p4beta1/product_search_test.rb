@@ -58,6 +58,10 @@ class ::Google::Cloud::Vision::V1p4beta1::ProductSearch::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_product_set

@@ -58,6 +58,10 @@ class ::Google::Cloud::Translate::V3::TranslationService::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_translate_text
