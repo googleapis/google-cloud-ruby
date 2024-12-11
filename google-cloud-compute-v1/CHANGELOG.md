@@ -1,5 +1,12 @@
 # Release History
 
+### 2.15.0 (2024-12-11)
+
+#### Features
+
+* Provided opt-in debug logging 
+* Updated Compute Engine API to revision 20241201 
+
 ### 2.14.0 (2024-12-04)
 
 #### Features
