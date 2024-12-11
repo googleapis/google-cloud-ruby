@@ -58,6 +58,10 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_available_versions

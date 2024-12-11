@@ -58,6 +58,10 @@ class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManagerSerialization::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_import_taxonomies

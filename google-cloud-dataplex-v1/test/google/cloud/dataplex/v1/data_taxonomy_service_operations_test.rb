@@ -58,6 +58,10 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::OperationsTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

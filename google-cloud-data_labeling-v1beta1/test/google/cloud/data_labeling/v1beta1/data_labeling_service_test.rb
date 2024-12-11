@@ -58,6 +58,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_dataset

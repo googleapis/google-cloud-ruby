@@ -35,6 +35,10 @@ class ::Google::Cloud::DataFusion::V1::DataFusion::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_crypto_key_path

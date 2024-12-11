@@ -35,6 +35,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::ClientPathsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_annotated_dataset_path

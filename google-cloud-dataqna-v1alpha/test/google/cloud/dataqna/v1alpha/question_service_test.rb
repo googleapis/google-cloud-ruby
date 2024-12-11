@@ -58,6 +58,10 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_question

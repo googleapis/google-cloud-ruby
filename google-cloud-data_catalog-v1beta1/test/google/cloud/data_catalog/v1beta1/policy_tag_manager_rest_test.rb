@@ -72,6 +72,10 @@ class ::Google::Cloud::DataCatalog::V1beta1::PolicyTagManager::Rest::ClientTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_taxonomy

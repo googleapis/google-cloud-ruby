@@ -58,6 +58,10 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::OperationsTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

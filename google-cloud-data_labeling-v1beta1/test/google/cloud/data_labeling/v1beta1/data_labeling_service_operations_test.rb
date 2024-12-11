@@ -58,6 +58,10 @@ class ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::OperationsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

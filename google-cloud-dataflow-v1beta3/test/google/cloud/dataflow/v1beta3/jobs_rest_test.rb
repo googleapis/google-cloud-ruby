@@ -72,6 +72,10 @@ class ::Google::Cloud::Dataflow::V1beta3::Jobs::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_job
