@@ -58,6 +58,10 @@ class ::Google::Cloud::ServiceDirectory::V1::LookupService::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_resolve_service

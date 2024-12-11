@@ -58,6 +58,10 @@ class ::Google::Cloud::ServiceUsage::V1::ServiceUsage::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_enable_service

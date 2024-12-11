@@ -72,6 +72,10 @@ class ::Google::Cloud::ServiceHealth::V1::ServiceHealth::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_events

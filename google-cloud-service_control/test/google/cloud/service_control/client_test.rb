@@ -35,6 +35,10 @@ class Google::Cloud::ServiceControl::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_quota_controller_grpc

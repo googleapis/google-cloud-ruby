@@ -35,6 +35,10 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_backup_path

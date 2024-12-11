@@ -58,6 +58,10 @@ class ::Google::Cloud::Speech::V2::Speech::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_recognizer

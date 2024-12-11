@@ -72,6 +72,10 @@ class ::Google::Cloud::Speech::V1p1beta1::Adaptation::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_phrase_set

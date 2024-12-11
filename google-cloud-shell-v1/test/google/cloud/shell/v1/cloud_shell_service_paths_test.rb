@@ -35,6 +35,10 @@ class ::Google::Cloud::Shell::V1::CloudShellService::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_environment_path

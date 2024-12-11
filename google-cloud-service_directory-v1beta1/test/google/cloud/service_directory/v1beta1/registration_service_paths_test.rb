@@ -35,6 +35,10 @@ class ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::ClientPat
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_endpoint_path
