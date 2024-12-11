@@ -58,6 +58,10 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_table

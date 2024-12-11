@@ -35,6 +35,10 @@ class ::Google::Apps::Meet::V2::SpacesService::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_conference_record_path

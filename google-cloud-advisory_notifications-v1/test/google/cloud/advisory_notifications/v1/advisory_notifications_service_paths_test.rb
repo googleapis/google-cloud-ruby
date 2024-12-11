@@ -35,6 +35,10 @@ class ::Google::Cloud::AdvisoryNotifications::V1::AdvisoryNotificationsService::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

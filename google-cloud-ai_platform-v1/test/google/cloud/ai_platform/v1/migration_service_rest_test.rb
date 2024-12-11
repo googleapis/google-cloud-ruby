@@ -72,6 +72,10 @@ class ::Google::Cloud::AIPlatform::V1::MigrationService::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_search_migratable_resources

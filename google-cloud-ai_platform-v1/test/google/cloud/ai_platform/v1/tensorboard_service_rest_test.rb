@@ -72,6 +72,10 @@ class ::Google::Cloud::AIPlatform::V1::TensorboardService::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_tensorboard

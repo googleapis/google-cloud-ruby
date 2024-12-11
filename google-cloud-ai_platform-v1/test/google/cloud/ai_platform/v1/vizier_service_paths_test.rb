@@ -35,6 +35,10 @@ class ::Google::Cloud::AIPlatform::V1::VizierService::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_custom_job_path

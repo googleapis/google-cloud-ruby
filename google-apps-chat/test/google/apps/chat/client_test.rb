@@ -35,6 +35,10 @@ class Google::Apps::Chat::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_chat_service_grpc

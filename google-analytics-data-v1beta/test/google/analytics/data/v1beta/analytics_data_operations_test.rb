@@ -58,6 +58,10 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::OperationsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

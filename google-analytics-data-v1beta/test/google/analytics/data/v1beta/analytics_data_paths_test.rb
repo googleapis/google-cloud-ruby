@@ -35,6 +35,10 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientPathsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_audience_export_path

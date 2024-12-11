@@ -35,6 +35,10 @@ class ::Google::Cloud::AIPlatform::V1::JobService::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_batch_prediction_job_path

@@ -72,6 +72,10 @@ class ::Google::Ads::AdManager::V1::PlacementService::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_placement

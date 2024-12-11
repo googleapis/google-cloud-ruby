@@ -35,6 +35,10 @@ class Google::Apps::Events::Subscriptions::ClientConstructionMinitest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_subscriptions_service_grpc

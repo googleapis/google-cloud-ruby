@@ -35,6 +35,10 @@ class ::Google::Apps::Chat::V1::ChatService::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_attachment_path

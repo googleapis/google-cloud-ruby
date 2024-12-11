@@ -72,6 +72,10 @@ class ::Google::Apps::Meet::V2beta::SpacesService::Rest::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_space

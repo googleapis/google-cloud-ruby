@@ -58,6 +58,10 @@ class ::Google::Cloud::AIPlatform::V1::EvaluationService::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_evaluate_instances

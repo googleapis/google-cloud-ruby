@@ -72,6 +72,10 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::Rest::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_deployment_resource_pool

@@ -35,6 +35,10 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_publisher_model_path
