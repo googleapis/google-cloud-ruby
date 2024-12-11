@@ -35,6 +35,10 @@ class ::Google::Cloud::EdgeNetwork::V1::EdgeNetwork::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_interconnect_path

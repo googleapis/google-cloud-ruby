@@ -35,6 +35,10 @@ class ::Google::Cloud::Functions::V2::FunctionService::ClientPathsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_build_path

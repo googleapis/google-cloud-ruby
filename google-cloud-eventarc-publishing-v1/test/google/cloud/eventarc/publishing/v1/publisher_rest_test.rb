@@ -72,6 +72,10 @@ class ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Rest::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_publish_channel_connection_events

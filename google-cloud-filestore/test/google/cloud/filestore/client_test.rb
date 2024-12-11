@@ -35,6 +35,10 @@ class Google::Cloud::Filestore::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_cloud_filestore_manager_grpc

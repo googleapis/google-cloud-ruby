@@ -72,6 +72,10 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::ClientT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_group_stats
