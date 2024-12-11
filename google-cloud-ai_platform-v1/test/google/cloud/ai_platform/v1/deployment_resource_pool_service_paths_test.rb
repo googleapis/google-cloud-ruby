@@ -35,6 +35,10 @@ class ::Google::Cloud::AIPlatform::V1::DeploymentResourcePoolService::ClientPath
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_deployment_resource_pool_path

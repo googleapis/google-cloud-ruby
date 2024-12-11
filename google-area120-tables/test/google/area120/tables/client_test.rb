@@ -35,6 +35,10 @@ class Google::Area120::Tables::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_tables_service_grpc

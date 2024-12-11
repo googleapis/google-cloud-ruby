@@ -72,6 +72,10 @@ class ::Google::Cloud::AIPlatform::V1::ScheduleService::Rest::ClientTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_schedule

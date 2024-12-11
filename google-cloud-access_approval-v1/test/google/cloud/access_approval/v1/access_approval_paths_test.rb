@@ -35,6 +35,10 @@ class ::Google::Cloud::AccessApproval::V1::AccessApproval::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_access_approval_settings_path

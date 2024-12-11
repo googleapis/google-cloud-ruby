@@ -72,6 +72,10 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::Rest::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_feature_online_store

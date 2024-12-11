@@ -35,6 +35,10 @@ class Google::Cloud::AccessApproval::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_access_approval_grpc

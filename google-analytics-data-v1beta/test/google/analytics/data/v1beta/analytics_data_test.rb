@@ -58,6 +58,10 @@ class ::Google::Analytics::Data::V1beta::AnalyticsData::ClientTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_run_report

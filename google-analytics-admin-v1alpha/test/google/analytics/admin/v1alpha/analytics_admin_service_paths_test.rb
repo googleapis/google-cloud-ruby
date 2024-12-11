@@ -35,6 +35,10 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_access_binding_path

@@ -35,6 +35,10 @@ class Google::Cloud::AdvisoryNotifications::ClientConstructionMinitest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_advisory_notifications_service_grpc

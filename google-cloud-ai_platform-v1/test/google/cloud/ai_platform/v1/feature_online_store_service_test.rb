@@ -58,6 +58,10 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreService::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_fetch_feature_values

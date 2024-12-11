@@ -72,6 +72,10 @@ class ::Google::Cloud::AIPlatform::V1::ModelGardenService::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_publisher_model

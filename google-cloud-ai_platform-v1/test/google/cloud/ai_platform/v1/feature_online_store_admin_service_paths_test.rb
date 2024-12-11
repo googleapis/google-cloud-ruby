@@ -35,6 +35,10 @@ class ::Google::Cloud::AIPlatform::V1::FeatureOnlineStoreAdminService::ClientPat
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_feature_online_store_path

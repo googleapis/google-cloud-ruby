@@ -35,6 +35,10 @@ class ::Google::Cloud::AIPlatform::V1::NotebookService::ClientPathsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

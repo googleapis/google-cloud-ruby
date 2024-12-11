@@ -72,6 +72,10 @@ class ::Google::Ads::AdManager::V1::CompanyService::Rest::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_company

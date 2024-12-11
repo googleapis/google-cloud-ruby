@@ -58,6 +58,10 @@ class ::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::ClientTes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_subscription

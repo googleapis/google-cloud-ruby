@@ -72,6 +72,10 @@ class ::Google::Ads::AdManager::V1::CustomFieldService::Rest::ClientTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_custom_field

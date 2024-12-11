@@ -72,6 +72,10 @@ class ::Google::Ads::AdManager::V1::OrderService::Rest::ClientTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_order

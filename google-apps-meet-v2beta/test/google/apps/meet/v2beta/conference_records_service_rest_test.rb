@@ -72,6 +72,10 @@ class ::Google::Apps::Meet::V2beta::ConferenceRecordsService::Rest::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_conference_record

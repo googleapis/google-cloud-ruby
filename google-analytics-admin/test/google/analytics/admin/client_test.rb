@@ -35,6 +35,10 @@ class Google::Analytics::Admin::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_analytics_admin_service_grpc

@@ -35,6 +35,10 @@ class ::Google::Area120::Tables::V1alpha1::TablesService::ClientPathsTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_row_path

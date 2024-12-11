@@ -72,6 +72,10 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_account
