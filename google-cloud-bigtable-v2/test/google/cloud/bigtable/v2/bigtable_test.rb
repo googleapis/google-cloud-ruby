@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_read_rows

@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientPathsTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_app_profile_path

@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Operatio
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

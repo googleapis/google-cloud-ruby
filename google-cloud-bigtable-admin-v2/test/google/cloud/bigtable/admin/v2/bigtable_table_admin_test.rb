@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_table

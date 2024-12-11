@@ -34,6 +34,10 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_big_query_read_grpc

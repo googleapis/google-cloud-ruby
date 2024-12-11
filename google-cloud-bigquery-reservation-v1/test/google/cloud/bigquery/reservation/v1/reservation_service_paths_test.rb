@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientPath
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_assignment_path

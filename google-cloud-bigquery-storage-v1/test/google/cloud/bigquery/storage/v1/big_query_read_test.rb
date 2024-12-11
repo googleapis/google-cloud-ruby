@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_read_session

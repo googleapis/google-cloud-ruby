@@ -35,6 +35,10 @@ class Google::Cloud::Bigquery::Reservation::ClientConstructionMinitest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_reservation_service_grpc

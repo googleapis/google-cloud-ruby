@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientPathsTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_authorized_view_path

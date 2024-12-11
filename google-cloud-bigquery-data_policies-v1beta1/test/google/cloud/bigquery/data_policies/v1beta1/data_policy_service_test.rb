@@ -58,6 +58,10 @@ class ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_data_policy

@@ -72,6 +72,10 @@ class ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_connection

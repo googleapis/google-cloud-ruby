@@ -35,6 +35,10 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientPa
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_data_source_path
