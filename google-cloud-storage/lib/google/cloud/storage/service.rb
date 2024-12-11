@@ -543,7 +543,6 @@ module Google
                          if_metageneration_match: nil,
                          user_project: nil,
                          options: {}
-
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
@@ -638,7 +637,6 @@ module Google
                         if_metageneration_not_match: nil,
                         user_project: nil,
                         options: {}
-
           if options[:retries].nil?
             is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
             options = is_idempotent ? {} : { retries: 0 }
@@ -670,7 +668,6 @@ module Google
                          user_project: nil,
                          fields: nil,
                          options: {}
-
           if options[:retries].nil?
             is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
             options = is_idempotent ? {} : { retries: 0 }
@@ -738,7 +735,6 @@ module Google
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
                             user_project: nil, options: {}
-
           if options[:retries].nil?
             options = options.merge({ retries: 0 })
           end

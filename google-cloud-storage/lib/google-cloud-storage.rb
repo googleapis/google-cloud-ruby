@@ -162,7 +162,6 @@ module Google
 end
 
 # Set the default storage configuration
-# rubocop:disable Metrics/BlockLength
 Google::Cloud.configure.add_config! :storage do |config|
   default_project = Google::Cloud::Config.deferred do
     ENV["STORAGE_PROJECT"]
@@ -195,4 +194,3 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :endpoint, nil, match: String, allow_nil: true
   config.add_field! :universe_domain, nil, match: String, allow_nil: true
 end
-# rubocop:enable Metrics/BlockLength

@@ -24,3 +24,35 @@ else
            path: "toys/gapic",
            update: true
 end
+
+tool "conformance" do
+  tool "gen-protos" do
+    include :exec, e: true
+    include :gems
+    include :git_cache
+
+    def run
+      setup
+      generate_conformance
+    end
+
+    def setup
+      gem "grpc-tools", "~> 1.65"
+      @googleapis_dir = git_cache.get "https://github.com/googleapis/googleapis.git", update: true
+      Dir.chdir context_directory
+    end
+
+    def generate_conformance
+      Dir.chdir "conformance/v1/proto" do
+        cmd = [
+          "grpc_tools_ruby_protoc",
+          "--ruby_out", ".",
+          "-I", ".",
+          "-I", @googleapis_dir,
+          "google/cloud/conformance/storage/v1/tests.proto"
+        ]
+        exec cmd
+      end
+    end
+  end
+end
