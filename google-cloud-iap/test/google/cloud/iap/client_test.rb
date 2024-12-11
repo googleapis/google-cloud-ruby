@@ -35,6 +35,10 @@ class Google::Cloud::Iap::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_identity_aware_proxy_admin_service_grpc

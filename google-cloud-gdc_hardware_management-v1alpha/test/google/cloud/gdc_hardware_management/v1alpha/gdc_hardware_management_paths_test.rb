@@ -35,6 +35,10 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Cl
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_change_log_entry_path

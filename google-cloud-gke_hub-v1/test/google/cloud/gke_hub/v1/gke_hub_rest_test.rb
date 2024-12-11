@@ -72,6 +72,10 @@ class ::Google::Cloud::GkeHub::V1::GkeHub::Rest::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_memberships

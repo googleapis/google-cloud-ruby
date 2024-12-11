@@ -35,6 +35,10 @@ class Google::Cloud::Kms::Inventory::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_key_dashboard_service_grpc

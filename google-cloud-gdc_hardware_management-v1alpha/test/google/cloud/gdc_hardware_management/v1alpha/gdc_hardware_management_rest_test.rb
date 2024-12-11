@@ -72,6 +72,10 @@ class ::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Re
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_orders

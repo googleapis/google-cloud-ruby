@@ -35,6 +35,10 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::ClientPathsTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_backup_path

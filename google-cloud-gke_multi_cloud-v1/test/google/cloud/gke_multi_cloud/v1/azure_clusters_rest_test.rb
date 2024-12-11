@@ -72,6 +72,10 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_azure_client

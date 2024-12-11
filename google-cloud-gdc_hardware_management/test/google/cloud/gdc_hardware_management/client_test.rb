@@ -35,6 +35,10 @@ class Google::Cloud::GDCHardwareManagement::ClientConstructionMinitest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_gdc_hardware_management_grpc

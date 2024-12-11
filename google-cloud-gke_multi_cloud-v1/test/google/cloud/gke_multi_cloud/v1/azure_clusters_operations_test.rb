@@ -58,6 +58,10 @@ class ::Google::Cloud::GkeMultiCloud::V1::AzureClusters::OperationsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

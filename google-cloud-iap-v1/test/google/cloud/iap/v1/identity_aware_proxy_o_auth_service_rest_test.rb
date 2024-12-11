@@ -72,6 +72,10 @@ class ::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Rest::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_brands

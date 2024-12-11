@@ -58,6 +58,10 @@ class ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_authorization

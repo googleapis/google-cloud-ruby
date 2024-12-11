@@ -72,6 +72,10 @@ class ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::ClientTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_backup_plan

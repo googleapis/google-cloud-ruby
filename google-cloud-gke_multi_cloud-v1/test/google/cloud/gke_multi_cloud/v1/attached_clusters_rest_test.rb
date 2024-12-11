@@ -72,6 +72,10 @@ class ::Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Rest::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_attached_cluster

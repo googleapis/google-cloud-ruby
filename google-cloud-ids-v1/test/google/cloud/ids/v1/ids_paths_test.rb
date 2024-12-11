@@ -35,6 +35,10 @@ class ::Google::Cloud::IDS::V1::IDS::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_endpoint_path
