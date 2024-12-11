@@ -35,6 +35,10 @@ class ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::ClientPat
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_finding_path

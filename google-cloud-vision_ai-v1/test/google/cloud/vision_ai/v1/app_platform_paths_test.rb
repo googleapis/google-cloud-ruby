@@ -35,6 +35,10 @@ class ::Google::Cloud::VisionAI::V1::AppPlatform::ClientPathsTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_application_path

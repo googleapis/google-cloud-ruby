@@ -35,6 +35,10 @@ class ::Google::Cloud::VpcAccess::V1::VpcAccessService::ClientPathsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_connector_path

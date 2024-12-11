@@ -35,6 +35,10 @@ class Google::Cloud::WebRisk::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_web_risk_service_grpc

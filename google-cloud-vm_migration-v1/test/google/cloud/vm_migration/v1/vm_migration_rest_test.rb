@@ -72,6 +72,10 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_sources

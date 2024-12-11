@@ -35,6 +35,10 @@ class ::Google::Cloud::VisionAI::V1::StreamsService::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_channel_path

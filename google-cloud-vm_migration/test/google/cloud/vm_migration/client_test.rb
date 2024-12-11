@@ -35,6 +35,10 @@ class Google::Cloud::VMMigration::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_vm_migration_grpc

@@ -35,6 +35,10 @@ class Google::Cloud::WebSecurityScanner::ClientConstructionMinitest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_web_security_scanner_grpc

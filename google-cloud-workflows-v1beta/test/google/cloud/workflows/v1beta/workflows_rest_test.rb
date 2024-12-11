@@ -72,6 +72,10 @@ class ::Google::Cloud::Workflows::V1beta::Workflows::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_workflows

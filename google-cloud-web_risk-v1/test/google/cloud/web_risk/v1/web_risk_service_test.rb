@@ -58,6 +58,10 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_compute_threat_list_diff
