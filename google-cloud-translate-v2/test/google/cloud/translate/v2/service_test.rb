@@ -20,6 +20,10 @@ class FakeClient
     false
   end
 
+  def access_token
+    :token
+  end
+
   def generate_authenticated_request request:
   end
 end

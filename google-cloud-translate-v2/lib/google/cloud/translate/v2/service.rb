@@ -140,7 +140,7 @@ module Google
             client = credentials.client
             return if client.nil?
 
-            client.fetch_access_token! if client.expires_within? 30
+            client.fetch_access_token! if client.access_token.nil? || client.expires_within?(30)
             client.generate_authenticated_request request: request
             request
           end
