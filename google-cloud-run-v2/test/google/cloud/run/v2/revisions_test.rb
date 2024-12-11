@@ -58,6 +58,10 @@ class ::Google::Cloud::Run::V2::Revisions::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_revision

@@ -35,6 +35,10 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_job_path

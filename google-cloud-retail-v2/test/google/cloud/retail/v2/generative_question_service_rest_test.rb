@@ -72,6 +72,10 @@ class ::Google::Cloud::Retail::V2::GenerativeQuestionService::Rest::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_update_generative_questions_feature_config

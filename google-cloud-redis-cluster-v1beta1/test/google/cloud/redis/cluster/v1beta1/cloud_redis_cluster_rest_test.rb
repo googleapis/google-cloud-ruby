@@ -72,6 +72,10 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Rest::ClientT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_clusters

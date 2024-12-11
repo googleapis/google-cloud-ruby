@@ -72,6 +72,10 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::ClientTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_instances

@@ -58,6 +58,10 @@ class ::Google::Cloud::Redis::V1::CloudRedis::OperationsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

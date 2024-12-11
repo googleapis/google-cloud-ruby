@@ -35,6 +35,10 @@ class ::Google::Cloud::Retail::V2::SearchService::ClientPathsTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_branch_path

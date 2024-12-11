@@ -35,6 +35,10 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientPathsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_tag_value_path

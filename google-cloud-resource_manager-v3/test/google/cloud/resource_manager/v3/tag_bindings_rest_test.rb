@@ -72,6 +72,10 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_tag_bindings

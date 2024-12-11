@@ -58,6 +58,10 @@ class ::Google::Cloud::Scheduler::V1beta1::CloudScheduler::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_jobs

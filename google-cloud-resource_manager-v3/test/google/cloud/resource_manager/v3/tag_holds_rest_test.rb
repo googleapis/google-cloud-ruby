@@ -72,6 +72,10 @@ class ::Google::Cloud::ResourceManager::V3::TagHolds::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_tag_hold

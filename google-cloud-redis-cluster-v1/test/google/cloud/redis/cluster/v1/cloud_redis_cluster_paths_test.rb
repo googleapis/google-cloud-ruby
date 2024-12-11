@@ -35,6 +35,10 @@ class ::Google::Cloud::Redis::Cluster::V1::CloudRedisCluster::ClientPathsTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_certificate_authority_path

@@ -35,6 +35,10 @@ class ::Google::Cloud::Redis::V1beta1::CloudRedis::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_instance_path

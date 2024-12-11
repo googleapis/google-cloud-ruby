@@ -58,6 +58,10 @@ class ::Google::Cloud::ResourceManager::V3::TagValues::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_tag_values
