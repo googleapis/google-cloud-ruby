@@ -1,0 +1,615 @@
+{
+  "client_library": {
+    "name": "google-cloud-bigquery-data_exchange-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.dataexchange.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_ListDataExchanges_sync",
+      "title": "Snippet for the list_data_exchanges call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_data_exchanges.",
+      "file": "analytics_hub_service/list_data_exchanges.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_data_exchanges",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_data_exchanges",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ListDataExchanges",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_ListOrgDataExchanges_sync",
+      "title": "Snippet for the list_org_data_exchanges call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_org_data_exchanges.",
+      "file": "analytics_hub_service/list_org_data_exchanges.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_org_data_exchanges",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_org_data_exchanges",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ListOrgDataExchanges",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_GetDataExchange_sync",
+      "title": "Snippet for the get_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_data_exchange.",
+      "file": "analytics_hub_service/get_data_exchange.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_data_exchange",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_data_exchange",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::GetDataExchangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "GetDataExchange",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_CreateDataExchange_sync",
+      "title": "Snippet for the create_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_data_exchange.",
+      "file": "analytics_hub_service/create_data_exchange.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_data_exchange",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_data_exchange",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "CreateDataExchange",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_UpdateDataExchange_sync",
+      "title": "Snippet for the update_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#update_data_exchange.",
+      "file": "analytics_hub_service/update_data_exchange.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_data_exchange",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#update_data_exchange",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateDataExchangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateDataExchange",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_DeleteDataExchange_sync",
+      "title": "Snippet for the delete_data_exchange call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#delete_data_exchange.",
+      "file": "analytics_hub_service/delete_data_exchange.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_data_exchange",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#delete_data_exchange",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteDataExchangeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteDataExchange",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_ListListings_sync",
+      "title": "Snippet for the list_listings call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_listings.",
+      "file": "analytics_hub_service/list_listings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_listings",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#list_listings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "ListListings",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_GetListing_sync",
+      "title": "Snippet for the get_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_listing.",
+      "file": "analytics_hub_service/get_listing.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_listing",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_listing",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "GetListing",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_CreateListing_sync",
+      "title": "Snippet for the create_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_listing.",
+      "file": "analytics_hub_service/create_listing.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_listing",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#create_listing",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateListingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "CreateListing",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_UpdateListing_sync",
+      "title": "Snippet for the update_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#update_listing.",
+      "file": "analytics_hub_service/update_listing.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_listing",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#update_listing",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateListingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "UpdateListing",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_DeleteListing_sync",
+      "title": "Snippet for the delete_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#delete_listing.",
+      "file": "analytics_hub_service/delete_listing.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_listing",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#delete_listing",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteListingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "DeleteListing",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_SubscribeListing_sync",
+      "title": "Snippet for the subscribe_listing call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#subscribe_listing.",
+      "file": "analytics_hub_service/subscribe_listing.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "subscribe_listing",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#subscribe_listing",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "SubscribeListing",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_iam_policy.",
+      "file": "analytics_hub_service/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#set_iam_policy.",
+      "file": "analytics_hub_service/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticshub_v1beta1_generated_AnalyticsHubService_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the AnalyticsHubService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#test_iam_permissions.",
+      "file": "analytics_hub_service/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "AnalyticsHubService::Client",
+          "full_name": "::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.TestIamPermissions",
+          "service": {
+            "short_name": "AnalyticsHubService",
+            "full_name": "google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
