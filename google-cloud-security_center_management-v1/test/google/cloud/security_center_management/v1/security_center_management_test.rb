@@ -58,6 +58,10 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_effective_security_health_analytics_custom_modules

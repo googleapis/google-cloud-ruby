@@ -34,6 +34,10 @@ class Google::Cloud::SecretManager::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_secret_manager_service_grpc

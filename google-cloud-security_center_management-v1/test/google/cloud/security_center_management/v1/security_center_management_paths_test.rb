@@ -35,6 +35,10 @@ class ::Google::Cloud::SecurityCenterManagement::V1::SecurityCenterManagement::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_effective_event_threat_detection_custom_module_path

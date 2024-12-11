@@ -72,6 +72,10 @@ class ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Rest::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_source

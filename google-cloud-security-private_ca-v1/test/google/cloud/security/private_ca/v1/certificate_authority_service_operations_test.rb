@@ -58,6 +58,10 @@ class ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Ope
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

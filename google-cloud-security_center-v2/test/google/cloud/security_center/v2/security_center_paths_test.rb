@@ -35,6 +35,10 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_big_query_export_path

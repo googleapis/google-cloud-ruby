@@ -58,6 +58,10 @@ class ::Google::Cloud::SecurityCenter::V2::SecurityCenter::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_batch_create_resource_value_configs

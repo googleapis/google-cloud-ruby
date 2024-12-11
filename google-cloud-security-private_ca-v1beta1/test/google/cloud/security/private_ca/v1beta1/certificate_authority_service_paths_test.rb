@@ -35,6 +35,10 @@ class ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_certificate_path

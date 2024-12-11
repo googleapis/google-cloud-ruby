@@ -72,6 +72,10 @@ class ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_check

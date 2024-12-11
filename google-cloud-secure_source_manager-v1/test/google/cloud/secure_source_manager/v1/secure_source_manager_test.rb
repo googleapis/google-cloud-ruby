@@ -58,6 +58,10 @@ class ::Google::Cloud::SecureSourceManager::V1::SecureSourceManager::ClientTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_instances

@@ -72,6 +72,10 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_bulk_mute_findings
