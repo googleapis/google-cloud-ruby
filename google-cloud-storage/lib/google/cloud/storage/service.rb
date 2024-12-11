@@ -97,11 +97,12 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, options: {}
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil, options: {}
           execute do
             service.list_buckets \
               @project, prefix: prefix, page_token: token, max_results: max,
-                        user_project: user_project(user_project), options: options
+                        user_project: user_project(user_project),
+                        soft_deleted: soft_deleted, options: options
           end
         end
 
@@ -663,20 +664,22 @@ module Google
         def restore_bucket bucket_name,
                            generation,
                            timeout: nil,
+                           soft_deleted: nil,
                            if_generation_match: nil,
                            if_generation_not_match: nil,
                            projection: nil,
                            user_project: nil,
-                           options: {soft_deleted: nil}
-            if options[:retries].nil?
-              is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
-              options = is_idempotent ? {} : { retries: 0 }
-            end
+                           options: {}
+          if options[:retries].nil?
+            is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
 
-            execute do
-              service.restore_bucket bucket_name, generation,
-                                     options: options
-            end
+          execute do
+            service.restore_bucket bucket_name, generation,
+                                   soft_deleted: soft_deleted,
+                                   options: options
+          end
         end
 
         ##
