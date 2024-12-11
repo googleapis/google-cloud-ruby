@@ -72,6 +72,10 @@ class ::Google::Cloud::ResourceManager::V3::Organizations::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_organization

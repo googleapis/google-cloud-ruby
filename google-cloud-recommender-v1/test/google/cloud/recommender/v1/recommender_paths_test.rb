@@ -35,6 +35,10 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_insight_path

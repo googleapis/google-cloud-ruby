@@ -35,6 +35,10 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_catalog_service_grpc

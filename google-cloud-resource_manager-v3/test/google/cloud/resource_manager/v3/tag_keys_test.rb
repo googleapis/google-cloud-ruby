@@ -58,6 +58,10 @@ class ::Google::Cloud::ResourceManager::V3::TagKeys::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_tag_keys

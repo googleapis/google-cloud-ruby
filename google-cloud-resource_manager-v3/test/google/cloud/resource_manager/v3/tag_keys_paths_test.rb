@@ -35,6 +35,10 @@ class ::Google::Cloud::ResourceManager::V3::TagKeys::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_tag_key_path

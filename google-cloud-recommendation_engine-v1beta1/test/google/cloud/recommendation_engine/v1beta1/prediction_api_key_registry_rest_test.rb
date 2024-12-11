@@ -72,6 +72,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_prediction_api_key_registration

@@ -58,6 +58,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::UserEventService::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_write_user_event

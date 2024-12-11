@@ -35,6 +35,10 @@ class ::Google::Cloud::ResourceManager::V3::Folders::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_folder_path

@@ -58,6 +58,10 @@ class ::Google::Cloud::Retail::V2::CompletionService::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_complete_query

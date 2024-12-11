@@ -72,6 +72,10 @@ class ::Google::Cloud::Retail::V2::ServingConfigService::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_serving_config

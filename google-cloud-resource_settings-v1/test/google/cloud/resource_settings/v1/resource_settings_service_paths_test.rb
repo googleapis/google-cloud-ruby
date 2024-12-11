@@ -35,6 +35,10 @@ class ::Google::Cloud::ResourceSettings::V1::ResourceSettingsService::ClientPath
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_setting_path

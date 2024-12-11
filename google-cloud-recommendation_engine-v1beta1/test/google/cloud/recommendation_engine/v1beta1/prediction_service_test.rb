@@ -58,6 +58,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::ClientT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_predict

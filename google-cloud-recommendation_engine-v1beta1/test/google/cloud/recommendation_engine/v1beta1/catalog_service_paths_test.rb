@@ -35,6 +35,10 @@ class ::Google::Cloud::RecommendationEngine::V1beta1::CatalogService::ClientPath
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_catalog_path

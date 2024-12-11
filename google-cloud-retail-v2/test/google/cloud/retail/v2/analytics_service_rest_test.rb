@@ -72,6 +72,10 @@ class ::Google::Cloud::Retail::V2::AnalyticsService::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_export_analytics_metrics

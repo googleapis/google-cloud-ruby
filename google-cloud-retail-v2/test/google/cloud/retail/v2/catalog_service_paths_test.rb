@@ -35,6 +35,10 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_attributes_config_path

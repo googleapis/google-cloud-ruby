@@ -58,6 +58,10 @@ class ::Google::Cloud::ResourceManager::V3::TagBindings::OperationsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations
