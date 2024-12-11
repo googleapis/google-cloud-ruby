@@ -34,6 +34,10 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_accelerator_types_rest
@@ -384,6 +388,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client, client
+    end
+  end
+
+  def test_network_profiles_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::Compute.network_profiles do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::NetworkProfiles::Rest::Client, client
     end
   end
 

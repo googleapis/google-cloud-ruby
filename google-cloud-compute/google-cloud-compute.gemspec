@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.7"
 
-  gem.add_dependency "google-cloud-compute-v1", "~> 2.11"
+  gem.add_dependency "google-cloud-compute-v1", "~> 2.15"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end
