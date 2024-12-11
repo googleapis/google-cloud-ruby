@@ -35,6 +35,10 @@ class ::Google::Cloud::PubSub::V1::SchemaService::ClientPathsTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path

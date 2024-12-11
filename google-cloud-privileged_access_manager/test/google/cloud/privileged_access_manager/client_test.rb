@@ -35,6 +35,10 @@ class Google::Cloud::PrivilegedAccessManager::ClientConstructionMinitest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_privileged_access_manager_grpc

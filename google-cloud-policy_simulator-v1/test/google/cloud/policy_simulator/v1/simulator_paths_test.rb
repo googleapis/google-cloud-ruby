@@ -35,6 +35,10 @@ class ::Google::Cloud::PolicySimulator::V1::Simulator::ClientPathsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_replay_path

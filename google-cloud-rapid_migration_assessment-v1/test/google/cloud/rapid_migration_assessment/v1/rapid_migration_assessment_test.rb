@@ -58,6 +58,10 @@ class ::Google::Cloud::RapidMigrationAssessment::V1::RapidMigrationAssessment::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_collector

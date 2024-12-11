@@ -35,6 +35,10 @@ class Google::Cloud::PolicySimulator::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_simulator_grpc

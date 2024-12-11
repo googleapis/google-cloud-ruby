@@ -35,6 +35,10 @@ class Google::Cloud::RapidMigrationAssessment::ClientConstructionMinitest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_rapid_migration_assessment_grpc

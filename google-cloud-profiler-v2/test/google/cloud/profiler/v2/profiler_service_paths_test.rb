@@ -35,6 +35,10 @@ class ::Google::Cloud::Profiler::V2::ProfilerService::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_profile_path

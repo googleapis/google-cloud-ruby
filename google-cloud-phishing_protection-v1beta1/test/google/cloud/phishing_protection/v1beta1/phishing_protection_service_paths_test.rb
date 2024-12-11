@@ -35,6 +35,10 @@ class ::Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path

@@ -35,6 +35,10 @@ class ::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_assessment_path

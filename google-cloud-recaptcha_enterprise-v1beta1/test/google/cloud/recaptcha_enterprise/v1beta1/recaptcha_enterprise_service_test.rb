@@ -58,6 +58,10 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_assessment

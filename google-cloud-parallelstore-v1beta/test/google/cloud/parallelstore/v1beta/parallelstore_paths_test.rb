@@ -35,6 +35,10 @@ class ::Google::Cloud::Parallelstore::V1beta::Parallelstore::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_address_path

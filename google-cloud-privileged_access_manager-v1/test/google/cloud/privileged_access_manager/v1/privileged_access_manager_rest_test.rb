@@ -72,6 +72,10 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Res
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_check_onboarding_status

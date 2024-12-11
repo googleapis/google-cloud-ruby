@@ -35,6 +35,10 @@ class Google::Cloud::PhishingProtection::ClientConstructionMinitest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_phishing_protection_service_grpc

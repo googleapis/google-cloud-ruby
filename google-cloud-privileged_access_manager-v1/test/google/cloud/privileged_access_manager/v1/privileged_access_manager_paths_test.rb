@@ -35,6 +35,10 @@ class ::Google::Cloud::PrivilegedAccessManager::V1::PrivilegedAccessManager::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_entitlement_path
