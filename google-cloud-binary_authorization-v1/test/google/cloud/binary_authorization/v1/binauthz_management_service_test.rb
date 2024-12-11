@@ -58,6 +58,10 @@ class ::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_policy

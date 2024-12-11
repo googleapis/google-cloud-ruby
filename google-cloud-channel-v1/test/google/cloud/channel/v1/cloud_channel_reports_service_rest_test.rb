@@ -72,6 +72,10 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_run_report_job

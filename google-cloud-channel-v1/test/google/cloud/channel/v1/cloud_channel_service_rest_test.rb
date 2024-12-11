@@ -72,6 +72,10 @@ class ::Google::Cloud::Channel::V1::CloudChannelService::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_customers

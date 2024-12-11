@@ -35,6 +35,10 @@ class ::Google::Cloud::Channel::V1::CloudChannelReportsService::ClientPathsTest 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_report_path

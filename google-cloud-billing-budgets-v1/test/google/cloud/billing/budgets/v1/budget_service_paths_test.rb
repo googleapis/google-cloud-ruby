@@ -35,6 +35,10 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::ClientPathsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_billing_account_path

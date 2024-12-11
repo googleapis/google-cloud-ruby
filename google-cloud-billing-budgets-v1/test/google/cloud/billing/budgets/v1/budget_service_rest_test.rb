@@ -72,6 +72,10 @@ class ::Google::Cloud::Billing::Budgets::V1::BudgetService::Rest::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_budget

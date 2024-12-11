@@ -35,6 +35,10 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_attestor_path

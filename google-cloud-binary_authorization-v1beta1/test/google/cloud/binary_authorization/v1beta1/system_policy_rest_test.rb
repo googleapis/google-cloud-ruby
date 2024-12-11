@@ -72,6 +72,10 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Rest::ClientT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_system_policy

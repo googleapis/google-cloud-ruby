@@ -58,6 +58,10 @@ class ::Google::Cloud::CloudDMS::V1::DataMigrationService::OperationsTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

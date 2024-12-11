@@ -35,6 +35,10 @@ class Google::Cloud::Billing::Budgets::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_budget_service_grpc

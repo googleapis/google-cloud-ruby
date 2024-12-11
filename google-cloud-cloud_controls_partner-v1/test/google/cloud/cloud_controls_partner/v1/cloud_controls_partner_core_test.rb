@@ -58,6 +58,10 @@ class ::Google::Cloud::CloudControlsPartner::V1::CloudControlsPartnerCore::Clien
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_workload

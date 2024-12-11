@@ -58,6 +58,10 @@ class ::Google::Cloud::CertificateManager::V1::CertificateManager::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_certificates
