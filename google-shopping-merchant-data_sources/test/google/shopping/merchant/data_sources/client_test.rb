@@ -35,6 +35,10 @@ class Google::Shopping::Merchant::DataSources::ClientConstructionMinitest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_data_sources_service_grpc
