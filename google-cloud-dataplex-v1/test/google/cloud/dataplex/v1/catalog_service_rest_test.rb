@@ -72,6 +72,10 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_entry_type

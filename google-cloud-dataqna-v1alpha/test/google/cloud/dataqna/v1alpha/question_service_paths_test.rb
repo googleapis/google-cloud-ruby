@@ -35,6 +35,10 @@ class ::Google::Cloud::DataQnA::V1alpha::QuestionService::ClientPathsTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

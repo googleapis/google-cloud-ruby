@@ -72,6 +72,10 @@ class ::Google::Cloud::Dataplex::V1::ContentService::Rest::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_content

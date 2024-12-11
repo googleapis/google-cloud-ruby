@@ -35,6 +35,10 @@ class Google::Cloud::Datastore::Admin::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_datastore_admin_grpc

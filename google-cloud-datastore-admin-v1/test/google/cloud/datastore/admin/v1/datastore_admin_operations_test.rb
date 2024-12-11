@@ -58,6 +58,10 @@ class ::Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::OperationsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

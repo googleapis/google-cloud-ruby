@@ -58,6 +58,10 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_data_scan

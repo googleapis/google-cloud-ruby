@@ -72,6 +72,10 @@ class ::Google::Cloud::Datastore::V1::Datastore::Rest::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_lookup

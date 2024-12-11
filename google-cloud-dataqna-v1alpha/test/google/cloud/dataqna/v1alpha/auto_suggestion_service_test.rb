@@ -58,6 +58,10 @@ class ::Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::ClientTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_suggest_queries

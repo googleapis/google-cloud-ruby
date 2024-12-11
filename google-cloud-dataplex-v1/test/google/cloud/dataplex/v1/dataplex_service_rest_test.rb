@@ -72,6 +72,10 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_lake

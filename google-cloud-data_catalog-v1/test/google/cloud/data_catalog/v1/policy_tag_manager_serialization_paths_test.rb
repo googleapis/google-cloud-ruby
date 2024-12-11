@@ -35,6 +35,10 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::ClientPat
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

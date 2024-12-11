@@ -35,6 +35,10 @@ class ::Google::Cloud::Dataplex::V1::CatalogService::ClientPathsTest < Minitest:
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_aspect_type_path

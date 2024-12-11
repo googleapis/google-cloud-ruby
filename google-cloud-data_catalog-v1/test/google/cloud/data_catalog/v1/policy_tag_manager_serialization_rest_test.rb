@@ -72,6 +72,10 @@ class ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Rest::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_replace_taxonomy

@@ -35,6 +35,10 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientPathsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_connection_path

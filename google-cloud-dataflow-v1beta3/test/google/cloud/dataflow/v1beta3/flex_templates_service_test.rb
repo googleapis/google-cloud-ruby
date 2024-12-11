@@ -58,6 +58,10 @@ class ::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::ClientTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_launch_flex_template
