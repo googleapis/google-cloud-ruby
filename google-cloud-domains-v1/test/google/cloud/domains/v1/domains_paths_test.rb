@@ -35,6 +35,10 @@ class ::Google::Cloud::Domains::V1::Domains::ClientPathsTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_location_path

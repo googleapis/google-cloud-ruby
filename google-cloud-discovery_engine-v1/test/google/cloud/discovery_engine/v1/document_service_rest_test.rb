@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DocumentService::Rest::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_document

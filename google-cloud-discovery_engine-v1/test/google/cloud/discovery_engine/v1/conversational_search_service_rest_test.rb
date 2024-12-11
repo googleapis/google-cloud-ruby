@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::ConversationalSearchService::Rest::C
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_converse_conversation

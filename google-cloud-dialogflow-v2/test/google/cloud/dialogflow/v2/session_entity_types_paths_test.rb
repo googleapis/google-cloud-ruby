@@ -35,6 +35,10 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_session_path

@@ -72,6 +72,10 @@ class ::Google::Cloud::Dialogflow::V2::SessionEntityTypes::Rest::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_session_entity_types

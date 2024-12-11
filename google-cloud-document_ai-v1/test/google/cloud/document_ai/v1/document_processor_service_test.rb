@@ -58,6 +58,10 @@ class ::Google::Cloud::DocumentAI::V1::DocumentProcessorService::ClientTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_process_document

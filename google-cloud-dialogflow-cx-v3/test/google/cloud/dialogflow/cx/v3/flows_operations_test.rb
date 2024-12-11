@@ -58,6 +58,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::Flows::OperationsTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

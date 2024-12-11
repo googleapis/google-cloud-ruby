@@ -58,6 +58,10 @@ class ::Google::Cloud::Dialogflow::V2::ConversationDatasets::OperationsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

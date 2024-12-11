@@ -35,6 +35,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::SiteSearchEngineService::ClientPaths
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_site_search_engine_path

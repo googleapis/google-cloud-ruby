@@ -72,6 +72,10 @@ class ::Google::Cloud::Dlp::V2::DlpService::Rest::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_inspect_content

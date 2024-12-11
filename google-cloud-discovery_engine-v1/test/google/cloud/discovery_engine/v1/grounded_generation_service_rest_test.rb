@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::GroundedGenerationService::Rest::Cli
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_generate_grounded_content

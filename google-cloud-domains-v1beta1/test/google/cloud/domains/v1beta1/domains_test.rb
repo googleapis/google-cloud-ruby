@@ -58,6 +58,10 @@ class ::Google::Cloud::Domains::V1beta1::Domains::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_search_domains

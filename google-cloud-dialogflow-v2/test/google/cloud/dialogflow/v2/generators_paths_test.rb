@@ -35,6 +35,10 @@ class ::Google::Cloud::Dialogflow::V2::Generators::ClientPathsTest < Minitest::T
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_generator_path

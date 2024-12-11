@@ -35,6 +35,10 @@ class ::Google::Cloud::Datastream::V1alpha1::Datastream::ClientPathsTest < Minit
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_connection_profile_path

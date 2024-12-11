@@ -35,6 +35,10 @@ class ::Google::Cloud::DiscoveryEngine::V1::DataStoreService::ClientPathsTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_collection_path

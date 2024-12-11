@@ -35,6 +35,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::ClientPathsT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_deidentify_template_path

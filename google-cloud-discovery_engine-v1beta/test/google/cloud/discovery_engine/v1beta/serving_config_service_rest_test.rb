@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ServingConfigService::Rest::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_update_serving_config

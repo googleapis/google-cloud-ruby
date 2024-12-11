@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Rest::ClientT
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_complete_query

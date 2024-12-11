@@ -35,6 +35,10 @@ class ::Google::Cloud::Dialogflow::V2::EncryptionSpecService::ClientPathsTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_encryption_spec_path

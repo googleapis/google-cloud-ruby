@@ -72,6 +72,10 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Clie
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_process_document

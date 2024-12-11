@@ -72,6 +72,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Rest::ClientTe
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_transition_route_groups

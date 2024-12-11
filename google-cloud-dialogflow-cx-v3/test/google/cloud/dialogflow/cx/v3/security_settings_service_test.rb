@@ -58,6 +58,10 @@ class ::Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::ClientTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_security_settings

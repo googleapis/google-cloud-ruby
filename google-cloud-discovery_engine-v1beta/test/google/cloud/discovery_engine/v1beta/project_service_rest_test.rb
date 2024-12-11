@@ -72,6 +72,10 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::ProjectService::Rest::ClientTest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_provision_project
