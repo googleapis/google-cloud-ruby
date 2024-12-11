@@ -52,7 +52,7 @@ module Google
             # Gets details about a [Resource][google.cloud.config.v1.Resource] deployed
             # by Infra Manager.
             rpc :GetResource, ::Google::Cloud::ConfigService::V1::GetResourceRequest, ::Google::Cloud::ConfigService::V1::Resource
-            # Lists [Resource][google.cloud.config.v1.Resource]s in a given revision.
+            # Lists [Resources][google.cloud.config.v1.Resource] in a given revision.
             rpc :ListResources, ::Google::Cloud::ConfigService::V1::ListResourcesRequest, ::Google::Cloud::ConfigService::V1::ListResourcesResponse
             # Exports Terraform state file from a given deployment.
             rpc :ExportDeploymentStatefile, ::Google::Cloud::ConfigService::V1::ExportDeploymentStatefileRequest, ::Google::Cloud::ConfigService::V1::Statefile
