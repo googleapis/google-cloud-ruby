@@ -35,6 +35,10 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::ClientPathsTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_cluster_path

@@ -72,6 +72,10 @@ class ::Google::Cloud::VisionAI::V1::Warehouse::Rest::ClientTest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_asset

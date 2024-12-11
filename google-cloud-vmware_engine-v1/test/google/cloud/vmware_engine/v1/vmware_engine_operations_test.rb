@@ -58,6 +58,10 @@ class ::Google::Cloud::VmwareEngine::V1::VmwareEngine::OperationsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

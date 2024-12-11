@@ -72,6 +72,10 @@ class ::Google::Cloud::VisionAI::V1::LiveVideoAnalytics::Rest::ClientTest < Mini
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_public_operators

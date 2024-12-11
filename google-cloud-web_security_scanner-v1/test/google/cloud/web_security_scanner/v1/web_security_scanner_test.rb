@@ -58,6 +58,10 @@ class ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_scan_config

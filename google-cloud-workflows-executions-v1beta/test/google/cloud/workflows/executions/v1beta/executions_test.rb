@@ -58,6 +58,10 @@ class ::Google::Cloud::Workflows::Executions::V1beta::Executions::ClientTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_executions

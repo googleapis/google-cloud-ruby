@@ -35,6 +35,10 @@ class Google::Cloud::VisionAI::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_live_video_analytics_grpc

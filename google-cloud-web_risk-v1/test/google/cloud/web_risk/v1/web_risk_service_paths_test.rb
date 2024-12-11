@@ -35,6 +35,10 @@ class ::Google::Cloud::WebRisk::V1::WebRiskService::ClientPathsTest < Minitest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path
