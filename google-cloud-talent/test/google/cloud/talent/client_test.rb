@@ -35,6 +35,10 @@ class Google::Cloud::Talent::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_company_service_grpc

@@ -35,6 +35,10 @@ class ::Google::Cloud::Support::V2::CaseAttachmentService::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_case_path

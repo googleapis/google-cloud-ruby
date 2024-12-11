@@ -35,6 +35,10 @@ class Google::Cloud::StorageTransfer::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_storage_transfer_service_grpc

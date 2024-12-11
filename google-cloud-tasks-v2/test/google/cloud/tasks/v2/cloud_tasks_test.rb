@@ -58,6 +58,10 @@ class ::Google::Cloud::Tasks::V2::CloudTasks::ClientTest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_queues

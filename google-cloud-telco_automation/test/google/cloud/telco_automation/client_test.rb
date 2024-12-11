@@ -35,6 +35,10 @@ class Google::Cloud::TelcoAutomation::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_telco_automation_grpc

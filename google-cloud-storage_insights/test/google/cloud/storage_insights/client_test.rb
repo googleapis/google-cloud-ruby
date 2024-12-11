@@ -35,6 +35,10 @@ class Google::Cloud::StorageInsights::ClientConstructionMinitest < Minitest::Tes
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_storage_insights_grpc

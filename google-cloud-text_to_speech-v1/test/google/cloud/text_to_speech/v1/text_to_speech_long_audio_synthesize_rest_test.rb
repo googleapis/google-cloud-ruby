@@ -72,6 +72,10 @@ class ::Google::Cloud::TextToSpeech::V1::TextToSpeechLongAudioSynthesize::Rest::
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_synthesize_long_audio

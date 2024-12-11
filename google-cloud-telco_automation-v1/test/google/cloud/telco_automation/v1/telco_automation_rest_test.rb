@@ -72,6 +72,10 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::Rest::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_orchestration_clusters

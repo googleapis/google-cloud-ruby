@@ -58,6 +58,10 @@ class ::Google::Cloud::TelcoAutomation::V1::TelcoAutomation::OperationsTest < Mi
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations
