@@ -58,6 +58,10 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::ClientTest < 
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_group

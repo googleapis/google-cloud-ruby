@@ -35,6 +35,10 @@ class Google::Cloud::Firestore::Admin::ClientConstructionMinitest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_firestore_admin_grpc

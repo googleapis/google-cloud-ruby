@@ -35,6 +35,10 @@ class ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::ClientPa
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_contact_path

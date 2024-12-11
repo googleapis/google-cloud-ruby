@@ -58,6 +58,10 @@ class ::Google::Cloud::Functions::V2::FunctionService::OperationsTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

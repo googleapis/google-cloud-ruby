@@ -72,6 +72,10 @@ class ::Google::Cloud::Firestore::V1::Firestore::Rest::ClientTest < Minitest::Te
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_get_document

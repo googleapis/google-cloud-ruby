@@ -35,6 +35,10 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientPathsTest < M
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_backup_path

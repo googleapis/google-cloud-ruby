@@ -35,6 +35,10 @@ class Google::Cloud::EdgeNetwork::ClientConstructionMinitest < Minitest::Test
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_edge_network_grpc

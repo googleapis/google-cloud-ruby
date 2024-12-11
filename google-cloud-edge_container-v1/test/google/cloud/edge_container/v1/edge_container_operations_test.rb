@@ -58,6 +58,10 @@ class ::Google::Cloud::EdgeContainer::V1::EdgeContainer::OperationsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

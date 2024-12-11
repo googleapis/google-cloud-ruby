@@ -35,6 +35,10 @@ class ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::ClientPaths
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_project_path
