@@ -58,6 +58,10 @@ class ::Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::OperationsTest <
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

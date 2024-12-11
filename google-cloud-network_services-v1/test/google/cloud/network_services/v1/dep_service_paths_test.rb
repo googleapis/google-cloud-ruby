@@ -35,6 +35,10 @@ class ::Google::Cloud::NetworkServices::V1::DepService::ClientPathsTest < Minite
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_lb_route_extension_path

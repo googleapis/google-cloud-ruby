@@ -35,6 +35,10 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::ClientPathsTest < Min
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_instance_path

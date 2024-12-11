@@ -35,6 +35,10 @@ class Google::Cloud::Orchestration::Airflow::Service::ClientConstructionMinitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_environments_grpc

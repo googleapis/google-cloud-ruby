@@ -58,6 +58,10 @@ class ::Google::Cloud::OsConfig::V1::OsConfigZonalService::ClientTest < Minitest
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_create_os_policy_assignment

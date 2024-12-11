@@ -58,6 +58,10 @@ class ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Operat
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_list_operations

@@ -72,6 +72,10 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::ClientTest < Minites
     def stub_logger
       nil
     end
+
+    def logger
+      nil
+    end
   end
 
   def test_execute_patch_job
