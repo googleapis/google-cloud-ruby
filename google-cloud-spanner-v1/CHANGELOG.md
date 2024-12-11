@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 (2024-12-11)
+
+#### Features
+
+* Support for the UUID type ([#28087](https://github.com/googleapis/google-cloud-ruby/issues/28087)) 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features
