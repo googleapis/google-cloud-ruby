@@ -1,5 +1,11 @@
 # Release History
 
+### 2.11.1 (2024-12-12)
+
+#### Bug Fixes
+
+* Avoid a potential protobuf memory leak ([#28101](https://github.com/googleapis/google-cloud-ruby/issues/28101)) 
+
 ### 2.11.0 (2024-07-09)
 
 #### Features
