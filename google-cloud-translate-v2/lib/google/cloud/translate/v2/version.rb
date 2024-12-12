@@ -17,7 +17,7 @@ module Google
   module Cloud
     module Translate
       module V2
-        VERSION = "1.0.0".freeze
+        VERSION = "1.0.1".freeze
       end
     end
   end
