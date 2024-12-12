@@ -24,6 +24,7 @@ require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "pathname"
 
+
 module Google
   module Cloud
     module Storage
@@ -81,6 +82,10 @@ module Google
         #   files = bucket.files # Billed to "my-other-project"
         #
         attr_accessor :user_project
+        attr_accessor :soft_deleted
+        attr_accessor :generation
+        attr_accessor :soft_delete_time
+        attr_accessor :hard_delete_time
 
         ##
         # @private Create an empty Bucket object.
@@ -220,6 +225,10 @@ module Google
             end
           end
           cors_builder.freeze # always return frozen objects
+        end
+
+        def generation
+          @gapi.generation
         end
 
         ##
@@ -1214,6 +1223,14 @@ module Google
         #
         def soft_delete_policy
           @gapi.soft_delete_policy
+        end
+
+        def soft_delete_time
+          @gapi.soft_delete_time
+        end
+
+        def hard_delete_time
+          @gapi.soft_delete_time
         end
 
         ##
@@ -3144,11 +3161,13 @@ module Google
 
         ##
         # @private New Bucket from a Google API Client object.
-        def self.from_gapi gapi, service, user_project: nil
+        def self.from_gapi gapi, service, user_project: nil, generation: nil, soft_deleted: nil
           new.tap do |b|
             b.gapi = gapi
             b.service = service
             b.user_project = user_project
+            b.generation = generation
+            b.soft_deleted = soft_deleted
           end
         end
 

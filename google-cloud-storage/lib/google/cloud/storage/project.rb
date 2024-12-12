@@ -193,11 +193,20 @@ module Google
         #     puts bucket.name
         #   end
         #
-        def buckets prefix: nil, token: nil, max: nil, user_project: nil
+        # @example Retrieve soft deleted
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   user_buckets = storage.buckets soft_deleted: true
+        #   user_buckets.each do |bucket|
+        #     puts bucket.name
+        #   end
+        def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project
+            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, options: {}
           Bucket::List.from_gapi \
-            gapi, service, prefix, max, user_project: user_project
+            gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted
         end
         alias find_buckets buckets
 
@@ -259,6 +268,8 @@ module Google
         #
         def bucket bucket_name,
                    skip_lookup: false,
+                   generation: nil,
+                   soft_deleted: nil,
                    if_metageneration_match: nil,
                    if_metageneration_not_match: nil,
                    user_project: nil
@@ -269,8 +280,11 @@ module Google
           gapi = service.get_bucket bucket_name,
                                     if_metageneration_match: if_metageneration_match,
                                     if_metageneration_not_match: if_metageneration_not_match,
-                                    user_project: user_project
-          Bucket.from_gapi gapi, service, user_project: user_project
+                                    user_project: user_project,
+                                    soft_deleted: soft_deleted,
+                                    generation: generation
+
+          Bucket.from_gapi gapi, service, user_project: user_project, soft_deleted: soft_deleted, generation: generation
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -552,6 +566,51 @@ module Google
             gapi, service,
             service_account_email: nil, show_deleted_keys: nil,
             max: max, user_project: user_project
+        end
+
+        ##
+        # Restores a soft deleted bucket with bucket name and generation no.
+        #
+        # @param [String] bucket_name Name of a bucket.
+        # @param [Fixnum] generation generation of a bucket.
+        # @param [Boolean] skip_lookup Optionally create a Bucket object
+        #   without verifying the bucket resource exists on the Storage service.
+        #   Calls made on this object will raise errors if the bucket resource
+        #   does not exist. Default is `false`.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Boolean] soft_deleted If this parameter is set to
+        #   `true` projects looks in the list of soft deleted buckets
+        #
+        #
+        # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
+        #   does not exist
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #   generation= 123
+        #
+        #   bucket = storage.restore_bucket "my-bucket", generation, soft_deleted: true
+        #   puts bucket.name
+        #
+        def restore_bucket bucket_name,
+                           generation,
+                           soft_deleted: nil,
+                           timeout: nil,
+                           if_generation_match: nil,
+                           if_generation_not_match: nil,
+                           projection: nil,
+                           user_project: nil,
+                           options: {}
+          gapi = service.restore_bucket bucket_name, generation,
+                                        if_generation_match: if_generation_match,
+                                        if_generation_not_match: if_generation_not_match,
+                                        user_project: user_project,
+                                        soft_deleted: soft_deleted,
+                                        options: options
+          Bucket.from_gapi gapi, service, user_project: user_project, generation: generation
         end
 
         ##
