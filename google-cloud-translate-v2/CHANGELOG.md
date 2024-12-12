@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.1 (2024-12-12)
+
+#### Bug Fixes
+
+* Ensure access token is fetched with recent googleauth versions in the non-api-key case ([#28096](https://github.com/googleapis/google-cloud-ruby/issues/28096)) 
+
 ### 1.0.0 (2024-07-08)
 
 #### Features
