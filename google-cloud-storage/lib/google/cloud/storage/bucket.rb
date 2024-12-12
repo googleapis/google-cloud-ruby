@@ -23,7 +23,6 @@ require "google/cloud/storage/notification"
 require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "pathname"
-require "pry"
 
 
 module Google
@@ -85,6 +84,8 @@ module Google
         attr_accessor :user_project
         attr_accessor :soft_deleted
         attr_accessor :generation
+        attr_accessor :soft_delete_time
+        attr_accessor :hard_delete_time
 
         ##
         # @private Create an empty Bucket object.
@@ -1222,6 +1223,14 @@ module Google
         #
         def soft_delete_policy
           @gapi.soft_delete_policy
+        end
+
+        def soft_delete_time
+          @gapi.soft_delete_time
+        end
+
+        def hard_delete_time
+          @gapi.soft_delete_time
         end
 
         ##
