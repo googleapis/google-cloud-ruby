@@ -133,20 +133,6 @@ module Google
       #   Google::Cloud::Bigtable::RowFilter.cells_per_row 10
       #
       module RowFilter
-        # @private
-        PASS = SimpleFilter.new.pass.freeze
-
-        # @private
-        BLOCK = SimpleFilter.new.block.freeze
-
-        # @private
-        SINK = SimpleFilter.new.sink.freeze
-
-        # @private
-        STRIP_VALUE = SimpleFilter.new.strip_value.freeze
-
-        private_constant :PASS, :BLOCK, :SINK, :STRIP_VALUE
-
         ##
         # Creates a chain filter instance.
         #
@@ -294,7 +280,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.pass
         #
         def self.pass
-          PASS
+          SimpleFilter.new.pass
         end
 
         ##
@@ -311,7 +297,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.block
         #
         def self.block
-          BLOCK
+          SimpleFilter.new.block
         end
 
         ##
@@ -328,7 +314,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.sink
         #
         def self.sink
-          SINK
+          SimpleFilter.new.sink
         end
 
         ##
@@ -344,7 +330,7 @@ module Google
         #   filter = Google::Cloud::Bigtable::RowFilter.strip_value
         #
         def self.strip_value
-          STRIP_VALUE
+          SimpleFilter.new.strip_value
         end
 
         ##
