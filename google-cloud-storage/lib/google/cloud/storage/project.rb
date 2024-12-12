@@ -592,7 +592,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   generation= 123
         #
-        #   bucket = storage.bucket "my-bucket", generation, soft_deleted: true
+        #   bucket = storage.restore_bucket "my-bucket", generation, soft_deleted: true
         #   puts bucket.name
         #
         def restore_bucket bucket_name,
