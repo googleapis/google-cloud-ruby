@@ -697,9 +697,7 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     _(buckets.size).must_equal num_buckets
     bucket = buckets.first
     _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
-    _(bucket.gapi.soft_delete_time).wont_be_nil
-    # refute_nil _(bucket).soft_delete_tme , "softDeleteTime should not be nil"
-    # _(bucket.soft_delete_tme).must_equal "multi-region"
+    _(bucket.soft_delete_time).wont_be_nil
   end
 
   it "paginates buckets" do

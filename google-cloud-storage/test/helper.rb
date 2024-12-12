@@ -610,7 +610,7 @@ class MockStorage < Minitest::Spec
                                          prefixes: prefixes
   end
 
-  def restore_file_gapi bucket, file_name, generation
+  def restore_file_gapi bucket, file_name, generation = nil
     file_hash = random_file_hash(bucket, file_name, generation).to_json
     Google::Apis::StorageV1::Object.from_json file_hash
   end
