@@ -3,6 +3,10 @@ assign_issues_by:
     - 'api: storage'
     to:
     - bajajneha27
+  - labels:
+    - 'api: secretmanager'
+    to:
+    - GoogleCloudPlatform/cloud-secrets-team
 
 assign_issues:
  - dazuma
