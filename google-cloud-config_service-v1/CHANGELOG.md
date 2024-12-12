@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2024-12-12)
+
+#### Features
+
+* Support key-value annotations on Preview ([#28099](https://github.com/googleapis/google-cloud-ruby/issues/28099)) 
+
 ### 1.1.0 (2024-12-10)
 
 #### Features
