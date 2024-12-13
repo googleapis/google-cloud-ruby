@@ -224,7 +224,6 @@ module Google
           cors_builder.freeze # always return frozen objects
         end
 
-
         ##
         # Returns the current Object Lifecycle Management rules configuration
         # for the bucket.
