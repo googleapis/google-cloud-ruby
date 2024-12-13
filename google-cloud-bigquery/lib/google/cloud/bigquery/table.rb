@@ -2747,7 +2747,8 @@ module Google
                                           rows,
                                           skip_invalid: skip_invalid,
                                           ignore_unknown: ignore_unknown,
-                                          insert_ids: insert_ids
+                                          insert_ids: insert_ids,
+                                          project_id: project_id
           InsertResponse.from_gapi rows, gapi
         end
 
