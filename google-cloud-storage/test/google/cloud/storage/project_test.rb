@@ -697,6 +697,8 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     _(buckets.size).must_equal num_buckets
     bucket = buckets.first
     _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.generation).wont_be_nil
+    _(bucket.hard_delete_time).wont_be_nil
     _(bucket.soft_delete_time).wont_be_nil
   end
 

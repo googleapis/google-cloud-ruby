@@ -83,9 +83,6 @@ module Google
         #
         attr_accessor :user_project
         attr_accessor :soft_deleted
-        attr_accessor :generation
-        attr_accessor :soft_delete_time
-        attr_accessor :hard_delete_time
 
         ##
         # @private Create an empty Bucket object.
@@ -227,9 +224,6 @@ module Google
           cors_builder.freeze # always return frozen objects
         end
 
-        def generation
-          @gapi.generation
-        end
 
         ##
         # Returns the current Object Lifecycle Management rules configuration
@@ -1225,14 +1219,6 @@ module Google
           @gapi.soft_delete_policy
         end
 
-        def soft_delete_time
-          @gapi.soft_delete_time
-        end
-
-        def hard_delete_time
-          @gapi.soft_delete_time
-        end
-
         ##
         # Sets the value for Soft Delete Policy in the bucket. This value can
         # be queried by calling {#soft_delete_policy}.
@@ -2056,6 +2042,18 @@ module Google
         end
         alias compose_file compose
         alias combine compose
+
+        def generation
+          @generation = @gapi.generation
+        end
+
+        def soft_delete_time
+          @soft_delete_time = @gapi.soft_delete_time
+        end
+
+        def hard_delete_time
+          @hard_delete_time = @gapi.hard_delete_time
+        end
 
         ##
         # Generates a signed URL. See [Signed
@@ -3166,8 +3164,6 @@ module Google
             b.gapi = gapi
             b.service = service
             b.user_project = user_project
-            b.generation = generation
-            b.soft_deleted = soft_deleted
           end
         end
 
