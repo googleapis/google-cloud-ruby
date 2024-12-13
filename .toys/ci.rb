@@ -14,7 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"].freeze
+TASKS = [
+  "test",
+  "rubocop",
+  "build",
+  "yard",
+  "linkinator",
+  "acceptance",
+  "conformance",
+  "samples-master",
+  "samples-latest",
+].freeze
+OPTIONAL_TASKS = ["conformance"].freeze
 ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"].freeze
 FAILURES_REPORT_PATH = "tmp/ci-failures.json"
 
@@ -89,11 +100,6 @@ include :fileutils
 def run
   require "json"
   require "set"
-
-  # Temporary hack to allow minitest-rg 5.2.0 to work in minitest 5.19 or
-  # later. This should be removed if we have a better solution or decide to
-  # drop rg.
-  ENV["MT_COMPAT"] = "true"
 
   set :failures_report, true if github_event_name == "schedule"
   set :failures_report, FAILURES_REPORT_PATH if failures_report == true
@@ -291,7 +297,7 @@ end
 
 def filter_gem_dirs dirs
   dirs.find_all do |dir|
-    if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file? File.join(dir, file) }
+    if ["Gemfile", "#{dir}.gemspec"].all? { |file| File.file? File.join(dir, file) }
       result = capture_ruby [], in: :controller do |controller|
         controller.in.puts "spec = Gem::Specification.load '#{dir}/#{dir}.gemspec'"
         controller.in.puts "puts spec.required_ruby_version.satisfied_by? Gem::Version.new(#{RUBY_VERSION.inspect})"
@@ -334,40 +340,18 @@ def run_in_dir dir
     end
     @run_tasks.each do |task|
       puts
-      puts "#{dir}: #{task} ...", :bold, :cyan
-      success =
-        if task == "linkinator"
-          run_linkinator dir
-        else
-          exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
+      if OPTIONAL_TASKS.include? task
+        success = exec(["toys", "system", "tools", "show", task], out: :null).success?
+        unless success
+          puts "#{dir}: #{task} not available", :bold, :yellow
+          next
         end
+      end
+      puts "#{dir}: #{task} ...", :bold, :cyan
+      success = exec(["toys", task] + verbosity_flags, env: @auth_env).success?
       @errors << [dir, task] unless success
     end
   end
-end
-
-def run_linkinator dir
-  allowed_http_codes = ["200", "202"]
-  dir_without_version = dir.sub(/-v\d\w*$/, "")
-  skip_regexes = [
-    "\\w+\\.md$",
-    "^https://rubygems\\.org/gems/#{dir_without_version}",
-    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
-    "^https://rubydoc\\.info/gems/#{dir}",
-  ]
-  if dir == dir_without_version
-    skip_regexes << "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}-v\\d\\w*/latest$"
-    skip_regexes << "^https://rubydoc\\.info/gems/#{dir}-v\\d\\w*"
-  end
-  linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
-  result = exec linkinator_cmd, out: :capture, err: [:child, :out]
-  puts result.captured_out
-  checked_links = result.captured_out.split "\n"
-  checked_links.select! { |link| link =~ /^\[(\d+)\]/ && !allowed_http_codes.include?(::Regexp.last_match[1]) }
-  checked_links.each do |link|
-    puts link, :yellow
-  end
-  checked_links.empty?
 end
 
 def handle_results
