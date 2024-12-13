@@ -598,19 +598,11 @@ module Google
         def restore_bucket bucket_name,
                            generation,
                            soft_deleted: nil,
-                           timeout: nil,
-                           if_generation_match: nil,
-                           if_generation_not_match: nil,
-                           projection: nil,
-                           user_project: nil,
                            options: {}
           gapi = service.restore_bucket bucket_name, generation,
-                                        if_generation_match: if_generation_match,
-                                        if_generation_not_match: if_generation_not_match,
-                                        user_project: user_project,
                                         soft_deleted: soft_deleted,
                                         options: options
-          Bucket.from_gapi gapi, service, user_project: user_project, generation: generation
+          Bucket.from_gapi gapi, service, generation: generation
         end
 
         ##

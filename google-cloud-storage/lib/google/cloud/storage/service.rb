@@ -663,18 +663,8 @@ module Google
         # Restore soft deleted bucket
         def restore_bucket bucket_name,
                            generation,
-                           timeout: nil,
                            soft_deleted: nil,
-                           if_generation_match: nil,
-                           if_generation_not_match: nil,
-                           projection: nil,
-                           user_project: nil,
                            options: {}
-          if options[:retries].nil?
-            is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
-            options = is_idempotent ? {} : { retries: 0 }
-          end
-
           execute do
             service.restore_bucket bucket_name, generation,
                                    soft_deleted: soft_deleted,
