@@ -379,10 +379,11 @@ module Google
               end
             end
 
-            # Contains information needed for generating an
+            # Contains information needed for generating either an
             # [OpenID Connect
-            # token](https://developers.google.com/identity/protocols/OpenIDConnect).
-            # The OIDC token will be generated for the Monitoring service agent service
+            # token](https://developers.google.com/identity/protocols/OpenIDConnect) or
+            # [OAuth token](https://developers.google.com/identity/protocols/oauth2).
+            # The token will be generated for the Monitoring service agent service
             # account.
             # @!attribute [rw] type
             #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck::ServiceAgentAuthentication::ServiceAgentAuthenticationType]

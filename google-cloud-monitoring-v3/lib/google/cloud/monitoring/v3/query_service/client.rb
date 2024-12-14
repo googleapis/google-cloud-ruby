@@ -184,7 +184,12 @@ module Google
             # Service calls
 
             ##
-            # Queries time series using Monitoring Query Language.
+            # Queries time series by using Monitoring Query Language (MQL). We recommend
+            # using PromQL instead of MQL. For more information about the status of MQL,
+            # see the [MQL deprecation
+            # notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload query_time_series(request, options = nil)
             #   Pass arguments to `query_time_series` via a request object, either of type

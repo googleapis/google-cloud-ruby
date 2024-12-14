@@ -35,7 +35,10 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.monitoring.v3.QueryService'
 
-            # Queries time series using Monitoring Query Language.
+            # Queries time series by using Monitoring Query Language (MQL). We recommend
+            # using PromQL instead of MQL. For more information about the status of MQL,
+            # see the [MQL deprecation
+            # notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
             rpc :QueryTimeSeries, ::Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest, ::Google::Cloud::Monitoring::V3::QueryTimeSeriesResponse
           end
 
