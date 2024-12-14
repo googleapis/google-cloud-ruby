@@ -20,7 +20,7 @@ require "firestore_helper"
 describe Google::Cloud::Firestore::Service, :firestore_acceptance do
   let :config_metadata do
     {
-      "google-cloud-resource-prefix": "projects/#{firestore.project_id}/databases/(default)"
+      "x-goog-request-params": "projects/#{firestore.project_id}/databases/(default)"
     }
   end
 
