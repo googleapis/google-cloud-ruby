@@ -663,11 +663,9 @@ module Google
         # Restore soft deleted bucket
         def restore_bucket bucket_name,
                            generation,
-                           soft_deleted: nil,
                            options: {}
           execute do
             service.restore_bucket bucket_name, generation,
-                                   soft_deleted: soft_deleted,
                                    options: options
           end
         end

@@ -26,38 +26,29 @@ require "google/cloud/storage"
 
 ##
 # Monkey-Patch Google API Client to support Mocks
-module Google
-  module Apis
-    module Core
-      module Hashable
-        ##
-        # Minitest Mock depends on === to match same-value objects.
-        # By default, the Google API Client objects do not match with ===.
-        # Therefore, we must add this capability.
-        # This module seems like as good a place as any...
-        def === other
-          return(to_h === other.to_h) if other.respond_to? :to_h
-          super
-        end
-      end
-    end
+module Google::Apis::Core::Hashable
+  ##
+  # Minitest Mock depends on === to match same-value objects.
+  # By default, the Google API Client objects do not match with ===.
+  # Therefore, we must add this capability.
+  # This module seems like as good a place as any...
+  def === other
+    return(to_h === other.to_h) if other.respond_to? :to_h
+    super
   end
 end
 
 class MockStorage < Minitest::Spec
   let(:project) { "test" }
-  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: proc {})) }
-  let :storage do
-    Google::Cloud::Storage::Project.new Google::Cloud::Storage::Service.new(project, credentials,
-                                                                            upload_chunk_size: 5 * 1024 * 1024)
-  end
+  let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
+  let(:storage) { Google::Cloud::Storage::Project.new(Google::Cloud::Storage::Service.new(project, credentials, upload_chunk_size: 5 * 1024 * 1024 )) }
   let(:pubsub_topic_name) { "my-topic-name" }
-  let(:file_obj) { StringIO.new "My test file" }
+  let(:file_obj) { StringIO.new("My test file") }
   let(:file_name) { "my_test_file.txt" }
   let(:acl) { "authenticated_read" }
 
   # Register this spec type for when :mock_storage is used.
-  register_spec_type self do |_desc, *addl|
+  register_spec_type(self) do |desc, *addl|
     addl.include? :mock_storage
   end
 
@@ -79,7 +70,7 @@ class MockStorage < Minitest::Spec
                          autoclass_terminal_storage_class: nil,
                          enable_object_retention: nil,
                          effective_time: DateTime.now,
-                         retention_duration_seconds: 604_800, # 7 days
+                         retention_duration_seconds: 604800, # 7 days
                          hierarchical_namespace: nil,
                          generation: "1733393981548601746"
     versioning_config = { "enabled" => versioning } if versioning
@@ -106,62 +97,62 @@ class MockStorage < Minitest::Spec
       "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
       "enableObjectRetention" => enable_object_retention,
       "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
-      "hierarchicalNamespace" => hierarchical_namespace }.delete_if { |_, v| v.nil? }
+      "hierarchicalNamespace" => hierarchical_namespace
+    }.delete_if { |_, v| v.nil? }
   end
-
   def random_deleted_bucket_hash name: random_bucket_name,
-                                 url_root: "https://www.googleapis.com/storage/v1",
-                                 location: "US",
-                                 storage_class: "STANDARD",
-                                 versioning: nil,
-                                 logging_bucket: nil,
-                                 logging_prefix: nil,
-                                 website_main: nil,
-                                 website_404: nil,
-                                 cors: [],
-                                 requester_pays: nil,
-                                 lifecycle: nil,
-                                 location_type: "multi-region",
-                                 rpo: "DEFAULT",
-                                 autoclass_enabled: nil,
-                                 autoclass_terminal_storage_class: nil,
-                                 enable_object_retention: nil,
-                                 effective_time: DateTime.now,
-                                 generation: "1733393981548601746",
-                                 retention_duration_seconds: 604_800, # 7 days
-                                 hierarchical_namespace: nil
+                         url_root: "https://www.googleapis.com/storage/v1",
+                         location: "US",
+                         storage_class: "STANDARD",
+                         versioning: nil,
+                         logging_bucket: nil,
+                         logging_prefix: nil,
+                         website_main: nil,
+                         website_404: nil,
+                         cors: [],
+                         requester_pays: nil,
+                         lifecycle: nil,
+                         location_type: "multi-region",
+                         rpo: "DEFAULT",
+                         autoclass_enabled: nil,
+                         autoclass_terminal_storage_class: nil,
+                         enable_object_retention: nil,
+                         effective_time: DateTime.now,
+                         retention_duration_seconds: 604800, # 7 days
+                         hierarchical_namespace: nil,
+                         generation: "1733393981548601746"
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
-    "id" => name,
-    "selfLink" => "#{url_root}/b/#{name}",
-    "projectNumber" => "1234567890",
-    "name" => name,
-    "timeCreated" => Time.now,
-    "generation" => generation,
-    "metageneration" => "1",
-    "owner" => { "entity" => "project-owners-1234567890" },
-    "location" => location,
-    "locationType" => location_type,
-    "rpo" => rpo,
-    "cors" => cors,
-    "lifecycle" => lifecycle,
-    "logging" => logging_hash(logging_bucket, logging_prefix),
-    "storageClass" => storage_class,
-    "versioning" => versioning_config,
-    "website" => website_hash(website_main, website_404),
-    "billing" => billing_hash(requester_pays),
-    "etag" => "CAE=",
-    "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
-    "enableObjectRetention" => enable_object_retention,
-    "softDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time,
-    "hardDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time
-                                                                                                         .to_time + retention_duration_seconds,
-    "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
-    "hierarchicalNamespace" => hierarchical_namespace }.delete_if { |_, v| v.nil? }
+      "id" => name,
+      "selfLink" => "#{url_root}/b/#{name}",
+      "projectNumber" => "1234567890",
+      "name" => name,
+      "timeCreated" => Time.now,
+      "generation" => generation,
+      "metageneration" => "1",
+      "owner" => { "entity" => "project-owners-1234567890" },
+      "location" => location,
+      "locationType" => location_type,
+      "rpo" => rpo,
+      "cors" => cors,
+      "lifecycle" => lifecycle,
+      "logging" => logging_hash(logging_bucket, logging_prefix),
+      "storageClass" => storage_class,
+      "versioning" => versioning_config,
+      "website" => website_hash(website_main, website_404),
+      "billing" => billing_hash(requester_pays),
+      "etag" => "CAE=",
+      "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
+      "enableObjectRetention" => enable_object_retention,
+      "softDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time,
+      "hardDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time
+                                                                                                           .to_time + retention_duration_seconds,  
+      "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
+      "hierarchicalNamespace" => hierarchical_namespace
+    }.delete_if { |_, v| v.nil? }
   end
 
-  # 7 days
-  def soft_delete_policy_object retention_duration_seconds: 604_800
+  def soft_delete_policy_object retention_duration_seconds: 604800 # 7 days
     Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
       effective_time: DateTime.now,
       retention_duration_seconds: retention_duration_seconds
@@ -174,34 +165,38 @@ class MockStorage < Minitest::Spec
     )
   end
 
-  def autoclass_config_hash enabled, terminal_storage_class
+  def autoclass_config_hash(enabled, terminal_storage_class)
     { "enabled"               => enabled,
-      "terminalStorageClass"  => terminal_storage_class }.delete_if { |_, v| v.nil? } if !enabled.nil? || terminal_storage_class
+      "terminalStorageClass"  => terminal_storage_class
+    }.delete_if { |_, v| v.nil? } if !enabled.nil? || terminal_storage_class
   end
 
-  def logging_hash bucket, prefix
+  def logging_hash(bucket, prefix)
     { "logBucket"       => bucket,
-      "logObjectPrefix" => prefix }.delete_if { |_, v| v.nil? } if bucket || prefix
+      "logObjectPrefix" => prefix,
+    }.delete_if { |_, v| v.nil? } if bucket || prefix
   end
 
-  def website_hash website_main, website_404
+  def website_hash(website_main, website_404)
     { "mainPageSuffix" => website_main,
-      "notFoundPage"   => website_404 }.delete_if { |_, v| v.nil? } if website_main || website_404
+      "notFoundPage"   => website_404,
+    }.delete_if { |_, v| v.nil? } if website_main || website_404
   end
 
-  def billing_hash requester_pays
-    { "requesterPays" => requester_pays } unless requester_pays.nil?
+  def billing_hash(requester_pays)
+    { "requesterPays" => requester_pays} unless requester_pays.nil?
   end
 
-  def file_retention_hash retention_params
-    { "mode" => retention_params[:mode],
-      "retainUntilTime" => retention_params[:retain_until_time] }.delete_if { |_, v| v.nil? } if !retention_params.nil? && !retention_params.empty?
+  def file_retention_hash(retention_params)
+    { "mode"               => retention_params[:mode],
+      "retainUntilTime"  => retention_params[:retain_until_time]
+    }.delete_if { |_, v| v.nil? } if !retention_params.nil? && !retention_params.empty?
   end
 
-  def random_file_hash bucket = random_bucket_name,
-                       name = random_file_path,
-                       generation = "1234567890",
-                       kms_key_name = "path/to/encryption_key_name",
+  def random_file_hash bucket=random_bucket_name,
+                       name=random_file_path,
+                       generation="1234567890",
+                       kms_key_name="path/to/encryption_key_name",
                        custom_time: nil,
                        retention_params: nil,
                        override_unlocked_retention: nil,
@@ -210,9 +205,9 @@ class MockStorage < Minitest::Spec
     { "kind" => "storage#object",
       "id" => "#{bucket}/#{name}/1234567890",
       "selfLink" => "https://www.googleapis.com/storage/v1/b/#{bucket}/o/#{name}",
-      "name" => name.to_s,
+      "name" => "#{name}",
       "timeCreated" => Time.now,
-      "bucket" => bucket.to_s,
+      "bucket" => "#{bucket}",
       "generation" => generation,
       "metageneration" => "1",
       "cacheControl" => "public, max-age=3600",
@@ -274,7 +269,7 @@ class MockStorage < Minitest::Spec
   def download_http_resp gzip: nil
     headers = {}
     headers["Content-Encoding"] = ["gzip"] if gzip
-    OpenStruct.new header: headers
+    OpenStruct.new(header: headers)
   end
 
   def encryption_gapi key_name
@@ -478,7 +473,7 @@ class MockStorage < Minitest::Spec
                         user_project: nil,
                         override_unlocked_retention: nil,
                         options: {}
-    {
+    opts = {
       generation: generation,
       if_generation_match: if_generation_match,
       if_generation_not_match: if_generation_not_match,
@@ -577,6 +572,7 @@ class MockStorage < Minitest::Spec
     }
   end
 
+
   def compose_request source_files, destination_gapi = nil, if_source_generation_match: nil
     source_objects = source_files.map do |file|
       if file.is_a? String
@@ -608,12 +604,10 @@ class MockStorage < Minitest::Spec
 
   def list_files_gapi count = 2, token = nil, prefixes = nil
     files = count.times.map { Google::Apis::StorageV1::Object.from_json random_file_hash.to_json }
-    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files,
-                                         next_page_token: token,
-                                         prefixes: prefixes
+    Google::Apis::StorageV1::Objects.new kind: "storage#objects", items: files, next_page_token: token, prefixes: prefixes
   end
 
-  def restore_file_gapi bucket, file_name, generation = nil
+  def restore_file_gapi bucket, file_name, generation=nil
     file_hash = random_file_hash(bucket, file_name, generation).to_json
     Google::Apis::StorageV1::Object.from_json file_hash
   end
