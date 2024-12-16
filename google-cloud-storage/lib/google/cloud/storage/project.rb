@@ -284,7 +284,7 @@ module Google
                                     soft_deleted: soft_deleted,
                                     generation: generation
 
-          Bucket.from_gapi gapi, service, user_project: user_project, soft_deleted: soft_deleted, generation: generation
+          Bucket.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -600,7 +600,7 @@ module Google
                            options: {}
           gapi = service.restore_bucket bucket_name, generation,
                                         options: options
-          Bucket.from_gapi gapi, service, generation: generation
+          Bucket.from_gapi gapi, service
         end
 
         ##
