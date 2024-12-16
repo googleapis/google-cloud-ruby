@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rake/testtask"
-require "rubocop/rake_task"
+require "uri"
 
-Rake::TestTask.new "global_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].exclude(/regional/)
-  t.warning = false
+require_relative "regional_helper"
+
+describe "#update_regional_secret", :secret_manager_snippet do
+  it "updates the secret" do
+    sample = SampleLoader.load "update_regional_secret.rb"
+
+    refute_nil secret
+
+    out, _err = capture_io do
+      sample.run project_id: project_id, location_id: location_id, secret_id: secret_id
+    end
+
+    assert_match(/Updated regional secret/, out)
+    assert_match(/New label: rocks/, out)
+  end
 end
-
-Rake::TestTask.new "regional_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].select { |file| file =~ /regional/ }
-  t.warning = false
-end
-
-RuboCop::RakeTask.new
