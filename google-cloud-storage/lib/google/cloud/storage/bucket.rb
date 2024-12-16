@@ -82,7 +82,7 @@ module Google
         #   files = bucket.files # Billed to "my-other-project"
         #
         attr_accessor :user_project
-        
+
         ##
         # @private Create an empty Bucket object.
         def initialize
@@ -2040,18 +2040,6 @@ module Google
         end
         alias compose_file compose
         alias combine compose
-
-        # def generation
-        #   @generation = @gapi.generation
-        # end
-
-        # def soft_delete_time
-        #   @soft_delete_time = @gapi.soft_delete_time
-        # end
-
-        # def hard_delete_time
-        #   @hard_delete_time = @gapi.hard_delete_time
-        # end
 
         ##
         # Generates a signed URL. See [Signed
