@@ -193,18 +193,18 @@ module Google
         #     puts bucket.name
         #   end
         #
-        # @example Retrieve soft deleted
+        # @example Retrieve soft deleted buckets
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
         #
-        #   user_buckets = storage.buckets soft_deleted: true
-        #   user_buckets.each do |bucket|
+        #   soft_deleted_buckets = storage.buckets soft_deleted: true
+        #   soft_deleted_buckets.each do |bucket|
         #     puts bucket.name
         #   end
         def buckets prefix: nil, token: nil, max: nil, user_project: nil, soft_deleted: nil
           gapi = service.list_buckets \
-            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted, options: {}
+            prefix: prefix, token: token, max: max, user_project: user_project, soft_deleted: soft_deleted
           Bucket::List.from_gapi \
             gapi, service, prefix, max, user_project: user_project, soft_deleted: soft_deleted
         end
@@ -569,7 +569,7 @@ module Google
         end
 
         ##
-        # Restores a soft deleted bucket with bucket name and generation no.
+        # Restores a soft deleted bucket with bucket name and generation.
         #
         # @param [String] bucket_name Name of a bucket.
         # @param [Fixnum] generation generation of a bucket.
@@ -580,7 +580,7 @@ module Google
         # @param [Integer] if_metageneration_match Makes the operation conditional
         #   on whether the bucket's current metageneration matches the given value.
         # @param [Boolean] soft_deleted If this parameter is set to
-        #   `true` projects looks in the list of soft deleted buckets
+        #   `true` project looks in the list of soft deleted buckets
         #
         #
         # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
@@ -597,10 +597,8 @@ module Google
         #
         def restore_bucket bucket_name,
                            generation,
-                           soft_deleted: nil,
                            options: {}
           gapi = service.restore_bucket bucket_name, generation,
-                                        soft_deleted: soft_deleted,
                                         options: options
           Bucket.from_gapi gapi, service, generation: generation
         end
