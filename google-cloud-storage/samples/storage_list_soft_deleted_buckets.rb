@@ -17,7 +17,7 @@ def list_soft_deleted_buckets
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
-  # {}require "google/cloud/storage"
+  # require "google/cloud/storage"
   require_relative "../lib/google/cloud/storage"
   require_relative "../lib/google/cloud/storage/project"
   require_relative "../lib/google/cloud/storage/bucket"
