@@ -17,13 +17,13 @@ def get_soft_deleted_bucket bucket_name:, generation:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
-  require "google/cloud/storage"
-  # require_relative '../lib/google/cloud/storage'
-  # require_relative '../lib/google/cloud/storage/project'
-  # require_relative '../lib/google/cloud/storage/bucket'
-  # # require_relative '../lib/google/cloud/storage/bucket/list'
-  # require_relative '../lib/google/cloud/storage/service'
-  # require "pry"
+  # require "google/cloud/storage"
+  require_relative '../lib/google/cloud/storage'
+  require_relative '../lib/google/cloud/storage/project'
+  require_relative '../lib/google/cloud/storage/bucket'
+  # require_relative '../lib/google/cloud/storage/bucket/list'
+  require_relative '../lib/google/cloud/storage/service'
+  require "pry"
 
   storage = Google::Cloud::Storage.new
   bucket_name= bucket_name.gsub(/[^a-zA-Z0-9\- ]/, "")
@@ -32,8 +32,8 @@ def get_soft_deleted_bucket bucket_name:, generation:
   # fetching soft deleted bucket with soft_delete_time and hard_delete_time
   deleted_bucket_fetch = storage.bucket bucket_name, generation: generation, soft_deleted: true
 
-  soft_delete_time = deleted_bucket_fetch.soft_delete_time
-  hard_delete_time = deleted_bucket_fetch.hard_delete_time
+  soft_delete_time = deleted_bucket_fetch.gapi.soft_delete_time
+  hard_delete_time = deleted_bucket_fetch.gapi.hard_delete_time
 
   puts "soft_delete_time - #{soft_delete_time}"
   puts "hard_delete_time - #{hard_delete_time}"

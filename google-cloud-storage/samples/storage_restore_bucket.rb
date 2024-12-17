@@ -18,7 +18,7 @@ def restore_bucket bucket_name:, generation:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
-   #{}require "google/cloud/storage"
+  # require "google/cloud/storage"
   require_relative '../lib/google/cloud/storage'
   require_relative '../lib/google/cloud/storage/project'
   require_relative '../lib/google/cloud/storage/bucket'
@@ -29,15 +29,15 @@ def restore_bucket bucket_name:, generation:
 
   storage = Google::Cloud::Storage.new
 
-  bucket_restored = storage.restore_bucket bucket_name, generation, soft_deleted: true
+  bucket_restored = storage.restore_bucket bucket_name, generation
   # fetching soft deleted bucket list
 #   deleted_buckets = storage.buckets soft_deleted: true
   binding.pry
 
-  if JSON.parse(bucket_restored.gapi)["name"] == deleted_bucket.name
-    puts "#{deleted_bucket.name} Bucket restored"
+  if bucket_restored.name == bucket_name
+    puts "#{bucket_name} Bucket restored"
   else
-    puts "#{deleted_bucket.name} Bucket not restored" 
+    puts "#{bucket_name} Bucket not restored" 
   end
 
 end
