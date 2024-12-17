@@ -123,19 +123,17 @@ describe "Buckets Snippets" do
   end
 
   describe "storage_soft_deleted_bucket" do
-    let(:generation) {bucket.generation}
+    let(:generation) {bucket.gapi.generation}
 
-    # it "get soft deleted bucket generation" do
-    #   out, _err = capture_io do
-    #     bucket.generation
-    #   end
-    #   assert generation, "Bucket generation should be present"
-    # # end
+    it "get soft deleted bucket generation" do
+      out, _err = capture_io do
+        bucket.gapi.generation
+      end
+      assert generation, "Bucket generation should be present"
+     end
 
 
     it "get soft deleted bucket soft_delete_time and hard_delete_time" do
-      # @bucket.delete
-      binding.pry
       bucket.delete
       out, _err = capture_io do
         get_soft_deleted_bucket bucket_name: bucket.name, generation:generation
@@ -145,8 +143,7 @@ describe "Buckets Snippets" do
     end
 
      it "lists soft deleted buckets" do
-      # delete_bucket bucket_name: bucket_name
-      # list_soft_deleted_buckets
+    
       list_deleted_bucket, _err = capture_io do
         list_soft_deleted_buckets
       end
