@@ -257,9 +257,9 @@ module Google
               # Creates a new {::Google::Cloud::Kms::V1::KeyHandle KeyHandle}, triggering the
               # provisioning of a new {::Google::Cloud::Kms::V1::CryptoKey CryptoKey} for CMEK
               # use with the given resource type in the configured key project and the same
-              # location. [GetOperation][Operations.GetOperation] should be used to resolve
-              # the resulting long-running operation and get the resulting
-              # {::Google::Cloud::Kms::V1::KeyHandle KeyHandle} and
+              # location. GetOperation should
+              # be used to resolve the resulting long-running operation and get the
+              # resulting {::Google::Cloud::Kms::V1::KeyHandle KeyHandle} and
               # {::Google::Cloud::Kms::V1::CryptoKey CryptoKey}.
               #
               # @overload create_key_handle(request, options = nil)
