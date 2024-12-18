@@ -659,9 +659,9 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     _(buckets.size).must_equal num_buckets
     bucket = buckets.first
     _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
-    _(bucket.gapi.generation).wont_be_nil
-    _(bucket.gapi.hard_delete_time).wont_be_nil
-    _(bucket.gapi.soft_delete_time).wont_be_nil
+    _(bucket.generation).wont_be_nil
+    _(bucket.hard_delete_time).wont_be_nil
+    _(bucket.soft_delete_time).wont_be_nil
   end
 
   it "paginates buckets" do
@@ -863,7 +863,7 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     _(bucket).wont_be :lazy?
   end
 
-    it "finds a deleted bucket" do
+  it "finds a deleted bucket" do
     bucket_name = "found-bucket"
     generation = 1_733_393_981_548_601_746
 
@@ -877,9 +877,9 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     mock.verify
 
     _(bucket.name).must_equal bucket_name
-    _(bucket.gapi.generation).must_equal generation
-    _(bucket.gapi.hard_delete_time).wont_be_nil
-    _(bucket.gapi.hard_delete_time).wont_be_nil
+    _(bucket.generation).must_equal generation
+    _(bucket.soft_delete_time).wont_be_nil
+    _(bucket.hard_delete_time).wont_be_nil
 
     _(bucket).wont_be :lazy?
   end
@@ -889,14 +889,14 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     generation = 1_733_393_981_548_601_746
 
     mock = Minitest::Mock.new
-    mock.expect :restore_bucket, restored_bucket_gapi(bucket_name, generation),
+    mock.expect :restore_bucket, restored_bucket_gapi(bucket_name),
                 [bucket_name, generation], options: {}
 
     storage.service.mocked_service = mock
     bucket = storage.restore_bucket bucket_name, generation
     mock.verify
     _(bucket.name).must_equal bucket_name
-    _(bucket.gapi.generation).must_equal generation
+    _(bucket.generation).must_equal generation
   end
 
   it "finds a bucket with find_bucket alias" do
@@ -1089,7 +1089,7 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     )
   end
 
-  def restored_bucket_gapi name, _generation
+  def restored_bucket_gapi name
     Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name).to_json
   end
 
