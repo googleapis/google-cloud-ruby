@@ -38,6 +38,9 @@ module Google
         # @!attribute [rw] new_message_payload
         #   @return [::Google::Cloud::Dialogflow::V2::Message]
         #     Payload of NEW_MESSAGE event.
+        # @!attribute [rw] new_recognition_result_payload
+        #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult]
+        #     Payload of NEW_RECOGNITION_RESULT event.
         class ConversationEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -63,6 +66,12 @@ module Google
             # telephony. It is configured in
             # {::Google::Cloud::Dialogflow::V2::ConversationProfile#new_message_event_notification_config ConversationProfile.new_message_event_notification_config}
             NEW_MESSAGE = 5
+
+            # An existing conversation has received a new speech recognition result.
+            # This is mainly for delivering intermediate transcripts. The notification
+            # is configured in
+            # [ConversationProfile.new_recognition_event_notification_config][].
+            NEW_RECOGNITION_RESULT = 7
 
             # Unrecoverable error during a telephone call.
             #

@@ -5,10 +5,11 @@
 require 'google/protobuf'
 
 require 'google/cloud/dialogflow/v2/participant_pb'
+require 'google/cloud/dialogflow/v2/session_pb'
 require 'google/rpc/status_pb'
 
 
-descriptor_data = "\n3google/cloud/dialogflow/v2/conversation_event.proto\x12\x1agoogle.cloud.dialogflow.v2\x1a,google/cloud/dialogflow/v2/participant.proto\x1a\x17google/rpc/status.proto\"\x81\x03\n\x11\x43onversationEvent\x12\x14\n\x0c\x63onversation\x18\x01 \x01(\t\x12@\n\x04type\x18\x02 \x01(\x0e\x32\x32.google.cloud.dialogflow.v2.ConversationEvent.Type\x12(\n\x0c\x65rror_status\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12\x42\n\x13new_message_payload\x18\x04 \x01(\x0b\x32#.google.cloud.dialogflow.v2.MessageH\x00\"\x9a\x01\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x43ONVERSATION_STARTED\x10\x01\x12\x19\n\x15\x43ONVERSATION_FINISHED\x10\x02\x12\x1d\n\x19HUMAN_INTERVENTION_NEEDED\x10\x03\x12\x0f\n\x0bNEW_MESSAGE\x10\x05\x12\x17\n\x13UNRECOVERABLE_ERROR\x10\x04\x42\t\n\x07payloadB\x9c\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x16\x43onversationEventProtoP\x01Z>cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3"
+descriptor_data = "\n3google/cloud/dialogflow/v2/conversation_event.proto\x12\x1agoogle.cloud.dialogflow.v2\x1a,google/cloud/dialogflow/v2/participant.proto\x1a(google/cloud/dialogflow/v2/session.proto\x1a\x17google/rpc/status.proto\"\xff\x03\n\x11\x43onversationEvent\x12\x14\n\x0c\x63onversation\x18\x01 \x01(\t\x12@\n\x04type\x18\x02 \x01(\x0e\x32\x32.google.cloud.dialogflow.v2.ConversationEvent.Type\x12(\n\x0c\x65rror_status\x18\x03 \x01(\x0b\x32\x12.google.rpc.Status\x12\x42\n\x13new_message_payload\x18\x04 \x01(\x0b\x32#.google.cloud.dialogflow.v2.MessageH\x00\x12`\n\x1enew_recognition_result_payload\x18\x05 \x01(\x0b\x32\x36.google.cloud.dialogflow.v2.StreamingRecognitionResultH\x00\"\xb6\x01\n\x04Type\x12\x14\n\x10TYPE_UNSPECIFIED\x10\x00\x12\x18\n\x14\x43ONVERSATION_STARTED\x10\x01\x12\x19\n\x15\x43ONVERSATION_FINISHED\x10\x02\x12\x1d\n\x19HUMAN_INTERVENTION_NEEDED\x10\x03\x12\x0f\n\x0bNEW_MESSAGE\x10\x05\x12\x1a\n\x16NEW_RECOGNITION_RESULT\x10\x07\x12\x17\n\x13UNRECOVERABLE_ERROR\x10\x04\x42\t\n\x07payloadB\x9c\x01\n\x1e\x63om.google.cloud.dialogflow.v2B\x16\x43onversationEventProtoP\x01Z>cloud.google.com/go/dialogflow/apiv2/dialogflowpb;dialogflowpb\xa2\x02\x02\x44\x46\xaa\x02\x1aGoogle.Cloud.Dialogflow.V2b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -25,6 +26,7 @@ rescue TypeError
   imports = [
     ["google.rpc.Status", "google/rpc/status.proto"],
     ["google.cloud.dialogflow.v2.Message", "google/cloud/dialogflow/v2/participant.proto"],
+    ["google.cloud.dialogflow.v2.StreamingRecognitionResult", "google/cloud/dialogflow/v2/session.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor
