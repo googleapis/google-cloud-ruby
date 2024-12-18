@@ -53,9 +53,9 @@ module Google
             # Creates a new [KeyHandle][google.cloud.kms.v1.KeyHandle], triggering the
             # provisioning of a new [CryptoKey][google.cloud.kms.v1.CryptoKey] for CMEK
             # use with the given resource type in the configured key project and the same
-            # location. [GetOperation][Operations.GetOperation] should be used to resolve
-            # the resulting long-running operation and get the resulting
-            # [KeyHandle][google.cloud.kms.v1.KeyHandle] and
+            # location. [GetOperation][google.longrunning.Operations.GetOperation] should
+            # be used to resolve the resulting long-running operation and get the
+            # resulting [KeyHandle][google.cloud.kms.v1.KeyHandle] and
             # [CryptoKey][google.cloud.kms.v1.CryptoKey].
             rpc :CreateKeyHandle, ::Google::Cloud::Kms::V1::CreateKeyHandleRequest, ::Google::Longrunning::Operation
             # Returns the [KeyHandle][google.cloud.kms.v1.KeyHandle].
