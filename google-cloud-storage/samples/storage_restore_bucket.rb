@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-require 'pry'
 
 # [START storage_delete_bucket]
 def restore_bucket bucket_name:, generation:
@@ -24,22 +23,16 @@ def restore_bucket bucket_name:, generation:
   require_relative '../lib/google/cloud/storage/bucket'
   # require_relative '../lib/google/cloud/storage/bucket/list'
   require_relative '../lib/google/cloud/storage/service'
-  require "pry"
-
 
   storage = Google::Cloud::Storage.new
 
   bucket_restored = storage.restore_bucket bucket_name, generation
-  # fetching soft deleted bucket list
-#   deleted_buckets = storage.buckets soft_deleted: true
-  binding.pry
 
   if bucket_restored.name == bucket_name
     puts "#{bucket_name} Bucket restored"
   else
-    puts "#{bucket_name} Bucket not restored" 
+    puts "#{bucket_name} Bucket not restored"
   end
-
 end
 # [END storage_delete_bucket]
 
