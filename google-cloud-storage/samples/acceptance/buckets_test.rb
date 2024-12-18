@@ -55,7 +55,6 @@ require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
-require "pry"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -127,7 +126,7 @@ describe "Buckets Snippets" do
 
     it "get soft deleted bucket generation" do
       out, _err = capture_io do
-        bucket.gapi.generation
+        bucket.generation
       end
       assert generation, "Bucket generation should be present"
      end
@@ -138,12 +137,12 @@ describe "Buckets Snippets" do
       out, _err = capture_io do
         get_soft_deleted_bucket bucket_name: bucket.name, generation:generation
       end
-      assert "soft_delete_time", "Bucket soft_delete_time should be present"
-      assert "hard_delete_time", "Bucket hard_delete_time should be present"
+      assert "soft_delete_time - #{bucket.soft_delete_time}", "Bucket soft_delete_time should be present"
+      assert "hard_delete_time - #{bucket.hard_delete_time}", "Bucket hard_delete_time should be present"
     end
 
      it "lists soft deleted buckets" do
-    
+      bucket.delete
       list_deleted_bucket, _err = capture_io do
         list_soft_deleted_buckets
       end
