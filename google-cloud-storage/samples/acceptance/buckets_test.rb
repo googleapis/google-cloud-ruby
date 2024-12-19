@@ -40,8 +40,10 @@ require_relative "../storage_get_default_event_based_hold"
 require_relative "../storage_get_public_access_prevention"
 require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
+require_relative "../storage_get_soft_deleted_bucket"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
+require_relative "../storage_list_soft_deleted_buckets"
 require_relative "../storage_lock_retention_policy"
 require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
@@ -118,6 +120,37 @@ describe "Buckets Snippets" do
       delete_bucket_helper secondary_bucket_name
     end
   end
+
+  describe "storage_soft_deleted_bucket" do
+    let(:generation) {bucket.gapi.generation}
+
+    it "get soft deleted bucket generation" do
+      out, _err = capture_io do
+        bucket.generation
+      end
+      assert generation, "Bucket generation should be present"
+     end
+
+
+    it "get soft deleted bucket soft_delete_time and hard_delete_time" do
+      bucket.delete
+      out, _err = capture_io do
+        get_soft_deleted_bucket bucket_name: bucket.name, generation:generation
+      end
+      assert "soft_delete_time - #{bucket.soft_delete_time}", "Bucket soft_delete_time should be present"
+      assert "hard_delete_time - #{bucket.hard_delete_time}", "Bucket hard_delete_time should be present"
+    end
+
+     it "lists soft deleted buckets" do
+      bucket.delete
+      list_deleted_bucket, _err = capture_io do
+        list_soft_deleted_buckets
+      end
+      assert_includes list_deleted_bucket, bucket.name
+    end
+
+  end
+
 
   describe "storage_create_bucket_dual_region" do
     it "creates dual region bucket" do

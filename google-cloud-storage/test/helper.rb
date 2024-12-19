@@ -71,7 +71,8 @@ class MockStorage < Minitest::Spec
                          enable_object_retention: nil,
                          effective_time: DateTime.now,
                          retention_duration_seconds: 604800, # 7 days
-                         hierarchical_namespace: nil
+                         hierarchical_namespace: nil,
+                         generation: "1733393981548601746"
     versioning_config = { "enabled" => versioning } if versioning
     { "kind" => "storage#bucket",
       "id" => name,
@@ -79,6 +80,7 @@ class MockStorage < Minitest::Spec
       "projectNumber" => "1234567890",
       "name" => name,
       "timeCreated" => Time.now,
+      "generation" => generation,
       "metageneration" => "1",
       "owner" => { "entity" => "project-owners-1234567890" },
       "location" => location,
@@ -94,6 +96,57 @@ class MockStorage < Minitest::Spec
       "etag" => "CAE=",
       "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
       "enableObjectRetention" => enable_object_retention,
+      "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
+      "hierarchicalNamespace" => hierarchical_namespace
+    }.delete_if { |_, v| v.nil? }
+  end
+  def random_deleted_bucket_hash name: random_bucket_name,
+                         url_root: "https://www.googleapis.com/storage/v1",
+                         location: "US",
+                         storage_class: "STANDARD",
+                         versioning: nil,
+                         logging_bucket: nil,
+                         logging_prefix: nil,
+                         website_main: nil,
+                         website_404: nil,
+                         cors: [],
+                         requester_pays: nil,
+                         lifecycle: nil,
+                         location_type: "multi-region",
+                         rpo: "DEFAULT",
+                         autoclass_enabled: nil,
+                         autoclass_terminal_storage_class: nil,
+                         enable_object_retention: nil,
+                         effective_time: DateTime.now,
+                         retention_duration_seconds: 604800, # 7 days
+                         hierarchical_namespace: nil,
+                         generation: "1733393981548601746"
+    versioning_config = { "enabled" => versioning } if versioning
+    { "kind" => "storage#bucket",
+      "id" => name,
+      "selfLink" => "#{url_root}/b/#{name}",
+      "projectNumber" => "1234567890",
+      "name" => name,
+      "timeCreated" => Time.now,
+      "generation" => generation,
+      "metageneration" => "1",
+      "owner" => { "entity" => "project-owners-1234567890" },
+      "location" => location,
+      "locationType" => location_type,
+      "rpo" => rpo,
+      "cors" => cors,
+      "lifecycle" => lifecycle,
+      "logging" => logging_hash(logging_bucket, logging_prefix),
+      "storageClass" => storage_class,
+      "versioning" => versioning_config,
+      "website" => website_hash(website_main, website_404),
+      "billing" => billing_hash(requester_pays),
+      "etag" => "CAE=",
+      "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
+      "enableObjectRetention" => enable_object_retention,
+      "softDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time,
+      "hardDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time
+                                                                                                           .to_time + retention_duration_seconds,  
       "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
       "hierarchicalNamespace" => hierarchical_namespace
     }.delete_if { |_, v| v.nil? }
@@ -282,11 +335,15 @@ class MockStorage < Minitest::Spec
   def get_bucket_args if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
                       user_project: nil,
+                      generation: nil,
+                      soft_deleted: nil,
                       options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project,
+      generation: generation,
+      soft_deleted: soft_deleted,
       options: options
     }
   end
