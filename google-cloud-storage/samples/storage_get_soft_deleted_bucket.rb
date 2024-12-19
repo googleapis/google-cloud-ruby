@@ -16,17 +16,13 @@
 def get_soft_deleted_bucket bucket_name:, generation:
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
+  # The generation no of your GCS bucket
+  # generation = "1234567896987"
 
-  # require "google/cloud/storage"
-  require_relative '../lib/google/cloud/storage'
-  require_relative '../lib/google/cloud/storage/project'
-  require_relative '../lib/google/cloud/storage/bucket'
-  # require_relative '../lib/google/cloud/storage/bucket/list'
-  require_relative '../lib/google/cloud/storage/service'
+  require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
   bucket_name= bucket_name.gsub(/[^a-zA-Z0-9\- ]/, "")
-
 
   # fetching soft deleted bucket with soft_delete_time and hard_delete_time
   deleted_bucket_fetch = storage.bucket bucket_name, generation: generation, soft_deleted: true
