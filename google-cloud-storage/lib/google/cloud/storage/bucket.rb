@@ -24,7 +24,6 @@ require "google/cloud/storage/policy"
 require "google/cloud/storage/post_object"
 require "pathname"
 
-
 module Google
   module Cloud
     module Storage
