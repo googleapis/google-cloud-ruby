@@ -232,6 +232,10 @@ module Google
         #   account, transit costs will be billed to the given project. This
         #   parameter is required with requester pays-enabled buckets. The
         #   default is `nil`.
+        # @param [fixedInt] generation generation no of bucket
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Boolean] soft_deleted If true, returns the soft-deleted bucket. 
+        #   This parameter is required if generation is specified.
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instance and its files.
@@ -265,7 +269,16 @@ module Google
         #   bucket = storage.bucket "other-project-bucket",
         #                           user_project: "my-other-project"
         #   files = bucket.files # Billed to "my-other-project"
+        # @example With `soft_deleted` set to a true and generation specified:
+        #   require "google/cloud/storage"
         #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket",
+        #                           soft_deleted: true,
+        #                           generation: 1234567889
+        #   puts bucket.name
+        # 
         def bucket bucket_name,
                    skip_lookup: false,
                    generation: nil,
@@ -573,15 +586,6 @@ module Google
         #
         # @param [String] bucket_name Name of a bucket.
         # @param [Fixnum] generation generation of a bucket.
-        # @param [Boolean] skip_lookup Optionally create a Bucket object
-        #   without verifying the bucket resource exists on the Storage service.
-        #   Calls made on this object will raise errors if the bucket resource
-        #   does not exist. Default is `false`.
-        # @param [Integer] if_metageneration_match Makes the operation conditional
-        #   on whether the bucket's current metageneration matches the given value.
-        # @param [Boolean] soft_deleted If this parameter is set to
-        #   `true` project looks in the list of soft deleted buckets
-        #
         #
         # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
         #   does not exist
@@ -592,7 +596,7 @@ module Google
         #   storage = Google::Cloud::Storage.new
         #   generation= 123
         #
-        #   bucket = storage.restore_bucket "my-bucket", generation, soft_deleted: true
+        #   bucket = storage.restore_bucket "my-bucket", generation
         #   puts bucket.name
         #
         def restore_bucket bucket_name,
