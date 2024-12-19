@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2022 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,17 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "rake/testtask"
-require "rubocop/rake_task"
+require "uri"
 
-Rake::TestTask.new "global_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].exclude(/regional/)
-  t.warning = false
+require_relative "regional_helper"
+
+describe "#list_regional_secrets_with_filter", :secret_manager_snippet do
+  it "lists the regional secrets with the filter passed" do
+    sample = SampleLoader.load "list_regional_secrets_with_filter.rb"
+
+    refute_nil secret
+
+    assert_output %r{Got regional secret projects/\S+/locations/\S+/secrets/#{Regexp.escape secret_id}} do
+      sample.run project_id: project_id, location_id: location_id, filter: filter
+    end
+  end
 end
-
-Rake::TestTask.new "regional_test" do |t|
-  t.test_files = FileList["acceptance/*_test.rb"].select { |file| file =~ /regional/ }
-  t.warning = false
-end
-
-RuboCop::RakeTask.new
