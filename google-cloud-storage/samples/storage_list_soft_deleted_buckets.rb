@@ -14,15 +14,8 @@
 
 # [START storage_list_soft_deleted_buckets]
 def list_soft_deleted_buckets
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
 
-  # require "google/cloud/storage"
-  require_relative "../lib/google/cloud/storage"
-  require_relative "../lib/google/cloud/storage/project"
-  require_relative "../lib/google/cloud/storage/bucket"
-  # require_relative '../lib/google/cloud/storage/bucket/list'
-  require_relative "../lib/google/cloud/storage/service"
+  require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
 
