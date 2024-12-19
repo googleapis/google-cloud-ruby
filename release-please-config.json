@@ -1827,6 +1827,10 @@
       "component": "google-shopping-merchant-reports-v1beta",
       "version_file": "lib/google/shopping/merchant/reports/v1beta/version.rb"
     },
+    "google-shopping-merchant-reviews-v1beta": {
+      "component": "google-shopping-merchant-reviews-v1beta",
+      "version_file": "lib/google/shopping/merchant/reviews/v1beta/version.rb"
+    },
     "grafeas": {
       "component": "grafeas",
       "version_file": "lib/grafeas/version.rb"
