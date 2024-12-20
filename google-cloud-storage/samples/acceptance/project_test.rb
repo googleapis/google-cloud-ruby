@@ -31,16 +31,15 @@ describe "Storage Quickstart" do
 end
 
 describe "storage_soft_deleted_bucket" do
-  let(:storage_client)   { Google::Cloud::Storage.new }
+  let(:storage_client)  { Google::Cloud::Storage.new }
   let(:bucket) { fixture_bucket }
-  let(:generation) {bucket.gapi.generation}
+  let(:generation) { bucket.gapi.generation }
 
   it "restores a soft deleted bucket" do
     bucket.delete
-    out, _err = capture_io do
-      restore_bucket bucket_name: bucket.name, generation:generation
+    _out, _err = capture_io do
+      restore_bucket bucket_name: bucket.name, generation: generation
     end
     assert "soft_delete_time", "#{bucket.name} Bucket restored"
   end
-
 end
