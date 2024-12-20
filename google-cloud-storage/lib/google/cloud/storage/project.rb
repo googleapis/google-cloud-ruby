@@ -234,7 +234,7 @@ module Google
         #   default is `nil`.
         # @param [fixedInt] generation generation no of bucket
         #   on whether the bucket's current metageneration matches the given value.
-        # @param [Boolean] soft_deleted If true, returns the soft-deleted bucket. 
+        # @param [Boolean] soft_deleted If true, returns the soft-deleted bucket.
         #   This parameter is required if generation is specified.
         #
         #   The value provided will be applied to all operations on the returned
