@@ -22,14 +22,14 @@ def get_soft_deleted_bucket bucket_name:, generation:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket_name= bucket_name.gsub(/[^a-zA-Z0-9\- ]/, "")
+  bucket_name = bucket_name.gsub(/[^a-zA-Z0-9\- ]/, "")
 
   # fetching soft deleted bucket with soft_delete_time and hard_delete_time
   deleted_bucket_fetch = storage.bucket bucket_name, generation: generation, soft_deleted: true
 
   soft_delete_time = deleted_bucket_fetch.soft_delete_time
   hard_delete_time = deleted_bucket_fetch.hard_delete_time
-  
+
   if (soft_delete_time && hard_delete_time).nil?
     puts "Not Found"
   else
