@@ -155,6 +155,7 @@ module Google
             buckets.instance_variable_set :@prefix, prefix
             buckets.instance_variable_set :@max, max
             buckets.instance_variable_set :@user_project, user_project
+            buckets.instance_variable_set :@soft_deleted, soft_deleted
             buckets
           end
 

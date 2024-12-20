@@ -278,7 +278,7 @@ module Google
         #                           soft_deleted: true,
         #                           generation: 1234567889
         #   puts bucket.name
-        # 
+        #
         def bucket bucket_name,
                    skip_lookup: false,
                    generation: nil,
