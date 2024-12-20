@@ -14,7 +14,6 @@
 
 # [START storage_list_soft_deleted_buckets]
 def list_soft_deleted_buckets
-
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
