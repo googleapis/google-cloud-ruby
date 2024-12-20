@@ -55,7 +55,9 @@ module Google
         #     Feed Label is synonymous to "target country" and hence should always be a
         #     valid region code. For example: 'DE' for Germany, 'FR' for France.
         # @!attribute [rw] freshness_time
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Protobuf::Timestamp]
+        #     DEPRECATED. Use expiration_date instead.
         #     Represents the existing version (freshness) of the CSS Product, which
         #     can be used to preserve the right order when multiple updates are done at
         #     the same time.
@@ -98,13 +100,44 @@ module Google
         #   @return [::Google::Shopping::Css::V1::CssProductInput]
         #     Required. The CSS Product Input to insert.
         # @!attribute [rw] feed_id
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Integer]
-        #     Required. The primary or supplemental feed id. If CSS Product already
-        #     exists and feed id provided is different, then the CSS Product will be
-        #     moved to a new feed. Note: For now, CSSs do not need to provide feed ids as
-        #     we create feeds on the fly. We do not have supplemental feed support for
-        #     CSS Products yet.
+        #     Optional. DEPRECATED. Feed id is not required for CSS Products.
+        #     The primary or supplemental feed id. If CSS Product already exists and
+        #     feed id provided is different, then the CSS Product will be moved to a
+        #     new feed.
+        #     Note: For now, CSSs do not need to provide feed ids as we create
+        #     feeds on the fly.
+        #     We do not have supplemental feed support for CSS Products yet.
         class InsertCssProductInputRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the UpdateCssProductInput method.
+        # @!attribute [rw] css_product_input
+        #   @return [::Google::Shopping::Css::V1::CssProductInput]
+        #     Required. The CSS product input resource to update. Information you submit
+        #     will be applied to the processed CSS product as well.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of CSS product attributes to be updated.
+        #
+        #     If the update mask is omitted, then it is treated as implied field mask
+        #     equivalent to all fields that are populated (have a non-empty value).
+        #
+        #     Attributes specified in the update mask without a value specified in the
+        #     body will be deleted from the CSS product.
+        #
+        #     Update mask can only be specified for top level fields in
+        #     attributes and custom attributes.
+        #
+        #     To specify the update mask for custom attributes you need to add the
+        #     `custom_attribute.` prefix.
+        #
+        #     Providing special "*" value for full CSS product replacement is not
+        #     supported.
+        class UpdateCssProductInputRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
