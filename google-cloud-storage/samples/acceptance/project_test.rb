@@ -31,7 +31,7 @@ describe "Storage Quickstart" do
 end
 
 describe "storage_soft_deleted_bucket" do
-  let(:storage_client)  { Google::Cloud::Storage.new }
+  let(:storage_client) { Google::Cloud::Storage.new }
   let(:bucket) { fixture_bucket }
   let(:generation) { bucket.gapi.generation }
 
