@@ -188,15 +188,18 @@ def invalid_range_query project_id:, collection_path: "cities"
   # [END firestore_query_filter_range_invalid]
 end
 
-def firestore_query_filter_compound_multi_ineq project_id:, collection_path: "cities"
+def query_filter_compound_multi_ineq project_id:, collection_path: "cities"
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "cities"
 
   firestore  = Google::Cloud::Firestore.new project_id: project_id
-  cities_ref = firestore.col collection_path
   # [START firestore_query_filter_compound_multi_ineq]
-  invalid_range_query = cities_ref.where("population", ">", 1_000_000).where("density", "<", 1_000)
+  cities_ref = firestore.col collection_path
+  compound_multi_ineq_query = cities_ref.where("population", ">", 1_000_000).where("density", "<", 5_000)
   # [END firestore_query_filter_compound_multi_ineq]
+  compound_multi_ineq_query.get do |city|
+    puts "Document #{city.document_id} returned by query population>1_000_000 AND density<5_000"
+  end
 end
 
 def in_query_without_array project_id:, collection_path: "cities"
