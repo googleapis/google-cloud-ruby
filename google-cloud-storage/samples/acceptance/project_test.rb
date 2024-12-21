@@ -36,7 +36,7 @@ describe "storage_soft_deleted_bucket" do
   let(:generation) { bucket.gapi.generation }
 
   it "restores a soft deleted bucket" do
-    bucket.delete
+    delete_bucket_helper bucket.name
     _out, _err = capture_io do
       restore_bucket bucket_name: bucket.name, generation: generation
     end

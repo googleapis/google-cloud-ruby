@@ -20,12 +20,14 @@ source "https://rubygems.org"
 if ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
   gem "google-cloud-kms", group: :test, path: "../../google-cloud-kms"
   gem "google-cloud-pubsub", group: :test, path: "../../google-cloud-pubsub"
+  gem "google-cloud-storage", path: "../../google-cloud-storage"
 else
   gem "google-cloud-kms"
   gem "google-cloud-pubsub"
+  # [START storage_dependencies]
+  gem "google-cloud-storage"
+  # [END storage_dependencies]
 end
-gem "google-cloud-storage", path: "../../google-cloud-storage"
-
 
 group :test do
   gem "google-style", "~> 1.30.0"

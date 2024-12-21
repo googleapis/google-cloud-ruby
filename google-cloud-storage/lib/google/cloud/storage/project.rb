@@ -232,7 +232,7 @@ module Google
         #   account, transit costs will be billed to the given project. This
         #   parameter is required with requester pays-enabled buckets. The
         #   default is `nil`.
-        # @param [fixedInt] generation generation no of bucket
+        # @param [Integer] generation generation no of bucket
         #   on whether the bucket's current metageneration matches the given value.
         # @param [Boolean] soft_deleted If true, returns the soft-deleted bucket.
         #   This parameter is required if generation is specified.

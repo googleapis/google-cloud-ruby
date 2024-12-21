@@ -2287,7 +2287,7 @@ module Google
         # bucket = storage.bucket "my-bucket"
         # generation= bucket.generation
         def generation
-          @generation = @gapi.generation
+          @gapi.generation
         end
 
         # Fetches soft_delete_time of a soft deleted bucket
@@ -2295,14 +2295,14 @@ module Google
         # bucket.delete
         # bucket.soft_delete_time
         def soft_delete_time
-          @soft_delete_time = @gapi.soft_delete_time
+          @gapi.soft_delete_time
         end
 
         # Fetches hard_delete_time of a soft deleted bucket
         # @example
         # bucket.hard_delete_time
         def hard_delete_time
-          @hard_delete_time = @gapi.hard_delete_time
+          @gapi.hard_delete_time
         end
 
         ##

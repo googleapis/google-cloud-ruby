@@ -646,9 +646,10 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
   it "lists deleted buckets" do
     num_buckets = 3
+    soft_deleted= true
 
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_deleted_buckets_gapi(num_buckets), [project], prefix: nil, page_token: nil,
+    mock.expect :list_buckets, list_buckets_gapi(num_buckets,nil,soft_deleted), [project], prefix: nil, page_token: nil,
 max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
     storage.service.mocked_service = mock
@@ -866,13 +867,14 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
   it "finds a deleted bucket" do
     bucket_name = "found-bucket"
     generation = 1_733_393_981_548_601_746
+    soft_deleted= true
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_deleted_bucket_gapi(bucket_name),
-                [bucket_name], **get_bucket_args(soft_deleted: true, generation: generation)
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name, soft_deleted),
+                [bucket_name], **get_bucket_args(soft_deleted: soft_deleted, generation: generation)
 
     storage.service.mocked_service = mock
-    bucket = storage.bucket bucket_name, soft_deleted: true, generation: generation
+    bucket = storage.bucket bucket_name, soft_deleted: soft_deleted, generation: generation
 
     mock.verify
 
@@ -1067,23 +1069,13 @@ max_results: nil, user_project: nil, soft_deleted: true, options: {}
     Google::Apis::StorageV1::Bucket.new **options
   end
 
-  def find_deleted_bucket_gapi name = nil
-    Google::Apis::StorageV1::Bucket.from_json random_deleted_bucket_hash(name: name).to_json
+
+  def find_bucket_gapi name = nil, soft_deleted= nil
+    Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name, soft_deleted: soft_deleted).to_json
   end
 
-  def find_bucket_gapi name = nil
-    Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name).to_json
-  end
-
-  def list_buckets_gapi count = 2, token = nil
-    buckets = count.times.map { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash.to_json }
-    Google::Apis::StorageV1::Buckets.new(
-      kind: "storage#buckets", items: buckets, next_page_token: token
-    )
-  end
-
-  def list_deleted_buckets_gapi count = 2, token = nil
-    buckets = count.times.map { Google::Apis::StorageV1::Bucket.from_json random_deleted_bucket_hash.to_json }
+  def list_buckets_gapi count = 2, token = nil,  soft_deleted = nil
+    buckets = count.times.map { Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(soft_deleted: soft_deleted).to_json }
     Google::Apis::StorageV1::Buckets.new(
       kind: "storage#buckets", items: buckets, next_page_token: token
     )
