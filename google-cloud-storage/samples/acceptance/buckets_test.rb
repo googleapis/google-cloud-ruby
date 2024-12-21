@@ -125,7 +125,6 @@ describe "Buckets Snippets" do
     let(:generation) { bucket.generation }
 
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
-
       delete_bucket_helper bucket.name
       _out, _err = capture_io do
         get_soft_deleted_bucket bucket_name: bucket.name, generation: generation
