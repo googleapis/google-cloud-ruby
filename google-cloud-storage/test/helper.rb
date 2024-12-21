@@ -23,6 +23,7 @@ require "json"
 require "base64"
 require "uri"
 require "google/cloud/storage"
+require "pry"
 
 ##
 # Monkey-Patch Google API Client to support Mocks
@@ -70,11 +71,14 @@ class MockStorage < Minitest::Spec
                          autoclass_terminal_storage_class: nil,
                          enable_object_retention: nil,
                          effective_time: DateTime.now,
-                         retention_duration_seconds: 604800, # 7 days
+                         retention_duration_seconds: 604_800, # 7 days
+                         soft_deleted: nil,
                          hierarchical_namespace: nil,
                          generation: "1733393981548601746"
     versioning_config = { "enabled" => versioning } if versioning
-    { "kind" => "storage#bucket",
+
+    data = {
+      "kind" => "storage#bucket",
       "id" => name,
       "selfLink" => "#{url_root}/b/#{name}",
       "projectNumber" => "1234567890",
@@ -98,61 +102,16 @@ class MockStorage < Minitest::Spec
       "enableObjectRetention" => enable_object_retention,
       "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
       "hierarchicalNamespace" => hierarchical_namespace
-    }.delete_if { |_, v| v.nil? }
-  end
-  def random_deleted_bucket_hash name: random_bucket_name,
-                         url_root: "https://www.googleapis.com/storage/v1",
-                         location: "US",
-                         storage_class: "STANDARD",
-                         versioning: nil,
-                         logging_bucket: nil,
-                         logging_prefix: nil,
-                         website_main: nil,
-                         website_404: nil,
-                         cors: [],
-                         requester_pays: nil,
-                         lifecycle: nil,
-                         location_type: "multi-region",
-                         rpo: "DEFAULT",
-                         autoclass_enabled: nil,
-                         autoclass_terminal_storage_class: nil,
-                         enable_object_retention: nil,
-                         effective_time: DateTime.now,
-                         retention_duration_seconds: 604800, # 7 days
-                         hierarchical_namespace: nil,
-                         generation: "1733393981548601746"
-    versioning_config = { "enabled" => versioning } if versioning
-    { "kind" => "storage#bucket",
-      "id" => name,
-      "selfLink" => "#{url_root}/b/#{name}",
-      "projectNumber" => "1234567890",
-      "name" => name,
-      "timeCreated" => Time.now,
-      "generation" => generation,
-      "metageneration" => "1",
-      "owner" => { "entity" => "project-owners-1234567890" },
-      "location" => location,
-      "locationType" => location_type,
-      "rpo" => rpo,
-      "cors" => cors,
-      "lifecycle" => lifecycle,
-      "logging" => logging_hash(logging_bucket, logging_prefix),
-      "storageClass" => storage_class,
-      "versioning" => versioning_config,
-      "website" => website_hash(website_main, website_404),
-      "billing" => billing_hash(requester_pays),
-      "etag" => "CAE=",
-      "autoclass" => autoclass_config_hash(autoclass_enabled, autoclass_terminal_storage_class),
-      "enableObjectRetention" => enable_object_retention,
-      "softDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time,
-      "hardDeleteTime" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds).effective_time
-                                                                                                           .to_time + retention_duration_seconds,  
-      "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
-      "hierarchicalNamespace" => hierarchical_namespace
-    }.delete_if { |_, v| v.nil? }
+    }
+    if soft_deleted
+      soft_delete_policy = soft_delete_policy_object retention_duration_seconds: retention_duration_seconds
+      data["softDeleteTime"] = soft_delete_policy.effective_time
+      data["hardDeleteTime"] = soft_delete_policy.effective_time.to_time + retention_duration_seconds
+    end
+    data.delete_if { |_, v| v.nil? }
   end
 
-  def soft_delete_policy_object retention_duration_seconds: 604800 # 7 days
+  def soft_delete_policy_object retention_duration_seconds: 604_800 # 7 days
     Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
       effective_time: DateTime.now,
       retention_duration_seconds: retention_duration_seconds
