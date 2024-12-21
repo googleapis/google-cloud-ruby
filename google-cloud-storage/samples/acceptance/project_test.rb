@@ -14,6 +14,7 @@
 
 require_relative "helper"
 require_relative "../storage_get_service_account"
+require_relative "../storage_restore_bucket"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
@@ -26,5 +27,19 @@ describe "Storage Quickstart" do
     assert_includes out,
                     "The GCS service account for project #{project.project_id} is: #{project.service_account_email}"
     assert_includes out, "@gs-project-accounts.iam.gserviceaccount.com"
+  end
+end
+
+describe "storage_soft_deleted_bucket" do
+  let(:storage_client) { Google::Cloud::Storage.new }
+  let(:bucket) { fixture_bucket }
+  let(:generation) { bucket.gapi.generation }
+
+  it "restores a soft deleted bucket" do
+    delete_bucket_helper bucket.name
+    _out, _err = capture_io do
+      restore_bucket bucket_name: bucket.name, generation: generation
+    end
+    assert "soft_delete_time", "#{bucket.name} Bucket restored"
   end
 end

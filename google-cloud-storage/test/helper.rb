@@ -70,15 +70,20 @@ class MockStorage < Minitest::Spec
                          autoclass_terminal_storage_class: nil,
                          enable_object_retention: nil,
                          effective_time: DateTime.now,
-                         retention_duration_seconds: 604800, # 7 days
-                         hierarchical_namespace: nil
+                         retention_duration_seconds: 604_800, # 7 days
+                         soft_deleted: nil,
+                         hierarchical_namespace: nil,
+                         generation: "1733393981548601746"
     versioning_config = { "enabled" => versioning } if versioning
-    { "kind" => "storage#bucket",
+
+    data = {
+      "kind" => "storage#bucket",
       "id" => name,
       "selfLink" => "#{url_root}/b/#{name}",
       "projectNumber" => "1234567890",
       "name" => name,
       "timeCreated" => Time.now,
+      "generation" => generation,
       "metageneration" => "1",
       "owner" => { "entity" => "project-owners-1234567890" },
       "location" => location,
@@ -96,10 +101,16 @@ class MockStorage < Minitest::Spec
       "enableObjectRetention" => enable_object_retention,
       "softDeletePolicy" => soft_delete_policy_object(retention_duration_seconds: retention_duration_seconds),
       "hierarchicalNamespace" => hierarchical_namespace
-    }.delete_if { |_, v| v.nil? }
+    }
+    if soft_deleted
+      soft_delete_policy = soft_delete_policy_object retention_duration_seconds: retention_duration_seconds
+      data["softDeleteTime"] = soft_delete_policy.effective_time
+      data["hardDeleteTime"] = soft_delete_policy.effective_time.to_time + retention_duration_seconds
+    end
+    data.delete_if { |_, v| v.nil? }
   end
 
-  def soft_delete_policy_object retention_duration_seconds: 604800 # 7 days
+  def soft_delete_policy_object retention_duration_seconds: 604_800 # 7 days
     Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
       effective_time: DateTime.now,
       retention_duration_seconds: retention_duration_seconds
@@ -282,11 +293,15 @@ class MockStorage < Minitest::Spec
   def get_bucket_args if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
                       user_project: nil,
+                      generation: nil,
+                      soft_deleted: nil,
                       options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project,
+      generation: generation,
+      soft_deleted: soft_deleted,
       options: options
     }
   end
