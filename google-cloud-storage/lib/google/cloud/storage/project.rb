@@ -584,8 +584,8 @@ module Google
         ##
         # Restores a soft deleted bucket with bucket name and generation.
         #
-        # @param [String] bucket_name Name of a bucket.
-        # @param [Fixnum] generation generation of a bucket.
+        # @param [String] bucket_name Name of the bucket.
+        # @param [Fixnum] generation generation of the bucket.
         #
         # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
         #   does not exist
