@@ -122,12 +122,11 @@ describe "Buckets Snippets" do
   end
 
   describe "storage_soft_deleted_bucket" do
-    let(:new_bucket_name) {random_bucket_name}
+    let(:new_bucket_name) { random_bucket_name }
 
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
-
       new_bucket = storage_client.create_bucket new_bucket_name
-      new_generation = new_bucket.generation 
+      new_generation = new_bucket.generation
 
       delete_bucket_helper new_bucket_name
       _out, _err = capture_io do
