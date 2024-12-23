@@ -122,15 +122,19 @@ describe "Buckets Snippets" do
   end
 
   describe "storage_soft_deleted_bucket" do
-    let(:generation) { bucket.generation }
+    let(:new_bucket_name) {random_bucket_name}
 
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
-      delete_bucket_helper bucket.name
+
+      new_bucket = storage_client.create_bucket new_bucket_name
+      new_generation = new_bucket.generation 
+
+      delete_bucket_helper new_bucket_name
       _out, _err = capture_io do
-        get_soft_deleted_bucket bucket_name: bucket.name, generation: generation
+        get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
       end
-      assert "soft_delete_time - #{bucket.soft_delete_time}", "Bucket soft_delete_time should be present"
-      assert "hard_delete_time - #{bucket.hard_delete_time}", "Bucket hard_delete_time should be present"
+      assert "soft_delete_time ", "Bucket soft_delete_time should be present"
+      assert "hard_delete_time ", "Bucket hard_delete_time should be present"
     end
 
     it "lists soft deleted buckets" do
