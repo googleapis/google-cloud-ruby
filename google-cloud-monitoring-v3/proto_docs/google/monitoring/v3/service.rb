@@ -351,7 +351,7 @@ module Google
         # @!attribute [rw] goal
         #   @return [::Float]
         #     The fraction of service that must be good in order for this objective to be
-        #     met. `0 < goal <= 0.999`.
+        #     met. `0 < goal <= 0.9999`.
         # @!attribute [rw] rolling_period
         #   @return [::Google::Protobuf::Duration]
         #     A rolling time period, semantically "in the past `<rolling_period>`".

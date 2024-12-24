@@ -62,11 +62,12 @@ module Google
     #   @return [::Google::Protobuf::Map{::String => ::String}]
     #     Additional structured details about this error.
     #
-    #     Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in
+    #     Keys must match a regular expression of `[a-z][a-zA-Z0-9-_]+` but should
+    #     ideally be lowerCamelCase. Also, they must be limited to 64 characters in
     #     length. When identifying the current value of an exceeded limit, the units
     #     should be contained in the key, not the value.  For example, rather than
-    #     \\{"instanceLimit": "100/request"}, should be returned as,
-    #     \\{"instanceLimitPerRequest": "100"}, if the client exceeds the number of
+    #     `{"instanceLimit": "100/request"}`, should be returned as,
+    #     `{"instanceLimitPerRequest": "100"}`, if the client exceeds the number of
     #     instances that can be created in a single (batch) request.
     class ErrorInfo
       include ::Google::Protobuf::MessageExts
@@ -242,6 +243,18 @@ module Google
       # @!attribute [rw] description
       #   @return [::String]
       #     A description of why the request element is bad.
+      # @!attribute [rw] reason
+      #   @return [::String]
+      #     The reason of the field-level error. This is a constant value that
+      #     identifies the proximate cause of the field-level error. It should
+      #     uniquely identify the type of the FieldViolation within the scope of the
+      #     google.rpc.ErrorInfo.domain. This should be at most 63
+      #     characters and match a regular expression of `[A-Z][A-Z0-9_]+[A-Z0-9]`,
+      #     which represents UPPER_SNAKE_CASE.
+      # @!attribute [rw] localized_message
+      #   @return [::Google::Rpc::LocalizedMessage]
+      #     Provides a localized error message for field-level errors that is safe to
+      #     return to the API consumer.
       class FieldViolation
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

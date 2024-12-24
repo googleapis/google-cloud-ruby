@@ -56,7 +56,7 @@ module Google
             # if the Uptime check configuration is referenced by an alert policy or
             # other dependent configs that would be rendered invalid by the deletion.
             rpc :DeleteUptimeCheckConfig, ::Google::Cloud::Monitoring::V3::DeleteUptimeCheckConfigRequest, ::Google::Protobuf::Empty
-            # Returns the list of IP addresses that checkers run from
+            # Returns the list of IP addresses that checkers run from.
             rpc :ListUptimeCheckIps, ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsRequest, ::Google::Cloud::Monitoring::V3::ListUptimeCheckIpsResponse
           end
 

@@ -89,7 +89,7 @@ module Google
         #         projects/[PROJECT_ID_OR_NUMBER]
         # @!attribute [rw] filter
         #   @return [::String]
-        #     If this field is empty, all custom and
+        #     Optional. If this field is empty, all custom and
         #     system-defined metric descriptors are returned.
         #     Otherwise, the [filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifies which metric descriptors are to be
@@ -99,14 +99,15 @@ module Google
         #         metric.type = starts_with("custom.googleapis.com/")
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     A positive number that is the maximum number of results to return. The
-        #     default and maximum value is 10,000. If a page_size <= 0 or > 10,000 is
-        #     submitted, will instead return a maximum of 10,000 results.
+        #     Optional. A positive number that is the maximum number of results to
+        #     return. The default and maximum value is 10,000. If a page_size <= 0 or >
+        #     10,000 is submitted, will instead return a maximum of 10,000 results.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     If this field is not empty then it must contain the `nextPageToken` value
-        #     returned by a previous call to this method.  Using this field causes the
-        #     method to return additional results from the previous method call.
+        #     Optional. If this field is not empty then it must contain the
+        #     `nextPageToken` value returned by a previous call to this method.  Using
+        #     this field causes the method to return additional results from the previous
+        #     method call.
         class ListMetricDescriptorsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -334,7 +335,10 @@ module Google
           end
         end
 
-        # The `QueryTimeSeries` request.
+        # The `QueryTimeSeries` request. For information about the status of
+        # Monitoring Query Language (MQL), see the [MQL deprecation
+        # notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The
@@ -360,7 +364,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The `QueryTimeSeries` response.
+        # The `QueryTimeSeries` response. For information about the status of
+        # Monitoring Query Language (MQL), see the [MQL deprecation
+        # notice](https://cloud.google.com/stackdriver/docs/deprecations/mql).
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] time_series_descriptor
         #   @return [::Google::Cloud::Monitoring::V3::TimeSeriesDescriptor]
         #     The descriptor for the time series data.

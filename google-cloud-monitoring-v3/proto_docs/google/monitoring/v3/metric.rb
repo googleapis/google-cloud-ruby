@@ -93,7 +93,14 @@ module Google
         #   @return [::String]
         #     The units in which the metric value is reported. It is only applicable
         #     if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
-        #     defines the representation of the stored metric values.
+        #     defines the representation of the stored metric values. This field can only
+        #     be changed through CreateTimeSeries when it is empty.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Input only. A detailed description of the time series that will be
+        #     associated with the
+        #     {::Google::Api::MetricDescriptor google.api.MetricDescriptor} for the metric.
+        #     Once set, this field cannot be changed through CreateTimeSeries.
         class TimeSeries
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

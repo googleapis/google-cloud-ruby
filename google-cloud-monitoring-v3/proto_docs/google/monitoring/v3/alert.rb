@@ -240,6 +240,9 @@ module Google
           # @!attribute [rw] condition_prometheus_query_language
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::PrometheusQueryLanguageCondition]
           #     A condition that uses the Prometheus query language to define alerts.
+          # @!attribute [rw] condition_sql
+          #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition]
+          #     A condition that periodically evaluates a SQL query result.
           class Condition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -585,6 +588,17 @@ module Google
             #     [valid Prometheus label
             #     name](https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels).
             #     This field may not exceed 2048 Unicode characters in length.
+            # @!attribute [rw] disable_metric_validation
+            #   @return [::Boolean]
+            #     Optional. Whether to disable metric existence validation for this
+            #     condition.
+            #
+            #     This allows alerting policies to be defined on metrics that do not yet
+            #     exist, improving advanced customer workflows such as configuring
+            #     alerting policies using Terraform.
+            #
+            #     Users with the `monitoring.alertPolicyViewer` role are able to see the
+            #     name of the non-existent metric in the alerting policy condition.
             class PrometheusQueryLanguageCondition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -594,6 +608,113 @@ module Google
               # @!attribute [rw] value
               #   @return [::String]
               class LabelsEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # A condition that allows alerting policies to be defined using GoogleSQL.
+            # SQL conditions examine a sliding window of logs using GoogleSQL.
+            # Alert policies with SQL conditions may incur additional billing.
+            # @!attribute [rw] query
+            #   @return [::String]
+            #     Required. The Log Analytics SQL query to run, as a string.  The query
+            #     must conform to the required shape. Specifically, the query must not
+            #     try to filter the input by time.  A filter will automatically be
+            #     applied to filter the input so that the query receives all rows
+            #     received since the last time the query was run.
+            #
+            #     For example, the following query extracts all log entries containing an
+            #     HTTP request:
+            #
+            #         SELECT
+            #           timestamp, log_name, severity, http_request, resource, labels
+            #         FROM
+            #           my-project.global._Default._AllLogs
+            #         WHERE
+            #           http_request IS NOT NULL
+            # @!attribute [rw] minutes
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::Minutes]
+            #     Schedule the query to execute every so many minutes.
+            # @!attribute [rw] hourly
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::Hourly]
+            #     Schedule the query to execute every so many hours.
+            # @!attribute [rw] daily
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::Daily]
+            #     Schedule the query to execute every so many days.
+            # @!attribute [rw] row_count_test
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::RowCountTest]
+            #     Test the row count against a threshold.
+            # @!attribute [rw] boolean_test
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::BooleanTest]
+            #     Test the boolean value in the indicated column.
+            class SqlCondition
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Used to schedule the query to run every so many minutes.
+              # @!attribute [rw] periodicity
+              #   @return [::Integer]
+              #     Required. Number of minutes between runs. The interval must be
+              #     greater than or equal to 5 minutes and less than or equal to 1440
+              #     minutes.
+              class Minutes
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Used to schedule the query to run every so many hours.
+              # @!attribute [rw] periodicity
+              #   @return [::Integer]
+              #     Required. The number of hours between runs. Must be greater than or
+              #     equal to 1 hour and less than or equal to 48 hours.
+              # @!attribute [rw] minute_offset
+              #   @return [::Integer]
+              #     Optional. The number of minutes after the hour (in UTC) to run the
+              #     query. Must be greater than or equal to 0 minutes and less than or
+              #     equal to 59 minutes.  If left unspecified, then an arbitrary offset
+              #     is used.
+              class Hourly
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Used to schedule the query to run every so many days.
+              # @!attribute [rw] periodicity
+              #   @return [::Integer]
+              #     Required. The number of days between runs. Must be greater than or
+              #     equal to 1 day and less than or equal to 31 days.
+              # @!attribute [rw] execution_time
+              #   @return [::Google::Type::TimeOfDay]
+              #     Optional. The time of day (in UTC) at which the query should run. If
+              #     left unspecified, the server picks an arbitrary time of day and runs
+              #     the query at the same time each day.
+              class Daily
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # A test that checks if the number of rows in the result set
+              # violates some threshold.
+              # @!attribute [rw] comparison
+              #   @return [::Google::Cloud::Monitoring::V3::ComparisonType]
+              #     Required. The comparison to apply between the number of rows returned
+              #     by the query and the threshold.
+              # @!attribute [rw] threshold
+              #   @return [::Integer]
+              #     Required. The value against which to compare the row count.
+              class RowCountTest
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # A test that uses an alerting result in a boolean column produced by
+              # the SQL query.
+              # @!attribute [rw] column
+              #   @return [::String]
+              #     Required. The name of the column containing the boolean value. If the
+              #     value in a row is NULL, that row is ignored.
+              class BooleanTest
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end

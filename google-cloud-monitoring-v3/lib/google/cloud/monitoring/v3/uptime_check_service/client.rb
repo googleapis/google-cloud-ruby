@@ -696,7 +696,7 @@ module Google
             end
 
             ##
-            # Returns the list of IP addresses that checkers run from
+            # Returns the list of IP addresses that checkers run from.
             #
             # @overload list_uptime_check_ips(request, options = nil)
             #   Pass arguments to `list_uptime_check_ips` via a request object, either of type

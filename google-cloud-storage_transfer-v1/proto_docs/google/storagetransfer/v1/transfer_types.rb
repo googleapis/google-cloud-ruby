@@ -357,43 +357,43 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An HttpData resource specifies a list of objects on the web to be transferred
-        # over HTTP.  The information of the objects to be transferred is contained in
-        # a file referenced by a URL. The first line in the file must be
-        # `"TsvHttpData-1.0"`, which specifies the format of the file.  Subsequent
-        # lines specify the information of the list of objects, one object per list
-        # entry. Each entry has the following tab-delimited fields:
+        # An HttpData resource specifies a list of objects on the web to be
+        #  transferred over HTTP.  The information of the objects to be transferred is
+        #  contained in a file referenced by a URL. The first line in the file must be
+        #  `"TsvHttpData-1.0"`, which specifies the format of the file.  Subsequent
+        #  lines specify the information of the list of objects, one object per list
+        #  entry. Each entry has the following tab-delimited fields:
         #
-        # * **HTTP URL** — The location of the object.
+        #  * **HTTP URL** — The location of the object.
         #
-        # * **Length** — The size of the object in bytes.
+        #  * **Length** — The size of the object in bytes.
         #
-        # * **MD5** — The base64-encoded MD5 hash of the object.
+        #  * **MD5** — The base64-encoded MD5 hash of the object.
         #
-        # For an example of a valid TSV file, see
-        # [Transferring data from
-        # URLs](https://cloud.google.com/storage-transfer/docs/create-url-list).
+        #  For an example of a valid TSV file, see
+        #  [Transferring data from
+        #  URLs](https://cloud.google.com/storage-transfer/docs/create-url-list).
         #
-        # When transferring data based on a URL list, keep the following in mind:
+        #  When transferring data based on a URL list, keep the following in mind:
         #
         # * When an object located at `http(s)://hostname:port/<URL-path>` is
-        # transferred to a data sink, the name of the object at the data sink is
+        #  transferred to a data sink, the name of the object at the data sink is
         # `<hostname>/<URL-path>`.
         #
         # * If the specified size of an object does not match the actual size of the
-        # object fetched, the object is not transferred.
+        #  object fetched, the object is not transferred.
         #
         # * If the specified MD5 does not match the MD5 computed from the transferred
-        # bytes, the object transfer fails.
+        #  bytes, the object transfer fails.
         #
         # * Ensure that each URL you specify is publicly accessible. For
-        # example, in Cloud Storage you can
-        # [share an object publicly]
-        # (/storage/docs/cloud-console#_sharingdata) and get a link to it.
+        #  example, in Cloud Storage you can
+        #  [share an object publicly]
+        #  (/storage/docs/cloud-console#_sharingdata) and get a link to it.
         #
         # * Storage Transfer Service obeys `robots.txt` rules and requires the source
-        # HTTP server to support `Range` requests and to return a `Content-Length`
-        # header in each response.
+        #  HTTP server to support `Range` requests and to return a `Content-Length`
+        #  header in each response.
         #
         # * {::Google::Cloud::StorageTransfer::V1::ObjectConditions ObjectConditions} have no
         # effect when filtering objects to transfer.
@@ -696,6 +696,32 @@ module Google
         #     Specifies the agent pool name associated with the posix data sink. When
         #     unspecified, the default name is used.
         class TransferSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the configuration for a cross-bucket replication job. Cross-bucket
+        # replication copies new or updated objects from a source Cloud Storage bucket
+        # to a destination Cloud Storage bucket. Existing objects in the source bucket
+        # are not copied by a new cross-bucket replication job.
+        # @!attribute [rw] gcs_data_source
+        #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
+        #     The Cloud Storage bucket from which to replicate objects.
+        # @!attribute [rw] gcs_data_sink
+        #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
+        #     The Cloud Storage bucket to which to replicate objects.
+        # @!attribute [rw] object_conditions
+        #   @return [::Google::Cloud::StorageTransfer::V1::ObjectConditions]
+        #     Object conditions that determine which objects are transferred. For
+        #     replication jobs, only `include_prefixes` and `exclude_prefixes` are
+        #     supported.
+        # @!attribute [rw] transfer_options
+        #   @return [::Google::Cloud::StorageTransfer::V1::TransferOptions]
+        #     Specifies the metadata options to be applied during replication.
+        #     Delete options are not supported. If a delete option is specified, the
+        #     request fails with an {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}
+        #     error.
+        class ReplicationSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1039,6 +1065,9 @@ module Google
         # @!attribute [rw] transfer_spec
         #   @return [::Google::Cloud::StorageTransfer::V1::TransferSpec]
         #     Transfer specification.
+        # @!attribute [rw] replication_spec
+        #   @return [::Google::Cloud::StorageTransfer::V1::ReplicationSpec]
+        #     Replication specification.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::StorageTransfer::V1::NotificationConfig]
         #     Notification configuration.

@@ -155,7 +155,7 @@ module Google
         #   @return [::Boolean]
         #     Indicates whether tags created with this template are public. Public tags
         #     do not require tag template access to appear in
-        #     [ListTags][google.cloud.datacatalog.v1.ListTags] API response.
+        #     {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#list_tags ListTags} API response.
         #
         #     Additionally, you can search for a public tag by value with a
         #     simple search query in addition to using a ``tag:`` predicate.

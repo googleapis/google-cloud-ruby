@@ -147,6 +147,9 @@ module Google
             #   @return [::String]
             #     A user-provided string indicating the outcome of the agent's segment of
             #     the call.
+            # @!attribute [rw] agent_type
+            #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationParticipant::Role]
+            #     The agent type, e.g. HUMAN_AGENT.
             class AgentInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

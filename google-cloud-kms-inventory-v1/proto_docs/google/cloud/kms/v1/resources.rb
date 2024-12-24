@@ -133,7 +133,7 @@ module Google
         #     where all related cryptographic operations are performed. Only applicable
         #     if {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersions} have a
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of
-        #     [EXTERNAL_VPC][CryptoKeyVersion.ProtectionLevel.EXTERNAL_VPC], with the
+        #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC}, with the
         #     resource name in the format `projects/*/locations/*/ekmConnections/*`.
         #     Note, this list is non-exhaustive and may apply to additional
         #     {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevels} in the future.

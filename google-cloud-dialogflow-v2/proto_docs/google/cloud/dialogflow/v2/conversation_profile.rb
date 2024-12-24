@@ -58,6 +58,17 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::NotificationConfig]
         #     Configuration for publishing new message events. Event will be sent in
         #     format of {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent}
+        # @!attribute [rw] new_recognition_result_notification_config
+        #   @return [::Google::Cloud::Dialogflow::V2::NotificationConfig]
+        #     Optional. Configuration for publishing transcription intermediate results.
+        #     Event will be sent in format of
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent}. If
+        #     configured, the following information will be populated as
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} Pub/Sub
+        #     message attributes:
+        #     - "participant_id"
+        #     - "participant_role"
+        #     - "message_id"
         # @!attribute [rw] stt_config
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechToTextConfig]
         #     Settings for speech transcription.
