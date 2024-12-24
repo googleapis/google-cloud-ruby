@@ -22,7 +22,7 @@ require_relative "../../../.toys/.lib/sample_loader"
 
 class RegionalSecretManagerSnippetSpec < Minitest::Spec
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
-  let(:location_id) { ENV['GOOGLE_LOCATION_ID'] || 'us-west1' }
+  let(:location_id) { ENV["GOOGLE_LOCATION_ID"] || "us-west1" }
 
   let(:api_endpoint) { "secretmanager.#{location_id}.rep.googleapis.com" }
   let(:filter) { "name : ruby-quickstart-" }
