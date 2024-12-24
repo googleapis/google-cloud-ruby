@@ -16,7 +16,7 @@ require "uri"
 
 require_relative "regional_helper"
 
-describe "#delete_regional_secret_with_etag", :secret_manager_snippet do
+describe "#delete_regional_secret_with_etag", :regional_secret_manager_snippet do
   it "deletes the regional secret" do
     sample = SampleLoader.load "delete_regional_secret_with_etag.rb"
 

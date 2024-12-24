@@ -16,7 +16,7 @@ require "uri"
 
 require_relative "regional_helper"
 
-describe "#update_regional_secret_with_etag", :secret_manager_snippet do
+describe "#update_regional_secret_with_etag", :regional_secret_manager_snippet do
   it "updates the secret with the etag" do
     sample = SampleLoader.load "update_regional_secret_with_etag.rb"
 

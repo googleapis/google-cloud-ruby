@@ -16,7 +16,7 @@ require "uri"
 
 require_relative "regional_helper"
 
-describe "#get_regional_secret", :secret_manager_snippet do
+describe "#get_regional_secret", :regional_secret_manager_snippet do
   it "gets the regional secret" do
     sample = SampleLoader.load "get_regional_secret.rb"
 

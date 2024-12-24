@@ -20,9 +20,10 @@ require "google/cloud/secret_manager"
 
 require_relative "../../../.toys/.lib/sample_loader"
 
-class SecretManagerSnippetSpec < Minitest::Spec
+class RegionalSecretManagerSnippetSpec < Minitest::Spec
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
-  let(:location_id) { "us-west1" }
+  let(:location_id) { ENV['GOOGLE_LOCATION_ID'] || 'us-west1' }
+
   let(:api_endpoint) { "secretmanager.#{location_id}.rep.googleapis.com" }
   let(:filter) { "name : ruby-quickstart-" }
 
@@ -64,5 +65,5 @@ class SecretManagerSnippetSpec < Minitest::Spec
     # Do nothing
   end
 
-  register_spec_type(self) { |*descs| descs.include? :secret_manager_snippet }
+  register_spec_type(self) { |*descs| descs.include? :regional_secret_manager_snippet }
 end

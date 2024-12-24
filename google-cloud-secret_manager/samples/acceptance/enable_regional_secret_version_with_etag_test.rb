@@ -16,7 +16,7 @@ require "uri"
 
 require_relative "regional_helper"
 
-describe "#enable_regional_secret_version_with_etag", :secret_manager_snippet do
+describe "#enable_regional_secret_version_with_etag", :regional_secret_manager_snippet do
   it "enables the regional secret version with etag" do
     sample = SampleLoader.load "enable_regional_secret_version_with_etag.rb"
 
