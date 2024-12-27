@@ -175,7 +175,7 @@ end
 def test_library
   Dir.chdir gem_name do
     exec ["bundle", "install"]
-    exec ["bundle", "exec", "rake", "ci"]
+    exec ["toys", "ci", "--rubocop", "--yard", "--test"]
   end
 end
 
