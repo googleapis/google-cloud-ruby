@@ -64,7 +64,7 @@ end
 
 def run_test dir
   exec ["bundle", "install"], chdir: dir
-  exec ["bundle", "exec", "rake", "ci"], chdir: dir
+  exec ["toys", "ci", "--rubocop", "--yard", "--test"], chdir: dir
 end
 
 def piper_client_dir
