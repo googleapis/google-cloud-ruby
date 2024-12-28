@@ -146,7 +146,7 @@ module Google
           # @private New Bucket::List from a Google API Client
           # Google::Apis::StorageV1::Buckets object.
           def self.from_gapi gapi_list, service, prefix = nil, max = nil,
-                             user_project: nil
+                             user_project: nil, soft_deleted: nil
             buckets = new(Array(gapi_list.items).map do |gapi_object|
               Bucket.from_gapi gapi_object, service, user_project: user_project
             end)
@@ -155,6 +155,7 @@ module Google
             buckets.instance_variable_set :@prefix, prefix
             buckets.instance_variable_set :@max, max
             buckets.instance_variable_set :@user_project, user_project
+            buckets.instance_variable_set :@soft_deleted, soft_deleted
             buckets
           end
 
