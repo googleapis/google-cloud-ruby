@@ -170,7 +170,8 @@ module Google
         # Retrieve aggregate query results specified by an AggregateQuery. The query is run within the
         # transaction.
         #
-        # @param [AggregateQuery, GqlQuery] query The Query object with the search criteria.
+        # @param [AggregateQuery, GqlQuery] aggregate_query The Query object
+        #   with the search criteria.
         # @param [String] namespace The namespace the query is to run within.
         #
         # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]

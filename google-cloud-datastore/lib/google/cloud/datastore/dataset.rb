@@ -483,7 +483,8 @@ module Google
         ##
         # Retrieve aggregate results specified by an AggregateQuery.
         #
-        # @param [AggregateQuery, GqlQuery] query The object with the aggregate criteria.
+        # @param [AggregateQuery, GqlQuery] aggregate_query The object with the
+        #   aggregate criteria.
         # @param [String] namespace The namespace the query is to run within.
         # @param [Symbol] consistency The non-transactional read consistency to
         #   use. Cannot be set to `:strong` for global queries. Accepted values
