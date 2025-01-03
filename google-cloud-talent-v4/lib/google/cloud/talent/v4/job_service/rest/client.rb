@@ -609,7 +609,7 @@ module Google
               #
               #     If {::Google::Cloud::Talent::V4::BatchUpdateJobsRequest#update_mask update_mask}
               #     is provided, The {::Google::Cloud::Talent::V4::Job Job} inside
-              #     [JobResult][JobOperationResult.JobResult]
+              #     {::Google::Cloud::Talent::V4::JobResult JobResult}
               #     will only contains fields that is updated, plus the Id of the Job.
               #     Otherwise,  {::Google::Cloud::Talent::V4::Job Job} will include all fields,
               #     which can yield a very large response.
@@ -1010,7 +1010,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
+              # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil, relevance_threshold: nil)
               #   Pass arguments to `search_jobs` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1287,6 +1287,12 @@ module Google
               #     Defaults to
               #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
               #     if no value is specified.
+              #   @param relevance_threshold [::Google::Cloud::Talent::V4::SearchJobsRequest::RelevanceThreshold]
+              #     Optional. The relevance threshold of the search results.
+              #
+              #     Default to Google defined threshold, leveraging a balance of
+              #     precision and recall to deliver both highly accurate results and
+              #     comprehensive coverage of relevant information.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Talent::V4::SearchJobsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1369,7 +1375,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
+              # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil, relevance_threshold: nil)
               #   Pass arguments to `search_jobs_for_alert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1646,6 +1652,12 @@ module Google
               #     Defaults to
               #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
               #     if no value is specified.
+              #   @param relevance_threshold [::Google::Cloud::Talent::V4::SearchJobsRequest::RelevanceThreshold]
+              #     Optional. The relevance threshold of the search results.
+              #
+              #     Default to Google defined threshold, leveraging a balance of
+              #     precision and recall to deliver both highly accurate results and
+              #     comprehensive coverage of relevant information.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Talent::V4::SearchJobsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
