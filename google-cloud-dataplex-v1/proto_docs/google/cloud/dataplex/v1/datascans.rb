@@ -57,7 +57,7 @@ module Google
         #     Only fields specified in `update_mask` are updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Mask of fields to update.
+        #     Optional. Mask of fields to update.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. Only validate the request, but do not perform mutations.
@@ -74,6 +74,11 @@ module Google
         #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
         #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any child resources of this data scan will also
+        #     be deleted. (Otherwise, the request will only work if the data scan has no
+        #     child resources.)
         class DeleteDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -294,8 +299,8 @@ module Google
         #   cardinality, min/max/mean, etc).
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The relative resource name of the scan, of the form:
-        #     `projects/{project}/locations/{location_id}/dataScans/{datascan_id}`,
+        #     Output only. Identifier. The relative resource name of the scan, of the
+        #     form: `projects/{project}/locations/{location_id}/dataScans/{datascan_id}`,
         #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [r] uid
@@ -381,10 +386,10 @@ module Google
           # Status of the data scan execution.
           # @!attribute [rw] latest_job_start_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The time when the latest DataScanJob started.
+          #     Optional. The time when the latest DataScanJob started.
           # @!attribute [rw] latest_job_end_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The time when the latest DataScanJob ended.
+          #     Optional. The time when the latest DataScanJob ended.
           # @!attribute [rw] latest_job_create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Optional. The time when the DataScanJob execution was created.
@@ -406,7 +411,8 @@ module Google
         # A DataScanJob represents an instance of DataScan execution.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The relative resource name of the DataScanJob, of the form:
+        #     Output only. Identifier. The relative resource name of the DataScanJob, of
+        #     the form:
         #     `projects/{project}/locations/{location_id}/dataScans/{datascan_id}/jobs/{job_id}`,
         #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.

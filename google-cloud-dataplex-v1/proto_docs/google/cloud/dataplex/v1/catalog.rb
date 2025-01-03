@@ -917,7 +917,7 @@ module Google
         #     specified path. For example, to attach an aspect to a field that is
         #     specified by the `schema` aspect, the path should have the format
         #     `Schema.<field_name>`.
-        #     * `<aspect_type_reference>*` - matches aspects of the given type for all
+        #     * `<aspect_type_reference>@*` - matches aspects of the given type for all
         #     paths.
         #     * `*@path` - matches aspects of all types on the given path.
         #
@@ -1052,6 +1052,8 @@ module Google
         # @!attribute [rw] query
         #   @return [::String]
         #     Required. The query against which entries in scope should be matched.
+        #     The query syntax is defined in [Search syntax for Dataplex
+        #     Catalog](https://cloud.google.com/dataplex/docs/search-syntax).
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Number of results in the search page. If <=0, then defaults
@@ -1064,6 +1066,10 @@ module Google
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. Specifies the ordering of results.
+        #     Supported values are:
+        #     * `relevance` (default)
+        #     * `last_modified_timestamp`
+        #     * `last_modified_timestamp asc`
         # @!attribute [rw] scope
         #   @return [::String]
         #     Optional. The scope under which the search should be operating. It must
@@ -1162,9 +1168,9 @@ module Google
         #     aspect type and are attached directly to the entry.
         #     * `{aspect_type_reference}@{path}`: matches aspects that belong to the
         #     specified aspect type and path.
-        #     * `{aspect_type_reference}@*`: matches aspects that belong to the specified
-        #     aspect type for all paths.
-        #
+        #     * `<aspect_type_reference>@*` : matches aspects of the given type for all
+        #     paths.
+        #     * `*@path` : matches aspects of all types on the given path.
         #     Replace `{aspect_type_reference}` with a reference to the aspect type, in
         #     the format
         #     `{project_id_or_number}.{location_id}.{aspect_type_id}`.
