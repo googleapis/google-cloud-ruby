@@ -121,7 +121,11 @@ module SampleLoader
           klass = traverse_name klass, name, type
         end
         bind = klass.class_eval { binding }
-        eval sample_text, bind, file_path rescue nil
+        begin
+          eval sample_text, bind, file_path
+        rescue StandardError, ScriptError
+          # Just fails to create whatever sample stuff is expected.
+        end
         klass
       end
     end
