@@ -149,9 +149,9 @@ module Google
         # @!attribute [rw] cpu_core_count
         #   @return [::Integer]
         #     Required. Number of enabled CPU cores.
-        # @!attribute [r] system_version
+        # @!attribute [rw] system_version
         #   @return [::String]
-        #     Output only. Operating system version of the image.
+        #     Optional. Operating system version of the image.
         # @!attribute [r] scan_ip_ids
         #   @return [::Array<::String>]
         #     Output only. OCIDs of scan IPs.
