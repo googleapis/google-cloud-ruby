@@ -30,7 +30,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The processed CSS Product(a.k.a Aggregate Offer internally).
+        # The processed CSS Product.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the CSS Product.
