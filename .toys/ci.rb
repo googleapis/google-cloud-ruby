@@ -22,7 +22,7 @@ TASKS = [
   "linkinator",
   "acceptance",
   "conformance",
-  "samples-master",
+  "samples-main",
   "samples-latest",
 ].freeze
 OPTIONAL_TASKS = ["conformance"].freeze
