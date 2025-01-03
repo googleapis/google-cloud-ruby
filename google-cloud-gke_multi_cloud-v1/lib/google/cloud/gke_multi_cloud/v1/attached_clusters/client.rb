@@ -396,6 +396,7 @@ module Google
             #      *   `proxy_config.kubernetes_secret.name`.
             #      *   `proxy_config.kubernetes_secret.namespace`.
             #      *   `security_posture_config.vulnerability_mode`
+            #      *   `monitoring_config.cloud_monitoring_config.enabled`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
