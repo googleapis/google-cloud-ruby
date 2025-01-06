@@ -154,6 +154,46 @@ describe Google::Cloud::Firestore::CollectionReference, :query, :mock_firestore 
     assert_results_enum results_enum
   end
 
+  it "runs a query with order, start_at, and limit_to_last" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :DESCENDING),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+          direction: :ASCENDING)],
+      limit: Google::Protobuf::Int32Value.new(value: 2)
+    )
+    firestore_mock.expect :run_query, query_results_descending_enum, run_query_args(expected_query, parent: collection.parent_path)
+
+    results_enum = collection.order(:name).order(firestore.document_id, :desc).start_at(:foo).limit_to_last(2).get
+
+    assert_results_enum results_enum
+  end
+
+  it "runs a query with order, end_at, and limit_to_last" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "messages")],
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :DESCENDING),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+          direction: :ASCENDING)],
+      limit: Google::Protobuf::Int32Value.new(value: 2)
+    )
+    firestore_mock.expect :run_query, query_results_descending_enum, run_query_args(expected_query, parent: collection.parent_path)
+
+    results_enum = collection.order(:name).order(firestore.document_id, :desc).end_at(:bar).limit_to_last(2).get
+
+    assert_results_enum results_enum
+  end
+
   it "updates limit but does not reflip cursors when calling limit_to_last more than once" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
       start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true),
