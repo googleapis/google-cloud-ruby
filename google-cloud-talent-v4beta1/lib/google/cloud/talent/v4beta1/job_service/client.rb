@@ -1082,7 +1082,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
+            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil, relevance_threshold: nil)
             #   Pass arguments to `search_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1365,6 +1365,12 @@ module Google
             #     Defaults to
             #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
             #     if no value is specified.
+            #   @param relevance_threshold [::Google::Cloud::Talent::V4beta1::SearchJobsRequest::RelevanceThreshold]
+            #     Optional. The relevance threshold of the search results.
+            #
+            #     Default to Google defined threshold, leveraging a balance of
+            #     precision and recall to deliver both highly accurate results and
+            #     comprehensive coverage of relevant information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::SearchJobsResponse]
@@ -1454,7 +1460,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
+            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil, relevance_threshold: nil)
             #   Pass arguments to `search_jobs_for_alert` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1737,6 +1743,12 @@ module Google
             #     Defaults to
             #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
             #     if no value is specified.
+            #   @param relevance_threshold [::Google::Cloud::Talent::V4beta1::SearchJobsRequest::RelevanceThreshold]
+            #     Optional. The relevance threshold of the search results.
+            #
+            #     Default to Google defined threshold, leveraging a balance of
+            #     precision and recall to deliver both highly accurate results and
+            #     comprehensive coverage of relevant information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::SearchJobsResponse]
