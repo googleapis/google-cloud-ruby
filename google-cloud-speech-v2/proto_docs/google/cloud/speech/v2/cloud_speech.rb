@@ -405,27 +405,17 @@ module Google
         #     Required. Encoding of the audio data sent for recognition.
         # @!attribute [rw] sample_rate_hertz
         #   @return [::Integer]
-        #     Sample rate in Hertz of the audio data sent for recognition. Valid
-        #     values are: 8000-48000. 16000 is optimal. For best results, set the
+        #     Optional. Sample rate in Hertz of the audio data sent for recognition.
+        #     Valid values are: 8000-48000. 16000 is optimal. For best results, set the
         #     sampling rate of the audio source to 16000 Hz. If that's not possible, use
         #     the native sample rate of the audio source (instead of re-sampling).
-        #     Supported for the following encodings:
-        #
-        #     * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
-        #
-        #     * MULAW: Headerless 8-bit companded mulaw samples.
-        #
-        #     * ALAW: Headerless 8-bit companded alaw samples.
+        #     Note that this field is marked as OPTIONAL for backward compatibility
+        #     reasons. It is (and has always been) effectively REQUIRED.
         # @!attribute [rw] audio_channel_count
         #   @return [::Integer]
-        #     Number of channels present in the audio data sent for recognition.
-        #     Supported for the following encodings:
-        #
-        #     * LINEAR16: Headerless 16-bit signed little-endian PCM samples.
-        #
-        #     * MULAW: Headerless 8-bit companded mulaw samples.
-        #
-        #     * ALAW: Headerless 8-bit companded alaw samples.
+        #     Optional. Number of channels present in the audio data sent for
+        #     recognition. Note that this field is marked as OPTIONAL for backward
+        #     compatibility reasons. It is (and has always been) effectively REQUIRED.
         #
         #     The maximum allowed value is 8.
         class ExplicitDecodingConfig
@@ -445,6 +435,33 @@ module Google
 
             # Headerless 8-bit companded alaw samples.
             ALAW = 3
+
+            # AMR frames with an rfc4867.5 header.
+            AMR = 4
+
+            # AMR-WB frames with an rfc4867.5 header.
+            AMR_WB = 5
+
+            # FLAC frames in the "native FLAC" container format.
+            FLAC = 6
+
+            # MPEG audio frames with optional (ignored) ID3 metadata.
+            MP3 = 7
+
+            # Opus audio frames in an Ogg container.
+            OGG_OPUS = 8
+
+            # Opus audio frames in a WebM container.
+            WEBM_OPUS = 9
+
+            # AAC audio frames in an MP4 container.
+            MP4_AAC = 10
+
+            # AAC audio frames in an M4A container.
+            M4A_AAC = 11
+
+            # AAC audio frames in an MOV container.
+            MOV_AAC = 12
           end
         end
 
@@ -1047,16 +1064,16 @@ module Google
         # @!attribute [rw] native
         #   @return [::Google::Cloud::Speech::V2::NativeOutputFileFormatConfig]
         #     Configuration for the native output format. If this field is set or if no
-        #     other output format field is set then transcripts will be written to the
+        #     other output format field is set, then transcripts will be written to the
         #     sink in the native format.
         # @!attribute [rw] vtt
         #   @return [::Google::Cloud::Speech::V2::VttOutputFileFormatConfig]
-        #     Configuration for the vtt output format. If this field is set then
-        #     transcripts will be written to the sink in the vtt format.
+        #     Configuration for the VTT output format. If this field is set, then
+        #     transcripts will be written to the sink in the VTT format.
         # @!attribute [rw] srt
         #   @return [::Google::Cloud::Speech::V2::SrtOutputFileFormatConfig]
-        #     Configuration for the srt output format. If this field is set then
-        #     transcripts will be written to the sink in the srt format.
+        #     Configuration for the SRT output format. If this field is set, then
+        #     transcripts will be written to the sink in the SRT format.
         class OutputFormatConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
