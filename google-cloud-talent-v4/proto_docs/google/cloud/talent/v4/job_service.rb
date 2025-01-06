@@ -446,6 +446,13 @@ module Google
         #     Defaults to
         #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}
         #     if no value is specified.
+        # @!attribute [rw] relevance_threshold
+        #   @return [::Google::Cloud::Talent::V4::SearchJobsRequest::RelevanceThreshold]
+        #     Optional. The relevance threshold of the search results.
+        #
+        #     Default to Google defined threshold, leveraging a balance of
+        #     precision and recall to deliver both highly accurate results and
+        #     comprehensive coverage of relevant information.
         class SearchJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -632,6 +639,27 @@ module Google
             # {::Google::Cloud::Talent::V4::Job#title Job.title}.
             KEYWORD_MATCH_TITLE_ONLY = 3
           end
+
+          # The relevance threshold of the search results. The higher relevance
+          # threshold is, the higher relevant results are shown and the less number of
+          # results are returned.
+          module RelevanceThreshold
+            # Default value. In this case, server behavior defaults to Google defined
+            # threshold.
+            RELEVANCE_THRESHOLD_UNSPECIFIED = 0
+
+            # Lowest relevance threshold.
+            LOWEST = 1
+
+            # Low relevance threshold.
+            LOW = 2
+
+            # Medium relevance threshold.
+            MEDIUM = 3
+
+            # High relevance threshold.
+            HIGH = 4
+          end
         end
 
         # Response for SearchJob method.
@@ -767,7 +795,7 @@ module Google
         #
         #     If {::Google::Cloud::Talent::V4::BatchUpdateJobsRequest#update_mask update_mask}
         #     is provided, The {::Google::Cloud::Talent::V4::Job Job} inside
-        #     [JobResult][JobOperationResult.JobResult]
+        #     {::Google::Cloud::Talent::V4::JobResult JobResult}
         #     will only contains fields that is updated, plus the Id of the Job.
         #     Otherwise,  {::Google::Cloud::Talent::V4::Job Job} will include all fields,
         #     which can yield a very large response.

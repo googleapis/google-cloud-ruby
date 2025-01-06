@@ -242,7 +242,8 @@ module Google
         #     {::Google::Cloud::Talent::V4::PostingRegion::TELECOMMUTE PostingRegion.TELECOMMUTE}
         #     and have additional {::Google::Cloud::Talent::V4::Job#addresses Job.addresses}
         #     may still be matched based on other location filters using
-        #     {::Google::Cloud::Talent::V4::LocationFilter#address address} or [latlng][].
+        #     {::Google::Cloud::Talent::V4::LocationFilter#address address} or
+        #     {::Google::Cloud::Talent::V4::LocationFilter#lat_lng lat_lng}.
         #
         #     This filter can be used by itself to search exclusively for telecommuting
         #     jobs, or it can be combined with another location
