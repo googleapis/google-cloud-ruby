@@ -119,6 +119,20 @@ module Google
         # @!attribute [rw] security_posture_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::SecurityPostureConfig]
         #     Optional. Security Posture configuration for this cluster.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Tag keys/values directly bound to this resource.
+        #
+        #     Tag key must be specified in the format <tag namespace>/<tag key name>
+        #     where the tag namespace is the ID of the organization or name of the
+        #     project that the tag key is defined in.
+        #     The short name of a tag key or value can have a maximum length of 256
+        #     characters. The permitted character set for the short name includes UTF-8
+        #     encoded Unicode characters except single quotes ('), double quotes ("),
+        #     backslashes (\), and forward slashes (/).
+        #
+        #     See [Tags](http://cloud/resource-manager/docs/tags/tags-overview)
+        #     for more details on Google Cloud Platform tags.
         class AttachedCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -128,6 +142,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class AnnotationsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -266,6 +289,10 @@ module Google
         #     The Kubernetes Secret resource that contains the HTTP(S) proxy
         #     configuration. The secret must be a JSON encoded proxy configuration
         #     as described in
+        #     https://cloud.google.com/kubernetes-engine/multi-cloud/docs/attached/eks/how-to/use-a-proxy#configure-proxy-support
+        #     for EKS clusters and
+        #     https://cloud.google.com/kubernetes-engine/multi-cloud/docs/attached/aks/how-to/use-a-proxy#configure-proxy-support
+        #     for AKS clusters.
         class AttachedProxyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
