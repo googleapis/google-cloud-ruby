@@ -364,7 +364,7 @@ module Google
             #
             #     Only fields specified in `update_mask` are updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Mask of fields to update.
+            #     Optional. Mask of fields to update.
             #   @param validate_only [::Boolean]
             #     Optional. Only validate the request, but do not perform mutations.
             #     The default is `false`.
@@ -455,7 +455,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_data_scan(name: nil)
+            # @overload delete_data_scan(name: nil, force: nil)
             #   Pass arguments to `delete_data_scan` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -465,6 +465,10 @@ module Google
             #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
             #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
+            #   @param force [::Boolean]
+            #     Optional. If set to true, any child resources of this data scan will also
+            #     be deleted. (Otherwise, the request will only work if the data scan has no
+            #     child resources.)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
