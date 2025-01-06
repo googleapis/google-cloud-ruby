@@ -34,19 +34,19 @@ module Google
         #     within the context of Product Ads.
         # @!attribute [rw] low_price
         #   @return [::Google::Shopping::Type::Price]
-        #     Low Price of the aggregate offer.
+        #     Low Price of the CSS Product.
         # @!attribute [rw] high_price
         #   @return [::Google::Shopping::Type::Price]
-        #     High Price of the aggregate offer.
+        #     High Price of the CSS Product.
         # @!attribute [rw] number_of_offers
         #   @return [::Integer]
-        #     The number of aggregate offers.
+        #     The number of CSS Products.
         # @!attribute [rw] headline_offer_condition
         #   @return [::String]
         #     Condition of the headline offer.
         # @!attribute [rw] headline_offer_price
         #   @return [::Google::Shopping::Type::Price]
-        #     Headline Price of the aggregate offer.
+        #     Headline Price of the CSS Product.
         # @!attribute [rw] headline_offer_link
         #   @return [::String]
         #     Link to the headline offer.
@@ -55,7 +55,7 @@ module Google
         #     Mobile Link to the headline offer.
         # @!attribute [rw] headline_offer_shipping_price
         #   @return [::Google::Shopping::Type::Price]
-        #     Headline Price of the aggregate offer.
+        #     Headline Price of the CSS Product.
         # @!attribute [rw] title
         #   @return [::String]
         #     Title of the item.
@@ -311,15 +311,15 @@ module Google
           #     The name of the destination
           # @!attribute [rw] approved_countries
           #   @return [::Array<::String>]
-          #     List of country codes (ISO 3166-1 alpha-2) where the aggregate offer is
+          #     List of country codes (ISO 3166-1 alpha-2) where the CSS Product is
           #     approved.
           # @!attribute [rw] pending_countries
           #   @return [::Array<::String>]
-          #     List of country codes (ISO 3166-1 alpha-2) where the aggregate offer is
+          #     List of country codes (ISO 3166-1 alpha-2) where the CSS Product is
           #     pending approval.
           # @!attribute [rw] disapproved_countries
           #   @return [::Array<::String>]
-          #     List of country codes (ISO 3166-1 alpha-2) where the aggregate offer is
+          #     List of country codes (ISO 3166-1 alpha-2) where the CSS Product is
           #     disapproved.
           class DestinationStatus
             include ::Google::Protobuf::MessageExts
@@ -332,7 +332,7 @@ module Google
           #     The error code of the issue.
           # @!attribute [rw] servability
           #   @return [::String]
-          #     How this issue affects serving of the aggregate offer.
+          #     How this issue affects serving of the CSS Product.
           # @!attribute [rw] resolution
           #   @return [::String]
           #     Whether the issue can be resolved by the merchant.
@@ -354,7 +354,7 @@ module Google
           # @!attribute [rw] applicable_countries
           #   @return [::Array<::String>]
           #     List of country codes (ISO 3166-1 alpha-2) where issue applies to the
-          #     aggregate offer.
+          #     CSS Product.
           class ItemLevelIssue
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

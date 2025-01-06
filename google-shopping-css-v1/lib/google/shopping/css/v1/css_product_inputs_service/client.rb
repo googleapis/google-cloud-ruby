@@ -73,6 +73,8 @@ module Google
 
                 default_config.rpcs.insert_css_product_input.timeout = 60.0
 
+                default_config.rpcs.update_css_product_input.timeout = 60.0
+
                 default_config.rpcs.delete_css_product_input.timeout = 60.0
 
                 default_config
@@ -217,11 +219,13 @@ module Google
             #   @param css_product_input [::Google::Shopping::Css::V1::CssProductInput, ::Hash]
             #     Required. The CSS Product Input to insert.
             #   @param feed_id [::Integer]
-            #     Required. The primary or supplemental feed id. If CSS Product already
-            #     exists and feed id provided is different, then the CSS Product will be
-            #     moved to a new feed. Note: For now, CSSs do not need to provide feed ids as
-            #     we create feeds on the fly. We do not have supplemental feed support for
-            #     CSS Products yet.
+            #     Optional. DEPRECATED. Feed id is not required for CSS Products.
+            #     The primary or supplemental feed id. If CSS Product already exists and
+            #     feed id provided is different, then the CSS Product will be moved to a
+            #     new feed.
+            #     Note: For now, CSSs do not need to provide feed ids as we create
+            #     feeds on the fly.
+            #     We do not have supplemental feed support for CSS Products yet.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Shopping::Css::V1::CssProductInput]
@@ -281,6 +285,112 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @css_product_inputs_service_stub.call_rpc :insert_css_product_input, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the existing Css Product input in your CSS Center account.
+            #
+            # After inserting, updating, or deleting a CSS Product input, it may take
+            # several minutes before the processed Css Product can be retrieved.
+            #
+            # @overload update_css_product_input(request, options = nil)
+            #   Pass arguments to `update_css_product_input` via a request object, either of type
+            #   {::Google::Shopping::Css::V1::UpdateCssProductInputRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Shopping::Css::V1::UpdateCssProductInputRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_css_product_input(css_product_input: nil, update_mask: nil)
+            #   Pass arguments to `update_css_product_input` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param css_product_input [::Google::Shopping::Css::V1::CssProductInput, ::Hash]
+            #     Required. The CSS product input resource to update. Information you submit
+            #     will be applied to the processed CSS product as well.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of CSS product attributes to be updated.
+            #
+            #     If the update mask is omitted, then it is treated as implied field mask
+            #     equivalent to all fields that are populated (have a non-empty value).
+            #
+            #     Attributes specified in the update mask without a value specified in the
+            #     body will be deleted from the CSS product.
+            #
+            #     Update mask can only be specified for top level fields in
+            #     attributes and custom attributes.
+            #
+            #     To specify the update mask for custom attributes you need to add the
+            #     `custom_attribute.` prefix.
+            #
+            #     Providing special "*" value for full CSS product replacement is not
+            #     supported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Shopping::Css::V1::CssProductInput]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Shopping::Css::V1::CssProductInput]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/shopping/css/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Shopping::Css::V1::CssProductInputsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Shopping::Css::V1::UpdateCssProductInputRequest.new
+            #
+            #   # Call the update_css_product_input method.
+            #   result = client.update_css_product_input request
+            #
+            #   # The returned object is of type Google::Shopping::Css::V1::CssProductInput.
+            #   p result
+            #
+            def update_css_product_input request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Shopping::Css::V1::UpdateCssProductInputRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_css_product_input.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Shopping::Css::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.css_product_input&.name
+                header_params["css_product_input.name"] = request.css_product_input.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_css_product_input.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_css_product_input.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @css_product_inputs_service_stub.call_rpc :update_css_product_input, request, options: options do |response, operation|
                 yield response, operation if block_given?
               end
             rescue ::GRPC::BadStatus => e
@@ -546,6 +656,11 @@ module Google
                 #
                 attr_reader :insert_css_product_input
                 ##
+                # RPC-specific configuration for `update_css_product_input`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_css_product_input
+                ##
                 # RPC-specific configuration for `delete_css_product_input`
                 # @return [::Gapic::Config::Method]
                 #
@@ -555,6 +670,8 @@ module Google
                 def initialize parent_rpcs = nil
                   insert_css_product_input_config = parent_rpcs.insert_css_product_input if parent_rpcs.respond_to? :insert_css_product_input
                   @insert_css_product_input = ::Gapic::Config::Method.new insert_css_product_input_config
+                  update_css_product_input_config = parent_rpcs.update_css_product_input if parent_rpcs.respond_to? :update_css_product_input
+                  @update_css_product_input = ::Gapic::Config::Method.new update_css_product_input_config
                   delete_css_product_input_config = parent_rpcs.delete_css_product_input if parent_rpcs.respond_to? :delete_css_product_input
                   @delete_css_product_input = ::Gapic::Config::Method.new delete_css_product_input_config
 

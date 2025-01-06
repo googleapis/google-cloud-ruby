@@ -68,6 +68,11 @@
                 "insert_css_product_input"
               ]
             },
+            "UpdateCssProductInput": {
+              "methods": [
+                "update_css_product_input"
+              ]
+            },
             "DeleteCssProductInput": {
               "methods": [
                 "delete_css_product_input"
