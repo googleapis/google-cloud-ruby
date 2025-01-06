@@ -569,12 +569,13 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the resource to attach this tag to. Tags can be
-        #     attached to Entries. Example:
+        #     attached to
+        #      Entries. Example:
         #
-        #     * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
+        #      * projects/\\{project_id}/locations/\\{location}/entryGroups/\\{entry_group_id}/entries/\\{entry_id}
         #
-        #     Note that this Tag and its child resources may not actually be stored in
-        #     the location in this name.
+        #      Note that this Tag and its child resources may not actually be stored in
+        #      the location in this name.
         # @!attribute [rw] tag
         #   @return [::Google::Cloud::DataCatalog::V1beta1::Tag]
         #     Required. The tag to create.
