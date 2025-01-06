@@ -544,6 +544,7 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     custom_ranking_info = {}
     disable_keyword_match = true
     keyword_match_mode = :KEYWORD_MATCH_MODE_UNSPECIFIED
+    relevance_threshold = :RELEVANCE_THRESHOLD_UNSPECIFIED
 
     search_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -559,27 +560,27 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
         end
 
         # Use hash object
-        client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode }) do |_result, response|
+        client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_jobs parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode do |_result, response|
+        client.search_jobs parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_jobs ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode) do |_result, response|
+        client.search_jobs ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode }, call_options) do |_result, response|
+        client.search_jobs({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_jobs(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode), call_options) do |_result, response|
+        client.search_jobs(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -613,6 +614,7 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
     custom_ranking_info = {}
     disable_keyword_match = true
     keyword_match_mode = :KEYWORD_MATCH_MODE_UNSPECIFIED
+    relevance_threshold = :RELEVANCE_THRESHOLD_UNSPECIFIED
 
     search_jobs_for_alert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -628,27 +630,27 @@ class ::Google::Cloud::Talent::V4beta1::JobService::Rest::ClientTest < Minitest:
         end
 
         # Use hash object
-        client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode }) do |_result, response|
+        client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.search_jobs_for_alert parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode do |_result, response|
+        client.search_jobs_for_alert parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.search_jobs_for_alert ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode) do |_result, response|
+        client.search_jobs_for_alert ::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode }, call_options) do |_result, response|
+        client.search_jobs_for_alert({ parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.search_jobs_for_alert(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode), call_options) do |_result, response|
+        client.search_jobs_for_alert(::Google::Cloud::Talent::V4beta1::SearchJobsRequest.new(parent: parent, search_mode: search_mode, request_metadata: request_metadata, job_query: job_query, enable_broadening: enable_broadening, require_precise_result_size: require_precise_result_size, histogram_queries: histogram_queries, job_view: job_view, offset: offset, page_size: page_size, page_token: page_token, order_by: order_by, diversification_level: diversification_level, custom_ranking_info: custom_ranking_info, disable_keyword_match: disable_keyword_match, keyword_match_mode: keyword_match_mode, relevance_threshold: relevance_threshold), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
