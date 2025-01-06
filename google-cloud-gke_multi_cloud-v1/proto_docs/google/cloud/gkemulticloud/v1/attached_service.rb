@@ -174,6 +174,7 @@ module Google
         #      *   `proxy_config.kubernetes_secret.name`.
         #      *   `proxy_config.kubernetes_secret.namespace`.
         #      *   `security_posture_config.vulnerability_mode`
+        #      *   `monitoring_config.cloud_monitoring_config.enabled`
         class UpdateAttachedClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -104,9 +104,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether it has been requested cancellation
         #     for the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to `Code.CANCELLED`.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -261,6 +262,10 @@ module Google
         # @!attribute [rw] managed_prometheus_config
         #   @return [::Google::Cloud::GkeMultiCloud::V1::ManagedPrometheusConfig]
         #     Enable Google Cloud Managed Service for Prometheus in the cluster.
+        # @!attribute [rw] cloud_monitoring_config
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::CloudMonitoringConfig]
+        #     Optionally enable GKE metrics.
+        #     Only for Attached Clusters.
         class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -272,6 +277,18 @@ module Google
         #   @return [::Boolean]
         #     Enable Managed Collection.
         class ManagedPrometheusConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CloudMonitoringConfig defines the configuration for
+        # built-in Cloud Logging and Monitoring.
+        # Only for Attached Clusters.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enable GKE-native logging and metrics.
+        #     Only for Attached Clusters.
+        class CloudMonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

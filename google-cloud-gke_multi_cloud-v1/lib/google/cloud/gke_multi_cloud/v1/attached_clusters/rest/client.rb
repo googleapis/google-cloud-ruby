@@ -382,6 +382,7 @@ module Google
               #      *   `proxy_config.kubernetes_secret.name`.
               #      *   `proxy_config.kubernetes_secret.namespace`.
               #      *   `security_posture_config.vulnerability_mode`
+              #      *   `monitoring_config.cloud_monitoring_config.enabled`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
