@@ -74,6 +74,15 @@ module Google
         # @!attribute [rw] cloud_storage
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage]
         #     Optional. Cloud Storage.
+        # @!attribute [rw] azure_event_hubs
+        #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AzureEventHubs]
+        #     Optional. Azure Event Hubs.
+        # @!attribute [rw] aws_msk
+        #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsMsk]
+        #     Optional. Amazon MSK.
+        # @!attribute [rw] confluent_cloud
+        #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::ConfluentCloud]
+        #     Optional. Confluent Cloud.
         # @!attribute [rw] platform_logs_settings
         #   @return [::Google::Cloud::PubSub::V1::PlatformLogsSettings]
         #     Optional. Platform Logs settings. If unset, no Platform Logs will be
@@ -233,6 +242,173 @@ module Google
               TOO_MANY_OBJECTS = 5
             end
           end
+
+          # Ingestion settings for Azure Event Hubs.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AzureEventHubs::State]
+          #     Output only. An output-only field that indicates the state of the Event
+          #     Hubs ingestion source.
+          # @!attribute [rw] resource_group
+          #   @return [::String]
+          #     Optional. Name of the resource group within the azure subscription.
+          # @!attribute [rw] namespace
+          #   @return [::String]
+          #     Optional. The name of the Event Hubs namespace.
+          # @!attribute [rw] event_hub
+          #   @return [::String]
+          #     Optional. The name of the Event Hub.
+          # @!attribute [rw] client_id
+          #   @return [::String]
+          #     Optional. The client id of the Azure application that is being used to
+          #     authenticate Pub/Sub.
+          # @!attribute [rw] tenant_id
+          #   @return [::String]
+          #     Optional. The tenant id of the Azure application that is being used to
+          #     authenticate Pub/Sub.
+          # @!attribute [rw] subscription_id
+          #   @return [::String]
+          #     Optional. The Azure subscription id.
+          # @!attribute [rw] gcp_service_account
+          #   @return [::String]
+          #     Optional. The GCP service account to be used for Federated Identity
+          #     authentication.
+          class AzureEventHubs
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible states for managed ingestion from Event Hubs.
+            module State
+              # Default value. This value is unused.
+              STATE_UNSPECIFIED = 0
+
+              # Ingestion is active.
+              ACTIVE = 1
+
+              # Permission denied encountered while consuming data from Event Hubs.
+              # This can happen when `client_id`, or `tenant_id` are invalid. Or the
+              # right permissions haven't been granted.
+              EVENT_HUBS_PERMISSION_DENIED = 2
+
+              # Permission denied encountered while publishing to the topic.
+              PUBLISH_PERMISSION_DENIED = 3
+
+              # The provided Event Hubs namespace couldn't be found.
+              NAMESPACE_NOT_FOUND = 4
+
+              # The provided Event Hub couldn't be found.
+              EVENT_HUB_NOT_FOUND = 5
+
+              # The provided Event Hubs subscription couldn't be found.
+              SUBSCRIPTION_NOT_FOUND = 6
+
+              # The provided Event Hubs resource group couldn't be found.
+              RESOURCE_GROUP_NOT_FOUND = 7
+            end
+          end
+
+          # Ingestion settings for Amazon MSK.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsMsk::State]
+          #     Output only. An output-only field that indicates the state of the Amazon
+          #     MSK ingestion source.
+          # @!attribute [rw] cluster_arn
+          #   @return [::String]
+          #     Required. The Amazon Resource Name (ARN) that uniquely identifies the
+          #     cluster.
+          # @!attribute [rw] topic
+          #   @return [::String]
+          #     Required. The name of the topic in the Amazon MSK cluster that Pub/Sub
+          #     will import from.
+          # @!attribute [rw] aws_role_arn
+          #   @return [::String]
+          #     Required. AWS role ARN to be used for Federated Identity authentication
+          #     with Amazon MSK. Check the Pub/Sub docs for how to set up this role and
+          #     the required permissions that need to be attached to it.
+          # @!attribute [rw] gcp_service_account
+          #   @return [::String]
+          #     Required. The GCP service account to be used for Federated Identity
+          #     authentication with Amazon MSK (via a `AssumeRoleWithWebIdentity` call
+          #     for the provided role). The `aws_role_arn` must be set up with
+          #     `accounts.google.com:sub` equals to this service account number.
+          class AwsMsk
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible states for managed ingestion from Amazon MSK.
+            module State
+              # Default value. This value is unused.
+              STATE_UNSPECIFIED = 0
+
+              # Ingestion is active.
+              ACTIVE = 1
+
+              # Permission denied encountered while consuming data from Amazon MSK.
+              MSK_PERMISSION_DENIED = 2
+
+              # Permission denied encountered while publishing to the topic.
+              PUBLISH_PERMISSION_DENIED = 3
+
+              # The provided MSK cluster wasn't found.
+              CLUSTER_NOT_FOUND = 4
+
+              # The provided topic wasn't found.
+              TOPIC_NOT_FOUND = 5
+            end
+          end
+
+          # Ingestion settings for Confluent Cloud.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::ConfluentCloud::State]
+          #     Output only. An output-only field that indicates the state of the
+          #     Confluent Cloud ingestion source.
+          # @!attribute [rw] bootstrap_server
+          #   @return [::String]
+          #     Required. The address of the bootstrap server. The format is url:port.
+          # @!attribute [rw] cluster_id
+          #   @return [::String]
+          #     Required. The id of the cluster.
+          # @!attribute [rw] topic
+          #   @return [::String]
+          #     Required. The name of the topic in the Confluent Cloud cluster that
+          #     Pub/Sub will import from.
+          # @!attribute [rw] identity_pool_id
+          #   @return [::String]
+          #     Required. The id of the identity pool to be used for Federated Identity
+          #     authentication with Confluent Cloud. See
+          #     https://docs.confluent.io/cloud/current/security/authenticate/workload-identities/identity-providers/oauth/identity-pools.html#add-oauth-identity-pools.
+          # @!attribute [rw] gcp_service_account
+          #   @return [::String]
+          #     Required. The GCP service account to be used for Federated Identity
+          #     authentication with `identity_pool_id`.
+          class ConfluentCloud
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible states for managed ingestion from Confluent Cloud.
+            module State
+              # Default value. This value is unused.
+              STATE_UNSPECIFIED = 0
+
+              # Ingestion is active.
+              ACTIVE = 1
+
+              # Permission denied encountered while consuming data from Confluent
+              # Cloud.
+              CONFLUENT_CLOUD_PERMISSION_DENIED = 2
+
+              # Permission denied encountered while publishing to the topic.
+              PUBLISH_PERMISSION_DENIED = 3
+
+              # The provided bootstrap server address is unreachable.
+              UNREACHABLE_BOOTSTRAP_SERVER = 4
+
+              # The provided cluster wasn't found.
+              CLUSTER_NOT_FOUND = 5
+
+              # The provided topic wasn't found.
+              TOPIC_NOT_FOUND = 6
+            end
+          end
         end
 
         # Settings for Platform Logs produced by Pub/Sub.
@@ -277,6 +453,15 @@ module Google
         # @!attribute [rw] cloud_storage_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::CloudStorageFailure]
         #     Optional. Failure when ingesting from Cloud Storage.
+        # @!attribute [rw] aws_msk_failure
+        #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AwsMskFailureReason]
+        #     Optional. Failure when ingesting from Amazon MSK.
+        # @!attribute [rw] azure_event_hubs_failure
+        #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AzureEventHubsFailureReason]
+        #     Optional. Failure when ingesting from Azure Event Hubs.
+        # @!attribute [rw] confluent_cloud_failure
+        #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ConfluentCloudFailureReason]
+        #     Optional. Failure when ingesting from Confluent Cloud.
         class IngestionFailureEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,6 +506,75 @@ module Google
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
           class CloudStorageFailure
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Failure when ingesting from an Amazon MSK source.
+          # @!attribute [rw] cluster_arn
+          #   @return [::String]
+          #     Optional. The ARN of the cluster of the topic being ingested from.
+          # @!attribute [rw] kafka_topic
+          #   @return [::String]
+          #     Optional. The name of the Kafka topic being ingested from.
+          # @!attribute [rw] partition_id
+          #   @return [::Integer]
+          #     Optional. The partition ID of the message that failed to be ingested.
+          # @!attribute [rw] offset
+          #   @return [::Integer]
+          #     Optional. The offset within the partition of the message that failed to
+          #     be ingested.
+          # @!attribute [rw] api_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
+          #     Optional. The Pub/Sub API limits prevented the desired message from
+          #     being published.
+          class AwsMskFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Failure when ingesting from an Azure Event Hubs source.
+          # @!attribute [rw] namespace
+          #   @return [::String]
+          #     Optional. The namespace containing the event hub being ingested from.
+          # @!attribute [rw] event_hub
+          #   @return [::String]
+          #     Optional. The name of the event hub being ingested from.
+          # @!attribute [rw] partition_id
+          #   @return [::Integer]
+          #     Optional. The partition ID of the message that failed to be ingested.
+          # @!attribute [rw] offset
+          #   @return [::Integer]
+          #     Optional. The offset within the partition of the message that failed to
+          #     be ingested.
+          # @!attribute [rw] api_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
+          #     Optional. The Pub/Sub API limits prevented the desired message from
+          #     being published.
+          class AzureEventHubsFailureReason
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Failure when ingesting from a Confluent Cloud source.
+          # @!attribute [rw] cluster_id
+          #   @return [::String]
+          #     Optional. The cluster ID containing the topic being ingested from.
+          # @!attribute [rw] kafka_topic
+          #   @return [::String]
+          #     Optional. The name of the Kafka topic being ingested from.
+          # @!attribute [rw] partition_id
+          #   @return [::Integer]
+          #     Optional. The partition ID of the message that failed to be ingested.
+          # @!attribute [rw] offset
+          #   @return [::Integer]
+          #     Optional. The offset within the partition of the message that failed to
+          #     be ingested.
+          # @!attribute [rw] api_violation_reason
+          #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
+          #     Optional. The Pub/Sub API limits prevented the desired message from
+          #     being published.
+          class ConfluentCloudFailureReason
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
