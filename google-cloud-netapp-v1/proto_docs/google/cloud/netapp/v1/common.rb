@@ -60,6 +60,15 @@ module Google
           # Customer managed encryption key, which is stored in KMS.
           CLOUD_KMS = 2
         end
+
+        # Type of directory service
+        module DirectoryServiceType
+          # Directory service type is not specified.
+          DIRECTORY_SERVICE_TYPE_UNSPECIFIED = 0
+
+          # Active directory policy attached to the storage pool.
+          ACTIVE_DIRECTORY = 1
+        end
       end
     end
   end

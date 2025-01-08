@@ -43,6 +43,9 @@ module Google
             rpc :UpdateStoragePool, ::Google::Cloud::NetApp::V1::UpdateStoragePoolRequest, ::Google::Longrunning::Operation
             # Warning! This operation will permanently delete the storage pool.
             rpc :DeleteStoragePool, ::Google::Cloud::NetApp::V1::DeleteStoragePoolRequest, ::Google::Longrunning::Operation
+            # ValidateDirectoryService does a connectivity check for a directory service
+            # policy attached to the storage pool.
+            rpc :ValidateDirectoryService, ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest, ::Google::Longrunning::Operation
             # This operation will switch the active/replica zone for a regional
             # storagePool.
             rpc :SwitchActiveReplicaZone, ::Google::Cloud::NetApp::V1::SwitchActiveReplicaZoneRequest, ::Google::Longrunning::Operation

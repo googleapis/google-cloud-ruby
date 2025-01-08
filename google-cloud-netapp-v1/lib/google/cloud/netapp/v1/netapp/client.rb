@@ -851,6 +851,103 @@ module Google
             end
 
             ##
+            # ValidateDirectoryService does a connectivity check for a directory service
+            # policy attached to the storage pool.
+            #
+            # @overload validate_directory_service(request, options = nil)
+            #   Pass arguments to `validate_directory_service` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload validate_directory_service(name: nil, directory_service_type: nil)
+            #   Pass arguments to `validate_directory_service` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the storage pool
+            #   @param directory_service_type [::Google::Cloud::NetApp::V1::DirectoryServiceType]
+            #     Type of directory service policy attached to the storage pool.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest.new
+            #
+            #   # Call the validate_directory_service method.
+            #   result = client.validate_directory_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def validate_directory_service request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ValidateDirectoryServiceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.validate_directory_service.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.validate_directory_service.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.validate_directory_service.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :validate_directory_service, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # This operation will switch the active/replica zone for a regional
             # storagePool.
             #
@@ -5785,6 +5882,11 @@ module Google
                 #
                 attr_reader :delete_storage_pool
                 ##
+                # RPC-specific configuration for `validate_directory_service`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :validate_directory_service
+                ##
                 # RPC-specific configuration for `switch_active_replica_zone`
                 # @return [::Gapic::Config::Method]
                 #
@@ -6042,6 +6144,8 @@ module Google
                   @update_storage_pool = ::Gapic::Config::Method.new update_storage_pool_config
                   delete_storage_pool_config = parent_rpcs.delete_storage_pool if parent_rpcs.respond_to? :delete_storage_pool
                   @delete_storage_pool = ::Gapic::Config::Method.new delete_storage_pool_config
+                  validate_directory_service_config = parent_rpcs.validate_directory_service if parent_rpcs.respond_to? :validate_directory_service
+                  @validate_directory_service = ::Gapic::Config::Method.new validate_directory_service_config
                   switch_active_replica_zone_config = parent_rpcs.switch_active_replica_zone if parent_rpcs.respond_to? :switch_active_replica_zone
                   @switch_active_replica_zone = ::Gapic::Config::Method.new switch_active_replica_zone_config
                   list_volumes_config = parent_rpcs.list_volumes if parent_rpcs.respond_to? :list_volumes

@@ -231,6 +231,19 @@ module Google
             ERROR = 7
           end
         end
+
+        # ValidateDirectoryServiceRequest validates the directory service policy
+        # attached to the storage pool.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the storage pool
+        # @!attribute [rw] directory_service_type
+        #   @return [::Google::Cloud::NetApp::V1::DirectoryServiceType]
+        #     Type of directory service policy attached to the storage pool.
+        class ValidateDirectoryServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
