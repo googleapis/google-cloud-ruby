@@ -117,6 +117,7 @@
     "snippets/netapp/update_snapshot.rb",
     "snippets/netapp/update_storage_pool.rb",
     "snippets/netapp/update_volume.rb",
+    "snippets/netapp/validate_directory_service.rb",
     "snippets/netapp/verify_kms_config.rb",
     "snippets/snippet_metadata_google.cloud.netapp.v1.json",
     "test/google/cloud/netapp/v1/netapp_operations_test.rb",

@@ -35,6 +35,11 @@
                 "delete_storage_pool"
               ]
             },
+            "ValidateDirectoryService": {
+              "methods": [
+                "validate_directory_service"
+              ]
+            },
             "SwitchActiveReplicaZone": {
               "methods": [
                 "switch_active_replica_zone"

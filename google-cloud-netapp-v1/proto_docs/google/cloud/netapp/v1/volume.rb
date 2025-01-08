@@ -548,9 +548,7 @@ module Google
         # The Hybrid Replication parameters for the volume.
         # @!attribute [rw] replication
         #   @return [::String]
-        #     Required. Desired Identifier (name) of the replication which will be created for this volume.
-        #     Format:
-        #     `projects/{project_id}/locations/{location}/volumes/{volume_id}/replications/{replication_id}`
+        #     Required. Desired name for the replication of this volume.
         # @!attribute [rw] peer_volume_name
         #   @return [::String]
         #     Required. Name of the user's local source volume to be peered with the
