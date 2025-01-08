@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.3.0 (2025-01-08)
+
+#### Features
+
+* Support for cross-bucket replication job configuration 
+#### Documentation
+
+* Expanded documentation for filters 
+
 ### 1.2.0 (2024-12-10)
 
 #### Features
