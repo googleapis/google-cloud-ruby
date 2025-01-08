@@ -1,5 +1,19 @@
 # Release History
 
+### 1.3.0 (2025-01-08)
+
+#### Features
+
+* added PrometheusQueryLanguageCondition.disable_metric_validation 
+* added SqlCondition in AlertPolicy 
+* added TimeSeries.description for input only 
+#### Documentation
+
+* deprecated QueryTimeSeries (MQL query endpoint) 
+* ServiceAgentAuthentication supports generating an OAuth token 
+* ServiceLevelObjective.goal must be &lt;= 0.9999 
+* TimeSeries.unit allows limited updating by CreateTimeSeries 
+
 ### 1.2.0 (2024-12-10)
 
 #### Features
