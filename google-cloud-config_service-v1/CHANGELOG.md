@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.1 (2025-01-08)
+
+#### Bug Fixes
+
+* Set default timeout and retry policies ([#28183](https://github.com/googleapis/google-cloud-ruby/issues/28183)) 
+
 ### 1.2.0 (2024-12-12)
 
 #### Features
