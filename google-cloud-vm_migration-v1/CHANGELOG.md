@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2025-01-08)
+
+#### Features
+
+* Support reason and localized message strings on FieldViolation ([#28123](https://github.com/googleapis/google-cloud-ruby/issues/28123)) 
+
 ### 1.1.0 (2024-12-10)
 
 #### Features
