@@ -1,5 +1,12 @@
 # Release History
 
+### 0.19.0 (2025-01-08)
+
+#### Features
+
+* Support for Linear PCM encoding 
+* Support for streaming audio config 
+
 ### 0.18.0 (2024-12-10)
 
 #### Features
