@@ -1,5 +1,12 @@
 # Release History
 
+### 1.5.0 (2025-01-08)
+
+#### Features
+
+* Added free_instance_availability, quorum_type, and storage_limit_per_processing_unit to InstanceConfig 
+* Added instance_type and free_instance_metadata to Instance 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features
