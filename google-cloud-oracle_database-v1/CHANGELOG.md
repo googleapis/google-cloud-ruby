@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2025-01-08)
+
+#### Documentation
+
+* the CloudVmClusterProperties#system_version field is no longer labeled as output only ([#28178](https://github.com/googleapis/google-cloud-ruby/issues/28178)) 
+
 ### 0.2.0 (2024-12-10)
 
 #### Features
