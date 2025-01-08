@@ -262,6 +262,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A Go module artifact uploaded to Artifact Registry using the GoModule
+        # directive.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of the uploaded artifact.
+        # @!attribute [rw] file_hashes
+        #   @return [::Google::Cloud::Build::V1::FileHashes]
+        #     Hash types and values of the Go Module Artifact.
+        # @!attribute [r] push_timing
+        #   @return [::Google::Cloud::Build::V1::TimeSpan]
+        #     Output only. Stores timing information for pushing the specified artifact.
+        class UploadedGoModule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # An npm package uploaded to Artifact Registry using the NpmPackage
         # directive.
         # @!attribute [rw] uri
@@ -453,6 +469,10 @@ module Google
         # @!attribute [rw] maven_artifacts
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedMavenArtifact>]
         #     Maven artifacts uploaded to Artifact Registry at the end of the build.
+        # @!attribute [rw] go_modules
+        #   @return [::Array<::Google::Cloud::Build::V1::UploadedGoModule>]
+        #     Optional. Go module artifacts uploaded to Artifact Registry at the end of
+        #     the build.
         # @!attribute [rw] npm_packages
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedNpmPackage>]
         #     Npm packages uploaded to Artifact Registry at the end of the build.
@@ -786,6 +806,12 @@ module Google
         #     account's credentials.
         #
         #     If any artifacts fail to be pushed, the build is marked FAILURE.
+        # @!attribute [rw] go_modules
+        #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::GoModule>]
+        #     Optional. A list of Go modules to be uploaded to Artifact Registry upon
+        #     successful completion of all build steps.
+        #
+        #     If any objects fail to be pushed, the build is marked FAILURE.
         # @!attribute [rw] python_packages
         #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::PythonPackage>]
         #     A list of Python packages to be uploaded to Artifact Registry upon
@@ -859,6 +885,43 @@ module Google
           #     Maven `version` value used when uploading the artifact to Artifact
           #     Registry.
           class MavenArtifact
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Go module to upload to Artifact Registry upon successful completion of all
+          # build steps. A module refers to all dependencies in a go.mod file.
+          # @!attribute [rw] repository_name
+          #   @return [::String]
+          #     Optional. Artifact Registry repository name.
+          #
+          #     Specified Go modules will be zipped and uploaded to Artifact Registry
+          #     with this location as a prefix.
+          #     e.g. my-go-repo
+          # @!attribute [rw] repository_location
+          #   @return [::String]
+          #     Optional. Location of the Artifact Registry repository. i.e. us-east1
+          #     Defaults to the build’s location.
+          # @!attribute [rw] repository_project_id
+          #   @return [::String]
+          #     Optional. Project ID of the Artifact Registry repository.
+          #     Defaults to the build project.
+          # @!attribute [rw] source_path
+          #   @return [::String]
+          #     Optional. Source path of the go.mod file in the build's workspace. If not
+          #     specified, this will default to the current directory.
+          #     e.g. ~/code/go/mypackage
+          # @!attribute [rw] module_path
+          #   @return [::String]
+          #     Optional. The Go module's "module path".
+          #     e.g. example.com/foo/v2
+          # @!attribute [rw] module_version
+          #   @return [::String]
+          #     Optional. The Go module's semantic version in the form vX.Y.Z. e.g.
+          #     v0.1.1 Pre-release identifiers can also be added by appending a dash and
+          #     dot separated ASCII alphanumeric characters and hyphens.
+          #     e.g. v0.2.3-alpha.x.12m.5
+          class GoModule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -995,6 +1058,9 @@ module Google
 
             # Use a md5 hash.
             MD5 = 2
+
+            # Dirhash of a Go module's source code which is then hex-encoded.
+            GO_MODULE_H1 = 3
 
             # Use a sha512 hash.
             SHA512 = 4
