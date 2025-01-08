@@ -1,5 +1,11 @@
 # Release History
 
+### 1.6.0 (2025-01-08)
+
+#### Features
+
+* Support for delivering intermediate transcriptions through PubSub ([#28112](https://github.com/googleapis/google-cloud-ruby/issues/28112)) 
+
 ### 1.5.0 (2024-12-10)
 
 #### Features
