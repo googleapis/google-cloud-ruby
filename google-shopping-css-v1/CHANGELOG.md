@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.4.0 (2025-01-08)
+
+#### Features
+
+* Support the update_css_product_input RPC 
+#### Documentation
+
+* Deprecated feed_id for CSS products 
+* Deprecated freshness_time for CSS products-- use expiration_date instead 
+* Fixed maximum page size documented for list_child_accounts 
+
 ### 0.3.0 (2024-12-10)
 
 #### Features
