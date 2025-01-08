@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2025-01-08)
+
+#### Features
+
+* Support relevance threshold for search RPCs ([#28181](https://github.com/googleapis/google-cloud-ruby/issues/28181)) 
+
 ### 1.1.0 (2024-12-10)
 
 #### Features
