@@ -52,6 +52,9 @@ module Google
 
             # Entitlement and Account are active.
             ACTIVE = 3
+
+            # Account is suspended.
+            ACCOUNT_SUSPENDED = 4
           end
         end
 
