@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.13.0 (2025-01-08)
+
+#### Features
+
+* Support built-in Cloud Logging and Monitoring for Attached Clusters 
+* Support tags on AttachedCluster resources 
+
 ### 0.12.0 (2024-12-10)
 
 #### Features
