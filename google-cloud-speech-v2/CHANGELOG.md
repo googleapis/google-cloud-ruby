@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.15.0 (2025-01-08)
+
+#### Features
+
+* Support several additional audio data encodings ([#28144](https://github.com/googleapis/google-cloud-ruby/issues/28144)) 
+
 ### 0.14.0 (2024-12-10)
 
 #### Features
