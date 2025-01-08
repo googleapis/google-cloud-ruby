@@ -1,5 +1,12 @@
 # Changelog
 
+### 1.4.0 (2025-01-08)
+
+#### Features
+
+* Support for agent type 
+* Support for authorized views in path helpers 
+
 ### 1.3.0 (2024-12-10)
 
 #### Features
