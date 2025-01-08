@@ -333,10 +333,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Description of the desired output audio data.
+        # @!attribute [rw] audio_encoding
+        #   @return [::Google::Cloud::TextToSpeech::V1::AudioEncoding]
+        #     Required. The format of the audio byte stream.
+        #     For now, streaming only supports PCM and OGG_OPUS. All other encodings
+        #     will return an error.
+        # @!attribute [rw] sample_rate_hertz
+        #   @return [::Integer]
+        #     Optional. The synthesis sample rate (in hertz) for this audio.
+        class StreamingAudioConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Provides configuration information for the StreamingSynthesize request.
         # @!attribute [rw] voice
         #   @return [::Google::Cloud::TextToSpeech::V1::VoiceSelectionParams]
         #     Required. The desired voice of the synthesized audio.
+        # @!attribute [rw] streaming_audio_config
+        #   @return [::Google::Cloud::TextToSpeech::V1::StreamingAudioConfig]
+        #     Optional. The configuration of the synthesized audio.
         class StreamingSynthesizeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -431,6 +448,11 @@ module Google
           # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/A-law.
           # Audio content returned as ALAW also contains a WAV header.
           ALAW = 6
+
+          # Uncompressed 16-bit signed little-endian samples (Linear PCM).
+          # Note that as opposed to LINEAR16, audio will not be wrapped in a WAV (or
+          # any other) header.
+          PCM = 7
         end
       end
     end
