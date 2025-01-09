@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2025-01-09)
+
+#### Features
+
+* Support new ACCOUNT_SUSPENDED state in Entitlement ([#28208](https://github.com/googleapis/google-cloud-ruby/issues/28208)) 
+
 ### 0.2.1 (2025-01-08)
 
 #### Documentation
