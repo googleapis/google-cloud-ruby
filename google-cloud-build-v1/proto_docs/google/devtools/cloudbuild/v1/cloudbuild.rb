@@ -1928,6 +1928,11 @@ module Google
         # @!attribute [rw] default_logs_bucket_behavior
         #   @return [::Google::Cloud::Build::V1::BuildOptions::DefaultLogsBucketBehavior]
         #     Optional. Option to specify how default logs buckets are setup.
+        # @!attribute [rw] enable_structured_logging
+        #   @return [::Boolean]
+        #     Optional. Option to specify whether structured logging is enabled.
+        #
+        #     If true, JSON-formatted logs are parsed as structured logs.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
