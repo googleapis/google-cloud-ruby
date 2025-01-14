@@ -584,6 +584,7 @@
     "proto_docs/google/type/date.rb",
     "proto_docs/google/type/expr.rb",
     "proto_docs/google/type/interval.rb",
+    "proto_docs/google/type/latlng.rb",
     "proto_docs/google/type/money.rb",
     "snippets/Gemfile",
     "snippets/dataset_service/create_dataset.rb",
