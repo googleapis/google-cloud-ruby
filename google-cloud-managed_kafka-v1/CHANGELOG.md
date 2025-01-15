@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2025-01-15)
+
+#### Features
+
+* Add resource_definition option to resources ([#28205](https://github.com/googleapis/google-cloud-ruby/issues/28205)) 
+
 ### 0.3.0 (2024-12-10)
 
 #### Features
