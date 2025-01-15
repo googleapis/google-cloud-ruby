@@ -55,6 +55,7 @@ require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
+require "pry"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -127,9 +128,6 @@ describe "Buckets Snippets" do
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
       new_bucket = storage_client.create_bucket new_bucket_name
       new_generation = new_bucket.generation
-      policy = bucket.policy
-      policy.add_binding(role: 'roles/storage.objectViewer', members: ["user:542339357638-cr0dserr2evg7sv1meghqeu703274f3h@developer.gserviceaccount.com"]) 
-
       # Check if the bucket exist
       assert(new_bucket.exists?, "Bucket #{new_bucket_name} should exist") 
       delete_bucket_helper new_bucket_name
