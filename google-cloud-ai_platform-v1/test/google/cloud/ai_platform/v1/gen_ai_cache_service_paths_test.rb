@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,9 +20,9 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/ai_platform/v1/prediction_service"
+require "google/cloud/ai_platform/v1/gen_ai_cache_service"
 
-class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientPathsTest < Minitest::Test
+class ::Google::Cloud::AIPlatform::V1::GenAiCacheService::ClientPathsTest < Minitest::Test
   class DummyStub
     def endpoint
       "endpoint.example.com"
@@ -44,7 +44,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientPathsTest < Mini
   def test_cached_content_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
@@ -53,25 +53,22 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientPathsTest < Mini
     end
   end
 
-  def test_endpoint_path
+  def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 
-      path = client.endpoint_path project: "value0", location: "value1", endpoint: "value2"
-      assert_equal "projects/value0/locations/value1/endpoints/value2", path
-
-      path = client.endpoint_path project: "value0", location: "value1", publisher: "value2", model: "value3"
-      assert_equal "projects/value0/locations/value1/publishers/value2/models/value3", path
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
     end
   end
 
   def test_rag_corpus_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
-      client = ::Google::Cloud::AIPlatform::V1::PredictionService::Client.new do |config|
+      client = ::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client.new do |config|
         config.credentials = grpc_channel
       end
 

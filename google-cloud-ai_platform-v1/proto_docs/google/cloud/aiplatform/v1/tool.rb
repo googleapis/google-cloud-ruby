@@ -232,6 +232,9 @@ module Google
         # @!attribute [rw] function_calling_config
         #   @return [::Google::Cloud::AIPlatform::V1::FunctionCallingConfig]
         #     Optional. Function calling config.
+        # @!attribute [rw] retrieval_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RetrievalConfig]
+        #     Optional. Retrieval config.
         class ToolConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -269,6 +272,18 @@ module Google
             # not passing any function declarations.
             NONE = 3
           end
+        end
+
+        # Retrieval config.
+        # @!attribute [rw] lat_lng
+        #   @return [::Google::Type::LatLng]
+        #     The location of the user.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     The language code of the user.
+        class RetrievalConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specifies the context retrieval config.

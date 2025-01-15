@@ -499,6 +499,13 @@ module Google
         #     Optional. The user provided system instructions for the model.
         #     Note: only text should be used in parts and content in each part will be in
         #     a separate paragraph.
+        # @!attribute [rw] cached_content
+        #   @return [::String]
+        #     Optional. The name of the cached content used as context to serve the
+        #     prediction. Note: only used in explicit caching, where users can have
+        #     control over caching (e.g. what content to cache) and enjoy guaranteed cost
+        #     savings. Format:
+        #     `projects/{project}/locations/{location}/cachedContents/{cachedContent}`
         # @!attribute [rw] tools
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::Tool>]
         #     Optional. A list of `Tools` the model may use to generate the next
@@ -606,6 +613,10 @@ module Google
           # @!attribute [rw] total_token_count
           #   @return [::Integer]
           #     Total token count for prompt and response candidates.
+          # @!attribute [r] cached_content_token_count
+          #   @return [::Integer]
+          #     Output only. Number of tokens in the cached part in the input (the cached
+          #     content).
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

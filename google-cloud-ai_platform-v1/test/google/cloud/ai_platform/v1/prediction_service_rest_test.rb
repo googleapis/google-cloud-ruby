@@ -481,6 +481,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     model = "hello world"
     contents = [{}]
     system_instruction = {}
+    cached_content = "hello world"
     tools = [{}]
     tool_config = {}
     labels = {}
@@ -501,27 +502,27 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }) do |_result, response|
+        client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.generate_content model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config do |_result, response|
+        client.generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config) do |_result, response|
+        client.generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }, call_options) do |_result, response|
+        client.generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config), call_options) do |_result, response|
+        client.generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -542,6 +543,7 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
     model = "hello world"
     contents = [{}]
     system_instruction = {}
+    cached_content = "hello world"
     tools = [{}]
     tool_config = {}
     labels = {}
@@ -562,27 +564,27 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }) do |_result, response|
+        client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use named arguments
-        client.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config do |_result, response|
+        client.stream_generate_content model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object
-        client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config) do |_result, response|
+        client.stream_generate_content ::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use hash object with options
-        client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }, call_options) do |_result, response|
+        client.stream_generate_content({ model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
         # Use protobuf object with options
-        client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config), call_options) do |_result, response|
+        client.stream_generate_content(::Google::Cloud::AIPlatform::V1::GenerateContentRequest.new(model: model, contents: contents, system_instruction: system_instruction, cached_content: cached_content, tools: tools, tool_config: tool_config, labels: labels, safety_settings: safety_settings, generation_config: generation_config), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end.first
 
