@@ -128,7 +128,7 @@ describe "Buckets Snippets" do
       new_generation = new_bucket.generation
 
       # Check if the bucket exist
-      assert(deleted_bucket.exists?, "Bucket #{new_bucket_name} should exist") 
+      assert(new_bucket.exists?, "Bucket #{new_bucket_name} should exist") 
       delete_bucket_helper new_bucket_name
 
       # Check if the bucket does not exist
