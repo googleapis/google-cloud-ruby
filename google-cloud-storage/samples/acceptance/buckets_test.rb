@@ -130,7 +130,8 @@ describe "Buckets Snippets" do
       delete_bucket_helper new_bucket_name
 
       # Check if the bucket does not exist
-      refute(bucket.exists?, "Bucket #{new_bucket_name} should not exist") 
+      deleted_bucket =storage_client.bucket new_bucket_name
+      refute(deleted_bucket.exists?, "Bucket #{new_bucket_name} should not exist") 
       _out, _err = capture_io do
         get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
       end
