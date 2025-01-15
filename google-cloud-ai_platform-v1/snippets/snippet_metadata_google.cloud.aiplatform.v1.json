@@ -3412,6 +3412,206 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_GenAiCacheService_CreateCachedContent_sync",
+      "title": "Snippet for the create_cached_content call in the GenAiCacheService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#create_cached_content.",
+      "file": "gen_ai_cache_service/create_cached_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cached_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#create_cached_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateCachedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::CachedContent",
+        "client": {
+          "short_name": "GenAiCacheService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client"
+        },
+        "method": {
+          "short_name": "CreateCachedContent",
+          "full_name": "google.cloud.aiplatform.v1.GenAiCacheService.CreateCachedContent",
+          "service": {
+            "short_name": "GenAiCacheService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiCacheService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiCacheService_GetCachedContent_sync",
+      "title": "Snippet for the get_cached_content call in the GenAiCacheService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#get_cached_content.",
+      "file": "gen_ai_cache_service/get_cached_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cached_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#get_cached_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetCachedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::CachedContent",
+        "client": {
+          "short_name": "GenAiCacheService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client"
+        },
+        "method": {
+          "short_name": "GetCachedContent",
+          "full_name": "google.cloud.aiplatform.v1.GenAiCacheService.GetCachedContent",
+          "service": {
+            "short_name": "GenAiCacheService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiCacheService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiCacheService_UpdateCachedContent_sync",
+      "title": "Snippet for the update_cached_content call in the GenAiCacheService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#update_cached_content.",
+      "file": "gen_ai_cache_service/update_cached_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cached_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#update_cached_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateCachedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::CachedContent",
+        "client": {
+          "short_name": "GenAiCacheService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCachedContent",
+          "full_name": "google.cloud.aiplatform.v1.GenAiCacheService.UpdateCachedContent",
+          "service": {
+            "short_name": "GenAiCacheService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiCacheService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiCacheService_DeleteCachedContent_sync",
+      "title": "Snippet for the delete_cached_content call in the GenAiCacheService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#delete_cached_content.",
+      "file": "gen_ai_cache_service/delete_cached_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cached_content",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#delete_cached_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteCachedContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "GenAiCacheService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client"
+        },
+        "method": {
+          "short_name": "DeleteCachedContent",
+          "full_name": "google.cloud.aiplatform.v1.GenAiCacheService.DeleteCachedContent",
+          "service": {
+            "short_name": "GenAiCacheService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiCacheService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_GenAiCacheService_ListCachedContents_sync",
+      "title": "Snippet for the list_cached_contents call in the GenAiCacheService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#list_cached_contents.",
+      "file": "gen_ai_cache_service/list_cached_contents.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_cached_contents",
+        "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client#list_cached_contents",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListCachedContentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListCachedContentsResponse",
+        "client": {
+          "short_name": "GenAiCacheService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::GenAiCacheService::Client"
+        },
+        "method": {
+          "short_name": "ListCachedContents",
+          "full_name": "google.cloud.aiplatform.v1.GenAiCacheService.ListCachedContents",
+          "service": {
+            "short_name": "GenAiCacheService",
+            "full_name": "google.cloud.aiplatform.v1.GenAiCacheService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_GenAiTuningService_CreateTuningJob_sync",
       "title": "Snippet for the create_tuning_job call in the GenAiTuningService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::GenAiTuningService::Client#create_tuning_job.",
