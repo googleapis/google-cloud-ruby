@@ -55,6 +55,7 @@ require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
+
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:kms_key)          { get_kms_key storage_client.project }
@@ -134,11 +135,14 @@ describe "Buckets Snippets" do
       # Check if the bucket does not exist
       deleted_bucket =storage_client.bucket new_bucket_name
       refute(deleted_bucket, "Bucket #{new_bucket_name} should not exist") 
-      _out, _err = capture_io do
-        get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
-      end
-      assert "soft_delete_time ", "Bucket soft_delete_time should be present"
-      assert "hard_delete_time ", "Bucket hard_delete_time should be present"
+
+      deleted_bucket= storage_client.bucket new_bucket_name, generation: new_generation, soft_deleted: true
+
+      # _out, _err = capture_io do
+      #   get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
+      # end
+      assert deleted_bucket.soft_delete_time , "Bucket soft_delete_time should be present"
+      assert deleted_bucket.hard_delete_time , "Bucket hard_delete_time should be present"
     end
 
     it "lists soft deleted buckets" do
