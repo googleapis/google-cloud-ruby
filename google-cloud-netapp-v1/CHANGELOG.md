@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.5.0 (2025-01-15)
+
+#### Features
+
+* Add ValidateDirectoryService API for testing AD connection of a storage pool ([#28206](https://github.com/googleapis/google-cloud-ruby/issues/28206)) 
+#### Documentation
+
+* Removed comments from HybridReplicationParameters 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features
