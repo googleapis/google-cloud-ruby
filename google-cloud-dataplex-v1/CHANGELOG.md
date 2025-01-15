@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.3.0 (2025-01-15)
+
+#### Features
+
+* The delete_data_Scan RPC supports the force parameter 
+#### Documentation
+
+* Various fixes and clarifications to the reference documentation 
+
 ### 1.2.0 (2024-12-10)
 
 #### Features
