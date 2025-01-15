@@ -131,7 +131,8 @@ module Google
         #     encoded Unicode characters except single quotes ('), double quotes ("),
         #     backslashes (\), and forward slashes (/).
         #
-        #     See [Tags](http://cloud/resource-manager/docs/tags/tags-overview)
+        #     See
+        #     [Tags](https://cloud.google.com/resource-manager/docs/tags/tags-overview)
         #     for more details on Google Cloud Platform tags.
         class AttachedCluster
           include ::Google::Protobuf::MessageExts
