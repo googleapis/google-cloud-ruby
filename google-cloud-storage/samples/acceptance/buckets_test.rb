@@ -55,7 +55,6 @@ require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
-
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:kms_key)          { get_kms_key storage_client.project }
@@ -129,6 +128,9 @@ describe "Buckets Snippets" do
       new_generation = new_bucket.generation
 
       delete_bucket_helper new_bucket_name
+
+      # Check if the bucket does not exist
+      refute(bucket.exists?, "Bucket #{new_bucket_name} should not exist") 
       _out, _err = capture_io do
         get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
       end
