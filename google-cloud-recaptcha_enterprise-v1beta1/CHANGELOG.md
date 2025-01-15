@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.1 (2025-01-15)
+
+#### Documentation
+
+* Minor update to FraudPrevention enumeration documentation ([#28212](https://github.com/googleapis/google-cloud-ruby/issues/28212)) 
+
 ### 0.16.0 (2024-12-10)
 
 #### Features
