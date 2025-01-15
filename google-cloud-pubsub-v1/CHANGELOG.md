@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 (2025-01-15)
+
+#### Features
+
+* Add Kafka-based sources to IngestionDataSourceSettings proto and IngestionFailureEvent proto ([#28200](https://github.com/googleapis/google-cloud-ruby/issues/28200)) 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features
