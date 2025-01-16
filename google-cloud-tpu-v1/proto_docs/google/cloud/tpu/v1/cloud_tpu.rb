@@ -188,6 +188,9 @@ module Google
 
             # TPU node is currently unhiding.
             UNHIDING = 15
+
+            # TPU node has unknown state after a failed repair.
+            UNKNOWN = 16
           end
 
           # Health defines the status of a TPU node as reported by
