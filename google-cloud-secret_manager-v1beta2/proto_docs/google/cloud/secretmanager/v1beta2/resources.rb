@@ -275,7 +275,8 @@ module Google
 
           # A replication policy that replicates the
           # {::Google::Cloud::SecretManager::V1beta2::Secret Secret} payload into the
-          # locations specified in [Secret.replication.user_managed.replicas][]
+          # locations specified in
+          # {::Google::Cloud::SecretManager::V1beta2::Replication::UserManaged#replicas Replication.UserManaged.replicas}
           # @!attribute [rw] replicas
           #   @return [::Array<::Google::Cloud::SecretManager::V1beta2::Replication::UserManaged::Replica>]
           #     Required. The list of Replicas for this
