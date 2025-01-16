@@ -71,14 +71,14 @@ module Google
             #     one of those three protocols. Immutable for Google Sheets files.
             # @!attribute [rw] username
             #   @return [::String]
-            #     Optional. An optional user name for [fetch
-            #     url][google.shopping.content.bundles.DataSources.FileInput.fetch_url].
+            #     Optional. An optional user name for
+            #     {::Google::Shopping::Merchant::DataSources::V1beta::FileInput::FetchSettings#fetch_uri fetch_uri}.
             #     Used for [submitting data sources through
             #     SFTP](https://support.google.com/merchants/answer/13813117).
             # @!attribute [rw] password
             #   @return [::String]
-            #     Optional. An optional password for [fetch
-            #     url][google.shopping.content.bundles.DataSources.FileInput.fetch_url].
+            #     Optional. An optional password for
+            #     {::Google::Shopping::Merchant::DataSources::V1beta::FileInput::FetchSettings#fetch_uri fetch_uri}.
             #     Used for [submitting data sources through
             #     SFTP](https://support.google.com/merchants/answer/13813117).
             class FetchSettings
@@ -126,11 +126,11 @@ module Google
               UPLOAD = 1
 
               # The file is fetched from the configured
-              # [fetch_uri][google.shopping.content.bundles.DataSources.FileInput.FetchSettings.fetch_uri].
+              # {::Google::Shopping::Merchant::DataSources::V1beta::FileInput::FetchSettings#fetch_uri fetch_uri}.
               FETCH = 2
 
               # The file is fetched from Google Sheets specified in the
-              # [fetch_uri][google.shopping.content.bundles.DataSources.FileInput.FetchSettings.fetch_uri].
+              # {::Google::Shopping::Merchant::DataSources::V1beta::FileInput::FetchSettings#fetch_uri fetch_uri}.
               GOOGLE_SHEETS = 3
             end
           end
