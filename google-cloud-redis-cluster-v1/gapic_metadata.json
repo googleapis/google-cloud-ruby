@@ -39,6 +39,46 @@
               "methods": [
                 "get_cluster_certificate_authority"
               ]
+            },
+            "RescheduleClusterMaintenance": {
+              "methods": [
+                "reschedule_cluster_maintenance"
+              ]
+            },
+            "ListBackupCollections": {
+              "methods": [
+                "list_backup_collections"
+              ]
+            },
+            "GetBackupCollection": {
+              "methods": [
+                "get_backup_collection"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "list_backups"
+              ]
+            },
+            "GetBackup": {
+              "methods": [
+                "get_backup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "delete_backup"
+              ]
+            },
+            "ExportBackup": {
+              "methods": [
+                "export_backup"
+              ]
+            },
+            "BackupCluster": {
+              "methods": [
+                "backup_cluster"
+              ]
             }
           }
         }
