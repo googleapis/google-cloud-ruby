@@ -43,7 +43,7 @@ def grant_storage_permission bucket_name
   bucket= storage_client.bucket bucket_name
 
   object_viewer = "roles/storage.objectViewer"
-  member = ""
+  member = "serviceAccount:542339357638-cr0dserr2evg7sv1meghqeu703274f3h@developer.gserviceaccount.com"
   bucket.policy requested_policy_version: 3 do |policy|
     policy.version = 3
     policy.bindings.insert(
