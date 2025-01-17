@@ -429,7 +429,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_metric_descriptors(name: nil, filter: nil, page_size: nil, page_token: nil)
+            # @overload list_metric_descriptors(name: nil, filter: nil, page_size: nil, page_token: nil, active_only: nil)
             #   Pass arguments to `list_metric_descriptors` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -458,6 +458,17 @@ module Google
             #     `nextPageToken` value returned by a previous call to this method.  Using
             #     this field causes the method to return additional results from the previous
             #     method call.
+            #   @param active_only [::Boolean]
+            #     Optional. If true, only metrics and monitored resource types that have
+            #     recent data (within roughly 25 hours) will be included in the response.
+            #      - If a metric descriptor enumerates monitored resource types, only the
+            #        monitored resource types for which the metric type has recent data will
+            #        be included in the returned metric descriptor, and if none of them have
+            #        recent data, the metric descriptor will not be returned.
+            #      - If a metric descriptor does not enumerate the compatible monitored
+            #        resource types, it will be returned only if the metric type has recent
+            #        data for some monitored resource type. The returned descriptor will not
+            #        enumerate any monitored resource types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Api::MetricDescriptor>]
