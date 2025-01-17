@@ -604,6 +604,7 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
     etag = "hello world"
     validate_only = true
     allow_missing = true
+    ignore_backup_plan_references = true
 
     delete_backup_vault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -619,27 +620,27 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+        client.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_backup_vault name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+        client.delete_backup_vault name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_backup_vault ::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+        client.delete_backup_vault ::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+        client.delete_backup_vault({ name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_backup_vault(::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+        client.delete_backup_vault(::Google::Cloud::BackupDR::V1::DeleteBackupVaultRequest.new(name: name, request_id: request_id, force: force, etag: etag, validate_only: validate_only, allow_missing: allow_missing, ignore_backup_plan_references: ignore_backup_plan_references), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1599,6 +1600,62 @@ class ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, trigger_backup_client_stub.call_count
+      end
+    end
+  end
+
+  def test_initialize_service
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    resource_type = "hello world"
+    request_id = "hello world"
+
+    initialize_service_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::BackupDR::V1::BackupDR::Rest::ServiceStub.stub :transcode_initialize_service_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, initialize_service_client_stub do
+        # Create client
+        client = ::Google::Cloud::BackupDR::V1::BackupDR::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.initialize_service({ name: name, resource_type: resource_type, request_id: request_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.initialize_service name: name, resource_type: resource_type, request_id: request_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.initialize_service ::Google::Cloud::BackupDR::V1::InitializeServiceRequest.new(name: name, resource_type: resource_type, request_id: request_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.initialize_service({ name: name, resource_type: resource_type, request_id: request_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.initialize_service(::Google::Cloud::BackupDR::V1::InitializeServiceRequest.new(name: name, resource_type: resource_type, request_id: request_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, initialize_service_client_stub.call_count
       end
     end
   end

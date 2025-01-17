@@ -1090,6 +1090,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "backupdr_v1_generated_BackupDR_InitializeService_sync",
+      "title": "Snippet for the initialize_service call in the BackupDR service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BackupDR::V1::BackupDR::Client#initialize_service.",
+      "file": "backupdr/initialize_service.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "initialize_service",
+        "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client#initialize_service",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BackupDR::V1::InitializeServiceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BackupDR::Client",
+          "full_name": "::Google::Cloud::BackupDR::V1::BackupDR::Client"
+        },
+        "method": {
+          "short_name": "InitializeService",
+          "full_name": "google.cloud.backupdr.v1.BackupDR.InitializeService",
+          "service": {
+            "short_name": "BackupDR",
+            "full_name": "google.cloud.backupdr.v1.BackupDR"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

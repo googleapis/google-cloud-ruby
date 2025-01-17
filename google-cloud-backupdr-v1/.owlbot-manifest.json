@@ -74,6 +74,7 @@
     "snippets/backupdr/get_backup_vault.rb",
     "snippets/backupdr/get_data_source.rb",
     "snippets/backupdr/get_management_server.rb",
+    "snippets/backupdr/initialize_service.rb",
     "snippets/backupdr/list_backup_plan_associations.rb",
     "snippets/backupdr/list_backup_plans.rb",
     "snippets/backupdr/list_backup_vaults.rb",
