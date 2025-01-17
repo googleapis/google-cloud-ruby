@@ -489,6 +489,20 @@ module Google
           #     Use `{location} = '-'` to list backups from all locations for the given
           #     project. This allows listing backups from a single location or from all
           #     locations.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     An expression that filters the list of returned backups.
+          #
+          #     A filter expression consists of a field name, a comparison operator, and a
+          #     value for filtering.
+          #     The value must be a string, a number, or a boolean. The comparison operator
+          #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
+          #     Colon `:` is the contains operator. Filter rules are not case sensitive.
+          #
+          #     The following fields in the {::Google::Cloud::Firestore::Admin::V1::Backup Backup} are
+          #     eligible for filtering:
+          #
+          #       * `database_uid` (supports `=` only)
           class ListBackupsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
