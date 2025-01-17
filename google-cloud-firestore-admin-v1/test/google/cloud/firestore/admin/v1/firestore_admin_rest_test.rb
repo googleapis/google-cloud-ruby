@@ -973,6 +973,7 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    filter = "hello world"
 
     list_backups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -988,27 +989,27 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_backups({ parent: parent }) do |_result, response|
+        client.list_backups({ parent: parent, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_backups parent: parent do |_result, response|
+        client.list_backups parent: parent, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_backups ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent) do |_result, response|
+        client.list_backups ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_backups({ parent: parent }, call_options) do |_result, response|
+        client.list_backups({ parent: parent, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_backups(::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent), call_options) do |_result, response|
+        client.list_backups(::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
