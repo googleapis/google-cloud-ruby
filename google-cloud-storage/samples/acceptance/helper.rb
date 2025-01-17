@@ -37,6 +37,23 @@ def create_bucket_helper bucket_name
   end
 end
 
+def grant_storage_permission bucket_name
+
+  storage_client = Google::Cloud::Storage.new
+  bucket= storage_client.bucket bucket_name
+
+  object_viewer = "roles/storage.objectViewer"
+  member = ""
+  bucket.policy requested_policy_version: 3 do |policy|
+    policy.version = 3
+    policy.bindings.insert(
+      role:      object_viewer,
+      members:   member
+    )
+  end
+
+end
+
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
   retry_resource_exhaustion do
