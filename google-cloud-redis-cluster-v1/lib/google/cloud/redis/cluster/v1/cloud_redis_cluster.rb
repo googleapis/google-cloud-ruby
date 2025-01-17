@@ -50,12 +50,6 @@ module Google
           # Note that location_id must be a GCP `region`; for example:
           # * `projects/redpepper-1290/locations/us-central1/clusters/my-redis`
           #
-          # We use API version selector for Flex APIs
-          # * The versioning strategy is release-based versioning
-          # * Our backend CLH only deals with the superset version (called v1main)
-          # * Existing backend for Redis Gen1 and MRR is not touched.
-          # * More details in go/redis-flex-api-versioning
-          #
           # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/redis/cluster/v1/cloud_redis_cluster"
