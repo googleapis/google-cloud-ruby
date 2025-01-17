@@ -1466,6 +1466,59 @@
         }
       }
     },
+    "ReasoningEngineExecutionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client",
+          "rpcs": {
+            "QueryReasoningEngine": {
+              "methods": [
+                "query_reasoning_engine"
+              ]
+            },
+            "StreamQueryReasoningEngine": {
+              "methods": [
+                "stream_query_reasoning_engine"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ReasoningEngineService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client",
+          "rpcs": {
+            "CreateReasoningEngine": {
+              "methods": [
+                "create_reasoning_engine"
+              ]
+            },
+            "GetReasoningEngine": {
+              "methods": [
+                "get_reasoning_engine"
+              ]
+            },
+            "ListReasoningEngines": {
+              "methods": [
+                "list_reasoning_engines"
+              ]
+            },
+            "UpdateReasoningEngine": {
+              "methods": [
+                "update_reasoning_engine"
+              ]
+            },
+            "DeleteReasoningEngine": {
+              "methods": [
+                "delete_reasoning_engine"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ScheduleService": {
       "clients": {
         "grpc": {
