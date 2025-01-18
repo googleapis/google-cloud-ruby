@@ -90,9 +90,49 @@ module Google
         #     [managed
         #     cluster](/dataproc/docs/concepts/workflows/using-workflows#configuring_or_selecting_a_cluster),
         #     the cluster is deleted.
+        # @!attribute [rw] encryption_config
+        #   @return [::Google::Cloud::Dataproc::V1::WorkflowTemplate::EncryptionConfig]
+        #     Optional. Encryption settings for encrypting workflow template job
+        #     arguments.
         class WorkflowTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Encryption settings for encrypting workflow template job arguments.
+          # @!attribute [rw] kms_key
+          #   @return [::String]
+          #     Optional. The Cloud KMS key name to use for encrypting
+          #     workflow template job arguments.
+          #
+          #     When this this key is provided, the following workflow template
+          #     [job arguments]
+          #     (https://cloud.google.com/dataproc/docs/concepts/workflows/use-workflows#adding_jobs_to_a_template),
+          #     if present, are
+          #     [CMEK
+          #     encrypted](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/customer-managed-encryption#use_cmek_with_workflow_template_data):
+          #
+          #     * [FlinkJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/FlinkJob)
+          #     * [HadoopJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/HadoopJob)
+          #     * [SparkJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkJob)
+          #     * [SparkRJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkRJob)
+          #     * [PySparkJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/PySparkJob)
+          #     * [SparkSqlJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkSqlJob)
+          #       scriptVariables and queryList.queries
+          #     * [HiveJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/HiveJob)
+          #       scriptVariables and queryList.queries
+          #     * [PigJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PigJob)
+          #       scriptVariables and queryList.queries
+          #     * [PrestoJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PrestoJob)
+          #       scriptVariables and queryList.queries
+          class EncryptionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -223,6 +263,12 @@ module Google
         # @!attribute [rw] presto_job
         #   @return [::Google::Cloud::Dataproc::V1::PrestoJob]
         #     Optional. Job is a Presto job.
+        # @!attribute [rw] trino_job
+        #   @return [::Google::Cloud::Dataproc::V1::TrinoJob]
+        #     Optional. Job is a Trino job.
+        # @!attribute [rw] flink_job
+        #   @return [::Google::Cloud::Dataproc::V1::FlinkJob]
+        #     Optional. Job is a Flink job.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this job.
@@ -691,6 +737,11 @@ module Google
         #     Output only. This token is included in the response if there are more
         #     results to fetch. To fetch additional results, provide this value as the
         #     page_token in a subsequent <code>ListWorkflowTemplatesRequest</code>.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. List of workflow templates that could not be included in the
+        #     response. Attempting to get one of these resources may indicate why it was
+        #     not included in the list response.
         class ListWorkflowTemplatesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
