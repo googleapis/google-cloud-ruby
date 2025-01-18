@@ -55,7 +55,7 @@ module Google
                 # runs a single Composer component.
                 #
                 # This method is supported for Cloud Composer environments in versions
-                # composer-3.*.*-airflow-*.*.* and newer.
+                # composer-2.*.*-airflow-*.*.* and newer.
                 rpc :ListWorkloads, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsRequest, ::Google::Cloud::Orchestration::Airflow::Service::V1::ListWorkloadsResponse
                 # Check if an upgrade operation on the environment will succeed.
                 #

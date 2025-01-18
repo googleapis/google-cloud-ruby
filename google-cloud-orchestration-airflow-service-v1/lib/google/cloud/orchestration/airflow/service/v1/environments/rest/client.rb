@@ -1021,7 +1021,7 @@ module Google
                   # runs a single Composer component.
                   #
                   # This method is supported for Cloud Composer environments in versions
-                  # composer-3.*.*-airflow-*.*.* and newer.
+                  # composer-2.*.*-airflow-*.*.* and newer.
                   #
                   # @overload list_workloads(request, options = nil)
                   #   Pass arguments to `list_workloads` via a request object, either of type
