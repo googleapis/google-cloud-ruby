@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.62.0 (2025-01-19)
+
+#### Features
+
+* Add Context Cache to v1 
+* Add retrieval_config to ToolConfig v1 ([#28233](https://github.com/googleapis/google-cloud-ruby/issues/28233)) 
+
 ### 0.61.0 (2024-12-10)
 
 #### Features
