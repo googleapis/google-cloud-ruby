@@ -31,8 +31,8 @@ def get_soft_deleted_bucket bucket_name:, generation:
   if (soft_delete_time && hard_delete_time).nil?
     puts "Not Found"
   else
-    puts "soft_delete_time - #{soft_delete_time}"
-    puts "hard_delete_time - #{hard_delete_time}"
+    puts "soft_delete_time for #{deleted_bucket_fetch.name} is - #{soft_delete_time}"
+    puts "hard_delete_time for #{deleted_bucket_fetch.name} is - #{hard_delete_time}"
   end
 end
 # [END storage_get_soft_deleted_bucket]
