@@ -14,8 +14,8 @@
 
 require "helper"
 require "net/http"
-require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb"
-require_relative "./utils.rb"
+require "v1/proto/google/cloud/conformance/storage/v1/tests_pb"
+require_relative "utils"
 
 class ConformanceTest < MockStorage
 

@@ -99,8 +99,7 @@ module Google
         # @return [String] The service account email address.
         #
         def service_account_email
-          @service_account_email ||= \
-            service.project_service_account.email_address
+          @service_account_email ||= service.project_service_account.email_address
         end
 
         ##

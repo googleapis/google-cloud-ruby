@@ -14,11 +14,11 @@
 
 require "helper"
 require "json"
-require_relative "../../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb"
+require "v1/proto/google/cloud/conformance/storage/v1/tests_pb"
 
 class SignedUrlConformanceTest < MockStorage
   def setup
-    account_file_path = File.expand_path "../../../../../../conformance/v1/test_service_account.not-a-test.json", __dir__
+    account_file_path = File.expand_path "../../../../../v1/test_service_account.not-a-test.json", __dir__
     account = JSON.parse File.read(account_file_path)
     credentials.issuer = account["client_email"]
     credentials.signing_key = OpenSSL::PKey::RSA.new account["private_key"]
