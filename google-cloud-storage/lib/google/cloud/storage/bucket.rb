@@ -982,7 +982,7 @@ module Google
         #
         def uniform_bucket_level_access= new_uniform_bucket_level_access
           @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
-          @gapi.iam_configuration.uniform_bucket_level_access ||= \
+          @gapi.iam_configuration.uniform_bucket_level_access ||=
             API::Bucket::IamConfiguration::UniformBucketLevelAccess.new
           @gapi.iam_configuration.uniform_bucket_level_access.enabled = new_uniform_bucket_level_access
           patch_gapi! :iam_configuration

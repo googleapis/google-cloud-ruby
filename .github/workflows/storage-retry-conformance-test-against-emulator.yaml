@@ -28,7 +28,8 @@ jobs:
         with:
           ruby-version: '3.2'
       - run: ruby --version
+      - run: gem install toys
       - run: bundle install
-      - run: bundle exec rake conformance
+      - run: toys conformance
         env:
           STORAGE_EMULATOR_HOST: localhost:9000
