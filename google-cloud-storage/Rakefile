@@ -8,14 +8,14 @@ require "rake/testtask"
 desc "Run tests."
 Rake::TestTask.new do |t|
   t.libs << "test"
-  t.test_files = FileList["test/**/*_test.rb"].exclude(/conformance/)
+  t.test_files = FileList["test/**/*_test.rb"]
   t.warning = false
 end
 
 desc "Run conformance tests"
 Rake::TestTask.new :conformance do |t|
   t.libs << "test"
-  t.test_files = FileList["test/**/*conformance_test.rb"]
+  t.test_files = FileList["conformance/**/*_test.rb"]
   t.warning = false
 end
 
