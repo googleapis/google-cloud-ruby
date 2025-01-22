@@ -2280,7 +2280,7 @@ module Google
           end
         end
 
-        # Fetches generation no. of bucket
+        # Fetches generation of the bucket
         # @example
         # require "google/cloud/storage"
         # storage = Google::Cloud::Storage.new

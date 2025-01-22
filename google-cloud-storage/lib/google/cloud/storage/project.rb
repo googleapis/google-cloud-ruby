@@ -269,7 +269,7 @@ module Google
         #   bucket = storage.bucket "other-project-bucket",
         #                           user_project: "my-other-project"
         #   files = bucket.files # Billed to "my-other-project"
-        # @example With `soft_deleted` set to a true and generation specified:
+        # @example With `soft_deleted` set to true and generation specified:
         #   require "google/cloud/storage"
         #
         #   storage = Google::Cloud::Storage.new
@@ -585,7 +585,7 @@ module Google
         # Restores a soft deleted bucket with bucket name and generation.
         #
         # @param [String] bucket_name Name of the bucket.
-        # @param [Fixnum] generation generation of the bucket.
+        # @param [Fixnum] generation Generation of the bucket.
         #
         # @return [Google::Cloud::Storage::Bucket, nil] Returns nil if bucket
         #   does not exist
