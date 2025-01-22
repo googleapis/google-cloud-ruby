@@ -9972,6 +9972,286 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineExecutionService_QueryReasoningEngine_sync",
+      "title": "Snippet for the query_reasoning_engine call in the ReasoningEngineExecutionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#query_reasoning_engine.",
+      "file": "reasoning_engine_execution_service/query_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#query_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::QueryReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::QueryReasoningEngineResponse",
+        "client": {
+          "short_name": "ReasoningEngineExecutionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client"
+        },
+        "method": {
+          "short_name": "QueryReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.QueryReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineExecutionService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineExecutionService_StreamQueryReasoningEngine_sync",
+      "title": "Snippet for the stream_query_reasoning_engine call in the ReasoningEngineExecutionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#stream_query_reasoning_engine.",
+      "file": "reasoning_engine_execution_service/stream_query_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stream_query_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client#stream_query_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::StreamQueryReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "ReasoningEngineExecutionService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client"
+        },
+        "method": {
+          "short_name": "StreamQueryReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService.StreamQueryReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineExecutionService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineExecutionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 49,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineService_CreateReasoningEngine_sync",
+      "title": "Snippet for the create_reasoning_engine call in the ReasoningEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#create_reasoning_engine.",
+      "file": "reasoning_engine_service/create_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#create_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReasoningEngineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client"
+        },
+        "method": {
+          "short_name": "CreateReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService.CreateReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineService_GetReasoningEngine_sync",
+      "title": "Snippet for the get_reasoning_engine call in the ReasoningEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#get_reasoning_engine.",
+      "file": "reasoning_engine_service/get_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#get_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ReasoningEngine",
+        "client": {
+          "short_name": "ReasoningEngineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client"
+        },
+        "method": {
+          "short_name": "GetReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService.GetReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineService_ListReasoningEngines_sync",
+      "title": "Snippet for the list_reasoning_engines call in the ReasoningEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#list_reasoning_engines.",
+      "file": "reasoning_engine_service/list_reasoning_engines.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reasoning_engines",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#list_reasoning_engines",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListReasoningEnginesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListReasoningEnginesResponse",
+        "client": {
+          "short_name": "ReasoningEngineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client"
+        },
+        "method": {
+          "short_name": "ListReasoningEngines",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService.ListReasoningEngines",
+          "service": {
+            "short_name": "ReasoningEngineService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineService_UpdateReasoningEngine_sync",
+      "title": "Snippet for the update_reasoning_engine call in the ReasoningEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#update_reasoning_engine.",
+      "file": "reasoning_engine_service/update_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#update_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReasoningEngineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client"
+        },
+        "method": {
+          "short_name": "UpdateReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService.UpdateReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ReasoningEngineService_DeleteReasoningEngine_sync",
+      "title": "Snippet for the delete_reasoning_engine call in the ReasoningEngineService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#delete_reasoning_engine.",
+      "file": "reasoning_engine_service/delete_reasoning_engine.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_reasoning_engine",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client#delete_reasoning_engine",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteReasoningEngineRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ReasoningEngineService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client"
+        },
+        "method": {
+          "short_name": "DeleteReasoningEngine",
+          "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService.DeleteReasoningEngine",
+          "service": {
+            "short_name": "ReasoningEngineService",
+            "full_name": "google.cloud.aiplatform.v1.ReasoningEngineService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_ScheduleService_CreateSchedule_sync",
       "title": "Snippet for the create_schedule call in the ScheduleService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#create_schedule.",
