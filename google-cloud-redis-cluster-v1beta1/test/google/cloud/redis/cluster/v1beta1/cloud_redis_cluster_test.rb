@@ -448,6 +448,522 @@ class ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::ClientTest < 
     end
   end
 
+  def test_reschedule_cluster_maintenance
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    reschedule_type = :RESCHEDULE_TYPE_UNSPECIFIED
+    schedule_time = {}
+
+    reschedule_cluster_maintenance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :reschedule_cluster_maintenance, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :RESCHEDULE_TYPE_UNSPECIFIED, request["reschedule_type"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["schedule_time"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, reschedule_cluster_maintenance_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.reschedule_cluster_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.reschedule_cluster_maintenance name: name, reschedule_type: reschedule_type, schedule_time: schedule_time do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.reschedule_cluster_maintenance ::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.reschedule_cluster_maintenance({ name: name, reschedule_type: reschedule_type, schedule_time: schedule_time }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.reschedule_cluster_maintenance(::Google::Cloud::Redis::Cluster::V1beta1::RescheduleClusterMaintenanceRequest.new(name: name, reschedule_type: reschedule_type, schedule_time: schedule_time), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, reschedule_cluster_maintenance_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_backup_collections
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_backup_collections_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_backup_collections, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_backup_collections_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_backup_collections parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_backup_collections ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_backup_collections({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_backup_collections(::Google::Cloud::Redis::Cluster::V1beta1::ListBackupCollectionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_backup_collections_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_backup_collection
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::BackupCollection.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_backup_collection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_backup_collection, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_backup_collection_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_backup_collection({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_backup_collection name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_backup_collection ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_backup_collection({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_backup_collection(::Google::Cloud::Redis::Cluster::V1beta1::GetBackupCollectionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_backup_collection_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_backups
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_backups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_backups, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_backups_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_backups parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_backups ::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_backups({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_backups(::Google::Cloud::Redis::Cluster::V1beta1::ListBackupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_backups_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_backup
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Redis::Cluster::V1beta1::Backup.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_backup, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_backup_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_backup({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_backup name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_backup ::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_backup({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_backup(::Google::Cloud::Redis::Cluster::V1beta1::GetBackupRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_backup_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_backup
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+
+    delete_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_backup, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_backup_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_backup({ name: name, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_backup name: name, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_backup ::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest.new(name: name, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_backup({ name: name, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_backup(::Google::Cloud::Redis::Cluster::V1beta1::DeleteBackupRequest.new(name: name, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_backup_client_stub.call_rpc_count
+    end
+  end
+
+  def test_export_backup
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    gcs_bucket = "hello world"
+    name = "hello world"
+
+    export_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_backup, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest, request
+      assert_equal "hello world", request["gcs_bucket"]
+      assert_equal :gcs_bucket, request.destination
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_backup_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_backup({ gcs_bucket: gcs_bucket, name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_backup gcs_bucket: gcs_bucket, name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_backup ::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_backup({ gcs_bucket: gcs_bucket, name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_backup(::Google::Cloud::Redis::Cluster::V1beta1::ExportBackupRequest.new(gcs_bucket: gcs_bucket, name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_backup_client_stub.call_rpc_count
+    end
+  end
+
+  def test_backup_cluster
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ttl = {}
+    backup_id = "hello world"
+
+    backup_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :backup_cluster, name
+      assert_kind_of ::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["ttl"]
+      assert_equal "hello world", request["backup_id"]
+      assert request.has_backup_id?
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, backup_cluster_client_stub do
+      # Create client
+      client = ::Google::Cloud::Redis::Cluster::V1beta1::CloudRedisCluster::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.backup_cluster({ name: name, ttl: ttl, backup_id: backup_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.backup_cluster name: name, ttl: ttl, backup_id: backup_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.backup_cluster ::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest.new(name: name, ttl: ttl, backup_id: backup_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.backup_cluster({ name: name, ttl: ttl, backup_id: backup_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.backup_cluster(::Google::Cloud::Redis::Cluster::V1beta1::BackupClusterRequest.new(name: name, ttl: ttl, backup_id: backup_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, backup_cluster_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
