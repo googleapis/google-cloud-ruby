@@ -157,11 +157,175 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A cluster instance.
+          # Request for [ListBackupCollections]
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The resource name of the backupCollection location using the
+          #     form:
+          #         `projects/{project_id}/locations/{location_id}`
+          #     where `location_id` refers to a GCP region.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return.
+          #
+          #     If not specified, a default value of 1000 will be used by the service.
+          #     Regardless of the page_size value, the response may include a partial list
+          #     and a caller should only rely on response's
+          #     {::Google::Cloud::Redis::Cluster::V1::ListBackupCollectionsResponse#next_page_token `next_page_token`}
+          #     to determine if there are more clusters left to be queried.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The `next_page_token` value returned from a previous
+          #     [ListBackupCollections] request, if any.
+          class ListBackupCollectionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response for [ListBackupCollections].
+          # @!attribute [rw] backup_collections
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::BackupCollection>]
+          #     A list of backupCollections in the project.
+          #
+          #     If the `location_id` in the parent field of the request is "-", all regions
+          #     available to the project are queried, and the results aggregated.
+          #     If in such an aggregated query a location is unavailable, a placeholder
+          #     backupCollection entry is included in the response with the `name` field
+          #     set to a value of the form
+          #     `projects/{project_id}/locations/{location_id}/backupCollections/`- and the
+          #     `status` field set to ERROR and `status_message` field set to "location not
+          #     available for ListBackupCollections".
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no more
+          #     results in the list.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Locations that could not be reached.
+          class ListBackupCollectionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for [GetBackupCollection].
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. Unique name of the resource in this scope including project and
-          #     location using the form:
+          #     Required. Redis backupCollection resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+          #     where `location_id` refers to a GCP region.
+          class GetBackupCollectionRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for [ListBackups].
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The resource name of the backupCollection using the form:
+          #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}`
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Optional. The maximum number of items to return.
+          #
+          #     If not specified, a default value of 1000 will be used by the service.
+          #     Regardless of the page_size value, the response may include a partial list
+          #     and a caller should only rely on response's
+          #     {::Google::Cloud::Redis::Cluster::V1::ListBackupsResponse#next_page_token `next_page_token`}
+          #     to determine if there are more clusters left to be queried.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     Optional. The `next_page_token` value returned from a previous
+          #     [ListBackupCollections] request, if any.
+          class ListBackupsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response for [ListBackups].
+          # @!attribute [rw] backups
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::Backup>]
+          #     A list of backups in the project.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Token to retrieve the next page of results, or empty if there are no more
+          #     results in the list.
+          # @!attribute [rw] unreachable
+          #   @return [::Array<::String>]
+          #     Backups that could not be reached.
+          class ListBackupsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for [GetBackup].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis backup resource name using the form:
+          #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+          class GetBackupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for [DeleteBackup].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis backup resource name using the form:
+          #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+          # @!attribute [rw] request_id
+          #   @return [::String]
+          #     Optional. Idempotent request UUID.
+          class DeleteBackupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for [ExportBackup].
+          # @!attribute [rw] gcs_bucket
+          #   @return [::String]
+          #     Google Cloud Storage bucket, like "my-bucket".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis backup resource name using the form:
+          #     `projects/{project_id}/locations/{location_id}/backupCollections/{backup_collection_id}/backups/{backup_id}`
+          class ExportBackupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request for [BackupCluster].
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis cluster resource name using the form:
+          #      `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`
+          #     where `location_id` refers to a GCP region.
+          # @!attribute [rw] ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. TTL for the backup to expire. Value range is 1 day to 100 years.
+          #     If not specified, the default value is 100 years.
+          # @!attribute [rw] backup_id
+          #   @return [::String]
+          #     Optional. The id of the backup to be created. If not specified, the
+          #     default value ([YYYYMMDDHHMMSS]_[Shortened Cluster UID] is used.
+          class BackupClusterRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A cluster instance.
+          # @!attribute [rw] gcs_source
+          #   @return [::Google::Cloud::Redis::Cluster::V1::Cluster::GcsBackupSource]
+          #     Optional. Backups stored in Cloud Storage buckets.
+          #     The Cloud Storage buckets need to be the same region as the clusters.
+          #     Read permission is required to import from the provided Cloud Storage
+          #     objects.
+          # @!attribute [rw] managed_backup_source
+          #   @return [::Google::Cloud::Redis::Cluster::V1::Cluster::ManagedBackupSource]
+          #     Optional. Backups generated and managed by memorystore service.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Identifier. Unique name of the resource in this scope including
+          #     project and location using the form:
           #         `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
@@ -190,10 +354,10 @@ module Google
           #     the next integer.
           # @!attribute [rw] shard_count
           #   @return [::Integer]
-          #     Required. Number of shards for the Redis cluster.
+          #     Optional. Number of shards for the Redis cluster.
           # @!attribute [rw] psc_configs
           #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::PscConfig>]
-          #     Required. Each PscConfig configures the consumer network where IPs will
+          #     Optional. Each PscConfig configures the consumer network where IPs will
           #     be designated to the cluster for client access through Private Service
           #     Connect Automation. Currently, only one PscConfig is supported.
           # @!attribute [r] discovery_endpoints
@@ -202,8 +366,8 @@ module Google
           #     connect to the cluster. Currently only one discovery endpoint is supported.
           # @!attribute [r] psc_connections
           #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::PscConnection>]
-          #     Output only. PSC connections for discovery of the cluster topology and
-          #     accessing the cluster.
+          #     Output only. The list of PSC connections that are auto-created through
+          #     service connectivity automation.
           # @!attribute [r] state_info
           #   @return [::Google::Cloud::Redis::Cluster::V1::Cluster::StateInfo]
           #     Output only. Additional information about the current state of the cluster.
@@ -225,9 +389,39 @@ module Google
           #   @return [::Google::Cloud::Redis::Cluster::V1::ZoneDistributionConfig]
           #     Optional. This config will be used to determine how the customer wants us
           #     to distribute cluster resources within the region.
+          # @!attribute [rw] cross_cluster_replication_config
+          #   @return [::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig]
+          #     Optional. Cross cluster replication config.
           # @!attribute [rw] deletion_protection_enabled
           #   @return [::Boolean]
           #     Optional. The delete operation will fail when the value is set to true.
+          # @!attribute [rw] maintenance_policy
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterMaintenancePolicy]
+          #     Optional. ClusterMaintenancePolicy determines when to allow or deny
+          #     updates.
+          # @!attribute [r] maintenance_schedule
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ClusterMaintenanceSchedule]
+          #     Output only. ClusterMaintenanceSchedule Output only Published maintenance
+          #     schedule.
+          # @!attribute [r] psc_service_attachments
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::PscServiceAttachment>]
+          #     Output only. Service attachment details to configure Psc connections
+          # @!attribute [rw] cluster_endpoints
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::ClusterEndpoint>]
+          #     Optional. A list of cluster enpoints.
+          # @!attribute [r] backup_collection
+          #   @return [::String]
+          #     Optional. Output only. The backup collection full resource name. Example:
+          #     projects/\\{project}/locations/\\{location}/backupCollections/\\{collection}
+          # @!attribute [rw] kms_key
+          #   @return [::String]
+          #     Optional. The KMS key used to encrypt the at-rest data of the cluster.
+          # @!attribute [rw] automated_backup_config
+          #   @return [::Google::Cloud::Redis::Cluster::V1::AutomatedBackupConfig]
+          #     Optional. The automated backup config for the cluster.
+          # @!attribute [r] encryption_info
+          #   @return [::Google::Cloud::Redis::Cluster::V1::EncryptionInfo]
+          #     Output only. Encryption information of the data at rest of the cluster.
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -251,6 +445,31 @@ module Google
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
               end
+            end
+
+            # Backups stored in Cloud Storage buckets.
+            # The Cloud Storage buckets need to be the same region as the clusters.
+            # @!attribute [rw] uris
+            #   @return [::Array<::String>]
+            #     Optional. URIs of the GCS objects to import.
+            #     Example: gs://bucket1/object1, gs://bucket2/folder2/object2
+            class GcsBackupSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Backups that generated and managed by memorystore.
+            # @!attribute [rw] backup
+            #   @return [::String]
+            #     Optional. Example:
+            #     //redis.googleapis.com/projects/\\{project}/locations/\\{location}/backupCollections/\\{collection}/backups/\\{backup}
+            #     A shorter version (without the prefix) of the backup name is also
+            #     supported, like
+            #     projects/\\{project}/locations/\\{location}/backupCollections/\\{collection}/backups/\\{backup_id}
+            #     In this case, it assumes the backup is under redis.googleapis.com.
+            class ManagedBackupSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # @!attribute [rw] key
@@ -281,6 +500,313 @@ module Google
             end
           end
 
+          # The automated backup config for a cluster.
+          # @!attribute [rw] fixed_frequency_schedule
+          #   @return [::Google::Cloud::Redis::Cluster::V1::AutomatedBackupConfig::FixedFrequencySchedule]
+          #     Optional. Trigger automated backups at a fixed frequency.
+          # @!attribute [rw] automated_backup_mode
+          #   @return [::Google::Cloud::Redis::Cluster::V1::AutomatedBackupConfig::AutomatedBackupMode]
+          #     Optional. The automated backup mode. If the mode is disabled, the other
+          #     fields will be ignored.
+          # @!attribute [rw] retention
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. How long to keep automated backups before the backups are
+          #     deleted. The value should be between 1 day and 365 days. If not specified,
+          #     the default value is 35 days.
+          class AutomatedBackupConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # This schedule allows the backup to be triggered at a fixed frequency
+            # (currently only daily is supported).
+            # @!attribute [rw] start_time
+            #   @return [::Google::Type::TimeOfDay]
+            #     Required. The start time of every automated backup in UTC. It must be set
+            #     to the start of an hour. This field is required.
+            class FixedFrequencySchedule
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The automated backup mode.
+            module AutomatedBackupMode
+              # Default value. Automated backup config is not specified.
+              AUTOMATED_BACKUP_MODE_UNSPECIFIED = 0
+
+              # Automated backup config disabled.
+              DISABLED = 1
+
+              # Automated backup config enabled.
+              ENABLED = 2
+            end
+          end
+
+          # BackupCollection of a cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Full resource path of the backup collection.
+          # @!attribute [r] cluster_uid
+          #   @return [::String]
+          #     Output only. The cluster uid of the backup collection.
+          # @!attribute [r] cluster
+          #   @return [::String]
+          #     Output only. The full resource path of the cluster the backup collection
+          #     belongs to. Example:
+          #     projects/\\{project}/locations/\\{location}/clusters/\\{cluster}
+          # @!attribute [r] kms_key
+          #   @return [::String]
+          #     Output only. The KMS key used to encrypt the backups under this backup
+          #     collection.
+          # @!attribute [r] uid
+          #   @return [::String]
+          #     Output only. System assigned unique identifier of the backup collection.
+          class BackupCollection
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Backup of a cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. Full resource path of the backup. the last part of the name is
+          #     the backup id with the following format: [YYYYMMDDHHMMSS]_[Shorted Cluster
+          #     UID] OR customer specified while backup cluster. Example:
+          #     20240515123000_1234
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time when the backup was created.
+          # @!attribute [r] cluster
+          #   @return [::String]
+          #     Output only. Cluster resource path of this backup.
+          # @!attribute [r] cluster_uid
+          #   @return [::String]
+          #     Output only. Cluster uid of this backup.
+          # @!attribute [r] total_size_bytes
+          #   @return [::Integer]
+          #     Output only. Total size of the backup in bytes.
+          # @!attribute [r] expire_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time when the backup will expire.
+          # @!attribute [r] engine_version
+          #   @return [::String]
+          #     Output only. redis-7.2, valkey-7.5
+          # @!attribute [r] backup_files
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::BackupFile>]
+          #     Output only. List of backup files of the backup.
+          # @!attribute [r] node_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::NodeType]
+          #     Output only. Node type of the cluster.
+          # @!attribute [r] replica_count
+          #   @return [::Integer]
+          #     Output only. Number of replicas for the cluster.
+          # @!attribute [r] shard_count
+          #   @return [::Integer]
+          #     Output only. Number of shards for the cluster.
+          # @!attribute [r] backup_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::Backup::BackupType]
+          #     Output only. Type of the backup.
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Redis::Cluster::V1::Backup::State]
+          #     Output only. State of the backup.
+          # @!attribute [r] encryption_info
+          #   @return [::Google::Cloud::Redis::Cluster::V1::EncryptionInfo]
+          #     Output only. Encryption information of the backup.
+          # @!attribute [r] uid
+          #   @return [::String]
+          #     Output only. System assigned unique identifier of the backup.
+          class Backup
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type of the backup.
+            module BackupType
+              # The default value, not set.
+              BACKUP_TYPE_UNSPECIFIED = 0
+
+              # On-demand backup.
+              ON_DEMAND = 1
+
+              # Automated backup.
+              AUTOMATED = 2
+            end
+
+            # State of the backup.
+            module State
+              # The default value, not set.
+              STATE_UNSPECIFIED = 0
+
+              # The backup is being created.
+              CREATING = 1
+
+              # The backup is active to be used.
+              ACTIVE = 2
+
+              # The backup is being deleted.
+              DELETING = 3
+
+              # The backup is currently suspended due to reasons like project deletion,
+              # billing account closure, etc.
+              SUSPENDED = 4
+            end
+          end
+
+          # Backup is consisted of multiple backup files.
+          # @!attribute [r] file_name
+          #   @return [::String]
+          #     Output only. e.g: <shard-id>.rdb
+          # @!attribute [r] size_bytes
+          #   @return [::Integer]
+          #     Output only. Size of the backup file in bytes.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time when the backup file was created.
+          class BackupFile
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration of a service attachment of the cluster, for creating PSC
+          # connections.
+          # @!attribute [r] service_attachment
+          #   @return [::String]
+          #     Output only. Service attachment URI which your self-created PscConnection
+          #     should use as target
+          # @!attribute [r] connection_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ConnectionType]
+          #     Output only. Type of a PSC connection targeting this service attachment.
+          class PscServiceAttachment
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Cross cluster replication config.
+          # @!attribute [rw] cluster_role
+          #   @return [::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig::ClusterRole]
+          #     The role of the cluster in cross cluster replication.
+          # @!attribute [rw] primary_cluster
+          #   @return [::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig::RemoteCluster]
+          #     Details of the primary cluster that is used as the replication source for
+          #     this secondary cluster.
+          #
+          #     This field is only set for a secondary cluster.
+          # @!attribute [rw] secondary_clusters
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig::RemoteCluster>]
+          #     List of secondary clusters that are replicating from this primary cluster.
+          #
+          #     This field is only set for a primary cluster.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The last time cross cluster replication config was updated.
+          # @!attribute [r] membership
+          #   @return [::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig::Membership]
+          #     Output only. An output only view of all the member clusters participating
+          #     in the cross cluster replication. This view will be provided by every
+          #     member cluster irrespective of its cluster role(primary or secondary).
+          #
+          #     A primary cluster can provide information about all the secondary clusters
+          #     replicating from it. However, a secondary cluster only knows about the
+          #     primary cluster from which it is replicating. However, for scenarios, where
+          #     the primary cluster is unavailable(e.g. regional outage), a GetCluster
+          #     request can be sent to any other member cluster and this field will list
+          #     all the member clusters participating in cross cluster replication.
+          class CrossClusterReplicationConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Details of the remote cluster associated with this cluster in a cross
+            # cluster replication setup.
+            # @!attribute [rw] cluster
+            #   @return [::String]
+            #     The full resource path of the remote cluster in
+            #     the format: projects/<project>/locations/<region>/clusters/<cluster-id>
+            # @!attribute [r] uid
+            #   @return [::String]
+            #     Output only. The unique identifier of the remote cluster.
+            class RemoteCluster
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # An output only view of all the member clusters participating in the cross
+            # cluster replication.
+            # @!attribute [r] primary_cluster
+            #   @return [::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig::RemoteCluster]
+            #     Output only. The primary cluster that acts as the source of replication
+            #     for the secondary clusters.
+            # @!attribute [r] secondary_clusters
+            #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::CrossClusterReplicationConfig::RemoteCluster>]
+            #     Output only. The list of secondary clusters replicating from the primary
+            #     cluster.
+            class Membership
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The role of the cluster in cross cluster replication.
+            module ClusterRole
+              # Cluster role is not set.
+              # The behavior is equivalent to NONE.
+              CLUSTER_ROLE_UNSPECIFIED = 0
+
+              # This cluster does not participate in cross cluster replication. It is an
+              # independent cluster and does not replicate to or from any other clusters.
+              NONE = 1
+
+              # A cluster that allows both reads and writes. Any data written to this
+              # cluster is also replicated to the attached secondary clusters.
+              PRIMARY = 2
+
+              # A cluster that allows only reads and replicates data from a primary
+              # cluster.
+              SECONDARY = 3
+            end
+          end
+
+          # Maintenance policy per cluster.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time when the policy was created i.e. Maintenance Window
+          #     or Deny Period was assigned.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The time when the policy was updated i.e. Maintenance Window
+          #     or Deny Period was updated.
+          # @!attribute [rw] weekly_maintenance_window
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::ClusterWeeklyMaintenanceWindow>]
+          #     Optional. Maintenance window that is applied to resources covered by this
+          #     policy. Minimum 1. For the current version, the maximum number of
+          #     weekly_maintenance_window is expected to be one.
+          class ClusterMaintenancePolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Time window specified for weekly operations.
+          # @!attribute [rw] day
+          #   @return [::Google::Type::DayOfWeek]
+          #     Allows to define schedule that runs specified day of the week.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Type::TimeOfDay]
+          #     Start time of the window in UTC.
+          class ClusterWeeklyMaintenanceWindow
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Upcoming maitenance schedule.
+          # @!attribute [r] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The start time of any upcoming scheduled maintenance for this
+          #     instance.
+          # @!attribute [r] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The end time of any upcoming scheduled maintenance for this
+          #     instance.
+          class ClusterMaintenanceSchedule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] network
           #   @return [::String]
           #     Required. The network where the IP address of the discovery endpoint will
@@ -309,6 +835,74 @@ module Google
           end
 
           # Details of consumer resources in a PSC connection.
+          # @!attribute [rw] psc_connection_id
+          #   @return [::String]
+          #     Required. The PSC connection id of the forwarding rule connected to the
+          #     service attachment.
+          # @!attribute [rw] address
+          #   @return [::String]
+          #     Required. The IP allocated on the consumer network for the PSC forwarding
+          #     rule.
+          # @!attribute [rw] forwarding_rule
+          #   @return [::String]
+          #     Required. The URI of the consumer side forwarding rule.
+          #     Example:
+          #     projects/\\{projectNumOrId}/regions/us-east1/forwardingRules/\\{resourceId}.
+          # @!attribute [rw] project_id
+          #   @return [::String]
+          #     Optional. Project ID of the consumer project where the forwarding rule is
+          #     created in.
+          # @!attribute [rw] network
+          #   @return [::String]
+          #     Required. The consumer network where the IP address resides, in the form of
+          #     projects/\\{project_id}/global/networks/\\{network_id}.
+          # @!attribute [rw] service_attachment
+          #   @return [::String]
+          #     Required. The service attachment which is the target of the PSC connection,
+          #     in the form of
+          #     projects/\\{project-id}/regions/\\{region}/serviceAttachments/\\{service-attachment-id}.
+          # @!attribute [r] psc_connection_status
+          #   @return [::Google::Cloud::Redis::Cluster::V1::PscConnectionStatus]
+          #     Output only. The status of the PSC connection.
+          #     Please note that this value is updated periodically.
+          #     To get the latest status of a PSC connection, follow
+          #     https://cloud.google.com/vpc/docs/configure-private-service-connect-services#endpoint-details.
+          # @!attribute [r] connection_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ConnectionType]
+          #     Output only. Type of the PSC connection.
+          class PscConnection
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ClusterEndpoint consists of PSC connections that are created
+          # as a group in each VPC network for accessing the cluster. In each group,
+          # there shall be one connection for each service attachment in the cluster.
+          # @!attribute [rw] connections
+          #   @return [::Array<::Google::Cloud::Redis::Cluster::V1::ConnectionDetail>]
+          #     A group of PSC connections. They are created in the same VPC network, one
+          #     for each service attachment in the cluster.
+          class ClusterEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Detailed information of each PSC connection.
+          # @!attribute [rw] psc_auto_connection
+          #   @return [::Google::Cloud::Redis::Cluster::V1::PscAutoConnection]
+          #     Detailed information of a PSC connection that is created through
+          #     service connectivity automation.
+          # @!attribute [rw] psc_connection
+          #   @return [::Google::Cloud::Redis::Cluster::V1::PscConnection]
+          #     Detailed information of a PSC connection that is created by the customer
+          #     who owns the cluster.
+          class ConnectionDetail
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details of consumer resources in a PSC connection that is created through
+          # Service Connectivity Automation.
           # @!attribute [r] psc_connection_id
           #   @return [::String]
           #     Output only. The PSC connection id of the forwarding rule connected to the
@@ -322,15 +916,28 @@ module Google
           #     Output only. The URI of the consumer side forwarding rule.
           #     Example:
           #     projects/\\{projectNumOrId}/regions/us-east1/forwardingRules/\\{resourceId}.
-          # @!attribute [r] project_id
+          # @!attribute [rw] project_id
           #   @return [::String]
-          #     Output only. The consumer project_id where the forwarding rule is created
+          #     Required. The consumer project_id where the forwarding rule is created
           #     from.
           # @!attribute [rw] network
           #   @return [::String]
-          #     The consumer network where the IP address resides, in the form of
+          #     Required. The consumer network where the IP address resides, in the form of
           #     projects/\\{project_id}/global/networks/\\{network_id}.
-          class PscConnection
+          # @!attribute [r] service_attachment
+          #   @return [::String]
+          #     Output only. The service attachment which is the target of the PSC
+          #     connection, in the form of
+          #     projects/\\{project-id}/regions/\\{region}/serviceAttachments/\\{service-attachment-id}.
+          # @!attribute [r] psc_connection_status
+          #   @return [::Google::Cloud::Redis::Cluster::V1::PscConnectionStatus]
+          #     Output only. The status of the PSC connection.
+          #     Please note that this value is updated periodically.
+          #     Please use Private Service Connect APIs for the latest status.
+          # @!attribute [r] connection_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::ConnectionType]
+          #     Output only. Type of the PSC connection.
+          class PscAutoConnection
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -463,8 +1070,8 @@ module Google
                 # there is a disaster
                 EVERYSEC = 2
 
-                # fsync every time new commands are appended to the AOF. It has the best
-                # data loss protection at the cost of performance
+                # fsync every time new write commands are appended to the AOF. It has the
+                # best data loss protection at the cost of performance
                 ALWAYS = 3
               end
             end
@@ -500,9 +1107,6 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Defines various modes of zone distribution.
-            # Currently supports two modes, can be expanded in future to support more
-            # types of distribution modes.
-            # design doc: go/same-zone-cluster
             module ZoneDistributionMode
               # Not Set. Default: MULTI_ZONE
               ZONE_DISTRIBUTION_MODE_UNSPECIFIED = 0
@@ -515,6 +1119,115 @@ module Google
               # specified, when this mode is selected.
               SINGLE_ZONE = 2
             end
+          end
+
+          # Request for rescheduling a cluster maintenance.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Redis Cluster instance resource name using the form:
+          #         `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}`
+          #     where `location_id` refers to a GCP region.
+          # @!attribute [rw] reschedule_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::RescheduleClusterMaintenanceRequest::RescheduleType]
+          #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+          #     well.
+          # @!attribute [rw] schedule_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Optional. Timestamp when the maintenance shall be rescheduled to if
+          #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+          #     example `2012-11-15T16:19:00.094Z`.
+          class RescheduleClusterMaintenanceRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Reschedule options.
+            module RescheduleType
+              # Not set.
+              RESCHEDULE_TYPE_UNSPECIFIED = 0
+
+              # If the user wants to schedule the maintenance to happen now.
+              IMMEDIATE = 1
+
+              # If the user wants to reschedule the maintenance to a specific time.
+              SPECIFIC_TIME = 3
+            end
+          end
+
+          # EncryptionInfo describes the encryption information of a cluster or a backup.
+          # @!attribute [r] encryption_type
+          #   @return [::Google::Cloud::Redis::Cluster::V1::EncryptionInfo::Type]
+          #     Output only. Type of encryption.
+          # @!attribute [r] kms_key_versions
+          #   @return [::Array<::String>]
+          #     Output only. KMS key versions that are being used to protect the data
+          #     at-rest.
+          # @!attribute [r] kms_key_primary_state
+          #   @return [::Google::Cloud::Redis::Cluster::V1::EncryptionInfo::KmsKeyState]
+          #     Output only. The state of the primary version of the KMS key perceived by
+          #     the system. This field is not populated in backups.
+          # @!attribute [r] last_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The most recent time when the encryption info was updated.
+          class EncryptionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible encryption types.
+            module Type
+              # Encryption type not specified. Defaults to GOOGLE_DEFAULT_ENCRYPTION.
+              TYPE_UNSPECIFIED = 0
+
+              # The data is encrypted at rest with a key that is fully managed by Google.
+              # No key version will be populated. This is the default state.
+              GOOGLE_DEFAULT_ENCRYPTION = 1
+
+              # The data is encrypted at rest with a key that is managed by the customer.
+              # KMS key versions will be populated.
+              CUSTOMER_MANAGED_ENCRYPTION = 2
+            end
+
+            # The state of the KMS key perceived by the system. Refer to the public
+            # documentation for the impact of each state.
+            module KmsKeyState
+              # The default value. This value is unused.
+              KMS_KEY_STATE_UNSPECIFIED = 0
+
+              # The KMS key is enabled and correctly configured.
+              ENABLED = 1
+
+              # Permission denied on the KMS key.
+              PERMISSION_DENIED = 2
+
+              # The KMS key is disabled.
+              DISABLED = 3
+
+              # The KMS key is destroyed.
+              DESTROYED = 4
+
+              # The KMS key is scheduled to be destroyed.
+              DESTROY_SCHEDULED = 5
+
+              # The EKM key is unreachable.
+              EKM_KEY_UNREACHABLE_DETECTED = 6
+
+              # Billing is disabled for the project.
+              BILLING_DISABLED = 7
+
+              # All other unknown failures.
+              UNKNOWN_FAILURE = 8
+            end
+          end
+
+          # Status of the PSC connection.
+          module PscConnectionStatus
+            # PSC connection status is not specified.
+            PSC_CONNECTION_STATUS_UNSPECIFIED = 0
+
+            # The connection is active
+            PSC_CONNECTION_STATUS_ACTIVE = 1
+
+            # Connection not found
+            PSC_CONNECTION_STATUS_NOT_FOUND = 2
           end
 
           # Available authorization mode of a Redis cluster.
@@ -531,6 +1244,7 @@ module Google
 
           # NodeType of a redis cluster node,
           module NodeType
+            # Node type unspecified
             NODE_TYPE_UNSPECIFIED = 0
 
             # Redis shared core nano node_type.
@@ -556,6 +1270,21 @@ module Google
 
             # Use server managed encryption for in-transit encryption.
             TRANSIT_ENCRYPTION_MODE_SERVER_AUTHENTICATION = 2
+          end
+
+          # Type of a PSC connection, for cluster access purpose.
+          module ConnectionType
+            # Cluster endpoint Type is not set
+            CONNECTION_TYPE_UNSPECIFIED = 0
+
+            # Cluster endpoint that will be used as for cluster topology discovery.
+            CONNECTION_TYPE_DISCOVERY = 1
+
+            # Cluster endpoint that will be used as primary endpoint to access primary.
+            CONNECTION_TYPE_PRIMARY = 2
+
+            # Cluster endpoint that will be used as reader endpoint to access replicas.
+            CONNECTION_TYPE_READER = 3
           end
         end
       end

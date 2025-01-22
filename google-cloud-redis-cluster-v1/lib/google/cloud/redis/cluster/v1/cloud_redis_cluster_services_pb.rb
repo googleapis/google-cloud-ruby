@@ -40,12 +40,6 @@ module Google
             #
             # Note that location_id must be a GCP `region`; for example:
             # * `projects/redpepper-1290/locations/us-central1/clusters/my-redis`
-            #
-            # We use API version selector for Flex APIs
-            # * The versioning strategy is release-based versioning
-            # * Our backend CLH only deals with the superset version (called v1main)
-            # * Existing backend for Redis Gen1 and MRR is not touched.
-            # * More details in go/redis-flex-api-versioning
             class Service
 
               include ::GRPC::GenericService
@@ -86,6 +80,37 @@ module Google
               rpc :CreateCluster, ::Google::Cloud::Redis::Cluster::V1::CreateClusterRequest, ::Google::Longrunning::Operation
               # Gets the details of certificate authority information for Redis cluster.
               rpc :GetClusterCertificateAuthority, ::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest, ::Google::Cloud::Redis::Cluster::V1::CertificateAuthority
+              # Reschedules upcoming maintenance event.
+              rpc :RescheduleClusterMaintenance, ::Google::Cloud::Redis::Cluster::V1::RescheduleClusterMaintenanceRequest, ::Google::Longrunning::Operation
+              # Lists all backup collections owned by a consumer project in either the
+              # specified location (region) or all locations.
+              #
+              # If `location_id` is specified as `-` (wildcard), then all regions
+              # available to the project are queried, and the results are aggregated.
+              rpc :ListBackupCollections, ::Google::Cloud::Redis::Cluster::V1::ListBackupCollectionsRequest, ::Google::Cloud::Redis::Cluster::V1::ListBackupCollectionsResponse
+              # Get a backup collection.
+              rpc :GetBackupCollection, ::Google::Cloud::Redis::Cluster::V1::GetBackupCollectionRequest, ::Google::Cloud::Redis::Cluster::V1::BackupCollection
+              # Lists all backups owned by a backup collection.
+              rpc :ListBackups, ::Google::Cloud::Redis::Cluster::V1::ListBackupsRequest, ::Google::Cloud::Redis::Cluster::V1::ListBackupsResponse
+              # Gets the details of a specific backup.
+              rpc :GetBackup, ::Google::Cloud::Redis::Cluster::V1::GetBackupRequest, ::Google::Cloud::Redis::Cluster::V1::Backup
+              # Deletes a specific backup.
+              rpc :DeleteBackup, ::Google::Cloud::Redis::Cluster::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
+              # Exports a specific backup to a customer target Cloud Storage URI.
+              rpc :ExportBackup, ::Google::Cloud::Redis::Cluster::V1::ExportBackupRequest, ::Google::Longrunning::Operation
+              # Backup Redis Cluster.
+              # If this is the first time a backup is being created, a backup collection
+              # will be created at the backend, and this backup belongs to this collection.
+              # Both collection and backup will have a resource name. Backup will be
+              # executed for each shard. A replica (primary if nonHA) will be selected to
+              # perform the execution. Backup call will be rejected if there is an ongoing
+              # backup or update operation. Be aware that during preview, if the cluster's
+              # internal software version is too old, critical update will be performed
+              # before actual backup. Once the internal software version is updated to the
+              # minimum version required by the backup feature, subsequent backups will not
+              # require critical update. After preview, there will be no critical update
+              # needed for backup.
+              rpc :BackupCluster, ::Google::Cloud::Redis::Cluster::V1::BackupClusterRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class
