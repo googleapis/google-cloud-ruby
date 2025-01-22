@@ -36,8 +36,12 @@ module Google
         #   @return [::String]
         #     The description of the NotebookRuntimeTemplate.
         # @!attribute [r] is_default
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
-        #     Output only. The default template to use if not specified.
+        #     Output only. Deprecated: This field has no behavior. Use
+        #     notebook_runtime_type = 'ONE_CLICK' instead.
+        #
+        #     The default template to use if not specified.
         # @!attribute [rw] machine_spec
         #   @return [::Google::Cloud::AIPlatform::V1::MachineSpec]
         #     Optional. Immutable. The specification of a single machine for the
@@ -51,7 +55,17 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::NetworkSpec]
         #     Optional. Network spec.
         # @!attribute [rw] service_account
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
+        #     Deprecated: This field is ignored and the "Vertex AI Notebook Service
+        #     Account"
+        #     (service-PROJECT_NUMBER@gcp-sa-aiplatform-vm.iam.gserviceaccount.com) is
+        #     used for the runtime workload identity.
+        #     See
+        #     https://cloud.google.com/iam/docs/service-agents#vertex-ai-notebook-service-account
+        #     for more details.
+        #     For NotebookExecutionJob, use NotebookExecutionJob.service_account instead.
+        #
         #     The service account that the runtime workload runs as.
         #     You can use any service account within the same project, but you
         #     must have the service account user permission to use the instance.
@@ -149,7 +163,15 @@ module Google
         #     The description of the NotebookRuntime.
         # @!attribute [r] service_account
         #   @return [::String]
-        #     Output only. The service account that the NotebookRuntime workload runs as.
+        #     Output only. Deprecated: This field is no longer used and the "Vertex AI
+        #     Notebook Service Account"
+        #     (service-PROJECT_NUMBER@gcp-sa-aiplatform-vm.iam.gserviceaccount.com) is
+        #     used for the runtime workload identity.
+        #     See
+        #     https://cloud.google.com/iam/docs/service-agents#vertex-ai-notebook-service-account
+        #     for more details.
+        #
+        #     The service account that the NotebookRuntime workload runs as.
         # @!attribute [r] runtime_state
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookRuntime::RuntimeState]
         #     Output only. The runtime (instance) state of the NotebookRuntime.
@@ -189,9 +211,27 @@ module Google
         # @!attribute [r] notebook_runtime_type
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookRuntimeType]
         #     Output only. The type of the notebook runtime.
+        # @!attribute [r] machine_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::MachineSpec]
+        #     Output only. The specification of a single machine used by the notebook
+        #     runtime.
+        # @!attribute [r] data_persistent_disk_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::PersistentDiskSpec]
+        #     Output only. The specification of [persistent
+        #     disk][https://cloud.google.com/compute/docs/disks/persistent-disks]
+        #     attached to the notebook runtime as data disk storage.
+        # @!attribute [r] network_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::NetworkSpec]
+        #     Output only. Network spec of the notebook runtime.
         # @!attribute [r] idle_shutdown_config
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookIdleShutdownConfig]
         #     Output only. The idle shutdown configuration of the notebook runtime.
+        # @!attribute [r] euc_config
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookEucConfig]
+        #     Output only. EUC configuration of the notebook runtime.
+        # @!attribute [r] shielded_vm_config
+        #   @return [::Google::Cloud::AIPlatform::V1::ShieldedVmConfig]
+        #     Output only. Runtime Shielded VM spec.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Optional. The Compute Engine tags to add to runtime (see [Tagging
