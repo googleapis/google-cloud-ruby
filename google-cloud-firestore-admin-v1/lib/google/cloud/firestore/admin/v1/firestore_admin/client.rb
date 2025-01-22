@@ -134,6 +134,10 @@ module Google
 
                   default_config.rpcs.bulk_delete_documents.timeout = 60.0
 
+                  default_config.rpcs.create_database.timeout = 120.0
+
+                  default_config.rpcs.restore_database.timeout = 120.0
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -1901,7 +1905,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload list_backups(parent: nil)
+              # @overload list_backups(parent: nil, filter: nil)
               #   Pass arguments to `list_backups` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1913,6 +1917,19 @@ module Google
               #     Use `{location} = '-'` to list backups from all locations for the given
               #     project. This allows listing backups from a single location or from all
               #     locations.
+              #   @param filter [::String]
+              #     An expression that filters the list of returned backups.
+              #
+              #     A filter expression consists of a field name, a comparison operator, and a
+              #     value for filtering.
+              #     The value must be a string, a number, or a boolean. The comparison operator
+              #     must be one of: `<`, `>`, `<=`, `>=`, `!=`, `=`, or `:`.
+              #     Colon `:` is the contains operator. Filter rules are not case sensitive.
+              #
+              #     The following fields in the {::Google::Cloud::Firestore::Admin::V1::Backup Backup} are
+              #     eligible for filtering:
+              #
+              #       * `database_uid` (supports `=` only)
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Firestore::Admin::V1::ListBackupsResponse]
