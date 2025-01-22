@@ -67,6 +67,7 @@ module Google
         end
 
         # Configuration for Oracle Automatic Storage Management (ASM) connection.
+        # .
         # @!attribute [rw] hostname
         #   @return [::String]
         #     Required. Hostname for the Oracle ASM connection.
@@ -78,7 +79,7 @@ module Google
         #     Required. Username for the Oracle ASM connection.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Required. Password for the Oracle ASM connection.
+        #     Optional. Password for the Oracle ASM connection.
         # @!attribute [rw] asm_service
         #   @return [::String]
         #     Required. ASM service name for the Oracle ASM connection.
@@ -142,6 +143,12 @@ module Google
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. Database for the PostgreSQL connection.
+        # @!attribute [rw] ssl_config
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlSslConfig]
+        #     Optional. SSL configuration for the PostgreSQL connection.
+        #     In case PostgresqlSslConfig is not set, the connection will use the default
+        #     SSL mode, which is `prefer` (i.e. this mode will only use encryption if
+        #     enabled from database side, otherwise will use unencrypted communication)
         class PostgresqlProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -235,7 +242,7 @@ module Google
         # between Datastream and a customer's network.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource's name.
+        #     Output only. Identifier. The resource's name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The create time of the resource.
@@ -307,7 +314,7 @@ module Google
         # used for defining a route for a private connection.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource's name.
+        #     Output only. Identifier. The resource's name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The create time of the resource.
@@ -383,11 +390,63 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # PostgreSQL SSL configuration information.
+        # @!attribute [rw] server_verification
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlSslConfig::ServerVerification]
+        #      If this field is set, the communication will be encrypted with TLS
+        #      encryption and the server identity will be authenticated.
+        # @!attribute [rw] server_and_client_verification
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlSslConfig::ServerAndClientVerification]
+        #     If this field is set, the communication will be encrypted with TLS
+        #     encryption and both the server identity and the client identity will be
+        #     authenticated.
+        class PostgresqlSslConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message represents the option where Datastream will enforce the encryption
+          # and authenticate the server identity. ca_certificate must be set if user
+          # selects this option.
+          # @!attribute [rw] ca_certificate
+          #   @return [::String]
+          #     Required. Input only. PEM-encoded server root CA certificate.
+          class ServerVerification
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message represents the option where Datastream will enforce the encryption
+          # and authenticate the server identity as well as the client identity.
+          # ca_certificate, client_certificate and client_key must be set if user
+          # selects this option.
+          # @!attribute [rw] client_certificate
+          #   @return [::String]
+          #     Required. Input only. PEM-encoded certificate used by the source database
+          #     to authenticate the client identity (i.e., the Datastream's identity).
+          #     This certificate is signed by either a root certificate trusted by the
+          #     server or one or more intermediate certificates (which is stored with the
+          #     leaf certificate) to link the this certificate to the trusted root
+          #     certificate.
+          # @!attribute [rw] client_key
+          #   @return [::String]
+          #     Required. Input only. PEM-encoded private key associated with the client
+          #     certificate. This value will be used during the SSL/TLS handshake,
+          #     allowing the PostgreSQL server to authenticate the client's identity,
+          #     i.e. identity of the Datastream.
+          # @!attribute [rw] ca_certificate
+          #   @return [::String]
+          #     Required. Input only. PEM-encoded server root CA certificate.
+          class ServerAndClientVerification
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # A set of reusable connection configurations to be used as a source or
         # destination for a stream.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The resource's name.
+        #     Output only. Identifier. The resource's name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The create time of the resource.
@@ -1078,7 +1137,7 @@ module Google
         # A resource representing streaming data from a source to a destination.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The stream's name.
+        #     Output only. Identifier. The stream's name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time of the stream.
@@ -1196,7 +1255,7 @@ module Google
         # A specific stream object (e.g a specific DB table).
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The object resource's name.
+        #     Output only. Identifier. The object resource's name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time of the object.
