@@ -75,6 +75,11 @@ module Google
 
                   default_config.rpcs.add_rule.timeout = 600.0
 
+                  default_config.rpcs.aggregated_list.timeout = 600.0
+                  default_config.rpcs.aggregated_list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.clone_rules.timeout = 600.0
 
                   default_config.rpcs.delete.timeout = 600.0
@@ -422,6 +427,100 @@ module Google
                     options: options
                   )
                   yield result, response if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Retrieves an aggregated list of network firewall policies, listing network firewall policies from all applicable scopes (global and regional) and grouping the results per scope. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.
+              #
+              # @overload aggregated_list(request, options = nil)
+              #   Pass arguments to `aggregated_list` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AggregatedListNetworkFirewallPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::AggregatedListNetworkFirewallPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, service_project_number: nil)
+              #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param filter [::String]
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+              #   @param include_all_scopes [::Boolean]
+              #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+              #   @param max_results [::Integer]
+              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #   @param page_token [::String]
+              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param return_partial_success [::Boolean]
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+              #   @param service_project_number [::Integer]
+              #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::FirewallPoliciesScopedList>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::FirewallPoliciesScopedList>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/compute/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Compute::V1::AggregatedListNetworkFirewallPoliciesRequest.new
+              #
+              #   # Call the aggregated_list method.
+              #   result = client.aggregated_list request
+              #
+              #   # The returned object is of type Google::Cloud::Compute::V1::NetworkFirewallPolicyAggregatedList.
+              #   p result
+              #
+              def aggregated_list request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListNetworkFirewallPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.aggregated_list.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @network_firewall_policies_stub.aggregated_list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @network_firewall_policies_stub, :aggregated_list, "items", request, result, options
+                  yield result, operation if block_given?
                   throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
@@ -1807,6 +1906,11 @@ module Google
                   #
                   attr_reader :add_rule
                   ##
+                  # RPC-specific configuration for `aggregated_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :aggregated_list
+                  ##
                   # RPC-specific configuration for `clone_rules`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1883,6 +1987,8 @@ module Google
                     @add_association = ::Gapic::Config::Method.new add_association_config
                     add_rule_config = parent_rpcs.add_rule if parent_rpcs.respond_to? :add_rule
                     @add_rule = ::Gapic::Config::Method.new add_rule_config
+                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
+                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
                     clone_rules_config = parent_rpcs.clone_rules if parent_rpcs.respond_to? :clone_rules
                     @clone_rules = ::Gapic::Config::Method.new clone_rules_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete

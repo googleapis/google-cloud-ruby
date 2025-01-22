@@ -234,7 +234,7 @@ module Google
         #     The DNS domain name for the public PTR record. You can set this field only if the `setPublicPtr` field is enabled in accessConfig. If this field is unspecified in ipv6AccessConfig, a default PTR record will be created for first IP in associated external IPv6 range.
         # @!attribute [rw] security_policy
         #   @return [::String]
-        #     [Output Only] The resource URL for the security policy associated with this access config.
+        #     The resource URL for the security policy associated with this access config.
         # @!attribute [rw] set_public_ptr
         #   @return [::Boolean]
         #     Specifies whether a public DNS 'PTR' record should be created to map the external IP address of the instance to a DNS domain name. This field is not used in ipv6AccessConfig. A default PTR record will be created if the VM has external IPv6 range associated.
@@ -1532,6 +1532,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] service_project_number
+        #   @return [::Integer]
+        #     The Shared VPC service project id or service project number for which aggregated list request is invoked for subnetworks list-usable api.
+        class AggregatedListNetworkFirewallPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NodeGroups.AggregatedList. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -2786,7 +2816,7 @@ module Google
         #     The customer-supplied encryption key of the source image. Required if the source image is protected by a customer-supplied encryption key. InstanceTemplate and InstancePropertiesPatch do not store customer-supplied encryption keys, so you cannot create disks for instances in a managed instance group if the source images are encrypted with your own keys.
         # @!attribute [rw] source_snapshot
         #   @return [::String]
-        #     The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set.
+        #     The source snapshot to create this disk. When creating a new instance boot disk, one of initializeParams.sourceSnapshot or initializeParams.sourceImage or disks.source is required. To create a disk with a snapshot that you created, specify the snapshot name in the following format: global/snapshots/my-backup If the source snapshot is deleted later, this field will not be set. Note: You cannot create VMs in bulk using a snapshot as the source. Use an image instead when you create VMs using the bulk insert method.
         # @!attribute [rw] source_snapshot_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
         #     The customer-supplied encryption key of the source snapshot.
@@ -7657,7 +7687,7 @@ module Google
         #     The logical grouping to which the "reason" belongs. The error domain is typically the registered service name of the tool or product that generates the error. Example: "pubsub.googleapis.com". If the error is generated by some common infrastructure, the error domain must be a globally unique value that identifies the infrastructure. For Google API infrastructure, the error domain is "googleapis.com".
         # @!attribute [rw] metadatas
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Additional structured details about this error. Keys must match /a-z+/ but should ideally be lowerCamelCase. Also they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than \\{"instanceLimit": "100/request"}, should be returned as, \\{"instanceLimitPerRequest": "100"}, if the client exceeds the number of instances that can be created in a single (batch) request.
+        #     Additional structured details about this error. Keys must match a regular expression of `a-z+` but should ideally be lowerCamelCase. Also, they must be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than `{"instanceLimit": "100/request"}`, should be returned as, `{"instanceLimitPerRequest": "100"}`, if the client exceeds the number of instances that can be created in a single (batch) request.
         # @!attribute [rw] reason
         #   @return [::String]
         #     The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match a regular expression of `A-Z+[A-Z0-9]`, which represents UPPER_SNAKE_CASE.
@@ -8046,6 +8076,17 @@ module Google
         #   @return [::String]
         #     [Output Only] Type of firewallPolicy associations. Always compute#FirewallPoliciesListAssociations for lists of firewallPolicy associations.
         class FirewallPoliciesListAssociationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] firewall_policies
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicy>]
+        #     A list of firewall policies contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Informational warning which replaces the list of firewall policies when the list is empty.
+        class FirewallPoliciesScopedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -13653,7 +13694,7 @@ module Google
         #     The name of the instance group. The name must be 1-63 characters long, and comply with RFC1035.
         # @!attribute [rw] named_ports
         #   @return [::Array<::Google::Cloud::Compute::V1::NamedPort>]
-        #     Assigns a name to a port number. For example: \\{name: "http", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [\\{name: "app1", port: 8080}, \\{name: "app1", port: 8081}, \\{name: "app2", port: 8082}] Named ports apply to all instances in this instance group.
+        #     Optional. Assigns a name to a port number. For example: \\{name: "http", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [\\{name: "app1", port: 8080}, \\{name: "app1", port: 8081}, \\{name: "app2", port: 8082}] Named ports apply to all instances in this instance group.
         # @!attribute [rw] network
         #   @return [::String]
         #     [Output Only] The URL of the network to which all instances in the instance group belong. If your instance has multiple network interfaces, then the network and subnetwork fields only refer to the network and subnet used by your primary interface (nic0).
@@ -15689,14 +15730,14 @@ module Google
         #     Determines whether this Attachment will carry packets. Not present for PARTNER_PROVIDER.
         # @!attribute [rw] bandwidth
         #   @return [::String]
-        #     Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s
+        #     Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s - BPS_100G: 100 Gbit/s
         #     Check the Bandwidth enum for the list of possible values.
         # @!attribute [rw] candidate_ipv6_subnets
         #   @return [::Array<::String>]
         #     This field is not available.
         # @!attribute [rw] candidate_subnets
         #   @return [::Array<::String>]
-        #     Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google's edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.
+        #     Input only. Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google's edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.
         # @!attribute [rw] cloud_router_ip_address
         #   @return [::String]
         #     [Output Only] IPv4 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.
@@ -15729,7 +15770,7 @@ module Google
         #     An optional description of this resource.
         # @!attribute [rw] edge_availability_domain
         #   @return [::String]
-        #     Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
+        #     Input only. Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
         #     Check the EdgeAvailabilityDomain enum for the list of possible values.
         # @!attribute [rw] encryption
         #   @return [::String]
@@ -15803,7 +15844,7 @@ module Google
         #     Check the State enum for the list of possible values.
         # @!attribute [rw] subnet_length
         #   @return [::Integer]
-        #     Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility.
+        #     Input only. Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility.
         # @!attribute [rw] type
         #   @return [::String]
         #     The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner.
@@ -15824,10 +15865,13 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s
+          # Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s - BPS_100G: 100 Gbit/s
           module Bandwidth
             # A value indicating that the enum field is not set.
             UNDEFINED_BANDWIDTH = 0
+
+            # 100 Gbit/s
+            BPS_100G = 49_547_952
 
             # 100 Mbit/s
             BPS_100M = 49_547_958
@@ -15866,7 +15910,7 @@ module Google
             BPS_5G = 355_358_572
           end
 
-          # Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
+          # Input only. Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
           module EdgeAvailabilityDomain
             # A value indicating that the enum field is not set.
             UNDEFINED_EDGE_AVAILABILITY_DOMAIN = 0
@@ -21109,16 +21153,16 @@ module Google
         # The network endpoint.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Metadata defined as annotations on the network endpoint.
+        #     Optional metadata defined as annotations on the network endpoint.
         # @!attribute [rw] client_destination_port
         #   @return [::Integer]
-        #     Represents the port number to which PSC consumer sends packets. Only valid for network endpoint groups created with GCE_VM_IP_PORTMAP endpoint type.
+        #     Represents the port number to which PSC consumer sends packets. Optional. Only valid for network endpoint groups created with GCE_VM_IP_PORTMAP endpoint type.
         # @!attribute [rw] fqdn
         #   @return [::String]
         #     Optional fully qualified domain name of network endpoint. This can only be specified when NetworkEndpointGroup.network_endpoint_type is NON_GCP_FQDN_PORT.
         # @!attribute [rw] instance
         #   @return [::String]
-        #     The name or a URL of VM instance of this network endpoint. This field is required for network endpoints of type GCE_VM_IP and GCE_VM_IP_PORT. The instance must be in the same zone of network endpoint group (for zonal NEGs) or in the zone within the region of the NEG (for regional NEGs). If the ipAddress is specified, it must belongs to the VM instance. The name must be 1-63 characters long, and comply with RFC1035 or be a valid URL pointing to an existing instance.
+        #     The name or a URL of VM instance of this network endpoint. Optional, the field presence depends on the network endpoint type. The field is required for network endpoints of type GCE_VM_IP and GCE_VM_IP_PORT. The instance must be in the same zone of network endpoint group (for zonal NEGs) or in the zone within the region of the NEG (for regional NEGs). If the ipAddress is specified, it must belongs to the VM instance. The name must be 1-63 characters long, and comply with RFC1035 or be a valid URL pointing to an existing instance.
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     Optional IPv4 address of network endpoint. The IP address must belong to a VM in Compute Engine (either the primary IP or as part of an aliased IP range). If the IP address is not specified, then the primary IP address for the VM instance in the network that the network endpoint group belongs to will be used. This field is redundant and need not be set for network endpoints of type GCE_VM_IP. If set, it must be set to the primary internal IP address of the attached VM instance that matches the subnetwork of the NEG. The primary internal IP address from any NIC of a multi-NIC VM instance can be added to a NEG as long as it matches the NEG subnetwork.
@@ -21145,22 +21189,22 @@ module Google
         # Represents a collection of network endpoints. A network endpoint group (NEG) defines how a set of endpoints should be reached, whether they are reachable, and where they are located. For more information about using NEGs for different use cases, see Network endpoint groups overview.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Metadata defined as annotations on the network endpoint group.
+        #     Optional. Metadata defined as annotations on the network endpoint group.
         # @!attribute [rw] app_engine
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroupAppEngine]
-        #     Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
+        #     Optional. Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
         # @!attribute [rw] cloud_function
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroupCloudFunction]
-        #     Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
+        #     Optional. Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
         # @!attribute [rw] cloud_run
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroupCloudRun]
-        #     Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
+        #     Optional. Only valid when networkEndpointType is SERVERLESS. Only one of cloudRun, appEngine or cloudFunction may be set.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
         # @!attribute [rw] default_port
         #   @return [::Integer]
-        #     The default port used if the port number is not specified in the network endpoint. If the network endpoint type is either GCE_VM_IP, SERVERLESS or PRIVATE_SERVICE_CONNECT, this field must not be specified.
+        #     The default port used if the port number is not specified in the network endpoint. Optional. If the network endpoint type is either GCE_VM_IP, SERVERLESS or PRIVATE_SERVICE_CONNECT, this field must not be specified.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -21182,9 +21226,10 @@ module Google
         #     Check the NetworkEndpointType enum for the list of possible values.
         # @!attribute [rw] psc_data
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroupPscData]
+        #     Optional. Only valid when networkEndpointType is PRIVATE_SERVICE_CONNECT.
         # @!attribute [rw] psc_target_service
         #   @return [::String]
-        #     The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: asia-northeast3-cloudkms.googleapis.com
+        #     The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: asia-northeast3-cloudkms.googleapis.com. Optional. Only valid when networkEndpointType is PRIVATE_SERVICE_CONNECT.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] The URL of the region where the network endpoint group is located.
@@ -21456,13 +21501,48 @@ module Google
 
         # @!attribute [rw] healths
         #   @return [::Array<::Google::Cloud::Compute::V1::HealthStatusForNetworkEndpoint>]
-        #     [Output only] The health status of network endpoint;
+        #     [Output only] The health status of network endpoint. Optional. Displayed only if the network endpoint has centralized health checking configured.
         # @!attribute [rw] network_endpoint
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpoint]
-        #     [Output only] The network endpoint;
+        #     [Output only] The network endpoint.
         class NetworkEndpointWithHealthStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::FirewallPoliciesScopedList}]
+        #     A list of FirewallPoliciesScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#networkFirewallPoliciesAggregatedList for lists of network firewall policies.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class NetworkFirewallPolicyAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::FirewallPoliciesScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A network interface resource attached to an instance.
@@ -22130,6 +22210,13 @@ module Google
         #   @return [::String]
         #     Allows to define a preferred approach for handling inter-region cost in the selection process when using the STANDARD BGP best path selection algorithm. Can be DEFAULT or ADD_COST_TO_MED.
         #     Check the BgpInterRegionCost enum for the list of possible values.
+        # @!attribute [rw] effective_bgp_always_compare_med
+        #   @return [::Boolean]
+        #     [Output Only] Effective value of the bgp_always_compare_med field.
+        # @!attribute [rw] effective_bgp_inter_region_cost
+        #   @return [::String]
+        #     [Output Only] Effective value of the bgp_inter_region_cost field.
+        #     Check the EffectiveBgpInterRegionCost enum for the list of possible values.
         # @!attribute [rw] routing_mode
         #   @return [::String]
         #     The network-wide routing mode to use. If set to REGIONAL, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network's Cloud Routers will advertise routes with all subnets of this network, across regions.
@@ -22149,6 +22236,9 @@ module Google
           end
 
           # Allows to define a preferred approach for handling inter-region cost in the selection process when using the STANDARD BGP best path selection algorithm. Can be DEFAULT or ADD_COST_TO_MED.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # ADD_COST_TO_MED
+          # DEFAULT
           module BgpInterRegionCost
             # A value indicating that the enum field is not set.
             UNDEFINED_BGP_INTER_REGION_COST = 0
@@ -22156,6 +22246,15 @@ module Google
             ADD_COST_TO_MED = 490_583_004
 
             DEFAULT = 115_302_945
+          end
+
+          # [Output Only] Effective value of the bgp_inter_region_cost field.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # ADD_COST_TO_MED
+          # DEFAULT
+          module EffectiveBgpInterRegionCost
+            # A value indicating that the enum field is not set.
+            UNDEFINED_EFFECTIVE_BGP_INTER_REGION_COST = 0
           end
 
           # The network-wide routing mode to use. If set to REGIONAL, this network's Cloud Routers will only advertise routes with subnets of this network in the same region as the router. If set to GLOBAL, this network's Cloud Routers will advertise routes with all subnets of this network, across regions.
@@ -34223,7 +34322,7 @@ module Google
         #     Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED or EXTERNAL or EXTERNAL_MANAGED. For details which ServerTlsPolicy resources are accepted with INTERNAL_SELF_MANAGED and which with EXTERNAL, EXTERNAL_MANAGED loadBalancingScheme consult ServerTlsPolicy documentation. If left blank, communications are not encrypted.
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
-        #     URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API. Certificate Manager Certificates are not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates. Certificate Manager Certificates accepted formats are: - //certificatemanager.googleapis.com/projects/\\{project}/locations/{ location}/certificates/\\{resourceName}. - https://certificatemanager.googleapis.com/v1alpha1/projects/\\{project }/locations/\\{location}/certificates/\\{resourceName}.
+        #     URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. SslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED. The URLs should refer to a SSL Certificate resource or Certificate Manager Certificate resource. Mixing Classic Certificates and Certificate Manager Certificates is not allowed. Certificate Manager Certificates must include the certificatemanager API namespace. Using Certificate Manager Certificates in this field is not supported by Global external Application Load Balancer or Classic Application Load Balancer, use certificate_map instead. Currently, you may specify up to 15 Classic SSL Certificates or up to 100 Certificate Manager Certificates. Certificate Manager Certificates accepted formats are: - //certificatemanager.googleapis.com/projects/\\{project}/locations/{ location}/certificates/\\{resourceName}. - https://certificatemanager.googleapis.com/v1alpha1/projects/\\{project }/locations/\\{location}/certificates/\\{resourceName}.
         # @!attribute [rw] ssl_policy
         #   @return [::String]
         #     URL of SslPolicy resource that will be associated with the TargetHttpsProxy resource. If not set, the TargetHttpsProxy resource has no SSL policy configured.
