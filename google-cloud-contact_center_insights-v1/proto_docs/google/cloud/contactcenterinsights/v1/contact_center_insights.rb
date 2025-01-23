@@ -1361,15 +1361,23 @@ module Google
         # @!attribute [r] issue_dimension_metadata
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Dimension::IssueDimensionMetadata]
         #     Output only. Metadata about the issue dimension.
+        #
+        #     Note: The following fields are mutually exclusive: `issue_dimension_metadata`, `agent_dimension_metadata`, `qa_question_dimension_metadata`, `qa_question_answer_dimension_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] agent_dimension_metadata
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Dimension::AgentDimensionMetadata]
         #     Output only. Metadata about the agent dimension.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_dimension_metadata`, `issue_dimension_metadata`, `qa_question_dimension_metadata`, `qa_question_answer_dimension_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] qa_question_dimension_metadata
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Dimension::QaQuestionDimensionMetadata]
         #     Output only. Metadata about the QA question dimension.
+        #
+        #     Note: The following fields are mutually exclusive: `qa_question_dimension_metadata`, `issue_dimension_metadata`, `agent_dimension_metadata`, `qa_question_answer_dimension_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] qa_question_answer_dimension_metadata
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Dimension::QaQuestionAnswerDimensionMetadata]
         #     Output only. Metadata about the QA question-answer dimension.
+        #
+        #     Note: The following fields are mutually exclusive: `qa_question_answer_dimension_metadata`, `issue_dimension_metadata`, `agent_dimension_metadata`, `qa_question_dimension_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dimension_key
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Dimension::DimensionKey]
         #     The key of the dimension.

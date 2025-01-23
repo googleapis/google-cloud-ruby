@@ -1151,6 +1151,8 @@ module Google
             #     be within the change stream retention period, less than or equal to the
             #     current time, and after change stream creation, whichever is greater.
             #     This value is inclusive and will be truncated to microsecond granularity.
+            #
+            #     Note: The following fields are mutually exclusive: `start_time`, `continuation_tokens`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param continuation_tokens [::Google::Cloud::Bigtable::V2::StreamContinuationTokens, ::Hash]
             #     Tokens that describe how to resume reading a stream where reading
             #     previously left off. If specified, changes will be read starting at the
@@ -1162,6 +1164,8 @@ module Google
             #     of a partition merge, the union of the token partitions must exactly
             #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
             #     returned.
+            #
+            #     Note: The following fields are mutually exclusive: `continuation_tokens`, `start_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
             #     If specified, OK will be returned when the stream advances beyond
             #     this time. Otherwise, changes will be continuously delivered on the stream.

@@ -83,22 +83,32 @@ module Google
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     The value of a tag field with a double type.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `string_value`, `bool_value`, `timestamp_value`, `enum_value`, `richtext_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     The value of a tag field with a string type.
         #
         #     The maximum length is 2000 UTF-8 characters.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `double_value`, `bool_value`, `timestamp_value`, `enum_value`, `richtext_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     The value of a tag field with a boolean type.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `double_value`, `string_value`, `timestamp_value`, `enum_value`, `richtext_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value
         #   @return [::Google::Protobuf::Timestamp]
         #     The value of a tag field with a timestamp type.
+        #
+        #     Note: The following fields are mutually exclusive: `timestamp_value`, `double_value`, `string_value`, `bool_value`, `enum_value`, `richtext_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enum_value
         #   @return [::Google::Cloud::DataCatalog::V1::TagField::EnumValue]
         #     The value of a tag field with an enum type.
         #
         #     This value must be one of the allowed values listed in this enum.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_value`, `double_value`, `string_value`, `bool_value`, `timestamp_value`, `richtext_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] richtext_value
         #   @return [::String]
         #     The value of a tag field with a rich text type.
@@ -106,6 +116,8 @@ module Google
         #     The maximum length is 10 MiB as this value holds HTML descriptions
         #     including encoded images. The maximum length of the text without images
         #     is 100 KiB.
+        #
+        #     Note: The following fields are mutually exclusive: `richtext_value`, `double_value`, `string_value`, `bool_value`, `timestamp_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] order
         #   @return [::Integer]
         #     Output only. The order of this field with respect to other fields in this
@@ -252,9 +264,13 @@ module Google
         # @!attribute [rw] primitive_type
         #   @return [::Google::Cloud::DataCatalog::V1::FieldType::PrimitiveType]
         #     Primitive types, such as string, boolean, etc.
+        #
+        #     Note: The following fields are mutually exclusive: `primitive_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enum_type
         #   @return [::Google::Cloud::DataCatalog::V1::FieldType::EnumType]
         #     An enum type.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_type`, `primitive_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FieldType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

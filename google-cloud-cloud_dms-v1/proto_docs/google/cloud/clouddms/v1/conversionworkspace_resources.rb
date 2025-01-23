@@ -112,15 +112,23 @@ module Google
         # @!attribute [r] seed_job_details
         #   @return [::Google::Cloud::CloudDMS::V1::BackgroundJobLogEntry::SeedJobDetails]
         #     Output only. Seed job details.
+        #
+        #     Note: The following fields are mutually exclusive: `seed_job_details`, `import_rules_job_details`, `convert_job_details`, `apply_job_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] import_rules_job_details
         #   @return [::Google::Cloud::CloudDMS::V1::BackgroundJobLogEntry::ImportRulesJobDetails]
         #     Output only. Import rules job details.
+        #
+        #     Note: The following fields are mutually exclusive: `import_rules_job_details`, `seed_job_details`, `convert_job_details`, `apply_job_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] convert_job_details
         #   @return [::Google::Cloud::CloudDMS::V1::BackgroundJobLogEntry::ConvertJobDetails]
         #     Output only. Convert job details.
+        #
+        #     Note: The following fields are mutually exclusive: `convert_job_details`, `seed_job_details`, `import_rules_job_details`, `apply_job_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] apply_job_details
         #   @return [::Google::Cloud::CloudDMS::V1::BackgroundJobLogEntry::ApplyJobDetails]
         #     Output only. Apply job details.
+        #
+        #     Note: The following fields are mutually exclusive: `apply_job_details`, `seed_job_details`, `import_rules_job_details`, `convert_job_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BackgroundJobLogEntry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -247,43 +255,65 @@ module Google
         # @!attribute [rw] single_entity_rename
         #   @return [::Google::Cloud::CloudDMS::V1::SingleEntityRename]
         #     Optional. Rule to specify how a single entity should be renamed.
+        #
+        #     Note: The following fields are mutually exclusive: `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_entity_rename
         #   @return [::Google::Cloud::CloudDMS::V1::MultiEntityRename]
         #     Optional. Rule to specify how multiple entities should be renamed.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_entity_rename`, `single_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity_move
         #   @return [::Google::Cloud::CloudDMS::V1::EntityMove]
         #     Optional. Rule to specify how multiple entities should be relocated into
         #     a different schema.
+        #
+        #     Note: The following fields are mutually exclusive: `entity_move`, `single_entity_rename`, `multi_entity_rename`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] single_column_change
         #   @return [::Google::Cloud::CloudDMS::V1::SingleColumnChange]
         #     Optional. Rule to specify how a single column is converted.
+        #
+        #     Note: The following fields are mutually exclusive: `single_column_change`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_column_data_type_change
         #   @return [::Google::Cloud::CloudDMS::V1::MultiColumnDatatypeChange]
         #     Optional. Rule to specify how multiple columns should be converted to a
         #     different data type.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_column_data_type_change`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conditional_column_set_value
         #   @return [::Google::Cloud::CloudDMS::V1::ConditionalColumnSetValue]
         #     Optional. Rule to specify how the data contained in a column should be
         #     transformed (such as trimmed, rounded, etc) provided that the data meets
         #     certain criteria.
+        #
+        #     Note: The following fields are mutually exclusive: `conditional_column_set_value`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] convert_rowid_column
         #   @return [::Google::Cloud::CloudDMS::V1::ConvertRowIdToColumn]
         #     Optional. Rule to specify how multiple tables should be converted with an
         #     additional rowid column.
+        #
+        #     Note: The following fields are mutually exclusive: `convert_rowid_column`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `set_table_primary_key`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] set_table_primary_key
         #   @return [::Google::Cloud::CloudDMS::V1::SetTablePrimaryKey]
         #     Optional. Rule to specify the primary key for a table
+        #
+        #     Note: The following fields are mutually exclusive: `set_table_primary_key`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `single_package_change`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] single_package_change
         #   @return [::Google::Cloud::CloudDMS::V1::SinglePackageChange]
         #     Optional. Rule to specify how a single package is converted.
+        #
+        #     Note: The following fields are mutually exclusive: `single_package_change`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `source_sql_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_sql_change
         #   @return [::Google::Cloud::CloudDMS::V1::SourceSqlChange]
         #     Optional. Rule to change the sql code for an entity, for example,
         #     function, procedure.
+        #
+        #     Note: The following fields are mutually exclusive: `source_sql_change`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `filter_table_columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_table_columns
         #   @return [::Google::Cloud::CloudDMS::V1::FilterTableColumns]
         #     Optional. Rule to specify the list of columns to include or exclude from
         #     a table.
+        #
+        #     Note: The following fields are mutually exclusive: `filter_table_columns`, `single_entity_rename`, `multi_entity_rename`, `entity_move`, `single_column_change`, `multi_column_data_type_change`, `conditional_column_set_value`, `convert_rowid_column`, `set_table_primary_key`, `single_package_change`, `source_sql_change`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MappingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -440,10 +470,14 @@ module Google
         # @!attribute [rw] source_text_filter
         #   @return [::Google::Cloud::CloudDMS::V1::SourceTextFilter]
         #     Optional. Filter for text-based data types like varchar.
+        #
+        #     Note: The following fields are mutually exclusive: `source_text_filter`, `source_numeric_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_numeric_filter
         #   @return [::Google::Cloud::CloudDMS::V1::SourceNumericFilter]
         #     Optional. Filter for fixed point number data types such as
         #     NUMERIC/NUMBER.
+        #
+        #     Note: The following fields are mutually exclusive: `source_numeric_filter`, `source_text_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_data_type
         #   @return [::String]
         #     Required. New data type.
@@ -522,10 +556,14 @@ module Google
         #   @return [::Google::Cloud::CloudDMS::V1::SourceTextFilter]
         #     Optional. Optional filter on source column length. Used for text based
         #     data types like varchar.
+        #
+        #     Note: The following fields are mutually exclusive: `source_text_filter`, `source_numeric_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_numeric_filter
         #   @return [::Google::Cloud::CloudDMS::V1::SourceNumericFilter]
         #     Optional. Optional filter on source column precision and scale. Used for
         #     fixed point numbers such as NUMERIC/NUMBER data types.
+        #
+        #     Note: The following fields are mutually exclusive: `source_numeric_filter`, `source_text_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value_transformation
         #   @return [::Google::Cloud::CloudDMS::V1::ValueTransformation]
         #     Required. Description of data transformation during migration.
@@ -542,38 +580,58 @@ module Google
         # @!attribute [rw] is_null
         #   @return [::Google::Protobuf::Empty]
         #     Optional. Value is null
+        #
+        #     Note: The following fields are mutually exclusive: `is_null`, `value_list`, `int_comparison`, `double_comparison`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value_list
         #   @return [::Google::Cloud::CloudDMS::V1::ValueListFilter]
         #     Optional. Value is found in the specified list.
+        #
+        #     Note: The following fields are mutually exclusive: `value_list`, `is_null`, `int_comparison`, `double_comparison`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int_comparison
         #   @return [::Google::Cloud::CloudDMS::V1::IntComparisonFilter]
         #     Optional. Filter on relation between source value and compare value of
         #     type integer.
+        #
+        #     Note: The following fields are mutually exclusive: `int_comparison`, `is_null`, `value_list`, `double_comparison`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_comparison
         #   @return [::Google::Cloud::CloudDMS::V1::DoubleComparisonFilter]
         #     Optional. Filter on relation between source value and compare value of
         #     type double.
+        #
+        #     Note: The following fields are mutually exclusive: `double_comparison`, `is_null`, `value_list`, `int_comparison`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assign_null
         #   @return [::Google::Protobuf::Empty]
         #     Optional. Set to null
+        #
+        #     Note: The following fields are mutually exclusive: `assign_null`, `assign_specific_value`, `assign_min_value`, `assign_max_value`, `round_scale`, `apply_hash`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assign_specific_value
         #   @return [::Google::Cloud::CloudDMS::V1::AssignSpecificValue]
         #     Optional. Set to a specific value (value is converted to fit the target
         #     data type)
+        #
+        #     Note: The following fields are mutually exclusive: `assign_specific_value`, `assign_null`, `assign_min_value`, `assign_max_value`, `round_scale`, `apply_hash`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assign_min_value
         #   @return [::Google::Protobuf::Empty]
         #     Optional. Set to min_value - if integer or numeric, will use
         #     int.minvalue, etc
+        #
+        #     Note: The following fields are mutually exclusive: `assign_min_value`, `assign_null`, `assign_specific_value`, `assign_max_value`, `round_scale`, `apply_hash`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assign_max_value
         #   @return [::Google::Protobuf::Empty]
         #     Optional. Set to max_value - if integer or numeric, will use
         #     int.maxvalue, etc
+        #
+        #     Note: The following fields are mutually exclusive: `assign_max_value`, `assign_null`, `assign_specific_value`, `assign_min_value`, `round_scale`, `apply_hash`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] round_scale
         #   @return [::Google::Cloud::CloudDMS::V1::RoundToScale]
         #     Optional. Allows the data to change scale
+        #
+        #     Note: The following fields are mutually exclusive: `round_scale`, `assign_null`, `assign_specific_value`, `assign_min_value`, `assign_max_value`, `apply_hash`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] apply_hash
         #   @return [::Google::Cloud::CloudDMS::V1::ApplyHash]
         #     Optional. Applies a hash function on the data
+        #
+        #     Note: The following fields are mutually exclusive: `apply_hash`, `assign_null`, `assign_specific_value`, `assign_min_value`, `assign_max_value`, `round_scale`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ValueTransformation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -773,36 +831,58 @@ module Google
         # @!attribute [rw] database
         #   @return [::Google::Cloud::CloudDMS::V1::DatabaseInstanceEntity]
         #     Database.
+        #
+        #     Note: The following fields are mutually exclusive: `database`, `schema`, `table`, `view`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::CloudDMS::V1::SchemaEntity]
         #     Schema.
+        #
+        #     Note: The following fields are mutually exclusive: `schema`, `database`, `table`, `view`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::CloudDMS::V1::TableEntity]
         #     Table.
+        #
+        #     Note: The following fields are mutually exclusive: `table`, `database`, `schema`, `view`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::CloudDMS::V1::ViewEntity]
         #     View.
+        #
+        #     Note: The following fields are mutually exclusive: `view`, `database`, `schema`, `table`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sequence
         #   @return [::Google::Cloud::CloudDMS::V1::SequenceEntity]
         #     Sequence.
+        #
+        #     Note: The following fields are mutually exclusive: `sequence`, `database`, `schema`, `table`, `view`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stored_procedure
         #   @return [::Google::Cloud::CloudDMS::V1::StoredProcedureEntity]
         #     Stored procedure.
+        #
+        #     Note: The following fields are mutually exclusive: `stored_procedure`, `database`, `schema`, `table`, `view`, `sequence`, `database_function`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] database_function
         #   @return [::Google::Cloud::CloudDMS::V1::FunctionEntity]
         #     Function.
+        #
+        #     Note: The following fields are mutually exclusive: `database_function`, `database`, `schema`, `table`, `view`, `sequence`, `stored_procedure`, `synonym`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] synonym
         #   @return [::Google::Cloud::CloudDMS::V1::SynonymEntity]
         #     Synonym.
+        #
+        #     Note: The following fields are mutually exclusive: `synonym`, `database`, `schema`, `table`, `view`, `sequence`, `stored_procedure`, `database_function`, `database_package`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] database_package
         #   @return [::Google::Cloud::CloudDMS::V1::PackageEntity]
         #     Package.
+        #
+        #     Note: The following fields are mutually exclusive: `database_package`, `database`, `schema`, `table`, `view`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `udt`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] udt
         #   @return [::Google::Cloud::CloudDMS::V1::UDTEntity]
         #     UDT.
+        #
+        #     Note: The following fields are mutually exclusive: `udt`, `database`, `schema`, `table`, `view`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `materialized_view`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] materialized_view
         #   @return [::Google::Cloud::CloudDMS::V1::MaterializedViewEntity]
         #     Materialized view.
+        #
+        #     Note: The following fields are mutually exclusive: `materialized_view`, `database`, `schema`, `table`, `view`, `sequence`, `stored_procedure`, `database_function`, `synonym`, `database_package`, `udt`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DatabaseEntity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

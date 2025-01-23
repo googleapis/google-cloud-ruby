@@ -354,6 +354,8 @@ module Google
         #     computes this ID as the OpenPGP RFC4880 V4 fingerprint, represented as
         #     upper-case hex.  If `id` is provided by the caller, it will be
         #     overwritten by the API-calculated ID.
+        #
+        #     Note: The following fields are mutually exclusive: `ascii_armored_pgp_public_key`, `pkix_public_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pkix_public_key
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::PkixPublicKey]
         #     A raw PKIX SubjectPublicKeyInfo format public key.
@@ -362,6 +364,8 @@ module Google
         #     type of public key, but it MUST be a valid RFC3986 URI. If `id` is left
         #     blank, a default one will be computed based on the digest of the DER
         #     encoding of the public key.
+        #
+        #     Note: The following fields are mutually exclusive: `pkix_public_key`, `ascii_armored_pgp_public_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AttestorPublicKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

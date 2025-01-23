@@ -63,9 +63,13 @@ module Google
         # @!attribute [rw] td_ccel
         #   @return [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation]
         #     Optional. A TDX with CCEL and RTMR Attestation Quote.
+        #
+        #     Note: The following fields are mutually exclusive: `td_ccel`, `sev_snp_attestation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sev_snp_attestation
         #   @return [::Google::Cloud::ConfidentialComputing::V1::SevSnpAttestation]
         #     Optional. An SEV-SNP Attestation Report.
+        #
+        #     Note: The following fields are mutually exclusive: `sev_snp_attestation`, `td_ccel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] challenge
         #   @return [::String]
         #     Required. The name of the Challenge whose nonce was used to generate the

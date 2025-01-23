@@ -1606,8 +1606,12 @@ module Google
               #   @param row_key_prefix [::String]
               #     Delete all rows that start with this row key prefix. Prefix cannot be
               #     zero length.
+              #
+              #     Note: The following fields are mutually exclusive: `row_key_prefix`, `delete_all_data_from_table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param delete_all_data_from_table [::Boolean]
               #     Delete all rows in the table. Setting this to false is a no-op.
+              #
+              #     Note: The following fields are mutually exclusive: `delete_all_data_from_table`, `row_key_prefix`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -1793,10 +1797,14 @@ module Google
               #     Checks that reads using an app profile with `StandardIsolation` can
               #     see all writes committed before the token was created, even if the
               #     read and write target different clusters.
+              #
+              #     Note: The following fields are mutually exclusive: `standard_read_remote_writes`, `data_boost_read_local_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param data_boost_read_local_writes [::Google::Cloud::Bigtable::Admin::V2::DataBoostReadLocalWrites, ::Hash]
               #     Checks that reads using an app profile with `DataBoostIsolationReadOnly`
               #     can see all writes committed before the token was created, but only if
               #     the read and write target the same cluster.
+              #
+              #     Note: The following fields are mutually exclusive: `data_boost_read_local_writes`, `standard_read_remote_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::CheckConsistencyResponse]
