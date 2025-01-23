@@ -512,10 +512,14 @@ module Google
         # @!attribute [rw] content
         #   @return [::String]
         #     Document's content represented as a stream of bytes.
+        #
+        #     Note: The following fields are mutually exclusive: `content`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::Translate::V3::GcsSource]
         #     Google Cloud Storage location. This must be a single file.
         #     For example: gs://example_bucket/example_file.pdf
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     Specifies the input document's mime_type.
@@ -950,9 +954,13 @@ module Google
         # @!attribute [rw] language_pair
         #   @return [::Google::Cloud::Translate::V3::Glossary::LanguageCodePair]
         #     Used with unidirectional glossaries.
+        #
+        #     Note: The following fields are mutually exclusive: `language_pair`, `language_codes_set`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] language_codes_set
         #   @return [::Google::Cloud::Translate::V3::Glossary::LanguageCodesSet]
         #     Used with equivalent term set glossaries.
+        #
+        #     Note: The following fields are mutually exclusive: `language_codes_set`, `language_pair`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_config
         #   @return [::Google::Cloud::Translate::V3::GlossaryInputConfig]
         #     Required. Provides examples to build the glossary from.

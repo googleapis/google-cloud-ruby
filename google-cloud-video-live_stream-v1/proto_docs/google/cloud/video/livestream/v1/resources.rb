@@ -519,21 +519,33 @@ module Google
           # @!attribute [rw] input_switch
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::InputSwitchTask]
           #     Switches to another input stream.
+          #
+          #     Note: The following fields are mutually exclusive: `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ad_break
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::AdBreakTask]
           #     Inserts a new ad opportunity.
+          #
+          #     Note: The following fields are mutually exclusive: `ad_break`, `input_switch`, `return_to_program`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] return_to_program
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::ReturnToProgramTask]
           #     Stops any running ad break.
+          #
+          #     Note: The following fields are mutually exclusive: `return_to_program`, `input_switch`, `ad_break`, `slate`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] slate
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::SlateTask]
           #     Inserts a slate.
+          #
+          #     Note: The following fields are mutually exclusive: `slate`, `input_switch`, `ad_break`, `return_to_program`, `mute`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mute
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::MuteTask]
           #     Mutes the stream.
+          #
+          #     Note: The following fields are mutually exclusive: `mute`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `unmute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] unmute
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::UnmuteTask]
           #     Unmutes the stream.
+          #
+          #     Note: The following fields are mutually exclusive: `unmute`, `input_switch`, `ad_break`, `return_to_program`, `slate`, `mute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] execute_now
           #   @return [::Boolean]
           #     When this field is set to true, the event will be executed at the earliest
@@ -795,9 +807,13 @@ module Google
           # @!attribute [rw] video
           #   @return [::Google::Cloud::Video::LiveStream::V1::Asset::VideoAsset]
           #     VideoAsset represents a video.
+          #
+          #     Note: The following fields are mutually exclusive: `video`, `image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] image
           #   @return [::Google::Cloud::Video::LiveStream::V1::Asset::ImageAsset]
           #     ImageAsset represents an image.
+          #
+          #     Note: The following fields are mutually exclusive: `image`, `video`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] crc32c
           #   @return [::String]
           #     Based64-encoded CRC32c checksum of the asset file. For more information,
@@ -886,12 +902,18 @@ module Google
           # @!attribute [rw] aes128
           #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::Aes128Encryption]
           #     Configuration for HLS AES-128 encryption.
+          #
+          #     Note: The following fields are mutually exclusive: `aes128`, `sample_aes`, `mpeg_cenc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sample_aes
           #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::SampleAesEncryption]
           #     Configuration for HLS SAMPLE-AES encryption.
+          #
+          #     Note: The following fields are mutually exclusive: `sample_aes`, `aes128`, `mpeg_cenc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mpeg_cenc
           #   @return [::Google::Cloud::Video::LiveStream::V1::Encryption::MpegCommonEncryption]
           #     Configuration for MPEG-Dash Common Encryption (MPEG-CENC).
+          #
+          #     Note: The following fields are mutually exclusive: `mpeg_cenc`, `aes128`, `sample_aes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Encryption
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

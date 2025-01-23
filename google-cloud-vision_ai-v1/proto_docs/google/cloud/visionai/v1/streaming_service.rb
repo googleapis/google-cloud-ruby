@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] setup_request
         #   @return [::Google::Cloud::VisionAI::V1::ReceiveEventsRequest::SetupRequest]
         #     The setup request to setup the RPC connection.
+        #
+        #     Note: The following fields are mutually exclusive: `setup_request`, `commit_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] commit_request
         #   @return [::Google::Cloud::VisionAI::V1::CommitRequest]
         #     This request checkpoints the consumer's read progress.
+        #
+        #     Note: The following fields are mutually exclusive: `commit_request`, `setup_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReceiveEventsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -96,6 +100,8 @@ module Google
         # @!attribute [rw] heartbeat
         #   @return [::Boolean]
         #     A server heartbeat.
+        #
+        #     Note: The following fields are mutually exclusive: `heartbeat`, `writes_done_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] writes_done_request
         #   @return [::Boolean]
         #     A request to the receiver to complete any final writes followed by a
@@ -107,6 +113,8 @@ module Google
         #     If `WritesDone` does not get issued, then the server will forcefully
         #     cancel the connection, and the receiver will likely receive an
         #     uninformative after `Read` returns `false` and `Finish` is called.
+        #
+        #     Note: The following fields are mutually exclusive: `writes_done_request`, `heartbeat`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReceiveEventsControlResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -116,9 +124,13 @@ module Google
         # @!attribute [rw] event_update
         #   @return [::Google::Cloud::VisionAI::V1::EventUpdate]
         #     The event update message.
+        #
+        #     Note: The following fields are mutually exclusive: `event_update`, `control`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] control
         #   @return [::Google::Cloud::VisionAI::V1::ReceiveEventsControlResponse]
         #     A control message from the server.
+        #
+        #     Note: The following fields are mutually exclusive: `control`, `event_update`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReceiveEventsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -233,9 +245,13 @@ module Google
         # @!attribute [rw] packet
         #   @return [::Google::Cloud::VisionAI::V1::Packet]
         #     Packets sent over the streaming rpc.
+        #
+        #     Note: The following fields are mutually exclusive: `packet`, `metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::VisionAI::V1::RequestMetadata]
         #     The first message of the streaming rpc including the request metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `metadata`, `packet`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SendPacketsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -253,9 +269,13 @@ module Google
         #     The request to setup the initial state of session.
         #
         #     The client must send and only send this as the first message.
+        #
+        #     Note: The following fields are mutually exclusive: `setup_request`, `commit_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] commit_request
         #   @return [::Google::Cloud::VisionAI::V1::CommitRequest]
         #     This request checkpoints the consumer's read progress.
+        #
+        #     Note: The following fields are mutually exclusive: `commit_request`, `setup_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReceivePacketsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,9 +284,13 @@ module Google
           # @!attribute [rw] eager_receive_mode
           #   @return [::Google::Cloud::VisionAI::V1::EagerMode]
           #     Options for configuring eager mode.
+          #
+          #     Note: The following fields are mutually exclusive: `eager_receive_mode`, `controlled_receive_mode`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] controlled_receive_mode
           #   @return [::Google::Cloud::VisionAI::V1::ControlledMode]
           #     Options for configuring controlled mode.
+          #
+          #     Note: The following fields are mutually exclusive: `controlled_receive_mode`, `eager_receive_mode`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] metadata
           #   @return [::Google::Cloud::VisionAI::V1::RequestMetadata]
           #     The configurations that specify where packets are retrieved.
@@ -301,6 +325,8 @@ module Google
         # @!attribute [rw] heartbeat
         #   @return [::Boolean]
         #     A server heartbeat.
+        #
+        #     Note: The following fields are mutually exclusive: `heartbeat`, `writes_done_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] writes_done_request
         #   @return [::Boolean]
         #     A request to the receiver to complete any final writes followed by a
@@ -312,6 +338,8 @@ module Google
         #     If `WritesDone` does not get issued, then the server will forcefully
         #     cancel the connection, and the receiver will likely receive an
         #     uninformative after `Read` returns `false` and `Finish` is called.
+        #
+        #     Note: The following fields are mutually exclusive: `writes_done_request`, `heartbeat`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReceivePacketsControlResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,9 +349,13 @@ module Google
         # @!attribute [rw] packet
         #   @return [::Google::Cloud::VisionAI::V1::Packet]
         #     A genuine data payload originating from the sender.
+        #
+        #     Note: The following fields are mutually exclusive: `packet`, `control`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] control
         #   @return [::Google::Cloud::VisionAI::V1::ReceivePacketsControlResponse]
         #     A control message from the server.
+        #
+        #     Note: The following fields are mutually exclusive: `control`, `packet`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReceivePacketsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

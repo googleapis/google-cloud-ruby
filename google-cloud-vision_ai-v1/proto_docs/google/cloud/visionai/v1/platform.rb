@@ -1125,11 +1125,15 @@ module Google
           #     "projects/123/locations/us-central1/clusters/456/streams/stream-a".
           #     If the instance type is BATCH_PREDICTION from Cloud Storage input
           #     container, the input resource is in format of "gs://bucket-a".
+          #
+          #     Note: The following fields are mutually exclusive: `input_resource`, `annotated_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] annotated_stream
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::VisionAI::V1::StreamWithAnnotation]
           #     If the input resource is VisionAI Stream, the associated annotations
           #     can be specified using annotated_stream instead.
+          #
+          #     Note: The following fields are mutually exclusive: `annotated_stream`, `input_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_type
           #   @return [::Google::Cloud::VisionAI::V1::DataType]
           #     Data type for the current input resource.
@@ -1437,10 +1441,14 @@ module Google
           #   @return [::String]
           #     The configuration proto that includes the Googleapis resources. I.e.
           #     type.googleapis.com/google.cloud.vision.v1.StreamWithAnnotation
+          #
+          #     Note: The following fields are mutually exclusive: `config_type_uri`, `resource_type_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] resource_type_uri
           #   @return [::String]
           #     The direct type url of Googleapis resource. i.e.
           #     type.googleapis.com/google.cloud.vision.v1.Asset
+          #
+          #     Note: The following fields are mutually exclusive: `resource_type_uri`, `config_type_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Name of the input binding, unique within the processor.
@@ -1469,9 +1477,13 @@ module Google
         # @!attribute [rw] vertex_model
         #   @return [::String]
         #     The resource name original model hosted in the vertex AI platform.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_model`, `product_recognizer_artifact`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] product_recognizer_artifact
         #   @return [::Google::Cloud::VisionAI::V1::CustomProcessorSourceInfo::ProductRecognizerArtifact]
         #     Artifact for product recognizer.
+        #
+        #     Note: The following fields are mutually exclusive: `product_recognizer_artifact`, `vertex_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_type
         #   @return [::Google::Cloud::VisionAI::V1::CustomProcessorSourceInfo::SourceType]
         #     The original product which holds the custom processor's functionality.
@@ -1553,51 +1565,83 @@ module Google
         # @!attribute [rw] video_stream_input_config
         #   @return [::Google::Cloud::VisionAI::V1::VideoStreamInputConfig]
         #     Configs of stream input processor.
+        #
+        #     Note: The following fields are mutually exclusive: `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ai_enabled_devices_input_config
         #   @return [::Google::Cloud::VisionAI::V1::AIEnabledDevicesInputConfig]
         #     Config of AI-enabled input devices.
+        #
+        #     Note: The following fields are mutually exclusive: `ai_enabled_devices_input_config`, `video_stream_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] media_warehouse_config
         #   @return [::Google::Cloud::VisionAI::V1::MediaWarehouseConfig]
         #     Configs of media warehouse processor.
+        #
+        #     Note: The following fields are mutually exclusive: `media_warehouse_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] person_blur_config
         #   @return [::Google::Cloud::VisionAI::V1::PersonBlurConfig]
         #     Configs of person blur processor.
+        #
+        #     Note: The following fields are mutually exclusive: `person_blur_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] occupancy_count_config
         #   @return [::Google::Cloud::VisionAI::V1::OccupancyCountConfig]
         #     Configs of occupancy count processor.
+        #
+        #     Note: The following fields are mutually exclusive: `occupancy_count_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] person_vehicle_detection_config
         #   @return [::Google::Cloud::VisionAI::V1::PersonVehicleDetectionConfig]
         #     Configs of Person Vehicle Detection processor.
+        #
+        #     Note: The following fields are mutually exclusive: `person_vehicle_detection_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_automl_vision_config
         #   @return [::Google::Cloud::VisionAI::V1::VertexAutoMLVisionConfig]
         #     Configs of Vertex AutoML vision processor.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_automl_vision_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_automl_video_config
         #   @return [::Google::Cloud::VisionAI::V1::VertexAutoMLVideoConfig]
         #     Configs of Vertex AutoML video processor.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_automl_video_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_custom_config
         #   @return [::Google::Cloud::VisionAI::V1::VertexCustomConfig]
         #     Configs of Vertex Custom processor.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_custom_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] general_object_detection_config
         #   @return [::Google::Cloud::VisionAI::V1::GeneralObjectDetectionConfig]
         #     Configs of General Object Detection processor.
+        #
+        #     Note: The following fields are mutually exclusive: `general_object_detection_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] big_query_config
         #   @return [::Google::Cloud::VisionAI::V1::BigQueryConfig]
         #     Configs of BigQuery processor.
+        #
+        #     Note: The following fields are mutually exclusive: `big_query_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_output_config
         #   @return [::Google::Cloud::VisionAI::V1::GcsOutputConfig]
         #     Configs of Cloud Storage output processor.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_output_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] product_recognizer_config
         #   @return [::Google::Cloud::VisionAI::V1::ProductRecognizerConfig]
         #     Runtime configs of Product Recognizer processor.
+        #
+        #     Note: The following fields are mutually exclusive: `product_recognizer_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] personal_protective_equipment_detection_config
         #   @return [::Google::Cloud::VisionAI::V1::PersonalProtectiveEquipmentDetectionConfig]
         #     Configs of personal_protective_equipment_detection_config
+        #
+        #     Note: The following fields are mutually exclusive: `personal_protective_equipment_detection_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `tag_recognizer_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_recognizer_config
         #   @return [::Google::Cloud::VisionAI::V1::TagRecognizerConfig]
         #     Runtime configs of Tag Recognizer processor.
+        #
+        #     Note: The following fields are mutually exclusive: `tag_recognizer_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `universal_input_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] universal_input_config
         #   @return [::Google::Cloud::VisionAI::V1::UniversalInputConfig]
         #     Runtime configs of UniversalInput processor.
+        #
+        #     Note: The following fields are mutually exclusive: `universal_input_config`, `video_stream_input_config`, `ai_enabled_devices_input_config`, `media_warehouse_config`, `person_blur_config`, `occupancy_count_config`, `person_vehicle_detection_config`, `vertex_automl_vision_config`, `vertex_automl_video_config`, `vertex_custom_config`, `general_object_detection_config`, `big_query_config`, `gcs_output_config`, `product_recognizer_config`, `personal_protective_equipment_detection_config`, `tag_recognizer_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] experimental_config
         #   @return [::Google::Protobuf::Struct]
         #     Experimental configurations. Structured object containing not-yet-stable

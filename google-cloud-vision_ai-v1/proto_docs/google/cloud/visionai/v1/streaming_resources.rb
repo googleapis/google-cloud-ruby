@@ -73,9 +73,13 @@ module Google
           # @!attribute [rw] gstreamer_buffer_descriptor
           #   @return [::Google::Cloud::VisionAI::V1::GstreamerBufferDescriptor]
           #     GstreamerBufferDescriptor is the descriptor for gstreamer buffer type.
+          #
+          #     Note: The following fields are mutually exclusive: `gstreamer_buffer_descriptor`, `raw_image_descriptor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] raw_image_descriptor
           #   @return [::Google::Cloud::VisionAI::V1::RawImageDescriptor]
           #     RawImageDescriptor is the descriptor for the raw image type.
+          #
+          #     Note: The following fields are mutually exclusive: `raw_image_descriptor`, `gstreamer_buffer_descriptor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] type
           #   @return [::String]
           #     The type of the packet. Its possible values is codec dependent.

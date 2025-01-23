@@ -871,6 +871,8 @@ module Google
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::VideoSegment]
         #     Non-streaming batch mode ONLY.
         #     Each object track corresponds to one video segment where it appears.
+        #
+        #     Note: The following fields are mutually exclusive: `segment`, `track_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] track_id
         #   @return [::Integer]
         #     Streaming mode ONLY.
@@ -879,6 +881,8 @@ module Google
         #     Instead, we provide a unique identifiable integer track_id so that
         #     the customers can correlate the results of the ongoing
         #     ObjectTrackAnnotation of the same track_id over time.
+        #
+        #     Note: The following fields are mutually exclusive: `track_id`, `segment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::Entity]
         #     Entity to specify the object category that this track is labeled as.
@@ -923,6 +927,8 @@ module Google
         #     Provides information to the annotator, specifing how to process the
         #     request. The first `AnnotateStreamingVideoRequest` message must only
         #     contain a `video_config` message.
+        #
+        #     Note: The following fields are mutually exclusive: `video_config`, `input_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_content
         #   @return [::String]
         #     The video data to be annotated. Chunks of video data are sequentially
@@ -932,6 +938,8 @@ module Google
         #     messages must only contain `input_content` field.
         #     Note: as with all bytes fields, protobuffers use a pure binary
         #     representation (not base64).
+        #
+        #     Note: The following fields are mutually exclusive: `input_content`, `video_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingAnnotateVideoRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -942,24 +950,38 @@ module Google
         # @!attribute [rw] shot_change_detection_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingShotChangeDetectionConfig]
         #     Config for STREAMING_SHOT_CHANGE_DETECTION.
+        #
+        #     Note: The following fields are mutually exclusive: `shot_change_detection_config`, `label_detection_config`, `explicit_content_detection_config`, `object_tracking_config`, `automl_action_recognition_config`, `automl_classification_config`, `automl_object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] label_detection_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingLabelDetectionConfig]
         #     Config for STREAMING_LABEL_DETECTION.
+        #
+        #     Note: The following fields are mutually exclusive: `label_detection_config`, `shot_change_detection_config`, `explicit_content_detection_config`, `object_tracking_config`, `automl_action_recognition_config`, `automl_classification_config`, `automl_object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] explicit_content_detection_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingExplicitContentDetectionConfig]
         #     Config for STREAMING_EXPLICIT_CONTENT_DETECTION.
+        #
+        #     Note: The following fields are mutually exclusive: `explicit_content_detection_config`, `shot_change_detection_config`, `label_detection_config`, `object_tracking_config`, `automl_action_recognition_config`, `automl_classification_config`, `automl_object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_tracking_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingObjectTrackingConfig]
         #     Config for STREAMING_OBJECT_TRACKING.
+        #
+        #     Note: The following fields are mutually exclusive: `object_tracking_config`, `shot_change_detection_config`, `label_detection_config`, `explicit_content_detection_config`, `automl_action_recognition_config`, `automl_classification_config`, `automl_object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] automl_action_recognition_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAutomlActionRecognitionConfig]
         #     Config for STREAMING_AUTOML_ACTION_RECOGNITION.
+        #
+        #     Note: The following fields are mutually exclusive: `automl_action_recognition_config`, `shot_change_detection_config`, `label_detection_config`, `explicit_content_detection_config`, `object_tracking_config`, `automl_classification_config`, `automl_object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] automl_classification_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAutomlClassificationConfig]
         #     Config for STREAMING_AUTOML_CLASSIFICATION.
+        #
+        #     Note: The following fields are mutually exclusive: `automl_classification_config`, `shot_change_detection_config`, `label_detection_config`, `explicit_content_detection_config`, `object_tracking_config`, `automl_action_recognition_config`, `automl_object_tracking_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] automl_object_tracking_config
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAutomlObjectTrackingConfig]
         #     Config for STREAMING_AUTOML_OBJECT_TRACKING.
+        #
+        #     Note: The following fields are mutually exclusive: `automl_object_tracking_config`, `shot_change_detection_config`, `label_detection_config`, `explicit_content_detection_config`, `object_tracking_config`, `automl_action_recognition_config`, `automl_classification_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature
         #   @return [::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingFeature]
         #     Requested annotation feature.

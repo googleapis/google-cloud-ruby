@@ -288,9 +288,13 @@ module Google
         # @!attribute [rw] file_input_source
         #   @return [::Google::Cloud::Translate::V3::FileInputSource]
         #     Inline file source.
+        #
+        #     Note: The following fields are mutually exclusive: `file_input_source`, `gcs_input_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_input_source
         #   @return [::Google::Cloud::Translate::V3::GcsInputSource]
         #     Google Cloud Storage file source.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_input_source`, `file_input_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ImportAdaptiveMtFileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -600,9 +600,13 @@ module Google
         # @!attribute [rw] active_zone
         #   @return [::Google::Cloud::VisionAI::V1::NormalizedPolygon]
         #     Annotation for type ACTIVE_ZONE
+        #
+        #     Note: The following fields are mutually exclusive: `active_zone`, `crossing_line`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] crossing_line
         #   @return [::Google::Cloud::VisionAI::V1::NormalizedPolyline]
         #     Annotation for type CROSSING_LINE
+        #
+        #     Note: The following fields are mutually exclusive: `crossing_line`, `active_zone`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] id
         #   @return [::String]
         #     ID of the annotation. It must be unique when used in the certain context.

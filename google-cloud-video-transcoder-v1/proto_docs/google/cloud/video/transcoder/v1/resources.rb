@@ -48,9 +48,13 @@ module Google
           #     The default is `preset/web-hd`, which is the only supported preset.
           #
           #     User defined JobTemplate: `{job_template_id}`
+          #
+          #     Note: The following fields are mutually exclusive: `template_id`, `config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] config
           #   @return [::Google::Cloud::Video::Transcoder::V1::JobConfig]
           #     The configuration for this job.
+          #
+          #     Note: The following fields are mutually exclusive: `config`, `template_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Video::Transcoder::V1::Job::ProcessingState]
           #     Output only. The current state of the job.
@@ -296,12 +300,18 @@ module Google
           # @!attribute [rw] video_stream
           #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream]
           #     Encoding of a video stream.
+          #
+          #     Note: The following fields are mutually exclusive: `video_stream`, `audio_stream`, `text_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] audio_stream
           #   @return [::Google::Cloud::Video::Transcoder::V1::AudioStream]
           #     Encoding of an audio stream.
+          #
+          #     Note: The following fields are mutually exclusive: `audio_stream`, `video_stream`, `text_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] text_stream
           #   @return [::Google::Cloud::Video::Transcoder::V1::TextStream]
           #     Encoding of a text stream. For example, closed captions or subtitles.
+          #
+          #     Note: The following fields are mutually exclusive: `text_stream`, `video_stream`, `audio_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ElementaryStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -481,10 +491,14 @@ module Google
           #     Total number of sprites. Create the specified number of sprites
           #     distributed evenly across the timeline of the output media. The default
           #     is 100.
+          #
+          #     Note: The following fields are mutually exclusive: `total_count`, `interval`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] interval
           #   @return [::Google::Protobuf::Duration]
           #     Starting from `0s`, create sprites at regular intervals. Specify the
           #     interval value in seconds.
+          #
+          #     Note: The following fields are mutually exclusive: `interval`, `total_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] quality
           #   @return [::Integer]
           #     The quality of the generated sprite sheet. Enter a value between 1
@@ -594,12 +608,18 @@ module Google
             # @!attribute [rw] animation_static
             #   @return [::Google::Cloud::Video::Transcoder::V1::Overlay::AnimationStatic]
             #     Display static overlay object.
+            #
+            #     Note: The following fields are mutually exclusive: `animation_static`, `animation_fade`, `animation_end`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] animation_fade
             #   @return [::Google::Cloud::Video::Transcoder::V1::Overlay::AnimationFade]
             #     Display overlay object with fade animation.
+            #
+            #     Note: The following fields are mutually exclusive: `animation_fade`, `animation_static`, `animation_end`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] animation_end
             #   @return [::Google::Cloud::Video::Transcoder::V1::Overlay::AnimationEnd]
             #     End previous animation.
+            #
+            #     Note: The following fields are mutually exclusive: `animation_end`, `animation_static`, `animation_fade`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Animation
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -774,9 +794,13 @@ module Google
             # @!attribute [rw] yadif
             #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig::Deinterlace::YadifConfig]
             #     Specifies the Yet Another Deinterlacing Filter Configuration.
+            #
+            #     Note: The following fields are mutually exclusive: `yadif`, `bwdif`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] bwdif
             #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig::Deinterlace::BwdifConfig]
             #     Specifies the Bob Weaver Deinterlacing Filter Configuration.
+            #
+            #     Note: The following fields are mutually exclusive: `bwdif`, `yadif`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Deinterlace
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -845,12 +869,18 @@ module Google
           # @!attribute [rw] h264
           #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H264CodecSettings]
           #     H264 codec settings.
+          #
+          #     Note: The following fields are mutually exclusive: `h264`, `h265`, `vp9`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] h265
           #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::H265CodecSettings]
           #     H265 codec settings.
+          #
+          #     Note: The following fields are mutually exclusive: `h265`, `h264`, `vp9`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] vp9
           #   @return [::Google::Cloud::Video::Transcoder::V1::VideoStream::Vp9CodecSettings]
           #     VP9 codec settings.
+          #
+          #     Note: The following fields are mutually exclusive: `vp9`, `h264`, `h265`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class VideoStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -924,6 +954,8 @@ module Google
             #   @return [::Integer]
             #     Select the GOP size based on the specified frame count. Must be greater
             #     than zero.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_frame_count`, `gop_duration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
@@ -931,6 +963,8 @@ module Google
             #     [`segmentDuration`](#SegmentSettings), and
             #     [`segmentDuration`](#SegmentSettings) must be divisible by
             #     `gopDuration`.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_duration`, `gop_frame_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] enable_two_pass
             #   @return [::Boolean]
             #     Use two-pass encoding strategy to achieve better video quality.
@@ -1069,6 +1103,8 @@ module Google
             #   @return [::Integer]
             #     Select the GOP size based on the specified frame count. Must be greater
             #     than zero.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_frame_count`, `gop_duration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
@@ -1076,6 +1112,8 @@ module Google
             #     [`segmentDuration`](#SegmentSettings), and
             #     [`segmentDuration`](#SegmentSettings) must be divisible by
             #     `gopDuration`.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_duration`, `gop_frame_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] enable_two_pass
             #   @return [::Boolean]
             #     Use two-pass encoding strategy to achieve better video quality.
@@ -1218,6 +1256,8 @@ module Google
             #   @return [::Integer]
             #     Select the GOP size based on the specified frame count. Must be greater
             #     than zero.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_frame_count`, `gop_duration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
@@ -1225,6 +1265,8 @@ module Google
             #     [`segmentDuration`](#SegmentSettings), and
             #     [`segmentDuration`](#SegmentSettings) must be divisible by
             #     `gopDuration`.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_duration`, `gop_frame_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] profile
             #   @return [::String]
             #     Enforces the specified codec profile. The following profiles are
@@ -1395,12 +1437,18 @@ module Google
           # @!attribute [rw] aes_128
           #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Aes128Encryption]
           #     Configuration for AES-128 encryption.
+          #
+          #     Note: The following fields are mutually exclusive: `aes_128`, `sample_aes`, `mpeg_cenc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sample_aes
           #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::SampleAesEncryption]
           #     Configuration for SAMPLE-AES encryption.
+          #
+          #     Note: The following fields are mutually exclusive: `sample_aes`, `aes_128`, `mpeg_cenc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mpeg_cenc
           #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::MpegCommonEncryption]
           #     Configuration for MPEG Common Encryption (MPEG-CENC).
+          #
+          #     Note: The following fields are mutually exclusive: `mpeg_cenc`, `aes_128`, `sample_aes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] secret_manager_key_source
           #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::SecretManagerSource]
           #     Keys are stored in Google Secret Manager.
