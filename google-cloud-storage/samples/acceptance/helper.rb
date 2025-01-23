@@ -91,14 +91,14 @@ end
 def grant_storage_permission bucket_name
 
   storage_client = Google::Cloud::Storage.new
-  bucket= storage_client.bucket bucket_name
+  bucket = storage_client.bucket bucket_name
 
-  object_viewer = "roles/storage.admin"
+  storage_admin = "roles/storage.admin"
   member = "serviceAccount:#{storage_client.service_account_email}"
   bucket.policy requested_policy_version: 3 do |policy|
     policy.version = 3
     policy.bindings.insert(
-      role:      object_viewer,
+      role:      storage_admin,
       members:   member
     )
   end
