@@ -29,12 +29,16 @@ module Google
         #     Resource name of the long running operation.
         #     Format:
         #     `projects/{project}/locations/{location}/operations/{operation}`
+        #
+        #     Note: The following fields are mutually exclusive: `operation`, `data_labeling_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_labeling_job
         #   @return [::String]
         #     For API calls that start a LabelingJob.
         #     Resource name of the LabelingJob.
         #     Format:
         #     `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
+        #
+        #     Note: The following fields are mutually exclusive: `data_labeling_job`, `operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] method
         #   @return [::String]
         #     The method name of the API RPC call. For example,

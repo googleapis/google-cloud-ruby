@@ -61,12 +61,18 @@ module Google
         # @!attribute [rw] rag_managed_db
         #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::RagManagedDb]
         #     The config for the RAG-managed Vector DB.
+        #
+        #     Note: The following fields are mutually exclusive: `rag_managed_db`, `pinecone`, `vertex_vector_search`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pinecone
         #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::Pinecone]
         #     The config for the Pinecone.
+        #
+        #     Note: The following fields are mutually exclusive: `pinecone`, `rag_managed_db`, `vertex_vector_search`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_vector_search
         #   @return [::Google::Cloud::AIPlatform::V1::RagVectorDbConfig::VertexVectorSearch]
         #     The config for the Vertex Vector Search.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_vector_search`, `rag_managed_db`, `pinecone`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] api_auth
         #   @return [::Google::Cloud::AIPlatform::V1::ApiAuth]
         #     Authentication config for the chosen Vector DB.
@@ -198,23 +204,35 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::GcsSource]
         #     Output only. Google Cloud Storage location of the RagFile.
         #     It does not support wildcards in the Cloud Storage uri for now.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `google_drive_source`, `direct_upload_source`, `slack_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] google_drive_source
         #   @return [::Google::Cloud::AIPlatform::V1::GoogleDriveSource]
         #     Output only. Google Drive location. Supports importing individual files
         #     as well as Google Drive folders.
+        #
+        #     Note: The following fields are mutually exclusive: `google_drive_source`, `gcs_source`, `direct_upload_source`, `slack_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] direct_upload_source
         #   @return [::Google::Cloud::AIPlatform::V1::DirectUploadSource]
         #     Output only. The RagFile is encapsulated and uploaded in the
         #     UploadRagFile request.
+        #
+        #     Note: The following fields are mutually exclusive: `direct_upload_source`, `gcs_source`, `google_drive_source`, `slack_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] slack_source
         #   @return [::Google::Cloud::AIPlatform::V1::SlackSource]
         #     The RagFile is imported from a Slack channel.
+        #
+        #     Note: The following fields are mutually exclusive: `slack_source`, `gcs_source`, `google_drive_source`, `direct_upload_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] jira_source
         #   @return [::Google::Cloud::AIPlatform::V1::JiraSource]
         #     The RagFile is imported from a Jira query.
+        #
+        #     Note: The following fields are mutually exclusive: `jira_source`, `gcs_source`, `google_drive_source`, `direct_upload_source`, `slack_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] share_point_sources
         #   @return [::Google::Cloud::AIPlatform::V1::SharePointSources]
         #     The RagFile is imported from a SharePoint source.
+        #
+        #     Note: The following fields are mutually exclusive: `share_point_sources`, `gcs_source`, `google_drive_source`, `direct_upload_source`, `slack_source`, `jira_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the RagFile.
@@ -286,24 +304,36 @@ module Google
         #     well as entire Google Cloud Storage directories. Sample formats:
         #     - `gs://bucket_name/my_directory/object_name/my_file.txt`
         #     - `gs://bucket_name/my_directory`
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `google_drive_source`, `slack_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_drive_source
         #   @return [::Google::Cloud::AIPlatform::V1::GoogleDriveSource]
         #     Google Drive location. Supports importing individual files as
         #     well as Google Drive folders.
+        #
+        #     Note: The following fields are mutually exclusive: `google_drive_source`, `gcs_source`, `slack_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] slack_source
         #   @return [::Google::Cloud::AIPlatform::V1::SlackSource]
         #     Slack channels with their corresponding access tokens.
+        #
+        #     Note: The following fields are mutually exclusive: `slack_source`, `gcs_source`, `google_drive_source`, `jira_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] jira_source
         #   @return [::Google::Cloud::AIPlatform::V1::JiraSource]
         #     Jira queries with their corresponding authentication.
+        #
+        #     Note: The following fields are mutually exclusive: `jira_source`, `gcs_source`, `google_drive_source`, `slack_source`, `share_point_sources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] share_point_sources
         #   @return [::Google::Cloud::AIPlatform::V1::SharePointSources]
         #     SharePoint sources.
+        #
+        #     Note: The following fields are mutually exclusive: `share_point_sources`, `gcs_source`, `google_drive_source`, `slack_source`, `jira_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] partial_failure_gcs_sink
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
         #     The Cloud Storage path to write partial failures to.
         #     Deprecated. Prefer to use `import_result_gcs_sink`.
+        #
+        #     Note: The following fields are mutually exclusive: `partial_failure_gcs_sink`, `partial_failure_bigquery_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] partial_failure_bigquery_sink
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
@@ -314,6 +344,8 @@ module Google
         #     table exists, the schema will be validated and data will be added to this
         #     existing table.
         #     Deprecated. Prefer to use `import_result_bq_sink`.
+        #
+        #     Note: The following fields are mutually exclusive: `partial_failure_bigquery_sink`, `partial_failure_gcs_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rag_file_transformation_config
         #   @return [::Google::Cloud::AIPlatform::V1::RagFileTransformationConfig]
         #     Specifies the transformation config for RagFiles.

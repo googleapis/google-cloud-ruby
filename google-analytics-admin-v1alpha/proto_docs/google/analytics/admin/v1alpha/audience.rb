@@ -25,17 +25,25 @@ module Google
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceDimensionOrMetricFilter::StringFilter]
         #     A filter for a string-type dimension that matches a particular pattern.
+        #
+        #     Note: The following fields are mutually exclusive: `string_filter`, `in_list_filter`, `numeric_filter`, `between_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] in_list_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceDimensionOrMetricFilter::InListFilter]
         #     A filter for a string dimension that matches a particular list of
         #     options.
+        #
+        #     Note: The following fields are mutually exclusive: `in_list_filter`, `string_filter`, `numeric_filter`, `between_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] numeric_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceDimensionOrMetricFilter::NumericFilter]
         #     A filter for numeric or date values on a dimension or metric.
+        #
+        #     Note: The following fields are mutually exclusive: `numeric_filter`, `string_filter`, `in_list_filter`, `between_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] between_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceDimensionOrMetricFilter::BetweenFilter]
         #     A filter for numeric or date values between certain values on a dimension
         #     or metric.
+        #
+        #     Note: The following fields are mutually exclusive: `between_filter`, `string_filter`, `in_list_filter`, `numeric_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] field_name
         #   @return [::String]
         #     Required. Immutable. The dimension name or metric name to filter. If the
@@ -124,9 +132,13 @@ module Google
           # @!attribute [rw] int64_value
           #   @return [::Integer]
           #     Integer value.
+          #
+          #     Note: The following fields are mutually exclusive: `int64_value`, `double_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] double_value
           #   @return [::Float]
           #     Double value.
+          #
+          #     Note: The following fields are mutually exclusive: `double_value`, `int64_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class NumericValue
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -199,23 +211,33 @@ module Google
         #     A list of expressions to be AND’ed together. It can only contain
         #     AudienceFilterExpressions with or_group. This must be set for the top
         #     level AudienceFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `and_group`, `or_group`, `not_expression`, `dimension_or_metric_filter`, `event_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] or_group
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpressionList]
         #     A list of expressions to OR’ed together. It cannot contain
         #     AudienceFilterExpressions with and_group or or_group.
+        #
+        #     Note: The following fields are mutually exclusive: `or_group`, `and_group`, `not_expression`, `dimension_or_metric_filter`, `event_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpression]
         #     A filter expression to be NOT'ed (For example, inverted, complemented).
         #     It can only include a dimension_or_metric_filter. This cannot be set on
         #     the top level AudienceFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `not_expression`, `and_group`, `or_group`, `dimension_or_metric_filter`, `event_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dimension_or_metric_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceDimensionOrMetricFilter]
         #     A filter on a single dimension or metric. This cannot be set on the top
         #     level AudienceFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `dimension_or_metric_filter`, `and_group`, `or_group`, `not_expression`, `event_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceEventFilter]
         #     Creates a filter that matches a specific event. This cannot be set on the
         #     top level AudienceFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `event_filter`, `and_group`, `or_group`, `not_expression`, `dimension_or_metric_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AudienceFilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -295,10 +317,14 @@ module Google
         # @!attribute [rw] simple_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceSimpleFilter]
         #     A simple filter that a user must satisfy to be a member of the Audience.
+        #
+        #     Note: The following fields are mutually exclusive: `simple_filter`, `sequence_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sequence_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceSequenceFilter]
         #     Filters that must occur in a specific order for the user to be a member
         #     of the Audience.
+        #
+        #     Note: The following fields are mutually exclusive: `sequence_filter`, `simple_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] clause_type
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterClause::AudienceClauseType]
         #     Required. Specifies whether this is an include or exclude filter clause.

@@ -40,10 +40,14 @@ module Google
               #   @return [::Float]
               #     Required when optimization_objective is "maximize-precision-at-recall".
               #     Must be between 0 and 1, inclusive.
+              #
+              #     Note: The following fields are mutually exclusive: `optimization_objective_recall_value`, `optimization_objective_precision_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] optimization_objective_precision_value
               #   @return [::Float]
               #     Required when optimization_objective is "maximize-recall-at-precision".
               #     Must be between 0 and 1, inclusive.
+              #
+              #     Note: The following fields are mutually exclusive: `optimization_objective_precision_value`, `optimization_objective_recall_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] prediction_type
               #   @return [::String]
               #     The type of prediction the Model is to produce.
@@ -130,20 +134,28 @@ module Google
 
                 # @!attribute [rw] auto
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::AutoTransformation]
+                #     Note: The following fields are mutually exclusive: `auto`, `numeric`, `categorical`, `timestamp`, `text`, `repeated_numeric`, `repeated_categorical`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] numeric
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::NumericTransformation]
+                #     Note: The following fields are mutually exclusive: `numeric`, `auto`, `categorical`, `timestamp`, `text`, `repeated_numeric`, `repeated_categorical`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] categorical
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::CategoricalTransformation]
+                #     Note: The following fields are mutually exclusive: `categorical`, `auto`, `numeric`, `timestamp`, `text`, `repeated_numeric`, `repeated_categorical`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] timestamp
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::TimestampTransformation]
+                #     Note: The following fields are mutually exclusive: `timestamp`, `auto`, `numeric`, `categorical`, `text`, `repeated_numeric`, `repeated_categorical`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] text
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::TextTransformation]
+                #     Note: The following fields are mutually exclusive: `text`, `auto`, `numeric`, `categorical`, `timestamp`, `repeated_numeric`, `repeated_categorical`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] repeated_numeric
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::NumericArrayTransformation]
+                #     Note: The following fields are mutually exclusive: `repeated_numeric`, `auto`, `numeric`, `categorical`, `timestamp`, `text`, `repeated_categorical`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] repeated_categorical
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::CategoricalArrayTransformation]
+                #     Note: The following fields are mutually exclusive: `repeated_categorical`, `auto`, `numeric`, `categorical`, `timestamp`, `text`, `repeated_numeric`, `repeated_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] repeated_text
                 #   @return [::Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition::AutoMlTablesInputs::Transformation::TextArrayTransformation]
+                #     Note: The following fields are mutually exclusive: `repeated_text`, `auto`, `numeric`, `categorical`, `timestamp`, `text`, `repeated_numeric`, `repeated_categorical`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 class Transformation
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] null_filter
         #   @return [::Boolean]
         #     A filter for null values.
+        #
+        #     Note: The following fields are mutually exclusive: `null_filter`, `string_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilterCondition::StringFilter]
         #     A filter for a string-type dimension that matches a particular pattern.
+        #
+        #     Note: The following fields are mutually exclusive: `string_filter`, `null_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] field_name
         #   @return [::String]
         #     Required. The field that is being filtered.
@@ -81,15 +85,21 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilterExpressionList]
         #     A list of expressions to OR’ed together. Must only contain
         #     not_expression or filter_condition expressions.
+        #
+        #     Note: The following fields are mutually exclusive: `or_group`, `not_expression`, `filter_condition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilterExpression]
         #     A filter expression to be NOT'ed (inverted, complemented). It can only
         #     include a filter. This cannot be set on the top level
         #     SubpropertyEventFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `not_expression`, `or_group`, `filter_condition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_condition
         #   @return [::Google::Analytics::Admin::V1alpha::SubpropertyEventFilterCondition]
         #     Creates a filter that matches a specific event. This cannot be set on the
         #     top level SubpropertyEventFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `filter_condition`, `or_group`, `not_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SubpropertyEventFilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
