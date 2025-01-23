@@ -166,11 +166,15 @@ module Google
             #     `projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*`.
             #     This option enables full flexibility in the key's capabilities and
             #     properties.
+            #
+            #     Note: The following fields are mutually exclusive: `cloud_kms_key_version`, `algorithm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] algorithm
             #   @return [::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority::SignHashAlgorithm]
             #     The algorithm to use for creating a managed Cloud KMS key for a for a
             #     simplified experience. All managed keys will be have their
             #     [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] as `HSM`.
+            #
+            #     Note: The following fields are mutually exclusive: `algorithm`, `cloud_kms_key_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class KeyVersionSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -453,9 +457,13 @@ module Google
               # @!attribute [rw] rsa
               #   @return [::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy::AllowedKeyType::RsaKeyType]
               #     Represents an allowed RSA key type.
+              #
+              #     Note: The following fields are mutually exclusive: `rsa`, `elliptic_curve`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] elliptic_curve
               #   @return [::Google::Cloud::Security::PrivateCA::V1::CaPool::IssuancePolicy::AllowedKeyType::EcKeyType]
               #     Represents an allowed Elliptic Curve key type.
+              #
+              #     Note: The following fields are mutually exclusive: `elliptic_curve`, `rsa`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class AllowedKeyType
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -667,10 +675,14 @@ module Google
           # @!attribute [rw] pem_csr
           #   @return [::String]
           #     Immutable. A pem-encoded X.509 certificate signing request (CSR).
+          #
+          #     Note: The following fields are mutually exclusive: `pem_csr`, `config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] config
           #   @return [::Google::Cloud::Security::PrivateCA::V1::CertificateConfig]
           #     Immutable. A description of the certificate and key that does not require
           #     X.509 or ASN.1.
+          #
+          #     Note: The following fields are mutually exclusive: `config`, `pem_csr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] issuer_certificate_authority
           #   @return [::String]
           #     Output only. The resource name of the issuing
@@ -971,11 +983,15 @@ module Google
           #     This field is used for information and usability purposes only. The
           #     resource name is in the format
           #     `projects/*/locations/*/caPools/*/certificateAuthorities/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `certificate_authority`, `pem_issuer_chain`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pem_issuer_chain
           #   @return [::Google::Cloud::Security::PrivateCA::V1::SubordinateConfig::SubordinateConfigChain]
           #     Required. Contains the PEM certificate chain for the issuers of this
           #     {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority},
           #     but not pem certificate for this CA itself.
+          #
+          #     Note: The following fields are mutually exclusive: `pem_issuer_chain`, `certificate_authority`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SubordinateConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -54,12 +54,18 @@ module Google
         # @!attribute [rw] pubsub_target
         #   @return [::Google::Cloud::Scheduler::V1::PubsubTarget]
         #     Pub/Sub target.
+        #
+        #     Note: The following fields are mutually exclusive: `pubsub_target`, `app_engine_http_target`, `http_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] app_engine_http_target
         #   @return [::Google::Cloud::Scheduler::V1::AppEngineHttpTarget]
         #     App Engine HTTP target.
+        #
+        #     Note: The following fields are mutually exclusive: `app_engine_http_target`, `pubsub_target`, `http_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] http_target
         #   @return [::Google::Cloud::Scheduler::V1::HttpTarget]
         #     HTTP target.
+        #
+        #     Note: The following fields are mutually exclusive: `http_target`, `pubsub_target`, `app_engine_http_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schedule
         #   @return [::String]
         #     Required, except when used with

@@ -126,11 +126,15 @@ module Google
             #   @return [::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority::CertificateAuthorityPolicy::AllowedConfigList]
             #     Optional. All {::Google::Cloud::Security::PrivateCA::V1beta1::Certificate Certificates} issued by the {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}
             #     must match at least one listed {::Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfigWrapper ReusableConfigWrapper} in the list.
+            #
+            #     Note: The following fields are mutually exclusive: `allowed_config_list`, `overwrite_config_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] overwrite_config_values
             #   @return [::Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfigWrapper]
             #     Optional. All {::Google::Cloud::Security::PrivateCA::V1beta1::Certificate Certificates} issued by the {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}
             #     will use the provided configuration values, overwriting any requested
             #     configuration values.
+            #
+            #     Note: The following fields are mutually exclusive: `overwrite_config_values`, `allowed_config_list`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] allowed_locations_and_organizations
             #   @return [::Array<::Google::Cloud::Security::PrivateCA::V1beta1::Subject>]
             #     Optional. If any {::Google::Cloud::Security::PrivateCA::V1beta1::Subject Subject} is specified here, then all
@@ -253,11 +257,15 @@ module Google
             #     `projects/*/locations/*/keyRings/*/cryptoKeys/*/cryptoKeyVersions/*`.
             #     This option enables full flexibility in the key's capabilities and
             #     properties.
+            #
+            #     Note: The following fields are mutually exclusive: `cloud_kms_key_version`, `algorithm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] algorithm
             #   @return [::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority::SignHashAlgorithm]
             #     Required. The algorithm to use for creating a managed Cloud KMS key for a for a
             #     simplified experience. All managed keys will be have their
             #     [ProtectionLevel][google.cloud.kms.v1.ProtectionLevel] as `HSM`.
+            #
+            #     Note: The following fields are mutually exclusive: `algorithm`, `cloud_kms_key_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class KeyVersionSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -440,10 +448,14 @@ module Google
           # @!attribute [rw] pem_csr
           #   @return [::String]
           #     Immutable. A pem-encoded X.509 certificate signing request (CSR).
+          #
+          #     Note: The following fields are mutually exclusive: `pem_csr`, `config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] config
           #   @return [::Google::Cloud::Security::PrivateCA::V1beta1::CertificateConfig]
           #     Immutable. A description of the certificate and key that does not require X.509 or
           #     ASN.1.
+          #
+          #     Note: The following fields are mutually exclusive: `config`, `pem_csr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] lifetime
           #   @return [::Google::Protobuf::Duration]
           #     Required. Immutable. The desired lifetime of a certificate. Used to create the
@@ -588,9 +600,13 @@ module Google
           #   @return [::String]
           #     Required. A resource path to a {::Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfig ReusableConfig} in the format
           #     `projects/*/locations/*/reusableConfigs/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `reusable_config`, `reusable_config_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] reusable_config_values
           #   @return [::Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfigValues]
           #     Required. A user-specified inline {::Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfigValues ReusableConfigValues}.
+          #
+          #     Note: The following fields are mutually exclusive: `reusable_config_values`, `reusable_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ReusableConfigWrapper
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -604,10 +620,14 @@ module Google
           #     was used to create a subordinate {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}. This field
           #     is used for information and usability purposes only. The resource name
           #     is in the format `projects/*/locations/*/certificateAuthorities/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `certificate_authority`, `pem_issuer_chain`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pem_issuer_chain
           #   @return [::Google::Cloud::Security::PrivateCA::V1beta1::SubordinateConfig::SubordinateConfigChain]
           #     Required. Contains the PEM certificate chain for the issuers of this
           #     {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority CertificateAuthority}, but not pem certificate for this CA itself.
+          #
+          #     Note: The following fields are mutually exclusive: `pem_issuer_chain`, `certificate_authority`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SubordinateConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

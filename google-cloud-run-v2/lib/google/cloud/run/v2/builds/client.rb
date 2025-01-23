@@ -228,8 +228,12 @@ module Google
             #     Required. Artifact Registry URI to store the built image.
             #   @param buildpack_build [::Google::Cloud::Run::V2::SubmitBuildRequest::BuildpacksBuild, ::Hash]
             #     Build the source using Buildpacks.
+            #
+            #     Note: The following fields are mutually exclusive: `buildpack_build`, `docker_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param docker_build [::Google::Cloud::Run::V2::SubmitBuildRequest::DockerBuild, ::Hash]
             #     Build the source using Docker. This means the source has a Dockerfile.
+            #
+            #     Note: The following fields are mutually exclusive: `docker_build`, `buildpack_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param service_account [::String]
             #     Optional. The service account to use for the build. If not set, the default
             #     Cloud Build service account for the project will be used.

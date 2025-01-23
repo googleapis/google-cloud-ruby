@@ -117,12 +117,18 @@ module Google
         # @!attribute [rw] catalog_inline_source
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::CatalogInlineSource]
         #     The Inline source for the input content for Catalog items.
+        #
+        #     Note: The following fields are mutually exclusive: `catalog_inline_source`, `gcs_source`, `user_event_inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::GcsSource]
         #     Google Cloud Storage location for the input content.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `catalog_inline_source`, `user_event_inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_event_inline_source
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::UserEventInlineSource]
         #     The Inline source for the input content for UserEvents.
+        #
+        #     Note: The following fields are mutually exclusive: `user_event_inline_source`, `catalog_inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class InputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

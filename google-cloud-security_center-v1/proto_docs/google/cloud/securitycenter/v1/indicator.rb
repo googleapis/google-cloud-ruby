@@ -47,9 +47,13 @@ module Google
           # @!attribute [rw] memory_hash_signature
           #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::MemoryHashSignature]
           #     Signature indicating that a binary family was matched.
+          #
+          #     Note: The following fields are mutually exclusive: `memory_hash_signature`, `yara_rule_signature`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] yara_rule_signature
           #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::YaraRuleSignature]
           #     Signature indicating that a YARA rule was matched.
+          #
+          #     Note: The following fields are mutually exclusive: `yara_rule_signature`, `memory_hash_signature`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] signature_type
           #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::SignatureType]
           #     Describes the type of resource associated with the signature.
