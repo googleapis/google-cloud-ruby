@@ -131,19 +131,27 @@ module Google
           #   @return [::Google::Cloud::OrgPolicy::V2::PolicySpec::PolicyRule::StringValues]
           #     List of values to be used for this policy rule. This field can be set
           #     only in policies for list constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `values`, `allow_all`, `deny_all`, `enforce`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] allow_all
           #   @return [::Boolean]
           #     Setting this to true means that all values are allowed. This field can
           #     be set only in policies for list constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `allow_all`, `values`, `deny_all`, `enforce`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] deny_all
           #   @return [::Boolean]
           #     Setting this to true means that all values are denied. This field can
           #     be set only in policies for list constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `deny_all`, `values`, `allow_all`, `enforce`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] enforce
           #   @return [::Boolean]
           #     If `true`, then the policy is enforced. If `false`, then any
           #     configuration is acceptable.
           #     This field can be set only in policies for boolean constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `enforce`, `values`, `allow_all`, `deny_all`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition
           #   @return [::Google::Type::Expr]
           #     A condition which determines whether this rule is used

@@ -26,10 +26,14 @@ module Google
         # @!attribute [rw] fixed
         #   @return [::Integer]
         #     Specifies a fixed value.
+        #
+        #     Note: The following fields are mutually exclusive: `fixed`, `percent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] percent
         #   @return [::Integer]
         #     Specifies the relative value defined as a percentage, which will be
         #     multiplied by a reference value.
+        #
+        #     Note: The following fields are mutually exclusive: `percent`, `fixed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FixedOrPercent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

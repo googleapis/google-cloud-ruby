@@ -60,9 +60,13 @@ module Google
         # @!attribute [rw] vm_image
         #   @return [::Google::Cloud::Notebooks::V1beta1::VmImage]
         #     Use a Compute Engine VM image to start the notebook instance.
+        #
+        #     Note: The following fields are mutually exclusive: `vm_image`, `container_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_image
         #   @return [::Google::Cloud::Notebooks::V1beta1::ContainerImage]
         #     Use a container image to start the notebook instance.
+        #
+        #     Note: The following fields are mutually exclusive: `container_image`, `vm_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] post_startup_script
         #   @return [::String]
         #     Path to a Bash script that automatically runs after a notebook instance

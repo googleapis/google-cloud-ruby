@@ -37,11 +37,15 @@ module Google
         #   @return [::Google::Cloud::NetworkSecurity::V1beta1::GrpcEndpoint]
         #     gRPC specific configuration to access the gRPC server to
         #     obtain the CA certificate.
+        #
+        #     Note: The following fields are mutually exclusive: `grpc_endpoint`, `certificate_provider_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] certificate_provider_instance
         #   @return [::Google::Cloud::NetworkSecurity::V1beta1::CertificateProviderInstance]
         #     The certificate provider instance specification that will be passed to
         #     the data plane, which will be used to load necessary credential
         #     information.
+        #
+        #     Note: The following fields are mutually exclusive: `certificate_provider_instance`, `grpc_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ValidationCA
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67,11 +71,15 @@ module Google
         #   @return [::Google::Cloud::NetworkSecurity::V1beta1::GrpcEndpoint]
         #     gRPC specific configuration to access the gRPC server to
         #     obtain the cert and private key.
+        #
+        #     Note: The following fields are mutually exclusive: `grpc_endpoint`, `certificate_provider_instance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] certificate_provider_instance
         #   @return [::Google::Cloud::NetworkSecurity::V1beta1::CertificateProviderInstance]
         #     The certificate provider instance specification that will be passed to
         #     the data plane, which will be used to load necessary credential
         #     information.
+        #
+        #     Note: The following fields are mutually exclusive: `certificate_provider_instance`, `grpc_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class CertificateProvider
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
