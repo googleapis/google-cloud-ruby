@@ -449,9 +449,13 @@ module Google
         # @!attribute [rw] self_managed
         #   @return [::Google::Cloud::CertificateManager::V1::Certificate::SelfManagedCertificate]
         #     If set, defines data of a self-managed certificate.
+        #
+        #     Note: The following fields are mutually exclusive: `self_managed`, `managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] managed
         #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate]
         #     If set, contains configuration and state of a managed certificate.
+        #
+        #     Note: The following fields are mutually exclusive: `managed`, `self_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] san_dnsnames
         #   @return [::Array<::String>]
         #     Output only. The list of Subject Alternative Names of dnsName type defined
@@ -691,11 +695,15 @@ module Google
           #     Output only. This field returns the resource name in the following
           #     format:
           #     `//compute.googleapis.com/projects/*/global/targetHttpsProxies/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_https_proxy`, `target_ssl_proxy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] target_ssl_proxy
           #   @return [::String]
           #     Output only. This field returns the resource name in the following
           #     format:
           #     `//compute.googleapis.com/projects/*/global/targetSslProxies/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_ssl_proxy`, `target_https_proxy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] ip_configs
           #   @return [::Array<::Google::Cloud::CertificateManager::V1::CertificateMap::GclbTarget::IpConfig>]
           #     Output only. IP configurations for this Target Proxy where the
@@ -750,9 +758,13 @@ module Google
         #     A Hostname (FQDN, e.g. `example.com`) or a wildcard hostname expression
         #     (`*.example.com`) for a set of hostnames with common suffix. Used as
         #     Server Name Indication (SNI) for selecting a proper certificate.
+        #
+        #     Note: The following fields are mutually exclusive: `hostname`, `matcher`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] matcher
         #   @return [::Google::Cloud::CertificateManager::V1::CertificateMapEntry::Matcher]
         #     A predefined matcher for particular cases, other than SNI selection.
+        #
+        #     Note: The following fields are mutually exclusive: `matcher`, `hostname`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] certificates
         #   @return [::Array<::String>]
         #     A set of Certificates defines for the given `hostname`. There can be

@@ -2714,12 +2714,18 @@ module Google
           # @!attribute [rw] int_value
           #   @return [::Integer]
           #     For metrics with integer value.
+          #
+          #     Note: The following fields are mutually exclusive: `int_value`, `double_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] double_value
           #   @return [::Float]
           #     For metrics with floating point value.
+          #
+          #     Note: The following fields are mutually exclusive: `double_value`, `int_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] string_value
           #   @return [::String]
           #     For metrics with custom values (ratios, visual progress, etc.).
+          #
+          #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `double_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Metric
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3618,9 +3624,13 @@ module Google
           #   @return [::Float]
           #     Percentage of the blue pool nodes to drain in a batch.
           #     The range of this field should be (0.0, 1.0].
+          #
+          #     Note: The following fields are mutually exclusive: `batch_percentage`, `batch_node_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] batch_node_count
           #   @return [::Integer]
           #     Number of blue nodes to drain in a batch.
+          #
+          #     Note: The following fields are mutually exclusive: `batch_node_count`, `batch_percentage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] batch_soak_duration
           #   @return [::Google::Protobuf::Duration]
           #     Soak time after each batch gets drained. Default to zero.
@@ -4004,11 +4014,15 @@ module Google
         # @!attribute [rw] daily_maintenance_window
         #   @return [::Google::Cloud::Container::V1::DailyMaintenanceWindow]
         #     DailyMaintenanceWindow specifies a daily maintenance operation window.
+        #
+        #     Note: The following fields are mutually exclusive: `daily_maintenance_window`, `recurring_window`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] recurring_window
         #   @return [::Google::Cloud::Container::V1::RecurringTimeWindow]
         #     RecurringWindow specifies some number of recurring time periods for
         #     maintenance to occur. The time windows may be overlapping. If no
         #     maintenance windows are set, maintenance can occur at any time.
+        #
+        #     Note: The following fields are mutually exclusive: `recurring_window`, `daily_maintenance_window`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] maintenance_exclusions
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Container::V1::TimeWindow}]
         #     Exceptions to maintenance window. Non-emergency maintenance should not

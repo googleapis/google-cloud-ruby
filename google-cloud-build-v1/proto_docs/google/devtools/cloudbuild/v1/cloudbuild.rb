@@ -136,15 +136,21 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch_name`, `tag_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_name
         #   @return [::String]
         #     Regex matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag_name`, `branch_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] commit_sha
         #   @return [::String]
         #     Explicit commit SHA to build.
+        #
+        #     Note: The following fields are mutually exclusive: `commit_sha`, `branch_name`, `tag_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dir
         #   @return [::String]
         #     Directory, relative to the source root, in which to run the build.
@@ -199,18 +205,26 @@ module Google
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Build::V1::StorageSource]
         #     If provided, get the source from this location in Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source`, `repo_source`, `git_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] repo_source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        #
+        #     Note: The following fields are mutually exclusive: `repo_source`, `storage_source`, `git_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_source
         #   @return [::Google::Cloud::Build::V1::GitSource]
         #     If provided, get the source from this Git repository.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `storage_source`, `repo_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] storage_source_manifest
         #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
         #     If provided, get the source from this manifest in Cloud Storage.
         #     This feature is in Preview; see description
         #     [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source_manifest`, `storage_source`, `repo_source`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1485,16 +1499,24 @@ module Google
         #     4. Dockerfile
         #
         #     Currently only available for GitHub App Triggers.
+        #
+        #     Note: The following fields are mutually exclusive: `autodetect`, `build`, `filename`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] build
         #   @return [::Google::Cloud::Build::V1::Build]
         #     Contents of the build template.
+        #
+        #     Note: The following fields are mutually exclusive: `build`, `autodetect`, `filename`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filename
         #   @return [::String]
         #     Path, from the source root, to the build configuration file
         #     (i.e. cloudbuild.yaml).
+        #
+        #     Note: The following fields are mutually exclusive: `filename`, `autodetect`, `build`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_file_source
         #   @return [::Google::Cloud::Build::V1::GitFileSource]
         #     The file source describing the local or remote Build template.
+        #
+        #     Note: The following fields are mutually exclusive: `git_file_source`, `autodetect`, `build`, `filename`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the trigger was created.
@@ -1573,9 +1595,13 @@ module Google
         # @!attribute [rw] pull_request
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
         #     Filter to match changes in pull requests.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_request`, `push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] push
         #   @return [::Google::Cloud::Build::V1::PushFilter]
         #     Filter to match changes in refs like branches, tags.
+        #
+        #     Note: The following fields are mutually exclusive: `push`, `pull_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepositoryEventConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1614,9 +1640,13 @@ module Google
         # @!attribute [rw] pull_request
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
         #     filter to match changes in pull requests.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_request`, `push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] push
         #   @return [::Google::Cloud::Build::V1::PushFilter]
         #     filter to match changes in refs like branches, tags.
+        #
+        #     Note: The following fields are mutually exclusive: `push`, `pull_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GitHubEventsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1731,12 +1761,16 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch`, `tag`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag
         #   @return [::String]
         #     Regexes matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag`, `branch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] invert_regex
         #   @return [::Boolean]
         #     When true, only trigger a build if the revision regex does NOT match the

@@ -49,39 +49,63 @@ module Google
           # @!attribute [rw] bytes_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Bytes]
           #     Bytes
+          #
+          #     Note: The following fields are mutually exclusive: `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] string_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::String]
           #     String
+          #
+          #     Note: The following fields are mutually exclusive: `string_type`, `bytes_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] int64_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Int64]
           #     Int64
+          #
+          #     Note: The following fields are mutually exclusive: `int64_type`, `bytes_type`, `string_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] float32_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Float32]
           #     Float32
+          #
+          #     Note: The following fields are mutually exclusive: `float32_type`, `bytes_type`, `string_type`, `int64_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] float64_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Float64]
           #     Float64
+          #
+          #     Note: The following fields are mutually exclusive: `float64_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bool_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Bool]
           #     Bool
+          #
+          #     Note: The following fields are mutually exclusive: `bool_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] timestamp_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Timestamp]
           #     Timestamp
+          #
+          #     Note: The following fields are mutually exclusive: `timestamp_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] date_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Date]
           #     Date
+          #
+          #     Note: The following fields are mutually exclusive: `date_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `aggregate_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] aggregate_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Aggregate]
           #     Aggregate
+          #
+          #     Note: The following fields are mutually exclusive: `aggregate_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `struct_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] struct_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Struct]
           #     Struct
+          #
+          #     Note: The following fields are mutually exclusive: `struct_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `array_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] array_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Array]
           #     Array
+          #
+          #     Note: The following fields are mutually exclusive: `array_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `map_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] map_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Map]
           #     Map
+          #
+          #     Note: The following fields are mutually exclusive: `map_type`, `bytes_type`, `string_type`, `int64_type`, `float32_type`, `float64_type`, `bool_type`, `timestamp_type`, `date_type`, `aggregate_type`, `struct_type`, `array_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Type
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -128,9 +152,13 @@ module Google
               #   @deprecated This field is deprecated and may be removed in the next major version update.
               #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::String::Encoding::Utf8Raw]
               #     Deprecated: if set, converts to an empty `utf8_bytes`.
+              #
+              #     Note: The following fields are mutually exclusive: `utf8_raw`, `utf8_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] utf8_bytes
               #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::String::Encoding::Utf8Bytes]
               #     Use `Utf8Bytes` encoding.
+              #
+              #     Note: The following fields are mutually exclusive: `utf8_bytes`, `utf8_raw`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class Encoding
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -298,15 +326,23 @@ module Google
             # @!attribute [rw] sum
             #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Aggregate::Sum]
             #     Sum aggregator.
+            #
+            #     Note: The following fields are mutually exclusive: `sum`, `hllpp_unique_count`, `max`, `min`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] hllpp_unique_count
             #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Aggregate::HyperLogLogPlusPlusUniqueCount]
             #     HyperLogLogPlusPlusUniqueCount aggregator.
+            #
+            #     Note: The following fields are mutually exclusive: `hllpp_unique_count`, `sum`, `max`, `min`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] max
             #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Aggregate::Max]
             #     Max aggregator.
+            #
+            #     Note: The following fields are mutually exclusive: `max`, `sum`, `hllpp_unique_count`, `min`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] min
             #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Aggregate::Min]
             #     Min aggregator.
+            #
+            #     Note: The following fields are mutually exclusive: `min`, `sum`, `hllpp_unique_count`, `max`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Aggregate
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

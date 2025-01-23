@@ -29,10 +29,14 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which this conversation should expire. After this time, the
         #     conversation data and any associated analyses will be deleted.
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL for this resource. If specified, then this TTL will
         #     be used to calculate the expire time.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The resource name of the conversation.
@@ -296,9 +300,13 @@ module Google
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::ContactCenterInsights::V1::GcsSource]
         #     A Cloud Storage location specification for the audio and transcript.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `dialogflow_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dialogflow_source
         #   @return [::Google::Cloud::ContactCenterInsights::V1::DialogflowSource]
         #     The source when the conversation comes from Dialogflow.
+        #
+        #     Note: The following fields are mutually exclusive: `dialogflow_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ConversationDataSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -419,9 +427,13 @@ module Google
         # @!attribute [rw] label
         #   @return [::String]
         #     String label.
+        #
+        #     Note: The following fields are mutually exclusive: `label`, `qa_answer_label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] qa_answer_label
         #   @return [::Google::Cloud::ContactCenterInsights::V1::QaAnswer::AnswerValue]
         #     QaAnswer label.
+        #
+        #     Note: The following fields are mutually exclusive: `qa_answer_label`, `label`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Resource name of the FeedbackLabel.
@@ -486,27 +498,43 @@ module Google
         # @!attribute [rw] interruption_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::InterruptionData]
         #     Data specifying an interruption.
+        #
+        #     Note: The following fields are mutually exclusive: `interruption_data`, `sentiment_data`, `silence_data`, `hold_data`, `entity_mention_data`, `intent_match_data`, `phrase_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sentiment_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SentimentData]
         #     Data specifying sentiment.
+        #
+        #     Note: The following fields are mutually exclusive: `sentiment_data`, `interruption_data`, `silence_data`, `hold_data`, `entity_mention_data`, `intent_match_data`, `phrase_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] silence_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SilenceData]
         #     Data specifying silence.
+        #
+        #     Note: The following fields are mutually exclusive: `silence_data`, `interruption_data`, `sentiment_data`, `hold_data`, `entity_mention_data`, `intent_match_data`, `phrase_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] hold_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::HoldData]
         #     Data specifying a hold.
+        #
+        #     Note: The following fields are mutually exclusive: `hold_data`, `interruption_data`, `sentiment_data`, `silence_data`, `entity_mention_data`, `intent_match_data`, `phrase_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity_mention_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::EntityMentionData]
         #     Data specifying an entity mention.
+        #
+        #     Note: The following fields are mutually exclusive: `entity_mention_data`, `interruption_data`, `sentiment_data`, `silence_data`, `hold_data`, `intent_match_data`, `phrase_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] intent_match_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IntentMatchData]
         #     Data specifying an intent match.
+        #
+        #     Note: The following fields are mutually exclusive: `intent_match_data`, `interruption_data`, `sentiment_data`, `silence_data`, `hold_data`, `entity_mention_data`, `phrase_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] phrase_match_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatchData]
         #     Data specifying a phrase match.
+        #
+        #     Note: The following fields are mutually exclusive: `phrase_match_data`, `interruption_data`, `sentiment_data`, `silence_data`, `hold_data`, `entity_mention_data`, `intent_match_data`, `issue_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] issue_match_data
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueMatchData]
         #     Data specifying an issue match.
+        #
+        #     Note: The following fields are mutually exclusive: `issue_match_data`, `interruption_data`, `sentiment_data`, `silence_data`, `hold_data`, `entity_mention_data`, `intent_match_data`, `phrase_match_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] channel_tag
         #   @return [::Integer]
         #     The channel of the audio where the annotation occurs. For single-channel
@@ -1257,21 +1285,33 @@ module Google
         # @!attribute [rw] article_suggestion
         #   @return [::Google::Cloud::ContactCenterInsights::V1::ArticleSuggestionData]
         #     Agent Assist Article Suggestion data.
+        #
+        #     Note: The following fields are mutually exclusive: `article_suggestion`, `faq_answer`, `smart_reply`, `smart_compose_suggestion`, `dialogflow_interaction`, `conversation_summarization_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] faq_answer
         #   @return [::Google::Cloud::ContactCenterInsights::V1::FaqAnswerData]
         #     Agent Assist FAQ answer data.
+        #
+        #     Note: The following fields are mutually exclusive: `faq_answer`, `article_suggestion`, `smart_reply`, `smart_compose_suggestion`, `dialogflow_interaction`, `conversation_summarization_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] smart_reply
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SmartReplyData]
         #     Agent Assist Smart Reply data.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_reply`, `article_suggestion`, `faq_answer`, `smart_compose_suggestion`, `dialogflow_interaction`, `conversation_summarization_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] smart_compose_suggestion
         #   @return [::Google::Cloud::ContactCenterInsights::V1::SmartComposeSuggestionData]
         #     Agent Assist Smart Compose suggestion data.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_compose_suggestion`, `article_suggestion`, `faq_answer`, `smart_reply`, `dialogflow_interaction`, `conversation_summarization_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dialogflow_interaction
         #   @return [::Google::Cloud::ContactCenterInsights::V1::DialogflowInteractionData]
         #     Dialogflow interaction data.
+        #
+        #     Note: The following fields are mutually exclusive: `dialogflow_interaction`, `article_suggestion`, `faq_answer`, `smart_reply`, `smart_compose_suggestion`, `conversation_summarization_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conversation_summarization_suggestion
         #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationSummarizationSuggestionData]
         #     Conversation summarization suggestion data.
+        #
+        #     Note: The following fields are mutually exclusive: `conversation_summarization_suggestion`, `article_suggestion`, `faq_answer`, `smart_reply`, `smart_compose_suggestion`, `dialogflow_interaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] annotation_id
         #   @return [::String]
         #     The unique identifier of the annotation.
@@ -1571,9 +1611,13 @@ module Google
         #   @return [::String]
         #     The name of the participant provided by Dialogflow. Format:
         #     projects/\\{project}/locations/\\{location}/conversations/\\{conversation}/participants/\\{participant}
+        #
+        #     Note: The following fields are mutually exclusive: `dialogflow_participant_name`, `user_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_id
         #   @return [::String]
         #     A user-specified ID representing the participant.
+        #
+        #     Note: The following fields are mutually exclusive: `user_id`, `dialogflow_participant_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dialogflow_participant
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -1691,9 +1735,13 @@ module Google
           #     Resource name of the Dialogflow conversation profile.
           #     Format:
           #     projects/\\{project}/locations/\\{location}/conversationProfiles/\\{conversation_profile}
+          #
+          #     Note: The following fields are mutually exclusive: `conversation_profile`, `summarization_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] summarization_model
           #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::SummarizationConfig::SummarizationModel]
           #     Default summarization model to be used.
+          #
+          #     Note: The following fields are mutually exclusive: `summarization_model`, `conversation_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SummarizationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1781,17 +1829,25 @@ module Google
           # @!attribute [rw] str_value
           #   @return [::String]
           #     String value.
+          #
+          #     Note: The following fields are mutually exclusive: `str_value`, `num_value`, `bool_value`, `na_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] num_value
           #   @return [::Float]
           #     Numerical value.
+          #
+          #     Note: The following fields are mutually exclusive: `num_value`, `str_value`, `bool_value`, `na_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bool_value
           #   @return [::Boolean]
           #     Boolean value.
+          #
+          #     Note: The following fields are mutually exclusive: `bool_value`, `str_value`, `num_value`, `na_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] na_value
           #   @return [::Boolean]
           #     A value of "Not Applicable (N/A)". If provided, this field may only
           #     be set to `true`. If a question receives this answer, it will be
           #     excluded from any score calculations.
+          #
+          #     Note: The following fields are mutually exclusive: `na_value`, `str_value`, `num_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] key
           #   @return [::String]
           #     A short string used as an identifier.
@@ -1945,15 +2001,23 @@ module Google
           # @!attribute [rw] str_value
           #   @return [::String]
           #     String value.
+          #
+          #     Note: The following fields are mutually exclusive: `str_value`, `num_value`, `bool_value`, `na_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] num_value
           #   @return [::Float]
           #     Numerical value.
+          #
+          #     Note: The following fields are mutually exclusive: `num_value`, `str_value`, `bool_value`, `na_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bool_value
           #   @return [::Boolean]
           #     Boolean value.
+          #
+          #     Note: The following fields are mutually exclusive: `bool_value`, `str_value`, `num_value`, `na_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] na_value
           #   @return [::Boolean]
           #     A value of "Not Applicable (N/A)". Should only ever be `true`.
+          #
+          #     Note: The following fields are mutually exclusive: `na_value`, `str_value`, `num_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] key
           #   @return [::String]
           #     A short string used as an identifier. Matches the value used in

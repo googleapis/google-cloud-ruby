@@ -239,9 +239,13 @@ module Google
         #
         #     URI may also specify an object version for zipped objects.
         #     Format: `gs://{bucket}/{object}#{version}`
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_source
         #   @return [::Google::Cloud::ConfigService::V1::GitSource]
         #     URI of a public Git repo.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_values
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ConfigService::V1::TerraformVariable}]
         #     Input variable values for the Terraform blueprint.
@@ -565,9 +569,13 @@ module Google
         # @!attribute [r] deployment_metadata
         #   @return [::Google::Cloud::ConfigService::V1::DeploymentOperationMetadata]
         #     Output only. Metadata about the deployment operation state.
+        #
+        #     Note: The following fields are mutually exclusive: `deployment_metadata`, `preview_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] preview_metadata
         #   @return [::Google::Cloud::ConfigService::V1::PreviewOperationMetadata]
         #     Output only. Metadata about the preview operation state.
+        #
+        #     Note: The following fields are mutually exclusive: `preview_metadata`, `deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the operation was created.

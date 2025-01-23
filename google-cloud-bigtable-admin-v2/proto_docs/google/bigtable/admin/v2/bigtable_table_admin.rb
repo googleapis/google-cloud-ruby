@@ -172,9 +172,13 @@ module Google
           #   @return [::String]
           #     Delete all rows that start with this row key prefix. Prefix cannot be
           #     zero length.
+          #
+          #     Note: The following fields are mutually exclusive: `row_key_prefix`, `delete_all_data_from_table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] delete_all_data_from_table
           #   @return [::Boolean]
           #     Delete all rows in the table. Setting this to false is a no-op.
+          #
+          #     Note: The following fields are mutually exclusive: `delete_all_data_from_table`, `row_key_prefix`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class DropRowRangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -349,14 +353,20 @@ module Google
             #   @return [::Google::Cloud::Bigtable::Admin::V2::ColumnFamily]
             #     Create a new column family with the specified schema, or fail if
             #     one already exists with the given ID.
+            #
+            #     Note: The following fields are mutually exclusive: `create`, `update`, `drop`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] update
             #   @return [::Google::Cloud::Bigtable::Admin::V2::ColumnFamily]
             #     Update an existing column family to the specified schema, or fail
             #     if no column family exists with the given ID.
+            #
+            #     Note: The following fields are mutually exclusive: `update`, `create`, `drop`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] drop
             #   @return [::Boolean]
             #     Drop (delete) the column family with the given ID, or fail if no such
             #     family exists.
+            #
+            #     Note: The following fields are mutually exclusive: `drop`, `create`, `update`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] update_mask
             #   @return [::Google::Protobuf::FieldMask]
             #     Optional. A mask specifying which fields (e.g. `gc_rule`) in the `update`
@@ -405,11 +415,15 @@ module Google
           #     Checks that reads using an app profile with `StandardIsolation` can
           #     see all writes committed before the token was created, even if the
           #     read and write target different clusters.
+          #
+          #     Note: The following fields are mutually exclusive: `standard_read_remote_writes`, `data_boost_read_local_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_boost_read_local_writes
           #   @return [::Google::Cloud::Bigtable::Admin::V2::DataBoostReadLocalWrites]
           #     Checks that reads using an app profile with `DataBoostIsolationReadOnly`
           #     can see all writes committed before the token was created, but only if
           #     the read and write target the same cluster.
+          #
+          #     Note: The following fields are mutually exclusive: `data_boost_read_local_writes`, `standard_read_remote_writes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CheckConsistencyRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

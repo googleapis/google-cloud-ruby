@@ -363,6 +363,8 @@ module Google
         #
         #      * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
         #      * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
+        #
+        #     Note: The following fields are mutually exclusive: `linked_resource`, `sql_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_resource
         #   @return [::String]
         #     The SQL name of the entry. SQL names are case-sensitive.
@@ -378,6 +380,8 @@ module Google
         #     Identifiers (`*_ID`) should comply with the
         #     [Lexical structure in Standard SQL]
         #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
+        #
+        #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fully_qualified_name
         #   @return [::String]
         #     [Fully Qualified Name
@@ -397,6 +401,8 @@ module Google
         #     Example for a DPMS table:
         #
         #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+        #
+        #     Note: The following fields are mutually exclusive: `fully_qualified_name`, `linked_resource`, `sql_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] project
         #   @return [::String]
         #     Project where the lookup should be performed. Required to lookup
@@ -460,6 +466,8 @@ module Google
         #     The type of the entry.
         #
         #     For details, see [`EntryType`](#entrytype).
+        #
+        #     Note: The following fields are mutually exclusive: `type`, `user_specified_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_specified_type
         #   @return [::String]
         #     Custom entry type that doesn't match any of the values allowed for input
@@ -475,10 +483,14 @@ module Google
         #     * Must begin with a letter or underscore.
         #     * Can only contain letters, numbers, and underscores.
         #     * Must be at least 1 character and at most 64 characters long.
+        #
+        #     Note: The following fields are mutually exclusive: `user_specified_type`, `type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] integrated_system
         #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
         #     Output only. Indicates the entry's source system that Data Catalog
         #     integrates with, such as BigQuery, Pub/Sub, or Dataproc Metastore.
+        #
+        #     Note: The following fields are mutually exclusive: `integrated_system`, `user_specified_system`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_specified_system
         #   @return [::String]
         #     Indicates the entry's source system that Data Catalog doesn't
@@ -490,26 +502,38 @@ module Google
         #     * Must begin with a letter or underscore.
         #     * Can only contain letters, numbers, and underscores.
         #     * Must be at least 1 character and at most 64 characters long.
+        #
+        #     Note: The following fields are mutually exclusive: `user_specified_system`, `integrated_system`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_database_system_spec
         #   @return [::Google::Cloud::DataCatalog::V1::SqlDatabaseSystemSpec]
         #     Specification that applies to a relational database system. Only settable
         #     when `user_specified_system` is equal to `SQL_DATABASE`
+        #
+        #     Note: The following fields are mutually exclusive: `sql_database_system_spec`, `looker_system_spec`, `cloud_bigtable_system_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] looker_system_spec
         #   @return [::Google::Cloud::DataCatalog::V1::LookerSystemSpec]
         #     Specification that applies to Looker sysstem. Only settable when
         #     `user_specified_system` is equal to `LOOKER`
+        #
+        #     Note: The following fields are mutually exclusive: `looker_system_spec`, `sql_database_system_spec`, `cloud_bigtable_system_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_bigtable_system_spec
         #   @return [::Google::Cloud::DataCatalog::V1::CloudBigtableSystemSpec]
         #     Specification that applies to Cloud Bigtable system. Only settable when
         #     `integrated_system` is equal to `CLOUD_BIGTABLE`
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_bigtable_system_spec`, `sql_database_system_spec`, `looker_system_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_fileset_spec
         #   @return [::Google::Cloud::DataCatalog::V1::GcsFilesetSpec]
         #     Specification that applies to a Cloud Storage fileset. Valid only
         #     for entries with the `FILESET` type.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_fileset_spec`, `bigquery_table_spec`, `bigquery_date_sharded_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] bigquery_table_spec
         #   @return [::Google::Cloud::DataCatalog::V1::BigQueryTableSpec]
         #     Output only. Specification that applies to a BigQuery table. Valid only
         #     for entries with the `TABLE` type.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_table_spec`, `gcs_fileset_spec`, `bigquery_date_sharded_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] bigquery_date_sharded_spec
         #   @return [::Google::Cloud::DataCatalog::V1::BigQueryDateShardedSpec]
         #     Output only. Specification for a group of BigQuery tables with
@@ -517,34 +541,52 @@ module Google
         #
         #     For more information, see [Introduction to partitioned tables]
         #     (https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding).
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_date_sharded_spec`, `gcs_fileset_spec`, `bigquery_table_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] database_table_spec
         #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec]
         #     Specification that applies to a table resource. Valid only
         #     for entries with the `TABLE` or `EXPLORE` type.
+        #
+        #     Note: The following fields are mutually exclusive: `database_table_spec`, `data_source_connection_spec`, `routine_spec`, `dataset_spec`, `fileset_spec`, `service_spec`, `model_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_source_connection_spec
         #   @return [::Google::Cloud::DataCatalog::V1::DataSourceConnectionSpec]
         #     Specification that applies to a data source connection. Valid only
         #     for entries with the `DATA_SOURCE_CONNECTION` type.
+        #
+        #     Note: The following fields are mutually exclusive: `data_source_connection_spec`, `database_table_spec`, `routine_spec`, `dataset_spec`, `fileset_spec`, `service_spec`, `model_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] routine_spec
         #   @return [::Google::Cloud::DataCatalog::V1::RoutineSpec]
         #     Specification that applies to a user-defined function or procedure. Valid
         #     only for entries with the `ROUTINE` type.
+        #
+        #     Note: The following fields are mutually exclusive: `routine_spec`, `database_table_spec`, `data_source_connection_spec`, `dataset_spec`, `fileset_spec`, `service_spec`, `model_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dataset_spec
         #   @return [::Google::Cloud::DataCatalog::V1::DatasetSpec]
         #     Specification that applies to a dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `dataset_spec`, `database_table_spec`, `data_source_connection_spec`, `routine_spec`, `fileset_spec`, `service_spec`, `model_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fileset_spec
         #   @return [::Google::Cloud::DataCatalog::V1::FilesetSpec]
         #     Specification that applies to a fileset resource. Valid only
         #     for entries with the `FILESET` type.
+        #
+        #     Note: The following fields are mutually exclusive: `fileset_spec`, `database_table_spec`, `data_source_connection_spec`, `routine_spec`, `dataset_spec`, `service_spec`, `model_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_spec
         #   @return [::Google::Cloud::DataCatalog::V1::ServiceSpec]
         #     Specification that applies to a Service resource.
+        #
+        #     Note: The following fields are mutually exclusive: `service_spec`, `database_table_spec`, `data_source_connection_spec`, `routine_spec`, `dataset_spec`, `fileset_spec`, `model_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] model_spec
         #   @return [::Google::Cloud::DataCatalog::V1::ModelSpec]
         #     Model specification.
+        #
+        #     Note: The following fields are mutually exclusive: `model_spec`, `database_table_spec`, `data_source_connection_spec`, `routine_spec`, `dataset_spec`, `fileset_spec`, `service_spec`, `feature_online_store_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature_online_store_spec
         #   @return [::Google::Cloud::DataCatalog::V1::FeatureOnlineStoreSpec]
         #     FeatureonlineStore spec for Vertex AI Feature Store.
+        #
+        #     Note: The following fields are mutually exclusive: `feature_online_store_spec`, `database_table_spec`, `data_source_connection_spec`, `routine_spec`, `dataset_spec`, `fileset_spec`, `service_spec`, `model_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of an entry.
@@ -630,9 +672,13 @@ module Google
           # @!attribute [rw] base_table
           #   @return [::String]
           #     Name of a singular table this view reflects one to one.
+          #
+          #     Note: The following fields are mutually exclusive: `base_table`, `sql_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_query
           #   @return [::String]
           #     SQL query used to generate this view.
+          #
+          #     Note: The following fields are mutually exclusive: `sql_query`, `base_table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class DatabaseViewSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1625,9 +1671,13 @@ module Google
         # @!attribute [rw] tag_template_migration
         #   @return [::Google::Cloud::DataCatalog::V1::TagTemplateMigration]
         #     Opt-in status for the migration of Tag Templates to Dataplex.
+        #
+        #     Note: The following fields are mutually exclusive: `tag_template_migration`, `catalog_ui_experience`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] catalog_ui_experience
         #   @return [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
         #     Opt-in status for the UI switch to Dataplex.
+        #
+        #     Note: The following fields are mutually exclusive: `catalog_ui_experience`, `tag_template_migration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SetConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

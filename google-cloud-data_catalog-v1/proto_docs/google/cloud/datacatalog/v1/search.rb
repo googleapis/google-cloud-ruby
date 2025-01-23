@@ -63,9 +63,13 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::IntegratedSystem]
         #     Output only. The source system that Data Catalog automatically integrates
         #     with, such as BigQuery, Cloud Pub/Sub, or Dataproc Metastore.
+        #
+        #     Note: The following fields are mutually exclusive: `integrated_system`, `user_specified_system`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_specified_system
         #   @return [::String]
         #     Custom source system that you can manually integrate Data Catalog with.
+        #
+        #     Note: The following fields are mutually exclusive: `user_specified_system`, `integrated_system`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fully_qualified_name
         #   @return [::String]
         #     Fully qualified name (FQN) of the resource.

@@ -162,15 +162,23 @@ module Google
         # @!attribute [rw] int_value
         #   @return [::Integer]
         #     Value is an integer
+        #
+        #     Note: The following fields are mutually exclusive: `int_value`, `bool_value`, `string_value`, `secret_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Value is a bool.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `int_value`, `string_value`, `secret_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     Value is a string.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `bool_value`, `secret_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] secret_value
         #   @return [::Google::Cloud::Connectors::V1::Secret]
         #     Value is a secret.
+        #
+        #     Note: The following fields are mutually exclusive: `secret_value`, `int_value`, `bool_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ConfigVariable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

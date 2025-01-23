@@ -36,19 +36,29 @@ module Google
         # @!attribute [rw] github_config
         #   @return [::Google::Cloud::Build::V2::GitHubConfig]
         #     Configuration for connections to github.com.
+        #
+        #     Note: The following fields are mutually exclusive: `github_config`, `github_enterprise_config`, `gitlab_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] github_enterprise_config
         #   @return [::Google::Cloud::Build::V2::GitHubEnterpriseConfig]
         #     Configuration for connections to an instance of GitHub Enterprise.
+        #
+        #     Note: The following fields are mutually exclusive: `github_enterprise_config`, `github_config`, `gitlab_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_config
         #   @return [::Google::Cloud::Build::V2::GitLabConfig]
         #     Configuration for connections to gitlab.com or an instance of GitLab
         #     Enterprise.
+        #
+        #     Note: The following fields are mutually exclusive: `gitlab_config`, `github_config`, `github_enterprise_config`, `bitbucket_data_center_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bitbucket_data_center_config
         #   @return [::Google::Cloud::Build::V2::BitbucketDataCenterConfig]
         #     Configuration for connections to Bitbucket Data Center.
+        #
+        #     Note: The following fields are mutually exclusive: `bitbucket_data_center_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `bitbucket_cloud_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bitbucket_cloud_config
         #   @return [::Google::Cloud::Build::V2::BitbucketCloudConfig]
         #     Configuration for connections to Bitbucket Cloud.
+        #
+        #     Note: The following fields are mutually exclusive: `bitbucket_cloud_config`, `github_config`, `github_enterprise_config`, `gitlab_config`, `bitbucket_data_center_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] installation_state
         #   @return [::Google::Cloud::Build::V2::InstallationState]
         #     Output only. Installation state of the Connection.

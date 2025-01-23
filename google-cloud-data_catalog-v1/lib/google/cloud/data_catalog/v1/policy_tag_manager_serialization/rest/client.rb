@@ -319,8 +319,12 @@ module Google
               #     to.
               #   @param inline_source [::Google::Cloud::DataCatalog::V1::InlineSource, ::Hash]
               #     Inline source taxonomy to import.
+              #
+              #     Note: The following fields are mutually exclusive: `inline_source`, `cross_regional_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param cross_regional_source [::Google::Cloud::DataCatalog::V1::CrossRegionalSource, ::Hash]
               #     Cross-regional source taxonomy to import.
+              #
+              #     Note: The following fields are mutually exclusive: `cross_regional_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::ImportTaxonomiesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

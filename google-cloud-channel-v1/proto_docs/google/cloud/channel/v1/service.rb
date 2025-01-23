@@ -181,12 +181,18 @@ module Google
         # @!attribute [rw] domain
         #   @return [::String]
         #     Required. Customer domain.
+        #
+        #     Note: The following fields are mutually exclusive: `domain`, `cloud_identity_id`, `primary_admin_email`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_identity_id
         #   @return [::String]
         #     Required. Customer's Cloud Identity ID
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_identity_id`, `domain`, `primary_admin_email`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] primary_admin_email
         #   @return [::String]
         #     Required. Customer's primary admin email.
+        #
+        #     Note: The following fields are mutually exclusive: `primary_admin_email`, `domain`, `cloud_identity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the reseller's account.
@@ -285,12 +291,16 @@ module Google
         # @!attribute [rw] cloud_identity_id
         #   @return [::String]
         #     Customer's Cloud Identity ID
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_identity_id`, `customer_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customer_name
         #   @return [::String]
         #     A reseller is required to create a customer and use the resource name of
         #     the created customer here.
         #     Customer_name uses the format:
         #     accounts/\\{account_id}/customers/\\{customer_id}
+        #
+        #     Note: The following fields are mutually exclusive: `customer_name`, `cloud_identity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The reseller account's resource name.
@@ -347,10 +357,14 @@ module Google
         # @!attribute [rw] cloud_identity_id
         #   @return [::String]
         #     Customer's Cloud Identity ID
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_identity_id`, `customer_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customer_name
         #   @return [::String]
         #     A reseller should create a customer and use the resource name of
         #     that customer here.
+        #
+        #     Note: The following fields are mutually exclusive: `customer_name`, `cloud_identity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the reseller's account.
@@ -1294,9 +1308,13 @@ module Google
         # @!attribute [rw] create_entitlement_purchase
         #   @return [::Google::Cloud::Channel::V1::ListPurchasableSkusRequest::CreateEntitlementPurchase]
         #     List SKUs for CreateEntitlement purchase.
+        #
+        #     Note: The following fields are mutually exclusive: `create_entitlement_purchase`, `change_offer_purchase`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] change_offer_purchase
         #   @return [::Google::Cloud::Channel::V1::ListPurchasableSkusRequest::ChangeOfferPurchase]
         #     List SKUs for ChangeOffer purchase with a new SKU.
+        #
+        #     Note: The following fields are mutually exclusive: `change_offer_purchase`, `create_entitlement_purchase`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customer
         #   @return [::String]
         #     Required. The resource name of the customer to list SKUs for.
@@ -1385,9 +1403,13 @@ module Google
         # @!attribute [rw] create_entitlement_purchase
         #   @return [::Google::Cloud::Channel::V1::ListPurchasableOffersRequest::CreateEntitlementPurchase]
         #     List Offers for CreateEntitlement purchase.
+        #
+        #     Note: The following fields are mutually exclusive: `create_entitlement_purchase`, `change_offer_purchase`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] change_offer_purchase
         #   @return [::Google::Cloud::Channel::V1::ListPurchasableOffersRequest::ChangeOfferPurchase]
         #     List Offers for ChangeOffer purchase.
+        #
+        #     Note: The following fields are mutually exclusive: `change_offer_purchase`, `create_entitlement_purchase`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customer
         #   @return [::String]
         #     Required. The resource name of the customer to list Offers for.
