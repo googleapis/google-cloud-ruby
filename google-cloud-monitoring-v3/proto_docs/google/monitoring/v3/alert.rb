@@ -225,24 +225,36 @@ module Google
           # @!attribute [rw] condition_threshold
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MetricThreshold]
           #     A condition that compares a time series against a threshold.
+          #
+          #     Note: The following fields are mutually exclusive: `condition_threshold`, `condition_absent`, `condition_matched_log`, `condition_monitoring_query_language`, `condition_prometheus_query_language`, `condition_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition_absent
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MetricAbsence]
           #     A condition that checks that a time series continues to
           #     receive new data points.
+          #
+          #     Note: The following fields are mutually exclusive: `condition_absent`, `condition_threshold`, `condition_matched_log`, `condition_monitoring_query_language`, `condition_prometheus_query_language`, `condition_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition_matched_log
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::LogMatch]
           #     A condition that checks for log messages matching given constraints. If
           #     set, no other conditions can be present.
+          #
+          #     Note: The following fields are mutually exclusive: `condition_matched_log`, `condition_threshold`, `condition_absent`, `condition_monitoring_query_language`, `condition_prometheus_query_language`, `condition_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition_monitoring_query_language
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::MonitoringQueryLanguageCondition]
           #     A condition that uses the Monitoring Query Language to define
           #     alerts.
+          #
+          #     Note: The following fields are mutually exclusive: `condition_monitoring_query_language`, `condition_threshold`, `condition_absent`, `condition_matched_log`, `condition_prometheus_query_language`, `condition_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition_prometheus_query_language
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::PrometheusQueryLanguageCondition]
           #     A condition that uses the Prometheus query language to define alerts.
+          #
+          #     Note: The following fields are mutually exclusive: `condition_prometheus_query_language`, `condition_threshold`, `condition_absent`, `condition_matched_log`, `condition_monitoring_query_language`, `condition_sql`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition_sql
           #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition]
           #     A condition that periodically evaluates a SQL query result.
+          #
+          #     Note: The following fields are mutually exclusive: `condition_sql`, `condition_threshold`, `condition_absent`, `condition_matched_log`, `condition_monitoring_query_language`, `condition_prometheus_query_language`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Condition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -253,10 +265,14 @@ module Google
             #   @return [::Integer]
             #     The absolute number of time series that must fail
             #     the predicate for the condition to be triggered.
+            #
+            #     Note: The following fields are mutually exclusive: `count`, `percent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] percent
             #   @return [::Float]
             #     The percentage of time series that must fail the
             #     predicate for the condition to be triggered.
+            #
+            #     Note: The following fields are mutually exclusive: `percent`, `count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Trigger
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -636,18 +652,28 @@ module Google
             # @!attribute [rw] minutes
             #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::Minutes]
             #     Schedule the query to execute every so many minutes.
+            #
+            #     Note: The following fields are mutually exclusive: `minutes`, `hourly`, `daily`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] hourly
             #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::Hourly]
             #     Schedule the query to execute every so many hours.
+            #
+            #     Note: The following fields are mutually exclusive: `hourly`, `minutes`, `daily`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] daily
             #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::Daily]
             #     Schedule the query to execute every so many days.
+            #
+            #     Note: The following fields are mutually exclusive: `daily`, `minutes`, `hourly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] row_count_test
             #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::RowCountTest]
             #     Test the row count against a threshold.
+            #
+            #     Note: The following fields are mutually exclusive: `row_count_test`, `boolean_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] boolean_test
             #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::SqlCondition::BooleanTest]
             #     Test the boolean value in the indicated column.
+            #
+            #     Note: The following fields are mutually exclusive: `boolean_test`, `row_count_test`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class SqlCondition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

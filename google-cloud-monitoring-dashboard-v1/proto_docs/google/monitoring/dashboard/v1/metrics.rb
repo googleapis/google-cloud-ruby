@@ -27,15 +27,23 @@ module Google
           # @!attribute [rw] time_series_filter
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilter]
           #     Filter parameters to fetch time series.
+          #
+          #     Note: The following fields are mutually exclusive: `time_series_filter`, `time_series_filter_ratio`, `time_series_query_language`, `prometheus_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] time_series_filter_ratio
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesFilterRatio]
           #     Parameters to fetch a ratio between two time series filters.
+          #
+          #     Note: The following fields are mutually exclusive: `time_series_filter_ratio`, `time_series_filter`, `time_series_query_language`, `prometheus_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] time_series_query_language
           #   @return [::String]
           #     A query used to fetch time series with MQL.
+          #
+          #     Note: The following fields are mutually exclusive: `time_series_query_language`, `time_series_filter`, `time_series_filter_ratio`, `prometheus_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] prometheus_query
           #   @return [::String]
           #     A query used to fetch time series with PromQL.
+          #
+          #     Note: The following fields are mutually exclusive: `prometheus_query`, `time_series_filter`, `time_series_filter_ratio`, `time_series_query_language`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] unit_override
           #   @return [::String]
           #     The unit of data contained in fetched time series. If non-empty, this
@@ -77,11 +85,15 @@ module Google
           # @!attribute [rw] pick_time_series_filter
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
+          #
+          #     Note: The following fields are mutually exclusive: `pick_time_series_filter`, `statistical_time_series_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] statistical_time_series_filter
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
           #     Note: This field is deprecated and completely ignored by the API.
+          #
+          #     Note: The following fields are mutually exclusive: `statistical_time_series_filter`, `pick_time_series_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class TimeSeriesFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -102,11 +114,15 @@ module Google
           # @!attribute [rw] pick_time_series_filter
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::PickTimeSeriesFilter]
           #     Ranking based time series filter.
+          #
+          #     Note: The following fields are mutually exclusive: `pick_time_series_filter`, `statistical_time_series_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] statistical_time_series_filter
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::StatisticalTimeSeriesFilter]
           #     Statistics based time series filter.
           #     Note: This field is deprecated and completely ignored by the API.
+          #
+          #     Note: The following fields are mutually exclusive: `statistical_time_series_filter`, `pick_time_series_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class TimeSeriesFilterRatio
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

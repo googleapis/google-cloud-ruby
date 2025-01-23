@@ -66,10 +66,14 @@ module Google
         #     Traffic will be logged from the Interconnect Attachment.
         #     Format:
         #     projects/\\{project_id}/regions/\\{region}/interconnectAttachments/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `vpn_tunnel`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vpn_tunnel
         #   @return [::String]
         #     Traffic will be logged from the VPN Tunnel.
         #     Format: projects/\\{project_id}/regions/\\{region}/vpnTunnels/\\{name}
+        #
+        #     Note: The following fields are mutually exclusive: `vpn_tunnel`, `interconnect_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Resource labels to represent user-provided metadata.

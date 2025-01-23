@@ -64,13 +64,19 @@ module Google
         #
         #       "type.googleapis.com/google.cloud.audit.AuditLog"
         #       "type.googleapis.com/google.appengine.logging.v1.RequestLog"
+        #
+        #     Note: The following fields are mutually exclusive: `proto_payload`, `text_payload`, `json_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_payload
         #   @return [::String]
         #     The log entry payload, represented as a Unicode string (UTF-8).
+        #
+        #     Note: The following fields are mutually exclusive: `text_payload`, `proto_payload`, `json_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json_payload
         #   @return [::Google::Protobuf::Struct]
         #     The log entry payload, represented as a structure that is
         #     expressed as a JSON object.
+        #
+        #     Note: The following fields are mutually exclusive: `json_payload`, `proto_payload`, `text_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The time the event described by the log entry occurred. This time

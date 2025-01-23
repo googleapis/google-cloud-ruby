@@ -118,6 +118,8 @@ module Google
         #     Provides information to the recognizer that specifies how to process the
         #     request. The first `StreamingTranslateSpeechRequest` message must contain
         #     a `streaming_config` message.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_config`, `audio_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] audio_content
         #   @return [::String]
         #     The audio data to be translated. Sequential chunks of audio data are sent
@@ -128,6 +130,8 @@ module Google
         #     encoded as specified in `StreamingTranslateSpeechConfig`. Note: as with
         #     all bytes fields, protobuffers use a pure binary representation (not
         #     base64).
+        #
+        #     Note: The following fields are mutually exclusive: `audio_content`, `streaming_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingTranslateSpeechRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

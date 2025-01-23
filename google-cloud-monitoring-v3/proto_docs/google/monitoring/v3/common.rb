@@ -25,20 +25,30 @@ module Google
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A Boolean value: `true` or `false`.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `int64_value`, `double_value`, `string_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     A 64-bit integer. Its range is approximately &plusmn;9.2x10<sup>18</sup>.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `bool_value`, `double_value`, `string_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     A 64-bit double-precision floating-point number. Its magnitude
         #     is approximately &plusmn;10<sup>&plusmn;300</sup> and it has 16
         #     significant digits of precision.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `bool_value`, `int64_value`, `string_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A variable-length string value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `int64_value`, `double_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] distribution_value
         #   @return [::Google::Api::Distribution]
         #     A distribution value.
+        #
+        #     Note: The following fields are mutually exclusive: `distribution_value`, `bool_value`, `int64_value`, `double_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TypedValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
