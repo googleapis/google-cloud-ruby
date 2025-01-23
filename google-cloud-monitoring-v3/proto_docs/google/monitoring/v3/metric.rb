@@ -173,12 +173,18 @@ module Google
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A bool label value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `int64_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     An int64 label value.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `bool_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A string label value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `int64_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class LabelValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

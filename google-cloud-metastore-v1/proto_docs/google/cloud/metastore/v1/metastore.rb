@@ -649,10 +649,14 @@ module Google
         #   @return [::Google::Cloud::Metastore::V1::ScalingConfig::InstanceSize]
         #     An enum of readable instance sizes, with each instance size mapping to a
         #     float value (e.g. InstanceSize.EXTRA_SMALL = scaling_factor(0.1))
+        #
+        #     Note: The following fields are mutually exclusive: `instance_size`, `scaling_factor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] scaling_factor
         #   @return [::Float]
         #     Scaling factor, increments of 0.1 for values less than 1.0, and
         #     increments of 1.0 for values greater than 1.0.
+        #
+        #     Note: The following fields are mutually exclusive: `scaling_factor`, `instance_size`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ScalingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
