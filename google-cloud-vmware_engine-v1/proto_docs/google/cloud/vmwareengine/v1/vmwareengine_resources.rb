@@ -542,9 +542,13 @@ module Google
           # @!attribute [rw] ip_address
           #   @return [::String]
           #     A single IP address. For example: `10.0.0.5`.
+          #
+          #     Note: The following fields are mutually exclusive: `ip_address`, `ip_address_range`, `external_address`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ip_address_range
           #   @return [::String]
           #     An IP address range in the CIDR format. For example: `10.0.0.0/24`.
+          #
+          #     Note: The following fields are mutually exclusive: `ip_address_range`, `ip_address`, `external_address`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] external_address
           #   @return [::String]
           #     The name of an `ExternalAddress` resource. The external address must
@@ -553,6 +557,8 @@ module Google
           #     `projects/{project}/locations/{location}/privateClouds/{private_cloud}/externalAddresses/{external_address}`.
           #     For example:
           #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/externalAddresses/my-address`.
+          #
+          #     Note: The following fields are mutually exclusive: `external_address`, `ip_address`, `ip_address_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class IpRange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1327,12 +1333,16 @@ module Google
         #     Specify the name in the following form for consumer
         #     VPC network: `projects/{project}/global/networks/{network_id}`.
         #     `{project}` can either be a project number or a project ID.
+        #
+        #     Note: The following fields are mutually exclusive: `vpc_network`, `vmware_engine_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vmware_engine_network
         #   @return [::String]
         #     Network to bind is a VMware Engine network.
         #     Specify the name in the following form for VMware engine network:
         #     `projects/{project}/locations/global/vmwareEngineNetworks/{vmware_engine_network_id}`.
         #     `{project}` can either be a project number or a project ID.
+        #
+        #     Note: The following fields are mutually exclusive: `vmware_engine_network`, `vpc_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. System-generated unique identifier for the resource.
@@ -1663,9 +1673,13 @@ module Google
         # @!attribute [rw] user
         #   @return [::String]
         #     The user who needs to be granted permission.
+        #
+        #     Note: The following fields are mutually exclusive: `user`, `service_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account which needs to be granted the permission.
+        #
+        #     Note: The following fields are mutually exclusive: `service_account`, `user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Principal
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

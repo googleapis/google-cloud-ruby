@@ -1199,11 +1199,15 @@ module Google
         #     be at most 24 hours in the future. If a value is not specified, the
         #     token's expiration time will be set to a default value of 1 hour in the
         #     future.
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Desired lifetime duration of the access token. This value must
         #     be at most 24 hours. If a value is not specified, the token's lifetime
         #     will be set to a default value of 1 hour.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] workstation
         #   @return [::String]
         #     Required. Name of the workstation for which the access token should be
