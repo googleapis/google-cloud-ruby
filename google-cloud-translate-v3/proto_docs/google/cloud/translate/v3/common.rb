@@ -65,9 +65,13 @@ module Google
         # @!attribute [rw] terms_pair
         #   @return [::Google::Cloud::Translate::V3::GlossaryEntry::GlossaryTermsPair]
         #     Used for an unidirectional glossary.
+        #
+        #     Note: The following fields are mutually exclusive: `terms_pair`, `terms_set`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] terms_set
         #   @return [::Google::Cloud::Translate::V3::GlossaryEntry::GlossaryTermsSet]
         #     Used for an equivalent term sets glossary.
+        #
+        #     Note: The following fields are mutually exclusive: `terms_set`, `terms_pair`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] description
         #   @return [::String]
         #     Describes the glossary entry.

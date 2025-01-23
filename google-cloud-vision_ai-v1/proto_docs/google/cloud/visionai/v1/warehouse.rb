@@ -129,9 +129,13 @@ module Google
         # @!attribute [rw] asset_gcs_source
         #   @return [::Google::Cloud::VisionAI::V1::AssetSource::AssetGcsSource]
         #     The source of the asset is from Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `asset_gcs_source`, `asset_content_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] asset_content_data
         #   @return [::Google::Cloud::VisionAI::V1::AssetSource::AssetContentData]
         #     The source of the asset is from content bytes.
+        #
+        #     Note: The following fields are mutually exclusive: `asset_content_data`, `asset_gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AssetSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1544,34 +1548,54 @@ module Google
         # @!attribute [rw] int_value
         #   @return [::Integer]
         #     Value of int type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `int_value`, `float_value`, `str_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] float_value
         #   @return [::Float]
         #     Value of float type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `float_value`, `int_value`, `str_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] str_value
         #   @return [::String]
         #     Value of string type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `str_value`, `int_value`, `float_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] datetime_value
         #   @return [::String]
         #     Value of date time type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `datetime_value`, `int_value`, `float_value`, `str_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] geo_coordinate
         #   @return [::Google::Cloud::VisionAI::V1::GeoCoordinate]
         #     Value of geo coordinate type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `geo_coordinate`, `int_value`, `float_value`, `str_value`, `datetime_value`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] proto_any_value
         #   @return [::Google::Protobuf::Any]
         #     Value of any proto value.
+        #
+        #     Note: The following fields are mutually exclusive: `proto_any_value`, `int_value`, `float_value`, `str_value`, `datetime_value`, `geo_coordinate`, `bool_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Value of boolean type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `int_value`, `float_value`, `str_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `customized_struct_data_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customized_struct_data_value
         #   @return [::Google::Protobuf::Struct]
         #     Value of customized struct annotation. This field does not have effects.
         #     Use customized_struct_value instead for customized struct annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `customized_struct_data_value`, `int_value`, `float_value`, `str_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `list_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] list_value
         #   @return [::Google::Cloud::VisionAI::V1::AnnotationList]
         #     Value of list type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `list_value`, `int_value`, `float_value`, `str_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `customized_struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customized_struct_value
         #   @return [::Google::Cloud::VisionAI::V1::AnnotationCustomizedStruct]
         #     Value of custom struct type annotation.
+        #
+        #     Note: The following fields are mutually exclusive: `customized_struct_value`, `int_value`, `float_value`, `str_value`, `datetime_value`, `geo_coordinate`, `proto_any_value`, `bool_value`, `customized_struct_data_value`, `list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AnnotationValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2154,12 +2178,18 @@ module Google
         # @!attribute [rw] fixed_range_bucket_spec
         #   @return [::Google::Cloud::VisionAI::V1::FacetProperty::FixedRangeBucketSpec]
         #     Fixed range facet bucket config.
+        #
+        #     Note: The following fields are mutually exclusive: `fixed_range_bucket_spec`, `custom_range_bucket_spec`, `datetime_bucket_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_range_bucket_spec
         #   @return [::Google::Cloud::VisionAI::V1::FacetProperty::CustomRangeBucketSpec]
         #     Custom range facet bucket config.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_range_bucket_spec`, `fixed_range_bucket_spec`, `datetime_bucket_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] datetime_bucket_spec
         #   @return [::Google::Cloud::VisionAI::V1::FacetProperty::DateTimeBucketSpec]
         #     Datetime range facet bucket config.
+        #
+        #     Note: The following fields are mutually exclusive: `datetime_bucket_spec`, `fixed_range_bucket_spec`, `custom_range_bucket_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mapped_fields
         #   @return [::Array<::String>]
         #     Name of the facets, which are the dimensions users want to use to refine
@@ -2403,12 +2433,18 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::String]
         #     String type value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `integer_value`, `datetime_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] integer_value
         #   @return [::Integer]
         #     Integer type value.
+        #
+        #     Note: The following fields are mutually exclusive: `integer_value`, `string_value`, `datetime_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] datetime_value
         #   @return [::Google::Type::DateTime]
         #     Datetime type value.
+        #
+        #     Note: The following fields are mutually exclusive: `datetime_value`, `string_value`, `integer_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FacetValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2418,9 +2454,13 @@ module Google
         # @!attribute [rw] value
         #   @return [::Google::Cloud::VisionAI::V1::FacetValue]
         #     Singular value.
+        #
+        #     Note: The following fields are mutually exclusive: `value`, `range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] range
         #   @return [::Google::Cloud::VisionAI::V1::FacetBucket::Range]
         #     Range value.
+        #
+        #     Note: The following fields are mutually exclusive: `range`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] selected
         #   @return [::Boolean]
         #     Whether one facet bucket is selected. This field represents user's facet
@@ -2475,9 +2515,13 @@ module Google
         #     Provides information for the data and the asset resource name that the
         #     data belongs to. The first `IngestAssetRequest` message must only contain
         #     a `Config` message.
+        #
+        #     Note: The following fields are mutually exclusive: `config`, `time_indexed_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] time_indexed_data
         #   @return [::Google::Cloud::VisionAI::V1::IngestAssetRequest::TimeIndexedData]
         #     Data to be ingested.
+        #
+        #     Note: The following fields are mutually exclusive: `time_indexed_data`, `config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class IngestAssetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2654,9 +2698,13 @@ module Google
         # @!attribute [rw] image_query
         #   @return [::Google::Cloud::VisionAI::V1::ImageQuery]
         #     An image-only query.
+        #
+        #     Note: The following fields are mutually exclusive: `image_query`, `text_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_query
         #   @return [::String]
         #     A text-only query.
+        #
+        #     Note: The following fields are mutually exclusive: `text_query`, `image_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] index_endpoint
         #   @return [::String]
         #     Required. The index endpoint to search.
@@ -2689,11 +2737,15 @@ module Google
         # @!attribute [rw] input_image
         #   @return [::String]
         #     Input image in raw bytes.
+        #
+        #     Note: The following fields are mutually exclusive: `input_image`, `asset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] asset
         #   @return [::String]
         #     Resource name of the asset. Only supported in IMAGE corpus type.
         #     Format:
         #     `projects/{project_number}/locations/{location_id}/corpora/{corpus_id}/assets/{asset_id}`
+        #
+        #     Note: The following fields are mutually exclusive: `asset`, `input_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ImageQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2939,21 +2991,33 @@ module Google
         # @!attribute [rw] text_array
         #   @return [::Google::Cloud::VisionAI::V1::StringArray]
         #     The text values associated with the field.
+        #
+        #     Note: The following fields are mutually exclusive: `text_array`, `int_range_array`, `float_range_array`, `date_time_range_array`, `geo_location_array`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int_range_array
         #   @return [::Google::Cloud::VisionAI::V1::IntRangeArray]
         #     The integer ranges associated with the field.
+        #
+        #     Note: The following fields are mutually exclusive: `int_range_array`, `text_array`, `float_range_array`, `date_time_range_array`, `geo_location_array`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] float_range_array
         #   @return [::Google::Cloud::VisionAI::V1::FloatRangeArray]
         #     The float ranges associated with the field.
+        #
+        #     Note: The following fields are mutually exclusive: `float_range_array`, `text_array`, `int_range_array`, `date_time_range_array`, `geo_location_array`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] date_time_range_array
         #   @return [::Google::Cloud::VisionAI::V1::DateTimeRangeArray]
         #     The datetime ranges associated with the field.
+        #
+        #     Note: The following fields are mutually exclusive: `date_time_range_array`, `text_array`, `int_range_array`, `float_range_array`, `geo_location_array`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] geo_location_array
         #   @return [::Google::Cloud::VisionAI::V1::GeoLocationArray]
         #     Geo Location array.
+        #
+        #     Note: The following fields are mutually exclusive: `geo_location_array`, `text_array`, `int_range_array`, `float_range_array`, `date_time_range_array`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Google::Cloud::VisionAI::V1::BoolValue]
         #     A Boolean value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `text_array`, `int_range_array`, `float_range_array`, `date_time_range_array`, `geo_location_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] field
         #   @return [::String]
         #     The UGA field or ML field to apply filtering criteria.

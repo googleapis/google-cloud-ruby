@@ -2984,8 +2984,12 @@ module Google
               #     `projects/{project-number-or-id}/locations/{location_id}/adaptiveMtDatasets/{dataset}`
               #   @param file_input_source [::Google::Cloud::Translate::V3::FileInputSource, ::Hash]
               #     Inline file source.
+              #
+              #     Note: The following fields are mutually exclusive: `file_input_source`, `gcs_input_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param gcs_input_source [::Google::Cloud::Translate::V3::GcsInputSource, ::Hash]
               #     Google Cloud Storage file source.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_input_source`, `file_input_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Translate::V3::ImportAdaptiveMtFileResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
