@@ -99,39 +99,63 @@ module Google
         # @!attribute [rw] image_classification_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelImageClassificationOperationMetadata]
         #     Details of label image classification operation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_bounding_box_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelImageBoundingBoxOperationMetadata]
         #     Details of label image bounding box operation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_bounding_box_details`, `image_classification_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_bounding_poly_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelImageBoundingPolyOperationMetadata]
         #     Details of label image bounding poly operation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_bounding_poly_details`, `image_classification_details`, `image_bounding_box_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_oriented_bounding_box_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelImageOrientedBoundingBoxOperationMetadata]
         #     Details of label image oriented bounding box operation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_oriented_bounding_box_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_polyline_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelImagePolylineOperationMetadata]
         #     Details of label image polyline operation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_polyline_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_segmentation_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelImageSegmentationOperationMetadata]
         #     Details of label image segmentation operation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_segmentation_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_classification_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelVideoClassificationOperationMetadata]
         #     Details of label video classification operation.
+        #
+        #     Note: The following fields are mutually exclusive: `video_classification_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_object_detection_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelVideoObjectDetectionOperationMetadata]
         #     Details of label video object detection operation.
+        #
+        #     Note: The following fields are mutually exclusive: `video_object_detection_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_object_tracking_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelVideoObjectTrackingOperationMetadata]
         #     Details of label video object tracking operation.
+        #
+        #     Note: The following fields are mutually exclusive: `video_object_tracking_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_event_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_event_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelVideoEventOperationMetadata]
         #     Details of label video event operation.
+        #
+        #     Note: The following fields are mutually exclusive: `video_event_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `text_classification_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_classification_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelTextClassificationOperationMetadata]
         #     Details of label text classification operation.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_entity_extraction_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_entity_extraction_details
         #   @return [::Google::Cloud::DataLabeling::V1beta1::LabelTextEntityExtractionOperationMetadata]
         #     Details of label text entity extraction operation.
+        #
+        #     Note: The following fields are mutually exclusive: `text_entity_extraction_details`, `image_classification_details`, `image_bounding_box_details`, `image_bounding_poly_details`, `image_oriented_bounding_box_details`, `image_polyline_details`, `image_segmentation_details`, `video_classification_details`, `video_object_detection_details`, `video_object_tracking_details`, `video_event_details`, `text_classification_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] progress_percent
         #   @return [::Integer]
         #     Output only. Progress of label operation. Range: [0, 100].

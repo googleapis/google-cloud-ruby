@@ -222,9 +222,13 @@ module Google
           # @!attribute [rw] uris_matcher
           #   @return [::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest::UrisMatcher]
           #     Matcher by exact URIs.
+          #
+          #     Note: The following fields are mutually exclusive: `uris_matcher`, `fhir_matcher`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] fhir_matcher
           #   @return [::Google::Cloud::DiscoveryEngine::V1::BatchGetDocumentsMetadataRequest::FhirMatcher]
           #     Matcher by FHIR resource names.
+          #
+          #     Note: The following fields are mutually exclusive: `fhir_matcher`, `uris_matcher`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Matcher
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -272,10 +276,14 @@ module Google
             #   @return [::String]
             #     If match by URI, the URI of the
             #     {::Google::Cloud::DiscoveryEngine::V1::Document Document}.
+            #
+            #     Note: The following fields are mutually exclusive: `uri`, `fhir_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] fhir_resource
             #   @return [::String]
             #     Format:
             #     projects/\\{project}/locations/\\{location}/datasets/\\{dataset}/fhirStores/\\{fhir_store}/fhir/\\{resource_type}/\\{fhir_resource_id}
+            #
+            #     Note: The following fields are mutually exclusive: `fhir_resource`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class MatcherValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

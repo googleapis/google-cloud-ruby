@@ -277,45 +277,73 @@ module Google
           # @!attribute [rw] text
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Text]
           #     The text response.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] image
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Image]
           #     The image response.
+          #
+          #     Note: The following fields are mutually exclusive: `image`, `text`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] quick_replies
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::QuickReplies]
           #     The quick replies response.
+          #
+          #     Note: The following fields are mutually exclusive: `quick_replies`, `text`, `image`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] card
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Card]
           #     The card response.
+          #
+          #     Note: The following fields are mutually exclusive: `card`, `text`, `image`, `quick_replies`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] payload
           #   @return [::Google::Protobuf::Struct]
           #     A custom platform-specific response.
+          #
+          #     Note: The following fields are mutually exclusive: `payload`, `text`, `image`, `quick_replies`, `card`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] simple_responses
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::SimpleResponses]
           #     The voice and text-only responses for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `simple_responses`, `text`, `image`, `quick_replies`, `card`, `payload`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] basic_card
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::BasicCard]
           #     The basic card response for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `basic_card`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] suggestions
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Suggestions]
           #     The suggestion chips for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `suggestions`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] link_out_suggestion
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::LinkOutSuggestion]
           #     The link out suggestion chip for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `link_out_suggestion`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] list_select
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::ListSelect]
           #     The list card response for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `list_select`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `carousel_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] carousel_select
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::CarouselSelect]
           #     The carousel card response for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `carousel_select`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `browse_carousel_card`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] browse_carousel_card
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::BrowseCarouselCard]
           #     Browse carousel card for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `browse_carousel_card`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `table_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] table_card
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::TableCard]
           #     Table card for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `table_card`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `media_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] media_content
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::MediaContent]
           #     The media content card for Actions on Google.
+          #
+          #     Note: The following fields are mutually exclusive: `media_content`, `text`, `image`, `quick_replies`, `card`, `payload`, `simple_responses`, `basic_card`, `suggestions`, `link_out_suggestion`, `list_select`, `carousel_select`, `browse_carousel_card`, `table_card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] platform
           #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Platform]
           #     Optional. The platform that this message is intended for.
@@ -589,9 +617,13 @@ module Google
               # @!attribute [rw] large_image
               #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Image]
               #     Optional. Image to display above media content.
+              #
+              #     Note: The following fields are mutually exclusive: `large_image`, `icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] icon
               #   @return [::Google::Cloud::Dialogflow::V2::Intent::Message::Image]
               #     Optional. Icon to display above media content.
+              #
+              #     Note: The following fields are mutually exclusive: `icon`, `large_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] content_url
               #   @return [::String]
               #     Required. Url where the media is stored.
@@ -982,9 +1014,13 @@ module Google
         #     The URI to a Google Cloud Storage file containing intents to update or
         #     create. The file format can either be a serialized proto (of IntentBatch
         #     type) or JSON object. Note: The URI must start with "gs://".
+        #
+        #     Note: The following fields are mutually exclusive: `intent_batch_uri`, `intent_batch_inline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] intent_batch_inline
         #   @return [::Google::Cloud::Dialogflow::V2::IntentBatch]
         #     The collection of intents to update or create.
+        #
+        #     Note: The following fields are mutually exclusive: `intent_batch_inline`, `intent_batch_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The language used to access language-specific data.

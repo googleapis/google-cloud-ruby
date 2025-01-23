@@ -146,9 +146,13 @@ module Google
               # @!attribute [rw] ratio
               #   @return [::Float]
               #     Ratio value of a metric.
+              #
+              #     Note: The following fields are mutually exclusive: `ratio`, `count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] count
               #   @return [::Float]
               #     Count value of a metric.
+              #
+              #     Note: The following fields are mutually exclusive: `count`, `ratio`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] confidence_interval
               #   @return [::Google::Cloud::Dialogflow::CX::V3::Experiment::Result::ConfidenceInterval]
               #     The probability that the treatment is better than all other treatments

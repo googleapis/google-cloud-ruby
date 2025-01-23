@@ -113,9 +113,13 @@ module Google
         # @!attribute [rw] password
         #   @return [::String]
         #     Input only. SSH password.
+        #
+        #     Note: The following fields are mutually exclusive: `password`, `private_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_key
         #   @return [::String]
         #     Input only. SSH private key.
+        #
+        #     Note: The following fields are mutually exclusive: `private_key`, `password`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ForwardSshTunnelConnectivity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -280,24 +284,38 @@ module Google
         # @!attribute [rw] oracle_profile
         #   @return [::Google::Cloud::Datastream::V1alpha1::OracleProfile]
         #     Oracle ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_profile`, `gcs_profile`, `mysql_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_profile
         #   @return [::Google::Cloud::Datastream::V1alpha1::GcsProfile]
         #     Cloud Storage ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_profile`, `oracle_profile`, `mysql_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_profile
         #   @return [::Google::Cloud::Datastream::V1alpha1::MysqlProfile]
         #     MySQL ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_profile`, `oracle_profile`, `gcs_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] no_connectivity
         #   @return [::Google::Cloud::Datastream::V1alpha1::NoConnectivitySettings]
         #     No connectivity option chosen.
+        #
+        #     Note: The following fields are mutually exclusive: `no_connectivity`, `static_service_ip_connectivity`, `forward_ssh_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::Datastream::V1alpha1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `static_service_ip_connectivity`, `no_connectivity`, `forward_ssh_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] forward_ssh_connectivity
         #   @return [::Google::Cloud::Datastream::V1alpha1::ForwardSshTunnelConnectivity]
         #     Forward SSH tunnel connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `forward_ssh_connectivity`, `no_connectivity`, `static_service_ip_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_connectivity
         #   @return [::Google::Cloud::Datastream::V1alpha1::PrivateConnectivity]
         #     Private connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `private_connectivity`, `no_connectivity`, `static_service_ip_connectivity`, `forward_ssh_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ConnectionProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -474,9 +492,13 @@ module Google
         # @!attribute [rw] oracle_source_config
         #   @return [::Google::Cloud::Datastream::V1alpha1::OracleSourceConfig]
         #     Oracle data source configuration
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_source_config`, `mysql_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_source_config
         #   @return [::Google::Cloud::Datastream::V1alpha1::MysqlSourceConfig]
         #     MySQL data source configuration
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_source_config`, `oracle_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -531,9 +553,13 @@ module Google
         # @!attribute [rw] avro_file_format
         #   @return [::Google::Cloud::Datastream::V1alpha1::AvroFileFormat]
         #     AVRO file format configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `avro_file_format`, `json_file_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json_file_format
         #   @return [::Google::Cloud::Datastream::V1alpha1::JsonFileFormat]
         #     JSON file format configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `json_file_format`, `avro_file_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GcsDestinationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -578,9 +604,13 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1alpha1::Stream::BackfillAllStrategy]
         #     Automatically backfill objects included in the stream source
         #     configuration. Specific objects can be excluded.
+        #
+        #     Note: The following fields are mutually exclusive: `backfill_all`, `backfill_none`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] backfill_none
         #   @return [::Google::Cloud::Datastream::V1alpha1::Stream::BackfillNoneStrategy]
         #     Do not automatically backfill any objects.
+        #
+        #     Note: The following fields are mutually exclusive: `backfill_none`, `backfill_all`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Datastream::V1alpha1::Error>]
         #     Output only. Errors on the Stream.
@@ -593,9 +623,13 @@ module Google
           # @!attribute [rw] oracle_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1alpha1::OracleRdbms]
           #     Oracle data source objects to avoid backfilling.
+          #
+          #     Note: The following fields are mutually exclusive: `oracle_excluded_objects`, `mysql_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mysql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1alpha1::MysqlRdbms]
           #     MySQL data source objects to avoid backfilling.
+          #
+          #     Note: The following fields are mutually exclusive: `mysql_excluded_objects`, `oracle_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BackfillAllStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

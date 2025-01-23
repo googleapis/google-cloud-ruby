@@ -90,9 +90,13 @@ module Google
           # @!attribute [rw] foundation_gen_ai_model_info
           #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo::FoundationGenAiModelInfo]
           #     Information for a pretrained Google-managed foundation model.
+          #
+          #     Note: The following fields are mutually exclusive: `foundation_gen_ai_model_info`, `custom_gen_ai_model_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] custom_gen_ai_model_info
           #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::GenAiModelInfo::CustomGenAiModelInfo]
           #     Information for a custom Generative AI model created by the user.
+          #
+          #     Note: The following fields are mutually exclusive: `custom_gen_ai_model_info`, `foundation_gen_ai_model_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class GenAiModelInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

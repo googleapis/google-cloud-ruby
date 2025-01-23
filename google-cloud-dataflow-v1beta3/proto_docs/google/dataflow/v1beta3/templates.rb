@@ -57,10 +57,14 @@ module Google
         # @!attribute [rw] container_spec
         #   @return [::Google::Cloud::Dataflow::V1beta3::ContainerSpec]
         #     Spec about the container image to launch.
+        #
+        #     Note: The following fields are mutually exclusive: `container_spec`, `container_spec_gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_spec_gcs_path
         #   @return [::String]
         #     Cloud Storage path to a file with json serialized ContainerSpec as
         #     content.
+        #
+        #     Note: The following fields are mutually exclusive: `container_spec_gcs_path`, `container_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parameters
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The parameters for FlexTemplate.
@@ -590,9 +594,13 @@ module Google
         #     A Cloud Storage path to the template from which to create
         #     the job.
         #     Must be valid Cloud Storage URL, beginning with 'gs://'.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_path`, `dynamic_template`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dynamic_template
         #   @return [::Google::Cloud::Dataflow::V1beta3::DynamicTemplateLaunchParams]
         #     Params for launching a dynamic template.
+        #
+        #     Note: The following fields are mutually exclusive: `dynamic_template`, `gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] launch_parameters
         #   @return [::Google::Cloud::Dataflow::V1beta3::LaunchTemplateParameters]
         #     The parameters of the template to launch. This should be part of the

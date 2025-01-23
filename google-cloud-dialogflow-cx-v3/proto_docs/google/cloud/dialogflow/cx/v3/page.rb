@@ -257,11 +257,15 @@ module Google
           #     The target page to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_page`, `target_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_flow`, `target_page`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class EventHandler
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,11 +325,15 @@ module Google
           #     The target page to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_page`, `target_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_flow`, `target_page`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class TransitionRoute
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -540,11 +548,15 @@ module Google
           #     The target page to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_page`, `target_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_flow`, `target_page`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_store_connections
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::DataStoreConnection>]
           #     Optional. List of related data store connections.

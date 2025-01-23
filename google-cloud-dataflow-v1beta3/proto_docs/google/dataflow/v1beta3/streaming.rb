@@ -123,15 +123,23 @@ module Google
         #   @return [::Google::Cloud::Dataflow::V1beta3::StreamingStageLocation]
         #     The stream is part of another computation within the current
         #     streaming Dataflow job.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_stage_location`, `pubsub_location`, `side_input_location`, `custom_source_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pubsub_location
         #   @return [::Google::Cloud::Dataflow::V1beta3::PubsubLocation]
         #     The stream is a pubsub stream.
+        #
+        #     Note: The following fields are mutually exclusive: `pubsub_location`, `streaming_stage_location`, `side_input_location`, `custom_source_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] side_input_location
         #   @return [::Google::Cloud::Dataflow::V1beta3::StreamingSideInputLocation]
         #     The stream is a streaming side input.
+        #
+        #     Note: The following fields are mutually exclusive: `side_input_location`, `streaming_stage_location`, `pubsub_location`, `custom_source_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_source_location
         #   @return [::Google::Cloud::Dataflow::V1beta3::CustomSourceLocation]
         #     The stream is a custom source.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_source_location`, `streaming_stage_location`, `pubsub_location`, `side_input_location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

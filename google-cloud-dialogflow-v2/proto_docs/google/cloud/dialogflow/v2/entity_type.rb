@@ -245,9 +245,13 @@ module Google
         #     or create. The file format can either be a serialized proto (of
         #     EntityBatch type) or a JSON object. Note: The URI must start with
         #     "gs://".
+        #
+        #     Note: The following fields are mutually exclusive: `entity_type_batch_uri`, `entity_type_batch_inline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity_type_batch_inline
         #   @return [::Google::Cloud::Dialogflow::V2::EntityTypeBatch]
         #     The collection of entity types to update or create.
+        #
+        #     Note: The following fields are mutually exclusive: `entity_type_batch_inline`, `entity_type_batch_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The language used to access language-specific data.

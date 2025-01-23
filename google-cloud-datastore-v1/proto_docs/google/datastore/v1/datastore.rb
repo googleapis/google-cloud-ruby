@@ -105,9 +105,13 @@ module Google
         # @!attribute [rw] query
         #   @return [::Google::Cloud::Datastore::V1::Query]
         #     The query to run.
+        #
+        #     Note: The following fields are mutually exclusive: `query`, `gql_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be a non-aggregation query.
+        #
+        #     Note: The following fields are mutually exclusive: `gql_query`, `query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] property_mask
         #   @return [::Google::Cloud::Datastore::V1::PropertyMask]
         #     The properties to return.
@@ -174,9 +178,13 @@ module Google
         # @!attribute [rw] aggregation_query
         #   @return [::Google::Cloud::Datastore::V1::AggregationQuery]
         #     The query to run.
+        #
+        #     Note: The following fields are mutually exclusive: `aggregation_query`, `gql_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
         #     The GQL query to run. This query must be an aggregation query.
+        #
+        #     Note: The following fields are mutually exclusive: `gql_query`, `aggregation_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] explain_options
         #   @return [::Google::Cloud::Datastore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
@@ -287,12 +295,16 @@ module Google
         #     The identifier of the transaction associated with the commit. A
         #     transaction identifier is returned by a call to
         #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `single_use_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] single_use_transaction
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
         #     Options for beginning a new transaction for this request.
         #     The transaction is committed when the request completes. If specified,
         #     {::Google::Cloud::Datastore::V1::TransactionOptions TransactionOptions.mode} must be
         #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
+        #
+        #     Note: The following fields are mutually exclusive: `single_use_transaction`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mutations
         #   @return [::Array<::Google::Cloud::Datastore::V1::Mutation>]
         #     The mutations to perform.
@@ -407,28 +419,40 @@ module Google
         #   @return [::Google::Cloud::Datastore::V1::Entity]
         #     The entity to insert. The entity must not already exist.
         #     The entity key's final path element may be incomplete.
+        #
+        #     Note: The following fields are mutually exclusive: `insert`, `update`, `upsert`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update
         #   @return [::Google::Cloud::Datastore::V1::Entity]
         #     The entity to update. The entity must already exist.
         #     Must have a complete key path.
+        #
+        #     Note: The following fields are mutually exclusive: `update`, `insert`, `upsert`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] upsert
         #   @return [::Google::Cloud::Datastore::V1::Entity]
         #     The entity to upsert. The entity may or may not already exist.
         #     The entity key's final path element may be incomplete.
+        #
+        #     Note: The following fields are mutually exclusive: `upsert`, `insert`, `update`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete
         #   @return [::Google::Cloud::Datastore::V1::Key]
         #     The key of the entity to delete. The entity may or may not already exist.
         #     Must have a complete key path and must not be reserved/read-only.
+        #
+        #     Note: The following fields are mutually exclusive: `delete`, `insert`, `update`, `upsert`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] base_version
         #   @return [::Integer]
         #     The version of the entity that this mutation is being applied
         #     to. If this does not match the current version on the server, the
         #     mutation conflicts.
+        #
+        #     Note: The following fields are mutually exclusive: `base_version`, `update_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The update time of the entity that this mutation is being applied
         #     to. If this does not match the current update time on the server, the
         #     mutation conflicts.
+        #
+        #     Note: The following fields are mutually exclusive: `update_time`, `base_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conflict_resolution_strategy
         #   @return [::Google::Cloud::Datastore::V1::Mutation::ConflictResolutionStrategy]
         #     The strategy to use when a conflict is detected. Defaults to
@@ -482,6 +506,8 @@ module Google
         # @!attribute [rw] set_to_server_value
         #   @return [::Google::Cloud::Datastore::V1::PropertyTransform::ServerValue]
         #     Sets the property to the given server value.
+        #
+        #     Note: The following fields are mutually exclusive: `set_to_server_value`, `increment`, `maximum`, `minimum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] increment
         #   @return [::Google::Cloud::Datastore::V1::Value]
         #     Adds the given value to the property's current value.
@@ -494,6 +520,8 @@ module Google
         #     representation of double values follows IEEE 754 semantics.
         #     If there is positive/negative integer overflow, the property is resolved
         #     to the largest magnitude positive/negative integer.
+        #
+        #     Note: The following fields are mutually exclusive: `increment`, `set_to_server_value`, `maximum`, `minimum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] maximum
         #   @return [::Google::Cloud::Datastore::V1::Value]
         #     Sets the property to the maximum of its current value and the given
@@ -509,6 +537,8 @@ module Google
         #     0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
         #     zero input value is always the stored value.
         #     The maximum of any numeric value x and NaN is NaN.
+        #
+        #     Note: The following fields are mutually exclusive: `maximum`, `set_to_server_value`, `increment`, `minimum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] minimum
         #   @return [::Google::Cloud::Datastore::V1::Value]
         #     Sets the property to the minimum of its current value and the given
@@ -524,6 +554,8 @@ module Google
         #     and -0.0 are all zero. The minimum of a zero stored value and zero input
         #     value is always the stored value. The minimum of any numeric value x and
         #     NaN is NaN.
+        #
+        #     Note: The following fields are mutually exclusive: `minimum`, `set_to_server_value`, `increment`, `maximum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] append_missing_elements
         #   @return [::Google::Cloud::Datastore::V1::ArrayValue]
         #     Appends the given elements in order if they are not already present in
@@ -538,6 +570,8 @@ module Google
         #     be considered.
         #
         #     The corresponding transform result will be the null value.
+        #
+        #     Note: The following fields are mutually exclusive: `append_missing_elements`, `set_to_server_value`, `increment`, `maximum`, `minimum`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] remove_all_from_array
         #   @return [::Google::Cloud::Datastore::V1::ArrayValue]
         #     Removes all of the given elements from the array in the property.
@@ -550,6 +584,8 @@ module Google
         #     This will remove all equivalent values if there are duplicates.
         #
         #     The corresponding transform result will be the null value.
+        #
+        #     Note: The following fields are mutually exclusive: `remove_all_from_array`, `set_to_server_value`, `increment`, `maximum`, `minimum`, `append_missing_elements`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PropertyTransform
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -625,11 +661,15 @@ module Google
         # @!attribute [rw] read_consistency
         #   @return [::Google::Cloud::Datastore::V1::ReadOptions::ReadConsistency]
         #     The non-transactional read consistency to use.
+        #
+        #     Note: The following fields are mutually exclusive: `read_consistency`, `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The identifier of the transaction in which to read. A
         #     transaction identifier is returned by a call to
         #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `read_consistency`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_transaction
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
         #     Options for beginning a new transaction for this request.
@@ -639,6 +679,8 @@ module Google
         #     {::Google::Cloud::Datastore::V1::LookupResponse#transaction LookupResponse.transaction}
         #     or
         #     {::Google::Cloud::Datastore::V1::RunQueryResponse#transaction RunQueryResponse.transaction}.
+        #
+        #     Note: The following fields are mutually exclusive: `new_transaction`, `read_consistency`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads entities as they were at the given time. This value is only
@@ -647,6 +689,8 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `read_consistency`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReadOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -674,9 +718,13 @@ module Google
         # @!attribute [rw] read_write
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite]
         #     The transaction should allow both reads and writes.
+        #
+        #     Note: The following fields are mutually exclusive: `read_write`, `read_only`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_only
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions::ReadOnly]
         #     The transaction should only allow reads.
+        #
+        #     Note: The following fields are mutually exclusive: `read_only`, `read_write`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TransactionOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

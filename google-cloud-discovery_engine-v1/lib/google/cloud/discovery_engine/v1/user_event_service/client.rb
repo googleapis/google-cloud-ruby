@@ -582,10 +582,16 @@ module Google
             #
             #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportUserEventsRequest::InlineSource, ::Hash]
             #     The Inline source for the input content for UserEvents.
+            #
+            #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
             #     Cloud Storage location for the input content.
+            #
+            #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1::BigQuerySource, ::Hash]
             #     BigQuery input source.
+            #
+            #     Note: The following fields are mutually exclusive: `bigquery_source`, `inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param parent [::String]
             #     Required. Parent DataStore resource name, of the form
             #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`

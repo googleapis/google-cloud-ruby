@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] on_demand
         #   @return [::Google::Cloud::Dataplex::V1::Trigger::OnDemand]
         #     The scan runs once via `RunDataScan` API.
+        #
+        #     Note: The following fields are mutually exclusive: `on_demand`, `schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schedule
         #   @return [::Google::Cloud::Dataplex::V1::Trigger::Schedule]
         #     The scan is scheduled to run periodically.
+        #
+        #     Note: The following fields are mutually exclusive: `schedule`, `on_demand`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Trigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -65,12 +69,16 @@ module Google
         #     Immutable. The Dataplex entity that represents the data source (e.g.
         #     BigQuery table) for DataScan, of the form:
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+        #
+        #     Note: The following fields are mutually exclusive: `entity`, `resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] resource
         #   @return [::String]
         #     Immutable. The service-qualified full resource name of the cloud resource
         #     for a DataScan job to scan against. The field could be: BigQuery table of
         #     type "TABLE" for DataProfileScan/DataQualityScan Format:
         #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
+        #
+        #     Note: The following fields are mutually exclusive: `resource`, `entity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

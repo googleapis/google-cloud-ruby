@@ -45,9 +45,13 @@ module Google
           # @!attribute [rw] prepare_step_details
           #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationProgressEvent::PrepareStepDetails]
           #     Details for the `PREPARE` step.
+          #
+          #     Note: The following fields are mutually exclusive: `prepare_step_details`, `redirect_writes_step_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] redirect_writes_step_details
           #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationProgressEvent::RedirectWritesStepDetails]
           #     Details for the `REDIRECT_WRITES` step.
+          #
+          #     Note: The following fields are mutually exclusive: `redirect_writes_step_details`, `prepare_step_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class MigrationProgressEvent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

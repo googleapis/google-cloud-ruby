@@ -41,10 +41,14 @@ module Google
           # @!attribute [rw] generic_web_service
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService]
           #     Configuration for a generic web service.
+          #
+          #     Note: The following fields are mutually exclusive: `generic_web_service`, `service_directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] service_directory
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::ServiceDirectoryConfig]
           #     Configuration for a [Service
           #     Directory](https://cloud.google.com/service-directory) service.
+          #
+          #     Note: The following fields are mutually exclusive: `service_directory`, `generic_web_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] timeout
           #   @return [::Google::Protobuf::Duration]
           #     Webhook execution timeout. Execution is considered failed if Dialogflow
@@ -352,24 +356,34 @@ module Google
           #   @return [::String]
           #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was
           #     provided as input, this field will contain a copy of the text.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `trigger_intent`, `transcript`, `trigger_event`, `dtmf_digits`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_intent
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_intent`, `text`, `transcript`, `trigger_event`, `dtmf_digits`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
           #     audio][google.cloud.dialogflow.cx.v3.AudioInput] was provided as input,
           #     this field will contain the transcript for the audio.
+          #
+          #     Note: The following fields are mutually exclusive: `transcript`, `text`, `trigger_intent`, `trigger_event`, `dtmf_digits`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_event
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
           #     input, this field will contain the name of the event.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_event`, `text`, `trigger_intent`, `transcript`, `dtmf_digits`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dtmf_digits
           #   @return [::String]
           #     If {::Google::Cloud::Dialogflow::CX::V3::DtmfInput DTMF} was provided as input,
           #     this field will contain the DTMF digits.
+          #
+          #     Note: The following fields are mutually exclusive: `dtmf_digits`, `text`, `trigger_intent`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language code specified in the [original
@@ -508,11 +522,15 @@ module Google
           #     The target page to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>/pages/<PageID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_page`, `target_flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target_flow
           #   @return [::String]
           #     The target flow to transition to.
           #     Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/flows/<FlowID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `target_flow`, `target_page`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class WebhookResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

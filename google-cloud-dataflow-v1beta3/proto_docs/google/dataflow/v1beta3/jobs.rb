@@ -496,24 +496,38 @@ module Google
         # @!attribute [rw] str_value
         #   @return [::String]
         #     Contains value if the data is of string type.
+        #
+        #     Note: The following fields are mutually exclusive: `str_value`, `int64_value`, `float_value`, `java_class_value`, `timestamp_value`, `duration_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     Contains value if the data is of int64 type.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `str_value`, `float_value`, `java_class_value`, `timestamp_value`, `duration_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] float_value
         #   @return [::Float]
         #     Contains value if the data is of float type.
+        #
+        #     Note: The following fields are mutually exclusive: `float_value`, `str_value`, `int64_value`, `java_class_value`, `timestamp_value`, `duration_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] java_class_value
         #   @return [::String]
         #     Contains value if the data is of java class type.
+        #
+        #     Note: The following fields are mutually exclusive: `java_class_value`, `str_value`, `int64_value`, `float_value`, `timestamp_value`, `duration_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value
         #   @return [::Google::Protobuf::Timestamp]
         #     Contains value if the data is of timestamp type.
+        #
+        #     Note: The following fields are mutually exclusive: `timestamp_value`, `str_value`, `int64_value`, `float_value`, `java_class_value`, `duration_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] duration_value
         #   @return [::Google::Protobuf::Duration]
         #     Contains value if the data is of duration type.
+        #
+        #     Note: The following fields are mutually exclusive: `duration_value`, `str_value`, `int64_value`, `float_value`, `java_class_value`, `timestamp_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Contains value if the data is of a boolean type.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `str_value`, `int64_value`, `float_value`, `java_class_value`, `timestamp_value`, `duration_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] short_str_value
         #   @return [::String]
         #     A possible additional shorter value to display.
