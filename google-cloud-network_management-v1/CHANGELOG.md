@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.5.0 (2025-01-23)
+
+#### Features
+
+* Support for VpcFlowLogsService ([#28231](https://github.com/googleapis/google-cloud-ruby/issues/28231)) 
+
 ### 1.4.0 (2024-12-10)
 
 #### Features
