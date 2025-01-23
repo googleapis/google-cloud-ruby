@@ -113,18 +113,26 @@ module Google
         #   @return [::Google::Protobuf::ListValue]
         #     If the start is closed, then the range includes all rows whose
         #     first `len(start_closed)` key columns exactly match `start_closed`.
+        #
+        #     Note: The following fields are mutually exclusive: `start_closed`, `start_open`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] start_open
         #   @return [::Google::Protobuf::ListValue]
         #     If the start is open, then the range excludes rows whose first
         #     `len(start_open)` key columns exactly match `start_open`.
+        #
+        #     Note: The following fields are mutually exclusive: `start_open`, `start_closed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] end_closed
         #   @return [::Google::Protobuf::ListValue]
         #     If the end is closed, then the range includes all rows whose
         #     first `len(end_closed)` key columns exactly match `end_closed`.
+        #
+        #     Note: The following fields are mutually exclusive: `end_closed`, `end_open`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] end_open
         #   @return [::Google::Protobuf::ListValue]
         #     If the end is open, then the range excludes rows whose first
         #     `len(end_open)` key columns exactly match `end_open`.
+        #
+        #     Note: The following fields are mutually exclusive: `end_open`, `end_closed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class KeyRange
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

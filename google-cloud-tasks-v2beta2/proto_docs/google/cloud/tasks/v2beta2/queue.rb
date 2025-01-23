@@ -52,15 +52,21 @@ module Google
         #
         #     An App Engine queue is a queue that has an
         #     {::Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget AppEngineHttpTarget}.
+        #
+        #     Note: The following fields are mutually exclusive: `app_engine_http_target`, `pull_target`, `http_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pull_target
         #   @return [::Google::Cloud::Tasks::V2beta2::PullTarget]
         #     Pull target.
         #
         #     A pull queue is a queue that has a
         #     {::Google::Cloud::Tasks::V2beta2::PullTarget PullTarget}.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_target`, `app_engine_http_target`, `http_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] http_target
         #   @return [::Google::Cloud::Tasks::V2beta2::HttpTarget]
         #     An http_target is used to override the target values for HTTP tasks.
+        #
+        #     Note: The following fields are mutually exclusive: `http_target`, `app_engine_http_target`, `pull_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rate_limits
         #   @return [::Google::Cloud::Tasks::V2beta2::RateLimits]
         #     Rate limits for task dispatches.
@@ -294,9 +300,13 @@ module Google
         #     Cloud Tasks will attempt the task `max_attempts` times (that
         #     is, if the first attempt fails, then there will be
         #     `max_attempts - 1` retries).  Must be > 0.
+        #
+        #     Note: The following fields are mutually exclusive: `max_attempts`, `unlimited_attempts`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] unlimited_attempts
         #   @return [::Boolean]
         #     If true, then the number of attempts is unlimited.
+        #
+        #     Note: The following fields are mutually exclusive: `unlimited_attempts`, `max_attempts`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] max_retry_duration
         #   @return [::Google::Protobuf::Duration]
         #     If positive, `max_retry_duration` specifies the time limit for

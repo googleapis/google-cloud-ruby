@@ -64,12 +64,18 @@ module Google
         # @!attribute [rw] linear_buckets
         #   @return [::Google::Cloud::ServiceControl::V1::Distribution::LinearBuckets]
         #     Buckets with constant width.
+        #
+        #     Note: The following fields are mutually exclusive: `linear_buckets`, `exponential_buckets`, `explicit_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exponential_buckets
         #   @return [::Google::Cloud::ServiceControl::V1::Distribution::ExponentialBuckets]
         #     Buckets with exponentially growing width.
+        #
+        #     Note: The following fields are mutually exclusive: `exponential_buckets`, `linear_buckets`, `explicit_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] explicit_buckets
         #   @return [::Google::Cloud::ServiceControl::V1::Distribution::ExplicitBuckets]
         #     Buckets with arbitrary user-provided width.
+        #
+        #     Note: The following fields are mutually exclusive: `explicit_buckets`, `linear_buckets`, `exponential_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exemplars
         #   @return [::Array<::Google::Api::Distribution::Exemplar>]
         #     Example points. Must be in increasing order of `value` field.

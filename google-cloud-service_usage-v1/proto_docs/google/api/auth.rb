@@ -84,12 +84,18 @@ module Google
     # @!attribute [rw] header
     #   @return [::String]
     #     Specifies HTTP header name to extract JWT token.
+    #
+    #     Note: The following fields are mutually exclusive: `header`, `query`, `cookie`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] query
     #   @return [::String]
     #     Specifies URL query parameter name to extract JWT token.
+    #
+    #     Note: The following fields are mutually exclusive: `query`, `header`, `cookie`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] cookie
     #   @return [::String]
     #     Specifies cookie name to extract JWT token.
+    #
+    #     Note: The following fields are mutually exclusive: `cookie`, `header`, `query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] value_prefix
     #   @return [::String]
     #     The value prefix. The value format is "value_prefix\\{token}"
