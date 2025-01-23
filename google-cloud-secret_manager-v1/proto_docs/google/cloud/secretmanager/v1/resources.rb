@@ -64,10 +64,14 @@ module Google
         #     Optional. Timestamp in UTC when the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to expire.
         #     This is always provided on output, regardless of what was sent on input.
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL for the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret}.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. Etag of the currently stored
@@ -243,10 +247,14 @@ module Google
         #   @return [::Google::Cloud::SecretManager::V1::Replication::Automatic]
         #     The {::Google::Cloud::SecretManager::V1::Secret Secret} will automatically be
         #     replicated without any restrictions.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic`, `user_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_managed
         #   @return [::Google::Cloud::SecretManager::V1::Replication::UserManaged]
         #     The {::Google::Cloud::SecretManager::V1::Secret Secret} will only be
         #     replicated into the locations specified.
+        #
+        #     Note: The following fields are mutually exclusive: `user_managed`, `automatic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Replication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,6 +349,8 @@ module Google
         #     Only populated if the parent
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} has an automatic
         #     replication policy.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic`, `user_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_managed
         #   @return [::Google::Cloud::SecretManager::V1::ReplicationStatus::UserManagedStatus]
         #     Describes the replication status of a
@@ -350,6 +360,8 @@ module Google
         #     Only populated if the parent
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} has a user-managed
         #     replication policy.
+        #
+        #     Note: The following fields are mutually exclusive: `user_managed`, `automatic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReplicationStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

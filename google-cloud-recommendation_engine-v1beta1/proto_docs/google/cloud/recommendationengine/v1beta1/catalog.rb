@@ -105,9 +105,13 @@ module Google
         # @!attribute [rw] exact_price
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::ProductCatalogItem::ExactPrice]
         #     Optional. The exact product price.
+        #
+        #     Note: The following fields are mutually exclusive: `exact_price`, `price_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] price_range
         #   @return [::Google::Cloud::RecommendationEngine::V1beta1::ProductCatalogItem::PriceRange]
         #     Optional. The product price range.
+        #
+        #     Note: The following fields are mutually exclusive: `price_range`, `exact_price`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] costs
         #   @return [::Google::Protobuf::Map{::String => ::Float}]
         #     Optional. A map to pass the costs associated with the product.

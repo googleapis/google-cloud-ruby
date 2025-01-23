@@ -319,9 +319,13 @@ module Google
           #     The Cloud Storage buckets need to be the same region as the clusters.
           #     Read permission is required to import from the provided Cloud Storage
           #     objects.
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_source`, `managed_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] managed_backup_source
           #   @return [::Google::Cloud::Redis::Cluster::V1::Cluster::ManagedBackupSource]
           #     Optional. Backups generated and managed by memorystore service.
+          #
+          #     Note: The following fields are mutually exclusive: `managed_backup_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Identifier. Unique name of the resource in this scope including
@@ -892,10 +896,14 @@ module Google
           #   @return [::Google::Cloud::Redis::Cluster::V1::PscAutoConnection]
           #     Detailed information of a PSC connection that is created through
           #     service connectivity automation.
+          #
+          #     Note: The following fields are mutually exclusive: `psc_auto_connection`, `psc_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] psc_connection
           #   @return [::Google::Cloud::Redis::Cluster::V1::PscConnection]
           #     Detailed information of a PSC connection that is created by the customer
           #     who owns the cluster.
+          #
+          #     Note: The following fields are mutually exclusive: `psc_connection`, `psc_auto_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ConnectionDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -326,11 +326,15 @@ module Google
         #     A unique string used as a suffix creating a new execution. The Job will
         #     become ready when the execution is successfully started.
         #     The sum of job name and token length must be fewer than 63 characters.
+        #
+        #     Note: The following fields are mutually exclusive: `start_execution_token`, `run_execution_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] run_execution_token
         #   @return [::String]
         #     A unique string used as a suffix for creating a new execution. The Job
         #     will become ready when the execution is successfully completed.
         #     The sum of job name and token length must be fewer than 63 characters.
+        #
+        #     Note: The following fields are mutually exclusive: `run_execution_token`, `start_execution_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
