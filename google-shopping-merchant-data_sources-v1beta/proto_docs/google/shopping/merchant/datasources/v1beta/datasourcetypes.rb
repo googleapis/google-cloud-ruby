@@ -82,10 +82,8 @@ module Google
             #     To link the data source to the default rule, you need to add a
             #     new reference to this list (in sequential order).
             #
-            #     To unlink the data source from the default rule, you need to remove the
-            #     given reference from this list. To create attribute rules that are
-            #     different from the default rule, see [Set up your attribute
-            #     rules](//support.google.com/merchants/answer/14994083).
+            #     To unlink the data source from the default rule, you need to
+            #     remove the given reference from this list.
             #
             #     Changing the order of this list will result in changing the priority of
             #     data sources in the default rule.
@@ -119,12 +117,9 @@ module Google
             end
           end
 
-          # The supplemental data source for local and online products. Supplemental API
-          # data sources must not have `feedLabel` and `contentLanguage` fields set. You
-          # can only use supplemental data sources to update existing products. For
-          # information about creating a supplemental data source, see [Create a
-          # supplemental data source and link it to the primary data
-          # source](/merchant/api/guides/data-sources/overview#create-supplemental-data-source).
+          # The supplemental data source for local and online products. After creation,
+          # you should make sure to link the supplemental product data source into one or
+          # more primary product data sources.
           # @!attribute [rw] feed_label
           #   @return [::String]
           #     Optional. Immutable. The feed label that is specified on the data source
@@ -138,7 +133,11 @@ module Google
           #
           #     `feedLabel` and `contentLanguage` must be either both set or unset for data
           #     sources with product content type.
-          #     They must be set for data sources with a file input.
+          #
+          #     They must be set for data sources with a [file
+          #     input][google.shopping.merchant.datasources.v1main.FileInput].
+          #     The fields must be unset for data sources without [file
+          #     input][google.shopping.merchant.datasources.v1main.FileInput].
           #
           #     If set, the data source will only accept products matching this
           #     combination. If unset, the data source will accept produts without that
@@ -218,6 +217,18 @@ module Google
           #     Required. Immutable. The two-letter ISO 639-1 language of the items in the
           #     data source.
           class PromotionDataSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The product review data source.
+          class ProductReviewDataSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The merchant review data source.
+          class MerchantReviewDataSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
