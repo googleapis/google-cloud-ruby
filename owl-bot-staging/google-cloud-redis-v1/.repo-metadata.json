@@ -1,0 +1,18 @@
+{
+    "api_id": "redis.googleapis.com",
+    "api_shortname": "redis",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-redis-v1/latest",
+    "distribution_name": "google-cloud-redis-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "redis",
+    "name_pretty": "Google Cloud Memorystore for Redis V1 API",
+    "product_documentation": "https://cloud.google.com/memorystore/docs/redis",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Creates and manages Redis instances on the Google Cloud Platform. Note that google-cloud-redis-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-redis instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "REDIS",
+    "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/redis",
+    "library_type": "GAPIC_AUTO"
+}
