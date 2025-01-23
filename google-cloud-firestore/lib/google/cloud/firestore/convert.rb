@@ -362,7 +362,7 @@ module Google
             )
 
             unless exists.nil? && update_time.nil?
-              write.current_document = \
+              write.current_document =
                 Google::Cloud::Firestore::V1::Precondition.new({
                   exists: exists, update_time: time_to_timestamp(update_time)
                 }.compact)
