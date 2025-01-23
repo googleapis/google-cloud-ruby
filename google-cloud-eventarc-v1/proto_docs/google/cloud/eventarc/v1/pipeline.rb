@@ -99,12 +99,18 @@ module Google
           # @!attribute [rw] protobuf
           #   @return [::Google::Cloud::Eventarc::V1::Pipeline::MessagePayloadFormat::ProtobufFormat]
           #     Optional. Protobuf format.
+          #
+          #     Note: The following fields are mutually exclusive: `protobuf`, `avro`, `json`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] avro
           #   @return [::Google::Cloud::Eventarc::V1::Pipeline::MessagePayloadFormat::AvroFormat]
           #     Optional. Avro format.
+          #
+          #     Note: The following fields are mutually exclusive: `avro`, `protobuf`, `json`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] json
           #   @return [::Google::Cloud::Eventarc::V1::Pipeline::MessagePayloadFormat::JsonFormat]
           #     Optional. JSON format.
+          #
+          #     Note: The following fields are mutually exclusive: `json`, `protobuf`, `avro`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class MessagePayloadFormat
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,23 +152,31 @@ module Google
           #     peering zone to the consumer VPC and forward DNS requests to the VPC
           #     specified by network config to resolve the service endpoint. See:
           #     https://cloud.google.com/dns/docs/zones/zones-overview#peering_zones
+          #
+          #     Note: The following fields are mutually exclusive: `http_endpoint`, `workflow`, `message_bus`, `topic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] workflow
           #   @return [::String]
           #     Optional. The resource name of the Workflow whose Executions are
           #     triggered by the events. The Workflow resource should be deployed in
           #     the same project as the Pipeline. Format:
           #     `projects/{project}/locations/{location}/workflows/{workflow}`
+          #
+          #     Note: The following fields are mutually exclusive: `workflow`, `http_endpoint`, `message_bus`, `topic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] message_bus
           #   @return [::String]
           #     Optional. The resource name of the Message Bus to which events should
           #     be published. The Message Bus resource should exist in the same project
           #     as the Pipeline. Format:
           #     `projects/{project}/locations/{location}/messageBuses/{message_bus}`
+          #
+          #     Note: The following fields are mutually exclusive: `message_bus`, `http_endpoint`, `workflow`, `topic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] topic
           #   @return [::String]
           #     Optional. The resource name of the Pub/Sub topic to which events should
           #     be published. Format:
           #     `projects/{project}/locations/{location}/topics/{topic}`
+          #
+          #     Note: The following fields are mutually exclusive: `topic`, `http_endpoint`, `workflow`, `message_bus`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] authentication_config
           #   @return [::Google::Cloud::Eventarc::V1::Pipeline::Destination::AuthenticationConfig]
           #     Optional. An authentication config used to authenticate message requests,
@@ -377,6 +391,8 @@ module Google
             #   @return [::Google::Cloud::Eventarc::V1::Pipeline::Destination::AuthenticationConfig::OidcToken]
             #     Optional. This authenticate method will apply Google OIDC tokens
             #     signed by a GCP service account to the requests.
+            #
+            #     Note: The following fields are mutually exclusive: `google_oidc`, `oauth_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] oauth_token
             #   @return [::Google::Cloud::Eventarc::V1::Pipeline::Destination::AuthenticationConfig::OAuthToken]
             #     Optional. If specified, an [OAuth
@@ -386,6 +402,8 @@ module Google
             #
             #     This type of authorization should generally only be used when calling
             #     Google APIs hosted on *.googleapis.com.
+            #
+            #     Note: The following fields are mutually exclusive: `oauth_token`, `google_oidc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class AuthenticationConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

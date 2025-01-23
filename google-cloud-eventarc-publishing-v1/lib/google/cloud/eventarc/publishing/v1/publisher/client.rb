@@ -424,14 +424,20 @@ module Google
               #     The Protobuf format of the CloudEvent being published. Specification can
               #     be found here:
               #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/protobuf-format.md
+              #
+              #     Note: The following fields are mutually exclusive: `proto_message`, `json_message`, `avro_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param json_message [::String]
               #     The JSON format of the CloudEvent being published. Specification can be
               #     found here:
               #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+              #
+              #     Note: The following fields are mutually exclusive: `json_message`, `proto_message`, `avro_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param avro_message [::String]
               #     The Avro format of the CloudEvent being published. Specification can
               #     be found here:
               #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/avro-format.md
+              #
+              #     Note: The following fields are mutually exclusive: `avro_message`, `proto_message`, `json_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Eventarc::Publishing::V1::PublishResponse]
