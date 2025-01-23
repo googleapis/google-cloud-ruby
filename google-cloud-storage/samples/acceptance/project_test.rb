@@ -47,18 +47,14 @@ describe "storage_soft_deleted_bucket" do
     # Check if the bucket exist
     puts new_bucket.policy.roles
         puts "new bucket name-- #{new_bucket.name}"
-
-
     assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
     check_bucket = storage_client.bucket new_bucket_name
     delete_bucket_helper new_bucket_name
     # Check if the bucket does not exist
      deleted_bucket = storage_client.bucket new_bucket_name
-     puts "deleted bucket name-- #{deleted_bucket.name}"  if deleted_bucket.present?
+     refute deleted_bucket, "Bucket #{new_bucket_name} should not exist"
 
-     #{}refute deleted_bucket, "Bucket #{new_bucket_name} should not exist"
-    assert deleted_bucket.exists?, "Bucket #{new_bucket_name} should exist"
- 
+     deleted_bucket_fetch = storage_client.bucket new_bucket_name, generation: new_generation, soft_deleted: true
     # output, _err = capture_io do
     #   get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
     # end
