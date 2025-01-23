@@ -176,12 +176,18 @@ module Google
             # @!attribute [rw] google_default_encryption
             #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::GoogleDefaultEncryptionOptions]
             #     Use Google default encryption.
+            #
+            #     Note: The following fields are mutually exclusive: `google_default_encryption`, `use_source_encryption`, `customer_managed_encryption`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] use_source_encryption
             #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::SourceEncryptionOptions]
             #     The database will use the same encryption configuration as the source.
+            #
+            #     Note: The following fields are mutually exclusive: `use_source_encryption`, `google_default_encryption`, `customer_managed_encryption`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] customer_managed_encryption
             #   @return [::Google::Cloud::Firestore::Admin::V1::Database::EncryptionConfig::CustomerManagedEncryptionOptions]
             #     Use Customer Managed Encryption Keys (CMEK) for encryption.
+            #
+            #     Note: The following fields are mutually exclusive: `customer_managed_encryption`, `google_default_encryption`, `use_source_encryption`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class EncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

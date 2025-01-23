@@ -130,20 +130,30 @@ module Google
         # @!attribute [rw] gke_cluster
         #   @return [::Google::Cloud::GkeHub::V1beta1::GkeCluster]
         #     Optional. Specific information for a GKE-on-GCP cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `gke_cluster`, `on_prem_cluster`, `multi_cloud_cluster`, `edge_cluster`, `appliance_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] on_prem_cluster
         #   @return [::Google::Cloud::GkeHub::V1beta1::OnPremCluster]
         #     Optional. Specific information for a GKE On-Prem cluster. An onprem
         #     user-cluster who has no resourceLink is not allowed to use this field, it
         #     should have a nil "type" instead.
+        #
+        #     Note: The following fields are mutually exclusive: `on_prem_cluster`, `gke_cluster`, `multi_cloud_cluster`, `edge_cluster`, `appliance_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_cloud_cluster
         #   @return [::Google::Cloud::GkeHub::V1beta1::MultiCloudCluster]
         #     Optional. Specific information for a GKE Multi-Cloud cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_cloud_cluster`, `gke_cluster`, `on_prem_cluster`, `edge_cluster`, `appliance_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] edge_cluster
         #   @return [::Google::Cloud::GkeHub::V1beta1::EdgeCluster]
         #     Optional. Specific information for a Google Edge cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `edge_cluster`, `gke_cluster`, `on_prem_cluster`, `multi_cloud_cluster`, `appliance_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] appliance_cluster
         #   @return [::Google::Cloud::GkeHub::V1beta1::ApplianceCluster]
         #     Optional. Specific information for a GDC Edge Appliance cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `appliance_cluster`, `gke_cluster`, `on_prem_cluster`, `multi_cloud_cluster`, `edge_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] kubernetes_metadata
         #   @return [::Google::Cloud::GkeHub::V1beta1::KubernetesMetadata]
         #     Output only. Useful Kubernetes-specific metadata.

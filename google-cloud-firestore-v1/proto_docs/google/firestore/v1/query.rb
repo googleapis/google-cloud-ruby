@@ -158,12 +158,18 @@ module Google
           # @!attribute [rw] composite_filter
           #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter]
           #     A composite filter.
+          #
+          #     Note: The following fields are mutually exclusive: `composite_filter`, `field_filter`, `unary_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] field_filter
           #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter]
           #     A filter on a document field.
+          #
+          #     Note: The following fields are mutually exclusive: `field_filter`, `composite_filter`, `unary_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] unary_filter
           #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::UnaryFilter]
           #     A filter that takes exactly one argument.
+          #
+          #     Note: The following fields are mutually exclusive: `unary_filter`, `composite_filter`, `field_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Filter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -470,12 +476,18 @@ module Google
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count]
           #     Count aggregator.
+          #
+          #     Note: The following fields are mutually exclusive: `count`, `sum`, `avg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sum
           #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum]
           #     Sum aggregator.
+          #
+          #     Note: The following fields are mutually exclusive: `sum`, `count`, `avg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] avg
           #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg]
           #     Average aggregator.
+          #
+          #     Note: The following fields are mutually exclusive: `avg`, `count`, `sum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] alias
           #   @return [::String]
           #     Optional. Optional name of the field to store the result of the

@@ -55,9 +55,13 @@ module Google
           # @!attribute [rw] daily_recurrence
           #   @return [::Google::Cloud::Firestore::Admin::V1::DailyRecurrence]
           #     For a schedule that runs daily.
+          #
+          #     Note: The following fields are mutually exclusive: `daily_recurrence`, `weekly_recurrence`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] weekly_recurrence
           #   @return [::Google::Cloud::Firestore::Admin::V1::WeeklyRecurrence]
           #     For a schedule that runs weekly on a specific day.
+          #
+          #     Note: The following fields are mutually exclusive: `weekly_recurrence`, `daily_recurrence`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BackupSchedule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
