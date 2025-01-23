@@ -16,6 +16,7 @@ require_relative "helper"
 require_relative "../storage_get_service_account"
 require_relative "../storage_restore_bucket"
 require_relative "../storage_get_soft_deleted_bucket"
+require_relative "../storage_get_bucket_class_and_location"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
@@ -49,6 +50,12 @@ describe "storage_soft_deleted_bucket" do
         puts "new bucket name-- #{new_bucket.name}"
     assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
     check_bucket = storage_client.bucket new_bucket_name
+
+      expected_output = "Bucket #{new_bucket_name} storage class is " \
+                        "#{check_bucket.storage_class}, and the location is #{check_bucket.location}\n"
+      assert_output expected_output do
+        get_bucket_class_and_location bucket_name: new_bucket_name
+      end
     delete_bucket_helper new_bucket_name
     # Check if the bucket does not exist
      deleted_bucket = storage_client.bucket new_bucket_name
