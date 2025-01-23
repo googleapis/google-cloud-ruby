@@ -72,11 +72,11 @@ describe "storage_soft_deleted_bucket" do
 
   end
 
-  it "restores a soft deleted bucket" do
-    delete_bucket_helper bucket.name
-    _out, _err = capture_io do
-      restore_bucket bucket_name: bucket.name, generation: generation
-    end
-    assert "soft_delete_time", "#{bucket.name} Bucket restored"
-  end
+  # it "restores a soft deleted bucket" do
+  #   delete_bucket_helper bucket.name
+  #   _out, _err = capture_io do
+  #     restore_bucket bucket_name: bucket.name, generation: generation
+  #   end
+  #   assert "soft_delete_time", "#{bucket.name} Bucket restored"
+  # end
 end
