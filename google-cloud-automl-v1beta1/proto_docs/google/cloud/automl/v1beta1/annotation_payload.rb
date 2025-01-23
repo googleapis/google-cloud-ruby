@@ -25,28 +25,44 @@ module Google
         # @!attribute [rw] translation
         #   @return [::Google::Cloud::AutoML::V1beta1::TranslationAnnotation]
         #     Annotation details for translation.
+        #
+        #     Note: The following fields are mutually exclusive: `translation`, `classification`, `image_object_detection`, `video_classification`, `video_object_tracking`, `text_extraction`, `text_sentiment`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] classification
         #   @return [::Google::Cloud::AutoML::V1beta1::ClassificationAnnotation]
         #     Annotation details for content or image classification.
+        #
+        #     Note: The following fields are mutually exclusive: `classification`, `translation`, `image_object_detection`, `video_classification`, `video_object_tracking`, `text_extraction`, `text_sentiment`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_object_detection
         #   @return [::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionAnnotation]
         #     Annotation details for image object detection.
+        #
+        #     Note: The following fields are mutually exclusive: `image_object_detection`, `translation`, `classification`, `video_classification`, `video_object_tracking`, `text_extraction`, `text_sentiment`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_classification
         #   @return [::Google::Cloud::AutoML::V1beta1::VideoClassificationAnnotation]
         #     Annotation details for video classification.
         #     Returned for Video Classification predictions.
+        #
+        #     Note: The following fields are mutually exclusive: `video_classification`, `translation`, `classification`, `image_object_detection`, `video_object_tracking`, `text_extraction`, `text_sentiment`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_object_tracking
         #   @return [::Google::Cloud::AutoML::V1beta1::VideoObjectTrackingAnnotation]
         #     Annotation details for video object tracking.
+        #
+        #     Note: The following fields are mutually exclusive: `video_object_tracking`, `translation`, `classification`, `image_object_detection`, `video_classification`, `text_extraction`, `text_sentiment`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_extraction
         #   @return [::Google::Cloud::AutoML::V1beta1::TextExtractionAnnotation]
         #     Annotation details for text extraction.
+        #
+        #     Note: The following fields are mutually exclusive: `text_extraction`, `translation`, `classification`, `image_object_detection`, `video_classification`, `video_object_tracking`, `text_sentiment`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_sentiment
         #   @return [::Google::Cloud::AutoML::V1beta1::TextSentimentAnnotation]
         #     Annotation details for text sentiment.
+        #
+        #     Note: The following fields are mutually exclusive: `text_sentiment`, `translation`, `classification`, `image_object_detection`, `video_classification`, `video_object_tracking`, `text_extraction`, `tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tables
         #   @return [::Google::Cloud::AutoML::V1beta1::TablesAnnotation]
         #     Annotation details for Tables.
+        #
+        #     Note: The following fields are mutually exclusive: `tables`, `translation`, `classification`, `image_object_detection`, `video_classification`, `video_object_tracking`, `text_extraction`, `text_sentiment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] annotation_spec_id
         #   @return [::String]
         #     Output only . The resource ID of the annotation spec that

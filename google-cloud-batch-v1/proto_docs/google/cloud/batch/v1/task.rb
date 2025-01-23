@@ -159,12 +159,18 @@ module Google
         # @!attribute [rw] container
         #   @return [::Google::Cloud::Batch::V1::Runnable::Container]
         #     Container runnable.
+        #
+        #     Note: The following fields are mutually exclusive: `container`, `script`, `barrier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] script
         #   @return [::Google::Cloud::Batch::V1::Runnable::Script]
         #     Script runnable.
+        #
+        #     Note: The following fields are mutually exclusive: `script`, `container`, `barrier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] barrier
         #   @return [::Google::Cloud::Batch::V1::Runnable::Barrier]
         #     Barrier runnable.
+        #
+        #     Note: The following fields are mutually exclusive: `barrier`, `container`, `script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. DisplayName is an optional field that can be provided by the
@@ -325,6 +331,8 @@ module Google
           #     include `#!/bin/bash` as the first line of the file. Alternatively,
           #     to execute the script using Python3, include `#!/usr/bin/env python3`
           #     as the first line of the file.
+          #
+          #     Note: The following fields are mutually exclusive: `path`, `text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] text
           #   @return [::String]
           #     The text for a script.
@@ -336,6 +344,8 @@ module Google
           #     include `#!/bin/bash\n` at the beginning of the text. Alternatively,
           #     to execute the script using Python3, include `#!/usr/bin/env python3\n`
           #     at the beginning of the text.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Script
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

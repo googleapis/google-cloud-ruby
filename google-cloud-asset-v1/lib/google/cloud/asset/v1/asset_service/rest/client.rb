@@ -1902,9 +1902,13 @@ module Google
               #   @param statement [::String]
               #     Optional. A SQL statement that's compatible with [BigQuery
               #     SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
+              #
+              #     Note: The following fields are mutually exclusive: `statement`, `job_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param job_reference [::String]
               #     Optional. Reference to the query job, which is from the
               #     `QueryAssetsResponse` of previous `QueryAssets` call.
+              #
+              #     Note: The following fields are mutually exclusive: `job_reference`, `statement`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of rows to return in the results. Responses
               #     are limited to 10 MB and 1000 rows.
@@ -1935,9 +1939,13 @@ module Google
               #     Optional. [start_time] is required. [start_time] must be less than
               #     [end_time] Defaults [end_time] to now if [start_time] is set and
               #     [end_time] isn't. Maximum permitted time range is 7 days.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time_window`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Optional. Queries cloud assets as they appeared at the specified point in
               #     time.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time`, `read_time_window`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param output_config [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig, ::Hash]
               #     Optional. Destination where the query results will be saved.
               #

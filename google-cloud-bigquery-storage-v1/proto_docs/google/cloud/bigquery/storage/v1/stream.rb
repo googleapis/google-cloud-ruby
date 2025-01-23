@@ -40,9 +40,13 @@ module Google
           # @!attribute [r] avro_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSchema]
           #     Output only. Avro schema.
+          #
+          #     Note: The following fields are mutually exclusive: `avro_schema`, `arrow_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] arrow_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSchema]
           #     Output only. Arrow schema.
+          #
+          #     Note: The following fields are mutually exclusive: `arrow_schema`, `avro_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] table
           #   @return [::String]
           #     Immutable. Table that this ReadSession is reading from, in the form
@@ -165,9 +169,13 @@ module Google
             # @!attribute [rw] arrow_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions]
             #     Optional. Options specific to the Apache Arrow output format.
+            #
+            #     Note: The following fields are mutually exclusive: `arrow_serialization_options`, `avro_serialization_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] avro_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSerializationOptions]
             #     Optional. Options specific to the Apache Avro output format
+            #
+            #     Note: The following fields are mutually exclusive: `avro_serialization_options`, `arrow_serialization_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] sample_percentage
             #   @return [::Float]
             #     Optional. Specifies a table sampling percentage. Specifically, the query

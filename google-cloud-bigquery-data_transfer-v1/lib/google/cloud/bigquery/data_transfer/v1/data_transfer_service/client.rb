@@ -1121,11 +1121,15 @@ module Google
               #     that are scheduled to be transferred by the scheduled transfer run.
               #     requested_time_range must be a past time and cannot include future time
               #     values.
+              #
+              #     Note: The following fields are mutually exclusive: `requested_time_range`, `requested_run_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param requested_run_time [::Google::Protobuf::Timestamp, ::Hash]
               #     A run_time timestamp for historical data files or reports
               #     that are scheduled to be transferred by the scheduled transfer run.
               #     requested_run_time must be a past time and cannot include future time
               #     values.
+              #
+              #     Note: The following fields are mutually exclusive: `requested_run_time`, `requested_time_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsResponse]
