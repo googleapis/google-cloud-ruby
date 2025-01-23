@@ -75,9 +75,13 @@ module Google
     #     UTC offset. Must be whole seconds, between -18 hours and +18 hours.
     #     For example, a UTC offset of -4:00 would be represented as
     #     { seconds: -14400 }.
+    #
+    #     Note: The following fields are mutually exclusive: `utc_offset`, `time_zone`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] time_zone
     #   @return [::Google::Type::TimeZone]
     #     Time zone.
+    #
+    #     Note: The following fields are mutually exclusive: `time_zone`, `utc_offset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     class DateTime
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -321,17 +321,25 @@ module Google
           # @!attribute [rw] max_num_versions
           #   @return [::Integer]
           #     Delete all cells in a column except the most recent N.
+          #
+          #     Note: The following fields are mutually exclusive: `max_num_versions`, `max_age`, `intersection`, `union`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] max_age
           #   @return [::Google::Protobuf::Duration]
           #     Delete cells in a column older than the given age.
           #     Values must be at least one millisecond, and will be truncated to
           #     microsecond granularity.
+          #
+          #     Note: The following fields are mutually exclusive: `max_age`, `max_num_versions`, `intersection`, `union`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intersection
           #   @return [::Google::Cloud::Bigtable::Admin::V2::GcRule::Intersection]
           #     Delete cells that would be deleted by every nested rule.
+          #
+          #     Note: The following fields are mutually exclusive: `intersection`, `max_num_versions`, `max_age`, `union`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] union
           #   @return [::Google::Cloud::Bigtable::Admin::V2::GcRule::Union]
           #     Delete cells that would be deleted by any nested rule.
+          #
+          #     Note: The following fields are mutually exclusive: `union`, `max_num_versions`, `max_age`, `intersection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class GcRule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

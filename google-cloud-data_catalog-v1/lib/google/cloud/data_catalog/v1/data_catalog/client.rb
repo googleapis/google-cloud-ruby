@@ -1304,6 +1304,8 @@ module Google
             #
             #      * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
             #      * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
+            #
+            #     Note: The following fields are mutually exclusive: `linked_resource`, `sql_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param sql_resource [::String]
             #     The SQL name of the entry. SQL names are case-sensitive.
             #
@@ -1318,6 +1320,8 @@ module Google
             #     Identifiers (`*_ID`) should comply with the
             #     [Lexical structure in Standard SQL]
             #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
+            #
+            #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param fully_qualified_name [::String]
             #     [Fully Qualified Name
             #     (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
@@ -1336,6 +1340,8 @@ module Google
             #     Example for a DPMS table:
             #
             #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+            #
+            #     Note: The following fields are mutually exclusive: `fully_qualified_name`, `linked_resource`, `sql_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param project [::String]
             #     Project where the lookup should be performed. Required to lookup
             #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
@@ -3697,8 +3703,12 @@ module Google
             #     Required. The organization or project whose config is being specified.
             #   @param tag_template_migration [::Google::Cloud::DataCatalog::V1::TagTemplateMigration]
             #     Opt-in status for the migration of Tag Templates to Dataplex.
+            #
+            #     Note: The following fields are mutually exclusive: `tag_template_migration`, `catalog_ui_experience`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param catalog_ui_experience [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
             #     Opt-in status for the UI switch to Dataplex.
+            #
+            #     Note: The following fields are mutually exclusive: `catalog_ui_experience`, `tag_template_migration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::MigrationConfig]

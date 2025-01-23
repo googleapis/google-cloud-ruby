@@ -109,9 +109,13 @@ module Google
         # @!attribute [rw] customer_event
         #   @return [::Google::Cloud::Channel::V1::CustomerEvent]
         #     Customer event sent as part of Pub/Sub event to partners.
+        #
+        #     Note: The following fields are mutually exclusive: `customer_event`, `entitlement_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entitlement_event
         #   @return [::Google::Cloud::Channel::V1::EntitlementEvent]
         #     Entitlement event sent as part of Pub/Sub event to partners.
+        #
+        #     Note: The following fields are mutually exclusive: `entitlement_event`, `customer_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SubscriberEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

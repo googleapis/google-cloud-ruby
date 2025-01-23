@@ -181,10 +181,14 @@ module Google
           #   @return [::Boolean]
           #     Indicates that the client should drop all previous chunks for
           #     `row_key`, as it will be re-read from the beginning.
+          #
+          #     Note: The following fields are mutually exclusive: `reset_row`, `commit_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] commit_row
           #   @return [::Boolean]
           #     Indicates that the client can safely process all previous chunks for
           #     `row_key`, as its data has been fully read.
+          #
+          #     Note: The following fields are mutually exclusive: `commit_row`, `reset_row`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CellChunk
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -544,6 +548,8 @@ module Google
         #     be within the change stream retention period, less than or equal to the
         #     current time, and after change stream creation, whichever is greater.
         #     This value is inclusive and will be truncated to microsecond granularity.
+        #
+        #     Note: The following fields are mutually exclusive: `start_time`, `continuation_tokens`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] continuation_tokens
         #   @return [::Google::Cloud::Bigtable::V2::StreamContinuationTokens]
         #     Tokens that describe how to resume reading a stream where reading
@@ -556,6 +562,8 @@ module Google
         #     of a partition merge, the union of the token partitions must exactly
         #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
         #     returned.
+        #
+        #     Note: The following fields are mutually exclusive: `continuation_tokens`, `start_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     If specified, OK will be returned when the stream advances beyond
@@ -575,12 +583,18 @@ module Google
         # @!attribute [rw] data_change
         #   @return [::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse::DataChange]
         #     A mutation to the partition.
+        #
+        #     Note: The following fields are mutually exclusive: `data_change`, `heartbeat`, `close_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] heartbeat
         #   @return [::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse::Heartbeat]
         #     A periodic heartbeat message.
+        #
+        #     Note: The following fields are mutually exclusive: `heartbeat`, `data_change`, `close_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] close_stream
         #   @return [::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse::CloseStream]
         #     An indication that the stream should be closed.
+        #
+        #     Note: The following fields are mutually exclusive: `close_stream`, `data_change`, `heartbeat`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReadChangeStreamResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -813,11 +827,15 @@ module Google
         #   @return [::Google::Cloud::Bigtable::V2::ResultSetMetadata]
         #     Structure of rows in this response stream. The first (and only the first)
         #     response streamed from the server will be of this type.
+        #
+        #     Note: The following fields are mutually exclusive: `metadata`, `results`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] results
         #   @return [::Google::Cloud::Bigtable::V2::PartialResultSet]
         #     A partial result set with row data potentially including additional
         #     instructions on how recent past and future partial responses should be
         #     interpreted.
+        #
+        #     Note: The following fields are mutually exclusive: `results`, `metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExecuteQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

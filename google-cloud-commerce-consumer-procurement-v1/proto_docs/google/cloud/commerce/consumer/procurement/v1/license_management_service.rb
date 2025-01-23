@@ -27,9 +27,13 @@ module Google
             # @!attribute [rw] manual_assignment_type
             #   @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignmentProtocol::ManualAssignmentType]
             #     Allow manual assignments triggered by administrative operations only.
+            #
+            #     Note: The following fields are mutually exclusive: `manual_assignment_type`, `auto_assignment_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] auto_assignment_type
             #   @return [::Google::Cloud::Commerce::Consumer::Procurement::V1::AssignmentProtocol::AutoAssignmentType]
             #     Allow automatic assignments triggered by data plane operations.
+            #
+            #     Note: The following fields are mutually exclusive: `auto_assignment_type`, `manual_assignment_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class AssignmentProtocol
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

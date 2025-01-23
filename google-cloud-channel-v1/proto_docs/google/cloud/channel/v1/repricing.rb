@@ -81,6 +81,8 @@ module Google
         #     {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
         #     and
         #     {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}.
+        #
+        #     Note: The following fields are mutually exclusive: `entitlement_granularity`, `channel_partner_granularity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] channel_partner_granularity
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::Channel::V1::RepricingConfig::ChannelPartnerGranularity]
@@ -90,6 +92,8 @@ module Google
         #     supports this value. Deprecated: This is no longer supported. Use
         #     {::Google::Cloud::Channel::V1::RepricingConfig#entitlement_granularity RepricingConfig.entitlement_granularity}
         #     instead.
+        #
+        #     Note: The following fields are mutually exclusive: `channel_partner_granularity`, `entitlement_granularity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] effective_invoice_month
         #   @return [::Google::Type::Date]
         #     Required. The YearMonth when these adjustments activate. The Day field

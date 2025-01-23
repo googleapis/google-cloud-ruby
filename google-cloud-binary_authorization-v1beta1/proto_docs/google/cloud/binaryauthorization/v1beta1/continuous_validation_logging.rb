@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] pod_event
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::ContinuousValidationEvent::ContinuousValidationPodEvent]
         #     Pod event.
+        #
+        #     Note: The following fields are mutually exclusive: `pod_event`, `config_error_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] config_error_event
         #   @return [::Google::Cloud::BinaryAuthorization::V1beta1::ContinuousValidationEvent::ConfigErrorEvent]
         #     Config error event.
+        #
+        #     Note: The following fields are mutually exclusive: `config_error_event`, `pod_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ContinuousValidationEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -116,11 +120,15 @@ module Google
                 #     'my-namespace:my-service-account'.
                 #     `kubernetes_service_account` scope is always more specific than
                 #     `kubernetes_namespace` scope for the same namespace.
+                #
+                #     Note: The following fields are mutually exclusive: `kubernetes_service_account`, `kubernetes_namespace`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] kubernetes_namespace
                 #   @return [::String]
                 #     Matches all Kubernetes service accounts in the provided
                 #     namespace, unless a more specific `kubernetes_service_account`
                 #     scope already matched.
+                #
+                #     Note: The following fields are mutually exclusive: `kubernetes_namespace`, `kubernetes_service_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 class CheckSetScope
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
