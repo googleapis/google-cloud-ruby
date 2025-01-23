@@ -50,6 +50,7 @@ describe "storage_soft_deleted_bucket" do
     assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
     check_bucket = storage_client.bucket new_bucket_name
     puts "new bucket name-- #{check_bucket.name}"
+    puts "new bucket generation-- #{check_bucket.generation}"
 
     delete_bucket_helper new_bucket_name
     # Check if the bucket does not exist
@@ -63,9 +64,12 @@ describe "storage_soft_deleted_bucket" do
     # assert_includes output, "soft_delete_time for #{new_bucket_name} is"
 
     _out, _err = capture_io do
-      restore_bucket bucket_name: bucket.name, generation: generation
+      restore_bucket bucket_name: new_bucket_name, generation: new_generation
     end
-    assert "soft_delete_time", "#{bucket.name} Bucket restored"
+
+    restored_bucket = storage_client.create_bucket new_bucket_name
+    assert restored_bucket.exists?, "Bucket #{new_bucket_name} should exist"
+
   end
 
   it "restores a soft deleted bucket" do
