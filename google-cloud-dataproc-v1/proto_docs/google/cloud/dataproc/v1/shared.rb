@@ -76,9 +76,13 @@ module Google
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     Optional. Network URI to connect workload to.
+        #
+        #     Note: The following fields are mutually exclusive: `network_uri`, `subnetwork_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] subnetwork_uri
         #   @return [::String]
         #     Optional. Subnetwork URI to connect workload to.
+        #
+        #     Note: The following fields are mutually exclusive: `subnetwork_uri`, `network_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Optional. Tags used for network traffic control.

@@ -147,15 +147,23 @@ module Google
         # @!attribute [rw] pyspark_batch
         #   @return [::Google::Cloud::Dataproc::V1::PySparkBatch]
         #     Optional. PySpark batch config.
+        #
+        #     Note: The following fields are mutually exclusive: `pyspark_batch`, `spark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkBatch]
         #     Optional. Spark batch config.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_batch`, `pyspark_batch`, `spark_r_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_r_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkRBatch]
         #     Optional. SparkR batch config.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_r_batch`, `pyspark_batch`, `spark_batch`, `spark_sql_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_sql_batch
         #   @return [::Google::Cloud::Dataproc::V1::SparkSqlBatch]
         #     Optional. SparkSql batch config.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_sql_batch`, `pyspark_batch`, `spark_batch`, `spark_r_batch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] runtime_info
         #   @return [::Google::Cloud::Dataproc::V1::RuntimeInfo]
         #     Output only. Runtime information about batch execution.
@@ -286,10 +294,14 @@ module Google
         # @!attribute [rw] main_jar_file_uri
         #   @return [::String]
         #     Optional. The HCFS URI of the jar file that contains the main class.
+        #
+        #     Note: The following fields are mutually exclusive: `main_jar_file_uri`, `main_class`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] main_class
         #   @return [::String]
         #     Optional. The name of the driver main class. The jar file that contains
         #     the class must be in the classpath or specified in `jar_file_uris`.
+        #
+        #     Note: The following fields are mutually exclusive: `main_class`, `main_jar_file_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] args
         #   @return [::Array<::String>]
         #     Optional. The arguments to pass to the driver. Do not include arguments

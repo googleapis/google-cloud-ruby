@@ -109,9 +109,13 @@ module Google
         # @!attribute [rw] jupyter_session
         #   @return [::Google::Cloud::Dataproc::V1::JupyterConfig]
         #     Optional. Jupyter session config.
+        #
+        #     Note: The following fields are mutually exclusive: `jupyter_session`, `spark_connect_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_connect_session
         #   @return [::Google::Cloud::Dataproc::V1::SparkConnectConfig]
         #     Optional. Spark Connect session config.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_connect_session`, `jupyter_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] creator
         #   @return [::String]
         #     Output only. The email address of the user who created the template.
