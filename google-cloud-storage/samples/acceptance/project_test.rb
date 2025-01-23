@@ -17,6 +17,7 @@ require_relative "../storage_get_service_account"
 require_relative "../storage_restore_bucket"
 require_relative "../storage_get_soft_deleted_bucket"
 require_relative "../storage_get_bucket_class_and_location"
+require "pry"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
@@ -47,36 +48,41 @@ describe "storage_soft_deleted_bucket" do
     new_generation = new_bucket.generation
     # Check if the bucket exist
     puts new_bucket.policy.roles
+
+    # ensuring bucket is created
     assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
+
+    # fetching bucket
     check_bucket = storage_client.bucket new_bucket_name
     puts "new bucket name-- #{check_bucket.name}"
     puts "new bucket generation-- #{check_bucket.generation}"
 
     delete_bucket_helper new_bucket_name
-    # Check if the bucket does not exist
+    # Check if the bucket is deleted
     deleted_bucket = storage_client.bucket new_bucket_name
     refute deleted_bucket, "Bucket #{new_bucket_name} should not exist"
+
+    # fetching a soft deleted bucket
 
     # deleted_bucket_fetch = storage_client.bucket new_bucket_name, generation: new_generation, soft_deleted: true
     # output, _err = capture_io do
     #   get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
     # end
     # assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+    
+    # restoring a soft deleted bucket
+    restore_bucket bucket_name: new_bucket_name, generation: new_generation
 
-    _out, _err = capture_io do
-      restore_bucket bucket_name: new_bucket_name, generation: new_generation
-    end
-
-    restored_bucket = storage_client.create_bucket new_bucket_name
+    restored_bucket = storage_client.bucket new_bucket_name
     assert restored_bucket.exists?, "Bucket #{new_bucket_name} should exist"
 
   end
 
-  # it "restores a soft deleted bucket" do
-  #   delete_bucket_helper bucket.name
-  #   _out, _err = capture_io do
-  #     restore_bucket bucket_name: bucket.name, generation: generation
-  #   end
-  #   assert "soft_delete_time", "#{bucket.name} Bucket restored"
-  # end
+  it "restores a soft deleted bucket" do
+    delete_bucket_helper bucket.name
+    _out, _err = capture_io do
+      restore_bucket bucket_name: bucket.name, generation: generation
+    end
+    assert  "#{bucket.name} Bucket restored"
+  end
 end
