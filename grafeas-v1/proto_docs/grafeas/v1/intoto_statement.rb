@@ -33,10 +33,13 @@ module Grafeas
     #     `https://slsa.dev/provenance/v0.1` for SlsaProvenance.
     # @!attribute [rw] provenance
     #   @return [::Grafeas::V1::InTotoProvenance]
+    #     Note: The following fields are mutually exclusive: `provenance`, `slsa_provenance`, `slsa_provenance_zero_two`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] slsa_provenance
     #   @return [::Grafeas::V1::SlsaProvenance]
+    #     Note: The following fields are mutually exclusive: `slsa_provenance`, `provenance`, `slsa_provenance_zero_two`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] slsa_provenance_zero_two
     #   @return [::Grafeas::V1::SlsaProvenanceZeroTwo]
+    #     Note: The following fields are mutually exclusive: `slsa_provenance_zero_two`, `provenance`, `slsa_provenance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     class InTotoStatement
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

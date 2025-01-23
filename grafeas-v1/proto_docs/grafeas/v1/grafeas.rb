@@ -50,37 +50,59 @@ module Grafeas
     # @!attribute [rw] vulnerability
     #   @return [::Grafeas::V1::VulnerabilityOccurrence]
     #     Describes a security vulnerability.
+    #
+    #     Note: The following fields are mutually exclusive: `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] build
     #   @return [::Grafeas::V1::BuildOccurrence]
     #     Describes a verifiable build.
+    #
+    #     Note: The following fields are mutually exclusive: `build`, `vulnerability`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] image
     #   @return [::Grafeas::V1::ImageOccurrence]
     #     Describes how this resource derives from the basis in the associated
     #     note.
+    #
+    #     Note: The following fields are mutually exclusive: `image`, `vulnerability`, `build`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] package
     #   @return [::Grafeas::V1::PackageOccurrence]
     #     Describes the installation of a package on the linked resource.
+    #
+    #     Note: The following fields are mutually exclusive: `package`, `vulnerability`, `build`, `image`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] deployment
     #   @return [::Grafeas::V1::DeploymentOccurrence]
     #     Describes the deployment of an artifact on a runtime.
+    #
+    #     Note: The following fields are mutually exclusive: `deployment`, `vulnerability`, `build`, `image`, `package`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] discovery
     #   @return [::Grafeas::V1::DiscoveryOccurrence]
     #     Describes when a resource was discovered.
+    #
+    #     Note: The following fields are mutually exclusive: `discovery`, `vulnerability`, `build`, `image`, `package`, `deployment`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] attestation
     #   @return [::Grafeas::V1::AttestationOccurrence]
     #     Describes an attestation of an artifact.
+    #
+    #     Note: The following fields are mutually exclusive: `attestation`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] upgrade
     #   @return [::Grafeas::V1::UpgradeOccurrence]
     #     Describes an available package upgrade on the linked resource.
+    #
+    #     Note: The following fields are mutually exclusive: `upgrade`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] compliance
     #   @return [::Grafeas::V1::ComplianceOccurrence]
     #     Describes a compliance violation on a linked resource.
+    #
+    #     Note: The following fields are mutually exclusive: `compliance`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] dsse_attestation
     #   @return [::Grafeas::V1::DSSEAttestationOccurrence]
     #     Describes an attestation of an artifact using dsse.
+    #
+    #     Note: The following fields are mutually exclusive: `dsse_attestation`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] sbom_reference
     #   @return [::Grafeas::V1::SBOMReferenceOccurrence]
     #     Describes a specific SBOM reference occurrences.
+    #
+    #     Note: The following fields are mutually exclusive: `sbom_reference`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] envelope
     #   @return [::Grafeas::V1::Envelope]
     #     https://github.com/secure-systems-lab/dsse
@@ -124,39 +146,63 @@ module Grafeas
     # @!attribute [rw] vulnerability
     #   @return [::Grafeas::V1::VulnerabilityNote]
     #     A note describing a package vulnerability.
+    #
+    #     Note: The following fields are mutually exclusive: `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] build
     #   @return [::Grafeas::V1::BuildNote]
     #     A note describing build provenance for a verifiable build.
+    #
+    #     Note: The following fields are mutually exclusive: `build`, `vulnerability`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] image
     #   @return [::Grafeas::V1::ImageNote]
     #     A note describing a base image.
+    #
+    #     Note: The following fields are mutually exclusive: `image`, `vulnerability`, `build`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] package
     #   @return [::Grafeas::V1::PackageNote]
     #     A note describing a package hosted by various package managers.
+    #
+    #     Note: The following fields are mutually exclusive: `package`, `vulnerability`, `build`, `image`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] deployment
     #   @return [::Grafeas::V1::DeploymentNote]
     #     A note describing something that can be deployed.
+    #
+    #     Note: The following fields are mutually exclusive: `deployment`, `vulnerability`, `build`, `image`, `package`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] discovery
     #   @return [::Grafeas::V1::DiscoveryNote]
     #     A note describing the initial analysis of a resource.
+    #
+    #     Note: The following fields are mutually exclusive: `discovery`, `vulnerability`, `build`, `image`, `package`, `deployment`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] attestation
     #   @return [::Grafeas::V1::AttestationNote]
     #     A note describing an attestation role.
+    #
+    #     Note: The following fields are mutually exclusive: `attestation`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] upgrade
     #   @return [::Grafeas::V1::UpgradeNote]
     #     A note describing available package upgrades.
+    #
+    #     Note: The following fields are mutually exclusive: `upgrade`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `compliance`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] compliance
     #   @return [::Grafeas::V1::ComplianceNote]
     #     A note describing a compliance check.
+    #
+    #     Note: The following fields are mutually exclusive: `compliance`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `dsse_attestation`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] dsse_attestation
     #   @return [::Grafeas::V1::DSSEAttestationNote]
     #     A note describing a dsse attestation note.
+    #
+    #     Note: The following fields are mutually exclusive: `dsse_attestation`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `vulnerability_assessment`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] vulnerability_assessment
     #   @return [::Grafeas::V1::VulnerabilityAssessmentNote]
     #     A note describing a vulnerability assessment.
+    #
+    #     Note: The following fields are mutually exclusive: `vulnerability_assessment`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `sbom_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] sbom_reference
     #   @return [::Grafeas::V1::SBOMReferenceNote]
     #     A note describing an SBOM reference.
+    #
+    #     Note: The following fields are mutually exclusive: `sbom_reference`, `vulnerability`, `build`, `image`, `package`, `deployment`, `discovery`, `attestation`, `upgrade`, `compliance`, `dsse_attestation`, `vulnerability_assessment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     class Note
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

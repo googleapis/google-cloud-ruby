@@ -252,23 +252,33 @@ module Google
             #   @return [::Integer]
             #     This data element is visible to the end users if the remaining stop
             #     count <= remaining_stop_count_threshold.
+            #
+            #     Note: The following fields are mutually exclusive: `remaining_stop_count_threshold`, `duration_until_estimated_arrival_time_threshold`, `remaining_driving_distance_meters_threshold`, `always`, `never`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] duration_until_estimated_arrival_time_threshold
             #   @return [::Google::Protobuf::Duration]
             #     This data element is visible to the end users if the ETA to the stop
             #     <= duration_until_estimated_arrival_time_threshold.
+            #
+            #     Note: The following fields are mutually exclusive: `duration_until_estimated_arrival_time_threshold`, `remaining_stop_count_threshold`, `remaining_driving_distance_meters_threshold`, `always`, `never`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] remaining_driving_distance_meters_threshold
             #   @return [::Integer]
             #     This data element is visible to the end users if the remaining
             #     driving distance in meters <=
             #     remaining_driving_distance_meters_threshold.
+            #
+            #     Note: The following fields are mutually exclusive: `remaining_driving_distance_meters_threshold`, `remaining_stop_count_threshold`, `duration_until_estimated_arrival_time_threshold`, `always`, `never`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] always
             #   @return [::Boolean]
             #     If set to true, this data element is always visible to the end users
             #     with no thresholds. This field cannot be set to false.
+            #
+            #     Note: The following fields are mutually exclusive: `always`, `remaining_stop_count_threshold`, `duration_until_estimated_arrival_time_threshold`, `remaining_driving_distance_meters_threshold`, `never`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] never
             #   @return [::Boolean]
             #     If set to true, this data element is always hidden from the end users
             #     with no thresholds. This field cannot be set to false.
+            #
+            #     Note: The following fields are mutually exclusive: `never`, `remaining_stop_count_threshold`, `duration_until_estimated_arrival_time_threshold`, `remaining_driving_distance_meters_threshold`, `always`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class VisibilityOption
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
