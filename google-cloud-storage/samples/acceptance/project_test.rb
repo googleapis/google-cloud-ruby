@@ -46,7 +46,7 @@ describe "storage_soft_deleted_bucket" do
     new_generation = new_bucket.generation
     # Check if the bucket exist
     puts new_bucket.policy.roles
-        puts "new bucket name-- #{check_bucket.name}"
+        puts "new bucket name-- #{new_bucket.name}"
 
 
     assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
