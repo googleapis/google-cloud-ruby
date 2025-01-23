@@ -364,9 +364,13 @@ module Google
           # @!attribute [rw] amount
           #   @return [::Google::Type::Money]
           #     Compensation amount.
+          #
+          #     Note: The following fields are mutually exclusive: `amount`, `range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] range
           #   @return [::Google::Cloud::Talent::V4::CompensationInfo::CompensationRange]
           #     Compensation range.
+          #
+          #     Note: The following fields are mutually exclusive: `range`, `amount`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] description
           #   @return [::String]
           #     Compensation description.  For example, could

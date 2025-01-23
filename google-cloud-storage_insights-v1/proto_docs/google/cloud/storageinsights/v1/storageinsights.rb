@@ -402,9 +402,13 @@ module Google
         # @!attribute [rw] csv_options
         #   @return [::Google::Cloud::StorageInsights::V1::CSVOptions]
         #     Options for CSV formatted reports.
+        #
+        #     Note: The following fields are mutually exclusive: `csv_options`, `parquet_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parquet_options
         #   @return [::Google::Cloud::StorageInsights::V1::ParquetOptions]
         #     Options for Parquet formatted reports.
+        #
+        #     Note: The following fields are mutually exclusive: `parquet_options`, `csv_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_metadata_report_options
         #   @return [::Google::Cloud::StorageInsights::V1::ObjectMetadataReportOptions]
         #     Report for exporting object metadata.

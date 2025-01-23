@@ -57,13 +57,19 @@ module Google
         #     The log entry payload, represented as a protocol buffer that is
         #     expressed as a JSON object. The only accepted type currently is
         #     [AuditLog][google.cloud.audit.AuditLog].
+        #
+        #     Note: The following fields are mutually exclusive: `proto_payload`, `text_payload`, `struct_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_payload
         #   @return [::String]
         #     The log entry payload, represented as a Unicode string (UTF-8).
+        #
+        #     Note: The following fields are mutually exclusive: `text_payload`, `proto_payload`, `struct_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] struct_payload
         #   @return [::Google::Protobuf::Struct]
         #     The log entry payload, represented as a structure that
         #     is expressed as a JSON object.
+        #
+        #     Note: The following fields are mutually exclusive: `struct_payload`, `proto_payload`, `text_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] operation
         #   @return [::Google::Cloud::ServiceControl::V1::LogEntryOperation]
         #     Optional. Information about an operation associated with the log entry, if

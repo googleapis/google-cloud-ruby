@@ -638,30 +638,48 @@ module Google
         # @!attribute [rw] gcs_data_sink
         #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
         #     A Cloud Storage data sink.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_data_sink`, `posix_data_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] posix_data_sink
         #   @return [::Google::Cloud::StorageTransfer::V1::PosixFilesystem]
         #     A POSIX Filesystem data sink.
+        #
+        #     Note: The following fields are mutually exclusive: `posix_data_sink`, `gcs_data_sink`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
         #     A Cloud Storage data source.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_data_source`, `aws_s3_data_source`, `http_data_source`, `posix_data_source`, `azure_blob_storage_data_source`, `aws_s3_compatible_data_source`, `hdfs_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_s3_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::AwsS3Data]
         #     An AWS S3 data source.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_s3_data_source`, `gcs_data_source`, `http_data_source`, `posix_data_source`, `azure_blob_storage_data_source`, `aws_s3_compatible_data_source`, `hdfs_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] http_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::HttpData]
         #     An HTTP URL data source.
+        #
+        #     Note: The following fields are mutually exclusive: `http_data_source`, `gcs_data_source`, `aws_s3_data_source`, `posix_data_source`, `azure_blob_storage_data_source`, `aws_s3_compatible_data_source`, `hdfs_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] posix_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::PosixFilesystem]
         #     A POSIX Filesystem data source.
+        #
+        #     Note: The following fields are mutually exclusive: `posix_data_source`, `gcs_data_source`, `aws_s3_data_source`, `http_data_source`, `azure_blob_storage_data_source`, `aws_s3_compatible_data_source`, `hdfs_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] azure_blob_storage_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData]
         #     An Azure Blob Storage data source.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_blob_storage_data_source`, `gcs_data_source`, `aws_s3_data_source`, `http_data_source`, `posix_data_source`, `aws_s3_compatible_data_source`, `hdfs_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_s3_compatible_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::AwsS3CompatibleData]
         #     An AWS S3 compatible data source.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_s3_compatible_data_source`, `gcs_data_source`, `aws_s3_data_source`, `http_data_source`, `posix_data_source`, `azure_blob_storage_data_source`, `hdfs_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] hdfs_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::HdfsData]
         #     An HDFS cluster data source.
+        #
+        #     Note: The following fields are mutually exclusive: `hdfs_data_source`, `gcs_data_source`, `aws_s3_data_source`, `http_data_source`, `posix_data_source`, `azure_blob_storage_data_source`, `aws_s3_compatible_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_intermediate_data_location
         #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
         #     For transfers between file systems, specifies a Cloud Storage bucket
