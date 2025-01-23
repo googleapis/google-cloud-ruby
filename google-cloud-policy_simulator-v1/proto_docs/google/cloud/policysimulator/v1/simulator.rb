@@ -101,12 +101,16 @@ module Google
         #     This field is only included for access tuples that were successfully
         #     replayed and had different results under the current policies and the
         #     proposed policies.
+        #
+        #     Note: The following fields are mutually exclusive: `diff`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     The error that caused the access tuple replay to fail.
         #
         #     This field is only included for access tuples that were not replayed
         #     successfully.
+        #
+        #     Note: The following fields are mutually exclusive: `error`, `diff`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the `ReplayResult`, in the following format:

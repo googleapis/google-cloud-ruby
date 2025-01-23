@@ -127,9 +127,13 @@ module Google
         # @!attribute [rw] dataproc_parameters
         #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::DataprocParameters]
         #     Parameters used in Dataproc JobType executions.
+        #
+        #     Note: The following fields are mutually exclusive: `dataproc_parameters`, `vertex_ai_parameters`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_ai_parameters
         #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::VertexAIParameters]
         #     Parameters used in Vertex AI JobType executions.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_ai_parameters`, `dataproc_parameters`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] kernel_spec
         #   @return [::String]
         #     Name of the kernel spec to use. This must be specified if the

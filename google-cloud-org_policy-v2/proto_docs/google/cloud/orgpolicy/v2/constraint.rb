@@ -62,9 +62,13 @@ module Google
         # @!attribute [rw] list_constraint
         #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::ListConstraint]
         #     Defines this constraint as being a ListConstraint.
+        #
+        #     Note: The following fields are mutually exclusive: `list_constraint`, `boolean_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] boolean_constraint
         #   @return [::Google::Cloud::OrgPolicy::V2::Constraint::BooleanConstraint]
         #     Defines this constraint as being a BooleanConstraint.
+        #
+        #     Note: The following fields are mutually exclusive: `boolean_constraint`, `list_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] supports_dry_run
         #   @return [::Boolean]
         #     Shows if dry run is supported for this constraint or not.

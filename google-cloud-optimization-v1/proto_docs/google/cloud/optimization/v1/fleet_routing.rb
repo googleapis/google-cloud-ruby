@@ -1729,9 +1729,13 @@ module Google
         #   @return [::Google::Cloud::Optimization::V1::Location]
         #     A point specified using geographic coordinates, including an optional
         #     heading.
+        #
+        #     Note: The following fields are mutually exclusive: `location`, `place_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] place_id
         #   @return [::String]
         #     The POI Place ID associated with the waypoint.
+        #
+        #     Note: The following fields are mutually exclusive: `place_id`, `location`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] side_of_road
         #   @return [::Boolean]
         #     Indicates that the location of this waypoint is meant to have a preference
@@ -2946,9 +2950,13 @@ module Google
           # @!attribute [rw] index
           #   @return [::Integer]
           #     Index of the field if repeated.
+          #
+          #     Note: The following fields are mutually exclusive: `index`, `key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] key
           #   @return [::String]
           #     Key if the field is a map.
+          #
+          #     Note: The following fields are mutually exclusive: `key`, `index`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sub_field
           #   @return [::Google::Cloud::Optimization::V1::OptimizeToursValidationError::FieldReference]
           #     Recursively nested sub-field, if needed.

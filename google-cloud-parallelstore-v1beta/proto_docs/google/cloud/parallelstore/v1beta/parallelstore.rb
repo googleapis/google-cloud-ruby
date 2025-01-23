@@ -517,15 +517,23 @@ module Google
         # @!attribute [r] source_parallelstore
         #   @return [::Google::Cloud::Parallelstore::V1beta::SourceParallelstore]
         #     Output only. Parallelstore source.
+        #
+        #     Note: The following fields are mutually exclusive: `source_parallelstore`, `source_gcs_bucket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] source_gcs_bucket
         #   @return [::Google::Cloud::Parallelstore::V1beta::SourceGcsBucket]
         #     Output only. Cloud Storage source.
+        #
+        #     Note: The following fields are mutually exclusive: `source_gcs_bucket`, `source_parallelstore`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] destination_gcs_bucket
         #   @return [::Google::Cloud::Parallelstore::V1beta::DestinationGcsBucket]
         #     Output only. Cloud Storage destination.
+        #
+        #     Note: The following fields are mutually exclusive: `destination_gcs_bucket`, `destination_parallelstore`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] destination_parallelstore
         #   @return [::Google::Cloud::Parallelstore::V1beta::DestinationParallelstore]
         #     Output only. Parallelstore destination.
+        #
+        #     Note: The following fields are mutually exclusive: `destination_parallelstore`, `destination_gcs_bucket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] counters
         #   @return [::Google::Cloud::Parallelstore::V1beta::TransferCounters]
         #     Output only. The progress of the transfer operation.
