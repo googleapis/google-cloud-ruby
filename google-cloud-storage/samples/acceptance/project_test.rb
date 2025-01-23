@@ -45,7 +45,7 @@ describe "storage_soft_deleted_bucket" do
     new_bucket = storage_client.create_bucket new_bucket_name
     new_generation = new_bucket.generation
     grant_storage_permission new_bucket_name
-    puts new_bucket.policy
+    puts new_bucket.policy.roles
     # Check if the bucket exist
     assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
     delete_bucket_helper new_bucket_name
