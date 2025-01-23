@@ -194,9 +194,13 @@ module Google
         # @!attribute [rw] fraction_split
         #   @return [::Google::Cloud::AIPlatform::V1::ExportFractionSplit]
         #     Split based on fractions defining the size of each set.
+        #
+        #     Note: The following fields are mutually exclusive: `fraction_split`, `filter_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_split
         #   @return [::Google::Cloud::AIPlatform::V1::ExportFilterSplit]
         #     Split based on the provided filters for each set.
+        #
+        #     Note: The following fields are mutually exclusive: `filter_split`, `fraction_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] annotations_filter
         #   @return [::String]
         #     An expression for filtering what part of the Dataset is to be exported.

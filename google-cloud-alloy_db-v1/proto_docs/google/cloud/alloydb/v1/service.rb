@@ -294,10 +294,14 @@ module Google
         # @!attribute [rw] backup_source
         #   @return [::Google::Cloud::AlloyDB::V1::BackupSource]
         #     Backup source.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_source`, `continuous_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] continuous_backup_source
         #   @return [::Google::Cloud::AlloyDB::V1::ContinuousBackupSource]
         #     ContinuousBackup source. Continuous backup needs to be enabled in the
         #     source cluster for this operation to succeed.
+        #
+        #     Note: The following fields are mutually exclusive: `continuous_backup_source`, `backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the parent resource. For the required format, see the

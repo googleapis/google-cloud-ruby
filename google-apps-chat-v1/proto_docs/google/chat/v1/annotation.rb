@@ -62,12 +62,18 @@ module Google
         # @!attribute [rw] user_mention
         #   @return [::Google::Apps::Chat::V1::UserMentionMetadata]
         #     The metadata of user mention.
+        #
+        #     Note: The following fields are mutually exclusive: `user_mention`, `slash_command`, `rich_link_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] slash_command
         #   @return [::Google::Apps::Chat::V1::SlashCommandMetadata]
         #     The metadata for a slash command.
+        #
+        #     Note: The following fields are mutually exclusive: `slash_command`, `user_mention`, `rich_link_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rich_link_metadata
         #   @return [::Google::Apps::Chat::V1::RichLinkMetadata]
         #     The metadata for a rich link.
+        #
+        #     Note: The following fields are mutually exclusive: `rich_link_metadata`, `user_mention`, `slash_command`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Annotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,9 +144,13 @@ module Google
         # @!attribute [rw] drive_link_data
         #   @return [::Google::Apps::Chat::V1::DriveLinkData]
         #     Data for a drive link.
+        #
+        #     Note: The following fields are mutually exclusive: `drive_link_data`, `chat_space_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] chat_space_link_data
         #   @return [::Google::Apps::Chat::V1::ChatSpaceLinkData]
         #     Data for a chat space link.
+        #
+        #     Note: The following fields are mutually exclusive: `chat_space_link_data`, `drive_link_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RichLinkMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

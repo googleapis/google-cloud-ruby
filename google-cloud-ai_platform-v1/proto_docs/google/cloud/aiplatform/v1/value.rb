@@ -25,12 +25,18 @@ module Google
         # @!attribute [rw] int_value
         #   @return [::Integer]
         #     An integer value.
+        #
+        #     Note: The following fields are mutually exclusive: `int_value`, `double_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     A double value.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `int_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A string value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `double_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Value
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

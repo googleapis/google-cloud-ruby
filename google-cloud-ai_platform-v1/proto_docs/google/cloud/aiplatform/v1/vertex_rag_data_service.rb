@@ -126,9 +126,13 @@ module Google
         # @!attribute [rw] rag_file
         #   @return [::Google::Cloud::AIPlatform::V1::RagFile]
         #     The RagFile that had been uploaded into the RagCorpus.
+        #
+        #     Note: The following fields are mutually exclusive: `rag_file`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     The error that occurred while processing the RagFile.
+        #
+        #     Note: The following fields are mutually exclusive: `error`, `rag_file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class UploadRagFileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,9 +161,13 @@ module Google
         #   @return [::String]
         #     The Google Cloud Storage path into which the partial failures were
         #     written.
+        #
+        #     Note: The following fields are mutually exclusive: `partial_failures_gcs_path`, `partial_failures_bigquery_table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] partial_failures_bigquery_table
         #   @return [::String]
         #     The BigQuery table into which the partial failures were written.
+        #
+        #     Note: The following fields are mutually exclusive: `partial_failures_bigquery_table`, `partial_failures_gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] imported_rag_files_count
         #   @return [::Integer]
         #     The number of RagFiles that had been imported into the RagCorpus.

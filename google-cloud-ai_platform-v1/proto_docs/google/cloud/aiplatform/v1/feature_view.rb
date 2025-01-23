@@ -27,13 +27,19 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::BigQuerySource]
         #     Optional. Configures how data is supposed to be extracted from a BigQuery
         #     source to be loaded onto the FeatureOnlineStore.
+        #
+        #     Note: The following fields are mutually exclusive: `big_query_source`, `feature_registry_source`, `vertex_rag_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature_registry_source
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::FeatureRegistrySource]
         #     Optional. Configures the features from a Feature Registry source that
         #     need to be loaded onto the FeatureOnlineStore.
+        #
+        #     Note: The following fields are mutually exclusive: `feature_registry_source`, `big_query_source`, `vertex_rag_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_rag_source
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::VertexRagSource]
         #     Optional. The Vertex RAG Source that the FeatureView is linked to.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_rag_source`, `big_query_source`, `feature_registry_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the FeatureView. Format:
@@ -118,12 +124,16 @@ module Google
           #     Optional. Configuration options for the tree-AH algorithm (Shallow tree
           #     + Asymmetric Hashing). Please refer to this paper for more details:
           #     https://arxiv.org/abs/1908.10396
+          #
+          #     Note: The following fields are mutually exclusive: `tree_ah_config`, `brute_force_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] brute_force_config
           #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::IndexConfig::BruteForceConfig]
           #     Optional. Configuration options for using brute force search, which
           #     simply implements the standard linear search in the database for each
           #     query. It is primarily meant for benchmarking and to generate the
           #     ground truth for approximate search.
+          #
+          #     Note: The following fields are mutually exclusive: `brute_force_config`, `tree_ah_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] embedding_column
           #   @return [::String]
           #     Optional. Column of embedding. This column contains the source data to

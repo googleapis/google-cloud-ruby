@@ -180,18 +180,25 @@ module Google
         # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#import_feature_values FeaturestoreService.ImportFeatureValues}.
         # @!attribute [rw] avro_source
         #   @return [::Google::Cloud::AIPlatform::V1::AvroSource]
+        #     Note: The following fields are mutually exclusive: `avro_source`, `bigquery_source`, `csv_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::AIPlatform::V1::BigQuerySource]
+        #     Note: The following fields are mutually exclusive: `bigquery_source`, `avro_source`, `csv_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] csv_source
         #   @return [::Google::Cloud::AIPlatform::V1::CsvSource]
+        #     Note: The following fields are mutually exclusive: `csv_source`, `avro_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature_time_field
         #   @return [::String]
         #     Source column that holds the Feature timestamp for all Feature
         #     values in each entity.
+        #
+        #     Note: The following fields are mutually exclusive: `feature_time_field`, `feature_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Single Feature timestamp for all entities being imported. The
         #     timestamp must not have higher than millisecond precision.
+        #
+        #     Note: The following fields are mutually exclusive: `feature_time`, `feature_time_field`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity_type
         #   @return [::String]
         #     Required. The resource name of the EntityType grouping the Features for
@@ -293,9 +300,13 @@ module Google
         #
         #     Values in the timestamp column must use the RFC 3339 format, e.g.
         #     `2012-07-30T10:43:17.123Z`.
+        #
+        #     Note: The following fields are mutually exclusive: `csv_read_instances`, `bigquery_read_instances`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_read_instances
         #   @return [::Google::Cloud::AIPlatform::V1::BigQuerySource]
         #     Similar to csv_read_instances, but from BigQuery source.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_read_instances`, `csv_read_instances`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] featurestore
         #   @return [::String]
         #     Required. The resource name of the Featurestore from which to query Feature
@@ -364,10 +375,14 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ExportFeatureValuesRequest::SnapshotExport]
         #     Exports the latest Feature values of all entities of the EntityType
         #     within a time range.
+        #
+        #     Note: The following fields are mutually exclusive: `snapshot_export`, `full_export`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] full_export
         #   @return [::Google::Cloud::AIPlatform::V1::ExportFeatureValuesRequest::FullExport]
         #     Exports all historical values of all entities of the EntityType within a
         #     time range
+        #
+        #     Note: The following fields are mutually exclusive: `full_export`, `snapshot_export`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity_type
         #   @return [::String]
         #     Required. The resource name of the EntityType from which to export Feature
@@ -441,6 +456,8 @@ module Google
         #     in
         #     {::Google::Cloud::AIPlatform::V1::FeatureValueDestination#bigquery_destination FeatureValueDestination.bigquery_destination}
         #     must refer to a table.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `tfrecord_destination`, `csv_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tfrecord_destination
         #   @return [::Google::Cloud::AIPlatform::V1::TFRecordDestination]
         #     Output in TFRecord format.
@@ -454,10 +471,14 @@ module Google
         #         STRING, STRING_ARRAY, BYTES                | BYTES_LIST
         #         true -> byte_string("true"), false -> byte_string("false")
         #         BOOL, BOOL_ARRAY (true, false)             | BYTES_LIST
+        #
+        #     Note: The following fields are mutually exclusive: `tfrecord_destination`, `bigquery_destination`, `csv_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] csv_destination
         #   @return [::Google::Cloud::AIPlatform::V1::CsvDestination]
         #     Output in CSV format. Array Feature value types are not allowed in CSV
         #     format.
+        #
+        #     Note: The following fields are mutually exclusive: `csv_destination`, `bigquery_destination`, `tfrecord_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FeatureValueDestination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1082,10 +1103,14 @@ module Google
         # @!attribute [rw] select_entity
         #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectEntity]
         #     Select feature values to be deleted by specifying entities.
+        #
+        #     Note: The following fields are mutually exclusive: `select_entity`, `select_time_range_and_feature`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] select_time_range_and_feature
         #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectTimeRangeAndFeature]
         #     Select feature values to be deleted by specifying time range and
         #     features.
+        #
+        #     Note: The following fields are mutually exclusive: `select_time_range_and_feature`, `select_entity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity_type
         #   @return [::String]
         #     Required. The resource name of the EntityType grouping the Features for
@@ -1137,9 +1162,13 @@ module Google
         # @!attribute [rw] select_entity
         #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesResponse::SelectEntity]
         #     Response for request specifying the entities to delete
+        #
+        #     Note: The following fields are mutually exclusive: `select_entity`, `select_time_range_and_feature`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] select_time_range_and_feature
         #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesResponse::SelectTimeRangeAndFeature]
         #     Response for request specifying time range and feature
+        #
+        #     Note: The following fields are mutually exclusive: `select_time_range_and_feature`, `select_entity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DeleteFeatureValuesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

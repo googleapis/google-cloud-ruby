@@ -25,10 +25,14 @@ module Google
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSetFilter::StringFilter]
         #     A filter for a string-type dimension that matches a particular pattern.
+        #
+        #     Note: The following fields are mutually exclusive: `string_filter`, `in_list_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] in_list_filter
         #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSetFilter::InListFilter]
         #     A filter for a string dimension that matches a particular list of
         #     options.
+        #
+        #     Note: The following fields are mutually exclusive: `in_list_filter`, `string_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] field_name
         #   @return [::String]
         #     Required. The dimension name to filter.
@@ -89,15 +93,21 @@ module Google
         #     ExpandedDataSetFilterExpression with either not_expression or
         #     dimension_filter. This must be set for the top level
         #     ExpandedDataSetFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `and_group`, `not_expression`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSetFilterExpression]
         #     A filter expression to be NOT'ed (that is, inverted, complemented). It
         #     must include a dimension_filter. This cannot be set on the
         #     top level ExpandedDataSetFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `not_expression`, `and_group`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter
         #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSetFilter]
         #     A filter on a single dimension. This cannot be set on the top
         #     level ExpandedDataSetFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `filter`, `and_group`, `not_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExpandedDataSetFilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

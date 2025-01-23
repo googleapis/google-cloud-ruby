@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] update_service
         #   @return [::Google::Cloud::AppEngine::V1::UpdateServiceMethod]
         #     Detailed information about UpdateService call.
+        #
+        #     Note: The following fields are mutually exclusive: `update_service`, `create_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_version
         #   @return [::Google::Cloud::AppEngine::V1::CreateVersionMethod]
         #     Detailed information about CreateVersion call.
+        #
+        #     Note: The following fields are mutually exclusive: `create_version`, `update_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AuditData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
