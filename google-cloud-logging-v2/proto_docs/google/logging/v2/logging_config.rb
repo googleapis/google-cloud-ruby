@@ -1416,9 +1416,13 @@ module Google
         # @!attribute [rw] create_bucket_request
         #   @return [::Google::Cloud::Logging::V2::CreateBucketRequest]
         #     LongRunningCreateBucket RPC request.
+        #
+        #     Note: The following fields are mutually exclusive: `create_bucket_request`, `update_bucket_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_bucket_request
         #   @return [::Google::Cloud::Logging::V2::UpdateBucketRequest]
         #     LongRunningUpdateBucket RPC request.
+        #
+        #     Note: The following fields are mutually exclusive: `update_bucket_request`, `create_bucket_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BucketMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1437,9 +1441,13 @@ module Google
         # @!attribute [rw] create_link_request
         #   @return [::Google::Cloud::Logging::V2::CreateLinkRequest]
         #     CreateLink RPC request.
+        #
+        #     Note: The following fields are mutually exclusive: `create_link_request`, `delete_link_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_link_request
         #   @return [::Google::Cloud::Logging::V2::DeleteLinkRequest]
         #     DeleteLink RPC request.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_link_request`, `create_link_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class LinkMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

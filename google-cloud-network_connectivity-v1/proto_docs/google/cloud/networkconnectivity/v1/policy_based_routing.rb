@@ -29,18 +29,26 @@ module Google
         # @!attribute [rw] virtual_machine
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::VirtualMachine]
         #     Optional. VM instances to which this policy based route applies to.
+        #
+        #     Note: The following fields are mutually exclusive: `virtual_machine`, `interconnect_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] interconnect_attachment
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::InterconnectAttachment]
         #     Optional. The interconnect attachments to which this route applies to.
+        #
+        #     Note: The following fields are mutually exclusive: `interconnect_attachment`, `virtual_machine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] next_hop_ilb_ip
         #   @return [::String]
         #     Optional. The IP of a global access enabled L4 ILB that should be the
         #     next hop to handle matching packets. For this version, only
         #     next_hop_ilb_ip is supported.
+        #
+        #     Note: The following fields are mutually exclusive: `next_hop_ilb_ip`, `next_hop_other_routes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] next_hop_other_routes
         #   @return [::Google::Cloud::NetworkConnectivity::V1::PolicyBasedRoute::OtherRoutes]
         #     Optional. Other routes that will be referenced to determine the next hop
         #     of the packet.
+        #
+        #     Note: The following fields are mutually exclusive: `next_hop_other_routes`, `next_hop_ilb_ip`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. A unique name of the resource in the form of

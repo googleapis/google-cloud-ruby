@@ -37,6 +37,8 @@ module Google
         #
         #     Returns groups whose `parent_name` field contains the group
         #     name.  If no groups have this parent, the results are empty.
+        #
+        #     Note: The following fields are mutually exclusive: `children_of_group`, `ancestors_of_group`, `descendants_of_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ancestors_of_group
         #   @return [::String]
         #     A group name. The format is:
@@ -47,6 +49,8 @@ module Google
         #     The groups are returned in order, starting with the immediate parent and
         #     ending with the most distant ancestor.  If the specified group has no
         #     immediate parent, the results are empty.
+        #
+        #     Note: The following fields are mutually exclusive: `ancestors_of_group`, `children_of_group`, `descendants_of_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] descendants_of_group
         #   @return [::String]
         #     A group name. The format is:
@@ -56,6 +60,8 @@ module Google
         #     Returns the descendants of the specified group.  This is a superset of
         #     the results returned by the `children_of_group` filter, and includes
         #     children-of-children, and so forth.
+        #
+        #     Note: The following fields are mutually exclusive: `descendants_of_group`, `children_of_group`, `ancestors_of_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     A positive number that is the maximum number of results to return.

@@ -576,12 +576,18 @@ module Google
         # @!attribute [rw] persistent_disk
         #   @return [::Google::Cloud::LifeSciences::V2beta::PersistentDisk]
         #     Configuration for a persistent disk.
+        #
+        #     Note: The following fields are mutually exclusive: `persistent_disk`, `existing_disk`, `nfs_mount`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] existing_disk
         #   @return [::Google::Cloud::LifeSciences::V2beta::ExistingDisk]
         #     Configuration for a existing disk.
+        #
+        #     Note: The following fields are mutually exclusive: `existing_disk`, `persistent_disk`, `nfs_mount`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] nfs_mount
         #   @return [::Google::Cloud::LifeSciences::V2beta::NFSMount]
         #     Configuration for an NFS mount.
+        #
+        #     Note: The following fields are mutually exclusive: `nfs_mount`, `persistent_disk`, `existing_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -690,42 +696,62 @@ module Google
         #   @return [::Google::Cloud::LifeSciences::V2beta::DelayedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::DelayedEvent google.cloud.lifesciences.v2beta.DelayedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `pull_stopped`, `container_started`, `container_stopped`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] worker_assigned
         #   @return [::Google::Cloud::LifeSciences::V2beta::WorkerAssignedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::WorkerAssignedEvent google.cloud.lifesciences.v2beta.WorkerAssignedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `worker_assigned`, `delayed`, `worker_released`, `pull_started`, `pull_stopped`, `container_started`, `container_stopped`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] worker_released
         #   @return [::Google::Cloud::LifeSciences::V2beta::WorkerReleasedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::WorkerReleasedEvent google.cloud.lifesciences.v2beta.WorkerReleasedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `worker_released`, `delayed`, `worker_assigned`, `pull_started`, `pull_stopped`, `container_started`, `container_stopped`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pull_started
         #   @return [::Google::Cloud::LifeSciences::V2beta::PullStartedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::PullStartedEvent google.cloud.lifesciences.v2beta.PullStartedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_started`, `delayed`, `worker_assigned`, `worker_released`, `pull_stopped`, `container_started`, `container_stopped`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pull_stopped
         #   @return [::Google::Cloud::LifeSciences::V2beta::PullStoppedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::PullStoppedEvent google.cloud.lifesciences.v2beta.PullStoppedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_stopped`, `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `container_started`, `container_stopped`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_started
         #   @return [::Google::Cloud::LifeSciences::V2beta::ContainerStartedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::ContainerStartedEvent google.cloud.lifesciences.v2beta.ContainerStartedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `container_started`, `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `pull_stopped`, `container_stopped`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_stopped
         #   @return [::Google::Cloud::LifeSciences::V2beta::ContainerStoppedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::ContainerStoppedEvent google.cloud.lifesciences.v2beta.ContainerStoppedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `container_stopped`, `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `pull_stopped`, `container_started`, `container_killed`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_killed
         #   @return [::Google::Cloud::LifeSciences::V2beta::ContainerKilledEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::ContainerKilledEvent google.cloud.lifesciences.v2beta.ContainerKilledEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `container_killed`, `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `pull_stopped`, `container_started`, `container_stopped`, `unexpected_exit_status`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] unexpected_exit_status
         #   @return [::Google::Cloud::LifeSciences::V2beta::UnexpectedExitStatusEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::UnexpectedExitStatusEvent google.cloud.lifesciences.v2beta.UnexpectedExitStatusEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `unexpected_exit_status`, `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `pull_stopped`, `container_started`, `container_stopped`, `container_killed`, `failed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] failed
         #   @return [::Google::Cloud::LifeSciences::V2beta::FailedEvent]
         #     See
         #     {::Google::Cloud::LifeSciences::V2beta::FailedEvent google.cloud.lifesciences.v2beta.FailedEvent}.
+        #
+        #     Note: The following fields are mutually exclusive: `failed`, `delayed`, `worker_assigned`, `worker_released`, `pull_started`, `pull_stopped`, `container_started`, `container_stopped`, `container_killed`, `unexpected_exit_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -139,18 +139,28 @@ module Google
         #       `k8s_service`
         #       `servicedirectory_service`
         #       `cloud_run_revision`
+        #
+        #     Note: The following fields are mutually exclusive: `monitored_resource`, `resource_group`, `synthetic_monitor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] resource_group
         #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::ResourceGroup]
         #     The group resource associated with the configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `resource_group`, `monitored_resource`, `synthetic_monitor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] synthetic_monitor
         #   @return [::Google::Cloud::Monitoring::V3::SyntheticMonitorTarget]
         #     Specifies a Synthetic Monitor to invoke.
+        #
+        #     Note: The following fields are mutually exclusive: `synthetic_monitor`, `monitored_resource`, `resource_group`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] http_check
         #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck]
         #     Contains information needed to make an HTTP or HTTPS check.
+        #
+        #     Note: The following fields are mutually exclusive: `http_check`, `tcp_check`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tcp_check
         #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::TcpCheck]
         #     Contains information needed to make a TCP check.
+        #
+        #     Note: The following fields are mutually exclusive: `tcp_check`, `http_check`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] period
         #   @return [::Google::Protobuf::Duration]
         #     How often, in seconds, the Uptime check is performed.
@@ -347,9 +357,13 @@ module Google
             # @!attribute [rw] status_value
             #   @return [::Integer]
             #     A status code to accept.
+            #
+            #     Note: The following fields are mutually exclusive: `status_value`, `status_class`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] status_class
             #   @return [::Google::Cloud::Monitoring::V3::UptimeCheckConfig::HttpCheck::ResponseStatusCode::StatusClass]
             #     A class of status codes to accept.
+            #
+            #     Note: The following fields are mutually exclusive: `status_class`, `status_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class ResponseStatusCode
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

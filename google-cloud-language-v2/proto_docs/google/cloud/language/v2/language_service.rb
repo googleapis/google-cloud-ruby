@@ -30,12 +30,16 @@ module Google
         #   @return [::String]
         #     The content of the input in string format.
         #     Cloud audit logging exempt since it is based on user data.
+        #
+        #     Note: The following fields are mutually exclusive: `content`, `gcs_content_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_content_uri
         #   @return [::String]
         #     The Google Cloud Storage URI where the file content is located.
         #     This URI must be of the form: gs://bucket_name/object_name. For more
         #     details, see https://cloud.google.com/storage/docs/reference-uris.
         #     NOTE: Cloud Storage object versioning is not supported.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_content_uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The language of the document (if not specified, the language is

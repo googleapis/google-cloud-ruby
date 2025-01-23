@@ -135,9 +135,13 @@ module Google
           #   @return [::Google::Cloud::Memorystore::V1beta::PscAutoConnection]
           #     Detailed information of a PSC connection that is created through
           #     service connectivity automation.
+          #
+          #     Note: The following fields are mutually exclusive: `psc_auto_connection`, `psc_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] psc_connection
           #   @return [::Google::Cloud::Memorystore::V1beta::PscConnection]
           #     Detailed information of a PSC connection that is created by the user.
+          #
+          #     Note: The following fields are mutually exclusive: `psc_connection`, `psc_auto_connection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ConnectionDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
