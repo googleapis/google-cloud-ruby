@@ -25,10 +25,14 @@ module Google
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroupFilter::StringFilter]
         #     A filter for a string-type dimension that matches a particular pattern.
+        #
+        #     Note: The following fields are mutually exclusive: `string_filter`, `in_list_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] in_list_filter
         #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroupFilter::InListFilter]
         #     A filter for a string dimension that matches a particular list of
         #     options.
+        #
+        #     Note: The following fields are mutually exclusive: `in_list_filter`, `string_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] field_name
         #   @return [::String]
         #     Required. Immutable. The dimension name to filter.
@@ -90,19 +94,27 @@ module Google
         #     A list of expressions to be AND’ed together. It can only contain
         #     ChannelGroupFilterExpressions with or_group. This must be set for the
         #     top level ChannelGroupFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `and_group`, `or_group`, `not_expression`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] or_group
         #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroupFilterExpressionList]
         #     A list of expressions to OR’ed together. It cannot contain
         #     ChannelGroupFilterExpressions with and_group or or_group.
+        #
+        #     Note: The following fields are mutually exclusive: `or_group`, `and_group`, `not_expression`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroupFilterExpression]
         #     A filter expression to be NOT'ed (that is inverted, complemented). It
         #     can only include a dimension_or_metric_filter. This cannot be set on the
         #     top level ChannelGroupFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `not_expression`, `and_group`, `or_group`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter
         #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroupFilter]
         #     A filter on a single dimension. This cannot be set on the top
         #     level ChannelGroupFilterExpression.
+        #
+        #     Note: The following fields are mutually exclusive: `filter`, `and_group`, `or_group`, `not_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ChannelGroupFilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

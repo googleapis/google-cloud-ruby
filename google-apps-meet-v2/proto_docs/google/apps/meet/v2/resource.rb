@@ -138,12 +138,18 @@ module Google
         # @!attribute [rw] signedin_user
         #   @return [::Google::Apps::Meet::V2::SignedinUser]
         #     Signed-in user.
+        #
+        #     Note: The following fields are mutually exclusive: `signedin_user`, `anonymous_user`, `phone_user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] anonymous_user
         #   @return [::Google::Apps::Meet::V2::AnonymousUser]
         #     Anonymous user.
+        #
+        #     Note: The following fields are mutually exclusive: `anonymous_user`, `signedin_user`, `phone_user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] phone_user
         #   @return [::Google::Apps::Meet::V2::PhoneUser]
         #     User calling from their phone.
+        #
+        #     Note: The following fields are mutually exclusive: `phone_user`, `signedin_user`, `anonymous_user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name of the participant.

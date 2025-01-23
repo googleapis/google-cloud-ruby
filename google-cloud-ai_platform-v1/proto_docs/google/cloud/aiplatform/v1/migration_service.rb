@@ -92,18 +92,26 @@ module Google
         # @!attribute [rw] migrate_ml_engine_model_version_config
         #   @return [::Google::Cloud::AIPlatform::V1::MigrateResourceRequest::MigrateMlEngineModelVersionConfig]
         #     Config for migrating Version in ml.googleapis.com to Vertex AI's Model.
+        #
+        #     Note: The following fields are mutually exclusive: `migrate_ml_engine_model_version_config`, `migrate_automl_model_config`, `migrate_automl_dataset_config`, `migrate_data_labeling_dataset_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] migrate_automl_model_config
         #   @return [::Google::Cloud::AIPlatform::V1::MigrateResourceRequest::MigrateAutomlModelConfig]
         #     Config for migrating Model in automl.googleapis.com to Vertex AI's
         #     Model.
+        #
+        #     Note: The following fields are mutually exclusive: `migrate_automl_model_config`, `migrate_ml_engine_model_version_config`, `migrate_automl_dataset_config`, `migrate_data_labeling_dataset_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] migrate_automl_dataset_config
         #   @return [::Google::Cloud::AIPlatform::V1::MigrateResourceRequest::MigrateAutomlDatasetConfig]
         #     Config for migrating Dataset in automl.googleapis.com to Vertex AI's
         #     Dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `migrate_automl_dataset_config`, `migrate_ml_engine_model_version_config`, `migrate_automl_model_config`, `migrate_data_labeling_dataset_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] migrate_data_labeling_dataset_config
         #   @return [::Google::Cloud::AIPlatform::V1::MigrateResourceRequest::MigrateDataLabelingDatasetConfig]
         #     Config for migrating Dataset in datalabeling.googleapis.com to
         #     Vertex AI's Dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `migrate_data_labeling_dataset_config`, `migrate_ml_engine_model_version_config`, `migrate_automl_model_config`, `migrate_automl_dataset_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MigrateResourceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,9 +221,13 @@ module Google
         # @!attribute [rw] dataset
         #   @return [::String]
         #     Migrated Dataset's resource name.
+        #
+        #     Note: The following fields are mutually exclusive: `dataset`, `model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] model
         #   @return [::String]
         #     Migrated Model's resource name.
+        #
+        #     Note: The following fields are mutually exclusive: `model`, `dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] migratable_resource
         #   @return [::Google::Cloud::AIPlatform::V1::MigratableResource]
         #     Before migration, the identifier in ml.googleapis.com,
@@ -242,12 +254,18 @@ module Google
           # @!attribute [rw] error
           #   @return [::Google::Rpc::Status]
           #     The error result of the migration request in case of failure.
+          #
+          #     Note: The following fields are mutually exclusive: `error`, `model`, `dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] model
           #   @return [::String]
           #     Migrated model resource name.
+          #
+          #     Note: The following fields are mutually exclusive: `model`, `error`, `dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dataset
           #   @return [::String]
           #     Migrated dataset resource name.
+          #
+          #     Note: The following fields are mutually exclusive: `dataset`, `error`, `model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] request
           #   @return [::Google::Cloud::AIPlatform::V1::MigrateResourceRequest]
           #     It's the same as the value in

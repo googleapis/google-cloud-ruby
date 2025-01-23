@@ -191,12 +191,18 @@ module Google
           # @!attribute [rw] value_int
           #   @return [::Integer]
           #     Represents 64 bit integer.
+          #
+          #     Note: The following fields are mutually exclusive: `value_int`, `value_float`, `value_double`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] value_float
           #   @return [::Float]
           #     Represents 32 bit float.
+          #
+          #     Note: The following fields are mutually exclusive: `value_float`, `value_int`, `value_double`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] value_double
           #   @return [::Float]
           #     Represents 64 bit float.
+          #
+          #     Note: The following fields are mutually exclusive: `value_double`, `value_int`, `value_float`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] namespace
           #   @return [::String]
           #     The namespace of this restriction. e.g.: cost.

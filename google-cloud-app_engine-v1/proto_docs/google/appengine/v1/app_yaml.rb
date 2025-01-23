@@ -91,14 +91,20 @@ module Google
         # @!attribute [rw] static_files
         #   @return [::Google::Cloud::AppEngine::V1::StaticFilesHandler]
         #     Returns the contents of a file, such as an image, as the response.
+        #
+        #     Note: The following fields are mutually exclusive: `static_files`, `script`, `api_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] script
         #   @return [::Google::Cloud::AppEngine::V1::ScriptHandler]
         #     Executes a script to handle the requests that match this URL
         #     pattern. Only the `auto` value is supported for Node.js in the
         #     App Engine standard environment, for example `"script": "auto"`.
+        #
+        #     Note: The following fields are mutually exclusive: `script`, `static_files`, `api_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] api_endpoint
         #   @return [::Google::Cloud::AppEngine::V1::ApiEndpointHandler]
         #     Uses API Endpoints to handle requests.
+        #
+        #     Note: The following fields are mutually exclusive: `api_endpoint`, `static_files`, `script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] security_level
         #   @return [::Google::Cloud::AppEngine::V1::SecurityLevel]
         #     Security (HTTPS) enforcement for this URL.

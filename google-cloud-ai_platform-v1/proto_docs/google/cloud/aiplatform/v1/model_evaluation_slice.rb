@@ -146,16 +146,22 @@ module Google
               #   @return [::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice::Slice::SliceSpec::Value]
               #     A unique specific value for a given feature.
               #     Example: `{ "value": { "string_value": "12345" } }`
+              #
+              #     Note: The following fields are mutually exclusive: `value`, `range`, `all_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] range
               #   @return [::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice::Slice::SliceSpec::Range]
               #     A range of values for a numerical feature.
               #     Example: `{"range":{"low":10000.0,"high":50000.0}}`
               #     will capture 12345 and 23334 in the slice.
+              #
+              #     Note: The following fields are mutually exclusive: `range`, `value`, `all_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] all_values
               #   @return [::Google::Protobuf::BoolValue]
               #     If all_values is set to true, then all possible labels of the keyed
               #     feature will have another slice computed.
               #     Example: `{"all_values":{"value":true}}`
+              #
+              #     Note: The following fields are mutually exclusive: `all_values`, `value`, `range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class SliceConfig
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -178,9 +184,13 @@ module Google
               # @!attribute [rw] string_value
               #   @return [::String]
               #     String type.
+              #
+              #     Note: The following fields are mutually exclusive: `string_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] float_value
               #   @return [::Float]
               #     Float type.
+              #
+              #     Note: The following fields are mutually exclusive: `float_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class Value
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods

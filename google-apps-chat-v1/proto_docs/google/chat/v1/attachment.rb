@@ -37,10 +37,14 @@ module Google
         #     Optional. A reference to the attachment data. This field is used to
         #     create or update messages with attachments, or with the media API to
         #     download the attachment data.
+        #
+        #     Note: The following fields are mutually exclusive: `attachment_data_ref`, `drive_data_ref`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] drive_data_ref
         #   @return [::Google::Apps::Chat::V1::DriveDataRef]
         #     Output only. A reference to the Google Drive attachment. This field is
         #     used with the Google Drive API.
+        #
+        #     Note: The following fields are mutually exclusive: `drive_data_ref`, `attachment_data_ref`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] thumbnail_uri
         #   @return [::String]
         #     Output only. The thumbnail URL which should be used to preview the

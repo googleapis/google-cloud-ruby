@@ -26,84 +26,134 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ExactMatchInput]
         #     Auto metric instances.
         #     Instances and metric spec for exact match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bleu_input
         #   @return [::Google::Cloud::AIPlatform::V1::BleuInput]
         #     Instances and metric spec for bleu metric.
+        #
+        #     Note: The following fields are mutually exclusive: `bleu_input`, `exact_match_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rouge_input
         #   @return [::Google::Cloud::AIPlatform::V1::RougeInput]
         #     Instances and metric spec for rouge metric.
+        #
+        #     Note: The following fields are mutually exclusive: `rouge_input`, `exact_match_input`, `bleu_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fluency_input
         #   @return [::Google::Cloud::AIPlatform::V1::FluencyInput]
         #     LLM-based metric instance.
         #     General text generation metrics, applicable to other categories.
         #     Input for fluency metric.
+        #
+        #     Note: The following fields are mutually exclusive: `fluency_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] coherence_input
         #   @return [::Google::Cloud::AIPlatform::V1::CoherenceInput]
         #     Input for coherence metric.
+        #
+        #     Note: The following fields are mutually exclusive: `coherence_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] safety_input
         #   @return [::Google::Cloud::AIPlatform::V1::SafetyInput]
         #     Input for safety metric.
+        #
+        #     Note: The following fields are mutually exclusive: `safety_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] groundedness_input
         #   @return [::Google::Cloud::AIPlatform::V1::GroundednessInput]
         #     Input for groundedness metric.
+        #
+        #     Note: The following fields are mutually exclusive: `groundedness_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fulfillment_input
         #   @return [::Google::Cloud::AIPlatform::V1::FulfillmentInput]
         #     Input for fulfillment metric.
+        #
+        #     Note: The following fields are mutually exclusive: `fulfillment_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_quality_input
         #   @return [::Google::Cloud::AIPlatform::V1::SummarizationQualityInput]
         #     Input for summarization quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_quality_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pairwise_summarization_quality_input
         #   @return [::Google::Cloud::AIPlatform::V1::PairwiseSummarizationQualityInput]
         #     Input for pairwise summarization quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_summarization_quality_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_helpfulness_input
         #   @return [::Google::Cloud::AIPlatform::V1::SummarizationHelpfulnessInput]
         #     Input for summarization helpfulness metric.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_helpfulness_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_verbosity_input
         #   @return [::Google::Cloud::AIPlatform::V1::SummarizationVerbosityInput]
         #     Input for summarization verbosity metric.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_verbosity_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_quality_input
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringQualityInput]
         #     Input for question answering quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_quality_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pairwise_question_answering_quality_input
         #   @return [::Google::Cloud::AIPlatform::V1::PairwiseQuestionAnsweringQualityInput]
         #     Input for pairwise question answering quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_question_answering_quality_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_relevance_input
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringRelevanceInput]
         #     Input for question answering relevance metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_relevance_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_helpfulness_input
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringHelpfulnessInput]
         #     Input for question answering helpfulness
         #     metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_helpfulness_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_correctness_input
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringCorrectnessInput]
         #     Input for question answering correctness
         #     metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_correctness_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pointwise_metric_input
         #   @return [::Google::Cloud::AIPlatform::V1::PointwiseMetricInput]
         #     Input for pointwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pointwise_metric_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pairwise_metric_input
         #   @return [::Google::Cloud::AIPlatform::V1::PairwiseMetricInput]
         #     Input for pairwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_metric_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_call_valid_input
         #   @return [::Google::Cloud::AIPlatform::V1::ToolCallValidInput]
         #     Tool call metric instances.
         #     Input for tool call valid metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_call_valid_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_name_match_input
         #   @return [::Google::Cloud::AIPlatform::V1::ToolNameMatchInput]
         #     Input for tool name match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_name_match_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_parameter_key_match_input
         #   @return [::Google::Cloud::AIPlatform::V1::ToolParameterKeyMatchInput]
         #     Input for tool parameter key match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_parameter_key_match_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_kv_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_parameter_kv_match_input
         #   @return [::Google::Cloud::AIPlatform::V1::ToolParameterKVMatchInput]
         #     Input for tool parameter key value match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_parameter_kv_match_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `comet_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] comet_input
         #   @return [::Google::Cloud::AIPlatform::V1::CometInput]
         #     Translation metrics.
         #     Input for Comet metric.
+        #
+        #     Note: The following fields are mutually exclusive: `comet_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `metricx_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metricx_input
         #   @return [::Google::Cloud::AIPlatform::V1::MetricxInput]
         #     Input for Metricx metric.
+        #
+        #     Note: The following fields are mutually exclusive: `metricx_input`, `exact_match_input`, `bleu_input`, `rouge_input`, `fluency_input`, `coherence_input`, `safety_input`, `groundedness_input`, `fulfillment_input`, `summarization_quality_input`, `pairwise_summarization_quality_input`, `summarization_helpfulness_input`, `summarization_verbosity_input`, `question_answering_quality_input`, `pairwise_question_answering_quality_input`, `question_answering_relevance_input`, `question_answering_helpfulness_input`, `question_answering_correctness_input`, `pointwise_metric_input`, `pairwise_metric_input`, `tool_call_valid_input`, `tool_name_match_input`, `tool_parameter_key_match_input`, `tool_parameter_kv_match_input`, `comet_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] location
         #   @return [::String]
         #     Required. The resource name of the Location to evaluate the instances.
@@ -118,85 +168,135 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::ExactMatchResults]
         #     Auto metric evaluation results.
         #     Results for exact match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bleu_results
         #   @return [::Google::Cloud::AIPlatform::V1::BleuResults]
         #     Results for bleu metric.
+        #
+        #     Note: The following fields are mutually exclusive: `bleu_results`, `exact_match_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rouge_results
         #   @return [::Google::Cloud::AIPlatform::V1::RougeResults]
         #     Results for rouge metric.
+        #
+        #     Note: The following fields are mutually exclusive: `rouge_results`, `exact_match_results`, `bleu_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fluency_result
         #   @return [::Google::Cloud::AIPlatform::V1::FluencyResult]
         #     LLM-based metric evaluation result.
         #     General text generation metrics, applicable to other categories.
         #     Result for fluency metric.
+        #
+        #     Note: The following fields are mutually exclusive: `fluency_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] coherence_result
         #   @return [::Google::Cloud::AIPlatform::V1::CoherenceResult]
         #     Result for coherence metric.
+        #
+        #     Note: The following fields are mutually exclusive: `coherence_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] safety_result
         #   @return [::Google::Cloud::AIPlatform::V1::SafetyResult]
         #     Result for safety metric.
+        #
+        #     Note: The following fields are mutually exclusive: `safety_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] groundedness_result
         #   @return [::Google::Cloud::AIPlatform::V1::GroundednessResult]
         #     Result for groundedness metric.
+        #
+        #     Note: The following fields are mutually exclusive: `groundedness_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fulfillment_result
         #   @return [::Google::Cloud::AIPlatform::V1::FulfillmentResult]
         #     Result for fulfillment metric.
+        #
+        #     Note: The following fields are mutually exclusive: `fulfillment_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_quality_result
         #   @return [::Google::Cloud::AIPlatform::V1::SummarizationQualityResult]
         #     Summarization only metrics.
         #     Result for summarization quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_quality_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pairwise_summarization_quality_result
         #   @return [::Google::Cloud::AIPlatform::V1::PairwiseSummarizationQualityResult]
         #     Result for pairwise summarization quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_summarization_quality_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_helpfulness_result
         #   @return [::Google::Cloud::AIPlatform::V1::SummarizationHelpfulnessResult]
         #     Result for summarization helpfulness metric.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_helpfulness_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] summarization_verbosity_result
         #   @return [::Google::Cloud::AIPlatform::V1::SummarizationVerbosityResult]
         #     Result for summarization verbosity metric.
+        #
+        #     Note: The following fields are mutually exclusive: `summarization_verbosity_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_quality_result
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringQualityResult]
         #     Question answering only metrics.
         #     Result for question answering quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_quality_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pairwise_question_answering_quality_result
         #   @return [::Google::Cloud::AIPlatform::V1::PairwiseQuestionAnsweringQualityResult]
         #     Result for pairwise question answering quality metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_question_answering_quality_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_relevance_result
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringRelevanceResult]
         #     Result for question answering relevance metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_relevance_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_helpfulness_result
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringHelpfulnessResult]
         #     Result for question answering helpfulness metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_helpfulness_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] question_answering_correctness_result
         #   @return [::Google::Cloud::AIPlatform::V1::QuestionAnsweringCorrectnessResult]
         #     Result for question answering correctness metric.
+        #
+        #     Note: The following fields are mutually exclusive: `question_answering_correctness_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pointwise_metric_result
         #   @return [::Google::Cloud::AIPlatform::V1::PointwiseMetricResult]
         #     Generic metrics.
         #     Result for pointwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pointwise_metric_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pairwise_metric_result
         #   @return [::Google::Cloud::AIPlatform::V1::PairwiseMetricResult]
         #     Result for pairwise metric.
+        #
+        #     Note: The following fields are mutually exclusive: `pairwise_metric_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_call_valid_results
         #   @return [::Google::Cloud::AIPlatform::V1::ToolCallValidResults]
         #     Tool call metrics.
         #      Results for tool call valid metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_call_valid_results`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_name_match_results
         #   @return [::Google::Cloud::AIPlatform::V1::ToolNameMatchResults]
         #     Results for tool name match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_name_match_results`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_parameter_key_match_results
         #   @return [::Google::Cloud::AIPlatform::V1::ToolParameterKeyMatchResults]
         #     Results for tool parameter key match  metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_parameter_key_match_results`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_kv_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_parameter_kv_match_results
         #   @return [::Google::Cloud::AIPlatform::V1::ToolParameterKVMatchResults]
         #     Results for tool parameter key value match metric.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_parameter_kv_match_results`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `comet_result`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] comet_result
         #   @return [::Google::Cloud::AIPlatform::V1::CometResult]
         #     Translation metrics.
         #     Result for Comet metric.
+        #
+        #     Note: The following fields are mutually exclusive: `comet_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `metricx_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metricx_result
         #   @return [::Google::Cloud::AIPlatform::V1::MetricxResult]
         #     Result for Metricx metric.
+        #
+        #     Note: The following fields are mutually exclusive: `metricx_result`, `exact_match_results`, `bleu_results`, `rouge_results`, `fluency_result`, `coherence_result`, `safety_result`, `groundedness_result`, `fulfillment_result`, `summarization_quality_result`, `pairwise_summarization_quality_result`, `summarization_helpfulness_result`, `summarization_verbosity_result`, `question_answering_quality_result`, `pairwise_question_answering_quality_result`, `question_answering_relevance_result`, `question_answering_helpfulness_result`, `question_answering_correctness_result`, `pointwise_metric_result`, `pairwise_metric_result`, `tool_call_valid_results`, `tool_name_match_results`, `tool_parameter_key_match_results`, `tool_parameter_kv_match_results`, `comet_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EvaluateInstancesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

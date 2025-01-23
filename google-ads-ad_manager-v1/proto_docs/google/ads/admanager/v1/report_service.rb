@@ -60,24 +60,38 @@ module Google
           # @!attribute [rw] int_value
           #   @return [::Integer]
           #     For integer values.
+          #
+          #     Note: The following fields are mutually exclusive: `int_value`, `double_value`, `string_value`, `bool_value`, `int_list_value`, `string_list_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] double_value
           #   @return [::Float]
           #     For double values.
+          #
+          #     Note: The following fields are mutually exclusive: `double_value`, `int_value`, `string_value`, `bool_value`, `int_list_value`, `string_list_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] string_value
           #   @return [::String]
           #     For string values.
+          #
+          #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `double_value`, `bool_value`, `int_list_value`, `string_list_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bool_value
           #   @return [::Boolean]
           #     For boolean values.
+          #
+          #     Note: The following fields are mutually exclusive: `bool_value`, `int_value`, `double_value`, `string_value`, `int_list_value`, `string_list_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] int_list_value
           #   @return [::Google::Ads::AdManager::V1::Report::Value::IntList]
           #     For lists of integer values.
+          #
+          #     Note: The following fields are mutually exclusive: `int_list_value`, `int_value`, `double_value`, `string_value`, `bool_value`, `string_list_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] string_list_value
           #   @return [::Google::Ads::AdManager::V1::Report::Value::StringList]
           #     For lists of string values.
+          #
+          #     Note: The following fields are mutually exclusive: `string_list_value`, `int_value`, `double_value`, `string_value`, `bool_value`, `int_list_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bytes_value
           #   @return [::String]
           #     For bytes values.
+          #
+          #     Note: The following fields are mutually exclusive: `bytes_value`, `int_value`, `double_value`, `string_value`, `bool_value`, `int_list_value`, `string_list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Value
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -187,9 +201,13 @@ module Google
           # @!attribute [rw] dimension
           #   @return [::Google::Ads::AdManager::V1::Report::Dimension]
           #     The dimension this field represents.
+          #
+          #     Note: The following fields are mutually exclusive: `dimension`, `metric`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] metric
           #   @return [::Google::Ads::AdManager::V1::Report::Metric]
           #     The metric this field represents.
+          #
+          #     Note: The following fields are mutually exclusive: `metric`, `dimension`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Field
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,15 +232,23 @@ module Google
           # @!attribute [rw] field_filter
           #   @return [::Google::Ads::AdManager::V1::Report::Filter::FieldFilter]
           #     A filter on a single field.
+          #
+          #     Note: The following fields are mutually exclusive: `field_filter`, `not_filter`, `and_filter`, `or_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] not_filter
           #   @return [::Google::Ads::AdManager::V1::Report::Filter]
           #     A filter whose result is negated.
+          #
+          #     Note: The following fields are mutually exclusive: `not_filter`, `field_filter`, `and_filter`, `or_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] and_filter
           #   @return [::Google::Ads::AdManager::V1::Report::Filter::FilterList]
           #     A list of filters whose results are AND-ed.
+          #
+          #     Note: The following fields are mutually exclusive: `and_filter`, `field_filter`, `not_filter`, `or_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] or_filter
           #   @return [::Google::Ads::AdManager::V1::Report::Filter::FilterList]
           #     A list of filters whose results are OR-ed.
+          #
+          #     Note: The following fields are mutually exclusive: `or_filter`, `field_filter`, `not_filter`, `and_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Filter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,9 +367,13 @@ module Google
           # @!attribute [rw] fixed
           #   @return [::Google::Ads::AdManager::V1::Report::DateRange::FixedDateRange]
           #     A fixed date range.
+          #
+          #     Note: The following fields are mutually exclusive: `fixed`, `relative`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] relative
           #   @return [::Google::Ads::AdManager::V1::Report::DateRange::RelativeDateRange]
           #     A relative date range.
+          #
+          #     Note: The following fields are mutually exclusive: `relative`, `fixed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class DateRange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3396,9 +3426,13 @@ module Google
         # @!attribute [rw] weekly_schedule
         #   @return [::Google::Ads::AdManager::V1::Schedule::WeeklySchedule]
         #     Days of week to schedule report run.
+        #
+        #     Note: The following fields are mutually exclusive: `weekly_schedule`, `monthly_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] monthly_schedule
         #   @return [::Google::Ads::AdManager::V1::Schedule::MonthlySchedule]
         #     Days of month to schedule report run.
+        #
+        #     Note: The following fields are mutually exclusive: `monthly_schedule`, `weekly_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] start_date
         #   @return [::Google::Type::Date]
         #     Date for the first run of the report.

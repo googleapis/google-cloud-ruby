@@ -398,9 +398,13 @@ module Google
         # @!attribute [r] container_detail
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineTaskExecutorDetail::ContainerDetail]
         #     Output only. The detailed info for a container executor.
+        #
+        #     Note: The following fields are mutually exclusive: `container_detail`, `custom_job_detail`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] custom_job_detail
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineTaskExecutorDetail::CustomJobDetail]
         #     Output only. The detailed info for a custom job executor.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_job_detail`, `container_detail`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PipelineTaskExecutorDetail
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

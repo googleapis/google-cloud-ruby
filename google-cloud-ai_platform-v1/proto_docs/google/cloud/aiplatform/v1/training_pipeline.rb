@@ -156,24 +156,34 @@ module Google
         # @!attribute [rw] fraction_split
         #   @return [::Google::Cloud::AIPlatform::V1::FractionSplit]
         #     Split based on fractions defining the size of each set.
+        #
+        #     Note: The following fields are mutually exclusive: `fraction_split`, `filter_split`, `predefined_split`, `timestamp_split`, `stratified_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_split
         #   @return [::Google::Cloud::AIPlatform::V1::FilterSplit]
         #     Split based on the provided filters for each set.
+        #
+        #     Note: The following fields are mutually exclusive: `filter_split`, `fraction_split`, `predefined_split`, `timestamp_split`, `stratified_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] predefined_split
         #   @return [::Google::Cloud::AIPlatform::V1::PredefinedSplit]
         #     Supported only for tabular Datasets.
         #
         #     Split based on a predefined key.
+        #
+        #     Note: The following fields are mutually exclusive: `predefined_split`, `fraction_split`, `filter_split`, `timestamp_split`, `stratified_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_split
         #   @return [::Google::Cloud::AIPlatform::V1::TimestampSplit]
         #     Supported only for tabular Datasets.
         #
         #     Split based on the timestamp of the input data pieces.
+        #
+        #     Note: The following fields are mutually exclusive: `timestamp_split`, `fraction_split`, `filter_split`, `predefined_split`, `stratified_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stratified_split
         #   @return [::Google::Cloud::AIPlatform::V1::StratifiedSplit]
         #     Supported only for tabular Datasets.
         #
         #     Split based on the distribution of the specified column.
+        #
+        #     Note: The following fields are mutually exclusive: `stratified_split`, `fraction_split`, `filter_split`, `predefined_split`, `timestamp_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
         #     The Cloud Storage location where the training data is to be
@@ -196,6 +206,8 @@ module Google
         #
         #     * AIP_TEST_DATA_URI =
         #     "gcs_destination/dataset-<dataset-id>-<annotation-type>-<time>/test-*.$\\{AIP_DATA_FORMAT}"
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
         #     Only applicable to custom training with tabular Dataset with BigQuery
@@ -217,6 +229,8 @@ module Google
         #
         #     * AIP_TEST_DATA_URI =
         #     "bigquery_destination.dataset_<dataset-id>_<annotation-type>_<time>.test"
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dataset_id
         #   @return [::String]
         #     Required. The ID of the Dataset in the same Project and Location which data

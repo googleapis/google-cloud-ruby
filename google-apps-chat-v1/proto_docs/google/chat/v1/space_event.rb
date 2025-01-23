@@ -85,91 +85,127 @@ module Google
         #     Event payload for a new message.
         #
         #     Event type: `google.workspace.chat.message.v1.created`
+        #
+        #     Note: The following fields are mutually exclusive: `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] message_updated_event_data
         #   @return [::Google::Apps::Chat::V1::MessageUpdatedEventData]
         #     Event payload for an updated message.
         #
         #     Event type: `google.workspace.chat.message.v1.updated`
+        #
+        #     Note: The following fields are mutually exclusive: `message_updated_event_data`, `message_created_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] message_deleted_event_data
         #   @return [::Google::Apps::Chat::V1::MessageDeletedEventData]
         #     Event payload for a deleted message.
         #
         #     Event type: `google.workspace.chat.message.v1.deleted`
+        #
+        #     Note: The following fields are mutually exclusive: `message_deleted_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] message_batch_created_event_data
         #   @return [::Google::Apps::Chat::V1::MessageBatchCreatedEventData]
         #     Event payload for multiple new messages.
         #
         #     Event type: `google.workspace.chat.message.v1.batchCreated`
+        #
+        #     Note: The following fields are mutually exclusive: `message_batch_created_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] message_batch_updated_event_data
         #   @return [::Google::Apps::Chat::V1::MessageBatchUpdatedEventData]
         #     Event payload for multiple updated messages.
         #
         #     Event type: `google.workspace.chat.message.v1.batchUpdated`
+        #
+        #     Note: The following fields are mutually exclusive: `message_batch_updated_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] message_batch_deleted_event_data
         #   @return [::Google::Apps::Chat::V1::MessageBatchDeletedEventData]
         #     Event payload for multiple deleted messages.
         #
         #     Event type: `google.workspace.chat.message.v1.batchDeleted`
+        #
+        #     Note: The following fields are mutually exclusive: `message_batch_deleted_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] space_updated_event_data
         #   @return [::Google::Apps::Chat::V1::SpaceUpdatedEventData]
         #     Event payload for a space update.
         #
         #     Event type: `google.workspace.chat.space.v1.updated`
+        #
+        #     Note: The following fields are mutually exclusive: `space_updated_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] space_batch_updated_event_data
         #   @return [::Google::Apps::Chat::V1::SpaceBatchUpdatedEventData]
         #     Event payload for multiple updates to a space.
         #
         #     Event type: `google.workspace.chat.space.v1.batchUpdated`
+        #
+        #     Note: The following fields are mutually exclusive: `space_batch_updated_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] membership_created_event_data
         #   @return [::Google::Apps::Chat::V1::MembershipCreatedEventData]
         #     Event payload for a new membership.
         #
         #     Event type: `google.workspace.chat.membership.v1.created`
+        #
+        #     Note: The following fields are mutually exclusive: `membership_created_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] membership_updated_event_data
         #   @return [::Google::Apps::Chat::V1::MembershipUpdatedEventData]
         #     Event payload for an updated membership.
         #
         #     Event type: `google.workspace.chat.membership.v1.updated`
+        #
+        #     Note: The following fields are mutually exclusive: `membership_updated_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] membership_deleted_event_data
         #   @return [::Google::Apps::Chat::V1::MembershipDeletedEventData]
         #     Event payload for a deleted membership.
         #
         #     Event type: `google.workspace.chat.membership.v1.deleted`
+        #
+        #     Note: The following fields are mutually exclusive: `membership_deleted_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] membership_batch_created_event_data
         #   @return [::Google::Apps::Chat::V1::MembershipBatchCreatedEventData]
         #     Event payload for multiple new memberships.
         #
         #     Event type: `google.workspace.chat.membership.v1.batchCreated`
+        #
+        #     Note: The following fields are mutually exclusive: `membership_batch_created_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] membership_batch_updated_event_data
         #   @return [::Google::Apps::Chat::V1::MembershipBatchUpdatedEventData]
         #     Event payload for multiple updated memberships.
         #
         #     Event type: `google.workspace.chat.membership.v1.batchUpdated`
+        #
+        #     Note: The following fields are mutually exclusive: `membership_batch_updated_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] membership_batch_deleted_event_data
         #   @return [::Google::Apps::Chat::V1::MembershipBatchDeletedEventData]
         #     Event payload for multiple deleted memberships.
         #
         #     Event type: `google.workspace.chat.membership.v1.batchDeleted`
+        #
+        #     Note: The following fields are mutually exclusive: `membership_batch_deleted_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reaction_created_event_data
         #   @return [::Google::Apps::Chat::V1::ReactionCreatedEventData]
         #     Event payload for a new reaction.
         #
         #     Event type: `google.workspace.chat.reaction.v1.created`
+        #
+        #     Note: The following fields are mutually exclusive: `reaction_created_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reaction_deleted_event_data
         #   @return [::Google::Apps::Chat::V1::ReactionDeletedEventData]
         #     Event payload for a deleted reaction.
         #
         #     Event type: `google.workspace.chat.reaction.v1.deleted`
+        #
+        #     Note: The following fields are mutually exclusive: `reaction_deleted_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_batch_created_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reaction_batch_created_event_data
         #   @return [::Google::Apps::Chat::V1::ReactionBatchCreatedEventData]
         #     Event payload for multiple new reactions.
         #
         #     Event type: `google.workspace.chat.reaction.v1.batchCreated`
+        #
+        #     Note: The following fields are mutually exclusive: `reaction_batch_created_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_deleted_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reaction_batch_deleted_event_data
         #   @return [::Google::Apps::Chat::V1::ReactionBatchDeletedEventData]
         #     Event payload for multiple deleted reactions.
         #
         #     Event type: `google.workspace.chat.reaction.v1.batchDeleted`
+        #
+        #     Note: The following fields are mutually exclusive: `reaction_batch_deleted_event_data`, `message_created_event_data`, `message_updated_event_data`, `message_deleted_event_data`, `message_batch_created_event_data`, `message_batch_updated_event_data`, `message_batch_deleted_event_data`, `space_updated_event_data`, `space_batch_updated_event_data`, `membership_created_event_data`, `membership_updated_event_data`, `membership_deleted_event_data`, `membership_batch_created_event_data`, `membership_batch_updated_event_data`, `membership_batch_deleted_event_data`, `reaction_created_event_data`, `reaction_deleted_event_data`, `reaction_batch_created_event_data`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SpaceEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

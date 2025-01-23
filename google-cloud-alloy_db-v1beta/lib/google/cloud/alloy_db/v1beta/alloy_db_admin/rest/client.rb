@@ -1152,9 +1152,13 @@ module Google
               #
               #   @param backup_source [::Google::Cloud::AlloyDB::V1beta::BackupSource, ::Hash]
               #     Backup source.
+              #
+              #     Note: The following fields are mutually exclusive: `backup_source`, `continuous_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param continuous_backup_source [::Google::Cloud::AlloyDB::V1beta::ContinuousBackupSource, ::Hash]
               #     ContinuousBackup source. Continuous backup needs to be enabled in the
               #     source cluster for this operation to succeed.
+              #
+              #     Note: The following fields are mutually exclusive: `continuous_backup_source`, `backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param parent [::String]
               #     Required. The name of the parent resource. For the required format, see the
               #     comment on the Cluster.name field.

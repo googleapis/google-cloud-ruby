@@ -25,19 +25,29 @@ module Google
         # @!attribute [rw] dataform_repository_source
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::DataformRepositorySource]
         #     The Dataform Repository pointing to a single file notebook repository.
+        #
+        #     Note: The following fields are mutually exclusive: `dataform_repository_source`, `gcs_notebook_source`, `direct_notebook_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_notebook_source
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::GcsNotebookSource]
         #     The Cloud Storage url pointing to the ipynb file. Format:
         #     `gs://bucket/notebook_file.ipynb`
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_notebook_source`, `dataform_repository_source`, `direct_notebook_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] direct_notebook_source
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::DirectNotebookSource]
         #     The contents of an input notebook file.
+        #
+        #     Note: The following fields are mutually exclusive: `direct_notebook_source`, `dataform_repository_source`, `gcs_notebook_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] notebook_runtime_template_resource_name
         #   @return [::String]
         #     The NotebookRuntimeTemplate to source compute configuration from.
+        #
+        #     Note: The following fields are mutually exclusive: `notebook_runtime_template_resource_name`, `custom_environment_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_environment_spec
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::CustomEnvironmentSpec]
         #     The custom compute configuration for an execution job.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_environment_spec`, `notebook_runtime_template_resource_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_output_uri
         #   @return [::String]
         #     The Cloud Storage location to upload the result to. Format:
@@ -45,9 +55,13 @@ module Google
         # @!attribute [rw] execution_user
         #   @return [::String]
         #     The user email to run the execution as. Only supported by Colab runtimes.
+        #
+        #     Note: The following fields are mutually exclusive: `execution_user`, `service_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account to run the execution as.
+        #
+        #     Note: The following fields are mutually exclusive: `service_account`, `execution_user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] workbench_runtime
         #   @return [::Google::Cloud::AIPlatform::V1::NotebookExecutionJob::WorkbenchRuntime]
         #     The Workbench runtime configuration to use for the notebook execution.

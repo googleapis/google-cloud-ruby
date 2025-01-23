@@ -133,10 +133,14 @@ module Google
         # @!attribute [rw] vertex_ai_search
         #   @return [::Google::Cloud::AIPlatform::V1::VertexAISearch]
         #     Set to use data source powered by Vertex AI Search.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_ai_search`, `vertex_rag_store`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vertex_rag_store
         #   @return [::Google::Cloud::AIPlatform::V1::VertexRagStore]
         #     Set to use data source powered by Vertex RAG store.
         #     User data is uploaded via the VertexRagDataService.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_rag_store`, `vertex_ai_search`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] disable_attribution
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Boolean]
@@ -302,10 +306,14 @@ module Google
           #   @return [::Float]
           #     Optional. Only returns contexts with vector distance smaller than the
           #     threshold.
+          #
+          #     Note: The following fields are mutually exclusive: `vector_distance_threshold`, `vector_similarity_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] vector_similarity_threshold
           #   @return [::Float]
           #     Optional. Only returns contexts with vector similarity larger than the
           #     threshold.
+          #
+          #     Note: The following fields are mutually exclusive: `vector_similarity_threshold`, `vector_distance_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] metadata_filter
           #   @return [::String]
           #     Optional. String for metadata filtering.

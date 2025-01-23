@@ -133,11 +133,15 @@ module Google
         #     when creating a space. If the field is not set, a collaboration space is
         #     created. After you create the space, settings are populated in the
         #     `PermissionSettings` field.
+        #
+        #     Note: The following fields are mutually exclusive: `predefined_permission_settings`, `permission_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] permission_settings
         #   @return [::Google::Apps::Chat::V1::Space::PermissionSettings]
         #     Optional. Space permission settings for existing spaces. Input for
         #     updating exact space permission settings, where existing permission
         #     settings are replaced. Output lists current permission settings.
+        #
+        #     Note: The following fields are mutually exclusive: `permission_settings`, `predefined_permission_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] import_mode_expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time when the space will be automatically deleted by the

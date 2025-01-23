@@ -158,9 +158,13 @@ module Google
         # @!attribute [rw] time_based_retention
         #   @return [::Google::Cloud::AlloyDB::V1alpha::AutomatedBackupPolicy::TimeBasedRetention]
         #     Time-based Backup retention policy.
+        #
+        #     Note: The following fields are mutually exclusive: `time_based_retention`, `quantity_based_retention`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] quantity_based_retention
         #   @return [::Google::Cloud::AlloyDB::V1alpha::AutomatedBackupPolicy::QuantityBasedRetention]
         #     Quantity-based Backup retention policy to retain recent backups.
+        #
+        #     Note: The following fields are mutually exclusive: `quantity_based_retention`, `time_based_retention`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enabled
         #   @return [::Boolean]
         #     Whether automated automated backups are enabled. If not set, defaults to
@@ -361,12 +365,18 @@ module Google
         # @!attribute [r] backup_source
         #   @return [::Google::Cloud::AlloyDB::V1alpha::BackupSource]
         #     Output only. Cluster created from backup.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_source`, `migration_source`, `cloudsql_backup_run_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] migration_source
         #   @return [::Google::Cloud::AlloyDB::V1alpha::MigrationSource]
         #     Output only. Cluster created via DMS migration.
+        #
+        #     Note: The following fields are mutually exclusive: `migration_source`, `backup_source`, `cloudsql_backup_run_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] cloudsql_backup_run_source
         #   @return [::Google::Cloud::AlloyDB::V1alpha::CloudSQLBackupRunSource]
         #     Output only. Cluster created from CloudSQL snapshot.
+        #
+        #     Note: The following fields are mutually exclusive: `cloudsql_backup_run_source`, `backup_source`, `migration_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The name of the cluster resource with the format:
@@ -1370,9 +1380,13 @@ module Google
         # @!attribute [rw] string_restrictions
         #   @return [::Google::Cloud::AlloyDB::V1alpha::SupportedDatabaseFlag::StringRestrictions]
         #     Restriction on STRING type value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_restrictions`, `integer_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] integer_restrictions
         #   @return [::Google::Cloud::AlloyDB::V1alpha::SupportedDatabaseFlag::IntegerRestrictions]
         #     Restriction on INTEGER type value.
+        #
+        #     Note: The following fields are mutually exclusive: `integer_restrictions`, `string_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the flag resource, following Google Cloud conventions, e.g.:

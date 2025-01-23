@@ -848,14 +848,20 @@ module Google
         #   @return [::Google::Cloud::ApiHub::V1::AttributeValues::EnumAttributeValues]
         #     The attribute values associated with a resource in case attribute data
         #     type is enum.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_values`, `string_values`, `json_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_values
         #   @return [::Google::Cloud::ApiHub::V1::AttributeValues::StringAttributeValues]
         #     The attribute values associated with a resource in case attribute data
         #     type is string.
+        #
+        #     Note: The following fields are mutually exclusive: `string_values`, `enum_values`, `json_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json_values
         #   @return [::Google::Cloud::ApiHub::V1::AttributeValues::StringAttributeValues]
         #     The attribute values associated with a resource in case attribute data
         #     type is JSON.
+        #
+        #     Note: The following fields are mutually exclusive: `json_values`, `enum_values`, `string_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] attribute
         #   @return [::String]
         #     Output only. The name of the attribute.
@@ -969,12 +975,16 @@ module Google
         #
         #     Format:
         #     `projects/{project}/locations/{location}/apis/{api}/versions/{version}/operations/{operation}`
+        #
+        #     Note: The following fields are mutually exclusive: `operation_resource_name`, `external_api_resource_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] external_api_resource_name
         #   @return [::String]
         #     The resource name of an external API in the API Hub.
         #
         #     Format:
         #     `projects/{project}/locations/{location}/externalApis/{external_api}`
+        #
+        #     Note: The following fields are mutually exclusive: `external_api_resource_name`, `operation_resource_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] display_name
         #   @return [::String]
         #     Output only. Display name of the entity.

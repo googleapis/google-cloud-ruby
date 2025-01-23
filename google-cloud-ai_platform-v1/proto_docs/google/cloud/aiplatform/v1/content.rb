@@ -51,23 +51,33 @@ module Google
         # @!attribute [rw] text
         #   @return [::String]
         #     Optional. Text part (can be code).
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `inline_data`, `file_data`, `function_call`, `function_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inline_data
         #   @return [::Google::Cloud::AIPlatform::V1::Blob]
         #     Optional. Inlined bytes data.
+        #
+        #     Note: The following fields are mutually exclusive: `inline_data`, `text`, `file_data`, `function_call`, `function_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] file_data
         #   @return [::Google::Cloud::AIPlatform::V1::FileData]
         #     Optional. URI based data.
+        #
+        #     Note: The following fields are mutually exclusive: `file_data`, `text`, `inline_data`, `function_call`, `function_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] function_call
         #   @return [::Google::Cloud::AIPlatform::V1::FunctionCall]
         #     Optional. A predicted [FunctionCall] returned from the model that
         #     contains a string representing the [FunctionDeclaration.name] with the
         #     parameters and their values.
+        #
+        #     Note: The following fields are mutually exclusive: `function_call`, `text`, `inline_data`, `file_data`, `function_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] function_response
         #   @return [::Google::Cloud::AIPlatform::V1::FunctionResponse]
         #     Optional. The result output of a [FunctionCall] that contains a string
         #     representing the [FunctionDeclaration.name] and a structured JSON object
         #     containing any output from the function call. It is used as context to
         #     the model.
+        #
+        #     Note: The following fields are mutually exclusive: `function_response`, `text`, `inline_data`, `file_data`, `function_call`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::VideoMetadata]
         #     Optional. Video metadata. The metadata should only be specified while the
@@ -179,9 +189,13 @@ module Google
           # @!attribute [rw] auto_mode
           #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig::AutoRoutingMode]
           #     Automated routing.
+          #
+          #     Note: The following fields are mutually exclusive: `auto_mode`, `manual_mode`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] manual_mode
           #   @return [::Google::Cloud::AIPlatform::V1::GenerationConfig::RoutingConfig::ManualRoutingMode]
           #     Manual routing.
+          #
+          #     Note: The following fields are mutually exclusive: `manual_mode`, `auto_mode`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class RoutingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -508,9 +522,13 @@ module Google
         # @!attribute [rw] web
         #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::Web]
         #     Grounding chunk from the web.
+        #
+        #     Note: The following fields are mutually exclusive: `web`, `retrieved_context`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] retrieved_context
         #   @return [::Google::Cloud::AIPlatform::V1::GroundingChunk::RetrievedContext]
         #     Grounding chunk from context retrieved by the retrieval tools.
+        #
+        #     Note: The following fields are mutually exclusive: `retrieved_context`, `web`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GroundingChunk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1879,14 +1879,21 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param avro_source [::Google::Cloud::AIPlatform::V1::AvroSource, ::Hash]
+              #     Note: The following fields are mutually exclusive: `avro_source`, `bigquery_source`, `csv_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param bigquery_source [::Google::Cloud::AIPlatform::V1::BigQuerySource, ::Hash]
+              #     Note: The following fields are mutually exclusive: `bigquery_source`, `avro_source`, `csv_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param csv_source [::Google::Cloud::AIPlatform::V1::CsvSource, ::Hash]
+              #     Note: The following fields are mutually exclusive: `csv_source`, `avro_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param feature_time_field [::String]
               #     Source column that holds the Feature timestamp for all Feature
               #     values in each entity.
+              #
+              #     Note: The following fields are mutually exclusive: `feature_time_field`, `feature_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param feature_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Single Feature timestamp for all entities being imported. The
               #     timestamp must not have higher than millisecond precision.
+              #
+              #     Note: The following fields are mutually exclusive: `feature_time`, `feature_time_field`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param entity_type [::String]
               #     Required. The resource name of the EntityType grouping the Features for
               #     which values are being imported. Format:
@@ -2026,8 +2033,12 @@ module Google
               #
               #     Values in the timestamp column must use the RFC 3339 format, e.g.
               #     `2012-07-30T10:43:17.123Z`.
+              #
+              #     Note: The following fields are mutually exclusive: `csv_read_instances`, `bigquery_read_instances`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param bigquery_read_instances [::Google::Cloud::AIPlatform::V1::BigQuerySource, ::Hash]
               #     Similar to csv_read_instances, but from BigQuery source.
+              #
+              #     Note: The following fields are mutually exclusive: `bigquery_read_instances`, `csv_read_instances`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param featurestore [::String]
               #     Required. The resource name of the Featurestore from which to query Feature
               #     values. Format:
@@ -2137,9 +2148,13 @@ module Google
               #   @param snapshot_export [::Google::Cloud::AIPlatform::V1::ExportFeatureValuesRequest::SnapshotExport, ::Hash]
               #     Exports the latest Feature values of all entities of the EntityType
               #     within a time range.
+              #
+              #     Note: The following fields are mutually exclusive: `snapshot_export`, `full_export`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param full_export [::Google::Cloud::AIPlatform::V1::ExportFeatureValuesRequest::FullExport, ::Hash]
               #     Exports all historical values of all entities of the EntityType within a
               #     time range
+              #
+              #     Note: The following fields are mutually exclusive: `full_export`, `snapshot_export`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param entity_type [::String]
               #     Required. The resource name of the EntityType from which to export Feature
               #     values. Format:
@@ -2246,9 +2261,13 @@ module Google
               #
               #   @param select_entity [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectEntity, ::Hash]
               #     Select feature values to be deleted by specifying entities.
+              #
+              #     Note: The following fields are mutually exclusive: `select_entity`, `select_time_range_and_feature`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param select_time_range_and_feature [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectTimeRangeAndFeature, ::Hash]
               #     Select feature values to be deleted by specifying time range and
               #     features.
+              #
+              #     Note: The following fields are mutually exclusive: `select_time_range_and_feature`, `select_entity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param entity_type [::String]
               #     Required. The resource name of the EntityType grouping the Features for
               #     which values are being deleted from. Format:

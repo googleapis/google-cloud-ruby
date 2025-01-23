@@ -42,9 +42,13 @@ module Google
         # @!attribute [rw] unicode
         #   @return [::String]
         #     Optional. A basic emoji represented by a unicode string.
+        #
+        #     Note: The following fields are mutually exclusive: `unicode`, `custom_emoji`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] custom_emoji
         #   @return [::Google::Apps::Chat::V1::CustomEmoji]
         #     Output only. A custom emoji.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_emoji`, `unicode`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Emoji
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

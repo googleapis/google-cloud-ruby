@@ -208,9 +208,13 @@ module Google
         # @!attribute [rw] max_duration
         #   @return [::Google::Protobuf::Duration]
         #     Counts the wallclock time passed since the creation of this Study.
+        #
+        #     Note: The following fields are mutually exclusive: `max_duration`, `end_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Compares the wallclock time to this time. Must use UTC timezone.
+        #
+        #     Note: The following fields are mutually exclusive: `end_time`, `max_duration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StudyTimeConstraint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,12 +224,18 @@ module Google
         # @!attribute [rw] decay_curve_stopping_spec
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::DecayCurveAutomatedStoppingSpec]
         #     The automated early stopping spec using decay curve rule.
+        #
+        #     Note: The following fields are mutually exclusive: `decay_curve_stopping_spec`, `median_automated_stopping_spec`, `convex_automated_stopping_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] median_automated_stopping_spec
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MedianAutomatedStoppingSpec]
         #     The automated early stopping spec using median rule.
+        #
+        #     Note: The following fields are mutually exclusive: `median_automated_stopping_spec`, `decay_curve_stopping_spec`, `convex_automated_stopping_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] convex_automated_stopping_spec
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ConvexAutomatedStoppingSpec]
         #     The automated early stopping spec using convex stopping rule.
+        #
+        #     Note: The following fields are mutually exclusive: `convex_automated_stopping_spec`, `decay_curve_stopping_spec`, `median_automated_stopping_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::StudySpec::MetricSpec>]
         #     Required. Metric specs for the Study.
@@ -302,15 +312,23 @@ module Google
           # @!attribute [rw] double_value_spec
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::DoubleValueSpec]
           #     The value spec for a 'DOUBLE' parameter.
+          #
+          #     Note: The following fields are mutually exclusive: `double_value_spec`, `integer_value_spec`, `categorical_value_spec`, `discrete_value_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] integer_value_spec
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::IntegerValueSpec]
           #     The value spec for an 'INTEGER' parameter.
+          #
+          #     Note: The following fields are mutually exclusive: `integer_value_spec`, `double_value_spec`, `categorical_value_spec`, `discrete_value_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] categorical_value_spec
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::CategoricalValueSpec]
           #     The value spec for a 'CATEGORICAL' parameter.
+          #
+          #     Note: The following fields are mutually exclusive: `categorical_value_spec`, `double_value_spec`, `integer_value_spec`, `discrete_value_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] discrete_value_spec
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::DiscreteValueSpec]
           #     The value spec for a 'DISCRETE' parameter.
+          #
+          #     Note: The following fields are mutually exclusive: `discrete_value_spec`, `double_value_spec`, `integer_value_spec`, `categorical_value_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] parameter_id
           #   @return [::String]
           #     Required. The ID of the parameter. Must not contain whitespaces and must
@@ -413,14 +431,20 @@ module Google
             #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::ConditionalParameterSpec::DiscreteValueCondition]
             #     The spec for matching values from a parent parameter of
             #     `DISCRETE` type.
+            #
+            #     Note: The following fields are mutually exclusive: `parent_discrete_values`, `parent_int_values`, `parent_categorical_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] parent_int_values
             #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::ConditionalParameterSpec::IntValueCondition]
             #     The spec for matching values from a parent parameter of `INTEGER`
             #     type.
+            #
+            #     Note: The following fields are mutually exclusive: `parent_int_values`, `parent_discrete_values`, `parent_categorical_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] parent_categorical_values
             #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec::ConditionalParameterSpec::CategoricalValueCondition]
             #     The spec for matching values from a parent parameter of
             #     `CATEGORICAL` type.
+            #
+            #     Note: The following fields are mutually exclusive: `parent_categorical_values`, `parent_discrete_values`, `parent_int_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] parameter_spec
             #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ParameterSpec]
             #     Required. The spec for a conditional parameter.

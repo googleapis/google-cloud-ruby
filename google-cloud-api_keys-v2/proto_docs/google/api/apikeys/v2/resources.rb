@@ -87,15 +87,23 @@ module Google
         # @!attribute [rw] browser_key_restrictions
         #   @return [::Google::Cloud::ApiKeys::V2::BrowserKeyRestrictions]
         #     The HTTP referrers (websites) that are allowed to use the key.
+        #
+        #     Note: The following fields are mutually exclusive: `browser_key_restrictions`, `server_key_restrictions`, `android_key_restrictions`, `ios_key_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] server_key_restrictions
         #   @return [::Google::Cloud::ApiKeys::V2::ServerKeyRestrictions]
         #     The IP addresses of callers that are allowed to use the key.
+        #
+        #     Note: The following fields are mutually exclusive: `server_key_restrictions`, `browser_key_restrictions`, `android_key_restrictions`, `ios_key_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] android_key_restrictions
         #   @return [::Google::Cloud::ApiKeys::V2::AndroidKeyRestrictions]
         #     The Android apps that are allowed to use the key.
+        #
+        #     Note: The following fields are mutually exclusive: `android_key_restrictions`, `browser_key_restrictions`, `server_key_restrictions`, `ios_key_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ios_key_restrictions
         #   @return [::Google::Cloud::ApiKeys::V2::IosKeyRestrictions]
         #     The iOS apps that are allowed to use the key.
+        #
+        #     Note: The following fields are mutually exclusive: `ios_key_restrictions`, `browser_key_restrictions`, `server_key_restrictions`, `android_key_restrictions`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] api_targets
         #   @return [::Array<::Google::Cloud::ApiKeys::V2::ApiTarget>]
         #     A restriction for a specific service and optionally one or

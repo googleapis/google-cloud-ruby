@@ -290,14 +290,20 @@ module Google
         # @!attribute [rw] tuned_model
         #   @return [::String]
         #     Support migration from model registry.
+        #
+        #     Note: The following fields are mutually exclusive: `tuned_model`, `tuning_job`, `pipeline_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tuning_job
         #   @return [::String]
         #     Support migration from tuning job list page, from gemini-1.0-pro-002
         #     to 1.5 and above.
+        #
+        #     Note: The following fields are mutually exclusive: `tuning_job`, `tuned_model`, `pipeline_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pipeline_job
         #   @return [::String]
         #     Support migration from tuning job list page, from bison model to gemini
         #     model.
+        #
+        #     Note: The following fields are mutually exclusive: `pipeline_job`, `tuned_model`, `tuning_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TunedModelRef
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

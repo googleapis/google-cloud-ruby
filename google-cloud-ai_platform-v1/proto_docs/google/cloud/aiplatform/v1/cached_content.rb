@@ -28,10 +28,14 @@ module Google
         #     Timestamp of when this resource is considered expired.
         #     This is *always* provided on output, regardless of what was sent
         #     on input.
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL for this resource. The expiration time is computed:
         #     now + TTL.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Identifier. The server-generated resource name of the cached

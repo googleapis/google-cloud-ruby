@@ -156,12 +156,16 @@ module Google
             # @!attribute [rw] value
             #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue]
             #     Feature value if a single value is requested.
+            #
+            #     Note: The following fields are mutually exclusive: `value`, `values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] values
             #   @return [::Google::Cloud::AIPlatform::V1::FeatureValueList]
             #     Feature values list if values, successive in time, are requested.
             #     If the requested number of values is greater than the number of
             #     existing Feature values, nonexistent values are omitted instead of
             #     being returned as empty.
+            #
+            #     Note: The following fields are mutually exclusive: `values`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Data
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -197,33 +201,53 @@ module Google
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Bool type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `double_value`, `int64_value`, `string_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     Double type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `bool_value`, `int64_value`, `string_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     Int64 feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `bool_value`, `double_value`, `string_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     String feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `double_value`, `int64_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_array_value
         #   @return [::Google::Cloud::AIPlatform::V1::BoolArray]
         #     A list of bool type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_array_value`, `bool_value`, `double_value`, `int64_value`, `string_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_array_value
         #   @return [::Google::Cloud::AIPlatform::V1::DoubleArray]
         #     A list of double type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `double_array_value`, `bool_value`, `double_value`, `int64_value`, `string_value`, `bool_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_array_value
         #   @return [::Google::Cloud::AIPlatform::V1::Int64Array]
         #     A list of int64 type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_array_value`, `bool_value`, `double_value`, `int64_value`, `string_value`, `bool_array_value`, `double_array_value`, `string_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_array_value
         #   @return [::Google::Cloud::AIPlatform::V1::StringArray]
         #     A list of string type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_array_value`, `bool_value`, `double_value`, `int64_value`, `string_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `bytes_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bytes_value
         #   @return [::String]
         #     Bytes feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `bytes_value`, `bool_value`, `double_value`, `int64_value`, `string_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] struct_value
         #   @return [::Google::Cloud::AIPlatform::V1::StructValue]
         #     A struct type feature value.
+        #
+        #     Note: The following fields are mutually exclusive: `struct_value`, `bool_value`, `double_value`, `int64_value`, `string_value`, `bool_array_value`, `double_array_value`, `int64_array_value`, `string_array_value`, `bytes_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureValue::Metadata]
         #     Metadata of feature value.
