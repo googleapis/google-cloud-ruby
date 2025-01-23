@@ -471,6 +471,8 @@ module Google
         #
         #     This type of authorization should generally only be used when calling
         #     Google APIs hosted on *.googleapis.com.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth_token`, `oidc_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oidc_token
         #   @return [::Google::Cloud::Tasks::V2beta2::OidcToken]
         #     If specified, an
@@ -481,6 +483,8 @@ module Google
         #     This type of authorization can be used for many scenarios, including
         #     calling Cloud Run, or endpoints where you intend to validate the token
         #     yourself.
+        #
+        #     Note: The following fields are mutually exclusive: `oidc_token`, `oauth_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class HttpRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -656,6 +660,8 @@ module Google
         #
         #     This type of authorization should generally only be used when calling
         #     Google APIs hosted on *.googleapis.com.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth_token`, `oidc_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oidc_token
         #   @return [::Google::Cloud::Tasks::V2beta2::OidcToken]
         #     If specified, an
@@ -666,6 +672,8 @@ module Google
         #     This type of authorization can be used for many scenarios, including
         #     calling Cloud Run, or endpoints where you intend to validate the token
         #     yourself.
+        #
+        #     Note: The following fields are mutually exclusive: `oidc_token`, `oauth_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class HttpTarget
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

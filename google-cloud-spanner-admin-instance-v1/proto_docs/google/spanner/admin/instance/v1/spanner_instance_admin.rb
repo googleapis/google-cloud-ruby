@@ -266,12 +266,16 @@ module Google
             #
             #     This may be zero in API responses for instances that are not yet in
             #     state `READY`.
+            #
+            #     Note: The following fields are mutually exclusive: `node_count`, `processing_units`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] processing_units
             #   @return [::Integer]
             #     The number of processing units allocated to each replica.
             #
             #     This may be zero in API responses for instances that are not yet in
             #     state `READY`.
+            #
+            #     Note: The following fields are mutually exclusive: `processing_units`, `node_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class ReplicaComputeCapacity
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,19 +312,27 @@ module Google
               #   @return [::Integer]
               #     Minimum number of nodes allocated to the instance. If set, this number
               #     should be greater than or equal to 1.
+              #
+              #     Note: The following fields are mutually exclusive: `min_nodes`, `min_processing_units`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] min_processing_units
               #   @return [::Integer]
               #     Minimum number of processing units allocated to the instance. If set,
               #     this number should be multiples of 1000.
+              #
+              #     Note: The following fields are mutually exclusive: `min_processing_units`, `min_nodes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] max_nodes
               #   @return [::Integer]
               #     Maximum number of nodes allocated to the instance. If set, this number
               #     should be greater than or equal to min_nodes.
+              #
+              #     Note: The following fields are mutually exclusive: `max_nodes`, `max_processing_units`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] max_processing_units
               #   @return [::Integer]
               #     Maximum number of processing units allocated to the instance. If set,
               #     this number should be multiples of 1000 and be greater than or equal to
               #     min_processing_units.
+              #
+              #     Note: The following fields are mutually exclusive: `max_processing_units`, `max_nodes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class AutoscalingLimits
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1091,6 +1103,8 @@ module Google
             #
             #     This may be zero in API responses for instance partitions that are not
             #     yet in state `READY`.
+            #
+            #     Note: The following fields are mutually exclusive: `node_count`, `processing_units`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] processing_units
             #   @return [::Integer]
             #     The number of processing units allocated to this instance partition.
@@ -1100,6 +1114,8 @@ module Google
             #
             #     This might be zero in API responses for instance partitions that are not
             #     yet in the `READY` state.
+            #
+            #     Note: The following fields are mutually exclusive: `processing_units`, `node_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition::State]
             #     Output only. The current instance partition state.

@@ -78,12 +78,16 @@ module Google
     #     The JWT audience is used when generating a JWT ID token for the backend.
     #     This ID token will be added in the HTTP "authorization" header, and sent
     #     to the backend.
+    #
+    #     Note: The following fields are mutually exclusive: `jwt_audience`, `disable_auth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] disable_auth
     #   @return [::Boolean]
     #     When disable_auth is true, a JWT ID token won't be generated and the
     #     original "Authorization" HTTP header will be preserved. If the header is
     #     used to carry the original token and is expected by the backend, this
     #     field must be set to true to preserve the header.
+    #
+    #     Note: The following fields are mutually exclusive: `disable_auth`, `jwt_audience`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] protocol
     #   @return [::String]
     #     The protocol used for sending a request to the backend.

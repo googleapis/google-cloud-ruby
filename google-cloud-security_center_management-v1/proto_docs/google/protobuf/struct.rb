@@ -53,21 +53,33 @@ module Google
     # @!attribute [rw] null_value
     #   @return [::Google::Protobuf::NullValue]
     #     Represents a null value.
+    #
+    #     Note: The following fields are mutually exclusive: `null_value`, `number_value`, `string_value`, `bool_value`, `struct_value`, `list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] number_value
     #   @return [::Float]
     #     Represents a double value.
+    #
+    #     Note: The following fields are mutually exclusive: `number_value`, `null_value`, `string_value`, `bool_value`, `struct_value`, `list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] string_value
     #   @return [::String]
     #     Represents a string value.
+    #
+    #     Note: The following fields are mutually exclusive: `string_value`, `null_value`, `number_value`, `bool_value`, `struct_value`, `list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] bool_value
     #   @return [::Boolean]
     #     Represents a boolean value.
+    #
+    #     Note: The following fields are mutually exclusive: `bool_value`, `null_value`, `number_value`, `string_value`, `struct_value`, `list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] struct_value
     #   @return [::Google::Protobuf::Struct]
     #     Represents a structured value.
+    #
+    #     Note: The following fields are mutually exclusive: `struct_value`, `null_value`, `number_value`, `string_value`, `bool_value`, `list_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] list_value
     #   @return [::Google::Protobuf::ListValue]
     #     Represents a repeated `Value`.
+    #
+    #     Note: The following fields are mutually exclusive: `list_value`, `null_value`, `number_value`, `string_value`, `bool_value`, `struct_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     class Value
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

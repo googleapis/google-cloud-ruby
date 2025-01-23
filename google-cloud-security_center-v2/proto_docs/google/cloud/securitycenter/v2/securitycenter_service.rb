@@ -759,12 +759,18 @@ module Google
             # @!attribute [rw] gcp_metadata
             #   @return [::Google::Cloud::SecurityCenter::V2::GcpMetadata]
             #     The GCP metadata associated with the finding.
+            #
+            #     Note: The following fields are mutually exclusive: `gcp_metadata`, `aws_metadata`, `azure_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] aws_metadata
             #   @return [::Google::Cloud::SecurityCenter::V2::AwsMetadata]
             #     The AWS metadata associated with the finding.
+            #
+            #     Note: The following fields are mutually exclusive: `aws_metadata`, `gcp_metadata`, `azure_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] azure_metadata
             #   @return [::Google::Cloud::SecurityCenter::V2::AzureMetadata]
             #     The Azure metadata associated with the finding.
+            #
+            #     Note: The following fields are mutually exclusive: `azure_metadata`, `gcp_metadata`, `aws_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] resource_path
             #   @return [::Google::Cloud::SecurityCenter::V2::ResourcePath]
             #     Provides the path to the resource within the resource hierarchy.

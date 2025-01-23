@@ -372,12 +372,16 @@ module Google
         # @!attribute [rw] road_traffic
         #   @return [::Google::Cloud::Talent::V4beta1::CommuteFilter::RoadTraffic]
         #     Specifies the traffic density to use when calculating commute time.
+        #
+        #     Note: The following fields are mutually exclusive: `road_traffic`, `departure_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] departure_time
         #   @return [::Google::Type::TimeOfDay]
         #     The departure time used to calculate traffic impact, represented as
         #     {::Google::Type::TimeOfDay google.type.TimeOfDay} in local time zone.
         #
         #     Currently traffic model is restricted to hour level resolution.
+        #
+        #     Note: The following fields are mutually exclusive: `departure_time`, `road_traffic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class CommuteFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
