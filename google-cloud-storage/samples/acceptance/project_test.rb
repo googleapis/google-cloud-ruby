@@ -17,7 +17,6 @@ require_relative "../storage_get_service_account"
 require_relative "../storage_restore_bucket"
 require_relative "../storage_get_soft_deleted_bucket"
 require_relative "../storage_get_bucket_class_and_location"
-require "pry"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
