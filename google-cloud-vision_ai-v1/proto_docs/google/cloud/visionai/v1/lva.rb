@@ -160,15 +160,23 @@ module Google
         # @!attribute [rw] i
         #   @return [::Integer]
         #     int.
+        #
+        #     Note: The following fields are mutually exclusive: `i`, `f`, `b`, `s`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] f
         #   @return [::Float]
         #     float.
+        #
+        #     Note: The following fields are mutually exclusive: `f`, `i`, `b`, `s`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] b
         #   @return [::Boolean]
         #     bool.
+        #
+        #     Note: The following fields are mutually exclusive: `b`, `i`, `f`, `s`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] s
         #   @return [::String]
         #     string.
+        #
+        #     Note: The following fields are mutually exclusive: `s`, `i`, `f`, `b`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AttributeValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

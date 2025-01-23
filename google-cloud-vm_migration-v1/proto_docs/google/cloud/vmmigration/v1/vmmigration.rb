@@ -81,12 +81,18 @@ module Google
         # @!attribute [rw] initializing_replication
         #   @return [::Google::Cloud::VMMigration::V1::InitializingReplicationStep]
         #     Initializing replication step.
+        #
+        #     Note: The following fields are mutually exclusive: `initializing_replication`, `replicating`, `post_processing`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] replicating
         #   @return [::Google::Cloud::VMMigration::V1::ReplicatingStep]
         #     Replicating step.
+        #
+        #     Note: The following fields are mutually exclusive: `replicating`, `initializing_replication`, `post_processing`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] post_processing
         #   @return [::Google::Cloud::VMMigration::V1::PostProcessingStep]
         #     Post processing step.
+        #
+        #     Note: The following fields are mutually exclusive: `post_processing`, `initializing_replication`, `replicating`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the cycle step has started.
@@ -344,12 +350,18 @@ module Google
         # @!attribute [rw] adapting_os
         #   @return [::Google::Cloud::VMMigration::V1::AdaptingOSStep]
         #     Adapting OS step.
+        #
+        #     Note: The following fields are mutually exclusive: `adapting_os`, `preparing_vm_disks`, `instantiating_migrated_vm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] preparing_vm_disks
         #   @return [::Google::Cloud::VMMigration::V1::PreparingVMDisksStep]
         #     Preparing VM disks step.
+        #
+        #     Note: The following fields are mutually exclusive: `preparing_vm_disks`, `adapting_os`, `instantiating_migrated_vm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] instantiating_migrated_vm
         #   @return [::Google::Cloud::VMMigration::V1::InstantiatingMigratedVMStep]
         #     Instantiating migrated VM step.
+        #
+        #     Note: The following fields are mutually exclusive: `instantiating_migrated_vm`, `adapting_os`, `preparing_vm_disks`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the step has started.
@@ -452,18 +464,28 @@ module Google
         # @!attribute [rw] previous_replication_cycle
         #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
         #     A replication cycle prior cutover step.
+        #
+        #     Note: The following fields are mutually exclusive: `previous_replication_cycle`, `shutting_down_source_vm`, `final_sync`, `preparing_vm_disks`, `instantiating_migrated_vm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] shutting_down_source_vm
         #   @return [::Google::Cloud::VMMigration::V1::ShuttingDownSourceVMStep]
         #     Shutting down VM step.
+        #
+        #     Note: The following fields are mutually exclusive: `shutting_down_source_vm`, `previous_replication_cycle`, `final_sync`, `preparing_vm_disks`, `instantiating_migrated_vm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] final_sync
         #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
         #     Final sync step.
+        #
+        #     Note: The following fields are mutually exclusive: `final_sync`, `previous_replication_cycle`, `shutting_down_source_vm`, `preparing_vm_disks`, `instantiating_migrated_vm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] preparing_vm_disks
         #   @return [::Google::Cloud::VMMigration::V1::PreparingVMDisksStep]
         #     Preparing VM disks step.
+        #
+        #     Note: The following fields are mutually exclusive: `preparing_vm_disks`, `previous_replication_cycle`, `shutting_down_source_vm`, `final_sync`, `instantiating_migrated_vm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] instantiating_migrated_vm
         #   @return [::Google::Cloud::VMMigration::V1::InstantiatingMigratedVMStep]
         #     Instantiating migrated VM step.
+        #
+        #     Note: The following fields are mutually exclusive: `instantiating_migrated_vm`, `previous_replication_cycle`, `shutting_down_source_vm`, `final_sync`, `preparing_vm_disks`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time the step has started.
@@ -584,9 +606,13 @@ module Google
         # @!attribute [rw] vmware
         #   @return [::Google::Cloud::VMMigration::V1::VmwareSourceDetails]
         #     Vmware type source details.
+        #
+        #     Note: The following fields are mutually exclusive: `vmware`, `aws`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws
         #   @return [::Google::Cloud::VMMigration::V1::AwsSourceDetails]
         #     AWS type source details.
+        #
+        #     Note: The following fields are mutually exclusive: `aws`, `vmware`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The Source name.
@@ -1267,9 +1293,13 @@ module Google
         # @!attribute [rw] vmware_vms
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmsDetails]
         #     The description of the VMs in a Source of type Vmware.
+        #
+        #     Note: The following fields are mutually exclusive: `vmware_vms`, `aws_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_vms
         #   @return [::Google::Cloud::VMMigration::V1::AwsVmsDetails]
         #     The description of the VMs in a Source of type AWS.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_vms`, `vmware_vms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the source was last queried (if the result

@@ -651,10 +651,14 @@ module Google
         # @!attribute [rw] product_set_purge_config
         #   @return [::Google::Cloud::Vision::V1::ProductSetPurgeConfig]
         #     Specify which ProductSet contains the Products to be deleted.
+        #
+        #     Note: The following fields are mutually exclusive: `product_set_purge_config`, `delete_orphan_products`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_orphan_products
         #   @return [::Boolean]
         #     If delete_orphan_products is true, all Products that are not in any
         #     ProductSet will be deleted.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_orphan_products`, `product_set_purge_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project and location in which the Products should be deleted.

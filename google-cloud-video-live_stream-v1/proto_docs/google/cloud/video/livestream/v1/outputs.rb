@@ -33,12 +33,18 @@ module Google
           # @!attribute [rw] video_stream
           #   @return [::Google::Cloud::Video::LiveStream::V1::VideoStream]
           #     Encoding of a video stream.
+          #
+          #     Note: The following fields are mutually exclusive: `video_stream`, `audio_stream`, `text_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] audio_stream
           #   @return [::Google::Cloud::Video::LiveStream::V1::AudioStream]
           #     Encoding of an audio stream.
+          #
+          #     Note: The following fields are mutually exclusive: `audio_stream`, `video_stream`, `text_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] text_stream
           #   @return [::Google::Cloud::Video::LiveStream::V1::TextStream]
           #     Encoding of a text stream. For example, closed captions or subtitles.
+          #
+          #     Note: The following fields are mutually exclusive: `text_stream`, `video_stream`, `audio_stream`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ElementaryStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,6 +313,8 @@ module Google
             #     calculated by `gopFrameCount`/`frameRate`. The calculated GOP duration
             #     must satisfy the limitations on `gopDuration` as well.
             #     Valid range is [60, 600].
+            #
+            #     Note: The following fields are mutually exclusive: `gop_frame_count`, `gop_duration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] gop_duration
             #   @return [::Google::Protobuf::Duration]
             #     Select the GOP size based on the specified duration. The default is
@@ -317,6 +325,8 @@ module Google
             #     must be divisible by `gopDuration`. Valid range is [2s, 20s].
             #
             #     All video streams in the same channel must have the same GOP size.
+            #
+            #     Note: The following fields are mutually exclusive: `gop_duration`, `gop_frame_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] vbv_size_bits
             #   @return [::Integer]
             #     Size of the Video Buffering Verifier (VBV) buffer in bits. Must be
@@ -496,9 +506,13 @@ module Google
           # @!attribute [rw] utc_offset
           #   @return [::Google::Protobuf::Duration]
           #     UTC offset. Must be whole seconds, between -18 hours and +18 hours.
+          #
+          #     Note: The following fields are mutually exclusive: `utc_offset`, `time_zone`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] time_zone
           #   @return [::Google::Type::TimeZone]
           #     Time zone e.g. "America/Los_Angeles".
+          #
+          #     Note: The following fields are mutually exclusive: `time_zone`, `utc_offset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class TimecodeConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
