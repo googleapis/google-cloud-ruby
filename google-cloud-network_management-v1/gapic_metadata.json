@@ -43,6 +43,40 @@
           }
         }
       }
+    },
+    "VpcFlowLogsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client",
+          "rpcs": {
+            "ListVpcFlowLogsConfigs": {
+              "methods": [
+                "list_vpc_flow_logs_configs"
+              ]
+            },
+            "GetVpcFlowLogsConfig": {
+              "methods": [
+                "get_vpc_flow_logs_config"
+              ]
+            },
+            "CreateVpcFlowLogsConfig": {
+              "methods": [
+                "create_vpc_flow_logs_config"
+              ]
+            },
+            "UpdateVpcFlowLogsConfig": {
+              "methods": [
+                "update_vpc_flow_logs_config"
+              ]
+            },
+            "DeleteVpcFlowLogsConfig": {
+              "methods": [
+                "delete_vpc_flow_logs_config"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

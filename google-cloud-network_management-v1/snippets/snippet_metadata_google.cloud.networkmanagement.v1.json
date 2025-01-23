@@ -250,6 +250,206 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_VpcFlowLogsService_ListVpcFlowLogsConfigs_sync",
+      "title": "Snippet for the list_vpc_flow_logs_configs call in the VpcFlowLogsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#list_vpc_flow_logs_configs.",
+      "file": "vpc_flow_logs_service/list_vpc_flow_logs_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_vpc_flow_logs_configs",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#list_vpc_flow_logs_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkManagement::V1::ListVpcFlowLogsConfigsResponse",
+        "client": {
+          "short_name": "VpcFlowLogsService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client"
+        },
+        "method": {
+          "short_name": "ListVpcFlowLogsConfigs",
+          "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService.ListVpcFlowLogsConfigs",
+          "service": {
+            "short_name": "VpcFlowLogsService",
+            "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_VpcFlowLogsService_GetVpcFlowLogsConfig_sync",
+      "title": "Snippet for the get_vpc_flow_logs_config call in the VpcFlowLogsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#get_vpc_flow_logs_config.",
+      "file": "vpc_flow_logs_service/get_vpc_flow_logs_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_vpc_flow_logs_config",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#get_vpc_flow_logs_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::GetVpcFlowLogsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsConfig",
+        "client": {
+          "short_name": "VpcFlowLogsService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client"
+        },
+        "method": {
+          "short_name": "GetVpcFlowLogsConfig",
+          "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService.GetVpcFlowLogsConfig",
+          "service": {
+            "short_name": "VpcFlowLogsService",
+            "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_VpcFlowLogsService_CreateVpcFlowLogsConfig_sync",
+      "title": "Snippet for the create_vpc_flow_logs_config call in the VpcFlowLogsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#create_vpc_flow_logs_config.",
+      "file": "vpc_flow_logs_service/create_vpc_flow_logs_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_vpc_flow_logs_config",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#create_vpc_flow_logs_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::CreateVpcFlowLogsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VpcFlowLogsService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client"
+        },
+        "method": {
+          "short_name": "CreateVpcFlowLogsConfig",
+          "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService.CreateVpcFlowLogsConfig",
+          "service": {
+            "short_name": "VpcFlowLogsService",
+            "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_VpcFlowLogsService_UpdateVpcFlowLogsConfig_sync",
+      "title": "Snippet for the update_vpc_flow_logs_config call in the VpcFlowLogsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#update_vpc_flow_logs_config.",
+      "file": "vpc_flow_logs_service/update_vpc_flow_logs_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_vpc_flow_logs_config",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#update_vpc_flow_logs_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::UpdateVpcFlowLogsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VpcFlowLogsService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateVpcFlowLogsConfig",
+          "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService.UpdateVpcFlowLogsConfig",
+          "service": {
+            "short_name": "VpcFlowLogsService",
+            "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "networkmanagement_v1_generated_VpcFlowLogsService_DeleteVpcFlowLogsConfig_sync",
+      "title": "Snippet for the delete_vpc_flow_logs_config call in the VpcFlowLogsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#delete_vpc_flow_logs_config.",
+      "file": "vpc_flow_logs_service/delete_vpc_flow_logs_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_vpc_flow_logs_config",
+        "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client#delete_vpc_flow_logs_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetworkManagement::V1::DeleteVpcFlowLogsConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VpcFlowLogsService::Client",
+          "full_name": "::Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteVpcFlowLogsConfig",
+          "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService.DeleteVpcFlowLogsConfig",
+          "service": {
+            "short_name": "VpcFlowLogsService",
+            "full_name": "google.cloud.networkmanagement.v1.VpcFlowLogsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
