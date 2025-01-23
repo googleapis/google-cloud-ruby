@@ -164,12 +164,18 @@ module Google
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count]
           #     Count aggregator.
+          #
+          #     Note: The following fields are mutually exclusive: `count`, `sum`, `avg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sum
           #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Sum]
           #     Sum aggregator.
+          #
+          #     Note: The following fields are mutually exclusive: `sum`, `count`, `avg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] avg
           #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Avg]
           #     Average aggregator.
+          #
+          #     Note: The following fields are mutually exclusive: `avg`, `count`, `sum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] alias
           #   @return [::String]
           #     Optional. Optional name of the property to store the result of the
@@ -353,9 +359,13 @@ module Google
         # @!attribute [rw] composite_filter
         #   @return [::Google::Cloud::Datastore::V1::CompositeFilter]
         #     A composite filter.
+        #
+        #     Note: The following fields are mutually exclusive: `composite_filter`, `property_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] property_filter
         #   @return [::Google::Cloud::Datastore::V1::PropertyFilter]
         #     A filter on a property.
+        #
+        #     Note: The following fields are mutually exclusive: `property_filter`, `composite_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Filter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -584,10 +594,14 @@ module Google
         # @!attribute [rw] value
         #   @return [::Google::Cloud::Datastore::V1::Value]
         #     A value parameter.
+        #
+        #     Note: The following fields are mutually exclusive: `value`, `cursor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cursor
         #   @return [::String]
         #     A query cursor. Query cursors are returned in query
         #     result batches.
+        #
+        #     Note: The following fields are mutually exclusive: `cursor`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GqlQueryParameter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

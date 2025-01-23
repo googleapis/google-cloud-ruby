@@ -295,8 +295,12 @@ module Google
               #     A Cloud Storage path to the template from which to create
               #     the job.
               #     Must be valid Cloud Storage URL, beginning with 'gs://'.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_path`, `dynamic_template`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param dynamic_template [::Google::Cloud::Dataflow::V1beta3::DynamicTemplateLaunchParams, ::Hash]
               #     Params for launching a dynamic template.
+              #
+              #     Note: The following fields are mutually exclusive: `dynamic_template`, `gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param launch_parameters [::Google::Cloud::Dataflow::V1beta3::LaunchTemplateParameters, ::Hash]
               #     The parameters of the template to launch. This should be part of the
               #     body of the POST request.

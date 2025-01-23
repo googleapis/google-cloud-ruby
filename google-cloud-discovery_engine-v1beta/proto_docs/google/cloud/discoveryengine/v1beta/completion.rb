@@ -53,10 +53,14 @@ module Google
         #   @return [::Float]
         #     Global score of this suggestion. Control how this suggestion would be
         #     scored / ranked.
+        #
+        #     Note: The following fields are mutually exclusive: `global_score`, `frequency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] frequency
         #   @return [::Integer]
         #     Frequency of this suggestion. Will be used to rank suggestions when score
         #     is not available.
+        #
+        #     Note: The following fields are mutually exclusive: `frequency`, `global_score`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggestion
         #   @return [::String]
         #     Required. The suggestion text.

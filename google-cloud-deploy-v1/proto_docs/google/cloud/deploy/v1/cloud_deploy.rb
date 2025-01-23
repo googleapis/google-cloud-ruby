@@ -170,10 +170,14 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::Standard]
         #     Standard deployment strategy executes a single deploy and allows
         #     verifying the deployment.
+        #
+        #     Note: The following fields are mutually exclusive: `standard`, `canary`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] canary
         #   @return [::Google::Cloud::Deploy::V1::Canary]
         #     Canary deployment strategy provides progressive percentage based
         #     deployments to a Target.
+        #
+        #     Note: The following fields are mutually exclusive: `canary`, `standard`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Strategy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -225,11 +229,15 @@ module Google
         # @!attribute [rw] canary_deployment
         #   @return [::Google::Cloud::Deploy::V1::CanaryDeployment]
         #     Configures the progressive based deployment for a Target.
+        #
+        #     Note: The following fields are mutually exclusive: `canary_deployment`, `custom_canary_deployment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_canary_deployment
         #   @return [::Google::Cloud::Deploy::V1::CustomCanaryDeployment]
         #     Configures the progressive based deployment for a Target, but allows
         #     customizing at the phase level where a phase represents each of the
         #     percentage deployments.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_canary_deployment`, `canary_deployment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Canary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,9 +315,13 @@ module Google
         # @!attribute [rw] gateway_service_mesh
         #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig::GatewayServiceMesh]
         #     Kubernetes Gateway API service mesh configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `gateway_service_mesh`, `service_networking`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_networking
         #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig::ServiceNetworking]
         #     Kubernetes Service networking configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `service_networking`, `gateway_service_mesh`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class KubernetesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -424,9 +436,13 @@ module Google
         # @!attribute [rw] kubernetes
         #   @return [::Google::Cloud::Deploy::V1::KubernetesConfig]
         #     Kubernetes runtime configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `kubernetes`, `cloud_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_run
         #   @return [::Google::Cloud::Deploy::V1::CloudRunConfig]
         #     Cloud Run runtime configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_run`, `kubernetes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RuntimeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -777,18 +793,28 @@ module Google
         # @!attribute [rw] gke
         #   @return [::Google::Cloud::Deploy::V1::GkeCluster]
         #     Optional. Information specifying a GKE Cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `gke`, `anthos_cluster`, `run`, `multi_target`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] anthos_cluster
         #   @return [::Google::Cloud::Deploy::V1::AnthosCluster]
         #     Optional. Information specifying an Anthos Cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `anthos_cluster`, `gke`, `run`, `multi_target`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] run
         #   @return [::Google::Cloud::Deploy::V1::CloudRunLocation]
         #     Optional. Information specifying a Cloud Run deployment target.
+        #
+        #     Note: The following fields are mutually exclusive: `run`, `gke`, `anthos_cluster`, `multi_target`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_target
         #   @return [::Google::Cloud::Deploy::V1::MultiTarget]
         #     Optional. Information specifying a multiTarget.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_target`, `gke`, `anthos_cluster`, `run`, `custom_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_target
         #   @return [::Google::Cloud::Deploy::V1::CustomTarget]
         #     Optional. Information specifying a Custom Target.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_target`, `gke`, `anthos_cluster`, `run`, `multi_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] associated_entities
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Deploy::V1::AssociatedEntities}]
         #     Optional. Map of entity IDs to their associated entities. Associated
@@ -864,9 +890,13 @@ module Google
         # @!attribute [rw] default_pool
         #   @return [::Google::Cloud::Deploy::V1::DefaultPool]
         #     Optional. Use default Cloud Build pool.
+        #
+        #     Note: The following fields are mutually exclusive: `default_pool`, `private_pool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_pool
         #   @return [::Google::Cloud::Deploy::V1::PrivatePool]
         #     Optional. Use private Cloud Build pool.
+        #
+        #     Note: The following fields are mutually exclusive: `private_pool`, `default_pool`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] worker_pool
         #   @return [::String]
         #     Optional. The resource name of the `WorkerPool`, with the format
@@ -1313,12 +1343,18 @@ module Google
         # @!attribute [rw] git
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGitSource]
         #     Remote git repository containing the Skaffold Config modules.
+        #
+        #     Note: The following fields are mutually exclusive: `git`, `google_cloud_storage`, `google_cloud_build_repo`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_cloud_storage
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCSSource]
         #     Cloud Storage bucket containing the Skaffold Config modules.
+        #
+        #     Note: The following fields are mutually exclusive: `google_cloud_storage`, `git`, `google_cloud_build_repo`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_cloud_build_repo
         #   @return [::Google::Cloud::Deploy::V1::SkaffoldModules::SkaffoldGCBRepoSource]
         #     Cloud Build V2 repository containing the Skaffold Config modules.
+        #
+        #     Note: The following fields are mutually exclusive: `google_cloud_build_repo`, `git`, `google_cloud_storage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SkaffoldModules
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2836,9 +2872,13 @@ module Google
         # @!attribute [r] deployment_jobs
         #   @return [::Google::Cloud::Deploy::V1::DeploymentJobs]
         #     Output only. Deployment job composition.
+        #
+        #     Note: The following fields are mutually exclusive: `deployment_jobs`, `child_rollout_jobs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] child_rollout_jobs
         #   @return [::Google::Cloud::Deploy::V1::ChildRolloutJobs]
         #     Output only. ChildRollout job composition.
+        #
+        #     Note: The following fields are mutually exclusive: `child_rollout_jobs`, `deployment_jobs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Phase
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2916,21 +2956,33 @@ module Google
         # @!attribute [r] deploy_job
         #   @return [::Google::Cloud::Deploy::V1::DeployJob]
         #     Output only. A deploy Job.
+        #
+        #     Note: The following fields are mutually exclusive: `deploy_job`, `verify_job`, `predeploy_job`, `postdeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] verify_job
         #   @return [::Google::Cloud::Deploy::V1::VerifyJob]
         #     Output only. A verify Job.
+        #
+        #     Note: The following fields are mutually exclusive: `verify_job`, `deploy_job`, `predeploy_job`, `postdeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] predeploy_job
         #   @return [::Google::Cloud::Deploy::V1::PredeployJob]
         #     Output only. A predeploy Job.
+        #
+        #     Note: The following fields are mutually exclusive: `predeploy_job`, `deploy_job`, `verify_job`, `postdeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] postdeploy_job
         #   @return [::Google::Cloud::Deploy::V1::PostdeployJob]
         #     Output only. A postdeploy Job.
+        #
+        #     Note: The following fields are mutually exclusive: `postdeploy_job`, `deploy_job`, `verify_job`, `predeploy_job`, `create_child_rollout_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_child_rollout_job
         #   @return [::Google::Cloud::Deploy::V1::CreateChildRolloutJob]
         #     Output only. A createChildRollout Job.
+        #
+        #     Note: The following fields are mutually exclusive: `create_child_rollout_job`, `deploy_job`, `verify_job`, `predeploy_job`, `postdeploy_job`, `advance_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] advance_child_rollout_job
         #   @return [::Google::Cloud::Deploy::V1::AdvanceChildRolloutJob]
         #     Output only. An advanceChildRollout Job.
+        #
+        #     Note: The following fields are mutually exclusive: `advance_child_rollout_job`, `deploy_job`, `verify_job`, `predeploy_job`, `postdeploy_job`, `create_child_rollout_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3305,21 +3357,33 @@ module Google
         # @!attribute [r] deploy_job_run
         #   @return [::Google::Cloud::Deploy::V1::DeployJobRun]
         #     Output only. Information specific to a deploy `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] verify_job_run
         #   @return [::Google::Cloud::Deploy::V1::VerifyJobRun]
         #     Output only. Information specific to a verify `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `verify_job_run`, `deploy_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] predeploy_job_run
         #   @return [::Google::Cloud::Deploy::V1::PredeployJobRun]
         #     Output only. Information specific to a predeploy `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `predeploy_job_run`, `deploy_job_run`, `verify_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] postdeploy_job_run
         #   @return [::Google::Cloud::Deploy::V1::PostdeployJobRun]
         #     Output only. Information specific to a postdeploy `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `postdeploy_job_run`, `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `create_child_rollout_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_child_rollout_job_run
         #   @return [::Google::Cloud::Deploy::V1::CreateChildRolloutJobRun]
         #     Output only. Information specific to a createChildRollout `JobRun`.
+        #
+        #     Note: The following fields are mutually exclusive: `create_child_rollout_job_run`, `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `advance_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] advance_child_rollout_job_run
         #   @return [::Google::Cloud::Deploy::V1::AdvanceChildRolloutJobRun]
         #     Output only. Information specific to an advanceChildRollout `JobRun`
+        #
+        #     Note: The following fields are mutually exclusive: `advance_child_rollout_job_run`, `deploy_job_run`, `verify_job_run`, `predeploy_job_run`, `postdeploy_job_run`, `create_child_rollout_job_run`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. This checksum is computed by the server based on the value of
@@ -3799,19 +3863,27 @@ module Google
         #   @return [::Google::Cloud::Deploy::V1::PromoteReleaseRule]
         #     Optional. `PromoteReleaseRule` will automatically promote a release from
         #     the current target to a specified target.
+        #
+        #     Note: The following fields are mutually exclusive: `promote_release_rule`, `advance_rollout_rule`, `repair_rollout_rule`, `timed_promote_release_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] advance_rollout_rule
         #   @return [::Google::Cloud::Deploy::V1::AdvanceRolloutRule]
         #     Optional. The `AdvanceRolloutRule` will automatically advance a
         #     successful Rollout.
+        #
+        #     Note: The following fields are mutually exclusive: `advance_rollout_rule`, `promote_release_rule`, `repair_rollout_rule`, `timed_promote_release_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] repair_rollout_rule
         #   @return [::Google::Cloud::Deploy::V1::RepairRolloutRule]
         #     Optional. The `RepairRolloutRule` will automatically repair a failed
         #     rollout.
+        #
+        #     Note: The following fields are mutually exclusive: `repair_rollout_rule`, `promote_release_rule`, `advance_rollout_rule`, `timed_promote_release_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timed_promote_release_rule
         #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseRule]
         #     Optional. The `TimedPromoteReleaseRule` will automatically promote a
         #     release from the current target(s) to the specified target(s) on a
         #     configured schedule.
+        #
+        #     Note: The following fields are mutually exclusive: `timed_promote_release_rule`, `promote_release_rule`, `advance_rollout_rule`, `repair_rollout_rule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AutomationRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3947,9 +4019,13 @@ module Google
         # @!attribute [rw] retry
         #   @return [::Google::Cloud::Deploy::V1::Retry]
         #     Optional. Retries a failed job.
+        #
+        #     Note: The following fields are mutually exclusive: `retry`, `rollback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rollback
         #   @return [::Google::Cloud::Deploy::V1::Rollback]
         #     Optional. Rolls back a `Rollout`.
+        #
+        #     Note: The following fields are mutually exclusive: `rollback`, `retry`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepairPhaseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4254,16 +4330,24 @@ module Google
         # @!attribute [r] promote_release_operation
         #   @return [::Google::Cloud::Deploy::V1::PromoteReleaseOperation]
         #     Output only. Promotes a release to a specified 'Target'.
+        #
+        #     Note: The following fields are mutually exclusive: `promote_release_operation`, `advance_rollout_operation`, `repair_rollout_operation`, `timed_promote_release_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] advance_rollout_operation
         #   @return [::Google::Cloud::Deploy::V1::AdvanceRolloutOperation]
         #     Output only. Advances a rollout to the next phase.
+        #
+        #     Note: The following fields are mutually exclusive: `advance_rollout_operation`, `promote_release_operation`, `repair_rollout_operation`, `timed_promote_release_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] repair_rollout_operation
         #   @return [::Google::Cloud::Deploy::V1::RepairRolloutOperation]
         #     Output only. Repairs a failed 'Rollout'.
+        #
+        #     Note: The following fields are mutually exclusive: `repair_rollout_operation`, `promote_release_operation`, `advance_rollout_operation`, `timed_promote_release_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] timed_promote_release_operation
         #   @return [::Google::Cloud::Deploy::V1::TimedPromoteReleaseOperation]
         #     Output only. Promotes a release to a specified 'Target' as defined in a
         #     Timed Promote Release rule.
+        #
+        #     Note: The following fields are mutually exclusive: `timed_promote_release_operation`, `promote_release_operation`, `advance_rollout_operation`, `repair_rollout_operation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] wait_until_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Earliest time the `AutomationRun` will attempt to resume.
@@ -4380,9 +4464,13 @@ module Google
         # @!attribute [r] retry
         #   @return [::Google::Cloud::Deploy::V1::RetryPhase]
         #     Output only. Records of the retry attempts for retry repair mode.
+        #
+        #     Note: The following fields are mutually exclusive: `retry`, `rollback`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] rollback
         #   @return [::Google::Cloud::Deploy::V1::RollbackAttempt]
         #     Output only. Rollback attempt for rollback repair mode .
+        #
+        #     Note: The following fields are mutually exclusive: `rollback`, `retry`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepairPhase
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

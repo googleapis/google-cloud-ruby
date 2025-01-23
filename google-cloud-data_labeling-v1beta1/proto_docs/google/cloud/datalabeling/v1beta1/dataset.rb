@@ -61,10 +61,14 @@ module Google
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::DataLabeling::V1beta1::GcsSource]
         #     Source located in Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::DataLabeling::V1beta1::BigQuerySource]
         #     Source located in BigQuery. You must specify this field if you are using
         #     this InputConfig in an {::Google::Cloud::DataLabeling::V1beta1::EvaluationJob EvaluationJob}.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_type
         #   @return [::Google::Cloud::DataLabeling::V1beta1::DataType]
         #     Required. Data type must be specifed when user tries to import data.
@@ -145,10 +149,14 @@ module Google
         #   @return [::Google::Cloud::DataLabeling::V1beta1::GcsDestination]
         #     Output to a file in Cloud Storage. Should be used for labeling output
         #     other than image segmentation.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `gcs_folder_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_folder_destination
         #   @return [::Google::Cloud::DataLabeling::V1beta1::GcsFolderDestination]
         #     Output to a folder in Cloud Storage. Should be used for image
         #     segmentation labeling output.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_folder_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -182,12 +190,18 @@ module Google
         # @!attribute [rw] image_payload
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImagePayload]
         #     The image payload, a container of the image bytes/uri.
+        #
+        #     Note: The following fields are mutually exclusive: `image_payload`, `text_payload`, `video_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_payload
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextPayload]
         #     The text payload, a container of text content.
+        #
+        #     Note: The following fields are mutually exclusive: `text_payload`, `image_payload`, `video_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_payload
         #   @return [::Google::Cloud::DataLabeling::V1beta1::VideoPayload]
         #     The video payload, a container of the video uri.
+        #
+        #     Note: The following fields are mutually exclusive: `video_payload`, `image_payload`, `text_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. Name of the data item, in format of:
@@ -273,33 +287,53 @@ module Google
         # @!attribute [rw] image_classification_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImageClassificationConfig]
         #     Configuration for image classification task.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bounding_poly_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::BoundingPolyConfig]
         #     Configuration for image bounding box and bounding poly task.
+        #
+        #     Note: The following fields are mutually exclusive: `bounding_poly_config`, `image_classification_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] polyline_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::PolylineConfig]
         #     Configuration for image polyline task.
+        #
+        #     Note: The following fields are mutually exclusive: `polyline_config`, `image_classification_config`, `bounding_poly_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] segmentation_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::SegmentationConfig]
         #     Configuration for image segmentation task.
+        #
+        #     Note: The following fields are mutually exclusive: `segmentation_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_classification_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::VideoClassificationConfig]
         #     Configuration for video classification task.
+        #
+        #     Note: The following fields are mutually exclusive: `video_classification_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_detection_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ObjectDetectionConfig]
         #     Configuration for video object detection task.
+        #
+        #     Note: The following fields are mutually exclusive: `object_detection_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_tracking_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_tracking_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ObjectTrackingConfig]
         #     Configuration for video object tracking task.
+        #
+        #     Note: The following fields are mutually exclusive: `object_tracking_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `event_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::EventConfig]
         #     Configuration for video event labeling task.
+        #
+        #     Note: The following fields are mutually exclusive: `event_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `text_classification_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_classification_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextClassificationConfig]
         #     Configuration for text classification task.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_entity_extraction_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_entity_extraction_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextEntityExtractionConfig]
         #     Configuration for text entity extraction task.
+        #
+        #     Note: The following fields are mutually exclusive: `text_entity_extraction_config`, `image_classification_config`, `bounding_poly_config`, `polyline_config`, `segmentation_config`, `video_classification_config`, `object_detection_config`, `object_tracking_config`, `event_config`, `text_classification_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] human_annotation_config
         #   @return [::Google::Cloud::DataLabeling::V1beta1::HumanAnnotationConfig]
         #     HumanAnnotationConfig used when requesting the human labeling task for this
@@ -314,12 +348,18 @@ module Google
         # @!attribute [rw] image_payload
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImagePayload]
         #     The image payload, a container of the image bytes/uri.
+        #
+        #     Note: The following fields are mutually exclusive: `image_payload`, `text_payload`, `video_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_payload
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextPayload]
         #     The text payload, a container of the text content.
+        #
+        #     Note: The following fields are mutually exclusive: `text_payload`, `image_payload`, `video_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_payload
         #   @return [::Google::Cloud::DataLabeling::V1beta1::VideoPayload]
         #     The video payload, a container of the video uri.
+        #
+        #     Note: The following fields are mutually exclusive: `video_payload`, `image_payload`, `text_payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. Name of the example, in format of:

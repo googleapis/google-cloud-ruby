@@ -194,10 +194,14 @@ module Google
         # @!attribute [rw] custom_dns
         #   @return [::Google::Cloud::Domains::V1::DnsSettings::CustomDns]
         #     An arbitrary DNS provider identified by its name servers.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_dns`, `google_domains_dns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_domains_dns
         #   @return [::Google::Cloud::Domains::V1::DnsSettings::GoogleDomainsDns]
         #     The free DNS zone provided by
         #     [Google Domains](https://domains.google/).
+        #
+        #     Note: The following fields are mutually exclusive: `google_domains_dns`, `custom_dns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] glue_records
         #   @return [::Array<::Google::Cloud::Domains::V1::DnsSettings::GlueRecord>]
         #     The list of glue records for this `Registration`. Commonly empty.

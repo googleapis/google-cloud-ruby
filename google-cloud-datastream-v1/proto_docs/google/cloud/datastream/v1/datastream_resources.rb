@@ -216,9 +216,13 @@ module Google
         # @!attribute [rw] password
         #   @return [::String]
         #     Input only. SSH password.
+        #
+        #     Note: The following fields are mutually exclusive: `password`, `private_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_key
         #   @return [::String]
         #     Input only. SSH private key.
+        #
+        #     Note: The following fields are mutually exclusive: `private_key`, `password`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ForwardSshTunnelConnectivity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -395,11 +399,15 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlSslConfig::ServerVerification]
         #      If this field is set, the communication will be encrypted with TLS
         #      encryption and the server identity will be authenticated.
+        #
+        #     Note: The following fields are mutually exclusive: `server_verification`, `server_and_client_verification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] server_and_client_verification
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlSslConfig::ServerAndClientVerification]
         #     If this field is set, the communication will be encrypted with TLS
         #     encryption and both the server identity and the client identity will be
         #     authenticated.
+        #
+        #     Note: The following fields are mutually exclusive: `server_and_client_verification`, `server_verification`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PostgresqlSslConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -462,30 +470,48 @@ module Google
         # @!attribute [rw] oracle_profile
         #   @return [::Google::Cloud::Datastream::V1::OracleProfile]
         #     Oracle ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_profile
         #   @return [::Google::Cloud::Datastream::V1::GcsProfile]
         #     Cloud Storage ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_profile`, `oracle_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_profile
         #   @return [::Google::Cloud::Datastream::V1::MysqlProfile]
         #     MySQL ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_profile`, `oracle_profile`, `gcs_profile`, `bigquery_profile`, `postgresql_profile`, `sql_server_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_profile
         #   @return [::Google::Cloud::Datastream::V1::BigQueryProfile]
         #     BigQuery Connection Profile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `postgresql_profile`, `sql_server_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_profile
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlProfile]
         #     PostgreSQL Connection Profile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `postgresql_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `sql_server_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_profile
         #   @return [::Google::Cloud::Datastream::V1::SqlServerProfile]
         #     SQLServer Connection Profile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_server_profile`, `oracle_profile`, `gcs_profile`, `mysql_profile`, `bigquery_profile`, `postgresql_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::Datastream::V1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `static_service_ip_connectivity`, `forward_ssh_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] forward_ssh_connectivity
         #   @return [::Google::Cloud::Datastream::V1::ForwardSshTunnelConnectivity]
         #     Forward SSH tunnel connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `forward_ssh_connectivity`, `static_service_ip_connectivity`, `private_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] private_connectivity
         #   @return [::Google::Cloud::Datastream::V1::PrivateConnectivity]
         #     Private connectivity.
+        #
+        #     Note: The following fields are mutually exclusive: `private_connectivity`, `static_service_ip_connectivity`, `forward_ssh_connectivity`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ConnectionProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -586,15 +612,23 @@ module Google
         # @!attribute [rw] drop_large_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::DropLargeObjects]
         #     Drop large object values.
+        #
+        #     Note: The following fields are mutually exclusive: `drop_large_objects`, `stream_large_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stream_large_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::StreamLargeObjects]
         #     Stream large object values.
+        #
+        #     Note: The following fields are mutually exclusive: `stream_large_objects`, `drop_large_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] log_miner
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::LogMiner]
         #     Use LogMiner.
+        #
+        #     Note: The following fields are mutually exclusive: `log_miner`, `binary_log_parser`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] binary_log_parser
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::BinaryLogParser]
         #     Use Binary Log Parser.
+        #
+        #     Note: The following fields are mutually exclusive: `binary_log_parser`, `log_miner`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OracleSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -621,9 +655,13 @@ module Google
           # @!attribute [rw] oracle_asm_log_file_access
           #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::BinaryLogParser::OracleAsmLogFileAccess]
           #     Use Oracle ASM.
+          #
+          #     Note: The following fields are mutually exclusive: `oracle_asm_log_file_access`, `log_file_directories`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] log_file_directories
           #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::BinaryLogParser::LogFileDirectories]
           #     Use Oracle directories.
+          #
+          #     Note: The following fields are mutually exclusive: `log_file_directories`, `oracle_asm_log_file_access`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BinaryLogParser
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -819,9 +857,13 @@ module Google
         # @!attribute [rw] transaction_logs
         #   @return [::Google::Cloud::Datastream::V1::SqlServerTransactionLogs]
         #     CDC reader reads from transaction logs.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction_logs`, `change_tables`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] change_tables
         #   @return [::Google::Cloud::Datastream::V1::SqlServerChangeTables]
         #     CDC reader reads from change tables.
+        #
+        #     Note: The following fields are mutually exclusive: `change_tables`, `transaction_logs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SqlServerSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -927,9 +969,13 @@ module Google
         # @!attribute [rw] binary_log_position
         #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig::BinaryLogPosition]
         #     Use Binary log position based replication.
+        #
+        #     Note: The following fields are mutually exclusive: `binary_log_position`, `gtid`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gtid
         #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig::Gtid]
         #     Use GTID based replication.
+        #
+        #     Note: The following fields are mutually exclusive: `gtid`, `binary_log_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MysqlSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -955,15 +1001,23 @@ module Google
         # @!attribute [rw] oracle_source_config
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig]
         #     Oracle data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`, `sql_server_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_source_config
         #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig]
         #     MySQL data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_source_config`, `oracle_source_config`, `postgresql_source_config`, `sql_server_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_source_config
         #   @return [::Google::Cloud::Datastream::V1::PostgresqlSourceConfig]
         #     PostgreSQL data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `postgresql_source_config`, `oracle_source_config`, `mysql_source_config`, `sql_server_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_source_config
         #   @return [::Google::Cloud::Datastream::V1::SqlServerSourceConfig]
         #     SQLServer data source configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_server_source_config`, `oracle_source_config`, `mysql_source_config`, `postgresql_source_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1026,9 +1080,13 @@ module Google
         # @!attribute [rw] avro_file_format
         #   @return [::Google::Cloud::Datastream::V1::AvroFileFormat]
         #     AVRO file format configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `avro_file_format`, `json_file_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json_file_format
         #   @return [::Google::Cloud::Datastream::V1::JsonFileFormat]
         #     JSON file format configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `json_file_format`, `avro_file_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GcsDestinationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1038,9 +1096,13 @@ module Google
         # @!attribute [rw] single_target_dataset
         #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SingleTargetDataset]
         #     Single destination dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `single_target_dataset`, `source_hierarchy_datasets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_hierarchy_datasets
         #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SourceHierarchyDatasets]
         #     Source hierarchy datasets.
+        #
+        #     Note: The following fields are mutually exclusive: `source_hierarchy_datasets`, `single_target_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_freshness
         #   @return [::Google::Protobuf::Duration]
         #     The guaranteed data freshness (in seconds) when querying tables created by
@@ -1050,9 +1112,13 @@ module Google
         # @!attribute [rw] merge
         #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::Merge]
         #     The standard mode
+        #
+        #     Note: The following fields are mutually exclusive: `merge`, `append_only`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] append_only
         #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::AppendOnly]
         #     Append only mode
+        #
+        #     Note: The following fields are mutually exclusive: `append_only`, `merge`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BigQueryDestinationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1126,9 +1192,13 @@ module Google
         # @!attribute [rw] gcs_destination_config
         #   @return [::Google::Cloud::Datastream::V1::GcsDestinationConfig]
         #     A configuration for how data should be loaded to Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination_config`, `bigquery_destination_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination_config
         #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig]
         #     BigQuery destination configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination_config`, `gcs_destination_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DestinationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1163,9 +1233,13 @@ module Google
         #   @return [::Google::Cloud::Datastream::V1::Stream::BackfillAllStrategy]
         #     Automatically backfill objects included in the stream source
         #     configuration. Specific objects can be excluded.
+        #
+        #     Note: The following fields are mutually exclusive: `backfill_all`, `backfill_none`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] backfill_none
         #   @return [::Google::Cloud::Datastream::V1::Stream::BackfillNoneStrategy]
         #     Do not automatically backfill any objects.
+        #
+        #     Note: The following fields are mutually exclusive: `backfill_none`, `backfill_all`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] errors
         #   @return [::Array<::Google::Cloud::Datastream::V1::Error>]
         #     Output only. Errors on the Stream.
@@ -1188,15 +1262,23 @@ module Google
           # @!attribute [rw] oracle_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
           #     Oracle data source objects to avoid backfilling.
+          #
+          #     Note: The following fields are mutually exclusive: `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] mysql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
           #     MySQL data source objects to avoid backfilling.
+          #
+          #     Note: The following fields are mutually exclusive: `mysql_excluded_objects`, `oracle_excluded_objects`, `postgresql_excluded_objects`, `sql_server_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] postgresql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
           #     PostgreSQL data source objects to avoid backfilling.
+          #
+          #     Note: The following fields are mutually exclusive: `postgresql_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `sql_server_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_server_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::SqlServerRdbms]
           #     SQLServer data source objects to avoid backfilling
+          #
+          #     Note: The following fields are mutually exclusive: `sql_server_excluded_objects`, `oracle_excluded_objects`, `mysql_excluded_objects`, `postgresql_excluded_objects`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BackfillAllStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1283,15 +1365,23 @@ module Google
         # @!attribute [rw] oracle_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::OracleObjectIdentifier]
         #     Oracle data source object identifier.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`, `sql_server_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::MysqlObjectIdentifier]
         #     Mysql data source object identifier.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_identifier`, `oracle_identifier`, `postgresql_identifier`, `sql_server_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] postgresql_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::PostgresqlObjectIdentifier]
         #     PostgreSQL data source object identifier.
+        #
+        #     Note: The following fields are mutually exclusive: `postgresql_identifier`, `oracle_identifier`, `mysql_identifier`, `sql_server_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_server_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::SqlServerObjectIdentifier]
         #     SQLServer data source object identifier.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_server_identifier`, `oracle_identifier`, `mysql_identifier`, `postgresql_identifier`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SourceObjectIdentifier
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1529,13 +1619,19 @@ module Google
         # @!attribute [rw] most_recent_start_position
         #   @return [::Google::Cloud::Datastream::V1::CdcStrategy::MostRecentStartPosition]
         #     Optional. Start replicating from the most recent position in the source.
+        #
+        #     Note: The following fields are mutually exclusive: `most_recent_start_position`, `next_available_start_position`, `specific_start_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] next_available_start_position
         #   @return [::Google::Cloud::Datastream::V1::CdcStrategy::NextAvailableStartPosition]
         #     Optional. Resume replication from the next available position in the
         #     source.
+        #
+        #     Note: The following fields are mutually exclusive: `next_available_start_position`, `most_recent_start_position`, `specific_start_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] specific_start_position
         #   @return [::Google::Cloud::Datastream::V1::CdcStrategy::SpecificStartPosition]
         #     Optional. Start replicating from a specific position in the source.
+        #
+        #     Note: The following fields are mutually exclusive: `specific_start_position`, `most_recent_start_position`, `next_available_start_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class CdcStrategy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1558,12 +1654,18 @@ module Google
           # @!attribute [rw] mysql_log_position
           #   @return [::Google::Cloud::Datastream::V1::MysqlLogPosition]
           #     MySQL specific log position to start replicating from.
+          #
+          #     Note: The following fields are mutually exclusive: `mysql_log_position`, `oracle_scn_position`, `sql_server_lsn_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] oracle_scn_position
           #   @return [::Google::Cloud::Datastream::V1::OracleScnPosition]
           #     Oracle SCN to start replicating from.
+          #
+          #     Note: The following fields are mutually exclusive: `oracle_scn_position`, `mysql_log_position`, `sql_server_lsn_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_server_lsn_position
           #   @return [::Google::Cloud::Datastream::V1::SqlServerLsnPosition]
           #     SqlServer LSN to start replicating from.
+          #
+          #     Note: The following fields are mutually exclusive: `sql_server_lsn_position`, `mysql_log_position`, `oracle_scn_position`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SpecificStartPosition
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

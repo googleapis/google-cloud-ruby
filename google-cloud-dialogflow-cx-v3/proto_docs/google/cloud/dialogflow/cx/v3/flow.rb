@@ -418,9 +418,13 @@ module Google
           #     have read permissions for the object. For more information, see
           #     [Dialogflow access
           #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          #
+          #     Note: The following fields are mutually exclusive: `flow_uri`, `flow_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] flow_content
           #   @return [::String]
           #     Uncompressed raw byte content for flow.
+          #
+          #     Note: The following fields are mutually exclusive: `flow_content`, `flow_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] import_option
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest::ImportOption]
           #     Flow import mode. If not specified, `KEEP` is assumed.
@@ -508,9 +512,13 @@ module Google
           #     The URI to a file containing the exported flow. This field is populated
           #     only if `flow_uri` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportFlowRequest ExportFlowRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `flow_uri`, `flow_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] flow_content
           #   @return [::String]
           #     Uncompressed raw byte content for flow.
+          #
+          #     Note: The following fields are mutually exclusive: `flow_content`, `flow_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ExportFlowResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -188,13 +188,19 @@ module Google
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
         #     Instructs the speech recognizer how to process the speech audio.
+        #
+        #     Note: The following fields are mutually exclusive: `audio_config`, `text`, `event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
         #     The natural language text to be processed. Text length must not exceed
         #     256 character for virtual agent interactions.
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `audio_config`, `event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     The event to be processed.
+        #
+        #     Note: The following fields are mutually exclusive: `event`, `audio_config`, `text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class QueryInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

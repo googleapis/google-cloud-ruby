@@ -349,6 +349,8 @@ module Google
         #
         #      * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
         #      * //pubsub.googleapis.com/projects/projectId/topics/topicId
+        #
+        #     Note: The following fields are mutually exclusive: `linked_resource`, `sql_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_resource
         #   @return [::String]
         #     The SQL name of the entry. SQL names are case-sensitive.
@@ -363,6 +365,8 @@ module Google
         #
         #     `*_id`s should satisfy the standard SQL rules for identifiers.
         #     https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class LookupEntryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -405,6 +409,8 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1beta1::EntryType]
         #     The type of the entry.
         #     Only used for Entries with types in the EntryType enum.
+        #
+        #     Note: The following fields are mutually exclusive: `type`, `user_specified_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_specified_type
         #   @return [::String]
         #     Entry type if it does not fit any of the input-allowed values listed in
@@ -417,10 +423,14 @@ module Google
         #
         #     Currently, only FILESET enum value is allowed. All other entries created
         #     through Data Catalog must use `user_specified_type`.
+        #
+        #     Note: The following fields are mutually exclusive: `user_specified_type`, `type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] integrated_system
         #   @return [::Google::Cloud::DataCatalog::V1beta1::IntegratedSystem]
         #     Output only. This field indicates the entry's source system that Data
         #     Catalog integrates with, such as BigQuery or Pub/Sub.
+        #
+        #     Note: The following fields are mutually exclusive: `integrated_system`, `user_specified_system`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_specified_system
         #   @return [::String]
         #     This field indicates the entry's source system that Data Catalog does not
@@ -428,19 +438,27 @@ module Google
         #     or underscore and can only contain letters, numbers, and underscores; are
         #     case insensitive; must be at least 1 character and at most 64 characters
         #     long.
+        #
+        #     Note: The following fields are mutually exclusive: `user_specified_system`, `integrated_system`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_fileset_spec
         #   @return [::Google::Cloud::DataCatalog::V1beta1::GcsFilesetSpec]
         #     Specification that applies to a Cloud Storage fileset. This is only valid
         #     on entries of type FILESET.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_fileset_spec`, `bigquery_table_spec`, `bigquery_date_sharded_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_table_spec
         #   @return [::Google::Cloud::DataCatalog::V1beta1::BigQueryTableSpec]
         #     Specification that applies to a BigQuery table. This is only valid on
         #     entries of type `TABLE`.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_table_spec`, `gcs_fileset_spec`, `bigquery_date_sharded_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_date_sharded_spec
         #   @return [::Google::Cloud::DataCatalog::V1beta1::BigQueryDateShardedSpec]
         #     Specification for a group of BigQuery tables with name pattern
         #     `[prefix]YYYYMMDD`. Context:
         #     https://cloud.google.com/bigquery/docs/partitioned-tables#partitioning_versus_sharding.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_date_sharded_spec`, `gcs_fileset_spec`, `bigquery_table_spec`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display information such as title and description. A short name to identify

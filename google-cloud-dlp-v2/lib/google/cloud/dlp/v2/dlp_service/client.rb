@@ -3311,9 +3311,13 @@ module Google
             #         parent=projects/example-project/locations/europe-west3
             #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
             #     An inspection job scans a storage repository for InfoTypes.
+            #
+            #     Note: The following fields are mutually exclusive: `inspect_job`, `risk_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
             #     A risk analysis job calculates re-identification risk metrics for a
             #     BigQuery table.
+            #
+            #     Note: The following fields are mutually exclusive: `risk_job`, `inspect_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular

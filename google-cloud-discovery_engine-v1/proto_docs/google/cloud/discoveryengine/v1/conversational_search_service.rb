@@ -415,9 +415,13 @@ module Google
           # @!attribute [rw] search_params
           #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SearchSpec::SearchParams]
           #     Search parameters.
+          #
+          #     Note: The following fields are mutually exclusive: `search_params`, `search_result_list`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] search_result_list
           #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SearchSpec::SearchResultList]
           #     Search result list.
+          #
+          #     Note: The following fields are mutually exclusive: `search_result_list`, `search_params`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SearchSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -489,9 +493,13 @@ module Google
               # @!attribute [rw] unstructured_document_info
               #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SearchSpec::SearchResultList::SearchResult::UnstructuredDocumentInfo]
               #     Unstructured document information.
+              #
+              #     Note: The following fields are mutually exclusive: `unstructured_document_info`, `chunk_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] chunk_info
               #   @return [::Google::Cloud::DiscoveryEngine::V1::AnswerQueryRequest::SearchSpec::SearchResultList::SearchResult::ChunkInfo]
               #     Chunk information.
+              #
+              #     Note: The following fields are mutually exclusive: `chunk_info`, `unstructured_document_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class SearchResult
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods

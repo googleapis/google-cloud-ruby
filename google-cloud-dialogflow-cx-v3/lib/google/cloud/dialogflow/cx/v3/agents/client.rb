@@ -850,10 +850,16 @@ module Google
               #     have read permissions for the object. For more information, see
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #
+              #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param agent_content [::String]
               #     Uncompressed raw byte content for agent.
+              #
+              #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param git_source [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::GitSource, ::Hash]
               #     Setting for restoring from a git branch
+              #
+              #     Note: The following fields are mutually exclusive: `git_source`, `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param restore_option [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]
               #     Agent restore mode. If not specified, `KEEP` is assumed.
               #

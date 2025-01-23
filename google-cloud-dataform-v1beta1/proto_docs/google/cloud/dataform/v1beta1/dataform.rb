@@ -272,9 +272,13 @@ module Google
           # @!attribute [rw] write_file
           #   @return [::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest::FileOperation::WriteFile]
           #     Represents the write operation.
+          #
+          #     Note: The following fields are mutually exclusive: `write_file`, `delete_file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] delete_file
           #   @return [::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest::FileOperation::DeleteFile]
           #     Represents the delete operation.
+          #
+          #     Note: The following fields are mutually exclusive: `delete_file`, `write_file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class FileOperation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -798,9 +802,13 @@ module Google
         # @!attribute [rw] file
         #   @return [::String]
         #     A file in the directory.
+        #
+        #     Note: The following fields are mutually exclusive: `file`, `directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] directory
         #   @return [::String]
         #     A child directory in the directory.
+        #
+        #     Note: The following fields are mutually exclusive: `directory`, `file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DirectoryEntry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1007,10 +1015,14 @@ module Google
           #     The name of the created compilation result, if one was successfully
           #     created. Must be in the format
           #     `projects/*/locations/*/repositories/*/compilationResults/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `compilation_result`, `error_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] error_status
           #   @return [::Google::Rpc::Status]
           #     The error status encountered upon this attempt to create the
           #     compilation result, if the attempt was unsuccessful.
+          #
+          #     Note: The following fields are mutually exclusive: `error_status`, `compilation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ScheduledReleaseRecord
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1114,16 +1126,22 @@ module Google
         #     - a commit SHA: `12ade345`
         #     - a tag: `tag1`
         #     - a branch name: `branch1`
+        #
+        #     Note: The following fields are mutually exclusive: `git_commitish`, `workspace`, `release_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] workspace
         #   @return [::String]
         #     Immutable. The name of the workspace to compile. Must be in the format
         #     `projects/*/locations/*/repositories/*/workspaces/*`.
+        #
+        #     Note: The following fields are mutually exclusive: `workspace`, `git_commitish`, `release_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] release_config
         #   @return [::String]
         #     Immutable. The name of the release config to compile. The release
         #     config's 'current_compilation_result' field will be updated to this
         #     compilation result. Must be in the format
         #     `projects/*/locations/*/repositories/*/releaseConfigs/*`.
+        #
+        #     Note: The following fields are mutually exclusive: `release_config`, `git_commitish`, `workspace`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] code_compilation_config
         #   @return [::Google::Cloud::Dataform::V1beta1::CodeCompilationConfig]
         #     Immutable. If set, fields of `code_compilation_config` override the default
@@ -1338,15 +1356,23 @@ module Google
         # @!attribute [rw] relation
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation]
         #     The database relation created/updated by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] operations
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Operations]
         #     The database operations executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] assertion
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Assertion]
         #     The assertion executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] declaration
         #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Declaration]
         #     The declaration declared by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class CompilationResultAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1610,10 +1636,14 @@ module Google
           #     The name of the created workflow invocation, if one was successfully
           #     created. Must be in the format
           #     `projects/*/locations/*/repositories/*/workflowInvocations/*`.
+          #
+          #     Note: The following fields are mutually exclusive: `workflow_invocation`, `error_status`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] error_status
           #   @return [::Google::Rpc::Status]
           #     The error status encountered upon this attempt to create the
           #     workflow invocation, if the attempt was unsuccessful.
+          #
+          #     Note: The following fields are mutually exclusive: `error_status`, `workflow_invocation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ScheduledExecutionRecord
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1743,10 +1773,14 @@ module Google
         #     Immutable. The name of the compilation result to use for this invocation.
         #     Must be in the format
         #     `projects/*/locations/*/repositories/*/compilationResults/*`.
+        #
+        #     Note: The following fields are mutually exclusive: `compilation_result`, `workflow_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] workflow_config
         #   @return [::String]
         #     Immutable. The name of the workflow config to invoke. Must be in the
         #     format `projects/*/locations/*/repositories/*/workflowConfigs/*`.
+        #
+        #     Note: The following fields are mutually exclusive: `workflow_config`, `compilation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] invocation_config
         #   @return [::Google::Cloud::Dataform::V1beta1::InvocationConfig]
         #     Immutable. If left unset, a default InvocationConfig will be used.

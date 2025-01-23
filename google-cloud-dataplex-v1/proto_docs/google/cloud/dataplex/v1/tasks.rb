@@ -61,9 +61,13 @@ module Google
         # @!attribute [rw] spark
         #   @return [::Google::Cloud::Dataplex::V1::Task::SparkTaskConfig]
         #     Config related to running custom Spark tasks.
+        #
+        #     Note: The following fields are mutually exclusive: `spark`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] notebook
         #   @return [::Google::Cloud::Dataplex::V1::Task::NotebookTaskConfig]
         #     Config related to running scheduled Notebooks.
+        #
+        #     Note: The following fields are mutually exclusive: `notebook`, `spark`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Task
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -137,9 +141,13 @@ module Google
             #   @return [::String]
             #     Optional. The Cloud VPC network in which the job is run. By default,
             #     the Cloud VPC network named Default within the project is used.
+            #
+            #     Note: The following fields are mutually exclusive: `network`, `sub_network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] sub_network
             #   @return [::String]
             #     Optional. The Cloud VPC sub-network in which the job is run.
+            #
+            #     Note: The following fields are mutually exclusive: `sub_network`, `network`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] network_tags
             #   @return [::Array<::String>]
             #     Optional. List of network tags to apply to the job.
@@ -246,6 +254,8 @@ module Google
           #     The Cloud Storage URI of the jar file that contains the main class.
           #     The execution args are passed in as a sequence of named process
           #     arguments (`--key=value`).
+          #
+          #     Note: The following fields are mutually exclusive: `main_jar_file_uri`, `main_class`, `python_script_file`, `sql_script_file`, `sql_script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] main_class
           #   @return [::String]
           #     The name of the driver's main class. The jar file that contains the
@@ -253,21 +263,29 @@ module Google
           #     `jar_file_uris`.
           #     The execution args are passed in as a sequence of named process
           #     arguments (`--key=value`).
+          #
+          #     Note: The following fields are mutually exclusive: `main_class`, `main_jar_file_uri`, `python_script_file`, `sql_script_file`, `sql_script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] python_script_file
           #   @return [::String]
           #     The Gcloud Storage URI of the main Python file to use as the driver.
           #     Must be a .py file. The execution args are passed in as a sequence of
           #     named process arguments (`--key=value`).
+          #
+          #     Note: The following fields are mutually exclusive: `python_script_file`, `main_jar_file_uri`, `main_class`, `sql_script_file`, `sql_script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_script_file
           #   @return [::String]
           #     A reference to a query file. This should be the Cloud Storage URI of
           #     the query file. The execution args are used to declare a set of script
           #     variables (`set key="value";`).
+          #
+          #     Note: The following fields are mutually exclusive: `sql_script_file`, `main_jar_file_uri`, `main_class`, `python_script_file`, `sql_script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] sql_script
           #   @return [::String]
           #     The query text.
           #     The execution args are used to declare a set of script variables
           #     (`set key="value";`).
+          #
+          #     Note: The following fields are mutually exclusive: `sql_script`, `main_jar_file_uri`, `main_class`, `python_script_file`, `sql_script_file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] file_uris
           #   @return [::Array<::String>]
           #     Optional. Cloud Storage URIs of files to be placed in the working

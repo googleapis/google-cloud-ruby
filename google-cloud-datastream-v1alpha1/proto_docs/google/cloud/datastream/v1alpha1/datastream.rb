@@ -29,22 +29,34 @@ module Google
         # @!attribute [rw] connection_profile
         #   @return [::Google::Cloud::Datastream::V1alpha1::ConnectionProfile]
         #     An ad-hoc ConnectionProfile configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `connection_profile`, `connection_profile_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] connection_profile_name
         #   @return [::String]
         #     A reference to an existing ConnectionProfile.
+        #
+        #     Note: The following fields are mutually exclusive: `connection_profile_name`, `connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] recursive
         #   @return [::Boolean]
         #     Whether to retrieve the full hierarchy of data objects (TRUE) or only the
         #     current level (FALSE).
+        #
+        #     Note: The following fields are mutually exclusive: `recursive`, `recursion_depth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] recursion_depth
         #   @return [::Integer]
         #     The number of hierarchy levels below the current level to be retrieved.
+        #
+        #     Note: The following fields are mutually exclusive: `recursion_depth`, `recursive`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oracle_rdbms
         #   @return [::Google::Cloud::Datastream::V1alpha1::OracleRdbms]
         #     Oracle RDBMS to enrich with child data objects and metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1alpha1::MysqlRdbms]
         #     MySQL RDBMS to enrich with child data objects and metadata.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoverConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -53,9 +65,13 @@ module Google
         # @!attribute [rw] oracle_rdbms
         #   @return [::Google::Cloud::Datastream::V1alpha1::OracleRdbms]
         #     Enriched Oracle RDBMS object.
+        #
+        #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1alpha1::MysqlRdbms]
         #     Enriched MySQL RDBMS object.
+        #
+        #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoverConnectionProfileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

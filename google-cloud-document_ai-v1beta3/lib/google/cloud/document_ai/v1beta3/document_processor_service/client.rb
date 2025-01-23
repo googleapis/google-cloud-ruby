@@ -251,10 +251,16 @@ module Google
             #
             #   @param inline_document [::Google::Cloud::DocumentAI::V1beta3::Document, ::Hash]
             #     An inline document proto.
+            #
+            #     Note: The following fields are mutually exclusive: `inline_document`, `raw_document`, `gcs_document`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param raw_document [::Google::Cloud::DocumentAI::V1beta3::RawDocument, ::Hash]
             #     A raw document content (bytes).
+            #
+            #     Note: The following fields are mutually exclusive: `raw_document`, `inline_document`, `gcs_document`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param gcs_document [::Google::Cloud::DocumentAI::V1beta3::GcsDocument, ::Hash]
             #     A raw document on Google Cloud Storage.
+            #
+            #     Note: The following fields are mutually exclusive: `gcs_document`, `inline_document`, `raw_document`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param name [::String]
             #     Required. The resource name of the
             #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or
@@ -956,8 +962,12 @@ module Google
             #
             #   @param custom_document_extraction_options [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::CustomDocumentExtractionOptions, ::Hash]
             #     Options to control Custom Document Extraction (CDE) Processor.
+            #
+            #     Note: The following fields are mutually exclusive: `custom_document_extraction_options`, `foundation_model_tuning_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param foundation_model_tuning_options [::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest::FoundationModelTuningOptions, ::Hash]
             #     Options to control foundation model tuning of a processor.
+            #
+            #     Note: The following fields are mutually exclusive: `foundation_model_tuning_options`, `custom_document_extraction_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param parent [::String]
             #     Required. The parent (project, location and processor) to create the new
             #     version for. Format:
@@ -2421,9 +2431,13 @@ module Google
             #     and destination processor need to be in the same environment and region.
             #     Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
             #     supported.
+            #
+            #     Note: The following fields are mutually exclusive: `processor_version_source`, `external_processor_version_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param external_processor_version_source [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource, ::Hash]
             #     The source processor version to import from. It can be from a different
             #     environment and region than the destination processor.
+            #
+            #     Note: The following fields are mutually exclusive: `external_processor_version_source`, `processor_version_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param parent [::String]
             #     Required. The destination processor name to create the processor version
             #     in. Format:

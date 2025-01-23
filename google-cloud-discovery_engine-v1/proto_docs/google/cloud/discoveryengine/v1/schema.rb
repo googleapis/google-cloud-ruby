@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] struct_schema
         #   @return [::Google::Protobuf::Struct]
         #     The structured representation of the schema.
+        #
+        #     Note: The following fields are mutually exclusive: `struct_schema`, `json_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json_schema
         #   @return [::String]
         #     The JSON representation of the schema.
+        #
+        #     Note: The following fields are mutually exclusive: `json_schema`, `struct_schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The full resource name of the schema, in the format of

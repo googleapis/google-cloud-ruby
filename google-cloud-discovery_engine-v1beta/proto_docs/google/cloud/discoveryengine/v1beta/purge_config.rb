@@ -119,9 +119,13 @@ module Google
         #     Supported `data_schema`:
         #     * `document_id`: One valid
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id} per line.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::PurgeDocumentsRequest::InlineSource]
         #     Inline source for the input content for purge.
+        #
+        #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name, such as

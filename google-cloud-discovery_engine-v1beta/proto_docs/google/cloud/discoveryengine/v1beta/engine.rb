@@ -29,12 +29,16 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine#solution_type solution_type}
         #     is
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_CHAT SOLUTION_TYPE_CHAT}.
+        #
+        #     Note: The following fields are mutually exclusive: `chat_engine_config`, `search_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] search_engine_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::SearchEngineConfig]
         #     Configurations for the Search Engine. Only applicable if
         #     {::Google::Cloud::DiscoveryEngine::V1beta::Engine#solution_type solution_type}
         #     is
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
+        #
+        #     Note: The following fields are mutually exclusive: `search_engine_config`, `chat_engine_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] chat_engine_metadata
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Engine::ChatEngineMetadata]
         #     Output only. Additional information of the Chat Engine. Only applicable

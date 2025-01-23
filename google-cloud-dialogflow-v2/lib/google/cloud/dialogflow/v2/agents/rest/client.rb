@@ -815,8 +815,12 @@ module Google
               #     have read permissions for the object. For more information, see
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #
+              #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param agent_content [::String]
               #     Zip compressed raw byte content for agent.
+              #
+              #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -938,8 +942,12 @@ module Google
               #     have read permissions for the object. For more information, see
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #
+              #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param agent_content [::String]
               #     Zip compressed raw byte content for agent.
+              #
+              #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

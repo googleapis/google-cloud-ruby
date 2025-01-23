@@ -25,15 +25,23 @@ module Google
         # @!attribute [rw] minimum
         #   @return [::Float]
         #     Inclusive lower bound.
+        #
+        #     Note: The following fields are mutually exclusive: `minimum`, `exclusive_minimum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclusive_minimum
         #   @return [::Float]
         #     Exclusive lower bound.
+        #
+        #     Note: The following fields are mutually exclusive: `exclusive_minimum`, `minimum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] maximum
         #   @return [::Float]
         #     Inclusive upper bound.
+        #
+        #     Note: The following fields are mutually exclusive: `maximum`, `exclusive_maximum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclusive_maximum
         #   @return [::Float]
         #     Exclusive upper bound.
+        #
+        #     Note: The following fields are mutually exclusive: `exclusive_maximum`, `maximum`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Interval
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

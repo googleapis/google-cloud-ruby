@@ -52,34 +52,52 @@ module Google
         # @!attribute [rw] image_classification_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImageClassificationAnnotation]
         #     Annotation value for image classification case.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_bounding_poly_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImageBoundingPolyAnnotation]
         #     Annotation value for image bounding box, oriented bounding box
         #     and polygon cases.
+        #
+        #     Note: The following fields are mutually exclusive: `image_bounding_poly_annotation`, `image_classification_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_polyline_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImagePolylineAnnotation]
         #     Annotation value for image polyline cases.
         #     Polyline here is different from BoundingPoly. It is formed by
         #     line segments connected to each other but not closed form(Bounding Poly).
         #     The line segments can cross each other.
+        #
+        #     Note: The following fields are mutually exclusive: `image_polyline_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_segmentation_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ImageSegmentationAnnotation]
         #     Annotation value for image segmentation.
+        #
+        #     Note: The following fields are mutually exclusive: `image_segmentation_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_classification_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextClassificationAnnotation]
         #     Annotation value for text classification case.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_entity_extraction_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::TextEntityExtractionAnnotation]
         #     Annotation value for text entity extraction case.
+        #
+        #     Note: The following fields are mutually exclusive: `text_entity_extraction_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_classification_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::VideoClassificationAnnotation]
         #     Annotation value for video classification case.
+        #
+        #     Note: The following fields are mutually exclusive: `video_classification_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_object_tracking_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_object_tracking_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::VideoObjectTrackingAnnotation]
         #     Annotation value for video object detection and tracking case.
+        #
+        #     Note: The following fields are mutually exclusive: `video_object_tracking_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_event_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] video_event_annotation
         #   @return [::Google::Cloud::DataLabeling::V1beta1::VideoEventAnnotation]
         #     Annotation value for video event case.
+        #
+        #     Note: The following fields are mutually exclusive: `video_event_annotation`, `image_classification_annotation`, `image_bounding_poly_annotation`, `image_polyline_annotation`, `image_segmentation_annotation`, `text_classification_annotation`, `text_entity_extraction_annotation`, `video_classification_annotation`, `video_object_tracking_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AnnotationValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -143,8 +161,10 @@ module Google
         # bounding box in the image.
         # @!attribute [rw] bounding_poly
         #   @return [::Google::Cloud::DataLabeling::V1beta1::BoundingPoly]
+        #     Note: The following fields are mutually exclusive: `bounding_poly`, `normalized_bounding_poly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] normalized_bounding_poly
         #   @return [::Google::Cloud::DataLabeling::V1beta1::NormalizedBoundingPoly]
+        #     Note: The following fields are mutually exclusive: `normalized_bounding_poly`, `bounding_poly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] annotation_spec
         #   @return [::Google::Cloud::DataLabeling::V1beta1::AnnotationSpec]
         #     Label of object in this bounding polygon.
@@ -174,8 +194,10 @@ module Google
         # A polyline for the image annotation.
         # @!attribute [rw] polyline
         #   @return [::Google::Cloud::DataLabeling::V1beta1::Polyline]
+        #     Note: The following fields are mutually exclusive: `polyline`, `normalized_polyline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] normalized_polyline
         #   @return [::Google::Cloud::DataLabeling::V1beta1::NormalizedPolyline]
+        #     Note: The following fields are mutually exclusive: `normalized_polyline`, `polyline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] annotation_spec
         #   @return [::Google::Cloud::DataLabeling::V1beta1::AnnotationSpec]
         #     Label of this polyline.
@@ -272,8 +294,10 @@ module Google
         # Video frame level annotation for object detection and tracking.
         # @!attribute [rw] bounding_poly
         #   @return [::Google::Cloud::DataLabeling::V1beta1::BoundingPoly]
+        #     Note: The following fields are mutually exclusive: `bounding_poly`, `normalized_bounding_poly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] normalized_bounding_poly
         #   @return [::Google::Cloud::DataLabeling::V1beta1::NormalizedBoundingPoly]
+        #     Note: The following fields are mutually exclusive: `normalized_bounding_poly`, `bounding_poly`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] time_offset
         #   @return [::Google::Protobuf::Duration]
         #     The time offset of this frame relative to the beginning of the video.

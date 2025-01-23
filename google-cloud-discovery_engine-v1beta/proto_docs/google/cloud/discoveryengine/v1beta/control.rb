@@ -88,16 +88,24 @@ module Google
         # @!attribute [rw] boost_action
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Control::BoostAction]
         #     Defines a boost-type control
+        #
+        #     Note: The following fields are mutually exclusive: `boost_action`, `filter_action`, `redirect_action`, `synonyms_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter_action
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Control::FilterAction]
         #     Defines a filter-type control
         #     Currently not supported by Recommendation
+        #
+        #     Note: The following fields are mutually exclusive: `filter_action`, `boost_action`, `redirect_action`, `synonyms_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] redirect_action
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Control::RedirectAction]
         #     Defines a redirect-type control.
+        #
+        #     Note: The following fields are mutually exclusive: `redirect_action`, `boost_action`, `filter_action`, `synonyms_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] synonyms_action
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Control::SynonymsAction]
         #     Treats a group of terms as synonyms of one another.
+        #
+        #     Note: The following fields are mutually exclusive: `synonyms_action`, `boost_action`, `filter_action`, `redirect_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Fully qualified name

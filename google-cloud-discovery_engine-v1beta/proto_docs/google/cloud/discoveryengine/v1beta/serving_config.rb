@@ -28,9 +28,13 @@ module Google
         # @!attribute [rw] media_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig::MediaConfig]
         #     The MediaConfig of the serving configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `media_config`, `generic_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generic_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ServingConfig::GenericConfig]
         #     The GenericConfig of the serving configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `generic_config`, `media_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Fully qualified name
@@ -222,9 +226,13 @@ module Google
           #   @return [::Float]
           #     Specifies the content watched percentage threshold for demotion.
           #     Threshold value must be between [0, 1.0] inclusive.
+          #
+          #     Note: The following fields are mutually exclusive: `content_watched_percentage_threshold`, `content_watched_seconds_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] content_watched_seconds_threshold
           #   @return [::Float]
           #     Specifies the content watched minutes threshold for demotion.
+          #
+          #     Note: The following fields are mutually exclusive: `content_watched_seconds_threshold`, `content_watched_percentage_threshold`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] demotion_event_type
           #   @return [::String]
           #     Specifies the event type used for demoting recommendation result.

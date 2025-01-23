@@ -56,10 +56,14 @@ module Google
         #     be indexed by Google Search. In particular, URLs for showing documents in
         #     Google Cloud Storage (i.e. the URL in your browser) are not supported.
         #     Instead use the `gs://` format URI described above.
+        #
+        #     Note: The following fields are mutually exclusive: `content_uri`, `raw_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] raw_content
         #   @return [::String]
         #     The raw content of the document. This field is only permitted for
         #     EXTRACTIVE_QA and FAQ knowledge types.
+        #
+        #     Note: The following fields are mutually exclusive: `raw_content`, `content_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enable_auto_reload
         #   @return [::Boolean]
         #     Optional. If true, we try to automatically reload the document every day

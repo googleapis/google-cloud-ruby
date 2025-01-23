@@ -1290,11 +1290,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::String]
             #     Text value of a facet, such as "Black" for facet "colors".
+            #
+            #     Note: The following fields are mutually exclusive: `value`, `interval`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] interval
             #   @return [::Google::Cloud::DiscoveryEngine::V1beta::Interval]
             #     Interval value for a facet, such as [10, 20) for facet "price". It
             #     matches
             #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec::FacetKey#intervals SearchRequest.FacetSpec.FacetKey.intervals}.
+            #
+            #     Note: The following fields are mutually exclusive: `interval`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] count
             #   @return [::Integer]
             #     Number of items that have this facet value.
@@ -1676,18 +1680,28 @@ module Google
               # @!attribute [rw] string_constraint
               #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::StringConstraint]
               #     String constraint expression.
+              #
+              #     Note: The following fields are mutually exclusive: `string_constraint`, `number_constraint`, `geolocation_constraint`, `and_expr`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] number_constraint
               #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::NumberConstraint]
               #     Numerical constraint expression.
+              #
+              #     Note: The following fields are mutually exclusive: `number_constraint`, `string_constraint`, `geolocation_constraint`, `and_expr`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] geolocation_constraint
               #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::GeolocationConstraint]
               #     Geolocation constraint expression.
+              #
+              #     Note: The following fields are mutually exclusive: `geolocation_constraint`, `string_constraint`, `number_constraint`, `and_expr`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] and_expr
               #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::AndExpression]
               #     Logical "And" compound operator connecting multiple expressions.
+              #
+              #     Note: The following fields are mutually exclusive: `and_expr`, `string_constraint`, `number_constraint`, `geolocation_constraint`, `or_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @!attribute [rw] or_expr
               #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::NaturalLanguageQueryUnderstandingInfo::StructuredExtractedFilter::OrExpression]
               #     Logical "Or" compound operator connecting multiple expressions.
+              #
+              #     Note: The following fields are mutually exclusive: `or_expr`, `string_constraint`, `number_constraint`, `geolocation_constraint`, `and_expr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               class Expression
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
