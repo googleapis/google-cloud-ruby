@@ -89,6 +89,8 @@ module Google
             rpc :DeleteBackupPlanAssociation, ::Google::Cloud::BackupDR::V1::DeleteBackupPlanAssociationRequest, ::Google::Longrunning::Operation
             # Triggers a new Backup.
             rpc :TriggerBackup, ::Google::Cloud::BackupDR::V1::TriggerBackupRequest, ::Google::Longrunning::Operation
+            # Initializes the service related config for a project.
+            rpc :InitializeService, ::Google::Cloud::BackupDR::V1::InitializeServiceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

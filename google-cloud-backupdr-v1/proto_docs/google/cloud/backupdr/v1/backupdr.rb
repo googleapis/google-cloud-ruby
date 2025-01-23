@@ -118,8 +118,9 @@ module Google
         #     Output only. The ManagementServer state.
         # @!attribute [rw] networks
         #   @return [::Array<::Google::Cloud::BackupDR::V1::NetworkConfig>]
-        #     Required. VPC networks to which the ManagementServer instance is connected.
-        #     For this version, only a single network is supported.
+        #     Optional. VPC networks to which the ManagementServer instance is connected.
+        #     For this version, only a single network is supported. This field is
+        #     optional if MS is created without PSA
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. Server specified ETag for the ManagementServer resource to
@@ -314,6 +315,53 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for initializing the service.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the serviceConfig used to initialize the
+        #     service. Format:
+        #     `projects/{project_id}/locations/{location}/serviceConfig`.
+        # @!attribute [rw] resource_type
+        #   @return [::String]
+        #     Required. The resource type to which the default service config will be
+        #     applied. Examples include, "compute.googleapis.com/Instance" and
+        #     "storage.googleapis.com/Bucket".
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     For example, consider a situation where you make an initial request and t
+        #     he request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class InitializeServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for initializing the service.
+        # @!attribute [rw] backup_vault_name
+        #   @return [::String]
+        #     The resource name of the default `BackupVault` created.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/backupVaults/{backup_vault_id}`.
+        # @!attribute [rw] backup_plan_name
+        #   @return [::String]
+        #     The resource name of the default `BackupPlan` created.
+        #     Format:
+        #     `projects/{project_id}/locations/{location}/backupPlans/{backup_plan_id}`.
+        class InitializeServiceResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the metadata of the long-running operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -334,9 +382,10 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     'Code.CANCELLED'.
+        #     have
+        #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+        #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
+        #     corresponding to 'Code.CANCELLED'.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

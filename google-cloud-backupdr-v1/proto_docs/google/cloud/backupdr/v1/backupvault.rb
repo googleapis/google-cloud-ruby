@@ -74,8 +74,7 @@ module Google
         #     Output only. Total size of the storage used by all backup resources.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Output only
-        #     Immutable after resource creation until resource deletion.
+        #     Output only. Immutable after resource creation until resource deletion.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. User annotations. See https://google.aip.dev/128#annotations
@@ -84,8 +83,6 @@ module Google
         #   @return [::Google::Cloud::BackupDR::V1::BackupVault::AccessRestriction]
         #     Optional. Note: This field is added for future use case and will not be
         #     supported in the current release.
-        #
-        #     Optional.
         #
         #     Access restriction for the backup vault.
         #     Default value is WITHIN_ORGANIZATION if not provided during creation.
@@ -131,7 +128,8 @@ module Google
 
           # Holds the access restriction for the backup vault.
           module AccessRestriction
-            # Access restriction not set.
+            # Access restriction not set. If user does not provide any value or pass
+            # this value, it will be changed to WITHIN_ORGANIZATION.
             ACCESS_RESTRICTION_UNSPECIFIED = 0
 
             # Access to or from resources outside your current project will be denied.
@@ -143,6 +141,10 @@ module Google
 
             # No access restriction.
             UNRESTRICTED = 3
+
+            # Access to or from resources outside your current organization will be
+            # denied except for backup appliance.
+            WITHIN_ORG_BUT_UNRESTRICTED_FOR_BA = 4
           end
         end
 
@@ -773,6 +775,10 @@ module Google
         #   @return [::Boolean]
         #     Optional. If true and the BackupVault is not found, the request will
         #     succeed but no action will be taken.
+        # @!attribute [rw] ignore_backup_plan_references
+        #   @return [::Boolean]
+        #     Optional. If set to true, backupvault deletion will proceed even if there
+        #     are backup plans referencing the backupvault. The default is 'false'.
         class DeleteBackupVaultRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

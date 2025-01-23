@@ -30,7 +30,8 @@ module Google
         #     projects/\\{project}/locations/\\{location}/backupPlanAssociations/\\{backupPlanAssociationId}
         # @!attribute [rw] resource_type
         #   @return [::String]
-        #     Optional. Resource type of workload on which backupplan is applied
+        #     Required. Immutable. Resource type of workload on which backupplan is
+        #     applied
         # @!attribute [rw] resource
         #   @return [::String]
         #     Required. Immutable. Resource name of workload on which backupplan is
@@ -54,11 +55,8 @@ module Google
         #     Output only. The config info related to backup rules.
         # @!attribute [r] data_source
         #   @return [::String]
-        #     Output only. Output Only.
-        #
-        #     Resource name of data source which will be used as storage location for
-        #     backups taken.
-        #     Format :
+        #     Output only. Resource name of data source which will be used as storage
+        #     location for backups taken. Format :
         #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backupvault}/dataSources/\\{datasource}
         class BackupPlanAssociation
           include ::Google::Protobuf::MessageExts
@@ -86,17 +84,13 @@ module Google
         # Message for rules config info.
         # @!attribute [r] rule_id
         #   @return [::String]
-        #     Output only. Output Only.
-        #
-        #     Backup Rule id fetched from backup plan.
+        #     Output only. Backup Rule id fetched from backup plan.
         # @!attribute [r] last_backup_state
         #   @return [::Google::Cloud::BackupDR::V1::RuleConfigInfo::LastBackupState]
         #     Output only. The last backup state for rule.
         # @!attribute [r] last_backup_error
         #   @return [::Google::Rpc::Status]
-        #     Output only. Output Only.
-        #
-        #     google.rpc.Status object to store the last backup error.
+        #     Output only. google.rpc.Status object to store the last backup error.
         # @!attribute [r] last_successful_backup_consistency_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The point in time when the last successful backup was captured
