@@ -75,9 +75,13 @@ module Google
         # @!attribute [rw] gcs_prefix
         #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsPrefix]
         #     The set of documents that match the specified Cloud Storage `gcs_prefix`.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_prefix`, `gcs_documents`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_documents
         #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsDocuments]
         #     The set of documents individually specified on Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_documents`, `gcs_prefix`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BatchDocumentsInputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

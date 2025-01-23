@@ -729,17 +729,29 @@ module Google
               #     format `projects/*/locations/*`.
               #   @param connection_profile [::Google::Cloud::Datastream::V1alpha1::ConnectionProfile, ::Hash]
               #     An ad-hoc ConnectionProfile configuration.
+              #
+              #     Note: The following fields are mutually exclusive: `connection_profile`, `connection_profile_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param connection_profile_name [::String]
               #     A reference to an existing ConnectionProfile.
+              #
+              #     Note: The following fields are mutually exclusive: `connection_profile_name`, `connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param recursive [::Boolean]
               #     Whether to retrieve the full hierarchy of data objects (TRUE) or only the
               #     current level (FALSE).
+              #
+              #     Note: The following fields are mutually exclusive: `recursive`, `recursion_depth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param recursion_depth [::Integer]
               #     The number of hierarchy levels below the current level to be retrieved.
+              #
+              #     Note: The following fields are mutually exclusive: `recursion_depth`, `recursive`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param oracle_rdbms [::Google::Cloud::Datastream::V1alpha1::OracleRdbms, ::Hash]
               #     Oracle RDBMS to enrich with child data objects and metadata.
+              #
+              #     Note: The following fields are mutually exclusive: `oracle_rdbms`, `mysql_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param mysql_rdbms [::Google::Cloud::Datastream::V1alpha1::MysqlRdbms, ::Hash]
               #     MySQL RDBMS to enrich with child data objects and metadata.
+              #
+              #     Note: The following fields are mutually exclusive: `mysql_rdbms`, `oracle_rdbms`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1alpha1::DiscoverConnectionProfileResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

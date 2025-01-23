@@ -287,36 +287,54 @@ module Google
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RangeExpectation]
         #     Row-level rule which evaluates whether each column value lies between a
         #     specified range.
+        #
+        #     Note: The following fields are mutually exclusive: `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] non_null_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::NonNullExpectation]
         #     Row-level rule which evaluates whether each column value is null.
+        #
+        #     Note: The following fields are mutually exclusive: `non_null_expectation`, `range_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] set_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::SetExpectation]
         #     Row-level rule which evaluates whether each column value is contained by
         #     a specified set.
+        #
+        #     Note: The following fields are mutually exclusive: `set_expectation`, `range_expectation`, `non_null_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RegexExpectation]
         #     Row-level rule which evaluates whether each column value matches a
         #     specified regex.
+        #
+        #     Note: The following fields are mutually exclusive: `regex_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uniqueness_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::UniquenessExpectation]
         #     Row-level rule which evaluates whether each column value is unique.
+        #
+        #     Note: The following fields are mutually exclusive: `uniqueness_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] statistic_range_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::StatisticRangeExpectation]
         #     Aggregate rule which evaluates whether the column aggregate
         #     statistic lies between a specified range.
+        #
+        #     Note: The following fields are mutually exclusive: `statistic_range_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `row_condition_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_condition_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::RowConditionExpectation]
         #     Row-level rule which evaluates whether each row in a table passes the
         #     specified condition.
+        #
+        #     Note: The following fields are mutually exclusive: `row_condition_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `table_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table_condition_expectation
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::TableConditionExpectation]
         #     Aggregate rule which evaluates whether the provided expression is true
         #     for a table.
+        #
+        #     Note: The following fields are mutually exclusive: `table_condition_expectation`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `sql_assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sql_assertion
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::SqlAssertion]
         #     Aggregate rule which evaluates the number of rows returned for the
         #     provided statement. If any rows are returned, this rule fails.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_assertion`, `range_expectation`, `non_null_expectation`, `set_expectation`, `regex_expectation`, `uniqueness_expectation`, `statistic_range_expectation`, `row_condition_expectation`, `table_condition_expectation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] column
         #   @return [::String]
         #     Optional. The unnested column which this rule is evaluated against.

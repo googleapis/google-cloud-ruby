@@ -1022,8 +1022,12 @@ module Google
               #     have read permissions for the object. For more information, see
               #     [Dialogflow access
               #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param content [::String]
               #     Uncompressed raw byte content for test cases.
+              #
+              #     Note: The following fields are mutually exclusive: `content`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]

@@ -49,9 +49,13 @@ module Google
         # @!attribute [rw] article_suggestion_model_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::ArticleSuggestionModelMetadata]
         #     Metadata for article suggestion models.
+        #
+        #     Note: The following fields are mutually exclusive: `article_suggestion_model_metadata`, `smart_reply_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] smart_reply_model_metadata
         #   @return [::Google::Cloud::Dialogflow::V2::SmartReplyModelMetadata]
         #     Metadata for smart reply models.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_reply_model_metadata`, `article_suggestion_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. A read only boolean field reflecting Zone Separation
@@ -156,9 +160,13 @@ module Google
         # @!attribute [rw] smart_reply_config
         #   @return [::Google::Cloud::Dialogflow::V2::EvaluationConfig::SmartReplyConfig]
         #     Configuration for smart reply model evalution.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_reply_config`, `smart_compose_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] smart_compose_config
         #   @return [::Google::Cloud::Dialogflow::V2::EvaluationConfig::SmartComposeConfig]
         #     Configuration for smart compose model evalution.
+        #
+        #     Note: The following fields are mutually exclusive: `smart_compose_config`, `smart_reply_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EvaluationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

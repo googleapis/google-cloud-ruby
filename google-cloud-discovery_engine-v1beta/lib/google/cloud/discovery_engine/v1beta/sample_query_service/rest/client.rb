@@ -711,10 +711,16 @@ module Google
               #
               #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1beta::ImportSampleQueriesRequest::InlineSource, ::Hash]
               #     The Inline source for sample query entries.
+              #
+              #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1beta::GcsSource, ::Hash]
               #     Cloud Storage location for the input content.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource, ::Hash]
               #     BigQuery input source.
+              #
+              #     Note: The following fields are mutually exclusive: `bigquery_source`, `inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param parent [::String]
               #     Required. The parent sample query set resource name, such as
               #     `projects/{project}/locations/{location}/sampleQuerySets/{sampleQuerySet}`.

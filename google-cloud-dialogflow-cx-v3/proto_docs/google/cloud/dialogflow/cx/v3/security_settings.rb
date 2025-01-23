@@ -177,10 +177,14 @@ module Google
           #     When data retention configuration is changed, it only applies to the data
           #     created after the change; the TTL of existing data created before the
           #     change stays intact.
+          #
+          #     Note: The following fields are mutually exclusive: `retention_window_days`, `retention_strategy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] retention_strategy
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::RetentionStrategy]
           #     Specifies the retention behavior defined by
           #     {::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::RetentionStrategy SecuritySettings.RetentionStrategy}.
+          #
+          #     Note: The following fields are mutually exclusive: `retention_strategy`, `retention_window_days`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] purge_data_types
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::PurgeDataType>]
           #     List of types of data to remove when retention settings triggers purge.

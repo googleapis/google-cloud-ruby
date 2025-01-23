@@ -720,22 +720,40 @@ module Google
               #
               #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportDocumentsRequest::InlineSource, ::Hash]
               #     The Inline source for the input content for documents.
+              #
+              #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`, `bigquery_source`, `fhir_store_source`, `spanner_source`, `cloud_sql_source`, `firestore_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
               #     Cloud Storage location for the input content.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`, `bigquery_source`, `fhir_store_source`, `spanner_source`, `cloud_sql_source`, `firestore_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1::BigQuerySource, ::Hash]
               #     BigQuery input source.
+              #
+              #     Note: The following fields are mutually exclusive: `bigquery_source`, `inline_source`, `gcs_source`, `fhir_store_source`, `spanner_source`, `cloud_sql_source`, `firestore_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param fhir_store_source [::Google::Cloud::DiscoveryEngine::V1::FhirStoreSource, ::Hash]
               #     FhirStore input source.
+              #
+              #     Note: The following fields are mutually exclusive: `fhir_store_source`, `inline_source`, `gcs_source`, `bigquery_source`, `spanner_source`, `cloud_sql_source`, `firestore_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param spanner_source [::Google::Cloud::DiscoveryEngine::V1::SpannerSource, ::Hash]
               #     Spanner input source.
+              #
+              #     Note: The following fields are mutually exclusive: `spanner_source`, `inline_source`, `gcs_source`, `bigquery_source`, `fhir_store_source`, `cloud_sql_source`, `firestore_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param cloud_sql_source [::Google::Cloud::DiscoveryEngine::V1::CloudSqlSource, ::Hash]
               #     Cloud SQL input source.
+              #
+              #     Note: The following fields are mutually exclusive: `cloud_sql_source`, `inline_source`, `gcs_source`, `bigquery_source`, `fhir_store_source`, `spanner_source`, `firestore_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param firestore_source [::Google::Cloud::DiscoveryEngine::V1::FirestoreSource, ::Hash]
               #     Firestore input source.
+              #
+              #     Note: The following fields are mutually exclusive: `firestore_source`, `inline_source`, `gcs_source`, `bigquery_source`, `fhir_store_source`, `spanner_source`, `cloud_sql_source`, `alloy_db_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param alloy_db_source [::Google::Cloud::DiscoveryEngine::V1::AlloyDbSource, ::Hash]
               #     AlloyDB input source.
+              #
+              #     Note: The following fields are mutually exclusive: `alloy_db_source`, `inline_source`, `gcs_source`, `bigquery_source`, `fhir_store_source`, `spanner_source`, `cloud_sql_source`, `firestore_source`, `bigtable_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param bigtable_source [::Google::Cloud::DiscoveryEngine::V1::BigtableSource, ::Hash]
               #     Cloud Bigtable input source.
+              #
+              #     Note: The following fields are mutually exclusive: `bigtable_source`, `inline_source`, `gcs_source`, `bigquery_source`, `fhir_store_source`, `spanner_source`, `cloud_sql_source`, `firestore_source`, `alloy_db_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param parent [::String]
               #     Required. The parent branch resource name, such as
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.
@@ -915,8 +933,12 @@ module Google
               #     Supported `data_schema`:
               #     * `document_id`: One valid
               #     {::Google::Cloud::DiscoveryEngine::V1::Document#id Document.id} per line.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::PurgeDocumentsRequest::InlineSource, ::Hash]
               #     Inline source for the input content for purge.
+              #
+              #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param parent [::String]
               #     Required. The parent resource name, such as
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}/branches/{branch}`.

@@ -82,19 +82,29 @@ module Google
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     Holds the value for a tag field with double type.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `string_value`, `bool_value`, `timestamp_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     Holds the value for a tag field with string type.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `double_value`, `bool_value`, `timestamp_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Holds the value for a tag field with boolean type.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `double_value`, `string_value`, `timestamp_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value
         #   @return [::Google::Protobuf::Timestamp]
         #     Holds the value for a tag field with timestamp type.
+        #
+        #     Note: The following fields are mutually exclusive: `timestamp_value`, `double_value`, `string_value`, `bool_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enum_value
         #   @return [::Google::Cloud::DataCatalog::V1beta1::TagField::EnumValue]
         #     Holds the value for a tag field with enum type. This value must be
         #     one of the allowed values in the definition of this enum.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_value`, `double_value`, `string_value`, `bool_value`, `timestamp_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] order
         #   @return [::Integer]
         #     Output only. The order of this field with respect to other fields in this
@@ -212,9 +222,13 @@ module Google
         # @!attribute [rw] primitive_type
         #   @return [::Google::Cloud::DataCatalog::V1beta1::FieldType::PrimitiveType]
         #     Represents primitive types - string, bool etc.
+        #
+        #     Note: The following fields are mutually exclusive: `primitive_type`, `enum_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enum_type
         #   @return [::Google::Cloud::DataCatalog::V1beta1::FieldType::EnumType]
         #     Represents an enum type.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_type`, `primitive_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FieldType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
