@@ -108,6 +108,18 @@ module Google
         #     `nextPageToken` value returned by a previous call to this method.  Using
         #     this field causes the method to return additional results from the previous
         #     method call.
+        # @!attribute [rw] active_only
+        #   @return [::Boolean]
+        #     Optional. If true, only metrics and monitored resource types that have
+        #     recent data (within roughly 25 hours) will be included in the response.
+        #      - If a metric descriptor enumerates monitored resource types, only the
+        #        monitored resource types for which the metric type has recent data will
+        #        be included in the returned metric descriptor, and if none of them have
+        #        recent data, the metric descriptor will not be returned.
+        #      - If a metric descriptor does not enumerate the compatible monitored
+        #        resource types, it will be returned only if the metric type has recent
+        #        data for some monitored resource type. The returned descriptor will not
+        #        enumerate any monitored resource types.
         class ListMetricDescriptorsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
