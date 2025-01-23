@@ -83,10 +83,14 @@ module Google
         #   @return [::Boolean]
         #     Optional. If True, indicates to use the default project's binary
         #     authorization policy. If False, binary authorization will be disabled.
+        #
+        #     Note: The following fields are mutually exclusive: `use_default`, `policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] policy
         #   @return [::String]
         #     Optional. The path to a binary authorization policy.
         #     Format: `projects/{project}/platforms/cloudRun/{policy-name}`
+        #
+        #     Note: The following fields are mutually exclusive: `policy`, `use_default`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] breakglass_justification
         #   @return [::String]
         #     Optional. If present, indicates to use Breakglass using this justification.

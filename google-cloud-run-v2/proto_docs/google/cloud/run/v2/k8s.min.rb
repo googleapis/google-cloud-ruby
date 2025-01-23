@@ -127,9 +127,13 @@ module Google
         #     Literal value of the environment variable.
         #     Defaults to "", and the maximum length is 32768 bytes.
         #     Variable references are not supported in Cloud Run.
+        #
+        #     Note: The following fields are mutually exclusive: `value`, `value_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value_source
         #   @return [::Google::Cloud::Run::V2::EnvVarSource]
         #     Source for the environment variable's value.
+        #
+        #     Note: The following fields are mutually exclusive: `value_source`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EnvVar
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -198,20 +202,30 @@ module Google
         # @!attribute [rw] secret
         #   @return [::Google::Cloud::Run::V2::SecretVolumeSource]
         #     Secret represents a secret that should populate this volume.
+        #
+        #     Note: The following fields are mutually exclusive: `secret`, `cloud_sql_instance`, `empty_dir`, `nfs`, `gcs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_instance
         #   @return [::Google::Cloud::Run::V2::CloudSqlInstance]
         #     For Cloud SQL volumes, contains the specific instances that should be
         #     mounted. Visit https://cloud.google.com/sql/docs/mysql/connect-run for
         #     more information on how to connect Cloud SQL and Cloud Run.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_sql_instance`, `secret`, `empty_dir`, `nfs`, `gcs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] empty_dir
         #   @return [::Google::Cloud::Run::V2::EmptyDirVolumeSource]
         #     Ephemeral storage used as a shared volume.
+        #
+        #     Note: The following fields are mutually exclusive: `empty_dir`, `secret`, `cloud_sql_instance`, `nfs`, `gcs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] nfs
         #   @return [::Google::Cloud::Run::V2::NFSVolumeSource]
         #     For NFS Voumes, contains the path to the nfs Volume
+        #
+        #     Note: The following fields are mutually exclusive: `nfs`, `secret`, `cloud_sql_instance`, `empty_dir`, `gcs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs
         #   @return [::Google::Cloud::Run::V2::GCSVolumeSource]
         #     Persistent storage backed by a Google Cloud Storage bucket.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs`, `secret`, `cloud_sql_instance`, `empty_dir`, `nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Volume
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -396,14 +410,20 @@ module Google
         #   @return [::Google::Cloud::Run::V2::HTTPGetAction]
         #     Optional. HTTPGet specifies the http request to perform.
         #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
+        #
+        #     Note: The following fields are mutually exclusive: `http_get`, `tcp_socket`, `grpc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tcp_socket
         #   @return [::Google::Cloud::Run::V2::TCPSocketAction]
         #     Optional. TCPSocket specifies an action involving a TCP port.
         #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
+        #
+        #     Note: The following fields are mutually exclusive: `tcp_socket`, `http_get`, `grpc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] grpc
         #   @return [::Google::Cloud::Run::V2::GRPCAction]
         #     Optional. GRPC specifies an action involving a gRPC port.
         #     Exactly one of httpGet, tcpSocket, or grpc must be specified.
+        #
+        #     Note: The following fields are mutually exclusive: `grpc`, `http_get`, `tcp_socket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Probe
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

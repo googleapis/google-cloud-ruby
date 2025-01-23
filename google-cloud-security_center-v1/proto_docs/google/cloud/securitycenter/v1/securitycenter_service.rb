@@ -1514,9 +1514,13 @@ module Google
             # @!attribute [rw] aws_metadata
             #   @return [::Google::Cloud::SecurityCenter::V1::AwsMetadata]
             #     The AWS metadata associated with the finding.
+            #
+            #     Note: The following fields are mutually exclusive: `aws_metadata`, `azure_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] azure_metadata
             #   @return [::Google::Cloud::SecurityCenter::V1::AzureMetadata]
             #     The Azure metadata associated with the finding.
+            #
+            #     Note: The following fields are mutually exclusive: `azure_metadata`, `aws_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] resource_path
             #   @return [::Google::Cloud::SecurityCenter::V1::ResourcePath]
             #     Provides the path to the resource within the resource hierarchy.
@@ -1667,12 +1671,18 @@ module Google
           #   @return [::Google::Cloud::SecurityCenter::V1::Finding]
           #     Finding that would be published for the test case,
           #     if a violation is detected.
+          #
+          #     Note: The following fields are mutually exclusive: `finding`, `no_violation`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] no_violation
           #   @return [::Google::Protobuf::Empty]
           #     Indicates that the test case does not trigger any violation.
+          #
+          #     Note: The following fields are mutually exclusive: `no_violation`, `finding`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] error
           #   @return [::Google::Rpc::Status]
           #     Error encountered during the test.
+          #
+          #     Note: The following fields are mutually exclusive: `error`, `finding`, `no_violation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SimulatedResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

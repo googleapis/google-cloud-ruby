@@ -37,9 +37,13 @@ module Google
         # @!attribute [rw] buildpack_build
         #   @return [::Google::Cloud::Run::V2::SubmitBuildRequest::BuildpacksBuild]
         #     Build the source using Buildpacks.
+        #
+        #     Note: The following fields are mutually exclusive: `buildpack_build`, `docker_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] docker_build
         #   @return [::Google::Cloud::Run::V2::SubmitBuildRequest::DockerBuild]
         #     Build the source using Docker. This means the source has a Dockerfile.
+        #
+        #     Note: The following fields are mutually exclusive: `docker_build`, `buildpack_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account to use for the build. If not set, the default

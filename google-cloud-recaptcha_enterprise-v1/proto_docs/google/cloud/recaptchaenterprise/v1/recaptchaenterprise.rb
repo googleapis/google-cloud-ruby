@@ -285,10 +285,14 @@ module Google
         # @!attribute [rw] email_address
         #   @return [::String]
         #     Email address for which to trigger a verification request.
+        #
+        #     Note: The following fields are mutually exclusive: `email_address`, `phone_number`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] phone_number
         #   @return [::String]
         #     Phone number for which to trigger a verification request. Should be given
         #     in E.164 format.
+        #
+        #     Note: The following fields are mutually exclusive: `phone_number`, `email_address`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] request_token
         #   @return [::String]
         #     Output only. Token to provide to the client to trigger endpoint
@@ -714,14 +718,20 @@ module Google
         # @!attribute [rw] email
         #   @return [::String]
         #     Optional. An email address.
+        #
+        #     Note: The following fields are mutually exclusive: `email`, `phone_number`, `username`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] phone_number
         #   @return [::String]
         #     Optional. A phone number. Should use the E.164 format.
+        #
+        #     Note: The following fields are mutually exclusive: `phone_number`, `email`, `username`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] username
         #   @return [::String]
         #     Optional. A unique username, if different from all the other identifiers
         #     and `account_id` that are provided. Can be a unique login handle or
         #     display name for a user.
+        #
+        #     Note: The following fields are mutually exclusive: `username`, `email`, `phone_number`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class UserId
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1286,15 +1296,23 @@ module Google
         # @!attribute [rw] web_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WebKeySettings]
         #     Settings for keys that can be used by websites.
+        #
+        #     Note: The following fields are mutually exclusive: `web_settings`, `android_settings`, `ios_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] android_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AndroidKeySettings]
         #     Settings for keys that can be used by Android apps.
+        #
+        #     Note: The following fields are mutually exclusive: `android_settings`, `web_settings`, `ios_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ios_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::IOSKeySettings]
         #     Settings for keys that can be used by iOS apps.
+        #
+        #     Note: The following fields are mutually exclusive: `ios_settings`, `web_settings`, `android_settings`, `express_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] express_settings
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::ExpressKeySettings]
         #     Settings for keys that can be used by reCAPTCHA Express.
+        #
+        #     Note: The following fields are mutually exclusive: `express_settings`, `web_settings`, `android_settings`, `ios_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. See [Creating and managing labels]
@@ -1563,26 +1581,38 @@ module Google
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::AllowAction]
         #     The user request did not match any policy and should be allowed
         #     access to the requested resource.
+        #
+        #     Note: The following fields are mutually exclusive: `allow`, `block`, `include_recaptcha_script`, `redirect`, `substitute`, `set_header`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] block
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::BlockAction]
         #     This action denies access to a given page. The user gets an HTTP
         #     error code.
+        #
+        #     Note: The following fields are mutually exclusive: `block`, `allow`, `include_recaptcha_script`, `redirect`, `substitute`, `set_header`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] include_recaptcha_script
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::IncludeRecaptchaScriptAction]
         #     This action injects reCAPTCHA JavaScript code into the HTML page
         #     returned by the site backend.
+        #
+        #     Note: The following fields are mutually exclusive: `include_recaptcha_script`, `allow`, `block`, `redirect`, `substitute`, `set_header`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] redirect
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::RedirectAction]
         #     This action redirects the request to a reCAPTCHA interstitial to
         #     attach a token.
+        #
+        #     Note: The following fields are mutually exclusive: `redirect`, `allow`, `block`, `include_recaptcha_script`, `substitute`, `set_header`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] substitute
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::SubstituteAction]
         #     This action transparently serves a different page to an offending
         #     user.
+        #
+        #     Note: The following fields are mutually exclusive: `substitute`, `allow`, `block`, `include_recaptcha_script`, `redirect`, `set_header`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] set_header
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::FirewallAction::SetHeaderAction]
         #     This action sets a custom header but allow the request to continue
         #     to the customer backend.
+        #
+        #     Note: The following fields are mutually exclusive: `set_header`, `allow`, `block`, `include_recaptcha_script`, `redirect`, `substitute`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FirewallAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

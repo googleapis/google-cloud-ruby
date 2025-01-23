@@ -53,9 +53,13 @@ module Google
         # @!attribute [rw] product_attribute_value
         #   @return [::Google::Cloud::Retail::V2::ProductAttributeValue]
         #     The product attribute key-value.
+        #
+        #     Note: The following fields are mutually exclusive: `product_attribute_value`, `product_attribute_interval`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] product_attribute_interval
         #   @return [::Google::Cloud::Retail::V2::ProductAttributeInterval]
         #     The product attribute key-numeric interval.
+        #
+        #     Note: The following fields are mutually exclusive: `product_attribute_interval`, `product_attribute_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] representative_product_id
         #   @return [::String]
         #     The representative product id for this tile.
@@ -772,11 +776,15 @@ module Google
             #   @return [::String]
             #     This field specifies the incremental input text from the user during
             #     the conversational search.
+            #
+            #     Note: The following fields are mutually exclusive: `text_answer`, `selected_answer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] selected_answer
             #   @return [::Google::Cloud::Retail::V2::SearchRequest::ConversationalSearchSpec::UserAnswer::SelectedAnswer]
             #     This field specifies the selected attributes during the
             #     conversational search. This should be a subset of
             #     [ConversationalSearchResult.suggested_answers][].
+            #
+            #     Note: The following fields are mutually exclusive: `selected_answer`, `text_answer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class UserAnswer
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1057,9 +1065,13 @@ module Google
             # @!attribute [rw] value
             #   @return [::String]
             #     Text value of a facet, such as "Black" for facet "colorFamilies".
+            #
+            #     Note: The following fields are mutually exclusive: `value`, `interval`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] interval
             #   @return [::Google::Cloud::Retail::V2::Interval]
             #     Interval value for a facet, such as [10, 20) for facet "price".
+            #
+            #     Note: The following fields are mutually exclusive: `interval`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] count
             #   @return [::Integer]
             #     Number of items that have this facet value.
