@@ -238,16 +238,22 @@ module Google
           # @!attribute [rw] self
           #   @return [::Boolean]
           #     Self should be used to reference the primary data source itself.
+          #
+          #     Note: The following fields are mutually exclusive: `self`, `primary_data_source_name`, `supplemental_data_source_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] primary_data_source_name
           #   @return [::String]
           #     Optional. The name of the primary data source.
           #     Format:
           #     `accounts/{account}/dataSources/{datasource}`
+          #
+          #     Note: The following fields are mutually exclusive: `primary_data_source_name`, `self`, `supplemental_data_source_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] supplemental_data_source_name
           #   @return [::String]
           #     Optional. The name of the supplemental data source.
           #     Format:
           #     `accounts/{account}/dataSources/{datasource}`
+          #
+          #     Note: The following fields are mutually exclusive: `supplemental_data_source_name`, `self`, `primary_data_source_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class DataSourceReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

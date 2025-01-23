@@ -39,12 +39,18 @@ module Google
           #     it's strongly recommended to use `string_value`. If both `string_value`
           #     and `value` are set, they must be identical or an error will be thrown.
           #     Both fields are populated in responses.
+          #
+          #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bool_value
           #   @return [::Boolean]
           #     Boolean typed attribute value.
+          #
+          #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] number_value
           #   @return [::Float]
           #     Double typed attribute value.
+          #
+          #     Note: The following fields are mutually exclusive: `number_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class DeliveryVehicleAttribute
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -178,12 +184,18 @@ module Google
           # @!attribute [rw] string_value
           #   @return [::String]
           #     String typed attribute value.
+          #
+          #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bool_value
           #   @return [::Boolean]
           #     Boolean typed attribute value.
+          #
+          #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] number_value
           #   @return [::Float]
           #     Double typed attribute value.
+          #
+          #     Note: The following fields are mutually exclusive: `number_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class TaskAttribute
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

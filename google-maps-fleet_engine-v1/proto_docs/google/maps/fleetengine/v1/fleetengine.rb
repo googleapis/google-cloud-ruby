@@ -28,10 +28,14 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated.
+        #
+        #     Note: The following fields are mutually exclusive: `place_id`, `generated_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generated_id
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Deprecated.
+        #
+        #     Note: The following fields are mutually exclusive: `generated_id`, `place_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -126,12 +130,18 @@ module Google
         #     it's strongly recommended to use `string_value`. If both `string_value`
         #     and `value` are set, they must be identical or an error will be thrown.
         #     Both fields are populated in responses.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Boolean typed attribute value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] number_value
         #   @return [::Float]
         #     Double typed attribute value.
+        #
+        #     Note: The following fields are mutually exclusive: `number_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class VehicleAttribute
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

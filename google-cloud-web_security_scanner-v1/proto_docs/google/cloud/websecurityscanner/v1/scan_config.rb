@@ -80,12 +80,18 @@ module Google
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::WebSecurityScanner::V1::ScanConfig::Authentication::GoogleAccount]
           #     Authentication using a Google account.
+          #
+          #     Note: The following fields are mutually exclusive: `google_account`, `custom_account`, `iap_credential`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] custom_account
           #   @return [::Google::Cloud::WebSecurityScanner::V1::ScanConfig::Authentication::CustomAccount]
           #     Authentication using a custom account.
+          #
+          #     Note: The following fields are mutually exclusive: `custom_account`, `google_account`, `iap_credential`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] iap_credential
           #   @return [::Google::Cloud::WebSecurityScanner::V1::ScanConfig::Authentication::IapCredential]
           #     Authentication using Identity-Aware-Proxy (IAP).
+          #
+          #     Note: The following fields are mutually exclusive: `iap_credential`, `google_account`, `custom_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Authentication
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

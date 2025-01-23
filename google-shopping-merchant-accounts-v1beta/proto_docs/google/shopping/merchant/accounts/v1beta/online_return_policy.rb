@@ -166,10 +166,14 @@ module Google
             # @!attribute [rw] fixed_fee
             #   @return [::Google::Shopping::Type::Price]
             #     Fixed restocking fee.
+            #
+            #     Note: The following fields are mutually exclusive: `fixed_fee`, `micro_percent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] micro_percent
             #   @return [::Integer]
             #     Percent of total price in micros. 15,000,000 means 15% of the total
             #     price would be charged.
+            #
+            #     Note: The following fields are mutually exclusive: `micro_percent`, `fixed_fee`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class RestockingFee
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

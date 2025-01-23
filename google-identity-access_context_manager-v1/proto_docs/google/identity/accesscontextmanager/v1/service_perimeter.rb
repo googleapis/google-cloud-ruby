@@ -184,11 +184,15 @@ module Google
           #     [google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation].
           #     If `*` used as value for `method`, then ALL methods and permissions are
           #     allowed.
+          #
+          #     Note: The following fields are mutually exclusive: `method`, `permission`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] permission
           #   @return [::String]
           #     Value for `permission` should be a valid Cloud IAM permission for the
           #     corresponding `service_name` in [ApiOperation]
           #     [google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation].
+          #
+          #     Note: The following fields are mutually exclusive: `permission`, `method`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class MethodSelector
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -240,6 +244,8 @@ module Google
           #     specified for `access_level`, then all [IngressSources]
           #     [google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource]
           #     will be allowed.
+          #
+          #     Note: The following fields are mutually exclusive: `access_level`, `resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] resource
           #   @return [::String]
           #     A Google Cloud resource that is allowed to ingress the perimeter.
@@ -249,6 +255,8 @@ module Google
           #     The project may be in any Google Cloud organization, not just the
           #     organization that the perimeter is defined in. `*` is not allowed, the
           #     case of allowing all Google Cloud resources only is not supported.
+          #
+          #     Note: The following fields are mutually exclusive: `resource`, `access_level`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class IngressSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

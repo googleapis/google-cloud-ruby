@@ -323,9 +323,13 @@ module Google
           #     A decimal representation of confidence in the range of 0
           #     to 1 where 0 indicates no confidence and 1 indicates
           #     complete confidence.
+          #
+          #     Note: The following fields are mutually exclusive: `score`, `level`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] level
           #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo::Confidence::ConfidenceLevel]
           #     Enum representation of confidence.
+          #
+          #     Note: The following fields are mutually exclusive: `level`, `score`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Confidence
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
