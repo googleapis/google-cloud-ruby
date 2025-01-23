@@ -30,12 +30,16 @@ module Google
         #   @return [::String]
         #     The content of the input in string format.
         #     Cloud audit logging exempt since it is based on user data.
+        #
+        #     Note: The following fields are mutually exclusive: `content`, `gcs_content_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcs_content_uri
         #   @return [::String]
         #     The Google Cloud Storage URI where the file content is located.
         #     This URI must be of the form: gs://bucket_name/object_name. For more
         #     details, see https://cloud.google.com/storage/docs/reference-uris.
         #     NOTE: Cloud Storage object versioning is not supported.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_content_uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] language
         #   @return [::String]
         #     The language of the document (if not specified, the language is
@@ -906,10 +910,14 @@ module Google
         #     Setting this field will use the V1 model and V1 content categories
         #     version. The V1 model is a legacy model; support for this will be
         #     discontinued in the future.
+        #
+        #     Note: The following fields are mutually exclusive: `v1_model`, `v2_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] v2_model
         #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions::V2Model]
         #     Setting this field will use the V2 model with the appropriate content
         #     categories version. The V2 model is a better performing model.
+        #
+        #     Note: The following fields are mutually exclusive: `v2_model`, `v1_model`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ClassificationModelOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

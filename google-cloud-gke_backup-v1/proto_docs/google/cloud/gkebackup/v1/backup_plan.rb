@@ -197,13 +197,19 @@ module Google
           # @!attribute [rw] all_namespaces
           #   @return [::Boolean]
           #     If True, include all namespaced resources
+          #
+          #     Note: The following fields are mutually exclusive: `all_namespaces`, `selected_namespaces`, `selected_applications`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] selected_namespaces
           #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
           #     If set, include just the resources in the listed namespaces.
+          #
+          #     Note: The following fields are mutually exclusive: `selected_namespaces`, `all_namespaces`, `selected_applications`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] selected_applications
           #   @return [::Google::Cloud::GkeBackup::V1::NamespacedNames]
           #     If set, include just the resources referenced by the listed
           #     ProtectedApplications.
+          #
+          #     Note: The following fields are mutually exclusive: `selected_applications`, `all_namespaces`, `selected_namespaces`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] include_volume_data
           #   @return [::Boolean]
           #     Optional. This flag specifies whether volume data should be backed up
@@ -316,13 +322,19 @@ module Google
         #   @return [::Google::Type::Date]
         #     No recurrence. The exclusion window occurs only once and on this
         #     date in UTC.
+        #
+        #     Note: The following fields are mutually exclusive: `single_occurrence_date`, `daily`, `days_of_week`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] daily
         #   @return [::Boolean]
         #     The exclusion window occurs every day if set to "True".
         #     Specifying this field to "False" is an error.
+        #
+        #     Note: The following fields are mutually exclusive: `daily`, `single_occurrence_date`, `days_of_week`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] days_of_week
         #   @return [::Google::Cloud::GkeBackup::V1::ExclusionWindow::DayOfWeekList]
         #     The exclusion window occurs on these days of each week in UTC.
+        #
+        #     Note: The following fields are mutually exclusive: `days_of_week`, `single_occurrence_date`, `daily`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExclusionWindow
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

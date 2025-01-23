@@ -36,6 +36,8 @@ module Google
         # @!attribute [rw] transaction
         #   @return [::String]
         #     Reads the document in a transaction.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads the version of the document at the given time.
@@ -43,6 +45,8 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GetDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -97,6 +101,8 @@ module Google
         # @!attribute [rw] transaction
         #   @return [::String]
         #     Perform the read as part of an already active transaction.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Perform the read at the provided time.
@@ -104,6 +110,8 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] show_missing
         #   @return [::Boolean]
         #     If the list should show missing documents.
@@ -231,12 +239,16 @@ module Google
         # @!attribute [rw] transaction
         #   @return [::String]
         #     Reads documents in a transaction.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_transaction
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
         #     Starts a new transaction and reads the documents.
         #     Defaults to a read-only transaction.
         #     The new transaction ID will be returned as the first response in the
         #     stream.
+        #
+        #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads documents as they were at the given time.
@@ -244,6 +256,8 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BatchGetDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -254,10 +268,14 @@ module Google
         # @!attribute [rw] found
         #   @return [::Google::Cloud::Firestore::V1::Document]
         #     A document that was requested.
+        #
+        #     Note: The following fields are mutually exclusive: `found`, `missing`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] missing
         #   @return [::String]
         #     A document name that was requested but does not exist. In the format:
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        #
+        #     Note: The following fields are mutually exclusive: `missing`, `found`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The transaction that was started as part of this request.
@@ -364,12 +382,16 @@ module Google
         #     Run the query within an already active transaction.
         #
         #     The value here is the opaque transaction ID to execute the query in.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_transaction
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
         #     Starts a new transaction and reads the documents.
         #     Defaults to a read-only transaction.
         #     The new transaction ID will be returned as the first response in the
         #     stream.
+        #
+        #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Reads documents as they were at the given time.
@@ -377,6 +399,8 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] explain_options
         #   @return [::Google::Cloud::Firestore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
@@ -443,12 +467,16 @@ module Google
         #     Run the aggregation within an already active transaction.
         #
         #     The value here is the opaque transaction ID to execute the query in.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_transaction
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
         #     Starts a new transaction as part of the query, defaulting to read-only.
         #
         #     The new transaction ID will be returned as the first response in the
         #     stream.
+        #
+        #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Executes the query at the given timestamp.
@@ -456,6 +484,8 @@ module Google
         #     This must be a microsecond precision timestamp within the past one hour,
         #     or if Point-in-Time Recovery is enabled, can additionally be a whole
         #     minute timestamp within the past 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] explain_options
         #   @return [::Google::Cloud::Firestore::V1::ExplainOptions]
         #     Optional. Explain options for the query. If set, additional query
@@ -684,9 +714,13 @@ module Google
         # @!attribute [rw] add_target
         #   @return [::Google::Cloud::Firestore::V1::Target]
         #     A target to add to this stream.
+        #
+        #     Note: The following fields are mutually exclusive: `add_target`, `remove_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] remove_target
         #   @return [::Integer]
         #     The ID of a target to remove from this stream.
+        #
+        #     Note: The following fields are mutually exclusive: `remove_target`, `add_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this target change.
@@ -708,16 +742,24 @@ module Google
         # @!attribute [rw] target_change
         #   @return [::Google::Cloud::Firestore::V1::TargetChange]
         #     Targets have changed.
+        #
+        #     Note: The following fields are mutually exclusive: `target_change`, `document_change`, `document_delete`, `document_remove`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_change
         #   @return [::Google::Cloud::Firestore::V1::DocumentChange]
         #     A {::Google::Cloud::Firestore::V1::Document Document} has changed.
+        #
+        #     Note: The following fields are mutually exclusive: `document_change`, `target_change`, `document_delete`, `document_remove`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_delete
         #   @return [::Google::Cloud::Firestore::V1::DocumentDelete]
         #     A {::Google::Cloud::Firestore::V1::Document Document} has been deleted.
+        #
+        #     Note: The following fields are mutually exclusive: `document_delete`, `target_change`, `document_change`, `document_remove`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_remove
         #   @return [::Google::Cloud::Firestore::V1::DocumentRemove]
         #     A {::Google::Cloud::Firestore::V1::Document Document} has been removed from a target
         #     (because it is no longer relevant to that target).
+        #
+        #     Note: The following fields are mutually exclusive: `document_remove`, `target_change`, `document_change`, `document_delete`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::Firestore::V1::ExistenceFilter]
         #     A filter to apply to the set of documents previously returned for the
@@ -725,6 +767,8 @@ module Google
         #
         #     Returned when documents may have been removed from the given target, but
         #     the exact documents are unknown.
+        #
+        #     Note: The following fields are mutually exclusive: `filter`, `target_change`, `document_change`, `document_delete`, `document_remove`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ListenResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -734,20 +778,28 @@ module Google
         # @!attribute [rw] query
         #   @return [::Google::Cloud::Firestore::V1::Target::QueryTarget]
         #     A target specified by a query.
+        #
+        #     Note: The following fields are mutually exclusive: `query`, `documents`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] documents
         #   @return [::Google::Cloud::Firestore::V1::Target::DocumentsTarget]
         #     A target specified by a set of document names.
+        #
+        #     Note: The following fields are mutually exclusive: `documents`, `query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] resume_token
         #   @return [::String]
         #     A resume token from a prior
         #     {::Google::Cloud::Firestore::V1::TargetChange TargetChange} for an identical target.
         #
         #     Using a resume token with a different target is unsupported and may fail.
+        #
+        #     Note: The following fields are mutually exclusive: `resume_token`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Start listening after a specific `read_time`.
         #
         #     The client must know the state of matching documents at this time.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `resume_token`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target_id
         #   @return [::Integer]
         #     The target ID that identifies the target on the stream. Must be a positive

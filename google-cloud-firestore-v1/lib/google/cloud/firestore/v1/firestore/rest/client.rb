@@ -295,12 +295,16 @@ module Google
               #     will not be returned in the response.
               #   @param transaction [::String]
               #     Reads the document in a transaction.
+              #
+              #     Note: The following fields are mutually exclusive: `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads the version of the document at the given time.
               #
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Firestore::V1::Document]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -417,12 +421,16 @@ module Google
               #     will not be returned in the response.
               #   @param transaction [::String]
               #     Perform the read as part of an already active transaction.
+              #
+              #     Note: The following fields are mutually exclusive: `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Perform the read at the provided time.
               #
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param show_missing [::Boolean]
               #     If the list should show missing documents.
               #
@@ -710,17 +718,23 @@ module Google
               #     not be returned in the response.
               #   @param transaction [::String]
               #     Reads documents in a transaction.
+              #
+              #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
               #     Starts a new transaction and reads the documents.
               #     Defaults to a read-only transaction.
               #     The new transaction ID will be returned as the first response in the
               #     stream.
+              #
+              #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
               #
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @return [::Enumerable<::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
@@ -1063,17 +1077,23 @@ module Google
               #     Run the query within an already active transaction.
               #
               #     The value here is the opaque transaction ID to execute the query in.
+              #
+              #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
               #     Starts a new transaction and reads the documents.
               #     Defaults to a read-only transaction.
               #     The new transaction ID will be returned as the first response in the
               #     stream.
+              #
+              #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Reads documents as they were at the given time.
               #
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.
@@ -1183,17 +1203,23 @@ module Google
               #     Run the aggregation within an already active transaction.
               #
               #     The value here is the opaque transaction ID to execute the query in.
+              #
+              #     Note: The following fields are mutually exclusive: `transaction`, `new_transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
               #     Starts a new transaction as part of the query, defaulting to read-only.
               #
               #     The new transaction ID will be returned as the first response in the
               #     stream.
+              #
+              #     Note: The following fields are mutually exclusive: `new_transaction`, `transaction`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
               #     Executes the query at the given timestamp.
               #
               #     This must be a microsecond precision timestamp within the past one hour,
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
+              #
+              #     Note: The following fields are mutually exclusive: `read_time`, `transaction`, `new_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param explain_options [::Google::Cloud::Firestore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.

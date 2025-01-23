@@ -34,11 +34,15 @@ module Google
         #   @return [::String]
         #     The Google Cloud Storage URL, starting with `gs://`, pointing to the zip
         #     archive which contains the function.
+        #
+        #     Note: The following fields are mutually exclusive: `source_archive_url`, `source_repository`, `source_upload_url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_repository
         #   @return [::Google::Cloud::Functions::V1::SourceRepository]
         #     **Beta Feature**
         #
         #     The source repository where a function is hosted.
+        #
+        #     Note: The following fields are mutually exclusive: `source_repository`, `source_archive_url`, `source_upload_url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] source_upload_url
         #   @return [::String]
         #     The Google Cloud Storage signed URL used for source uploading, generated
@@ -47,12 +51,18 @@ module Google
         #     The signature is validated on write methods (Create, Update)
         #     The signature is stripped from the Function object on read methods (Get,
         #     List)
+        #
+        #     Note: The following fields are mutually exclusive: `source_upload_url`, `source_archive_url`, `source_repository`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] https_trigger
         #   @return [::Google::Cloud::Functions::V1::HttpsTrigger]
         #     An HTTPS endpoint type of source that can be triggered via URL.
+        #
+        #     Note: The following fields are mutually exclusive: `https_trigger`, `event_trigger`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event_trigger
         #   @return [::Google::Cloud::Functions::V1::EventTrigger]
         #     A source that fires events in response to a condition in another service.
+        #
+        #     Note: The following fields are mutually exclusive: `event_trigger`, `https_trigger`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] status
         #   @return [::Google::Cloud::Functions::V1::CloudFunctionStatus]
         #     Output only. Status of the function deployment.
@@ -226,8 +236,10 @@ module Google
         #     unspecified or set to `ARTIFACT_REGISTRY`.
         # @!attribute [rw] automatic_update_policy
         #   @return [::Google::Cloud::Functions::V1::CloudFunction::AutomaticUpdatePolicy]
+        #     Note: The following fields are mutually exclusive: `automatic_update_policy`, `on_deploy_update_policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] on_deploy_update_policy
         #   @return [::Google::Cloud::Functions::V1::CloudFunction::OnDeployUpdatePolicy]
+        #     Note: The following fields are mutually exclusive: `on_deploy_update_policy`, `automatic_update_policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] build_service_account
         #   @return [::String]
         #     A service account the user provides for use with Cloud Build. The format of

@@ -69,11 +69,15 @@ module Google
           # @!attribute [rw] open_link
           #   @return [::String]
           #     A link that is opened by Gmail when the user triggers the action.
+          #
+          #     Note: The following fields are mutually exclusive: `open_link`, `run_function`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] run_function
           #   @return [::String]
           #     An endpoint that is called when the user triggers the
           #     action. See the [universal actions
           #     guide](/gmail/add-ons/how-tos/universal-actions) for details.
+          #
+          #     Note: The following fields are mutually exclusive: `run_function`, `open_link`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class UniversalAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

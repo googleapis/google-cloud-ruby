@@ -86,21 +86,31 @@ module Google
         # @!attribute [rw] null_value
         #   @return [::Google::Protobuf::NullValue]
         #     A null value.
+        #
+        #     Note: The following fields are mutually exclusive: `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] boolean_value
         #   @return [::Boolean]
         #     A boolean value.
+        #
+        #     Note: The following fields are mutually exclusive: `boolean_value`, `null_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] integer_value
         #   @return [::Integer]
         #     An integer value.
+        #
+        #     Note: The following fields are mutually exclusive: `integer_value`, `null_value`, `boolean_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     A double value.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `null_value`, `boolean_value`, `integer_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_value
         #   @return [::Google::Protobuf::Timestamp]
         #     A timestamp value.
         #
         #     Precise only to microseconds. When stored, any additional precision is
         #     rounded down.
+        #
+        #     Note: The following fields are mutually exclusive: `timestamp_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A string value.
@@ -108,28 +118,40 @@ module Google
         #     The string, represented as UTF-8, must not exceed 1 MiB - 89 bytes.
         #     Only the first 1,500 bytes of the UTF-8 representation are considered by
         #     queries.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bytes_value
         #   @return [::String]
         #     A bytes value.
         #
         #     Must not exceed 1 MiB - 89 bytes.
         #     Only the first 1,500 bytes are considered by queries.
+        #
+        #     Note: The following fields are mutually exclusive: `bytes_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `reference_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reference_value
         #   @return [::String]
         #     A reference to a document. For example:
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reference_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `geo_point_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] geo_point_value
         #   @return [::Google::Type::LatLng]
         #     A geo point value representing a point on the surface of Earth.
+        #
+        #     Note: The following fields are mutually exclusive: `geo_point_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `array_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] array_value
         #   @return [::Google::Cloud::Firestore::V1::ArrayValue]
         #     An array value.
         #
         #     Cannot directly contain another array value, though can contain a
         #     map which contains another array.
+        #
+        #     Note: The following fields are mutually exclusive: `array_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `map_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] map_value
         #   @return [::Google::Cloud::Firestore::V1::MapValue]
         #     A map value.
+        #
+        #     Note: The following fields are mutually exclusive: `map_value`, `null_value`, `boolean_value`, `integer_value`, `double_value`, `timestamp_value`, `string_value`, `bytes_value`, `reference_value`, `geo_point_value`, `array_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Value
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

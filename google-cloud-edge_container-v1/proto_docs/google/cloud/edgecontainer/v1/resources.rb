@@ -115,6 +115,8 @@ module Google
           # @!attribute [rw] remote
           #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::ControlPlane::Remote]
           #     Remote control plane configuration.
+          #
+          #     Note: The following fields are mutually exclusive: `remote`, `local`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] local
           #   @return [::Google::Cloud::EdgeContainer::V1::Cluster::ControlPlane::Local]
           #     Local control plane configuration.
@@ -124,6 +126,8 @@ module Google
           #     project with any other type of clusters, including non-GDCE clusters.
           #     Mixing local control plane GDCE clusters with any other type of
           #     clusters in the same project can result in data loss.
+          #
+          #     Note: The following fields are mutually exclusive: `local`, `remote`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ControlPlane
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -42,10 +42,14 @@ module Google
         #   @return [::Boolean]
         #     When set to `true`, the target document must exist.
         #     When set to `false`, the target document must not exist.
+        #
+        #     Note: The following fields are mutually exclusive: `exists`, `update_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     When set, the target document must exist and have been last updated at
         #     that time. Timestamp must be microsecond aligned.
+        #
+        #     Note: The following fields are mutually exclusive: `update_time`, `exists`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Precondition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -55,9 +59,13 @@ module Google
         # @!attribute [rw] read_only
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions::ReadOnly]
         #     The transaction can only be used for read operations.
+        #
+        #     Note: The following fields are mutually exclusive: `read_only`, `read_write`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_write
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions::ReadWrite]
         #     The transaction can be used for both read and write operations.
+        #
+        #     Note: The following fields are mutually exclusive: `read_write`, `read_only`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class TransactionOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

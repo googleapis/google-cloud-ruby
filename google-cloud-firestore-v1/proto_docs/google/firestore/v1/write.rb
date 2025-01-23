@@ -25,13 +25,19 @@ module Google
         # @!attribute [rw] update
         #   @return [::Google::Cloud::Firestore::V1::Document]
         #     A document to write.
+        #
+        #     Note: The following fields are mutually exclusive: `update`, `delete`, `transform`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete
         #   @return [::String]
         #     A document name to delete. In the format:
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        #
+        #     Note: The following fields are mutually exclusive: `delete`, `update`, `transform`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] transform
         #   @return [::Google::Cloud::Firestore::V1::DocumentTransform]
         #     Applies a transformation to a document.
+        #
+        #     Note: The following fields are mutually exclusive: `transform`, `update`, `delete`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] update_mask
         #   @return [::Google::Cloud::Firestore::V1::DocumentMask]
         #     The fields to update in this write.
@@ -83,6 +89,8 @@ module Google
           # @!attribute [rw] set_to_server_value
           #   @return [::Google::Cloud::Firestore::V1::DocumentTransform::FieldTransform::ServerValue]
           #     Sets the field to the given server value.
+          #
+          #     Note: The following fields are mutually exclusive: `set_to_server_value`, `increment`, `maximum`, `minimum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] increment
           #   @return [::Google::Cloud::Firestore::V1::Value]
           #     Adds the given value to the field's current value.
@@ -95,6 +103,8 @@ module Google
           #     representation of double values follow IEEE 754 semantics.
           #     If there is positive/negative integer overflow, the field is resolved
           #     to the largest magnitude positive/negative integer.
+          #
+          #     Note: The following fields are mutually exclusive: `increment`, `set_to_server_value`, `maximum`, `minimum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] maximum
           #   @return [::Google::Cloud::Firestore::V1::Value]
           #     Sets the field to the maximum of its current value and the given value.
@@ -109,6 +119,8 @@ module Google
           #     0, 0.0, and -0.0 are all zero. The maximum of a zero stored value and
           #     zero input value is always the stored value.
           #     The maximum of any numeric value x and NaN is NaN.
+          #
+          #     Note: The following fields are mutually exclusive: `maximum`, `set_to_server_value`, `increment`, `minimum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] minimum
           #   @return [::Google::Cloud::Firestore::V1::Value]
           #     Sets the field to the minimum of its current value and the given value.
@@ -123,6 +135,8 @@ module Google
           #     0, 0.0, and -0.0 are all zero. The minimum of a zero stored value and
           #     zero input value is always the stored value.
           #     The minimum of any numeric value x and NaN is NaN.
+          #
+          #     Note: The following fields are mutually exclusive: `minimum`, `set_to_server_value`, `increment`, `maximum`, `append_missing_elements`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] append_missing_elements
           #   @return [::Google::Cloud::Firestore::V1::ArrayValue]
           #     Append the given elements in order if they are not already present in
@@ -137,6 +151,8 @@ module Google
           #     be considered.
           #
           #     The corresponding transform_result will be the null value.
+          #
+          #     Note: The following fields are mutually exclusive: `append_missing_elements`, `set_to_server_value`, `increment`, `maximum`, `minimum`, `remove_all_from_array`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] remove_all_from_array
           #   @return [::Google::Cloud::Firestore::V1::ArrayValue]
           #     Remove all of the given elements from the array in the field.
@@ -149,6 +165,8 @@ module Google
           #     This will remove all equivalent values if there are duplicates.
           #
           #     The corresponding transform_result will be the null value.
+          #
+          #     Note: The following fields are mutually exclusive: `remove_all_from_array`, `set_to_server_value`, `increment`, `maximum`, `minimum`, `append_missing_elements`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class FieldTransform
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
