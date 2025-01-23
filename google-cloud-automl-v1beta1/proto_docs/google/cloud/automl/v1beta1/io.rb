@@ -383,9 +383,13 @@ module Google
         #     The Google Cloud Storage location for the input content.
         #     In ImportData, the gcs_source points to a csv with structure described in
         #     the comment.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::AutoML::V1beta1::BigQuerySource]
         #     The BigQuery location for the input content.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Additional domain-specific parameters describing the semantic of the
@@ -626,9 +630,13 @@ module Google
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::AutoML::V1beta1::GcsSource]
         #     The Google Cloud Storage location for the input content.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::AutoML::V1beta1::BigQuerySource]
         #     The BigQuery location for the input content.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BatchPredictInputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -685,9 +693,13 @@ module Google
         #     export_data-<dataset-display-name>-<timestamp-of-export-call> where
         #     timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format. All export
         #     output will be written into that directory.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::AutoML::V1beta1::BigQueryDestination]
         #     The BigQuery location where the output is to be written to.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -972,9 +984,13 @@ module Google
         #   @return [::Google::Cloud::AutoML::V1beta1::GcsDestination]
         #     The Google Cloud Storage location of the directory where the output is to
         #     be written to.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::AutoML::V1beta1::BigQueryDestination]
         #     The BigQuery location where the output is to be written to.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BatchPredictOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -992,6 +1008,8 @@ module Google
         #      where timestamp is in YYYY-MM-DDThh:mm:ss.sssZ ISO-8601 format,
         #      will be created. Inside the model and any of its supporting files
         #      will be written.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `gcr_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gcr_destination
         #   @return [::Google::Cloud::AutoML::V1beta1::GcrDestination]
         #     The GCR location where model image is to be pushed to. This location
@@ -999,6 +1017,8 @@ module Google
         #       "docker".
         #
         #     The model image will be created under the given URI.
+        #
+        #     Note: The following fields are mutually exclusive: `gcr_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] model_format
         #   @return [::String]
         #     The format in which the model must be exported. The available, and default,

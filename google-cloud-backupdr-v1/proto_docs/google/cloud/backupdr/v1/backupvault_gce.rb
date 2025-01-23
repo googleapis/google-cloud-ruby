@@ -340,15 +340,21 @@ module Google
         #   @return [::String]
         #     Optional. Specifies a 256-bit customer-supplied
         #     encryption key.
+        #
+        #     Note: The following fields are mutually exclusive: `raw_key`, `rsa_encrypted_key`, `kms_key_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rsa_encrypted_key
         #   @return [::String]
         #     Optional. RSA-wrapped 2048-bit
         #     customer-supplied encryption key to either encrypt or decrypt this
         #     resource.
+        #
+        #     Note: The following fields are mutually exclusive: `rsa_encrypted_key`, `raw_key`, `kms_key_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
         #     Optional. The name of the encryption key that is stored in Google Cloud
         #     KMS.
+        #
+        #     Note: The following fields are mutually exclusive: `kms_key_name`, `raw_key`, `rsa_encrypted_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] kms_key_service_account
         #   @return [::String]
         #     Optional. The service account being used for the encryption request for the

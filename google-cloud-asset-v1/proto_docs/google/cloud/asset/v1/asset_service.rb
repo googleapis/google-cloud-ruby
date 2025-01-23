@@ -351,10 +351,14 @@ module Google
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::Asset::V1::GcsDestination]
         #     Destination on Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Asset::V1::BigQueryDestination]
         #     Destination on BigQuery. The output table stores the fields in asset
         #     Protobuf as columns in BigQuery.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -391,6 +395,8 @@ module Google
         #     If the specified Cloud Storage object already exists and there is no
         #     [hold](https://cloud.google.com/storage/docs/object-holds), it will be
         #     overwritten with the exported result.
+        #
+        #     Note: The following fields are mutually exclusive: `uri`, `uri_prefix`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uri_prefix
         #   @return [::String]
         #     The URI prefix of all generated Cloud Storage objects. Example:
@@ -402,6 +408,8 @@ module Google
         #     compute.googleapis.com/Disk assets. An INVALID_ARGUMENT error will be
         #     returned if file with the same name "gs://bucket_name/object_name_prefix"
         #     already exists.
+        #
+        #     Note: The following fields are mutually exclusive: `uri_prefix`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GcsDestination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1224,9 +1232,13 @@ module Google
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::GcsDestination]
         #     Destination on Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::BigQueryDestination]
         #     Destination on BigQuery.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class IamPolicyAnalysisOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1580,9 +1592,13 @@ module Google
         # @!attribute [rw] analysis
         #   @return [::Google::Cloud::Asset::V1::MoveAnalysisResult]
         #     Analysis result of moving the target resource.
+        #
+        #     Note: The following fields are mutually exclusive: `analysis`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     Description of error encountered when performing the analysis.
+        #
+        #     Note: The following fields are mutually exclusive: `error`, `analysis`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MoveAnalysis
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1662,10 +1678,14 @@ module Google
         #   @return [::String]
         #     Optional. A SQL statement that's compatible with [BigQuery
         #     SQL](https://cloud.google.com/bigquery/docs/introduction-sql).
+        #
+        #     Note: The following fields are mutually exclusive: `statement`, `job_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] job_reference
         #   @return [::String]
         #     Optional. Reference to the query job, which is from the
         #     `QueryAssetsResponse` of previous `QueryAssets` call.
+        #
+        #     Note: The following fields are mutually exclusive: `job_reference`, `statement`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of rows to return in the results. Responses
@@ -1700,10 +1720,14 @@ module Google
         #     Optional. [start_time] is required. [start_time] must be less than
         #     [end_time] Defaults [end_time] to now if [start_time] is set and
         #     [end_time] isn't. Maximum permitted time range is 7 days.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time_window`, `read_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Queries cloud assets as they appeared at the specified point in
         #     time.
+        #
+        #     Note: The following fields are mutually exclusive: `read_time`, `read_time_window`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig]
         #     Optional. Destination where the query results will be saved.
@@ -1737,14 +1761,20 @@ module Google
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     Error status.
+        #
+        #     Note: The following fields are mutually exclusive: `error`, `query_result`, `output_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] query_result
         #   @return [::Google::Cloud::Asset::V1::QueryResult]
         #     Result of the query.
+        #
+        #     Note: The following fields are mutually exclusive: `query_result`, `error`, `output_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig]
         #     Output configuration, which indicates that instead of being returned in
         #     an API response on the fly, the query result will be saved in a specific
         #     output.
+        #
+        #     Note: The following fields are mutually exclusive: `output_config`, `error`, `query_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class QueryAssetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1962,19 +1992,27 @@ module Google
           #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicy::Rule::StringValues]
           #     List of values to be used for this policy rule. This field can be set
           #     only in policies for list constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `values`, `allow_all`, `deny_all`, `enforce`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] allow_all
           #   @return [::Boolean]
           #     Setting this to true means that all values are allowed. This field can
           #     be set only in Policies for list constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `allow_all`, `values`, `deny_all`, `enforce`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] deny_all
           #   @return [::Boolean]
           #     Setting this to true means that all values are denied. This field can
           #     be set only in Policies for list constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `deny_all`, `values`, `allow_all`, `enforce`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] enforce
           #   @return [::Boolean]
           #     If `true`, then the `Policy` is enforced. If `false`, then any
           #     configuration is acceptable.
           #     This field can be set only in Policies for boolean constraints.
+          #
+          #     Note: The following fields are mutually exclusive: `enforce`, `values`, `allow_all`, `deny_all`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] condition
           #   @return [::Google::Type::Expr]
           #     The evaluating condition for this rule.
@@ -2016,9 +2054,13 @@ module Google
         # @!attribute [rw] google_defined_constraint
         #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicyConstraint::Constraint]
         #     The definition of the canned constraint defined by Google.
+        #
+        #     Note: The following fields are mutually exclusive: `google_defined_constraint`, `custom_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_constraint
         #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicyConstraint::CustomConstraint]
         #     The definition of the custom constraint.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_constraint`, `google_defined_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AnalyzerOrgPolicyConstraint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2043,9 +2085,13 @@ module Google
           # @!attribute [rw] list_constraint
           #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicyConstraint::Constraint::ListConstraint]
           #     Defines this constraint as being a ListConstraint.
+          #
+          #     Note: The following fields are mutually exclusive: `list_constraint`, `boolean_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] boolean_constraint
           #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicyConstraint::Constraint::BooleanConstraint]
           #     Defines this constraint as being a BooleanConstraint.
+          #
+          #     Note: The following fields are mutually exclusive: `boolean_constraint`, `list_constraint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Constraint
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2535,11 +2581,15 @@ module Google
           #     A Google Cloud resource governed by the organization
           #     policies of the
           #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest#constraint AnalyzeOrgPolicyGovernedAssetsRequest.constraint}.
+          #
+          #     Note: The following fields are mutually exclusive: `governed_resource`, `governed_iam_policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] governed_iam_policy
           #   @return [::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedIamPolicy]
           #     An IAM policy governed by the organization
           #     policies of the
           #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest#constraint AnalyzeOrgPolicyGovernedAssetsRequest.constraint}.
+          #
+          #     Note: The following fields are mutually exclusive: `governed_iam_policy`, `governed_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] consolidated_policy
           #   @return [::Google::Cloud::Asset::V1::AnalyzerOrgPolicy]
           #     The consolidated policy for the analyzed asset. The consolidated

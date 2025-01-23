@@ -25,21 +25,33 @@ module Google
         # @!attribute [rw] translation_model_metadata
         #   @return [::Google::Cloud::AutoML::V1::TranslationModelMetadata]
         #     Metadata for translation models.
+        #
+        #     Note: The following fields are mutually exclusive: `translation_model_metadata`, `image_classification_model_metadata`, `text_classification_model_metadata`, `image_object_detection_model_metadata`, `text_extraction_model_metadata`, `text_sentiment_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_classification_model_metadata
         #   @return [::Google::Cloud::AutoML::V1::ImageClassificationModelMetadata]
         #     Metadata for image classification models.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_model_metadata`, `translation_model_metadata`, `text_classification_model_metadata`, `image_object_detection_model_metadata`, `text_extraction_model_metadata`, `text_sentiment_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_classification_model_metadata
         #   @return [::Google::Cloud::AutoML::V1::TextClassificationModelMetadata]
         #     Metadata for text classification models.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_model_metadata`, `translation_model_metadata`, `image_classification_model_metadata`, `image_object_detection_model_metadata`, `text_extraction_model_metadata`, `text_sentiment_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_object_detection_model_metadata
         #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionModelMetadata]
         #     Metadata for image object detection models.
+        #
+        #     Note: The following fields are mutually exclusive: `image_object_detection_model_metadata`, `translation_model_metadata`, `image_classification_model_metadata`, `text_classification_model_metadata`, `text_extraction_model_metadata`, `text_sentiment_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_extraction_model_metadata
         #   @return [::Google::Cloud::AutoML::V1::TextExtractionModelMetadata]
         #     Metadata for text extraction models.
+        #
+        #     Note: The following fields are mutually exclusive: `text_extraction_model_metadata`, `translation_model_metadata`, `image_classification_model_metadata`, `text_classification_model_metadata`, `image_object_detection_model_metadata`, `text_sentiment_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_sentiment_model_metadata
         #   @return [::Google::Cloud::AutoML::V1::TextSentimentModelMetadata]
         #     Metadata for text sentiment models.
+        #
+        #     Note: The following fields are mutually exclusive: `text_sentiment_model_metadata`, `translation_model_metadata`, `image_classification_model_metadata`, `text_classification_model_metadata`, `image_object_detection_model_metadata`, `text_extraction_model_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. Resource name of the model.

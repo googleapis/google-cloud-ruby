@@ -1543,8 +1543,12 @@ module Google
             #
             #   @param image_object_detection_model_deployment_metadata [::Google::Cloud::AutoML::V1::ImageObjectDetectionModelDeploymentMetadata, ::Hash]
             #     Model deployment metadata specific to Image Object Detection.
+            #
+            #     Note: The following fields are mutually exclusive: `image_object_detection_model_deployment_metadata`, `image_classification_model_deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param image_classification_model_deployment_metadata [::Google::Cloud::AutoML::V1::ImageClassificationModelDeploymentMetadata, ::Hash]
             #     Model deployment metadata specific to Image Classification.
+            #
+            #     Note: The following fields are mutually exclusive: `image_classification_model_deployment_metadata`, `image_object_detection_model_deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param name [::String]
             #     Required. Resource name of the model to deploy.
             #

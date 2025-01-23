@@ -25,30 +25,48 @@ module Google
         # @!attribute [rw] delete_details
         #   @return [::Google::Cloud::AutoML::V1beta1::DeleteOperationMetadata]
         #     Details of a Delete operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] deploy_model_details
         #   @return [::Google::Cloud::AutoML::V1beta1::DeployModelOperationMetadata]
         #     Details of a DeployModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `deploy_model_details`, `delete_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] undeploy_model_details
         #   @return [::Google::Cloud::AutoML::V1beta1::UndeployModelOperationMetadata]
         #     Details of an UndeployModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `undeploy_model_details`, `delete_details`, `deploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_model_details
         #   @return [::Google::Cloud::AutoML::V1beta1::CreateModelOperationMetadata]
         #     Details of CreateModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_model_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] import_data_details
         #   @return [::Google::Cloud::AutoML::V1beta1::ImportDataOperationMetadata]
         #     Details of ImportData operation.
+        #
+        #     Note: The following fields are mutually exclusive: `import_data_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `batch_predict_details`, `export_data_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] batch_predict_details
         #   @return [::Google::Cloud::AutoML::V1beta1::BatchPredictOperationMetadata]
         #     Details of BatchPredict operation.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_predict_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `export_data_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] export_data_details
         #   @return [::Google::Cloud::AutoML::V1beta1::ExportDataOperationMetadata]
         #     Details of ExportData operation.
+        #
+        #     Note: The following fields are mutually exclusive: `export_data_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_model_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] export_model_details
         #   @return [::Google::Cloud::AutoML::V1beta1::ExportModelOperationMetadata]
         #     Details of ExportModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `export_model_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_evaluated_examples_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] export_evaluated_examples_details
         #   @return [::Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesOperationMetadata]
         #     Details of ExportEvaluatedExamples operation.
+        #
+        #     Note: The following fields are mutually exclusive: `export_evaluated_examples_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] progress_percent
         #   @return [::Integer]
         #     Output only. Progress of operation. Range: [0, 100].
@@ -115,10 +133,14 @@ module Google
           #   @return [::String]
           #     The full path of the Google Cloud Storage directory created, into which
           #     the exported data is written.
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_output_directory`, `bigquery_output_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bigquery_output_dataset
           #   @return [::String]
           #     The path of the BigQuery dataset created, in bq://projectId.bqDatasetId
           #     format, into which the exported data is written.
+          #
+          #     Note: The following fields are mutually exclusive: `bigquery_output_dataset`, `gcs_output_directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ExportDataOutputInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -145,10 +167,14 @@ module Google
           #   @return [::String]
           #     The full path of the Google Cloud Storage directory created, into which
           #     the prediction output is written.
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_output_directory`, `bigquery_output_dataset`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] bigquery_output_dataset
           #   @return [::String]
           #     The path of the BigQuery dataset created, in bq://projectId.bqDatasetId
           #     format, into which the prediction output is written.
+          #
+          #     Note: The following fields are mutually exclusive: `bigquery_output_dataset`, `gcs_output_directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BatchPredictOutputInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

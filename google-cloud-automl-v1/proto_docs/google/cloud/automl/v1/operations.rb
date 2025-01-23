@@ -25,30 +25,48 @@ module Google
         # @!attribute [rw] delete_details
         #   @return [::Google::Cloud::AutoML::V1::DeleteOperationMetadata]
         #     Details of a Delete operation.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `create_dataset_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] deploy_model_details
         #   @return [::Google::Cloud::AutoML::V1::DeployModelOperationMetadata]
         #     Details of a DeployModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `deploy_model_details`, `delete_details`, `undeploy_model_details`, `create_model_details`, `create_dataset_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] undeploy_model_details
         #   @return [::Google::Cloud::AutoML::V1::UndeployModelOperationMetadata]
         #     Details of an UndeployModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `undeploy_model_details`, `delete_details`, `deploy_model_details`, `create_model_details`, `create_dataset_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_model_details
         #   @return [::Google::Cloud::AutoML::V1::CreateModelOperationMetadata]
         #     Details of CreateModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_model_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_dataset_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_dataset_details
         #   @return [::Google::Cloud::AutoML::V1::CreateDatasetOperationMetadata]
         #     Details of CreateDataset operation.
+        #
+        #     Note: The following fields are mutually exclusive: `create_dataset_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `import_data_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] import_data_details
         #   @return [::Google::Cloud::AutoML::V1::ImportDataOperationMetadata]
         #     Details of ImportData operation.
+        #
+        #     Note: The following fields are mutually exclusive: `import_data_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `create_dataset_details`, `batch_predict_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] batch_predict_details
         #   @return [::Google::Cloud::AutoML::V1::BatchPredictOperationMetadata]
         #     Details of BatchPredict operation.
+        #
+        #     Note: The following fields are mutually exclusive: `batch_predict_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `create_dataset_details`, `import_data_details`, `export_data_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] export_data_details
         #   @return [::Google::Cloud::AutoML::V1::ExportDataOperationMetadata]
         #     Details of ExportData operation.
+        #
+        #     Note: The following fields are mutually exclusive: `export_data_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `create_dataset_details`, `import_data_details`, `batch_predict_details`, `export_model_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] export_model_details
         #   @return [::Google::Cloud::AutoML::V1::ExportModelOperationMetadata]
         #     Details of ExportModel operation.
+        #
+        #     Note: The following fields are mutually exclusive: `export_model_details`, `delete_details`, `deploy_model_details`, `undeploy_model_details`, `create_model_details`, `create_dataset_details`, `import_data_details`, `batch_predict_details`, `export_data_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] progress_percent
         #   @return [::Integer]
         #     Output only. Progress of operation. Range: [0, 100].

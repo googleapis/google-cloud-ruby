@@ -340,9 +340,13 @@ module Google
         # @!attribute [rw] image_object_detection_model_deployment_metadata
         #   @return [::Google::Cloud::AutoML::V1beta1::ImageObjectDetectionModelDeploymentMetadata]
         #     Model deployment metadata specific to Image Object Detection.
+        #
+        #     Note: The following fields are mutually exclusive: `image_object_detection_model_deployment_metadata`, `image_classification_model_deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_classification_model_deployment_metadata
         #   @return [::Google::Cloud::AutoML::V1beta1::ImageClassificationModelDeploymentMetadata]
         #     Model deployment metadata specific to Image Classification.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_model_deployment_metadata`, `image_object_detection_model_deployment_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the model to deploy.
