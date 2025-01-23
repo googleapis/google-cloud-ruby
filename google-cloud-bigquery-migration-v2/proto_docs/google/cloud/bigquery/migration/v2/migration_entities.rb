@@ -89,9 +89,13 @@ module Google
           # @!attribute [rw] translation_config_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationConfigDetails]
           #     Task configuration for CW Batch/Offline SQL Translation.
+          #
+          #     Note: The following fields are mutually exclusive: `translation_config_details`, `translation_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] translation_details
           #   @return [::Google::Cloud::Bigquery::Migration::V2::TranslationDetails]
           #     Task details for unified SQL Translation.
+          #
+          #     Note: The following fields are mutually exclusive: `translation_details`, `translation_config_details`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] id
           #   @return [::String]
           #     Output only. Immutable. The unique identifier for the migration task. The

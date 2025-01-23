@@ -647,12 +647,16 @@ module Google
           #     that are scheduled to be transferred by the scheduled transfer run.
           #     requested_time_range must be a past time and cannot include future time
           #     values.
+          #
+          #     Note: The following fields are mutually exclusive: `requested_time_range`, `requested_run_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] requested_run_time
           #   @return [::Google::Protobuf::Timestamp]
           #     A run_time timestamp for historical data files or reports
           #     that are scheduled to be transferred by the scheduled transfer run.
           #     requested_run_time must be a past time and cannot include future time
           #     values.
+          #
+          #     Note: The following fields are mutually exclusive: `requested_run_time`, `requested_time_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class StartManualTransferRunsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

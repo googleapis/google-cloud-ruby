@@ -58,13 +58,19 @@ module Google
         # @!attribute [rw] list_policy
         #   @return [::Google::Cloud::OrgPolicy::V1::Policy::ListPolicy]
         #     List of values either allowed or disallowed.
+        #
+        #     Note: The following fields are mutually exclusive: `list_policy`, `boolean_policy`, `restore_default`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] boolean_policy
         #   @return [::Google::Cloud::OrgPolicy::V1::Policy::BooleanPolicy]
         #     For boolean `Constraints`, whether to enforce the `Constraint` or not.
+        #
+        #     Note: The following fields are mutually exclusive: `boolean_policy`, `list_policy`, `restore_default`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] restore_default
         #   @return [::Google::Cloud::OrgPolicy::V1::Policy::RestoreDefault]
         #     Restores the default behavior of the constraint; independent of
         #     `Constraint` type.
+        #
+        #     Note: The following fields are mutually exclusive: `restore_default`, `list_policy`, `boolean_policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Policy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

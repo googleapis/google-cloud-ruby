@@ -26,21 +26,33 @@ module Google
         # @!attribute [rw] translation_dataset_metadata
         #   @return [::Google::Cloud::AutoML::V1::TranslationDatasetMetadata]
         #     Metadata for a dataset used for translation.
+        #
+        #     Note: The following fields are mutually exclusive: `translation_dataset_metadata`, `image_classification_dataset_metadata`, `text_classification_dataset_metadata`, `image_object_detection_dataset_metadata`, `text_extraction_dataset_metadata`, `text_sentiment_dataset_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_classification_dataset_metadata
         #   @return [::Google::Cloud::AutoML::V1::ImageClassificationDatasetMetadata]
         #     Metadata for a dataset used for image classification.
+        #
+        #     Note: The following fields are mutually exclusive: `image_classification_dataset_metadata`, `translation_dataset_metadata`, `text_classification_dataset_metadata`, `image_object_detection_dataset_metadata`, `text_extraction_dataset_metadata`, `text_sentiment_dataset_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_classification_dataset_metadata
         #   @return [::Google::Cloud::AutoML::V1::TextClassificationDatasetMetadata]
         #     Metadata for a dataset used for text classification.
+        #
+        #     Note: The following fields are mutually exclusive: `text_classification_dataset_metadata`, `translation_dataset_metadata`, `image_classification_dataset_metadata`, `image_object_detection_dataset_metadata`, `text_extraction_dataset_metadata`, `text_sentiment_dataset_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_object_detection_dataset_metadata
         #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionDatasetMetadata]
         #     Metadata for a dataset used for image object detection.
+        #
+        #     Note: The following fields are mutually exclusive: `image_object_detection_dataset_metadata`, `translation_dataset_metadata`, `image_classification_dataset_metadata`, `text_classification_dataset_metadata`, `text_extraction_dataset_metadata`, `text_sentiment_dataset_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_extraction_dataset_metadata
         #   @return [::Google::Cloud::AutoML::V1::TextExtractionDatasetMetadata]
         #     Metadata for a dataset used for text extraction.
+        #
+        #     Note: The following fields are mutually exclusive: `text_extraction_dataset_metadata`, `translation_dataset_metadata`, `image_classification_dataset_metadata`, `text_classification_dataset_metadata`, `image_object_detection_dataset_metadata`, `text_sentiment_dataset_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_sentiment_dataset_metadata
         #   @return [::Google::Cloud::AutoML::V1::TextSentimentDatasetMetadata]
         #     Metadata for a dataset used for text sentiment.
+        #
+        #     Note: The following fields are mutually exclusive: `text_sentiment_dataset_metadata`, `translation_dataset_metadata`, `image_classification_dataset_metadata`, `text_classification_dataset_metadata`, `image_object_detection_dataset_metadata`, `text_extraction_dataset_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. The resource name of the dataset.

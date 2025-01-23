@@ -115,12 +115,18 @@ module Google
       # @!attribute [rw] linear_buckets
       #   @return [::Google::Api::Distribution::BucketOptions::Linear]
       #     The linear bucket.
+      #
+      #     Note: The following fields are mutually exclusive: `linear_buckets`, `exponential_buckets`, `explicit_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
       # @!attribute [rw] exponential_buckets
       #   @return [::Google::Api::Distribution::BucketOptions::Exponential]
       #     The exponential buckets.
+      #
+      #     Note: The following fields are mutually exclusive: `exponential_buckets`, `linear_buckets`, `explicit_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
       # @!attribute [rw] explicit_buckets
       #   @return [::Google::Api::Distribution::BucketOptions::Explicit]
       #     The explicit buckets.
+      #
+      #     Note: The following fields are mutually exclusive: `explicit_buckets`, `linear_buckets`, `exponential_buckets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
       class BucketOptions
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

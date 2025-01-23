@@ -106,10 +106,14 @@ module Google
         #   @return [::Float]
         #     Required when optimization_objective is "MAXIMIZE_PRECISION_AT_RECALL".
         #     Must be between 0 and 1, inclusive.
+        #
+        #     Note: The following fields are mutually exclusive: `optimization_objective_recall_value`, `optimization_objective_precision_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] optimization_objective_precision_value
         #   @return [::Float]
         #     Required when optimization_objective is "MAXIMIZE_RECALL_AT_PRECISION".
         #     Must be between 0 and 1, inclusive.
+        #
+        #     Note: The following fields are mutually exclusive: `optimization_objective_precision_value`, `optimization_objective_recall_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target_column_spec
         #   @return [::Google::Cloud::AutoML::V1beta1::ColumnSpec]
         #     Column spec of the dataset's primary table's column the model is

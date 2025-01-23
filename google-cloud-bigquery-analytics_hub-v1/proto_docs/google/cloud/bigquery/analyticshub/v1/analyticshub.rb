@@ -77,9 +77,13 @@ module Google
           # @!attribute [rw] default_exchange_config
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharingEnvironmentConfig::DefaultExchangeConfig]
           #     Default Analytics Hub data exchange, used for secured data sharing.
+          #
+          #     Note: The following fields are mutually exclusive: `default_exchange_config`, `dcr_exchange_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dcr_exchange_config
           #   @return [::Google::Cloud::Bigquery::AnalyticsHub::V1::SharingEnvironmentConfig::DcrExchangeConfig]
           #     Data Clean Room (DCR), used for privacy-safe and secured data sharing.
+          #
+          #     Note: The following fields are mutually exclusive: `dcr_exchange_config`, `default_exchange_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SharingEnvironmentConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -388,10 +392,14 @@ module Google
           #   @return [::String]
           #     Output only. Resource name of the source Listing.
           #     e.g. projects/123/locations/US/dataExchanges/456/listings/789
+          #
+          #     Note: The following fields are mutually exclusive: `listing`, `data_exchange`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] data_exchange
           #   @return [::String]
           #     Output only. Resource name of the source Data Exchange.
           #     e.g. projects/123/locations/US/dataExchanges/456
+          #
+          #     Note: The following fields are mutually exclusive: `data_exchange`, `listing`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the subscription.

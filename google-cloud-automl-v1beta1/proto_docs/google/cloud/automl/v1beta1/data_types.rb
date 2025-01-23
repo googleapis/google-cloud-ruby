@@ -27,10 +27,14 @@ module Google
         #   @return [::Google::Cloud::AutoML::V1beta1::DataType]
         #     If {::Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {::Google::Cloud::AutoML::V1beta1::TypeCode::ARRAY ARRAY},
         #     then `list_element_type` is the type of the elements.
+        #
+        #     Note: The following fields are mutually exclusive: `list_element_type`, `struct_type`, `time_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] struct_type
         #   @return [::Google::Cloud::AutoML::V1beta1::StructType]
         #     If {::Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {::Google::Cloud::AutoML::V1beta1::TypeCode::STRUCT STRUCT}, then `struct_type`
         #     provides type information for the struct's fields.
+        #
+        #     Note: The following fields are mutually exclusive: `struct_type`, `list_element_type`, `time_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] time_format
         #   @return [::String]
         #     If {::Google::Cloud::AutoML::V1beta1::DataType#type_code type_code} == {::Google::Cloud::AutoML::V1beta1::TypeCode::TIMESTAMP TIMESTAMP}
@@ -44,6 +48,8 @@ module Google
         #     nanoseconds since start of the Unix epoch);
         #     or be written in `strftime` syntax. If time_format is not set, then the
         #     default format as described on the type_code is used.
+        #
+        #     Note: The following fields are mutually exclusive: `time_format`, `list_element_type`, `struct_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] type_code
         #   @return [::Google::Cloud::AutoML::V1beta1::TypeCode]
         #     Required. The {::Google::Cloud::AutoML::V1beta1::TypeCode TypeCode} for this type.

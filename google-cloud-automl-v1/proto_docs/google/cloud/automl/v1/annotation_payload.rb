@@ -25,18 +25,28 @@ module Google
         # @!attribute [rw] translation
         #   @return [::Google::Cloud::AutoML::V1::TranslationAnnotation]
         #     Annotation details for translation.
+        #
+        #     Note: The following fields are mutually exclusive: `translation`, `classification`, `image_object_detection`, `text_extraction`, `text_sentiment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] classification
         #   @return [::Google::Cloud::AutoML::V1::ClassificationAnnotation]
         #     Annotation details for content or image classification.
+        #
+        #     Note: The following fields are mutually exclusive: `classification`, `translation`, `image_object_detection`, `text_extraction`, `text_sentiment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_object_detection
         #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionAnnotation]
         #     Annotation details for image object detection.
+        #
+        #     Note: The following fields are mutually exclusive: `image_object_detection`, `translation`, `classification`, `text_extraction`, `text_sentiment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_extraction
         #   @return [::Google::Cloud::AutoML::V1::TextExtractionAnnotation]
         #     Annotation details for text extraction.
+        #
+        #     Note: The following fields are mutually exclusive: `text_extraction`, `translation`, `classification`, `image_object_detection`, `text_sentiment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_sentiment
         #   @return [::Google::Cloud::AutoML::V1::TextSentimentAnnotation]
         #     Annotation details for text sentiment.
+        #
+        #     Note: The following fields are mutually exclusive: `text_sentiment`, `translation`, `classification`, `image_object_detection`, `text_extraction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] annotation_spec_id
         #   @return [::String]
         #     Output only . The resource ID of the annotation spec that

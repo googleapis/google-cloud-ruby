@@ -193,9 +193,13 @@ module Google
         #     The word 'DataSource' was included in the names to indicate that this is
         #     the representation of the Google Cloud resource used within the
         #     DataSource object.
+        #
+        #     Note: The following fields are mutually exclusive: `data_source_gcp_resource`, `data_source_backup_appliance_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_source_backup_appliance_application
         #   @return [::Google::Cloud::BackupDR::V1::DataSourceBackupApplianceApplication]
         #     The backed up resource is a backup appliance application.
+        #
+        #     Note: The following fields are mutually exclusive: `data_source_backup_appliance_application`, `data_source_gcp_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DataSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -243,9 +247,13 @@ module Google
         # @!attribute [rw] gcp_backup_config
         #   @return [::Google::Cloud::BackupDR::V1::GcpBackupConfig]
         #     Configuration for a Google Cloud resource.
+        #
+        #     Note: The following fields are mutually exclusive: `gcp_backup_config`, `backup_appliance_backup_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] backup_appliance_backup_config
         #   @return [::Google::Cloud::BackupDR::V1::BackupApplianceBackupConfig]
         #     Configuration for an application backed up by a Backup Appliance.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_appliance_backup_config`, `gcp_backup_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BackupConfigInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -397,12 +405,18 @@ module Google
         # @!attribute [rw] job_name
         #   @return [::String]
         #     The job name on the backup/recovery appliance that created this lock.
+        #
+        #     Note: The following fields are mutually exclusive: `job_name`, `backup_image`, `sla_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] backup_image
         #   @return [::String]
         #     The image name that depends on this Backup.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_image`, `job_name`, `sla_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sla_id
         #   @return [::Integer]
         #     The SLA on the backup/recovery appliance that owns the lock.
+        #
+        #     Note: The following fields are mutually exclusive: `sla_id`, `job_name`, `backup_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BackupApplianceLockInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -418,10 +432,14 @@ module Google
         #   @return [::Google::Cloud::BackupDR::V1::BackupApplianceLockInfo]
         #     If the client is a backup and recovery appliance, this
         #     contains metadata about why the lock exists.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_appliance_lock_info`, `service_lock_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] service_lock_info
         #   @return [::Google::Cloud::BackupDR::V1::ServiceLockInfo]
         #     Output only. Contains metadata about the lock exist for Google Cloud
         #     native backups.
+        #
+        #     Note: The following fields are mutually exclusive: `service_lock_info`, `backup_appliance_lock_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BackupLock
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -475,9 +493,13 @@ module Google
         # @!attribute [r] compute_instance_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::ComputeInstanceBackupProperties]
         #     Output only. Compute Engine specific backup properties.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_instance_backup_properties`, `backup_appliance_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_appliance_backup_properties
         #   @return [::Google::Cloud::BackupDR::V1::BackupApplianceBackupProperties]
         #     Output only. Backup Appliance specific backup properties.
+        #
+        #     Note: The following fields are mutually exclusive: `backup_appliance_backup_properties`, `compute_instance_backup_properties`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] backup_type
         #   @return [::Google::Cloud::BackupDR::V1::Backup::BackupType]
         #     Output only. Type of the backup, unspecified, scheduled or ondemand.
