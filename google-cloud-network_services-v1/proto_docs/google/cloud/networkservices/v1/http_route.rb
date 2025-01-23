@@ -100,25 +100,37 @@ module Google
           #   @return [::String]
           #     The value of the header should match exactly the content of
           #     exact_match.
+          #
+          #     Note: The following fields are mutually exclusive: `exact_match`, `regex_match`, `prefix_match`, `present_match`, `suffix_match`, `range_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] regex_match
           #   @return [::String]
           #     The value of the header must match the regular expression specified in
           #     regex_match. For regular expression grammar, please see:
           #     https://github.com/google/re2/wiki/Syntax
+          #
+          #     Note: The following fields are mutually exclusive: `regex_match`, `exact_match`, `prefix_match`, `present_match`, `suffix_match`, `range_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] prefix_match
           #   @return [::String]
           #     The value of the header must start with the contents of prefix_match.
+          #
+          #     Note: The following fields are mutually exclusive: `prefix_match`, `exact_match`, `regex_match`, `present_match`, `suffix_match`, `range_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] present_match
           #   @return [::Boolean]
           #     A header with header_name must exist. The match takes place whether or
           #     not the header has a value.
+          #
+          #     Note: The following fields are mutually exclusive: `present_match`, `exact_match`, `regex_match`, `prefix_match`, `suffix_match`, `range_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] suffix_match
           #   @return [::String]
           #     The value of the header must end with the contents of suffix_match.
+          #
+          #     Note: The following fields are mutually exclusive: `suffix_match`, `exact_match`, `regex_match`, `prefix_match`, `present_match`, `range_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] range_match
           #   @return [::Google::Cloud::NetworkServices::V1::HttpRoute::HeaderMatch::IntegerRange]
           #     If specified, the rule will match if the request header value is within
           #     the range.
+          #
+          #     Note: The following fields are mutually exclusive: `range_match`, `exact_match`, `regex_match`, `prefix_match`, `present_match`, `suffix_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] header
           #   @return [::String]
           #     The name of the HTTP header to match against.
@@ -150,6 +162,8 @@ module Google
           #     exact_match.
           #
           #     Only one of exact_match, regex_match, or present_match must be set.
+          #
+          #     Note: The following fields are mutually exclusive: `exact_match`, `regex_match`, `present_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] regex_match
           #   @return [::String]
           #     The value of the query parameter must match the regular expression
@@ -157,6 +171,8 @@ module Google
           #     https://github.com/google/re2/wiki/Syntax
           #
           #     Only one of exact_match, regex_match, or present_match must be set.
+          #
+          #     Note: The following fields are mutually exclusive: `regex_match`, `exact_match`, `present_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] present_match
           #   @return [::Boolean]
           #     Specifies that the QueryParameterMatcher matches if request contains
@@ -164,6 +180,8 @@ module Google
           #     not.
           #
           #     Only one of exact_match, regex_match, or present_match must be set.
+          #
+          #     Note: The following fields are mutually exclusive: `present_match`, `exact_match`, `regex_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] query_parameter
           #   @return [::String]
           #     The name of the query parameter to match.
@@ -181,6 +199,8 @@ module Google
           #
           #     Only one of full_path_match, prefix_match, or regex_match should be
           #     used.
+          #
+          #     Note: The following fields are mutually exclusive: `full_path_match`, `prefix_match`, `regex_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] prefix_match
           #   @return [::String]
           #     The HTTP request path value must begin with specified prefix_match.
@@ -188,6 +208,8 @@ module Google
           #
           #     Only one of full_path_match, prefix_match, or regex_match should be
           #     used.
+          #
+          #     Note: The following fields are mutually exclusive: `prefix_match`, `full_path_match`, `regex_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] regex_match
           #   @return [::String]
           #     The HTTP request path value must satisfy the regular expression
@@ -197,6 +219,8 @@ module Google
           #
           #     Only one of full_path_match, prefix_match, or regex_match should be
           #     used.
+          #
+          #     Note: The following fields are mutually exclusive: `regex_match`, `full_path_match`, `prefix_match`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] ignore_case
           #   @return [::Boolean]
           #     Specifies if prefix_match and full_path_match matches are case sensitive.

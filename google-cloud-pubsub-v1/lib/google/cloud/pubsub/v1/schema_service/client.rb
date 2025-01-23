@@ -1107,8 +1107,12 @@ module Google
             #     Name of the schema against which to validate.
             #
             #     Format is `projects/{project}/schemas/{schema}`.
+            #
+            #     Note: The following fields are mutually exclusive: `name`, `schema`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param schema [::Google::Cloud::PubSub::V1::Schema, ::Hash]
             #     Ad-hoc schema against which to validate
+            #
+            #     Note: The following fields are mutually exclusive: `schema`, `name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param message [::String]
             #     Message to validate against the provided `schema_spec`.
             #   @param encoding [::Google::Cloud::PubSub::V1::Encoding]

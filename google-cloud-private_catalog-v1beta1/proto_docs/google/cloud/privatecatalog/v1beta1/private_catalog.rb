@@ -372,13 +372,19 @@ module Google
         # @!attribute [r] asset
         #   @return [::String]
         #     Output only. The asset resource name if an asset is hosted by Private Catalog.
+        #
+        #     Note: The following fields are mutually exclusive: `asset`, `gcs_path`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] gcs_path
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
         #     Output only. The cloud storage object path.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_path`, `asset`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] git_source
         #   @return [::Google::Cloud::PrivateCatalog::V1beta1::GitSource]
         #     Output only. The git source.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `asset`, `gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] gcs_source
         #   @return [::Google::Cloud::PrivateCatalog::V1beta1::GcsSource]
         #     Output only. The cloud storage source.
@@ -450,12 +456,18 @@ module Google
         # @!attribute [rw] commit
         #   @return [::String]
         #     The revision commit to use.
+        #
+        #     Note: The following fields are mutually exclusive: `commit`, `branch`, `tag`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] branch
         #   @return [::String]
         #     The revision branch to use.
+        #
+        #     Note: The following fields are mutually exclusive: `branch`, `commit`, `tag`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag
         #   @return [::String]
         #     The revision tag to use.
+        #
+        #     Note: The following fields are mutually exclusive: `tag`, `commit`, `branch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GitSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

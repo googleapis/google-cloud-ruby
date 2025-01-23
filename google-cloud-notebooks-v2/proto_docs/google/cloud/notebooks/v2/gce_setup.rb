@@ -63,10 +63,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. Use VM image name to find the image.
+        #
+        #     Note: The following fields are mutually exclusive: `name`, `family`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] family
         #   @return [::String]
         #     Optional. Use this VM image family to find the image; the newest image in
         #     this family will be used.
+        #
+        #     Note: The following fields are mutually exclusive: `family`, `name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class VmImage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,9 +271,13 @@ module Google
         # @!attribute [rw] vm_image
         #   @return [::Google::Cloud::Notebooks::V2::VmImage]
         #     Optional. Use a Compute Engine VM image to start the notebook instance.
+        #
+        #     Note: The following fields are mutually exclusive: `vm_image`, `container_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_image
         #   @return [::Google::Cloud::Notebooks::V2::ContainerImage]
         #     Optional. Use a container image to start the notebook instance.
+        #
+        #     Note: The following fields are mutually exclusive: `container_image`, `vm_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] boot_disk
         #   @return [::Google::Cloud::Notebooks::V2::BootDisk]
         #     Optional. The boot disk for the VM.
