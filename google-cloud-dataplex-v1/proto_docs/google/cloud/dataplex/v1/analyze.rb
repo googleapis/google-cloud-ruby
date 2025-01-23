@@ -213,9 +213,13 @@ module Google
         # @!attribute [rw] sql_script
         #   @return [::Google::Cloud::Dataplex::V1::Content::SqlScript]
         #     Sql Script related configurations.
+        #
+        #     Note: The following fields are mutually exclusive: `sql_script`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] notebook
         #   @return [::Google::Cloud::Dataplex::V1::Content::Notebook]
         #     Notebook related configurations.
+        #
+        #     Note: The following fields are mutually exclusive: `notebook`, `sql_script`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Content
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -111,17 +111,25 @@ module Google
         # @!attribute [rw] dictionary
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary]
         #     A list of phrases to detect as a CustomInfoType.
+        #
+        #     Note: The following fields are mutually exclusive: `dictionary`, `regex`, `surrogate_type`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] regex
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Regex]
         #     Regular expression based CustomInfoType.
+        #
+        #     Note: The following fields are mutually exclusive: `regex`, `dictionary`, `surrogate_type`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] surrogate_type
         #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::SurrogateType]
         #     Message for detecting output from deidentification transformations that
         #     support reversing.
+        #
+        #     Note: The following fields are mutually exclusive: `surrogate_type`, `dictionary`, `regex`, `stored_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stored_type
         #   @return [::Google::Cloud::Dlp::V2::StoredType]
         #     Load an existing `StoredInfoType` resource for use in
         #     `InspectDataSource`. Not currently supported in `InspectContent`.
+        #
+        #     Note: The following fields are mutually exclusive: `stored_type`, `dictionary`, `regex`, `surrogate_type`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] detection_rules
         #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType::DetectionRule>]
         #     Set of detection rules to apply to all findings of this CustomInfoType.
@@ -168,10 +176,14 @@ module Google
           # @!attribute [rw] word_list
           #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
+          #
+          #     Note: The following fields are mutually exclusive: `word_list`, `cloud_storage_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] cloud_storage_path
           #   @return [::Google::Cloud::Dlp::V2::CloudStoragePath]
           #     Newline-delimited file of words in Cloud Storage. Only a single file
           #     is accepted.
+          #
+          #     Note: The following fields are mutually exclusive: `cloud_storage_path`, `word_list`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Dictionary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -249,6 +261,8 @@ module Google
             # @!attribute [rw] fixed_likelihood
             #   @return [::Google::Cloud::Dlp::V2::Likelihood]
             #     Set the likelihood of a finding to a fixed value.
+            #
+            #     Note: The following fields are mutually exclusive: `fixed_likelihood`, `relative_likelihood`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] relative_likelihood
             #   @return [::Integer]
             #     Increase or decrease the likelihood by the specified number of
@@ -259,6 +273,8 @@ module Google
             #     `VERY_LIKELY`, so applying an adjustment of 1 followed by an
             #     adjustment of -1 when base likelihood is `VERY_LIKELY` will result in
             #     a final likelihood of `LIKELY`.
+            #
+            #     Note: The following fields are mutually exclusive: `relative_likelihood`, `fixed_likelihood`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class LikelihoodAdjustment
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -585,15 +601,23 @@ module Google
         # @!attribute [rw] datastore_options
         #   @return [::Google::Cloud::Dlp::V2::DatastoreOptions]
         #     Google Cloud Datastore options.
+        #
+        #     Note: The following fields are mutually exclusive: `datastore_options`, `cloud_storage_options`, `big_query_options`, `hybrid_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_storage_options
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions]
         #     Cloud Storage options.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_storage_options`, `datastore_options`, `big_query_options`, `hybrid_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] big_query_options
         #   @return [::Google::Cloud::Dlp::V2::BigQueryOptions]
         #     BigQuery options.
+        #
+        #     Note: The following fields are mutually exclusive: `big_query_options`, `datastore_options`, `cloud_storage_options`, `hybrid_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] hybrid_options
         #   @return [::Google::Cloud::Dlp::V2::HybridOptions]
         #     Hybrid inspection options.
+        #
+        #     Note: The following fields are mutually exclusive: `hybrid_options`, `datastore_options`, `cloud_storage_options`, `big_query_options`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timespan_config
         #   @return [::Google::Cloud::Dlp::V2::StorageConfig::TimespanConfig]
         #     Configuration of the timespan of the items to include in scanning.
@@ -784,12 +808,16 @@ module Google
           #     The auto-allocated ID of the entity.
           #     Never equal to zero. Values less than zero are discouraged and may not
           #     be supported in the future.
+          #
+          #     Note: The following fields are mutually exclusive: `id`, `name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the entity.
           #     A name matching regex `__.*__` is reserved/read-only.
           #     A name must not be more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
+          #
+          #     Note: The following fields are mutually exclusive: `name`, `id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class PathElement
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -800,9 +828,13 @@ module Google
         # @!attribute [rw] datastore_key
         #   @return [::Google::Cloud::Dlp::V2::DatastoreKey]
         #     BigQuery key
+        #
+        #     Note: The following fields are mutually exclusive: `datastore_key`, `big_query_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] big_query_key
         #   @return [::Google::Cloud::Dlp::V2::BigQueryKey]
         #     Datastore key
+        #
+        #     Note: The following fields are mutually exclusive: `big_query_key`, `datastore_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] id_values
         #   @return [::Array<::String>]
         #     Values of identifying columns in the given row. Order of values matches

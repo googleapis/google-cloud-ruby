@@ -587,12 +587,18 @@ module Google
         # @!attribute [rw] csv
         #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::CsvOptions]
         #     Optional. Additional information about CSV formatted data.
+        #
+        #     Note: The following fields are mutually exclusive: `csv`, `json`, `iceberg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] json
         #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::JsonOptions]
         #     Optional. Additional information about CSV formatted data.
+        #
+        #     Note: The following fields are mutually exclusive: `json`, `csv`, `iceberg`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] iceberg
         #   @return [::Google::Cloud::Dataplex::V1::StorageFormat::IcebergOptions]
         #     Optional. Additional information about iceberg tables.
+        #
+        #     Note: The following fields are mutually exclusive: `iceberg`, `csv`, `json`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StorageFormat
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

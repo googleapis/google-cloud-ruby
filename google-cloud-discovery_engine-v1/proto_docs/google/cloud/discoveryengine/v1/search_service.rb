@@ -1095,11 +1095,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::String]
             #     Text value of a facet, such as "Black" for facet "colors".
+            #
+            #     Note: The following fields are mutually exclusive: `value`, `interval`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] interval
             #   @return [::Google::Cloud::DiscoveryEngine::V1::Interval]
             #     Interval value for a facet, such as [10, 20) for facet "price". It
             #     matches
             #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::FacetSpec::FacetKey#intervals SearchRequest.FacetSpec.FacetKey.intervals}.
+            #
+            #     Note: The following fields are mutually exclusive: `interval`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] count
             #   @return [::Integer]
             #     Number of items that have this facet value.

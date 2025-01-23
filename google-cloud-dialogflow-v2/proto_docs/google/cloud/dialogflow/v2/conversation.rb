@@ -439,10 +439,14 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::Generator]
         #     Uncreated generator. It should be a complete generator that includes all
         #     information about the generator.
+        #
+        #     Note: The following fields are mutually exclusive: `generator`, `generator_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] generator_name
         #   @return [::String]
         #     The resource name of the existing created generator. Format:
         #     `projects/<Project ID>/locations/<Location ID>/generators/<Generator ID>`
+        #
+        #     Note: The following fields are mutually exclusive: `generator_name`, `generator`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] conversation_context
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationContext]
         #     Optional. Context of the conversation, including transcripts.

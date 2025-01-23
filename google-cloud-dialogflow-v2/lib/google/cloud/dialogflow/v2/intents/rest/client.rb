@@ -712,8 +712,12 @@ module Google
               #     The URI to a Google Cloud Storage file containing intents to update or
               #     create. The file format can either be a serialized proto (of IntentBatch
               #     type) or JSON object. Note: The URI must start with "gs://".
+              #
+              #     Note: The following fields are mutually exclusive: `intent_batch_uri`, `intent_batch_inline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param intent_batch_inline [::Google::Cloud::Dialogflow::V2::IntentBatch, ::Hash]
               #     The collection of intents to update or create.
+              #
+              #     Note: The following fields are mutually exclusive: `intent_batch_inline`, `intent_batch_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param language_code [::String]
               #     Optional. The language used to access language-specific data.
               #     If not specified, the agent's default language is used.

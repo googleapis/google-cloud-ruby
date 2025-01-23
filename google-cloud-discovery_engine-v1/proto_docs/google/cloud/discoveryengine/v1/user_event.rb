@@ -423,15 +423,21 @@ module Google
         # @!attribute [rw] id
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1::Document Document} resource ID.
+        #
+        #     Note: The following fields are mutually exclusive: `id`, `name`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1::Document Document} resource full
         #     name, of the form:
         #     `projects/{project}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
+        #
+        #     Note: The following fields are mutually exclusive: `name`, `id`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] uri
         #   @return [::String]
         #     The {::Google::Cloud::DiscoveryEngine::V1::Document Document} URI - only
         #     allowed for website data stores.
+        #
+        #     Note: The following fields are mutually exclusive: `uri`, `id`, `name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] quantity
         #   @return [::Integer]
         #     Quantity of the Document associated with the user event. Defaults to 1.

@@ -88,8 +88,10 @@ module Google
 
         # @!attribute [rw] classification_metrics
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ClassificationMetrics]
+        #     Note: The following fields are mutually exclusive: `classification_metrics`, `object_detection_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] object_detection_metrics
         #   @return [::Google::Cloud::DataLabeling::V1beta1::ObjectDetectionMetrics]
+        #     Note: The following fields are mutually exclusive: `object_detection_metrics`, `classification_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EvaluationMetrics
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

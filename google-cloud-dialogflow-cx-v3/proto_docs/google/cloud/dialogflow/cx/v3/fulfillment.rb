@@ -129,9 +129,13 @@ module Google
                 # @!attribute [rw] message
                 #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage]
                 #     Returned message.
+                #
+                #     Note: The following fields are mutually exclusive: `message`, `additional_cases`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 # @!attribute [rw] additional_cases
                 #   @return [::Google::Cloud::Dialogflow::CX::V3::Fulfillment::ConditionalCases]
                 #     Additional cases to be evaluated.
+                #
+                #     Note: The following fields are mutually exclusive: `additional_cases`, `message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
                 class CaseContent
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods

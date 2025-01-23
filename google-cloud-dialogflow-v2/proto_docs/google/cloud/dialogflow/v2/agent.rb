@@ -247,9 +247,13 @@ module Google
         #   @return [::String]
         #     The URI to a file containing the exported agent. This field is populated
         #     only if `agent_uri` is specified in `ExportAgentRequest`.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] agent_content
         #   @return [::String]
         #     Zip compressed raw byte content for agent.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExportAgentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -271,9 +275,13 @@ module Google
         #     have read permissions for the object. For more information, see
         #     [Dialogflow access
         #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+        #
+        #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] agent_content
         #   @return [::String]
         #     Zip compressed raw byte content for agent.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ImportAgentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -295,9 +303,13 @@ module Google
         #     have read permissions for the object. For more information, see
         #     [Dialogflow access
         #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+        #
+        #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] agent_content
         #   @return [::String]
         #     Zip compressed raw byte content for agent.
+        #
+        #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RestoreAgentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

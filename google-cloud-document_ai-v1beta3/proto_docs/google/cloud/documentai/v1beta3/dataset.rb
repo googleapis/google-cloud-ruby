@@ -29,16 +29,22 @@ module Google
         #     Optional. User-managed Cloud Storage dataset configuration. Use this
         #     configuration if the dataset documents are stored under a user-managed
         #     Cloud Storage location.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_managed_config`, `document_warehouse_config`, `unmanaged_dataset_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document_warehouse_config
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Dataset::DocumentWarehouseConfig]
         #     Optional. Deprecated. Warehouse-based dataset configuration is not
         #     supported.
+        #
+        #     Note: The following fields are mutually exclusive: `document_warehouse_config`, `gcs_managed_config`, `unmanaged_dataset_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] unmanaged_dataset_config
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Dataset::UnmanagedDatasetConfig]
         #     Optional. Unmanaged dataset configuration. Use this configuration if the
         #     dataset documents are managed by the document service internally (not
         #     user-managed).
+        #
+        #     Note: The following fields are mutually exclusive: `unmanaged_dataset_config`, `gcs_managed_config`, `document_warehouse_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spanner_indexing_config
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Dataset::SpannerIndexingConfig]
         #     Optional. A lightweight indexing source with low latency and high
@@ -118,9 +124,13 @@ module Google
         # @!attribute [rw] gcs_managed_doc_id
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId::GCSManagedDocumentId]
         #     A document id within user-managed Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_managed_doc_id`, `unmanaged_doc_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] unmanaged_doc_id
         #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId::UnmanagedDocumentId]
         #     A document id within unmanaged dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `unmanaged_doc_id`, `gcs_managed_doc_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] revision_ref
         #   @return [::Google::Cloud::DocumentAI::V1beta3::RevisionRef]
         #     Points to a specific revision of the document if set.
@@ -177,11 +187,15 @@ module Google
         # @!attribute [rw] individual_document_ids
         #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDatasetDocuments::IndividualDocumentIds]
         #     Document identifiers.
+        #
+        #     Note: The following fields are mutually exclusive: `individual_document_ids`, `filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filter
         #   @return [::String]
         #     A filter matching the documents.
         #     Follows the same format and restriction as
         #     [google.cloud.documentai.master.ListDocumentsRequest.filter].
+        #
+        #     Note: The following fields are mutually exclusive: `filter`, `individual_document_ids`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BatchDatasetDocuments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
