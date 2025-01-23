@@ -237,11 +237,15 @@ module Google
         #     contribute to the label being predicted. A sampling strategy is used to
         #     approximate the value rather than considering all subsets of features.
         #     Refer to this paper for model details: https://arxiv.org/abs/1306.4265.
+        #
+        #     Note: The following fields are mutually exclusive: `sampled_shapley_attribution`, `integrated_gradients_attribution`, `xrai_attribution`, `examples`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] integrated_gradients_attribution
         #   @return [::Google::Cloud::AIPlatform::V1::IntegratedGradientsAttribution]
         #     An attribution method that computes Aumann-Shapley values taking
         #     advantage of the model's fully differentiable structure. Refer to this
         #     paper for more details: https://arxiv.org/abs/1703.01365
+        #
+        #     Note: The following fields are mutually exclusive: `integrated_gradients_attribution`, `sampled_shapley_attribution`, `xrai_attribution`, `examples`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] xrai_attribution
         #   @return [::Google::Cloud::AIPlatform::V1::XraiAttribution]
         #     An attribution method that redistributes Integrated Gradients
@@ -253,10 +257,14 @@ module Google
         #     house or an animal. If the images are taken in artificial environments,
         #     like a lab or manufacturing line, or from diagnostic equipment, like
         #     x-rays or quality-control cameras, use Integrated Gradients instead.
+        #
+        #     Note: The following fields are mutually exclusive: `xrai_attribution`, `sampled_shapley_attribution`, `integrated_gradients_attribution`, `examples`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] examples
         #   @return [::Google::Cloud::AIPlatform::V1::Examples]
         #     Example-based explanations that returns the nearest neighbors from the
         #     provided dataset.
+        #
+        #     Note: The following fields are mutually exclusive: `examples`, `sampled_shapley_attribution`, `integrated_gradients_attribution`, `xrai_attribution`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] top_k
         #   @return [::Integer]
         #     If populated, returns attributions for top K indices of outputs
@@ -382,6 +390,8 @@ module Google
         #     If the distribution is different per feature, set
         #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#feature_noise_sigma feature_noise_sigma}
         #     instead for each feature.
+        #
+        #     Note: The following fields are mutually exclusive: `noise_sigma`, `feature_noise_sigma`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] feature_noise_sigma
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureNoiseSigma]
         #     This is similar to
@@ -392,6 +402,8 @@ module Google
         #     is unset,
         #     {::Google::Cloud::AIPlatform::V1::SmoothGradConfig#noise_sigma noise_sigma}
         #     will be used for all features.
+        #
+        #     Note: The following fields are mutually exclusive: `feature_noise_sigma`, `noise_sigma`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] noisy_sample_count
         #   @return [::Integer]
         #     The number of gradient samples to use for
@@ -460,10 +472,14 @@ module Google
         #     same as {::Google::Cloud::AIPlatform::V1::Index#metadata metadata} and should
         #     match
         #     [NearestNeighborSearchConfig](https://cloud.google.com/vertex-ai/docs/explainable-ai/configuring-explanations-example-based#nearest-neighbor-search-config).
+        #
+        #     Note: The following fields are mutually exclusive: `nearest_neighbor_search_config`, `presets`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] presets
         #   @return [::Google::Cloud::AIPlatform::V1::Presets]
         #     Simplified preset configuration, which automatically sets configuration
         #     values based on the desired query speed-precision trade-off and modality.
+        #
+        #     Note: The following fields are mutually exclusive: `presets`, `nearest_neighbor_search_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] neighbor_count
         #   @return [::Integer]
         #     The number of neighbors to return when querying for examples.

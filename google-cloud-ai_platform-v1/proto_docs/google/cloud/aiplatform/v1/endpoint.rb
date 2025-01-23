@@ -172,15 +172,21 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::DedicatedResources]
         #     A description of resources that are dedicated to the DeployedModel, and
         #     that need a higher degree of manual configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `dedicated_resources`, `automatic_resources`, `shared_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] automatic_resources
         #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
         #     A description of resources that to large degree are decided by Vertex
         #     AI, and require only a modest additional configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic_resources`, `dedicated_resources`, `shared_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] shared_resources
         #   @return [::String]
         #     The resource name of the shared DeploymentResourcePool to deploy on.
         #     Format:
         #     `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+        #
+        #     Note: The following fields are mutually exclusive: `shared_resources`, `dedicated_resources`, `automatic_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] id
         #   @return [::String]
         #     Immutable. The ID of the DeployedModel. If not provided upon deployment,

@@ -393,6 +393,8 @@ module Google
         #       "text": "  <b>bold text</b>"
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image
         #   @return [::Google::Apps::Card::V1::Image]
         #     Displays an image.
@@ -405,6 +407,8 @@ module Google
         #       "altText": "Chat app avatar"
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `image`, `text_paragraph`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] decorated_text
         #   @return [::Google::Apps::Card::V1::DecoratedText]
         #     Displays a decorated text item.
@@ -427,6 +431,8 @@ module Google
         #       }
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `decorated_text`, `text_paragraph`, `image`, `button_list`, `text_input`, `selection_input`, `date_time_picker`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] button_list
         #   @return [::Google::Apps::Card::V1::ButtonList]
         #     A list of buttons.
@@ -461,6 +467,8 @@ module Google
         #       ]
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `button_list`, `text_paragraph`, `image`, `decorated_text`, `text_input`, `selection_input`, `date_time_picker`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_input
         #   @return [::Google::Apps::Card::V1::TextInput]
         #     Displays a text box that users can type into.
@@ -499,6 +507,8 @@ module Google
         #       }
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `text_input`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `selection_input`, `date_time_picker`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] selection_input
         #   @return [::Google::Apps::Card::V1::SelectionInput]
         #     Displays a selection control that lets users select items. Selection
@@ -536,6 +546,8 @@ module Google
         #       ]
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `selection_input`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `date_time_picker`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] date_time_picker
         #   @return [::Google::Apps::Card::V1::DateTimePicker]
         #     Displays a widget that lets users input a date, time, or date and time.
@@ -552,6 +564,8 @@ module Google
         #       "valueMsEpoch": "796435200000"
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `date_time_picker`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `divider`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] divider
         #   @return [::Google::Apps::Card::V1::Divider]
         #     Displays a horizontal line divider between widgets.
@@ -561,6 +575,8 @@ module Google
         #     "divider": {
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `divider`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`, `grid`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] grid
         #   @return [::Google::Apps::Card::V1::Grid]
         #     Displays a grid with a collection of items.
@@ -606,6 +622,8 @@ module Google
         #       }
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `grid`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`, `divider`, `columns`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] columns
         #   @return [::Google::Apps::Card::V1::Columns]
         #     Displays up to 2 columns.
@@ -645,6 +663,8 @@ module Google
         #       ]
         #     }
         #     ```
+        #
+        #     Note: The following fields are mutually exclusive: `columns`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`, `divider`, `grid`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] horizontal_alignment
         #   @return [::Google::Apps::Card::V1::Widget::HorizontalAlignment]
         #     Specifies whether widgets align to the left, right, or center of a column.
@@ -799,10 +819,14 @@ module Google
         # @!attribute [rw] button
         #   @return [::Google::Apps::Card::V1::Button]
         #     A button that a user can click to trigger an action.
+        #
+        #     Note: The following fields are mutually exclusive: `button`, `switch_control`, `end_icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] switch_control
         #   @return [::Google::Apps::Card::V1::DecoratedText::SwitchControl]
         #     A switch widget that a user can click to change its state and trigger an
         #     action.
+        #
+        #     Note: The following fields are mutually exclusive: `switch_control`, `button`, `end_icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] end_icon
         #   @return [::Google::Apps::Card::V1::Icon]
         #     An icon displayed after the text.
@@ -812,6 +836,8 @@ module Google
         #     and
         #     [custom](https://developers.google.com/workspace/chat/format-messages#customicons)
         #     icons.
+        #
+        #     Note: The following fields are mutually exclusive: `end_icon`, `button`, `switch_control`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DecoratedText
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1098,9 +1124,13 @@ module Google
         # @!attribute [rw] external_data_source
         #   @return [::Google::Apps::Card::V1::Action]
         #     An external data source, such as a relational data base.
+        #
+        #     Note: The following fields are mutually exclusive: `external_data_source`, `platform_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] platform_data_source
         #   @return [::Google::Apps::Card::V1::SelectionInput::PlatformDataSource]
         #     A data source from Google Workspace.
+        #
+        #     Note: The following fields are mutually exclusive: `platform_data_source`, `external_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SelectionInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1380,6 +1410,8 @@ module Google
         #
         #     For a full list of supported icons, see [built-in
         #     icons](https://developers.google.com/workspace/chat/format-messages#builtinicons).
+        #
+        #     Note: The following fields are mutually exclusive: `known_icon`, `icon_url`, `material_icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] icon_url
         #   @return [::String]
         #     Display a custom icon hosted at an HTTPS URL.
@@ -1392,6 +1424,8 @@ module Google
         #     ```
         #
         #     Supported file types include `.png` and `.jpg`.
+        #
+        #     Note: The following fields are mutually exclusive: `icon_url`, `known_icon`, `material_icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] material_icon
         #   @return [::Google::Apps::Card::V1::MaterialIcon]
         #     Display one of the [Google Material
@@ -1407,6 +1441,8 @@ module Google
         #     ```
         #
         #     [Google Chat apps](https://developers.google.com/workspace/chat):
+        #
+        #     Note: The following fields are mutually exclusive: `material_icon`, `known_icon`, `icon_url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] alt_text
         #   @return [::String]
         #     Optional. A description of the icon used for accessibility.
@@ -1776,24 +1812,38 @@ module Google
             # @!attribute [rw] text_paragraph
             #   @return [::Google::Apps::Card::V1::TextParagraph]
             #     {::Google::Apps::Card::V1::TextParagraph TextParagraph} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] image
             #   @return [::Google::Apps::Card::V1::Image]
             #     {::Google::Apps::Card::V1::Image Image} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `image`, `text_paragraph`, `decorated_text`, `button_list`, `text_input`, `selection_input`, `date_time_picker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] decorated_text
             #   @return [::Google::Apps::Card::V1::DecoratedText]
             #     {::Google::Apps::Card::V1::DecoratedText DecoratedText} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `decorated_text`, `text_paragraph`, `image`, `button_list`, `text_input`, `selection_input`, `date_time_picker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] button_list
             #   @return [::Google::Apps::Card::V1::ButtonList]
             #     {::Google::Apps::Card::V1::ButtonList ButtonList} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `button_list`, `text_paragraph`, `image`, `decorated_text`, `text_input`, `selection_input`, `date_time_picker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] text_input
             #   @return [::Google::Apps::Card::V1::TextInput]
             #     {::Google::Apps::Card::V1::TextInput TextInput} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `text_input`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `selection_input`, `date_time_picker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] selection_input
             #   @return [::Google::Apps::Card::V1::SelectionInput]
             #     {::Google::Apps::Card::V1::SelectionInput SelectionInput} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `selection_input`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `date_time_picker`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] date_time_picker
             #   @return [::Google::Apps::Card::V1::DateTimePicker]
             #     {::Google::Apps::Card::V1::DateTimePicker DateTimePicker} widget.
+            #
+            #     Note: The following fields are mutually exclusive: `date_time_picker`, `text_paragraph`, `image`, `decorated_text`, `button_list`, `text_input`, `selection_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Widgets
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1852,9 +1902,13 @@ module Google
         # @!attribute [rw] action
         #   @return [::Google::Apps::Card::V1::Action]
         #     If specified, an action is triggered by this `onClick`.
+        #
+        #     Note: The following fields are mutually exclusive: `action`, `open_link`, `open_dynamic_link_action`, `card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] open_link
         #   @return [::Google::Apps::Card::V1::OpenLink]
         #     If specified, this `onClick` triggers an open link action.
+        #
+        #     Note: The following fields are mutually exclusive: `open_link`, `action`, `open_dynamic_link_action`, `card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] open_dynamic_link_action
         #   @return [::Google::Apps::Card::V1::Action]
         #     An add-on triggers this action when the action needs to open a
@@ -1864,12 +1918,16 @@ module Google
         #
         #     [Google Workspace
         #     Add-ons](https://developers.google.com/workspace/add-ons):
+        #
+        #     Note: The following fields are mutually exclusive: `open_dynamic_link_action`, `action`, `open_link`, `card`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] card
         #   @return [::Google::Apps::Card::V1::Card]
         #     A new card is pushed to the card stack after clicking if specified.
         #
         #     [Google Workspace
         #     Add-ons](https://developers.google.com/workspace/add-ons):
+        #
+        #     Note: The following fields are mutually exclusive: `card`, `action`, `open_link`, `open_dynamic_link_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OnClick
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

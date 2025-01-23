@@ -50,12 +50,18 @@ module Google
         # @!attribute [rw] http_request
         #   @return [::Google::Cloud::ApigeeConnect::V1::HttpRequest]
         #     The HttpRequest proto.
+        #
+        #     Note: The following fields are mutually exclusive: `http_request`, `stream_info`, `action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] stream_info
         #   @return [::Google::Cloud::ApigeeConnect::V1::StreamInfo]
         #     The information of stream.
+        #
+        #     Note: The following fields are mutually exclusive: `stream_info`, `http_request`, `action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] action
         #   @return [::Google::Cloud::ApigeeConnect::V1::Action]
         #     The action taken by agent.
+        #
+        #     Note: The following fields are mutually exclusive: `action`, `http_request`, `stream_info`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Payload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

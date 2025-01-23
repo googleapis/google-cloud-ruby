@@ -115,9 +115,13 @@ module Google
         #     The public key for the Google default signing, encoded in PEM format. The
         #     signature was created using a private key which may be verified using
         #     this public key.
+        #
+        #     Note: The following fields are mutually exclusive: `google_public_key_pem`, `customer_kms_key_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] customer_kms_key_version
         #   @return [::String]
         #     The resource name of the customer CryptoKeyVersion used for signing.
+        #
+        #     Note: The following fields are mutually exclusive: `customer_kms_key_version`, `google_public_key_pem`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SignatureInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -201,9 +205,13 @@ module Google
         # @!attribute [rw] approve
         #   @return [::Google::Cloud::AccessApproval::V1::ApproveDecision]
         #     Access was approved.
+        #
+        #     Note: The following fields are mutually exclusive: `approve`, `dismiss`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dismiss
         #   @return [::Google::Cloud::AccessApproval::V1::DismissDecision]
         #     The request was dismissed.
+        #
+        #     Note: The following fields are mutually exclusive: `dismiss`, `approve`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ApprovalRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

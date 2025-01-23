@@ -145,9 +145,13 @@ module Google
         # @!attribute [rw] max_data_item_count
         #   @return [::Integer]
         #     Max number of human labeled DataItems.
+        #
+        #     Note: The following fields are mutually exclusive: `max_data_item_count`, `max_data_item_percentage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] max_data_item_percentage
         #   @return [::Integer]
         #     Max percent of total DataItems for human labeling.
+        #
+        #     Note: The following fields are mutually exclusive: `max_data_item_percentage`, `max_data_item_count`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sample_config
         #   @return [::Google::Cloud::AIPlatform::V1::SampleConfig]
         #     Active learning data sampling config. For every active learning labeling
