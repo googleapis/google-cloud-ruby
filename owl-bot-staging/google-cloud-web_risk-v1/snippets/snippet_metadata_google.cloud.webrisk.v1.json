@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-web_risk-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.webrisk.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "webrisk_v1_generated_WebRiskService_ComputeThreatListDiff_sync",
+      "title": "Snippet for the compute_threat_list_diff call in the WebRiskService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebRisk::V1::WebRiskService::Client#compute_threat_list_diff.",
+      "file": "web_risk_service/compute_threat_list_diff.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "compute_threat_list_diff",
+        "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client#compute_threat_list_diff",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebRisk::V1::ComputeThreatListDiffRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebRisk::V1::ComputeThreatListDiffResponse",
+        "client": {
+          "short_name": "WebRiskService::Client",
+          "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client"
+        },
+        "method": {
+          "short_name": "ComputeThreatListDiff",
+          "full_name": "google.cloud.webrisk.v1.WebRiskService.ComputeThreatListDiff",
+          "service": {
+            "short_name": "WebRiskService",
+            "full_name": "google.cloud.webrisk.v1.WebRiskService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "webrisk_v1_generated_WebRiskService_SearchUris_sync",
+      "title": "Snippet for the search_uris call in the WebRiskService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebRisk::V1::WebRiskService::Client#search_uris.",
+      "file": "web_risk_service/search_uris.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_uris",
+        "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client#search_uris",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebRisk::V1::SearchUrisRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebRisk::V1::SearchUrisResponse",
+        "client": {
+          "short_name": "WebRiskService::Client",
+          "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client"
+        },
+        "method": {
+          "short_name": "SearchUris",
+          "full_name": "google.cloud.webrisk.v1.WebRiskService.SearchUris",
+          "service": {
+            "short_name": "WebRiskService",
+            "full_name": "google.cloud.webrisk.v1.WebRiskService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "webrisk_v1_generated_WebRiskService_SearchHashes_sync",
+      "title": "Snippet for the search_hashes call in the WebRiskService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebRisk::V1::WebRiskService::Client#search_hashes.",
+      "file": "web_risk_service/search_hashes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_hashes",
+        "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client#search_hashes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebRisk::V1::SearchHashesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebRisk::V1::SearchHashesResponse",
+        "client": {
+          "short_name": "WebRiskService::Client",
+          "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client"
+        },
+        "method": {
+          "short_name": "SearchHashes",
+          "full_name": "google.cloud.webrisk.v1.WebRiskService.SearchHashes",
+          "service": {
+            "short_name": "WebRiskService",
+            "full_name": "google.cloud.webrisk.v1.WebRiskService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "webrisk_v1_generated_WebRiskService_CreateSubmission_sync",
+      "title": "Snippet for the create_submission call in the WebRiskService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebRisk::V1::WebRiskService::Client#create_submission.",
+      "file": "web_risk_service/create_submission.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_submission",
+        "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client#create_submission",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebRisk::V1::CreateSubmissionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebRisk::V1::Submission",
+        "client": {
+          "short_name": "WebRiskService::Client",
+          "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client"
+        },
+        "method": {
+          "short_name": "CreateSubmission",
+          "full_name": "google.cloud.webrisk.v1.WebRiskService.CreateSubmission",
+          "service": {
+            "short_name": "WebRiskService",
+            "full_name": "google.cloud.webrisk.v1.WebRiskService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "webrisk_v1_generated_WebRiskService_SubmitUri_sync",
+      "title": "Snippet for the submit_uri call in the WebRiskService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebRisk::V1::WebRiskService::Client#submit_uri.",
+      "file": "web_risk_service/submit_uri.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_uri",
+        "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client#submit_uri",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebRisk::V1::SubmitUriRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "WebRiskService::Client",
+          "full_name": "::Google::Cloud::WebRisk::V1::WebRiskService::Client"
+        },
+        "method": {
+          "short_name": "SubmitUri",
+          "full_name": "google.cloud.webrisk.v1.WebRiskService.SubmitUri",
+          "service": {
+            "short_name": "WebRiskService",
+            "full_name": "google.cloud.webrisk.v1.WebRiskService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
