@@ -1,0 +1,58 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.api.apikeys.v2",
+  "libraryPackage": "::Google::Cloud::ApiKeys::V2",
+  "services": {
+    "ApiKeys": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ApiKeys::V2::ApiKeys::Client",
+          "rpcs": {
+            "CreateKey": {
+              "methods": [
+                "create_key"
+              ]
+            },
+            "ListKeys": {
+              "methods": [
+                "list_keys"
+              ]
+            },
+            "GetKey": {
+              "methods": [
+                "get_key"
+              ]
+            },
+            "GetKeyString": {
+              "methods": [
+                "get_key_string"
+              ]
+            },
+            "UpdateKey": {
+              "methods": [
+                "update_key"
+              ]
+            },
+            "DeleteKey": {
+              "methods": [
+                "delete_key"
+              ]
+            },
+            "UndeleteKey": {
+              "methods": [
+                "undelete_key"
+              ]
+            },
+            "LookupKey": {
+              "methods": [
+                "lookup_key"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
