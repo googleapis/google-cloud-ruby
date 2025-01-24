@@ -746,11 +746,11 @@ module Google
         ##
         # @private
         def transaction_opt
-          read_only = \
+          read_only =
             Google::Cloud::Firestore::V1::TransactionOptions::ReadOnly.new \
               read_time: service.read_time_to_timestamp(@read_time)
 
-          read_write = \
+          read_write =
             Google::Cloud::Firestore::V1::TransactionOptions::ReadWrite.new
 
           if @previous_transaction
