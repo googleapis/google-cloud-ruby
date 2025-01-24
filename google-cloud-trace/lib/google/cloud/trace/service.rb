@@ -47,7 +47,7 @@ module Google
         def lowlevel_client
           return mocked_lowlevel_client if mocked_lowlevel_client
 
-          @lowlevel_client ||= \
+          @lowlevel_client ||=
             begin
               require "grpc"
               require "google/cloud/trace/patches/active_call_with_trace"
