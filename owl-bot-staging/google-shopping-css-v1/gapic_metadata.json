@@ -1,0 +1,105 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.css.v1",
+  "libraryPackage": "::Google::Shopping::Css::V1",
+  "services": {
+    "AccountsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Css::V1::AccountsService::Client",
+          "rpcs": {
+            "ListChildAccounts": {
+              "methods": [
+                "list_child_accounts"
+              ]
+            },
+            "GetAccount": {
+              "methods": [
+                "get_account"
+              ]
+            },
+            "UpdateLabels": {
+              "methods": [
+                "update_labels"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AccountLabelsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Css::V1::AccountLabelsService::Client",
+          "rpcs": {
+            "ListAccountLabels": {
+              "methods": [
+                "list_account_labels"
+              ]
+            },
+            "CreateAccountLabel": {
+              "methods": [
+                "create_account_label"
+              ]
+            },
+            "UpdateAccountLabel": {
+              "methods": [
+                "update_account_label"
+              ]
+            },
+            "DeleteAccountLabel": {
+              "methods": [
+                "delete_account_label"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CssProductInputsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Css::V1::CssProductInputsService::Client",
+          "rpcs": {
+            "InsertCssProductInput": {
+              "methods": [
+                "insert_css_product_input"
+              ]
+            },
+            "UpdateCssProductInput": {
+              "methods": [
+                "update_css_product_input"
+              ]
+            },
+            "DeleteCssProductInput": {
+              "methods": [
+                "delete_css_product_input"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CssProductsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Css::V1::CssProductsService::Client",
+          "rpcs": {
+            "GetCssProduct": {
+              "methods": [
+                "get_css_product"
+              ]
+            },
+            "ListCssProducts": {
+              "methods": [
+                "list_css_products"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
