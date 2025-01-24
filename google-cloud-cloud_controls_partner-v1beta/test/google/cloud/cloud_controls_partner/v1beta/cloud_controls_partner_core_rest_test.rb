@@ -522,6 +522,171 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::R
     end
   end
 
+  def test_create_customer
+    # Create test objects.
+    client_result = ::Google::Cloud::CloudControlsPartner::V1beta::Customer.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    customer = {}
+    customer_id = "hello world"
+
+    create_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Rest::ServiceStub.stub :transcode_create_customer_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_customer_client_stub do
+        # Create client
+        client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_customer({ parent: parent, customer: customer, customer_id: customer_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_customer parent: parent, customer: customer, customer_id: customer_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_customer ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_customer({ parent: parent, customer: customer, customer_id: customer_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_customer(::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_customer_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_customer
+    # Create test objects.
+    client_result = ::Google::Cloud::CloudControlsPartner::V1beta::Customer.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    customer = {}
+    update_mask = {}
+
+    update_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Rest::ServiceStub.stub :transcode_update_customer_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_customer_client_stub do
+        # Create client
+        client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_customer({ customer: customer, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_customer customer: customer, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_customer ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_customer({ customer: customer, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_customer(::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_customer_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_customer
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_customer_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Rest::ServiceStub.stub :transcode_delete_customer_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_customer_client_stub do
+        # Create client
+        client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_customer({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_customer name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_customer ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_customer({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_customer(::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_customer_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

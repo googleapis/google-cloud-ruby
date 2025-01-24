@@ -35,6 +35,10 @@ module Google
         # @!attribute [r] is_onboarded
         #   @return [::Boolean]
         #     Output only. Indicates whether a customer is fully onboarded
+        # @!attribute [r] organization_domain
+        #   @return [::String]
+        #     Output only. The customer organization domain, extracted from
+        #     CRM Organization’s display_name field. e.g. "google.com"
         class Customer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -76,6 +80,24 @@ module Google
         #   @return [::Array<::String>]
         #     Locations that could not be reached.
         class ListCustomersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to create a customer
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent resource
+        #     Format: `organizations/{organization}/locations/{location}`
+        # @!attribute [rw] customer
+        #   @return [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
+        #     Required. The customer to create.
+        # @!attribute [rw] customer_id
+        #   @return [::String]
+        #     Required. The customer id to use for the customer, which will become the
+        #     final component of the customer's resource name. The specified value must
+        #     be a valid Google cloud organization id.
+        class CreateCustomerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -127,6 +149,30 @@ module Google
             # Customer Environment
             CUSTOMER_ENVIRONMENT = 2
           end
+        end
+
+        # Request to update a customer
+        # @!attribute [rw] customer
+        #   @return [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
+        #     Required. The customer to update
+        #     Format:
+        #     `organizations/{organization}/locations/{location}/customers/{customer}`
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update
+        class UpdateCustomerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for deleting customer
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. name of the resource to be deleted
+        #     format: name=organizations/*/locations/*/customers/*
+        class DeleteCustomerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

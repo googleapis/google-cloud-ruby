@@ -567,6 +567,186 @@ class ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::C
     end
   end
 
+  def test_create_customer
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::CloudControlsPartner::V1beta::Customer.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    customer = {}
+    customer_id = "hello world"
+
+    create_customer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_customer, name
+      assert_kind_of ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::CloudControlsPartner::V1beta::Customer), request["customer"]
+      assert_equal "hello world", request["customer_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_customer_client_stub do
+      # Create client
+      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_customer({ parent: parent, customer: customer, customer_id: customer_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_customer parent: parent, customer: customer, customer_id: customer_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_customer ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_customer({ parent: parent, customer: customer, customer_id: customer_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_customer(::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new(parent: parent, customer: customer, customer_id: customer_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_customer_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_customer
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::CloudControlsPartner::V1beta::Customer.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    customer = {}
+    update_mask = {}
+
+    update_customer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_customer, name
+      assert_kind_of ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::CloudControlsPartner::V1beta::Customer), request["customer"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_customer_client_stub do
+      # Create client
+      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_customer({ customer: customer, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_customer customer: customer, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_customer ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_customer({ customer: customer, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_customer(::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new(customer: customer, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_customer_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_customer
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_customer_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_customer, name
+      assert_kind_of ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_customer_client_stub do
+      # Create client
+      client = ::Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_customer({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_customer name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_customer ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_customer({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_customer(::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_customer_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

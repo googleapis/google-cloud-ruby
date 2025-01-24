@@ -107,7 +107,7 @@ module Google
             # EKM Partner Thales
             THALES = 3
 
-            # EKM Partner Virtu
+            # This enum value is never used.
             VIRTRU = 4
           end
         end

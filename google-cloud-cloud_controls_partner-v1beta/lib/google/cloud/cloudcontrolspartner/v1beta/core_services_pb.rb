@@ -50,6 +50,12 @@ module Google
             rpc :ListAccessApprovalRequests, ::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsRequest, ::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsResponse
             # Get details of a Partner.
             rpc :GetPartner, ::Google::Cloud::CloudControlsPartner::V1beta::GetPartnerRequest, ::Google::Cloud::CloudControlsPartner::V1beta::Partner
+            # Creates a new customer.
+            rpc :CreateCustomer, ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest, ::Google::Cloud::CloudControlsPartner::V1beta::Customer
+            # Update details of a single customer
+            rpc :UpdateCustomer, ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest, ::Google::Cloud::CloudControlsPartner::V1beta::Customer
+            # Delete details of a single customer
+            rpc :DeleteCustomer, ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
