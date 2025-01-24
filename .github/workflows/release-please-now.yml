@@ -15,6 +15,10 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_PLEASE_DISABLE: ${{ secrets.RELEASE_PLEASE_DISABLE }}
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
