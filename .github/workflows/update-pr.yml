@@ -11,11 +11,15 @@ on:
         required: false
 
 jobs:
-  OwlBot:
+  UpdatePR:
     if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: write
+      packages: read
+      pull-requests: read
     steps:
     - name: Checkout repo
       uses: actions/checkout@v4
