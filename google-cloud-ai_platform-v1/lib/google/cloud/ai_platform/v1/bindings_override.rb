@@ -193,6 +193,14 @@ module Google
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/featureOnlineStores/[^/]+/featureViews/[^/]+/?$}, false]
                 ],
                 body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/ui/{resource}:getIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/featureGroups/[^/]+/?$}, false]
+                ],
+                body: nil
               )
             ]
             default_config.bindings_override["google.iam.v1.IAMPolicy.SetIamPolicy"] = [
@@ -300,6 +308,14 @@ module Google
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/featureOnlineStores/[^/]+/featureViews/[^/]+/?$}, false]
                 ],
                 body: "*"
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/ui/{resource}:setIamPolicy",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/featureGroups/[^/]+/?$}, false]
+                ],
+                body: "*"
               )
             ]
             default_config.bindings_override["google.iam.v1.IAMPolicy.TestIamPermissions"] = [
@@ -405,6 +421,14 @@ module Google
                 uri_template: "/ui/{resource}:testIamPermissions",
                 matches: [
                   ["resource", %r{^projects/[^/]+/locations/[^/]+/featureOnlineStores/[^/]+/featureViews/[^/]+/?$}, false]
+                ],
+                body: nil
+              ),
+              Gapic::Rest::GrpcTranscoder::HttpBinding.create_with_validation(
+                uri_method: :post,
+                uri_template: "/ui/{resource}:testIamPermissions",
+                matches: [
+                  ["resource", %r{^projects/[^/]+/locations/[^/]+/featureGroups/[^/]+/?$}, false]
                 ],
                 body: nil
               )
