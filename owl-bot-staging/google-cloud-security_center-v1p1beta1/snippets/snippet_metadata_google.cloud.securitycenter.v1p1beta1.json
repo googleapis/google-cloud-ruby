@@ -1,0 +1,935 @@
+{
+  "client_library": {
+    "name": "google-cloud-security_center-v1p1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.securitycenter.v1p1beta1",
+        "version": "v1p1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_CreateSource_sync",
+      "title": "Snippet for the create_source call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_source.",
+      "file": "security_center/create_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_source",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::Source",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateSource",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.CreateSource",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_CreateFinding_sync",
+      "title": "Snippet for the create_finding call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_finding.",
+      "file": "security_center/create_finding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_finding",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_finding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::CreateFindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::Finding",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateFinding",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.CreateFinding",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_CreateNotificationConfig_sync",
+      "title": "Snippet for the create_notification_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_notification_config.",
+      "file": "security_center/create_notification_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_notification_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#create_notification_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::CreateNotificationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "CreateNotificationConfig",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.CreateNotificationConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_DeleteNotificationConfig_sync",
+      "title": "Snippet for the delete_notification_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#delete_notification_config.",
+      "file": "security_center/delete_notification_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_notification_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#delete_notification_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::DeleteNotificationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "DeleteNotificationConfig",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.DeleteNotificationConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_GetIamPolicy_sync",
+      "title": "Snippet for the get_iam_policy call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_iam_policy.",
+      "file": "security_center/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.GetIamPolicy",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_GetNotificationConfig_sync",
+      "title": "Snippet for the get_notification_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_notification_config.",
+      "file": "security_center/get_notification_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_notification_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_notification_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::GetNotificationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetNotificationConfig",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.GetNotificationConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_GetOrganizationSettings_sync",
+      "title": "Snippet for the get_organization_settings call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_organization_settings.",
+      "file": "security_center/get_organization_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_organization_settings",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_organization_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::GetOrganizationSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetOrganizationSettings",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.GetOrganizationSettings",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_GetSource_sync",
+      "title": "Snippet for the get_source call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_source.",
+      "file": "security_center/get_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_source",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::Source",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GetSource",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.GetSource",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_GroupAssets_sync",
+      "title": "Snippet for the group_assets call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_assets.",
+      "file": "security_center/group_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "group_assets",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GroupAssets",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.GroupAssets",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_GroupFindings_sync",
+      "title": "Snippet for the group_findings call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_findings.",
+      "file": "security_center/group_findings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "group_findings",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_findings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::GroupFindingsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "GroupFindings",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.GroupFindings",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_ListAssets_sync",
+      "title": "Snippet for the list_assets call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_assets.",
+      "file": "security_center/list_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_assets",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListAssetsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListAssets",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.ListAssets",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_ListFindings_sync",
+      "title": "Snippet for the list_findings call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_findings.",
+      "file": "security_center/list_findings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_findings",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_findings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListFindingsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListFindings",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.ListFindings",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_ListNotificationConfigs_sync",
+      "title": "Snippet for the list_notification_configs call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_notification_configs.",
+      "file": "security_center/list_notification_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_notification_configs",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_notification_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListNotificationConfigsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListNotificationConfigs",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.ListNotificationConfigs",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_ListSources_sync",
+      "title": "Snippet for the list_sources call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_sources.",
+      "file": "security_center/list_sources.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sources",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#list_sources",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::ListSourcesResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "ListSources",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.ListSources",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_RunAssetDiscovery_sync",
+      "title": "Snippet for the run_asset_discovery call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#run_asset_discovery.",
+      "file": "security_center/run_asset_discovery.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_asset_discovery",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#run_asset_discovery",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::RunAssetDiscoveryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "RunAssetDiscovery",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.RunAssetDiscovery",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_SetFindingState_sync",
+      "title": "Snippet for the set_finding_state call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#set_finding_state.",
+      "file": "security_center/set_finding_state.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_finding_state",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#set_finding_state",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::SetFindingStateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::Finding",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "SetFindingState",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.SetFindingState",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_SetIamPolicy_sync",
+      "title": "Snippet for the set_iam_policy call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#set_iam_policy.",
+      "file": "security_center/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.SetIamPolicy",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_TestIamPermissions_sync",
+      "title": "Snippet for the test_iam_permissions call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#test_iam_permissions.",
+      "file": "security_center/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.TestIamPermissions",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_UpdateFinding_sync",
+      "title": "Snippet for the update_finding call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_finding.",
+      "file": "security_center/update_finding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_finding",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_finding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::UpdateFindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::Finding",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateFinding",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.UpdateFinding",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_UpdateNotificationConfig_sync",
+      "title": "Snippet for the update_notification_config call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_notification_config.",
+      "file": "security_center/update_notification_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_notification_config",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_notification_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::UpdateNotificationConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::NotificationConfig",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateNotificationConfig",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.UpdateNotificationConfig",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_UpdateOrganizationSettings_sync",
+      "title": "Snippet for the update_organization_settings call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_organization_settings.",
+      "file": "security_center/update_organization_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_organization_settings",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_organization_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::UpdateOrganizationSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::OrganizationSettings",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateOrganizationSettings",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.UpdateOrganizationSettings",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_UpdateSource_sync",
+      "title": "Snippet for the update_source call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_source.",
+      "file": "security_center/update_source.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_source",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_source",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSourceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::Source",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateSource",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.UpdateSource",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "securitycenter_v1p1beta1_generated_SecurityCenter_UpdateSecurityMarks_sync",
+      "title": "Snippet for the update_security_marks call in the SecurityCenter service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_security_marks.",
+      "file": "security_center/update_security_marks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_security_marks",
+        "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#update_security_marks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::SecurityCenter::V1p1beta1::UpdateSecurityMarksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityMarks",
+        "client": {
+          "short_name": "SecurityCenter::Client",
+          "full_name": "::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client"
+        },
+        "method": {
+          "short_name": "UpdateSecurityMarks",
+          "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter.UpdateSecurityMarks",
+          "service": {
+            "short_name": "SecurityCenter",
+            "full_name": "google.cloud.securitycenter.v1p1beta1.SecurityCenter"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
