@@ -63,11 +63,10 @@ describe "storage_soft_deleted_bucket" do
 
     # fetching a soft deleted bucket
 
-    # deleted_bucket_fetch = storage_client.bucket new_bucket_name, generation: new_generation, soft_deleted: true
-    # output, _err = capture_io do
-    #   get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
-    # end
-    # assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+    output, _err = capture_io do
+      get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
+    end
+    assert_includes output, "soft_delete_time for #{new_bucket_name} is"
     
     # restoring a soft deleted bucket
     restore_bucket bucket_name: new_bucket_name, generation: new_generation
