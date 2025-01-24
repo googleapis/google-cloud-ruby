@@ -962,6 +962,273 @@ module Google
             end
 
             ##
+            # Creates a new customer.
+            #
+            # @overload create_customer(request, options = nil)
+            #   Pass arguments to `create_customer` via a request object, either of type
+            #   {::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_customer(parent: nil, customer: nil, customer_id: nil)
+            #   Pass arguments to `create_customer` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent resource
+            #     Format: `organizations/{organization}/locations/{location}`
+            #   @param customer [::Google::Cloud::CloudControlsPartner::V1beta::Customer, ::Hash]
+            #     Required. The customer to create.
+            #   @param customer_id [::String]
+            #     Required. The customer id to use for the customer, which will become the
+            #     final component of the customer's resource name. The specified value must
+            #     be a valid Google cloud organization id.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_controls_partner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest.new
+            #
+            #   # Call the create_customer method.
+            #   result = client.create_customer request
+            #
+            #   # The returned object is of type Google::Cloud::CloudControlsPartner::V1beta::Customer.
+            #   p result
+            #
+            def create_customer request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudControlsPartner::V1beta::CreateCustomerRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_customer.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudControlsPartner::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_customer.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_customer.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_controls_partner_core_stub.call_rpc :create_customer, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update details of a single customer
+            #
+            # @overload update_customer(request, options = nil)
+            #   Pass arguments to `update_customer` via a request object, either of type
+            #   {::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_customer(customer: nil, update_mask: nil)
+            #   Pass arguments to `update_customer` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param customer [::Google::Cloud::CloudControlsPartner::V1beta::Customer, ::Hash]
+            #     Required. The customer to update
+            #     Format:
+            #     `organizations/{organization}/locations/{location}/customers/{customer}`
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. The list of fields to update
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CloudControlsPartner::V1beta::Customer]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_controls_partner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest.new
+            #
+            #   # Call the update_customer method.
+            #   result = client.update_customer request
+            #
+            #   # The returned object is of type Google::Cloud::CloudControlsPartner::V1beta::Customer.
+            #   p result
+            #
+            def update_customer request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudControlsPartner::V1beta::UpdateCustomerRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_customer.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudControlsPartner::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.customer&.name
+                header_params["customer.name"] = request.customer.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_customer.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_customer.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_controls_partner_core_stub.call_rpc :update_customer, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete details of a single customer
+            #
+            # @overload delete_customer(request, options = nil)
+            #   Pass arguments to `delete_customer` via a request object, either of type
+            #   {::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_customer(name: nil)
+            #   Pass arguments to `delete_customer` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. name of the resource to be deleted
+            #     format: name=organizations/*/locations/*/customers/*
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/cloud_controls_partner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CloudControlsPartner::V1beta::CloudControlsPartnerCore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest.new
+            #
+            #   # Call the delete_customer method.
+            #   result = client.delete_customer request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_customer request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CloudControlsPartner::V1beta::DeleteCustomerRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_customer.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CloudControlsPartner::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_customer.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_customer.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_controls_partner_core_stub.call_rpc :delete_customer, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CloudControlsPartnerCore API.
             #
             # This class represents the configuration for CloudControlsPartnerCore,
@@ -1160,6 +1427,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_partner
+                ##
+                # RPC-specific configuration for `create_customer`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_customer
+                ##
+                # RPC-specific configuration for `update_customer`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_customer
+                ##
+                # RPC-specific configuration for `delete_customer`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_customer
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1179,6 +1461,12 @@ module Google
                   @list_access_approval_requests = ::Gapic::Config::Method.new list_access_approval_requests_config
                   get_partner_config = parent_rpcs.get_partner if parent_rpcs.respond_to? :get_partner
                   @get_partner = ::Gapic::Config::Method.new get_partner_config
+                  create_customer_config = parent_rpcs.create_customer if parent_rpcs.respond_to? :create_customer
+                  @create_customer = ::Gapic::Config::Method.new create_customer_config
+                  update_customer_config = parent_rpcs.update_customer if parent_rpcs.respond_to? :update_customer
+                  @update_customer = ::Gapic::Config::Method.new update_customer_config
+                  delete_customer_config = parent_rpcs.delete_customer if parent_rpcs.respond_to? :delete_customer
+                  @delete_customer = ::Gapic::Config::Method.new delete_customer_config
 
                   yield self if block_given?
                 end
