@@ -1,0 +1,33 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.policysimulator.v1",
+  "libraryPackage": "::Google::Cloud::PolicySimulator::V1",
+  "services": {
+    "Simulator": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::PolicySimulator::V1::Simulator::Client",
+          "rpcs": {
+            "GetReplay": {
+              "methods": [
+                "get_replay"
+              ]
+            },
+            "CreateReplay": {
+              "methods": [
+                "create_replay"
+              ]
+            },
+            "ListReplayResults": {
+              "methods": [
+                "list_replay_results"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
