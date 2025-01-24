@@ -629,6 +629,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents token counting info for a single modality.
+        # @!attribute [rw] modality
+        #   @return [::Google::Cloud::AIPlatform::V1::Modality]
+        #     The modality associated with this token count.
+        # @!attribute [rw] token_count
+        #   @return [::Integer]
+        #     Number of tokens.
+        class ModalityTokenCount
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Harm categories that will block the content.
         module HarmCategory
           # The harm category is unspecified.
@@ -648,6 +660,27 @@ module Google
 
           # The harm category is civic integrity.
           HARM_CATEGORY_CIVIC_INTEGRITY = 5
+        end
+
+        # Content Part modality
+        module Modality
+          # Unspecified modality.
+          MODALITY_UNSPECIFIED = 0
+
+          # Plain text.
+          TEXT = 1
+
+          # Image.
+          IMAGE = 2
+
+          # Video.
+          VIDEO = 3
+
+          # Audio.
+          AUDIO = 4
+
+          # Document, e.g. PDF.
+          DOCUMENT = 5
         end
       end
     end
