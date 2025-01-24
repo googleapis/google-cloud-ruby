@@ -96,7 +96,7 @@ module Google
           # Default value, equivalent to `SYSTEM_ID_TOKEN`
           HTTP_AUTHORIZATION_HEADER_UNSPECIFIED = 0
 
-          # Send an ID token for the project-specific Google Workspace Add-ons system
+          # Send an ID token for the project-specific Google Workspace add-ons system
           # service account (default)
           SYSTEM_ID_TOKEN = 1
 
