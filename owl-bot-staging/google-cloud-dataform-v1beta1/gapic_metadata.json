@@ -1,0 +1,273 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.dataform.v1beta1",
+  "libraryPackage": "::Google::Cloud::Dataform::V1beta1",
+  "services": {
+    "Dataform": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataform::V1beta1::Dataform::Client",
+          "rpcs": {
+            "ListRepositories": {
+              "methods": [
+                "list_repositories"
+              ]
+            },
+            "GetRepository": {
+              "methods": [
+                "get_repository"
+              ]
+            },
+            "CreateRepository": {
+              "methods": [
+                "create_repository"
+              ]
+            },
+            "UpdateRepository": {
+              "methods": [
+                "update_repository"
+              ]
+            },
+            "DeleteRepository": {
+              "methods": [
+                "delete_repository"
+              ]
+            },
+            "CommitRepositoryChanges": {
+              "methods": [
+                "commit_repository_changes"
+              ]
+            },
+            "ReadRepositoryFile": {
+              "methods": [
+                "read_repository_file"
+              ]
+            },
+            "QueryRepositoryDirectoryContents": {
+              "methods": [
+                "query_repository_directory_contents"
+              ]
+            },
+            "FetchRepositoryHistory": {
+              "methods": [
+                "fetch_repository_history"
+              ]
+            },
+            "ComputeRepositoryAccessTokenStatus": {
+              "methods": [
+                "compute_repository_access_token_status"
+              ]
+            },
+            "FetchRemoteBranches": {
+              "methods": [
+                "fetch_remote_branches"
+              ]
+            },
+            "ListWorkspaces": {
+              "methods": [
+                "list_workspaces"
+              ]
+            },
+            "GetWorkspace": {
+              "methods": [
+                "get_workspace"
+              ]
+            },
+            "CreateWorkspace": {
+              "methods": [
+                "create_workspace"
+              ]
+            },
+            "DeleteWorkspace": {
+              "methods": [
+                "delete_workspace"
+              ]
+            },
+            "InstallNpmPackages": {
+              "methods": [
+                "install_npm_packages"
+              ]
+            },
+            "PullGitCommits": {
+              "methods": [
+                "pull_git_commits"
+              ]
+            },
+            "PushGitCommits": {
+              "methods": [
+                "push_git_commits"
+              ]
+            },
+            "FetchFileGitStatuses": {
+              "methods": [
+                "fetch_file_git_statuses"
+              ]
+            },
+            "FetchGitAheadBehind": {
+              "methods": [
+                "fetch_git_ahead_behind"
+              ]
+            },
+            "CommitWorkspaceChanges": {
+              "methods": [
+                "commit_workspace_changes"
+              ]
+            },
+            "ResetWorkspaceChanges": {
+              "methods": [
+                "reset_workspace_changes"
+              ]
+            },
+            "FetchFileDiff": {
+              "methods": [
+                "fetch_file_diff"
+              ]
+            },
+            "QueryDirectoryContents": {
+              "methods": [
+                "query_directory_contents"
+              ]
+            },
+            "MakeDirectory": {
+              "methods": [
+                "make_directory"
+              ]
+            },
+            "RemoveDirectory": {
+              "methods": [
+                "remove_directory"
+              ]
+            },
+            "MoveDirectory": {
+              "methods": [
+                "move_directory"
+              ]
+            },
+            "ReadFile": {
+              "methods": [
+                "read_file"
+              ]
+            },
+            "RemoveFile": {
+              "methods": [
+                "remove_file"
+              ]
+            },
+            "MoveFile": {
+              "methods": [
+                "move_file"
+              ]
+            },
+            "WriteFile": {
+              "methods": [
+                "write_file"
+              ]
+            },
+            "ListReleaseConfigs": {
+              "methods": [
+                "list_release_configs"
+              ]
+            },
+            "GetReleaseConfig": {
+              "methods": [
+                "get_release_config"
+              ]
+            },
+            "CreateReleaseConfig": {
+              "methods": [
+                "create_release_config"
+              ]
+            },
+            "UpdateReleaseConfig": {
+              "methods": [
+                "update_release_config"
+              ]
+            },
+            "DeleteReleaseConfig": {
+              "methods": [
+                "delete_release_config"
+              ]
+            },
+            "ListCompilationResults": {
+              "methods": [
+                "list_compilation_results"
+              ]
+            },
+            "GetCompilationResult": {
+              "methods": [
+                "get_compilation_result"
+              ]
+            },
+            "CreateCompilationResult": {
+              "methods": [
+                "create_compilation_result"
+              ]
+            },
+            "QueryCompilationResultActions": {
+              "methods": [
+                "query_compilation_result_actions"
+              ]
+            },
+            "ListWorkflowConfigs": {
+              "methods": [
+                "list_workflow_configs"
+              ]
+            },
+            "GetWorkflowConfig": {
+              "methods": [
+                "get_workflow_config"
+              ]
+            },
+            "CreateWorkflowConfig": {
+              "methods": [
+                "create_workflow_config"
+              ]
+            },
+            "UpdateWorkflowConfig": {
+              "methods": [
+                "update_workflow_config"
+              ]
+            },
+            "DeleteWorkflowConfig": {
+              "methods": [
+                "delete_workflow_config"
+              ]
+            },
+            "ListWorkflowInvocations": {
+              "methods": [
+                "list_workflow_invocations"
+              ]
+            },
+            "GetWorkflowInvocation": {
+              "methods": [
+                "get_workflow_invocation"
+              ]
+            },
+            "CreateWorkflowInvocation": {
+              "methods": [
+                "create_workflow_invocation"
+              ]
+            },
+            "DeleteWorkflowInvocation": {
+              "methods": [
+                "delete_workflow_invocation"
+              ]
+            },
+            "CancelWorkflowInvocation": {
+              "methods": [
+                "cancel_workflow_invocation"
+              ]
+            },
+            "QueryWorkflowInvocationActions": {
+              "methods": [
+                "query_workflow_invocation_actions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
