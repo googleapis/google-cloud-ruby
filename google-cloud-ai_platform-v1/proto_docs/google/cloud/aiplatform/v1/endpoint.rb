@@ -285,6 +285,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     System labels to apply to Model Garden deployments.
         #     System labels are managed by Google for internal use only.
+        # @!attribute [rw] speculative_decoding_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec]
+        #     Optional. Spec for configuring speculative decoding.
         class DeployedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -358,6 +361,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configurations (e.g. inference timeout) that are applied on your endpoints.
+        # @!attribute [rw] inference_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Customizable online prediction request timeout.
+        class ClientConnectionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration for faster model deployment.
         # @!attribute [rw] fast_tryout_enabled
         #   @return [::Boolean]
@@ -367,13 +379,47 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Configurations (e.g. inference timeout) that are applied on your endpoints.
-        # @!attribute [rw] inference_timeout
-        #   @return [::Google::Protobuf::Duration]
-        #     Customizable online prediction request timeout.
-        class ClientConnectionConfig
+        # Configuration for Speculative Decoding.
+        # @!attribute [rw] draft_model_speculation
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec::DraftModelSpeculation]
+        #     draft model speculation.
+        #
+        #     Note: The following fields are mutually exclusive: `draft_model_speculation`, `ngram_speculation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ngram_speculation
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec::NgramSpeculation]
+        #     N-Gram speculation.
+        #
+        #     Note: The following fields are mutually exclusive: `ngram_speculation`, `draft_model_speculation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] speculative_token_count
+        #   @return [::Integer]
+        #     The number of speculative tokens to generate at each step.
+        class SpeculativeDecodingSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Draft model speculation works by using the smaller model to generate
+          # candidate tokens for speculative decoding.
+          # @!attribute [rw] draft_model
+          #   @return [::String]
+          #     Required. The resource name of the draft model.
+          class DraftModelSpeculation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # N-Gram speculation works by trying to find matching tokens in the
+          # previous prompt sequence and use those as speculation for generating
+          # new tokens.
+          # @!attribute [rw] ngram_size
+          #   @return [::Integer]
+          #     The number of last N input tokens used as ngram to search/match
+          #     against the previous prompt sequence.
+          #     This is equal to the N in N-Gram.
+          #     The default value is 3 if not specified.
+          class NgramSpeculation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end
