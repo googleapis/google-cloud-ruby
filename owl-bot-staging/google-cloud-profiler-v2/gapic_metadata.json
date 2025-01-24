@@ -1,0 +1,47 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.cloudprofiler.v2",
+  "libraryPackage": "::Google::Cloud::Profiler::V2",
+  "services": {
+    "ProfilerService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Profiler::V2::ProfilerService::Client",
+          "rpcs": {
+            "CreateProfile": {
+              "methods": [
+                "create_profile"
+              ]
+            },
+            "CreateOfflineProfile": {
+              "methods": [
+                "create_offline_profile"
+              ]
+            },
+            "UpdateProfile": {
+              "methods": [
+                "update_profile"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ExportService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Profiler::V2::ExportService::Client",
+          "rpcs": {
+            "ListProfiles": {
+              "methods": [
+                "list_profiles"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
