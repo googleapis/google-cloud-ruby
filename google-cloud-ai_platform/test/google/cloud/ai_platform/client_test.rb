@@ -212,6 +212,25 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_gen_ai_cache_service_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.gen_ai_cache_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::GenAiCacheService::Client, client
+    end
+  end
+
+  def test_gen_ai_cache_service_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::AIPlatform.gen_ai_cache_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::GenAiCacheService::Rest::Client, client
+    end
+  end
+
   def test_gen_ai_tuning_service_grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -475,6 +494,44 @@ class Google::Cloud::AIPlatform::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::AIPlatform::V1::PipelineService::Rest::Client, client
+    end
+  end
+
+  def test_reasoning_engine_execution_service_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.reasoning_engine_execution_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Client, client
+    end
+  end
+
+  def test_reasoning_engine_execution_service_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::AIPlatform.reasoning_engine_execution_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::ReasoningEngineExecutionService::Rest::Client, client
+    end
+  end
+
+  def test_reasoning_engine_service_grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::AIPlatform.reasoning_engine_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Client, client
+    end
+  end
+
+  def test_reasoning_engine_service_rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::AIPlatform.reasoning_engine_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AIPlatform::V1::ReasoningEngineService::Rest::Client, client
     end
   end
 
