@@ -42,6 +42,7 @@ class Google::Cloud::DeveloperConnect::ClientConstructionMinitest < Minitest::Te
   end
 
   def test_developer_connect_grpc
+    skip unless Google::Cloud::DeveloperConnect.developer_connect_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::DeveloperConnect.developer_connect transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::DeveloperConnect::ClientConstructionMinitest < Minitest::Te
   end
 
   def test_developer_connect_rest
+    skip unless Google::Cloud::DeveloperConnect.developer_connect_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::DeveloperConnect.developer_connect transport: :rest do |config|
         config.credentials = :dummy_credentials
