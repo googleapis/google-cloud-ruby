@@ -41,6 +41,7 @@ class Google::Cloud::BeyondCorp::AppConnectors::ClientConstructionMinitest < Min
   end
 
   def test_app_connectors_service_grpc
+    skip unless Google::Cloud::BeyondCorp::AppConnectors.app_connectors_service_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::BeyondCorp::AppConnectors.app_connectors_service do |config|

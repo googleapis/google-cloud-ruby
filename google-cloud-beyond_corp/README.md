@@ -18,7 +18,10 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-beyond_corp-app_connections-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connections-v1/latest),
 [google-cloud-beyond_corp-app_connectors-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest),
+[google-cloud-beyond_corp-app_connectors-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connectors-v1/latest),
 [google-cloud-beyond_corp-app_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_gateways-v1/latest),
+[google-cloud-beyond_corp-app_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_gateways-v1/latest),
+[google-cloud-beyond_corp-client_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-client_gateways-v1/latest),
 [google-cloud-beyond_corp-client_gateways-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-client_gateways-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/beyondcorp/)
@@ -61,6 +64,11 @@ result in logs appearing on the console. When running on a Google Cloud hosting
 service such as [Google Cloud Run](https://cloud.google.com/run), this generally
 results in logs appearing alongside your application logs in the
 [Google Cloud Logging](https://cloud.google.com/logging/) service.
+
+Debug logging also requires that the versioned clients for this service be
+sufficiently recent, released after about Dec 10, 2024. If logging is not
+working, try updating the versioned clients in your bundle or installed gems:
+[google-cloud-beyond_corp-app_connections-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connections-v1/latest).
 
 ## Supported Ruby Versions
 
