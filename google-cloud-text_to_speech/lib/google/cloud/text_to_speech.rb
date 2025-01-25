@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the TextToSpeech service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::TextToSpeech.text_to_speech_available?}.
+      #
       # ## About TextToSpeech
       #
       # Service that implements Google Cloud Text-to-Speech API.
@@ -80,6 +85,37 @@ module Google
       end
 
       ##
+      # Determines whether the TextToSpeech service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::TextToSpeech.text_to_speech}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the TextToSpeech service,
+      # or if the versioned client gem needs an update to support the TextToSpeech service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.text_to_speech_available? version: :v1, transport: :grpc
+        require "google/cloud/text_to_speech/#{version.to_s.downcase}"
+        package_name = Google::Cloud::TextToSpeech
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::TextToSpeech.const_get package_name
+        return false unless service_module.const_defined? :TextToSpeech
+        service_module = service_module.const_get :TextToSpeech
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for TextToSpeechLongAudioSynthesize.
       #
       # By default, this returns an instance of
@@ -91,6 +127,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the TextToSpeechLongAudioSynthesize service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::TextToSpeech.text_to_speech_long_audio_synthesize_available?}.
       #
       # ## About TextToSpeechLongAudioSynthesize
       #
@@ -111,6 +152,37 @@ module Google
         service_module = Google::Cloud::TextToSpeech.const_get(package_name).const_get(:TextToSpeechLongAudioSynthesize)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the TextToSpeechLongAudioSynthesize service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::TextToSpeech.text_to_speech_long_audio_synthesize}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the TextToSpeechLongAudioSynthesize service,
+      # or if the versioned client gem needs an update to support the TextToSpeechLongAudioSynthesize service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.text_to_speech_long_audio_synthesize_available? version: :v1, transport: :grpc
+        require "google/cloud/text_to_speech/#{version.to_s.downcase}"
+        package_name = Google::Cloud::TextToSpeech
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::TextToSpeech.const_get package_name
+        return false unless service_module.const_defined? :TextToSpeechLongAudioSynthesize
+        service_module = service_module.const_get :TextToSpeechLongAudioSynthesize
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

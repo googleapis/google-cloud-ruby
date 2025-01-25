@@ -56,6 +56,11 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the CaseAttachmentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Support.case_attachment_service_available?}.
+      #
       # ## About CaseAttachmentService
       #
       # A service to manage file attachment for Google Cloud support cases.
@@ -76,6 +81,32 @@ module Google
       end
 
       ##
+      # Determines whether the CaseAttachmentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Support.case_attachment_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CaseAttachmentService service,
+      # or if the versioned client gem needs an update to support the CaseAttachmentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.case_attachment_service_available? version: :v2
+        require "google/cloud/support/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Support
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Support.const_get package_name
+        return false unless service_module.const_defined? :CaseAttachmentService
+        service_module = service_module.const_get :CaseAttachmentService
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for CaseService.
       #
       # By default, this returns an instance of
@@ -85,6 +116,11 @@ module Google
       # `version` parameter. If the CaseService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the CaseService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Support.case_service_available?}.
       #
       # ## About CaseService
       #
@@ -106,6 +142,32 @@ module Google
       end
 
       ##
+      # Determines whether the CaseService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Support.case_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CaseService service,
+      # or if the versioned client gem needs an update to support the CaseService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.case_service_available? version: :v2
+        require "google/cloud/support/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Support
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Support.const_get package_name
+        return false unless service_module.const_defined? :CaseService
+        service_module = service_module.const_get :CaseService
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for CommentService.
       #
       # By default, this returns an instance of
@@ -115,6 +177,11 @@ module Google
       # `version` parameter. If the CommentService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the CommentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Support.comment_service_available?}.
       #
       # ## About CommentService
       #
@@ -133,6 +200,32 @@ module Google
                        .first
         service_module = Google::Cloud::Support.const_get(package_name).const_get(:CommentService)
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the CommentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Support.comment_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CommentService service,
+      # or if the versioned client gem needs an update to support the CommentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.comment_service_available? version: :v2
+        require "google/cloud/support/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Support
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Support.const_get package_name
+        return false unless service_module.const_defined? :CommentService
+        service_module = service_module.const_get :CommentService
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##
