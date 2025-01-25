@@ -42,6 +42,7 @@ class Google::Cloud::PolicyTroubleshooter::ClientConstructionMinitest < Minitest
   end
 
   def test_iam_checker_grpc
+    skip unless Google::Cloud::PolicyTroubleshooter.iam_checker_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::PolicyTroubleshooter.iam_checker transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::PolicyTroubleshooter::ClientConstructionMinitest < Minitest
   end
 
   def test_iam_checker_rest
+    skip unless Google::Cloud::PolicyTroubleshooter.iam_checker_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::PolicyTroubleshooter.iam_checker transport: :rest do |config|
         config.credentials = :dummy_credentials
