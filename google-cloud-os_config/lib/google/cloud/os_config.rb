@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the OsConfigService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::OsConfig.os_config_service_available?}.
+      #
       # ## About OsConfigService
       #
       # OS Config API
@@ -83,6 +88,37 @@ module Google
       end
 
       ##
+      # Determines whether the OsConfigService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::OsConfig.os_config_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the OsConfigService service,
+      # or if the versioned client gem needs an update to support the OsConfigService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.os_config_service_available? version: :v1, transport: :grpc
+        require "google/cloud/os_config/#{version.to_s.downcase}"
+        package_name = Google::Cloud::OsConfig
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::OsConfig.const_get package_name
+        return false unless service_module.const_defined? :OsConfigService
+        service_module = service_module.const_get :OsConfigService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for OsConfigZonalService.
       #
       # By default, this returns an instance of
@@ -94,6 +130,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the OsConfigZonalService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::OsConfig.os_config_zonal_service_available?}.
       #
       # ## About OsConfigZonalService
       #
@@ -117,6 +158,37 @@ module Google
         service_module = Google::Cloud::OsConfig.const_get(package_name).const_get(:OsConfigZonalService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the OsConfigZonalService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::OsConfig.os_config_zonal_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the OsConfigZonalService service,
+      # or if the versioned client gem needs an update to support the OsConfigZonalService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.os_config_zonal_service_available? version: :v1, transport: :grpc
+        require "google/cloud/os_config/#{version.to_s.downcase}"
+        package_name = Google::Cloud::OsConfig
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::OsConfig.const_get package_name
+        return false unless service_module.const_defined? :OsConfigZonalService
+        service_module = service_module.const_get :OsConfigZonalService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

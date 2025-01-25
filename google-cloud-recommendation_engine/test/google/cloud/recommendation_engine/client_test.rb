@@ -42,6 +42,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_catalog_service_grpc
+    skip unless Google::Cloud::RecommendationEngine.catalog_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.catalog_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_catalog_service_rest
+    skip unless Google::Cloud::RecommendationEngine.catalog_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::RecommendationEngine.catalog_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_prediction_api_key_registry_grpc
+    skip unless Google::Cloud::RecommendationEngine.prediction_api_key_registry_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.prediction_api_key_registry transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_prediction_api_key_registry_rest
+    skip unless Google::Cloud::RecommendationEngine.prediction_api_key_registry_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::RecommendationEngine.prediction_api_key_registry transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_prediction_service_grpc
+    skip unless Google::Cloud::RecommendationEngine.prediction_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.prediction_service transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_prediction_service_rest
+    skip unless Google::Cloud::RecommendationEngine.prediction_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::RecommendationEngine.prediction_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_user_event_service_grpc
+    skip unless Google::Cloud::RecommendationEngine.user_event_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::RecommendationEngine.user_event_service transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest
   end
 
   def test_user_event_service_rest
+    skip unless Google::Cloud::RecommendationEngine.user_event_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::RecommendationEngine.user_event_service transport: :rest do |config|
         config.credentials = :dummy_credentials
