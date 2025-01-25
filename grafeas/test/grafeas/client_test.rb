@@ -41,6 +41,7 @@ class Grafeas::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_grafeas_grpc
+    skip unless Grafeas.grafeas_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Grafeas.grafeas do |config|
