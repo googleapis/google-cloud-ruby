@@ -42,6 +42,7 @@ class Google::Cloud::SecurityCenterManagement::ClientConstructionMinitest < Mini
   end
 
   def test_security_center_management_grpc
+    skip unless Google::Cloud::SecurityCenterManagement.security_center_management_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::SecurityCenterManagement.security_center_management transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::SecurityCenterManagement::ClientConstructionMinitest < Mini
   end
 
   def test_security_center_management_rest
+    skip unless Google::Cloud::SecurityCenterManagement.security_center_management_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::SecurityCenterManagement.security_center_management transport: :rest do |config|
         config.credentials = :dummy_credentials
