@@ -42,6 +42,7 @@ class Google::Maps::FleetEngine::Delivery::ClientConstructionMinitest < Minitest
   end
 
   def test_delivery_service_grpc
+    skip unless Google::Maps::FleetEngine::Delivery.delivery_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Maps::FleetEngine::Delivery.delivery_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Maps::FleetEngine::Delivery::ClientConstructionMinitest < Minitest
   end
 
   def test_delivery_service_rest
+    skip unless Google::Maps::FleetEngine::Delivery.delivery_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Maps::FleetEngine::Delivery.delivery_service transport: :rest do |config|
         config.credentials = :dummy_credentials
