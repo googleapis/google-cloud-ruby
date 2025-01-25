@@ -59,6 +59,11 @@ service such as [Google Cloud Run](https://cloud.google.com/run), this generally
 results in logs appearing alongside your application logs in the
 [Google Cloud Logging](https://cloud.google.com/logging/) service.
 
+Debug logging also requires that the versioned clients for this service be
+sufficiently recent, released after about Dec 10, 2024. If logging is not
+working, try updating the versioned clients in your bundle or installed gems:
+[google-analytics-data-v1beta](https://rubydoc.info/gems/google-analytics-data-v1beta).
+
 ## Supported Ruby Versions
 
 This library is supported on Ruby 2.7+.

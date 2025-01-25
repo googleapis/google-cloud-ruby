@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Applications service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.applications_available?}.
+      #
       # ## About Applications
       #
       # Manages App Engine applications.
@@ -80,6 +85,37 @@ module Google
       end
 
       ##
+      # Determines whether the Applications service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.applications}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Applications service,
+      # or if the versioned client gem needs an update to support the Applications service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.applications_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :Applications
+        service_module = service_module.const_get :Applications
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Services.
       #
       # By default, this returns an instance of
@@ -91,6 +127,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Services service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.services_available?}.
       #
       # ## About Services
       #
@@ -114,6 +155,37 @@ module Google
       end
 
       ##
+      # Determines whether the Services service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.services}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Services service,
+      # or if the versioned client gem needs an update to support the Services service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.services_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :Services
+        service_module = service_module.const_get :Services
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Versions.
       #
       # By default, this returns an instance of
@@ -125,6 +197,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Versions service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.versions_available?}.
       #
       # ## About Versions
       #
@@ -148,6 +225,37 @@ module Google
       end
 
       ##
+      # Determines whether the Versions service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.versions}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Versions service,
+      # or if the versioned client gem needs an update to support the Versions service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.versions_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :Versions
+        service_module = service_module.const_get :Versions
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Instances.
       #
       # By default, this returns an instance of
@@ -159,6 +267,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Instances service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.instances_available?}.
       #
       # ## About Instances
       #
@@ -182,6 +295,37 @@ module Google
       end
 
       ##
+      # Determines whether the Instances service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.instances}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Instances service,
+      # or if the versioned client gem needs an update to support the Instances service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.instances_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :Instances
+        service_module = service_module.const_get :Instances
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Firewall.
       #
       # By default, this returns an instance of
@@ -193,6 +337,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Firewall service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.firewall_available?}.
       #
       # ## About Firewall
       #
@@ -225,6 +374,37 @@ module Google
       end
 
       ##
+      # Determines whether the Firewall service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.firewall}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Firewall service,
+      # or if the versioned client gem needs an update to support the Firewall service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.firewall_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :Firewall
+        service_module = service_module.const_get :Firewall
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for AuthorizedDomains.
       #
       # By default, this returns an instance of
@@ -236,6 +416,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the AuthorizedDomains service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.authorized_domains_available?}.
       #
       # ## About AuthorizedDomains
       #
@@ -261,6 +446,37 @@ module Google
       end
 
       ##
+      # Determines whether the AuthorizedDomains service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.authorized_domains}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AuthorizedDomains service,
+      # or if the versioned client gem needs an update to support the AuthorizedDomains service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.authorized_domains_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :AuthorizedDomains
+        service_module = service_module.const_get :AuthorizedDomains
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for AuthorizedCertificates.
       #
       # By default, this returns an instance of
@@ -272,6 +488,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the AuthorizedCertificates service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.authorized_certificates_available?}.
       #
       # ## About AuthorizedCertificates
       #
@@ -296,6 +517,37 @@ module Google
       end
 
       ##
+      # Determines whether the AuthorizedCertificates service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.authorized_certificates}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AuthorizedCertificates service,
+      # or if the versioned client gem needs an update to support the AuthorizedCertificates service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.authorized_certificates_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :AuthorizedCertificates
+        service_module = service_module.const_get :AuthorizedCertificates
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for DomainMappings.
       #
       # By default, this returns an instance of
@@ -307,6 +559,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DomainMappings service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::AppEngine.domain_mappings_available?}.
       #
       # ## About DomainMappings
       #
@@ -327,6 +584,37 @@ module Google
         service_module = Google::Cloud::AppEngine.const_get(package_name).const_get(:DomainMappings)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the DomainMappings service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::AppEngine.domain_mappings}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DomainMappings service,
+      # or if the versioned client gem needs an update to support the DomainMappings service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.domain_mappings_available? version: :v1, transport: :grpc
+        require "google/cloud/app_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::AppEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::AppEngine.const_get package_name
+        return false unless service_module.const_defined? :DomainMappings
+        service_module = service_module.const_get :DomainMappings
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##
