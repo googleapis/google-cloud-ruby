@@ -41,6 +41,7 @@ class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_attached_clusters_grpc
+    skip unless Google::Cloud::GkeMultiCloud.attached_clusters_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeMultiCloud.attached_clusters do |config|
@@ -51,6 +52,7 @@ class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_aws_clusters_grpc
+    skip unless Google::Cloud::GkeMultiCloud.aws_clusters_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeMultiCloud.aws_clusters do |config|
@@ -61,6 +63,7 @@ class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_azure_clusters_grpc
+    skip unless Google::Cloud::GkeMultiCloud.azure_clusters_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeMultiCloud.azure_clusters do |config|

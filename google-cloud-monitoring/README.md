@@ -18,6 +18,8 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-monitoring-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest),
 [google-cloud-monitoring-dashboard-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest),
+[google-cloud-monitoring-dashboard-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-dashboard-v1/latest),
+[google-cloud-monitoring-metrics_scope-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest),
 [google-cloud-monitoring-metrics_scope-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-metrics_scope-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/monitoring)
@@ -68,6 +70,11 @@ result in logs appearing on the console. When running on a Google Cloud hosting
 service such as [Google Cloud Run](https://cloud.google.com/run), this generally
 results in logs appearing alongside your application logs in the
 [Google Cloud Logging](https://cloud.google.com/logging/) service.
+
+Debug logging also requires that the versioned clients for this service be
+sufficiently recent, released after about Dec 10, 2024. If logging is not
+working, try updating the versioned clients in your bundle or installed gems:
+[google-cloud-monitoring-v3](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest).
 
 ## Supported Ruby Versions
 
