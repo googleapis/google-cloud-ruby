@@ -59,6 +59,11 @@ module Google
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
         #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the KeyDashboardService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Kms::Inventory.key_dashboard_service_available?}.
+        #
         # ## About KeyDashboardService
         #
         # Provides a cross-region view of all Cloud KMS keys in a given Cloud project.
@@ -81,6 +86,37 @@ module Google
         end
 
         ##
+        # Determines whether the KeyDashboardService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Kms::Inventory.key_dashboard_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the KeyDashboardService service,
+        # or if the versioned client gem needs an update to support the KeyDashboardService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.key_dashboard_service_available? version: :v1, transport: :grpc
+          require "google/cloud/kms/inventory/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Kms::Inventory
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Kms::Inventory.const_get package_name
+          return false unless service_module.const_defined? :KeyDashboardService
+          service_module = service_module.const_get :KeyDashboardService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for KeyTrackingService.
         #
         # By default, this returns an instance of
@@ -92,6 +128,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the KeyTrackingService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Kms::Inventory.key_tracking_service_available?}.
         #
         # ## About KeyTrackingService
         #
@@ -113,6 +154,37 @@ module Google
           service_module = Google::Cloud::Kms::Inventory.const_get(package_name).const_get(:KeyTrackingService)
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the KeyTrackingService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Kms::Inventory.key_tracking_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the KeyTrackingService service,
+        # or if the versioned client gem needs an update to support the KeyTrackingService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.key_tracking_service_available? version: :v1, transport: :grpc
+          require "google/cloud/kms/inventory/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Kms::Inventory
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Kms::Inventory.const_get package_name
+          return false unless service_module.const_defined? :KeyTrackingService
+          service_module = service_module.const_get :KeyTrackingService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
         end
 
         ##
