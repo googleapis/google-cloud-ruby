@@ -41,6 +41,7 @@ class Google::Cloud::OracleDatabase::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_oracle_database_rest
+    skip unless Google::Cloud::OracleDatabase.oracle_database_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::OracleDatabase.oracle_database do |config|
         config.credentials = :dummy_credentials
