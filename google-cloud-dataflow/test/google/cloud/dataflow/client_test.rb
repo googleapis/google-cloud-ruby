@@ -42,6 +42,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_snapshots_grpc
+    skip unless Google::Cloud::Dataflow.snapshots_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.snapshots transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_snapshots_rest
+    skip unless Google::Cloud::Dataflow.snapshots_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataflow.snapshots transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_jobs_grpc
+    skip unless Google::Cloud::Dataflow.jobs_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.jobs transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_jobs_rest
+    skip unless Google::Cloud::Dataflow.jobs_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataflow.jobs transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_messages_grpc
+    skip unless Google::Cloud::Dataflow.messages_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.messages transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_messages_rest
+    skip unless Google::Cloud::Dataflow.messages_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataflow.messages transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_metrics_grpc
+    skip unless Google::Cloud::Dataflow.metrics_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.metrics transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_metrics_rest
+    skip unless Google::Cloud::Dataflow.metrics_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataflow.metrics transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -118,6 +126,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_templates_service_grpc
+    skip unless Google::Cloud::Dataflow.templates_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.templates_service transport: :grpc do |config|
@@ -128,6 +137,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_templates_service_rest
+    skip unless Google::Cloud::Dataflow.templates_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataflow.templates_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -137,6 +147,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_flex_templates_service_grpc
+    skip unless Google::Cloud::Dataflow.flex_templates_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataflow.flex_templates_service transport: :grpc do |config|
@@ -147,6 +158,7 @@ class Google::Cloud::Dataflow::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_flex_templates_service_rest
+    skip unless Google::Cloud::Dataflow.flex_templates_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataflow.flex_templates_service transport: :rest do |config|
         config.credentials = :dummy_credentials

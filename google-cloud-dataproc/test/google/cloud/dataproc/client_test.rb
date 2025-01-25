@@ -42,6 +42,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_autoscaling_policy_service_grpc
+    skip unless Google::Cloud::Dataproc.autoscaling_policy_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.autoscaling_policy_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_autoscaling_policy_service_rest
+    skip unless Google::Cloud::Dataproc.autoscaling_policy_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.autoscaling_policy_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_batch_controller_grpc
+    skip unless Google::Cloud::Dataproc.batch_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.batch_controller transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_batch_controller_rest
+    skip unless Google::Cloud::Dataproc.batch_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.batch_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cluster_controller_grpc
+    skip unless Google::Cloud::Dataproc.cluster_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.cluster_controller transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cluster_controller_rest
+    skip unless Google::Cloud::Dataproc.cluster_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.cluster_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_job_controller_grpc
+    skip unless Google::Cloud::Dataproc.job_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.job_controller transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_job_controller_rest
+    skip unless Google::Cloud::Dataproc.job_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.job_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -118,6 +126,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_node_group_controller_grpc
+    skip unless Google::Cloud::Dataproc.node_group_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.node_group_controller transport: :grpc do |config|
@@ -128,6 +137,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_node_group_controller_rest
+    skip unless Google::Cloud::Dataproc.node_group_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.node_group_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -137,6 +147,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_session_controller_grpc
+    skip unless Google::Cloud::Dataproc.session_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.session_controller transport: :grpc do |config|
@@ -147,6 +158,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_session_controller_rest
+    skip unless Google::Cloud::Dataproc.session_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.session_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -156,6 +168,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_session_template_controller_grpc
+    skip unless Google::Cloud::Dataproc.session_template_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.session_template_controller transport: :grpc do |config|
@@ -166,6 +179,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_session_template_controller_rest
+    skip unless Google::Cloud::Dataproc.session_template_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.session_template_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -175,6 +189,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_workflow_template_service_grpc
+    skip unless Google::Cloud::Dataproc.workflow_template_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Dataproc.workflow_template_service transport: :grpc do |config|
@@ -185,6 +200,7 @@ class Google::Cloud::Dataproc::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_workflow_template_service_rest
+    skip unless Google::Cloud::Dataproc.workflow_template_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Dataproc.workflow_template_service transport: :rest do |config|
         config.credentials = :dummy_credentials

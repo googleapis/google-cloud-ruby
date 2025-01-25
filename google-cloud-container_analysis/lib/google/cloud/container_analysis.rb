@@ -56,6 +56,11 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ContainerAnalysis service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ContainerAnalysis.container_analysis_available?}.
+      #
       # ## About ContainerAnalysis
       #
       # Retrieves analysis results of Cloud components such as Docker container
@@ -85,6 +90,32 @@ module Google
                        .first
         service_module = Google::Cloud::ContainerAnalysis.const_get(package_name).const_get(:ContainerAnalysis)
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ContainerAnalysis service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ContainerAnalysis.container_analysis}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ContainerAnalysis service,
+      # or if the versioned client gem needs an update to support the ContainerAnalysis service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.container_analysis_available? version: :v1
+        require "google/cloud/container_analysis/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ContainerAnalysis
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ContainerAnalysis.const_get package_name
+        return false unless service_module.const_defined? :ContainerAnalysis
+        service_module = service_module.const_get :ContainerAnalysis
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

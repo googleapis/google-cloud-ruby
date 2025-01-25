@@ -41,6 +41,7 @@ class Google::Cloud::Container::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cluster_manager_grpc
+    skip unless Google::Cloud::Container.cluster_manager_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Container.cluster_manager do |config|

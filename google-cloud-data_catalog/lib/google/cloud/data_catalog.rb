@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DataCatalog service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DataCatalog.data_catalog_available?}.
+      #
       # ## About DataCatalog
       #
       # Data Catalog API service allows you to discover, understand, and manage
@@ -81,6 +86,37 @@ module Google
       end
 
       ##
+      # Determines whether the DataCatalog service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DataCatalog.data_catalog}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DataCatalog service,
+      # or if the versioned client gem needs an update to support the DataCatalog service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.data_catalog_available? version: :v1, transport: :grpc
+        require "google/cloud/data_catalog/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DataCatalog
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DataCatalog.const_get package_name
+        return false unless service_module.const_defined? :DataCatalog
+        service_module = service_module.const_get :DataCatalog
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for PolicyTagManager.
       #
       # By default, this returns an instance of
@@ -92,6 +128,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the PolicyTagManager service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DataCatalog.policy_tag_manager_available?}.
       #
       # ## About PolicyTagManager
       #
@@ -120,6 +161,37 @@ module Google
       end
 
       ##
+      # Determines whether the PolicyTagManager service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DataCatalog.policy_tag_manager}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the PolicyTagManager service,
+      # or if the versioned client gem needs an update to support the PolicyTagManager service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.policy_tag_manager_available? version: :v1, transport: :grpc
+        require "google/cloud/data_catalog/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DataCatalog
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DataCatalog.const_get package_name
+        return false unless service_module.const_defined? :PolicyTagManager
+        service_module = service_module.const_get :PolicyTagManager
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for PolicyTagManagerSerialization.
       #
       # By default, this returns an instance of
@@ -131,6 +203,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the PolicyTagManagerSerialization service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DataCatalog.policy_tag_manager_serialization_available?}.
       #
       # ## About PolicyTagManagerSerialization
       #
@@ -154,6 +231,37 @@ module Google
         service_module = Google::Cloud::DataCatalog.const_get(package_name).const_get(:PolicyTagManagerSerialization)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the PolicyTagManagerSerialization service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DataCatalog.policy_tag_manager_serialization}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the PolicyTagManagerSerialization service,
+      # or if the versioned client gem needs an update to support the PolicyTagManagerSerialization service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.policy_tag_manager_serialization_available? version: :v1, transport: :grpc
+        require "google/cloud/data_catalog/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DataCatalog
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DataCatalog.const_get package_name
+        return false unless service_module.const_defined? :PolicyTagManagerSerialization
+        service_module = service_module.const_get :PolicyTagManagerSerialization
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##
