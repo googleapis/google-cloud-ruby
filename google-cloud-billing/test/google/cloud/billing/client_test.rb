@@ -42,6 +42,7 @@ class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cloud_billing_service_grpc
+    skip unless Google::Cloud::Billing.cloud_billing_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Billing.cloud_billing_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cloud_billing_service_rest
+    skip unless Google::Cloud::Billing.cloud_billing_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Billing.cloud_billing_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cloud_catalog_service_grpc
+    skip unless Google::Cloud::Billing.cloud_catalog_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Billing.cloud_catalog_service transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::Billing::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_cloud_catalog_service_rest
+    skip unless Google::Cloud::Billing.cloud_catalog_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Billing.cloud_catalog_service transport: :rest do |config|
         config.credentials = :dummy_credentials
