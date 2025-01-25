@@ -42,6 +42,7 @@ class Google::Cloud::ApigeeRegistry::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_provisioning_grpc
+    skip unless Google::Cloud::ApigeeRegistry.provisioning_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ApigeeRegistry.provisioning transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::ApigeeRegistry::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_provisioning_rest
+    skip unless Google::Cloud::ApigeeRegistry.provisioning_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApigeeRegistry.provisioning transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::ApigeeRegistry::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_registry_grpc
+    skip unless Google::Cloud::ApigeeRegistry.registry_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ApigeeRegistry.registry transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::ApigeeRegistry::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_registry_rest
+    skip unless Google::Cloud::ApigeeRegistry.registry_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApigeeRegistry.registry transport: :rest do |config|
         config.credentials = :dummy_credentials
