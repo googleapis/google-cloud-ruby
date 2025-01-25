@@ -41,6 +41,7 @@ class Google::Cloud::Monitoring::MetricsScope::ClientConstructionMinitest < Mini
   end
 
   def test_metrics_scopes_grpc
+    skip unless Google::Cloud::Monitoring::MetricsScope.metrics_scopes_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Monitoring::MetricsScope.metrics_scopes do |config|

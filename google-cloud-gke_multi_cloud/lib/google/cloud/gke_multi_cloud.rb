@@ -56,6 +56,11 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the AttachedClusters service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::GkeMultiCloud.attached_clusters_available?}.
+      #
       # ## About AttachedClusters
       #
       # The AttachedClusters API provides a single centrally managed service
@@ -78,6 +83,32 @@ module Google
       end
 
       ##
+      # Determines whether the AttachedClusters service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::GkeMultiCloud.attached_clusters}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AttachedClusters service,
+      # or if the versioned client gem needs an update to support the AttachedClusters service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.attached_clusters_available? version: :v1
+        require "google/cloud/gke_multi_cloud/#{version.to_s.downcase}"
+        package_name = Google::Cloud::GkeMultiCloud
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::GkeMultiCloud.const_get package_name
+        return false unless service_module.const_defined? :AttachedClusters
+        service_module = service_module.const_get :AttachedClusters
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for AwsClusters.
       #
       # By default, this returns an instance of
@@ -87,6 +118,11 @@ module Google
       # `version` parameter. If the AwsClusters service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the AwsClusters service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::GkeMultiCloud.aws_clusters_available?}.
       #
       # ## About AwsClusters
       #
@@ -109,6 +145,32 @@ module Google
       end
 
       ##
+      # Determines whether the AwsClusters service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::GkeMultiCloud.aws_clusters}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AwsClusters service,
+      # or if the versioned client gem needs an update to support the AwsClusters service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.aws_clusters_available? version: :v1
+        require "google/cloud/gke_multi_cloud/#{version.to_s.downcase}"
+        package_name = Google::Cloud::GkeMultiCloud
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::GkeMultiCloud.const_get package_name
+        return false unless service_module.const_defined? :AwsClusters
+        service_module = service_module.const_get :AwsClusters
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for AzureClusters.
       #
       # By default, this returns an instance of
@@ -118,6 +180,11 @@ module Google
       # `version` parameter. If the AzureClusters service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the AzureClusters service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::GkeMultiCloud.azure_clusters_available?}.
       #
       # ## About AzureClusters
       #
@@ -137,6 +204,32 @@ module Google
                        .first
         service_module = Google::Cloud::GkeMultiCloud.const_get(package_name).const_get(:AzureClusters)
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the AzureClusters service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::GkeMultiCloud.azure_clusters}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AzureClusters service,
+      # or if the versioned client gem needs an update to support the AzureClusters service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.azure_clusters_available? version: :v1
+        require "google/cloud/gke_multi_cloud/#{version.to_s.downcase}"
+        package_name = Google::Cloud::GkeMultiCloud
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::GkeMultiCloud.const_get package_name
+        return false unless service_module.const_defined? :AzureClusters
+        service_module = service_module.const_get :AzureClusters
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

@@ -41,6 +41,7 @@ class Google::Cloud::GkeConnect::Gateway::ClientConstructionMinitest < Minitest:
   end
 
   def test_gateway_control_rest
+    skip unless Google::Cloud::GkeConnect::Gateway.gateway_control_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::GkeConnect::Gateway.gateway_control do |config|
         config.credentials = :dummy_credentials
