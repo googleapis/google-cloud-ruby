@@ -41,6 +41,7 @@ class Google::Cloud::ServiceUsage::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_service_usage_grpc
+    skip unless Google::Cloud::ServiceUsage.service_usage_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceUsage.service_usage do |config|

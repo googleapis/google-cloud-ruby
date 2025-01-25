@@ -41,6 +41,7 @@ class Google::Cloud::SecretManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_secret_manager_service_grpc
+    skip unless Google::Cloud::SecretManager.secret_manager_service_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::SecretManager.secret_manager_service do |config|
