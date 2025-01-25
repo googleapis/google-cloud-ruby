@@ -41,6 +41,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_ad_unit_service_rest
+    skip unless Google::Ads::AdManager.ad_unit_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.ad_unit_service do |config|
         config.credentials = :dummy_credentials
@@ -50,6 +51,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_company_service_rest
+    skip unless Google::Ads::AdManager.company_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.company_service do |config|
         config.credentials = :dummy_credentials
@@ -59,6 +61,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_custom_field_service_rest
+    skip unless Google::Ads::AdManager.custom_field_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.custom_field_service do |config|
         config.credentials = :dummy_credentials
@@ -68,6 +71,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_custom_targeting_key_service_rest
+    skip unless Google::Ads::AdManager.custom_targeting_key_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.custom_targeting_key_service do |config|
         config.credentials = :dummy_credentials
@@ -77,6 +81,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_custom_targeting_value_service_rest
+    skip unless Google::Ads::AdManager.custom_targeting_value_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.custom_targeting_value_service do |config|
         config.credentials = :dummy_credentials
@@ -86,6 +91,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_entity_signals_mapping_service_rest
+    skip unless Google::Ads::AdManager.entity_signals_mapping_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.entity_signals_mapping_service do |config|
         config.credentials = :dummy_credentials
@@ -95,6 +101,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_network_service_rest
+    skip unless Google::Ads::AdManager.network_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.network_service do |config|
         config.credentials = :dummy_credentials
@@ -104,6 +111,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_order_service_rest
+    skip unless Google::Ads::AdManager.order_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.order_service do |config|
         config.credentials = :dummy_credentials
@@ -113,6 +121,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_placement_service_rest
+    skip unless Google::Ads::AdManager.placement_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.placement_service do |config|
         config.credentials = :dummy_credentials
@@ -122,6 +131,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_report_service_rest
+    skip unless Google::Ads::AdManager.report_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.report_service do |config|
         config.credentials = :dummy_credentials
@@ -131,6 +141,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_role_service_rest
+    skip unless Google::Ads::AdManager.role_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.role_service do |config|
         config.credentials = :dummy_credentials
@@ -140,6 +151,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_taxonomy_category_service_rest
+    skip unless Google::Ads::AdManager.taxonomy_category_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.taxonomy_category_service do |config|
         config.credentials = :dummy_credentials
@@ -149,6 +161,7 @@ class Google::Ads::AdManager::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_user_service_rest
+    skip unless Google::Ads::AdManager.user_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Ads::AdManager.user_service do |config|
         config.credentials = :dummy_credentials
