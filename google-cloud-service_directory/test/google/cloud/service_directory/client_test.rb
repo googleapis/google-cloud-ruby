@@ -42,6 +42,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
   end
 
   def test_lookup_service_grpc
+    skip unless Google::Cloud::ServiceDirectory.lookup_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceDirectory.lookup_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
   end
 
   def test_lookup_service_rest
+    skip unless Google::Cloud::ServiceDirectory.lookup_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ServiceDirectory.lookup_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
   end
 
   def test_registration_service_grpc
+    skip unless Google::Cloud::ServiceDirectory.registration_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceDirectory.registration_service transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::ServiceDirectory::ClientConstructionMinitest < Minitest::Te
   end
 
   def test_registration_service_rest
+    skip unless Google::Cloud::ServiceDirectory.registration_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ServiceDirectory.registration_service transport: :rest do |config|
         config.credentials = :dummy_credentials
