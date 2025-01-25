@@ -41,6 +41,11 @@ module Google
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
         #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the LocalInventoryService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Inventories.local_inventory_service_available?}.
+        #
         # ## About LocalInventoryService
         #
         # Service to manage local inventory for products
@@ -63,6 +68,37 @@ module Google
         end
 
         ##
+        # Determines whether the LocalInventoryService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Inventories.local_inventory_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the LocalInventoryService service,
+        # or if the versioned client gem needs an update to support the LocalInventoryService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.local_inventory_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/inventories/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Inventories
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Inventories.const_get package_name
+          return false unless service_module.const_defined? :LocalInventoryService
+          service_module = service_module.const_get :LocalInventoryService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for RegionalInventoryService.
         #
         # By default, this returns an instance of
@@ -74,6 +110,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the RegionalInventoryService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Inventories.regional_inventory_service_available?}.
         #
         # ## About RegionalInventoryService
         #
@@ -95,6 +136,37 @@ module Google
           service_module = Google::Shopping::Merchant::Inventories.const_get(package_name).const_get(:RegionalInventoryService)
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the RegionalInventoryService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Inventories.regional_inventory_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the RegionalInventoryService service,
+        # or if the versioned client gem needs an update to support the RegionalInventoryService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.regional_inventory_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/inventories/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Inventories
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Inventories.const_get package_name
+          return false unless service_module.const_defined? :RegionalInventoryService
+          service_module = service_module.const_get :RegionalInventoryService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
         end
       end
     end

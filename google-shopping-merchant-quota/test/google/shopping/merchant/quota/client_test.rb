@@ -42,6 +42,7 @@ class Google::Shopping::Merchant::Quota::ClientConstructionMinitest < Minitest::
   end
 
   def test_quota_service_grpc
+    skip unless Google::Shopping::Merchant::Quota.quota_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Quota.quota_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Shopping::Merchant::Quota::ClientConstructionMinitest < Minitest::
   end
 
   def test_quota_service_rest
+    skip unless Google::Shopping::Merchant::Quota.quota_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Quota.quota_service transport: :rest do |config|
         config.credentials = :dummy_credentials

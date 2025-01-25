@@ -40,6 +40,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the TripService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Maps::FleetEngine.trip_service_available?}.
+      #
       # ## About TripService
       #
       # Trip management service.
@@ -62,6 +67,37 @@ module Google
       end
 
       ##
+      # Determines whether the TripService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Maps::FleetEngine.trip_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the TripService service,
+      # or if the versioned client gem needs an update to support the TripService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.trip_service_available? version: :v1, transport: :grpc
+        require "google/maps/fleet_engine/#{version.to_s.downcase}"
+        package_name = Google::Maps::FleetEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Maps::FleetEngine.const_get package_name
+        return false unless service_module.const_defined? :TripService
+        service_module = service_module.const_get :TripService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for VehicleService.
       #
       # By default, this returns an instance of
@@ -73,6 +109,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the VehicleService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Maps::FleetEngine.vehicle_service_available?}.
       #
       # ## About VehicleService
       #
@@ -93,6 +134,37 @@ module Google
         service_module = Google::Maps::FleetEngine.const_get(package_name).const_get(:VehicleService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the VehicleService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Maps::FleetEngine.vehicle_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the VehicleService service,
+      # or if the versioned client gem needs an update to support the VehicleService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.vehicle_service_available? version: :v1, transport: :grpc
+        require "google/maps/fleet_engine/#{version.to_s.downcase}"
+        package_name = Google::Maps::FleetEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Maps::FleetEngine.const_get package_name
+        return false unless service_module.const_defined? :VehicleService
+        service_module = service_module.const_get :VehicleService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
     end
   end

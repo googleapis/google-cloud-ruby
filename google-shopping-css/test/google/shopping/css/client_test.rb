@@ -42,6 +42,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_accounts_service_grpc
+    skip unless Google::Shopping::Css.accounts_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Css.accounts_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_accounts_service_rest
+    skip unless Google::Shopping::Css.accounts_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Css.accounts_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_account_labels_service_grpc
+    skip unless Google::Shopping::Css.account_labels_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Css.account_labels_service transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_account_labels_service_rest
+    skip unless Google::Shopping::Css.account_labels_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Css.account_labels_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_css_product_inputs_service_grpc
+    skip unless Google::Shopping::Css.css_product_inputs_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Css.css_product_inputs_service transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_css_product_inputs_service_rest
+    skip unless Google::Shopping::Css.css_product_inputs_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Css.css_product_inputs_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_css_products_service_grpc
+    skip unless Google::Shopping::Css.css_products_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Css.css_products_service transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Shopping::Css::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_css_products_service_rest
+    skip unless Google::Shopping::Css.css_products_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Css.css_products_service transport: :rest do |config|
         config.credentials = :dummy_credentials

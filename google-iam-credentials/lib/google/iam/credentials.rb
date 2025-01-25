@@ -40,6 +40,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the IAMCredentials service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Iam::Credentials.iam_credentials_available?}.
+      #
       # ## About IAMCredentials
       #
       # A service account is a special type of Google account that belongs to your
@@ -67,6 +72,37 @@ module Google
         service_module = Google::Iam::Credentials.const_get(package_name).const_get(:IAMCredentials)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the IAMCredentials service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Iam::Credentials.iam_credentials}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the IAMCredentials service,
+      # or if the versioned client gem needs an update to support the IAMCredentials service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.iam_credentials_available? version: :v1, transport: :grpc
+        require "google/iam/credentials/#{version.to_s.downcase}"
+        package_name = Google::Iam::Credentials
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Iam::Credentials.const_get package_name
+        return false unless service_module.const_defined? :IAMCredentials
+        service_module = service_module.const_get :IAMCredentials
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
     end
   end
