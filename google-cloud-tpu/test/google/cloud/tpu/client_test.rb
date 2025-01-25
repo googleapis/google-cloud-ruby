@@ -41,6 +41,7 @@ class Google::Cloud::Tpu::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_tpu_grpc
+    skip unless Google::Cloud::Tpu.tpu_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Tpu.tpu do |config|

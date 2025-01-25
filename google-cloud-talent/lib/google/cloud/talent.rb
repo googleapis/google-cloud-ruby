@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the CompanyService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Talent.company_service_available?}.
+      #
       # ## About CompanyService
       #
       # A service that handles company management, including CRUD and enumeration.
@@ -80,6 +85,37 @@ module Google
       end
 
       ##
+      # Determines whether the CompanyService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Talent.company_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CompanyService service,
+      # or if the versioned client gem needs an update to support the CompanyService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.company_service_available? version: :v4, transport: :grpc
+        require "google/cloud/talent/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Talent
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Talent.const_get package_name
+        return false unless service_module.const_defined? :CompanyService
+        service_module = service_module.const_get :CompanyService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Completion.
       #
       # By default, this returns an instance of
@@ -91,6 +127,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Completion service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Talent.completion_available?}.
       #
       # ## About Completion
       #
@@ -114,6 +155,37 @@ module Google
       end
 
       ##
+      # Determines whether the Completion service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Talent.completion}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Completion service,
+      # or if the versioned client gem needs an update to support the Completion service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.completion_available? version: :v4, transport: :grpc
+        require "google/cloud/talent/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Talent
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Talent.const_get package_name
+        return false unless service_module.const_defined? :Completion
+        service_module = service_module.const_get :Completion
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for EventService.
       #
       # By default, this returns an instance of
@@ -125,6 +197,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the EventService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Talent.event_service_available?}.
       #
       # ## About EventService
       #
@@ -148,6 +225,37 @@ module Google
       end
 
       ##
+      # Determines whether the EventService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Talent.event_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the EventService service,
+      # or if the versioned client gem needs an update to support the EventService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.event_service_available? version: :v4, transport: :grpc
+        require "google/cloud/talent/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Talent
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Talent.const_get package_name
+        return false unless service_module.const_defined? :EventService
+        service_module = service_module.const_get :EventService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for JobService.
       #
       # By default, this returns an instance of
@@ -159,6 +267,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the JobService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Talent.job_service_available?}.
       #
       # ## About JobService
       #
@@ -182,6 +295,37 @@ module Google
       end
 
       ##
+      # Determines whether the JobService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Talent.job_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the JobService service,
+      # or if the versioned client gem needs an update to support the JobService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.job_service_available? version: :v4, transport: :grpc
+        require "google/cloud/talent/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Talent
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Talent.const_get package_name
+        return false unless service_module.const_defined? :JobService
+        service_module = service_module.const_get :JobService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for TenantService.
       #
       # By default, this returns an instance of
@@ -193,6 +337,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the TenantService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Talent.tenant_service_available?}.
       #
       # ## About TenantService
       #
@@ -213,6 +362,37 @@ module Google
         service_module = Google::Cloud::Talent.const_get(package_name).const_get(:TenantService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the TenantService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Talent.tenant_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the TenantService service,
+      # or if the versioned client gem needs an update to support the TenantService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.tenant_service_available? version: :v4, transport: :grpc
+        require "google/cloud/talent/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Talent
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Talent.const_get package_name
+        return false unless service_module.const_defined? :TenantService
+        service_module = service_module.const_get :TenantService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##
