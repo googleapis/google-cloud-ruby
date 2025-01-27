@@ -31,4 +31,3 @@ describe "Storage Quickstart" do
     assert_includes out, "@gs-project-accounts.iam.gserviceaccount.com"
   end
 end
-
