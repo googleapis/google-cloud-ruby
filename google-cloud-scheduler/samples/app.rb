@@ -19,6 +19,8 @@ $stdout.sync = true
 # [START cloudscheduler_app]
 require "sinatra"
 
+set :environment, :production
+
 # Define relative URI for job endpoint
 post "/log_payload" do
   # Log the request payload

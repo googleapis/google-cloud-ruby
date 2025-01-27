@@ -24,6 +24,7 @@ gem "sinatra"
 group :test do
   gem "google-style", "~> 1.25.1"
   gem "minitest", "~> 5.14"
+  gem "minitest-focus", "~> 1.4"
   gem "rack-test"
   gem "rake"
 end
