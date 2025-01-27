@@ -72,7 +72,8 @@ module Google
             return nil unless next?
             ensure_service!
             gapi = @service.list_buckets prefix: @prefix, token: @token,
-                                         max: @max, user_project: @user_project
+                                         max: @max, user_project: @user_project,
+                                         soft_deleted: @soft_deleted
             Bucket::List.from_gapi gapi, @service, @prefix, @max,
                                    user_project: @user_project
           end

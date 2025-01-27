@@ -124,6 +124,33 @@ describe "Buckets Snippets" do
   describe "storage_soft_deleted_bucket" do
     let(:new_bucket_name) { random_bucket_name }
 
+    it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
+      new_bucket = storage_client.create_bucket new_bucket_name
+      new_generation = new_bucket.generation
+      puts  storage_client.service_account_email
+      puts new_bucket.policy.roles
+
+      # ensuring bucket is created
+      assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
+
+      # fetching bucket
+      check_bucket = storage_client.bucket new_bucket_name
+      puts "new bucket name-- #{check_bucket.name}"
+      puts "new bucket generation-- #{check_bucket.generation}"
+
+      delete_bucket_helper new_bucket_name
+      # Check if the bucket is deleted
+      deleted_bucket = storage_client.bucket new_bucket_name
+      refute deleted_bucket, "Bucket #{new_bucket_name} should not exist"
+
+      # fetching a soft deleted bucket
+      output, _err = capture_io do
+        get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
+      end
+      assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+
+    end
+
     it "lists soft deleted buckets" do
       list_deleted_bucket, _err = capture_io do
         list_soft_deleted_buckets

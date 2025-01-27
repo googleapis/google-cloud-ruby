@@ -911,7 +911,7 @@ module Google
           headers = (options[:header] ||= {})
           headers["x-goog-#{source}encryption-algorithm"] = "AES256"
           headers["x-goog-#{source}encryption-key"] = Base64.strict_encode64 key
-          headers["x-goog-#{source}encryption-key-sha256"] = \
+          headers["x-goog-#{source}encryption-key-sha256"] =
             Base64.strict_encode64 key_sha256
           options
         end
