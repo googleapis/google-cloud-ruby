@@ -41,14 +41,20 @@ module Google
         #     Which HTTP method to use for the request.
         # @!attribute [rw] headers
         #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     HTTP request headers.
+        #
+        #     This map contains the header field names and values.
+        #
         #     The user can specify HTTP request headers to send with the job's
-        #     HTTP request. This map contains the header field names and
-        #     values. Repeated headers are not supported, but a header value can
-        #     contain commas. These headers represent a subset of the headers
-        #     that will accompany the job's HTTP request. Some HTTP request
-        #     headers will be ignored or replaced. A partial list of headers that
-        #     will be ignored or replaced is below:
-        #     - Host: This will be computed by Cloud Scheduler and derived from
+        #     HTTP request. Repeated headers are not supported, but a header value can
+        #     contain commas.
+        #
+        #     The following headers represent a subset of the headers
+        #     that accompany the job's HTTP request. Some HTTP request
+        #     headers are ignored or replaced. A partial list of headers that
+        #     are ignored or replaced is below:
+        #
+        #     * Host: This will be computed by Cloud Scheduler and derived from
         #     {::Google::Cloud::Scheduler::V1::HttpTarget#uri uri}.
         #     * `Content-Length`: This will be computed by Cloud Scheduler.
         #     * `User-Agent`: This will be set to `"Google-Cloud-Scheduler"`.
@@ -59,6 +65,15 @@ module Google
         #     * `X-CloudScheduler-ScheduleTime`: For Cloud Scheduler jobs specified in
         #     the unix-cron format, this header will contain the job schedule as an
         #     offset of UTC parsed according to RFC3339.
+        #
+        #     If the job has a {::Google::Cloud::Scheduler::V1::HttpTarget#body body} and the
+        #     following headers are not set by the user, Cloud Scheduler sets default
+        #     values:
+        #
+        #     * `Content-Type`: This will be set to `"application/octet-stream"`. You
+        #       can override this default by explicitly setting `Content-Type` to a
+        #       particular media type when creating the job. For example, you can set
+        #       `Content-Type` to `"application/json"`.
         #
         #     The total size of headers must be less than 80KB.
         # @!attribute [rw] body
@@ -148,20 +163,18 @@ module Google
         #     the unix-cron format, this header will contain the job schedule as an
         #     offset of UTC parsed according to RFC3339.
         #
-        #     If the job has an
-        #     {::Google::Cloud::Scheduler::V1::AppEngineHttpTarget#body body}, Cloud Scheduler
-        #     sets the following headers:
+        #     If the job has a {::Google::Cloud::Scheduler::V1::AppEngineHttpTarget#body body}
+        #     and the following headers are not set by the user, Cloud Scheduler sets
+        #     default values:
         #
-        #     * `Content-Type`: By default, the `Content-Type` header is set to
-        #       `"application/octet-stream"`. The default can be overridden by explictly
-        #       setting `Content-Type` to a particular media type when the job is
-        #       created.
-        #       For example, `Content-Type` can be set to `"application/json"`.
-        #     * `Content-Length`: This is computed by Cloud Scheduler. This value is
-        #       output only. It cannot be changed.
+        #     * `Content-Type`: This will be set to `"application/octet-stream"`. You
+        #       can override this default by explicitly setting `Content-Type` to a
+        #       particular media type when creating the job. For example, you can set
+        #       `Content-Type` to `"application/json"`.
         #
         #     The headers below are output only. They cannot be set or overridden:
         #
+        #     * `Content-Length`: This is computed by Cloud Scheduler.
         #     * `X-Google-*`: For Google internal use only.
         #     * `X-AppEngine-*`: For Google internal use only.
         #
