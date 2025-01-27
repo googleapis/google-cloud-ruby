@@ -1,0 +1,18 @@
+{
+    "api_id": "dlp.googleapis.com",
+    "api_shortname": "dlp",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dlp/latest",
+    "distribution_name": "google-cloud-dlp",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "dlp",
+    "name_pretty": "Cloud Data Loss Prevention (DLP) API",
+    "product_documentation": "https://cloud.google.com/dlp",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.",
+    "ruby-cloud-env-prefix": "DLP",
+    "ruby-cloud-product-url": "https://cloud.google.com/dlp",
+    "library_type": "GAPIC_AUTO"
+}
