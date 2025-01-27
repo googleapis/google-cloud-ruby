@@ -5178,7 +5178,7 @@ module Google
         # @!attribute [r] network
         #   @return [::String]
         #     Output only. The relative name of the Google Compute Engine
-        #     {::Google::Cloud::Container::V1beta1::NetworkConfig#network network}(https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
+        #     [network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks)
         #     to which the cluster is connected. Example:
         #     projects/my-project/global/networks/my-network
         # @!attribute [r] subnetwork
