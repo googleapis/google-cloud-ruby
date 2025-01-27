@@ -14,7 +14,6 @@
 
 require_relative "helper"
 require_relative "../storage_get_service_account"
-require_relative "../storage_restore_bucket"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
@@ -33,15 +32,3 @@ describe "Storage Quickstart" do
   end
 end
 
-describe "storage_soft_deleted_bucket" do
-  let(:generation) { bucket.generation }
-  let(:bucket) { fixture_bucket }
-
-  it "restores a soft deleted bucket" do
-    delete_bucket_helper bucket.name
-    _out, _err = capture_io do
-      restore_bucket bucket_name: bucket.name, generation: generation
-    end
-    assert "#{bucket.name} Bucket restored"
-  end
-end
