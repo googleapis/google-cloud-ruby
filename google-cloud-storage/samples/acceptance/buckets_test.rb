@@ -127,7 +127,7 @@ describe "Buckets Snippets" do
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
       new_bucket = storage_client.create_bucket new_bucket_name
       new_generation = new_bucket.generation
-      puts  storage_client.service_account_email
+      puts storage_client.service_account_email
       puts new_bucket.policy.roles
 
       # ensuring bucket is created
@@ -148,7 +148,6 @@ describe "Buckets Snippets" do
         get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
       end
       assert_includes output, "soft_delete_time for #{new_bucket_name} is"
-
     end
 
     it "lists soft deleted buckets" do

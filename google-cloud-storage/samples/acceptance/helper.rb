@@ -88,7 +88,6 @@ def get_kms_key project_id
   end
 end
 
-
 def delete_hmac_key_helper hmac_key
   hmac_key.refresh!
   return if hmac_key.deleted?
