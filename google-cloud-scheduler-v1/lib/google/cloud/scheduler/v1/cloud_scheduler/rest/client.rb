@@ -253,11 +253,7 @@ module Google
               #     request the next page of results, page_token must be the value of
               #     {::Google::Cloud::Scheduler::V1::ListJobsResponse#next_page_token next_page_token}
               #     returned from the previous call to
-              #     {::Google::Cloud::Scheduler::V1::CloudScheduler::Rest::Client#list_jobs ListJobs}. It is an
-              #     error to switch the value of
-              #     [filter][google.cloud.scheduler.v1.ListJobsRequest.filter] or
-              #     [order_by][google.cloud.scheduler.v1.ListJobsRequest.order_by] while
-              #     iterating through pages.
+              #     {::Google::Cloud::Scheduler::V1::CloudScheduler::Rest::Client#list_jobs ListJobs}.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Scheduler::V1::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

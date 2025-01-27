@@ -91,7 +91,11 @@ module Google
         #     If {::Google::Cloud::Scheduler::V1::RetryConfig#retry_count retry_count} > 0 and
         #     a job attempt fails, the job will be tried a total of
         #     {::Google::Cloud::Scheduler::V1::RetryConfig#retry_count retry_count} times,
-        #     with exponential backoff, until the next scheduled start time.
+        #     with exponential backoff, until the next scheduled start time. If
+        #     retry_count is 0, a job attempt will not be retried if it fails. Instead
+        #     the Cloud Scheduler system will wait for the next scheduled execution time.
+        #     Setting retry_count to 0 does not prevent failed jobs from running
+        #     according to schedule after the failure.
         # @!attribute [rw] time_zone
         #   @return [::String]
         #     Specifies the time zone to be used in interpreting
@@ -104,21 +108,21 @@ module Google
         #     determined by the chosen tz. For UTC use the string "utc". If a
         #     time zone is not specified, the default will be in UTC (also known
         #     as GMT).
-        # @!attribute [rw] user_update_time
+        # @!attribute [r] user_update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time of the job.
-        # @!attribute [rw] state
+        # @!attribute [r] state
         #   @return [::Google::Cloud::Scheduler::V1::Job::State]
         #     Output only. State of the job.
-        # @!attribute [rw] status
+        # @!attribute [r] status
         #   @return [::Google::Rpc::Status]
         #     Output only. The response from the target for the last attempted execution.
-        # @!attribute [rw] schedule_time
+        # @!attribute [r] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The next time the job is scheduled. Note that this may be a
         #     retry of a previously failed attempt or the next execution time
         #     according to the schedule.
-        # @!attribute [rw] last_attempt_time
+        # @!attribute [r] last_attempt_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the last job attempt started.
         # @!attribute [rw] retry_config
@@ -192,9 +196,10 @@ module Google
         #
         #     The default value of retry_count is zero.
         #
-        #     If retry_count is zero, a job attempt will *not* be retried if
+        #     If retry_count is 0, a job attempt will not be retried if
         #     it fails. Instead the Cloud Scheduler system will wait for the
-        #     next scheduled execution time.
+        #     next scheduled execution time. Setting retry_count to 0 does not prevent
+        #     failed jobs from running according to schedule after the failure.
         #
         #     If retry_count is set to a non-zero number then Cloud Scheduler
         #     will retry failed attempts, using exponential backoff,
@@ -239,7 +244,7 @@ module Google
         #     {::Google::Cloud::Scheduler::V1::RetryConfig#min_backoff_duration min_backoff_duration}
         #     is 10s,
         #     {::Google::Cloud::Scheduler::V1::RetryConfig#max_backoff_duration max_backoff_duration}
-        #     is 300s, and `max_doublings` is 3, then the a job will first be retried in
+        #     is 300s, and `max_doublings` is 3, then the job will first be retried in
         #     10s. The retry interval will double three times, and then increase linearly
         #     by 2^3 * 10s.  Finally, the job will retry at intervals of
         #     {::Google::Cloud::Scheduler::V1::RetryConfig#max_backoff_duration max_backoff_duration}
