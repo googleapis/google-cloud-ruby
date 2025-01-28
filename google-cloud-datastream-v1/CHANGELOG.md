@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.13.0 (2025-01-28)
+
+#### Features
+
+* Support SSL configuration for a PostgreSQL connection ([#28247](https://github.com/googleapis/google-cloud-ruby/issues/28247)) 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.12.0 (2024-12-10)
 
 #### Features
