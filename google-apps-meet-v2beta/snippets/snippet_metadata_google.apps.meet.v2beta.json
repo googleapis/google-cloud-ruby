@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-apps-meet-v2beta",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
