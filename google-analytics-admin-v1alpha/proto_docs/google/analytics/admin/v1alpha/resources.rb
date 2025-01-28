@@ -53,7 +53,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A resource message representing a Google Analytics GA4 property.
+        # A resource message representing a Google Analytics property.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name of this property.
@@ -234,7 +234,7 @@ module Google
           end
         end
 
-        # A link between a GA4 property and a Firebase project.
+        # A link between a Google Analytics property and a Firebase project.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Example format: properties/1234/firebaseLinks/5678
@@ -271,7 +271,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between a GA4 property and a Google Ads account.
+        # A link between a Google Analytics property and a Google Ads account.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Format:
@@ -337,7 +337,7 @@ module Google
         end
 
         # A virtual resource representing an overview of an account and
-        # all its child GA4 properties.
+        # all its child Google Analytics properties.
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource name for this account summary.
@@ -359,7 +359,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A virtual resource representing metadata for a GA4 property.
+        # A virtual resource representing metadata for a Google Analytics property.
         # @!attribute [rw] property
         #   @return [::String]
         #     Resource name of property referred to by this property summary
@@ -504,7 +504,7 @@ module Google
         # Event setting conditions to match an event.
         # @!attribute [rw] event_name
         #   @return [::String]
-        #     Required. Name of the GA4 event. It must always be set.
+        #     Required. Name of the Google Analytics event. It must always be set.
         #     The max allowed display name length is 40 UTF-16 code units.
         # @!attribute [rw] min_event_count
         #   @return [::Integer]
@@ -717,7 +717,8 @@ module Google
           end
         end
 
-        # A link between a GA4 property and a Display & Video 360 advertiser.
+        # A link between a Google Analytics property and a Display & Video 360
+        # advertiser.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for this DisplayVideo360AdvertiserLink
@@ -738,23 +739,23 @@ module Google
         # @!attribute [rw] campaign_data_sharing_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Immutable. Enables the import of campaign data from Display & Video 360
-        #     into the GA4 property. After link creation, this can only be updated from
-        #     the Display & Video 360 product. If this field is not set on create, it
-        #     will be defaulted to true.
+        #     into the Google Analytics property. After link creation, this can only be
+        #     updated from the Display & Video 360 product. If this field is not set on
+        #     create, it will be defaulted to true.
         # @!attribute [rw] cost_data_sharing_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Immutable. Enables the import of cost data from Display & Video 360 into
-        #     the GA4 property. This can only be enabled if campaign_data_sharing_enabled
-        #     is enabled. After link creation, this can only be updated from the Display
-        #     & Video 360 product. If this field is not set on create, it will be
-        #     defaulted to true.
+        #     the Google Analytics property. This can only be enabled if
+        #     `campaign_data_sharing_enabled` is true. After link creation, this can
+        #     only be updated from the Display & Video 360 product. If this field is not
+        #     set on create, it will be defaulted to true.
         class DisplayVideo360AdvertiserLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A proposal for a link between a GA4 property and a Display & Video 360
-        # advertiser.
+        # A proposal for a link between a Google Analytics property and a Display &
+        # Video 360 advertiser.
         #
         # A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
         # Google Analytics admins approve inbound proposals while Display & Video 360
@@ -802,7 +803,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between a GA4 property and a Search Ads 360 entity.
+        # A link between a Google Analytics property and a Search Ads 360 entity.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for this SearchAds360Link resource.
@@ -816,16 +817,16 @@ module Google
         # @!attribute [rw] campaign_data_sharing_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Immutable. Enables the import of campaign data from Search Ads 360 into the
-        #     GA4 property. After link creation, this can only be updated from the Search
-        #     Ads 360 product.
-        #     If this field is not set on create, it will be defaulted to true.
+        #     Google Analytics property. After link creation, this can only be updated
+        #     from the Search Ads 360 product. If this field is not set on create, it
+        #     will be defaulted to true.
         # @!attribute [rw] cost_data_sharing_enabled
         #   @return [::Google::Protobuf::BoolValue]
-        #     Immutable. Enables the import of cost data from Search Ads 360 to the GA4
-        #     property. This can only be enabled if campaign_data_sharing_enabled is
-        #     enabled. After link creation, this can only be updated from
-        #     the Search Ads 360 product.
-        #     If this field is not set on create, it will be defaulted to true.
+        #     Immutable. Enables the import of cost data from Search Ads 360 to the
+        #     Google Analytics property. This can only be enabled if
+        #     campaign_data_sharing_enabled is enabled. After link creation, this can
+        #     only be updated from the Search Ads 360 product. If this field is not set
+        #     on create, it will be defaulted to true.
         # @!attribute [r] advertiser_display_name
         #   @return [::String]
         #     Output only. The display name of the Search Ads 360 Advertiser.
@@ -1272,7 +1273,10 @@ module Google
         #     Format: properties/\\{property}/dataRetentionSettings
         # @!attribute [rw] event_data_retention
         #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings::RetentionDuration]
-        #     The length of time that event-level data is retained.
+        #     Required. The length of time that event-level data is retained.
+        # @!attribute [rw] user_data_retention
+        #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings::RetentionDuration]
+        #     Required. The length of time that user-level data is retained.
         # @!attribute [rw] reset_user_data_on_new_activity
         #   @return [::Boolean]
         #     If true, reset the retention period for the user identifier with every
@@ -1293,15 +1297,15 @@ module Google
             FOURTEEN_MONTHS = 3
 
             # The data retention time duration is 26 months.
-            # Available to 360 properties only.
+            # Available to 360 properties only. Available for event data only.
             TWENTY_SIX_MONTHS = 4
 
             # The data retention time duration is 38 months.
-            # Available to 360 properties only.
+            # Available to 360 properties only. Available for event data only.
             THIRTY_EIGHT_MONTHS = 5
 
             # The data retention time duration is 50 months.
-            # Available to 360 properties only.
+            # Available to 360 properties only. Available for event data only.
             FIFTY_MONTHS = 6
           end
         end
@@ -1447,7 +1451,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between a GA4 Property and BigQuery project.
+        # A link between a Google Analytics property and BigQuery project.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name of this BigQuery link.
@@ -1598,7 +1602,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between a GA4 Property and an AdSense for Content ad client.
+        # A link between a Google Analytics property and an AdSense for Content ad
+        # client.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for this AdSense Link resource.
@@ -1606,8 +1611,8 @@ module Google
         #     Example: properties/1234/adSenseLinks/6789
         # @!attribute [rw] ad_client_code
         #   @return [::String]
-        #     Immutable. The AdSense ad client code that the GA4 property is linked to.
-        #     Example format: "ca-pub-1234567890"
+        #     Immutable. The AdSense ad client code that the Google Analytics property is
+        #     linked to. Example format: "ca-pub-1234567890"
         class AdSenseLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1910,18 +1915,18 @@ module Google
           OBSOLETE = 6
         end
 
-        # Types of Property resources.
+        # Types of `Property` resources.
         module PropertyType
           # Unknown or unspecified property type
           PROPERTY_TYPE_UNSPECIFIED = 0
 
-          # Ordinary GA4 property
+          # Ordinary Google Analytics property
           PROPERTY_TYPE_ORDINARY = 1
 
-          # GA4 subproperty
+          # Google Analytics subproperty
           PROPERTY_TYPE_SUBPROPERTY = 2
 
-          # GA4 rollup property
+          # Google Analytics rollup property
           PROPERTY_TYPE_ROLLUP = 3
         end
 
