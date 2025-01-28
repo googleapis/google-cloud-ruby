@@ -21,28 +21,39 @@ module Google
   module Apps
     module Meet
       module V2beta
-        # [Developer Preview](https://developers.google.com/workspace/preview).
         # Virtual place where conferences are held. Only one active conference can be
         # held in one space at any given time.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Resource name of the space.
-        #     Format: `spaces/{space}`
+        #
+        #     Format: `spaces/{space}`.
+        #
+        #     `{space}` is the resource identifier for the space. It's a unique,
+        #     server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+        #
+        #     For more information, see [How Meet identifies a meeting
+        #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
         # @!attribute [r] meeting_uri
         #   @return [::String]
-        #     Output only. URI used to join meeting, such as
+        #     Output only. URI used to join meetings consisting of
+        #     `https://meet.google.com/` followed by the `meeting_code`. For example,
         #     `https://meet.google.com/abc-mnop-xyz`.
         # @!attribute [r] meeting_code
         #   @return [::String]
-        #     Output only. Type friendly code to join the meeting. Format:
-        #     `[a-z]+-[a-z]+-[a-z]+` such as `abc-mnop-xyz`. The maximum length is 128
-        #     characters. Can ONLY be used as alias of the space ID to get the space.
+        #     Output only. Type friendly unique string used to join the meeting.
+        #
+        #     Format: `[a-z]+-[a-z]+-[a-z]+`. For example, `abc-mnop-xyz`.
+        #
+        #     The maximum length is 128 characters.
+        #
+        #     Can only be used as an alias of the space name to get the space.
         # @!attribute [rw] config
         #   @return [::Google::Apps::Meet::V2beta::SpaceConfig]
         #     Configuration pertaining to the meeting space.
         # @!attribute [rw] active_conference
         #   @return [::Google::Apps::Meet::V2beta::ActiveConference]
-        #     Active conference if it exists.
+        #     Active conference, if it exists.
         class Space
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -53,7 +64,7 @@ module Google
         #   @return [::String]
         #     Output only. Reference to 'ConferenceRecord' resource.
         #     Format: `conferenceRecords/{conference_record}` where `{conference_record}`
-        #     is a unique id for each instance of a call within a space.
+        #     is a unique ID for each instance of a call within a space.
         class ActiveConference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -70,9 +81,138 @@ module Google
         #     Defines the entry points that can be used to join meetings hosted in this
         #     meeting space.
         #     Default: EntryPointAccess.ALL
+        # @!attribute [rw] moderation
+        #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::Moderation]
+        #     [Developer Preview](https://developers.google.com/workspace/preview):
+        #     The pre-configured moderation mode for the Meeting.
+        #     Default: Controlled by the user's policies.
+        # @!attribute [rw] moderation_restrictions
+        #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ModerationRestrictions]
+        #     [Developer Preview](https://developers.google.com/workspace/preview):
+        #     When moderation.ON, these restrictions go into effect for the meeting.
+        #     When moderation.OFF, will be reset to default ModerationRestrictions.
+        # @!attribute [rw] attendance_report_generation_type
+        #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::AttendanceReportGenerationType]
+        #     [Developer Preview](https://developers.google.com/workspace/preview):
+        #     Whether attendance report is enabled for the meeting space.
+        # @!attribute [rw] artifact_config
+        #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig]
+        #     [Developer Preview](https://developers.google.com/workspace/preview):
+        #     Configuration pertaining to the auto-generated artifacts that the meeting
+        #     supports.
         class SpaceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines restrictions for features when the meeting is moderated.
+          # @!attribute [rw] chat_restriction
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ModerationRestrictions::RestrictionType]
+          #     Defines who has permission to send chat messages in the meeting space.
+          # @!attribute [rw] reaction_restriction
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ModerationRestrictions::RestrictionType]
+          #     Defines who has permission to send reactions in the meeting space.
+          # @!attribute [rw] present_restriction
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ModerationRestrictions::RestrictionType]
+          #     Defines who has permission to share their screen in the meeting space.
+          # @!attribute [rw] default_join_as_viewer_type
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ModerationRestrictions::DefaultJoinAsViewerType]
+          #     Defines whether to restrict the default role assigned to users as viewer.
+          class ModerationRestrictions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Determines who has permission to use a particular feature.
+            module RestrictionType
+              # Default value specified by user policy.
+              # This should never be returned.
+              RESTRICTION_TYPE_UNSPECIFIED = 0
+
+              # Meeting owner and co-host have the permission.
+              HOSTS_ONLY = 1
+
+              # All Participants have permissions.
+              NO_RESTRICTION = 2
+            end
+
+            # By default users will join as contributors. Hosts can restrict users to
+            # join as viewers.
+            # Note: If an explicit role is set for a users in the Member resource, the
+            # user will join as that role.
+            module DefaultJoinAsViewerType
+              # Default value specified by user policy.
+              # This should never be returned.
+              DEFAULT_JOIN_AS_VIEWER_TYPE_UNSPECIFIED = 0
+
+              # Users will by default join as viewers.
+              ON = 1
+
+              # Users will by default join as contributors.
+              OFF = 2
+            end
+          end
+
+          # Configuration related to meeting artifacts potentially generated by this
+          # meeting space.
+          # @!attribute [rw] recording_config
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::RecordingConfig]
+          #     Configuration for recording.
+          # @!attribute [rw] transcription_config
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::TranscriptionConfig]
+          #     Configuration for auto-transcript.
+          # @!attribute [rw] smart_notes_config
+          #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::SmartNotesConfig]
+          #     Configuration for auto-smart-notes.
+          class ArtifactConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration related to recording in a meeting space.
+            # @!attribute [rw] auto_recording_generation
+            #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::AutoGenerationType]
+            #     Defines whether a meeting space is automatically recorded when someone
+            #     with the privilege to record joins the meeting.
+            class RecordingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration related to transcription in a meeting space.
+            # @!attribute [rw] auto_transcription_generation
+            #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::AutoGenerationType]
+            #     Defines whether the content of a meeting is automatically transcribed
+            #     when someone with the privilege to transcribe joins the meeting.
+            class TranscriptionConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration related to smart notes in a meeting space. More
+            # details about smart notes
+            # https://support.google.com/meet/answer/14754931?hl=en.
+            # @!attribute [rw] auto_smart_notes_generation
+            #   @return [::Google::Apps::Meet::V2beta::SpaceConfig::ArtifactConfig::AutoGenerationType]
+            #     Defines whether to automatically generate a summary and recap of the
+            #     meeting for all invitees in the organization when someone with the
+            #     privilege to enable smart notes joins the meeting.
+            class SmartNotesConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Determines whether an artifact can be automatically generated in the
+            # meeting space.
+            module AutoGenerationType
+              # Default value specified by user policy.
+              # This should never be returned.
+              AUTO_GENERATION_TYPE_UNSPECIFIED = 0
+
+              # The artifact is generated automatically.
+              ON = 1
+
+              # The artifact is not generated automatically.
+              OFF = 2
+            end
+          end
 
           # Possible access types for a meeting space.
           module AccessType
@@ -94,7 +234,7 @@ module Google
           end
 
           # Entry points that can be used to join a meeting.  Example:
-          # `meet.google.com`, the Embed SDK Web, or a mobile application.
+          # `meet.google.com`, the Meet Embed SDK Web, or a mobile application.
           module EntryPointAccess
             # Unused.
             ENTRY_POINT_ACCESS_UNSPECIFIED = 0
@@ -103,31 +243,97 @@ module Google
             ALL = 1
 
             # Only entry points owned by the Google Cloud project that created the
-            # space can be used to join meetings in this space.  Apps can use the Embed
-            # SDK Web or mobile Meet SDKs to create owned entry points.
+            # space can be used to join meetings in this space. Apps can use the Meet
+            # Embed SDK Web or mobile Meet SDKs to create owned entry points.
             CREATOR_APP_ONLY = 2
+          end
+
+          # The moderation mode for a meeting. When the moderation mode is on, the
+          # meeting owner has more control over the meeting with features such as
+          # co-host management (see message Member) and feature restrictions (see
+          # message ModerationRestrictions).
+          module Moderation
+            # Moderation type is not specified. This is used to indicate the user
+            # hasn't specified any value as the user does not intend to update the
+            # state. Users are not allowed to set the value as unspecified.
+            MODERATION_UNSPECIFIED = 0
+
+            # Moderation is off.
+            OFF = 1
+
+            # Moderation is on.
+            ON = 2
+          end
+
+          # Possible states of whether attendance report is enabled for the meeting
+          # space.
+          module AttendanceReportGenerationType
+            # Default value specified by user policy.
+            # This should never be returned.
+            ATTENDANCE_REPORT_GENERATION_TYPE_UNSPECIFIED = 0
+
+            # Attendance report will be generated and sent to drive/email.
+            GENERATE_REPORT = 1
+
+            # Attendance report will not be generated.
+            DO_NOT_GENERATE = 2
           end
         end
 
-        # [Developer Preview](https://developers.google.com/workspace/preview).
+        # Users who are configured to have a role in the space. These users can
+        # join the space without knocking.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. Resource name of the member.
+        #     Format: spaces/\\{space}/members/\\{member}
+        # @!attribute [rw] email
+        #   @return [::String]
+        #     Email for the member. This is required for creating the member.
+        # @!attribute [rw] role
+        #   @return [::Google::Apps::Meet::V2beta::Member::Role]
+        #     The meeting role assigned to the member.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     [Developer Preview](https://developers.google.com/workspace/preview):
+        #     Unique name for the user. Interoperable with Admin SDK API and People API.
+        #     This will be empty for non google users. Setting both user and email in
+        #     request will result in error. Format: `users/{user}`
+        class Member
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Role of this member in the space.
+          module Role
+            # This is used to indicate the user hasn't specified any value and the
+            # user’s role will be determined upon joining the meetings between
+            # 'contributor' and 'viewer' role depending on meeting configuration. More
+            # details about viewer role
+            # https://support.google.com/meet/answer/13658394?hl=en.
+            ROLE_UNSPECIFIED = 0
+
+            # Co-host role.
+            COHOST = 1
+          end
+        end
+
         # Single instance of a meeting held in a space.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Resource name of the conference record.
         #     Format: `conferenceRecords/{conference_record}` where `{conference_record}`
-        #     is a unique id for each instance of a call within a space.
+        #     is a unique ID for each instance of a call within a space.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when the conference started, always set.
+        #     Output only. Timestamp when the conference started. Always set.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when the conference ended.
         #     Set for past conferences. Unset if the conference is ongoing.
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Server enforced expire time for when this conference record
-        #     resource is deleted. The resource is deleted 30 days after the conference
-        #     ends.
+        #     Output only. Server enforced expiration time for when this conference
+        #     record resource is deleted. The resource is deleted 30 days after the
+        #     conference ends.
         # @!attribute [r] space
         #   @return [::String]
         #     Output only. The space where the conference was held.
@@ -136,7 +342,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # [Developer Preview](https://developers.google.com/workspace/preview).
         # User who attended or is attending a conference.
         # @!attribute [rw] signedin_user
         #   @return [::Google::Apps::Meet::V2beta::SignedinUser]
@@ -150,7 +355,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `anonymous_user`, `signedin_user`, `phone_user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] phone_user
         #   @return [::Google::Apps::Meet::V2beta::PhoneUser]
-        #     User who calls in from their phone.
+        #     User calling from their phone.
         #
         #     Note: The following fields are mutually exclusive: `phone_user`, `signedin_user`, `anonymous_user`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] name
@@ -159,21 +364,19 @@ module Google
         #     Format: `conferenceRecords/{conference_record}/participants/{participant}`
         # @!attribute [r] earliest_start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when the participant joined the meeting for the first
-        #     time.
+        #     Output only. Time when the participant first joined the meeting.
         # @!attribute [r] latest_end_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the participant left the meeting for the last time.
-        #     This can be null if it is an active meeting.
+        #     This can be null if it's an active meeting.
         class Participant
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # [Developer Preview](https://developers.google.com/workspace/preview).
-        # Refers to each unique join/leave session when a user joins a conference from
-        # a device. Note that any time a user joins the conference a new unique ID is
-        # assigned. That means if a user joins a space multiple times from the same
+        # Refers to each unique join or leave session when a user joins a conference
+        # from a device. Note that any time a user joins the conference a new unique ID
+        # is assigned. That means if a user joins a space multiple times from the same
         # device, they're assigned different IDs, and are also be treated as different
         # participant sessions.
         # @!attribute [rw] name
@@ -181,10 +384,10 @@ module Google
         #     Identifier. Session id.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when the user session started.
+        #     Output only. Timestamp when the user session starts.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Timestamp when the user session ended. Unset if the user
+        #     Output only. Timestamp when the user session ends. Unset if the user
         #     session hasn’t ended.
         class ParticipantSession
           include ::Google::Protobuf::MessageExts
@@ -201,9 +404,9 @@ module Google
         #     People API. Format: `users/{user}`
         # @!attribute [r] display_name
         #   @return [::String]
-        #     Output only. For a personal device, it's the user's first and last name.
-        #     For a robot account, it's the admin specified device name. For example,
-        #     "Altostrat Room".
+        #     Output only. For a personal device, it's the user's first name and last
+        #     name. For a robot account, it's the administrator-specified device name.
+        #     For example, "Altostrat Room".
         class SignedinUser
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -222,17 +425,16 @@ module Google
         # they haven't signed in with a Google Account.
         # @!attribute [r] display_name
         #   @return [::String]
-        #     Output only. Partially redacted user's phone number when they call in.
+        #     Output only. Partially redacted user's phone number when calling.
         class PhoneUser
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # [Developer Preview](https://developers.google.com/workspace/preview).
         # Metadata about a recording created during a conference.
         # @!attribute [r] drive_destination
         #   @return [::Google::Apps::Meet::V2beta::DriveDestination]
-        #     Output only. Recording is saved to Google Drive as an mp4 file. The
+        #     Output only. Recording is saved to Google Drive as an MP4 file. The
         #     `drive_destination` includes the Drive `fileId` that can be used to
         #     download the file using the `files.get` method of the Drive API.
         # @!attribute [r] name
@@ -288,7 +490,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # [Developer Preview](https://developers.google.com/workspace/preview).
         # Metadata for a transcript generated from a conference. It refers to the ASR
         # (Automatic Speech Recognition) result of user's speech during the conference.
         # @!attribute [r] docs_destination
@@ -348,7 +549,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # [Developer Preview](https://developers.google.com/workspace/preview).
         # Single entry for one user’s speech during a transcript session.
         # @!attribute [r] name
         #   @return [::String]
@@ -356,7 +556,7 @@ module Google
         #     "conferenceRecords/\\{conference_record}/transcripts/\\{transcript}/entries/\\{entry}"
         # @!attribute [r] participant
         #   @return [::String]
-        #     Output only. Refer to the participant who speaks.
+        #     Output only. Refers to the participant who speaks.
         # @!attribute [r] text
         #   @return [::String]
         #     Output only. The transcribed text of the participant's voice, at maximum

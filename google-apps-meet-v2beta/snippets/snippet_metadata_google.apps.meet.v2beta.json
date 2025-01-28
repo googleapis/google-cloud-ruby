@@ -172,6 +172,166 @@
       ]
     },
     {
+      "region_tag": "meet_v2beta_generated_SpacesService_CreateMember_sync",
+      "title": "Snippet for the create_member call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#create_member.",
+      "file": "spaces_service/create_member.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_member",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#create_member",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::CreateMemberRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Member",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "CreateMember",
+          "full_name": "google.apps.meet.v2beta.SpacesService.CreateMember",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_GetMember_sync",
+      "title": "Snippet for the get_member call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#get_member.",
+      "file": "spaces_service/get_member.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_member",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#get_member",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::GetMemberRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::Member",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "GetMember",
+          "full_name": "google.apps.meet.v2beta.SpacesService.GetMember",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_ListMembers_sync",
+      "title": "Snippet for the list_members call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#list_members.",
+      "file": "spaces_service/list_members.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_members",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#list_members",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ListMembersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ListMembersResponse",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "ListMembers",
+          "full_name": "google.apps.meet.v2beta.SpacesService.ListMembers",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "meet_v2beta_generated_SpacesService_DeleteMember_sync",
+      "title": "Snippet for the delete_member call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#delete_member.",
+      "file": "spaces_service/delete_member.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_member",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#delete_member",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::DeleteMemberRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "DeleteMember",
+          "full_name": "google.apps.meet.v2beta.SpacesService.DeleteMember",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "meet_v2beta_generated_ConferenceRecordsService_GetConferenceRecord_sync",
       "title": "Snippet for the get_conference_record call in the ConferenceRecordsService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::ConferenceRecordsService::Client#get_conference_record.",
