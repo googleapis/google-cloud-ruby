@@ -17,9 +17,6 @@ require_relative "../storage_get_service_account"
 
 describe "Storage Quickstart" do
   let(:project) { Google::Cloud::Storage.new }
-  let(:bucket) { fixture_bucket }
-  let(:generation) { bucket.generation }
-  let(:new_bucket_name) { random_bucket_name }
 
   it "get_service_account" do
     email = nil

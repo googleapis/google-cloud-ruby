@@ -649,7 +649,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     soft_deleted= true
 
     mock = Minitest::Mock.new
-    mock.expect :list_buckets, list_buckets_gapi(num_buckets,nil,soft_deleted), [project], prefix: nil, page_token: nil,
+    mock.expect :list_buckets, list_buckets_gapi(num_buckets,"next_page_token",soft_deleted), [project], prefix: nil, page_token: nil,
 max_results: nil, user_project: nil, soft_deleted: true, options: {}
 
     storage.service.mocked_service = mock
