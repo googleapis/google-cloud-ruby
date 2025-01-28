@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-assured_workloads-v1", ">= 0.9", "< 2.a"
   gem.add_dependency "google-cloud-assured_workloads-v1beta1", ">= 0.17", "< 2.a"
