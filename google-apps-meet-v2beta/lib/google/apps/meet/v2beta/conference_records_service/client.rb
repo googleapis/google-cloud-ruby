@@ -244,7 +244,6 @@ module Google
             # Service calls
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a conference record by conference ID.
             #
             # @overload get_conference_record(request, options = nil)
@@ -330,8 +329,8 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the conference records by start time and in descending order.
+            # Lists the conference records. By default, ordered by start time and in
+            # descending order.
             #
             # @overload list_conference_records(request, options = nil)
             #   Pass arguments to `list_conference_records` via a request object, either of type
@@ -356,15 +355,22 @@ module Google
             #   @param page_token [::String]
             #     Optional. Page token returned from previous List Call.
             #   @param filter [::String]
-            #     Optional. User specified filtering condition in EBNF format. The following
-            #     are the filterable fields:
+            #     Optional. User specified filtering condition in [EBNF
+            #     format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+            #     The following are the filterable fields:
             #
             #     * `space.meeting_code`
             #     * `space.name`
             #     * `start_time`
             #     * `end_time`
             #
-            #     For example, `space.meeting_code = "abc-mnop-xyz"`.
+            #     For example, consider the following filters:
+            #
+            #     * `space.name = "spaces/NAME"`
+            #     * `space.meeting_code = "abc-mnop-xyz"`
+            #     * `start_time>="2024-01-01T00:00:00.000Z" AND
+            #     start_time<="2024-01-02T00:00:00.000Z"`
+            #     * `end_time IS NULL`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Apps::Meet::V2beta::ConferenceRecord>]
@@ -429,7 +435,6 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a participant by participant ID.
             #
             # @overload get_participant(request, options = nil)
@@ -515,8 +520,7 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the participants in a conference record, by default ordered by join
+            # Lists the participants in a conference record. By default, ordered by join
             # time and in descending order. This API supports `fields` as standard
             # parameters like every other API. However, when the `fields` request
             # parameter is omitted, this API defaults to `'participants/*,
@@ -548,8 +552,9 @@ module Google
             #   @param page_token [::String]
             #     Page token returned from previous List Call.
             #   @param filter [::String]
-            #     Optional. User specified filtering condition in EBNF format. The following
-            #     are the filterable fields:
+            #     Optional. User specified filtering condition in [EBNF
+            #     format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+            #     The following are the filterable fields:
             #
             #     * `earliest_start_time`
             #     * `latest_end_time`
@@ -628,7 +633,6 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a participant session by participant session ID.
             #
             # @overload get_participant_session(request, options = nil)
@@ -714,9 +718,8 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the participant sessions of a participant in a conference record, by
-            # default ordered by join time and in descending order. This API supports
+            # Lists the participant sessions of a participant in a conference record. By
+            # default, ordered by join time and in descending order. This API supports
             # `fields` as standard parameters like every other API. However, when the
             # `fields` request parameter is omitted this API defaults to
             # `'participantsessions/*, next_page_token'`.
@@ -747,8 +750,9 @@ module Google
             #   @param page_token [::String]
             #     Optional. Page token returned from previous List Call.
             #   @param filter [::String]
-            #     Optional. User specified filtering condition in EBNF format. The following
-            #     are the filterable fields:
+            #     Optional. User specified filtering condition in [EBNF
+            #     format](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form).
+            #     The following are the filterable fields:
             #
             #     * `start_time`
             #     * `end_time`
@@ -827,7 +831,6 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a recording by recording ID.
             #
             # @overload get_recording(request, options = nil)
@@ -913,8 +916,8 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the recording resources from the conference record.
+            # Lists the recording resources from the conference record. By default,
+            # ordered by start time and in ascending order.
             #
             # @overload list_recordings(request, options = nil)
             #   Pass arguments to `list_recordings` via a request object, either of type
@@ -1013,7 +1016,6 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a transcript by transcript ID.
             #
             # @overload get_transcript(request, options = nil)
@@ -1099,8 +1101,8 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the set of transcripts from the conference record.
+            # Lists the set of transcripts from the conference record. By default,
+            # ordered by start time and in ascending order.
             #
             # @overload list_transcripts(request, options = nil)
             #   Pass arguments to `list_transcripts` via a request object, either of type
@@ -1199,7 +1201,6 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a `TranscriptEntry` resource by entry ID.
             #
             # Note: The transcript entries returned by the Google Meet API might not
@@ -1289,7 +1290,6 @@ module Google
             end
 
             ##
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Lists the structured transcript entries per transcript. By default, ordered
             # by start time and in ascending order.
             #

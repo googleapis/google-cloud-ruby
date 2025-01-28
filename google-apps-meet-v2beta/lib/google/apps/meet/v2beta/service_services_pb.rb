@@ -33,18 +33,50 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.apps.meet.v2beta.SpacesService'
 
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Creates a space.
             rpc :CreateSpace, ::Google::Apps::Meet::V2beta::CreateSpaceRequest, ::Google::Apps::Meet::V2beta::Space
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Gets a space by `space_id` or `meeting_code`.
+            # Gets details about a meeting space.
+            #
+            # For an example, see [Get a meeting
+            # space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).
             rpc :GetSpace, ::Google::Apps::Meet::V2beta::GetSpaceRequest, ::Google::Apps::Meet::V2beta::Space
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Updates a space.
+            # Updates details about a meeting space.
+            #
+            # For an example, see [Update a meeting
+            # space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).
             rpc :UpdateSpace, ::Google::Apps::Meet::V2beta::UpdateSpaceRequest, ::Google::Apps::Meet::V2beta::Space
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Ends an active conference (if there is one).
+            # Ends an active conference (if there's one).
+            #
+            # For an example, see [End active
+            # conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).
             rpc :EndActiveConference, ::Google::Apps::Meet::V2beta::EndActiveConferenceRequest, ::Google::Protobuf::Empty
+            # [Developer Preview](https://developers.google.com/workspace/preview):
+            # Create a member.
+            #
+            # This API supports the `fields` parameter in
+            # [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+            # When the `fields` parameter is omitted, this API response will default to
+            # "name,email,role,user".
+            rpc :CreateMember, ::Google::Apps::Meet::V2beta::CreateMemberRequest, ::Google::Apps::Meet::V2beta::Member
+            # [Developer Preview](https://developers.google.com/workspace/preview):
+            # Get a member.
+            #
+            # This API supports the `fields` parameter in
+            # [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+            # When the `fields` parameter is omitted, this API response will default to
+            # "name,email,role,user".
+            rpc :GetMember, ::Google::Apps::Meet::V2beta::GetMemberRequest, ::Google::Apps::Meet::V2beta::Member
+            # [Developer Preview](https://developers.google.com/workspace/preview):
+            # List members.
+            #
+            # This API supports the `fields` parameter in
+            # [SystemParameterContext](https://cloud.google.com/apis/docs/system-parameters).
+            # When the `fields` parameter is omitted this API response will default to
+            # "name,email,role,user".
+            rpc :ListMembers, ::Google::Apps::Meet::V2beta::ListMembersRequest, ::Google::Apps::Meet::V2beta::ListMembersResponse
+            # [Developer Preview](https://developers.google.com/workspace/preview):
+            # Delete the member who was previously assigned roles in the space.
+            rpc :DeleteMember, ::Google::Apps::Meet::V2beta::DeleteMemberRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
@@ -59,52 +91,43 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.apps.meet.v2beta.ConferenceRecordsService'
 
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a conference record by conference ID.
             rpc :GetConferenceRecord, ::Google::Apps::Meet::V2beta::GetConferenceRecordRequest, ::Google::Apps::Meet::V2beta::ConferenceRecord
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the conference records by start time and in descending order.
+            # Lists the conference records. By default, ordered by start time and in
+            # descending order.
             rpc :ListConferenceRecords, ::Google::Apps::Meet::V2beta::ListConferenceRecordsRequest, ::Google::Apps::Meet::V2beta::ListConferenceRecordsResponse
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a participant by participant ID.
             rpc :GetParticipant, ::Google::Apps::Meet::V2beta::GetParticipantRequest, ::Google::Apps::Meet::V2beta::Participant
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the participants in a conference record, by default ordered by join
+            # Lists the participants in a conference record. By default, ordered by join
             # time and in descending order. This API supports `fields` as standard
             # parameters like every other API. However, when the `fields` request
             # parameter is omitted, this API defaults to `'participants/*,
             # next_page_token'`.
             rpc :ListParticipants, ::Google::Apps::Meet::V2beta::ListParticipantsRequest, ::Google::Apps::Meet::V2beta::ListParticipantsResponse
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a participant session by participant session ID.
             rpc :GetParticipantSession, ::Google::Apps::Meet::V2beta::GetParticipantSessionRequest, ::Google::Apps::Meet::V2beta::ParticipantSession
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the participant sessions of a participant in a conference record, by
-            # default ordered by join time and in descending order. This API supports
+            # Lists the participant sessions of a participant in a conference record. By
+            # default, ordered by join time and in descending order. This API supports
             # `fields` as standard parameters like every other API. However, when the
             # `fields` request parameter is omitted this API defaults to
             # `'participantsessions/*, next_page_token'`.
             rpc :ListParticipantSessions, ::Google::Apps::Meet::V2beta::ListParticipantSessionsRequest, ::Google::Apps::Meet::V2beta::ListParticipantSessionsResponse
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a recording by recording ID.
             rpc :GetRecording, ::Google::Apps::Meet::V2beta::GetRecordingRequest, ::Google::Apps::Meet::V2beta::Recording
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the recording resources from the conference record.
+            # Lists the recording resources from the conference record. By default,
+            # ordered by start time and in ascending order.
             rpc :ListRecordings, ::Google::Apps::Meet::V2beta::ListRecordingsRequest, ::Google::Apps::Meet::V2beta::ListRecordingsResponse
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a transcript by transcript ID.
             rpc :GetTranscript, ::Google::Apps::Meet::V2beta::GetTranscriptRequest, ::Google::Apps::Meet::V2beta::Transcript
-            # [Developer Preview](https://developers.google.com/workspace/preview).
-            # Lists the set of transcripts from the conference record.
+            # Lists the set of transcripts from the conference record. By default,
+            # ordered by start time and in ascending order.
             rpc :ListTranscripts, ::Google::Apps::Meet::V2beta::ListTranscriptsRequest, ::Google::Apps::Meet::V2beta::ListTranscriptsResponse
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Gets a `TranscriptEntry` resource by entry ID.
             #
             # Note: The transcript entries returned by the Google Meet API might not
             # match the transcription found in the Google Docs transcript file. This can
             # occur when the Google Docs transcript file is modified after generation.
             rpc :GetTranscriptEntry, ::Google::Apps::Meet::V2beta::GetTranscriptEntryRequest, ::Google::Apps::Meet::V2beta::TranscriptEntry
-            # [Developer Preview](https://developers.google.com/workspace/preview).
             # Lists the structured transcript entries per transcript. By default, ordered
             # by start time and in ascending order.
             #
