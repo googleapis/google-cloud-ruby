@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-contact_center_insights-v1", ">= 0.20", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"
