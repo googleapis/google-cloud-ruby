@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ResourceManager
       module V3
-        VERSION = "1.1.0"
+        VERSION = "1.2.0"
       end
     end
   end
