@@ -1,5 +1,15 @@
 # Release History
 
+### 2.16.0 (2025-01-28)
+
+#### Features
+
+* Support aggregated_list RPC in the NetworkFirewallPolicies service ([#28253](https://github.com/googleapis/google-cloud-ruby/issues/28253)) 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
 ### 2.15.0 (2024-12-11)
 
 #### Features
