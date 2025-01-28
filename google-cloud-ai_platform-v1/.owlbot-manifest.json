@@ -807,6 +807,7 @@
     "snippets/model_service/import_model_evaluation.rb",
     "snippets/model_service/list_model_evaluation_slices.rb",
     "snippets/model_service/list_model_evaluations.rb",
+    "snippets/model_service/list_model_version_checkpoints.rb",
     "snippets/model_service/list_model_versions.rb",
     "snippets/model_service/list_models.rb",
     "snippets/model_service/merge_version_aliases.rb",

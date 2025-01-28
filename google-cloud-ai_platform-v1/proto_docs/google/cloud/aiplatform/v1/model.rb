@@ -59,6 +59,9 @@ module Google
         # @!attribute [rw] version_description
         #   @return [::String]
         #     The description of this version.
+        # @!attribute [rw] default_checkpoint_id
+        #   @return [::String]
+        #     The default checkpoint id of a model version.
         # @!attribute [rw] predict_schemata
         #   @return [::Google::Cloud::AIPlatform::V1::PredictSchemata]
         #     The schemata that describe formats of the Model's predictions and

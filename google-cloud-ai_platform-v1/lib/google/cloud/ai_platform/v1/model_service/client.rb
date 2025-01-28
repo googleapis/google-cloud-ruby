@@ -696,6 +696,112 @@ module Google
             end
 
             ##
+            # Lists checkpoints of the specified model version.
+            #
+            # @overload list_model_version_checkpoints(request, options = nil)
+            #   Pass arguments to `list_model_version_checkpoints` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_model_version_checkpoints(name: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_model_version_checkpoints` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the model version to list checkpoints for.
+            #     `projects/{project}/locations/{location}/models/{model}@{version}`
+            #     Example: `projects/{project}/locations/{location}/models/{model}@2`
+            #     or
+            #     `projects/{project}/locations/{location}/models/{model}@golden`
+            #     If no version ID or alias is specified, the latest version will be
+            #     used.
+            #   @param page_size [::Integer]
+            #     Optional. The standard list page size.
+            #   @param page_token [::String]
+            #     Optional. The standard list page token.
+            #     Typically obtained via
+            #     {::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsResponse#next_page_token next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_version_checkpoints ListModelVersionCheckpoints}
+            #     call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::ModelVersionCheckpoint>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::ModelVersionCheckpoint>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest.new
+            #
+            #   # Call the list_model_version_checkpoints method.
+            #   result = client.list_model_version_checkpoints request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelVersionCheckpoint.
+            #     p item
+            #   end
+            #
+            def list_model_version_checkpoints request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_model_version_checkpoints.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_model_version_checkpoints.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_model_version_checkpoints.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :list_model_version_checkpoints, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @model_service_stub, :list_model_version_checkpoints, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Updates a Model.
             #
             # @overload update_model(request, options = nil)
@@ -2266,6 +2372,11 @@ module Google
                 #
                 attr_reader :list_model_versions
                 ##
+                # RPC-specific configuration for `list_model_version_checkpoints`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_model_version_checkpoints
+                ##
                 # RPC-specific configuration for `update_model`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2346,6 +2457,8 @@ module Google
                   @list_models = ::Gapic::Config::Method.new list_models_config
                   list_model_versions_config = parent_rpcs.list_model_versions if parent_rpcs.respond_to? :list_model_versions
                   @list_model_versions = ::Gapic::Config::Method.new list_model_versions_config
+                  list_model_version_checkpoints_config = parent_rpcs.list_model_version_checkpoints if parent_rpcs.respond_to? :list_model_version_checkpoints
+                  @list_model_version_checkpoints = ::Gapic::Config::Method.new list_model_version_checkpoints_config
                   update_model_config = parent_rpcs.update_model if parent_rpcs.respond_to? :update_model
                   @update_model = ::Gapic::Config::Method.new update_model_config
                   update_explanation_dataset_config = parent_rpcs.update_explanation_dataset if parent_rpcs.respond_to? :update_explanation_dataset
