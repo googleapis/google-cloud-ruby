@@ -35,11 +35,20 @@ module Google
 
             # Creates a space.
             rpc :CreateSpace, ::Google::Apps::Meet::V2::CreateSpaceRequest, ::Google::Apps::Meet::V2::Space
-            # Gets a space by `space_id` or `meeting_code`.
+            # Gets details about a meeting space.
+            #
+            # For an example, see [Get a meeting
+            # space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).
             rpc :GetSpace, ::Google::Apps::Meet::V2::GetSpaceRequest, ::Google::Apps::Meet::V2::Space
-            # Updates a space.
+            # Updates details about a meeting space.
+            #
+            # For an example, see [Update a meeting
+            # space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).
             rpc :UpdateSpace, ::Google::Apps::Meet::V2::UpdateSpaceRequest, ::Google::Apps::Meet::V2::Space
             # Ends an active conference (if there's one).
+            #
+            # For an example, see [End active
+            # conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).
             rpc :EndActiveConference, ::Google::Apps::Meet::V2::EndActiveConferenceRequest, ::Google::Protobuf::Empty
           end
 

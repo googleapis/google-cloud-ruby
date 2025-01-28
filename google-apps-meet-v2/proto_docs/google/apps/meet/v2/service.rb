@@ -35,6 +35,24 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the space.
+        #
+        #     Format: `spaces/{space}` or `spaces/{meetingCode}`.
+        #
+        #     `{space}` is the resource identifier for the space. It's a unique,
+        #     server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+        #
+        #     `{meetingCode}` is an alias for the space. It's a typeable, unique
+        #     character string and is non-case sensitive. For example, `abc-mnop-xyz`.
+        #     The maximum length is 128 characters.
+        #
+        #     A `meetingCode` shouldn't be stored long term as it can become
+        #     dissociated from a meeting space and can be reused for different meeting
+        #     spaces in the future. Generally, a `meetingCode` expires 365 days after
+        #     last use. For more information, see [Learn about meeting codes in Google
+        #     Meet](https://support.google.com/meet/answer/10710509).
+        #
+        #     For more information, see [How Meet identifies a meeting
+        #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
         class GetSpaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -47,9 +65,11 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Field mask used to specify the fields to be updated in the space.
-        #     If update_mask isn't provided, it defaults to '*' and updates all
-        #     fields provided in the request, including deleting fields not set in the
+        #     If update_mask isn't provided(not set, set with empty paths, or only has ""
+        #     as paths), it defaults to update all fields provided with values in the
         #     request.
+        #     Using "*" as update_mask will update all fields, including deleting fields
+        #     not set in the request.
         class UpdateSpaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -59,6 +79,14 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the space.
+        #
+        #     Format: `spaces/{space}`.
+        #
+        #     `{space}` is the resource identifier for the space. It's a unique,
+        #     server-generated ID and is case sensitive. For example, `jQCFfuBOdN5z`.
+        #
+        #     For more information, see [How Meet identifies a meeting
+        #     space](https://developers.google.com/meet/api/guides/meeting-spaces#identify-meeting-space).
         class EndActiveConferenceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,7 +122,13 @@ module Google
         #     * `start_time`
         #     * `end_time`
         #
-        #     For example, `space.meeting_code = "abc-mnop-xyz"`.
+        #     For example, consider the following filters:
+        #
+        #     * `space.name = "spaces/NAME"`
+        #     * `space.meeting_code = "abc-mnop-xyz"`
+        #     * `start_time>="2024-01-01T00:00:00.000Z" AND
+        #     start_time<="2024-01-02T00:00:00.000Z"`
+        #     * `end_time IS NULL`
         class ListConferenceRecordsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

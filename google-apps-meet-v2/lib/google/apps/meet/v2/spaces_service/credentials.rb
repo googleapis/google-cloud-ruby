@@ -27,7 +27,8 @@ module Google
           class Credentials < ::Google::Auth::Credentials
             self.scope = [
               "https://www.googleapis.com/auth/meetings.space.created",
-              "https://www.googleapis.com/auth/meetings.space.readonly"
+              "https://www.googleapis.com/auth/meetings.space.readonly",
+              "https://www.googleapis.com/auth/meetings.space.settings"
             ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",
