@@ -245,7 +245,7 @@
   "google-cloud-container_analysis-v1+FILLER": "0.0.0",
   "google-cloud-core": "1.7.1",
   "google-cloud-core+FILLER": "0.0.0",
-  "google-cloud-data_catalog": "1.6.1",
+  "google-cloud-data_catalog": "1.7.0",
   "google-cloud-data_catalog+FILLER": "0.0.0",
   "google-cloud-data_catalog-lineage": "1.0.1",
   "google-cloud-data_catalog-lineage+FILLER": "0.0.0",
