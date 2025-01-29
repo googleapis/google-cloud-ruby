@@ -841,7 +841,7 @@
   "google-cloud-workstations-v1+FILLER": "0.0.0",
   "google-cloud-workstations-v1beta": "0.2.0",
   "google-cloud-workstations-v1beta+FILLER": "0.0.0",
-  "google-iam-client": "1.0.1",
+  "google-iam-client": "1.1.0",
   "google-iam-client+FILLER": "0.0.0",
   "google-iam-credentials": "1.5.0",
   "google-iam-credentials+FILLER": "0.0.0",
