@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Datastream
-      VERSION = "1.4.1"
+      VERSION = "1.5.0"
     end
   end
 end
