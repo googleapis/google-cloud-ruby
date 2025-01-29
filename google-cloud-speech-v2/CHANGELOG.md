@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.16.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.15.0 (2025-01-08)
 
 #### Features
