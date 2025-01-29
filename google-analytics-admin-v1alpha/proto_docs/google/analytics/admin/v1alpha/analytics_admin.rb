@@ -29,9 +29,9 @@ module Google
         #     access for all properties under that account.
         #
         #     To request at the property level, entity should be for example
-        #     'properties/123' if "123" is your GA4 property ID. To request at the
-        #     account level, entity should be for example 'accounts/1234' if "1234" is
-        #     your GA4 Account ID.
+        #     'properties/123' if "123" is your Google Analytics property ID. To request
+        #     at the account level, entity should be for example 'accounts/1234' if
+        #     "1234" is your Google Analytics Account ID.
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Analytics::Admin::V1alpha::AccessDimension>]
         #     The dimensions requested and displayed in the response. Requests are
@@ -598,9 +598,14 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of ChangeHistoryEvent items to return.
-        #     The service may return fewer than this value, even if there are additional
-        #     pages. If unspecified, at most 50 items will be returned.
-        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        #     If unspecified, at most 50 items will be returned. The maximum value is 200
+        #     (higher values will be coerced to the maximum).
+        #
+        #     Note that the service may return a page with fewer items than this value
+        #     specifies (potentially even zero), and that there still may be additional
+        #     pages. If you want a particular number of items, you'll need to continue
+        #     requesting additional pages using `page_token` until you get the needed
+        #     number.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous
