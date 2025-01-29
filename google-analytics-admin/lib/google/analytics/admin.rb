@@ -47,7 +47,7 @@ module Google
       #
       # ## About AnalyticsAdminService
       #
-      # Service Interface for the Analytics Admin API (GA4).
+      # Service Interface for the Google Analytics Admin API.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1alpha`.
