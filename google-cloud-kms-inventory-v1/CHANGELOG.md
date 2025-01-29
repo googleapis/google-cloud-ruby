@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.13.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
 ### 0.12.2 (2025-01-09)
 
 #### Documentation
