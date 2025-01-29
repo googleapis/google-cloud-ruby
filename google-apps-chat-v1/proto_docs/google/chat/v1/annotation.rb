@@ -63,17 +63,22 @@ module Google
         #   @return [::Google::Apps::Chat::V1::UserMentionMetadata]
         #     The metadata of user mention.
         #
-        #     Note: The following fields are mutually exclusive: `user_mention`, `slash_command`, `rich_link_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `user_mention`, `slash_command`, `rich_link_metadata`, `custom_emoji_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] slash_command
         #   @return [::Google::Apps::Chat::V1::SlashCommandMetadata]
         #     The metadata for a slash command.
         #
-        #     Note: The following fields are mutually exclusive: `slash_command`, `user_mention`, `rich_link_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `slash_command`, `user_mention`, `rich_link_metadata`, `custom_emoji_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] rich_link_metadata
         #   @return [::Google::Apps::Chat::V1::RichLinkMetadata]
         #     The metadata for a rich link.
         #
-        #     Note: The following fields are mutually exclusive: `rich_link_metadata`, `user_mention`, `slash_command`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `rich_link_metadata`, `user_mention`, `slash_command`, `custom_emoji_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] custom_emoji_metadata
+        #   @return [::Google::Apps::Chat::V1::CustomEmojiMetadata]
+        #     The metadata for a custom emoji.
+        #
+        #     Note: The following fields are mutually exclusive: `custom_emoji_metadata`, `user_mention`, `slash_command`, `rich_link_metadata`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Annotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -168,6 +173,15 @@ module Google
           end
         end
 
+        # Annotation metadata for custom emoji.
+        # @!attribute [rw] custom_emoji
+        #   @return [::Google::Apps::Chat::V1::CustomEmoji]
+        #     The custom emoji.
+        class CustomEmojiMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Data for Google Drive links.
         # @!attribute [rw] drive_data_ref
         #   @return [::Google::Apps::Chat::V1::DriveDataRef]
@@ -216,6 +230,9 @@ module Google
 
           # A rich link annotation.
           RICH_LINK = 3
+
+          # A custom emoji annotation.
+          CUSTOM_EMOJI = 4
         end
       end
     end
