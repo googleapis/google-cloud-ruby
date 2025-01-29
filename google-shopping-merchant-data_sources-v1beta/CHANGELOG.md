@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.4.0 (2025-01-29)
+
+#### Features
+
+* Support product review and merchant review data sources 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Fixed some cross-reference links 
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.3.0 (2024-12-10)
 
 #### Features
