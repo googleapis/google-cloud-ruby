@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module PhishingProtection
-      VERSION = "0.15.2"
+      VERSION = "0.16.0"
     end
   end
 end
