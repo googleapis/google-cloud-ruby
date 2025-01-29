@@ -122,7 +122,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A resource message representing a GA4 ExpandedDataSet.
+        # A resource message representing an `ExpandedDataSet`.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for this ExpandedDataSet resource.

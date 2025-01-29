@@ -24,7 +24,7 @@ module Google
     module Admin
       module V1alpha
         module AnalyticsAdminService
-          # Service Interface for the Analytics Admin API (GA4).
+          # Service Interface for the Google Analytics Admin API.
           class Service
 
             include ::GRPC::GenericService
@@ -37,7 +37,7 @@ module Google
             rpc :GetAccount, ::Google::Analytics::Admin::V1alpha::GetAccountRequest, ::Google::Analytics::Admin::V1alpha::Account
             # Returns all accounts accessible by the caller.
             #
-            # Note that these accounts might not currently have GA4 properties.
+            # Note that these accounts might not currently have GA properties.
             # Soft-deleted (ie: "trashed") accounts are excluded by default.
             # Returns an empty list if no relevant accounts are found.
             rpc :ListAccounts, ::Google::Analytics::Admin::V1alpha::ListAccountsRequest, ::Google::Analytics::Admin::V1alpha::ListAccountsResponse
@@ -59,16 +59,16 @@ module Google
             rpc :ProvisionAccountTicket, ::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest, ::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse
             # Returns summaries of all accounts accessible by the caller.
             rpc :ListAccountSummaries, ::Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest, ::Google::Analytics::Admin::V1alpha::ListAccountSummariesResponse
-            # Lookup for a single "GA4" Property.
+            # Lookup for a single GA Property.
             rpc :GetProperty, ::Google::Analytics::Admin::V1alpha::GetPropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Returns child Properties under the specified parent Account.
             #
-            # Only "GA4" properties will be returned.
             # Properties will be excluded if the caller does not have access.
             # Soft-deleted (ie: "trashed") properties are excluded by default.
             # Returns an empty list if no relevant properties are found.
             rpc :ListProperties, ::Google::Analytics::Admin::V1alpha::ListPropertiesRequest, ::Google::Analytics::Admin::V1alpha::ListPropertiesResponse
-            # Creates an "GA4" property with the specified location and attributes.
+            # Creates a Google Analytics property with the specified location and
+            # attributes.
             rpc :CreateProperty, ::Google::Analytics::Admin::V1alpha::CreatePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Marks target Property as soft-deleted (ie: "trashed") and returns it.
             #
@@ -80,7 +80,7 @@ module Google
             # will be permanently purged.
             # https://support.google.com/analytics/answer/6154772
             #
-            # Returns an error if the target is not found, or is not a GA4 Property.
+            # Returns an error if the target is not found.
             rpc :DeleteProperty, ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Updates a property.
             rpc :UpdateProperty, ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
@@ -107,7 +107,7 @@ module Google
             # Get data sharing settings on an account.
             # Data sharing settings are singletons.
             rpc :GetDataSharingSettings, ::Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataSharingSettings
-            # Lookup for a single "GA4" MeasurementProtocolSecret.
+            # Lookup for a single MeasurementProtocolSecret.
             rpc :GetMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::GetMeasurementProtocolSecretRequest, ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret
             # Returns child MeasurementProtocolSecrets under the specified parent
             # Property.
@@ -137,6 +137,9 @@ module Google
             rpc :ListSKAdNetworkConversionValueSchemas, ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasRequest, ::Google::Analytics::Admin::V1alpha::ListSKAdNetworkConversionValueSchemasResponse
             # Searches through all changes to an account or its children given the
             # specified set of filters.
+            #
+            # Only returns the subset of changes supported by the API. The UI may return
+            # additional changes.
             rpc :SearchChangeHistoryEvents, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse
             # Lookup for Google Signals settings for a property.
             rpc :GetGoogleSignalsSettings, ::Google::Analytics::Admin::V1alpha::GetGoogleSignalsSettingsRequest, ::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings
@@ -274,12 +277,17 @@ module Google
             # only be requested on Google Analytics 360 properties. This method is only
             # available to Administrators.
             #
-            # These data access records include GA4 UI Reporting, GA4 UI Explorations,
-            # GA4 Data API, and other products like Firebase & Admob that can retrieve
+            # These data access records include GA UI Reporting, GA UI Explorations,
+            # GA Data API, and other products like Firebase & Admob that can retrieve
             # data from Google Analytics through a linkage. These records don't include
             # property configuration changes like adding a stream or changing a
             # property's time zone. For configuration change history, see
             # [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+            #
+            # To give your feedback on this API, complete the [Google Analytics Access
+            # Reports
+            # feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform)
+            # form.
             rpc :RunAccessReport, ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse
             # Creates an access binding on an account or property.
             rpc :CreateAccessBinding, ::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding

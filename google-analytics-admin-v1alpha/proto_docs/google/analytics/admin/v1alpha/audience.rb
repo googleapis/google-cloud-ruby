@@ -370,7 +370,7 @@ module Google
           end
         end
 
-        # A resource message representing a GA4 Audience.
+        # A resource message representing an Audience.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for this Audience resource.
