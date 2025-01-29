@@ -325,7 +325,7 @@
   "google-cloud-dlp-v2+FILLER": "0.0.0",
   "google-cloud-dns": "1.0.0",
   "google-cloud-dns+FILLER": "0.0.0",
-  "google-cloud-document_ai": "1.4.1",
+  "google-cloud-document_ai": "1.5.0",
   "google-cloud-document_ai+FILLER": "0.0.0",
   "google-cloud-document_ai-v1": "1.4.0",
   "google-cloud-document_ai-v1+FILLER": "0.0.0",
