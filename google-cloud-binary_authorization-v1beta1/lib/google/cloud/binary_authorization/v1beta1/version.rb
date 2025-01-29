@@ -21,7 +21,7 @@ module Google
   module Cloud
     module BinaryAuthorization
       module V1beta1
-        VERSION = "0.14.0"
+        VERSION = "0.15.0"
       end
     end
   end
