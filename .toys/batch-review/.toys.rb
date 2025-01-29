@@ -18,7 +18,9 @@
 batch_reviewer = Yoshi::BatchReviewer.new "googleapis/google-cloud-ruby"
 
 batch_reviewer.define_preset "releases", based_on: :basic_releases do |preset|
-  preset.diff_expectations.expect_changed_paths(/\/snippets\/snippet_metadata_[\w\.]+\.json$/)
+  preset.diff_expectations.expect name: "snippet metadata" do |expect|
+    expect.change_type(:changed).path_pattern(/\/snippets\/snippet_metadata_[\w\.]+\.json$/)
+  end
 end
 
 batch_reviewer.define_preset "releases-gapics", based_on: "releases" do |preset|
@@ -37,7 +39,9 @@ end
 batch_reviewer.define_preset "owlbot" do |preset|
   preset.desc = "Selects all OwlBot pull requests"
   preset.pull_request_filter.only_users(["gcf-owl-bot[bot]"])
-  preset.diff_expectations.expect_paths(/_pb\.rb$/)
+  preset.diff_expectations.expect name: "protobuf descriptor files" do |expect|
+    expect.path_pattern(/_pb\.rb$/)
+  end
 end
 
 expand Yoshi::BatchReviewer::Template, batch_reviewer
@@ -46,8 +50,8 @@ long_desc \
   "",
   "Some useful patterns:",
   "",
-  ["toys batch-review releases --automerge"],
+  ["toys batch-review --config=releases --automerge"],
   ["  ", "Merges all open release pull requests that do not have the \"do not merge\" label"],
   "",
-  ["toys batch-review owlbot"],
+  ["toys batch-review --config=owlbot"],
   ["  ", "Interactively reviews all owlbot pull requests"]

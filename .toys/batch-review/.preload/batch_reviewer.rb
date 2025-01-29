@@ -26,9 +26,15 @@ module Yoshi
           preset.desc = "Selects all release pull requests, and expect diffs appropriate to a release pull request"
           preset.pull_request_filter.only_titles(/^chore\(main\): release [\w-]+ \d+\.\d+\.\d+/)
           preset.pull_request_filter.only_users(["release-please[bot]"])
-          preset.diff_expectations.expect_changed_paths(/\.release-please-manifest\.json$/)
-          preset.diff_expectations.expect_changed_paths(/\/CHANGELOG\.md$/)
-          preset.diff_expectations.expect_changed_paths(/\/version\.rb$/)
+          preset.diff_expectations.expect name: "release-please-manifest" do |expect|
+            expect.change_type(:changed).path_pattern(/\.release-please-manifest\.json$/)
+          end
+          preset.diff_expectations.expect name: "changelog" do |expect|
+            expect.change_type(:changed).path_pattern(/\/CHANGELOG\.md$/)
+          end
+          preset.diff_expectations.expect name: "version" do |expect|
+            expect.change_type(:changed).path_pattern(/\/version\.rb$/)
+          end
         end
         {
           basic_releases: releases_preset
@@ -70,12 +76,7 @@ module Yoshi
                omit_labels: nil,
                only_ids: nil,
                omit_ids: nil,
-               expect_paths: nil,
-               expect_changed_paths: nil,
-               expect_added_paths: nil,
-               expect_deleted_paths: nil,
-               expect_indented_paths: nil,
-               expect_diffs: nil,
+               expectation_expressions: nil,
                message: nil,
                detail: nil,
                automerge: false,
@@ -97,15 +98,7 @@ module Yoshi
       @pull_request_filter.only_ids Array(only_ids).map{ |spec| parse_ids spec }
       @pull_request_filter.omit_ids Array(omit_ids).map{ |spec| parse_ids spec }
       @diff_expectations = preset.diff_expectations
-      Array(expect_paths).each { |expr| @diff_expectations.expect_paths expr }
-      Array(expect_changed_paths).each { |expr| @diff_expectations.expect_changed_paths expr }
-      Array(expect_added_paths).each { |expr| @diff_expectations.expect_added_paths expr }
-      Array(expect_deleted_paths).each { |expr| @diff_expectations.expect_deleted_paths expr }
-      Array(expect_indented_paths).each { |expr| @diff_expectations.expect_indented_paths expr }
-      Array(expect_diffs).each do |expr|
-        params = parse_diff_expectations expr
-        @diff_expectations.expect_diffs(**params)
-      end
+      parse_expectation_expressions Array(expectation_expressions)
       message = message[1..].to_sym if message.to_s.start_with? ":"
       @message = message || preset.message
       detail = detail[1..].to_sym if detail.to_s.start_with? ":"
@@ -160,28 +153,58 @@ module Yoshi
       end
     end
 
-    def parse_diff_expectations expr
-      path_exprs = []
-      additions = []
-      removals = []
-      desc = nil
-      expr.split(/\t|\n/).each do |line|
-        prefix = line[0]
-        line = line[1..]
-        case prefix
-        when "$"
-          path_exprs << Regexp.new(line)
-        when "#"
-          desc = line
-        when "+"
-          additions << Regexp.new(line)
-        when "-"
-          removals << Regexp.new(line)
-        else
-          raise "Unknown prefix code #{prefix.inspect} when parsing expect-diffs"
+    def parse_expectation_expressions expressions
+      cur_expectation = nil
+      expressions.each do |expr|
+        cmd, param = expr.split "=", 2
+        cmd.downcase!
+        case cmd
+        when "expect"
+          cur_expectation = @diff_expectations.get param
+          unless cur_expectation
+            cur_expectation = DiffExpectation.new
+            @diff_expectations.expect cur_expectation, name: param
+          end
+        when "clear"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          cur_expectation.clear!
+        when "desc"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "desc requires a parameter" unless param
+          cur_expectation.desc param
+        when "created", "deleted", "changed", "indented"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          cur_expectation.change_type cmd.to_sym
+        when "path"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "path requires a parameter" unless param
+          cur_expectation.path_pattern Regexp.new param
+        when "allow-add"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "allow-add requires a parameter" unless param
+          cur_expectation.allowed_addition Regexp.new param
+        when "allow-del"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "allow-del requires a parameter" unless param
+          cur_expectation.allowed_deletion Regexp.new param
+        when "require-add"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "require-add requires a parameter" unless param
+          cur_expectation.required_addition Regexp.new param
+        when "require-del"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "require-del requires a parameter" unless param
+          cur_expectation.required_deletion Regexp.new param
+        when "deny-add"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "deny-add requires a parameter" unless param
+          cur_expectation.denied_addition Regexp.new param
+        when "deny-del"
+          raise "Need to start expectation configs with 'expect'" unless cur_expectation
+          raise "deny-del requires a parameter" unless param
+          cur_expectation.denied_deletion Regexp.new param
         end
       end
-      {path_patterns: path_exprs, additions: additions, removals: removals, desc: desc}
     end
 
     def validate_config
@@ -372,7 +395,7 @@ module Yoshi
     class Preset
       def initialize
         @pull_request_filter = PullRequestFilter.new
-        @diff_expectations = DiffExpectations.new
+        @diff_expectations = DiffExpectationSet.new
         @message = :pr_title_number
         @detail = :none
         @desc = "(no description provided)"
@@ -504,115 +527,195 @@ module Yoshi
         copy
       end
 
-      def match? pr_resource
-        number = pr_resource["number"].to_i
-        return false if !@only_ids.empty? && !@only_ids.any? { |range| range === number }
-        return false if !@omit_ids.empty? && @omit_ids.any? { |range| range === number }
-        title = pr_resource["title"]
-        return false if !@only_titles.empty? && !@only_titles.any? { |pattern| pattern === title }
-        return false if !@omit_titles.empty? && @omit_titles.any? { |pattern| pattern === title }
-        user = pr_resource["user"]["login"]
-        return false if !@only_users.empty? && !@only_users.any? { |pattern| pattern === user }
-        return false if !@omit_users.empty? && @omit_users.any? { |pattern| pattern === user }
-        labels = Array(pr_resource["labels"]).map { |label| label["name"] }
-        return false if !@only_labels.empty? && !@only_labels.intersect?(labels)
-        return false if !@omit_labels.empty? && @omit_labels.intersect?(labels)
+      def match? pr
+        return false if !@only_ids.empty? && !@only_ids.any? { |range| range === pr.id }
+        return false if !@omit_ids.empty? && @omit_ids.any? { |range| range === pr.id }
+        return false if !@only_titles.empty? && !@only_titles.any? { |pattern| pattern === pr.title }
+        return false if !@omit_titles.empty? && @omit_titles.any? { |pattern| pattern === pr.title }
+        return false if !@only_users.empty? && !@only_users.any? { |pattern| pattern === pr.user }
+        return false if !@omit_users.empty? && @omit_users.any? { |pattern| pattern === pr.user }
+        return false if !@only_labels.empty? && !@only_labels.intersect?(pr.labels)
+        return false if !@omit_labels.empty? && @omit_labels.intersect?(pr.labels)
         true
       end
     end
 
-    class DiffExpectations
+    class DiffExpectation
       def initialize
-        @expected = []
+        clear!
+      end
+
+      def clear!
+        @desc = nil
+        @path_patterns = []
+        @change_type = "any"
+        @allowed_additions = []
+        @allowed_deletions = []
+        @required_additions = []
+        @required_deletions = []
+        @denied_additions = []
+        @denied_deletions = []
+      end
+
+      def change_type val = nil
+        if val.nil?
+          @change_type
+        else
+          @change_type = val
+          self
+        end
+      end
+
+      def desc val = nil
+        if val.nil?
+          @desc || begin
+            list = []
+            list << (path_patterns.empty? ? "Any file" : "Files matching #{path_patterns.inspect}")
+            case change_type
+            when :created
+              list << "newly created"
+            when :deleted
+              list << "being deleted"
+            when :changed
+              list << "being changed"
+            when :indented
+              list << "containing only indentation changes"
+            end
+            list << "completely matching allowed regexes" if !allowed_additions.empty? || !allowed_deletions.empty?
+            list << "with further content requirements" if !required_additions.empty? || !required_deletions.empty? ||
+                                                           !denied_additions.empty? || !denied_deletions.empty?
+            list.join ", "
+          end
+        else
+          @desc = val
+          self
+        end
+      end
+
+      attr_reader :path_patterns
+      attr_reader :allowed_additions
+      attr_reader :allowed_deletions
+      attr_reader :required_additions
+      attr_reader :required_deletions
+      attr_reader :denied_additions
+      attr_reader :denied_deletions
+
+      def path_pattern regex
+        @path_patterns << regex
+        self
+      end
+
+      def allowed_addition regex
+        @allowed_additions << regex
+        self
+      end
+
+      def allowed_deletion regex
+        @allowed_deletions << regex
+        self
+      end
+
+      def required_addition regex
+        @required_additions << regex
+        self
+      end
+
+      def required_deletion regex
+        @required_deletions << regex
+        self
+      end
+
+      def denied_addition regex
+        @denied_additions << regex
+        self
+      end
+
+      def denied_deletion regex
+        @denied_deletions << regex
+        self
+      end
+
+      def match? file
+        return false if !path_patterns.empty? && !path_patterns.any? { |pat| pat === file.path }
+        case change_type
+        when :created
+          return false if file.type != "N"
+        when :deleted
+          return false if file.type != "D"
+        when :changed
+          return false if file.type != "C"
+        when :indented
+          return false unless file.only_indentation
+        end
+        check_allowed = !allowed_additions.empty? || !allowed_deletions.empty?
+        check_additional = !required_additions.empty? || !required_deletions.empty? ||
+                           !denied_additions.empty? || !denied_deletions.empty?
+        return true unless check_allowed || check_additional
+        remaining_required_additions = required_additions.dup
+        remaining_required_deletions = required_deletions.dup
+        file.each_hunk do |hunk|
+          hunk.each do |line|
+            line_without_mark = line[1..]
+            if line.start_with? "+"
+              return false if denied_additions.any? { |regex| regex.match? line_without_mark }
+              return false if check_allowed && !allowed_additions.any? { |regex| regex.match? line_without_mark }
+              remaining_required_additions.delete_if { |regex| regex.match? line_without_mark }
+            elsif line.start_with? "-"
+              return false if denied_deletions.any? { |regex| regex.match? line_without_mark }
+              return false if check_allowed && !allowed_deletions.any? { |regex| regex.match? line_without_mark }
+              remaining_required_deletions.delete_if { |regex| regex.match? line_without_mark }
+            end
+          end
+        end
+        remaining_required_additions.empty? && remaining_required_deletions.empty?
+      end
+    end
+
+    class DiffExpectationSet
+      def initialize
+        @named = {}
+        @anonymous = []
         yield self if block_given?
       end
 
-      def expect_paths path_pattern, desc: nil
-        desc ||= "Any file path matching: #{path_pattern}"
-        @expected << Expectation.new(desc) { |file| path_pattern === file.path }
-        self
-      end
-
-      def expect_changed_paths path_pattern, desc: nil
-        desc ||= "Any changed file path matching: #{path_pattern}"
-        @expected << Expectation.new(desc) { |file| file.type == "C" && path_pattern === file.path }
-        self
-      end
-
-      def expect_added_paths path_pattern, desc: nil
-        desc ||= "Any added file path matching: #{path_pattern}"
-        @expected << Expectation.new(desc) { |file| file.type == "A" && path_pattern === file.path }
-        self
-      end
-
-      def expect_deleted_paths path_pattern, desc: nil
-        desc ||= "Any deleted file path matching: #{path_pattern}"
-        @expected << Expectation.new(desc) { |file| file.type == "D" && path_pattern === file.path }
-        self
-      end
-
-      def expect_indented_paths path_pattern, desc: nil
-        desc ||= "Any file with only indentation changes and path matching: #{path_pattern}"
-        @expected << Expectation.new(desc) { |file| file.only_indentation && path_pattern === file.path }
-        self
-      end
-
-      def expect_diffs path_patterns: nil, additions: nil, removals: nil, desc: nil
-        additions = Array additions
-        removals = Array removals
-        path_patterns = Array(path_patterns)
-        desc ||= "Any file with certain specific changes"
-        @expected << Expectation.new(desc) do |file|
-          (path_patterns.empty? || path_patterns.any? { |pattern| pattern === file.path }) &&
-            file.reduce_hunks(true) do |val, hunk|
-              next false unless val
-              hunk.all? do |line|
-                line_without_mark = line[1..]
-                if line.start_with? "+"
-                  additions.any? { |regex| regex.match? line_without_mark }
-                elsif line.start_with? "-"
-                  removals.any? { |regex| regex.match? line_without_mark }
-                else
-                  true
-                end
-              end
-            end
-        end
-        self
-      end
-
-      def expect_generic expectation
-        @expected << expectation
-        self
-      end
-
       def clone
-        DiffExpectations.new do |copy|
-          @expected.each do |expectation|
-            copy.expect_generic expectation
+        DiffExpectationSet.new do |copy|
+          @named.each do |name, expectation|
+            copy.expect expectation, name: name
+          end
+          @anonymous.each do |expectation|
+            copy.expect expectation
           end
         end
       end
 
-      def matching_expectation diff_file
-        @expected.each do |expectation|
-          return expectation if expectation.match? diff_file
-        end
-        nil
+      def empty?
+        @named.empty? && @anonymous.empty?
       end
 
-      class Expectation
-        def initialize desc, &block
-          raise "Block required" unless block
-          @desc = desc
-          @block = block
+      def get name
+        @named[name]
+      end
+
+      def clear! name
+        @named.delete name
+        self
+      end
+
+      def matching_expectation diff_file
+        (@named.values + @anonymous).find { |expectation| expectation.match? diff_file }
+      end
+
+      def expect expectation = nil, name: nil
+        expectation ||= DiffExpectation.new
+        yield expectation if block_given?
+        if name
+          raise "Name #{name} already exists" if @named.key? name
+          @named[name] = expectation
+        else
+          @anonymous << expectation
         end
-  
-        attr_reader :desc
-  
-        def match? pr_file
-          @block.call pr_file
-        end
+        self
       end
     end
 
@@ -629,8 +732,9 @@ module Yoshi
           results_page = JSON.parse context.capture(["gh", "api", path], e: true)
           break if results_page.empty?
           results_page.each do |pr_resource|
-            next unless pull_request_filter.match? pr_resource
-            results << PullRequest.new(context, repo, pr_resource, diff_expectations)
+            pr = PullRequest.new context, repo, pr_resource, diff_expectations
+            next unless pull_request_filter.match? pr
+            results << pr
           end
           page += 1
         end
@@ -638,15 +742,29 @@ module Yoshi
       end
 
       def initialize context, repo, pr_resource, diff_expectations
+        @resource = pr_resource
         @context = context
         @repo = repo
-        @id = pr_resource["number"]
-        @title = pr_resource["title"]
         @diff_expectations = diff_expectations
       end
 
-      attr_reader :id
-      attr_reader :title
+      attr_reader :resource
+
+      def id
+        @id ||= resource["number"].to_i
+      end
+
+      def title
+        @title ||= resource["title"]
+      end
+
+      def user
+        @user ||= resource["user"]["login"]
+      end
+
+      def labels
+        @labels ||= Array(resource["labels"]).map { |label| label["name"] }
+      end
 
       def raw_diff_data
         @raw_diff_data ||= begin
@@ -751,28 +869,7 @@ module Yoshi
       attr_reader :hunk_lines_count
       attr_reader :matching_expectation
 
-      def reduce_hunks value
-        analyze_changes do |hunk|
-          value = yield value, hunk
-        end
-        value
-      end
-
-      private
-
-      def initial_analysis
-        @only_indentation = true
-        @common_directory = nil
-        @added_lines_count = 0
-        @deleted_lines_count = 0
-        @hunk_lines_count = 0
-        analyze_changes do |hunk|
-          analyze_only_indentation hunk
-          analyze_counts hunk
-        end
-      end
-
-      def analyze_changes
+      def each_hunk
         hunk = nil
         @lines.each do |line|
           if line.start_with? "@@"
@@ -783,6 +880,20 @@ module Yoshi
           end
         end
         yield hunk if hunk && !hunk.empty?
+      end
+
+      private
+
+      def initial_analysis
+        @only_indentation = true
+        @common_directory = nil
+        @added_lines_count = 0
+        @deleted_lines_count = 0
+        @hunk_lines_count = 0
+        each_hunk do |hunk|
+          analyze_only_indentation hunk
+          analyze_counts hunk
+        end
       end
 
       def analyze_only_indentation hunk
@@ -855,10 +966,10 @@ module Yoshi
           "In many cases, you can use a preset configuration by passing its " \
             "name as an argument. Presets generally set a particular filter " \
             "on the selected pull requests and a particular set of expected " \
-            "diffs for those pulls. See the description of PRESET_NAME for a " \
-            "list of supported preset names. Otherwise you can configure the " \
-            "pull request selectors and diff expectations explicitly by " \
-            "passing flags.",
+            "diffs for those pulls. See the description of CONFIG for a list " \
+            "of supported preset names. Otherwise you can configure the pull " \
+            "request selectors and diff expectations explicitly by passing " \
+            "flags.",
           "",
           "To automerge pull requests with expected diffs, pass --automerge. " \
             "This mode will skip any pull requests with unexpected diffs. " \
@@ -868,14 +979,12 @@ module Yoshi
             "any unexpected diffs are displayed, and the tool prompts for " \
             "confirmation on each merge."
 
-        optional_arg :preset_name, accept: template.batch_reviewer.preset_names do |arg|
-          arg.desc "The name of an optional preset configuration"
-          value_descs = template.batch_reviewer.preset_names.map do |name|
-            "* #{name}: #{template.batch_reviewer.lookup_preset(name).desc}"
+        flag :config, accept: template.batch_reviewer.preset_names do |flag|
+          flag.desc "The name of an optional preset configuration"
+          flag.long_desc "The name of an optional preset configuration. Supported values are:", ""
+          template.batch_reviewer.preset_names.each do |name|
+            flag.long_desc "* #{name}: #{template.batch_reviewer.lookup_preset(name).desc}"
           end
-          arg.long_desc \
-            "The name of an optional preset configuration. Supported values are:",
-            "", *value_descs
         end
 
         flag_group desc: "Pull request selectors" do
@@ -901,21 +1010,6 @@ module Yoshi
                desc: "pull request ID or range of IDs to omit"
         end
 
-        flag_group desc: "Diff expectations" do
-          flag :expect_path, accept: Regexp, handler: :push, default: [],
-               desc: "expect diffs in files matching the given path regex"
-          flag :expect_changed_path, accept: Regexp, handler: :push, default: [],
-               desc: "expect changes in files matching the given path regex"
-          flag :expect_added_path, accept: Regexp, handler: :push, default: [],
-               desc: "expect added files matching the given path regex"
-          flag :expect_deleted_path, accept: Regexp, handler: :push, default: [],
-               desc: "expect deleted files matching the given path regex"
-          flag :expect_indented_path, accept: Regexp, handler: :push, default: [],
-               desc: "expect indentation changes in files matching the given path regex"
-          flag :expect_diffs, accept: String, handler: :push, default: [],
-               desc: "expect diffs by content"
-        end
-
         flag_group desc: "Commit messages" do
           flag :message, accept: String,
                desc: "custom commit message, or :pr_title, :pr_title_number, or :shared"
@@ -929,16 +1023,22 @@ module Yoshi
                desc: "path to the editor program to use for editing commit message details"
         end
 
-        flag :automerge,
-             desc: "automatically merge pull requests whose diffs satisfy expectations"
-        flag :assert_diffs_clean,
-             desc: "assert that all selected pull request diffs satisfy expectations"
-        flag :merge_delay, accept: Integer, default: 0,
-             desc: "delay in seconds between subsequent merges"
-        flag :max_diff_size, accept: Integer, default: 500,
-             desc: "maximum size in lines for displaying unexpected diffs"
-        flag :dry_run,
-             desc: "execute in dry run mode, which does not approve or merge pull requests"
+        flag_group desc: "Execution options" do
+          flag :automerge,
+              desc: "automatically merge pull requests whose diffs satisfy expectations"
+          flag :assert_diffs_clean,
+              desc: "assert that all selected pull request diffs satisfy expectations"
+          flag :merge_delay, accept: Integer, default: 0,
+              desc: "delay in seconds between subsequent merges"
+          flag :max_diff_size, accept: Integer, default: 500,
+              desc: "maximum size in lines for displaying unexpected diffs"
+          flag :dry_run,
+              desc: "execute in dry run mode, which does not approve or merge pull requests"
+        end
+
+        remaining_args :expectation_expressions do
+          desc "expectation expressions"
+        end
 
         static :batch_reviewer, template.batch_reviewer
 
@@ -946,7 +1046,7 @@ module Yoshi
         include :terminal
 
         def run
-          batch_reviewer.config preset_name: preset_name,
+          batch_reviewer.config preset_name: config,
                                 only_titles: only_title_re + only_title,
                                 omit_titles: omit_title_re + omit_title,
                                 only_users: only_user,
@@ -955,12 +1055,7 @@ module Yoshi
                                 omit_labels: omit_label,
                                 only_ids: only_ids,
                                 omit_ids: omit_ids,
-                                expect_paths: expect_path,
-                                expect_changed_paths: expect_changed_path,
-                                expect_added_paths: expect_added_path,
-                                expect_deleted_paths: expect_deleted_path,
-                                expect_indented_paths: expect_indented_path,
-                                expect_diffs: expect_diffs,
+                                expectation_expressions: expectation_expressions,
                                 message: message,
                                 detail: detail,
                                 automerge: automerge,
