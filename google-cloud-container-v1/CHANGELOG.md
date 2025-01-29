@@ -1,5 +1,16 @@
 # Release History
 
+### 1.6.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Fixed an incorrect link ([#28758](https://github.com/googleapis/google-cloud-ruby/issues/28758)) 
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 1.5.0 (2024-12-10)
 
 #### Features
