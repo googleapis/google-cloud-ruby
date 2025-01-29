@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.63.0 (2025-01-28)
+
+#### Features
+
+* add per-modality token count break downs for GenAI APIs ([#28509](https://github.com/googleapis/google-cloud-ruby/issues/28509)) 
+* Added DeployedModel#speculatie_decoding_spec ([#28299](https://github.com/googleapis/google-cloud-ruby/issues/28299)) 
+* Support FeatureView service account ([#28524](https://github.com/googleapis/google-cloud-ruby/issues/28524)) 
+* Support for model registry checkpoints ([#28786](https://github.com/googleapis/google-cloud-ruby/issues/28786)) 
+* Support code execution tool ([#28525](https://github.com/googleapis/google-cloud-ruby/issues/28525)) 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+
 ### 0.62.0 (2025-01-23)
 
 #### Features
