@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require "gapic/common/polling_harness"
 
 module Google
   module Cloud
@@ -101,6 +102,56 @@ module Google
               warn "WARNING: #{caller(2).first}: At most one GcRule field can be set. " \
                    "Setting GcRule##{cur} automatically clears GcRule##{last}. " \
                    "To suppress this warning, explicitly clear GcRule##{last} to nil first."
+            end
+          end
+
+          module BigtableTableAdmin
+            class Client # rubocop:disable Style/Documentation
+              ##
+              # Wait until the given table consistently reflects mutations up
+              # to this point.
+              #
+              # @param name [String] The table name, in the form
+              #     `projects/{project}/instances/{instance}/tables/{table}`.
+              # @param consistency_token [String] A consistency token
+              #     identifying the mutations to be checked. If not provided,
+              #     one is generated automatically.
+              # @param retry_policy [Gapic::Common::RetryPolicy] A retry policy.
+              #     If not provided, uses the given initial_delay, max_delay,
+              #     multipler, timeout, and retry_codes.
+              # @param initial_delay [Numeric] Initial delay in seconds.
+              #     Defaults to 1.
+              # @param max_delay [Numeric] Maximum delay in seconds.
+              #     Defaults to 15.
+              # @param multiplier [Numeric] The delay scaling factor for each
+              #     subsequent retry attempt. Defaults to 1.3.
+              # @param retry_codes [Array<String|Integer>] List of retry codes.
+              # @param timeout [Numeric] Timeout threshold value in seconds.
+              #     Defaults to 3600 (1 hour).
+              #
+              # @return [nil] If the table is now consistent.
+              # @return [String] The consistency token if the wait timed out.
+              #     The returned token can be passed into another call to wait
+              #     again for the same mutation set.
+              #
+              def wait_for_replication name, consistency_token: nil,
+                                       retry_policy: nil,
+                                       initial_delay: nil,
+                                       max_delay: nil,
+                                       multiplier: nil,
+                                       retry_codes: nil,
+                                       timeout: nil,
+                                       mock_delay: false
+                consistency_token ||= generate_consistency_token(name: name).consistency_token
+                poller = Gapic::Common::PollingHarness.new retry_policy: retry_policy,
+                                                           initial_delay: initial_delay, max_delay: max_delay,
+                                                           multiplier: multiplier, retry_codes: retry_codes,
+                                                           timeout: timeout
+                poller.wait timeout_result: consistency_token, wait_sentinel: :wait, mock_delay: mock_delay do
+                  response = check_consistency name: name, consistency_token: consistency_token
+                  response.consistent ? nil : :wait
+                end
+              end
             end
           end
         end
