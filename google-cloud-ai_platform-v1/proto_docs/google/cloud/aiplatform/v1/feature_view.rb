@@ -78,6 +78,10 @@ module Google
         #     contains the required configurations to create an index from source data,
         #     so that approximate nearest neighbor (a.k.a ANN) algorithms search can be
         #     performed during online serving.
+        # @!attribute [rw] optimized_config
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::OptimizedConfig]
+        #     Optional. Configuration for FeatureView created under Optimized
+        #     FeatureOnlineStore.
         # @!attribute [rw] service_agent_type
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::ServiceAgentType]
         #     Optional. Service agent type used during data sync. By default, the Vertex
@@ -259,6 +263,19 @@ module Google
           #   @return [::Integer]
           #     Optional. The RAG corpus id corresponding to this FeatureView.
           class VertexRagSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for FeatureViews created in Optimized FeatureOnlineStore.
+          # @!attribute [rw] automatic_resources
+          #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
+          #     Optional. A description of resources that the FeatureView uses, which to
+          #     large degree are decided by Vertex AI, and optionally allows only a
+          #     modest additional configuration. If min_replica_count is not set, the
+          #     default value is 2. If max_replica_count is not set, the default value
+          #     is 6. The max allowed replica count is 1000.
+          class OptimizedConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
