@@ -523,7 +523,7 @@
   "google-cloud-oracle_database+FILLER": "0.0.0",
   "google-cloud-oracle_database-v1": "0.4.0",
   "google-cloud-oracle_database-v1+FILLER": "0.0.0",
-  "google-cloud-orchestration-airflow-service": "1.4.1",
+  "google-cloud-orchestration-airflow-service": "1.5.0",
   "google-cloud-orchestration-airflow-service+FILLER": "0.0.0",
   "google-cloud-orchestration-airflow-service-v1": "1.3.0",
   "google-cloud-orchestration-airflow-service-v1+FILLER": "0.0.0",
