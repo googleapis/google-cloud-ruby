@@ -147,7 +147,7 @@
   "google-cloud-bigquery-data_transfer-v1+FILLER": "0.0.0",
   "google-cloud-bigquery-migration": "1.2.1",
   "google-cloud-bigquery-migration+FILLER": "0.0.0",
-  "google-cloud-bigquery-migration-v2": "0.13.0",
+  "google-cloud-bigquery-migration-v2": "0.14.0",
   "google-cloud-bigquery-migration-v2+FILLER": "0.0.0",
   "google-cloud-bigquery-reservation": "1.5.1",
   "google-cloud-bigquery-reservation+FILLER": "0.0.0",
