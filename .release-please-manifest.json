@@ -453,7 +453,7 @@
   "google-cloud-managed_kafka-v1+FILLER": "0.0.0",
   "google-cloud-media_translation": "0.5.1",
   "google-cloud-media_translation+FILLER": "0.0.0",
-  "google-cloud-media_translation-v1beta1": "0.10.0",
+  "google-cloud-media_translation-v1beta1": "0.11.0",
   "google-cloud-media_translation-v1beta1+FILLER": "0.0.0",
   "google-cloud-memcache": "1.5.1",
   "google-cloud-memcache+FILLER": "0.0.0",
