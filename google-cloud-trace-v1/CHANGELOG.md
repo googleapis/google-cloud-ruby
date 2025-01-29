@@ -1,5 +1,14 @@
 # Release History
 
+### 1.3.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
 ### 1.2.0 (2024-12-11)
 
 #### Features
