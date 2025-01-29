@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.5.0 (2025-01-28)
+
+#### Features
+
+* Developer Preview support for moderation, attendance reports, and auto-generated artifacts 
+* Support for the create_member, get_member, list_members, and delete_member RPCs ([#28785](https://github.com/googleapis/google-cloud-ruby/issues/28785)) 
+* Update Ruby version requirement to 3.0 
+#### Bug Fixes
+
+* Set the OAuth scopes for default credentials 
+#### Documentation
+
+* A number of items are no longer marked as Developer Preview 
+* Various reference documentation updates 
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.4.0 (2024-12-10)
 
 #### Features
