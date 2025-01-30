@@ -62,6 +62,32 @@ module Google
         end
 
         ##
+        # Retrieve a client for instance administration. This client should be
+        # used for instance administration operations such as managing
+        # clusters, instances, and app profiles. See
+        # https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-admin-v2/latest/Google-Cloud-Bigtable-Admin-V2-BigtableInstanceAdmin-Client
+        # for documentation on this class.
+        #
+        # @return [Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client]
+        #
+        def instance_admin_client
+          service.instances
+        end
+
+        ##
+        # Retrieve a client for table administration. This client should be
+        # used for table administration operations such as managing tables,
+        # backups, snapshots, and authorized views. See
+        # https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-admin-v2/latest/Google-Cloud-Bigtable-Admin-V2-BigtableTableAdmin-Client
+        # for documentation on this class.
+        #
+        # @return [Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client]
+        #
+        def table_admin_client
+          service.tables
+        end
+
+        ##
         # The identifier for the Cloud Bigtable project.
         #
         # @return [String] Project ID.

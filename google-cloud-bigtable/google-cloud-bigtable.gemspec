@@ -21,10 +21,10 @@ Gem::Specification.new do |gem|
                        "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "concurrent-ruby", "~> 1.0"
-  gem.add_dependency "google-cloud-bigtable-admin-v2", ">= 0.0", "< 2.a"
-  gem.add_dependency "google-cloud-bigtable-v2", ">= 0.14", "< 2.a"
+  gem.add_dependency "google-cloud-bigtable-admin-v2", "~> 1.7"
+  gem.add_dependency "google-cloud-bigtable-v2", "~> 1.5"
   gem.add_dependency "google-cloud-core", "~> 1.5"
 end

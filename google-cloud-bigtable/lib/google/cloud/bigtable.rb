@@ -27,6 +27,9 @@ module Google
     # See {file:OVERVIEW.md Bigtable Overview}.
     #
     module Bigtable
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/AbcSize
+
       ##
       # Service for managing Cloud Bigtable instances and tables and for reading from and
       # writing to Bigtable tables.
@@ -74,8 +77,6 @@ module Google
       #
       #   client = Google::Cloud::Bigtable.new
       #
-      # rubocop:disable Metrics/CyclomaticComplexity
-      # rubocop:disable Metrics/AbcSize
       def self.new project_id: nil,
                    credentials: nil,
                    emulator_host: nil,
@@ -108,7 +109,6 @@ module Google
       end
       # rubocop:enable Metrics/CyclomaticComplexity
       # rubocop:enable Metrics/AbcSize
-
 
       ##
       # Configure the Google Cloud Bigtable library.
