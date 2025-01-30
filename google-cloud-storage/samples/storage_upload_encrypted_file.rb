@@ -24,7 +24,7 @@ def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryp
   # file_name = "your-file-name"
 
   # The key to encrypt the object with
-  # encryption_key = "TIbv/fjexq+VmtXzAlc63J4z5kFmWJ6NdAPQulQBT7g="
+  # encryption_key = "your-enncryption-key"
 
   require "google/cloud/storage"
 
