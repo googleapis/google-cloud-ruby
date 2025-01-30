@@ -1,0 +1,17 @@
+{
+    "api_id": "language.googleapis.com",
+    "api_shortname": "language",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-language-v2/latest",
+    "distribution_name": "google-cloud-language-v2",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "language",
+    "name_pretty": "Cloud Natural Language V2 API",
+    "product_documentation": "https://cloud.google.com/natural-language/docs",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations, to developers. Note that google-cloud-language-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-language instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/natural-language/docs",
+    "library_type": "GAPIC_AUTO"
+}

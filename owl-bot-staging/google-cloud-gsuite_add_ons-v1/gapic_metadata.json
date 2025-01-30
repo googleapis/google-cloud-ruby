@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.gsuiteaddons.v1",
+  "libraryPackage": "::Google::Cloud::GSuiteAddOns::V1",
+  "services": {
+    "GSuiteAddOns": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client",
+          "rpcs": {
+            "GetAuthorization": {
+              "methods": [
+                "get_authorization"
+              ]
+            },
+            "CreateDeployment": {
+              "methods": [
+                "create_deployment"
+              ]
+            },
+            "ReplaceDeployment": {
+              "methods": [
+                "replace_deployment"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "get_deployment"
+              ]
+            },
+            "ListDeployments": {
+              "methods": [
+                "list_deployments"
+              ]
+            },
+            "DeleteDeployment": {
+              "methods": [
+                "delete_deployment"
+              ]
+            },
+            "InstallDeployment": {
+              "methods": [
+                "install_deployment"
+              ]
+            },
+            "UninstallDeployment": {
+              "methods": [
+                "uninstall_deployment"
+              ]
+            },
+            "GetInstallStatus": {
+              "methods": [
+                "get_install_status"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
