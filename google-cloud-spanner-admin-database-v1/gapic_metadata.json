@@ -110,6 +110,11 @@
                 "list_database_roles"
               ]
             },
+            "AddSplitPoints": {
+              "methods": [
+                "add_split_points"
+              ]
+            },
             "CreateBackupSchedule": {
               "methods": [
                 "create_backup_schedule"

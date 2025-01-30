@@ -1195,6 +1195,62 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client
     end
   end
 
+  def test_add_split_points
+    # Create test objects.
+    client_result = ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    database = "hello world"
+    split_points = [{}]
+    initiator = "hello world"
+
+    add_split_points_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::ServiceStub.stub :transcode_add_split_points_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, add_split_points_client_stub do
+        # Create client
+        client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.add_split_points({ database: database, split_points: split_points, initiator: initiator }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.add_split_points database: database, split_points: split_points, initiator: initiator do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.add_split_points ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.add_split_points({ database: database, split_points: split_points, initiator: initiator }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.add_split_points(::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, add_split_points_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_backup_schedule
     # Create test objects.
     client_result = ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule.new
