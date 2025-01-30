@@ -608,6 +608,61 @@ module Google
           end
         end
 
+        # User-defined JavaScript function that can transform or filter a Pub/Sub
+        # message.
+        # @!attribute [rw] function_name
+        #   @return [::String]
+        #     Required. Name of the JavasScript function that should applied to Pub/Sub
+        #     messages.
+        # @!attribute [rw] code
+        #   @return [::String]
+        #     Required. JavaScript code that contains a function `function_name` with the
+        #     below signature:
+        #
+        #       /**
+        #       * Transforms a Pub/Sub message.
+        #
+        #       * @return \\{(Object<string, (string | Object<string, string>)>|null)} - To
+        #       * filter a message, return `null`. To transform a message return a map
+        #       * with the following keys:
+        #       *   - (required) 'data' : \\{string}
+        #       *   - (optional) 'attributes' : \\{Object<string, string>}
+        #       * Returning empty `attributes` will remove all attributes from the
+        #       * message.
+        #       *
+        #       * @param  \\{(Object<string, (string | Object<string, string>)>} Pub/Sub
+        #       * message. Keys:
+        #       *   - (required) 'data' : \\{string}
+        #       *   - (required) 'attributes' : \\{Object<string, string>}
+        #       *
+        #       * @param  \\{Object<string, any>} metadata - Pub/Sub message metadata.
+        #       * Keys:
+        #       *   - (required) 'message_id'  : \\{string}
+        #       *   - (optional) 'publish_time': \\{string} YYYY-MM-DDTHH:MM:SSZ format
+        #       *   - (optional) 'ordering_key': \\{string}
+        #       */
+        #
+        #       function <function_name>(message, metadata) {
+        #       }
+        class JavaScriptUDF
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # All supported message transforms types.
+        # @!attribute [rw] javascript_udf
+        #   @return [::Google::Cloud::PubSub::V1::JavaScriptUDF]
+        #     Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's
+        #     are specified on a resource, each must have a unique `function_name`.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. If set to true, the transform is enabled. If false, the transform
+        #     is disabled and will not be applied to messages. Defaults to `true`.
+        class MessageTransform
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A topic resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -656,6 +711,10 @@ module Google
         # @!attribute [rw] ingestion_data_source_settings
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings]
         #     Optional. Settings for ingestion from a data source into this topic.
+        # @!attribute [rw] message_transforms
+        #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
+        #     Optional. Transforms to be applied to messages published to the topic.
+        #     Transforms are applied in the order specified.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1056,12 +1115,16 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::Subscription::AnalyticsHubSubscriptionInfo]
         #     Output only. Information about the associated Analytics Hub subscription.
         #     Only set if the subscritpion is created by Analytics Hub.
+        # @!attribute [rw] message_transforms
+        #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
+        #     Optional. Transforms to be applied to messages before they are delivered to
+        #     subscribers. Transforms are applied in the order specified.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Information about an associated Analytics Hub subscription
-          # (https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions).
+          # Information about an associated [Analytics Hub
+          # subscription](https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions).
           # @!attribute [rw] listing
           #   @return [::String]
           #     Optional. The name of the associated Analytics Hub listing resource.
