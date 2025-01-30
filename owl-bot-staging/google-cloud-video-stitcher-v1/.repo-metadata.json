@@ -1,0 +1,17 @@
+{
+    "api_id": "videostitcher.googleapis.com",
+    "api_shortname": "videostitcher",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-video-stitcher-v1/latest",
+    "distribution_name": "google-cloud-video-stitcher-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "videostitcher",
+    "name_pretty": "Video Stitcher V1 API",
+    "product_documentation": "https://cloud.google.com/video-stitcher/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Video Stitcher API allows you to manipulate video content to dynamically insert ads prior to delivery to client devices. Using the Video Stitcher API, you can monetize your video-on-demand (VOD) and livestreaming videos by inserting ads as described by metadata stored on ad servers. Note that google-cloud-video-stitcher-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-video-stitcher instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/video-stitcher/",
+    "library_type": "GAPIC_AUTO"
+}
