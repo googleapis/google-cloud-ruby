@@ -726,6 +726,66 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#add_split_points AddSplitPoints}.
+            # @!attribute [rw] database
+            #   @return [::String]
+            #     Required. The database on whose tables/indexes split points are to be
+            #     added. Values are of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>`.
+            # @!attribute [rw] split_points
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::SplitPoints>]
+            #     Required. The split points to add.
+            # @!attribute [rw] initiator
+            #   @return [::String]
+            #     Optional. A user-supplied tag associated with the split points.
+            #     For example, "intital_data_load", "special_event_1".
+            #     Defaults to "CloudAddSplitPointsAPI" if not specified.
+            #     The length of the tag must not exceed 50 characters,else will be trimmed.
+            #     Only valid UTF8 characters are allowed.
+            class AddSplitPointsRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The response for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#add_split_points AddSplitPoints}.
+            class AddSplitPointsResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The split points of a table/index.
+            # @!attribute [rw] table
+            #   @return [::String]
+            #     The table to split.
+            # @!attribute [rw] index
+            #   @return [::String]
+            #     The index to split.
+            #     If specified, the `table` field must refer to the index's base table.
+            # @!attribute [rw] keys
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::SplitPoints::Key>]
+            #     Required. The list of split keys, i.e., the split boundaries.
+            # @!attribute [rw] expire_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Optional. The expiration timestamp of the split points.
+            #     A timestamp in the past means immediate expiration.
+            #     The maximum value can be 30 days in the future.
+            #     Defaults to 10 days in the future if not specified.
+            class SplitPoints
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # A split key.
+              # @!attribute [rw] key_parts
+              #   @return [::Google::Protobuf::ListValue]
+              #     Required. The column values making up the split key.
+              class Key
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
             # Indicates the type of the restore source.
             module RestoreSourceType
               # No restore associated.

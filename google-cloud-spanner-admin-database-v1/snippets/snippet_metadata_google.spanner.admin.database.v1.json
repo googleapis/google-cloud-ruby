@@ -812,6 +812,46 @@
       ]
     },
     {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_AddSplitPoints_sync",
+      "title": "Snippet for the add_split_points call in the DatabaseAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#add_split_points.",
+      "file": "database_admin/add_split_points.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_split_points",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#add_split_points",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "AddSplitPoints",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.AddSplitPoints",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "spanner_v1_generated_DatabaseAdmin_CreateBackupSchedule_sync",
       "title": "Snippet for the create_backup_schedule call in the DatabaseAdmin service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#create_backup_schedule.",
