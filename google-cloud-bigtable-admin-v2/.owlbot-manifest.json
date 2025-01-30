@@ -120,6 +120,7 @@
   "static": [
     ".OwlBot.yaml",
     "lib/google/cloud/bigtable/admin/v2/bigtable_table_admin/helpers.rb",
+    "test/google/cloud/bigtable/admin/v2/bigtable_table_admin_helpers_test.rb",
     "test/google/cloud/bigtable/admin/v2/gcrule_oneof_test.rb"
   ]
 }
