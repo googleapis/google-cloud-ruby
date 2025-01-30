@@ -160,6 +160,11 @@ module Google
                       initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
                     }
 
+                    default_config.rpcs.add_split_points.timeout = 3600.0
+                    default_config.rpcs.add_split_points.retry_policy = {
+                      initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
+                    }
+
                     default_config.rpcs.create_backup_schedule.timeout = 3600.0
                     default_config.rpcs.create_backup_schedule.retry_policy = {
                       initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -2619,6 +2624,101 @@ module Google
                 end
 
                 ##
+                # Adds split points to specified tables, indexes of a database.
+                #
+                # @overload add_split_points(request, options = nil)
+                #   Pass arguments to `add_split_points` via a request object, either of type
+                #   {::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload add_split_points(database: nil, split_points: nil, initiator: nil)
+                #   Pass arguments to `add_split_points` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param database [::String]
+                #     Required. The database on whose tables/indexes split points are to be
+                #     added. Values are of the form
+                #     `projects/<project>/instances/<instance>/databases/<database>`.
+                #   @param split_points [::Array<::Google::Cloud::Spanner::Admin::Database::V1::SplitPoints, ::Hash>]
+                #     Required. The split points to add.
+                #   @param initiator [::String]
+                #     Optional. A user-supplied tag associated with the split points.
+                #     For example, "intital_data_load", "special_event_1".
+                #     Defaults to "CloudAddSplitPointsAPI" if not specified.
+                #     The length of the tag must not exceed 50 characters,else will be trimmed.
+                #     Only valid UTF8 characters are allowed.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/spanner/admin/database/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new
+                #
+                #   # Call the add_split_points method.
+                #   result = client.add_split_points request
+                #
+                #   # The returned object is of type Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse.
+                #   p result
+                #
+                def add_split_points request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.add_split_points.metadata.to_h
+
+                  # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
+                  metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.database
+                    header_params["database"] = request.database
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.add_split_points.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.add_split_points.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @database_admin_stub.call_rpc :add_split_points, request, options: options do |response, operation|
+                    yield response, operation if block_given?
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Creates a new backup schedule.
                 #
                 # @overload create_backup_schedule(request, options = nil)
@@ -3345,6 +3445,11 @@ module Google
                     #
                     attr_reader :list_database_roles
                     ##
+                    # RPC-specific configuration for `add_split_points`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :add_split_points
+                    ##
                     # RPC-specific configuration for `create_backup_schedule`
                     # @return [::Gapic::Config::Method]
                     #
@@ -3412,6 +3517,8 @@ module Google
                       @list_backup_operations = ::Gapic::Config::Method.new list_backup_operations_config
                       list_database_roles_config = parent_rpcs.list_database_roles if parent_rpcs.respond_to? :list_database_roles
                       @list_database_roles = ::Gapic::Config::Method.new list_database_roles_config
+                      add_split_points_config = parent_rpcs.add_split_points if parent_rpcs.respond_to? :add_split_points
+                      @add_split_points = ::Gapic::Config::Method.new add_split_points_config
                       create_backup_schedule_config = parent_rpcs.create_backup_schedule if parent_rpcs.respond_to? :create_backup_schedule
                       @create_backup_schedule = ::Gapic::Config::Method.new create_backup_schedule_config
                       get_backup_schedule_config = parent_rpcs.get_backup_schedule if parent_rpcs.respond_to? :get_backup_schedule
