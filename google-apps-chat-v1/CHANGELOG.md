@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2025-01-30)
+
+#### Features
+
+* Support for custom emoji annotations ([#28788](https://github.com/googleapis/google-cloud-ruby/issues/28788)) 
+
 ### 0.8.0 (2025-01-28)
 
 #### Features
