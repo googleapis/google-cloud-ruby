@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.1 (2025-01-30)
+
+#### Documentation
+
+* Update the API name ([#28790](https://github.com/googleapis/google-cloud-ruby/issues/28790)) 
+
 ### 0.6.0 (2025-01-29)
 
 #### Features
