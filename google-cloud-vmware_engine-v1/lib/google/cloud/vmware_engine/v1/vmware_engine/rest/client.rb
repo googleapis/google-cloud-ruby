@@ -467,10 +467,10 @@ module Google
               #     descending order based on the `name` value using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListPrivateCloudsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PrivateCloud>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListPrivateCloudsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PrivateCloud>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -522,7 +522,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_private_clouds request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_private_clouds, "private_clouds", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1106,10 +1108,10 @@ module Google
               #     descending order based on the `name` value using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListClustersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::Cluster>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListClustersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::Cluster>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1161,7 +1163,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_clusters request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_clusters, "clusters", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1815,10 +1819,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListExternalAddressesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ExternalAddress>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListExternalAddressesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ExternalAddress>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1870,7 +1874,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_external_addresses request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_external_addresses, "external_addresses", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2442,10 +2448,10 @@ module Google
               #     When paginating, all other parameters provided to
               #     `ListSubnetsRequest` must match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::Subnet>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::Subnet>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2497,7 +2503,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_subnets request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_subnets, "subnets", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2752,10 +2760,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ExternalAccessRule>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListExternalAccessRulesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ExternalAccessRule>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2807,7 +2815,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_external_access_rules request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_external_access_rules, "external_access_rules", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3302,10 +3312,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListLoggingServersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::LoggingServer>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListLoggingServersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::LoggingServer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3357,7 +3367,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_logging_servers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_logging_servers, "logging_servers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3843,10 +3855,10 @@ module Google
               #     (name = "standard-72")
               #     ```
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::NodeType>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::NodeType>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3898,7 +3910,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_node_types request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_node_types, "node_types", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4731,10 +4745,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::NetworkPeering>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListNetworkPeeringsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::NetworkPeering>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4786,7 +4800,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_network_peerings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_network_peerings, "network_peerings", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5396,10 +5412,10 @@ module Google
               #     `ListHcxActivationKeys` must match the call that provided the page
               #     token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListHcxActivationKeysResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::HcxActivationKey>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListHcxActivationKeysResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::HcxActivationKey>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -5451,7 +5467,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_hcx_activation_keys request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_hcx_activation_keys, "hcx_activation_keys", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5689,10 +5707,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListNetworkPoliciesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::NetworkPolicy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListNetworkPoliciesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::NetworkPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -5744,7 +5762,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_network_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_network_policies, "network_policies", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -6171,10 +6191,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListManagementDnsZoneBindingsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::ManagementDnsZoneBinding>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -6226,7 +6246,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_management_dns_zone_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_management_dns_zone_bindings, "management_dns_zone_bindings", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7268,10 +7290,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -7323,7 +7345,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_vmware_engine_networks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_vmware_engine_networks, "vmware_engine_networks", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -7601,10 +7625,10 @@ module Google
               #     using `orderBy="name desc"`.
               #     Currently, only ordering by `name` is supported.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PrivateConnection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PrivateConnection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -7656,7 +7680,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vmware_engine_stub.list_private_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vmware_engine_stub, :list_private_connections, "private_connections", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

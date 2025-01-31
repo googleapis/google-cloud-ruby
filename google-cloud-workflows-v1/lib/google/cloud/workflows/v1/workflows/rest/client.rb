@@ -250,10 +250,10 @@ module Google
               #     for a field, append a "desc" suffix.
               #     If not specified, the results are returned in an unspecified order.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Workflows::V1::ListWorkflowsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workflows::V1::Workflow>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Workflows::V1::ListWorkflowsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workflows::V1::Workflow>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -305,7 +305,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workflows_stub.list_workflows request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @workflows_stub, :list_workflows, "workflows", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

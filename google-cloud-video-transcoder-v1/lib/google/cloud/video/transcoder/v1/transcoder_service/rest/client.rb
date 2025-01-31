@@ -316,10 +316,10 @@ module Google
                 #     One or more fields to compare and use to sort the output.
                 #     See https://google.aip.dev/132#ordering.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::Transcoder::V1::ListJobsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::Transcoder::V1::Job>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::Transcoder::V1::ListJobsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::Transcoder::V1::Job>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -371,7 +371,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @transcoder_service_stub.list_jobs request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @transcoder_service_stub, :list_jobs, "jobs", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -658,10 +660,10 @@ module Google
                 #     One or more fields to compare and use to sort the output.
                 #     See https://google.aip.dev/132#ordering.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::Transcoder::V1::ListJobTemplatesResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::Transcoder::V1::JobTemplate>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::Transcoder::V1::ListJobTemplatesResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::Transcoder::V1::JobTemplate>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -713,7 +715,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @transcoder_service_stub.list_job_templates request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @transcoder_service_stub, :list_job_templates, "job_templates", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)

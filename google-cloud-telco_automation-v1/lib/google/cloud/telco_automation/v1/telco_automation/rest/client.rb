@@ -241,10 +241,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::TelcoAutomation::V1::OrchestrationCluster>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::TelcoAutomation::V1::ListOrchestrationClustersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::TelcoAutomation::V1::OrchestrationCluster>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -296,7 +296,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @telco_automation_stub.list_orchestration_clusters request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_orchestration_clusters, "orchestration_clusters", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -618,10 +620,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::TelcoAutomation::V1::EdgeSlm>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::TelcoAutomation::V1::ListEdgeSlmsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::TelcoAutomation::V1::EdgeSlm>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -673,7 +675,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @telco_automation_stub.list_edge_slms request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @telco_automation_stub, :list_edge_slms, "edge_slms", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
