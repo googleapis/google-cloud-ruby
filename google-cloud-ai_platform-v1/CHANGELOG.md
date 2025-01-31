@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.64.0 (2025-01-30)
+
+#### Features
+
+* Support for FeatureView optimized config ([#28787](https://github.com/googleapis/google-cloud-ruby/issues/28787)) 
+
 ### 0.63.0 (2025-01-28)
 
 #### Features
