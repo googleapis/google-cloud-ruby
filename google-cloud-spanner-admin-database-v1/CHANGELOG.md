@@ -1,5 +1,11 @@
 # Release History
 
+### 1.5.0 (2025-01-31)
+
+#### Features
+
+* Support for the add_split_points RPC ([#28794](https://github.com/googleapis/google-cloud-ruby/issues/28794)) 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features
