@@ -292,10 +292,10 @@ module Google
                 #     The `next_page_token` value returned from a previous
                 #     [ListClusters][CloudRedis.ListClusters] request, if any.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Redis::Cluster::V1::ListClustersResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::Cluster>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Redis::Cluster::V1::ListClustersResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::Cluster>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -347,7 +347,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @cloud_redis_cluster_stub.list_clusters request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @cloud_redis_cluster_stub, :list_clusters, "clusters", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -950,10 +952,10 @@ module Google
                 #     Optional. The `next_page_token` value returned from a previous
                 #     [ListBackupCollections] request, if any.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Redis::Cluster::V1::ListBackupCollectionsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::BackupCollection>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Redis::Cluster::V1::ListBackupCollectionsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::BackupCollection>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -1005,7 +1007,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @cloud_redis_cluster_stub.list_backup_collections request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @cloud_redis_cluster_stub, :list_backup_collections, "backup_collections", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1124,10 +1128,10 @@ module Google
                 #     Optional. The `next_page_token` value returned from a previous
                 #     [ListBackupCollections] request, if any.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Redis::Cluster::V1::ListBackupsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::Backup>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Redis::Cluster::V1::ListBackupsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::Cluster::V1::Backup>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -1179,7 +1183,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @cloud_redis_cluster_stub.list_backups request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @cloud_redis_cluster_stub, :list_backups, "backups", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)

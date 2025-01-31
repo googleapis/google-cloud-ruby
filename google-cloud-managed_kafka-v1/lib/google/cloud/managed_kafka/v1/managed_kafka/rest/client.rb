@@ -290,10 +290,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ManagedKafka::V1::ListClustersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ManagedKafka::V1::Cluster>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ManagedKafka::V1::ListClustersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ManagedKafka::V1::Cluster>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -345,7 +345,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @managed_kafka_stub.list_clusters request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @managed_kafka_stub, :list_clusters, "clusters", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
