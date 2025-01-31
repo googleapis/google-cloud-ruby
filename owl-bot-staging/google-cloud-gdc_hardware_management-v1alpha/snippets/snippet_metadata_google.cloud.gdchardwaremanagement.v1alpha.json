@@ -1,0 +1,1415 @@
+{
+  "client_library": {
+    "name": "google-cloud-gdc_hardware_management-v1alpha",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.gdchardwaremanagement.v1alpha",
+        "version": "v1alpha"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_sync",
+      "title": "Snippet for the list_orders call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_orders.",
+      "file": "gdc_hardware_management/list_orders.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_orders",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_orders",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListOrders",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListOrders",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetOrder_sync",
+      "title": "Snippet for the get_order call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_order.",
+      "file": "gdc_hardware_management/get_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_order",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Order",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetOrder",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetOrder",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_sync",
+      "title": "Snippet for the create_order call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_order.",
+      "file": "gdc_hardware_management/create_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_order",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::CreateOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateOrder",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateOrder",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_sync",
+      "title": "Snippet for the update_order call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_order.",
+      "file": "gdc_hardware_management/update_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_order",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateOrder",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateOrder",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_sync",
+      "title": "Snippet for the delete_order call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_order.",
+      "file": "gdc_hardware_management/delete_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_order",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteOrder",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteOrder",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_sync",
+      "title": "Snippet for the submit_order call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#submit_order.",
+      "file": "gdc_hardware_management/submit_order.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "submit_order",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#submit_order",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::SubmitOrderRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "SubmitOrder",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SubmitOrder",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSites_sync",
+      "title": "Snippet for the list_sites call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_sites.",
+      "file": "gdc_hardware_management/list_sites.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_sites",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_sites",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListSites",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSites",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSite_sync",
+      "title": "Snippet for the get_site call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_site.",
+      "file": "gdc_hardware_management/get_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_site",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Site",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetSite",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSite",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_sync",
+      "title": "Snippet for the create_site call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_site.",
+      "file": "gdc_hardware_management/create_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_site",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::CreateSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateSite",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateSite",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_sync",
+      "title": "Snippet for the update_site call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_site.",
+      "file": "gdc_hardware_management/update_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_site",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateSite",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_sync",
+      "title": "Snippet for the delete_site call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_site.",
+      "file": "gdc_hardware_management/delete_site.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_site",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_site",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteSiteRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteSite",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardwareGroups_sync",
+      "title": "Snippet for the list_hardware_groups call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_hardware_groups.",
+      "file": "gdc_hardware_management/list_hardware_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hardware_groups",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_hardware_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListHardwareGroups",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardwareGroups",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardwareGroup_sync",
+      "title": "Snippet for the get_hardware_group call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_hardware_group.",
+      "file": "gdc_hardware_management/get_hardware_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hardware_group",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_hardware_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::HardwareGroup",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetHardwareGroup",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardwareGroup",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_sync",
+      "title": "Snippet for the create_hardware_group call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_hardware_group.",
+      "file": "gdc_hardware_management/create_hardware_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_hardware_group",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_hardware_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateHardwareGroup",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardwareGroup",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_sync",
+      "title": "Snippet for the update_hardware_group call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_hardware_group.",
+      "file": "gdc_hardware_management/update_hardware_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_hardware_group",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_hardware_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateHardwareGroup",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardwareGroup",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_sync",
+      "title": "Snippet for the delete_hardware_group call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_hardware_group.",
+      "file": "gdc_hardware_management/delete_hardware_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_hardware_group",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_hardware_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteHardwareGroup",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardwareGroup",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardware_sync",
+      "title": "Snippet for the list_hardware call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_hardware.",
+      "file": "gdc_hardware_management/list_hardware.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hardware",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_hardware",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListHardware",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardware",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardware_sync",
+      "title": "Snippet for the get_hardware call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_hardware.",
+      "file": "gdc_hardware_management/get_hardware.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hardware",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_hardware",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetHardwareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetHardware",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardware",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_sync",
+      "title": "Snippet for the create_hardware call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_hardware.",
+      "file": "gdc_hardware_management/create_hardware.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_hardware",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_hardware",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::CreateHardwareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateHardware",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardware",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_sync",
+      "title": "Snippet for the update_hardware call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_hardware.",
+      "file": "gdc_hardware_management/update_hardware.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_hardware",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_hardware",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateHardwareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateHardware",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardware",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_sync",
+      "title": "Snippet for the delete_hardware call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_hardware.",
+      "file": "gdc_hardware_management/delete_hardware.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_hardware",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_hardware",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteHardwareRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteHardware",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardware",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListComments_sync",
+      "title": "Snippet for the list_comments call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_comments.",
+      "file": "gdc_hardware_management/list_comments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_comments",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_comments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListComments",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListComments",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetComment_sync",
+      "title": "Snippet for the get_comment call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_comment.",
+      "file": "gdc_hardware_management/get_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_comment",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Comment",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetComment",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetComment",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_sync",
+      "title": "Snippet for the create_comment call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_comment.",
+      "file": "gdc_hardware_management/create_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_comment",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::CreateCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateComment",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateComment",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_sync",
+      "title": "Snippet for the record_action_on_comment call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#record_action_on_comment.",
+      "file": "gdc_hardware_management/record_action_on_comment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "record_action_on_comment",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#record_action_on_comment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::RecordActionOnCommentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Comment",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "RecordActionOnComment",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_sync",
+      "title": "Snippet for the list_change_log_entries call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_change_log_entries.",
+      "file": "gdc_hardware_management/list_change_log_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_change_log_entries",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_change_log_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListChangeLogEntries",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListChangeLogEntries",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetChangeLogEntry_sync",
+      "title": "Snippet for the get_change_log_entry call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_change_log_entry.",
+      "file": "gdc_hardware_management/get_change_log_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_change_log_entry",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_change_log_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetChangeLogEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ChangeLogEntry",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetChangeLogEntry",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetChangeLogEntry",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSkus_sync",
+      "title": "Snippet for the list_skus call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_skus.",
+      "file": "gdc_hardware_management/list_skus.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_skus",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_skus",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListSkus",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSkus",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSku_sync",
+      "title": "Snippet for the get_sku call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_sku.",
+      "file": "gdc_hardware_management/get_sku.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_sku",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_sku",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetSkuRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Sku",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetSku",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSku",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListZones_sync",
+      "title": "Snippet for the list_zones call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_zones.",
+      "file": "gdc_hardware_management/list_zones.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_zones",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#list_zones",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesResponse",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "ListZones",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListZones",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetZone_sync",
+      "title": "Snippet for the get_zone call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_zone.",
+      "file": "gdc_hardware_management/get_zone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_zone",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#get_zone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::GetZoneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::GDCHardwareManagement::V1alpha::Zone",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "GetZone",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetZone",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_sync",
+      "title": "Snippet for the create_zone call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_zone.",
+      "file": "gdc_hardware_management/create_zone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_zone",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#create_zone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::CreateZoneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "CreateZone",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateZone",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_sync",
+      "title": "Snippet for the update_zone call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_zone.",
+      "file": "gdc_hardware_management/update_zone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_zone",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#update_zone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::UpdateZoneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "UpdateZone",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateZone",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_sync",
+      "title": "Snippet for the delete_zone call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_zone.",
+      "file": "gdc_hardware_management/delete_zone.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_zone",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#delete_zone",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::DeleteZoneRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "DeleteZone",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteZone",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_sync",
+      "title": "Snippet for the signal_zone_state call in the GDCHardwareManagement service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#signal_zone_state.",
+      "file": "gdc_hardware_management/signal_zone_state.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "signal_zone_state",
+        "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client#signal_zone_state",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::GDCHardwareManagement::V1alpha::SignalZoneStateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "GDCHardwareManagement::Client",
+          "full_name": "::Google::Cloud::GDCHardwareManagement::V1alpha::GDCHardwareManagement::Client"
+        },
+        "method": {
+          "short_name": "SignalZoneState",
+          "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SignalZoneState",
+          "service": {
+            "short_name": "GDCHardwareManagement",
+            "full_name": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
