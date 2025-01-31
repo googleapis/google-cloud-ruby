@@ -547,10 +547,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListDataTaxonomiesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataTaxonomy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListDataTaxonomiesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataTaxonomy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -602,7 +602,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @data_taxonomy_service_stub.list_data_taxonomies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @data_taxonomy_service_stub, :list_data_taxonomies, "data_taxonomies", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1014,10 +1016,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataAttributeBinding>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListDataAttributeBindingsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataAttributeBinding>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1069,7 +1071,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @data_taxonomy_service_stub.list_data_attribute_bindings request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @data_taxonomy_service_stub, :list_data_attribute_bindings, "data_attribute_bindings", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1473,10 +1477,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListDataAttributesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataAttribute>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListDataAttributesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataAttribute>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1528,7 +1532,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @data_taxonomy_service_stub.list_data_attributes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @data_taxonomy_service_stub, :list_data_attributes, "data_attributes", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

@@ -500,10 +500,10 @@ module Google
               #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
               #     contains this job.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataflow::V1beta3::ListJobsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataflow::V1beta3::ListJobsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::Job>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -555,7 +555,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @jobs_stub.list_jobs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @jobs_stub, :list_jobs, "jobs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -598,10 +600,10 @@ module Google
               #     (https://cloud.google.com/dataflow/docs/concepts/regional-endpoints) that
               #     contains this job.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataflow::V1beta3::ListJobsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataflow::V1beta3::ListJobsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataflow::V1beta3::Job>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -653,7 +655,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @jobs_stub.aggregated_list_jobs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @jobs_stub, :aggregated_list_jobs, "jobs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

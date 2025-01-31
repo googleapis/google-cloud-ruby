@@ -284,10 +284,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListConnectionProfilesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::ConnectionProfile>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListConnectionProfilesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::ConnectionProfile>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -339,7 +339,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_connection_profiles request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_connection_profiles, "connection_profiles", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -896,10 +898,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListStreamsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Stream>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListStreamsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Stream>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -951,7 +953,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_streams request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_streams, "streams", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1890,10 +1894,10 @@ module Google
               #     A page token, received from a previous `ListStaticIps` call.
               #     will likely not be specified.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
+              # @yieldparam result [::Google::Cloud::Datastream::V1::FetchStaticIpsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String>]
+              # @return [::Google::Cloud::Datastream::V1::FetchStaticIpsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1941,9 +1945,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.fetch_static_ips request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :fetch_static_ips, "static_ips", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2173,10 +2175,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListPrivateConnectionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::PrivateConnection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListPrivateConnectionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::PrivateConnection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2228,7 +2230,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_private_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_private_connections, "private_connections", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2560,10 +2564,10 @@ module Google
               #   @param order_by [::String]
               #     Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Datastream::V1::ListRoutesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Route>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Datastream::V1::ListRoutesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Datastream::V1::Route>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2615,7 +2619,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @datastream_stub.list_routes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @datastream_stub, :list_routes, "routes", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

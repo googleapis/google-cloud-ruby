@@ -629,10 +629,10 @@ module Google
               #     Optional. Orders the result by `name` or `create_time` fields.
               #     If not specified, the ordering is undefined.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListEntryTypesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::EntryType>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListEntryTypesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::EntryType>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -684,7 +684,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.list_entry_types request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :list_entry_types, "entry_types", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1094,10 +1096,10 @@ module Google
               #     Optional. Orders the result by `name` or `create_time` fields.
               #     If not specified, the ordering is undefined.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListAspectTypesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::AspectType>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListAspectTypesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::AspectType>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1149,7 +1151,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.list_aspect_types request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :list_aspect_types, "aspect_types", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1551,10 +1555,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListEntryGroupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::EntryGroup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListEntryGroupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::EntryGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1606,7 +1610,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.list_entry_groups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :list_entry_groups, "entry_groups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2330,10 +2336,10 @@ module Google
               #     unspecified, it defaults to the organization where the project provided in
               #     `name` is located.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::SearchEntriesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::SearchEntriesResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::SearchEntriesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::SearchEntriesResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2385,7 +2391,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.search_entries request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :search_entries, "results", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2611,10 +2619,10 @@ module Google
               #     Optional. The field to sort the results by, either `name` or `create_time`.
               #     If not specified, the ordering is undefined.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::MetadataJob>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataplex::V1::ListMetadataJobsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::MetadataJob>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2666,7 +2674,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @catalog_service_stub.list_metadata_jobs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @catalog_service_stub, :list_metadata_jobs, "metadata_jobs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

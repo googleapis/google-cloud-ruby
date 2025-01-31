@@ -389,10 +389,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Order>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListOrdersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Order>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -444,7 +444,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_orders request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_orders, "orders", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -950,10 +952,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Site>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListSitesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Site>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1005,7 +1007,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_sites request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_sites, "sites", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1409,10 +1413,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::HardwareGroup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareGroupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::HardwareGroup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1464,7 +1468,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_hardware_groups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_hardware_groups, "hardware_groups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1875,10 +1881,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListHardwareResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Hardware>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1930,7 +1936,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_hardware request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_hardware, "hardware", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2331,10 +2339,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Comment>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListCommentsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Comment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2386,7 +2394,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_comments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_comments, "comments", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2690,10 +2700,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::ChangeLogEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListChangeLogEntriesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::ChangeLogEntry>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2745,7 +2755,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_change_log_entries request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_change_log_entries, "change_log_entries", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2866,10 +2878,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Sku>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListSkusResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Sku>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2921,7 +2933,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_skus request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_skus, "skus", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3041,10 +3055,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Zone>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::GDCHardwareManagement::V1alpha::ListZonesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::GDCHardwareManagement::V1alpha::Zone>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3096,7 +3110,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @gdc_hardware_management_stub.list_zones request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @gdc_hardware_management_stub, :list_zones, "zones", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
