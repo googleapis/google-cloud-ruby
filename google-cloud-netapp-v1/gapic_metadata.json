@@ -284,6 +284,31 @@
               "methods": [
                 "delete_backup_policy"
               ]
+            },
+            "ListQuotaRules": {
+              "methods": [
+                "list_quota_rules"
+              ]
+            },
+            "GetQuotaRule": {
+              "methods": [
+                "get_quota_rule"
+              ]
+            },
+            "CreateQuotaRule": {
+              "methods": [
+                "create_quota_rule"
+              ]
+            },
+            "UpdateQuotaRule": {
+              "methods": [
+                "update_quota_rule"
+              ]
+            },
+            "DeleteQuotaRule": {
+              "methods": [
+                "delete_quota_rule"
+              ]
             }
           }
         }

@@ -5698,6 +5698,486 @@ module Google
             end
 
             ##
+            # Returns list of all quota rules in a location.
+            #
+            # @overload list_quota_rules(request, options = nil)
+            #   Pass arguments to `list_quota_rules` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::ListQuotaRulesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::ListQuotaRulesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_quota_rules(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_quota_rules` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for ListQuotaRulesRequest
+            #   @param page_size [::Integer]
+            #     Optional. Requested page size. Server may return fewer items than
+            #     requested. If unspecified, the server will pick an appropriate default.
+            #   @param page_token [::String]
+            #     Optional. A token identifying a page of results the server should return.
+            #   @param filter [::String]
+            #     Optional. Filtering results
+            #   @param order_by [::String]
+            #     Optional. Hint for how to order the results
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::QuotaRule>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::QuotaRule>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new
+            #
+            #   # Call the list_quota_rules method.
+            #   result = client.list_quota_rules request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetApp::V1::QuotaRule.
+            #     p item
+            #   end
+            #
+            def list_quota_rules request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_quota_rules.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_quota_rules.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_quota_rules.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :list_quota_rules, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @net_app_stub, :list_quota_rules, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns details of the specified quota rule.
+            #
+            # @overload get_quota_rule(request, options = nil)
+            #   Pass arguments to `get_quota_rule` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::GetQuotaRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::GetQuotaRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_quota_rule(name: nil)
+            #   Pass arguments to `get_quota_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the quota rule
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetApp::V1::QuotaRule]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetApp::V1::QuotaRule]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new
+            #
+            #   # Call the get_quota_rule method.
+            #   result = client.get_quota_rule request
+            #
+            #   # The returned object is of type Google::Cloud::NetApp::V1::QuotaRule.
+            #   p result
+            #
+            def get_quota_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_quota_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_quota_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_quota_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :get_quota_rule, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new quota rule.
+            #
+            # @overload create_quota_rule(request, options = nil)
+            #   Pass arguments to `create_quota_rule` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_quota_rule(parent: nil, quota_rule: nil, quota_rule_id: nil)
+            #   Pass arguments to `create_quota_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent value for CreateQuotaRuleRequest
+            #   @param quota_rule [::Google::Cloud::NetApp::V1::QuotaRule, ::Hash]
+            #     Required. Fields of the to be created quota rule.
+            #   @param quota_rule_id [::String]
+            #     Required. ID of the quota rule to create. Must be unique within the parent
+            #     resource. Must contain only letters, numbers, underscore and hyphen, with
+            #     the first character a letter or underscore, the last a letter or underscore
+            #     or a number, and a 63 character maximum.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new
+            #
+            #   # Call the create_quota_rule method.
+            #   result = client.create_quota_rule request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_quota_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_quota_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_quota_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_quota_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :create_quota_rule, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a quota rule.
+            #
+            # @overload update_quota_rule(request, options = nil)
+            #   Pass arguments to `update_quota_rule` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_quota_rule(update_mask: nil, quota_rule: nil)
+            #   Pass arguments to `update_quota_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask is used to specify the fields to be overwritten in the
+            #     Quota Rule resource by the update.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param quota_rule [::Google::Cloud::NetApp::V1::QuotaRule, ::Hash]
+            #     Required. The quota rule being updated
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new
+            #
+            #   # Call the update_quota_rule method.
+            #   result = client.update_quota_rule request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_quota_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_quota_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.quota_rule&.name
+                header_params["quota_rule.name"] = request.quota_rule.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_quota_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_quota_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :update_quota_rule, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a quota rule.
+            #
+            # @overload delete_quota_rule(request, options = nil)
+            #   Pass arguments to `delete_quota_rule` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_quota_rule(name: nil)
+            #   Pass arguments to `delete_quota_rule` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the quota rule.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new
+            #
+            #   # Call the delete_quota_rule method.
+            #   result = client.delete_quota_rule request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_quota_rule request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_quota_rule.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_quota_rule.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_quota_rule.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :delete_quota_rule, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the NetApp API.
             #
             # This class represents the configuration for NetApp,
@@ -6138,6 +6618,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_backup_policy
+                ##
+                # RPC-specific configuration for `list_quota_rules`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_quota_rules
+                ##
+                # RPC-specific configuration for `get_quota_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_quota_rule
+                ##
+                # RPC-specific configuration for `create_quota_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_quota_rule
+                ##
+                # RPC-specific configuration for `update_quota_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_quota_rule
+                ##
+                # RPC-specific configuration for `delete_quota_rule`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_quota_rule
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -6251,6 +6756,16 @@ module Google
                   @update_backup_policy = ::Gapic::Config::Method.new update_backup_policy_config
                   delete_backup_policy_config = parent_rpcs.delete_backup_policy if parent_rpcs.respond_to? :delete_backup_policy
                   @delete_backup_policy = ::Gapic::Config::Method.new delete_backup_policy_config
+                  list_quota_rules_config = parent_rpcs.list_quota_rules if parent_rpcs.respond_to? :list_quota_rules
+                  @list_quota_rules = ::Gapic::Config::Method.new list_quota_rules_config
+                  get_quota_rule_config = parent_rpcs.get_quota_rule if parent_rpcs.respond_to? :get_quota_rule
+                  @get_quota_rule = ::Gapic::Config::Method.new get_quota_rule_config
+                  create_quota_rule_config = parent_rpcs.create_quota_rule if parent_rpcs.respond_to? :create_quota_rule
+                  @create_quota_rule = ::Gapic::Config::Method.new create_quota_rule_config
+                  update_quota_rule_config = parent_rpcs.update_quota_rule if parent_rpcs.respond_to? :update_quota_rule
+                  @update_quota_rule = ::Gapic::Config::Method.new update_quota_rule_config
+                  delete_quota_rule_config = parent_rpcs.delete_quota_rule if parent_rpcs.respond_to? :delete_quota_rule
+                  @delete_quota_rule = ::Gapic::Config::Method.new delete_quota_rule_config
 
                   yield self if block_given?
                 end

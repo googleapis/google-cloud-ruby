@@ -26,6 +26,9 @@ module Google
         # @!attribute [r] supported_service_levels
         #   @return [::Array<::Google::Cloud::NetApp::V1::ServiceLevel>]
         #     Output only. Supported service levels in a location.
+        # @!attribute [r] supported_flex_performance
+        #   @return [::Array<::Google::Cloud::NetApp::V1::FlexPerformance>]
+        #     Output only. Supported flex performance in a location.
         class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -47,6 +50,18 @@ module Google
 
           # Flex service level.
           FLEX = 4
+        end
+
+        # Flex Storage Pool performance.
+        module FlexPerformance
+          # Unspecified flex performance.
+          FLEX_PERFORMANCE_UNSPECIFIED = 0
+
+          # Flex Storage Pool with default performance.
+          FLEX_PERFORMANCE_DEFAULT = 1
+
+          # Flex Storage Pool with custom performance.
+          FLEX_PERFORMANCE_CUSTOM = 2
         end
 
         # The volume encryption key source.

@@ -64,6 +64,12 @@ module Google
         #   @return [::Integer]
         #     Output only. Total size of all backups in a chain in bytes = baseline
         #     backup size + sum(incremental backup size)
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use
+        # @!attribute [r] satisfies_pzi
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

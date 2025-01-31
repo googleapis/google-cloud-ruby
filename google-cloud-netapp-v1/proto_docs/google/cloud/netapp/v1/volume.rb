@@ -474,6 +474,9 @@ module Google
         # @!attribute [rw] instructions
         #   @return [::String]
         #     Instructions for mounting
+        # @!attribute [r] ip_address
+        #   @return [::String]
+        #     Output only. IP Address.
         class MountOption
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
