@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2025-01-30)
+
+#### Features
+
+* Support wait_for_replication convenience method ([#28252](https://github.com/googleapis/google-cloud-ruby/issues/28252)) 
+
 ### 1.6.0 (2025-01-28)
 
 #### Features
