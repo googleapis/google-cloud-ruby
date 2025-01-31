@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.1 (2025-01-30)
+
+#### Bug Fixes
+
+* Update credential scopes 
+#### Documentation
+
+* Various documentation enhancements 
+
 ### 0.4.0 (2025-01-28)
 
 #### Features
