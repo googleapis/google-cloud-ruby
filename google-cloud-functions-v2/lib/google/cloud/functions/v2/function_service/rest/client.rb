@@ -357,10 +357,10 @@ module Google
               #     separated list of fields. The default sorting oder is ascending.
               #     See https://google.aip.dev/132#ordering.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Functions::V2::ListFunctionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Functions::V2::Function>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Functions::V2::ListFunctionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Functions::V2::Function>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -412,7 +412,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @function_service_stub.list_functions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @function_service_stub, :list_functions, "functions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
