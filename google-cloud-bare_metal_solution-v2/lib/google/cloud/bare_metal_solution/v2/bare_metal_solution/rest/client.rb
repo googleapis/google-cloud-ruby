@@ -260,10 +260,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BareMetalSolution::V2::ListInstancesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Instance>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BareMetalSolution::V2::ListInstancesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Instance>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -315,7 +315,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bare_metal_solution_stub.list_instances request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @bare_metal_solution_stub, :list_instances, "instances", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1388,10 +1390,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BareMetalSolution::V2::ListVolumesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Volume>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BareMetalSolution::V2::ListVolumesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Volume>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1443,7 +1445,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bare_metal_solution_stub.list_volumes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @bare_metal_solution_stub, :list_volumes, "volumes", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1908,10 +1912,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BareMetalSolution::V2::ListNetworksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Network>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BareMetalSolution::V2::ListNetworksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Network>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1963,7 +1967,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bare_metal_solution_stub.list_networks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @bare_metal_solution_stub, :list_networks, "networks", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2576,10 +2582,10 @@ module Google
               #   @param page_token [::String]
               #     A token identifying a page of results from the server.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2631,7 +2637,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bare_metal_solution_stub.list_volume_snapshots request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @bare_metal_solution_stub, :list_volume_snapshots, "volume_snapshots", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2741,10 +2749,10 @@ module Google
               #   @param page_token [::String]
               #     A token identifying a page of results from the server.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BareMetalSolution::V2::ListLunsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Lun>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BareMetalSolution::V2::ListLunsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::Lun>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2796,7 +2804,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bare_metal_solution_stub.list_luns request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @bare_metal_solution_stub, :list_luns, "luns", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2996,10 +3006,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BareMetalSolution::V2::ListNfsSharesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::NfsShare>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BareMetalSolution::V2::ListNfsSharesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BareMetalSolution::V2::NfsShare>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3051,7 +3061,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bare_metal_solution_stub.list_nfs_shares request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @bare_metal_solution_stub, :list_nfs_shares, "nfs_shares", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
