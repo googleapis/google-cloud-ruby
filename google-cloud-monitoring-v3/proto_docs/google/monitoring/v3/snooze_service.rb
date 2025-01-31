@@ -58,10 +58,8 @@ module Google
         #
         #     For example:
         #
-        #         ```
         #         interval.start_time > "2022-03-11T00:00:00-08:00" AND
         #             interval.end_time < "2022-03-12T00:00:00-08:00"
-        #         ```
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return for a single query. The
