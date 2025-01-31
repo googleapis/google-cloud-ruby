@@ -90,9 +90,49 @@ module Google
         #     [managed
         #     cluster](/dataproc/docs/concepts/workflows/using-workflows#configuring_or_selecting_a_cluster),
         #     the cluster is deleted.
+        # @!attribute [rw] encryption_config
+        #   @return [::Google::Cloud::Dataproc::V1::WorkflowTemplate::EncryptionConfig]
+        #     Optional. Encryption settings for encrypting workflow template job
+        #     arguments.
         class WorkflowTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Encryption settings for encrypting workflow template job arguments.
+          # @!attribute [rw] kms_key
+          #   @return [::String]
+          #     Optional. The Cloud KMS key name to use for encrypting
+          #     workflow template job arguments.
+          #
+          #     When this this key is provided, the following workflow template
+          #     [job arguments]
+          #     (https://cloud.google.com/dataproc/docs/concepts/workflows/use-workflows#adding_jobs_to_a_template),
+          #     if present, are
+          #     [CMEK
+          #     encrypted](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/customer-managed-encryption#use_cmek_with_workflow_template_data):
+          #
+          #     * [FlinkJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/FlinkJob)
+          #     * [HadoopJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/HadoopJob)
+          #     * [SparkJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkJob)
+          #     * [SparkRJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkRJob)
+          #     * [PySparkJob
+          #     args](https://cloud.google.com/dataproc/docs/reference/rest/v1/PySparkJob)
+          #     * [SparkSqlJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/SparkSqlJob)
+          #       scriptVariables and queryList.queries
+          #     * [HiveJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/HiveJob)
+          #       scriptVariables and queryList.queries
+          #     * [PigJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PigJob)
+          #       scriptVariables and queryList.queries
+          #     * [PrestoJob](https://cloud.google.com/dataproc/docs/reference/rest/v1/PrestoJob)
+          #       scriptVariables and queryList.queries
+          class EncryptionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -110,12 +150,16 @@ module Google
         # @!attribute [rw] managed_cluster
         #   @return [::Google::Cloud::Dataproc::V1::ManagedCluster]
         #     A cluster that is managed by the workflow.
+        #
+        #     Note: The following fields are mutually exclusive: `managed_cluster`, `cluster_selector`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cluster_selector
         #   @return [::Google::Cloud::Dataproc::V1::ClusterSelector]
         #     Optional. A selector that chooses target cluster for jobs based
         #     on metadata.
         #
         #     The selector is evaluated at the time each job is submitted.
+        #
+        #     Note: The following fields are mutually exclusive: `cluster_selector`, `managed_cluster`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class WorkflowTemplatePlacement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -202,27 +246,53 @@ module Google
         # @!attribute [rw] hadoop_job
         #   @return [::Google::Cloud::Dataproc::V1::HadoopJob]
         #     Optional. Job is a Hadoop job.
+        #
+        #     Note: The following fields are mutually exclusive: `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_job
         #   @return [::Google::Cloud::Dataproc::V1::SparkJob]
         #     Optional. Job is a Spark job.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_job`, `hadoop_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pyspark_job
         #   @return [::Google::Cloud::Dataproc::V1::PySparkJob]
         #     Optional. Job is a PySpark job.
+        #
+        #     Note: The following fields are mutually exclusive: `pyspark_job`, `hadoop_job`, `spark_job`, `hive_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] hive_job
         #   @return [::Google::Cloud::Dataproc::V1::HiveJob]
         #     Optional. Job is a Hive job.
+        #
+        #     Note: The following fields are mutually exclusive: `hive_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pig_job
         #   @return [::Google::Cloud::Dataproc::V1::PigJob]
         #     Optional. Job is a Pig job.
+        #
+        #     Note: The following fields are mutually exclusive: `pig_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_r_job
         #   @return [::Google::Cloud::Dataproc::V1::SparkRJob]
         #     Optional. Job is a SparkR job.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_r_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_sql_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spark_sql_job
         #   @return [::Google::Cloud::Dataproc::V1::SparkSqlJob]
         #     Optional. Job is a SparkSql job.
+        #
+        #     Note: The following fields are mutually exclusive: `spark_sql_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_r_job`, `presto_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] presto_job
         #   @return [::Google::Cloud::Dataproc::V1::PrestoJob]
         #     Optional. Job is a Presto job.
+        #
+        #     Note: The following fields are mutually exclusive: `presto_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `trino_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] trino_job
+        #   @return [::Google::Cloud::Dataproc::V1::TrinoJob]
+        #     Optional. Job is a Trino job.
+        #
+        #     Note: The following fields are mutually exclusive: `trino_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `flink_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] flink_job
+        #   @return [::Google::Cloud::Dataproc::V1::FlinkJob]
+        #     Optional. Job is a Flink job.
+        #
+        #     Note: The following fields are mutually exclusive: `flink_job`, `hadoop_job`, `spark_job`, `pyspark_job`, `hive_job`, `pig_job`, `spark_r_job`, `spark_sql_job`, `presto_job`, `trino_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this job.
@@ -336,9 +406,13 @@ module Google
         # @!attribute [rw] regex
         #   @return [::Google::Cloud::Dataproc::V1::RegexValidation]
         #     Validation based on regular expressions.
+        #
+        #     Note: The following fields are mutually exclusive: `regex`, `values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] values
         #   @return [::Google::Cloud::Dataproc::V1::ValueValidation]
         #     Validation based on a list of allowed values.
+        #
+        #     Note: The following fields are mutually exclusive: `values`, `regex`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ParameterValidation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -691,6 +765,11 @@ module Google
         #     Output only. This token is included in the response if there are more
         #     results to fetch. To fetch additional results, provide this value as the
         #     page_token in a subsequent <code>ListWorkflowTemplatesRequest</code>.
+        # @!attribute [r] unreachable
+        #   @return [::Array<::String>]
+        #     Output only. List of workflow templates that could not be included in the
+        #     response. Attempting to get one of these resources may indicate why it was
+        #     not included in the list response.
         class ListWorkflowTemplatesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

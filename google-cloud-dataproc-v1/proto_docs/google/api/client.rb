@@ -28,6 +28,9 @@ module Google
     # @!attribute [rw] destinations
     #   @return [::Array<::Google::Api::ClientLibraryDestination>]
     #     The destination where API teams want this client library to be published.
+    # @!attribute [rw] selective_gapic_generation
+    #   @return [::Google::Api::SelectiveGapicGeneration]
+    #     Configuration for which RPCs should be generated in the GAPIC client.
     class CommonLanguageSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -212,6 +215,12 @@ module Google
       #     enabled. By default, asynchronous REST clients will not be generated.
       #     This feature will be enabled by default 1 month after launching the
       #     feature in preview packages.
+      # @!attribute [rw] protobuf_pythonic_types_enabled
+      #   @return [::Boolean]
+      #     Enables generation of protobuf code using new types that are more
+      #     Pythonic which are included in `protobuf>=5.29.x`. This feature will be
+      #     enabled by default 1 month after launching the feature in preview
+      #     packages.
       class ExperimentalFeatures
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -297,9 +306,28 @@ module Google
     # @!attribute [rw] common
     #   @return [::Google::Api::CommonLanguageSettings]
     #     Some settings.
+    # @!attribute [rw] renamed_services
+    #   @return [::Google::Protobuf::Map{::String => ::String}]
+    #     Map of service names to renamed services. Keys are the package relative
+    #     service names and values are the name to be used for the service client
+    #     and call options.
+    #
+    #     publishing:
+    #       go_settings:
+    #         renamed_services:
+    #           Publisher: TopicAdmin
     class GoSettings
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # @!attribute [rw] key
+      #   @return [::String]
+      # @!attribute [rw] value
+      #   @return [::String]
+      class RenamedServicesEntry
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
     end
 
     # Describes the generator configuration for a method.
@@ -373,6 +401,25 @@ module Google
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
       end
+    end
+
+    # This message is used to configure the generation of a subset of the RPCs in
+    # a service for client libraries.
+    # @!attribute [rw] methods
+    #   @return [::Array<::String>]
+    #     An allowlist of the fully qualified names of RPCs that should be included
+    #     on public client surfaces.
+    # @!attribute [rw] generate_omitted_as_internal
+    #   @return [::Boolean]
+    #     Setting this to true indicates to the client generators that methods
+    #     that would be excluded from the generation should instead be generated
+    #     in a way that indicates these methods should not be consumed by
+    #     end users. How this is expressed is up to individual language
+    #     implementations to decide. Some examples may be: added annotations,
+    #     obfuscated identifiers, or other language idiomatic patterns.
+    class SelectiveGapicGeneration
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # The organization for which the client libraries are being published.
