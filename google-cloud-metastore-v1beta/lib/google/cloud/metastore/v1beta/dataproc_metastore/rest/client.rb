@@ -308,10 +308,10 @@ module Google
               #     Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
               #     If not specified, the results will be sorted in the default order.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Metastore::V1beta::ListServicesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Metastore::V1beta::Service>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Metastore::V1beta::ListServicesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Metastore::V1beta::Service>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -363,7 +363,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataproc_metastore_stub.list_services request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataproc_metastore_stub, :list_services, "services", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -820,10 +822,10 @@ module Google
               #     Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
               #     If not specified, the results will be sorted in the default order.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Metastore::V1beta::ListMetadataImportsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Metastore::V1beta::MetadataImport>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Metastore::V1beta::ListMetadataImportsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Metastore::V1beta::MetadataImport>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -875,7 +877,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataproc_metastore_stub.list_metadata_imports request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataproc_metastore_stub, :list_metadata_imports, "metadata_imports", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1450,10 +1454,10 @@ module Google
               #     Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
               #     If not specified, the results will be sorted in the default order.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Metastore::V1beta::ListBackupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Metastore::V1beta::Backup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Metastore::V1beta::ListBackupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Metastore::V1beta::Backup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1505,7 +1509,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataproc_metastore_stub.list_backups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataproc_metastore_stub, :list_backups, "backups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

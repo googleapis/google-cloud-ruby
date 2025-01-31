@@ -276,10 +276,10 @@ module Google
               #     A previous returned page token that can be used to continue listing
               #     from the last result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Notebooks::V1::ListRuntimesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Runtime>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Notebooks::V1::ListRuntimesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Runtime>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -331,7 +331,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @managed_notebook_service_stub.list_runtimes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @managed_notebook_service_stub, :list_runtimes, "runtimes", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

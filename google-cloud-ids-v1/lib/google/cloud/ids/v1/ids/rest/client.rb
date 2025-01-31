@@ -240,10 +240,10 @@ module Google
               #     Optional. One or more fields to compare and use to sort the output.
               #     See https://google.aip.dev/132#ordering.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::IDS::V1::ListEndpointsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::IDS::V1::Endpoint>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::IDS::V1::ListEndpointsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::IDS::V1::Endpoint>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -295,7 +295,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @ids_stub.list_endpoints request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @ids_stub, :list_endpoints, "endpoints", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

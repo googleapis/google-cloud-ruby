@@ -280,10 +280,10 @@ module Google
               #   @param order_by [::String]
               #     Field to use to sort the list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkManagement::V1::ConnectivityTest>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetworkManagement::V1::ListConnectivityTestsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkManagement::V1::ConnectivityTest>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -335,7 +335,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @reachability_service_stub.list_connectivity_tests request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @reachability_service_stub, :list_connectivity_tests, "resources", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
