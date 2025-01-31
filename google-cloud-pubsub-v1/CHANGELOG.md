@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.0 (2025-01-31)
+
+#### Features
+
+* Added support for message transforms to Topic and Subscription ([#28801](https://github.com/googleapis/google-cloud-ruby/issues/28801)) 
+
 ### 1.6.0 (2025-01-28)
 
 #### Features
