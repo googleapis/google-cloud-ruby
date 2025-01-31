@@ -240,6 +240,18 @@ module Google
         # @!attribute [rw] passphrase
         #   @return [::String]
         #     Optional. Temporary passphrase generated to accept cluster peering command.
+        # @!attribute [rw] peer_volume_name
+        #   @return [::String]
+        #     Optional. Name of the user's local source volume to be peered with the
+        #     destination volume.
+        # @!attribute [rw] peer_cluster_name
+        #   @return [::String]
+        #     Optional. Name of the user's local source cluster to be peered with the
+        #     destination cluster.
+        # @!attribute [rw] peer_svm_name
+        #   @return [::String]
+        #     Optional. Name of the user's local source vserver svm to be peered with the
+        #     destination vserver svm.
         class HybridPeeringDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
