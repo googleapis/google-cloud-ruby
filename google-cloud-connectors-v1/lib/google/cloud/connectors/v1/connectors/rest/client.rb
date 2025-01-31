@@ -323,10 +323,10 @@ module Google
               #     Specifies which fields of the Connection are returned in the response.
               #     Defaults to `BASIC` view.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Connectors::V1::ListConnectionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::Connection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Connectors::V1::ListConnectionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::Connection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -378,7 +378,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @connectors_stub.list_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @connectors_stub, :list_connections, "connections", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -778,10 +780,10 @@ module Google
               #   @param page_token [::String]
               #     Page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Connectors::V1::ListProvidersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::Provider>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Connectors::V1::ListProvidersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::Provider>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -833,7 +835,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @connectors_stub.list_providers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @connectors_stub, :list_providers, "providers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -946,10 +950,10 @@ module Google
               #   @param page_token [::String]
               #     Page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Connectors::V1::ListConnectorsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::Connector>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Connectors::V1::ListConnectorsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::Connector>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1001,7 +1005,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @connectors_stub.list_connectors request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @connectors_stub, :list_connectors, "connectors", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1117,10 +1123,10 @@ module Google
               #     Specifies which fields of the ConnectorVersion are returned in the
               #     response. Defaults to `BASIC` view.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Connectors::V1::ListConnectorVersionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::ConnectorVersion>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Connectors::V1::ListConnectorVersionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Connectors::V1::ConnectorVersion>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1172,7 +1178,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @connectors_stub.list_connector_versions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @connectors_stub, :list_connector_versions, "connector_versions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
