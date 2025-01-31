@@ -280,10 +280,10 @@ module Google
               #     this is a continuation of a prior `ListFunctions` call, and that the
               #     system should return the next page of data.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Functions::V1::ListFunctionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Functions::V1::CloudFunction>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Functions::V1::ListFunctionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Functions::V1::CloudFunction>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -335,7 +335,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_functions_service_stub.list_functions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_functions_service_stub, :list_functions, "functions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

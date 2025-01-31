@@ -1452,10 +1452,10 @@ module Google
               #     or if Point-in-Time Recovery is enabled, can additionally be a whole
               #     minute timestamp within the past 7 days.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
+              # @yieldparam result [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String>]
+              # @return [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1503,9 +1503,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @firestore_stub.list_collection_ids request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @firestore_stub, :list_collection_ids, "collection_ids", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

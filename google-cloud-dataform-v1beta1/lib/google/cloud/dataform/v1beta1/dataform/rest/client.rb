@@ -249,10 +249,10 @@ module Google
               #   @param filter [::String]
               #     Optional. Filter for the returned list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::Repository>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataform::V1beta1::ListRepositoriesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::Repository>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -304,7 +304,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataform_stub.list_repositories request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :list_repositories, "repositories", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1199,10 +1201,10 @@ module Google
               #   @param filter [::String]
               #     Optional. Filter for the returned list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ListWorkspacesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::Workspace>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataform::V1beta1::ListWorkspacesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::Workspace>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1254,7 +1256,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataform_stub.list_workspaces request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :list_workspaces, "workspaces", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2858,10 +2862,10 @@ module Google
               #     When paginating, all other parameters provided to `ListReleaseConfigs`
               #     must match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::ReleaseConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataform::V1beta1::ListReleaseConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::ReleaseConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2913,7 +2917,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataform_stub.list_release_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :list_release_configs, "release_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3272,10 +3278,10 @@ module Google
               #     When paginating, all other parameters provided to `ListCompilationResults`
               #     must match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ListCompilationResultsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::CompilationResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataform::V1beta1::ListCompilationResultsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::CompilationResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3327,7 +3333,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataform_stub.list_compilation_results request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :list_compilation_results, "compilation_results", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3623,10 +3631,10 @@ module Google
               #     When paginating, all other parameters provided to `ListWorkflowConfigs`
               #     must match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::WorkflowConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataform::V1beta1::ListWorkflowConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::WorkflowConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3678,7 +3686,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataform_stub.list_workflow_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :list_workflow_configs, "workflow_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4043,10 +4053,10 @@ module Google
               #   @param filter [::String]
               #     Optional. Filter for the returned list.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::WorkflowInvocation>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::WorkflowInvocation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4098,7 +4108,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dataform_stub.list_workflow_invocations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dataform_stub, :list_workflow_invocations, "workflow_invocations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

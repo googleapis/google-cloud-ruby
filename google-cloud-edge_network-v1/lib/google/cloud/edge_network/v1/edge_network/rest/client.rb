@@ -404,10 +404,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::EdgeNetwork::V1::ListZonesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Zone>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::EdgeNetwork::V1::ListZonesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Zone>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -459,7 +459,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @edge_network_stub.list_zones request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @edge_network_stub, :list_zones, "zones", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -574,10 +576,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::EdgeNetwork::V1::ListNetworksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Network>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::EdgeNetwork::V1::ListNetworksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Network>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -629,7 +631,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @edge_network_stub.list_networks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @edge_network_stub, :list_networks, "networks", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1029,10 +1033,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::EdgeNetwork::V1::ListSubnetsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Subnet>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::EdgeNetwork::V1::ListSubnetsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Subnet>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1084,7 +1088,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @edge_network_stub.list_subnets request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @edge_network_stub, :list_subnets, "subnets", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1513,10 +1519,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::EdgeNetwork::V1::ListInterconnectsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Interconnect>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::EdgeNetwork::V1::ListInterconnectsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Interconnect>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1568,7 +1574,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @edge_network_stub.list_interconnects request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @edge_network_stub, :list_interconnects, "interconnects", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1760,10 +1768,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::InterconnectAttachment>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::EdgeNetwork::V1::ListInterconnectAttachmentsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::InterconnectAttachment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1815,7 +1823,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @edge_network_stub.list_interconnect_attachments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @edge_network_stub, :list_interconnect_attachments, "interconnect_attachments", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2137,10 +2147,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::EdgeNetwork::V1::ListRoutersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Router>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::EdgeNetwork::V1::ListRoutersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::EdgeNetwork::V1::Router>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2192,7 +2202,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @edge_network_stub.list_routers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @edge_network_stub, :list_routers, "routers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

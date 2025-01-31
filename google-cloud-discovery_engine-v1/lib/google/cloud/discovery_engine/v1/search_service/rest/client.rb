@@ -427,10 +427,10 @@ module Google
               #
               #     Can be used only when `session` is set.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -482,7 +482,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @search_service_stub.search request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @search_service_stub, :search, "results", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -730,10 +732,10 @@ module Google
               #
               #     Can be used only when `session` is set.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::SearchResponse::SearchResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -785,7 +787,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @search_service_stub.search_lite request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @search_service_stub, :search_lite, "results", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

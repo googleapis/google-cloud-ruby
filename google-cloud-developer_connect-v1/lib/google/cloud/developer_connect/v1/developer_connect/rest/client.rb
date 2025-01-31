@@ -297,10 +297,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::ListConnectionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::Connection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::DeveloperConnect::V1::ListConnectionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::Connection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -352,7 +352,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @developer_connect_stub.list_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @developer_connect_stub, :list_connections, "connections", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1018,10 +1020,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::GitRepositoryLink>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::DeveloperConnect::V1::ListGitRepositoryLinksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DeveloperConnect::V1::GitRepositoryLink>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1073,7 +1075,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @developer_connect_stub.list_git_repository_links request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @developer_connect_stub, :list_git_repository_links, "git_repository_links", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1515,10 +1519,10 @@ module Google
               #   @param page_token [::String]
               #     Optional. Page start.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
+              # @yieldparam result [::Google::Cloud::DeveloperConnect::V1::FetchGitRefsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String>]
+              # @return [::Google::Cloud::DeveloperConnect::V1::FetchGitRefsResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1566,9 +1570,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @developer_connect_stub.fetch_git_refs request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @developer_connect_stub, :fetch_git_refs, "ref_names", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
