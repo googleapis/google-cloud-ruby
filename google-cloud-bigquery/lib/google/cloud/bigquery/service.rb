@@ -74,7 +74,7 @@ module Google
             service.client_options.send_timeout_sec = timeout
             service.request_options.retries = 0 # handle retries in #execute
             service.request_options.header ||= {}
-            service.request_options.header["x-goog-api-client"] = \
+            service.request_options.header["x-goog-api-client"] =
               "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Bigquery::VERSION}"
             service.request_options.query ||= {}
             service.request_options.query["prettyPrint"] = false
