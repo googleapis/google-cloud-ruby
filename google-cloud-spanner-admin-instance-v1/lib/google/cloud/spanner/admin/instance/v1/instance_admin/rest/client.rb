@@ -1016,10 +1016,10 @@ module Google
                   #     in
                   #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse ListInstancesResponse}.
                   # @yield [result, operation] Access the result along with the TransportOperation object
-                  # @yieldparam result [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse]
+                  # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::Instance>]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]
                   #
-                  # @return [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancesResponse]
+                  # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::Instance>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
                   #
@@ -1071,7 +1071,9 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @instance_admin_stub.list_instances request, options do |result, operation|
+                      result = ::Gapic::Rest::PagedEnumerable.new @instance_admin_stub, :list_instances, "instances", request, result, options
                       yield result, operation if block_given?
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -1116,10 +1118,10 @@ module Google
                   #     in
                   #     {::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse ListInstancePartitionsResponse}.
                   # @yield [result, operation] Access the result along with the TransportOperation object
-                  # @yieldparam result [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse]
+                  # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition>]
                   # @yieldparam operation [::Gapic::Rest::TransportOperation]
                   #
-                  # @return [::Google::Cloud::Spanner::Admin::Instance::V1::ListInstancePartitionsResponse]
+                  # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Spanner::Admin::Instance::V1::InstancePartition>]
                   #
                   # @raise [::Google::Cloud::Error] if the REST call is aborted.
                   #
@@ -1171,7 +1173,9 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @instance_admin_stub.list_instance_partitions request, options do |result, operation|
+                      result = ::Gapic::Rest::PagedEnumerable.new @instance_admin_stub, :list_instance_partitions, "instance_partitions", request, result, options
                       yield result, operation if block_given?
+                      throw :response, result
                     end
                   rescue ::Gapic::Rest::Error => e
                     raise ::Google::Cloud::Error.from_error(e)
@@ -2473,7 +2477,7 @@ module Google
                                            retry_policy: @config.retry_policy
 
                     @instance_admin_stub.list_instance_partition_operations request, options do |result, operation|
-                      result = ::Gapic::Operation.new result, @operations_client, options: options
+                      result = ::Gapic::Rest::PagedEnumerable.new @instance_admin_stub, :list_instance_partition_operations, "operations", request, result, options
                       yield result, operation if block_given?
                       throw :response, result
                     end

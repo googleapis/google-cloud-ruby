@@ -245,10 +245,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::StorageInsights::V1::ListReportConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::StorageInsights::V1::ReportConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::StorageInsights::V1::ListReportConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::StorageInsights::V1::ReportConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -300,7 +300,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @storage_insights_stub.list_report_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @storage_insights_stub, :list_report_configs, "report_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -700,10 +702,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::StorageInsights::V1::ListReportDetailsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::StorageInsights::V1::ReportDetail>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::StorageInsights::V1::ListReportDetailsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::StorageInsights::V1::ReportDetail>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -755,7 +757,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @storage_insights_stub.list_report_details request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @storage_insights_stub, :list_report_details, "report_details", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

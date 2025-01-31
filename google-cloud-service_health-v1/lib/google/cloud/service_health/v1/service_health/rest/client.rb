@@ -281,10 +281,10 @@ module Google
               #   @param view [::Google::Cloud::ServiceHealth::V1::EventView]
               #     Optional. Event fields to include in response.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ServiceHealth::V1::ListEventsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ServiceHealth::V1::Event>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ServiceHealth::V1::ListEventsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ServiceHealth::V1::Event>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -336,7 +336,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @service_health_stub.list_events request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @service_health_stub, :list_events, "events", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -489,10 +491,10 @@ module Google
               #   @param view [::Google::Cloud::ServiceHealth::V1::OrganizationEventView]
               #     Optional. OrganizationEvent fields to include in response.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ServiceHealth::V1::ListOrganizationEventsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ServiceHealth::V1::OrganizationEvent>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ServiceHealth::V1::ListOrganizationEventsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ServiceHealth::V1::OrganizationEvent>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -544,7 +546,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @service_health_stub.list_organization_events request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @service_health_stub, :list_organization_events, "organization_events", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -699,10 +703,10 @@ module Google
               #     AND and OR expressions explicitly.
               #     Filter is supported for the following fields: `events`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ServiceHealth::V1::ListOrganizationImpactsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ServiceHealth::V1::OrganizationImpact>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ServiceHealth::V1::ListOrganizationImpactsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ServiceHealth::V1::OrganizationImpact>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -754,7 +758,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @service_health_stub.list_organization_impacts request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @service_health_stub, :list_organization_impacts, "organization_impacts", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

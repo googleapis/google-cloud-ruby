@@ -266,10 +266,10 @@ module Google
               #     The `next_page_token` value returned from a previous
               #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::Client#list_instances ListInstances} request, if any.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Redis::V1beta1::ListInstancesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Redis::V1beta1::ListInstancesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -321,7 +321,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_redis_stub.list_instances request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_redis_stub, :list_instances, "instances", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
