@@ -475,10 +475,10 @@ module Google
               #     are described in https://google.aip.dev/160. For example, using
               #     "?filter=destination:gke" would list only Triggers with a gke destination.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListTriggersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Trigger>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListTriggersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Trigger>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -530,7 +530,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_triggers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_triggers, "triggers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -937,10 +939,10 @@ module Google
               #     specify descending order for a field, append a `desc` suffix; for example:
               #     `name desc, channel_id`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListChannelsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Channel>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListChannelsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Channel>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -992,7 +994,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_channels request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_channels, "channels", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1390,10 +1394,10 @@ module Google
               #   @param filter [::String]
               #     The filter field that the list request will filter on.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListProvidersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Provider>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListProvidersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Provider>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1445,7 +1449,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_providers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_providers, "providers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1560,10 +1566,10 @@ module Google
               #     When paginating, all other parameters provided to `ListChannelConnetions`
               #     match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListChannelConnectionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::ChannelConnection>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListChannelConnectionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::ChannelConnection>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1615,7 +1621,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_channel_connections request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_channel_connections, "channel_connections", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2076,10 +2084,10 @@ module Google
               #     Optional. The filter field that the list request will filter on.
               #     Possible filtersare described in https://google.aip.dev/160.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListMessageBusesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::MessageBus>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListMessageBusesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::MessageBus>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2131,7 +2139,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_message_buses request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_message_buses, "message_buses", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2630,10 +2640,10 @@ module Google
               #     Optional. The filter field that the list request will filter on.
               #     Possible filtersare described in https://google.aip.dev/160.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Enrollment>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListEnrollmentsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Enrollment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2685,7 +2695,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_enrollments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_enrollments, "enrollments", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3096,10 +3108,10 @@ module Google
               #     Optional. The filter field that the list request will filter on.
               #     Possible filters are described in https://google.aip.dev/160.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListPipelinesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Pipeline>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListPipelinesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::Pipeline>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3151,7 +3163,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_pipelines request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_pipelines, "pipelines", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3561,10 +3575,10 @@ module Google
               #     Optional. The filter field that the list request will filter on.
               #     Possible filtersare described in https://google.aip.dev/160.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::GoogleApiSource>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Eventarc::V1::ListGoogleApiSourcesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Eventarc::V1::GoogleApiSource>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3616,7 +3630,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @eventarc_stub.list_google_api_sources request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @eventarc_stub, :list_google_api_sources, "google_api_sources", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

@@ -408,10 +408,10 @@ module Google
               #   @param order_by [::String]
               #     Field to sort by. See https://google.aip.dev/132#ordering for more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListDeliveryPipelinesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::DeliveryPipeline>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListDeliveryPipelinesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::DeliveryPipeline>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -463,7 +463,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_delivery_pipelines request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_delivery_pipelines, "delivery_pipelines", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -925,10 +927,10 @@ module Google
               #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
               #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListTargetsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Target>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListTargetsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Target>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -980,7 +982,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_targets request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_targets, "targets", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1538,10 +1542,10 @@ module Google
               #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
               #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListCustomTargetTypesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::CustomTargetType>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListCustomTargetTypesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::CustomTargetType>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1593,7 +1597,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_custom_target_types request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_custom_target_types, "custom_target_types", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2051,10 +2057,10 @@ module Google
               #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
               #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListReleasesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Release>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListReleasesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Release>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2106,7 +2112,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_releases request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_releases, "releases", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2755,10 +2763,10 @@ module Google
               #   @param order_by [::String]
               #     Field to sort by. See https://google.aip.dev/132#ordering for more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListDeployPoliciesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::DeployPolicy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListDeployPoliciesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::DeployPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2810,7 +2818,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_deploy_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_deploy_policies, "deploy_policies", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3183,10 +3193,10 @@ module Google
               #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
               #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListRolloutsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Rollout>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListRolloutsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Rollout>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3238,7 +3248,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_rollouts request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_rollouts, "rollouts", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3649,10 +3661,10 @@ module Google
               #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for
               #     more details.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListJobRunsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::JobRun>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListJobRunsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::JobRun>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3704,7 +3716,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_job_runs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_job_runs, "job_runs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4403,10 +4417,10 @@ module Google
               #   @param order_by [::String]
               #     Field to sort by.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListAutomationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Automation>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListAutomationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::Automation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4458,7 +4472,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_automations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_automations, "automations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4582,10 +4598,10 @@ module Google
               #   @param order_by [::String]
               #     Field to sort by.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Deploy::V1::ListAutomationRunsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::AutomationRun>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Deploy::V1::ListAutomationRunsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Deploy::V1::AutomationRun>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4637,7 +4653,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_deploy_stub.list_automation_runs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_deploy_stub, :list_automation_runs, "automation_runs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
