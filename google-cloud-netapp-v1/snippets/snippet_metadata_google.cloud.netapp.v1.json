@@ -2210,6 +2210,206 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_ListQuotaRules_sync",
+      "title": "Snippet for the list_quota_rules call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#list_quota_rules.",
+      "file": "netapp/list_quota_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_quota_rules",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#list_quota_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::ListQuotaRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::ListQuotaRulesResponse",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "ListQuotaRules",
+          "full_name": "google.cloud.netapp.v1.NetApp.ListQuotaRules",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_GetQuotaRule_sync",
+      "title": "Snippet for the get_quota_rule call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#get_quota_rule.",
+      "file": "netapp/get_quota_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_quota_rule",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#get_quota_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::GetQuotaRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::NetApp::V1::QuotaRule",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "GetQuotaRule",
+          "full_name": "google.cloud.netapp.v1.NetApp.GetQuotaRule",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_CreateQuotaRule_sync",
+      "title": "Snippet for the create_quota_rule call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#create_quota_rule.",
+      "file": "netapp/create_quota_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_quota_rule",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#create_quota_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "CreateQuotaRule",
+          "full_name": "google.cloud.netapp.v1.NetApp.CreateQuotaRule",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_UpdateQuotaRule_sync",
+      "title": "Snippet for the update_quota_rule call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#update_quota_rule.",
+      "file": "netapp/update_quota_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_quota_rule",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#update_quota_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "UpdateQuotaRule",
+          "full_name": "google.cloud.netapp.v1.NetApp.UpdateQuotaRule",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "netapp_v1_generated_NetApp_DeleteQuotaRule_sync",
+      "title": "Snippet for the delete_quota_rule call in the NetApp service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetApp::V1::NetApp::Client#delete_quota_rule.",
+      "file": "netapp/delete_quota_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_quota_rule",
+        "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client#delete_quota_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NetApp::Client",
+          "full_name": "::Google::Cloud::NetApp::V1::NetApp::Client"
+        },
+        "method": {
+          "short_name": "DeleteQuotaRule",
+          "full_name": "google.cloud.netapp.v1.NetApp.DeleteQuotaRule",
+          "service": {
+            "short_name": "NetApp",
+            "full_name": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
