@@ -529,10 +529,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::RapidMigrationAssessment::V1::Collector>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::RapidMigrationAssessment::V1::ListCollectorsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::RapidMigrationAssessment::V1::Collector>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -584,7 +584,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @rapid_migration_assessment_stub.list_collectors request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @rapid_migration_assessment_stub, :list_collectors, "collectors", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

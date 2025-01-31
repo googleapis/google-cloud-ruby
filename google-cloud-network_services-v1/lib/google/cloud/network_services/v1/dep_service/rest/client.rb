@@ -258,10 +258,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbTrafficExtension>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbTrafficExtension>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -313,7 +313,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dep_service_stub.list_lb_traffic_extensions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dep_service_stub, :list_lb_traffic_extensions, "lb_traffic_extensions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -749,10 +751,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbRouteExtension>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbRouteExtension>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -804,7 +806,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dep_service_stub.list_lb_route_extensions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dep_service_stub, :list_lb_route_extensions, "lb_route_extensions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

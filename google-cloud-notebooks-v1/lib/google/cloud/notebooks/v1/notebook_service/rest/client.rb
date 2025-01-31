@@ -320,10 +320,10 @@ module Google
               #     A previous returned page token that can be used to continue listing
               #     from the last result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Notebooks::V1::ListInstancesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Instance>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Notebooks::V1::ListInstancesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Instance>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -375,7 +375,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @notebook_service_stub.list_instances request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @notebook_service_stub, :list_instances, "instances", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2189,10 +2191,10 @@ module Google
               #     A previous returned page token that can be used to continue listing from
               #     the last result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Notebooks::V1::ListEnvironmentsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Environment>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Notebooks::V1::ListEnvironmentsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Environment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2244,7 +2246,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @notebook_service_stub.list_environments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @notebook_service_stub, :list_environments, "environments", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2542,10 +2546,10 @@ module Google
               #   @param order_by [::String]
               #     Field to order results by.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Notebooks::V1::ListSchedulesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Schedule>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Notebooks::V1::ListSchedulesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Schedule>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2597,7 +2601,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @notebook_service_stub.list_schedules request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @notebook_service_stub, :list_schedules, "schedules", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2983,10 +2989,10 @@ module Google
               #   @param order_by [::String]
               #     Sort by field.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Notebooks::V1::ListExecutionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Execution>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Notebooks::V1::ListExecutionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Notebooks::V1::Execution>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3038,7 +3044,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @notebook_service_stub.list_executions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @notebook_service_stub, :list_executions, "executions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

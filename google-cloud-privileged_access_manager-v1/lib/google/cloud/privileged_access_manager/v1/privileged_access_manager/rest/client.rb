@@ -341,10 +341,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::PrivilegedAccessManager::V1::ListEntitlementsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivilegedAccessManager::V1::Entitlement>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::PrivilegedAccessManager::V1::ListEntitlementsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivilegedAccessManager::V1::Entitlement>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -396,7 +396,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @privileged_access_manager_stub.list_entitlements request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @privileged_access_manager_stub, :list_entitlements, "entitlements", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -947,10 +949,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::PrivilegedAccessManager::V1::ListGrantsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivilegedAccessManager::V1::Grant>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::PrivilegedAccessManager::V1::ListGrantsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::PrivilegedAccessManager::V1::Grant>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1002,7 +1004,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @privileged_access_manager_stub.list_grants request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @privileged_access_manager_stub, :list_grants, "grants", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
