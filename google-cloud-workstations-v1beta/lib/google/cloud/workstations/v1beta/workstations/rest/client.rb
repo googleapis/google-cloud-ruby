@@ -394,10 +394,10 @@ module Google
               #     Optional. next_page_token value returned from a previous List request, if
               #     any.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Workstations::V1beta::ListWorkstationClustersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationCluster>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Workstations::V1beta::ListWorkstationClustersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationCluster>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -449,7 +449,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workstations_stub.list_workstation_clusters request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @workstations_stub, :list_workstation_clusters, "workstation_clusters", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -847,10 +849,10 @@ module Google
               #     Optional. next_page_token value returned from a previous List request, if
               #     any.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Workstations::V1beta::ListWorkstationConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Workstations::V1beta::ListWorkstationConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -902,7 +904,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workstations_stub.list_workstation_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @workstations_stub, :list_workstation_configs, "workstation_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -935,10 +939,10 @@ module Google
               #     Optional. next_page_token value returned from a previous List request, if
               #     any.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Workstations::V1beta::ListUsableWorkstationConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Workstations::V1beta::ListUsableWorkstationConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::WorkstationConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -990,7 +994,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workstations_stub.list_usable_workstation_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @workstations_stub, :list_usable_workstation_configs, "workstation_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1388,10 +1394,10 @@ module Google
               #     Optional. next_page_token value returned from a previous List request, if
               #     any.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Workstations::V1beta::ListWorkstationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::Workstation>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Workstations::V1beta::ListWorkstationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::Workstation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1443,7 +1449,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workstations_stub.list_workstations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @workstations_stub, :list_workstations, "workstations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1476,10 +1484,10 @@ module Google
               #     Optional. next_page_token value returned from a previous List request, if
               #     any.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Workstations::V1beta::ListUsableWorkstationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::Workstation>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Workstations::V1beta::ListUsableWorkstationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Workstations::V1beta::Workstation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1531,7 +1539,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @workstations_stub.list_usable_workstations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @workstations_stub, :list_usable_workstations, "workstations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

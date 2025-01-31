@@ -4302,10 +4302,10 @@ module Google
               #     Global search query. Allows user to search assets without needing to
               #     specify which field the value belongs to.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VisionAI::V1::SearchAssetsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VisionAI::V1::SearchResultItem>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VisionAI::V1::SearchAssetsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VisionAI::V1::SearchResultItem>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4357,7 +4357,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @warehouse_stub.search_assets request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @warehouse_stub, :search_assets, "search_result_items", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

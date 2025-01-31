@@ -406,10 +406,10 @@ module Google
                 #     Specifies the ordering of results following syntax at
                 #     https://cloud.google.com/apis/design/design_patterns#sorting_order.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Channel>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Channel>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -461,7 +461,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @livestream_service_stub.list_channels request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @livestream_service_stub, :list_channels, "channels", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1124,10 +1126,10 @@ module Google
                 #     Specifies the ordering of results following syntax at [Sorting
                 #     Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::ListInputsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Input>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::LiveStream::V1::ListInputsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Input>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -1179,7 +1181,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @livestream_service_stub.list_inputs request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @livestream_service_stub, :list_inputs, "inputs", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1614,10 +1618,10 @@ module Google
                 #     Specifies the ordering of results following syntax at
                 #     https://cloud.google.com/apis/design/design_patterns#sorting_order.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::ListEventsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Event>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::LiveStream::V1::ListEventsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Event>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -1669,7 +1673,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @livestream_service_stub.list_events request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @livestream_service_stub, :list_events, "events", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1877,10 +1883,10 @@ module Google
                 #   @param order_by [::String]
                 #     Hint for how to order the results
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::ListClipsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Clip>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::LiveStream::V1::ListClipsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Clip>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -1932,7 +1938,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @livestream_service_stub.list_clips request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @livestream_service_stub, :list_clips, "clips", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2550,10 +2558,10 @@ module Google
                 #   @param order_by [::String]
                 #     Hint for how to order the results
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Asset>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Video::LiveStream::V1::ListAssetsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Video::LiveStream::V1::Asset>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -2605,7 +2613,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @livestream_service_stub.list_assets request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @livestream_service_stub, :list_assets, "assets", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)

@@ -267,10 +267,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListSourcesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::Source>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListSourcesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::Source>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -322,7 +322,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_sources request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_sources, "sources", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -843,10 +845,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListUtilizationReportsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::UtilizationReport>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListUtilizationReportsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::UtilizationReport>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -898,7 +900,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_utilization_reports request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_utilization_reports, "utilization_reports", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1233,10 +1237,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::DatacenterConnector>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListDatacenterConnectorsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::DatacenterConnector>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1288,7 +1292,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_datacenter_connectors request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_datacenter_connectors, "datacenter_connectors", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1826,10 +1832,10 @@ module Google
               #   @param view [::Google::Cloud::VMMigration::V1::MigratingVmView]
               #     Optional. The level of details of each migrating VM.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListMigratingVmsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::MigratingVm>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListMigratingVmsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::MigratingVm>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1881,7 +1887,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_migrating_vms request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_migrating_vms, "migrating_vms", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2744,10 +2752,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListCloneJobsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::CloneJob>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListCloneJobsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::CloneJob>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2799,7 +2807,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_clone_jobs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_clone_jobs, "clone_jobs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3113,10 +3123,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListCutoverJobsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::CutoverJob>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListCutoverJobsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::CutoverJob>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3168,7 +3178,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_cutover_jobs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_cutover_jobs, "cutover_jobs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3288,10 +3300,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListGroupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::Group>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListGroupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::Group>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3343,7 +3355,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_groups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_groups, "groups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3957,10 +3971,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListTargetProjectsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::TargetProject>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListTargetProjectsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::TargetProject>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4012,7 +4026,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_target_projects request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_target_projects, "target_projects", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4457,10 +4473,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. the order by fields for the result.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::VMMigration::V1::ListReplicationCyclesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::VMMigration::V1::ListReplicationCyclesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::VMMigration::V1::ReplicationCycle>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4512,7 +4528,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @vm_migration_stub.list_replication_cycles request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @vm_migration_stub, :list_replication_cycles, "replication_cycles", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

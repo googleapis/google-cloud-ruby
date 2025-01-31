@@ -490,10 +490,10 @@ module Google
                 #     supported fields and syntax, see [Certificates Sorting
                 #     documentation](https://cloud.google.com/certificate-authority-service/docs/sorting-filtering-certificates#sorting_support).
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Security::PrivateCA::V1::ListCertificatesResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::Certificate>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificatesResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::Certificate>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -545,7 +545,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @certificate_authority_service_stub.list_certificates request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @certificate_authority_service_stub, :list_certificates, "certificates", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -1403,10 +1405,10 @@ module Google
                 #   @param order_by [::String]
                 #     Optional. Specify how the results should be sorted.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -1458,7 +1460,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @certificate_authority_service_stub.list_certificate_authorities request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @certificate_authority_service_stub, :list_certificate_authorities, "certificate_authorities", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2121,10 +2125,10 @@ module Google
                 #   @param order_by [::String]
                 #     Optional. Specify how the results should be sorted.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CaPool>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Security::PrivateCA::V1::ListCaPoolsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CaPool>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -2176,7 +2180,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @certificate_authority_service_stub.list_ca_pools request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @certificate_authority_service_stub, :list_ca_pools, "ca_pools", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -2510,10 +2516,10 @@ module Google
                 #   @param order_by [::String]
                 #     Optional. Specify how the results should be sorted.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificateRevocationListsResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CertificateRevocationList>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -2565,7 +2571,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @certificate_authority_service_stub.list_certificate_revocation_lists request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @certificate_authority_service_stub, :list_certificate_revocation_lists, "certificate_revocation_lists", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
@@ -3015,10 +3023,10 @@ module Google
                 #   @param order_by [::String]
                 #     Optional. Specify how the results should be sorted.
                 # @yield [result, operation] Access the result along with the TransportOperation object
-                # @yieldparam result [::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesResponse]
+                # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate>]
                 # @yieldparam operation [::Gapic::Rest::TransportOperation]
                 #
-                # @return [::Google::Cloud::Security::PrivateCA::V1::ListCertificateTemplatesResponse]
+                # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Security::PrivateCA::V1::CertificateTemplate>]
                 #
                 # @raise [::Google::Cloud::Error] if the REST call is aborted.
                 #
@@ -3070,7 +3078,9 @@ module Google
                                          retry_policy: @config.retry_policy
 
                   @certificate_authority_service_stub.list_certificate_templates request, options do |result, operation|
+                    result = ::Gapic::Rest::PagedEnumerable.new @certificate_authority_service_stub, :list_certificate_templates, "certificate_templates", request, result, options
                     yield result, operation if block_given?
+                    throw :response, result
                   end
                 rescue ::Gapic::Rest::Error => e
                   raise ::Google::Cloud::Error.from_error(e)
