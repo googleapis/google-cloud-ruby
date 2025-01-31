@@ -5571,10 +5571,10 @@ module Google
               #     When paginating, all other parameters provided to `ListSubscribers` must
               #     match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
+              # @yieldparam result [::Google::Cloud::Channel::V1::ListSubscribersResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String>]
+              # @return [::Google::Cloud::Channel::V1::ListSubscribersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -5622,9 +5622,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_channel_service_stub.list_subscribers request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_channel_service_stub, :list_subscribers, "service_accounts", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

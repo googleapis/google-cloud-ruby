@@ -229,10 +229,10 @@ module Google
               #     Optional. Specifies the interval for retrieving violations.
               #     if unspecified, all violations will be returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1::ListViolationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1::Violation>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CloudControlsPartner::V1::ListViolationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1::Violation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -284,7 +284,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_controls_partner_monitoring_stub.list_violations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_controls_partner_monitoring_stub, :list_violations, "violations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

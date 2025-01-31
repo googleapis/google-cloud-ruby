@@ -386,10 +386,10 @@ module Google
               #     results. The default sorting order is ascending. To specify descending
               #     order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CertificateManager::V1::ListCertificatesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::Certificate>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CertificateManager::V1::ListCertificatesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::Certificate>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -441,7 +441,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @certificate_manager_stub.list_certificates request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @certificate_manager_stub, :list_certificates, "certificates", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -831,10 +833,10 @@ module Google
               #     returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CertificateManager::V1::ListCertificateMapsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMap>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CertificateManager::V1::ListCertificateMapsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMap>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -886,7 +888,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @certificate_manager_stub.list_certificate_maps request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @certificate_manager_stub, :list_certificate_maps, "certificate_maps", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1283,10 +1287,10 @@ module Google
               #     the order of the returned results. The default sorting order is ascending.
               #     To specify descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMapEntry>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateMapEntry>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1338,7 +1342,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @certificate_manager_stub.list_certificate_map_entries request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @certificate_manager_stub, :list_certificate_map_entries, "certificate_map_entries", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1728,10 +1734,10 @@ module Google
               #     returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CertificateManager::V1::ListDnsAuthorizationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::DnsAuthorization>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CertificateManager::V1::ListDnsAuthorizationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::DnsAuthorization>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1783,7 +1789,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @certificate_manager_stub.list_dns_authorizations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @certificate_manager_stub, :list_dns_authorizations, "dns_authorizations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2174,10 +2182,10 @@ module Google
               #     returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2229,7 +2237,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @certificate_manager_stub.list_certificate_issuance_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @certificate_manager_stub, :list_certificate_issuance_configs, "certificate_issuance_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2528,10 +2538,10 @@ module Google
               #     returned results. The default sorting order is ascending. To specify
               #     descending order for a field, add a suffix `" desc"`.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CertificateManager::V1::ListTrustConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::TrustConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CertificateManager::V1::ListTrustConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CertificateManager::V1::TrustConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2583,7 +2593,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @certificate_manager_stub.list_trust_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @certificate_manager_stub, :list_trust_configs, "trust_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

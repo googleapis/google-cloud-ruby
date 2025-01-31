@@ -438,10 +438,10 @@ module Google
               #     `quota_id`,
               #     `service, create_time`
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CloudQuotas::V1::ListQuotaPreferencesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudQuotas::V1::QuotaPreference>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CloudQuotas::V1::ListQuotaPreferencesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudQuotas::V1::QuotaPreference>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -493,7 +493,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_quotas_stub.list_quota_preferences request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_quotas_stub, :list_quota_preferences, "quota_preferences", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

@@ -549,10 +549,10 @@ module Google
               #   @param page_token [::String]
               #     Page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Batch::V1::ListJobsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Batch::V1::Job>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Batch::V1::ListJobsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Batch::V1::Job>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -604,7 +604,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @batch_service_stub.list_jobs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @batch_service_stub, :list_jobs, "jobs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -719,10 +721,10 @@ module Google
               #   @param page_token [::String]
               #     Page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::Batch::V1::ListTasksResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Batch::V1::Task>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Batch::V1::ListTasksResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Batch::V1::Task>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -774,7 +776,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @batch_service_stub.list_tasks request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @batch_service_stub, :list_tasks, "tasks", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

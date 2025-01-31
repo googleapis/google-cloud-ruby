@@ -436,10 +436,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::ServiceProjectAttachment>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AppHub::V1::ListServiceProjectAttachmentsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::ServiceProjectAttachment>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -491,7 +491,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @app_hub_stub.list_service_project_attachments request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_service_project_attachments, "service_project_attachments", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -903,10 +905,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AppHub::V1::ListDiscoveredServicesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::DiscoveredService>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AppHub::V1::ListDiscoveredServicesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::DiscoveredService>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -958,7 +960,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @app_hub_stub.list_discovered_services request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_discovered_services, "discovered_services", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1160,10 +1164,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AppHub::V1::ListServicesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::Service>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AppHub::V1::ListServicesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::Service>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1215,7 +1219,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @app_hub_stub.list_services request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_services, "services", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1657,10 +1663,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::DiscoveredWorkload>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AppHub::V1::ListDiscoveredWorkloadsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::DiscoveredWorkload>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1712,7 +1718,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @app_hub_stub.list_discovered_workloads request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_discovered_workloads, "discovered_workloads", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1914,10 +1922,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AppHub::V1::ListWorkloadsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::Workload>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AppHub::V1::ListWorkloadsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::Workload>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1969,7 +1977,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @app_hub_stub.list_workloads request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_workloads, "workloads", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2410,10 +2420,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AppHub::V1::ListApplicationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::Application>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AppHub::V1::ListApplicationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AppHub::V1::Application>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2465,7 +2475,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @app_hub_stub.list_applications request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @app_hub_stub, :list_applications, "applications", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

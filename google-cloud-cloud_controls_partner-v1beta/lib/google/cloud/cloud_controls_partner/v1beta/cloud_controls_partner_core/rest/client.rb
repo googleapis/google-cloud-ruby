@@ -323,10 +323,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1beta::Workload>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CloudControlsPartner::V1beta::ListWorkloadsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1beta::Workload>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -378,7 +378,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_controls_partner_core_stub.list_workloads request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_controls_partner_core_stub, :list_workloads, "workloads", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -495,10 +497,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1beta::Customer>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CloudControlsPartner::V1beta::ListCustomersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1beta::Customer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -550,7 +552,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_controls_partner_core_stub.list_customers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_controls_partner_core_stub, :list_customers, "customers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -750,10 +754,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1beta::AccessApprovalRequest>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::CloudControlsPartner::V1beta::ListAccessApprovalRequestsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::CloudControlsPartner::V1beta::AccessApprovalRequest>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -805,7 +809,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_controls_partner_core_stub.list_access_approval_requests request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_controls_partner_core_stub, :list_access_approval_requests, "access_approval_requests", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
