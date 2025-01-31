@@ -1,5 +1,12 @@
 # Release History
 
+### 0.32.1 (2025-01-30)
+
+#### Documentation
+
+* Update the API name 
+* Various other documentation enhancements 
+
 ### 0.32.0 (2025-01-28)
 
 #### Features
