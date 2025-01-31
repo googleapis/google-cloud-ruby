@@ -394,10 +394,10 @@ module Google
               #   @param filter [::String]
               #     Optional. List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListStoragePoolsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::StoragePool>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListStoragePoolsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::StoragePool>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -449,7 +449,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_storage_pools request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_storage_pools, "storage_pools", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1015,10 +1017,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListVolumesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Volume>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListVolumesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Volume>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1070,7 +1072,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_volumes request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_volumes, "volumes", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1558,10 +1562,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListSnapshotsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Snapshot>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListSnapshotsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Snapshot>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1613,7 +1617,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_snapshots request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_snapshots, "snapshots", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2001,10 +2007,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListActiveDirectoriesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::ActiveDirectory>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListActiveDirectoriesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::ActiveDirectory>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2056,7 +2062,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_active_directories request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_active_directories, "active_directories", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2445,10 +2453,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListKmsConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::KmsConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListKmsConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::KmsConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2500,7 +2508,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_kms_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_kms_configs, "kms_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3056,10 +3066,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListReplicationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Replication>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListReplicationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Replication>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3111,7 +3121,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_replications request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_replications, "replications", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4136,10 +4148,10 @@ module Google
               #   @param filter [::String]
               #     List filter.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListBackupVaultsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::BackupVault>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListBackupVaultsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::BackupVault>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4191,7 +4203,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_backup_vaults request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_backup_vaults, "backup_vaults", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -4599,10 +4613,10 @@ module Google
               #     matches the filter expression. If empty, then no backups are filtered out.
               #     See https://google.aip.dev/160
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListBackupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Backup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListBackupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::Backup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -4654,7 +4668,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_backups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_backups, "backups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5046,10 +5062,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListBackupPoliciesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::BackupPolicy>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListBackupPoliciesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::BackupPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -5101,7 +5117,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_backup_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_backup_policies, "backup_policies", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5318,10 +5336,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetApp::V1::ListQuotaRulesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::QuotaRule>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetApp::V1::ListQuotaRulesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetApp::V1::QuotaRule>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -5373,7 +5391,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @net_app_stub.list_quota_rules request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @net_app_stub, :list_quota_rules, "quota_rules", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
