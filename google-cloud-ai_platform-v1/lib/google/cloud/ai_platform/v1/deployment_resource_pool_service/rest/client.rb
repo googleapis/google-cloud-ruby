@@ -712,10 +712,10 @@ module Google
               #     `QueryDeployedModels` must match the call that provided the page
               #     token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AIPlatform::V1::QueryDeployedModelsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AIPlatform::V1::DeployedModel>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AIPlatform::V1::QueryDeployedModelsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AIPlatform::V1::DeployedModel>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -767,7 +767,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @deployment_resource_pool_service_stub.query_deployed_models request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @deployment_resource_pool_service_stub, :query_deployed_models, "deployed_models", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

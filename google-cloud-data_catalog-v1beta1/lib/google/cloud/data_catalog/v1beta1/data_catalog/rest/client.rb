@@ -270,10 +270,10 @@ module Google
               #
               #     If not specified, defaults to `relevance` descending.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::DataCatalog::V1beta1::SearchCatalogResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1beta1::SearchCatalogResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::DataCatalog::V1beta1::SearchCatalogResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1beta1::SearchCatalogResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -325,7 +325,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @data_catalog_stub.search_catalog request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @data_catalog_stub, :search_catalog, "results", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)

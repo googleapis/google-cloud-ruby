@@ -331,10 +331,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListManagementServersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::ManagementServer>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::ListManagementServersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::ManagementServer>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -386,7 +386,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.list_management_servers request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_management_servers, "management_servers", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -829,10 +831,10 @@ module Google
               #     Optional. Reserved for future use to provide a BASIC & FULL view of Backup
               #     Vault.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListBackupVaultsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupVault>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::ListBackupVaultsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupVault>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -884,7 +886,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.list_backup_vaults request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_backup_vaults, "backup_vaults", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -927,10 +931,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupVault>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::FetchUsableBackupVaultsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupVault>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -982,7 +986,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.fetch_usable_backup_vaults request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :fetch_usable_backup_vaults, "backup_vaults", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1335,10 +1341,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListDataSourcesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::DataSource>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::ListDataSourcesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::DataSource>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1390,7 +1396,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.list_data_sources request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_data_sources, "data_sources", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1622,10 +1630,10 @@ module Google
               #     Optional. Reserved for future use to provide a BASIC & FULL view of Backup
               #     resource.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListBackupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::Backup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::ListBackupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::Backup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1677,7 +1685,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.list_backups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_backups, "backups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2312,10 +2322,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Field by which to sort the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListBackupPlansResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupPlan>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::ListBackupPlansResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupPlan>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2367,7 +2377,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.list_backup_plans request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_backup_plans, "backup_plans", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2696,10 +2708,10 @@ module Google
               #   @param filter [::String]
               #     Optional. Filtering results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupPlanAssociation>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::BackupDR::V1::ListBackupPlanAssociationsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::BackupDR::V1::BackupPlanAssociation>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2751,7 +2763,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @backup_dr_stub.list_backup_plan_associations request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @backup_dr_stub, :list_backup_plan_associations, "backup_plan_associations", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
