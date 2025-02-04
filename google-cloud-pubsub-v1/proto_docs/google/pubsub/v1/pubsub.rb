@@ -619,6 +619,7 @@ module Google
         #     Required. JavaScript code that contains a function `function_name` with the
         #     below signature:
         #
+        #     ```
         #       /**
         #       * Transforms a Pub/Sub message.
         #
@@ -644,6 +645,7 @@ module Google
         #
         #       function <function_name>(message, metadata) {
         #       }
+        #     ```
         class JavaScriptUDF
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
