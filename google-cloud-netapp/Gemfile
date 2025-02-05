@@ -2,7 +2,22 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "google-cloud-netapp-v1", path: "../google-cloud-netapp-v1"
+local_dependencies = ["google-cloud-netapp-v1"]
+
+main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-netapp.gemspec"))
+local_dependencies.each do |name|
+  spec_path = File.expand_path "../#{name}/#{name}.gemspec", __dir__
+  unless File.file? spec_path
+    warn "WARNING: Disabled local dependency for #{name} because gemspec not found."
+    next
+  end
+  version = Bundler.load_gemspec(spec_path).version
+  if main_spec.dependencies.any? { |dep| dep.name == name && !dep.requirement.satisfied_by?(version) }
+    warn "WARNING: Disabled local dependency for #{name} because the gemspec disallows version #{version}."
+    next
+  end
+  gem name, path: "../#{name}"
+end
 
 gem "google-style", "~> 1.30.1"
 gem "minitest", "~> 5.22"
