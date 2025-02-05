@@ -26,6 +26,15 @@ describe "Secret Manager Snippets" do
 
   let(:iam_user) { "user:sethvargo@google.com" }
 
+  let(:annotation_key) { "annotation-key" }
+  let(:annotation_value) { "annotation-value" }
+
+  let(:updated_annotation_key) { "updated-annotation-key" }
+  let(:updated_annotation_value) { "updated-annotation-value" }
+
+  let(:label_key) { "label-key" }
+  let(:label_value) { "label-value" }
+
   let :secret do
     client.create_secret(
       parent:    "projects/#{project_id}",
@@ -33,6 +42,12 @@ describe "Secret Manager Snippets" do
       secret:    {
         replication: {
           automatic: {}
+        },
+        annotations: {
+          annotation_key => annotation_value
+        },
+        labels: {
+          label_key => label_value
         }
       }
     )
@@ -328,6 +343,91 @@ describe "Secret Manager Snippets" do
         expect(n_secret).wont_be_nil
         expect(n_secret.version_aliases["test"]).must_equal(1)
       }.must_output(/Updated secret/)
+    end
+  end
+
+  describe "#create_secret_with_annotations" do
+    it "create secret with annotations" do
+      expect {
+        secret = create_secret_with_annotations(
+          project_id:       project_id,
+          secret_id:        secret_id,
+          annotation_key:   annotation_key,
+          annotation_value: annotation_value
+        )
+
+        expect(secret).wont_be_nil
+        expect(secret.name).must_include(secret_id)
+        expect(secret.annotations[annotation_key]).must_equal(annotation_value)
+      }.must_output(/Created secret/)
+    end
+  end
+
+  describe "#create_secret_with_labels" do
+    it "create secret with labels" do
+      expect {
+        secret = create_secret_with_labels(
+          project_id:  project_id,
+          secret_id:   secret_id,
+          label_key:   label_key,
+          label_value: label_value
+        )
+
+        expect(secret).wont_be_nil
+        expect(secret.name).must_include(secret_id)
+        expect(secret.labels[label_key]).must_equal(label_value)
+      }.must_output(/Created secret with labels/)
+    end
+  end
+
+  describe "#edit_secret_annotations" do
+    it "edit secret annotations" do
+      expect(secret).wont_be_nil
+
+      expect {
+        n_secret = edit_secret_annotations(
+          project_id:       project_id,
+          secret_id:        secret_id,
+          annotation_key:   updated_annotation_key,
+          annotation_value: updated_annotation_value
+        )
+
+        expect(n_secret).wont_be_nil
+        expect(n_secret.name).must_include(secret_id)
+        expect(n_secret.annotations[updated_annotation_key]).must_equal(updated_annotation_value)
+      }.must_output(/Updated secret/)
+    end
+  end
+
+  describe "#view_secret_annotations" do
+    it "view secret annotations" do
+      expect(secret).wont_be_nil
+
+      expect {
+        secret_annotations = view_secret_annotations(
+          project_id: project_id,
+          secret_id:  secret_id
+        )
+
+        expect(secret_annotations).wont_be_nil
+        expect(secret_annotations[annotation_key]).must_equal(annotation_value)
+      }.must_output(/Annotation Key: #{annotation_key}, Annotation Value: #{annotation_value}/)
+    end
+  end
+
+  describe "#view_secret_labels" do
+    it "view secret labels" do
+      expect(secret).wont_be_nil
+
+      expect {
+        secret_labels = view_secret_labels(
+          project_id: project_id,
+          secret_id:  secret_id
+        )
+
+        expect(secret_labels).wont_be_nil
+        expect(secret_labels[label_key]).must_equal(label_value)
+      }.must_output(/Label Key: #{label_key}, Label Value: #{label_value}/)
     end
   end
 end

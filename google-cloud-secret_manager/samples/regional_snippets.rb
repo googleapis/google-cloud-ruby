@@ -121,6 +121,86 @@ def create_regional_secret project_id:, location_id:, secret_id:
   secret
 end
 
+def create_regional_secret_with_annotations project_id:, location_id:, secret_id:, annotation_key:, annotation_value:
+  # [START secretmanager_create_regional_secret_with_annotations]
+  # project_id       = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # location_id      = "YOUR-GOOGLE-CLOUD-LOCATION" # (e.g. "us-west1")
+  # secret_id        = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+  # annotation_key   = "YOUR-ANNOTATION-KEY"        # (e.g. "my-annotation-key")
+  # annotation_value = "YOUR-ANNOTATION-VALUE"      # (e.g. "my-annotation-value")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Endpoint for the regional secret manager service.
+  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
+
+  # Create the Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service do |config|
+    config.endpoint = api_endpoint
+  end
+
+  # Build the resource name of the parent project.
+  parent = client.location_path project: project_id, location: location_id
+
+  # Create the secret.
+  secret = client.create_secret(
+    parent:    parent,
+    secret_id: secret_id,
+    secret: {
+      annotations: {
+        annotation_key => annotation_value
+      }
+    }
+  )
+
+  # Print the new secret name.
+  puts "Created regional secret with annotations: #{secret.name}"
+  # [END secretmanager_create_regional_secret_with_annotations]
+
+  secret
+end
+
+def create_regional_secret_with_labels project_id:, location_id:, secret_id:, label_key:, label_value:
+  # [START secretmanager_create_regional_secret_with_labels]
+  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # location_id = "YOUR-GOOGLE-CLOUD-LOCATION" # (e.g. "us-west1")
+  # secret_id   = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+  # label_key   = "YOUR-LABEL-KEY"             # (e.g. "my-label-key")
+  # label_value = "YOUR-LABEL-VALUE"           # (e.g. "my-label-value")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Endpoint for the regional secret manager service.
+  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
+
+  # Create the Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service do |config|
+    config.endpoint = api_endpoint
+  end
+
+  # Build the resource name of the parent project.
+  parent = client.location_path project: project_id, location: location_id
+
+  # Create the secret.
+  secret = client.create_secret(
+    parent:    parent,
+    secret_id: secret_id,
+    secret: {
+      labels: {
+        label_key => label_value
+      }
+    }
+  )
+
+  # Print the new secret name.
+  puts "Created regional secret with label: #{secret.name}"
+  # [END secretmanager_create_regional_secret_with_labels]
+
+  secret
+end
+
 def delete_regional_secret_with_etag project_id:, location_id:, secret_id:, etag:
   # [START secretmanager_delete_regional_secret_with_etag]
   # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
@@ -397,6 +477,56 @@ def enable_regional_secret_version project_id:, location_id:, secret_id:, versio
   # [END secretmanager_enable_regional_secret_version]
 
   response
+end
+
+def edit_regional_secret_annotations project_id:, location_id:, secret_id:, annotation_key:, annotation_value:
+  # [START secretmanager_edit_regional_secret_annotations]
+  # project_id       = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # location_id      = "YOUR-GOOGLE-CLOUD-LOCATION" # (e.g. "us-west1")
+  # secret_id        = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+  # annotation_key   = "YOUR-ANNOTATION-KEY"        # (e.g. "my-annotation-key")
+  # annotation_value = "YOUR-ANNOTATION-VALUE"      # (e.g. "my-annotation-value")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Endpoint for the regional secret manager service.
+  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
+
+  # Create the Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service do |config|
+    config.endpoint = api_endpoint
+  end
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, location: location_id, secret: secret_id
+
+  # Get the existing secret.
+  existing_secret = client.get_secret name: name
+
+  # Get the existing secret's annotations.
+  existing_secret_annotations = existing_secret.annotations.to_h
+
+  # Add a new annotation key and value.
+  existing_secret_annotations[annotation_key] = annotation_value
+
+  # Updates the secret.
+  secret = client.update_secret(
+    secret: {
+      name: name,
+      annotations: existing_secret_annotations
+    },
+    update_mask: {
+      paths: ["annotations"]
+    }
+  )
+
+  # Print the updated secret name and annotations.
+  puts "Updated regional secret: #{secret.name}"
+  puts "New updated annotations: #{secret.annotations}"
+  # [END secretmanager_edit_regional_secret_annotations]
+
+  secret
 end
 
 def get_regional_secret project_id:, location_id:, secret_id:
@@ -795,6 +925,76 @@ def update_regional_secret_with_etag project_id:, location_id:, secret_id:, etag
   secret
 end
 
+def view_regional_secret_annotations project_id:, location_id:, secret_id:
+  # [START secretmanager_view_regional_secret_annotations]
+  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # location_id = "YOUR-GOOGLE-CLOUD-LOCATION" # (e.g. "us-west1")
+  # secret_id   = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Endpoint for the regional secret manager service.
+  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
+
+  # Create the Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service do |config|
+    config.endpoint = api_endpoint
+  end
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, location: location_id, secret: secret_id
+
+  # Get the existing secret.
+  existing_secret = client.get_secret name: name
+
+  # Get the existing secret's annotations.
+  existing_secret_annotations = existing_secret.annotations.to_h
+
+  # Print the secret annotations.
+  existing_secret_annotations.each do |key, value|
+    puts "Annotation Key: #{key}, Annotation Value: #{value}"
+  end
+  # [END secretmanager_view_regional_secret_annotations]
+
+  existing_secret_annotations
+end
+
+def view_regional_secret_labels project_id:, location_id:, secret_id:
+  # [START secretmanager_view_regional_secret_labels]
+  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # location_id = "YOUR-GOOGLE-CLOUD-LOCATION" # (e.g. "us-west1")
+  # secret_id   = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Endpoint for the regional secret manager service.
+  api_endpoint = "secretmanager.#{location_id}.rep.googleapis.com"
+
+  # Create the Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service do |config|
+    config.endpoint = api_endpoint
+  end
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, location: location_id, secret: secret_id
+
+  # Get the existing secret.
+  existing_secret = client.get_secret name: name
+
+  # Get the existing secret's labels.
+  existing_secret_labels = existing_secret.labels.to_h
+
+  # Print the secret labels.
+  existing_secret_labels.each do |key, value|
+    puts "Label Key: #{key}, Label Value: #{value}"
+  end
+  # [END secretmanager_view_regional_secret_labels]
+
+  existing_secret_labels
+end
+
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
@@ -818,6 +1018,22 @@ if $PROGRAM_NAME == __FILE__
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
       location_id: ENV["GOOGLE_CLOUD_LOCATION"],
       secret_id:  args.shift
+    )
+  when "create_regional_secret_with_annotations"
+    create_regional_secret_with_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
+      secret_id:  args.shift,
+      annotation_key: args.shift,
+      annotation_value: args.shift
+    )
+  when "create_regional_secret_with_labels"
+    create_regional_secret_with_labels(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
+      secret_id:  args.shift,
+      label_key: args.shift,
+      label_value: args.shift
     )
   when "delete_regional_secret_with_etag"
     delete_regional_secret_with_etag(
@@ -846,6 +1062,14 @@ if $PROGRAM_NAME == __FILE__
       location_id: ENV["GOOGLE_CLOUD_LOCATION"],
       secret_id:  args.shift,
       version_id: args.shift
+    )
+  when "edit_regional_secret_annotations"
+    edit_regional_secret_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
+      secret_id:  args.shift,
+      annotation_key: args.shift,
+      annotation_value: args.shift
     )
   when "enable_regional_secret_version_with_etag"
     enable_regional_secret_version_with_etag(
@@ -947,33 +1171,50 @@ if $PROGRAM_NAME == __FILE__
       location_id: ENV["GOOGLE_CLOUD_LOCATION"],
       secret_id:  args.shift
     )
+  when "view_regional_secret_anotations"
+    view_regional_secret_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
+      secret_id:  args.shift
+    )
+  when "view_regional_secret_lanbels"
+    view_regional_secret_labels(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      location_id: ENV["GOOGLE_CLOUD_LOCATION"],
+      secret_id:  args.shift
+    )
   else
     puts <<~USAGE
       Usage: bundle exec ruby #{__FILE__} [command] [arguments]
 
       Commands:
-        access_regional_secret_version <secret> <version>                       Access a regional secret version
-        add_regional_secret_version <secret>                                    Add a new regional secret version
-        create_regional_secret <secret>                                         Create a new regional secret
-        delete_regional_secret_with_etag <secret> <etag>                        Delete an existing regional secret with associated etag
-        delete_regional_secret <secret>                                         Delete an existing regional secret
-        destroy_regional_secret_version_with_etag <secret> <version> <etag>     Destroy a regional secret version
-        destroy_regional_secret_version <secret> <version> <etag>               Destroy a regional secret version
-        disable_regional_secret_version_with_etag <secret> <version> <etag>     Disable a regional secret version
-        disable_regional_secret_version <secret> <version>                      Disable a regional secret version
-        enable_regional_secret_version_with_etag <secret> <version> <etag>      Enable a regional secret version
-        enable_regional_secret_version <secret> <version>                       Enable a regional secret version
-        get_regional_secret <secret>                                            Get a regional secret
-        get_regional_secret_version <secret> <version>                          Get a regional secret version
-        iam_grant_access_regional <secret> <version> <member>                   Grant the member access to the regional secret
-        iam_revoke_access_regional <secret> <version> <member>                  Revoke the member access to the regional secret
-        list_regional_secret_versions_with_filter <secret> <filter>             List all versions for a regional secret
-        list_regional_secret_versions <secret>                                  List all versions for a regional secret
-        list_regional_secrets_with_filter <filter>                              List all  regional secrets
-        list_regional_secrets                                                   List all  regional secrets
-        update_regional_secret_with_alias <secret>                              Update a regional secret
-        update_regional_secret_with_etag <secret> <etag>                        Update a regional secret
-        update_regional_secret <secret>                                         Update a regional secret
+        access_regional_secret_version <secret> <version>                                                    Access a regional secret version
+        add_regional_secret_version <secret>                                                                 Add a new regional secret version
+        create_regional_secret <secret>                                                                      Create a new regional secret
+        create_regional_secret_with_annotations <secret> <key> <value>                                       Create a new regional secret with annotations
+        create_regional_secret_with_labels <secret> <key> <value>                                            Create a new regional secret with labels
+        delete_regional_secret_with_etag <secret> <etag>                                                     Delete an existing regional secret with associated etag
+        delete_regional_secret <secret>                                                                      Delete an existing regional secret
+        destroy_regional_secret_version_with_etag <secret> <version> <etag>                                  Destroy a regional secret version
+        destroy_regional_secret_version <secret> <version> <etag>                                            Destroy a regional secret version
+        disable_regional_secret_version_with_etag <secret> <version> <etag>                                  Disable a regional secret version
+        disable_regional_secret_version <secret> <version>                                                   Disable a regional secret version
+        edit_regional_secret_annotations <secret> <key> <value>                                              Edit a regional secret annotations
+        enable_regional_secret_version_with_etag <secret> <version> <etag>                                   Enable a regional secret version
+        enable_regional_secret_version <secret> <version>                                                    Enable a regional secret version
+        get_regional_secret <secret>                                                                         Get a regional secret
+        get_regional_secret_version <secret> <version>                                                       Get a regional secret version
+        iam_grant_access_regional <secret> <version> <member>                                                Grant the member access to the regional secret
+        iam_revoke_access_regional <secret> <version> <member>                                               Revoke the member access to the regional secret
+        list_regional_secret_versions_with_filter <secret> <filter>                                          List all versions for a regional secret
+        list_regional_secret_versions <secret>                                                               List all versions for a regional secret
+        list_regional_secrets_with_filter <filter>                                                           List all  regional secrets
+        list_regional_secrets                                                                                List all  regional secrets
+        update_regional_secret_with_alias <secret>                                                           Update a regional secret
+        update_regional_secret_with_etag <secret> <etag>                                                     Update a regional secret
+        update_regional_secret <secret>                                                                      Update a regional secret
+        view_regional_secret_annotations <secret>                                                            View a regional secret annotations
+        view_regional_secret_labels <secret>                                                                 View a regional secret labels
 
       Environment variables:
         GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run the regional snippets
