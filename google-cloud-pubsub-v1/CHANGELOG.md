@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.1 (2025-02-05)
+
+#### Documentation
+
+* Fixed some documentation formatting ([#28914](https://github.com/googleapis/google-cloud-ruby/issues/28914)) 
+
 ### 1.7.0 (2025-01-31)
 
 #### Features
