@@ -1,0 +1,17 @@
+{
+    "api_id": "policytroubleshooter.googleapis.com",
+    "api_shortname": "policytroubleshooter",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-iam/latest",
+    "distribution_name": "google-cloud-policy_troubleshooter-iam",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "policytroubleshooter",
+    "name_pretty": "Policy Troubleshooter API",
+    "product_documentation": "https://cloud.google.com/policy-intelligence/docs/troubleshoot-access",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-policy_troubleshooter-iam is the official client library for the Policy Troubleshooter API.",
+    "ruby-cloud-product-url": "https://cloud.google.com/policy-intelligence/docs/troubleshoot-access",
+    "library_type": "GAPIC_AUTO"
+}
