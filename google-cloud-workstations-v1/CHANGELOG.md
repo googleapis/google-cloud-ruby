@@ -41,3 +41,4 @@
 * Initial generation of google-cloud-workstations-v1 ([#25945](https://github.com/googleapis/google-cloud-ruby/issues/25945)) 
 
 ## Release History
+
