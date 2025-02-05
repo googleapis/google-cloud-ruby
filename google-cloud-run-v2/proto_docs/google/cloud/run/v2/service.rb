@@ -197,7 +197,7 @@ module Google
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. For a deleted resource, the time after which it will be
-        #     permamently deleted.
+        #     permanently deleted.
         # @!attribute [r] creator
         #   @return [::String]
         #     Output only. Email address of the authenticated creator.
@@ -224,7 +224,7 @@ module Google
         #     Set the launch stage to a preview stage on input to allow use of preview
         #     features in that stage. On read (or output), describes whether the resource
         #     uses preview features.
-        #     <p>
+        #
         #     For example, if ALPHA is provided as input, but only BETA and GA-level
         #     features are used, this field will be BETA on output.
         # @!attribute [rw] binary_authorization
@@ -300,6 +300,9 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [rw] build_config
+        #   @return [::Google::Cloud::Run::V2::BuildConfig]
+        #     Optional. Configuration for building a Cloud Run function.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
         #     Output only. Returns true if the Service is currently being acted upon by
@@ -309,7 +312,7 @@ module Google
         #     will asynchronously perform all necessary steps to bring the Service to the
         #     desired serving state. This process is called reconciliation.
         #     While reconciliation is in process, `observed_generation`,
-        #     `latest_ready_revison`, `traffic_statuses`, and `uri` will have transient
+        #     `latest_ready_revision`, `traffic_statuses`, and `uri` will have transient
         #     values that might mismatch the intended state: Once reconciliation is over
         #     (and this field is false), there are two possible outcomes: reconciliation
         #     succeeded and the serving state matches the Service, or there was an error,
