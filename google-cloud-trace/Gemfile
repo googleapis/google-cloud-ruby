@@ -2,13 +2,32 @@ source "https://rubygems.org"
 
 gemspec
 
+local_dependencies = [
+  "google-cloud-trace-v1",
+  "google-cloud-trace-v2",
+  "google-cloud-core",
+  "google-cloud-errors",
+  "stackdriver-core"
+]
+
+main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-trace.gemspec"))
+local_dependencies.each do |name|
+  spec_path = File.expand_path "../#{name}/#{name}.gemspec", __dir__
+  unless File.file? spec_path
+    warn "WARNING: Disabled local dependency for #{name} because gemspec not found."
+    next
+  end
+  version = Bundler.load_gemspec(spec_path).version
+  if main_spec.dependencies.any? { |dep| dep.name == name && !dep.requirement.satisfied_by?(version) }
+    warn "WARNING: Disabled local dependency for #{name} because the gemspec disallows version #{version}."
+    next
+  end
+  gem name, path: "../#{name}"
+end
+
 gem "activerecord", ">= 5.0", "< 7.1.4"
 gem "autotest-suffix", "~> 1.1"
 gem "faraday", ">= 1.3", "< 3"
-gem "google-cloud-core", path: "../google-cloud-core"
-gem "google-cloud-errors", path: "../google-cloud-errors"
-gem "google-cloud-trace-v1", path: "../google-cloud-trace-v1"
-gem "google-cloud-trace-v2", path: "../google-cloud-trace-v2"
 gem "google-style", "~> 1.27.1"
 gem "minitest", "~> 5.16"
 gem "minitest-autotest", "~> 1.0"
@@ -18,6 +37,5 @@ gem "railties", ">= 5.0", "< 7.1.4"
 gem "rake"
 gem "redcarpet", "~> 3.0"
 gem "simplecov", "~> 0.9"
-gem "stackdriver-core", path: "../stackdriver-core"
 gem "yard", "~> 0.9"
 gem "yard-doctest" # , "~> 0.1.6"

@@ -4,7 +4,7 @@ gemspec
 
 local_dependencies = ["google-cloud-run-v2"]
 
-main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-run.gemspec"))
+main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-run-client.gemspec"))
 local_dependencies.each do |name|
   spec_path = File.expand_path "../#{name}/#{name}.gemspec", __dir__
   unless File.file? spec_path
