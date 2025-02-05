@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.22.0 (2025-02-05)
+
+#### Features
+
+* Added the build_config field to the Service resource 
+* Added the creator field to the Execution resource 
+* Support for Container base image URI and build info 
+* Support for project descriptor files ([#28918](https://github.com/googleapis/google-cloud-ruby/issues/28918)) 
+
 ### 0.21.0 (2025-01-28)
 
 #### Features
