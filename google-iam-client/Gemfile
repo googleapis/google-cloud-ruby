@@ -4,7 +4,7 @@ gemspec
 
 local_dependencies = ["google-iam-v2"]
 
-main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-iam.gemspec"))
+main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-iam-client.gemspec"))
 local_dependencies.each do |name|
   spec_path = File.expand_path "../#{name}/#{name}.gemspec", __dir__
   unless File.file? spec_path
