@@ -76,12 +76,12 @@ module Google
             # @!attribute [rw] semantic_chunking_group_size
             #   @return [::Boolean]
             #     Optional. The number of tokens to group together when evaluating
-            #     semantic similarity.
+            #     semantic similarity. THIS FIELD IS NOT YET USED.
             # @!attribute [rw] breakpoint_percentile_threshold
             #   @return [::Integer]
             #     Optional. The percentile of cosine dissimilarity that must be exceeded
             #     between a group of tokens and the next. The smaller this number is, the
-            #     more chunks will be generated.
+            #     more chunks will be generated. THIS FIELD IS NOT YET USED.
             class ChunkingConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
