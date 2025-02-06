@@ -1095,11 +1095,13 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
 
     # Create request parameters for a unary method.
     parent = "hello world"
+    filter = "hello world"
 
     list_backups_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_backups, name
       assert_kind_of ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest, request
       assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -1110,31 +1112,31 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientTest < Minite
       end
 
       # Use hash object
-      client.list_backups({ parent: parent }) do |response, operation|
+      client.list_backups({ parent: parent, filter: filter }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_backups parent: parent do |response, operation|
+      client.list_backups parent: parent, filter: filter do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_backups ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent) do |response, operation|
+      client.list_backups ::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_backups({ parent: parent }, grpc_options) do |response, operation|
+      client.list_backups({ parent: parent, filter: filter }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_backups(::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent), grpc_options) do |response, operation|
+      client.list_backups(::Google::Cloud::Firestore::Admin::V1::ListBackupsRequest.new(parent: parent, filter: filter), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

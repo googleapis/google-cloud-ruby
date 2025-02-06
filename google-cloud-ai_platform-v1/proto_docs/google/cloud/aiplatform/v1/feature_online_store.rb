@@ -29,6 +29,8 @@ module Google
         #     Contains settings for the Cloud Bigtable instance that will be created
         #     to serve featureValues for all FeatureViews under this
         #     FeatureOnlineStore.
+        #
+        #     Note: The following fields are mutually exclusive: `bigtable`, `optimized`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] optimized
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureOnlineStore::Optimized]
         #     Contains settings for the Optimized store that will be created
@@ -36,6 +38,8 @@ module Google
         #     FeatureOnlineStore. When choose Optimized storage type, need to set
         #     {::Google::Cloud::AIPlatform::V1::PrivateServiceConnectConfig#enable_private_service_connect PrivateServiceConnectConfig.enable_private_service_connect}
         #     to use private endpoint. Otherwise will use public endpoint by default.
+        #
+        #     Note: The following fields are mutually exclusive: `optimized`, `bigtable`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. Name of the FeatureOnlineStore. Format:

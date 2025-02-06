@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.3.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.2.0 (2024-12-10)
 
 #### Features
@@ -31,3 +41,4 @@
 * Initial generation of google-cloud-workstations-v1 ([#25945](https://github.com/googleapis/google-cloud-ruby/issues/25945)) 
 
 ## Release History
+

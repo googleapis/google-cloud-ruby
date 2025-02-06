@@ -130,6 +130,8 @@ module Google
         #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
         #     For example:
         #     "organizations/123/locations/us-east1/workloads/assured-workload-1"
+        #
+        #     Note: The following fields are mutually exclusive: `source`, `project`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] project
         #   @return [::String]
         #     The source type is a project. Specify the project's relative resource
@@ -138,6 +140,8 @@ module Google
         #     For example:
         #     "projects/951040570662" when specifying a project number, or
         #     "projects/my-project-123" when specifying a project ID.
+        #
+        #     Note: The following fields are mutually exclusive: `project`, `source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target
         #   @return [::String]
         #     Required. The resource ID of the folder-based destination workload. This workload is
@@ -238,18 +242,26 @@ module Google
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::IL4Settings]
         #     Input only. Immutable. Settings specific to resources needed for IL4.
+        #
+        #     Note: The following fields are mutually exclusive: `il4_settings`, `cjis_settings`, `fedramp_high_settings`, `fedramp_moderate_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cjis_settings
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::CJISSettings]
         #     Input only. Immutable. Settings specific to resources needed for CJIS.
+        #
+        #     Note: The following fields are mutually exclusive: `cjis_settings`, `il4_settings`, `fedramp_high_settings`, `fedramp_moderate_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fedramp_high_settings
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::FedrampHighSettings]
         #     Input only. Immutable. Settings specific to resources needed for FedRAMP High.
+        #
+        #     Note: The following fields are mutually exclusive: `fedramp_high_settings`, `il4_settings`, `cjis_settings`, `fedramp_moderate_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fedramp_moderate_settings
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::FedrampModerateSettings]
         #     Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
+        #
+        #     Note: The following fields are mutually exclusive: `fedramp_moderate_settings`, `il4_settings`, `cjis_settings`, `fedramp_high_settings`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. ETag of the workload, it is calculated on the basis

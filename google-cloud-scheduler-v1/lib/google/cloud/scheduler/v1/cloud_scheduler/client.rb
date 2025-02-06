@@ -259,11 +259,7 @@ module Google
             #     request the next page of results, page_token must be the value of
             #     {::Google::Cloud::Scheduler::V1::ListJobsResponse#next_page_token next_page_token}
             #     returned from the previous call to
-            #     {::Google::Cloud::Scheduler::V1::CloudScheduler::Client#list_jobs ListJobs}. It is an
-            #     error to switch the value of
-            #     [filter][google.cloud.scheduler.v1.ListJobsRequest.filter] or
-            #     [order_by][google.cloud.scheduler.v1.ListJobsRequest.order_by] while
-            #     iterating through pages.
+            #     {::Google::Cloud::Scheduler::V1::CloudScheduler::Client#list_jobs ListJobs}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Scheduler::V1::Job>]
@@ -1022,6 +1018,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

@@ -160,12 +160,18 @@ module Google
           # @!attribute [rw] inline_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::InlineSource]
           #     If set, grounding is performed with inline content.
+          #
+          #     Note: The following fields are mutually exclusive: `inline_source`, `search_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] search_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::SearchSource]
           #     If set, grounding is performed with Vertex AI Search.
+          #
+          #     Note: The following fields are mutually exclusive: `search_source`, `inline_source`, `google_search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] google_search_source
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GenerateGroundedContentRequest::GroundingSource::GoogleSearchSource]
           #     If set, grounding is performed with Google Search.
+          #
+          #     Note: The following fields are mutually exclusive: `google_search_source`, `inline_source`, `search_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class GroundingSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -25,12 +25,18 @@ module Google
         # @!attribute [rw] text_paragraph
         #   @return [::Google::Apps::Chat::V1::WidgetMarkup::TextParagraph]
         #     Display a text paragraph in this widget.
+        #
+        #     Note: The following fields are mutually exclusive: `text_paragraph`, `image`, `key_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image
         #   @return [::Google::Apps::Chat::V1::WidgetMarkup::Image]
         #     Display an image in this widget.
+        #
+        #     Note: The following fields are mutually exclusive: `image`, `text_paragraph`, `key_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] key_value
         #   @return [::Google::Apps::Chat::V1::WidgetMarkup::KeyValue]
         #     Display a key value item in this widget.
+        #
+        #     Note: The following fields are mutually exclusive: `key_value`, `text_paragraph`, `image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] buttons
         #   @return [::Array<::Google::Apps::Chat::V1::WidgetMarkup::Button>]
         #     A list of buttons. Buttons is also `oneof data` and only one of these
@@ -58,9 +64,13 @@ module Google
           # @!attribute [rw] text_button
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::TextButton]
           #     A button with text and `onclick` action.
+          #
+          #     Note: The following fields are mutually exclusive: `text_button`, `image_button`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] image_button
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::ImageButton]
           #     A button with image and `onclick` action.
+          #
+          #     Note: The following fields are mutually exclusive: `image_button`, `text_button`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Button
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,9 +94,13 @@ module Google
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::Icon]
           #     An enum value that's replaced by the Chat API with the
           #     corresponding icon image.
+          #
+          #     Note: The following fields are mutually exclusive: `icon`, `icon_url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] icon_url
           #   @return [::String]
           #     The icon specified by a URL.
+          #
+          #     Note: The following fields are mutually exclusive: `icon_url`, `icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] top_label
           #   @return [::String]
           #     The text of the top label. Formatted text supported. For more information
@@ -155,9 +169,13 @@ module Google
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::Icon]
           #     The icon specified by an `enum` that indices to an icon provided by
           #     Chat API.
+          #
+          #     Note: The following fields are mutually exclusive: `icon`, `icon_url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] icon_url
           #   @return [::String]
           #     The icon specified by a URL.
+          #
+          #     Note: The following fields are mutually exclusive: `icon_url`, `icon`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] on_click
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::OnClick]
           #     The `onclick` action.
@@ -174,9 +192,13 @@ module Google
           # @!attribute [rw] action
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::FormAction]
           #     A form action is triggered by this `onclick` action if specified.
+          #
+          #     Note: The following fields are mutually exclusive: `action`, `open_link`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] open_link
           #   @return [::Google::Apps::Chat::V1::WidgetMarkup::OpenLink]
           #     This `onclick` action triggers an open link action if specified.
+          #
+          #     Note: The following fields are mutually exclusive: `open_link`, `action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class OnClick
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -350,9 +350,13 @@ module Google
           # @!attribute [rw] recognition_result
           #   @return [::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult]
           #     The result of speech recognition.
+          #
+          #     Note: The following fields are mutually exclusive: `recognition_result`, `detect_intent_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] detect_intent_response
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse]
           #     The response from detect intent.
+          #
+          #     Note: The following fields are mutually exclusive: `detect_intent_response`, `recognition_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] debugging_info
           #   @return [::Google::Cloud::Dialogflow::CX::V3::CloudConversationDebuggingInfo]
           #     Debugging info that would get populated when
@@ -819,18 +823,28 @@ module Google
           # @!attribute [rw] text
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TextInput]
           #     The natural language text to be processed.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `intent`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intent
           #   @return [::Google::Cloud::Dialogflow::CX::V3::IntentInput]
           #     The intent to be triggered.
+          #
+          #     Note: The following fields are mutually exclusive: `intent`, `text`, `audio`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] audio
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AudioInput]
           #     The natural language speech audio to be processed.
+          #
+          #     Note: The following fields are mutually exclusive: `audio`, `text`, `intent`, `event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] event
           #   @return [::Google::Cloud::Dialogflow::CX::V3::EventInput]
           #     The event to be triggered.
+          #
+          #     Note: The following fields are mutually exclusive: `event`, `text`, `intent`, `audio`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dtmf
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DtmfInput]
           #     The DTMF event to be handled.
+          #
+          #     Note: The following fields are mutually exclusive: `dtmf`, `text`, `intent`, `audio`, `event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     Required. The language of the input. See [Language
@@ -847,25 +861,35 @@ module Google
           #   @return [::String]
           #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was
           #     provided as input, this field will contain a copy of the text.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `trigger_intent`, `transcript`, `trigger_event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_intent
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_intent`, `text`, `transcript`, `trigger_event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
           #     audio][google.cloud.dialogflow.cx.v3.AudioInput] was provided as input,
           #     this field will contain the transcript for the audio.
+          #
+          #     Note: The following fields are mutually exclusive: `transcript`, `text`, `trigger_intent`, `trigger_event`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_event
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
           #     input, this field will contain the name of the event.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_event`, `text`, `trigger_intent`, `transcript`, `dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] dtmf
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DtmfInput]
           #     If a {::Google::Cloud::Dialogflow::CX::V3::DtmfInput DTMF} was provided as
           #     input, this field will contain a copy of the
           #     {::Google::Cloud::Dialogflow::CX::V3::DtmfInput DtmfInput}.
+          #
+          #     Note: The following fields are mutually exclusive: `dtmf`, `text`, `trigger_intent`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language that was triggered during intent detection.
@@ -1174,20 +1198,28 @@ module Google
           #   @return [::String]
           #     If {::Google::Cloud::Dialogflow::CX::V3::TextInput natural language text} was
           #     provided as input, this field will contain a copy of the text.
+          #
+          #     Note: The following fields are mutually exclusive: `text`, `trigger_intent`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_intent
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::IntentInput intent} was provided as
           #     input, this field will contain a copy of the intent identifier. Format:
           #     `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/intents/<IntentID>`.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_intent`, `text`, `transcript`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] transcript
           #   @return [::String]
           #     If [natural language speech
           #     audio][google.cloud.dialogflow.cx.v3.AudioInput] was provided as input,
           #     this field will contain the transcript for the audio.
+          #
+          #     Note: The following fields are mutually exclusive: `transcript`, `text`, `trigger_intent`, `trigger_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] trigger_event
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
           #     input, this field will contain a copy of the event name.
+          #
+          #     Note: The following fields are mutually exclusive: `trigger_event`, `text`, `trigger_intent`, `transcript`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] matches
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Match>]
           #     Match results, if more than one, ordered descendingly by the confidence

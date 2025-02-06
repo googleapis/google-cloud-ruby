@@ -258,10 +258,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbTrafficExtension>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetworkServices::V1::ListLbTrafficExtensionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbTrafficExtension>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -313,7 +313,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dep_service_stub.list_lb_traffic_extensions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dep_service_stub, :list_lb_traffic_extensions, "lb_traffic_extensions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -749,10 +751,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbRouteExtension>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::NetworkServices::V1::ListLbRouteExtensionsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::NetworkServices::V1::LbRouteExtension>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -804,7 +806,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @dep_service_stub.list_lb_route_extensions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @dep_service_stub, :list_lb_route_extensions, "lb_route_extensions", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1249,6 +1253,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

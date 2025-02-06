@@ -180,12 +180,18 @@ module Google
         # @!attribute [rw] image
         #   @return [::Google::Cloud::AutoML::V1::Image]
         #     Example image.
+        #
+        #     Note: The following fields are mutually exclusive: `image`, `text_snippet`, `document`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_snippet
         #   @return [::Google::Cloud::AutoML::V1::TextSnippet]
         #     Example text.
+        #
+        #     Note: The following fields are mutually exclusive: `text_snippet`, `image`, `document`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::AutoML::V1::Document]
         #     Example document.
+        #
+        #     Note: The following fields are mutually exclusive: `document`, `image`, `text_snippet`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ExamplePayload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

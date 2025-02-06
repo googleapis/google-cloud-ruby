@@ -110,9 +110,13 @@ module Google
         # @!attribute [rw] automatic
         #   @return [::Google::Cloud::SecretManager::V1beta1::Replication::Automatic]
         #     The {::Google::Cloud::SecretManager::V1beta1::Secret Secret} will automatically be replicated without any restrictions.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic`, `user_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_managed
         #   @return [::Google::Cloud::SecretManager::V1beta1::Replication::UserManaged]
         #     The {::Google::Cloud::SecretManager::V1beta1::Secret Secret} will only be replicated into the locations specified.
+        #
+        #     Note: The following fields are mutually exclusive: `user_managed`, `automatic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Replication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

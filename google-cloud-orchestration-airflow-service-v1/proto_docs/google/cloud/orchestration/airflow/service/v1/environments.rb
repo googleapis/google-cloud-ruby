@@ -1222,6 +1222,8 @@ module Google
             #
             #     For Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*,
             #     this field is applicable only when `use_ip_aliases` is true.
+            #
+            #     Note: The following fields are mutually exclusive: `cluster_secondary_range_name`, `cluster_ipv4_cidr_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] cluster_ipv4_cidr_block
             #   @return [::String]
             #     Optional. The IP address range used to allocate IP addresses to pods in
@@ -1240,6 +1242,8 @@ module Google
             #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
             #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
             #     to use.
+            #
+            #     Note: The following fields are mutually exclusive: `cluster_ipv4_cidr_block`, `cluster_secondary_range_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] services_secondary_range_name
             #   @return [::String]
             #     Optional. The name of the services' secondary range used to allocate
@@ -1247,6 +1251,8 @@ module Google
             #
             #     For Cloud Composer environments in versions composer-1.*.*-airflow-*.*.*,
             #     this field is applicable only when `use_ip_aliases` is true.
+            #
+            #     Note: The following fields are mutually exclusive: `services_secondary_range_name`, `services_ipv4_cidr_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] services_ipv4_cidr_block
             #   @return [::String]
             #     Optional. The IP address range of the services IP addresses in this
@@ -1265,6 +1271,8 @@ module Google
             #     notation (e.g. `10.96.0.0/14`) from the RFC-1918 private networks (e.g.
             #     `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`) to pick a specific range
             #     to use.
+            #
+            #     Note: The following fields are mutually exclusive: `services_ipv4_cidr_block`, `services_secondary_range_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class IPAllocationPolicy
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

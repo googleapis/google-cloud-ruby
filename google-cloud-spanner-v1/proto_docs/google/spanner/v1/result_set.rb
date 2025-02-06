@@ -224,10 +224,14 @@ module Google
         # @!attribute [rw] row_count_exact
         #   @return [::Integer]
         #     Standard DML returns an exact count of rows that were modified.
+        #
+        #     Note: The following fields are mutually exclusive: `row_count_exact`, `row_count_lower_bound`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_count_lower_bound
         #   @return [::Integer]
         #     Partitioned DML does not offer exactly-once semantics, so it
         #     returns a lower bound of the rows modified.
+        #
+        #     Note: The following fields are mutually exclusive: `row_count_lower_bound`, `row_count_exact`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ResultSetStats
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

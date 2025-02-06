@@ -241,12 +241,18 @@ module Google
         # @!attribute [rw] text_input
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
         #     The natural language text to be processed.
+        #
+        #     Note: The following fields are mutually exclusive: `text_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] event_input
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     An input event to send to Dialogflow.
+        #
+        #     Note: The following fields are mutually exclusive: `event_input`, `text_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggestion_input
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestionInput]
         #     An input representing the selection of a suggestion.
+        #
+        #     Note: The following fields are mutually exclusive: `suggestion_input`, `text_input`, `event_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reply_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Speech synthesis configuration.
@@ -396,9 +402,13 @@ module Google
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
         #     Instructs the speech recognizer how to process the speech audio.
+        #
+        #     Note: The following fields are mutually exclusive: `audio_config`, `text_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_config
         #   @return [::Google::Cloud::Dialogflow::V2::InputTextConfig]
         #     The natural language text to be processed.
+        #
+        #     Note: The following fields are mutually exclusive: `text_config`, `audio_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reply_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Speech synthesis configuration.
@@ -411,18 +421,24 @@ module Google
         #     The input audio content to be recognized. Must be sent if `audio_config`
         #     is set in the first message. The complete audio over all streaming
         #     messages must not exceed 1 minute.
+        #
+        #     Note: The following fields are mutually exclusive: `input_audio`, `input_text`, `input_dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_text
         #   @return [::String]
         #     The UTF-8 encoded natural language text to be processed. Must be sent if
         #     `text_config` is set in the first message. Text length must not exceed
         #     256 bytes for virtual agent interactions. The `input_text` field can be
         #     only sent once, and would cancel the speech recognition if any ongoing.
+        #
+        #     Note: The following fields are mutually exclusive: `input_text`, `input_audio`, `input_dtmf`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input_dtmf
         #   @return [::Google::Cloud::Dialogflow::V2::TelephonyDtmfEvents]
         #     The DTMF digits used to invoke intent and fill in parameter value.
         #
         #     This input is ignored if the previous response indicated that DTMF input
         #     is not accepted.
+        #
+        #     Note: The following fields are mutually exclusive: `input_dtmf`, `input_audio`, `input_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] query_params
         #   @return [::Google::Cloud::Dialogflow::V2::QueryParameters]
         #     Parameters for a Dialogflow virtual-agent query.
@@ -885,9 +901,13 @@ module Google
         # @!attribute [rw] query_result
         #   @return [::Google::Cloud::Dialogflow::V2::QueryResult]
         #     Result from v2 agent.
+        #
+        #     Note: The following fields are mutually exclusive: `query_result`, `intent_suggestion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] intent_suggestion
         #   @return [::Google::Cloud::Dialogflow::V2::IntentSuggestion]
         #     An intent suggestion generated from conversation.
+        #
+        #     Note: The following fields are mutually exclusive: `intent_suggestion`, `query_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] answer_record
         #   @return [::String]
         #     The name of answer record, in the format of
@@ -908,18 +928,28 @@ module Google
         # @!attribute [rw] error
         #   @return [::Google::Rpc::Status]
         #     Error status if the request failed.
+        #
+        #     Note: The following fields are mutually exclusive: `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_articles_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestArticlesResponse]
         #     SuggestArticlesResponse if request is for ARTICLE_SUGGESTION.
+        #
+        #     Note: The following fields are mutually exclusive: `suggest_articles_response`, `error`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_knowledge_assist_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestKnowledgeAssistResponse]
         #     SuggestKnowledgeAssistResponse if request is for KNOWLEDGE_ASSIST.
+        #
+        #     Note: The following fields are mutually exclusive: `suggest_knowledge_assist_response`, `error`, `suggest_articles_response`, `suggest_faq_answers_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_faq_answers_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse]
         #     SuggestFaqAnswersResponse if request is for FAQ_ANSWER.
+        #
+        #     Note: The following fields are mutually exclusive: `suggest_faq_answers_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_smart_replies_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] suggest_smart_replies_response
         #   @return [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse]
         #     SuggestSmartRepliesResponse if request is for SMART_REPLY.
+        #
+        #     Note: The following fields are mutually exclusive: `suggest_smart_replies_response`, `error`, `suggest_articles_response`, `suggest_knowledge_assist_response`, `suggest_faq_answers_response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SuggestionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1114,9 +1144,13 @@ module Google
           # @!attribute [rw] faq_source
           #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::FaqSource]
           #     Populated if the prediction came from FAQ.
+          #
+          #     Note: The following fields are mutually exclusive: `faq_source`, `generative_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] generative_source
           #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeAssistAnswer::KnowledgeAnswer::GenerativeSource]
           #     Populated if the prediction was Generative.
+          #
+          #     Note: The following fields are mutually exclusive: `generative_source`, `faq_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class KnowledgeAnswer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

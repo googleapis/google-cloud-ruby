@@ -136,15 +136,21 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch_name`, `tag_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_name
         #   @return [::String]
         #     Regex matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag_name`, `branch_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] commit_sha
         #   @return [::String]
         #     Explicit commit SHA to build.
+        #
+        #     Note: The following fields are mutually exclusive: `commit_sha`, `branch_name`, `tag_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dir
         #   @return [::String]
         #     Directory, relative to the source root, in which to run the build.
@@ -199,18 +205,26 @@ module Google
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Build::V1::StorageSource]
         #     If provided, get the source from this location in Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source`, `repo_source`, `git_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] repo_source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        #
+        #     Note: The following fields are mutually exclusive: `repo_source`, `storage_source`, `git_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_source
         #   @return [::Google::Cloud::Build::V1::GitSource]
         #     If provided, get the source from this Git repository.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `storage_source`, `repo_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] storage_source_manifest
         #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
         #     If provided, get the source from this manifest in Cloud Storage.
         #     This feature is in Preview; see description
         #     [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source_manifest`, `storage_source`, `repo_source`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +272,22 @@ module Google
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
         #     Output only. Stores timing information for pushing the specified artifact.
         class UploadedMavenArtifact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Go module artifact uploaded to Artifact Registry using the GoModule
+        # directive.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of the uploaded artifact.
+        # @!attribute [rw] file_hashes
+        #   @return [::Google::Cloud::Build::V1::FileHashes]
+        #     Hash types and values of the Go Module Artifact.
+        # @!attribute [r] push_timing
+        #   @return [::Google::Cloud::Build::V1::TimeSpan]
+        #     Output only. Stores timing information for pushing the specified artifact.
+        class UploadedGoModule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -453,6 +483,10 @@ module Google
         # @!attribute [rw] maven_artifacts
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedMavenArtifact>]
         #     Maven artifacts uploaded to Artifact Registry at the end of the build.
+        # @!attribute [rw] go_modules
+        #   @return [::Array<::Google::Cloud::Build::V1::UploadedGoModule>]
+        #     Optional. Go module artifacts uploaded to Artifact Registry at the end of
+        #     the build.
         # @!attribute [rw] npm_packages
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedNpmPackage>]
         #     Npm packages uploaded to Artifact Registry at the end of the build.
@@ -786,6 +820,12 @@ module Google
         #     account's credentials.
         #
         #     If any artifacts fail to be pushed, the build is marked FAILURE.
+        # @!attribute [rw] go_modules
+        #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::GoModule>]
+        #     Optional. A list of Go modules to be uploaded to Artifact Registry upon
+        #     successful completion of all build steps.
+        #
+        #     If any objects fail to be pushed, the build is marked FAILURE.
         # @!attribute [rw] python_packages
         #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::PythonPackage>]
         #     A list of Python packages to be uploaded to Artifact Registry upon
@@ -859,6 +899,43 @@ module Google
           #     Maven `version` value used when uploading the artifact to Artifact
           #     Registry.
           class MavenArtifact
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Go module to upload to Artifact Registry upon successful completion of all
+          # build steps. A module refers to all dependencies in a go.mod file.
+          # @!attribute [rw] repository_name
+          #   @return [::String]
+          #     Optional. Artifact Registry repository name.
+          #
+          #     Specified Go modules will be zipped and uploaded to Artifact Registry
+          #     with this location as a prefix.
+          #     e.g. my-go-repo
+          # @!attribute [rw] repository_location
+          #   @return [::String]
+          #     Optional. Location of the Artifact Registry repository. i.e. us-east1
+          #     Defaults to the build’s location.
+          # @!attribute [rw] repository_project_id
+          #   @return [::String]
+          #     Optional. Project ID of the Artifact Registry repository.
+          #     Defaults to the build project.
+          # @!attribute [rw] source_path
+          #   @return [::String]
+          #     Optional. Source path of the go.mod file in the build's workspace. If not
+          #     specified, this will default to the current directory.
+          #     e.g. ~/code/go/mypackage
+          # @!attribute [rw] module_path
+          #   @return [::String]
+          #     Optional. The Go module's "module path".
+          #     e.g. example.com/foo/v2
+          # @!attribute [rw] module_version
+          #   @return [::String]
+          #     Optional. The Go module's semantic version in the form vX.Y.Z. e.g.
+          #     v0.1.1 Pre-release identifiers can also be added by appending a dash and
+          #     dot separated ASCII alphanumeric characters and hyphens.
+          #     e.g. v0.2.3-alpha.x.12m.5
+          class GoModule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -995,6 +1072,9 @@ module Google
 
             # Use a md5 hash.
             MD5 = 2
+
+            # Dirhash of a Go module's source code which is then hex-encoded.
+            GO_MODULE_H1 = 3
 
             # Use a sha512 hash.
             SHA512 = 4
@@ -1419,16 +1499,24 @@ module Google
         #     4. Dockerfile
         #
         #     Currently only available for GitHub App Triggers.
+        #
+        #     Note: The following fields are mutually exclusive: `autodetect`, `build`, `filename`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] build
         #   @return [::Google::Cloud::Build::V1::Build]
         #     Contents of the build template.
+        #
+        #     Note: The following fields are mutually exclusive: `build`, `autodetect`, `filename`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filename
         #   @return [::String]
         #     Path, from the source root, to the build configuration file
         #     (i.e. cloudbuild.yaml).
+        #
+        #     Note: The following fields are mutually exclusive: `filename`, `autodetect`, `build`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_file_source
         #   @return [::Google::Cloud::Build::V1::GitFileSource]
         #     The file source describing the local or remote Build template.
+        #
+        #     Note: The following fields are mutually exclusive: `git_file_source`, `autodetect`, `build`, `filename`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the trigger was created.
@@ -1507,9 +1595,13 @@ module Google
         # @!attribute [rw] pull_request
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
         #     Filter to match changes in pull requests.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_request`, `push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] push
         #   @return [::Google::Cloud::Build::V1::PushFilter]
         #     Filter to match changes in refs like branches, tags.
+        #
+        #     Note: The following fields are mutually exclusive: `push`, `pull_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepositoryEventConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1548,9 +1640,13 @@ module Google
         # @!attribute [rw] pull_request
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
         #     filter to match changes in pull requests.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_request`, `push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] push
         #   @return [::Google::Cloud::Build::V1::PushFilter]
         #     filter to match changes in refs like branches, tags.
+        #
+        #     Note: The following fields are mutually exclusive: `push`, `pull_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GitHubEventsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1665,12 +1761,16 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch`, `tag`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag
         #   @return [::String]
         #     Regexes matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag`, `branch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] invert_regex
         #   @return [::Boolean]
         #     When true, only trigger a build if the revision regex does NOT match the
@@ -1862,6 +1962,11 @@ module Google
         # @!attribute [rw] default_logs_bucket_behavior
         #   @return [::Google::Cloud::Build::V1::BuildOptions::DefaultLogsBucketBehavior]
         #     Optional. Option to specify how default logs buckets are setup.
+        # @!attribute [rw] enable_structured_logging
+        #   @return [::Boolean]
+        #     Optional. Option to specify whether structured logging is enabled.
+        #
+        #     If true, JSON-formatted logs are parsed as structured logs.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

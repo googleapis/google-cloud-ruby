@@ -561,10 +561,14 @@ module Google
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
           #     Optional. Send asset information in the **source** field to retrieve all
           #     links that lead from the specified asset to downstream assets.
+          #
+          #     Note: The following fields are mutually exclusive: `source`, `target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] target
           #   @return [::Google::Cloud::DataCatalog::Lineage::V1::EntityReference]
           #     Optional. Send asset information in the **target** field to retrieve all
           #     links that lead from upstream assets to the specified asset.
+          #
+          #     Note: The following fields are mutually exclusive: `target`, `source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Optional. The maximum number of links to return in a single page of the

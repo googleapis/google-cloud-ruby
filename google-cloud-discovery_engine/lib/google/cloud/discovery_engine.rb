@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the CompletionService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.completion_service_available?}.
+      #
       # ## About CompletionService
       #
       # Service for Auto-Completion.
@@ -80,6 +85,37 @@ module Google
       end
 
       ##
+      # Determines whether the CompletionService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.completion_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CompletionService service,
+      # or if the versioned client gem needs an update to support the CompletionService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.completion_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :CompletionService
+        service_module = service_module.const_get :CompletionService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ControlService.
       #
       # By default, this returns an instance of
@@ -91,6 +127,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the ControlService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.control_service_available?}.
       #
       # ## About ControlService
       #
@@ -117,6 +158,37 @@ module Google
       end
 
       ##
+      # Determines whether the ControlService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.control_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ControlService service,
+      # or if the versioned client gem needs an update to support the ControlService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.control_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :ControlService
+        service_module = service_module.const_get :ControlService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for SearchService.
       #
       # By default, this returns an instance of
@@ -128,6 +200,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the SearchService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.search_service_available?}.
       #
       # ## About SearchService
       #
@@ -151,6 +228,37 @@ module Google
       end
 
       ##
+      # Determines whether the SearchService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.search_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the SearchService service,
+      # or if the versioned client gem needs an update to support the SearchService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.search_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :SearchService
+        service_module = service_module.const_get :SearchService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ConversationalSearchService.
       #
       # By default, this returns an instance of
@@ -162,6 +270,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the ConversationalSearchService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.conversational_search_service_available?}.
       #
       # ## About ConversationalSearchService
       #
@@ -185,6 +298,37 @@ module Google
       end
 
       ##
+      # Determines whether the ConversationalSearchService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.conversational_search_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ConversationalSearchService service,
+      # or if the versioned client gem needs an update to support the ConversationalSearchService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.conversational_search_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :ConversationalSearchService
+        service_module = service_module.const_get :ConversationalSearchService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for DataStoreService.
       #
       # By default, this returns an instance of
@@ -196,6 +340,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DataStoreService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.data_store_service_available?}.
       #
       # ## About DataStoreService
       #
@@ -220,6 +369,37 @@ module Google
       end
 
       ##
+      # Determines whether the DataStoreService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.data_store_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DataStoreService service,
+      # or if the versioned client gem needs an update to support the DataStoreService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.data_store_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :DataStoreService
+        service_module = service_module.const_get :DataStoreService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for DocumentService.
       #
       # By default, this returns an instance of
@@ -231,6 +411,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DocumentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.document_service_available?}.
       #
       # ## About DocumentService
       #
@@ -255,6 +440,37 @@ module Google
       end
 
       ##
+      # Determines whether the DocumentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.document_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DocumentService service,
+      # or if the versioned client gem needs an update to support the DocumentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.document_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :DocumentService
+        service_module = service_module.const_get :DocumentService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for EngineService.
       #
       # By default, this returns an instance of
@@ -266,6 +482,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the EngineService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.engine_service_available?}.
       #
       # ## About EngineService
       #
@@ -290,6 +511,37 @@ module Google
       end
 
       ##
+      # Determines whether the EngineService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.engine_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the EngineService service,
+      # or if the versioned client gem needs an update to support the EngineService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.engine_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :EngineService
+        service_module = service_module.const_get :EngineService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for GroundedGenerationService.
       #
       # By default, this returns an instance of
@@ -301,6 +553,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the GroundedGenerationService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.grounded_generation_service_available?}.
       #
       # ## About GroundedGenerationService
       #
@@ -324,6 +581,37 @@ module Google
       end
 
       ##
+      # Determines whether the GroundedGenerationService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.grounded_generation_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the GroundedGenerationService service,
+      # or if the versioned client gem needs an update to support the GroundedGenerationService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.grounded_generation_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :GroundedGenerationService
+        service_module = service_module.const_get :GroundedGenerationService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ProjectService.
       #
       # By default, this returns an instance of
@@ -335,6 +623,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the ProjectService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.project_service_available?}.
       #
       # ## About ProjectService
       #
@@ -359,6 +652,37 @@ module Google
       end
 
       ##
+      # Determines whether the ProjectService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.project_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ProjectService service,
+      # or if the versioned client gem needs an update to support the ProjectService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.project_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :ProjectService
+        service_module = service_module.const_get :ProjectService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for RankService.
       #
       # By default, this returns an instance of
@@ -370,6 +694,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the RankService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.rank_service_available?}.
       #
       # ## About RankService
       #
@@ -393,6 +722,37 @@ module Google
       end
 
       ##
+      # Determines whether the RankService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.rank_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RankService service,
+      # or if the versioned client gem needs an update to support the RankService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.rank_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :RankService
+        service_module = service_module.const_get :RankService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for RecommendationService.
       #
       # By default, this returns an instance of
@@ -404,6 +764,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the RecommendationService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.recommendation_service_available?}.
       #
       # ## About RecommendationService
       #
@@ -427,6 +792,37 @@ module Google
       end
 
       ##
+      # Determines whether the RecommendationService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.recommendation_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RecommendationService service,
+      # or if the versioned client gem needs an update to support the RecommendationService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.recommendation_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :RecommendationService
+        service_module = service_module.const_get :RecommendationService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for SchemaService.
       #
       # By default, this returns an instance of
@@ -438,6 +834,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the SchemaService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.schema_service_available?}.
       #
       # ## About SchemaService
       #
@@ -461,6 +862,37 @@ module Google
       end
 
       ##
+      # Determines whether the SchemaService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.schema_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the SchemaService service,
+      # or if the versioned client gem needs an update to support the SchemaService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.schema_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :SchemaService
+        service_module = service_module.const_get :SchemaService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for SearchTuningService.
       #
       # By default, this returns an instance of
@@ -472,6 +904,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the SearchTuningService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.search_tuning_service_available?}.
       #
       # ## About SearchTuningService
       #
@@ -495,6 +932,37 @@ module Google
       end
 
       ##
+      # Determines whether the SearchTuningService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.search_tuning_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the SearchTuningService service,
+      # or if the versioned client gem needs an update to support the SearchTuningService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.search_tuning_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :SearchTuningService
+        service_module = service_module.const_get :SearchTuningService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for SiteSearchEngineService.
       #
       # By default, this returns an instance of
@@ -506,6 +974,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the SiteSearchEngineService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.site_search_engine_service_available?}.
       #
       # ## About SiteSearchEngineService
       #
@@ -529,6 +1002,37 @@ module Google
       end
 
       ##
+      # Determines whether the SiteSearchEngineService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.site_search_engine_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the SiteSearchEngineService service,
+      # or if the versioned client gem needs an update to support the SiteSearchEngineService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.site_search_engine_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :SiteSearchEngineService
+        service_module = service_module.const_get :SiteSearchEngineService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for UserEventService.
       #
       # By default, this returns an instance of
@@ -540,6 +1044,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the UserEventService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DiscoveryEngine.user_event_service_available?}.
       #
       # ## About UserEventService
       #
@@ -560,6 +1069,37 @@ module Google
         service_module = Google::Cloud::DiscoveryEngine.const_get(package_name).const_get(:UserEventService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the UserEventService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DiscoveryEngine.user_event_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the UserEventService service,
+      # or if the versioned client gem needs an update to support the UserEventService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.user_event_service_available? version: :v1, transport: :grpc
+        require "google/cloud/discovery_engine/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DiscoveryEngine
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DiscoveryEngine.const_get package_name
+        return false unless service_module.const_defined? :UserEventService
+        service_module = service_module.const_get :UserEventService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

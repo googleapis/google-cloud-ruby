@@ -59,6 +59,9 @@ module Google
         # @!attribute [rw] version_description
         #   @return [::String]
         #     The description of this version.
+        # @!attribute [rw] default_checkpoint_id
+        #   @return [::String]
+        #     The default checkpoint id of a model version.
         # @!attribute [rw] predict_schemata
         #   @return [::Google::Cloud::AIPlatform::V1::PredictSchemata]
         #     The schemata that describe formats of the Model's predictions and
@@ -409,9 +412,13 @@ module Google
           # @!attribute [rw] model_garden_source
           #   @return [::Google::Cloud::AIPlatform::V1::ModelGardenSource]
           #     Source information of Model Garden models.
+          #
+          #     Note: The following fields are mutually exclusive: `model_garden_source`, `genie_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] genie_source
           #   @return [::Google::Cloud::AIPlatform::V1::GenieSource]
           #     Information about the base model of Genie models.
+          #
+          #     Note: The following fields are mutually exclusive: `genie_source`, `model_garden_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BaseModelSource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -176,6 +176,8 @@ module Google
         # @!attribute [rw] text
         #   @return [::String]
         #     The raw text to be synthesized.
+        #
+        #     Note: The following fields are mutually exclusive: `text`, `ssml`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ssml
         #   @return [::String]
         #     The SSML document to be synthesized. The SSML document must be valid
@@ -183,10 +185,14 @@ module Google
         #     [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. For
         #     more information, see
         #     [SSML](https://cloud.google.com/text-to-speech/docs/ssml).
+        #
+        #     Note: The following fields are mutually exclusive: `ssml`, `text`, `multi_speaker_markup`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] multi_speaker_markup
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::MultiSpeakerMarkup]
         #     The multi-speaker input to be synthesized. Only applicable for
         #     multi-speaker synthesis.
+        #
+        #     Note: The following fields are mutually exclusive: `multi_speaker_markup`, `text`, `ssml`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom_pronunciations
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::CustomPronunciations]
         #     Optional. The pronunciation customizations to be applied to the input. If
@@ -412,10 +418,14 @@ module Google
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesizeConfig]
         #     StreamingSynthesizeConfig to be used in this streaming attempt. Only
         #     specified in the first message sent in a `StreamingSynthesize` call.
+        #
+        #     Note: The following fields are mutually exclusive: `streaming_config`, `input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] input
         #   @return [::Google::Cloud::TextToSpeech::V1beta1::StreamingSynthesisInput]
         #     Input to synthesize. Specified in all messages but the first in a
         #     `StreamingSynthesize` call.
+        #
+        #     Note: The following fields are mutually exclusive: `input`, `streaming_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StreamingSynthesizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

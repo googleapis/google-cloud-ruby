@@ -1518,8 +1518,12 @@ module Google
               #   @param order_by_data_item [::String]
               #     A comma-separated list of data item fields to order by, sorted in
               #     ascending order. Use "desc" after a field name for descending.
+              #
+              #     Note: The following fields are mutually exclusive: `order_by_data_item`, `order_by_annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param order_by_annotation [::Google::Cloud::AIPlatform::V1::SearchDataItemsRequest::OrderByAnnotation, ::Hash]
               #     Expression that allows ranking results based on annotation's property.
+              #
+              #     Note: The following fields are mutually exclusive: `order_by_annotation`, `order_by_data_item`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param dataset [::String]
               #     Required. The resource name of the Dataset from which to search DataItems.
               #     Format:
@@ -2051,6 +2055,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

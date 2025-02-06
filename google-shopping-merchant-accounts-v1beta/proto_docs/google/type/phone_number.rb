@@ -62,12 +62,16 @@ module Google
     #      - https://www.itu.int/rec/T-REC-E.164-201011-I
     #      - https://en.wikipedia.org/wiki/E.164.
     #      - https://en.wikipedia.org/wiki/List_of_country_calling_codes
+    #
+    #     Note: The following fields are mutually exclusive: `e164_number`, `short_code`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] short_code
     #   @return [::Google::Type::PhoneNumber::ShortCode]
     #     A short code.
     #
     #     Reference(s):
     #      - https://en.wikipedia.org/wiki/Short_code
+    #
+    #     Note: The following fields are mutually exclusive: `short_code`, `e164_number`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] extension
     #   @return [::String]
     #     The phone number's extension. The extension is not standardized in ITU

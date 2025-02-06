@@ -229,10 +229,14 @@ module Google
         #   @return [::Google::Cloud::ServiceManagement::V1::Rollout::TrafficPercentStrategy]
         #     Google Service Control selects service configurations based on
         #     traffic percentage.
+        #
+        #     Note: The following fields are mutually exclusive: `traffic_percent_strategy`, `delete_service_strategy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] delete_service_strategy
         #   @return [::Google::Cloud::ServiceManagement::V1::Rollout::DeleteServiceStrategy]
         #     The strategy associated with a rollout to delete a `ManagedService`.
         #     Readonly.
+        #
+        #     Note: The following fields are mutually exclusive: `delete_service_strategy`, `traffic_percent_strategy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_name
         #   @return [::String]
         #     The name of the service associated with this Rollout.

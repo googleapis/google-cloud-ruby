@@ -164,10 +164,14 @@ module Google
         #     Static Comma separated backends which are common for all Connection
         #     resources. Supported formats for each backend are host:port or just
         #     host (host can be ip address or domain name).
+        #
+        #     Note: The following fields are mutually exclusive: `backends`, `extraction_rules`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] extraction_rules
         #   @return [::Google::Cloud::Connectors::V1::ExtractionRules]
         #     Extractions Rules to extract the backends from customer provided
         #     configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `extraction_rules`, `backends`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class EgressControlConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

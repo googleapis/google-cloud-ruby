@@ -45,12 +45,16 @@ module Google
         #     the output populates the
         #     [user](https://developers.google.com/workspace/chat/api/reference/rest/v1/User)
         #     `name` and `type`.
+        #
+        #     Note: The following fields are mutually exclusive: `member`, `group_member`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] group_member
         #   @return [::Google::Apps::Chat::V1::Group]
         #     Optional. The Google Group the membership corresponds to.
         #
         #     Reading or mutating memberships for Google Groups requires [user
         #     authentication](https://developers.google.com/workspace/chat/authenticate-authorize-chat-user).
+        #
+        #     Note: The following fields are mutually exclusive: `group_member`, `member`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Immutable. The creation time of the membership, such as when a

@@ -38,18 +38,26 @@ module Google
           #   @return [::Integer]
           #     The admin_id or criteria_id of the region in which this rule is
           #     applicable.
+          #
+          #     Note: The following fields are mutually exclusive: `location_id`, `post_code_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] post_code_range
           #   @return [::Google::Shopping::Merchant::Accounts::V1beta::TaxRule::TaxPostalCodeRange]
           #     The range of postal codes in which this rule is applicable.
+          #
+          #     Note: The following fields are mutually exclusive: `post_code_range`, `location_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] use_google_rate
           #   @return [::Boolean]
           #     Rate that depends on delivery location: if merchant has a nexus in
           #     corresponding US state, rates from authorities with jurisdiction over
           #     delivery area are added up.
+          #
+          #     Note: The following fields are mutually exclusive: `use_google_rate`, `self_specified_rate_micros`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] self_specified_rate_micros
           #   @return [::Integer]
           #     A fixed rate specified in micros, where 100% = 1_000_000.
           #     Suitable for origin-based states.
+          #
+          #     Note: The following fields are mutually exclusive: `self_specified_rate_micros`, `use_google_rate`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] region_code
           #   @return [::String]
           #     Region code in which this rule is applicable

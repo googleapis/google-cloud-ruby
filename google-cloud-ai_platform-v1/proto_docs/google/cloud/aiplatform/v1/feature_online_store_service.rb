@@ -25,10 +25,14 @@ module Google
         # @!attribute [rw] key
         #   @return [::String]
         #     String key to use for lookup.
+        #
+        #     Note: The following fields are mutually exclusive: `key`, `composite_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] composite_key
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureViewDataKey::CompositeKey]
         #     The actual Entity ID will be composed from this struct. This should match
         #     with the way ID is defined in the FeatureView spec.
+        #
+        #     Note: The following fields are mutually exclusive: `composite_key`, `key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class FeatureViewDataKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -69,9 +73,13 @@ module Google
         # @!attribute [rw] key_values
         #   @return [::Google::Cloud::AIPlatform::V1::FetchFeatureValuesResponse::FeatureNameValuePairList]
         #     Feature values in KeyValue format.
+        #
+        #     Note: The following fields are mutually exclusive: `key_values`, `proto_struct`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] proto_struct
         #   @return [::Google::Protobuf::Struct]
         #     Feature values in proto Struct format.
+        #
+        #     Note: The following fields are mutually exclusive: `proto_struct`, `key_values`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_key
         #   @return [::Google::Cloud::AIPlatform::V1::FeatureViewDataKey]
         #     The data key associated with this response.
@@ -110,9 +118,13 @@ module Google
         #     Optional. The entity id whose similar entities should be searched for.
         #     If embedding is set, search will use embedding instead of
         #     entity_id.
+        #
+        #     Note: The following fields are mutually exclusive: `entity_id`, `embedding`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] embedding
         #   @return [::Google::Cloud::AIPlatform::V1::NearestNeighborQuery::Embedding]
         #     Optional. The embedding vector that be used for similar search.
+        #
+        #     Note: The following fields are mutually exclusive: `embedding`, `entity_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] neighbor_count
         #   @return [::Integer]
         #     Optional. The number of similar entities to be retrieved from feature view
@@ -170,20 +182,26 @@ module Google
           # Numeric filter is used to search a subset of the entities by using boolean
           # rules on numeric columns.
           # For example:
-          # Database Point 0: \\{name: “a” value_int: 42} \\{name: “b” value_float: 1.0}
-          # Database Point 1:  \\{name: “a” value_int: 10} \\{name: “b” value_float: 2.0}
-          # Database Point 2: \\{name: “a” value_int: -1} \\{name: “b” value_float: 3.0}
-          # Query: \\{name: “a” value_int: 12 operator: LESS}    // Matches Point 1, 2
-          # \\{name: “b” value_float: 2.0 operator: EQUAL} // Matches Point 1
+          # Database Point 0: \\{name: "a" value_int: 42} \\{name: "b" value_float: 1.0}
+          # Database Point 1:  \\{name: "a" value_int: 10} \\{name: "b" value_float: 2.0}
+          # Database Point 2: \\{name: "a" value_int: -1} \\{name: "b" value_float: 3.0}
+          # Query: \\{name: "a" value_int: 12 operator: LESS}    // Matches Point 1, 2
+          # \\{name: "b" value_float: 2.0 operator: EQUAL} // Matches Point 1
           # @!attribute [rw] value_int
           #   @return [::Integer]
           #     int value type.
+          #
+          #     Note: The following fields are mutually exclusive: `value_int`, `value_float`, `value_double`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] value_float
           #   @return [::Float]
           #     float value type.
+          #
+          #     Note: The following fields are mutually exclusive: `value_float`, `value_int`, `value_double`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] value_double
           #   @return [::Float]
           #     double value type.
+          #
+          #     Note: The following fields are mutually exclusive: `value_double`, `value_int`, `value_float`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Column name in BigQuery that used as filters.
@@ -195,7 +213,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Datapoints for which Operator is true relative to the query’s Value
+            # Datapoints for which Operator is true relative to the query's Value
             # field will be allowlisted.
             module Operator
               # Unspecified operator.

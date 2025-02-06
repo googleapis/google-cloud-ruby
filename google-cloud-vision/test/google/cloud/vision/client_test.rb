@@ -42,6 +42,7 @@ class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_product_search_grpc
+    skip unless Google::Cloud::Vision.product_search_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Vision.product_search transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_product_search_rest
+    skip unless Google::Cloud::Vision.product_search_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Vision.product_search transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_image_annotator_grpc
+    skip unless Google::Cloud::Vision.image_annotator_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Vision.image_annotator transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_image_annotator_rest
+    skip unless Google::Cloud::Vision.image_annotator_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Vision.image_annotator transport: :rest do |config|
         config.credentials = :dummy_credentials

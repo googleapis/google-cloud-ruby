@@ -125,6 +125,18 @@ class ::Google::Cloud::NetApp::V1::NetApp::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_quota_rule_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::NetApp::V1::NetApp::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.quota_rule_path project: "value0", location: "value1", volume: "value2", quota_rule: "value3"
+      assert_equal "projects/value0/locations/value1/volumes/value2/quotaRules/value3", path
+    end
+  end
+
   def test_replication_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do

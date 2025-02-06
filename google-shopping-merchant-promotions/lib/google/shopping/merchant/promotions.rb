@@ -41,6 +41,11 @@ module Google
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
         #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the PromotionsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Shopping::Merchant::Promotions.promotions_service_available?}.
+        #
         # ## About PromotionsService
         #
         # Service to manage promotions for products.
@@ -60,6 +65,37 @@ module Google
           service_module = Google::Shopping::Merchant::Promotions.const_get(package_name).const_get(:PromotionsService)
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the PromotionsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Shopping::Merchant::Promotions.promotions_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the PromotionsService service,
+        # or if the versioned client gem needs an update to support the PromotionsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1beta`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.promotions_service_available? version: :v1beta, transport: :grpc
+          require "google/shopping/merchant/promotions/#{version.to_s.downcase}"
+          package_name = Google::Shopping::Merchant::Promotions
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Shopping::Merchant::Promotions.const_get package_name
+          return false unless service_module.const_defined? :PromotionsService
+          service_module = service_module.const_get :PromotionsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
         end
       end
     end

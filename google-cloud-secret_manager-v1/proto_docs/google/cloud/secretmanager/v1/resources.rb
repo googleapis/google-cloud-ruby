@@ -64,10 +64,14 @@ module Google
         #     Optional. Timestamp in UTC when the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} is scheduled to expire.
         #     This is always provided on output, regardless of what was sent on input.
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL for the
         #     {::Google::Cloud::SecretManager::V1::Secret Secret}.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. Etag of the currently stored
@@ -114,8 +118,8 @@ module Google
         #     destruction happens after the TTL expires.
         # @!attribute [rw] customer_managed_encryption
         #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryption]
-        #     Optional. The customer-managed encryption configuration of the Regionalised
-        #     Secrets. If no configuration is provided, Google-managed default encryption
+        #     Optional. The customer-managed encryption configuration of the regionalized
+        #     secrets. If no configuration is provided, Google-managed default encryption
         #     is used.
         #
         #     Updates to the {::Google::Cloud::SecretManager::V1::Secret Secret} encryption
@@ -201,15 +205,14 @@ module Google
         #     Optional. Output only. Scheduled destroy time for secret version.
         #     This is a part of the Delayed secret version destroy feature. For a
         #     Secret with a valid version destroy TTL, when a secert version is
-        #     destroyed, the version is moved to disabled state and it is scheduled for
-        #     destruction. The version is destroyed only after the
-        #     `scheduled_destroy_time`.
+        #     destroyed, version is moved to disabled state and it is scheduled for
+        #     destruction Version is destroyed only after the scheduled_destroy_time.
         # @!attribute [r] customer_managed_encryption
         #   @return [::Google::Cloud::SecretManager::V1::CustomerManagedEncryptionStatus]
         #     Output only. The customer-managed encryption status of the
         #     {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}. Only
         #     populated if customer-managed encryption is used and
-        #     {::Google::Cloud::SecretManager::V1::Secret Secret} is a Regionalised Secret.
+        #     {::Google::Cloud::SecretManager::V1::Secret Secret} is a regionalized secret.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -244,10 +247,14 @@ module Google
         #   @return [::Google::Cloud::SecretManager::V1::Replication::Automatic]
         #     The {::Google::Cloud::SecretManager::V1::Secret Secret} will automatically be
         #     replicated without any restrictions.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic`, `user_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_managed
         #   @return [::Google::Cloud::SecretManager::V1::Replication::UserManaged]
         #     The {::Google::Cloud::SecretManager::V1::Secret Secret} will only be
         #     replicated into the locations specified.
+        #
+        #     Note: The following fields are mutually exclusive: `user_managed`, `automatic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Replication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -273,7 +280,8 @@ module Google
 
           # A replication policy that replicates the
           # {::Google::Cloud::SecretManager::V1::Secret Secret} payload into the locations
-          # specified in [Secret.replication.user_managed.replicas][]
+          # specified in
+          # {::Google::Cloud::SecretManager::V1::Replication::UserManaged#replicas Replication.UserManaged.replicas}
           # @!attribute [rw] replicas
           #   @return [::Array<::Google::Cloud::SecretManager::V1::Replication::UserManaged::Replica>]
           #     Required. The list of Replicas for this
@@ -341,6 +349,8 @@ module Google
         #     Only populated if the parent
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} has an automatic
         #     replication policy.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic`, `user_managed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_managed
         #   @return [::Google::Cloud::SecretManager::V1::ReplicationStatus::UserManagedStatus]
         #     Describes the replication status of a
@@ -350,6 +360,8 @@ module Google
         #     Only populated if the parent
         #     {::Google::Cloud::SecretManager::V1::Secret Secret} has a user-managed
         #     replication policy.
+        #
+        #     Note: The following fields are mutually exclusive: `user_managed`, `automatic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ReplicationStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -417,10 +429,10 @@ module Google
         # events occur on this secret.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the Pub/Sub topic that will be published to,
-        #     in the following format: `projects/*/topics/*`. For publication to succeed,
-        #     the Secret Manager service agent must have the `pubsub.topic.publish`
-        #     permission on the topic. The Pub/Sub Publisher role
+        #     Identifier. The resource name of the Pub/Sub topic that will be published
+        #     to, in the following format: `projects/*/topics/*`. For publication to
+        #     succeed, the Secret Manager service agent must have the
+        #     `pubsub.topic.publish` permission on the topic. The Pub/Sub Publisher role
         #     (`roles/pubsub.publisher`) includes this permission.
         class Topic
           include ::Google::Protobuf::MessageExts

@@ -355,29 +355,45 @@ module Google
         # @!attribute [rw] invalid_data_format
         #   @return [::Google::Cloud::Dataplex::V1::Action::InvalidDataFormat]
         #     Details for issues related to invalid or unsupported data formats.
+        #
+        #     Note: The following fields are mutually exclusive: `invalid_data_format`, `incompatible_data_schema`, `invalid_data_partition`, `missing_data`, `missing_resource`, `unauthorized_resource`, `failed_security_policy_apply`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] incompatible_data_schema
         #   @return [::Google::Cloud::Dataplex::V1::Action::IncompatibleDataSchema]
         #     Details for issues related to incompatible schemas detected within data.
+        #
+        #     Note: The following fields are mutually exclusive: `incompatible_data_schema`, `invalid_data_format`, `invalid_data_partition`, `missing_data`, `missing_resource`, `unauthorized_resource`, `failed_security_policy_apply`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] invalid_data_partition
         #   @return [::Google::Cloud::Dataplex::V1::Action::InvalidDataPartition]
         #     Details for issues related to invalid or unsupported data partition
         #     structure.
+        #
+        #     Note: The following fields are mutually exclusive: `invalid_data_partition`, `invalid_data_format`, `incompatible_data_schema`, `missing_data`, `missing_resource`, `unauthorized_resource`, `failed_security_policy_apply`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] missing_data
         #   @return [::Google::Cloud::Dataplex::V1::Action::MissingData]
         #     Details for issues related to absence of data within managed resources.
+        #
+        #     Note: The following fields are mutually exclusive: `missing_data`, `invalid_data_format`, `incompatible_data_schema`, `invalid_data_partition`, `missing_resource`, `unauthorized_resource`, `failed_security_policy_apply`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] missing_resource
         #   @return [::Google::Cloud::Dataplex::V1::Action::MissingResource]
         #     Details for issues related to absence of a managed resource.
+        #
+        #     Note: The following fields are mutually exclusive: `missing_resource`, `invalid_data_format`, `incompatible_data_schema`, `invalid_data_partition`, `missing_data`, `unauthorized_resource`, `failed_security_policy_apply`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] unauthorized_resource
         #   @return [::Google::Cloud::Dataplex::V1::Action::UnauthorizedResource]
         #     Details for issues related to lack of permissions to access data
         #     resources.
+        #
+        #     Note: The following fields are mutually exclusive: `unauthorized_resource`, `invalid_data_format`, `incompatible_data_schema`, `invalid_data_partition`, `missing_data`, `missing_resource`, `failed_security_policy_apply`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] failed_security_policy_apply
         #   @return [::Google::Cloud::Dataplex::V1::Action::FailedSecurityPolicyApply]
         #     Details for issues related to applying security policy.
+        #
+        #     Note: The following fields are mutually exclusive: `failed_security_policy_apply`, `invalid_data_format`, `incompatible_data_schema`, `invalid_data_partition`, `missing_data`, `missing_resource`, `unauthorized_resource`, `invalid_data_organization`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] invalid_data_organization
         #   @return [::Google::Cloud::Dataplex::V1::Action::InvalidDataOrganization]
         #     Details for issues related to invalid data arrangement.
+        #
+        #     Note: The following fields are mutually exclusive: `invalid_data_organization`, `invalid_data_format`, `incompatible_data_schema`, `invalid_data_partition`, `missing_data`, `missing_resource`, `unauthorized_resource`, `failed_security_policy_apply`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Action
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

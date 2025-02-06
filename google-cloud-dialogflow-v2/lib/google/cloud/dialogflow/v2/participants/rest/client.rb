@@ -565,10 +565,16 @@ module Google
               #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
               #   @param text_input [::Google::Cloud::Dialogflow::V2::TextInput, ::Hash]
               #     The natural language text to be processed.
+              #
+              #     Note: The following fields are mutually exclusive: `text_input`, `event_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param event_input [::Google::Cloud::Dialogflow::V2::EventInput, ::Hash]
               #     An input event to send to Dialogflow.
+              #
+              #     Note: The following fields are mutually exclusive: `event_input`, `text_input`, `suggestion_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param suggestion_input [::Google::Cloud::Dialogflow::V2::SuggestionInput, ::Hash]
               #     An input representing the selection of a suggestion.
+              #
+              #     Note: The following fields are mutually exclusive: `suggestion_input`, `text_input`, `event_input`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param reply_audio_config [::Google::Cloud::Dialogflow::V2::OutputAudioConfig, ::Hash]
               #     Speech synthesis configuration.
               #     The speech synthesis settings for a virtual agent that may be configured
@@ -1067,6 +1073,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

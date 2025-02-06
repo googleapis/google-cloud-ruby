@@ -121,15 +121,23 @@ module Google
         # @!attribute [rw] boolean_value
         #   @return [::Boolean]
         #     Defines this value as being a boolean value.
+        #
+        #     Note: The following fields are mutually exclusive: `boolean_value`, `string_value`, `string_set_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     Defines this value as being a string value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `boolean_value`, `string_set_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_set_value
         #   @return [::Google::Cloud::ResourceSettings::V1::Value::StringSet]
         #     Defines this value as being a StringSet.
+        #
+        #     Note: The following fields are mutually exclusive: `string_set_value`, `boolean_value`, `string_value`, `enum_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] enum_value
         #   @return [::Google::Cloud::ResourceSettings::V1::Value::EnumValue]
         #     Defines this value as being a Enum.
+        #
+        #     Note: The following fields are mutually exclusive: `enum_value`, `boolean_value`, `string_value`, `string_set_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Value
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

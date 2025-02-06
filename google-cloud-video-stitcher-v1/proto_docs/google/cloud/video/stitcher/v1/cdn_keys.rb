@@ -28,12 +28,18 @@ module Google
           # @!attribute [rw] google_cdn_key
           #   @return [::Google::Cloud::Video::Stitcher::V1::GoogleCdnKey]
           #     The configuration for a Google Cloud CDN key.
+          #
+          #     Note: The following fields are mutually exclusive: `google_cdn_key`, `akamai_cdn_key`, `media_cdn_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] akamai_cdn_key
           #   @return [::Google::Cloud::Video::Stitcher::V1::AkamaiCdnKey]
           #     The configuration for an Akamai CDN key.
+          #
+          #     Note: The following fields are mutually exclusive: `akamai_cdn_key`, `google_cdn_key`, `media_cdn_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] media_cdn_key
           #   @return [::Google::Cloud::Video::Stitcher::V1::MediaCdnKey]
           #     The configuration for a Media CDN key.
+          #
+          #     Note: The following fields are mutually exclusive: `media_cdn_key`, `google_cdn_key`, `akamai_cdn_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     The resource name of the CDN key, in the form of

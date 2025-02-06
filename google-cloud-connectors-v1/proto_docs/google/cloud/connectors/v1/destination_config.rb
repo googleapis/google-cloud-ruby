@@ -37,9 +37,13 @@ module Google
         #   @return [::String]
         #     PSC service attachments.
         #     Format: projects/*/regions/*/serviceAttachments/*
+        #
+        #     Note: The following fields are mutually exclusive: `service_attachment`, `host`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] host
         #   @return [::String]
         #     For publicly routable host.
+        #
+        #     Note: The following fields are mutually exclusive: `host`, `service_attachment`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] port
         #   @return [::Integer]
         #     The port is the target port number that is accepted by the destination.

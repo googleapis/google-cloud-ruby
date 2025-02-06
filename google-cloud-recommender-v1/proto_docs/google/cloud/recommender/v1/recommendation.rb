@@ -176,10 +176,14 @@ module Google
         #     Value for the `path` field. Will be set for actions:'add'/'replace'.
         #     Maybe set for action: 'test'. Either this or `value_matcher` will be set
         #     for 'test' operation. An exact match must be performed.
+        #
+        #     Note: The following fields are mutually exclusive: `value`, `value_matcher`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] value_matcher
         #   @return [::Google::Cloud::Recommender::V1::ValueMatcher]
         #     Can be set for action 'test' for advanced matching for the value of
         #     'path' field. Either this or `value` will be set for 'test' operation.
+        #
+        #     Note: The following fields are mutually exclusive: `value_matcher`, `value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] path_filters
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Set of filters to apply if `path` refers to array elements or nested array
@@ -330,15 +334,23 @@ module Google
         # @!attribute [rw] cost_projection
         #   @return [::Google::Cloud::Recommender::V1::CostProjection]
         #     Use with CategoryType.COST
+        #
+        #     Note: The following fields are mutually exclusive: `cost_projection`, `security_projection`, `sustainability_projection`, `reliability_projection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] security_projection
         #   @return [::Google::Cloud::Recommender::V1::SecurityProjection]
         #     Use with CategoryType.SECURITY
+        #
+        #     Note: The following fields are mutually exclusive: `security_projection`, `cost_projection`, `sustainability_projection`, `reliability_projection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sustainability_projection
         #   @return [::Google::Cloud::Recommender::V1::SustainabilityProjection]
         #     Use with CategoryType.SUSTAINABILITY
+        #
+        #     Note: The following fields are mutually exclusive: `sustainability_projection`, `cost_projection`, `security_projection`, `reliability_projection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] reliability_projection
         #   @return [::Google::Cloud::Recommender::V1::ReliabilityProjection]
         #     Use with CategoryType.RELIABILITY
+        #
+        #     Note: The following fields are mutually exclusive: `reliability_projection`, `cost_projection`, `security_projection`, `sustainability_projection`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Impact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -172,15 +172,21 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::DedicatedResources]
         #     A description of resources that are dedicated to the DeployedModel, and
         #     that need a higher degree of manual configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `dedicated_resources`, `automatic_resources`, `shared_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] automatic_resources
         #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
         #     A description of resources that to large degree are decided by Vertex
         #     AI, and require only a modest additional configuration.
+        #
+        #     Note: The following fields are mutually exclusive: `automatic_resources`, `dedicated_resources`, `shared_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] shared_resources
         #   @return [::String]
         #     The resource name of the shared DeploymentResourcePool to deploy on.
         #     Format:
         #     `projects/{project}/locations/{location}/deploymentResourcePools/{deployment_resource_pool}`
+        #
+        #     Note: The following fields are mutually exclusive: `shared_resources`, `dedicated_resources`, `automatic_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] id
         #   @return [::String]
         #     Immutable. The ID of the DeployedModel. If not provided upon deployment,
@@ -279,6 +285,9 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     System labels to apply to Model Garden deployments.
         #     System labels are managed by Google for internal use only.
+        # @!attribute [rw] speculative_decoding_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec]
+        #     Optional. Spec for configuring speculative decoding.
         class DeployedModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -352,6 +361,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configurations (e.g. inference timeout) that are applied on your endpoints.
+        # @!attribute [rw] inference_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Customizable online prediction request timeout.
+        class ClientConnectionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration for faster model deployment.
         # @!attribute [rw] fast_tryout_enabled
         #   @return [::Boolean]
@@ -361,13 +379,47 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Configurations (e.g. inference timeout) that are applied on your endpoints.
-        # @!attribute [rw] inference_timeout
-        #   @return [::Google::Protobuf::Duration]
-        #     Customizable online prediction request timeout.
-        class ClientConnectionConfig
+        # Configuration for Speculative Decoding.
+        # @!attribute [rw] draft_model_speculation
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec::DraftModelSpeculation]
+        #     draft model speculation.
+        #
+        #     Note: The following fields are mutually exclusive: `draft_model_speculation`, `ngram_speculation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] ngram_speculation
+        #   @return [::Google::Cloud::AIPlatform::V1::SpeculativeDecodingSpec::NgramSpeculation]
+        #     N-Gram speculation.
+        #
+        #     Note: The following fields are mutually exclusive: `ngram_speculation`, `draft_model_speculation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] speculative_token_count
+        #   @return [::Integer]
+        #     The number of speculative tokens to generate at each step.
+        class SpeculativeDecodingSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Draft model speculation works by using the smaller model to generate
+          # candidate tokens for speculative decoding.
+          # @!attribute [rw] draft_model
+          #   @return [::String]
+          #     Required. The resource name of the draft model.
+          class DraftModelSpeculation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # N-Gram speculation works by trying to find matching tokens in the
+          # previous prompt sequence and use those as speculation for generating
+          # new tokens.
+          # @!attribute [rw] ngram_size
+          #   @return [::Integer]
+          #     The number of last N input tokens used as ngram to search/match
+          #     against the previous prompt sequence.
+          #     This is equal to the N in N-Gram.
+          #     The default value is 3 if not specified.
+          class NgramSpeculation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

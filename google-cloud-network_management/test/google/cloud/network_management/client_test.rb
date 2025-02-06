@@ -42,6 +42,7 @@ class Google::Cloud::NetworkManagement::ClientConstructionMinitest < Minitest::T
   end
 
   def test_reachability_service_grpc
+    skip unless Google::Cloud::NetworkManagement.reachability_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::NetworkManagement.reachability_service transport: :grpc do |config|
@@ -52,11 +53,33 @@ class Google::Cloud::NetworkManagement::ClientConstructionMinitest < Minitest::T
   end
 
   def test_reachability_service_rest
+    skip unless Google::Cloud::NetworkManagement.reachability_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::NetworkManagement.reachability_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::NetworkManagement::V1::ReachabilityService::Rest::Client, client
+    end
+  end
+
+  def test_vpc_flow_logs_service_grpc
+    skip unless Google::Cloud::NetworkManagement.vpc_flow_logs_service_available? transport: :grpc
+    Gapic::ServiceStub.stub :new, DummyStub.new do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::NetworkManagement.vpc_flow_logs_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Client, client
+    end
+  end
+
+  def test_vpc_flow_logs_service_rest
+    skip unless Google::Cloud::NetworkManagement.vpc_flow_logs_service_available? transport: :rest
+    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
+      client = Google::Cloud::NetworkManagement.vpc_flow_logs_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::NetworkManagement::V1::VpcFlowLogsService::Rest::Client, client
     end
   end
 end

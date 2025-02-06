@@ -831,6 +831,8 @@ module Google
               #     {::Google::Cloud::Speech::V2::RecognitionConfig RecognitionConfig}. As
               #     with all bytes fields, proto buffers use a pure binary representation,
               #     whereas JSON representations use base64.
+              #
+              #     Note: The following fields are mutually exclusive: `content`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param uri [::String]
               #     URI that points to a file that contains audio data bytes as specified in
               #     {::Google::Cloud::Speech::V2::RecognitionConfig RecognitionConfig}. The file
@@ -840,6 +842,8 @@ module Google
               #     [INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]). For more
               #     information, see [Request
               #     URIs](https://cloud.google.com/storage/docs/reference-uris).
+              #
+              #     Note: The following fields are mutually exclusive: `uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Speech::V2::RecognizeResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2361,6 +2365,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

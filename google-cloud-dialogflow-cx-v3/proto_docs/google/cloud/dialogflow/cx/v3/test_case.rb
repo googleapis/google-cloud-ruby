@@ -234,10 +234,14 @@ module Google
             #   @return [::Google::Cloud::Dialogflow::CX::V3::Page]
             #     Indicates a transition to a {::Google::Cloud::Dialogflow::CX::V3::Page Page}.
             #     Only some fields such as name and displayname will be set.
+            #
+            #     Note: The following fields are mutually exclusive: `page`, `flow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] flow
             #   @return [::Google::Cloud::Dialogflow::CX::V3::Flow]
             #     Indicates a transition to a {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
             #     Only some fields such as name and displayname will be set.
+            #
+            #     Note: The following fields are mutually exclusive: `flow`, `page`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class TransitionNode
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -260,9 +264,13 @@ module Google
             # @!attribute [rw] transition_route
             #   @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRoute]
             #     Intent route or condition route.
+            #
+            #     Note: The following fields are mutually exclusive: `transition_route`, `event_handler`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] event_handler
             #   @return [::Google::Cloud::Dialogflow::CX::V3::EventHandler]
             #     Event handler.
+            #
+            #     Note: The following fields are mutually exclusive: `event_handler`, `transition_route`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class Transition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -377,12 +385,18 @@ module Google
           # @!attribute [rw] intent_coverage
           #   @return [::Google::Cloud::Dialogflow::CX::V3::IntentCoverage]
           #     Intent coverage.
+          #
+          #     Note: The following fields are mutually exclusive: `intent_coverage`, `transition_coverage`, `route_group_coverage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] transition_coverage
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TransitionCoverage]
           #     Transition (excluding transition route groups) coverage.
+          #
+          #     Note: The following fields are mutually exclusive: `transition_coverage`, `intent_coverage`, `route_group_coverage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] route_group_coverage
           #   @return [::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroupCoverage]
           #     Transition route group coverage.
+          #
+          #     Note: The following fields are mutually exclusive: `route_group_coverage`, `intent_coverage`, `transition_coverage`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CalculateCoverageResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -605,9 +619,13 @@ module Google
           #     have read permissions for the object. For more information, see
           #     [Dialogflow access
           #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] content
           #   @return [::String]
           #     Uncompressed raw byte content for test cases.
+          #
+          #     Note: The following fields are mutually exclusive: `content`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ImportTestCasesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -706,9 +724,13 @@ module Google
           #     The URI to a file containing the exported test cases. This field is
           #      populated only if `gcs_uri` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportTestCasesRequest ExportTestCasesRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `gcs_uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] content
           #   @return [::String]
           #     Uncompressed raw byte content for test cases.
+          #
+          #     Note: The following fields are mutually exclusive: `content`, `gcs_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ExportTestCasesResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

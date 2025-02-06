@@ -25,15 +25,23 @@ module Google
         # @!attribute [rw] suspension_reason
         #   @return [::Google::Cloud::Channel::V1::Entitlement::SuspensionReason]
         #     Suspension reason for the Entitlement.
+        #
+        #     Note: The following fields are mutually exclusive: `suspension_reason`, `cancellation_reason`, `activation_reason`, `other_change_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cancellation_reason
         #   @return [::Google::Cloud::Channel::V1::EntitlementChange::CancellationReason]
         #     Cancellation reason for the Entitlement.
+        #
+        #     Note: The following fields are mutually exclusive: `cancellation_reason`, `suspension_reason`, `activation_reason`, `other_change_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] activation_reason
         #   @return [::Google::Cloud::Channel::V1::EntitlementChange::ActivationReason]
         #     The Entitlement's activation reason
+        #
+        #     Note: The following fields are mutually exclusive: `activation_reason`, `suspension_reason`, `cancellation_reason`, `other_change_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] other_change_reason
         #   @return [::String]
         #     e.g. purchase_number change reason, entered by CRS.
+        #
+        #     Note: The following fields are mutually exclusive: `other_change_reason`, `suspension_reason`, `cancellation_reason`, `activation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entitlement
         #   @return [::String]
         #     Required. Resource name of an entitlement in the form:

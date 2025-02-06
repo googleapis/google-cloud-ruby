@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.5.0 (2025-01-28)
+
+#### Features
+
+* Support for the initialize_service RPC 
+* The delete_backup_vault RPC supports the ignore_backup_plan_references parameter 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.4.0 (2024-12-10)
 
 #### Features

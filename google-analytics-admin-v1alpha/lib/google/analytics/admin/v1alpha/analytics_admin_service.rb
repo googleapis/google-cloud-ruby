@@ -32,7 +32,7 @@ module Google
     module Admin
       module V1alpha
         ##
-        # Service Interface for the Analytics Admin API (GA4).
+        # Service Interface for the Google Analytics Admin API.
         #
         # @example Load this service and instantiate a gRPC client
         #

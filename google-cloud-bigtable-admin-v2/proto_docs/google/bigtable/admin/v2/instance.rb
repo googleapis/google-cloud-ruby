@@ -279,9 +279,13 @@ module Google
           # @!attribute [rw] multi_cluster_routing_use_any
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
           #     Use a multi-cluster routing policy.
+          #
+          #     Note: The following fields are mutually exclusive: `multi_cluster_routing_use_any`, `single_cluster_routing`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] single_cluster_routing
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::SingleClusterRouting]
           #     Use a single-cluster routing policy.
+          #
+          #     Note: The following fields are mutually exclusive: `single_cluster_routing`, `multi_cluster_routing_use_any`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] priority
           #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::Priority]
@@ -289,14 +293,20 @@ module Google
           #     If you set this field, `standard_isolation.priority` will be set instead.
           #
           #     The priority of requests sent using this app profile.
+          #
+          #     Note: The following fields are mutually exclusive: `priority`, `standard_isolation`, `data_boost_isolation_read_only`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] standard_isolation
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::StandardIsolation]
           #     The standard options used for isolating this app profile's traffic from
           #     other use cases.
+          #
+          #     Note: The following fields are mutually exclusive: `standard_isolation`, `priority`, `data_boost_isolation_read_only`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_boost_isolation_read_only
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::DataBoostIsolationReadOnly]
           #     Specifies that this app profile is intended for read-only usage via the
           #     Data Boost feature.
+          #
+          #     Note: The following fields are mutually exclusive: `data_boost_isolation_read_only`, `priority`, `standard_isolation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AppProfile
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

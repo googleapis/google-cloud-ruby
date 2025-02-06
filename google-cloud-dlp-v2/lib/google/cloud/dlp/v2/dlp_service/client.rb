@@ -3311,9 +3311,13 @@ module Google
             #         parent=projects/example-project/locations/europe-west3
             #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
             #     An inspection job scans a storage repository for InfoTypes.
+            #
+            #     Note: The following fields are mutually exclusive: `inspect_job`, `risk_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
             #     A risk analysis job calculates re-identification risk metrics for a
             #     BigQuery table.
+            #
+            #     Note: The following fields are mutually exclusive: `risk_job`, `inspect_job`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
@@ -6227,6 +6231,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

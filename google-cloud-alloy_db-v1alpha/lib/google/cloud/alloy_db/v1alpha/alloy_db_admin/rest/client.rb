@@ -313,10 +313,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AlloyDB::V1alpha::ListClustersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Cluster>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AlloyDB::V1alpha::ListClustersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Cluster>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -368,7 +368,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @alloy_db_admin_stub.list_clusters request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @alloy_db_admin_stub, :list_clusters, "clusters", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1147,9 +1149,13 @@ module Google
               #
               #   @param backup_source [::Google::Cloud::AlloyDB::V1alpha::BackupSource, ::Hash]
               #     Backup source.
+              #
+              #     Note: The following fields are mutually exclusive: `backup_source`, `continuous_backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param continuous_backup_source [::Google::Cloud::AlloyDB::V1alpha::ContinuousBackupSource, ::Hash]
               #     ContinuousBackup source. Continuous backup needs to be enabled in the
               #     source cluster for this operation to succeed.
+              #
+              #     Note: The following fields are mutually exclusive: `continuous_backup_source`, `backup_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param parent [::String]
               #     Required. The name of the parent resource. For the required format, see the
               #     comment on the Cluster.name field.
@@ -1388,10 +1394,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AlloyDB::V1alpha::ListInstancesResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Instance>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AlloyDB::V1alpha::ListInstancesResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Instance>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1443,7 +1449,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @alloy_db_admin_stub.list_instances request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @alloy_db_admin_stub, :list_instances, "instances", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -2535,10 +2543,10 @@ module Google
               #   @param order_by [::String]
               #     Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AlloyDB::V1alpha::ListBackupsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Backup>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AlloyDB::V1alpha::ListBackupsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::Backup>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -2590,7 +2598,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @alloy_db_admin_stub.list_backups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @alloy_db_admin_stub, :list_backups, "backups", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3334,10 +3344,10 @@ module Google
               #   @param order_by [::String]
               #     Optional. Hint for how to order the results
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::AlloyDB::V1alpha::ListUsersResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::User>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::AlloyDB::V1alpha::ListUsersResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::AlloyDB::V1alpha::User>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -3389,7 +3399,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @alloy_db_admin_stub.list_users request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @alloy_db_admin_stub, :list_users, "users", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -3910,6 +3922,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

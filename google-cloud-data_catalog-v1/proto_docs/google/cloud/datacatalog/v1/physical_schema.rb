@@ -26,21 +26,33 @@ module Google
         # @!attribute [rw] avro
         #   @return [::Google::Cloud::DataCatalog::V1::PhysicalSchema::AvroSchema]
         #     Schema in Avro JSON format.
+        #
+        #     Note: The following fields are mutually exclusive: `avro`, `thrift`, `protobuf`, `parquet`, `orc`, `csv`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] thrift
         #   @return [::Google::Cloud::DataCatalog::V1::PhysicalSchema::ThriftSchema]
         #     Schema in Thrift format.
+        #
+        #     Note: The following fields are mutually exclusive: `thrift`, `avro`, `protobuf`, `parquet`, `orc`, `csv`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] protobuf
         #   @return [::Google::Cloud::DataCatalog::V1::PhysicalSchema::ProtobufSchema]
         #     Schema in protocol buffer format.
+        #
+        #     Note: The following fields are mutually exclusive: `protobuf`, `avro`, `thrift`, `parquet`, `orc`, `csv`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] parquet
         #   @return [::Google::Cloud::DataCatalog::V1::PhysicalSchema::ParquetSchema]
         #     Marks a Parquet-encoded data source.
+        #
+        #     Note: The following fields are mutually exclusive: `parquet`, `avro`, `thrift`, `protobuf`, `orc`, `csv`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] orc
         #   @return [::Google::Cloud::DataCatalog::V1::PhysicalSchema::OrcSchema]
         #     Marks an ORC-encoded data source.
+        #
+        #     Note: The following fields are mutually exclusive: `orc`, `avro`, `thrift`, `protobuf`, `parquet`, `csv`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] csv
         #   @return [::Google::Cloud::DataCatalog::V1::PhysicalSchema::CsvSchema]
         #     Marks a CSV-encoded data source.
+        #
+        #     Note: The following fields are mutually exclusive: `csv`, `avro`, `thrift`, `protobuf`, `parquet`, `orc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PhysicalSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -41,6 +41,7 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
   end
 
   def test_big_query_read_grpc
+    skip unless Google::Cloud::Bigquery::Storage.big_query_read_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Bigquery::Storage.big_query_read do |config|
@@ -51,6 +52,7 @@ class Google::Cloud::Bigquery::Storage::ClientConstructionMinitest < Minitest::T
   end
 
   def test_big_query_write_grpc
+    skip unless Google::Cloud::Bigquery::Storage.big_query_write_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Bigquery::Storage.big_query_write do |config|

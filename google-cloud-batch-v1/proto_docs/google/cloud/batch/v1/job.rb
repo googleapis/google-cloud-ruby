@@ -392,10 +392,14 @@ module Google
           #     * `batch-debian`: use Batch Debian images.
           #     * `batch-cos`: use Batch Container-Optimized images.
           #     * `batch-hpc-rocky`: use Batch HPC Rocky Linux images.
+          #
+          #     Note: The following fields are mutually exclusive: `image`, `snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] snapshot
           #   @return [::String]
           #     Name of a snapshot used as the data source.
           #     Snapshot is not supported as boot disk now.
+          #
+          #     Note: The following fields are mutually exclusive: `snapshot`, `image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] type
           #   @return [::String]
           #     Disk type as shown in `gcloud compute disk-types list`.
@@ -441,9 +445,12 @@ module Google
           # instance.
           # @!attribute [rw] new_disk
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::Disk]
+          #     Note: The following fields are mutually exclusive: `new_disk`, `existing_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] existing_disk
           #   @return [::String]
           #     Name of an existing PD.
+          #
+          #     Note: The following fields are mutually exclusive: `existing_disk`, `new_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] device_name
           #   @return [::String]
           #     Device name that the guest operating system will see.
@@ -527,6 +534,8 @@ module Google
           # @!attribute [rw] policy
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::InstancePolicy]
           #     InstancePolicy.
+          #
+          #     Note: The following fields are mutually exclusive: `policy`, `instance_template`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] instance_template
           #   @return [::String]
           #     Name of an instance template used to create VMs.
@@ -536,6 +545,8 @@ module Google
           #     Batch only supports global instance templates from the same project as
           #     the job.
           #     You can specify the global instance template as a full or partial URL.
+          #
+          #     Note: The following fields are mutually exclusive: `instance_template`, `policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] install_gpu_drivers
           #   @return [::Boolean]
           #     Set this field true if you want Batch to help fetch drivers from a third

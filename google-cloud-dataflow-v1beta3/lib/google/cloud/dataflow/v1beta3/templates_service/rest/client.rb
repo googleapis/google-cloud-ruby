@@ -295,8 +295,12 @@ module Google
               #     A Cloud Storage path to the template from which to create
               #     the job.
               #     Must be valid Cloud Storage URL, beginning with 'gs://'.
+              #
+              #     Note: The following fields are mutually exclusive: `gcs_path`, `dynamic_template`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param dynamic_template [::Google::Cloud::Dataflow::V1beta3::DynamicTemplateLaunchParams, ::Hash]
               #     Params for launching a dynamic template.
+              #
+              #     Note: The following fields are mutually exclusive: `dynamic_template`, `gcs_path`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param launch_parameters [::Google::Cloud::Dataflow::V1beta3::LaunchTemplateParameters, ::Hash]
               #     The parameters of the template to launch. This should be part of the
               #     body of the POST request.
@@ -492,6 +496,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

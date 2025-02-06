@@ -328,9 +328,13 @@ module Google
           #     have read permissions for the object. For more information, see
           #     [Dialogflow access
           #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          #
+          #     Note: The following fields are mutually exclusive: `intents_uri`, `intents_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intents_content
           #   @return [::Google::Cloud::Dialogflow::CX::V3::InlineSource]
           #     Uncompressed byte content of intents.
+          #
+          #     Note: The following fields are mutually exclusive: `intents_content`, `intents_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] merge_option
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportIntentsRequest::MergeOption]
           #     Merge option for importing intents. If not specified, `REJECT` is assumed.
@@ -433,9 +437,13 @@ module Google
           #     have write permissions for the object. For more information, see
           #     [Dialogflow access
           #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          #
+          #     Note: The following fields are mutually exclusive: `intents_uri`, `intents_content_inline`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intents_content_inline
           #   @return [::Boolean]
           #     Optional. The option to return the serialized intents inline.
+          #
+          #     Note: The following fields are mutually exclusive: `intents_content_inline`, `intents_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] data_format
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest::DataFormat]
           #     Optional. The data format of the exported intents. If not specified, `BLOB`
@@ -467,11 +475,15 @@ module Google
           #     The URI to a file containing the exported intents. This field is
           #     populated only if `intents_uri` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest ExportIntentsRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `intents_uri`, `intents_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] intents_content
           #   @return [::Google::Cloud::Dialogflow::CX::V3::InlineDestination]
           #     Uncompressed byte content for intents. This field is populated only if
           #     `intents_content_inline` is set to true in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportIntentsRequest ExportIntentsRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `intents_content`, `intents_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ExportIntentsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

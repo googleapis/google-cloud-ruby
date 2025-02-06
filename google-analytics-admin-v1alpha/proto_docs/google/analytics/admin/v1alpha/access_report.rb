@@ -73,16 +73,24 @@ module Google
         # @!attribute [rw] and_group
         #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpressionList]
         #     Each of the FilterExpressions in the and_group has an AND relationship.
+        #
+        #     Note: The following fields are mutually exclusive: `and_group`, `or_group`, `not_expression`, `access_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] or_group
         #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpressionList]
         #     Each of the FilterExpressions in the or_group has an OR relationship.
+        #
+        #     Note: The following fields are mutually exclusive: `or_group`, `and_group`, `not_expression`, `access_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::AccessFilterExpression]
         #     The FilterExpression is NOT of not_expression.
+        #
+        #     Note: The following fields are mutually exclusive: `not_expression`, `and_group`, `or_group`, `access_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] access_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessFilter]
         #     A primitive filter. In the same FilterExpression, all of the filter's
         #     field names need to be either all dimensions or all metrics.
+        #
+        #     Note: The following fields are mutually exclusive: `access_filter`, `and_group`, `or_group`, `not_expression`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AccessFilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,15 +109,23 @@ module Google
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessStringFilter]
         #     Strings related filter.
+        #
+        #     Note: The following fields are mutually exclusive: `string_filter`, `in_list_filter`, `numeric_filter`, `between_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] in_list_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessInListFilter]
         #     A filter for in list values.
+        #
+        #     Note: The following fields are mutually exclusive: `in_list_filter`, `string_filter`, `numeric_filter`, `between_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] numeric_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessNumericFilter]
         #     A filter for numeric or date values.
+        #
+        #     Note: The following fields are mutually exclusive: `numeric_filter`, `string_filter`, `in_list_filter`, `between_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] between_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AccessBetweenFilter]
         #     A filter for two values.
+        #
+        #     Note: The following fields are mutually exclusive: `between_filter`, `string_filter`, `in_list_filter`, `numeric_filter`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] field_name
         #   @return [::String]
         #     The dimension name or metric name.
@@ -218,9 +234,13 @@ module Google
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     Integer value
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `double_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     Double value
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `int64_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class NumericValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -232,9 +252,13 @@ module Google
         # @!attribute [rw] metric
         #   @return [::Google::Analytics::Admin::V1alpha::AccessOrderBy::MetricOrderBy]
         #     Sorts results by a metric's values.
+        #
+        #     Note: The following fields are mutually exclusive: `metric`, `dimension`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dimension
         #   @return [::Google::Analytics::Admin::V1alpha::AccessOrderBy::DimensionOrderBy]
         #     Sorts results by a dimension's values.
+        #
+        #     Note: The following fields are mutually exclusive: `dimension`, `metric`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] desc
         #   @return [::Boolean]
         #     If true, sorts by descending order. If false or unspecified, sorts in

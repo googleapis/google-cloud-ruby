@@ -141,9 +141,13 @@ module Google
           # @!attribute [rw] annotation
           #   @return [::Google::Cloud::Trace::V2::Span::TimeEvent::Annotation]
           #     Text annotation with a set of attributes.
+          #
+          #     Note: The following fields are mutually exclusive: `annotation`, `message_event`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] message_event
           #   @return [::Google::Cloud::Trace::V2::Span::TimeEvent::MessageEvent]
           #     An event describing a message sent/received between Spans.
+          #
+          #     Note: The following fields are mutually exclusive: `message_event`, `annotation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class TimeEvent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -301,12 +305,18 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::Google::Cloud::Trace::V2::TruncatableString]
         #     A string up to 256 bytes long.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `int_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int_value
         #   @return [::Integer]
         #     A 64-bit signed integer.
+        #
+        #     Note: The following fields are mutually exclusive: `int_value`, `string_value`, `bool_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A Boolean value represented by `true` or `false`.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `string_value`, `int_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AttributeValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -152,12 +152,18 @@ module Google
         # @!attribute [rw] server_count
         #   @return [::Integer]
         #     Server count.
+        #
+        #     Note: The following fields are mutually exclusive: `server_count`, `network_bandwidth`, `storage_gib`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] network_bandwidth
         #   @return [::Integer]
         #     Network bandwidth, Gbps
+        #
+        #     Note: The following fields are mutually exclusive: `network_bandwidth`, `server_count`, `storage_gib`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] storage_gib
         #   @return [::Integer]
         #     Storage size (GB).
+        #
+        #     Note: The following fields are mutually exclusive: `storage_gib`, `server_count`, `network_bandwidth`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ProvisioningQuota
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,9 +366,13 @@ module Google
           #   @return [::String]
           #     Either a single machine, identified by an ID, or a comma-separated
           #     list of machine IDs.
+          #
+          #     Note: The following fields are mutually exclusive: `machine_id`, `cidr`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] cidr
           #   @return [::String]
           #     A CIDR range.
+          #
+          #     Note: The following fields are mutually exclusive: `cidr`, `machine_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] permissions
           #   @return [::Google::Cloud::BareMetalSolution::V2::VolumeConfig::NfsExport::Permissions]
           #     Export permissions.

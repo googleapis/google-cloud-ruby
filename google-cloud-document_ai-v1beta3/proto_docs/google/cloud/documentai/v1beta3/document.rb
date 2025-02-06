@@ -31,11 +31,15 @@ module Google
         #     `gs://bucket_name/object_name`. Object versioning is not supported.
         #     For more information, refer to [Google Cloud Storage Request
         #     URIs](https://cloud.google.com/storage/docs/reference-uris).
+        #
+        #     Note: The following fields are mutually exclusive: `uri`, `content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] content
         #   @return [::String]
         #     Optional. Inline document content, represented as a stream of bytes.
         #     Note: As with all `bytes` fields, protobuffers use a pure binary
         #     representation, whereas JSON representations use base64.
+        #
+        #     Note: The following fields are mutually exclusive: `content`, `uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     An IANA published [media type (MIME
@@ -731,28 +735,42 @@ module Google
             #   @return [::Google::Type::Money]
             #     Money value. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/money.proto
+            #
+            #     Note: The following fields are mutually exclusive: `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] date_value
             #   @return [::Google::Type::Date]
             #     Date value. Includes year, month, day. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/date.proto
+            #
+            #     Note: The following fields are mutually exclusive: `date_value`, `money_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] datetime_value
             #   @return [::Google::Type::DateTime]
             #     DateTime value. Includes date, time, and timezone. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto
+            #
+            #     Note: The following fields are mutually exclusive: `datetime_value`, `money_value`, `date_value`, `address_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] address_value
             #   @return [::Google::Type::PostalAddress]
             #     Postal address. See also:
             #     https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto
+            #
+            #     Note: The following fields are mutually exclusive: `address_value`, `money_value`, `date_value`, `datetime_value`, `boolean_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] boolean_value
             #   @return [::Boolean]
             #     Boolean value. Can be used for entities with binary values, or for
             #     checkboxes.
+            #
+            #     Note: The following fields are mutually exclusive: `boolean_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `integer_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] integer_value
             #   @return [::Integer]
             #     Integer value.
+            #
+            #     Note: The following fields are mutually exclusive: `integer_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `float_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] float_value
             #   @return [::Float]
             #     Float value.
+            #
+            #     Note: The following fields are mutually exclusive: `float_value`, `money_value`, `date_value`, `datetime_value`, `address_value`, `boolean_value`, `integer_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] text
             #   @return [::String]
             #     Optional. An optional field to store a normalized string.
@@ -988,10 +1006,14 @@ module Google
           #   @return [::String]
           #     If the change was made by a person specify the name or id of that
           #     person.
+          #
+          #     Note: The following fields are mutually exclusive: `agent`, `processor`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] processor
           #   @return [::String]
           #     If the annotation was made by processor identify the processor by its
           #     resource name.
+          #
+          #     Note: The following fields are mutually exclusive: `processor`, `agent`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] id
           #   @return [::String]
           #     Id of the revision, internally generated by doc proto storage.
@@ -1067,12 +1089,18 @@ module Google
             # @!attribute [rw] text_block
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::DocumentLayout::DocumentLayoutBlock::LayoutTextBlock]
             #     Block consisting of text content.
+            #
+            #     Note: The following fields are mutually exclusive: `text_block`, `table_block`, `list_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] table_block
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::DocumentLayout::DocumentLayoutBlock::LayoutTableBlock]
             #     Block consisting of table content/structure.
+            #
+            #     Note: The following fields are mutually exclusive: `table_block`, `text_block`, `list_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] list_block
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::DocumentLayout::DocumentLayoutBlock::LayoutListBlock]
             #     Block consisting of list content/structure.
+            #
+            #     Note: The following fields are mutually exclusive: `list_block`, `text_block`, `table_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] block_id
             #   @return [::String]
             #     ID of the block.
@@ -1252,14 +1280,20 @@ module Google
         # @!attribute [rw] revision_case
         #   @return [::Google::Cloud::DocumentAI::V1beta3::RevisionRef::RevisionCase]
         #     Reads the revision by the predefined case.
+        #
+        #     Note: The following fields are mutually exclusive: `revision_case`, `revision_id`, `latest_processor_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] revision_id
         #   @return [::String]
         #     Reads the revision given by the id.
+        #
+        #     Note: The following fields are mutually exclusive: `revision_id`, `revision_case`, `latest_processor_version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] latest_processor_version
         #   @return [::String]
         #     Reads the revision generated by the processor version.
         #     The format takes the full resource name of processor version.
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+        #
+        #     Note: The following fields are mutually exclusive: `latest_processor_version`, `revision_case`, `revision_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RevisionRef
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

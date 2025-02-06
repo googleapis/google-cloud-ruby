@@ -389,16 +389,22 @@ module Google
           #     The URI to a file containing the exported agent. This field is populated
           #     if `agent_uri` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] agent_content
           #   @return [::String]
           #     Uncompressed raw byte content for agent. This field is populated
           #     if none of `agent_uri` and `git_destination` are specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] commit_sha
           #   @return [::String]
           #     Commit SHA of the git push. This field is populated if
           #     `git_destination` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
+          #
+          #     Note: The following fields are mutually exclusive: `commit_sha`, `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ExportAgentResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -421,12 +427,18 @@ module Google
           #     have read permissions for the object. For more information, see
           #     [Dialogflow access
           #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          #
+          #     Note: The following fields are mutually exclusive: `agent_uri`, `agent_content`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] agent_content
           #   @return [::String]
           #     Uncompressed raw byte content for agent.
+          #
+          #     Note: The following fields are mutually exclusive: `agent_content`, `agent_uri`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] git_source
           #   @return [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::GitSource]
           #     Setting for restoring from a git branch
+          #
+          #     Note: The following fields are mutually exclusive: `git_source`, `agent_uri`, `agent_content`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] restore_option
           #   @return [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]
           #     Agent restore mode. If not specified, `KEEP` is assumed.

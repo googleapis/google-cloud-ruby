@@ -131,11 +131,15 @@ module Google
           #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Entitlement::RequesterJustificationConfig::NotMandatory]
           #     This option means the requester isn't required to provide a
           #     justification.
+          #
+          #     Note: The following fields are mutually exclusive: `not_mandatory`, `unstructured`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] unstructured
           #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Entitlement::RequesterJustificationConfig::Unstructured]
           #     This option means the requester must provide a string as
           #     justification. If this is selected, the server allows the requester
           #     to provide a justification but doesn't validate it.
+          #
+          #     Note: The following fields are mutually exclusive: `unstructured`, `not_mandatory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class RequesterJustificationConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -563,35 +567,55 @@ module Google
             # @!attribute [rw] requested
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Requested]
             #     The grant was requested.
+            #
+            #     Note: The following fields are mutually exclusive: `requested`, `approved`, `denied`, `revoked`, `scheduled`, `activated`, `activation_failed`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] approved
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Approved]
             #     The grant was approved.
+            #
+            #     Note: The following fields are mutually exclusive: `approved`, `requested`, `denied`, `revoked`, `scheduled`, `activated`, `activation_failed`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] denied
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Denied]
             #     The grant was denied.
+            #
+            #     Note: The following fields are mutually exclusive: `denied`, `requested`, `approved`, `revoked`, `scheduled`, `activated`, `activation_failed`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] revoked
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Revoked]
             #     The grant was revoked.
+            #
+            #     Note: The following fields are mutually exclusive: `revoked`, `requested`, `approved`, `denied`, `scheduled`, `activated`, `activation_failed`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] scheduled
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Scheduled]
             #     The grant has been scheduled to give access.
+            #
+            #     Note: The following fields are mutually exclusive: `scheduled`, `requested`, `approved`, `denied`, `revoked`, `activated`, `activation_failed`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] activated
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Activated]
             #     The grant was successfully activated to give access.
+            #
+            #     Note: The following fields are mutually exclusive: `activated`, `requested`, `approved`, `denied`, `revoked`, `scheduled`, `activation_failed`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] activation_failed
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::ActivationFailed]
             #     There was a non-retriable error while trying to give access.
+            #
+            #     Note: The following fields are mutually exclusive: `activation_failed`, `requested`, `approved`, `denied`, `revoked`, `scheduled`, `activated`, `expired`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] expired
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Expired]
             #     The approval workflow did not complete in the necessary duration,
             #     and so the grant is expired.
+            #
+            #     Note: The following fields are mutually exclusive: `expired`, `requested`, `approved`, `denied`, `revoked`, `scheduled`, `activated`, `activation_failed`, `ended`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] ended
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::Ended]
             #     Access given by the grant ended automatically as the approved
             #     duration was over.
+            #
+            #     Note: The following fields are mutually exclusive: `ended`, `requested`, `approved`, `denied`, `revoked`, `scheduled`, `activated`, `activation_failed`, `expired`, `externally_modified`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] externally_modified
             #   @return [::Google::Cloud::PrivilegedAccessManager::V1::Grant::Timeline::Event::ExternallyModified]
             #     The policy bindings made by grant have been modified outside of PAM.
+            #
+            #     Note: The following fields are mutually exclusive: `externally_modified`, `requested`, `approved`, `denied`, `revoked`, `scheduled`, `activated`, `activation_failed`, `expired`, `ended`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [r] event_time
             #   @return [::Google::Protobuf::Timestamp]
             #     Output only. The time (as recorded at server) when this event occurred.

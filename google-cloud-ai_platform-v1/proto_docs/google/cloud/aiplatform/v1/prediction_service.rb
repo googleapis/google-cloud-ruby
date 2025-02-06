@@ -471,6 +471,9 @@ module Google
         #   @return [::Integer]
         #     The total number of billable characters counted across all instances from
         #     the request.
+        # @!attribute [r] prompt_tokens_details
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+        #     Output only. List of modalities that were processed in the request input.
         class CountTokensResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -617,6 +620,16 @@ module Google
           #   @return [::Integer]
           #     Output only. Number of tokens in the cached part in the input (the cached
           #     content).
+          # @!attribute [r] prompt_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities that were processed in the request input.
+          # @!attribute [r] cache_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities of the cached content in the request
+          #     input.
+          # @!attribute [r] candidates_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities that were returned in the response.
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

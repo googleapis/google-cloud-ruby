@@ -42,6 +42,7 @@ class Google::Analytics::Data::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_analytics_data_grpc
+    skip unless Google::Analytics::Data.analytics_data_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Analytics::Data.analytics_data transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Analytics::Data::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_analytics_data_rest
+    skip unless Google::Analytics::Data.analytics_data_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Analytics::Data.analytics_data transport: :rest do |config|
         config.credentials = :dummy_credentials

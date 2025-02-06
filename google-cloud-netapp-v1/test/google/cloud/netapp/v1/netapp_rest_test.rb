@@ -3119,6 +3119,283 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_list_quota_rules
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ListQuotaRulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_quota_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_quota_rules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_quota_rules_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_quota_rules parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_quota_rules ::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_quota_rules({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_quota_rules(::Google::Cloud::NetApp::V1::ListQuotaRulesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_quota_rules_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_quota_rule
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::QuotaRule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_quota_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_quota_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_quota_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_quota_rule({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_quota_rule name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_quota_rule ::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_quota_rule({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_quota_rule(::Google::Cloud::NetApp::V1::GetQuotaRuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_quota_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_quota_rule
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    quota_rule = {}
+    quota_rule_id = "hello world"
+
+    create_quota_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_create_quota_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_quota_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_quota_rule parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_quota_rule ::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_quota_rule({ parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_quota_rule(::Google::Cloud::NetApp::V1::CreateQuotaRuleRequest.new(parent: parent, quota_rule: quota_rule, quota_rule_id: quota_rule_id), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_quota_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_quota_rule
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    quota_rule = {}
+
+    update_quota_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_quota_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_quota_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_quota_rule update_mask: update_mask, quota_rule: quota_rule do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_quota_rule ::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_quota_rule({ update_mask: update_mask, quota_rule: quota_rule }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_quota_rule(::Google::Cloud::NetApp::V1::UpdateQuotaRuleRequest.new(update_mask: update_mask, quota_rule: quota_rule), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_quota_rule_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_quota_rule
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_quota_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_delete_quota_rule_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_quota_rule_client_stub do
+        # Create client
+        client = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_quota_rule({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_quota_rule name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_quota_rule ::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_quota_rule({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_quota_rule(::Google::Cloud::NetApp::V1::DeleteQuotaRuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_quota_rule_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

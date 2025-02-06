@@ -29,6 +29,26 @@
               "methods": [
                 "end_active_conference"
               ]
+            },
+            "CreateMember": {
+              "methods": [
+                "create_member"
+              ]
+            },
+            "GetMember": {
+              "methods": [
+                "get_member"
+              ]
+            },
+            "ListMembers": {
+              "methods": [
+                "list_members"
+              ]
+            },
+            "DeleteMember": {
+              "methods": [
+                "delete_member"
+              ]
             }
           }
         }
