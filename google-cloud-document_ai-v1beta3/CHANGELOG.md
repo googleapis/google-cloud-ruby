@@ -1,5 +1,11 @@
 # Release History
 
+### 0.39.1 (2025-02-06)
+
+#### Documentation
+
+* Marked some fields as unused ([#28937](https://github.com/googleapis/google-cloud-ruby/issues/28937)) 
+
 ### 0.39.0 (2025-01-28)
 
 #### Features
