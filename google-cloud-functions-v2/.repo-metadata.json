@@ -8,7 +8,7 @@
     "name": "cloudfunctions",
     "name_pretty": "Cloud Functions V2 API",
     "product_documentation": "https://cloud.google.com/functions",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Cloud Functions API manages lightweight user-provided functions executed in response to events. Note that google-cloud-functions-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-functions instead. See the readme for more details.",
