@@ -23,10 +23,8 @@ def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryp
   # The ID of your GCS object
   # file_name = "your-file-name"
 
-
-  # The key used to encrypt the object can be a 32-byte key (raw encrypted data).
-  # This example is provided for demonstration purposes only; it is recommended to generate your own encryption key.
-  # Additionally, please ensure that encryption keys are managed in accordance with a comprehensive security policy.
+  # The encryption key used for securing the object must be a 32-byte key consisting of raw encrypted data.
+  # Key used should not be base64 encoded.
 
   # encryption_key = "your-enncryption-key"
 
