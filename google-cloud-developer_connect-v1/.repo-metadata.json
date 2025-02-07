@@ -8,7 +8,7 @@
     "name": "developerconnect",
     "name_pretty": "Developer Connect V1 API",
     "product_documentation": "https://cloud.google.com/developer-connect/docs/overview",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Developer Connect streamlines integration with third-party source code management platforms by simplifying authentication, authorization, and networking configuration. Note that google-cloud-developer_connect-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-developer_connect instead. See the readme for more details.",
