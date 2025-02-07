@@ -2479,6 +2479,7 @@ module Google
             #   @param order_by [::String]
             #     Optional. Specifies the ordering of results.
             #     Supported values are:
+            #
             #     * `relevance` (default)
             #     * `last_modified_timestamp`
             #     * `last_modified_timestamp asc`

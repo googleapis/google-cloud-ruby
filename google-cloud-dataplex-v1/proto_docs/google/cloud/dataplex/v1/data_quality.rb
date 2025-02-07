@@ -221,11 +221,11 @@ module Google
         #     evaluation, or
         #     * exclude `null` rows from the `evaluated_count`, by setting
         #     `ignore_nulls = true`.
+        #
+        #     This field is not set for rule SqlAssertion.
         # @!attribute [rw] passed_count
         #   @return [::Integer]
-        #     The number of rows which passed a rule evaluation.
-        #
-        #     This field is only valid for row-level type rules.
+        #     This field is not set for rule SqlAssertion.
         # @!attribute [rw] null_count
         #   @return [::Integer]
         #     The number of rows with null values in the specified column.
