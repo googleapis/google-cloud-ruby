@@ -1,5 +1,21 @@
 # Changelog
 
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28821](https://github.com/googleapis/google-cloud-ruby/issues/28821))
+
+#### Features
+
+* MountOption reports the IP address 
+* Support CRUD operations on QuotaRules 
+* Support for local source volume, cluster, and svm names in hybrid peering 
+* Support for LocationMetadata#supported_flex_performance 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28821](https://github.com/googleapis/google-cloud-ruby/issues/28821)) 
+
 ### 1.6.0 (2025-01-28)
 
 #### Features
