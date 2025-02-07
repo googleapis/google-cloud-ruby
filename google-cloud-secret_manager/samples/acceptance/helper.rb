@@ -29,6 +29,15 @@ class SecretManagerSnippetSpec < Minitest::Spec
 
   let(:iam_user) { "user:sethvargo@google.com" }
 
+  let(:annotation_key) { "annotation-key" }
+  let(:annotation_value) { "annotation-value" }
+
+  let(:updated_annotation_key) { "updated-annotation-key" }
+  let(:updated_annotation_value) { "updated-annotation-value" }
+
+  let(:label_key) { "label-key" }
+  let(:label_value) { "label-value" }
+
   let :secret do
     client.create_secret(
       parent:    "projects/#{project_id}",
@@ -36,6 +45,12 @@ class SecretManagerSnippetSpec < Minitest::Spec
       secret:    {
         replication: {
           automatic: {}
+        },
+        annotations: {
+          annotation_key => annotation_value
+        },
+        labels: {
+          label_key => label_value
         }
       }
     )
