@@ -1,5 +1,24 @@
 # Release History
 
+### 1.2.0 (2025-02-07)
+
+#### Features
+
+* Provide opt-in debug logging 
+* Report batches that could not be included in a list_batches response 
+* Report unreachable resources due to KMS-key-encrypted parameters that could not be decrypted 
+* Support Apache Flink 
+* Support configuring how the Group selects the provisioning model to ensure required reliability 
+* Support configuring IOPS and throughput provisioning in DiskConfig 
+* Support configuring the cloud KMS key resource name to use for cluster persistent disk and job argument encryption 
+* Support encryption for workflow template job arguments 
+* Support Spark Connect for interactive seesions 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 1.1.0 (2024-09-11)
 
 #### Features
