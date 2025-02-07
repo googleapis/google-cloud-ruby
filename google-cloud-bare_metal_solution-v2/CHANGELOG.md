@@ -106,3 +106,4 @@
 #### Features
 
 * Initial generation of google-cloud-bare_metal_solution-v2
+

@@ -57,3 +57,4 @@
 * Initial generation of google-cloud-backupdr-v1 ([#25702](https://github.com/googleapis/google-cloud-ruby/issues/25702)) 
 
 ## Release History
+

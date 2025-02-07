@@ -71,3 +71,4 @@
 * Initial generation of google-cloud-redis-cluster-v1 ([#23531](https://github.com/googleapis/google-cloud-ruby/issues/23531)) 
 
 ## Release History
+
