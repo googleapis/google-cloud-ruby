@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.1.0 (2025-02-07)
+
+#### Features
+
+* Support the "NONE" entry sync mode ([#28942](https://github.com/googleapis/google-cloud-ruby/issues/28942)) 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
