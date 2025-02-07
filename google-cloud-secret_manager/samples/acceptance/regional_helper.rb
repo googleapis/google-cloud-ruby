@@ -27,6 +27,15 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
   let(:api_endpoint) { "secretmanager.#{location_id}.rep.googleapis.com" }
   let(:filter) { "name : ruby-quickstart-" }
 
+  let(:annotation_key) { "annotation-key" }
+  let(:annotation_value) { "annotation-value" }
+
+  let(:updated_annotation_key) { "updated-annotation-key" }
+  let(:updated_annotation_value) { "updated-annotation-value" }
+
+  let(:label_key) { "label-key" }
+  let(:label_value) { "label-value" }
+
   let :client do
     Google::Cloud::SecretManager.secret_manager_service do |config|
       config.endpoint = api_endpoint
@@ -41,7 +50,14 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
     client.create_secret(
       parent:    "projects/#{project_id}/locations/#{location_id}",
       secret_id: secret_id,
-      secret:    {}
+      secret:    {
+        annotations: {
+          annotation_key => annotation_value
+        },
+        labels: {
+          label_key => label_value
+        }
+      }
     )
   end
 

@@ -106,6 +106,80 @@ def create_secret project_id:, secret_id:
   secret
 end
 
+def create_secret_with_annotations project_id:, secret_id:, annotation_key:, annotation_value:
+  # [START secretmanager_create_secret_with_annotations]
+  # project_id       = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
+  # secret_id        = "YOUR-SECRET-ID"            # (e.g. "my-secret")
+  # annotation_key   = "YOUR-ANNOTATION-KEY"       # (e.g. "my-annotation-key")
+  # annotation_value = "YOUR-ANNOTATION-VALUE"     # (e.g. "my-annotation-value")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the parent project.
+  parent = client.project_path project: project_id
+
+  # Create the secret.
+  secret = client.create_secret(
+    parent:    parent,
+    secret_id: secret_id,
+    secret:    {
+      replication: {
+        automatic: {}
+      },
+      annotations: {
+        annotation_key => annotation_value
+      }
+    }
+  )
+
+  # Print the new secret name.
+  puts "Created secret: #{secret.name}"
+  # [END secretmanager_create_secret_with_annotations]
+
+  secret
+end
+
+def create_secret_with_labels project_id:, secret_id:, label_key:, label_value:
+  # [START secretmanager_create_secret_with_labels]
+  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
+  # secret_id   = "YOUR-SECRET-ID"            # (e.g. "my-secret")
+  # label_key   = "YOUR-LABEL-KEY"       # (e.g. "my-label-key")
+  # label_value = "YOUR-LABEL-VALUE"     # (e.g. "my-label-value")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the parent project.
+  parent = client.project_path project: project_id
+
+  # Create the secret.
+  secret = client.create_secret(
+    parent:    parent,
+    secret_id: secret_id,
+    secret:    {
+      replication: {
+        automatic: {}
+      },
+      labels: {
+        label_key => label_value
+      }
+    }
+  )
+
+  # Print the new secret name.
+  puts "Created secret with labels: #{secret.name}"
+  # [END secretmanager_create_secret_with_labels]
+
+  secret
+end
+
 def create_ummr_secret project_id:, secret_id:, locations:
   # project_id = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
   # secret_id  = "YOUR-SECRET-ID"             # (e.g. "my-secret")
@@ -246,6 +320,50 @@ def enable_secret_version project_id:, secret_id:, version_id:
   # [END secretmanager_enable_secret_version]
 
   response
+end
+
+def edit_secret_annotations project_id:, secret_id:, annotation_key:, annotation_value:
+  # [START secretmanager_edit_secret_annotations]
+  # project_id       = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
+  # secret_id        = "YOUR-SECRET-ID"            # (e.g. "my-secret")
+  # annotation_key   = "YOUR-ANNOTATION-KEY"       # (e.g. "my-annotation-key")
+  # annotation_value = "YOUR-ANNOTATION-VALUE"     # (e.g. "my-annotation-value")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, secret: secret_id
+
+  # Get the existing secret.
+  existing_secret = client.get_secret name: name
+
+  # Get the existing secret's annotations.
+  existing_secret_annotations = existing_secret.annotations.to_h
+
+  # Add a new annotation key and value.
+  existing_secret_annotations[annotation_key] = annotation_value
+
+  # Updates the secret.
+  secret = client.update_secret(
+    secret: {
+      name: name,
+      annotations: existing_secret_annotations
+    },
+    update_mask: {
+      paths: ["annotations"]
+    }
+  )
+
+  # Print the updated secret name and annotations.
+  puts "Updated secret: #{secret.name}"
+  puts "New updated annotations: #{secret.annotations}"
+  # [END secretmanager_edit_secret_annotations]
+
+  secret
 end
 
 def get_secret project_id:, secret_id:
@@ -497,6 +615,64 @@ def update_secret_with_alias project_id:, secret_id:
   secret
 end
 
+def view_secret_annotations project_id:, secret_id:
+  # [START secretmanager_view_secret_annotations]
+  # project_id = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
+  # secret_id  = "YOUR-SECRET-ID"            # (e.g. "my-secret")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, secret: secret_id
+
+  # Get the existing secret.
+  existing_secret = client.get_secret name: name
+
+  # Get the existing secret's annotations.
+  existing_secret_annotations = existing_secret.annotations.to_h
+
+  # Print the secret annotations.
+  existing_secret_annotations.each do |key, value|
+    puts "Annotation Key: #{key}, Annotation Value: #{value}"
+  end
+  # [END secretmanager_view_secret_annotations]
+
+  existing_secret_annotations
+end
+
+def view_secret_labels project_id:, secret_id:
+  # [START secretmanager_view_secret_labels]
+  # project_id = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
+  # secret_id  = "YOUR-SECRET-ID"            # (e.g. "my-secret")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, secret: secret_id
+
+  # Get the existing secret.
+  existing_secret = client.get_secret name: name
+
+  # Get the existing secret's labels.
+  existing_secret_labels = existing_secret.labels.to_h
+
+  # Print the secret labels.
+  existing_secret_labels.each do |key, value|
+    puts "Label Key: #{key}, Label Value: #{value}"
+  end
+  # [END secretmanager_view_secret_labels]
+
+  existing_secret_labels
+end
+
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
@@ -518,6 +694,20 @@ if $PROGRAM_NAME == __FILE__
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
       secret_id:  args.shift
     )
+  when "create_secret_with_annotations"
+    create_secret_with_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      secret_id:  args.shift,
+      annotation_key: args.shift,
+      annotation_value: args.shift
+    )
+  when "create_secret_with_labels"
+    create_secret_with_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      secret_id:  args.shift,
+      label_key: args.shift,
+      label_value: args.shift
+    )
   when "create_ummr_secret"
     create_ummr_secret(
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
@@ -534,6 +724,13 @@ if $PROGRAM_NAME == __FILE__
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
       secret_id:  args.shift,
       version_id: args.shift
+    )
+  when "edit_secret_annotations"
+    edit_secret_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      secret_id:  args.shift,
+      annotation_key: args.shift,
+      annotation_value: args.shift
     )
   when "enable_secret_version"
     enable_secret_version(
@@ -584,26 +781,42 @@ if $PROGRAM_NAME == __FILE__
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
       secret_id:  args.shift
     )
+  when "view_secret_annotations"
+    view_secret_annotations(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      secret_id:  args.shift
+    )
+  when "view_secret_labels"
+    view_secret_labels(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      secret_id:  args.shift
+    )
   else
     puts <<~USAGE
       Usage: bundle exec ruby #{__FILE__} [command] [arguments]
 
       Commands:
-        access_secret_version <secret> <version>           Access a secret version
-        add_secret_version <secret>                        Add a new secret version
-        create_secret <secret>                             Create a new secret
-        create_ummr_secret <secret> <locations>            Create a new secret with user managed replication
-        delete_secret <secret>                             Delete an existing secret
-        destroy_secret_version <secret> <version>          Destroy a secret version
-        disable_secret_version <secret> <version>          Disable a secret version
-        enable_secret_version <secret> <version>           Enable a secret version
-        get_secret <secret>                                Get a secret
-        get_secret_version <secret> <version>              Get a secret version
-        iam_grant_access <secret> <version> <member>       Grant the member access to the secret
-        iam_revoke_access <secret> <version> <member>      Revoke the member access to the secret
-        list_secret_versions <secret>                      List all versions for a secret
-        list_secrets                                       List all secrets
-        update_secret <secret>                             Update a secret
+        access_secret_version <secret> <version>                Access a secret version
+        add_secret_version <secret>                             Add a new secret version
+        create_secret <secret>                                  Create a new secret
+        create_secret_with_annotations <secret> <key> <value>   Create a new secret with annotations
+        create_secret_with_labels <secret> <key> <value>        Create a new secret with labels
+        create_ummr_secret <secret> <locations>                 Create a new secret with user managed replication
+        delete_secret <secret>                                  Delete an existing secret
+        destroy_secret_version <secret> <version>               Destroy a secret version
+        disable_secret_version <secret> <version>               Disable a secret version
+        edit_secret_annotations <secret> <key> <value>          Edit existing secret annotations
+        enable_secret_version <secret> <version>                Enable a secret version
+        get_secret <secret>                                     Get a secret
+        get_secret_version <secret> <version>                   Get a secret version
+        iam_grant_access <secret> <version> <member>            Grant the member access to the secret
+        iam_revoke_access <secret> <version> <member>           Revoke the member access to the secret
+        list_secret_versions <secret>                           List all versions for a secret
+        list_secrets                                            List all secrets
+        update_secret <secret>                                  Update a secret
+        view_secret_annotations <secret>                        View a secret annotations
+        view_secret_labels <secret>                             View a secret labels
+
 
       Environment variables:
         GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
