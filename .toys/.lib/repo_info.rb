@@ -14,46 +14,63 @@
 
 module RepoInfo
   ##
-  # Gems that have different names than expected, or are not present in this
-  # repository (either because they are in a different repository, or because
-  # they intentionally do not exist but should be treated as though they do.)
+  # Wrapper gems that are handwritten or live in a different repo.
   #
-  UNUSUAL_NAMES = {
-    "google-cloud-run" => "google-cloud-run-client",
-    "google-cloud-spanner" => :external,
-    "google-iam" => :none
+  NON_GENERATED_WRAPPERS = {
+    "google-cloud-bigquery" => :handwritten,
+    "google-cloud-bigtable" => :handwritten,
+    "google-cloud-datastore" => :handwritten,
+    "google-cloud-error_reporting" => :handwritten,
+    "google-cloud-firestore" => :handwritten,
+    "google-cloud-logging" => :handwritten,
+    "google-cloud-pubsub" => :handwritten,
+    "google-cloud-resource_manager" => :handwritten,
+    "google-cloud-storage" => :handwritten,
+    "google-cloud-trace" => :handwritten,
+    "google-cloud-spanner" => :external
   }
 
   ##
-  # Multi-wrappers, where the key is the normally expected wrapper name, and
-  # the value is the actual multi-wrapper gem that covers it.
+  # Mapping from the normally expected wrapper name to the actual wrapper gem
+  # that covers it.
   #
-  MULTI_WRAPPERS = {
+  WRAPPER_MAPPING = {
     "google-cloud-beyond_corp-app_connections" => "google-cloud-beyond_corp",
     "google-cloud-beyond_corp-app_connectors" => "google-cloud-beyond_corp",
     "google-cloud-beyond_corp-app_gateways" => "google-cloud-beyond_corp",
     "google-cloud-beyond_corp-client_connector_services" => "google-cloud-beyond_corp",
     "google-cloud-beyond_corp-client_gateways" => "google-cloud-beyond_corp",
+    "google-cloud-bigtable" => "google-cloud-bigtable",
     "google-cloud-bigtable-admin" => "google-cloud-bigtable",
+    "google-cloud-datastore" => "google-cloud-datastore",
     "google-cloud-datastore-admin" => "google-cloud-datastore",
+    "google-cloud-firestore" => "google-cloud-firestore",
     "google-cloud-firestore-admin" => "google-cloud-firestore",
+    "google-cloud-monitoring" => "google-cloud-monitoring",
     "google-cloud-monitoring-dashboard" => "google-cloud-monitoring",
     "google-cloud-monitoring-metrics_scope" => "google-cloud-monitoring",
+    "google-cloud-run" => "google-cloud-run-client",
     "google-cloud-spanner-admin-database" => "google-cloud-spanner",
     "google-cloud-spanner-admin-instance" => "google-cloud-spanner",
     "google-cloud-spanner" => "google-cloud-spanner",
+    "google-cloud-workflows" => "google-cloud-workflows",
     "google-cloud-workflows-executions" => "google-cloud-workflows",
-    "google-iam" => "google-iam"
+    "google-iam" => "google-iam-client",
   }
 
   ##
-  # Gems that are not clients (neither generated GAPICs, wrappers, or veneers)
+  # Gems that are not normal clients (generated GAPICs, wrappers, or veneers
+  # that wrap GAPICs) and should be treated specially.
   #
   SPECIAL_GEMS = [
     "gcloud",
     "google-cloud",
     "google-cloud-core",
+    "google-cloud-dns",
     "google-cloud-errors",
+    "google-cloud-location",
+    "google-iam-v1",
+    "google-iam-v1beta",
     "grafeas-client",
     "stackdriver",
     "stackdriver-core"
