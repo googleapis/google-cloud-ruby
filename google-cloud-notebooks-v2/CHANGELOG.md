@@ -65,3 +65,4 @@
 * Initial generation of google-cloud-notebooks-v2 ([#22803](https://github.com/googleapis/google-cloud-ruby/issues/22803)) 
 
 ## Release History
+
