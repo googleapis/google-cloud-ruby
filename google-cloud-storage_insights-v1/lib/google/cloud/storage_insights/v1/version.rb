@@ -21,7 +21,7 @@ module Google
   module Cloud
     module StorageInsights
       module V1
-        VERSION = "0.7.0"
+        VERSION = "1.0.0"
       end
     end
   end
