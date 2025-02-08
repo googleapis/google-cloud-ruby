@@ -1,0 +1,103 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.datacatalog.lineage.v1",
+  "libraryPackage": "::Google::Cloud::DataCatalog::Lineage::V1",
+  "services": {
+    "Lineage": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::DataCatalog::Lineage::V1::Lineage::Client",
+          "rpcs": {
+            "ProcessOpenLineageRunEvent": {
+              "methods": [
+                "process_open_lineage_run_event"
+              ]
+            },
+            "CreateProcess": {
+              "methods": [
+                "create_process"
+              ]
+            },
+            "UpdateProcess": {
+              "methods": [
+                "update_process"
+              ]
+            },
+            "GetProcess": {
+              "methods": [
+                "get_process"
+              ]
+            },
+            "ListProcesses": {
+              "methods": [
+                "list_processes"
+              ]
+            },
+            "DeleteProcess": {
+              "methods": [
+                "delete_process"
+              ]
+            },
+            "CreateRun": {
+              "methods": [
+                "create_run"
+              ]
+            },
+            "UpdateRun": {
+              "methods": [
+                "update_run"
+              ]
+            },
+            "GetRun": {
+              "methods": [
+                "get_run"
+              ]
+            },
+            "ListRuns": {
+              "methods": [
+                "list_runs"
+              ]
+            },
+            "DeleteRun": {
+              "methods": [
+                "delete_run"
+              ]
+            },
+            "CreateLineageEvent": {
+              "methods": [
+                "create_lineage_event"
+              ]
+            },
+            "GetLineageEvent": {
+              "methods": [
+                "get_lineage_event"
+              ]
+            },
+            "ListLineageEvents": {
+              "methods": [
+                "list_lineage_events"
+              ]
+            },
+            "DeleteLineageEvent": {
+              "methods": [
+                "delete_lineage_event"
+              ]
+            },
+            "SearchLinks": {
+              "methods": [
+                "search_links"
+              ]
+            },
+            "BatchSearchLinkProcesses": {
+              "methods": [
+                "batch_search_link_processes"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
