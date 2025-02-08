@@ -1,0 +1,17 @@
+{
+    "api_id": "migrationcenter.googleapis.com",
+    "api_shortname": "migrationcenter",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-migration_center-v1/latest",
+    "distribution_name": "google-cloud-migration_center-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "migrationcenter",
+    "name_pretty": "Migration Center V1 API",
+    "product_documentation": "https://cloud.google.com/migration-center/docs/migration-center-overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "A unified platform that helps you accelerate your end-to-end cloud journey from your current on-premises or cloud environments to Google Cloud. Note that google-cloud-migration_center-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-migration_center instead. See the readme for more details.",
+    "ruby-cloud-product-url": "https://cloud.google.com/migration-center/docs/migration-center-overview",
+    "library_type": "GAPIC_AUTO"
+}
