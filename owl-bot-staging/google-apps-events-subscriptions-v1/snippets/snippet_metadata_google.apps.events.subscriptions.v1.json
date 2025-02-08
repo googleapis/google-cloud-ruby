@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-apps-events-subscriptions-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.apps.events.subscriptions.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "workspaceevents_v1_generated_SubscriptionsService_CreateSubscription_sync",
+      "title": "Snippet for the create_subscription call in the SubscriptionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#create_subscription.",
+      "file": "subscriptions_service/create_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_subscription",
+        "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#create_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Events::Subscriptions::V1::CreateSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SubscriptionsService::Client",
+          "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client"
+        },
+        "method": {
+          "short_name": "CreateSubscription",
+          "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService.CreateSubscription",
+          "service": {
+            "short_name": "SubscriptionsService",
+            "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workspaceevents_v1_generated_SubscriptionsService_DeleteSubscription_sync",
+      "title": "Snippet for the delete_subscription call in the SubscriptionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#delete_subscription.",
+      "file": "subscriptions_service/delete_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_subscription",
+        "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#delete_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Events::Subscriptions::V1::DeleteSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SubscriptionsService::Client",
+          "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSubscription",
+          "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService.DeleteSubscription",
+          "service": {
+            "short_name": "SubscriptionsService",
+            "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workspaceevents_v1_generated_SubscriptionsService_GetSubscription_sync",
+      "title": "Snippet for the get_subscription call in the SubscriptionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#get_subscription.",
+      "file": "subscriptions_service/get_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_subscription",
+        "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#get_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Events::Subscriptions::V1::GetSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Events::Subscriptions::V1::Subscription",
+        "client": {
+          "short_name": "SubscriptionsService::Client",
+          "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client"
+        },
+        "method": {
+          "short_name": "GetSubscription",
+          "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService.GetSubscription",
+          "service": {
+            "short_name": "SubscriptionsService",
+            "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workspaceevents_v1_generated_SubscriptionsService_ListSubscriptions_sync",
+      "title": "Snippet for the list_subscriptions call in the SubscriptionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#list_subscriptions.",
+      "file": "subscriptions_service/list_subscriptions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subscriptions",
+        "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#list_subscriptions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Events::Subscriptions::V1::ListSubscriptionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Events::Subscriptions::V1::ListSubscriptionsResponse",
+        "client": {
+          "short_name": "SubscriptionsService::Client",
+          "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client"
+        },
+        "method": {
+          "short_name": "ListSubscriptions",
+          "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService.ListSubscriptions",
+          "service": {
+            "short_name": "SubscriptionsService",
+            "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workspaceevents_v1_generated_SubscriptionsService_UpdateSubscription_sync",
+      "title": "Snippet for the update_subscription call in the SubscriptionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#update_subscription.",
+      "file": "subscriptions_service/update_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_subscription",
+        "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#update_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Events::Subscriptions::V1::UpdateSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SubscriptionsService::Client",
+          "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSubscription",
+          "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService.UpdateSubscription",
+          "service": {
+            "short_name": "SubscriptionsService",
+            "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "workspaceevents_v1_generated_SubscriptionsService_ReactivateSubscription_sync",
+      "title": "Snippet for the reactivate_subscription call in the SubscriptionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#reactivate_subscription.",
+      "file": "subscriptions_service/reactivate_subscription.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reactivate_subscription",
+        "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client#reactivate_subscription",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Events::Subscriptions::V1::ReactivateSubscriptionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "SubscriptionsService::Client",
+          "full_name": "::Google::Apps::Events::Subscriptions::V1::SubscriptionsService::Client"
+        },
+        "method": {
+          "short_name": "ReactivateSubscription",
+          "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService.ReactivateSubscription",
+          "service": {
+            "short_name": "SubscriptionsService",
+            "full_name": "google.apps.events.subscriptions.v1.SubscriptionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
