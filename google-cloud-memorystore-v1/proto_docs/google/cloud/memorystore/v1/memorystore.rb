@@ -232,11 +232,14 @@ module Google
             # Mode is not specified.
             MODE_UNSPECIFIED = 0
 
-            # Instance is in standalone mode.
+            # Deprecated: Use CLUSTER_DISABLED instead.
             STANDALONE = 1
 
             # Instance is in cluster mode.
             CLUSTER = 2
+
+            # Cluster mode is disabled for the instance.
+            CLUSTER_DISABLED = 4
           end
         end
 
