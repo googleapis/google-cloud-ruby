@@ -114,6 +114,9 @@ module Google
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for the notebook runtime.
+        # @!attribute [rw] software_config
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookSoftwareConfig]
+        #     Optional. The notebook software configuration of the notebook runtime.
         class NotebookRuntimeTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -236,6 +239,9 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. The Compute Engine tags to add to runtime (see [Tagging
         #     instances](https://cloud.google.com/vpc/docs/add-remove-network-tags)).
+        # @!attribute [r] software_config
+        #   @return [::Google::Cloud::AIPlatform::V1::NotebookSoftwareConfig]
+        #     Output only. Software config of the notebook runtime.
         # @!attribute [r] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Output only. Customer-managed encryption key spec for the notebook runtime.
