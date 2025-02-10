@@ -1,0 +1,48 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.memorystore.v1",
+  "libraryPackage": "::Google::Cloud::Memorystore::V1",
+  "services": {
+    "Memorystore": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Memorystore::V1::Memorystore::Client",
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "GetCertificateAuthority": {
+              "methods": [
+                "get_certificate_authority"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
