@@ -779,6 +779,9 @@ module Google
         # @!attribute [rw] health_probe
         #   @return [::Google::Cloud::AIPlatform::V1::Probe]
         #     Immutable. Specification for Kubernetes readiness probe.
+        # @!attribute [rw] liveness_probe
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe]
+        #     Immutable. Specification for Kubernetes liveness probe.
         class ModelContainerSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -844,6 +847,25 @@ module Google
         # @!attribute [rw] exec
         #   @return [::Google::Cloud::AIPlatform::V1::Probe::ExecAction]
         #     ExecAction probes the health of a container by executing a command.
+        #
+        #     Note: The following fields are mutually exclusive: `exec`, `http_get`, `grpc`, `tcp_socket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] http_get
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe::HttpGetAction]
+        #     HttpGetAction probes the health of a container by sending an HTTP GET
+        #     request.
+        #
+        #     Note: The following fields are mutually exclusive: `http_get`, `exec`, `grpc`, `tcp_socket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] grpc
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe::GrpcAction]
+        #     GrpcAction probes the health of a container by sending a gRPC request.
+        #
+        #     Note: The following fields are mutually exclusive: `grpc`, `exec`, `http_get`, `tcp_socket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] tcp_socket
+        #   @return [::Google::Cloud::AIPlatform::V1::Probe::TcpSocketAction]
+        #     TcpSocketAction probes the health of a container by opening a TCP socket
+        #     connection.
+        #
+        #     Note: The following fields are mutually exclusive: `tcp_socket`, `exec`, `http_get`, `grpc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] period_seconds
         #   @return [::Integer]
         #     How often (in seconds) to perform the probe. Default to 10 seconds.
@@ -856,6 +878,24 @@ module Google
         #     Minimum value is 1. Must be greater or equal to period_seconds.
         #
         #     Maps to Kubernetes probe argument 'timeoutSeconds'.
+        # @!attribute [rw] failure_threshold
+        #   @return [::Integer]
+        #     Number of consecutive failures before the probe is considered failed.
+        #     Defaults to 3. Minimum value is 1.
+        #
+        #     Maps to Kubernetes probe argument 'failureThreshold'.
+        # @!attribute [rw] success_threshold
+        #   @return [::Integer]
+        #     Number of consecutive successes before the probe is considered successful.
+        #     Defaults to 1. Minimum value is 1.
+        #
+        #     Maps to Kubernetes probe argument 'successThreshold'.
+        # @!attribute [rw] initial_delay_seconds
+        #   @return [::Integer]
+        #     Number of seconds to wait before starting the probe. Defaults to 0.
+        #     Minimum value is 0.
+        #
+        #     Maps to Kubernetes probe argument 'initialDelaySeconds'.
         class Probe
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -870,6 +910,75 @@ module Google
           #     need to explicitly call out to that shell. Exit status of 0 is treated as
           #     live/healthy and non-zero is unhealthy.
           class ExecAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # HttpGetAction describes an action based on HTTP Get requests.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Path to access on the HTTP server.
+          # @!attribute [rw] port
+          #   @return [::Integer]
+          #     Number of the port to access on the container.
+          #     Number must be in the range 1 to 65535.
+          # @!attribute [rw] host
+          #   @return [::String]
+          #     Host name to connect to, defaults to the model serving container's IP.
+          #     You probably want to set "Host" in httpHeaders instead.
+          # @!attribute [rw] scheme
+          #   @return [::String]
+          #     Scheme to use for connecting to the host.
+          #     Defaults to HTTP. Acceptable values are "HTTP" or "HTTPS".
+          # @!attribute [rw] http_headers
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::Probe::HttpHeader>]
+          #     Custom headers to set in the request. HTTP allows repeated headers.
+          class HttpGetAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # GrpcAction checks the health of a container using a gRPC service.
+          # @!attribute [rw] port
+          #   @return [::Integer]
+          #     Port number of the gRPC service. Number must be in the range 1 to 65535.
+          # @!attribute [rw] service
+          #   @return [::String]
+          #     Service is the name of the service to place in the gRPC
+          #     HealthCheckRequest (see
+          #     https://github.com/grpc/grpc/blob/master/doc/health-checking.md).
+          #
+          #     If this is not specified, the default behavior is defined by gRPC.
+          class GrpcAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # TcpSocketAction probes the health of a container by opening a TCP socket
+          # connection.
+          # @!attribute [rw] port
+          #   @return [::Integer]
+          #     Number of the port to access on the container.
+          #     Number must be in the range 1 to 65535.
+          # @!attribute [rw] host
+          #   @return [::String]
+          #     Optional: Host name to connect to, defaults to the model serving
+          #     container's IP.
+          class TcpSocketAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # HttpHeader describes a custom header to be used in HTTP probes
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The header field name.
+          #     This will be canonicalized upon output, so case-variant names will be
+          #     understood as the same header.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The header field value
+          class HttpHeader
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
