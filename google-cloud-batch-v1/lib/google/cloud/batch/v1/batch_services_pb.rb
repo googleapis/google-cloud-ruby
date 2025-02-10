@@ -41,6 +41,8 @@ module Google
             rpc :GetJob, ::Google::Cloud::Batch::V1::GetJobRequest, ::Google::Cloud::Batch::V1::Job
             # Delete a Job.
             rpc :DeleteJob, ::Google::Cloud::Batch::V1::DeleteJobRequest, ::Google::Longrunning::Operation
+            # Cancel a Job.
+            rpc :CancelJob, ::Google::Cloud::Batch::V1::CancelJobRequest, ::Google::Longrunning::Operation
             # List all Jobs for a project within a region.
             rpc :ListJobs, ::Google::Cloud::Batch::V1::ListJobsRequest, ::Google::Cloud::Batch::V1::ListJobsResponse
             # Return a single Task.
