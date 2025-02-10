@@ -21,6 +21,9 @@ batch_reviewer.define_preset "releases", based_on: :basic_releases do |preset|
   preset.diff_expectations.expect name: "snippet metadata" do |expect|
     expect.change_type(:changed).path_pattern(/\/snippets\/snippet_metadata_[\w\.]+\.json$/)
   end
+  preset.diff_expectations.expect name: "repo metadata" do |expect|
+    expect.change_type(:changed).path_pattern(/\/\.repo-metadata\.json$/)
+  end
 end
 
 batch_reviewer.define_preset "releases-gapics", based_on: "releases" do |preset|
