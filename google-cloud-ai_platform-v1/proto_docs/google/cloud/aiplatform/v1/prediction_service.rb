@@ -558,6 +558,13 @@ module Google
         # @!attribute [r] model_version
         #   @return [::String]
         #     Output only. The model version used to generate the response.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the request is made to the server.
+        # @!attribute [r] response_id
+        #   @return [::String]
+        #     Output only. response_id is used to identify each response. It is the
+        #     encoding of the event_id.
         # @!attribute [r] prompt_feedback
         #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::PromptFeedback]
         #     Output only. Content filter results for a prompt sent in the request.
