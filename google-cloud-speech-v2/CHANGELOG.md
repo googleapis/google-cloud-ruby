@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2025-02-11)
+
+#### Features
+
+* Bump version to 1.0.0 ([#28969](https://github.com/googleapis/google-cloud-ruby/issues/28969)) 
+
 ### 0.16.0 (2025-01-28)
 
 #### Features
@@ -129,4 +135,3 @@
 * Initial generation of google-cloud-speech-v2 ([#19248](https://github.com/googleapis/google-cloud-ruby/issues/19248)) 
 
 ## Release History
-
