@@ -48,7 +48,7 @@ class Google::Cloud::SecurityCenter::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::SecurityCenter.security_center transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client, client
+      assert_kind_of Google::Cloud::SecurityCenter::V2::SecurityCenter::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Cloud::SecurityCenter::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::SecurityCenter.security_center transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client, client
+      assert_kind_of Google::Cloud::SecurityCenter::V2::SecurityCenter::Rest::Client, client
     end
   end
 end

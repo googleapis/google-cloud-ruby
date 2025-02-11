@@ -49,8 +49,8 @@ module Google
       # Create a new client object for SecurityCenter.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::SecurityCenter::V1::SecurityCenter::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1/latest/Google-Cloud-SecurityCenter-V1-SecurityCenter-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::SecurityCenter::V2::SecurityCenter::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v2/latest/Google-Cloud-SecurityCenter-V2-SecurityCenter-Client)
+      # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SecurityCenter service is
       # supported by that API version, and the corresponding gem is available, the
@@ -65,14 +65,14 @@ module Google
       #
       # ## About SecurityCenter
       #
-      # V1 APIs for Security Center service.
+      # V2 APIs for Security Center service.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
+      #   Defaults to `:v2`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.security_center version: :v1, transport: :grpc, &block
+      def self.security_center version: :v2, transport: :grpc, &block
         require "google/cloud/security_center/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::SecurityCenter
@@ -92,11 +92,11 @@ module Google
       # or if the versioned client gem needs an update to support the SecurityCenter service.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
+      #   Defaults to `:v2`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.security_center_available? version: :v1, transport: :grpc
+      def self.security_center_available? version: :v2, transport: :grpc
         require "google/cloud/security_center/#{version.to_s.downcase}"
         package_name = Google::Cloud::SecurityCenter
                        .constants
