@@ -92,3 +92,4 @@
 * Initial generation of google-cloud-bigquery-data_policies-v1 ([#19950](https://github.com/googleapis/google-cloud-ruby/issues/19950)) 
 
 ## Release History
+
