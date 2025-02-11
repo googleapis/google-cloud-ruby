@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2025-02-11)
+
+#### Features
+
+* Bump version to 1.0.0 ([#28969](https://github.com/googleapis/google-cloud-ruby/issues/28969)) 
+
 ### 0.7.0 (2025-01-28)
 
 #### Features
@@ -66,4 +72,3 @@
 * Initial generation of google-cloud-language-v2 ([#22801](https://github.com/googleapis/google-cloud-ruby/issues/22801)) 
 
 ## Release History
-
