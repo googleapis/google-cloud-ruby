@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2025-02-11)
+
+#### Features
+
+* Bump version to 1.0.0 ([#28977](https://github.com/googleapis/google-cloud-ruby/issues/28977)) 
+
 ### 0.9.0 (2025-01-28)
 
 #### Features
@@ -81,4 +87,3 @@
 #### Features
 
 * Initial generation of google-cloud-domains-v1
-
