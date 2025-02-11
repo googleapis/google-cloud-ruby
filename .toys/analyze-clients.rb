@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-toys_version! ">= 0.14.7"
+toys_version! ">= 0.15.6"
 
 desc "Runs various analyses on client status and reports results."
 
@@ -23,7 +23,7 @@ ANALYSES = {
   unwrapped: "List gapic gems that have no corresponding wrapper.",
   gapic_prerelease: "List gapic gems whose service is GA but do not have a 1.0 release",
   wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release",
-  outdated_wrappers: "List wrapper gems prioritizing an outdated gapic",
+  wrapper_dependencies: "List wrapper gems with outdated dependencies",
   wrapper_bazel: "List missing Ruby wrapper bazel configs",
   gapic_ready: "List complete Ruby bazel configs that haven't yet been generated",
 }.freeze
@@ -42,6 +42,7 @@ include :terminal
 include :git_cache
 
 def run
+  Dir.chdir context_directory
   require "repo_info"
   require "fileutils"
   require "tmpdir"
@@ -64,12 +65,16 @@ def all_gems
   @all_gems ||= Dir.glob("*/*.gemspec").map { |path| File.dirname path }.sort
 end
 
+def all_normal_gems
+  @all_normal_gems ||= all_gems - RepoInfo::SPECIAL_GEMS
+end
+
 def all_generated_gems
   @all_generated_gems ||= Dir.glob("*/.OwlBot.yaml").map { |path| File.dirname path }.sort
 end
 
 def all_versioned_gems
-  @all_versioned_gems ||= all_gems.find_all { |name| /-v\d\w*$/.match? name }
+  @all_versioned_gems ||= all_gems.find_all { |name| /-v\d\w*$/.match? name } - RepoInfo::SPECIAL_GEMS
 end
 
 def all_wrapper_gems
@@ -81,8 +86,29 @@ def expected_wrapper_of gem_name
 end
 
 def transform_gem_name name
-  name = RepoInfo::MULTI_WRAPPERS[name] || name
-  RepoInfo::UNUSUAL_NAMES[name] || name
+  RepoInfo::WRAPPER_MAPPING[name] || name
+end
+
+def wrapper_reverse_mapping
+  @wrapper_reverse_mapping ||= begin
+    mapping = {}
+    RepoInfo::WRAPPER_MAPPING.each do |from, to|
+      (mapping[to] ||= []) << from
+    end
+    mapping
+  end
+end
+
+def original_wrapper_names gem_name
+  wrapper_reverse_mapping[gem_name] || [gem_name]
+end
+
+def expected_gapics_for gem_name
+  gem_names = original_wrapper_names gem_name
+  all_versioned_gems.find_all do |vname|
+    !RepoInfo::SPECIAL_GEMS.include?(vname) &&
+      gem_names.any? { |wname| /^#{wname}-v\d+\w*$/ =~ vname }
+  end
 end
 
 def gem_version gem_name
@@ -200,37 +226,115 @@ def generic_prerelease_analysis gem_names
   puts "Total: #{results.size}", :cyan
 end
 
-def outdated_wrappers_analysis
-  count = 0
+def wrapper_dependencies_analysis
+  require "set"
+  wrapper_list = Set.new
   puts "Results:", :cyan
   all_wrapper_gems.each do |gem_name|
-    pre_versions = []
-    ga_versions = []
-    all_versioned_gems.each do |versioned_name|
-      match = /^#{gem_name}-(v\d+[a-z]\w*)$/.match versioned_name
-      pre_versions << match[1] if match
-      match = /^#{gem_name}-(v\d+)$/.match versioned_name
-      ga_versions << match[1] if match
-    end
-    expected_version = (ga_versions.empty? ? pre_versions : ga_versions).max
-    unless expected_version
-      puts "#{gem_name}: No expected version"
+    gapic_names = expected_gapics_for gem_name
+    if gapic_names.empty?
+      puts "#{gem_name}: No gapics"
       next
     end
-    path = gem_name.tr "-", "/"
-    content = File.read "#{gem_name}/lib/#{path}.rb"
-    match = / version: :(v\d\w*), /.match content
-    unless match
-      puts "#{gem_name}: No version found"
-      next
-    end
-    version = match[1]
-    unless version == expected_version
-      puts "#{gem_name}: Expected #{expected_version} but found #{version}", :yellow
-      count += 1
+    gapic_gem_versions, pre_service_versions, ga_service_versions = wda_analyze_gapic_versions gapic_names
+    deps_requirements = wda_get_requirements gem_name, gapic_names
+    wda_analyze_service_versions gem_name, ga_service_versions, pre_service_versions, deps_requirements, wrapper_list
+    wda_analyze_best_service_version gem_name, ga_service_versions, pre_service_versions, wrapper_list
+    wda_analyze_deps_requirements gem_name, deps_requirements, gapic_gem_versions, wrapper_list
+  end
+  puts "Total: #{wrapper_list.size}", :cyan
+end
+
+def wda_analyze_gapic_versions gapic_names
+  gapic_gem_versions = {}
+  pre_service_versions = {}
+  ga_service_versions = {}
+  gapic_names.each do |name|
+    gapic_gem_versions[name] = gem_version name
+    match = /-(v\d+[a-z]\w*)$/.match name
+    pre_service_versions[name] = match[1] if match
+    match = /-(v\d+)$/.match name
+    ga_service_versions[name] = match[1] if match
+  end
+  [gapic_gem_versions, pre_service_versions, ga_service_versions]
+end
+
+def wda_get_requirements gem_name, gapic_names
+  deps_requirements = {}
+  gemspec_content = File.read "#{gem_name}/#{gem_name}.gemspec"
+  gemspec_content.scan(/gem\.add_dependency\s+"([^"]+)",\s*("[^"]+"(?:,\s*"[^"]+")*)$/).each do |(name, versions)|
+    if gapic_names.include? name
+      requirements = versions.split(/,\s*/).map { |s| s[1..-2] }
+      deps_requirements[name] = Gem::Dependency.new name, *requirements
     end
   end
-  puts "Total: #{count}", :cyan
+  deps_requirements
+end
+
+def wda_get_default_service_version gem_name, wrapper_list
+  unless RepoInfo::NON_GENERATED_WRAPPERS.include? gem_name
+    factory_path = original_wrapper_names(gem_name).first.tr "-", "/"
+    factory_content = File.read "#{gem_name}/lib/#{factory_path}.rb"
+    match = / version: :(v\d\w*), /.match factory_content
+    return match[1] if match
+    puts "#{gem_name}: No default version found in factory file #{factory_path}!?", :red
+    wrapper_list.add gem_name
+  end
+  nil
+end
+
+def wda_analyze_service_versions gem_name, ga_service_versions, pre_service_versions, deps_requirements, wrapper_list
+  ga_service_versions.each_key do |ga_gapic_name|
+    next if deps_requirements[ga_gapic_name]
+    puts "#{gem_name}: Does not depend on GA gapic #{ga_gapic_name}", :yellow
+    wrapper_list.add gem_name
+  end
+  return if ga_service_versions.empty?
+  pre_service_versions.each_key do |pre_gapic_name|
+    next unless deps_requirements[pre_gapic_name]
+    puts "#{gem_name}: Depends on prerelease gapic #{pre_gapic_name} " \
+         "when GA available: #{ga_service_versions.values.inspect}"
+    wrapper_list.add gem_name
+  end
+end
+
+def wda_analyze_best_service_version gem_name, ga_service_versions, pre_service_versions, wrapper_list
+  default_service_version = nil
+  unless RepoInfo::NON_GENERATED_WRAPPERS.include? gem_name
+    factory_path = original_wrapper_names(gem_name).first.tr "-", "/"
+    factory_content = File.read "#{gem_name}/lib/#{factory_path}.rb"
+    match = / version: :(v\d\w*), /.match factory_content
+    if match
+      default_service_version = match[1]
+    else
+      puts "#{gem_name}: No default version found in factory file #{factory_path}!?", :red
+      wrapper_list.add gem_name
+    end
+  end
+  best_service_version = ga_service_versions.empty? ? pre_service_versions.values.max : ga_service_versions.values.max
+
+  if best_service_version.nil?
+    puts "#{gem_name}: No gapics found!?", :red
+    wrapper_list.add gem_name
+  elsif default_service_version && best_service_version != default_service_version
+    puts "#{gem_name}: Default service version is #{default_service_version} " \
+         "but #{best_service_version} is available", :yellow
+    wrapper_list.add gem_name
+  end
+end
+
+def wda_analyze_deps_requirements gem_name, deps_requirements, gapic_gem_versions, wrapper_list
+  deps_requirements.each_value do |dependency|
+    name = dependency.name
+    version = gapic_gem_versions[name]
+    if !dependency.match? name, version
+      puts "#{gem_name}: Dep #{dependency} fails current version #{version}", :yellow
+      wrapper_list.add gem_name
+    elsif dependency.requirements_list.size > 1 && version !~ /^0\./
+      puts "#{gem_name}: Dep #{dependency} not necessary for version #{version}"
+      wrapper_list.add gem_name
+    end
+  end
 end
 
 def wrapper_bazel_analysis
