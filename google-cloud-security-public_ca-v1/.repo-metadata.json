@@ -8,7 +8,7 @@
     "name": "publicca",
     "name_pretty": "Public Certificate Authority V1 API",
     "product_documentation": "https://cloud.google.com/certificate-manager/docs/public-ca",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Public Certificate Authority API may be used to create and manage ACME external account binding keys associated with Google Trust Services' publicly trusted certificate authority. Note that google-cloud-security-public_ca-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-security-public_ca instead. See the readme for more details.",
