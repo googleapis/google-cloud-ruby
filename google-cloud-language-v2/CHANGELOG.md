@@ -66,3 +66,4 @@
 * Initial generation of google-cloud-language-v2 ([#22801](https://github.com/googleapis/google-cloud-ruby/issues/22801)) 
 
 ## Release History
+

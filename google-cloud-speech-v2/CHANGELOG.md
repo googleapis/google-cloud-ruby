@@ -129,3 +129,4 @@
 * Initial generation of google-cloud-speech-v2 ([#19248](https://github.com/googleapis/google-cloud-ruby/issues/19248)) 
 
 ## Release History
+

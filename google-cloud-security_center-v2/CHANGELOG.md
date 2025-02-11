@@ -55,3 +55,4 @@
 * Initial generation of google-cloud-security_center-v2 ([#25738](https://github.com/googleapis/google-cloud-ruby/issues/25738)) 
 
 ## Release History
+
