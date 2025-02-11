@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-speech-v1", "google-cloud-speech-v1p1beta1"]
+local_dependencies = ["google-cloud-speech-v1", "google-cloud-speech-v2"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-speech.gemspec"))
 local_dependencies.each do |name|
