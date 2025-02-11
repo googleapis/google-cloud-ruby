@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2025-02-11)
+
+#### Features
+
+* Bump version to 1.0.0 ([#28976](https://github.com/googleapis/google-cloud-ruby/issues/28976)) 
+
 ### 0.10.0 (2025-01-28)
 
 #### Features
@@ -92,4 +98,3 @@
 * Initial generation of google-cloud-bigquery-data_policies-v1 ([#19950](https://github.com/googleapis/google-cloud-ruby/issues/19950)) 
 
 ## Release History
-
