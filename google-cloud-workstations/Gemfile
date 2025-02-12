@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-workstations-v1", "google-cloud-workstations-v1beta"]
+local_dependencies = ["google-cloud-workstations-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-workstations.gemspec"))
 local_dependencies.each do |name|
