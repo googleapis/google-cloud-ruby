@@ -159,6 +159,12 @@ module Google
             #     ever existed in the chain. For all other backups, this is the version time
             #     of the backup. This field can be used to understand what data is being
             #     retained by the backup system.
+            # @!attribute [r] instance_partitions
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::BackupInstancePartition>]
+            #     Output only. The instance partition(s) storing the backup.
+            #
+            #     This is the same as the list of the instance partition(s) that the database
+            #     had footprint in at the backup's `version_time`.
             class Backup
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -703,6 +709,16 @@ module Google
             # successive incremental backups. The first backup created for an
             # incremental backup chain is always a full backup.
             class IncrementalBackupSpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Instance partition information for the backup.
+            # @!attribute [rw] instance_partition
+            #   @return [::String]
+            #     A unique identifier for the instance partition. Values are of the form
+            #     `projects/<project>/instances/<instance>/instancePartitions/<instance_partition_id>`
+            class BackupInstancePartition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
