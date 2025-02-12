@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/notebooks"
 
-client = Google::Cloud::Notebooks.notebook_service do |config|
+client = Google::Cloud::Notebooks.managed_notebook_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::Notebooks.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::Notebooks.notebook_service
+client = Google::Cloud::Notebooks.managed_notebook_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/notebooks"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::Notebooks.notebook_service
+client = Google::Cloud::Notebooks.managed_notebook_service
 ```
 
 ### Local ADC file
