@@ -472,8 +472,9 @@ module Google
         #     corresponding to build step indices.
         #
         #     [Cloud Builders](https://cloud.google.com/cloud-build/docs/cloud-builders)
-        #     can produce this output by writing to `$BUILDER_OUTPUT/output`.
-        #     Only the first 4KB of data is stored.
+        #     can produce this output by writing to `$BUILDER_OUTPUT/output`. Only the
+        #     first 50KB of data is stored. Note that the `$BUILDER_OUTPUT` variable is
+        #     read-only and can't be substituted.
         # @!attribute [rw] artifact_timing
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
         #     Time to push all non-container artifacts to Cloud Storage.
@@ -660,6 +661,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Build::V1::Build::Warning>]
         #     Output only. Non-fatal problems encountered during the execution of the
         #     build.
+        # @!attribute [rw] git_config
+        #   @return [::Google::Cloud::Build::V1::GitConfig]
+        #     Optional. Configuration for git operations.
         # @!attribute [r] failure_info
         #   @return [::Google::Cloud::Build::V1::Build::FailureInfo]
         #     Output only. Contains information about the build when status=FAILURE.
@@ -841,6 +845,28 @@ module Google
           #
           #     Note: The following fields are mutually exclusive: `developer_connect`, `url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class GitSourceRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # GitConfig is a configuration for git operations.
+        # @!attribute [rw] http
+        #   @return [::Google::Cloud::Build::V1::GitConfig::HttpConfig]
+        #     Configuration for HTTP related git operations.
+        class GitConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # HttpConfig is a configuration for HTTP related git operations.
+          # @!attribute [rw] proxy_secret_version_name
+          #   @return [::String]
+          #     SecretVersion resource of the HTTP proxy URL. The Service Account used in
+          #     the build (either the default Service Account or
+          #     user-specified Service Account) should have
+          #     `secretmanager.versions.access` permissions on this secret. The proxy URL
+          #     should be in format `[protocol://][user[:password]@]proxyhost[:port]`.
+          class HttpConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1625,8 +1651,9 @@ module Google
         #   @return [::String]
         #     The service account used for all user-controlled operations including
         #     UpdateBuildTrigger, RunBuildTrigger, CreateBuild, and CancelBuild.
-        #     If no service account is set, then the standard Cloud Build service account
-        #     ([PROJECT_NUM]@system.gserviceaccount.com) will be used instead.
+        #     If no service account is set and the legacy Cloud Build service account
+        #     (`[PROJECT_NUM]@cloudbuild.gserviceaccount.com`) is the default for the
+        #     project then it will be used instead.
         #     Format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_ID_OR_EMAIL}`
         # @!attribute [rw] repository_event_config
         #   @return [::Google::Cloud::Build::V1::RepositoryEventConfig]
@@ -1792,8 +1819,14 @@ module Google
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
         # @!attribute [rw] comment_control
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter::CommentControl]
-        #     Configure builds to run whether a repository owner or collaborator need to
-        #     comment `/gcbrun`.
+        #     If CommentControl is enabled, depending on the setting, builds may not
+        #     fire until a repository writer comments `/gcbrun` on a pull
+        #     request or `/gcbrun` is in the pull request description.
+        #     Only PR comments that contain `/gcbrun` will trigger builds.
+        #
+        #     If CommentControl is set to disabled, comments with `/gcbrun` from a user
+        #     with repository write permission or above will
+        #     still trigger builds to run.
         # @!attribute [rw] invert_regex
         #   @return [::Boolean]
         #     If true, branches that do NOT match the git_ref will trigger a build.
@@ -1801,17 +1834,33 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Controls behavior of Pull Request comments.
+          # Controls whether or not a `/gcbrun` comment is required from a user with
+          # repository write permission or above in order to
+          # trigger Build runs for pull requests. Pull Request update events differ
+          # between repo types.
+          # Check repo specific guides
+          # ([GitHub](https://cloud.google.com/build/docs/automating-builds/github/build-repos-from-github-enterprise#creating_a_github_enterprise_trigger),
+          # [Bitbucket](https://cloud.google.com/build/docs/automating-builds/bitbucket/build-repos-from-bitbucket-server#creating_a_bitbucket_server_trigger),
+          # [GitLab](https://cloud.google.com/build/docs/automating-builds/gitlab/build-repos-from-gitlab#creating_a_gitlab_trigger)
+          # for details.
           module CommentControl
-            # Do not require comments on Pull Requests before builds are triggered.
+            # Do not require `/gcbrun` comments from a user with repository write
+            # permission or above on pull requests before builds are triggered.
+            # Comments that contain `/gcbrun` will still fire builds so this should
+            # be thought of as comments not required.
             COMMENTS_DISABLED = 0
 
-            # Enforce that repository owners or collaborators must comment on Pull
-            # Requests before builds are triggered.
+            # Builds will only fire in response to pull requests if:
+            # 1. The pull request author has repository write permission or above and
+            # `/gcbrun` is in the PR description.
+            # 2. A user with repository writer permissions or above comments `/gcbrun`
+            # on a pull request authored by any user.
             COMMENTS_ENABLED = 1
 
-            # Enforce that repository owners or collaborators must comment on external
-            # contributors' Pull Requests before builds are triggered.
+            # Builds will only fire in response to pull requests if:
+            # 1. The pull request author is a repository writer or above.
+            # 2. If the author does not have write permissions, a user with write
+            # permissions or above must comment `/gcbrun` in order to fire a build.
             COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY = 2
           end
         end
@@ -1957,7 +2006,7 @@ module Google
         #     "disk free"; some of the space will be used by the operating system and
         #     build utilities. Also note that this is the minimum disk size that will be
         #     allocated for the build -- the build may run with a larger disk than
-        #     requested. At present, the maximum disk size is 2000GB; builds that request
+        #     requested. At present, the maximum disk size is 4000GB; builds that request
         #     more than the maximum are rejected with an error.
         # @!attribute [rw] substitution_option
         #   @return [::Google::Cloud::Build::V1::BuildOptions::SubstitutionOption]
@@ -2183,6 +2232,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise
+        # server.
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. The full resource name for the GitHubEnterpriseConfig
