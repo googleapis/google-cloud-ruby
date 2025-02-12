@@ -50,8 +50,8 @@ module Google
         # Create a new client object for PublicCertificateAuthorityService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-security-public_ca-v1beta1/latest/Google-Cloud-Security-PublicCA-V1beta1-PublicCertificateAuthorityService-Client)
-        # for a gRPC client for version V1beta1 of the API.
+        # [Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-security-public_ca-v1/latest/Google-Cloud-Security-PublicCA-V1-PublicCertificateAuthorityService-Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the PublicCertificateAuthorityService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -71,11 +71,11 @@ module Google
         # the public certificate authority service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.public_certificate_authority_service version: :v1beta1, transport: :grpc, &block
+        def self.public_certificate_authority_service version: :v1, transport: :grpc, &block
           require "google/cloud/security/public_ca/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Security::PublicCA
@@ -95,11 +95,11 @@ module Google
         # or if the versioned client gem needs an update to support the PublicCertificateAuthorityService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta1`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.public_certificate_authority_service_available? version: :v1beta1, transport: :grpc
+        def self.public_certificate_authority_service_available? version: :v1, transport: :grpc
           require "google/cloud/security/public_ca/#{version.to_s.downcase}"
           package_name = Google::Cloud::Security::PublicCA
                          .constants
