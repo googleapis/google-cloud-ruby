@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-workflows-v1", "google-cloud-workflows-v1beta", "google-cloud-workflows-executions-v1", "google-cloud-workflows-executions-v1beta"]
+local_dependencies = ["google-cloud-workflows-v1", "google-cloud-workflows-executions-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-workflows.gemspec"))
 local_dependencies.each do |name|

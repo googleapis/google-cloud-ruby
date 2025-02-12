@@ -17,11 +17,8 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-workflows-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest),
-[google-cloud-workflows-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1beta/latest),
 [google-cloud-workflows-executions-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1/latest),
-[google-cloud-workflows-executions-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1beta/latest),
-[google-cloud-workflows-executions-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1/latest),
-[google-cloud-workflows-executions-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1beta/latest).
+[google-cloud-workflows-executions-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/workflows/)
 for more usage information.
@@ -67,8 +64,7 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-cloud-workflows-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest),
-[google-cloud-workflows-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1beta/latest).
+[google-cloud-workflows-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1/latest).
 
 ## Supported Ruby Versions
 
