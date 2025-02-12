@@ -49,8 +49,8 @@ module Google
       # Create a new client object for LanguageService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Language::V1::LanguageService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1/latest/Google-Cloud-Language-V1-LanguageService-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::Language::V2::LanguageService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v2/latest/Google-Cloud-Language-V2-LanguageService-Client)
+      # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the LanguageService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -69,11 +69,11 @@ module Google
       # recognition.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
+      #   Defaults to `:v2`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.language_service version: :v1, transport: :grpc, &block
+      def self.language_service version: :v2, transport: :grpc, &block
         require "google/cloud/language/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Language
@@ -93,11 +93,11 @@ module Google
       # or if the versioned client gem needs an update to support the LanguageService service.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
+      #   Defaults to `:v2`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.language_service_available? version: :v1, transport: :grpc
+      def self.language_service_available? version: :v2, transport: :grpc
         require "google/cloud/language/#{version.to_s.downcase}"
         package_name = Google::Cloud::Language
                        .constants
