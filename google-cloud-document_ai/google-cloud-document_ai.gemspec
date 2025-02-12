@@ -23,6 +23,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-document_ai-v1", ">= 0.17", "< 2.a"
-  gem.add_dependency "google-cloud-document_ai-v1beta3", ">= 0.30", "< 2.a"
+  gem.add_dependency "google-cloud-document_ai-v1", "~> 1.4"
 end
