@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.1 (2025-02-12)
+
+#### Documentation
+
+* Fixed a link ([#28981](https://github.com/googleapis/google-cloud-ruby/issues/28981)) 
+
 ### 0.9.0 (2025-01-30)
 
 #### Features
