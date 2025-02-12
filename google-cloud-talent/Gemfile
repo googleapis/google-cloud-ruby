@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-talent-v4", "google-cloud-talent-v4beta1"]
+local_dependencies = ["google-cloud-talent-v4"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-talent.gemspec"))
 local_dependencies.each do |name|
