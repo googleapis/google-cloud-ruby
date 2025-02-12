@@ -27,6 +27,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      "CA",
       country:    "USA",
       capital:    false,
+      density:    18_000,
       population: 860_000,
       regions:    ["west_coast", "norcal"]
     }
@@ -37,6 +38,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      "CA",
       country:    "USA",
       capital:    false,
+      density:    8_300,
       population: 3_900_000,
       regions:    ["west_coast", "socal"]
     }
@@ -47,6 +49,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      nil,
       country:    "USA",
       capital:    true,
+      density:    11_300,
       population: 680_000,
       regions:    ["east_coast"]
     }
@@ -57,6 +60,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      nil,
       country:    "Japan",
       capital:    true,
+      density:    16_000,
       population: 9_000_000,
       regions:    ["kanto", "honshu"]
     }
@@ -67,6 +71,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      nil,
       country:    "China",
       capital:    true,
+      density:    3_500,
       population: 21_500_000,
       regions:    ["jingjinji", "hebei"]
     }
@@ -181,6 +186,20 @@ def invalid_range_query project_id:, collection_path: "cities"
   # [START firestore_query_filter_range_invalid]
   invalid_range_query = cities_ref.where("state", ">=", "CA").where("population", ">", 1_000_000)
   # [END firestore_query_filter_range_invalid]
+end
+
+def query_filter_compound_multi_ineq project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore  = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_query_filter_compound_multi_ineq]
+  cities_ref = firestore.col collection_path
+  compound_multi_ineq_query = cities_ref.where("population", ">", 1_000_000).where("density", "<", 5_000)
+  # [END firestore_query_filter_compound_multi_ineq]
+  compound_multi_ineq_query.get do |city|
+    puts "Document #{city.document_id} returned by query population>1_000_000 AND density<5_000"
+  end
 end
 
 def in_query_without_array project_id:, collection_path: "cities"
