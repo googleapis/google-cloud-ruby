@@ -22,7 +22,7 @@ module Google
     module Chat
       module V1
         # A [slash
-        # command](https://developers.google.com/workspace/chat/slash-commands) in
+        # command](https://developers.google.com/workspace/chat/commands) in
         # Google Chat.
         # @!attribute [rw] command_id
         #   @return [::Integer]
