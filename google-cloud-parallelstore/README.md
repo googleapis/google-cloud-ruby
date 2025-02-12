@@ -16,7 +16,7 @@ for this library, google-cloud-parallelstore, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-parallelstore-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1beta/latest).
+[google-cloud-parallelstore-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/parallelstore?hl=en)
 for more usage information.
@@ -62,7 +62,7 @@ results in logs appearing alongside your application logs in the
 Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
-[google-cloud-parallelstore-v1beta](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1beta/latest).
+[google-cloud-parallelstore-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1/latest).
 
 ## Supported Ruby Versions
 
@@ -80,7 +80,7 @@ support schedule.
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-cloud-parallelstore`,
 and lower-level _versioned_ client libraries with names such as
-`google-cloud-parallelstore-v1beta`.
+`google-cloud-parallelstore-v1`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -118,7 +118,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-parallelstore-v1beta`.
+is part of the name, e.g. `google-cloud-parallelstore-v1`.
 
 ### What about the google-apis-<name> clients?
 
