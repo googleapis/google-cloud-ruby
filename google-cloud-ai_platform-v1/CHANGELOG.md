@@ -1,5 +1,13 @@
 # Changelog
 
+### 1.1.0 (2025-02-12)
+
+#### Features
+
+* Support creation time and response ID in the response to generate_content ([#28965](https://github.com/googleapis/google-cloud-ruby/issues/28965)) 
+* Support for Kubernetes liveness probes 
+* Support for software configuration of the notebook runtime 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
