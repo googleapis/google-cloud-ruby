@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.0"
 
-  gem.add_dependency "google-cloud-bigquery-data_policies-v1", ">= 0.7", "< 2.a"
-  gem.add_dependency "google-cloud-bigquery-data_policies-v1beta1", ">= 0.4", "< 2.a"
+  gem.add_dependency "google-cloud-bigquery-data_policies-v1", "~> 1.0"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end
