@@ -48,7 +48,7 @@ class Google::Cloud::Security::PublicCA::ClientConstructionMinitest < Minitest::
       client = Google::Cloud::Security::PublicCA.public_certificate_authority_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client, client
+      assert_kind_of Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Cloud::Security::PublicCA::ClientConstructionMinitest < Minitest::
       client = Google::Cloud::Security::PublicCA.public_certificate_authority_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Rest::Client, client
+      assert_kind_of Google::Cloud::Security::PublicCA::V1::PublicCertificateAuthorityService::Rest::Client, client
     end
   end
 end
