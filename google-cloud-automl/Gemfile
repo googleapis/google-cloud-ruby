@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-automl-v1", "google-cloud-automl-v1beta1"]
+local_dependencies = ["google-cloud-automl-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-automl.gemspec"))
 local_dependencies.each do |name|
