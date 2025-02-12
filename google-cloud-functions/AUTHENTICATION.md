@@ -56,7 +56,7 @@ To configure a credentials file for an individual client initialization:
 ```ruby
 require "google/cloud/functions"
 
-client = Google::Cloud::Functions.cloud_functions_service do |config|
+client = Google::Cloud::Functions.function_service do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 ```
@@ -70,7 +70,7 @@ Google::Cloud::Functions.configure do |config|
   config.credentials = "path/to/credentialfile.json"
 end
 
-client = Google::Cloud::Functions.cloud_functions_service
+client = Google::Cloud::Functions.function_service
 ```
 
 ### Environment Variables
@@ -100,7 +100,7 @@ require "google/cloud/functions"
 
 ENV["GOOGLE_APPLICATION_CREDENTIALS"] = "path/to/credentialfile.json"
 
-client = Google::Cloud::Functions.cloud_functions_service
+client = Google::Cloud::Functions.function_service
 ```
 
 ### Local ADC file

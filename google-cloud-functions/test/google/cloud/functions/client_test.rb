@@ -41,24 +41,24 @@ class Google::Cloud::Functions::ClientConstructionMinitest < Minitest::Test
     end
   end
 
-  def test_cloud_functions_service_grpc
-    skip unless Google::Cloud::Functions.cloud_functions_service_available? transport: :grpc
+  def test_function_service_grpc
+    skip unless Google::Cloud::Functions.function_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Functions.cloud_functions_service transport: :grpc do |config|
+      client = Google::Cloud::Functions.function_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Functions::V1::CloudFunctionsService::Client, client
+      assert_kind_of Google::Cloud::Functions::V2::FunctionService::Client, client
     end
   end
 
-  def test_cloud_functions_service_rest
-    skip unless Google::Cloud::Functions.cloud_functions_service_available? transport: :rest
+  def test_function_service_rest
+    skip unless Google::Cloud::Functions.function_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::Functions.cloud_functions_service transport: :rest do |config|
+      client = Google::Cloud::Functions.function_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Functions::V1::CloudFunctionsService::Rest::Client, client
+      assert_kind_of Google::Cloud::Functions::V2::FunctionService::Rest::Client, client
     end
   end
 end
