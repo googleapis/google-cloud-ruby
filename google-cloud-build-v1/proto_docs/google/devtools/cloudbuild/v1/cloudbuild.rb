@@ -663,6 +663,10 @@ module Google
         # @!attribute [r] failure_info
         #   @return [::Google::Cloud::Build::V1::Build::FailureInfo]
         #     Output only. Contains information about the build when status=FAILURE.
+        # @!attribute [rw] dependencies
+        #   @return [::Array<::Google::Cloud::Build::V1::Dependency>]
+        #     Optional. Dependencies that the Cloud Build worker will fetch before
+        #     executing user steps.
         class Build
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -781,6 +785,64 @@ module Google
 
             # Build was enqueued for longer than the value of `queue_ttl`.
             EXPIRED = 9
+          end
+        end
+
+        # A dependency that the Cloud Build worker will fetch before executing user
+        # steps.
+        # @!attribute [rw] empty
+        #   @return [::Boolean]
+        #     If set to true disable all dependency fetching (ignoring the default
+        #     source as well).
+        #
+        #     Note: The following fields are mutually exclusive: `empty`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] git_source
+        #   @return [::Google::Cloud::Build::V1::Dependency::GitSourceDependency]
+        #     Represents a git repository as a build dependency.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `empty`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class Dependency
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a git repository as a build dependency.
+          # @!attribute [rw] repository
+          #   @return [::Google::Cloud::Build::V1::Dependency::GitSourceRepository]
+          #     Required. The kind of repo (url or dev connect).
+          # @!attribute [rw] revision
+          #   @return [::String]
+          #     Required. The revision that we will fetch the repo at.
+          # @!attribute [rw] recurse_submodules
+          #   @return [::Boolean]
+          #     Optional. True if submodules should be fetched too (default false).
+          # @!attribute [rw] depth
+          #   @return [::Integer]
+          #     Optional. How much history should be fetched for the build (default 1, -1
+          #     for all history).
+          # @!attribute [rw] dest_path
+          #   @return [::String]
+          #     Required. Where should the files be placed on the worker.
+          class GitSourceDependency
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A repository for a git source.
+          # @!attribute [rw] url
+          #   @return [::String]
+          #     Location of the Git repository.
+          #
+          #     Note: The following fields are mutually exclusive: `url`, `developer_connect`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] developer_connect
+          #   @return [::String]
+          #     The Developer Connect Git repository link or the url that matches a
+          #     repository link in the current project, formatted as
+          #     `projects/*/locations/*/connections/*/gitRepositoryLink/*`
+          #
+          #     Note: The following fields are mutually exclusive: `developer_connect`, `url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class GitSourceRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
