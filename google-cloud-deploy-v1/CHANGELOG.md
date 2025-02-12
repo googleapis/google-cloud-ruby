@@ -1,5 +1,11 @@
 # Changelog
 
+### 2.0.1 (2025-02-12)
+
+#### Bug Fixes
+
+* Fixed some http bindings for IAM calls using REST ([#28964](https://github.com/googleapis/google-cloud-ruby/issues/28964)) 
+
 ### 2.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
