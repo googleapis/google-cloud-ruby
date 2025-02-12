@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.0"
 
-  gem.add_dependency "google-cloud-alloy_db-v1", ">= 0.8", "< 2.a"
-  gem.add_dependency "google-cloud-alloy_db-v1beta", ">= 0.6", "< 2.a"
+  gem.add_dependency "google-cloud-alloy_db-v1", "~> 1.0"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end
