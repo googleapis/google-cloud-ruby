@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-document_ai-v1", "google-cloud-document_ai-v1beta3"]
+local_dependencies = ["google-cloud-document_ai-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-document_ai.gemspec"))
 local_dependencies.each do |name|
