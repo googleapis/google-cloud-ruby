@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.0"
 
-  gem.add_dependency "google-cloud-artifact_registry-v1", ">= 0.12", "< 2.a"
-  gem.add_dependency "google-cloud-artifact_registry-v1beta2", ">= 0.11", "< 2.a"
+  gem.add_dependency "google-cloud-artifact_registry-v1", "~> 1.3"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end
