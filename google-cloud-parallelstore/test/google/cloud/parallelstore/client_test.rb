@@ -48,7 +48,7 @@ class Google::Cloud::Parallelstore::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Parallelstore.parallelstore transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Parallelstore::V1beta::Parallelstore::Client, client
+      assert_kind_of Google::Cloud::Parallelstore::V1::Parallelstore::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Cloud::Parallelstore::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Parallelstore.parallelstore transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Parallelstore::V1beta::Parallelstore::Rest::Client, client
+      assert_kind_of Google::Cloud::Parallelstore::V1::Parallelstore::Rest::Client, client
     end
   end
 end
