@@ -48,7 +48,7 @@ class Google::Cloud::Language::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Language.language_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Language::V1::LanguageService::Client, client
+      assert_kind_of Google::Cloud::Language::V2::LanguageService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Cloud::Language::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Language.language_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Language::V1::LanguageService::Rest::Client, client
+      assert_kind_of Google::Cloud::Language::V2::LanguageService::Rest::Client, client
     end
   end
 end

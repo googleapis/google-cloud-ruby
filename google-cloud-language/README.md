@@ -17,7 +17,7 @@ constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-language-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1/latest),
-[google-cloud-language-v1beta2](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1beta2/latest).
+[google-cloud-language-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/natural-language)
 for more usage information.
@@ -34,14 +34,6 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 1. [Enable the API.](https://console.cloud.google.com/apis/library/language.googleapis.com)
 1. [Set up authentication.](AUTHENTICATION.md)
-
-## Migrating from 0.x versions
-
-The 1.0 release of the google-cloud-language client is a significant upgrade
-based on a [next-gen code generator](https://github.com/googleapis/gapic-generator-ruby),
-and includes substantial interface changes. Existing code written for earlier
-versions of this library will likely require updates to use this version.
-See the {file:MIGRATING.md MIGRATING.md} document for more information.
 
 ## Debug Logging
 
@@ -72,7 +64,7 @@ Debug logging also requires that the versioned clients for this service be
 sufficiently recent, released after about Dec 10, 2024. If logging is not
 working, try updating the versioned clients in your bundle or installed gems:
 [google-cloud-language-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1/latest),
-[google-cloud-language-v1beta2](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1beta2/latest).
+[google-cloud-language-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v2/latest).
 
 ## Supported Ruby Versions
 
