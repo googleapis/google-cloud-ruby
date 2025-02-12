@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-discovery_engine-v1", "google-cloud-discovery_engine-v1beta"]
+local_dependencies = ["google-cloud-discovery_engine-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-discovery_engine.gemspec"))
 local_dependencies.each do |name|
