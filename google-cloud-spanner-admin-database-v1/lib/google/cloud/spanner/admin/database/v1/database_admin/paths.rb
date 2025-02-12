@@ -146,6 +146,25 @@ module Google
                   "projects/#{project}/instances/#{instance}"
                 end
 
+                ##
+                # Create a fully-qualified InstancePartition resource string.
+                #
+                # The resource will be in the following format:
+                #
+                # `projects/{project}/instances/{instance}/instancePartitions/{instance_partition}`
+                #
+                # @param project [String]
+                # @param instance [String]
+                # @param instance_partition [String]
+                #
+                # @return [::String]
+                def instance_partition_path project:, instance:, instance_partition:
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+                  "projects/#{project}/instances/#{instance}/instancePartitions/#{instance_partition}"
+                end
+
                 extend self
               end
             end
