@@ -46,57 +46,62 @@ module Google
   module Cloud
     module Functions
       ##
-      # Create a new client object for CloudFunctionsService.
+      # Create a new client object for FunctionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Functions::V1::CloudFunctionsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v1/latest/Google-Cloud-Functions-V1-CloudFunctionsService-Client)
-      # for a gRPC client for version V1 of the API.
+      # [Google::Cloud::Functions::V2::FunctionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v2/latest/Google-Cloud-Functions-V2-FunctionService-Client)
+      # for a gRPC client for version V2 of the API.
       # However, you can specify a different API version by passing it in the
-      # `version` parameter. If the CloudFunctionsService service is
+      # `version` parameter. If the FunctionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
       # Raises an exception if the currently installed versioned client gem for the
-      # given API version does not support the given transport of the CloudFunctionsService service.
+      # given API version does not support the given transport of the FunctionService service.
       # You can determine whether the method will succeed by calling
-      # {Google::Cloud::Functions.cloud_functions_service_available?}.
+      # {Google::Cloud::Functions.function_service_available?}.
       #
-      # ## About CloudFunctionsService
+      # ## About FunctionService
       #
-      # A service that application uses to manipulate triggers and functions.
+      # Google Cloud Functions is used to deploy functions that are executed by
+      # Google in response to various events. Data connected with that event is
+      # passed to a function as the input data.
+      #
+      # A **function** is a resource which describes a function that should be
+      # executed and how it is triggered.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
+      #   Defaults to `:v2`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.cloud_functions_service version: :v1, transport: :grpc, &block
+      def self.function_service version: :v2, transport: :grpc, &block
         require "google/cloud/functions/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Functions
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        service_module = Google::Cloud::Functions.const_get(package_name).const_get(:CloudFunctionsService)
+        service_module = Google::Cloud::Functions.const_get(package_name).const_get(:FunctionService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
       ##
-      # Determines whether the CloudFunctionsService service is supported by the current client.
-      # If true, you can retrieve a client object by calling {Google::Cloud::Functions.cloud_functions_service}.
+      # Determines whether the FunctionService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Functions.function_service}.
       # If false, that method will raise an exception. This could happen if the given
-      # API version does not exist or does not support the CloudFunctionsService service,
-      # or if the versioned client gem needs an update to support the CloudFunctionsService service.
+      # API version does not exist or does not support the FunctionService service,
+      # or if the versioned client gem needs an update to support the FunctionService service.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1`.
+      #   Defaults to `:v2`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [boolean] Whether the service is available.
       #
-      def self.cloud_functions_service_available? version: :v1, transport: :grpc
+      def self.function_service_available? version: :v2, transport: :grpc
         require "google/cloud/functions/#{version.to_s.downcase}"
         package_name = Google::Cloud::Functions
                        .constants
@@ -104,8 +109,8 @@ module Google
                        .first
         return false unless package_name
         service_module = Google::Cloud::Functions.const_get package_name
-        return false unless service_module.const_defined? :CloudFunctionsService
-        service_module = service_module.const_get :CloudFunctionsService
+        return false unless service_module.const_defined? :FunctionService
+        service_module = service_module.const_get :FunctionService
         if transport == :rest
           return false unless service_module.const_defined? :Rest
           service_module = service_module.const_get :Rest
