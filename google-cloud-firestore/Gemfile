@@ -20,14 +20,14 @@ local_dependencies.each do |name|
 end
 
 gem "autotest-suffix", "~> 1.1"
-gem "google-style", "~> 1.27.1"
-gem "minitest", "~> 5.16"
+gem "google-style", "~> 1.30.1"
+gem "minitest", "~> 5.25"
 gem "minitest-autotest", "~> 1.0"
-gem "minitest-focus", "~> 1.1"
-gem "minitest-rg", "~> 5.2"
+gem "minitest-focus", "~> 1.4"
+gem "minitest-rg", "~> 5.3"
 gem "rake"
 gem "redcarpet", "~> 3.0"
-gem "simplecov", "~> 0.9"
+gem "simplecov", "~> 0.22"
 gem "stackprof" unless Gem.win_platform?
 gem "yard", "~> 0.9"
-gem "yard-doctest", "~> 0.1.13"
+gem "yard-doctest", "~> 0.1.17"

@@ -17,11 +17,11 @@ Gem::Specification.new do |gem|
                       ["OVERVIEW.md", "AUTHENTICATION.md", "EMULATOR.md", "LOGGING.md", "CONTRIBUTING.md", "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "bigdecimal", "~> 3.0"
   gem.add_dependency "concurrent-ruby", "~> 1.0"
-  gem.add_dependency "google-cloud-core", "~> 1.5"
-  gem.add_dependency "google-cloud-firestore-v1", ">= 0.10", "< 2.a"
+  gem.add_dependency "google-cloud-core", "~> 1.7"
+  gem.add_dependency "google-cloud-firestore-v1", "~> 2.0"
   gem.add_dependency "rbtree", "~> 0.4.2"
 end

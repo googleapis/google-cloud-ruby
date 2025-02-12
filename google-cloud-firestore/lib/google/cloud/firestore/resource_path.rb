@@ -24,7 +24,7 @@ module Google
       class ResourcePath
         include Comparable
 
-        RESOURCE_PATH_RE = %r{^projects/([^/]*)/databases/([^/]*)(?:/documents/)?([\s\S]*)$}.freeze
+        RESOURCE_PATH_RE = %r{^projects/([^/]*)/databases/([^/]*)(?:/documents/)?([\s\S]*)$}
 
         attr_reader :project_id
         attr_reader :database_id

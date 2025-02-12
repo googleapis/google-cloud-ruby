@@ -530,9 +530,9 @@ module Google
             left_hash
           end
 
-          START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/.freeze
-          INVALID_FIELD_PATH_CHARS = %r{[~*/\[\]]}.freeze
-          ESCAPED_FIELD_PATH = /\A`(.*)`\z/.freeze
+          START_FIELD_PATH_CHARS = /\A[a-zA-Z_]/
+          INVALID_FIELD_PATH_CHARS = %r{[~*/\[\]]}
+          ESCAPED_FIELD_PATH = /\A`(.*)`\z/
 
           def build_hash_from_field_paths_and_values pairs
             pairs.each do |pair|
