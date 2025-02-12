@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.0"
 
-  gem.add_dependency "google-cloud-assured_workloads-v1", ">= 0.9", "< 2.a"
-  gem.add_dependency "google-cloud-assured_workloads-v1beta1", ">= 0.17", "< 2.a"
+  gem.add_dependency "google-cloud-assured_workloads-v1", "~> 1.2"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end
