@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.1.0 (2025-02-12)
+
+#### Features
+
+* Support for the cancel_job RPC ([#28963](https://github.com/googleapis/google-cloud-ruby/issues/28963)) 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
