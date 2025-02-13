@@ -1,5 +1,16 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-network_connectivity-v1alpha1 prerelease service
+
+#### Features
+
+* Removed dependency on google-cloud-network_connectivity-v1alpha1 prerelease service 
+* Updated google-cloud-network_connectivity-v1 dependency to version 1.x ([#29025](https://github.com/googleapis/google-cloud-ruby/issues/29025)) 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features
