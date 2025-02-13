@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-rapid_migration_assessment-v1 dependency to version 2.x ([#29037](https://github.com/googleapis/google-cloud-ruby/issues/29037))
+
+#### Features
+
+* Updated google-cloud-rapid_migration_assessment-v1 dependency to version 2.x ([#29037](https://github.com/googleapis/google-cloud-ruby/issues/29037)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features
