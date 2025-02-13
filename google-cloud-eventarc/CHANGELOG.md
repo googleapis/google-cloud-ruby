@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-eventarc-v1 dependency to version 2.x ([#29050](https://github.com/googleapis/google-cloud-ruby/issues/29050))
+
+#### Features
+
+* Update google-cloud-eventarc-v1 dependency to version 2.x ([#29050](https://github.com/googleapis/google-cloud-ruby/issues/29050)) 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
