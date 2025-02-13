@@ -1,5 +1,16 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-vision-v1p3beta1 prerelease service ([#28999](https://github.com/googleapis/google-cloud-ruby/issues/28999))
+
+#### Features
+
+* Removed dependency on google-cloud-vision-v1p3beta1 prerelease service ([#28999](https://github.com/googleapis/google-cloud-ruby/issues/28999)) 
+* Updated google-cloud-vision-v1 dependency to version 1.x 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features
