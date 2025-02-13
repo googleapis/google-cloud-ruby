@@ -23,5 +23,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-telco_automation-v1", ">= 0.2", "< 2.a"
+  gem.add_dependency "google-cloud-telco_automation-v1", "~> 2.0"
 end

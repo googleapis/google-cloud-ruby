@@ -7,7 +7,7 @@
     "language": "ruby",
     "name": "connectors",
     "name_pretty": "Connectors V1 API",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Enables users to create and manage connections to Google Cloud services and third-party business applications using the Connectors interface. Note that google-cloud-connectors-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-connectors instead. See the readme for more details.",

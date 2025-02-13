@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-network_connectivity-v1", "google-cloud-network_connectivity-v1alpha1"]
+local_dependencies = ["google-cloud-network_connectivity-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-network_connectivity.gemspec"))
 local_dependencies.each do |name|

@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-security_center-v1", "google-cloud-security_center-v1p1beta1", "google-cloud-security_center-v2"]
+local_dependencies = ["google-cloud-security_center-v1", "google-cloud-security_center-v2"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-security_center.gemspec"))
 local_dependencies.each do |name|

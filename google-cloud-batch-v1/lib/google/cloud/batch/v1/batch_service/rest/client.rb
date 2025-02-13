@@ -84,6 +84,8 @@ module Google
 
                   default_config.rpcs.delete_job.timeout = 60.0
 
+                  default_config.rpcs.cancel_job.timeout = 60.0
+
                   default_config.rpcs.list_jobs.timeout = 60.0
                   default_config.rpcs.list_jobs.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -511,6 +513,107 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @batch_service_stub.delete_job request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Cancel a Job.
+              #
+              # @overload cancel_job(request, options = nil)
+              #   Pass arguments to `cancel_job` via a request object, either of type
+              #   {::Google::Cloud::Batch::V1::CancelJobRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Batch::V1::CancelJobRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload cancel_job(name: nil, request_id: nil)
+              #   Pass arguments to `cancel_job` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Job name.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/batch/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Batch::V1::BatchService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Batch::V1::CancelJobRequest.new
+              #
+              #   # Call the cancel_job method.
+              #   result = client.cancel_job request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def cancel_job request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Batch::V1::CancelJobRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.cancel_job.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Batch::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.cancel_job.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.cancel_job.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @batch_service_stub.cancel_job request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
                   yield result, operation if block_given?
                   throw :response, result
@@ -953,6 +1056,11 @@ module Google
                   #
                   attr_reader :delete_job
                   ##
+                  # RPC-specific configuration for `cancel_job`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :cancel_job
+                  ##
                   # RPC-specific configuration for `list_jobs`
                   # @return [::Gapic::Config::Method]
                   #
@@ -976,6 +1084,8 @@ module Google
                     @get_job = ::Gapic::Config::Method.new get_job_config
                     delete_job_config = parent_rpcs.delete_job if parent_rpcs.respond_to? :delete_job
                     @delete_job = ::Gapic::Config::Method.new delete_job_config
+                    cancel_job_config = parent_rpcs.cancel_job if parent_rpcs.respond_to? :cancel_job
+                    @cancel_job = ::Gapic::Config::Method.new cancel_job_config
                     list_jobs_config = parent_rpcs.list_jobs if parent_rpcs.respond_to? :list_jobs
                     @list_jobs = ::Gapic::Config::Method.new list_jobs_config
                     get_task_config = parent_rpcs.get_task if parent_rpcs.respond_to? :get_task

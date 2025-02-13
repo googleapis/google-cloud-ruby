@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.0"
 
-  gem.add_dependency "google-cloud-bare_metal_solution-v2", ">= 0.7", "< 2.a"
+  gem.add_dependency "google-cloud-bare_metal_solution-v2", "~> 1.0"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end

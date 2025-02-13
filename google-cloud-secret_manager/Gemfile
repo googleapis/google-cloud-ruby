@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-secret_manager-v1", "google-cloud-secret_manager-v1beta1"]
+local_dependencies = ["google-cloud-secret_manager-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-secret_manager.gemspec"))
 local_dependencies.each do |name|

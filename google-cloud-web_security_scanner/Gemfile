@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 gemspec
 
-local_dependencies = ["google-cloud-web_security_scanner-v1", "google-cloud-web_security_scanner-v1beta"]
+local_dependencies = ["google-cloud-web_security_scanner-v1"]
 
 main_spec = gemspecs.last || Bundler.load_gemspec(File.join(__dir__, "google-cloud-web_security_scanner.gemspec"))
 local_dependencies.each do |name|

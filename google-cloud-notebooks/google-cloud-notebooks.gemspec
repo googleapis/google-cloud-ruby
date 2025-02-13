@@ -23,6 +23,6 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-notebooks-v1", ">= 0.8", "< 2.a"
-  gem.add_dependency "google-cloud-notebooks-v1beta1", ">= 0.9", "< 2.a"
+  gem.add_dependency "google-cloud-notebooks-v1", "~> 1.0"
+  gem.add_dependency "google-cloud-notebooks-v2", "~> 1.0"
 end

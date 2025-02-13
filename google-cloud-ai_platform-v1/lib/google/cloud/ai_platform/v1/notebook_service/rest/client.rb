@@ -433,6 +433,8 @@ module Google
               #         * A key including a space must be quoted. `labels."a key"`.
               #       * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
               #       [USER_DEFINED, ONE_CLICK].
+              #       * `machineType` supports = and !=.
+              #       * `acceleratorType` supports = and !=.
               #
               #     Some examples:
               #
@@ -440,6 +442,8 @@ module Google
               #       * `displayName="myDisplayName"`
               #       * `labels.myKey="myValue"`
               #       * `notebookRuntimeType=USER_DEFINED`
+              #       * `machineType=e2-standard-4`
+              #       * `acceleratorType=NVIDIA_TESLA_T4`
               #   @param page_size [::Integer]
               #     Optional. The standard list page size.
               #   @param page_token [::String]
@@ -923,6 +927,8 @@ module Google
               #       UI_RESOURCE_STATE_CREATION_FAILED].
               #       * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
               #       [USER_DEFINED, ONE_CLICK].
+              #       * `machineType` supports = and !=.
+              #       * `acceleratorType` supports = and !=.
               #
               #     Some examples:
               #
@@ -934,6 +940,8 @@ module Google
               #       * `runtimeUser="test@google.com"`
               #       * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
               #       * `notebookRuntimeType=USER_DEFINED`
+              #       * `machineType=e2-standard-4`
+              #       * `acceleratorType=NVIDIA_TESLA_T4`
               #   @param page_size [::Integer]
               #     Optional. The standard list page size.
               #   @param page_token [::String]

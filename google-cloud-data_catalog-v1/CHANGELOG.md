@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823)) 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features

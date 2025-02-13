@@ -63,6 +63,7 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
+    "snippets/batch_service/cancel_job.rb",
     "snippets/batch_service/create_job.rb",
     "snippets/batch_service/delete_job.rb",
     "snippets/batch_service/get_job.rb",
