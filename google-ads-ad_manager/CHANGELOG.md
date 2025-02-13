@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-ads-ad_manager-v1 dependency to version 1.x ([#29028](https://github.com/googleapis/google-cloud-ruby/issues/29028))
+
+#### Features
+
+* Bump version to 1.0.0 ([#29159](https://github.com/googleapis/google-cloud-ruby/issues/29159)) 
+* Updated google-ads-ad_manager-v1 dependency to version 1.x ([#29028](https://github.com/googleapis/google-cloud-ruby/issues/29028)) 
+
 ### 0.2.0 (2025-01-29)
 
 #### Features
@@ -14,4 +25,3 @@
 * Initial generation of google-ads-ad_manager ([#27518](https://github.com/googleapis/google-cloud-ruby/issues/27518)) 
 
 ## Release History
-
