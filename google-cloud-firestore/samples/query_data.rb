@@ -392,6 +392,8 @@ if $PROGRAM_NAME == __FILE__
     range_query project_id: project
   when "invalid_range_query"
     invalid_range_query project_id: project
+  when "query_filter_compound_multi_ineq"
+    query_filter_compound_multi_ineq project_id: project
   when "in_query_without_array"
     in_query_without_array project_id: project
   when "in_query_with_array"
@@ -411,21 +413,22 @@ if $PROGRAM_NAME == __FILE__
       Usage: bundle exec ruby query_data.rb [command]
 
       Commands:
-        query_create_examples          Create an example collection of documents.
-        create_query_state             Create a query by state.
-        create_query_capital           Create a query by capital.
-        simple_queries                 Create simple queries with a single where clause.
-        chained_query                  Create a query with chained clauses.
-        composite_index_chained_query  Create a composite index chained query.
-        range_query                    Create a query with range clauses.
-        invalid_range_query            An example of an invalid range query.
-        in_query_without_array         In queries without array.
-        in_query_with_array            In queries with array.
-        query_not_equals               Create a query with a NOT_EQUAL where clause.
-        filter_not_in                  Create a query with a NOT_IN where clause.
-        array_contains_any_queries     Array contains any in query.
-        array_contains_filter          Array contains filter.
-        collection_group_query         Add sub collection and filter.
+        query_create_examples             Create an example collection of documents.
+        create_query_state                Create a query by state.
+        create_query_capital              Create a query by capital.
+        simple_queries                    Create simple queries with a single where clause.
+        chained_query                     Create a query with chained clauses.
+        composite_index_chained_query     Create a composite index chained query.
+        range_query                       Create a query with range clauses.
+        invalid_range_query               An example of an invalid range query.
+        query_filter_compound_multi_ineq  Compound query with range and inequality filters on multiple fields.
+        in_query_without_array            In queries without array.
+        in_query_with_array               In queries with array.
+        query_not_equals                  Create a query with a NOT_EQUAL where clause.
+        filter_not_in                     Create a query with a NOT_IN where clause.
+        array_contains_any_queries        Array contains any in query.
+        array_contains_filter             Array contains filter.
+        collection_group_query            Add sub collection and filter.
     USAGE
   end
 end

@@ -118,6 +118,7 @@ describe "Google Cloud Firestore API samples - Query Data" do
 
   it "query_filter_compound_multi_ineq" do
     out, _err = capture_io do
+      create_composite_index project_id: @firestore_project, collection_path: @collection_path
       query_filter_compound_multi_ineq project_id: @firestore_project, collection_path: @collection_path
     end
 

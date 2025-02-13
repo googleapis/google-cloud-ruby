@@ -16,6 +16,7 @@ require "minitest/autorun"
 require "minitest/focus"
 require "minitest/hooks/default"
 require "google/cloud/firestore"
+require "google/cloud/firestore/admin/v1"
 require "securerandom"
 
 def delete_collection_test collection_name:, project_id:
@@ -30,4 +31,32 @@ end
 
 def random_name prefix
   "#{prefix}_#{SecureRandom.hex 4}"
+end
+
+##
+# Creates a composite index, given a project_id and collection_path.
+#
+# NOTE: Currently, only `density` and `population` fields are supported.
+#
+# @param project_id [String] The Cloud Platform project ID that the collection belongs to.
+# @param collection_path [String] A string representing the path of the collection,
+#   relative to the document.
+#
+# @return [::Gapic::Operation]
+def create_composite_index project_id:, collection_path:
+  admin = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+
+  order = Google::Cloud::Firestore::Admin::V1::Index::IndexField::Order::ASCENDING
+
+  index_fields = [
+    Google::Cloud::Firestore::Admin::V1::Index::IndexField.new(field_path: "density", order: order),
+    Google::Cloud::Firestore::Admin::V1::Index::IndexField.new(field_path: "population", order: order)
+  ]
+
+  scope = Google::Cloud::Firestore::Admin::V1::Index::QueryScope::COLLECTION
+  index = Google::Cloud::Firestore::Admin::V1::Index.new query_scope: scope, fields: index_fields
+  parent = "projects/#{project_id}/databases/(default)/collectionGroups/#{collection_path}"
+  request = Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new parent: parent, index: index
+  result = admin.create_index request
+  result.wait_until_done!
 end
