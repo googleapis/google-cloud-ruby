@@ -366,29 +366,40 @@ module Yoshi
                 "--field", "body=Approved using batch-review"],
                name: "gh pull request approval"
       @context.logger.info "Merging PR #{pr.id}..."
+      passing_errors = [{
+        "status" => "405",
+        "message" => "Merge already in progress"
+      }]
       retry_gh ["-XPUT", "repos/#{@repo}/pulls/#{pr.id}/merge",
                 "--field", "merge_method=squash",
                 "--field", "commit_title=#{message}",
                 "--field", "commit_message=#{detail}"],
-               name: "gh pull request merge"
+               name: "gh pull request merge",
+               passing_errors: passing_errors
       @context.puts "Merged PR##{pr.id} #{pr.title.inspect} (#{index}/#{@pull_requests.size})", :bold, :green
       @next_timestamp = Process.clock_gettime(Process::CLOCK_MONOTONIC) + @merge_delay
     end
 
-    def retry_gh args, tries: 3, name: nil
+    def retry_gh args, tries: 3, name: nil, passing_errors: nil
       cmd = ["gh", "api"] + args
       name ||= cmd.inspect
+      passing_errors = Array passing_errors
       result = nil
       tries.times do |num|
         result = @context.exec cmd, out: :capture, err: :capture
         return if result.success?
         break unless result.error?
+        @context.puts result.captured_out unless result.captured_out.empty?
+        @context.puts result.captured_err unless result.captured_err.empty?
+        message = JSON.parse result.captured_out rescue {}
+        if passing_errors.any? { |spec| spec.all? { |k, v| message[k] == v } }
+          @context.puts "Interpreting error as passing when calling #{name}", :yellow
+          return
+        end
         @context.logger.info "waiting to retry..."
         sleep 2 * (num + 1)
       end
       @context.puts "Repeatedly failed to call #{name}", :red, :bold
-      @context.puts result&.captured_out
-      @context.puts result&.captured_err
       @context.exit 1
     end
 
