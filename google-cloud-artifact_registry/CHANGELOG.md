@@ -1,5 +1,16 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-artifact_registry-v1beta2 prerelease service ([#28998](https://github.com/googleapis/google-cloud-ruby/issues/28998))
+
+#### Features
+
+* Removed dependency on google-cloud-artifact_registry-v1beta2 prerelease service ([#28998](https://github.com/googleapis/google-cloud-ruby/issues/28998)) 
+* Updated google-cloud-artifact_registry-v1 dependency to version 1.x 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
