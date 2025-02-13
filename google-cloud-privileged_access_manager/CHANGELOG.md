@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-privileged_access_manager-v1 dependency to version 1.x ([#29024](https://github.com/googleapis/google-cloud-ruby/issues/29024))
+
+#### Features
+
+* Bump version to 1.0.0 ([#29159](https://github.com/googleapis/google-cloud-ruby/issues/29159)) 
+* Updated google-cloud-privileged_access_manager-v1 dependency to version 1.x ([#29024](https://github.com/googleapis/google-cloud-ruby/issues/29024)) 
+
 ### 0.2.0 (2025-01-29)
 
 #### Features
@@ -20,4 +31,3 @@
 * Initial generation of google-cloud-privileged_access_manager ([#26518](https://github.com/googleapis/google-cloud-ruby/issues/26518)) 
 
 ## Release History
-
