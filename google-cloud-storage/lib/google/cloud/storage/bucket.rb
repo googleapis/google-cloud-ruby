@@ -2282,25 +2282,25 @@ module Google
 
         # Fetches generation of the bucket
         # @example
-        # require "google/cloud/storage"
-        # storage = Google::Cloud::Storage.new
-        # bucket = storage.bucket "my-bucket"
-        # generation= bucket.generation
+        #   require "google/cloud/storage"
+        #   storage = Google::Cloud::Storage.new
+        #   bucket = storage.bucket "my-bucket"
+        #   generation= bucket.generation
         def generation
           @gapi.generation
         end
 
         # Fetches soft_delete_time of a soft deleted bucket
         # @example
-        # bucket.delete
-        # bucket.soft_delete_time
+        #   bucket.delete
+        #   bucket.soft_delete_time
         def soft_delete_time
           @gapi.soft_delete_time
         end
 
         # Fetches hard_delete_time of a soft deleted bucket
         # @example
-        # bucket.hard_delete_time
+        #   bucket.hard_delete_time
         def hard_delete_time
           @gapi.hard_delete_time
         end

@@ -103,18 +103,31 @@ class MockStorage < Minitest::Spec
       "hierarchicalNamespace" => hierarchical_namespace
     }
     if soft_deleted
-      soft_delete_policy = soft_delete_policy_object retention_duration_seconds: retention_duration_seconds
-      data["softDeleteTime"] = soft_delete_policy.effective_time
-      data["hardDeleteTime"] = soft_delete_policy.effective_time.to_time + retention_duration_seconds
+      data.merge! soft_delete_bucket_hash
     end
     data.delete_if { |_, v| v.nil? }
   end
 
-  def soft_delete_policy_object retention_duration_seconds: 604_800 # 7 days
+  def soft_delete_policy_object retention_duration_seconds: 604_800
     Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
       effective_time: DateTime.now,
       retention_duration_seconds: retention_duration_seconds
     )
+  end
+
+  def soft_delete_policy_bucket retention_duration_seconds: 604_800
+    Google::Apis::StorageV1::Bucket::SoftDeletePolicy.new(
+      effective_time: DateTime.now,
+      retention_duration_seconds: retention_duration_seconds
+    )
+  end
+
+  def soft_delete_bucket_hash
+    soft_delete_policy = soft_delete_policy_bucket
+    {
+      "softDeleteTime" => soft_delete_policy.effective_time,
+      "hardDeleteTime" => soft_delete_policy.effective_time.to_time + soft_delete_policy.retention_duration_seconds
+    }
   end
 
   def hierarchical_namespace_object enabled: true
