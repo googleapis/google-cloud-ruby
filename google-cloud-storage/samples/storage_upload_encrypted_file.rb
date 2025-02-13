@@ -26,7 +26,7 @@ def upload_encrypted_file bucket_name:, local_file_path:, file_name: nil, encryp
   # The encryption key used for securing the object must be a 32-byte key consisting of raw encrypted data.
   # Key used should not be base64 encoded.
 
-  # encryption_key = "your-enncryption-key"
+  # encryption_key = "your-encryption-key"
 
   require "google/cloud/storage"
 
