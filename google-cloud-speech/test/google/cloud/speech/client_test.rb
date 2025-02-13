@@ -48,7 +48,7 @@ class Google::Cloud::Speech::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Speech.speech transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Speech::V1::Speech::Client, client
+      assert_kind_of Google::Cloud::Speech::V2::Speech::Client, client
     end
   end
 
@@ -58,28 +58,7 @@ class Google::Cloud::Speech::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Speech.speech transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Speech::V1::Speech::Rest::Client, client
-    end
-  end
-
-  def test_adaptation_grpc
-    skip unless Google::Cloud::Speech.adaptation_available? transport: :grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Speech.adaptation transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Speech::V1::Adaptation::Client, client
-    end
-  end
-
-  def test_adaptation_rest
-    skip unless Google::Cloud::Speech.adaptation_available? transport: :rest
-    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Cloud::Speech.adaptation transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::Speech::V1::Adaptation::Rest::Client, client
+      assert_kind_of Google::Cloud::Speech::V2::Speech::Rest::Client, client
     end
   end
 end
