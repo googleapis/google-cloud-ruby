@@ -135,7 +135,7 @@
   "google-cloud-bigquery-data_exchange+FILLER": "0.0.0",
   "google-cloud-bigquery-data_exchange-v1beta1": "0.9.0",
   "google-cloud-bigquery-data_exchange-v1beta1+FILLER": "0.0.0",
-  "google-cloud-bigquery-data_policies": "1.4.0",
+  "google-cloud-bigquery-data_policies": "2.0.0",
   "google-cloud-bigquery-data_policies+FILLER": "0.0.0",
   "google-cloud-bigquery-data_policies-v1": "1.0.0",
   "google-cloud-bigquery-data_policies-v1+FILLER": "0.0.0",
