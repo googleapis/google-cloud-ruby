@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-bare_metal_solution-v2 dependency to version 1.x ([#29013](https://github.com/googleapis/google-cloud-ruby/issues/29013))
+
+#### Features
+
+* Updated google-cloud-bare_metal_solution-v2 dependency to version 1.x ([#29013](https://github.com/googleapis/google-cloud-ruby/issues/29013)) 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features
