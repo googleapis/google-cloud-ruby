@@ -102,9 +102,13 @@ module Google
           # @!attribute [rw] installed_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::SoftwarePackage]
           #     Software package present on the VM instance.
+          #
+          #     Note: The following fields are mutually exclusive: `installed_package`, `available_package`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] available_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::SoftwarePackage]
           #     Software package available to be installed on the VM instance.
+          #
+          #     Note: The following fields are mutually exclusive: `available_package`, `installed_package`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Item
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,43 +142,61 @@ module Google
           #     Yum package info.
           #     For details about the yum package manager, see
           #     https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/ch-yum.
+          #
+          #     Note: The following fields are mutually exclusive: `yum_package`, `apt_package`, `zypper_package`, `googet_package`, `zypper_patch`, `wua_package`, `qfe_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] apt_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::VersionedPackage]
           #     Details of an APT package.
           #     For details about the apt package manager, see
           #     https://wiki.debian.org/Apt.
+          #
+          #     Note: The following fields are mutually exclusive: `apt_package`, `yum_package`, `zypper_package`, `googet_package`, `zypper_patch`, `wua_package`, `qfe_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] zypper_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::VersionedPackage]
           #     Details of a Zypper package.
           #     For details about the Zypper package manager, see
           #     https://en.opensuse.org/SDB:Zypper_manual.
+          #
+          #     Note: The following fields are mutually exclusive: `zypper_package`, `yum_package`, `apt_package`, `googet_package`, `zypper_patch`, `wua_package`, `qfe_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] googet_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::VersionedPackage]
           #     Details of a Googet package.
           #      For details about the googet package manager, see
           #      https://github.com/google/googet.
+          #
+          #     Note: The following fields are mutually exclusive: `googet_package`, `yum_package`, `apt_package`, `zypper_package`, `zypper_patch`, `wua_package`, `qfe_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] zypper_patch
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::ZypperPatch]
           #     Details of a Zypper patch.
           #     For details about the Zypper package manager, see
           #     https://en.opensuse.org/SDB:Zypper_manual.
+          #
+          #     Note: The following fields are mutually exclusive: `zypper_patch`, `yum_package`, `apt_package`, `zypper_package`, `googet_package`, `wua_package`, `qfe_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] wua_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::WindowsUpdatePackage]
           #     Details of a Windows Update package.
           #     See https://docs.microsoft.com/en-us/windows/win32/api/_wua/ for
           #     information about Windows Update.
+          #
+          #     Note: The following fields are mutually exclusive: `wua_package`, `yum_package`, `apt_package`, `zypper_package`, `googet_package`, `zypper_patch`, `qfe_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] qfe_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::WindowsQuickFixEngineeringPackage]
           #     Details of a Windows Quick Fix engineering package.
           #     See
           #     https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-quickfixengineering
           #     for info in Windows Quick Fix Engineering.
+          #
+          #     Note: The following fields are mutually exclusive: `qfe_package`, `yum_package`, `apt_package`, `zypper_package`, `googet_package`, `zypper_patch`, `wua_package`, `cos_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] cos_package
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::VersionedPackage]
           #     Details of a COS package.
+          #
+          #     Note: The following fields are mutually exclusive: `cos_package`, `yum_package`, `apt_package`, `zypper_package`, `googet_package`, `zypper_patch`, `wua_package`, `qfe_package`, `windows_application`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] windows_application
           #   @return [::Google::Cloud::OsConfig::V1alpha::Inventory::WindowsApplication]
           #     Details of Windows Application.
+          #
+          #     Note: The following fields are mutually exclusive: `windows_application`, `yum_package`, `apt_package`, `zypper_package`, `googet_package`, `zypper_patch`, `wua_package`, `qfe_package`, `cos_package`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class SoftwarePackage
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

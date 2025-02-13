@@ -25,21 +25,33 @@ module Google
         # @!attribute [rw] float64_stats
         #   @return [::Google::Cloud::AutoML::V1beta1::Float64Stats]
         #     The statistics for FLOAT64 DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `float64_stats`, `string_stats`, `timestamp_stats`, `array_stats`, `struct_stats`, `category_stats`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_stats
         #   @return [::Google::Cloud::AutoML::V1beta1::StringStats]
         #     The statistics for STRING DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `string_stats`, `float64_stats`, `timestamp_stats`, `array_stats`, `struct_stats`, `category_stats`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] timestamp_stats
         #   @return [::Google::Cloud::AutoML::V1beta1::TimestampStats]
         #     The statistics for TIMESTAMP DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `timestamp_stats`, `float64_stats`, `string_stats`, `array_stats`, `struct_stats`, `category_stats`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] array_stats
         #   @return [::Google::Cloud::AutoML::V1beta1::ArrayStats]
         #     The statistics for ARRAY DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `array_stats`, `float64_stats`, `string_stats`, `timestamp_stats`, `struct_stats`, `category_stats`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] struct_stats
         #   @return [::Google::Cloud::AutoML::V1beta1::StructStats]
         #     The statistics for STRUCT DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `struct_stats`, `float64_stats`, `string_stats`, `timestamp_stats`, `array_stats`, `category_stats`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] category_stats
         #   @return [::Google::Cloud::AutoML::V1beta1::CategoryStats]
         #     The statistics for CATEGORY DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `category_stats`, `float64_stats`, `string_stats`, `timestamp_stats`, `array_stats`, `struct_stats`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] distinct_value_count
         #   @return [::Integer]
         #     The number of distinct values.

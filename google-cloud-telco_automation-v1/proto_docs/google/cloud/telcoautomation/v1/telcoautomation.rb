@@ -1193,10 +1193,14 @@ module Google
         # @!attribute [rw] standard_management_config
         #   @return [::Google::Cloud::TelcoAutomation::V1::StandardManagementConfig]
         #     Configuration of the standard (GKE) cluster management
+        #
+        #     Note: The following fields are mutually exclusive: `standard_management_config`, `full_management_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] full_management_config
         #   @return [::Google::Cloud::TelcoAutomation::V1::FullManagementConfig]
         #     Configuration of the full (Autopilot) cluster management. Full cluster
         #     management is a preview feature.
+        #
+        #     Note: The following fields are mutually exclusive: `full_management_config`, `standard_management_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ManagementConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

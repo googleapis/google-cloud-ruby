@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the EdgeContainer service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::EdgeContainer.edge_container_available?}.
+      #
       # ## About EdgeContainer
       #
       # EdgeContainer API provides management of Kubernetes Clusters on Google Edge
@@ -78,6 +83,37 @@ module Google
         service_module = Google::Cloud::EdgeContainer.const_get(package_name).const_get(:EdgeContainer)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the EdgeContainer service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::EdgeContainer.edge_container}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the EdgeContainer service,
+      # or if the versioned client gem needs an update to support the EdgeContainer service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.edge_container_available? version: :v1, transport: :grpc
+        require "google/cloud/edge_container/#{version.to_s.downcase}"
+        package_name = Google::Cloud::EdgeContainer
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::EdgeContainer.const_get package_name
+        return false unless service_module.const_defined? :EdgeContainer
+        service_module = service_module.const_get :EdgeContainer
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

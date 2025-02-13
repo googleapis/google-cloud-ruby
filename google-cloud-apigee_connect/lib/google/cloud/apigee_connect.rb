@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the ConnectionService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApigeeConnect.connection_service_available?}.
+      #
       # ## About ConnectionService
       #
       # Service Interface for the Apigee Connect connection management APIs.
@@ -80,6 +85,37 @@ module Google
       end
 
       ##
+      # Determines whether the ConnectionService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApigeeConnect.connection_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ConnectionService service,
+      # or if the versioned client gem needs an update to support the ConnectionService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.connection_service_available? version: :v1, transport: :grpc
+        require "google/cloud/apigee_connect/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApigeeConnect
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApigeeConnect.const_get package_name
+        return false unless service_module.const_defined? :ConnectionService
+        service_module = service_module.const_get :ConnectionService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Tether.
       #
       # By default, this returns an instance of
@@ -89,6 +125,11 @@ module Google
       # `version` parameter. If the Tether service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the Tether service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApigeeConnect.tether_available?}.
       #
       # ## About Tether
       #
@@ -109,6 +150,32 @@ module Google
                        .first
         service_module = Google::Cloud::ApigeeConnect.const_get(package_name).const_get(:Tether)
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the Tether service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApigeeConnect.tether}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Tether service,
+      # or if the versioned client gem needs an update to support the Tether service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.tether_available? version: :v1
+        require "google/cloud/apigee_connect/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApigeeConnect
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApigeeConnect.const_get package_name
+        return false unless service_module.const_defined? :Tether
+        service_module = service_module.const_get :Tether
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

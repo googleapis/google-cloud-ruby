@@ -59,10 +59,14 @@ module Google
           # @!attribute [rw] dataset_split
           #   @return [::Google::Cloud::DocumentAI::V1beta3::DatasetSplitType]
           #     Target dataset split where the documents must be stored.
+          #
+          #     Note: The following fields are mutually exclusive: `dataset_split`, `auto_split_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] auto_split_config
           #   @return [::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest::BatchDocumentsImportConfig::AutoSplitConfig]
           #     If set, documents will be automatically split into training and test
           #     split category with the specified ratio.
+          #
+          #     Note: The following fields are mutually exclusive: `auto_split_config`, `dataset_split`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] batch_input_config
           #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig]
           #     The common config to specify a set of documents used as input.

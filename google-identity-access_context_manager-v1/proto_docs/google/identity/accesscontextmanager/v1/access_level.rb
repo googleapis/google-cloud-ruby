@@ -39,9 +39,13 @@ module Google
         # @!attribute [rw] basic
         #   @return [::Google::Identity::AccessContextManager::V1::BasicLevel]
         #     A `BasicLevel` composed of `Conditions`.
+        #
+        #     Note: The following fields are mutually exclusive: `basic`, `custom`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] custom
         #   @return [::Google::Identity::AccessContextManager::V1::CustomLevel]
         #     A `CustomLevel` written in the Common Expression Language.
+        #
+        #     Note: The following fields are mutually exclusive: `custom`, `basic`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time the `AccessLevel` was created in UTC.

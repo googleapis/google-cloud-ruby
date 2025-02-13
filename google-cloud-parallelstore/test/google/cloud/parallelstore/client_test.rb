@@ -42,21 +42,23 @@ class Google::Cloud::Parallelstore::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_parallelstore_grpc
+    skip unless Google::Cloud::Parallelstore.parallelstore_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Parallelstore.parallelstore transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Parallelstore::V1beta::Parallelstore::Client, client
+      assert_kind_of Google::Cloud::Parallelstore::V1::Parallelstore::Client, client
     end
   end
 
   def test_parallelstore_rest
+    skip unless Google::Cloud::Parallelstore.parallelstore_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Parallelstore.parallelstore transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::Parallelstore::V1beta::Parallelstore::Rest::Client, client
+      assert_kind_of Google::Cloud::Parallelstore::V1::Parallelstore::Rest::Client, client
     end
   end
 end

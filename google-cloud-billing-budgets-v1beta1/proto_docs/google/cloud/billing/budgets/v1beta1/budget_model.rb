@@ -74,6 +74,8 @@ module Google
           #     match the currency of the billing account. If specified when updating a
           #     budget, it must match the currency_code of the existing budget.
           #     The `currency_code` is provided on output.
+          #
+          #     Note: The following fields are mutually exclusive: `specified_amount`, `last_period_amount`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] last_period_amount
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::LastPeriodAmount]
           #     Use the last period's actual spend as the budget for the present period.
@@ -81,6 +83,8 @@ module Google
           #     {::Google::Cloud::Billing::Budgets::V1beta1::Filter#calendar_period Filter.calendar_period}.
           #     It cannot be set in combination with
           #     {::Google::Cloud::Billing::Budgets::V1beta1::Filter#custom_period Filter.custom_period}.
+          #
+          #     Note: The following fields are mutually exclusive: `last_period_amount`, `specified_amount`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class BudgetAmount
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -272,10 +276,14 @@ module Google
           #     April, May, June. After that, it will track usage from July 1 to
           #     September 30 when the current calendar month is July, August, September,
           #     so on.
+          #
+          #     Note: The following fields are mutually exclusive: `calendar_period`, `custom_period`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] custom_period
           #   @return [::Google::Cloud::Billing::Budgets::V1beta1::CustomPeriod]
           #     Optional. Specifies to track usage from any start date (required) to any
           #     end date (optional). This time period is static, it does not recur.
+          #
+          #     Note: The following fields are mutually exclusive: `custom_period`, `calendar_period`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Filter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -194,9 +194,13 @@ module Google
       # @!attribute [rw] aws
       #   @return [::Google::Iam::V1beta::WorkloadIdentityPoolProvider::Aws]
       #     An Amazon Web Services identity provider.
+      #
+      #     Note: The following fields are mutually exclusive: `aws`, `oidc`. If a field in that set is populated, all other fields in the set will automatically be cleared.
       # @!attribute [rw] oidc
       #   @return [::Google::Iam::V1beta::WorkloadIdentityPoolProvider::Oidc]
       #     An OpenId Connect 1.0 identity provider.
+      #
+      #     Note: The following fields are mutually exclusive: `oidc`, `aws`. If a field in that set is populated, all other fields in the set will automatically be cleared.
       class WorkloadIdentityPoolProvider
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

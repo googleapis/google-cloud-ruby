@@ -368,6 +368,8 @@ module Google
             #
             #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportSuggestionDenyListEntriesRequest::InlineSource, ::Hash]
             #     The Inline source for the input content for suggestion deny list entries.
+            #
+            #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
             #     Cloud Storage location for the input content.
             #
@@ -377,6 +379,8 @@ module Google
             #
             #     * `suggestion_deny_list` (default): One JSON [SuggestionDenyListEntry]
             #     per line.
+            #
+            #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param parent [::String]
             #     Required. The parent data store resource name for which to import denylist
             #     entries. Follows pattern projects/*/locations/*/collections/*/dataStores/*.
@@ -573,10 +577,16 @@ module Google
             #
             #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1::ImportCompletionSuggestionsRequest::InlineSource, ::Hash]
             #     The Inline source for suggestion entries.
+            #
+            #     Note: The following fields are mutually exclusive: `inline_source`, `gcs_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1::GcsSource, ::Hash]
             #     Cloud Storage location for the input content.
+            #
+            #     Note: The following fields are mutually exclusive: `gcs_source`, `inline_source`, `bigquery_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1::BigQuerySource, ::Hash]
             #     BigQuery input source.
+            #
+            #     Note: The following fields are mutually exclusive: `bigquery_source`, `inline_source`, `gcs_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param parent [::String]
             #     Required. The parent data store resource name for which to import customer
             #     autocomplete suggestions.
@@ -800,6 +810,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

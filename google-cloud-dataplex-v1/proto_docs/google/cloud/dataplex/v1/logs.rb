@@ -46,18 +46,28 @@ module Google
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::ConfigDetails]
         #     Details about discovery configuration in effect.
+        #
+        #     Note: The following fields are mutually exclusive: `config`, `entity`, `partition`, `action`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] entity
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::EntityDetails]
         #     Details about the entity associated with the event.
+        #
+        #     Note: The following fields are mutually exclusive: `entity`, `config`, `partition`, `action`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] partition
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::PartitionDetails]
         #     Details about the partition associated with the event.
+        #
+        #     Note: The following fields are mutually exclusive: `partition`, `config`, `entity`, `action`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] action
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::ActionDetails]
         #     Details about the action associated with the event.
+        #
+        #     Note: The following fields are mutually exclusive: `action`, `config`, `entity`, `partition`, `table`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] table
         #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::TableDetails]
         #     Details about the BigQuery table publishing associated with the event.
+        #
+        #     Note: The following fields are mutually exclusive: `table`, `config`, `entity`, `partition`, `action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoveryEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -520,15 +530,23 @@ module Google
         # @!attribute [rw] data_profile
         #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataProfileResult]
         #     Data profile result for data profile type data scan.
+        #
+        #     Note: The following fields are mutually exclusive: `data_profile`, `data_quality`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_quality
         #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataQualityResult]
         #     Data quality result for data quality type data scan.
+        #
+        #     Note: The following fields are mutually exclusive: `data_quality`, `data_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_profile_configs
         #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataProfileAppliedConfigs]
         #     Applied configs for data profile type data scan.
+        #
+        #     Note: The following fields are mutually exclusive: `data_profile_configs`, `data_quality_configs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] data_quality_configs
         #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::DataQualityAppliedConfigs]
         #     Applied configs for data quality type data scan.
+        #
+        #     Note: The following fields are mutually exclusive: `data_quality_configs`, `data_profile_configs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] post_scan_actions_result
         #   @return [::Google::Cloud::Dataplex::V1::DataScanEvent::PostScanActionsResult]
         #     The result of post scan actions.

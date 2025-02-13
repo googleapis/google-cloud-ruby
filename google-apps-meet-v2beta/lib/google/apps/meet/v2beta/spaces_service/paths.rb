@@ -39,6 +39,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Member resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `spaces/{space}/members/{member}`
+            #
+            # @param space [String]
+            # @param member [String]
+            #
+            # @return [::String]
+            def member_path space:, member:
+              raise ::ArgumentError, "space cannot contain /" if space.to_s.include? "/"
+
+              "spaces/#{space}/members/#{member}"
+            end
+
+            ##
             # Create a fully-qualified Space resource string.
             #
             # The resource will be in the following format:

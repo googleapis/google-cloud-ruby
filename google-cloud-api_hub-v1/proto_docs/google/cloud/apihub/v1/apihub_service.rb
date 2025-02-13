@@ -1010,26 +1010,38 @@ module Google
         #   @return [::Google::Cloud::ApiHub::V1::Api]
         #     This represents Api resource in search results. Only name, display_name,
         #     description and owner fields are populated in search results.
+        #
+        #     Note: The following fields are mutually exclusive: `api`, `operation`, `deployment`, `spec`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] operation
         #   @return [::Google::Cloud::ApiHub::V1::ApiOperation]
         #     This represents ApiOperation resource in search results. Only name,
         #     and description fields are populated in search results.
+        #
+        #     Note: The following fields are mutually exclusive: `operation`, `api`, `deployment`, `spec`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] deployment
         #   @return [::Google::Cloud::ApiHub::V1::Deployment]
         #     This represents Deployment resource in search results. Only name,
         #     display_name and description fields are populated in search results.
+        #
+        #     Note: The following fields are mutually exclusive: `deployment`, `api`, `operation`, `spec`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] spec
         #   @return [::Google::Cloud::ApiHub::V1::Spec]
         #     This represents Spec resource in search results. Only name,
         #     display_name and description fields are populated in search results.
+        #
+        #     Note: The following fields are mutually exclusive: `spec`, `api`, `operation`, `deployment`, `definition`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] definition
         #   @return [::Google::Cloud::ApiHub::V1::Definition]
         #     This represents Definition resource in search results.
         #     Only name field is populated in search results.
+        #
+        #     Note: The following fields are mutually exclusive: `definition`, `api`, `operation`, `deployment`, `spec`, `version`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::ApiHub::V1::Version]
         #     This represents Version resource in search results. Only name,
         #     display_name and description fields are populated in search results.
+        #
+        #     Note: The following fields are mutually exclusive: `version`, `api`, `operation`, `deployment`, `spec`, `definition`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ApiHubResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

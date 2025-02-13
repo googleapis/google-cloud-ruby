@@ -56,6 +56,11 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the AutoSuggestionService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DataQnA.auto_suggestion_service_available?}.
+      #
       # ## About AutoSuggestionService
       #
       # This stateless API provides automatic suggestions for natural language
@@ -141,6 +146,32 @@ module Google
       end
 
       ##
+      # Determines whether the AutoSuggestionService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DataQnA.auto_suggestion_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AutoSuggestionService service,
+      # or if the versioned client gem needs an update to support the AutoSuggestionService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1alpha`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.auto_suggestion_service_available? version: :v1alpha
+        require "google/cloud/dataqna/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DataQnA
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DataQnA.const_get package_name
+        return false unless service_module.const_defined? :AutoSuggestionService
+        service_module = service_module.const_get :AutoSuggestionService
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for QuestionService.
       #
       # By default, this returns an instance of
@@ -150,6 +181,11 @@ module Google
       # `version` parameter. If the QuestionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the QuestionService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::DataQnA.question_service_available?}.
       #
       # ## About QuestionService
       #
@@ -182,6 +218,32 @@ module Google
                        .first
         service_module = Google::Cloud::DataQnA.const_get(package_name).const_get(:QuestionService)
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the QuestionService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::DataQnA.question_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the QuestionService service,
+      # or if the versioned client gem needs an update to support the QuestionService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1alpha`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.question_service_available? version: :v1alpha
+        require "google/cloud/dataqna/#{version.to_s.downcase}"
+        package_name = Google::Cloud::DataQnA
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::DataQnA.const_get package_name
+        return false unless service_module.const_defined? :QuestionService
+        service_module = service_module.const_get :QuestionService
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

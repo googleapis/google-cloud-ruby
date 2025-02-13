@@ -173,15 +173,21 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch_name`, `tag_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_name
         #   @return [::String]
         #     Regex matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag_name`, `branch_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] commit_sha
         #   @return [::String]
         #     Explicit commit SHA to build.
+        #
+        #     Note: The following fields are mutually exclusive: `commit_sha`, `branch_name`, `tag_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     ID of the project that owns the Cloud Source Repository. If omitted, the
@@ -209,15 +215,21 @@ module Google
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Functions::V2::StorageSource]
         #     If provided, get the source from this location in Google Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source`, `repo_source`, `git_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] repo_source
         #   @return [::Google::Cloud::Functions::V2::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        #
+        #     Note: The following fields are mutually exclusive: `repo_source`, `storage_source`, `git_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_uri
         #   @return [::String]
         #     If provided, get the source from GitHub repository. This option is valid
         #     only for GCF 1st Gen function.
         #     Example: https://github.com/<user>/<repo>/blob/<commit>/<path-to-code>
+        #
+        #     Note: The following fields are mutually exclusive: `git_uri`, `storage_source`, `repo_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -246,8 +258,10 @@ module Google
         # given source.
         # @!attribute [rw] automatic_update_policy
         #   @return [::Google::Cloud::Functions::V2::AutomaticUpdatePolicy]
+        #     Note: The following fields are mutually exclusive: `automatic_update_policy`, `on_deploy_update_policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] on_deploy_update_policy
         #   @return [::Google::Cloud::Functions::V2::OnDeployUpdatePolicy]
+        #     Note: The following fields are mutually exclusive: `on_deploy_update_policy`, `automatic_update_policy`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] build
         #   @return [::String]
         #     Output only. The Cloud Build name of the latest successful deployment of

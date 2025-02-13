@@ -41,6 +41,7 @@ class Google::Cloud::ContainerAnalysis::ClientConstructionMinitest < Minitest::T
   end
 
   def test_container_analysis_grpc
+    skip unless Google::Cloud::ContainerAnalysis.container_analysis_available?
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ContainerAnalysis.container_analysis do |config|

@@ -38,15 +38,23 @@ module Google
           # @!attribute [rw] dropdown_value
           #   @return [::Integer]
           #     The custom_field_option_id, if the CustomFieldDataType is DROPDOWN.
+          #
+          #     Note: The following fields are mutually exclusive: `dropdown_value`, `string_value`, `number_value`, `toggle_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] string_value
           #   @return [::String]
           #     The value, if the CustomFieldDataType is STRING.
+          #
+          #     Note: The following fields are mutually exclusive: `string_value`, `dropdown_value`, `number_value`, `toggle_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] number_value
           #   @return [::Float]
           #     The value, if the CustomFieldDataType is NUMBER.
+          #
+          #     Note: The following fields are mutually exclusive: `number_value`, `dropdown_value`, `string_value`, `toggle_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] toggle_value
           #   @return [::Boolean]
           #     The value, if the CustomFieldDataType is TOGGLE.
+          #
+          #     Note: The following fields are mutually exclusive: `toggle_value`, `dropdown_value`, `string_value`, `number_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Value
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

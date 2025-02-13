@@ -59,6 +59,11 @@ module Google
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
         #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Pages service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.pages_available?}.
+        #
         # ## About Pages
         #
         # Service for managing Pages.
@@ -81,6 +86,37 @@ module Google
         end
 
         ##
+        # Determines whether the Pages service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.pages}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Pages service,
+        # or if the versioned client gem needs an update to support the Pages service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.pages_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Pages
+          service_module = service_module.const_get :Pages
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Flows.
         #
         # By default, this returns an instance of
@@ -92,6 +128,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Flows service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.flows_available?}.
         #
         # ## About Flows
         #
@@ -115,6 +156,37 @@ module Google
         end
 
         ##
+        # Determines whether the Flows service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.flows}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Flows service,
+        # or if the versioned client gem needs an update to support the Flows service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.flows_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Flows
+          service_module = service_module.const_get :Flows
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Agents.
         #
         # By default, this returns an instance of
@@ -126,6 +198,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Agents service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.agents_available?}.
         #
         # ## About Agents
         #
@@ -149,6 +226,37 @@ module Google
         end
 
         ##
+        # Determines whether the Agents service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.agents}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Agents service,
+        # or if the versioned client gem needs an update to support the Agents service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.agents_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Agents
+          service_module = service_module.const_get :Agents
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Changelogs.
         #
         # By default, this returns an instance of
@@ -160,6 +268,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Changelogs service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.changelogs_available?}.
         #
         # ## About Changelogs
         #
@@ -183,6 +296,37 @@ module Google
         end
 
         ##
+        # Determines whether the Changelogs service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.changelogs}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Changelogs service,
+        # or if the versioned client gem needs an update to support the Changelogs service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.changelogs_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Changelogs
+          service_module = service_module.const_get :Changelogs
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Deployments.
         #
         # By default, this returns an instance of
@@ -194,6 +338,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Deployments service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.deployments_available?}.
         #
         # ## About Deployments
         #
@@ -217,6 +366,37 @@ module Google
         end
 
         ##
+        # Determines whether the Deployments service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.deployments}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Deployments service,
+        # or if the versioned client gem needs an update to support the Deployments service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.deployments_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Deployments
+          service_module = service_module.const_get :Deployments
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for EntityTypes.
         #
         # By default, this returns an instance of
@@ -228,6 +408,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the EntityTypes service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.entity_types_available?}.
         #
         # ## About EntityTypes
         #
@@ -251,6 +436,37 @@ module Google
         end
 
         ##
+        # Determines whether the EntityTypes service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.entity_types}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the EntityTypes service,
+        # or if the versioned client gem needs an update to support the EntityTypes service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.entity_types_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :EntityTypes
+          service_module = service_module.const_get :EntityTypes
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Intents.
         #
         # By default, this returns an instance of
@@ -262,6 +478,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Intents service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.intents_available?}.
         #
         # ## About Intents
         #
@@ -285,6 +506,37 @@ module Google
         end
 
         ##
+        # Determines whether the Intents service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.intents}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Intents service,
+        # or if the versioned client gem needs an update to support the Intents service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.intents_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Intents
+          service_module = service_module.const_get :Intents
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for SessionEntityTypes.
         #
         # By default, this returns an instance of
@@ -296,6 +548,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the SessionEntityTypes service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.session_entity_types_available?}.
         #
         # ## About SessionEntityTypes
         #
@@ -320,6 +577,37 @@ module Google
         end
 
         ##
+        # Determines whether the SessionEntityTypes service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.session_entity_types}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the SessionEntityTypes service,
+        # or if the versioned client gem needs an update to support the SessionEntityTypes service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.session_entity_types_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :SessionEntityTypes
+          service_module = service_module.const_get :SessionEntityTypes
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Sessions.
         #
         # By default, this returns an instance of
@@ -331,6 +619,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Sessions service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.sessions_available?}.
         #
         # ## About Sessions
         #
@@ -357,6 +650,37 @@ module Google
         end
 
         ##
+        # Determines whether the Sessions service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.sessions}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Sessions service,
+        # or if the versioned client gem needs an update to support the Sessions service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.sessions_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Sessions
+          service_module = service_module.const_get :Sessions
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for TransitionRouteGroups.
         #
         # By default, this returns an instance of
@@ -368,6 +692,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the TransitionRouteGroups service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.transition_route_groups_available?}.
         #
         # ## About TransitionRouteGroups
         #
@@ -392,6 +721,37 @@ module Google
         end
 
         ##
+        # Determines whether the TransitionRouteGroups service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.transition_route_groups}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the TransitionRouteGroups service,
+        # or if the versioned client gem needs an update to support the TransitionRouteGroups service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.transition_route_groups_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :TransitionRouteGroups
+          service_module = service_module.const_get :TransitionRouteGroups
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for TestCases.
         #
         # By default, this returns an instance of
@@ -403,6 +763,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the TestCases service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.test_cases_available?}.
         #
         # ## About TestCases
         #
@@ -427,6 +792,37 @@ module Google
         end
 
         ##
+        # Determines whether the TestCases service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.test_cases}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the TestCases service,
+        # or if the versioned client gem needs an update to support the TestCases service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.test_cases_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :TestCases
+          service_module = service_module.const_get :TestCases
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Webhooks.
         #
         # By default, this returns an instance of
@@ -438,6 +834,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Webhooks service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.webhooks_available?}.
         #
         # ## About Webhooks
         #
@@ -461,6 +862,37 @@ module Google
         end
 
         ##
+        # Determines whether the Webhooks service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.webhooks}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Webhooks service,
+        # or if the versioned client gem needs an update to support the Webhooks service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.webhooks_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Webhooks
+          service_module = service_module.const_get :Webhooks
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Environments.
         #
         # By default, this returns an instance of
@@ -472,6 +904,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Environments service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.environments_available?}.
         #
         # ## About Environments
         #
@@ -496,6 +933,37 @@ module Google
         end
 
         ##
+        # Determines whether the Environments service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.environments}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Environments service,
+        # or if the versioned client gem needs an update to support the Environments service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.environments_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Environments
+          service_module = service_module.const_get :Environments
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Experiments.
         #
         # By default, this returns an instance of
@@ -507,6 +975,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Experiments service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.experiments_available?}.
         #
         # ## About Experiments
         #
@@ -530,6 +1003,37 @@ module Google
         end
 
         ##
+        # Determines whether the Experiments service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.experiments}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Experiments service,
+        # or if the versioned client gem needs an update to support the Experiments service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.experiments_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Experiments
+          service_module = service_module.const_get :Experiments
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Generators.
         #
         # By default, this returns an instance of
@@ -541,6 +1045,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Generators service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.generators_available?}.
         #
         # ## About Generators
         #
@@ -564,6 +1073,37 @@ module Google
         end
 
         ##
+        # Determines whether the Generators service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.generators}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Generators service,
+        # or if the versioned client gem needs an update to support the Generators service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.generators_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Generators
+          service_module = service_module.const_get :Generators
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for SecuritySettingsService.
         #
         # By default, this returns an instance of
@@ -575,6 +1115,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the SecuritySettingsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.security_settings_service_available?}.
         #
         # ## About SecuritySettingsService
         #
@@ -598,6 +1143,37 @@ module Google
         end
 
         ##
+        # Determines whether the SecuritySettingsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.security_settings_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the SecuritySettingsService service,
+        # or if the versioned client gem needs an update to support the SecuritySettingsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.security_settings_service_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :SecuritySettingsService
+          service_module = service_module.const_get :SecuritySettingsService
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
+        end
+
+        ##
         # Create a new client object for Versions.
         #
         # By default, this returns an instance of
@@ -609,6 +1185,11 @@ module Google
         # appropriate versioned client will be returned.
         # You can also specify a different transport by passing `:rest` or `:grpc` in
         # the `transport` parameter.
+        #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the given transport of the Versions service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::Dialogflow::CX.versions_available?}.
         #
         # ## About Versions
         #
@@ -629,6 +1210,37 @@ module Google
           service_module = Google::Cloud::Dialogflow::CX.const_get(package_name).const_get(:Versions)
           service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the Versions service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::Dialogflow::CX.versions}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the Versions service,
+        # or if the versioned client gem needs an update to support the Versions service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.versions_available? version: :v3, transport: :grpc
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          return false unless service_module.const_defined? :Versions
+          service_module = service_module.const_get :Versions
+          if transport == :rest
+            return false unless service_module.const_defined? :Rest
+            service_module = service_module.const_get :Rest
+          end
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
         end
 
         ##

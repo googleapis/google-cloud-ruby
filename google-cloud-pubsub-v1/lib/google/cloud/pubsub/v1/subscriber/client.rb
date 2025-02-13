@@ -304,7 +304,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil, message_transforms: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -421,6 +421,9 @@ module Google
             #     when `enable_exactly_once_delivery` is true if the message was published
             #     multiple times by a publisher client. These copies are  considered distinct
             #     by Pub/Sub and have distinct `message_id` values.
+            #   @param message_transforms [::Array<::Google::Cloud::PubSub::V1::MessageTransform, ::Hash>]
+            #     Optional. Transforms to be applied to messages before they are delivered to
+            #     subscribers. Transforms are applied in the order specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -1863,10 +1866,14 @@ module Google
             #     window (or to a point before the system's notion of the subscription
             #     creation time), only retained messages will be marked as unacknowledged,
             #     and already-expunged messages will not be restored.
+            #
+            #     Note: The following fields are mutually exclusive: `time`, `snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param snapshot [::String]
             #     Optional. The snapshot to seek to. The snapshot's topic must be the same
             #     as that of the provided subscription. Format is
             #     `projects/{project}/snapshots/{snap}`.
+            #
+            #     Note: The following fields are mutually exclusive: `snapshot`, `time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::SeekResponse]
@@ -1976,6 +1983,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

@@ -152,6 +152,8 @@ module Google
         #   @return [::Google::Cloud::Eventarc::V1::CloudRun]
         #     Cloud Run fully-managed resource that receives the events. The resource
         #     should be in the same project as the trigger.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_run`, `cloud_function`, `gke`, `workflow`, `http_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_function
         #   @return [::String]
         #     The Cloud Function resource name. Cloud Functions V1 and V2 are
@@ -161,19 +163,27 @@ module Google
         #     This is a read-only field. Creating Cloud Functions V1/V2 triggers is
         #     only supported via the Cloud Functions product. An error will be returned
         #     if the user sets this value.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_function`, `cloud_run`, `gke`, `workflow`, `http_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gke
         #   @return [::Google::Cloud::Eventarc::V1::GKE]
         #     A GKE service capable of receiving events. The service should be running
         #     in the same project as the trigger.
+        #
+        #     Note: The following fields are mutually exclusive: `gke`, `cloud_run`, `cloud_function`, `workflow`, `http_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] workflow
         #   @return [::String]
         #     The resource name of the Workflow whose Executions are triggered by
         #     the events. The Workflow resource should be deployed in the same project
         #     as the trigger.
         #     Format: `projects/{project}/locations/{location}/workflows/{workflow}`
+        #
+        #     Note: The following fields are mutually exclusive: `workflow`, `cloud_run`, `cloud_function`, `gke`, `http_endpoint`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] http_endpoint
         #   @return [::Google::Cloud::Eventarc::V1::HttpEndpoint]
         #     An HTTP endpoint destination described by an URI.
+        #
+        #     Note: The following fields are mutually exclusive: `http_endpoint`, `cloud_run`, `cloud_function`, `gke`, `workflow`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::Eventarc::V1::NetworkConfig]
         #     Optional. Network config is used to configure how Eventarc resolves and

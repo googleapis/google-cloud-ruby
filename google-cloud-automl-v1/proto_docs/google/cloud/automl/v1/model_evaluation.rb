@@ -28,18 +28,28 @@ module Google
         #     classification.
         #     Tables problem is considered a classification when the target column
         #     is CATEGORY DataType.
+        #
+        #     Note: The following fields are mutually exclusive: `classification_evaluation_metrics`, `translation_evaluation_metrics`, `image_object_detection_evaluation_metrics`, `text_sentiment_evaluation_metrics`, `text_extraction_evaluation_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] translation_evaluation_metrics
         #   @return [::Google::Cloud::AutoML::V1::TranslationEvaluationMetrics]
         #     Model evaluation metrics for translation.
+        #
+        #     Note: The following fields are mutually exclusive: `translation_evaluation_metrics`, `classification_evaluation_metrics`, `image_object_detection_evaluation_metrics`, `text_sentiment_evaluation_metrics`, `text_extraction_evaluation_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_object_detection_evaluation_metrics
         #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionEvaluationMetrics]
         #     Model evaluation metrics for image object detection.
+        #
+        #     Note: The following fields are mutually exclusive: `image_object_detection_evaluation_metrics`, `classification_evaluation_metrics`, `translation_evaluation_metrics`, `text_sentiment_evaluation_metrics`, `text_extraction_evaluation_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_sentiment_evaluation_metrics
         #   @return [::Google::Cloud::AutoML::V1::TextSentimentEvaluationMetrics]
         #     Evaluation metrics for text sentiment models.
+        #
+        #     Note: The following fields are mutually exclusive: `text_sentiment_evaluation_metrics`, `classification_evaluation_metrics`, `translation_evaluation_metrics`, `image_object_detection_evaluation_metrics`, `text_extraction_evaluation_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] text_extraction_evaluation_metrics
         #   @return [::Google::Cloud::AutoML::V1::TextExtractionEvaluationMetrics]
         #     Evaluation metrics for text extraction models.
+        #
+        #     Note: The following fields are mutually exclusive: `text_extraction_evaluation_metrics`, `classification_evaluation_metrics`, `translation_evaluation_metrics`, `image_object_detection_evaluation_metrics`, `text_sentiment_evaluation_metrics`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Output only. Resource name of the model evaluation.

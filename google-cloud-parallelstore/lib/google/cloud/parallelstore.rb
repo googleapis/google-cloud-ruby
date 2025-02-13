@@ -49,14 +49,19 @@ module Google
       # Create a new client object for Parallelstore.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Parallelstore::V1beta::Parallelstore::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1beta/latest/Google-Cloud-Parallelstore-V1beta-Parallelstore-Client)
-      # for a gRPC client for version V1beta of the API.
+      # [Google::Cloud::Parallelstore::V1::Parallelstore::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-parallelstore-v1/latest/Google-Cloud-Parallelstore-V1-Parallelstore-Client)
+      # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Parallelstore service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Parallelstore service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Parallelstore.parallelstore_available?}.
       #
       # ## About Parallelstore
       #
@@ -77,11 +82,11 @@ module Google
       # * `projects/12345/locations/us-central1-c/instances/my-parallelstore-share`
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta`.
+      #   Defaults to `:v1`.
       # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.parallelstore version: :v1beta, transport: :grpc, &block
+      def self.parallelstore version: :v1, transport: :grpc, &block
         require "google/cloud/parallelstore/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Parallelstore
@@ -91,6 +96,37 @@ module Google
         service_module = Google::Cloud::Parallelstore.const_get(package_name).const_get(:Parallelstore)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the Parallelstore service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Parallelstore.parallelstore}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Parallelstore service,
+      # or if the versioned client gem needs an update to support the Parallelstore service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.parallelstore_available? version: :v1, transport: :grpc
+        require "google/cloud/parallelstore/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Parallelstore
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Parallelstore.const_get package_name
+        return false unless service_module.const_defined? :Parallelstore
+        service_module = service_module.const_get :Parallelstore
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

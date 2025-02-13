@@ -65,16 +65,22 @@ module Google
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::TimeBasedSchedule]
           #     Time based transfer schedule options. This is the default schedule
           #     option.
+          #
+          #     Note: The following fields are mutually exclusive: `time_based_schedule`, `manual_schedule`, `event_driven_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] manual_schedule
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ManualSchedule]
           #     Manual transfer schedule. If set, the transfer run will not be
           #     auto-scheduled by the system, unless the client invokes
           #     StartManualTransferRuns.  This is equivalent to
           #     disable_auto_scheduling = true.
+          #
+          #     Note: The following fields are mutually exclusive: `manual_schedule`, `time_based_schedule`, `event_driven_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] event_driven_schedule
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EventDrivenSchedule]
           #     Event driven transfer schedule options. If set, the transfer will be
           #     scheduled upon events arrial.
+          #
+          #     Note: The following fields are mutually exclusive: `event_driven_schedule`, `time_based_schedule`, `manual_schedule`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class ScheduleOptionsV2
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

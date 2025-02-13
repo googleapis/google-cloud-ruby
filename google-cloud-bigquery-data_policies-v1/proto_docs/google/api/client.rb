@@ -221,6 +221,12 @@ module Google
       #     Pythonic which are included in `protobuf>=5.29.x`. This feature will be
       #     enabled by default 1 month after launching the feature in preview
       #     packages.
+      # @!attribute [rw] unversioned_package_disabled
+      #   @return [::Boolean]
+      #     Disables generation of an unversioned Python package for this client
+      #     library. This means that the module names will need to be versioned in
+      #     import statements. For example `import google.cloud.library_v2` instead
+      #     of `import google.cloud.library`.
       class ExperimentalFeatures
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -409,6 +415,14 @@ module Google
     #   @return [::Array<::String>]
     #     An allowlist of the fully qualified names of RPCs that should be included
     #     on public client surfaces.
+    # @!attribute [rw] generate_omitted_as_internal
+    #   @return [::Boolean]
+    #     Setting this to true indicates to the client generators that methods
+    #     that would be excluded from the generation should instead be generated
+    #     in a way that indicates these methods should not be consumed by
+    #     end users. How this is expressed is up to individual language
+    #     implementations to decide. Some examples may be: added annotations,
+    #     obfuscated identifiers, or other language idiomatic patterns.
     class SelectiveGapicGeneration
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

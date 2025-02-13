@@ -41,6 +41,7 @@ class Google::Cloud::Memorystore::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_memorystore_rest
+    skip unless Google::Cloud::Memorystore.memorystore_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Memorystore.memorystore do |config|
         config.credentials = :dummy_credentials

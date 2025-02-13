@@ -265,10 +265,10 @@ module Google
               #   @param order_by [::String]
               #     Order by parameters.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ApiGateway::V1::ListGatewaysResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Gateway>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ApiGateway::V1::ListGatewaysResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Gateway>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -320,7 +320,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @api_gateway_service_stub.list_gateways request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @api_gateway_service_stub, :list_gateways, "gateways", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -709,10 +711,10 @@ module Google
               #   @param order_by [::String]
               #     Order by parameters.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ApiGateway::V1::ListApisResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Api>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ApiGateway::V1::ListApisResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiGateway::V1::Api>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -764,7 +766,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @api_gateway_service_stub.list_apis request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @api_gateway_service_stub, :list_apis, "apis", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1153,10 +1157,10 @@ module Google
               #   @param order_by [::String]
               #     Order by parameters.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::ApiGateway::V1::ListApiConfigsResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiGateway::V1::ApiConfig>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::ApiGateway::V1::ListApiConfigsResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ApiGateway::V1::ApiConfig>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -1208,7 +1212,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @api_gateway_service_stub.list_api_configs request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @api_gateway_service_stub, :list_api_configs, "api_configs", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1612,6 +1618,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

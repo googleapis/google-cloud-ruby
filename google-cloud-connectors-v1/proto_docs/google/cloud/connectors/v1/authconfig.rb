@@ -28,15 +28,23 @@ module Google
         # @!attribute [rw] user_password
         #   @return [::Google::Cloud::Connectors::V1::AuthConfig::UserPassword]
         #     UserPassword.
+        #
+        #     Note: The following fields are mutually exclusive: `user_password`, `oauth2_jwt_bearer`, `oauth2_client_credentials`, `ssh_public_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oauth2_jwt_bearer
         #   @return [::Google::Cloud::Connectors::V1::AuthConfig::Oauth2JwtBearer]
         #     Oauth2JwtBearer.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth2_jwt_bearer`, `user_password`, `oauth2_client_credentials`, `ssh_public_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] oauth2_client_credentials
         #   @return [::Google::Cloud::Connectors::V1::AuthConfig::Oauth2ClientCredentials]
         #     Oauth2ClientCredentials.
+        #
+        #     Note: The following fields are mutually exclusive: `oauth2_client_credentials`, `user_password`, `oauth2_jwt_bearer`, `ssh_public_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ssh_public_key
         #   @return [::Google::Cloud::Connectors::V1::AuthConfig::SshPublicKey]
         #     SSH Public Key.
+        #
+        #     Note: The following fields are mutually exclusive: `ssh_public_key`, `user_password`, `oauth2_jwt_bearer`, `oauth2_client_credentials`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] additional_variables
         #   @return [::Array<::Google::Cloud::Connectors::V1::ConfigVariable>]
         #     List containing additional auth configs.

@@ -218,6 +218,8 @@ module Google
                 rpc :ListBackupOperations, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse
                 # Lists Cloud Spanner database roles.
                 rpc :ListDatabaseRoles, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse
+                # Adds split points to specified tables, indexes of a database.
+                rpc :AddSplitPoints, ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse
                 # Creates a new backup schedule.
                 rpc :CreateBackupSchedule, ::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupScheduleRequest, ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule
                 # Gets backup schedule for the input schedule name.

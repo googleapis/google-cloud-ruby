@@ -161,9 +161,9 @@ module Google
     #     `[Java][Tutorial.Java]`.
     # @!attribute [rw] content
     #   @return [::String]
-    #     The Markdown content of the page. You can use <code>&#40;== include \\{path}
-    #     ==&#41;</code> to include content from a Markdown file. The content can be
-    #     used to produce the documentation page such as HTML format page.
+    #     The Markdown content of the page. You can use ```(== include {path}
+    #     ==)``` to include content from a Markdown file. The content can be used
+    #     to produce the documentation page such as HTML format page.
     # @!attribute [rw] subpages
     #   @return [::Array<::Google::Api::Page>]
     #     Subpages of this page. The order of subpages specified here will be

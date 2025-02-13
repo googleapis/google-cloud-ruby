@@ -136,15 +136,21 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch_name`, `tag_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_name
         #   @return [::String]
         #     Regex matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag_name`, `branch_name`, `commit_sha`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] commit_sha
         #   @return [::String]
         #     Explicit commit SHA to build.
+        #
+        #     Note: The following fields are mutually exclusive: `commit_sha`, `branch_name`, `tag_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] dir
         #   @return [::String]
         #     Directory, relative to the source root, in which to run the build.
@@ -199,18 +205,26 @@ module Google
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Build::V1::StorageSource]
         #     If provided, get the source from this location in Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source`, `repo_source`, `git_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] repo_source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        #
+        #     Note: The following fields are mutually exclusive: `repo_source`, `storage_source`, `git_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_source
         #   @return [::Google::Cloud::Build::V1::GitSource]
         #     If provided, get the source from this Git repository.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `storage_source`, `repo_source`, `storage_source_manifest`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] storage_source_manifest
         #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
         #     If provided, get the source from this manifest in Cloud Storage.
         #     This feature is in Preview; see description
         #     [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
+        #
+        #     Note: The following fields are mutually exclusive: `storage_source_manifest`, `storage_source`, `repo_source`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Source
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -258,6 +272,22 @@ module Google
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
         #     Output only. Stores timing information for pushing the specified artifact.
         class UploadedMavenArtifact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Go module artifact uploaded to Artifact Registry using the GoModule
+        # directive.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of the uploaded artifact.
+        # @!attribute [rw] file_hashes
+        #   @return [::Google::Cloud::Build::V1::FileHashes]
+        #     Hash types and values of the Go Module Artifact.
+        # @!attribute [r] push_timing
+        #   @return [::Google::Cloud::Build::V1::TimeSpan]
+        #     Output only. Stores timing information for pushing the specified artifact.
+        class UploadedGoModule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -442,8 +472,9 @@ module Google
         #     corresponding to build step indices.
         #
         #     [Cloud Builders](https://cloud.google.com/cloud-build/docs/cloud-builders)
-        #     can produce this output by writing to `$BUILDER_OUTPUT/output`.
-        #     Only the first 4KB of data is stored.
+        #     can produce this output by writing to `$BUILDER_OUTPUT/output`. Only the
+        #     first 50KB of data is stored. Note that the `$BUILDER_OUTPUT` variable is
+        #     read-only and can't be substituted.
         # @!attribute [rw] artifact_timing
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
         #     Time to push all non-container artifacts to Cloud Storage.
@@ -453,6 +484,10 @@ module Google
         # @!attribute [rw] maven_artifacts
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedMavenArtifact>]
         #     Maven artifacts uploaded to Artifact Registry at the end of the build.
+        # @!attribute [rw] go_modules
+        #   @return [::Array<::Google::Cloud::Build::V1::UploadedGoModule>]
+        #     Optional. Go module artifacts uploaded to Artifact Registry at the end of
+        #     the build.
         # @!attribute [rw] npm_packages
         #   @return [::Array<::Google::Cloud::Build::V1::UploadedNpmPackage>]
         #     Npm packages uploaded to Artifact Registry at the end of the build.
@@ -626,9 +661,16 @@ module Google
         #   @return [::Array<::Google::Cloud::Build::V1::Build::Warning>]
         #     Output only. Non-fatal problems encountered during the execution of the
         #     build.
+        # @!attribute [rw] git_config
+        #   @return [::Google::Cloud::Build::V1::GitConfig]
+        #     Optional. Configuration for git operations.
         # @!attribute [r] failure_info
         #   @return [::Google::Cloud::Build::V1::Build::FailureInfo]
         #     Output only. Contains information about the build when status=FAILURE.
+        # @!attribute [rw] dependencies
+        #   @return [::Array<::Google::Cloud::Build::V1::Dependency>]
+        #     Optional. Dependencies that the Cloud Build worker will fetch before
+        #     executing user steps.
         class Build
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -750,6 +792,86 @@ module Google
           end
         end
 
+        # A dependency that the Cloud Build worker will fetch before executing user
+        # steps.
+        # @!attribute [rw] empty
+        #   @return [::Boolean]
+        #     If set to true disable all dependency fetching (ignoring the default
+        #     source as well).
+        #
+        #     Note: The following fields are mutually exclusive: `empty`, `git_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] git_source
+        #   @return [::Google::Cloud::Build::V1::Dependency::GitSourceDependency]
+        #     Represents a git repository as a build dependency.
+        #
+        #     Note: The following fields are mutually exclusive: `git_source`, `empty`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class Dependency
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents a git repository as a build dependency.
+          # @!attribute [rw] repository
+          #   @return [::Google::Cloud::Build::V1::Dependency::GitSourceRepository]
+          #     Required. The kind of repo (url or dev connect).
+          # @!attribute [rw] revision
+          #   @return [::String]
+          #     Required. The revision that we will fetch the repo at.
+          # @!attribute [rw] recurse_submodules
+          #   @return [::Boolean]
+          #     Optional. True if submodules should be fetched too (default false).
+          # @!attribute [rw] depth
+          #   @return [::Integer]
+          #     Optional. How much history should be fetched for the build (default 1, -1
+          #     for all history).
+          # @!attribute [rw] dest_path
+          #   @return [::String]
+          #     Required. Where should the files be placed on the worker.
+          class GitSourceDependency
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A repository for a git source.
+          # @!attribute [rw] url
+          #   @return [::String]
+          #     Location of the Git repository.
+          #
+          #     Note: The following fields are mutually exclusive: `url`, `developer_connect`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] developer_connect
+          #   @return [::String]
+          #     The Developer Connect Git repository link or the url that matches a
+          #     repository link in the current project, formatted as
+          #     `projects/*/locations/*/connections/*/gitRepositoryLink/*`
+          #
+          #     Note: The following fields are mutually exclusive: `developer_connect`, `url`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class GitSourceRepository
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # GitConfig is a configuration for git operations.
+        # @!attribute [rw] http
+        #   @return [::Google::Cloud::Build::V1::GitConfig::HttpConfig]
+        #     Configuration for HTTP related git operations.
+        class GitConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # HttpConfig is a configuration for HTTP related git operations.
+          # @!attribute [rw] proxy_secret_version_name
+          #   @return [::String]
+          #     SecretVersion resource of the HTTP proxy URL. The Service Account used in
+          #     the build (either the default Service Account or
+          #     user-specified Service Account) should have
+          #     `secretmanager.versions.access` permissions on this secret. The proxy URL
+          #     should be in format `[protocol://][user[:password]@]proxyhost[:port]`.
+          class HttpConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Artifacts produced by a build that should be uploaded upon
         # successful completion of all build steps.
         # @!attribute [rw] images
@@ -786,6 +908,12 @@ module Google
         #     account's credentials.
         #
         #     If any artifacts fail to be pushed, the build is marked FAILURE.
+        # @!attribute [rw] go_modules
+        #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::GoModule>]
+        #     Optional. A list of Go modules to be uploaded to Artifact Registry upon
+        #     successful completion of all build steps.
+        #
+        #     If any objects fail to be pushed, the build is marked FAILURE.
         # @!attribute [rw] python_packages
         #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::PythonPackage>]
         #     A list of Python packages to be uploaded to Artifact Registry upon
@@ -859,6 +987,43 @@ module Google
           #     Maven `version` value used when uploading the artifact to Artifact
           #     Registry.
           class MavenArtifact
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Go module to upload to Artifact Registry upon successful completion of all
+          # build steps. A module refers to all dependencies in a go.mod file.
+          # @!attribute [rw] repository_name
+          #   @return [::String]
+          #     Optional. Artifact Registry repository name.
+          #
+          #     Specified Go modules will be zipped and uploaded to Artifact Registry
+          #     with this location as a prefix.
+          #     e.g. my-go-repo
+          # @!attribute [rw] repository_location
+          #   @return [::String]
+          #     Optional. Location of the Artifact Registry repository. i.e. us-east1
+          #     Defaults to the build’s location.
+          # @!attribute [rw] repository_project_id
+          #   @return [::String]
+          #     Optional. Project ID of the Artifact Registry repository.
+          #     Defaults to the build project.
+          # @!attribute [rw] source_path
+          #   @return [::String]
+          #     Optional. Source path of the go.mod file in the build's workspace. If not
+          #     specified, this will default to the current directory.
+          #     e.g. ~/code/go/mypackage
+          # @!attribute [rw] module_path
+          #   @return [::String]
+          #     Optional. The Go module's "module path".
+          #     e.g. example.com/foo/v2
+          # @!attribute [rw] module_version
+          #   @return [::String]
+          #     Optional. The Go module's semantic version in the form vX.Y.Z. e.g.
+          #     v0.1.1 Pre-release identifiers can also be added by appending a dash and
+          #     dot separated ASCII alphanumeric characters and hyphens.
+          #     e.g. v0.2.3-alpha.x.12m.5
+          class GoModule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -995,6 +1160,9 @@ module Google
 
             # Use a md5 hash.
             MD5 = 2
+
+            # Dirhash of a Go module's source code which is then hex-encoded.
+            GO_MODULE_H1 = 3
 
             # Use a sha512 hash.
             SHA512 = 4
@@ -1419,16 +1587,24 @@ module Google
         #     4. Dockerfile
         #
         #     Currently only available for GitHub App Triggers.
+        #
+        #     Note: The following fields are mutually exclusive: `autodetect`, `build`, `filename`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] build
         #   @return [::Google::Cloud::Build::V1::Build]
         #     Contents of the build template.
+        #
+        #     Note: The following fields are mutually exclusive: `build`, `autodetect`, `filename`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] filename
         #   @return [::String]
         #     Path, from the source root, to the build configuration file
         #     (i.e. cloudbuild.yaml).
+        #
+        #     Note: The following fields are mutually exclusive: `filename`, `autodetect`, `build`, `git_file_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] git_file_source
         #   @return [::Google::Cloud::Build::V1::GitFileSource]
         #     The file source describing the local or remote Build template.
+        #
+        #     Note: The following fields are mutually exclusive: `git_file_source`, `autodetect`, `build`, `filename`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the trigger was created.
@@ -1475,8 +1651,9 @@ module Google
         #   @return [::String]
         #     The service account used for all user-controlled operations including
         #     UpdateBuildTrigger, RunBuildTrigger, CreateBuild, and CancelBuild.
-        #     If no service account is set, then the standard Cloud Build service account
-        #     ([PROJECT_NUM]@system.gserviceaccount.com) will be used instead.
+        #     If no service account is set and the legacy Cloud Build service account
+        #     (`[PROJECT_NUM]@cloudbuild.gserviceaccount.com`) is the default for the
+        #     project then it will be used instead.
         #     Format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_ID_OR_EMAIL}`
         # @!attribute [rw] repository_event_config
         #   @return [::Google::Cloud::Build::V1::RepositoryEventConfig]
@@ -1507,9 +1684,13 @@ module Google
         # @!attribute [rw] pull_request
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
         #     Filter to match changes in pull requests.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_request`, `push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] push
         #   @return [::Google::Cloud::Build::V1::PushFilter]
         #     Filter to match changes in refs like branches, tags.
+        #
+        #     Note: The following fields are mutually exclusive: `push`, `pull_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RepositoryEventConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1548,9 +1729,13 @@ module Google
         # @!attribute [rw] pull_request
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
         #     filter to match changes in pull requests.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_request`, `push`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] push
         #   @return [::Google::Cloud::Build::V1::PushFilter]
         #     filter to match changes in refs like branches, tags.
+        #
+        #     Note: The following fields are mutually exclusive: `push`, `pull_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class GitHubEventsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1634,8 +1819,14 @@ module Google
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
         # @!attribute [rw] comment_control
         #   @return [::Google::Cloud::Build::V1::PullRequestFilter::CommentControl]
-        #     Configure builds to run whether a repository owner or collaborator need to
-        #     comment `/gcbrun`.
+        #     If CommentControl is enabled, depending on the setting, builds may not
+        #     fire until a repository writer comments `/gcbrun` on a pull
+        #     request or `/gcbrun` is in the pull request description.
+        #     Only PR comments that contain `/gcbrun` will trigger builds.
+        #
+        #     If CommentControl is set to disabled, comments with `/gcbrun` from a user
+        #     with repository write permission or above will
+        #     still trigger builds to run.
         # @!attribute [rw] invert_regex
         #   @return [::Boolean]
         #     If true, branches that do NOT match the git_ref will trigger a build.
@@ -1643,17 +1834,33 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Controls behavior of Pull Request comments.
+          # Controls whether or not a `/gcbrun` comment is required from a user with
+          # repository write permission or above in order to
+          # trigger Build runs for pull requests. Pull Request update events differ
+          # between repo types.
+          # Check repo specific guides
+          # ([GitHub](https://cloud.google.com/build/docs/automating-builds/github/build-repos-from-github-enterprise#creating_a_github_enterprise_trigger),
+          # [Bitbucket](https://cloud.google.com/build/docs/automating-builds/bitbucket/build-repos-from-bitbucket-server#creating_a_bitbucket_server_trigger),
+          # [GitLab](https://cloud.google.com/build/docs/automating-builds/gitlab/build-repos-from-gitlab#creating_a_gitlab_trigger)
+          # for details.
           module CommentControl
-            # Do not require comments on Pull Requests before builds are triggered.
+            # Do not require `/gcbrun` comments from a user with repository write
+            # permission or above on pull requests before builds are triggered.
+            # Comments that contain `/gcbrun` will still fire builds so this should
+            # be thought of as comments not required.
             COMMENTS_DISABLED = 0
 
-            # Enforce that repository owners or collaborators must comment on Pull
-            # Requests before builds are triggered.
+            # Builds will only fire in response to pull requests if:
+            # 1. The pull request author has repository write permission or above and
+            # `/gcbrun` is in the PR description.
+            # 2. A user with repository writer permissions or above comments `/gcbrun`
+            # on a pull request authored by any user.
             COMMENTS_ENABLED = 1
 
-            # Enforce that repository owners or collaborators must comment on external
-            # contributors' Pull Requests before builds are triggered.
+            # Builds will only fire in response to pull requests if:
+            # 1. The pull request author is a repository writer or above.
+            # 2. If the author does not have write permissions, a user with write
+            # permissions or above must comment `/gcbrun` in order to fire a build.
             COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY = 2
           end
         end
@@ -1665,12 +1872,16 @@ module Google
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `branch`, `tag`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag
         #   @return [::String]
         #     Regexes matching tags to build.
         #
         #     The syntax of the regular expressions accepted is the syntax accepted by
         #     RE2 and described at https://github.com/google/re2/wiki/Syntax
+        #
+        #     Note: The following fields are mutually exclusive: `tag`, `branch`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] invert_regex
         #   @return [::Boolean]
         #     When true, only trigger a build if the revision regex does NOT match the
@@ -1795,7 +2006,7 @@ module Google
         #     "disk free"; some of the space will be used by the operating system and
         #     build utilities. Also note that this is the minimum disk size that will be
         #     allocated for the build -- the build may run with a larger disk than
-        #     requested. At present, the maximum disk size is 2000GB; builds that request
+        #     requested. At present, the maximum disk size is 4000GB; builds that request
         #     more than the maximum are rejected with an error.
         # @!attribute [rw] substitution_option
         #   @return [::Google::Cloud::Build::V1::BuildOptions::SubstitutionOption]
@@ -1862,6 +2073,11 @@ module Google
         # @!attribute [rw] default_logs_bucket_behavior
         #   @return [::Google::Cloud::Build::V1::BuildOptions::DefaultLogsBucketBehavior]
         #     Optional. Option to specify how default logs buckets are setup.
+        # @!attribute [rw] enable_structured_logging
+        #   @return [::Boolean]
+        #     Optional. Option to specify whether structured logging is enabled.
+        #
+        #     If true, JSON-formatted logs are parsed as structured logs.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2016,6 +2232,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # GitHubEnterpriseConfig represents a configuration for a GitHub Enterprise
+        # server.
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. The full resource name for the GitHubEnterpriseConfig

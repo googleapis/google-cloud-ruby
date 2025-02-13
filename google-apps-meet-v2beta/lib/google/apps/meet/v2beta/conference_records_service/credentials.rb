@@ -25,6 +25,10 @@ module Google
         module ConferenceRecordsService
           # Credentials for the ConferenceRecordsService API.
           class Credentials < ::Google::Auth::Credentials
+            self.scope = [
+              "https://www.googleapis.com/auth/meetings.space.created",
+              "https://www.googleapis.com/auth/meetings.space.readonly"
+            ]
             self.env_vars = [
               "GOOGLE_CLOUD_CREDENTIALS",
               "GOOGLE_CLOUD_KEYFILE",

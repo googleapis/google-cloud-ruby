@@ -251,11 +251,15 @@ module Google
         #     true and all replicas are exhausted without finding a healthy replica,
         #     Spanner will wait for a replica in the list to become available, requests
         #     may fail due to `DEADLINE_EXCEEDED` errors.
+        #
+        #     Note: The following fields are mutually exclusive: `include_replicas`, `exclude_replicas`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] exclude_replicas
         #   @return [::Google::Cloud::Spanner::V1::DirectedReadOptions::ExcludeReplicas]
         #     Exclude_replicas indicates that specified replicas should be excluded
         #     from serving requests. Spanner will not route requests to the replicas
         #     in this list.
+        #
+        #     Note: The following fields are mutually exclusive: `exclude_replicas`, `include_replicas`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DirectedReadOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1029,6 +1033,8 @@ module Google
         # @!attribute [rw] transaction_id
         #   @return [::String]
         #     Commit a previously-started transaction.
+        #
+        #     Note: The following fields are mutually exclusive: `transaction_id`, `single_use_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] single_use_transaction
         #   @return [::Google::Cloud::Spanner::V1::TransactionOptions]
         #     Execute mutations in a temporary transaction. Note that unlike
@@ -1040,6 +1046,8 @@ module Google
         #     executed more than once. If this is undesirable, use
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction BeginTransaction} and
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} instead.
+        #
+        #     Note: The following fields are mutually exclusive: `single_use_transaction`, `transaction_id`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mutations
         #   @return [::Array<::Google::Cloud::Spanner::V1::Mutation>]
         #     The mutations to be executed when this transaction commits. All

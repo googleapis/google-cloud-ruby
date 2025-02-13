@@ -25,15 +25,23 @@ module Google
         # @!attribute [rw] github_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubConfig]
         #     Configuration for connections to github.com.
+        #
+        #     Note: The following fields are mutually exclusive: `github_config`, `github_enterprise_config`, `gitlab_config`, `gitlab_enterprise_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] github_enterprise_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitHubEnterpriseConfig]
         #     Configuration for connections to an instance of GitHub Enterprise.
+        #
+        #     Note: The following fields are mutually exclusive: `github_enterprise_config`, `github_config`, `gitlab_config`, `gitlab_enterprise_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabConfig]
         #     Configuration for connections to gitlab.com.
+        #
+        #     Note: The following fields are mutually exclusive: `gitlab_config`, `github_config`, `github_enterprise_config`, `gitlab_enterprise_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gitlab_enterprise_config
         #   @return [::Google::Cloud::DeveloperConnect::V1::GitLabEnterpriseConfig]
         #     Configuration for connections to an instance of GitLab Enterprise.
+        #
+        #     Note: The following fields are mutually exclusive: `gitlab_enterprise_config`, `github_config`, `github_enterprise_config`, `gitlab_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Identifier. The resource name of the connection, in the format

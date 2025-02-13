@@ -1431,8 +1431,12 @@ module Google
             #     Required. Bastion VM Instance name to use or to create.
             #   @param vm_creation_config [::Google::Cloud::CloudDMS::V1::VmCreationConfig, ::Hash]
             #     The VM creation configuration
+            #
+            #     Note: The following fields are mutually exclusive: `vm_creation_config`, `vm_selection_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param vm_selection_config [::Google::Cloud::CloudDMS::V1::VmSelectionConfig, ::Hash]
             #     The VM selection configuration
+            #
+            #     Note: The following fields are mutually exclusive: `vm_selection_config`, `vm_creation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param vm_port [::Integer]
             #     The port that will be open on the bastion host.
             #
@@ -3464,9 +3468,13 @@ module Google
             #     seed operation.
             #   @param source_connection_profile [::String]
             #     Optional. Fully qualified (Uri) name of the source connection profile.
+            #
+            #     Note: The following fields are mutually exclusive: `source_connection_profile`, `destination_connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #   @param destination_connection_profile [::String]
             #     Optional. Fully qualified (Uri) name of the destination connection
             #     profile.
+            #
+            #     Note: The following fields are mutually exclusive: `destination_connection_profile`, `source_connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -4497,6 +4505,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

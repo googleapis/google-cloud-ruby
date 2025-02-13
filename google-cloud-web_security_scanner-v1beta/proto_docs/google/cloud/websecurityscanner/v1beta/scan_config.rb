@@ -75,9 +75,13 @@ module Google
           # @!attribute [rw] google_account
           #   @return [::Google::Cloud::WebSecurityScanner::V1beta::ScanConfig::Authentication::GoogleAccount]
           #     Authentication using a Google account.
+          #
+          #     Note: The following fields are mutually exclusive: `google_account`, `custom_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] custom_account
           #   @return [::Google::Cloud::WebSecurityScanner::V1beta::ScanConfig::Authentication::CustomAccount]
           #     Authentication using a custom account.
+          #
+          #     Note: The following fields are mutually exclusive: `custom_account`, `google_account`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class Authentication
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

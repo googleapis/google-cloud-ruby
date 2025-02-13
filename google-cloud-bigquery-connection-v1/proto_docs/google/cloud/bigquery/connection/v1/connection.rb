@@ -122,26 +122,40 @@ module Google
           # @!attribute [rw] cloud_sql
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSqlProperties]
           #     Cloud SQL properties.
+          #
+          #     Note: The following fields are mutually exclusive: `cloud_sql`, `aws`, `azure`, `cloud_spanner`, `cloud_resource`, `spark`, `salesforce_data_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] aws
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsProperties]
           #     Amazon Web Services (AWS) properties.
+          #
+          #     Note: The following fields are mutually exclusive: `aws`, `cloud_sql`, `azure`, `cloud_spanner`, `cloud_resource`, `spark`, `salesforce_data_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] azure
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AzureProperties]
           #     Azure properties.
+          #
+          #     Note: The following fields are mutually exclusive: `azure`, `cloud_sql`, `aws`, `cloud_spanner`, `cloud_resource`, `spark`, `salesforce_data_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] cloud_spanner
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSpannerProperties]
           #     Cloud Spanner properties.
+          #
+          #     Note: The following fields are mutually exclusive: `cloud_spanner`, `cloud_sql`, `aws`, `azure`, `cloud_resource`, `spark`, `salesforce_data_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] cloud_resource
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudResourceProperties]
           #     Cloud Resource properties.
+          #
+          #     Note: The following fields are mutually exclusive: `cloud_resource`, `cloud_sql`, `aws`, `azure`, `cloud_spanner`, `spark`, `salesforce_data_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] spark
           #   @return [::Google::Cloud::Bigquery::Connection::V1::SparkProperties]
           #     Spark properties.
+          #
+          #     Note: The following fields are mutually exclusive: `spark`, `cloud_sql`, `aws`, `azure`, `cloud_spanner`, `cloud_resource`, `salesforce_data_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] salesforce_data_cloud
           #   @return [::Google::Cloud::Bigquery::Connection::V1::SalesforceDataCloudProperties]
           #     Optional. Salesforce DataCloud properties. This field is intended for
           #     use only by Salesforce partner projects. This field contains properties
           #     for your Salesforce DataCloud connection.
+          #
+          #     Note: The following fields are mutually exclusive: `salesforce_data_cloud`, `cloud_sql`, `aws`, `azure`, `cloud_spanner`, `cloud_resource`, `spark`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [r] creation_time
           #   @return [::Integer]
           #     Output only. The creation timestamp of the connection.
@@ -260,10 +274,14 @@ module Google
           #     Authentication using Google owned AWS IAM user's access key to assume
           #     into customer's AWS IAM Role.
           #     Deprecated, do not use.
+          #
+          #     Note: The following fields are mutually exclusive: `cross_account_role`, `access_role`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] access_role
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsAccessRole]
           #     Authentication using Google owned service account to assume into
           #     customer's AWS IAM Role.
+          #
+          #     Note: The following fields are mutually exclusive: `access_role`, `cross_account_role`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class AwsProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

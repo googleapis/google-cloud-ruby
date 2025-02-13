@@ -235,9 +235,13 @@ module Google
         # @!attribute [rw] vm_creation_config
         #   @return [::Google::Cloud::CloudDMS::V1::VmCreationConfig]
         #     The VM creation configuration
+        #
+        #     Note: The following fields are mutually exclusive: `vm_creation_config`, `vm_selection_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vm_selection_config
         #   @return [::Google::Cloud::CloudDMS::V1::VmSelectionConfig]
         #     The VM selection configuration
+        #
+        #     Note: The following fields are mutually exclusive: `vm_selection_config`, `vm_creation_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] vm_port
         #   @return [::Integer]
         #     The port that will be open on the bastion host.
@@ -837,10 +841,14 @@ module Google
         # @!attribute [rw] source_connection_profile
         #   @return [::String]
         #     Optional. Fully qualified (Uri) name of the source connection profile.
+        #
+        #     Note: The following fields are mutually exclusive: `source_connection_profile`, `destination_connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] destination_connection_profile
         #   @return [::String]
         #     Optional. Fully qualified (Uri) name of the destination connection
         #     profile.
+        #
+        #     Note: The following fields are mutually exclusive: `destination_connection_profile`, `source_connection_profile`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SeedConversionWorkspaceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

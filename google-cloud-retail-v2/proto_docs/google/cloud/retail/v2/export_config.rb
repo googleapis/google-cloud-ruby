@@ -25,9 +25,13 @@ module Google
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::Retail::V2::OutputConfig::GcsDestination]
         #     The Google Cloud Storage location where the output is to be written to.
+        #
+        #     Note: The following fields are mutually exclusive: `gcs_destination`, `bigquery_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Retail::V2::OutputConfig::BigQueryDestination]
         #     The BigQuery location where the output is to be written to.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_destination`, `gcs_destination`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

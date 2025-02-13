@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.22.0 (2025-02-05)
+
+#### Features
+
+* Added the build_config field to the Service resource 
+* Added the creator field to the Execution resource 
+* Support for Container base image URI and build info 
+* Support for project descriptor files ([#28918](https://github.com/googleapis/google-cloud-ruby/issues/28918)) 
+
+### 0.21.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.20.0 (2024-12-10)
 
 #### Features

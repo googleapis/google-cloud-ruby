@@ -37,9 +37,13 @@ module Google
         # @!attribute [rw] vm_image
         #   @return [::Google::Cloud::Notebooks::V1::VmImage]
         #     Use a Compute Engine VM image to start the notebook instance.
+        #
+        #     Note: The following fields are mutually exclusive: `vm_image`, `container_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] container_image
         #   @return [::Google::Cloud::Notebooks::V1::ContainerImage]
         #     Use a container image to start the notebook instance.
+        #
+        #     Note: The following fields are mutually exclusive: `container_image`, `vm_image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] post_startup_script
         #   @return [::String]
         #     Path to a Bash script that automatically runs after a notebook instance
@@ -62,10 +66,14 @@ module Google
         # @!attribute [rw] image_name
         #   @return [::String]
         #     Use VM image name to find the image.
+        #
+        #     Note: The following fields are mutually exclusive: `image_name`, `image_family`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] image_family
         #   @return [::String]
         #     Use this VM image family to find the image; the newest image in this
         #     family will be used.
+        #
+        #     Note: The following fields are mutually exclusive: `image_family`, `image_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class VmImage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

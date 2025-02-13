@@ -74,13 +74,19 @@ module Google
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::Order]
             #     Indicates that this field supports ordering by the specified order or
             #     comparing using =, !=, <, <=, >, >=.
+            #
+            #     Note: The following fields are mutually exclusive: `order`, `array_config`, `vector_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] array_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::ArrayConfig]
             #     Indicates that this field supports operations on `array_value`s.
+            #
+            #     Note: The following fields are mutually exclusive: `array_config`, `order`, `vector_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             # @!attribute [rw] vector_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::VectorConfig]
             #     Indicates that this field supports nearest neighbor and distance
             #     operations on vector.
+            #
+            #     Note: The following fields are mutually exclusive: `vector_config`, `order`, `array_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
             class IndexField
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DataplexService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dataplex.dataplex_service_available?}.
+      #
       # ## About DataplexService
       #
       # Dataplex service provides data lakes as a service. The primary resources
@@ -84,6 +89,37 @@ module Google
       end
 
       ##
+      # Determines whether the DataplexService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dataplex.dataplex_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DataplexService service,
+      # or if the versioned client gem needs an update to support the DataplexService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.dataplex_service_available? version: :v1, transport: :grpc
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dataplex.const_get package_name
+        return false unless service_module.const_defined? :DataplexService
+        service_module = service_module.const_get :DataplexService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for CatalogService.
       #
       # By default, this returns an instance of
@@ -95,6 +131,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the CatalogService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dataplex.catalog_service_available?}.
       #
       # ## About CatalogService
       #
@@ -122,6 +163,37 @@ module Google
       end
 
       ##
+      # Determines whether the CatalogService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dataplex.catalog_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the CatalogService service,
+      # or if the versioned client gem needs an update to support the CatalogService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.catalog_service_available? version: :v1, transport: :grpc
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dataplex.const_get package_name
+        return false unless service_module.const_defined? :CatalogService
+        service_module = service_module.const_get :CatalogService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ContentService.
       #
       # By default, this returns an instance of
@@ -133,6 +205,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the ContentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dataplex.content_service_available?}.
       #
       # ## About ContentService
       #
@@ -156,6 +233,37 @@ module Google
       end
 
       ##
+      # Determines whether the ContentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dataplex.content_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ContentService service,
+      # or if the versioned client gem needs an update to support the ContentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.content_service_available? version: :v1, transport: :grpc
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dataplex.const_get package_name
+        return false unless service_module.const_defined? :ContentService
+        service_module = service_module.const_get :ContentService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for DataTaxonomyService.
       #
       # By default, this returns an instance of
@@ -167,6 +275,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DataTaxonomyService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dataplex.data_taxonomy_service_available?}.
       #
       # ## About DataTaxonomyService
       #
@@ -191,6 +304,37 @@ module Google
       end
 
       ##
+      # Determines whether the DataTaxonomyService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dataplex.data_taxonomy_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DataTaxonomyService service,
+      # or if the versioned client gem needs an update to support the DataTaxonomyService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.data_taxonomy_service_available? version: :v1, transport: :grpc
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dataplex.const_get package_name
+        return false unless service_module.const_defined? :DataTaxonomyService
+        service_module = service_module.const_get :DataTaxonomyService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for DataScanService.
       #
       # By default, this returns an instance of
@@ -202,6 +346,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the DataScanService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dataplex.data_scan_service_available?}.
       #
       # ## About DataScanService
       #
@@ -227,6 +376,37 @@ module Google
       end
 
       ##
+      # Determines whether the DataScanService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dataplex.data_scan_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the DataScanService service,
+      # or if the versioned client gem needs an update to support the DataScanService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.data_scan_service_available? version: :v1, transport: :grpc
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dataplex.const_get package_name
+        return false unless service_module.const_defined? :DataScanService
+        service_module = service_module.const_get :DataScanService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for MetadataService.
       #
       # By default, this returns an instance of
@@ -238,6 +418,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the MetadataService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Dataplex.metadata_service_available?}.
       #
       # ## About MetadataService
       #
@@ -259,6 +444,37 @@ module Google
         service_module = Google::Cloud::Dataplex.const_get(package_name).const_get(:MetadataService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the MetadataService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Dataplex.metadata_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the MetadataService service,
+      # or if the versioned client gem needs an update to support the MetadataService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.metadata_service_available? version: :v1, transport: :grpc
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Dataplex.const_get package_name
+        return false unless service_module.const_defined? :MetadataService
+        service_module = service_module.const_get :MetadataService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

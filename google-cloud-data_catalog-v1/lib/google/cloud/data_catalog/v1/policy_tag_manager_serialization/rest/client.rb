@@ -319,8 +319,12 @@ module Google
               #     to.
               #   @param inline_source [::Google::Cloud::DataCatalog::V1::InlineSource, ::Hash]
               #     Inline source taxonomy to import.
+              #
+              #     Note: The following fields are mutually exclusive: `inline_source`, `cross_regional_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param cross_regional_source [::Google::Cloud::DataCatalog::V1::CrossRegionalSource, ::Hash]
               #     Cross-regional source taxonomy to import.
+              #
+              #     Note: The following fields are mutually exclusive: `cross_regional_source`, `inline_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::ImportTaxonomiesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -510,6 +514,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

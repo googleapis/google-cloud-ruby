@@ -399,6 +399,8 @@ module Google
           #     {::Google::Cloud::AIPlatform::V1::Attribution#output_display_name Attribution.output_display_name}
           #     is populated by locating in the mapping with
           #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index}.
+          #
+          #     Note: The following fields are mutually exclusive: `index_display_name_mapping`, `display_name_mapping_key`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] display_name_mapping_key
           #   @return [::String]
           #     Specify a field name in the prediction to look for the display name.
@@ -409,6 +411,8 @@ module Google
           #     outputs, so that it can be located by
           #     {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index}
           #     for a specific output.
+          #
+          #     Note: The following fields are mutually exclusive: `display_name_mapping_key`, `index_display_name_mapping`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] output_tensor_name
           #   @return [::String]
           #     Name of the output tensor. Required and is only applicable to Vertex

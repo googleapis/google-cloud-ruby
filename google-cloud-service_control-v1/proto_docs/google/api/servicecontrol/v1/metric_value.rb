@@ -43,18 +43,28 @@ module Google
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     A boolean value.
+        #
+        #     Note: The following fields are mutually exclusive: `bool_value`, `int64_value`, `double_value`, `string_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] int64_value
         #   @return [::Integer]
         #     A signed 64-bit integer value.
+        #
+        #     Note: The following fields are mutually exclusive: `int64_value`, `bool_value`, `double_value`, `string_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] double_value
         #   @return [::Float]
         #     A double precision floating point value.
+        #
+        #     Note: The following fields are mutually exclusive: `double_value`, `bool_value`, `int64_value`, `string_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A text string value.
+        #
+        #     Note: The following fields are mutually exclusive: `string_value`, `bool_value`, `int64_value`, `double_value`, `distribution_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] distribution_value
         #   @return [::Google::Cloud::ServiceControl::V1::Distribution]
         #     A distribution value.
+        #
+        #     Note: The following fields are mutually exclusive: `distribution_value`, `bool_value`, `int64_value`, `double_value`, `string_value`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class MetricValue
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

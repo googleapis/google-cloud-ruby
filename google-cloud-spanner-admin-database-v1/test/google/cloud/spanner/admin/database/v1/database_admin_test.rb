@@ -1354,6 +1354,68 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     end
   end
 
+  def test_add_split_points
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    database = "hello world"
+    split_points = [{}]
+    initiator = "hello world"
+
+    add_split_points_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :add_split_points, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest, request
+      assert_equal "hello world", request["database"]
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::SplitPoints, request["split_points"].first
+      assert_equal "hello world", request["initiator"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, add_split_points_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.add_split_points({ database: database, split_points: split_points, initiator: initiator }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.add_split_points database: database, split_points: split_points, initiator: initiator do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.add_split_points ::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.add_split_points({ database: database, split_points: split_points, initiator: initiator }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.add_split_points(::Google::Cloud::Spanner::Admin::Database::V1::AddSplitPointsRequest.new(database: database, split_points: split_points, initiator: initiator), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, add_split_points_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_backup_schedule
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Spanner::Admin::Database::V1::BackupSchedule.new

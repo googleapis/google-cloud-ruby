@@ -335,8 +335,12 @@ module Google
               #     The options for this query.
               #   @param query [::Google::Cloud::Datastore::V1::Query, ::Hash]
               #     The query to run.
+              #
+              #     Note: The following fields are mutually exclusive: `query`, `gql_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
               #     The GQL query to run. This query must be a non-aggregation query.
+              #
+              #     Note: The following fields are mutually exclusive: `gql_query`, `query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param property_mask [::Google::Cloud::Datastore::V1::PropertyMask, ::Hash]
               #     The properties to return.
               #     This field must not be set for a projection query.
@@ -438,8 +442,12 @@ module Google
               #     The options for this query.
               #   @param aggregation_query [::Google::Cloud::Datastore::V1::AggregationQuery, ::Hash]
               #     The query to run.
+              #
+              #     Note: The following fields are mutually exclusive: `aggregation_query`, `gql_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
               #     The GQL query to run. This query must be an aggregation query.
+              #
+              #     Note: The following fields are mutually exclusive: `gql_query`, `aggregation_query`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param explain_options [::Google::Cloud::Datastore::V1::ExplainOptions, ::Hash]
               #     Optional. Explain options for the query. If set, additional query
               #     statistics will be returned. If not, only query results will be returned.
@@ -618,11 +626,15 @@ module Google
               #     The identifier of the transaction associated with the commit. A
               #     transaction identifier is returned by a call to
               #     {::Google::Cloud::Datastore::V1::Datastore::Rest::Client#begin_transaction Datastore.BeginTransaction}.
+              #
+              #     Note: The following fields are mutually exclusive: `transaction`, `single_use_transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param single_use_transaction [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
               #     Options for beginning a new transaction for this request.
               #     The transaction is committed when the request completes. If specified,
               #     {::Google::Cloud::Datastore::V1::TransactionOptions TransactionOptions.mode} must be
               #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
+              #
+              #     Note: The following fields are mutually exclusive: `single_use_transaction`, `transaction`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param mutations [::Array<::Google::Cloud::Datastore::V1::Mutation, ::Hash>]
               #     The mutations to perform.
               #
@@ -997,6 +1009,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

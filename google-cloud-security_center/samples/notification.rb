@@ -12,15 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def create_notification_config org_id:, config_id:, pubsub_topic:
+def create_notification_config org_id:, location:, config_id:, pubsub_topic:
   # [START securitycenter_create_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
   # org_id = "YOUR_ORGANZATION_ID"
 
-  # Your notification config id. e.g. for
-  # "organizations/123/notificationConfigs/my-config" this would be "my-config".
+  # Your location. e.g. "global" or "us".
+  # location = "global"
+
+  # Your notification config id within its parent scope. e.g. for
+  # "organizations/123/locations/global/notificationConfigs/my-config" this would be "my-config".
   # config_id = "YOUR_CONFIG_ID"
 
   # The PubSub topic where notifications will be published.
@@ -28,10 +31,8 @@ def create_notification_config org_id:, config_id:, pubsub_topic:
 
   client = Google::Cloud::SecurityCenter.security_center
 
-  # You can also use 'project_id' or 'folder_id' as a parent.
-  # client.project_path project: project_id
-  # client.folder_path folder: folder_id
-  parent = client.organization_path organization: org_id
+  # You can also use a project or folder path as a parent.
+  parent = client.organization_location_path organization: org_id, location: location
 
   notification_config = {
     description:      "Sample config for Ruby",
@@ -48,12 +49,15 @@ def create_notification_config org_id:, config_id:, pubsub_topic:
   # [END securitycenter_create_notification_config]
 end
 
-def update_notification_config org_id:, config_id:, description: nil, pubsub_topic: nil, filter: nil
+def update_notification_config org_id:, location:, config_id:, description: nil, pubsub_topic: nil, filter: nil
   # [START securitycenter_update_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
   # org_id = "YOUR_ORGANZATION_ID"
+
+  # Your location. e.g. "global" or "us".
+  # location = "global"
 
   # Your notification config id. e.g. for
   # "organizations/123/notificationConfigs/my-config" this would be "my-config".
@@ -70,8 +74,9 @@ def update_notification_config org_id:, config_id:, description: nil, pubsub_top
 
   client = Google::Cloud::SecurityCenter.security_center
 
-  # You can also use 'project_id' or 'folder_id' as a parent.
+  # You can also use a project or folder as a parent.
   config_path = client.notification_config_path organization:        org_id,
+                                                location:            location,
                                                 notification_config: config_id
   notification_config = { name: config_path }
   notification_config[:description] = description unless description.nil?
@@ -92,12 +97,15 @@ def update_notification_config org_id:, config_id:, description: nil, pubsub_top
   # [END securitycenter_update_notification_config]
 end
 
-def delete_notification_config org_id:, config_id:
+def delete_notification_config org_id:, location:, config_id:
   # [START securitycenter_delete_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
   # org_id = "YOUR_ORGANZATION_ID"
+
+  # Your location. e.g. "global" or "us".
+  # location = "global"
 
   # Your notification config id. e.g. for
   # "organizations/123/notificationConfigs/my-config" this would be "my-config".
@@ -105,8 +113,9 @@ def delete_notification_config org_id:, config_id:
 
   client = Google::Cloud::SecurityCenter.security_center
 
-  # You can also use 'project_id' or 'folder_id' as a parent.
+  # You can also use a project or folder as a parent.
   config_path = client.notification_config_path organization:        org_id,
+                                                location:            location,
                                                 notification_config: config_id
 
   response = client.delete_notification_config name: config_path
@@ -114,12 +123,15 @@ def delete_notification_config org_id:, config_id:
   # [END securitycenter_delete_notification_config]
 end
 
-def get_notification_config org_id:, config_id:
+def get_notification_config org_id:, location:, config_id:
   # [START securitycenter_get_notification_config]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
   # org_id = "YOUR_ORGANZATION_ID"
+
+  # Your location. e.g. "global" or "us".
+  # location = "global"
 
   # Your notification config id. e.g. for
   # "organizations/123/notificationConfigs/my-config" this would be "my-config".
@@ -127,8 +139,9 @@ def get_notification_config org_id:, config_id:
 
   client = Google::Cloud::SecurityCenter.security_center
 
-  # You can also use 'project_id' or 'folder_id' as a parent.
+  # You can also use a project or folder as a parent.
   config_path = client.notification_config_path organization:        org_id,
+                                                location:            location,
                                                 notification_config: config_id
 
   response = client.get_notification_config name: config_path
@@ -136,19 +149,20 @@ def get_notification_config org_id:, config_id:
   # [END securitycenter_get_notification_config]
 end
 
-def list_notification_configs org_id:
+def list_notification_configs org_id:, location:
   # [START securitycenter_list_notification_configs]
   require "google/cloud/security_center"
 
   # Your organization id. e.g. for "organizations/123", this would be "123".
   # org_id = "YOUR_ORGANZATION_ID"
 
+  # Your location. e.g. "global" or "us".
+  # location = "global"
+
   client = Google::Cloud::SecurityCenter.security_center
 
-  # You can also use 'project_id' or 'folder_id' as a parent.
-  # client.project_path project: project_id
-  # client.folder_path folder: folder_id
-  parent = client.organization_path organization: org_id
+  # You can also use a project or folder as a parent.
+  parent = client.organization_location_path organization: org_id, location: location
 
   client.list_notification_configs(parent: parent).each_page do |page|
     page.each do |element|
@@ -162,23 +176,28 @@ if $PROGRAM_NAME == __FILE__
   case ARGV.shift
   when "create_notification_config"
     create_notification_config org_id:       ARGV.shift,
+                               location:     ARGV.shift,
                                config_id:    ARGV.shift,
                                pubsub_topic: ARGV.shift
   when "delete_notification_config"
     delete_notification_config org_id:    ARGV.shift,
+                               location:  ARGV.shift,
                                config_id: ARGV.shift
   when "update_notification_config"
     update_notification_config org_id:       ARGV.shift,
+                               location:     ARGV.shift,
                                config_id:    ARGV.shift,
                                description:  ARGV.shift,
                                pubsub_topic: ARGV.shift,
                                filter:       ARGV.shift
   when "get_notification_config"
     get_notification_config org_id:    ARGV.shift,
+                            location:  ARGV.shift,
                             config_id: ARGV.shift
 
   when "list_notification_configs"
-    list_notification_configs org_id: ARGV.shift
+    list_notification_configs org_id:   ARGV.shift,
+                              location: ARGV.shift
   else
     puts <<~USAGE
       Usage: bundle exec ruby notification.rb [command] [arguments]

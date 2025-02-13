@@ -26,29 +26,53 @@ module Google
           # the Merchant Center account.
           # @!attribute [rw] primary_product_data_source
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::PrimaryProductDataSource]
-          #     Required. The [primary data
+          #     The [primary data
           #     source](https://support.google.com/merchants/answer/7439058) for local
           #     and online products.
+          #
+          #     Note: The following fields are mutually exclusive: `primary_product_data_source`, `supplemental_product_data_source`, `local_inventory_data_source`, `regional_inventory_data_source`, `promotion_data_source`, `product_review_data_source`, `merchant_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] supplemental_product_data_source
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::SupplementalProductDataSource]
-          #     Required. The [supplemental data
+          #     The [supplemental data
           #     source](https://support.google.com/merchants/answer/7439058) for local
           #     and online products.
+          #
+          #     Note: The following fields are mutually exclusive: `supplemental_product_data_source`, `primary_product_data_source`, `local_inventory_data_source`, `regional_inventory_data_source`, `promotion_data_source`, `product_review_data_source`, `merchant_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] local_inventory_data_source
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::LocalInventoryDataSource]
-          #     Required. The [local
+          #     The [local
           #     inventory](https://support.google.com/merchants/answer/7023001) data
           #     source.
+          #
+          #     Note: The following fields are mutually exclusive: `local_inventory_data_source`, `primary_product_data_source`, `supplemental_product_data_source`, `regional_inventory_data_source`, `promotion_data_source`, `product_review_data_source`, `merchant_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] regional_inventory_data_source
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::RegionalInventoryDataSource]
-          #     Required. The [regional
+          #     The [regional
           #     inventory](https://support.google.com/merchants/answer/7439058) data
           #     source.
+          #
+          #     Note: The following fields are mutually exclusive: `regional_inventory_data_source`, `primary_product_data_source`, `supplemental_product_data_source`, `local_inventory_data_source`, `promotion_data_source`, `product_review_data_source`, `merchant_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] promotion_data_source
           #   @return [::Google::Shopping::Merchant::DataSources::V1beta::PromotionDataSource]
-          #     Required. The
+          #     The
           #     [promotion](https://support.google.com/merchants/answer/2906014) data
           #     source.
+          #
+          #     Note: The following fields are mutually exclusive: `promotion_data_source`, `primary_product_data_source`, `supplemental_product_data_source`, `local_inventory_data_source`, `regional_inventory_data_source`, `product_review_data_source`, `merchant_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] product_review_data_source
+          #   @return [::Google::Shopping::Merchant::DataSources::V1beta::ProductReviewDataSource]
+          #     The [product
+          #     review](https://support.google.com/merchants/answer/7045996)
+          #     data source.
+          #
+          #     Note: The following fields are mutually exclusive: `product_review_data_source`, `primary_product_data_source`, `supplemental_product_data_source`, `local_inventory_data_source`, `regional_inventory_data_source`, `promotion_data_source`, `merchant_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] merchant_review_data_source
+          #   @return [::Google::Shopping::Merchant::DataSources::V1beta::MerchantReviewDataSource]
+          #     The [merchant
+          #     review](https://support.google.com/merchants/answer/7045996)
+          #     data source.
+          #
+          #     Note: The following fields are mutually exclusive: `merchant_review_data_source`, `primary_product_data_source`, `supplemental_product_data_source`, `local_inventory_data_source`, `regional_inventory_data_source`, `promotion_data_source`, `product_review_data_source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] name
           #   @return [::String]
           #     Identifier. The name of the data source.

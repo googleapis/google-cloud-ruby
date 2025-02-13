@@ -302,10 +302,10 @@ module Google
               #     The only allowed `order_by` criteria for admin_search mode is `default`.
               #     Using this flags guarantees a full recall of the search results.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Cloud::DataCatalog::V1::SearchCatalogResponse]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::DataCatalog::V1::SearchCatalogResponse]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -357,7 +357,9 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @data_catalog_stub.search_catalog request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @data_catalog_stub, :search_catalog, "results", request, result, options
                   yield result, operation if block_given?
+                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -1233,6 +1235,8 @@ module Google
               #
               #      * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
               #      * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
+              #
+              #     Note: The following fields are mutually exclusive: `linked_resource`, `sql_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param sql_resource [::String]
               #     The SQL name of the entry. SQL names are case-sensitive.
               #
@@ -1247,6 +1251,8 @@ module Google
               #     Identifiers (`*_ID`) should comply with the
               #     [Lexical structure in Standard SQL]
               #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
+              #
+              #     Note: The following fields are mutually exclusive: `sql_resource`, `linked_resource`, `fully_qualified_name`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param fully_qualified_name [::String]
               #     [Fully Qualified Name
               #     (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
@@ -1265,6 +1271,8 @@ module Google
               #     Example for a DPMS table:
               #
               #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+              #
+              #     Note: The following fields are mutually exclusive: `fully_qualified_name`, `linked_resource`, `sql_resource`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param project [::String]
               #     Project where the lookup should be performed. Required to lookup
               #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
@@ -3466,8 +3474,12 @@ module Google
               #     Required. The organization or project whose config is being specified.
               #   @param tag_template_migration [::Google::Cloud::DataCatalog::V1::TagTemplateMigration]
               #     Opt-in status for the migration of Tag Templates to Dataplex.
+              #
+              #     Note: The following fields are mutually exclusive: `tag_template_migration`, `catalog_ui_experience`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               #   @param catalog_ui_experience [::Google::Cloud::DataCatalog::V1::CatalogUIExperience]
               #     Opt-in status for the UI switch to Dataplex.
+              #
+              #     Note: The following fields are mutually exclusive: `catalog_ui_experience`, `tag_template_migration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::MigrationConfig]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -3730,6 +3742,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

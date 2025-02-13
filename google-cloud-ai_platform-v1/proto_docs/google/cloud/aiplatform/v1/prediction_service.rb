@@ -471,6 +471,9 @@ module Google
         #   @return [::Integer]
         #     The total number of billable characters counted across all instances from
         #     the request.
+        # @!attribute [r] prompt_tokens_details
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+        #     Output only. List of modalities that were processed in the request input.
         class CountTokensResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -555,6 +558,13 @@ module Google
         # @!attribute [r] model_version
         #   @return [::String]
         #     Output only. The model version used to generate the response.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when the request is made to the server.
+        # @!attribute [r] response_id
+        #   @return [::String]
+        #     Output only. response_id is used to identify each response. It is the
+        #     encoding of the event_id.
         # @!attribute [r] prompt_feedback
         #   @return [::Google::Cloud::AIPlatform::V1::GenerateContentResponse::PromptFeedback]
         #     Output only. Content filter results for a prompt sent in the request.
@@ -617,6 +627,16 @@ module Google
           #   @return [::Integer]
           #     Output only. Number of tokens in the cached part in the input (the cached
           #     content).
+          # @!attribute [r] prompt_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities that were processed in the request input.
+          # @!attribute [r] cache_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities of the cached content in the request
+          #     input.
+          # @!attribute [r] candidates_tokens_details
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModalityTokenCount>]
+          #     Output only. List of modalities that were returned in the response.
           class UsageMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

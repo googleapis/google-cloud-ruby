@@ -1640,12 +1640,18 @@ module Google
         # @!attribute [rw] sha256
         #   @return [::String]
         #     A message digest produced with the SHA-256 algorithm.
+        #
+        #     Note: The following fields are mutually exclusive: `sha256`, `sha384`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha384
         #   @return [::String]
         #     A message digest produced with the SHA-384 algorithm.
+        #
+        #     Note: The following fields are mutually exclusive: `sha384`, `sha256`, `sha512`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] sha512
         #   @return [::String]
         #     A message digest produced with the SHA-512 algorithm.
+        #
+        #     Note: The following fields are mutually exclusive: `sha512`, `sha256`, `sha384`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Digest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

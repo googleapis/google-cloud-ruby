@@ -42,21 +42,23 @@ class Google::Cloud::SecurityCenter::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_security_center_grpc
+    skip unless Google::Cloud::SecurityCenter.security_center_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::SecurityCenter.security_center transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::SecurityCenter::V1::SecurityCenter::Client, client
+      assert_kind_of Google::Cloud::SecurityCenter::V2::SecurityCenter::Client, client
     end
   end
 
   def test_security_center_rest
+    skip unless Google::Cloud::SecurityCenter.security_center_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::SecurityCenter.security_center transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client, client
+      assert_kind_of Google::Cloud::SecurityCenter::V2::SecurityCenter::Rest::Client, client
     end
   end
 end

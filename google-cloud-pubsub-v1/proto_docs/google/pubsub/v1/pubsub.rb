@@ -71,18 +71,28 @@ module Google
         # @!attribute [rw] aws_kinesis
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsKinesis]
         #     Optional. Amazon Kinesis Data Streams.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_kinesis`, `cloud_storage`, `azure_event_hubs`, `aws_msk`, `confluent_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_storage
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage]
         #     Optional. Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_storage`, `aws_kinesis`, `azure_event_hubs`, `aws_msk`, `confluent_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] azure_event_hubs
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AzureEventHubs]
         #     Optional. Azure Event Hubs.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_event_hubs`, `aws_kinesis`, `cloud_storage`, `aws_msk`, `confluent_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_msk
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::AwsMsk]
         #     Optional. Amazon MSK.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_msk`, `aws_kinesis`, `cloud_storage`, `azure_event_hubs`, `confluent_cloud`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] confluent_cloud
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::ConfluentCloud]
         #     Optional. Confluent Cloud.
+        #
+        #     Note: The following fields are mutually exclusive: `confluent_cloud`, `aws_kinesis`, `cloud_storage`, `azure_event_hubs`, `aws_msk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] platform_logs_settings
         #   @return [::Google::Cloud::PubSub::V1::PlatformLogsSettings]
         #     Optional. Platform Logs settings. If unset, no Platform Logs will be
@@ -163,14 +173,20 @@ module Google
           # @!attribute [rw] text_format
           #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::TextFormat]
           #     Optional. Data from Cloud Storage will be interpreted as text.
+          #
+          #     Note: The following fields are mutually exclusive: `text_format`, `avro_format`, `pubsub_avro_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] avro_format
           #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::AvroFormat]
           #     Optional. Data from Cloud Storage will be interpreted in Avro format.
+          #
+          #     Note: The following fields are mutually exclusive: `avro_format`, `text_format`, `pubsub_avro_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] pubsub_avro_format
           #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings::CloudStorage::PubSubAvroFormat]
           #     Optional. It will be assumed data from Cloud Storage was written via
           #     [Cloud Storage
           #     subscriptions](https://cloud.google.com/pubsub/docs/cloudstorage).
+          #
+          #     Note: The following fields are mutually exclusive: `pubsub_avro_format`, `text_format`, `avro_format`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] minimum_object_create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Optional. Only objects with a larger or equal creation timestamp will be
@@ -453,15 +469,23 @@ module Google
         # @!attribute [rw] cloud_storage_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::CloudStorageFailure]
         #     Optional. Failure when ingesting from Cloud Storage.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] aws_msk_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AwsMskFailureReason]
         #     Optional. Failure when ingesting from Amazon MSK.
+        #
+        #     Note: The following fields are mutually exclusive: `aws_msk_failure`, `cloud_storage_failure`, `azure_event_hubs_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] azure_event_hubs_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AzureEventHubsFailureReason]
         #     Optional. Failure when ingesting from Azure Event Hubs.
+        #
+        #     Note: The following fields are mutually exclusive: `azure_event_hubs_failure`, `cloud_storage_failure`, `aws_msk_failure`, `confluent_cloud_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] confluent_cloud_failure
         #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ConfluentCloudFailureReason]
         #     Optional. Failure when ingesting from Confluent Cloud.
+        #
+        #     Note: The following fields are mutually exclusive: `confluent_cloud_failure`, `cloud_storage_failure`, `aws_msk_failure`, `azure_event_hubs_failure`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class IngestionFailureEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -501,10 +525,14 @@ module Google
           # @!attribute [rw] avro_failure_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::AvroFailureReason]
           #     Optional. Failure encountered when parsing an Avro file.
+          #
+          #     Note: The following fields are mutually exclusive: `avro_failure_reason`, `api_violation_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] api_violation_reason
           #   @return [::Google::Cloud::PubSub::V1::IngestionFailureEvent::ApiViolationReason]
           #     Optional. The Pub/Sub API limits prevented the desired message from
           #     being published.
+          #
+          #     Note: The following fields are mutually exclusive: `api_violation_reason`, `avro_failure_reason`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           class CloudStorageFailure
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -580,6 +608,63 @@ module Google
           end
         end
 
+        # User-defined JavaScript function that can transform or filter a Pub/Sub
+        # message.
+        # @!attribute [rw] function_name
+        #   @return [::String]
+        #     Required. Name of the JavasScript function that should applied to Pub/Sub
+        #     messages.
+        # @!attribute [rw] code
+        #   @return [::String]
+        #     Required. JavaScript code that contains a function `function_name` with the
+        #     below signature:
+        #
+        #     ```
+        #       /**
+        #       * Transforms a Pub/Sub message.
+        #
+        #       * @return \\{(Object<string, (string | Object<string, string>)>|null)} - To
+        #       * filter a message, return `null`. To transform a message return a map
+        #       * with the following keys:
+        #       *   - (required) 'data' : \\{string}
+        #       *   - (optional) 'attributes' : \\{Object<string, string>}
+        #       * Returning empty `attributes` will remove all attributes from the
+        #       * message.
+        #       *
+        #       * @param  \\{(Object<string, (string | Object<string, string>)>} Pub/Sub
+        #       * message. Keys:
+        #       *   - (required) 'data' : \\{string}
+        #       *   - (required) 'attributes' : \\{Object<string, string>}
+        #       *
+        #       * @param  \\{Object<string, any>} metadata - Pub/Sub message metadata.
+        #       * Keys:
+        #       *   - (required) 'message_id'  : \\{string}
+        #       *   - (optional) 'publish_time': \\{string} YYYY-MM-DDTHH:MM:SSZ format
+        #       *   - (optional) 'ordering_key': \\{string}
+        #       */
+        #
+        #       function <function_name>(message, metadata) {
+        #       }
+        #     ```
+        class JavaScriptUDF
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # All supported message transforms types.
+        # @!attribute [rw] javascript_udf
+        #   @return [::Google::Cloud::PubSub::V1::JavaScriptUDF]
+        #     Optional. JavaScript User Defined Function. If multiple JavaScriptUDF's
+        #     are specified on a resource, each must have a unique `function_name`.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Optional. If set to true, the transform is enabled. If false, the transform
+        #     is disabled and will not be applied to messages. Defaults to `true`.
+        class MessageTransform
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A topic resource.
         # @!attribute [rw] name
         #   @return [::String]
@@ -628,6 +713,10 @@ module Google
         # @!attribute [rw] ingestion_data_source_settings
         #   @return [::Google::Cloud::PubSub::V1::IngestionDataSourceSettings]
         #     Optional. Settings for ingestion from a data source into this topic.
+        # @!attribute [rw] message_transforms
+        #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
+        #     Optional. Transforms to be applied to messages published to the topic.
+        #     Transforms are applied in the order specified.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1028,12 +1117,16 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::Subscription::AnalyticsHubSubscriptionInfo]
         #     Output only. Information about the associated Analytics Hub subscription.
         #     Only set if the subscritpion is created by Analytics Hub.
+        # @!attribute [rw] message_transforms
+        #   @return [::Array<::Google::Cloud::PubSub::V1::MessageTransform>]
+        #     Optional. Transforms to be applied to messages before they are delivered to
+        #     subscribers. Transforms are applied in the order specified.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Information about an associated Analytics Hub subscription
-          # (https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions).
+          # Information about an associated [Analytics Hub
+          # subscription](https://cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions).
           # @!attribute [rw] listing
           #   @return [::String]
           #     Optional. The name of the associated Analytics Hub listing resource.
@@ -1187,9 +1280,13 @@ module Google
         #     Optional. When set, the payload to the push endpoint is in the form of
         #     the JSON representation of a PubsubMessage
         #     (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
+        #
+        #     Note: The following fields are mutually exclusive: `pubsub_wrapper`, `no_wrapper`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] no_wrapper
         #   @return [::Google::Cloud::PubSub::V1::PushConfig::NoWrapper]
         #     Optional. When set, the payload to the push endpoint is not wrapped.
+        #
+        #     Note: The following fields are mutually exclusive: `no_wrapper`, `pubsub_wrapper`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class PushConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1345,10 +1442,14 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::TextConfig]
         #     Optional. If set, message data will be written to Cloud Storage in text
         #     format.
+        #
+        #     Note: The following fields are mutually exclusive: `text_config`, `avro_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] avro_config
         #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::AvroConfig]
         #     Optional. If set, message data will be written to Cloud Storage in Avro
         #     format.
+        #
+        #     Note: The following fields are mutually exclusive: `avro_config`, `text_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] max_duration
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The maximum duration that can elapse before a new Cloud Storage
@@ -1934,11 +2035,15 @@ module Google
         #     window (or to a point before the system's notion of the subscription
         #     creation time), only retained messages will be marked as unacknowledged,
         #     and already-expunged messages will not be restored.
+        #
+        #     Note: The following fields are mutually exclusive: `time`, `snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] snapshot
         #   @return [::String]
         #     Optional. The snapshot to seek to. The snapshot's topic must be the same
         #     as that of the provided subscription. Format is
         #     `projects/{project}/snapshots/{snap}`.
+        #
+        #     Note: The following fields are mutually exclusive: `snapshot`, `time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class SeekRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

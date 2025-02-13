@@ -52,12 +52,16 @@ module Google
         #     An App Engine task is a task that has
         #     {::Google::Cloud::Tasks::V2beta3::AppEngineHttpRequest AppEngineHttpRequest}
         #     set.
+        #
+        #     Note: The following fields are mutually exclusive: `app_engine_http_request`, `http_request`, `pull_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] http_request
         #   @return [::Google::Cloud::Tasks::V2beta3::HttpRequest]
         #     HTTP request that is sent to the task's target.
         #
         #     An HTTP task is a task that has
         #     {::Google::Cloud::Tasks::V2beta3::HttpRequest HttpRequest} set.
+        #
+        #     Note: The following fields are mutually exclusive: `http_request`, `app_engine_http_request`, `pull_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] pull_message
         #   @return [::Google::Cloud::Tasks::V2beta3::PullMessage]
         #     Pull Message contained in a task in a
@@ -67,6 +71,8 @@ module Google
         #     [pull](https://cloud.google.com/appengine/docs/standard/java/taskqueue/pull/)
         #     queues to provide a way to inspect contents of pull tasks through the
         #     {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#get_task CloudTasks.GetTask}.
+        #
+        #     Note: The following fields are mutually exclusive: `pull_message`, `app_engine_http_request`, `http_request`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted.

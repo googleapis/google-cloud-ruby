@@ -324,12 +324,18 @@ module Google
         # @!attribute [r] article_suggestion_answer
         #   @return [::Google::Cloud::Dialogflow::V2::ArticleAnswer]
         #     Output only. The article suggestion answer.
+        #
+        #     Note: The following fields are mutually exclusive: `article_suggestion_answer`, `faq_answer`, `dialogflow_assist_answer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] faq_answer
         #   @return [::Google::Cloud::Dialogflow::V2::FaqAnswer]
         #     Output only. The FAQ answer.
+        #
+        #     Note: The following fields are mutually exclusive: `faq_answer`, `article_suggestion_answer`, `dialogflow_assist_answer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] dialogflow_assist_answer
         #   @return [::Google::Cloud::Dialogflow::V2::DialogflowAssistAnswer]
         #     Output only. Dialogflow assist answer.
+        #
+        #     Note: The following fields are mutually exclusive: `dialogflow_assist_answer`, `article_suggestion_answer`, `faq_answer`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class AgentAssistantRecord
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

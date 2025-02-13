@@ -49,6 +49,8 @@ module Google
         #
         #     Corresponding properties: Google Merchant Center property
         #     [expiration_date](https://support.google.com/merchants/answer/6324499).
+        #
+        #     Note: The following fields are mutually exclusive: `expire_time`, `ttl`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL (time to live) of the product. Note that this is only
@@ -73,6 +75,8 @@ module Google
         #     {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
         #     and
         #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
+        #
+        #     Note: The following fields are mutually exclusive: `ttl`, `expire_time`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. Full resource name of the product, such as

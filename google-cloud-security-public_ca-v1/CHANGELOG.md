@@ -1,5 +1,20 @@
 # Changelog
 
+### 1.0.0 (2025-02-11)
+
+#### Features
+
+* Bump version to 1.0.0 ([#28969](https://github.com/googleapis/google-cloud-ruby/issues/28969)) 
+
+### 0.3.0 (2025-01-29)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
 ### 0.2.0 (2024-12-10)
 
 #### Features

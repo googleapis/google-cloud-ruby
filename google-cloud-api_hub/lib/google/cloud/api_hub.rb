@@ -55,6 +55,11 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApiHub service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.api_hub_available?}.
+      #
       # ## About ApiHub
       #
       # This service provides all methods related to the API hub.
@@ -75,6 +80,34 @@ module Google
       end
 
       ##
+      # Determines whether the ApiHub service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.api_hub}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApiHub service,
+      # or if the versioned client gem needs an update to support the ApiHub service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.api_hub_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :ApiHub
+        service_module = service_module.const_get :ApiHub
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ApiHubDependencies.
       #
       # By default, this returns an instance of
@@ -84,6 +117,11 @@ module Google
       # `version` parameter. If the ApiHubDependencies service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApiHubDependencies service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.api_hub_dependencies_available?}.
       #
       # ## About ApiHubDependencies
       #
@@ -106,6 +144,34 @@ module Google
       end
 
       ##
+      # Determines whether the ApiHubDependencies service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.api_hub_dependencies}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApiHubDependencies service,
+      # or if the versioned client gem needs an update to support the ApiHubDependencies service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.api_hub_dependencies_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :ApiHubDependencies
+        service_module = service_module.const_get :ApiHubDependencies
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for HostProjectRegistrationService.
       #
       # By default, this returns an instance of
@@ -115,6 +181,11 @@ module Google
       # `version` parameter. If the HostProjectRegistrationService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the HostProjectRegistrationService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.host_project_registration_service_available?}.
       #
       # ## About HostProjectRegistrationService
       #
@@ -136,6 +207,34 @@ module Google
       end
 
       ##
+      # Determines whether the HostProjectRegistrationService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.host_project_registration_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the HostProjectRegistrationService service,
+      # or if the versioned client gem needs an update to support the HostProjectRegistrationService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.host_project_registration_service_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :HostProjectRegistrationService
+        service_module = service_module.const_get :HostProjectRegistrationService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for LintingService.
       #
       # By default, this returns an instance of
@@ -145,6 +244,11 @@ module Google
       # `version` parameter. If the LintingService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the LintingService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.linting_service_available?}.
       #
       # ## About LintingService
       #
@@ -166,6 +270,34 @@ module Google
       end
 
       ##
+      # Determines whether the LintingService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.linting_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the LintingService service,
+      # or if the versioned client gem needs an update to support the LintingService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.linting_service_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :LintingService
+        service_module = service_module.const_get :LintingService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ApiHubPlugin.
       #
       # By default, this returns an instance of
@@ -175,6 +307,11 @@ module Google
       # `version` parameter. If the ApiHubPlugin service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the ApiHubPlugin service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.api_hub_plugin_available?}.
       #
       # ## About ApiHubPlugin
       #
@@ -196,6 +333,34 @@ module Google
       end
 
       ##
+      # Determines whether the ApiHubPlugin service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.api_hub_plugin}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ApiHubPlugin service,
+      # or if the versioned client gem needs an update to support the ApiHubPlugin service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.api_hub_plugin_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :ApiHubPlugin
+        service_module = service_module.const_get :ApiHubPlugin
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for Provisioning.
       #
       # By default, this returns an instance of
@@ -205,6 +370,11 @@ module Google
       # `version` parameter. If the Provisioning service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the Provisioning service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.provisioning_available?}.
       #
       # ## About Provisioning
       #
@@ -226,6 +396,34 @@ module Google
       end
 
       ##
+      # Determines whether the Provisioning service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.provisioning}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Provisioning service,
+      # or if the versioned client gem needs an update to support the Provisioning service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.provisioning_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :Provisioning
+        service_module = service_module.const_get :Provisioning
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for RuntimeProjectAttachmentService.
       #
       # By default, this returns an instance of
@@ -235,6 +433,11 @@ module Google
       # `version` parameter. If the RuntimeProjectAttachmentService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the RuntimeProjectAttachmentService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::ApiHub.runtime_project_attachment_service_available?}.
       #
       # ## About RuntimeProjectAttachmentService
       #
@@ -253,6 +456,34 @@ module Google
                        .first
         service_module = Google::Cloud::ApiHub.const_get(package_name).const_get(:RuntimeProjectAttachmentService)
         service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the RuntimeProjectAttachmentService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::ApiHub.runtime_project_attachment_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the RuntimeProjectAttachmentService service,
+      # or if the versioned client gem needs an update to support the RuntimeProjectAttachmentService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.runtime_project_attachment_service_available? version: :v1
+        require "google/cloud/api_hub/#{version.to_s.downcase}"
+        package_name = Google::Cloud::ApiHub
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::ApiHub.const_get package_name
+        return false unless service_module.const_defined? :RuntimeProjectAttachmentService
+        service_module = service_module.const_get :RuntimeProjectAttachmentService
+        return false unless service_module.const_defined? :Rest
+        service_module = service_module.const_get :Rest
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

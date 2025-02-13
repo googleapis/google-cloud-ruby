@@ -16,7 +16,7 @@ for this library, google-cloud-functions, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-functions-v1](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v1/latest).
+[google-cloud-functions-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v2/latest).
 
 See also the [Product Documentation](https://cloud.google.com/functions)
 for more usage information.
@@ -59,9 +59,14 @@ service such as [Google Cloud Run](https://cloud.google.com/run), this generally
 results in logs appearing alongside your application logs in the
 [Google Cloud Logging](https://cloud.google.com/logging/) service.
 
+Debug logging also requires that the versioned clients for this service be
+sufficiently recent, released after about Dec 10, 2024. If logging is not
+working, try updating the versioned clients in your bundle or installed gems:
+[google-cloud-functions-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v2/latest).
+
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.7+.
+This library is supported on Ruby 3.0+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
@@ -75,7 +80,7 @@ support schedule.
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
 client library with a name such as `google-cloud-functions`,
 and lower-level _versioned_ client libraries with names such as
-`google-cloud-functions-v1`.
+`google-cloud-functions-v2`.
 _In most cases, you should install the main client._
 
 ### What's the difference between the main client and a versioned client?
@@ -113,7 +118,7 @@ You can use a versioned client if you are content with a possibly lower-level
 class interface, you explicitly want to avoid features provided by the main
 client, or you want to access a specific service version not be covered by the
 main client. You can identify versioned client gems because the service version
-is part of the name, e.g. `google-cloud-functions-v1`.
+is part of the name, e.g. `google-cloud-functions-v2`.
 
 ### What about the google-apis-<name> clients?
 

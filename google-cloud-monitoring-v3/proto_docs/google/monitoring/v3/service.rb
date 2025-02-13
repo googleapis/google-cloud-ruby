@@ -37,35 +37,55 @@ module Google
         # @!attribute [rw] custom
         #   @return [::Google::Cloud::Monitoring::V3::Service::Custom]
         #     Custom service type.
+        #
+        #     Note: The following fields are mutually exclusive: `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] app_engine
         #   @return [::Google::Cloud::Monitoring::V3::Service::AppEngine]
         #     Type used for App Engine services.
+        #
+        #     Note: The following fields are mutually exclusive: `app_engine`, `custom`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_endpoints
         #   @return [::Google::Cloud::Monitoring::V3::Service::CloudEndpoints]
         #     Type used for Cloud Endpoints services.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_endpoints`, `custom`, `app_engine`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cluster_istio
         #   @return [::Google::Cloud::Monitoring::V3::Service::ClusterIstio]
         #     Type used for Istio services that live in a Kubernetes cluster.
+        #
+        #     Note: The following fields are mutually exclusive: `cluster_istio`, `custom`, `app_engine`, `cloud_endpoints`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] mesh_istio
         #   @return [::Google::Cloud::Monitoring::V3::Service::MeshIstio]
         #     Type used for Istio services scoped to an Istio mesh.
+        #
+        #     Note: The following fields are mutually exclusive: `mesh_istio`, `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] istio_canonical_service
         #   @return [::Google::Cloud::Monitoring::V3::Service::IstioCanonicalService]
         #     Type used for canonical services scoped to an Istio mesh.
         #     Metrics for Istio are
         #     [documented here](https://istio.io/latest/docs/reference/config/metrics/)
+        #
+        #     Note: The following fields are mutually exclusive: `istio_canonical_service`, `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `cloud_run`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_run
         #   @return [::Google::Cloud::Monitoring::V3::Service::CloudRun]
         #     Type used for Cloud Run services.
+        #
+        #     Note: The following fields are mutually exclusive: `cloud_run`, `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `gke_namespace`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gke_namespace
         #   @return [::Google::Cloud::Monitoring::V3::Service::GkeNamespace]
         #     Type used for GKE Namespaces.
+        #
+        #     Note: The following fields are mutually exclusive: `gke_namespace`, `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_workload`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gke_workload
         #   @return [::Google::Cloud::Monitoring::V3::Service::GkeWorkload]
         #     Type used for GKE Workloads.
+        #
+        #     Note: The following fields are mutually exclusive: `gke_workload`, `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_service`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] gke_service
         #   @return [::Google::Cloud::Monitoring::V3::Service::GkeService]
         #     Type used for GKE Services (the Kubernetes concept of a service).
+        #
+        #     Note: The following fields are mutually exclusive: `gke_service`, `custom`, `app_engine`, `cloud_endpoints`, `cluster_istio`, `mesh_istio`, `istio_canonical_service`, `cloud_run`, `gke_namespace`, `gke_workload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] basic_service
         #   @return [::Google::Cloud::Monitoring::V3::Service::BasicService]
         #     Message that contains the service type and service labels of this service
@@ -356,11 +376,15 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     A rolling time period, semantically "in the past `<rolling_period>`".
         #     Must be an integer multiple of 1 day no larger than 30 days.
+        #
+        #     Note: The following fields are mutually exclusive: `rolling_period`, `calendar_period`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] calendar_period
         #   @return [::Google::Type::CalendarPeriod]
         #     A calendar period, semantically "since the start of the current
         #     `<calendar_period>`". At this time, only `DAY`, `WEEK`, `FORTNIGHT`, and
         #     `MONTH` are supported.
+        #
+        #     Note: The following fields are mutually exclusive: `calendar_period`, `rolling_period`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] user_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels which have been used to annotate the service-level objective. Label
@@ -418,12 +442,18 @@ module Google
         # @!attribute [rw] basic_sli
         #   @return [::Google::Cloud::Monitoring::V3::BasicSli]
         #     Basic SLI on a well-known service type.
+        #
+        #     Note: The following fields are mutually exclusive: `basic_sli`, `request_based`, `windows_based`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] request_based
         #   @return [::Google::Cloud::Monitoring::V3::RequestBasedSli]
         #     Request-based SLIs
+        #
+        #     Note: The following fields are mutually exclusive: `request_based`, `basic_sli`, `windows_based`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] windows_based
         #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli]
         #     Windows-based SLIs
+        #
+        #     Note: The following fields are mutually exclusive: `windows_based`, `basic_sli`, `request_based`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class ServiceLevelIndicator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -460,10 +490,14 @@ module Google
         #   @return [::Google::Cloud::Monitoring::V3::BasicSli::AvailabilityCriteria]
         #     Good service is defined to be the count of requests made to this service
         #     that return successfully.
+        #
+        #     Note: The following fields are mutually exclusive: `availability`, `latency`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] latency
         #   @return [::Google::Cloud::Monitoring::V3::BasicSli::LatencyCriteria]
         #     Good service is defined to be the count of requests made to this service
         #     that are fast enough with respect to `latency.threshold`.
+        #
+        #     Note: The following fields are mutually exclusive: `latency`, `availability`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class BasicSli
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -503,12 +537,16 @@ module Google
         #   @return [::Google::Cloud::Monitoring::V3::TimeSeriesRatio]
         #     `good_total_ratio` is used when the ratio of `good_service` to
         #     `total_service` is computed from two `TimeSeries`.
+        #
+        #     Note: The following fields are mutually exclusive: `good_total_ratio`, `distribution_cut`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] distribution_cut
         #   @return [::Google::Cloud::Monitoring::V3::DistributionCut]
         #     `distribution_cut` is used when `good_service` is a count of values
         #     aggregated in a `Distribution` that fall into a good range. The
         #     `total_service` is the total count of all values aggregated in the
         #     `Distribution`.
+        #
+        #     Note: The following fields are mutually exclusive: `distribution_cut`, `good_total_ratio`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class RequestBasedSli
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -571,17 +609,25 @@ module Google
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
         #     specifying a `TimeSeries` with `ValueType = BOOL`. The window is good if
         #     any `true` values appear in the window.
+        #
+        #     Note: The following fields are mutually exclusive: `good_bad_metric_filter`, `good_total_ratio_threshold`, `metric_mean_in_range`, `metric_sum_in_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] good_total_ratio_threshold
         #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli::PerformanceThreshold]
         #     A window is good if its `performance` is high enough.
+        #
+        #     Note: The following fields are mutually exclusive: `good_total_ratio_threshold`, `good_bad_metric_filter`, `metric_mean_in_range`, `metric_sum_in_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metric_mean_in_range
         #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli::MetricRange]
         #     A window is good if the metric's value is in a good range, averaged
         #     across returned streams.
+        #
+        #     Note: The following fields are mutually exclusive: `metric_mean_in_range`, `good_bad_metric_filter`, `good_total_ratio_threshold`, `metric_sum_in_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] metric_sum_in_range
         #   @return [::Google::Cloud::Monitoring::V3::WindowsBasedSli::MetricRange]
         #     A window is good if the metric's value is in a good range, summed across
         #     returned streams.
+        #
+        #     Note: The following fields are mutually exclusive: `metric_sum_in_range`, `good_bad_metric_filter`, `good_total_ratio_threshold`, `metric_mean_in_range`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] window_period
         #   @return [::Google::Protobuf::Duration]
         #     Duration over which window quality is evaluated. Must be an integer
@@ -595,9 +641,13 @@ module Google
           # @!attribute [rw] performance
           #   @return [::Google::Cloud::Monitoring::V3::RequestBasedSli]
           #     `RequestBasedSli` to evaluate to judge window quality.
+          #
+          #     Note: The following fields are mutually exclusive: `performance`, `basic_sli_performance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] basic_sli_performance
           #   @return [::Google::Cloud::Monitoring::V3::BasicSli]
           #     `BasicSli` to evaluate to judge window quality.
+          #
+          #     Note: The following fields are mutually exclusive: `basic_sli_performance`, `performance`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] threshold
           #   @return [::Float]
           #     If window `performance >= threshold`, the window is counted as good.

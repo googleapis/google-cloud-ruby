@@ -1,5 +1,34 @@
 # Changelog
 
+### 1.1.0 (2025-02-12)
+
+#### Features
+
+* Support for the cancel_job RPC ([#28963](https://github.com/googleapis/google-cloud-ruby/issues/28963)) 
+
+### 1.0.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823))
+
+#### Features
+
+* Bump version to 1.0.0 ([#28941](https://github.com/googleapis/google-cloud-ruby/issues/28941)) 
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823)) 
+
+### 0.21.0 (2025-01-28)
+
+#### Features
+
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Clarify behavior of protobuf message fields that are part of mutually-exclusive sets 
+* Include note about validating externally-provided credentials 
+
 ### 0.20.1 (2025-01-08)
 
 #### Documentation

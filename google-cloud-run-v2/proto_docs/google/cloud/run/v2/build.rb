@@ -37,9 +37,13 @@ module Google
         # @!attribute [rw] buildpack_build
         #   @return [::Google::Cloud::Run::V2::SubmitBuildRequest::BuildpacksBuild]
         #     Build the source using Buildpacks.
+        #
+        #     Note: The following fields are mutually exclusive: `buildpack_build`, `docker_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] docker_build
         #   @return [::Google::Cloud::Run::V2::SubmitBuildRequest::DockerBuild]
         #     Build the source using Docker. This means the source has a Dockerfile.
+        #
+        #     Note: The following fields are mutually exclusive: `docker_build`, `buildpack_build`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account to use for the build. If not set, the default
@@ -83,7 +87,7 @@ module Google
           #     The build will clean up the temporary image on a best-effort basis.
           # @!attribute [rw] base_image
           #   @return [::String]
-          #     Optional. The base image used to opt into automatic base image updates.
+          #     Optional. The base image to use for the build.
           # @!attribute [rw] environment_variables
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. User-provided build-time environment variables.
@@ -92,6 +96,11 @@ module Google
           #     Optional. Whether or not the application container will be enrolled in
           #     automatic base image updates. When true, the application will be built on
           #     a scratch base image, so the base layers can be appended at run time.
+          # @!attribute [rw] project_descriptor
+          #   @return [::String]
+          #     Optional. project_descriptor stores the path to the project descriptor
+          #     file. When empty, it means that there is no project descriptor file in
+          #     the source.
           class BuildpacksBuild
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

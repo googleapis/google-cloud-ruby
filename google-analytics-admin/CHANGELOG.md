@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.6.1 (2025-01-30)
+
+#### Documentation
+
+* Update the API name ([#28790](https://github.com/googleapis/google-cloud-ruby/issues/28790)) 
+
+### 0.6.0 (2025-01-29)
+
+#### Features
+
+* Provide methods to determine whether services are available with the currently installed versioned client ([#28526](https://github.com/googleapis/google-cloud-ruby/issues/28526)) 
+* Update Ruby version requirement to 3.0 
+
 ### 0.5.1 (2024-08-08)
 
 #### Documentation

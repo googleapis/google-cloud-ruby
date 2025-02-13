@@ -65,9 +65,13 @@ module Google
           # @!attribute [rw] base_uri
           #   @return [::String]
           #     The base URI for all files to be read in as sources for translation.
+          #
+          #     Note: The following fields are mutually exclusive: `base_uri`, `literal`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] literal
           #   @return [::Google::Cloud::Bigquery::Migration::V2::Literal]
           #     Source literal.
+          #
+          #     Note: The following fields are mutually exclusive: `literal`, `base_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] encoding
           #   @return [::String]
           #     Optional. The optional field to specify the encoding of the sql bytes.
@@ -91,9 +95,13 @@ module Google
           # @!attribute [rw] literal_string
           #   @return [::String]
           #     Literal string data.
+          #
+          #     Note: The following fields are mutually exclusive: `literal_string`, `literal_bytes`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] literal_bytes
           #   @return [::String]
           #     Literal byte data.
+          #
+          #     Note: The following fields are mutually exclusive: `literal_bytes`, `literal_string`. If a field in that set is populated, all other fields in the set will automatically be cleared.
           # @!attribute [rw] relative_path
           #   @return [::String]
           #     Required. The identifier of the literal entry.
