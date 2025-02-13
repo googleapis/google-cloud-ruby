@@ -14,3 +14,4 @@
 * Initial generation of google-ads-ad_manager ([#27518](https://github.com/googleapis/google-cloud-ruby/issues/27518)) 
 
 ## Release History
+

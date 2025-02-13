@@ -20,3 +20,4 @@
 * Initial generation of google-cloud-privileged_access_manager ([#26518](https://github.com/googleapis/google-cloud-ruby/issues/26518)) 
 
 ## Release History
+
