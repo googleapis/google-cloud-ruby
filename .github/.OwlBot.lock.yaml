@@ -1,4 +1,4 @@
 docker:
   image: gcr.io/cloud-devrel-public-resources/owlbot-ruby:latest
-  # OwlBot Postprocessor 0.9.13
-  digest: sha256:eb464e8011e8a778f3997e8dcc8b1a86b44aca199cb4c30070972a29970a53f5
+  # OwlBot Postprocessor 0.9.14
+  digest: sha256:432e1918ac9be042c522347c9ed22b5729e448b3864186f229b3ba98fd32ebc0
