@@ -29,7 +29,7 @@ module Google
     # @!attribute [rw] code
     #   @return [::Integer]
     #     The status code, which should be an enum value of
-    #     [google.rpc.Code][google.rpc.Code].
+    #     {::Google::Rpc::Code google.rpc.Code}.
     # @!attribute [rw] message
     #   @return [::String]
     #     A developer-facing error message, which should be in English. Any

@@ -42,6 +42,7 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
+    "proto_docs/google/rpc/code.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
     "snippets/parallelstore/create_instance.rb",
