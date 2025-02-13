@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-dataplex-v1 dependency to version 2.x ([#29032](https://github.com/googleapis/google-cloud-ruby/issues/29032))
+
+#### Features
+
+* Update google-cloud-dataplex-v1 dependency to version 2.x ([#29032](https://github.com/googleapis/google-cloud-ruby/issues/29032)) 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features
