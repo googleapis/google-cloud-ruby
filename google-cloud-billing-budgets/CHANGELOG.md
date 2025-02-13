@@ -1,5 +1,16 @@
 # Release History
 
+### 3.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-billing-budgets-v1beta1 prerelease service ([#29003](https://github.com/googleapis/google-cloud-ruby/issues/29003))
+
+#### Features
+
+* Removed dependency on google-cloud-billing-budgets-v1beta1 prerelease service ([#29003](https://github.com/googleapis/google-cloud-ruby/issues/29003)) 
+* Updated google-cloud-billing-budgets-v1 dependency to version 1.x 
+
 ### 2.5.0 (2025-01-29)
 
 #### Features
