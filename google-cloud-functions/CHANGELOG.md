@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update to v2 of the cloud functions service ([#29039](https://github.com/googleapis/google-cloud-ruby/issues/29039))
+
+#### Features
+
+* Update to v2 of the cloud functions service ([#29039](https://github.com/googleapis/google-cloud-ruby/issues/29039)) 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features
