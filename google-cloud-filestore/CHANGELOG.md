@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-filestore-v1 dependency to version 2.x ([#29056](https://github.com/googleapis/google-cloud-ruby/issues/29056))
+
+#### Features
+
+* Update google-cloud-filestore-v1 dependency to version 2.x ([#29056](https://github.com/googleapis/google-cloud-ruby/issues/29056)) 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
