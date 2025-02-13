@@ -17,13 +17,12 @@ Gem::Specification.new do |gem|
   gem.platform      = Gem::Platform::RUBY
 
   gem.files         = `git ls-files -- lib/*`.split("\n") +
-                      ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts", "MIGRATING.md"]
+                      ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
   gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-security_center-v1", ">= 0.34", "< 2.a"
-  gem.add_dependency "google-cloud-security_center-v1p1beta1", ">= 0.13", "< 2.a"
-  gem.add_dependency "google-cloud-security_center-v2", ">= 0.0", "< 2.a"
+  gem.add_dependency "google-cloud-security_center-v1", "~> 1.0"
+  gem.add_dependency "google-cloud-security_center-v2", "~> 1.0"
 end

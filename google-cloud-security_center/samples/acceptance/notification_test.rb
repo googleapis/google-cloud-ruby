@@ -23,7 +23,9 @@ describe "Google Cloud Security Center Notifications Sample" do
     @pubsub_topic = "projects/project-a-id/topics/notifications-sample-topic"
     @config_id = "config-#{SecureRandom.hex 8}"
     @org_id = "1081635000895"
+    @location = "global"
     @config_path = @client.notification_config_path organization:        @org_id,
+                                                    location:            @location,
                                                     notification_config: @config_id
     cleanup!
   end
@@ -42,6 +44,7 @@ describe "Google Cloud Security Center Notifications Sample" do
     last_error = nil
     3.times do
       create_notification_config org_id:       @org_id,
+                                 location:     @location,
                                  config_id:    @config_id,
                                  pubsub_topic: @pubsub_topic
       return
@@ -60,6 +63,7 @@ describe "Google Cloud Security Center Notifications Sample" do
   it "creates notification config" do
     assert_output(/Created notification config #{@config_id}/) do
       create_notification_config org_id:       @org_id,
+                                 location:     @location,
                                  config_id:    @config_id,
                                  pubsub_topic: @pubsub_topic
     end
@@ -73,6 +77,7 @@ describe "Google Cloud Security Center Notifications Sample" do
 
     assert_output(/Updated description/) do
       update_notification_config org_id:      @org_id,
+                                 location:    @location,
                                  config_id:   @config_id,
                                  description: "Updated description"
     end
@@ -83,6 +88,7 @@ describe "Google Cloud Security Center Notifications Sample" do
 
     assert_output(/Deleted notification config #{@config_id}/) do
       delete_notification_config org_id:    @org_id,
+                                 location:  @location,
                                  config_id: @config_id
     end
   end
@@ -92,6 +98,7 @@ describe "Google Cloud Security Center Notifications Sample" do
 
     assert_output(/#{@config_path}/) do
       get_notification_config org_id:    @org_id,
+                              location:  @location,
                               config_id: @config_id
     end
   end
@@ -100,7 +107,7 @@ describe "Google Cloud Security Center Notifications Sample" do
     create_fixture!
 
     assert_output(/#{@config_path}/) do
-      list_notification_configs org_id: @org_id
+      list_notification_configs org_id: @org_id, location: @location
     end
   end
 end
