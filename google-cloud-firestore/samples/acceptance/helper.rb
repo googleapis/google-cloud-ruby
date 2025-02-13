@@ -42,7 +42,7 @@ end
 # @param collection_path [String] A string representing the path of the collection,
 #   relative to the document.
 #
-# @return [::Gapic::Operation]
+# @return [String, nil] The name assigned to the newly created index.
 def create_composite_index project_id:, collection_path:
   admin = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
 
@@ -58,5 +58,19 @@ def create_composite_index project_id:, collection_path:
   parent = "projects/#{project_id}/databases/(default)/collectionGroups/#{collection_path}"
   request = Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new parent: parent, index: index
   result = admin.create_index request
+  result.wait_until_done!
+  result.response? ? result.response.name : nil
+end
+
+##
+# Deletes a composite index.
+#
+# @param name [String] The index's name to be deleted, of the form
+#  `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`.
+#
+# @return [nil]
+def delete_composite_index name:
+  request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new name: name
+  result = admin.delete_index request
   result.wait_until_done!
 end
