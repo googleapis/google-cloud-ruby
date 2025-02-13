@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-secure_source_manager-v1 dependency to version 2.x ([#29038](https://github.com/googleapis/google-cloud-ruby/issues/29038))
+
+#### Features
+
+* Updated google-cloud-secure_source_manager-v1 dependency to version 2.x ([#29038](https://github.com/googleapis/google-cloud-ruby/issues/29038)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features
