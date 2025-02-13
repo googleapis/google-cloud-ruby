@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-video-live_stream-v1 dependency to version 2.x ([#29036](https://github.com/googleapis/google-cloud-ruby/issues/29036))
+
+#### Features
+
+* Updated google-cloud-video-live_stream-v1 dependency to version 2.x ([#29036](https://github.com/googleapis/google-cloud-ruby/issues/29036)) 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features
