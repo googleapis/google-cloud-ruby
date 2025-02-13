@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-service_health-v1 dependency to version 2.x ([#29046](https://github.com/googleapis/google-cloud-ruby/issues/29046))
+
+#### Features
+
+* Updated google-cloud-service_health-v1 dependency to version 2.x ([#29046](https://github.com/googleapis/google-cloud-ruby/issues/29046)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features
