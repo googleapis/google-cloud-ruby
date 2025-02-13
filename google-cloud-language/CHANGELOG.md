@@ -1,5 +1,17 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-language-v1beta2
+* Updated to use google-cloud-language-v2 by default ([#29000](https://github.com/googleapis/google-cloud-ruby/issues/29000))
+
+#### Features
+
+* Removed dependency on google-cloud-language-v1beta2 
+* Updated to use google-cloud-language-v2 by default ([#29000](https://github.com/googleapis/google-cloud-ruby/issues/29000)) 
+
 ### 1.8.0 (2025-01-29)
 
 #### Features
