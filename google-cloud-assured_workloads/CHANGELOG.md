@@ -1,5 +1,16 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-assured_workloads-v1beta1 prerelease service ([#29012](https://github.com/googleapis/google-cloud-ruby/issues/29012))
+
+#### Features
+
+* Removed dependency on google-cloud-assured_workloads-v1beta1 prerelease service ([#29012](https://github.com/googleapis/google-cloud-ruby/issues/29012)) 
+* Updated google-cloud-assured_workloads-v1 dependency to version 1.x 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
