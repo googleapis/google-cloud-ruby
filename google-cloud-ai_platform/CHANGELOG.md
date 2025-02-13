@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-ai_platform-v1 dependency to version 1.x ([#29042](https://github.com/googleapis/google-cloud-ruby/issues/29042))
+
+#### Features
+
+* Updated google-cloud-ai_platform-v1 dependency to version 1.x ([#29042](https://github.com/googleapis/google-cloud-ruby/issues/29042)) 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features
