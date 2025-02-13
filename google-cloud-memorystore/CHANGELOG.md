@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-memorystore-v1 dependency to version 1.x ([#28985](https://github.com/googleapis/google-cloud-ruby/issues/28985))
+
+#### Features
+
+* Bump version to 1.0.0 ([#29159](https://github.com/googleapis/google-cloud-ruby/issues/29159)) 
+* Updated google-cloud-memorystore-v1 dependency to version 1.x ([#28985](https://github.com/googleapis/google-cloud-ruby/issues/28985)) 
+
 ### 0.2.0 (2025-01-29)
 
 #### Features
@@ -14,4 +25,3 @@
 * Initial generation of google-cloud-memorystore ([#27755](https://github.com/googleapis/google-cloud-ruby/issues/27755)) 
 
 ## Release History
-
