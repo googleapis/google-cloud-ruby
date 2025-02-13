@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Update google-cloud-cloud_controls_partner-v1 dependency to version 2.x ([#29059](https://github.com/googleapis/google-cloud-ruby/issues/29059))
+
+#### Features
+
+* Update google-cloud-cloud_controls_partner-v1 dependency to version 2.x ([#29059](https://github.com/googleapis/google-cloud-ruby/issues/29059)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features
