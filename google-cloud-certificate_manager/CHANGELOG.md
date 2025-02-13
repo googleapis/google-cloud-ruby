@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-certificate_manager-v1 dependency to version 1.x ([#28986](https://github.com/googleapis/google-cloud-ruby/issues/28986))
+
+#### Features
+
+* Updated google-cloud-certificate_manager-v1 dependency to version 1.x ([#28986](https://github.com/googleapis/google-cloud-ruby/issues/28986)) 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features
