@@ -1,5 +1,17 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-redis-v1beta1 prerelease service
+* Updated google-cloud-redis-v1 dependency to version 2.x ([#29052](https://github.com/googleapis/google-cloud-ruby/issues/29052))
+
+#### Features
+
+* Removed dependency on google-cloud-redis-v1beta1 prerelease service 
+* Updated google-cloud-redis-v1 dependency to version 2.x ([#29052](https://github.com/googleapis/google-cloud-ruby/issues/29052)) 
+
 ### 1.7.0 (2025-01-29)
 
 #### Features
