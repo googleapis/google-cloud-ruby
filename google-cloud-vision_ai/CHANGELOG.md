@@ -1,5 +1,16 @@
 # Changelog
 
+### 1.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-vision_ai-v1 dependency to version 1.x ([#28996](https://github.com/googleapis/google-cloud-ruby/issues/28996))
+
+#### Features
+
+* Bump version to 1.0.0 ([#29159](https://github.com/googleapis/google-cloud-ruby/issues/29159)) 
+* Updated google-cloud-vision_ai-v1 dependency to version 1.x ([#28996](https://github.com/googleapis/google-cloud-ruby/issues/28996)) 
+
 ### 0.2.0 (2025-01-29)
 
 #### Features
@@ -20,4 +31,3 @@
 * Initial generation of google-cloud-vision_ai ([#26487](https://github.com/googleapis/google-cloud-ruby/issues/26487)) 
 
 ## Release History
-
