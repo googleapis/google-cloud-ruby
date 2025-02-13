@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-managed_kafka-v1 dependency to version 1.x ([#29008](https://github.com/googleapis/google-cloud-ruby/issues/29008))
+
+#### Features
+
+* Updated google-cloud-managed_kafka-v1 dependency to version 1.x ([#29008](https://github.com/googleapis/google-cloud-ruby/issues/29008)) 
+
 ### 1.1.0 (2025-01-29)
 
 #### Features
