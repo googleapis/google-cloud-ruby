@@ -1,5 +1,17 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-gke_hub-v1beta1 prerelease service
+* Updated google-cloud-gke_hub-v1 dependency to version 2.x ([#29040](https://github.com/googleapis/google-cloud-ruby/issues/29040))
+
+#### Features
+
+* Removed dependency on google-cloud-gke_hub-v1beta1 prerelease service 
+* Updated google-cloud-gke_hub-v1 dependency to version 2.x ([#29040](https://github.com/googleapis/google-cloud-ruby/issues/29040)) 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
