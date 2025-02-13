@@ -1,5 +1,16 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-talent-v4beta1 prerelease service ([#29002](https://github.com/googleapis/google-cloud-ruby/issues/29002))
+
+#### Features
+
+* Removed dependency on google-cloud-talent-v4beta1 prerelease service ([#29002](https://github.com/googleapis/google-cloud-ruby/issues/29002)) 
+* Updated google-cloud-talent-v4 dependency to version 1.x 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features
