@@ -49,7 +49,9 @@ module Google
                        timeout: nil, open_timeout: nil, read_timeout: nil,
                        send_timeout: nil, host: nil, quota_project: nil,
                        max_elapsed_time: nil, base_interval: nil, max_interval: nil,
-                       multiplier: nil, upload_chunk_size: nil, universe_domain: nil
+                       multiplier: nil, upload_chunk_size: nil, universe_domain: nil,
+                       upload_url: nil, delete_upload: nil
+
           host ||= Google::Cloud::Storage.configure.endpoint
           @project = project
           @credentials = credentials
@@ -72,6 +74,8 @@ module Google
           @service.request_options.multiplier = multiplier if multiplier
           @service.request_options.add_invocation_id_header = true
           @service.request_options.upload_chunk_size = upload_chunk_size if upload_chunk_size
+          @service.request_options.upload_url = upload_url if upload_url
+          @service.request_options.delete_upload = delete_upload if delete_upload
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
           @service.universe_domain = universe_domain || Google::Cloud::Storage.configure.universe_domain
