@@ -1,5 +1,15 @@
 # Release History
 
+### 1.5.0 (2025-02-13)
+
+#### Features
+
+* Add option to enable fetching dependencies ([#29065](https://github.com/googleapis/google-cloud-ruby/issues/29065)) 
+* Support for git proxy setup ([#29072](https://github.com/googleapis/google-cloud-ruby/issues/29072)) 
+#### Documentation
+
+* Updates to proto message comments 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features
