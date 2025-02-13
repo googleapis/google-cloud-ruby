@@ -418,7 +418,8 @@ module Google
         #     `{project_id_or_number}.{location_id}.{aspect_type_id}@{path}`
         # @!attribute [rw] parent_entry
         #   @return [::String]
-        #     Optional. Immutable. The resource name of the parent entry.
+        #     Optional. Immutable. The resource name of the parent entry, in the format
+        #     `projects/{project_id_or_number}/locations/{location_id}/entryGroups/{entry_group_id}/entries/{entry_id}`.
         # @!attribute [rw] fully_qualified_name
         #   @return [::String]
         #     Optional. A name for the entry that can be referenced by an external
@@ -1067,6 +1068,7 @@ module Google
         #   @return [::String]
         #     Optional. Specifies the ordering of results.
         #     Supported values are:
+        #
         #     * `relevance` (default)
         #     * `last_modified_timestamp`
         #     * `last_modified_timestamp asc`
@@ -1450,6 +1452,11 @@ module Google
               # metadata import file are modified. Use this mode to modify a subset of
               # resources while leaving unreferenced resources unchanged.
               INCREMENTAL = 2
+
+              # If entry sync mode is NONE, then the entry-specific fields (apart from
+              # aspects) are not modified and the aspects are modified according to the
+              # aspect_sync_mode
+              NONE = 3
             end
 
             # The level of logs to write to Cloud Logging for this job.

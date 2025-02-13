@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the Autokey service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Kms.autokey_available?}.
+      #
       # ## About Autokey
       #
       # Provides interfaces for using [Cloud KMS
@@ -97,6 +102,37 @@ module Google
       end
 
       ##
+      # Determines whether the Autokey service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Kms.autokey}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the Autokey service,
+      # or if the versioned client gem needs an update to support the Autokey service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.autokey_available? version: :v1, transport: :grpc
+        require "google/cloud/kms/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Kms.const_get package_name
+        return false unless service_module.const_defined? :Autokey
+        service_module = service_module.const_get :Autokey
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for AutokeyAdmin.
       #
       # By default, this returns an instance of
@@ -108,6 +144,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the AutokeyAdmin service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Kms.autokey_admin_available?}.
       #
       # ## About AutokeyAdmin
       #
@@ -138,6 +179,37 @@ module Google
       end
 
       ##
+      # Determines whether the AutokeyAdmin service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Kms.autokey_admin}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the AutokeyAdmin service,
+      # or if the versioned client gem needs an update to support the AutokeyAdmin service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.autokey_admin_available? version: :v1, transport: :grpc
+        require "google/cloud/kms/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Kms.const_get package_name
+        return false unless service_module.const_defined? :AutokeyAdmin
+        service_module = service_module.const_get :AutokeyAdmin
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for EkmService.
       #
       # By default, this returns an instance of
@@ -149,6 +221,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the EkmService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Kms.ekm_service_available?}.
       #
       # ## About EkmService
       #
@@ -176,6 +253,37 @@ module Google
       end
 
       ##
+      # Determines whether the EkmService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Kms.ekm_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the EkmService service,
+      # or if the versioned client gem needs an update to support the EkmService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.ekm_service_available? version: :v1, transport: :grpc
+        require "google/cloud/kms/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Kms.const_get package_name
+        return false unless service_module.const_defined? :EkmService
+        service_module = service_module.const_get :EkmService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for KeyManagementService.
       #
       # By default, this returns an instance of
@@ -187,6 +295,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the KeyManagementService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::Kms.key_management_service_available?}.
       #
       # ## About KeyManagementService
       #
@@ -218,6 +331,37 @@ module Google
         service_module = Google::Cloud::Kms.const_get(package_name).const_get(:KeyManagementService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the KeyManagementService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::Kms.key_management_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the KeyManagementService service,
+      # or if the versioned client gem needs an update to support the KeyManagementService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.key_management_service_available? version: :v1, transport: :grpc
+        require "google/cloud/kms/#{version.to_s.downcase}"
+        package_name = Google::Cloud::Kms
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::Kms.const_get package_name
+        return false unless service_module.const_defined? :KeyManagementService
+        service_module = service_module.const_get :KeyManagementService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

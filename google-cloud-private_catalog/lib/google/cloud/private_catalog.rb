@@ -58,6 +58,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the PrivateCatalog service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Cloud::PrivateCatalog.private_catalog_available?}.
+      #
       # ## About PrivateCatalog
       #
       # `PrivateCatalog` allows catalog consumers to retrieve `Catalog`, `Product`
@@ -97,6 +102,37 @@ module Google
         service_module = Google::Cloud::PrivateCatalog.const_get(package_name).const_get(:PrivateCatalog)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the PrivateCatalog service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Cloud::PrivateCatalog.private_catalog}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the PrivateCatalog service,
+      # or if the versioned client gem needs an update to support the PrivateCatalog service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1beta1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.private_catalog_available? version: :v1beta1, transport: :grpc
+        require "google/cloud/private_catalog/#{version.to_s.downcase}"
+        package_name = Google::Cloud::PrivateCatalog
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Cloud::PrivateCatalog.const_get package_name
+        return false unless service_module.const_defined? :PrivateCatalog
+        service_module = service_module.const_get :PrivateCatalog
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
 
       ##

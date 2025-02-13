@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Scheduler
-      VERSION = "2.6.1"
+      VERSION = "2.7.0"
     end
   end
 end

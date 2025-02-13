@@ -40,9 +40,11 @@ module Google
     # @!attribute [rw] error
     #   @return [::Google::Rpc::Status]
     #     The error result of the operation in case of failure or cancellation.
+    #
+    #     Note: The following fields are mutually exclusive: `error`, `response`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     # @!attribute [rw] response
     #   @return [::Google::Protobuf::Any]
-    #     The normal response of the operation in case of success.  If the original
+    #     The normal, successful response of the operation.  If the original
     #     method returns no data on success, such as `Delete`, the response is
     #     `google.protobuf.Empty`.  If the original method is standard
     #     `Get`/`Create`/`Update`, the response should be the resource.  For other
@@ -50,12 +52,15 @@ module Google
     #     is the original method name.  For example, if the original method name
     #     is `TakeSnapshot()`, the inferred response type is
     #     `TakeSnapshotResponse`.
+    #
+    #     Note: The following fields are mutually exclusive: `response`, `error`. If a field in that set is populated, all other fields in the set will automatically be cleared.
     class Operation
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # The request message for Operations.GetOperation.
+    # The request message for
+    # Operations.GetOperation.
     # @!attribute [rw] name
     #   @return [::String]
     #     The name of the operation resource.
@@ -64,7 +69,8 @@ module Google
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # The request message for Operations.ListOperations.
+    # The request message for
+    # Operations.ListOperations.
     # @!attribute [rw] name
     #   @return [::String]
     #     The name of the operation's parent resource.
@@ -82,7 +88,8 @@ module Google
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # The response message for Operations.ListOperations.
+    # The response message for
+    # Operations.ListOperations.
     # @!attribute [rw] operations
     #   @return [::Array<::Google::Longrunning::Operation>]
     #     A list of operations that matches the specified filter in the request.
@@ -94,7 +101,8 @@ module Google
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # The request message for Operations.CancelOperation.
+    # The request message for
+    # Operations.CancelOperation.
     # @!attribute [rw] name
     #   @return [::String]
     #     The name of the operation resource to be cancelled.
@@ -103,7 +111,8 @@ module Google
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # The request message for Operations.DeleteOperation.
+    # The request message for
+    # Operations.DeleteOperation.
     # @!attribute [rw] name
     #   @return [::String]
     #     The name of the operation resource to be deleted.
@@ -112,7 +121,8 @@ module Google
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # The request message for Operations.WaitOperation.
+    # The request message for
+    # Operations.WaitOperation.
     # @!attribute [rw] name
     #   @return [::String]
     #     The name of the operation resource to wait on.
@@ -130,13 +140,12 @@ module Google
     #
     # Example:
     #
-    #   rpc LongRunningRecognize(LongRunningRecognizeRequest)
-    #       returns (google.longrunning.Operation) {
-    #     option (google.longrunning.operation_info) = {
-    #       response_type: "LongRunningRecognizeResponse"
-    #       metadata_type: "LongRunningRecognizeMetadata"
-    #     };
-    #   }
+    #     rpc Export(ExportRequest) returns (google.longrunning.Operation) {
+    #       option (google.longrunning.operation_info) = {
+    #         response_type: "ExportResponse"
+    #         metadata_type: "ExportMetadata"
+    #       };
+    #     }
     # @!attribute [rw] response_type
     #   @return [::String]
     #     Required. The message name of the primary return type for this

@@ -57,6 +57,11 @@ module Google
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
         #
+        # Raises an exception if the currently installed versioned client gem for the
+        # given API version does not support the AppConnectorsService service.
+        # You can determine whether the method will succeed by calling
+        # {Google::Cloud::BeyondCorp::AppConnectors.app_connectors_service_available?}.
+        #
         # ## About AppConnectorsService
         #
         # API Overview:
@@ -87,6 +92,32 @@ module Google
                          .first
           service_module = Google::Cloud::BeyondCorp::AppConnectors.const_get(package_name).const_get(:AppConnectorsService)
           service_module.const_get(:Client).new(&block)
+        end
+
+        ##
+        # Determines whether the AppConnectorsService service is supported by the current client.
+        # If true, you can retrieve a client object by calling {Google::Cloud::BeyondCorp::AppConnectors.app_connectors_service}.
+        # If false, that method will raise an exception. This could happen if the given
+        # API version does not exist or does not support the AppConnectorsService service,
+        # or if the versioned client gem needs an update to support the AppConnectorsService service.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v1`.
+        # @return [boolean] Whether the service is available.
+        #
+        def self.app_connectors_service_available? version: :v1
+          require "google/cloud/beyond_corp/app_connectors/#{version.to_s.downcase}"
+          package_name = Google::Cloud::BeyondCorp::AppConnectors
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          return false unless package_name
+          service_module = Google::Cloud::BeyondCorp::AppConnectors.const_get package_name
+          return false unless service_module.const_defined? :AppConnectorsService
+          service_module = service_module.const_get :AppConnectorsService
+          service_module.const_defined? :Client
+        rescue ::LoadError
+          false
         end
 
         ##

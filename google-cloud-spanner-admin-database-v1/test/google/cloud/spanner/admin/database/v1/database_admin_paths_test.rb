@@ -112,4 +112,16 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientPathsT
       assert_equal "projects/value0/instances/value1", path
     end
   end
+
+  def test_instance_partition_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_partition_path project: "value0", instance: "value1", instance_partition: "value2"
+      assert_equal "projects/value0/instances/value1/instancePartitions/value2", path
+    end
+  end
 end

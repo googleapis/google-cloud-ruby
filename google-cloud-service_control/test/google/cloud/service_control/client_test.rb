@@ -42,6 +42,7 @@ class Google::Cloud::ServiceControl::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_quota_controller_grpc
+    skip unless Google::Cloud::ServiceControl.quota_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceControl.quota_controller transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::ServiceControl::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_quota_controller_rest
+    skip unless Google::Cloud::ServiceControl.quota_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ServiceControl.quota_controller transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Cloud::ServiceControl::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_service_controller_grpc
+    skip unless Google::Cloud::ServiceControl.service_controller_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::ServiceControl.service_controller transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Cloud::ServiceControl::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_service_controller_rest
+    skip unless Google::Cloud::ServiceControl.service_controller_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ServiceControl.service_controller transport: :rest do |config|
         config.credentials = :dummy_credentials

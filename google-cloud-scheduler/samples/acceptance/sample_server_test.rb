@@ -17,6 +17,7 @@
 require_relative "../app"
 
 require "minitest/autorun"
+require "minitest/focus"
 require "rack/test"
 
 # Test the Sinatra server for the Cloud Scheduler sample.

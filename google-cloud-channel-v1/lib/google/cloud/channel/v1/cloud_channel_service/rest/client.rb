@@ -5571,10 +5571,10 @@ module Google
               #     When paginating, all other parameters provided to `ListSubscribers` must
               #     match the call that provided the page token.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String>]
+              # @yieldparam result [::Google::Cloud::Channel::V1::ListSubscribersResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String>]
+              # @return [::Google::Cloud::Channel::V1::ListSubscribersResponse]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -5622,9 +5622,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @cloud_channel_service_stub.list_subscribers request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @cloud_channel_service_stub, :list_subscribers, "service_accounts", request, result, options
                   yield result, operation if block_given?
-                  throw :response, result
                 end
               rescue ::Gapic::Rest::Error => e
                 raise ::Google::Cloud::Error.from_error(e)
@@ -5791,6 +5789,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

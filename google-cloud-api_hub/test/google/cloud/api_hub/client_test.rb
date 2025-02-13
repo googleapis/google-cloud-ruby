@@ -41,6 +41,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_api_hub_rest
+    skip unless Google::Cloud::ApiHub.api_hub_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.api_hub do |config|
         config.credentials = :dummy_credentials
@@ -50,6 +51,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_api_hub_dependencies_rest
+    skip unless Google::Cloud::ApiHub.api_hub_dependencies_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.api_hub_dependencies do |config|
         config.credentials = :dummy_credentials
@@ -59,6 +61,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_host_project_registration_service_rest
+    skip unless Google::Cloud::ApiHub.host_project_registration_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.host_project_registration_service do |config|
         config.credentials = :dummy_credentials
@@ -68,6 +71,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_linting_service_rest
+    skip unless Google::Cloud::ApiHub.linting_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.linting_service do |config|
         config.credentials = :dummy_credentials
@@ -77,6 +81,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_api_hub_plugin_rest
+    skip unless Google::Cloud::ApiHub.api_hub_plugin_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.api_hub_plugin do |config|
         config.credentials = :dummy_credentials
@@ -86,6 +91,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_provisioning_rest
+    skip unless Google::Cloud::ApiHub.provisioning_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.provisioning do |config|
         config.credentials = :dummy_credentials
@@ -95,6 +101,7 @@ class Google::Cloud::ApiHub::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_runtime_project_attachment_service_rest
+    skip unless Google::Cloud::ApiHub.runtime_project_attachment_service_available?
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::ApiHub.runtime_project_attachment_service do |config|
         config.credentials = :dummy_credentials

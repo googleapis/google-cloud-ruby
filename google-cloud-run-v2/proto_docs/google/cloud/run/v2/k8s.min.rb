@@ -77,6 +77,13 @@ module Google
         # @!attribute [rw] depends_on
         #   @return [::Array<::String>]
         #     Names of the containers that must start before this container.
+        # @!attribute [rw] base_image_uri
+        #   @return [::String]
+        #     Base image for this container. Only supported for services. If set, it
+        #     indicates that the service is enrolled into automatic base image update.
+        # @!attribute [r] build_info
+        #   @return [::Google::Cloud::Run::V2::BuildInfo]
+        #     Output only. The build info of the container image.
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -483,6 +490,19 @@ module Google
         #     https://github.com/grpc/grpc/blob/master/doc/health-checking.md ). If this
         #     is not specified, the default behavior is defined by gRPC.
         class GRPCAction
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Build information of the image.
+        # @!attribute [r] function_target
+        #   @return [::String]
+        #     Output only. Entry point of the function when the image is a Cloud Run
+        #     function.
+        # @!attribute [r] source_location
+        #   @return [::String]
+        #     Output only. Source code location of the image.
+        class BuildInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

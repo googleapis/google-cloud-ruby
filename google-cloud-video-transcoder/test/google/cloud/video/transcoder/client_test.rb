@@ -42,6 +42,7 @@ class Google::Cloud::Video::Transcoder::ClientConstructionMinitest < Minitest::T
   end
 
   def test_transcoder_service_grpc
+    skip unless Google::Cloud::Video::Transcoder.transcoder_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Video::Transcoder.transcoder_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::Video::Transcoder::ClientConstructionMinitest < Minitest::T
   end
 
   def test_transcoder_service_rest
+    skip unless Google::Cloud::Video::Transcoder.transcoder_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::Video::Transcoder.transcoder_service transport: :rest do |config|
         config.credentials = :dummy_credentials

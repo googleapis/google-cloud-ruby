@@ -143,7 +143,7 @@ module Google
           end
         end
 
-        # A resource message representing a GA4 Subproperty event filter.
+        # A resource message representing a Google Analytics subproperty event filter.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Format:

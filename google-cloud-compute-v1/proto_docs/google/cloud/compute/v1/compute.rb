@@ -4921,6 +4921,8 @@ module Google
 
             ACCELERATOR_OPTIMIZED_A3_MEGA = 156_517_459
 
+            ACCELERATOR_OPTIMIZED_A3_ULTRA = 27_812_811
+
             COMPUTE_OPTIMIZED = 158_349_023
 
             COMPUTE_OPTIMIZED_C2D = 383_246_453
@@ -28966,6 +28968,9 @@ module Google
         # @!attribute [rw] availability_domain
         #   @return [::Integer]
         #     Specifies the availability domain to place the instance in. The value must be a number between 1 and the number of availability domains specified in the spread placement policy attached to the instance.
+        # @!attribute [rw] host_error_timeout_seconds
+        #   @return [::Integer]
+        #     Specify the time in seconds for host error detection, the value must be within the range of [90, 330] with the increment of 30, if unset, the default behavior of host error recovery will be used.
         # @!attribute [rw] instance_termination_action
         #   @return [::String]
         #     Specifies the termination action for the instance.

@@ -452,6 +452,8 @@ module Google
             #         * A key including a space must be quoted. `labels."a key"`.
             #       * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
             #       [USER_DEFINED, ONE_CLICK].
+            #       * `machineType` supports = and !=.
+            #       * `acceleratorType` supports = and !=.
             #
             #     Some examples:
             #
@@ -459,6 +461,8 @@ module Google
             #       * `displayName="myDisplayName"`
             #       * `labels.myKey="myValue"`
             #       * `notebookRuntimeType=USER_DEFINED`
+            #       * `machineType=e2-standard-4`
+            #       * `acceleratorType=NVIDIA_TESLA_T4`
             #   @param page_size [::Integer]
             #     Optional. The standard list page size.
             #   @param page_token [::String]
@@ -977,6 +981,8 @@ module Google
             #       UI_RESOURCE_STATE_CREATION_FAILED].
             #       * `notebookRuntimeType` supports = and !=. notebookRuntimeType enum:
             #       [USER_DEFINED, ONE_CLICK].
+            #       * `machineType` supports = and !=.
+            #       * `acceleratorType` supports = and !=.
             #
             #     Some examples:
             #
@@ -988,6 +994,8 @@ module Google
             #       * `runtimeUser="test@google.com"`
             #       * `uiState=UI_RESOURCE_STATE_BEING_DELETED`
             #       * `notebookRuntimeType=USER_DEFINED`
+            #       * `machineType=e2-standard-4`
+            #       * `acceleratorType=NVIDIA_TESLA_T4`
             #   @param page_size [::Integer]
             #     Optional. The standard list page size.
             #   @param page_token [::String]
@@ -1917,6 +1925,13 @@ module Google
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
+            #
+            #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+            #   external source for authentication to Google Cloud, you must validate it before
+            #   providing it to a Google API client library. Providing an unvalidated credential
+            #   configuration to Google APIs can compromise the security of your systems and data.
+            #   For more information, refer to [Validate credential configurations from external
+            #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
             #   @return [::Object]
             # @!attribute [rw] scope
             #   The OAuth scopes

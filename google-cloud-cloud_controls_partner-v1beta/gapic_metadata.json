@@ -49,6 +49,21 @@
               "methods": [
                 "get_partner"
               ]
+            },
+            "CreateCustomer": {
+              "methods": [
+                "create_customer"
+              ]
+            },
+            "UpdateCustomer": {
+              "methods": [
+                "update_customer"
+              ]
+            },
+            "DeleteCustomer": {
+              "methods": [
+                "delete_customer"
+              ]
             }
           }
         }

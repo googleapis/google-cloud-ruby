@@ -42,6 +42,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_account_tax_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.account_tax_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.account_tax_service transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_account_tax_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.account_tax_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.account_tax_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -61,6 +63,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_account_issue_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.account_issue_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.account_issue_service transport: :grpc do |config|
@@ -71,6 +74,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_account_issue_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.account_issue_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.account_issue_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -80,6 +84,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_user_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.user_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.user_service transport: :grpc do |config|
@@ -90,6 +95,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_user_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.user_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.user_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -99,6 +105,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_accounts_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.accounts_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.accounts_service transport: :grpc do |config|
@@ -109,6 +116,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_accounts_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.accounts_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.accounts_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -118,6 +126,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_autofeed_settings_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.autofeed_settings_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.autofeed_settings_service transport: :grpc do |config|
@@ -128,6 +137,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_autofeed_settings_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.autofeed_settings_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.autofeed_settings_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -137,6 +147,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_business_identity_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.business_identity_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.business_identity_service transport: :grpc do |config|
@@ -147,6 +158,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_business_identity_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.business_identity_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.business_identity_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -156,6 +168,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_business_info_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.business_info_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.business_info_service transport: :grpc do |config|
@@ -166,6 +179,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_business_info_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.business_info_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.business_info_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -175,6 +189,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_email_preferences_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.email_preferences_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.email_preferences_service transport: :grpc do |config|
@@ -185,6 +200,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_email_preferences_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.email_preferences_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.email_preferences_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -194,6 +210,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_homepage_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.homepage_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.homepage_service transport: :grpc do |config|
@@ -204,6 +221,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_homepage_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.homepage_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.homepage_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -213,6 +231,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_online_return_policy_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.online_return_policy_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.online_return_policy_service transport: :grpc do |config|
@@ -223,6 +242,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_online_return_policy_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.online_return_policy_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.online_return_policy_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -232,6 +252,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_programs_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.programs_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.programs_service transport: :grpc do |config|
@@ -242,6 +263,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_programs_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.programs_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.programs_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -251,6 +273,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_regions_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.regions_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.regions_service transport: :grpc do |config|
@@ -261,6 +284,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_regions_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.regions_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.regions_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -270,6 +294,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_shipping_settings_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.shipping_settings_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.shipping_settings_service transport: :grpc do |config|
@@ -280,6 +305,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_shipping_settings_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.shipping_settings_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.shipping_settings_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -289,6 +315,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_terms_of_service_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.terms_of_service_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.terms_of_service_service transport: :grpc do |config|
@@ -299,6 +326,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_terms_of_service_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.terms_of_service_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.terms_of_service_service transport: :rest do |config|
         config.credentials = :dummy_credentials
@@ -308,6 +336,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_terms_of_service_agreement_state_service_grpc
+    skip unless Google::Shopping::Merchant::Accounts.terms_of_service_agreement_state_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Shopping::Merchant::Accounts.terms_of_service_agreement_state_service transport: :grpc do |config|
@@ -318,6 +347,7 @@ class Google::Shopping::Merchant::Accounts::ClientConstructionMinitest < Minites
   end
 
   def test_terms_of_service_agreement_state_service_rest
+    skip unless Google::Shopping::Merchant::Accounts.terms_of_service_agreement_state_service_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Shopping::Merchant::Accounts.terms_of_service_agreement_state_service transport: :rest do |config|
         config.credentials = :dummy_credentials

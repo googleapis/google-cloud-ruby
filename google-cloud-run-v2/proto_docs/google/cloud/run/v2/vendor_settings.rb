@@ -172,6 +172,61 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Describes the Build step of the function that builds a container from the
+        # given source.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The Cloud Build name of the latest successful deployment of
+        #     the function.
+        # @!attribute [rw] source_location
+        #   @return [::String]
+        #     The Cloud Storage bucket URI where the function source code is located.
+        # @!attribute [rw] function_target
+        #   @return [::String]
+        #     Optional. The name of the function (as defined in source code) that will be
+        #     executed. Defaults to the resource name suffix, if not specified. For
+        #     backward compatibility, if function with given name is not found, then the
+        #     system will try to use function named "function".
+        # @!attribute [rw] image_uri
+        #   @return [::String]
+        #     Optional. Artifact Registry URI to store the built image.
+        # @!attribute [rw] base_image
+        #   @return [::String]
+        #     Optional. The base image used to build the function.
+        # @!attribute [rw] enable_automatic_updates
+        #   @return [::Boolean]
+        #     Optional. Sets whether the function will receive automatic base image
+        #     updates.
+        # @!attribute [rw] worker_pool
+        #   @return [::String]
+        #     Optional. Name of the Cloud Build Custom Worker Pool that should be used to
+        #     build the Cloud Run function. The format of this field is
+        #     `projects/{project}/locations/{region}/workerPools/{workerPool}` where
+        #     `{project}` and `{region}` are the project id and region respectively where
+        #     the worker pool is defined and `{workerPool}` is the short name of the
+        #     worker pool.
+        # @!attribute [rw] environment_variables
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. User-provided build-time environment variables for the function
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. Service account to be used for building the container. The format
+        #     of this field is
+        #     `projects/{projectId}/serviceAccounts/{serviceAccountEmail}`.
+        class BuildConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class EnvironmentVariablesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Allowed ingress traffic for the Container.
         module IngressTraffic
           # Unspecified

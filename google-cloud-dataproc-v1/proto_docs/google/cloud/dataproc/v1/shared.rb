@@ -76,9 +76,13 @@ module Google
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     Optional. Network URI to connect workload to.
+        #
+        #     Note: The following fields are mutually exclusive: `network_uri`, `subnetwork_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] subnetwork_uri
         #   @return [::String]
         #     Optional. Subnetwork URI to connect workload to.
+        #
+        #     Note: The following fields are mutually exclusive: `subnetwork_uri`, `network_uri`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Optional. Tags used for network traffic control.
@@ -563,10 +567,11 @@ module Google
           # Unspecified component. Specifying this will cause Cluster creation to fail.
           COMPONENT_UNSPECIFIED = 0
 
-          # The Anaconda python distribution. The Anaconda component is not supported
-          # in the Dataproc [2.0 image]
-          # (/https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-release-2.0).
-          # The 2.0 image is pre-installed with Miniconda.
+          # The Anaconda component is no longer supported or applicable to
+          # [supported Dataproc on Compute Engine image versions]
+          # (https://cloud.google.com/dataproc/docs/concepts/versioning/dataproc-version-clusters#supported-dataproc-image-versions).
+          # It cannot be activated on clusters created with supported Dataproc on
+          # Compute Engine image versions.
           ANACONDA = 5
 
           # Docker

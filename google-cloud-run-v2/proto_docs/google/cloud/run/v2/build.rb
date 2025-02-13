@@ -87,7 +87,7 @@ module Google
           #     The build will clean up the temporary image on a best-effort basis.
           # @!attribute [rw] base_image
           #   @return [::String]
-          #     Optional. The base image used to opt into automatic base image updates.
+          #     Optional. The base image to use for the build.
           # @!attribute [rw] environment_variables
           #   @return [::Google::Protobuf::Map{::String => ::String}]
           #     Optional. User-provided build-time environment variables.
@@ -96,6 +96,11 @@ module Google
           #     Optional. Whether or not the application container will be enrolled in
           #     automatic base image updates. When true, the application will be built on
           #     a scratch base image, so the base layers can be appended at run time.
+          # @!attribute [rw] project_descriptor
+          #   @return [::String]
+          #     Optional. project_descriptor stores the path to the project descriptor
+          #     file. When empty, it means that there is no project descriptor file in
+          #     the source.
           class BuildpacksBuild
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

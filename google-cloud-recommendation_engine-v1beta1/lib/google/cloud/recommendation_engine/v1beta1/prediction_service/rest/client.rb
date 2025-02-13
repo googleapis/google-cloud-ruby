@@ -292,10 +292,10 @@ module Google
               #
               #     See https://goo.gl/xmQnxf for more information on and examples of labels.
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Protobuf::Value>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::RecommendationEngine::V1beta1::PredictResponse::PredictionResult>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Protobuf::Value>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::RecommendationEngine::V1beta1::PredictResponse::PredictionResult>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               #
@@ -347,7 +347,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @prediction_service_stub.predict request, options do |result, operation|
-                  result = ::Gapic::Rest::PagedEnumerable.new @prediction_service_stub, :predict, "metadata", request, result, options
+                  result = ::Gapic::Rest::PagedEnumerable.new @prediction_service_stub, :predict, "results", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -397,6 +397,13 @@ module Google
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
               #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
+              #
+              #   Warning: If you accept a credential configuration (JSON file or Hash) from an
+              #   external source for authentication to Google Cloud, you must validate it before
+              #   providing it to a Google API client library. Providing an unvalidated credential
+              #   configuration to Google APIs can compromise the security of your systems and data.
+              #   For more information, refer to [Validate credential configurations from external
+              #   sources](https://cloud.google.com/docs/authentication/external/externally-sourced-credentials).
               #   @return [::Object]
               # @!attribute [rw] scope
               #   The OAuth scopes

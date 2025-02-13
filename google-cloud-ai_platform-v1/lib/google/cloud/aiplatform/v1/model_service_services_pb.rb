@@ -41,6 +41,8 @@ module Google
             rpc :ListModels, ::Google::Cloud::AIPlatform::V1::ListModelsRequest, ::Google::Cloud::AIPlatform::V1::ListModelsResponse
             # Lists versions of the specified model.
             rpc :ListModelVersions, ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest, ::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse
+            # Lists checkpoints of the specified model version.
+            rpc :ListModelVersionCheckpoints, ::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest, ::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsResponse
             # Updates a Model.
             rpc :UpdateModel, ::Google::Cloud::AIPlatform::V1::UpdateModelRequest, ::Google::Cloud::AIPlatform::V1::Model
             # Incrementally update the dataset used for an examples model.

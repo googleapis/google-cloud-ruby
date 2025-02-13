@@ -42,6 +42,7 @@ class Google::Cloud::GkeBackup::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_backup_for_gke_grpc
+    skip unless Google::Cloud::GkeBackup.backup_for_gke_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::GkeBackup.backup_for_gke transport: :grpc do |config|
@@ -52,6 +53,7 @@ class Google::Cloud::GkeBackup::ClientConstructionMinitest < Minitest::Test
   end
 
   def test_backup_for_gke_rest
+    skip unless Google::Cloud::GkeBackup.backup_for_gke_available? transport: :rest
     Gapic::Rest::ClientStub.stub :new, DummyStub.new do
       client = Google::Cloud::GkeBackup.backup_for_gke transport: :rest do |config|
         config.credentials = :dummy_credentials

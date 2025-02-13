@@ -241,6 +241,65 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_version_checkpoints ModelService.ListModelVersionCheckpoints}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the model version to list checkpoints for.
+        #     `projects/{project}/locations/{location}/models/{model}@{version}`
+        #     Example: `projects/{project}/locations/{location}/models/{model}@2`
+        #     or
+        #     `projects/{project}/locations/{location}/models/{model}@golden`
+        #     If no version ID or alias is specified, the latest version will be
+        #     used.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The standard list page token.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsResponse#next_page_token next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_version_checkpoints ListModelVersionCheckpoints}
+        #     call.
+        class ListModelVersionCheckpointsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A proto representation of a Spanner-stored ModelVersionCheckpoint.
+        # The meaning of the fields is equivalent to their in-Spanner counterparts.
+        # @!attribute [rw] checkpoint_id
+        #   @return [::String]
+        #     The ID of the checkpoint.
+        # @!attribute [rw] epoch
+        #   @return [::Integer]
+        #     The epoch of the checkpoint.
+        # @!attribute [rw] step
+        #   @return [::Integer]
+        #     The step of the checkpoint.
+        class ModelVersionCheckpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_version_checkpoints ModelService.ListModelVersionCheckpoints}
+        # @!attribute [rw] checkpoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelVersionCheckpoint>]
+        #     List of Model Version checkpoints.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionCheckpointsRequest#page_token ListModelVersionCheckpointsRequest.page_token}
+        #     to obtain that page.
+        class ListModelVersionCheckpointsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_model ModelService.UpdateModel}.
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AIPlatform::V1::Model]

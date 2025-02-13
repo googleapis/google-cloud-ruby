@@ -40,6 +40,11 @@ module Google
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
       #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the SpacesService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Apps::Meet.spaces_service_available?}.
+      #
       # ## About SpacesService
       #
       # REST API for services dealing with spaces.
@@ -62,6 +67,37 @@ module Google
       end
 
       ##
+      # Determines whether the SpacesService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Apps::Meet.spaces_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the SpacesService service,
+      # or if the versioned client gem needs an update to support the SpacesService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.spaces_service_available? version: :v2, transport: :grpc
+        require "google/apps/meet/#{version.to_s.downcase}"
+        package_name = Google::Apps::Meet
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Apps::Meet.const_get package_name
+        return false unless service_module.const_defined? :SpacesService
+        service_module = service_module.const_get :SpacesService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
+      end
+
+      ##
       # Create a new client object for ConferenceRecordsService.
       #
       # By default, this returns an instance of
@@ -73,6 +109,11 @@ module Google
       # appropriate versioned client will be returned.
       # You can also specify a different transport by passing `:rest` or `:grpc` in
       # the `transport` parameter.
+      #
+      # Raises an exception if the currently installed versioned client gem for the
+      # given API version does not support the given transport of the ConferenceRecordsService service.
+      # You can determine whether the method will succeed by calling
+      # {Google::Apps::Meet.conference_records_service_available?}.
       #
       # ## About ConferenceRecordsService
       #
@@ -93,6 +134,37 @@ module Google
         service_module = Google::Apps::Meet.const_get(package_name).const_get(:ConferenceRecordsService)
         service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Determines whether the ConferenceRecordsService service is supported by the current client.
+      # If true, you can retrieve a client object by calling {Google::Apps::Meet.conference_records_service}.
+      # If false, that method will raise an exception. This could happen if the given
+      # API version does not exist or does not support the ConferenceRecordsService service,
+      # or if the versioned client gem needs an update to support the ConferenceRecordsService service.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [boolean] Whether the service is available.
+      #
+      def self.conference_records_service_available? version: :v2, transport: :grpc
+        require "google/apps/meet/#{version.to_s.downcase}"
+        package_name = Google::Apps::Meet
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        return false unless package_name
+        service_module = Google::Apps::Meet.const_get package_name
+        return false unless service_module.const_defined? :ConferenceRecordsService
+        service_module = service_module.const_get :ConferenceRecordsService
+        if transport == :rest
+          return false unless service_module.const_defined? :Rest
+          service_module = service_module.const_get :Rest
+        end
+        service_module.const_defined? :Client
+      rescue ::LoadError
+        false
       end
     end
   end

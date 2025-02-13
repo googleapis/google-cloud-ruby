@@ -1195,6 +1195,11 @@
                 "list_model_versions"
               ]
             },
+            "ListModelVersionCheckpoints": {
+              "methods": [
+                "list_model_version_checkpoints"
+              ]
+            },
             "UpdateModel": {
               "methods": [
                 "update_model"

@@ -156,6 +156,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified QuotaRule resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/volumes/{volume}/quotaRules/{quota_rule}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param volume [String]
+            # @param quota_rule [String]
+            #
+            # @return [::String]
+            def quota_rule_path project:, location:, volume:, quota_rule:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "volume cannot contain /" if volume.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/volumes/#{volume}/quotaRules/#{quota_rule}"
+            end
+
+            ##
             # Create a fully-qualified Replication resource string.
             #
             # The resource will be in the following format:

@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.5.0 (2025-02-07)
+
+### ⚠ BREAKING CHANGES
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823))
+
+#### Bug Fixes
+
+* Fixed incorrect pagination on certain REST RPC methods ([#28823](https://github.com/googleapis/google-cloud-ruby/issues/28823)) 
+
+### 0.4.0 (2025-01-28)
+
+#### Features
+
+* Support for CreateCustomer, UpdateCustomer, and DeleteCustomer RPCs 
+* Support for customer organization domain 
+* Update Ruby version requirement to 3.0 
+#### Documentation
+
+* Include note about validating externally-provided credentials 
+
 ### 0.3.0 (2024-12-10)
 
 #### Features

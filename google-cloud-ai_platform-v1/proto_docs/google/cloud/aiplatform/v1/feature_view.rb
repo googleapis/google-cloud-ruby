@@ -78,6 +78,23 @@ module Google
         #     contains the required configurations to create an index from source data,
         #     so that approximate nearest neighbor (a.k.a ANN) algorithms search can be
         #     performed during online serving.
+        # @!attribute [rw] optimized_config
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::OptimizedConfig]
+        #     Optional. Configuration for FeatureView created under Optimized
+        #     FeatureOnlineStore.
+        # @!attribute [rw] service_agent_type
+        #   @return [::Google::Cloud::AIPlatform::V1::FeatureView::ServiceAgentType]
+        #     Optional. Service agent type used during data sync. By default, the Vertex
+        #     AI Service Agent is used. When using an IAM Policy to isolate this
+        #     FeatureView within a project, a separate service account should be
+        #     provisioned by setting this field to `SERVICE_AGENT_TYPE_FEATURE_VIEW`.
+        #     This will generate a separate service account to access the BigQuery source
+        #     table.
+        # @!attribute [r] service_account_email
+        #   @return [::String]
+        #     Output only. A Service Account unique to this FeatureView. The role
+        #     bigquery.dataViewer should be granted to this service account to allow
+        #     Vertex AI Feature Store to sync data to the online store.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
@@ -250,6 +267,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Configuration for FeatureViews created in Optimized FeatureOnlineStore.
+          # @!attribute [rw] automatic_resources
+          #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]
+          #     Optional. A description of resources that the FeatureView uses, which to
+          #     large degree are decided by Vertex AI, and optionally allows only a
+          #     modest additional configuration. If min_replica_count is not set, the
+          #     default value is 2. If max_replica_count is not set, the default value
+          #     is 6. The max allowed replica count is 1000.
+          class OptimizedConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -257,6 +287,22 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Service agent type used during data sync.
+          module ServiceAgentType
+            # By default, the project-level Vertex AI Service Agent is enabled.
+            SERVICE_AGENT_TYPE_UNSPECIFIED = 0
+
+            # Indicates the project-level Vertex AI Service Agent
+            # (https://cloud.google.com/vertex-ai/docs/general/access-control#service-agents)
+            # will be used during sync jobs.
+            SERVICE_AGENT_TYPE_PROJECT = 1
+
+            # Enable a FeatureView service account to be created by Vertex AI and
+            # output in the field `service_account_email`. This service account will
+            # be used to read from the source BigQuery table during sync.
+            SERVICE_AGENT_TYPE_FEATURE_VIEW = 2
           end
         end
       end
