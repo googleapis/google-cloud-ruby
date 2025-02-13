@@ -24,7 +24,7 @@ module Google
         # Contains information about the org policies associated with the finding.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the org policy.
+        #     Identifier. The resource name of the org policy.
         #     Example:
         #     "organizations/\\{organization_id}/policies/\\{constraint_name}"
         class OrgPolicy
