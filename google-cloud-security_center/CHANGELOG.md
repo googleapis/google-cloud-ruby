@@ -1,5 +1,17 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-security_center-v1p1beta1
+* Updated to use google-cloud-security_center-v2 ([#28984](https://github.com/googleapis/google-cloud-ruby/issues/28984))
+
+#### Features
+
+* Removed dependency on google-cloud-security_center-v1p1beta1 
+* Updated to use google-cloud-security_center-v2 ([#28984](https://github.com/googleapis/google-cloud-ruby/issues/28984)) 
+
 ### 1.8.0 (2025-01-29)
 
 #### Features

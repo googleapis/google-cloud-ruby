@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-retail-v2 dependency to version 2.x ([#29015](https://github.com/googleapis/google-cloud-ruby/issues/29015))
+
+#### Features
+
+* Updated google-cloud-retail-v2 dependency to version 2.x ([#29015](https://github.com/googleapis/google-cloud-ruby/issues/29015)) 
+
 ### 1.11.0 (2025-01-29)
 
 #### Features

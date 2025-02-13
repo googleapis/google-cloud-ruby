@@ -1,5 +1,18 @@
 # Release History
 
+### 3.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-notebooks-v1 dependency to version 1.x ([#29062](https://github.com/googleapis/google-cloud-ruby/issues/29062))
+* Removed dependency on google-cloud-notebooks-v1beta1 prerelease service
+
+#### Features
+
+* Removed dependency on google-cloud-notebooks-v1beta1 prerelease service 
+* Support notebooks v2 service 
+* Updated google-cloud-notebooks-v1 dependency to version 1.x ([#29062](https://github.com/googleapis/google-cloud-ruby/issues/29062)) 
+
 ### 2.5.0 (2025-01-29)
 
 #### Features

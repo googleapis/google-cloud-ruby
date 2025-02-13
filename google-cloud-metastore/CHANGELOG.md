@@ -1,5 +1,17 @@
 # Release History
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Removed dependency on google-cloud-metastore-v1beta prerelease service
+* Updated google-cloud-metastore-v1 dependency to version 2.x ([#29017](https://github.com/googleapis/google-cloud-ruby/issues/29017))
+
+#### Features
+
+* Removed dependency on google-cloud-metastore-v1beta prerelease service 
+* Updated google-cloud-metastore-v1 dependency to version 2.x ([#29017](https://github.com/googleapis/google-cloud-ruby/issues/29017)) 
+
 ### 1.6.0 (2025-01-29)
 
 #### Features

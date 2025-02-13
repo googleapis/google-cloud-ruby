@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-datastream-v1 dependency to version 1.x ([#28997](https://github.com/googleapis/google-cloud-ruby/issues/28997))
+
+#### Features
+
+* Updated google-cloud-datastream-v1 dependency to version 1.x ([#28997](https://github.com/googleapis/google-cloud-ruby/issues/28997)) 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
