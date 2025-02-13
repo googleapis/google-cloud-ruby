@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-ids-v1 dependency to version 2.x ([#29035](https://github.com/googleapis/google-cloud-ruby/issues/29035))
+
+#### Features
+
+* Updated google-cloud-ids-v1 dependency to version 2.x ([#29035](https://github.com/googleapis/google-cloud-ruby/issues/29035)) 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features
