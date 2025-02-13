@@ -1,5 +1,15 @@
 # Changelog
 
+### 2.0.0 (2025-02-13)
+
+### ⚠ BREAKING CHANGES
+
+* Updated google-cloud-network_management-v1 dependency to version 2.x ([#29030](https://github.com/googleapis/google-cloud-ruby/issues/29030))
+
+#### Features
+
+* Updated google-cloud-network_management-v1 dependency to version 2.x ([#29030](https://github.com/googleapis/google-cloud-ruby/issues/29030)) 
+
 ### 1.5.0 (2025-01-29)
 
 #### Features
