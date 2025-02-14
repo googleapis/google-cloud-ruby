@@ -126,6 +126,7 @@ describe "Buckets Snippets" do
 
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
       new_bucket = storage_client.create_bucket new_bucket_name
+      new_bucket.retention_period = retention_period
       new_generation = new_bucket.generation
       puts storage_client.service_account_email
       puts new_bucket.policy.roles
@@ -137,6 +138,7 @@ describe "Buckets Snippets" do
       check_bucket = storage_client.bucket new_bucket_name
       puts "new bucket name-- #{check_bucket.name}"
       puts "new bucket generation-- #{check_bucket.generation}"
+      puts "new bucket retention period-- #{check_bucket.retention_period}"
 
       delete_bucket_helper new_bucket_name
       # Check if the bucket is deleted
