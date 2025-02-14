@@ -2446,6 +2446,13 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v2/{parent}/attackPaths",
                                                           matches: [
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/attackPaths",
+                                                          matches: [
                                                             ["parent", %r{^organizations/[^/]+/simulations/[^/]+/valuedResources/[^/]+/?$}, false]
                                                           ]
                                                         )
@@ -2741,6 +2748,13 @@ module Google
                                                           uri_template: "/v2/{parent}/valuedResources",
                                                           matches: [
                                                             ["parent", %r{^organizations/[^/]+/simulations/[^/]+/attackExposureResults/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v2/{parent}/valuedResources",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

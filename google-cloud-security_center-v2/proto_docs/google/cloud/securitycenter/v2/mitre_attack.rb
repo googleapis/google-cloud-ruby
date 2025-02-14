@@ -99,7 +99,6 @@ module Google
 
           # MITRE ATT&CK techniques that can be referenced by SCC findings.
           # See: https://attack.mitre.org/techniques/enterprise/
-          # Next ID: 65
           module Technique
             # Unspecified value.
             TECHNIQUE_UNSPECIFIED = 0
@@ -239,6 +238,9 @@ module Google
             # T1543
             CREATE_OR_MODIFY_SYSTEM_PROCESS = 24
 
+            # T1546
+            EVENT_TRIGGERED_EXECUTION = 65
+
             # T1548
             ABUSE_ELEVATION_CONTROL_MECHANISM = 34
 
@@ -286,6 +288,9 @@ module Google
 
             # T1609
             CONTAINER_ADMINISTRATION_COMMAND = 60
+
+            # T1610
+            DEPLOY_CONTAINER = 66
 
             # T1611
             ESCAPE_TO_HOST = 61
