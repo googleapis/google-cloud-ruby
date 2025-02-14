@@ -109,15 +109,25 @@ module Google
         end
 
         # Information about DDoS attack volume and classification.
-        # @!attribute [rw] volume_pps
+        # @!attribute [rw] volume_pps_long
         #   @return [::Integer]
         #     Total PPS (packets per second) volume of attack.
-        # @!attribute [rw] volume_bps
+        # @!attribute [rw] volume_bps_long
         #   @return [::Integer]
         #     Total BPS (bytes per second) volume of attack.
         # @!attribute [rw] classification
         #   @return [::String]
         #     Type of attack, for example, 'SYN-flood', 'NTP-udp', or 'CHARGEN-udp'.
+        # @!attribute [rw] volume_pps
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Integer]
+        #     Total PPS (packets per second) volume of attack. Deprecated - refer to
+        #     volume_pps_long instead.
+        # @!attribute [rw] volume_bps
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
+        #   @return [::Integer]
+        #     Total BPS (bytes per second) volume of attack. Deprecated - refer to
+        #     volume_bps_long instead.
         class Attack
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

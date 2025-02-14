@@ -280,6 +280,18 @@ module Google
         #     Contains details about groups of which this finding is a member. A group is
         #     a collection of findings that are related in some way.
         #     This field cannot be updated. Its value is ignored in all update requests.
+        # @!attribute [rw] disk
+        #   @return [::Google::Cloud::SecurityCenter::V2::Disk]
+        #     Disk associated with the finding.
+        # @!attribute [rw] data_access_events
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::DataAccessEvent>]
+        #     Data access events associated with the finding.
+        # @!attribute [rw] data_flow_events
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::DataFlowEvent>]
+        #     Data flow events associated with the finding.
+        # @!attribute [rw] data_retention_deletion_events
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V2::DataRetentionDeletionEvent>]
+        #     Data retention deletion events associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -472,6 +484,10 @@ module Google
             # Describes a combination of security issues that represent a more severe
             # security problem when taken together.
             TOXIC_COMBINATION = 7
+
+            # Describes a potential security risk to data assets that contain sensitive
+            # data.
+            SENSITIVE_DATA_RISK = 8
           end
         end
       end
