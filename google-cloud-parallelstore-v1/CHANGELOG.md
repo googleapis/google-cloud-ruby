@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.1.0 (2025-02-14)
+
+#### Features
+
+* Added instance deployment type field 
+* Added REPAIRING instance state 
+* TransferCounters includes number of objects that failed to write and bytes that failed 
+* TransferOperationMetadata reports a list of files that failed to transfer 
+#### Documentation
+
+* Deprecated Instance#daos_version 
+
 ### 1.0.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
