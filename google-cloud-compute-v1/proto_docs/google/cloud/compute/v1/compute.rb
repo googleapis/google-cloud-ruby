@@ -446,6 +446,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.AddPacketMirroringRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] max_priority
+        #   @return [::Integer]
+        #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+        # @!attribute [rw] min_priority
+        #   @return [::Integer]
+        #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class AddPacketMirroringRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Networks.AddPeering. See the method description for details.
         # @!attribute [rw] network
         #   @return [::String]
@@ -4791,29 +4815,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a regional Commitment resource. Creating a commitment resource means that you are purchasing a committed use contract with an explicit start and end time. You can create commitments based on vCPUs and memory usage and receive discounted rates. For full details, read Signing Up for Committed Use Discounts.
+        # Represents a regional resource-based commitment resource. Creating this commitment resource means that you are purchasing a resource-based committed use contract, with an explicit start and end time. You can purchase resource-based commitments for both hardware and software resources. For more information, read Resource-based committed use discounts
         # @!attribute [rw] auto_renew
         #   @return [::Boolean]
-        #     Specifies whether to enable automatic renewal for the commitment. The default value is false if not specified. The field can be updated until the day of the commitment expiration at 12:00am PST. If the field is set to true, the commitment will be automatically renewed for either one or three years according to the terms of the existing commitment.
+        #     Specifies whether to automatically renew the commitment at the end of its current term. The default value is false. If you set the field to true, each time your commitment reaches the end of its term, Compute Engine automatically renews it for another term. You can update this field anytime before the commitment expires. For example, if the commitment is set to expire at 12 AM UTC-8 on January 3, 2027, you can update this field until 11:59 PM UTC-8 on January 2, 2027.
         # @!attribute [rw] category
         #   @return [::String]
-        #     The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
+        #     The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.
         #     Check the Category enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
         # @!attribute [rw] custom_end_timestamp
         #   @return [::String]
-        #     [Input Only] Optional, specifies the CUD end time requested by the customer in RFC3339 text format. Needed when the customer wants CUD's end date is later than the start date + term duration.
+        #     [Input Only] Optional, specifies the requested commitment end time in RFC3339 text format. Use this option when the desired commitment's end date is later than the start date + term duration.
         # @!attribute [rw] description
         #   @return [::String]
-        #     An optional description of this resource. Provide this property when you create the resource.
+        #     An optional description of the commitment. You can provide this property when you create the resource.
         # @!attribute [rw] end_timestamp
         #   @return [::String]
         #     [Output Only] Commitment end time in RFC3339 text format.
         # @!attribute [rw] existing_reservations
         #   @return [::Array<::String>]
-        #     Specifies the already existing reservations to attach to the Commitment. This field is optional, and it can be a full or partial URL. For example, the following are valid URLs to an reservation: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /reservations/reservation - projects/project/zones/zone/reservations/reservation
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -4825,51 +4848,51 @@ module Google
         #     The license specification required as part of a license commitment.
         # @!attribute [rw] merge_source_commitments
         #   @return [::Array<::String>]
-        #     List of source commitments to be merged into a new commitment.
+        #     The list of source commitments that you are merging to create the new merged commitment. For more information, see Merging commitments.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        #     Name of the commitment. You must specify a name when you purchase the commitment. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] plan
         #   @return [::String]
-        #     The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
+        #     The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
         #     Check the Plan enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
-        #     [Output Only] URL of the region where this commitment may be used.
+        #     [Output Only] URL of the region where the commitment and committed resources are located.
         # @!attribute [rw] reservations
         #   @return [::Array<::Google::Cloud::Compute::V1::Reservation>]
-        #     List of create-on-create reservations for this commitment.
+        #     The list of new reservations that you want to create and attach to this commitment. You must attach reservations to your commitment if your commitment specifies any GPUs or Local SSD disks. For more information, see Attach reservations to resource-based commitments. Specify this property only if you want to create new reservations to attach. To attach existing reservations, specify the existingReservations property instead.
         # @!attribute [rw] resource_status
         #   @return [::Google::Cloud::Compute::V1::CommitmentResourceStatus]
         #     [Output Only] Status information for Commitment resource.
         # @!attribute [rw] resources
         #   @return [::Array<::Google::Cloud::Compute::V1::ResourceCommitment>]
-        #     A list of commitment amounts for particular resources. Note that VCPU and MEMORY resource commitments must occur together.
+        #     The list of all the hardware resources, with their types and amounts, that you want to commit to. Specify as a separate entry in the list for each individual resource type.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] split_source_commitment
         #   @return [::String]
-        #     Source commitment to be split into a new commitment.
+        #     The source commitment from which you are transferring resources to create the new split commitment. For more information, see Split commitments.
         # @!attribute [rw] start_timestamp
         #   @return [::String]
         #     [Output Only] Commitment start time in RFC3339 text format.
         # @!attribute [rw] status
         #   @return [::String]
-        #     [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
+        #     [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT_YET_ACTIVE, ACTIVE, or EXPIRED.
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] status_message
         #   @return [::String]
         #     [Output Only] An optional, human-readable explanation of the status.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
+        #     The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3, ACCELERATOR_OPTIMIZED_A3_MEGA, COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D, COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D, COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE, GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2, GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D, GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D, GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For example, type MEMORY_OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL_PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.
         #     Check the Type enum for the list of possible values.
         class Commitment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The category of the commitment. Category MACHINE specifies commitments composed of machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies commitments composed of software licenses, listed in licenseResources. Note that only MACHINE commitments should have a Type specified.
+          # The category of the commitment; specifies whether the commitment is for hardware or software resources. Category MACHINE specifies that you are committing to hardware machine resources such as VCPU or MEMORY, listed in resources. Category LICENSE specifies that you are committing to software licenses, listed in licenseResources. Note that if you specify MACHINE commitments, then you must also specify a type to indicate the machine series of the hardware resource that you are committing to.
           module Category
             # A value indicating that the enum field is not set.
             UNDEFINED_CATEGORY = 0
@@ -4881,7 +4904,7 @@ module Google
             MACHINE = 469_553_191
           end
 
-          # The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
+          # The minimum time duration that you commit to purchasing resources. The plan that you choose determines the preset term length of the commitment (which is 1 year or 3 years) and affects the discount rate that you receive for your resources. Committing to a longer time duration typically gives you a higher discount rate. The supported values for this field are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
           module Plan
             # A value indicating that the enum field is not set.
             UNDEFINED_PLAN = 0
@@ -4893,7 +4916,7 @@ module Google
             TWELVE_MONTH = 173_083_962
           end
 
-          # [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
+          # [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). Status can be one of the following values: NOT_YET_ACTIVE, ACTIVE, or EXPIRED.
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
@@ -4910,7 +4933,7 @@ module Google
             NOT_YET_ACTIVE = 20_607_337
           end
 
-          # The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
+          # The type of commitment; specifies the machine series for which you want to commit to purchasing resources. The choice of machine series affects the discount rate and the eligible resource types. The type must be one of the following: ACCELERATOR_OPTIMIZED, ACCELERATOR_OPTIMIZED_A3, ACCELERATOR_OPTIMIZED_A3_MEGA, COMPUTE_OPTIMIZED, COMPUTE_OPTIMIZED_C2D, COMPUTE_OPTIMIZED_C3, COMPUTE_OPTIMIZED_C3D, COMPUTE_OPTIMIZED_H3, GENERAL_PURPOSE, GENERAL_PURPOSE_C4, GENERAL_PURPOSE_E2, GENERAL_PURPOSE_N2, GENERAL_PURPOSE_N2D, GENERAL_PURPOSE_N4, GENERAL_PURPOSE_T2D, GRAPHICS_OPTIMIZED, MEMORY_OPTIMIZED, MEMORY_OPTIMIZED_M3, MEMORY_OPTIMIZED_X4, STORAGE_OPTIMIZED_Z3. For example, type MEMORY_OPTIMIZED specifies a commitment that applies only to eligible resources of memory optimized M1 and M2 machine series. Type GENERAL_PURPOSE specifies a commitment that applies only to eligible resources of general purpose N1 machine series.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -4963,6 +4986,7 @@ module Google
 
             STORAGE_OPTIMIZED_Z3 = 316_796_085
 
+            # Note for internal users: When adding a new enum Type for v1, make sure to also add it in the comment for the `optional Type type` definition. This ensures that the public documentation displays the new enum Type.
             TYPE_UNSPECIFIED = 437_714_322
           end
         end
@@ -5037,7 +5061,7 @@ module Google
 
         # @!attribute [rw] commitments
         #   @return [::Array<::Google::Cloud::Compute::V1::Commitment>]
-        #     [Output Only] A list of commitments contained in this scope.
+        #     [Output Only] The list of commitments contained in this scope.
         # @!attribute [rw] warning
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning which replaces the list of commitments when the list is empty.
@@ -8118,6 +8142,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. For Organization Firewall Policies it's a [Output Only] numeric ID allocated by Google Cloud which uniquely identifies the Organization Firewall Policy.
+        # @!attribute [rw] packet_mirroring_rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     A list of packet mirroring rules that belong to this policy.
         # @!attribute [rw] parent
         #   @return [::String]
         #     [Output Only] The parent of the firewall policy. This field is not applicable to network firewall policies.
@@ -9923,6 +9950,21 @@ module Google
         #   @return [::String]
         #     Name of the region for this request.
         class GetPacketMirroringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.GetPacketMirroringRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried rule belongs.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to get from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetPacketMirroringRuleNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -15211,6 +15253,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] The name of the firewall policy.
+        # @!attribute [rw] packet_mirroring_rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     [Output Only] The packet mirroring rules that apply to the instance.
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     [Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.
@@ -17001,13 +17046,13 @@ module Google
         # Commitment for a particular license resource.
         # @!attribute [rw] amount
         #   @return [::Integer]
-        #     The number of licenses purchased.
+        #     The number of licenses you plan to purchase.
         # @!attribute [rw] cores_per_license
         #   @return [::String]
-        #     Specifies the core range of the instance for which this license applies.
+        #     The number of cores per license.
         # @!attribute [rw] license
         #   @return [::String]
-        #     Any applicable license URI.
+        #     The applicable license URI.
         class LicenseResourceCommitment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21799,7 +21844,6 @@ module Google
         #     [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     [Output Only] Zone to which the network is restricted.
         class NetworkProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22304,6 +22348,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] The name of the firewall policy.
+        # @!attribute [rw] packet_mirroring_rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     [Output Only] The packet mirroring rules that apply to the network.
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     [Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.
@@ -22904,6 +22951,9 @@ module Google
         # @!attribute [rw] local_ssd_gb
         #   @return [::Integer]
         #     [Output Only] Local SSD available to the node type, defined in GB.
+        # @!attribute [rw] max_vms
+        #   @return [::Integer]
+        #     [Output Only] Maximum number of VMs that can be created for this node type.
         # @!attribute [rw] memory_mb
         #   @return [::Integer]
         #     [Output Only] The amount of physical memory available to the node type, defined in MB.
@@ -23927,6 +23977,27 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class PatchPacketMirroringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.PatchPacketMirroringRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to patch.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class PatchPacketMirroringRuleNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -26549,6 +26620,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     [Output Only] The name of the firewall policy.
+        # @!attribute [rw] packet_mirroring_rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     [Output only] The packet mirroring rules that apply to the network.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
         #     [Output only] The rules that apply to the network.
@@ -26738,6 +26812,24 @@ module Google
         #   @return [::String]
         #     The name of the zone where the instance group is located.
         class RemoveInstancesInstanceGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.RemovePacketMirroringRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to remove from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class RemovePacketMirroringRuleNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27237,22 +27329,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Commitment for a particular resource (a Commitment is composed of one or more of these).
+        # Commitment for a particular hardware resource (a commitment is composed of one or more of these).
         # @!attribute [rw] accelerator_type
         #   @return [::String]
-        #     Name of the accelerator type resource. Applicable only when the type is ACCELERATOR.
+        #     Name of the accelerator type or GPU resource. Specify this field only when the type of hardware resource is ACCELERATOR.
         # @!attribute [rw] amount
         #   @return [::Integer]
-        #     The amount of the resource purchased (in a type-dependent unit, such as bytes). For vCPUs, this can just be an integer. For memory, this must be provided in MB. Memory must be a multiple of 256 MB, with up to 6.5GB of memory per every vCPU.
+        #     The quantity of the hardware resource that you want to commit to purchasing (in a type-dependent unit). - For vCPUs, you must specify an integer value. - For memory, you specify the amount of MB that you want. The value you specify must be a multiple of 256 MB, with up to 6.5 GB of memory per every vCPU. - For GPUs, you must specify an integer value. - For Local SSD disks, you must specify the amount in GB. The size of a single Local SSD disk is 375 GB.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
+        #     The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.
         #     Check the Type enum for the list of possible values.
         class ResourceCommitment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Type of resource for which this commitment applies. Possible values are VCPU, MEMORY, LOCAL_SSD, and ACCELERATOR.
+          # The type of hardware resource that you want to specify. You can specify any of the following values: - VCPU - MEMORY - LOCAL_SSD - ACCELERATOR Specify as a separate entry in the list for each individual resource type.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -28211,7 +28303,7 @@ module Google
 
         # @!attribute [rw] ip_range
         #   @return [::String]
-        #     IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fc00:0:1:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
+        #     IP address and range of the interface. - For Internet Protocol version 4 (IPv4), the IP range must be in the RFC3927 link-local IP address space. The value must be a CIDR-formatted string, for example, 169.254.0.1/30. Note: Do not truncate the IP address, as it represents the IP address of the interface. - For Internet Protocol version 6 (IPv6), the value must be a unique local address (ULA) range from fdff:1::/64 with a mask length of 126 or less. This value should be a CIDR-formatted string, for example, fdff:1::1/112. Within the router's VPC, this IPv6 prefix will be reserved exclusively for this connection and cannot be used for any other purpose.
         # @!attribute [rw] ip_version
         #   @return [::String]
         #     IP version of this interface.
@@ -36094,7 +36186,7 @@ module Google
         # A request message for RegionCommitments.Update. See the method description for details.
         # @!attribute [rw] commitment
         #   @return [::String]
-        #     Name of the commitment for which auto renew is being updated.
+        #     Name of the commitment that you want to update.
         # @!attribute [rw] commitment_resource
         #   @return [::Google::Cloud::Compute::V1::Commitment]
         #     The body resource for this request
