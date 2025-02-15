@@ -21,16 +21,6 @@ module GRPC
   extend ProxyLogger
 end
 
-# bt:: aliases Google::Cloud::Bigtable::
-def bt
-  Google::Cloud::Bigtable
-end
-
-# tp:: aliases Google::Bigtable::Testproxy::
-def tp
-  Google::Bigtable::Testproxy
-end
-
 # Helper method to provide feedback for future devs trying to maintain this file.
 # Generally we can't rely on the type system to fail fast when arguments are invalid
 # so we'll add some simple assertions to help out.
@@ -41,7 +31,7 @@ end
 
 # Implements a proxy per https://github.com/googleapis/cloud-bigtable-clients-test/blob/main/docs/test_proxy.md#
 # for client conformance testing.
-class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
+class TestProxyServer < Google::Bigtable::Testproxy::CloudBigtableV2TestProxy::Service
   # Client provides class-level get, create and remove methods for managing client
   # connections in a thread-safe manner, per
   # https://github.com/googleapis/cloud-bigtable-clients-test/blob/main/docs/test_proxy.md#additional-notes
@@ -144,14 +134,14 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
   def create_client req, _call
     LOGGER.info "CreateClient(#{req.to_h})"
     Client.create req
-    tp::CreateClientResponse.new
+    Google::Bigtable::Testproxy::CreateClientResponse.new
   end
 
   # Closes a client in the proxy, making it not accept new requests.
   def close_client req, _call
     LOGGER.info "CloseClient(#{req.to_h})"
     Client.get(req.client_id).close
-    tp::CloseClientResponse.new
+    Google::Bigtable::Testproxy::CloseClientResponse.new
   end
 
   # Removes a client in the proxy, making it inaccessible. Client closing
@@ -159,7 +149,7 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
   def remove_client req, _call
     LOGGER.info "RemoveClient(#{req.to_h})"
     Client.remove req.client_id
-    tp::RemoveClientResponse.new
+    Google::Bigtable::Testproxy::RemoveClientResponse.new
   end
 
   # Reads a row with the client instance.
@@ -173,9 +163,9 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
                    .table(req.table_name)
                    .read_row(req.row_key)
 
-    tp::RowResult.new(
+    Google::Bigtable::Testproxy::RowResult.new(
       status: ok_status,
-      row: result.nil? ? bt::V2::Row.new(key: req.row_key) : row_to_v2_row(result)
+      row: result.nil? ? Google::Cloud::Bigtable::V2::Row.new(key: req.row_key) : row_to_v2_row(result)
     )
   rescue Google::Cloud::Error => e
     LOGGER.info "ReadRow failed: Caught #{e}"
@@ -226,7 +216,7 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     result = result.to_a
 
     if result.any?
-      tp::RowsResult.new(
+      Google::Bigtable::Testproxy::RowsResult.new(
         # The status is not available from the Ruby client library, so just assumed "ok"
         status: ok_status,
         rows: result.map { |row| row_to_v2_row(row) }
@@ -234,13 +224,13 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     else
       # TODO(meagar): Is this the right response?
       #   It seems to allow the tests to pass...
-      tp::RowsResult.new(
+      Google::Bigtable::Testproxy::RowsResult.new(
         status: not_found_status
       )
     end
   rescue Google::Cloud::Error => e
     LOGGER.info "ReadRows failed: Caught #{e}"
-    tp::RowResult.new(
+    Google::Bigtable::Testproxy::RowResult.new(
       status: make_status(e.code)
     )
   end
@@ -258,7 +248,7 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
 
     table.mutate_row entry
 
-    tp::MutateRowResult.new(
+    Google::Bigtable::Testproxy::MutateRowResult.new(
       status: ok_status
     )
   rescue Google::Cloud::Error => e
@@ -283,11 +273,11 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
 
     results = table.mutate_rows entries
 
-    tp::MutateRowsResult.new(
+    Google::Bigtable::Testproxy::MutateRowsResult.new(
       status: ok_status,
       # Entries should include only the failed rows, where status != 0 (OK)
       entries: results.reject { |r| r.status.code.zero? }.map do |result|
-        bt::V2::MutateRowsResponse::Entry.new(
+        Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry.new(
           index: result.index,
           status: Google::Rpc::Status.new(
             code: result.status.code,
@@ -319,15 +309,15 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
       otherwise: entry_to_v2_entry(table, req.request.row_key, req.request.false_mutations)
     )
 
-    tp::CheckAndMutateRowResult.new(
+    Google::Bigtable::Testproxy::CheckAndMutateRowResult.new(
       status: ok_status,
-      result: bt::V2::CheckAndMutateRowResponse.new(
+      result: Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse.new(
         predicate_matched: result
       )
     )
   rescue Google::Cloud::Error => e
     LOGGER.info "CheckAndMutateRow failed: Caught #{e}"
-    tp::CheckAndMutateRowResult.new(
+    Google::Bigtable::Testproxy::CheckAndMutateRowResult.new(
       status: make_status(e.code)
     )
   end
@@ -354,10 +344,10 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     table = Client.get(req.client_id).table(req.request.table_name)
     result = table.sample_row_keys
 
-    tp::SampleRowKeysResult.new(
+    Google::Bigtable::Testproxy::SampleRowKeysResult.new(
       status: ok_status,
       samples: result.map do |sample|
-        bt::V2::SampleRowKeysResponse.new(
+        Google::Cloud::Bigtable::V2::SampleRowKeysResponse.new(
           row_key: sample.key,
           offset_bytes: sample.offset
         )
@@ -379,34 +369,43 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
     table = Client.get(req.client_id).table(req.request.table_name)
 
     result = table.read_modify_write_row(req.request.row_key, req.request.rules.map do |r|
-      rule = bt::ReadModifyWriteRule.new r.family_name, r.column_qualifier
+      rule = Google::Cloud::Bigtable::ReadModifyWriteRule.new r.family_name, r.column_qualifier
       rule.append r.append_value if r.append_value && r.append_value != ""
       rule.increment r.increment_amount if r.increment_amount&.positive?
       rule
     end)
 
-    tp::RowResult.new(
+    Google::Bigtable::Testproxy::RowResult.new(
       # The status is not available from the Ruby client library
       status: ok_status,
       row: row_to_v2_row(result)
     )
   rescue Google::Cloud::Error => e
-    tp::RowResult.new(
+    Google::Bigtable::Testproxy::RowResult.new(
       status: make_status(e.code)
     )
   end
   # rubocop:enable Metrics/AbcSize
 
+  # Executes a query with the client.
+  # rpc ExecuteQuery(ExecuteQueryRequest) returns (ExecuteQueryResult) {}
+  def execute_query req, _call
+    LOGGER.info "ExecuteQuery(#{req.to_h})"
+    # The handwritten client appears not to implement queries. We'll reflect
+    # that for now.
+    Google::Bigtable::Testproxy::ExecuteQueryResult.new status: unimplemented_status
+  end
+
   private
 
   def row_to_v2_row row
     families = row.cells.map do |family_name, cells|
-      bt::V2::Family.new(
+      Google::Cloud::Bigtable::V2::Family.new(
         name: family_name,
         columns: cells.map do |cell|
-          bt::V2::Column.new(
+          Google::Cloud::Bigtable::V2::Column.new(
             qualifier: cell.qualifier,
-            cells: [bt::V2::Cell.new(
+            cells: [Google::Cloud::Bigtable::V2::Cell.new(
               # labels: cell.labels,
               timestamp_micros: cell.timestamp,
               value: cell.value
@@ -416,7 +415,7 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
       )
     end
 
-    bt::V2::Row.new key: row.key, families: families
+    Google::Cloud::Bigtable::V2::Row.new key: row.key, families: families
   end
 
   def entry_to_v2_entry table, row_key, mutations
@@ -454,6 +453,10 @@ class TestProxyServer < tp::CloudBigtableV2TestProxy::Service
 
   def not_found_status message = ""
     make_status Google::Rpc::Code::NOT_FOUND, message
+  end
+
+  def unimplemented_status message = ""
+    make_status Google::Rpc::Code::UNIMPLEMENTED, message
   end
 end
 
