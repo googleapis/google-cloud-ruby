@@ -19,6 +19,8 @@ require "google/cloud/firestore"
 require "google/cloud/firestore/admin/v1"
 require "securerandom"
 
+firestore_admin = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+
 def delete_collection_test collection_name:, project_id:
   firestore = Google::Cloud::Firestore.new project_id: project_id
   cities_ref = firestore.col collection_name
@@ -42,10 +44,8 @@ end
 # @param collection_path [String] A string representing the path of the collection,
 #   relative to the document.
 #
-# @return [::Gapic::Operation]
+# @return [String, nil] The name assigned to the newly created index.
 def create_composite_index project_id:, collection_path:
-  admin = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
-
   order = Google::Cloud::Firestore::Admin::V1::Index::IndexField::Order::ASCENDING
 
   index_fields = [
@@ -57,6 +57,20 @@ def create_composite_index project_id:, collection_path:
   index = Google::Cloud::Firestore::Admin::V1::Index.new query_scope: scope, fields: index_fields
   parent = "projects/#{project_id}/databases/(default)/collectionGroups/#{collection_path}"
   request = Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new parent: parent, index: index
-  result = admin.create_index request
+  result = firestore_admin.create_index request
+  result.wait_until_done!
+  result.response? ? result.response.name : nil
+end
+
+##
+# Deletes a composite index.
+#
+# @param name [String] The index's name to be deleted, of the form
+#  `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`.
+#
+# @return [nil]
+def delete_composite_index name:
+  request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new name: name
+  result = firestore_admin.delete_index request
   result.wait_until_done!
 end
