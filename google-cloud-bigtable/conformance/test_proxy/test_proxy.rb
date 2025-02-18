@@ -467,4 +467,5 @@ puts "Starting server on #{addr}"
 server = GRPC::RpcServer.new
 server.add_http2_port addr, :this_port_is_insecure
 server.handle TestProxyServer
+puts "SERVER STARTED"
 server.run_till_terminated_or_interrupted [1, "int", "SIGTERM"]
