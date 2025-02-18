@@ -2378,9 +2378,13 @@ module Google
 
             VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT5LP = 18_705_267
 
+            VM_FAMILY_CLOUD_TPU_LITE_POD_SLICE_CT6E = 398_926_997
+
             VM_FAMILY_CLOUD_TPU_POD_SLICE_CT3P = 517_384_376
 
             VM_FAMILY_CLOUD_TPU_POD_SLICE_CT4P = 517_384_407
+
+            VM_FAMILY_CLOUD_TPU_POD_SLICE_CT5P = 517_384_438
           end
 
           # The workload type of the instances that will target this reservation.
@@ -4498,6 +4502,73 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] as_paths
+        #   @return [::Array<::Google::Cloud::Compute::V1::BgpRouteAsPath>]
+        #     [Output only] AS-PATH for the route
+        # @!attribute [rw] communities
+        #   @return [::Array<::String>]
+        #     [Output only] BGP communities in human-readable A:B format.
+        # @!attribute [rw] destination
+        #   @return [::Google::Cloud::Compute::V1::BgpRouteNetworkLayerReachabilityInformation]
+        #     [Output only] Destination IP range for the route, in human-readable CIDR format
+        # @!attribute [rw] med
+        #   @return [::Integer]
+        #     [Output only] BGP multi-exit discriminator
+        # @!attribute [rw] origin
+        #   @return [::String]
+        #     [Output only] BGP origin (EGP, IGP or INCOMPLETE)
+        #     Check the Origin enum for the list of possible values.
+        class BgpRoute
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output only] BGP origin (EGP, IGP or INCOMPLETE)
+          module Origin
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ORIGIN = 0
+
+            BGP_ORIGIN_EGP = 378_906_473
+
+            BGP_ORIGIN_IGP = 378_910_317
+
+            BGP_ORIGIN_INCOMPLETE = 452_839_811
+          end
+        end
+
+        # @!attribute [rw] asns
+        #   @return [::Array<::Integer>]
+        #     [Output only] ASNs in the path segment. When type is SEQUENCE, these are ordered.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     [Output only] Type of AS-PATH segment (SEQUENCE or SET)
+        #     Check the Type enum for the list of possible values.
+        class BgpRouteAsPath
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output only] Type of AS-PATH segment (SEQUENCE or SET)
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            AS_PATH_TYPE_SEQUENCE = 362_887_609
+
+            AS_PATH_TYPE_SET = 302_584_650
+          end
+        end
+
+        # Network Layer Reachability Information (NLRI) for a route.
+        # @!attribute [rw] path_id
+        #   @return [::Integer]
+        #     If the BGP session supports multiple paths (RFC 7911), the path identifier for this route.
+        # @!attribute [rw] prefix
+        #   @return [::String]
+        #     Human readable CIDR notation for a prefix. E.g. 10.42.0.0/16.
+        class BgpRouteNetworkLayerReachabilityInformation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Associates `members`, or principals, with a `role`.
         # @!attribute [rw] binding_id
         #   @return [::String]
@@ -6438,6 +6509,27 @@ module Google
         #   @return [::String]
         #     Name of the resource policy to delete.
         class DeleteResourcePolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Routers.DeleteRoutePolicy. See the method description for details.
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     The Policy name for this request. Name must conform to RFC1035
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] router
+        #   @return [::String]
+        #     Name of the Router resource where Route Policy is defined.
+        class DeleteRoutePolicyRouterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -10373,6 +10465,24 @@ module Google
         #   @return [::String]
         #     Name of the resource policy to retrieve.
         class GetResourcePolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Routers.GetRoutePolicy. See the method description for details.
+        # @!attribute [rw] policy
+        #   @return [::String]
+        #     The Policy name for this request. Name must conform to RFC1035
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] router
+        #   @return [::String]
+        #     Name of the Router resource to query for the route policy. The name should conform to RFC1035.
+        class GetRoutePolicyRouterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -17278,6 +17388,77 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Routers.ListBgpRoutes. See the method description for details.
+        # @!attribute [rw] address_family
+        #   @return [::String]
+        #     (Required) limit results to this address family (either IPv4 or IPv6)
+        #     Check the AddressFamily enum for the list of possible values.
+        # @!attribute [rw] destination_prefix
+        #   @return [::String]
+        #     Limit results to destinations that are subnets of this CIDR range
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] peer
+        #   @return [::String]
+        #     (Required) limit results to the BGP peer with the given name. Name should conform to RFC1035.
+        # @!attribute [rw] policy_applied
+        #   @return [::Boolean]
+        #     When true, the method returns post-policy routes. Otherwise, it returns pre-policy routes.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] route_type
+        #   @return [::String]
+        #     (Required) limit results to this type of route (either LEARNED or ADVERTISED)
+        #     Check the RouteType enum for the list of possible values.
+        # @!attribute [rw] router
+        #   @return [::String]
+        #     Name or id of the resource for this request. Name should conform to RFC1035.
+        class ListBgpRoutesRoutersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # (Required) limit results to this address family (either IPv4 or IPv6)
+          module AddressFamily
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ADDRESS_FAMILY = 0
+
+            IPV4 = 2_254_341
+
+            IPV6 = 2_254_343
+
+            UNSPECIFIED_IP_VERSION = 72_938_440
+          end
+
+          # (Required) limit results to this type of route (either LEARNED or ADVERTISED)
+          module RouteType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ROUTE_TYPE = 0
+
+            ADVERTISED = 20_302_109
+
+            LEARNED = 231_892_419
+
+            UNSPECIFIED_ROUTE_TYPE = 248_064_440
+          end
+        end
+
         # A request message for DiskTypes.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -19438,6 +19619,36 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
         class ListResourcePoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Routers.ListRoutePolicies. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. These two types of filter expressions cannot be mixed in one request. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`. You cannot combine constraints on multiple fields using regular expressions.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false. For example, when partial success behavior is enabled, aggregatedList for a single zone scope either returns all resources in the zone or no resources, with an error code.
+        # @!attribute [rw] router
+        #   @return [::String]
+        #     Name or id of the resource for this request. Name should conform to RFC1035.
+        class ListRoutePoliciesRoutersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -24320,6 +24531,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Routers.PatchRoutePolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] route_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::RoutePolicy]
+        #     The body resource for this request
+        # @!attribute [rw] router
+        #   @return [::String]
+        #     Name of the Router resource where Route Policy is defined.
+        class PatchRoutePolicyRouterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Routers.Patch. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -26623,6 +26855,9 @@ module Google
         # @!attribute [rw] packet_mirroring_rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
         #     [Output only] The packet mirroring rules that apply to the network.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     [Output only] Priority of firewall policy association. Not applicable for type=HIERARCHY.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
         #     [Output only] The rules that apply to the network.
@@ -26644,6 +26879,10 @@ module Google
             NETWORK = 413_984_270
 
             NETWORK_REGIONAL = 190_804_272
+
+            SYSTEM_GLOBAL = 60_099_507
+
+            SYSTEM_REGIONAL = 161_777_199
 
             UNSPECIFIED = 526_786_327
           end
@@ -28003,6 +28242,52 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of route policy.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     A fingerprint for the Route Policy being applied to this Router, which is essentially a hash of the Route Policy used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update Route Policy. You must always provide an up-to-date fingerprint hash in order to update or change labels. To see the latest fingerprint, make a getRoutePolicy() request to retrieve a Route Policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Route Policy name, which must be a resource ID segment and unique within all the router's Route Policies. Name should conform to RFC1035.
+        # @!attribute [rw] terms
+        #   @return [::Array<::Google::Cloud::Compute::V1::RoutePolicyPolicyTerm>]
+        #     List of terms (the order in the list is not important, they are evaluated in order of priority). Order of policies is not retained and might change when getting policy later.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Check the Type enum for the list of possible values.
+        class RoutePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            # The Route Policy is an Export Policy.
+            ROUTE_POLICY_TYPE_EXPORT = 293_086_882
+
+            # The Route Policy is an Import Policy.
+            ROUTE_POLICY_TYPE_IMPORT = 397_444_755
+          end
+        end
+
+        # @!attribute [rw] actions
+        #   @return [::Array<::Google::Cloud::Compute::V1::Expr>]
+        #     CEL expressions to evaluate to modify a route when this term matches.
+        # @!attribute [rw] match
+        #   @return [::Google::Cloud::Compute::V1::Expr]
+        #     CEL expression evaluated against a route to determine if this term applies. When not set, the term applies to all routes.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The evaluation priority for this term, which must be between 0 (inclusive) and 2^31 (exclusive), and unique within the list.
+        class RoutePolicyPolicyTerm
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a Cloud Router resource. For more information about Cloud Router, read the Cloud Router overview.
         # @!attribute [rw] bgp
         #   @return [::Google::Cloud::Compute::V1::RouterBgp]
@@ -28177,10 +28462,10 @@ module Google
         #     Enable IPv6 traffic over BGP Peer. It is enabled by default if the peerIpAddress is version 6.
         # @!attribute [rw] export_policies
         #   @return [::Array<::String>]
-        #     List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+        #     List of export policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_EXPORT type.
         # @!attribute [rw] import_policies
         #   @return [::Array<::String>]
-        #     List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type. Note that Route Policies are currently available in preview. Please use Beta API to use Route Policies.
+        #     List of import policies applied to this peer, in the order they must be evaluated. The name must correspond to an existing policy that has ROUTE_POLICY_TYPE_IMPORT type.
         # @!attribute [rw] interface_name
         #   @return [::String]
         #     Name of the interface the BGP peer is associated with.
@@ -28799,6 +29084,69 @@ module Google
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Compute::V1::RouterStatus]
         class RouterStatusResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] resource
+        #   @return [::Google::Cloud::Compute::V1::RoutePolicy]
+        class RoutersGetRoutePolicyResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#routersListBgpRoutes for lists of bgp routes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] result
+        #   @return [::Array<::Google::Cloud::Compute::V1::BgpRoute>]
+        #     [Output Only] A list of bgp routes.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class RoutersListBgpRoutes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#routersListRoutePolicies for lists of route policies.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] result
+        #   @return [::Array<::Google::Cloud::Compute::V1::RoutePolicy>]
+        #     [Output Only] A list of route policies.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class RoutersListRoutePolicies
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -29485,6 +29833,8 @@ module Google
             UNDEFINED_DDOS_PROTECTION = 0
 
             ADVANCED = 63_789_090
+
+            ADVANCED_PREVIEW = 40_905_867
 
             STANDARD = 484_642_493
           end
@@ -32231,7 +32581,7 @@ module Google
         #     Customer provided encryption key when creating Snapshot from Instant Snapshot.
         # @!attribute [rw] source_instant_snapshot_id
         #   @return [::String]
-        #     [Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this persistent disk. For example, if you created the persistent disk from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
+        #     [Output Only] The unique ID of the instant snapshot used to create this snapshot. This value identifies the exact instant snapshot that was used to create this snapshot. For example, if you created the snapshot from an instant snapshot that was later deleted and recreated under the same name, the source instant snapshot ID would identify the exact instant snapshot that was used.
         # @!attribute [rw] source_snapshot_schedule_policy
         #   @return [::String]
         #     [Output Only] URL of the resource policy which created this scheduled snapshot.
@@ -33709,7 +34059,7 @@ module Google
         #     Check the PrivateIpv6GoogleAccess enum for the list of possible values.
         # @!attribute [rw] purpose
         #   @return [::String]
-        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
@@ -33768,7 +34118,7 @@ module Google
             ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288_210_263
           end
 
-          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -36303,6 +36653,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Routers.UpdateRoutePolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] route_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::RoutePolicy]
+        #     The body resource for this request
+        # @!attribute [rw] router
+        #   @return [::String]
+        #     Name of the Router resource where Route Policy is defined.
+        class UpdateRoutePolicyRouterRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Routers.Update. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -36641,7 +37012,7 @@ module Google
         #     Network URL.
         # @!attribute [rw] purpose
         #   @return [::String]
-        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+        #     The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] role
         #   @return [::String]
@@ -36673,7 +37044,7 @@ module Google
             INTERNAL = 279_295_677
           end
 
-          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION or PRIVATE_SERVICE_CONNECT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
+          # The purpose of the resource. This field can be either PRIVATE, GLOBAL_MANAGED_PROXY, REGIONAL_MANAGED_PROXY, PEER_MIGRATION, PRIVATE_SERVICE_CONNECT or PRIVATE_NAT. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. Subnets with purpose set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY are user-created subnetworks that are reserved for Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to PEER_MIGRATION is used for subnet migration from one peered VPC to another. A subnet with purpose set to PRIVATE_NAT is used for Private NAT IP address by Private NAT Gateway. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to GLOBAL_MANAGED_PROXY or REGIONAL_MANAGED_PROXY.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
