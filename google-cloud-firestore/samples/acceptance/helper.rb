@@ -69,9 +69,8 @@ end
 # @param name [String] The index's name to be deleted, of the form
 #  `projects/{project_id}/databases/{database_id}/collectionGroups/{collection_id}/indexes/{index_id}`.
 #
-# @return [nil]
+# @return [Google::Protobuf::Empty]
 def delete_composite_index name:
   request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new name: name
-  result = $firestore_admin.delete_index request
-  result.wait_until_done!
+  $firestore_admin.delete_index request
 end
