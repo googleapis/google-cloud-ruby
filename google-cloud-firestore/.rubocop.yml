@@ -10,12 +10,10 @@ AllCops:
     - "acceptance/**/*"
     - "conformance/**/*"
     - "test/**/*"
+    - "samples/acceptance/helper.rb"
 
 Style/Documentation:
   Enabled: false
-Style/GlobalVars:
-  Exclude:
-    - "samples/acceptance/helper.rb"
 
 Metrics/AbcSize:
   Exclude:
