@@ -333,6 +333,9 @@ module Google
 
             # Executable file types. Only used for profiling.
             EXECUTABLE = 17
+
+            # AI model file types. Only used for profiling.
+            AI_MODEL = 18
           end
         end
 
@@ -1218,6 +1221,9 @@ module Google
         #   @return [::String]
         #     Description of the infotype. Translated when language is provided in the
         #     request.
+        # @!attribute [rw] example
+        #   @return [::String]
+        #     A sample that is a true positive for this infoType.
         # @!attribute [rw] versions
         #   @return [::Array<::Google::Cloud::Dlp::V2::VersionDescription>]
         #     A list of available versions for the infotype.
@@ -1458,6 +1464,9 @@ module Google
             # Information that is not sensitive on its own, but provides details about
             # the circumstances surrounding an entity or an event.
             CONTEXTUAL_INFORMATION = 7
+
+            # Category for `CustomInfoType` types.
+            CUSTOM = 8
           end
         end
 
@@ -2374,7 +2383,8 @@ module Google
         #     Note: The following fields are mutually exclusive: `character_mask_config`, `replace_config`, `redact_config`, `crypto_replace_ffx_fpe_config`, `fixed_size_bucketing_config`, `bucketing_config`, `replace_with_info_type_config`, `time_part_config`, `crypto_hash_config`, `date_shift_config`, `crypto_deterministic_config`, `replace_dictionary_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] crypto_replace_ffx_fpe_config
         #   @return [::Google::Cloud::Dlp::V2::CryptoReplaceFfxFpeConfig]
-        #     Ffx-Fpe
+        #     Ffx-Fpe. Strongly discouraged, consider using CryptoDeterministicConfig
+        #     instead. Fpe is computationally expensive incurring latency costs.
         #
         #     Note: The following fields are mutually exclusive: `crypto_replace_ffx_fpe_config`, `replace_config`, `redact_config`, `character_mask_config`, `fixed_size_bucketing_config`, `bucketing_config`, `replace_with_info_type_config`, `time_part_config`, `crypto_hash_config`, `date_shift_config`, `crypto_deterministic_config`, `replace_dictionary_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] fixed_size_bucketing_config
@@ -2749,7 +2759,7 @@ module Google
         #
         # Note: We recommend using  CryptoDeterministicConfig for all use cases which
         # do not require preserving the input alphabet space and size, plus warrant
-        # referential integrity.
+        # referential integrity. FPE incurs significant latency costs.
         # @!attribute [rw] crypto_key
         #   @return [::Google::Cloud::Dlp::V2::CryptoKey]
         #     Required. The key used by the encryption algorithm.
@@ -4251,7 +4261,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `publish_to_chronicle`, `export_data`, `pub_sub_notification`, `publish_to_scc`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] publish_to_scc
         #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PublishToSecurityCommandCenter]
-        #     Publishes findings to SCC for each data profile.
+        #     Publishes findings to Security Command Center for each data profile.
         #
         #     Note: The following fields are mutually exclusive: `publish_to_scc`, `export_data`, `pub_sub_notification`, `publish_to_chronicle`, `tag_resources`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tag_resources
@@ -4267,15 +4277,32 @@ module Google
           # of your choice whenever updated.
           # @!attribute [rw] profile_table
           #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
-          #     Store all table and column profiles in an existing table or a new table
-          #     in an existing dataset. Each re-generation will result in new rows in
-          #     BigQuery. Data is inserted using [streaming
-          #     insert](https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert)
-          #     and so data may be in the buffer for a period of time after the profile
-          #     has finished. The Pub/Sub notification is sent before the streaming
-          #     buffer is guaranteed to be written, so data may not be instantly
-          #     visible to queries by the time your topic receives the Pub/Sub
-          #     notification.
+          #     Store all profiles to BigQuery.
+          #
+          #     * The system will create a new dataset and table for you if none are
+          #       are provided. The dataset will be named
+          #       `sensitive_data_protection_discovery` and table will be named
+          #       `discovery_profiles`. This table will be placed in the same project as
+          #       the container project running the scan. After the first profile is
+          #       generated and the dataset and table are created, the discovery scan
+          #       configuration will be updated with the dataset and table names.
+          #     * See [Analyze data profiles stored in
+          #     BigQuery](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles).
+          #     * See [Sample queries for your BigQuery
+          #     table](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#sample_sql_queries).
+          #     *  Data is inserted using [streaming
+          #        insert](https://cloud.google.com/blog/products/bigquery/life-of-a-bigquery-streaming-insert)
+          #        and so data may be in the buffer for a period of time after the
+          #        profile has finished.
+          #      * The Pub/Sub notification is sent before the streaming buffer is
+          #        guaranteed to be written, so data may not be instantly
+          #        visible to queries by the time your topic receives the Pub/Sub
+          #        notification.
+          #      * The best practice is to use the same table for an entire organization
+          #        so that you can take advantage of the [provided Looker
+          #        reports](https://cloud.google.com/sensitive-data-protection/docs/analyze-data-profiles#use_a_premade_report).
+          #        If you use VPC Service Controls to define security perimeters, then
+          #        you must use a separate table for each boundary.
           class Export
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4327,7 +4354,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # If set, a summary finding will be created/updated in SCC for each profile.
+          # If set, a summary finding will be created or updated in Security Command
+          # Center for each profile.
           class PublishToSecurityCommandCenter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4425,7 +4453,7 @@ module Google
         #   @return [::String]
         #     The project that will run the scan. The DLP service
         #     account that exists within this project must have access to all resources
-        #     that are profiled, and the Cloud DLP API must be enabled.
+        #     that are profiled, and the DLP API must be enabled.
         # @!attribute [rw] other_cloud_starting_location
         #   @return [::Google::Cloud::Dlp::V2::OtherCloudDiscoveryStartingLocation]
         #     Must be set only when scanning other clouds.
@@ -4580,6 +4608,11 @@ module Google
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Dlp::V2::DiscoveryConfig::Status]
         #     Required. A status for this configuration.
+        # @!attribute [rw] processing_location
+        #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation]
+        #     Optional. Processing location configuration. Vertex AI dataset scanning
+        #     will set processing_location.image_fallback_type to MultiRegionProcessing
+        #     by default.
         class DiscoveryConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4592,7 +4625,7 @@ module Google
           #   @return [::String]
           #     The project that will run the scan. The DLP service
           #     account that exists within this project must have access to all resources
-          #     that are profiled, and the Cloud DLP API must be enabled.
+          #     that are profiled, and the DLP API must be enabled.
           class OrgConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4618,32 +4651,44 @@ module Google
         #     BigQuery target for Discovery. The first target to match a table will be
         #     the one applied.
         #
-        #     Note: The following fields are mutually exclusive: `big_query_target`, `cloud_sql_target`, `secrets_target`, `cloud_storage_target`, `other_cloud_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `big_query_target`, `cloud_sql_target`, `secrets_target`, `cloud_storage_target`, `other_cloud_target`, `vertex_dataset_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_sql_target
         #   @return [::Google::Cloud::Dlp::V2::CloudSqlDiscoveryTarget]
         #     Cloud SQL target for Discovery. The first target to match a table will be
         #     the one applied.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_sql_target`, `big_query_target`, `secrets_target`, `cloud_storage_target`, `other_cloud_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_sql_target`, `big_query_target`, `secrets_target`, `cloud_storage_target`, `other_cloud_target`, `vertex_dataset_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] secrets_target
         #   @return [::Google::Cloud::Dlp::V2::SecretsDiscoveryTarget]
         #     Discovery target that looks for credentials and secrets stored in cloud
         #     resource metadata and reports them as vulnerabilities to Security Command
         #     Center. Only one target of this type is allowed.
         #
-        #     Note: The following fields are mutually exclusive: `secrets_target`, `big_query_target`, `cloud_sql_target`, `cloud_storage_target`, `other_cloud_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `secrets_target`, `big_query_target`, `cloud_sql_target`, `cloud_storage_target`, `other_cloud_target`, `vertex_dataset_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] cloud_storage_target
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageDiscoveryTarget]
         #     Cloud Storage target for Discovery. The first target to match a table
         #     will be the one applied.
         #
-        #     Note: The following fields are mutually exclusive: `cloud_storage_target`, `big_query_target`, `cloud_sql_target`, `secrets_target`, `other_cloud_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `cloud_storage_target`, `big_query_target`, `cloud_sql_target`, `secrets_target`, `other_cloud_target`, `vertex_dataset_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] other_cloud_target
         #   @return [::Google::Cloud::Dlp::V2::OtherCloudDiscoveryTarget]
         #     Other clouds target for discovery. The first target to match a resource
         #     will be the one applied.
         #
-        #     Note: The following fields are mutually exclusive: `other_cloud_target`, `big_query_target`, `cloud_sql_target`, `secrets_target`, `cloud_storage_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `other_cloud_target`, `big_query_target`, `cloud_sql_target`, `secrets_target`, `cloud_storage_target`, `vertex_dataset_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vertex_dataset_target
+        #   @return [::Google::Cloud::Dlp::V2::VertexDatasetDiscoveryTarget]
+        #     Vertex AI dataset target for Discovery. The first target to match a
+        #     dataset will be the one applied. Note that discovery for Vertex AI can
+        #     incur Cloud Storage Class B operation charges for storage.objects.get
+        #     operations and retrieval fees. For more information, see [Cloud Storage
+        #     pricing](https://cloud.google.com/storage/pricing#price-tables).
+        #     Note that discovery for Vertex AI dataset will not be able to scan images
+        #     unless DiscoveryConfig.processing_location.image_fallback_location has
+        #     multi_region_processing or global_processing configured.
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_dataset_target`, `big_query_target`, `cloud_sql_target`, `secrets_target`, `cloud_storage_target`, `other_cloud_target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DiscoveryTarget
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5262,13 +5307,13 @@ module Google
             # Scan buckets regardless of the attribute.
             ALL_SUPPORTED_BUCKETS = 1
 
-            # Buckets with autoclass disabled
-            # (https://cloud.google.com/storage/docs/autoclass). Only one of
+            # Buckets with [Autoclass](https://cloud.google.com/storage/docs/autoclass)
+            # disabled. Only one of
             # AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set.
             AUTOCLASS_DISABLED = 2
 
-            # Buckets with autoclass enabled
-            # (https://cloud.google.com/storage/docs/autoclass). Only one of
+            # Buckets with [Autoclass](https://cloud.google.com/storage/docs/autoclass)
+            # enabled. Only one of
             # AUTOCLASS_DISABLED or AUTOCLASS_ENABLED should be set. Scanning
             # Autoclass-enabled buckets can affect object storage classes.
             AUTOCLASS_ENABLED = 3
@@ -5573,6 +5618,134 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Target used to match against for discovery with Vertex AI datasets.
+        # @!attribute [rw] filter
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryVertexDatasetFilter]
+        #     Required. The datasets the discovery cadence applies to. The first target
+        #     with a matching filter will be the one to apply to a dataset.
+        # @!attribute [rw] conditions
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryVertexDatasetConditions]
+        #     In addition to matching the filter, these conditions must be true
+        #     before a profile is generated.
+        # @!attribute [rw] generation_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryVertexDatasetGenerationCadence]
+        #     How often and when to update profiles. New datasets that match both the
+        #     filter and conditions are scanned as quickly as possible depending on
+        #     system capacity.
+        #
+        #     Note: The following fields are mutually exclusive: `generation_cadence`, `disabled`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] disabled
+        #   @return [::Google::Cloud::Dlp::V2::Disabled]
+        #     Disable profiling for datasets that match this filter.
+        #
+        #     Note: The following fields are mutually exclusive: `disabled`, `generation_cadence`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class VertexDatasetDiscoveryTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Determines what datasets will have profiles generated within an organization
+        # or project. Includes the ability to filter by regular expression patterns
+        # on project ID or dataset regex.
+        # @!attribute [rw] collection
+        #   @return [::Google::Cloud::Dlp::V2::VertexDatasetCollection]
+        #     A specific set of Vertex AI datasets for this filter to apply to.
+        #
+        #     Note: The following fields are mutually exclusive: `collection`, `vertex_dataset_resource_reference`, `others`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] vertex_dataset_resource_reference
+        #   @return [::Google::Cloud::Dlp::V2::VertexDatasetResourceReference]
+        #     The dataset resource to scan. Targets including this can only include
+        #     one target (the target with this dataset resource reference).
+        #
+        #     Note: The following fields are mutually exclusive: `vertex_dataset_resource_reference`, `collection`, `others`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] others
+        #   @return [::Google::Cloud::Dlp::V2::AllOtherResources]
+        #     Catch-all. This should always be the last target in the list because
+        #     anything above it will apply first. Should only appear once in a
+        #     configuration. If none is specified, a default one will be added
+        #     automatically.
+        #
+        #     Note: The following fields are mutually exclusive: `others`, `collection`, `vertex_dataset_resource_reference`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class DiscoveryVertexDatasetFilter
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Match dataset resources using regex filters.
+        # @!attribute [rw] vertex_dataset_regexes
+        #   @return [::Google::Cloud::Dlp::V2::VertexDatasetRegexes]
+        #     The regex used to filter dataset resources.
+        class VertexDatasetCollection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A collection of regular expressions to determine what datasets to match
+        # against.
+        # @!attribute [rw] patterns
+        #   @return [::Array<::Google::Cloud::Dlp::V2::VertexDatasetRegex>]
+        #     Required. The group of regular expression patterns to match against one or
+        #     more datasets. Maximum of 100 entries. The sum of the lengths of all
+        #     regular expressions can't exceed 10 KiB.
+        class VertexDatasetRegexes
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A pattern to match against one or more dataset resources.
+        # @!attribute [rw] project_id_regex
+        #   @return [::String]
+        #     For organizations, if unset, will match all projects. Has no effect
+        #     for configurations created within a project.
+        class VertexDatasetRegex
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Identifies a single Vertex AI dataset.
+        # @!attribute [rw] dataset_resource_name
+        #   @return [::String]
+        #     Required. The name of the dataset resource. If set within a project-level
+        #     configuration, the specified resource must be within the project.
+        class VertexDatasetResourceReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Requirements that must be true before a dataset is profiled for the
+        # first time.
+        # @!attribute [rw] created_after
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Vertex AI dataset must have been created after this date. Used to avoid
+        #     backfilling.
+        # @!attribute [rw] min_age
+        #   @return [::Google::Protobuf::Duration]
+        #     Minimum age a Vertex AI dataset must have. If set, the value must be 1 hour
+        #     or greater.
+        class DiscoveryVertexDatasetConditions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # How often existing datasets should have their profiles refreshed.
+        # New datasets are scanned as quickly as possible depending on system
+        # capacity.
+        # @!attribute [rw] refresh_frequency
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileUpdateFrequency]
+        #     If you set this field, profiles are refreshed at this
+        #     frequency regardless of whether the underlying datasets have changed.
+        #     Defaults to never.
+        # @!attribute [rw] inspect_template_modified_cadence
+        #   @return [::Google::Cloud::Dlp::V2::DiscoveryInspectTemplateModifiedCadence]
+        #     Governs when to update data profiles when the inspection rules
+        #     defined by the `InspectTemplate` change.
+        #     If not set, changing the template will not cause a data profile to be
+        #     updated.
+        class DiscoveryVertexDatasetGenerationCadence
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Combines all of the information about a DLP job.
         # @!attribute [rw] name
         #   @return [::String]
@@ -5648,7 +5821,8 @@ module Google
           end
         end
 
-        # The request message for [DlpJobs.GetDlpJob][].
+        # The request message for
+        # {::Google::Cloud::Dlp::V2::DlpService::Client#get_dlp_job GetDlpJob}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the DlpJob resource.
@@ -6710,6 +6884,9 @@ module Google
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the table was created.
+        # @!attribute [rw] related_resources
+        #   @return [::Array<::Google::Cloud::Dlp::V2::RelatedResource>]
+        #     Resources related to this profile.
         class TableDataProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6976,14 +7153,16 @@ module Google
         #     profile.
         # @!attribute [rw] location_type
         #   @return [::String]
-        #     The location type of the bucket (region, dual-region, multi-region, etc).
-        #     If dual-region, expect data_storage_locations to be populated.
+        #     The location type of the file store (region, dual-region, multi-region,
+        #     etc). If dual-region, expect data_storage_locations to be populated.
         # @!attribute [rw] file_store_path
         #   @return [::String]
         #     The file store path.
         #
         #     * Cloud Storage: `gs://{bucket}`
         #     * Amazon S3: `s3://{bucket}`
+        #     * Vertex AI dataset:
+        #     `projects/{project_number}/locations/{location}/datasets/{dataset_id}`
         # @!attribute [rw] full_resource
         #   @return [::String]
         #     The resource name of the resource profiled.
@@ -7039,6 +7218,9 @@ module Google
         # @!attribute [rw] file_store_is_empty
         #   @return [::Boolean]
         #     The file store does not have any files.
+        # @!attribute [rw] related_resources
+        #   @return [::Array<::Google::Cloud::Dlp::V2::RelatedResource>]
+        #     Resources related to this profile.
         class FileStoreDataProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7075,6 +7257,19 @@ module Google
             # failed.
             DONE = 2
           end
+        end
+
+        # A related resource.
+        # Examples:
+        #
+        # * The source BigQuery table for a Vertex AI dataset.
+        # * The source Cloud Storage bucket for a Vertex AI dataset.
+        # @!attribute [rw] full_resource
+        #   @return [::String]
+        #     The full resource name of the related resource.
+        class RelatedResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Information regarding the discovered InfoType.
@@ -7125,8 +7320,8 @@ module Google
         #     File extensions can be derived from the file name or the file content.
         # @!attribute [rw] no_files_exist
         #   @return [::Boolean]
-        #     True if no files exist in this cluster. If the bucket had more files than
-        #     could be listed, this will be false even if no files for this cluster
+        #     True if no files exist in this cluster. If the file store had more files
+        #     than could be listed, this will be false even if no files for this cluster
         #     were seen and file_extensions_seen is empty.
         class FileClusterSummary
           include ::Google::Protobuf::MessageExts
@@ -7479,8 +7674,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A data connection to allow DLP to profile data in locations that require
-        # additional configuration.
+        # A data connection to allow the DLP API to profile data in locations that
+        # require additional configuration.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Name of the connection:
@@ -7550,7 +7745,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `cloud_sql_iam`, `username_password`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] max_connections
         #   @return [::Integer]
-        #     Required. DLP will limit its connections to max_connections.
+        #     Required. The DLP API will limit its connections to max_connections.
         #     Must be 2 or greater.
         # @!attribute [rw] database_engine
         #   @return [::Google::Cloud::Dlp::V2::CloudSqlProperties::DatabaseEngine]
@@ -7638,6 +7833,47 @@ module Google
 
             # Executable files like .exe, .class, .apk etc.
             CLUSTER_EXECUTABLE = 9
+
+            # AI models like .tflite etc.
+            CLUSTER_AI_MODEL = 10
+          end
+        end
+
+        # Configure processing location for discovery and inspection. For example,
+        # image OCR is only provided in limited regions but configuring
+        # ProcessingLocation will redirect OCR to a location where OCR is provided.
+        # @!attribute [rw] image_fallback_location
+        #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::ImageFallbackLocation]
+        #     Image processing will fall back using this configuration.
+        class ProcessingLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Processing will happen in a multi-region that contains the current region
+          # if available.
+          class MultiRegionProcessing
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Processing will happen in the global region.
+          class GlobalProcessing
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configure image processing to fall back to the configured processing option
+          # below if unavailable in the request location.
+          # @!attribute [rw] multi_region_processing
+          #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::MultiRegionProcessing]
+          #     Processing will happen in a multi-region that contains the current region
+          #     if available.
+          # @!attribute [rw] global_processing
+          #   @return [::Google::Cloud::Dlp::V2::ProcessingLocation::GlobalProcessing]
+          #     Processing will happen in the global region.
+          class ImageFallbackLocation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -8015,8 +8251,8 @@ module Google
           # Unused
           CONNECTION_STATE_UNSPECIFIED = 0
 
-          # DLP automatically created this connection during an initial scan, and it is
-          # awaiting full configuration by a user.
+          # The DLP API automatically created this connection during an initial scan,
+          # and it is awaiting full configuration by a user.
           MISSING_CREDENTIALS = 1
 
           # A configured connection that has not encountered any errors.
