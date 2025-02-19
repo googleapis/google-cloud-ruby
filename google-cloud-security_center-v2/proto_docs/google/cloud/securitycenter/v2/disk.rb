@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,9 +19,17 @@
 
 module Google
   module Cloud
-    module Parallelstore
-      module V1
-        VERSION = "1.1.0"
+    module SecurityCenter
+      module V2
+        # Contains information about the disk associated with the finding.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the disk, for example,
+        #     `https://www.googleapis.com/compute/v1/projects/{project-id}/zones/{zone-id}/disks/{disk-id}`.
+        class Disk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

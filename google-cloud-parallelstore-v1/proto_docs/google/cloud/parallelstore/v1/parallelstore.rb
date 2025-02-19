@@ -50,7 +50,9 @@ module Google
         #     Allowed values are between 12000 and 100000, in multiples of 4000; e.g.,
         #     12000, 16000, 20000, ...
         # @!attribute [r] daos_version
+        #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
+        #     Deprecated 'daos_version' field.
         #     Output only. The version of DAOS software running in the instance.
         # @!attribute [r] access_points
         #   @return [::Array<::String>]
@@ -73,7 +75,7 @@ module Google
         #     the value currently used by the service.
         # @!attribute [rw] file_stripe_level
         #   @return [::Google::Cloud::Parallelstore::V1::FileStripeLevel]
-        #     Optional. Stripe level for files. Allowed values are:
+        #     Optional. Immutable. Stripe level for files. Allowed values are:
         #
         #     * `FILE_STRIPE_LEVEL_MIN`: offers the best performance for small size
         #       files.
@@ -82,7 +84,7 @@ module Google
         #     * `FILE_STRIPE_LEVEL_MAX`: higher throughput performance for larger files.
         # @!attribute [rw] directory_stripe_level
         #   @return [::Google::Cloud::Parallelstore::V1::DirectoryStripeLevel]
-        #     Optional. Stripe level for directories. Allowed values are:
+        #     Optional. Immutable. Stripe level for directories. Allowed values are:
         #
         #     * `DIRECTORY_STRIPE_LEVEL_MIN`: recommended when directories contain a
         #       small number of files.
@@ -90,6 +92,13 @@ module Google
         #       involving a mix of small and large directories.
         #     * `DIRECTORY_STRIPE_LEVEL_MAX`: recommended for directories with a large
         #       number of files.
+        # @!attribute [rw] deployment_type
+        #   @return [::Google::Cloud::Parallelstore::V1::DeploymentType]
+        #     Optional. Immutable. The deployment type of the instance. Allowed values
+        #     are:
+        #
+        #     * `SCRATCH`: the instance is a scratch instance.
+        #     * `PERSISTENT`: the instance is a persistent instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -122,6 +131,10 @@ module Google
 
             # The instance is being upgraded.
             UPGRADING = 5
+
+            # The instance is being repaired. This should only be used by instances
+            # using the `PERSISTENT` deployment type.
+            REPAIRING = 6
           end
         end
 
@@ -433,6 +446,35 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # An entry describing an error that has occurred.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     A URL that refers to the target (a data source, a data sink,
+        #     or an object) with which the error is associated.
+        # @!attribute [rw] error_details
+        #   @return [::Array<::String>]
+        #     A list of messages that carry the error details.
+        class TransferErrorLogEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A summary of errors by error code, plus a count and sample error log
+        # entries.
+        # @!attribute [rw] error_code
+        #   @return [::Google::Rpc::Code]
+        #     One of the error codes that caused the transfer failure.
+        # @!attribute [rw] error_count
+        #   @return [::Integer]
+        #     Count of this type of error.
+        # @!attribute [rw] error_log_entries
+        #   @return [::Array<::Google::Cloud::Parallelstore::V1::TransferErrorLogEntry>]
+        #     A list of messages that carry the error details.
+        class TransferErrorSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Metadata related to the data import operation.
         # @!attribute [rw] operation_metadata
         #   @return [::Google::Cloud::Parallelstore::V1::TransferOperationMetadata]
@@ -534,6 +576,10 @@ module Google
         # @!attribute [r] transfer_type
         #   @return [::Google::Cloud::Parallelstore::V1::TransferType]
         #     Output only. The type of transfer occurring.
+        # @!attribute [r] error_summary
+        #   @return [::Array<::Google::Cloud::Parallelstore::V1::TransferErrorSummary>]
+        #     Output only. List of files that failed to be transferred. This list will
+        #     have a maximum size of 5 elements.
         class TransferOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -564,6 +610,12 @@ module Google
         # @!attribute [rw] bytes_copied
         #   @return [::Integer]
         #     Bytes that are copied to the data destination.
+        # @!attribute [rw] objects_failed
+        #   @return [::Integer]
+        #     Objects that failed to write to the data destination.
+        # @!attribute [rw] bytes_failed
+        #   @return [::Integer]
+        #     Number of Bytes that failed to be written to the data destination.
         class TransferCounters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -609,6 +661,19 @@ module Google
 
           # Maximum directory striping
           DIRECTORY_STRIPE_LEVEL_MAX = 3
+        end
+
+        # Represents the deployment type for the instance.
+        module DeploymentType
+          # Default Deployment Type
+          # It is equivalent to SCRATCH
+          DEPLOYMENT_TYPE_UNSPECIFIED = 0
+
+          # Scratch
+          SCRATCH = 1
+
+          # Persistent
+          PERSISTENT = 2
         end
       end
     end
