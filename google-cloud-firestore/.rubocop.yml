@@ -13,6 +13,9 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+Style/GlobalVars:
+  Exclude:
+    - "samples/acceptance/helper.rb"
 
 Metrics/AbcSize:
   Exclude:

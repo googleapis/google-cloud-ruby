@@ -19,7 +19,8 @@ require "google/cloud/firestore"
 require "google/cloud/firestore/admin/v1"
 require "securerandom"
 
-firestore_admin = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+# Create shared FirestoreAdmin client object for tests.
+$firestore_admin = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
 
 def delete_collection_test collection_name:, project_id:
   firestore = Google::Cloud::Firestore.new project_id: project_id
@@ -57,7 +58,7 @@ def create_composite_index project_id:, collection_path:
   index = Google::Cloud::Firestore::Admin::V1::Index.new query_scope: scope, fields: index_fields
   parent = "projects/#{project_id}/databases/(default)/collectionGroups/#{collection_path}"
   request = Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new parent: parent, index: index
-  result = firestore_admin.create_index request
+  result = $firestore_admin.create_index request
   result.wait_until_done!
   result.response? ? result.response.name : nil
 end
@@ -71,6 +72,6 @@ end
 # @return [nil]
 def delete_composite_index name:
   request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new name: name
-  result = firestore_admin.delete_index request
+  result = $firestore_admin.delete_index request
   result.wait_until_done!
 end
