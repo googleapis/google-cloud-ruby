@@ -1,5 +1,14 @@
 # Changelog
 
+### 1.1.0 (2025-02-19)
+
+#### Features
+
+* Added data access events, data flow events, data retention deletion events, and associated disk to the Finding resource 
+* Added earliest known exploitation date to the Cvs resource 
+* Renamed volume_pps and volume_bps to volume_pps_long and volume_bps_long, respectively, in the Attack resource, and deprecated the old fields 
+* Support Azure Entra tenant 
+
 ### 1.0.0 (2025-02-11)
 
 #### Features
