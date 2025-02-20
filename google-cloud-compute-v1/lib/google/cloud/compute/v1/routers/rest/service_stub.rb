@@ -154,6 +154,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the delete_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def delete_route_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_route_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "delete_route_policy",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the get REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::GetRouterRequest]
@@ -267,6 +307,46 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Compute::V1::VmEndpointNatMappingsList.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::RoutersGetRoutePolicyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::RoutersGetRoutePolicyResponse]
+              #   A result object deserialized from the server's reply
+              def get_route_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_route_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_route_policy",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::RoutersGetRoutePolicyResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -394,6 +474,86 @@ module Google
               end
 
               ##
+              # Baseline implementation for the list_bgp_routes REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListBgpRoutesRoutersRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::RoutersListBgpRoutes]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::RoutersListBgpRoutes]
+              #   A result object deserialized from the server's reply
+              def list_bgp_routes request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_bgp_routes_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_bgp_routes",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::RoutersListBgpRoutes.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the list_route_policies REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListRoutePoliciesRoutersRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::RoutersListRoutePolicies]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::RoutersListRoutePolicies]
+              #   A result object deserialized from the server's reply
+              def list_route_policies request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_route_policies_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "list_route_policies",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::RoutersListRoutePolicies.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the patch REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::PatchRouterRequest]
@@ -423,6 +583,46 @@ module Google
                   body: body || "",
                   params: query_string_params,
                   method_name: "patch",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the patch_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def patch_route_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_patch_route_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "patch_route_policy",
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
@@ -514,6 +714,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def update_route_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_route_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_route_policy",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # @private
               #
               # GRPC transcoding helper method for the aggregated_list REST call
@@ -548,6 +788,29 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["router", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_route_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}/deleteRoutePolicy",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["region", %r{^[^/]+/?$}, false],
@@ -629,6 +892,29 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the get_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_route_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}/getRoutePolicy",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["router", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the get_router_status REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::GetRouterStatusRouterRequest]
@@ -697,6 +983,52 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the list_bgp_routes REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListBgpRoutesRoutersRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_bgp_routes_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}/listBgpRoutes",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["router", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_route_policies REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListRoutePoliciesRoutersRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_route_policies_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}/listRoutePolicies",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["router", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the patch REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::PatchRouterRequest]
@@ -709,6 +1041,30 @@ module Google
                                                           uri_method: :patch,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}",
                                                           body: "router_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["router", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the patch_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_patch_route_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}/patchRoutePolicy",
+                                                          body: "route_policy_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["region", %r{^[^/]+/?$}, false],
@@ -757,6 +1113,30 @@ module Google
                                                           uri_method: :put,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}",
                                                           body: "router_resource",
+                                                          matches: [
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["router", %r{^[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_route_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateRoutePolicyRouterRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_route_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/routers/{router}/updateRoutePolicy",
+                                                          body: "route_policy_resource",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
                                                             ["region", %r{^[^/]+/?$}, false],
