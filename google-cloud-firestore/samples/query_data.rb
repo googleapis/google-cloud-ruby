@@ -27,6 +27,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      "CA",
       country:    "USA",
       capital:    false,
+      density:    18_000,
       population: 860_000,
       regions:    ["west_coast", "norcal"]
     }
@@ -37,6 +38,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      "CA",
       country:    "USA",
       capital:    false,
+      density:    8_300,
       population: 3_900_000,
       regions:    ["west_coast", "socal"]
     }
@@ -47,6 +49,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      nil,
       country:    "USA",
       capital:    true,
+      density:    11_300,
       population: 680_000,
       regions:    ["east_coast"]
     }
@@ -57,6 +60,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      nil,
       country:    "Japan",
       capital:    true,
+      density:    16_000,
       population: 9_000_000,
       regions:    ["kanto", "honshu"]
     }
@@ -67,6 +71,7 @@ def query_create_examples project_id:, collection_path: "cities"
       state:      nil,
       country:    "China",
       capital:    true,
+      density:    3_500,
       population: 21_500_000,
       regions:    ["jingjinji", "hebei"]
     }
@@ -181,6 +186,20 @@ def invalid_range_query project_id:, collection_path: "cities"
   # [START firestore_query_filter_range_invalid]
   invalid_range_query = cities_ref.where("state", ">=", "CA").where("population", ">", 1_000_000)
   # [END firestore_query_filter_range_invalid]
+end
+
+def query_filter_compound_multi_ineq project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore  = Google::Cloud::Firestore.new project_id: project_id
+  # [START firestore_query_filter_compound_multi_ineq]
+  cities_ref = firestore.col collection_path
+  compound_multi_ineq_query = cities_ref.where("population", ">", 1_000_000).where("density", "<", 5_000)
+  # [END firestore_query_filter_compound_multi_ineq]
+  compound_multi_ineq_query.get do |city|
+    puts "Document #{city.document_id} returned by query population>1_000_000 AND density<5_000"
+  end
 end
 
 def in_query_without_array project_id:, collection_path: "cities"
@@ -373,6 +392,8 @@ if $PROGRAM_NAME == __FILE__
     range_query project_id: project
   when "invalid_range_query"
     invalid_range_query project_id: project
+  when "query_filter_compound_multi_ineq"
+    query_filter_compound_multi_ineq project_id: project
   when "in_query_without_array"
     in_query_without_array project_id: project
   when "in_query_with_array"
@@ -392,21 +413,22 @@ if $PROGRAM_NAME == __FILE__
       Usage: bundle exec ruby query_data.rb [command]
 
       Commands:
-        query_create_examples          Create an example collection of documents.
-        create_query_state             Create a query by state.
-        create_query_capital           Create a query by capital.
-        simple_queries                 Create simple queries with a single where clause.
-        chained_query                  Create a query with chained clauses.
-        composite_index_chained_query  Create a composite index chained query.
-        range_query                    Create a query with range clauses.
-        invalid_range_query            An example of an invalid range query.
-        in_query_without_array         In queries without array.
-        in_query_with_array            In queries with array.
-        query_not_equals               Create a query with a NOT_EQUAL where clause.
-        filter_not_in                  Create a query with a NOT_IN where clause.
-        array_contains_any_queries     Array contains any in query.
-        array_contains_filter          Array contains filter.
-        collection_group_query         Add sub collection and filter.
+        query_create_examples             Create an example collection of documents.
+        create_query_state                Create a query by state.
+        create_query_capital              Create a query by capital.
+        simple_queries                    Create simple queries with a single where clause.
+        chained_query                     Create a query with chained clauses.
+        composite_index_chained_query     Create a composite index chained query.
+        range_query                       Create a query with range clauses.
+        invalid_range_query               An example of an invalid range query.
+        query_filter_compound_multi_ineq  Compound query with range and inequality filters on multiple fields.
+        in_query_without_array            In queries without array.
+        in_query_with_array               In queries with array.
+        query_not_equals                  Create a query with a NOT_EQUAL where clause.
+        filter_not_in                     Create a query with a NOT_IN where clause.
+        array_contains_any_queries        Array contains any in query.
+        array_contains_filter             Array contains filter.
+        collection_group_query            Add sub collection and filter.
     USAGE
   end
 end
