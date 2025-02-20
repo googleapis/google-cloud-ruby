@@ -10,6 +10,7 @@ AllCops:
     - "acceptance/**/*"
     - "conformance/**/*"
     - "test/**/*"
+    - "samples/acceptance/helper.rb"
 
 Style/Documentation:
   Enabled: false
