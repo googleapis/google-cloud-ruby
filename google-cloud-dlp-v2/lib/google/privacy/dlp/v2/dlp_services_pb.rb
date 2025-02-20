@@ -74,7 +74,7 @@ module Google
             # https://cloud.google.com/sensitive-data-protection/docs/pseudonymization#re-identification_in_free_text_code_example
             # to learn more.
             rpc :ReidentifyContent, ::Google::Cloud::Dlp::V2::ReidentifyContentRequest, ::Google::Cloud::Dlp::V2::ReidentifyContentResponse
-            # Returns a list of the sensitive information types that DLP API
+            # Returns a list of the sensitive information types that the DLP API
             # supports. See
             # https://cloud.google.com/sensitive-data-protection/docs/infotypes-reference
             # to learn more.

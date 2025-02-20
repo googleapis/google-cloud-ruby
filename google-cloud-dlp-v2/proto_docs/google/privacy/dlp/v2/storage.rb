@@ -851,7 +851,7 @@ module Google
         # `<project_id>.<dataset_id>.<table_id>`.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The Google Cloud Platform project ID of the project containing the table.
+        #     The Google Cloud project ID of the project containing the table.
         #     If omitted, project ID is inferred from the API call.
         # @!attribute [rw] dataset_id
         #   @return [::String]
