@@ -59,7 +59,7 @@ module Google
         end
 
         # A request for an OIDC token, providing all the necessary information needed
-        # for this service to verify the plaform state of the requestor.
+        # for this service to verify the platform state of the requestor.
         # @!attribute [rw] td_ccel
         #   @return [::Google::Cloud::ConfidentialComputing::V1::TdxCcelAttestation]
         #     Optional. A TDX with CCEL and RTMR Attestation Quote.
@@ -90,6 +90,10 @@ module Google
         #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions]
         #     Optional. A collection of optional, workload-specified claims that modify
         #     the token output.
+        # @!attribute [rw] attester
+        #   @return [::String]
+        #     Optional. An optional indicator of the attester, only applies to certain
+        #     products.
         class VerifyAttestationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
