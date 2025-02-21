@@ -34,6 +34,11 @@ module Google
         attr_accessor :project_id, :credentials, :host, :host_admin, :timeout
 
         # @private
+        def universe_domain
+          tables.universe_domain
+        end
+
+        # @private
         # Creates a new Service instance.
         #
         # @param project_id [String] Project identifier
@@ -53,7 +58,7 @@ module Google
         #   The default timeout, in seconds, for calls made through this client.
         #
         def initialize project_id, credentials, host: nil, host_admin: nil, timeout: nil,
-                       channel_selection: nil, channel_count: nil
+                       channel_selection: nil, channel_count: nil, universe_domain: nil
           @project_id = project_id
           @credentials = credentials
           @host = host
@@ -61,6 +66,7 @@ module Google
           @timeout = timeout
           @channel_selection = channel_selection
           @channel_count = channel_count
+          @universe_domain_override = universe_domain
           @bigtable_clients = ::Gapic::LruHash.new 10
           @mutex = Mutex.new
         end
@@ -68,6 +74,7 @@ module Google
         def instances
           return mocked_instances if mocked_instances
           @instances ||= Admin::V2::BigtableInstanceAdmin::Client.new do |config|
+            config.universe_domain = @universe_domain_override if @universe_domain_override
             config.credentials = credentials if credentials
             config.timeout = timeout if timeout
             config.endpoint = host_admin if host_admin
@@ -81,6 +88,7 @@ module Google
         def tables
           return mocked_tables if mocked_tables
           @tables ||= Admin::V2::BigtableTableAdmin::Client.new do |config|
+            config.universe_domain = @universe_domain_override if @universe_domain_override
             config.credentials = credentials if credentials
             config.timeout = timeout if timeout
             config.endpoint = host_admin if host_admin
@@ -895,6 +903,7 @@ module Google
         def create_bigtable_client table_path, app_profile_id
           V2::Bigtable::Client.new do |config|
             config.credentials = credentials if credentials
+            config.universe_domain = @universe_domain_override if @universe_domain_override
             config.timeout = timeout if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
