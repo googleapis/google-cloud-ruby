@@ -25,6 +25,11 @@
                 "update_space"
               ]
             },
+            "ConnectActiveConference": {
+              "methods": [
+                "connect_active_conference"
+              ]
+            },
             "EndActiveConference": {
               "methods": [
                 "end_active_conference"
