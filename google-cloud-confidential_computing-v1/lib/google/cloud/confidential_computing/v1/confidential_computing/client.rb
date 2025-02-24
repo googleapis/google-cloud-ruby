@@ -313,7 +313,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil)
+            # @overload verify_attestation(td_ccel: nil, sev_snp_attestation: nil, challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil, attester: nil)
             #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -341,6 +341,9 @@ module Google
             #   @param token_options [::Google::Cloud::ConfidentialComputing::V1::TokenOptions, ::Hash]
             #     Optional. A collection of optional, workload-specified claims that modify
             #     the token output.
+            #   @param attester [::String]
+            #     Optional. An optional indicator of the attester, only applies to certain
+            #     products.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse]
