@@ -87,6 +87,15 @@ module Google
           service.tables
         end
 
+        # The universe domain the client is connected to
+        #
+        # @return [String]
+        #
+        def universe_domain
+          ensure_service!
+          service.universe_domain
+        end
+
         ##
         # The identifier for the Cloud Bigtable project.
         #

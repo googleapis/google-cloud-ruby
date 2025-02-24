@@ -122,12 +122,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         OpenStruct.new(project_id: project_id)
       }
 
@@ -177,7 +175,7 @@ describe Google::Cloud do
     end
 
     it "uses provided endpoints" do
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, **_other_keywords|
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
         _(host).must_equal "bigtable-endpoint2.example.com"
@@ -205,12 +203,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         OpenStruct.new project_id: project_id
       }
 
@@ -237,12 +233,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         OpenStruct.new project_id: project_id
       }
 
@@ -269,12 +263,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, channel_selection: nil, channel_count: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         _(channel_selection).must_equal :least_loaded
         _(channel_count).must_equal 5
         OpenStruct.new project_id: project_id
@@ -339,13 +331,11 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         OpenStruct.new project_id: project_id
       }
       empty_env = OpenStruct.new
@@ -370,7 +360,7 @@ describe Google::Cloud do
     end
 
     it "uses channel config" do
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, channel_selection: nil, channel_count: nil, **_other_keywords|
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
         _(channel_selection).must_equal :least_loaded
@@ -406,12 +396,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
 
         OpenStruct.new project_id: project_id
       }
@@ -445,12 +433,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         OpenStruct.new project_id: project_id
       }
 
@@ -477,19 +463,17 @@ describe Google::Cloud do
       end
     end
 
-    it "uses bigtable config for project and keyfile" do
+    it "uses bigtable config for project, keyfile, and universe domain" do
       stubbed_credentials = lambda { |credentials, scope: nil|
         _(credentials).must_equal "path/to/keyfile.json"
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, universe_domain: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_equal 42
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
-        OpenStruct.new project_id: project_id
+        OpenStruct.new project_id: project_id, universe_domain: universe_domain
       }
 
       # Clear all environment variables
@@ -499,6 +483,7 @@ describe Google::Cloud do
           config.project_id = "project-id"
           config.credentials = "path/to/keyfile.json"
           config.timeout = 42
+          config.universe_domain = "myuniverse.com"
         end
 
         File.stub :file?, true, ["path/to/keyfile.json"] do
@@ -508,6 +493,7 @@ describe Google::Cloud do
                 bigtable = Google::Cloud::Bigtable.new
                 _(bigtable).must_be_kind_of Google::Cloud::Bigtable::Project
                 _(bigtable.project_id).must_equal "project-id"
+                _(bigtable.universe_domain).must_equal "myuniverse.com"
                 _(bigtable.service).must_be_kind_of OpenStruct
               end
             end
@@ -522,12 +508,10 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(timeout).must_equal 42
-        _(host).must_equal default_host
-        _(host_admin).must_equal default_host_admin
         OpenStruct.new project_id: project_id
       }
 
@@ -561,7 +545,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(host).must_equal "bigtable-endpoint2.example.com"
@@ -600,7 +584,7 @@ describe Google::Cloud do
         _(scope).must_equal default_scope
         "bigtable-credentials"
       }
-      stubbed_service = lambda { |project_id, credentials, timeout: nil, host: nil, host_admin: nil, channel_selection: nil, channel_count: nil|
+      stubbed_service = lambda { |project_id, credentials, timeout: nil, channel_selection: nil, channel_count: nil, **_other_keywords|
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "bigtable-credentials"
         _(channel_selection).must_equal :least_loaded
