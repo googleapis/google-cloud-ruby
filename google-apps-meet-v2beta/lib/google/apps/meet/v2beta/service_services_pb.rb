@@ -45,6 +45,17 @@ module Google
             # For an example, see [Update a meeting
             # space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).
             rpc :UpdateSpace, ::Google::Apps::Meet::V2beta::UpdateSpaceRequest, ::Google::Apps::Meet::V2beta::Space
+            # [Developer Preview](https://developers.google.com/workspace/preview):
+            # Broker a WebRTC connection to the active conference of a space.
+            #
+            # On success, clients must use the resulting SDP (Session Description
+            # Protocol) answer to establish a WebRTC connection. Once connected,
+            # additional functionality is available across WebRTC data channels.
+            #
+            # See [Meet Media API
+            # overview](https://developers.google.com/meet/media-api/guides/overview) for
+            # more details about this connection.
+            rpc :ConnectActiveConference, ::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest, ::Google::Apps::Meet::V2beta::ConnectActiveConferenceResponse
             # Ends an active conference (if there's one).
             #
             # For an example, see [End active
