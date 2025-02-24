@@ -127,6 +127,12 @@ module Google
         #     staging and temporary buckets.
         #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
         #     a Cloud Storage bucket.**
+        # @!attribute [rw] authentication_config
+        #   @return [::Google::Cloud::Dataproc::V1::AuthenticationConfig]
+        #     Optional. Authentication configuration used to set the default identity for
+        #     the workload execution. The config specifies the type of identity
+        #     (service account or user) that will be used by workloads to access
+        #     resources on the project(s).
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -516,6 +522,33 @@ module Google
           class GkeNodePoolAutoscalingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Authentication configuration for a workload is used to set the default
+        # identity for the workload execution.
+        # The config specifies the type of identity (service account or user) that
+        # will be used by workloads to access resources on the project(s).
+        # @!attribute [rw] user_workload_authentication_type
+        #   @return [::Google::Cloud::Dataproc::V1::AuthenticationConfig::AuthenticationType]
+        #     Optional. Authentication type for the user workload running in containers.
+        class AuthenticationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Authentication types for workload execution.
+          module AuthenticationType
+            # If AuthenticationType is unspecified then END_USER_CREDENTIALS is used
+            # for 3.0 and newer runtimes, and SERVICE_ACCOUNT is used for older
+            # runtimes.
+            AUTHENTICATION_TYPE_UNSPECIFIED = 0
+
+            # Use service account credentials for authenticating to other services.
+            SERVICE_ACCOUNT = 1
+
+            # Use OAuth credentials associated with the workload creator/user for
+            # authenticating to other services.
+            END_USER_CREDENTIALS = 2
           end
         end
 
