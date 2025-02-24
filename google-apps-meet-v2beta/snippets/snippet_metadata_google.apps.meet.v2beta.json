@@ -132,6 +132,46 @@
       ]
     },
     {
+      "region_tag": "meet_v2beta_generated_SpacesService_ConnectActiveConference_sync",
+      "title": "Snippet for the connect_active_conference call in the SpacesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#connect_active_conference.",
+      "file": "spaces_service/connect_active_conference.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "connect_active_conference",
+        "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client#connect_active_conference",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Apps::Meet::V2beta::ConnectActiveConferenceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Apps::Meet::V2beta::ConnectActiveConferenceResponse",
+        "client": {
+          "short_name": "SpacesService::Client",
+          "full_name": "::Google::Apps::Meet::V2beta::SpacesService::Client"
+        },
+        "method": {
+          "short_name": "ConnectActiveConference",
+          "full_name": "google.apps.meet.v2beta.SpacesService.ConnectActiveConference",
+          "service": {
+            "short_name": "SpacesService",
+            "full_name": "google.apps.meet.v2beta.SpacesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "meet_v2beta_generated_SpacesService_EndActiveConference_sync",
       "title": "Snippet for the end_active_conference call in the SpacesService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Apps::Meet::V2beta::SpacesService::Client#end_active_conference.",
