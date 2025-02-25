@@ -40,8 +40,10 @@ require_relative "../storage_get_default_event_based_hold"
 require_relative "../storage_get_public_access_prevention"
 require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
+require_relative "../storage_get_soft_deleted_bucket"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
+require_relative "../storage_list_soft_deleted_buckets"
 require_relative "../storage_lock_retention_policy"
 require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
@@ -116,6 +118,44 @@ describe "Buckets Snippets" do
 
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
+    end
+  end
+
+  describe "storage_soft_deleted_bucket" do
+    let(:new_bucket_name) { random_bucket_name }
+    let(:soft_delete_policy) { { retention_duration_seconds: 10*24*60*60 } }
+
+    it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
+      new_bucket = storage_client.create_bucket new_bucket_name
+      new_generation = new_bucket.generation
+      new_bucket.soft_delete_policy = soft_delete_policy
+      _(new_bucket.soft_delete_policy.retention_duration_seconds).must_equal 10*24*60*60
+      puts storage_client.service_account_email
+
+      # ensuring bucket is created
+      assert new_bucket.exists?, "Bucket #{new_bucket_name} should exist"
+
+      # fetching bucket
+      check_bucket = storage_client.bucket new_bucket_name
+      puts "new bucket name-- #{check_bucket.name}"
+      puts "new bucket soft_delete_policy-- #{check_bucket.soft_delete_policy}"
+      delete_bucket_helper new_bucket_name
+      # Check if the bucket is deleted
+      deleted_bucket = storage_client.bucket new_bucket_name
+      refute deleted_bucket, "Bucket #{new_bucket_name} should not exist"
+
+      # fetching a soft deleted bucket
+      output, _err = capture_io do
+        get_soft_deleted_bucket bucket_name: new_bucket_name, generation: new_generation
+      end
+      assert_includes output, "soft_delete_time for #{new_bucket_name} is"
+    end
+
+    it "lists soft deleted buckets" do
+      list_deleted_bucket, _err = capture_io do
+        list_soft_deleted_buckets
+      end
+      assert list_deleted_bucket, "List of soft deleted bucket should not be blank"
     end
   end
 
