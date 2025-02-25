@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.1 (2025-02-25)
+
+#### Documentation
+
+* fix broken link in comment for field `OperationMetadata.requested_cancellation` ([#29183](https://github.com/googleapis/google-cloud-ruby/issues/29183)) 
+
 ### 1.2.0 (2025-01-28)
 
 #### Features
