@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2025-02-25)
+
+#### Features
+
+* Support for authentication configuration in serverless workloads ([#29182](https://github.com/googleapis/google-cloud-ruby/issues/29182)) 
+
 ### 1.2.0 (2025-02-07)
 
 #### Features
