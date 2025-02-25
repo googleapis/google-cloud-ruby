@@ -7,5 +7,4 @@ set -eo pipefail
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
-gem install --no-document toys
-toys release perform -v --reporter-org=googleapis --force-republish --enable-docs --enable-rad < /dev/null
+toys release perform -v --reporter-org=googleapis --force-republish --enable-rad < /dev/null
