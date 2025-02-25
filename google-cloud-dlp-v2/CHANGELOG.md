@@ -1,5 +1,11 @@
 # Release History
 
+### 1.8.0 (2025-02-25)
+
+#### Features
+
+* Support for discovery of Vertex AI datasets ([#29172](https://github.com/googleapis/google-cloud-ruby/issues/29172)) 
+
 ### 1.7.0 (2025-01-28)
 
 #### Features
