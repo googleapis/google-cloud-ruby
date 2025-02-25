@@ -409,7 +409,7 @@ describe "topics" do
 
   # Pub/Sub calls may not respond immediately.
   # Wrap expectations that may require multiple attempts with this method.
-  def expect_with_retry(sample_name, attempts: 5)
+  def expect_with_retry sample_name, attempts: 5
     @attempt_number ||= 0
     yield
     @attempt_number = nil
