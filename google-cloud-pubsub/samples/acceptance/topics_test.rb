@@ -71,9 +71,9 @@ describe "topics" do
                                                 match_glob: "**.txt",
                                                 minimum_object_create_time: "1970-01-01T00:00:01Z"
     end
-    cloud_storage_ingestion_topic = pubsub.topic cloud_storage_ingestion_topic_id
-    assert cloud_storage_ingestion_topic
-    assert_equal "projects/#{pubsub.project}/topics/#{cloud_storage_ingestion_topic_id}", cloud_storage_ingestion_topic.name
+    @cloud_storage_ingestion_topic = pubsub.topic cloud_storage_ingestion_topic_id
+    assert @cloud_storage_ingestion_topic
+    assert_equal "projects/#{pubsub.project}/topics/#{cloud_storage_ingestion_topic_id}", @cloud_storage_ingestion_topic.name
 
     # pubsub_list_topics
     out, _err = capture_io do
