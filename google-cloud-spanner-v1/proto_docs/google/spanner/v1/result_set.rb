@@ -29,11 +29,10 @@ module Google
         # @!attribute [rw] rows
         #   @return [::Array<::Google::Protobuf::ListValue>]
         #     Each element in `rows` is a row whose format is defined by
-        #     {::Google::Cloud::Spanner::V1::ResultSetMetadata#row_type metadata.row_type}. The ith element
-        #     in each row matches the ith field in
-        #     {::Google::Cloud::Spanner::V1::ResultSetMetadata#row_type metadata.row_type}. Elements are
-        #     encoded based on type as described
-        #     {::Google::Cloud::Spanner::V1::TypeCode here}.
+        #     {::Google::Cloud::Spanner::V1::ResultSetMetadata#row_type metadata.row_type}. The ith
+        #     element in each row matches the ith field in
+        #     {::Google::Cloud::Spanner::V1::ResultSetMetadata#row_type metadata.row_type}. Elements
+        #     are encoded based on type as described {::Google::Cloud::Spanner::V1::TypeCode here}.
         # @!attribute [rw] stats
         #   @return [::Google::Cloud::Spanner::V1::ResultSetStats]
         #     Query plan and execution statistics for the SQL statement that
@@ -41,18 +40,16 @@ module Google
         #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}.
         #     DML statements always produce stats containing the number of rows
         #     modified, unless executed using the
-        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN ExecuteSqlRequest.QueryMode.PLAN} {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}.
-        #     Other fields may or may not be populated, based on the
+        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest::QueryMode::PLAN ExecuteSqlRequest.QueryMode.PLAN}
+        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}.
+        #     Other fields might or might not be populated, based on the
         #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}.
         # @!attribute [rw] precommit_token
         #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
-        #     Optional. A precommit token will be included if the read-write transaction
-        #     is on a multiplexed session.
-        #     The precommit token with the highest sequence number from this transaction
-        #     attempt should be passed to the
+        #     Optional. A precommit token is included if the read-write transaction is on
+        #     a multiplexed session. Pass the precommit token with the highest sequence
+        #     number from this transaction attempt to the
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} request for this transaction.
-        #     This feature is not yet supported and will result in an UNIMPLEMENTED
-        #     error.
         class ResultSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -76,13 +73,14 @@ module Google
         #     Most values are encoded based on type as described
         #     {::Google::Cloud::Spanner::V1::TypeCode here}.
         #
-        #     It is possible that the last value in values is "chunked",
+        #     It's possible that the last value in values is "chunked",
         #     meaning that the rest of the value is sent in subsequent
-        #     `PartialResultSet`(s). This is denoted by the {::Google::Cloud::Spanner::V1::PartialResultSet#chunked_value chunked_value}
-        #     field. Two or more chunked values can be merged to form a
-        #     complete value as follows:
+        #     `PartialResultSet`(s). This is denoted by the
+        #     {::Google::Cloud::Spanner::V1::PartialResultSet#chunked_value chunked_value} field.
+        #     Two or more chunked values can be merged to form a complete value as
+        #     follows:
         #
-        #       * `bool/number/null`: cannot be chunked
+        #       * `bool/number/null`: can't be chunked
         #       * `string`: concatenate the strings
         #       * `list`: concatenate the lists. If the last element in a list is a
         #         `string`, `list`, or `object`, merge it with the first element in
@@ -93,28 +91,28 @@ module Google
         #
         #     Some examples of merging:
         #
-        #         # Strings are concatenated.
+        #         Strings are concatenated.
         #         "foo", "bar" => "foobar"
         #
-        #         # Lists of non-strings are concatenated.
+        #         Lists of non-strings are concatenated.
         #         [2, 3], [4] => [2, 3, 4]
         #
-        #         # Lists are concatenated, but the last and first elements are merged
-        #         # because they are strings.
+        #         Lists are concatenated, but the last and first elements are merged
+        #         because they are strings.
         #         ["a", "b"], ["c", "d"] => ["a", "bc", "d"]
         #
-        #         # Lists are concatenated, but the last and first elements are merged
-        #         # because they are lists. Recursively, the last and first elements
-        #         # of the inner lists are merged because they are strings.
+        #         Lists are concatenated, but the last and first elements are merged
+        #         because they are lists. Recursively, the last and first elements
+        #         of the inner lists are merged because they are strings.
         #         ["a", ["b", "c"]], [["d"], "e"] => ["a", ["b", "cd"], "e"]
         #
-        #         # Non-overlapping object fields are combined.
+        #         Non-overlapping object fields are combined.
         #         {"a": "1"}, {"b": "2"} => {"a": "1", "b": 2"}
         #
-        #         # Overlapping object fields are merged.
+        #         Overlapping object fields are merged.
         #         {"a": "1"}, {"a": "2"} => {"a": "12"}
         #
-        #         # Examples of merging objects containing lists of strings.
+        #         Examples of merging objects containing lists of strings.
         #         {"a": ["1"]}, {"a": ["2"]} => {"a": ["12"]}
         #
         #     For a more complete example, suppose a streaming SQL query is
@@ -130,7 +128,6 @@ module Google
         #         {
         #           "values": ["orl"]
         #           "chunked_value": true
-        #           "resume_token": "Bqp2..."
         #         }
         #         {
         #           "values": ["d"]
@@ -140,11 +137,17 @@ module Google
         #     This sequence of `PartialResultSet`s encodes two rows, one
         #     containing the field value `"Hello"`, and a second containing the
         #     field value `"World" = "W" + "orl" + "d"`.
+        #
+        #     Not all `PartialResultSet`s contain a `resume_token`. Execution can only be
+        #     resumed from a previously yielded `resume_token`. For the above sequence of
+        #     `PartialResultSet`s, resuming the query with `"resume_token": "Af65..."`
+        #     yields results from the `PartialResultSet` with value "orl".
         # @!attribute [rw] chunked_value
         #   @return [::Boolean]
-        #     If true, then the final value in {::Google::Cloud::Spanner::V1::PartialResultSet#values values} is chunked, and must
-        #     be combined with more values from subsequent `PartialResultSet`s
-        #     to obtain a complete field value.
+        #     If true, then the final value in
+        #     {::Google::Cloud::Spanner::V1::PartialResultSet#values values} is chunked, and must be
+        #     combined with more values from subsequent `PartialResultSet`s to obtain a
+        #     complete field value.
         # @!attribute [rw] resume_token
         #   @return [::String]
         #     Streaming calls might be interrupted for a variety of reasons, such
@@ -156,29 +159,31 @@ module Google
         #   @return [::Google::Cloud::Spanner::V1::ResultSetStats]
         #     Query plan and execution statistics for the statement that produced this
         #     streaming result set. These can be requested by setting
-        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode} and are sent
-        #     only once with the last response in the stream.
-        #     This field will also be present in the last response for DML
-        #     statements.
+        #     {::Google::Cloud::Spanner::V1::ExecuteSqlRequest#query_mode ExecuteSqlRequest.query_mode}
+        #     and are sent only once with the last response in the stream. This field is
+        #     also present in the last response for DML statements.
         # @!attribute [rw] precommit_token
         #   @return [::Google::Cloud::Spanner::V1::MultiplexedSessionPrecommitToken]
-        #     Optional. A precommit token will be included if the read-write transaction
-        #     is on a multiplexed session.
-        #     The precommit token with the highest sequence number from this transaction
-        #     attempt should be passed to the
+        #     Optional. A precommit token is included if the read-write transaction
+        #     has multiplexed sessions enabled. Pass the precommit token with the highest
+        #     sequence number from this transaction attempt to the
         #     {::Google::Cloud::Spanner::V1::Spanner::Client#commit Commit} request for this transaction.
-        #     This feature is not yet supported and will result in an UNIMPLEMENTED
-        #     error.
+        # @!attribute [rw] last
+        #   @return [::Boolean]
+        #     Optional. Indicates whether this is the last `PartialResultSet` in the
+        #     stream. The server might optionally set this field. Clients shouldn't rely
+        #     on this field being set in all cases.
         class PartialResultSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata about a {::Google::Cloud::Spanner::V1::ResultSet ResultSet} or {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet}.
+        # Metadata about a {::Google::Cloud::Spanner::V1::ResultSet ResultSet} or
+        # {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet}.
         # @!attribute [rw] row_type
         #   @return [::Google::Cloud::Spanner::V1::StructType]
         #     Indicates the field names and types for the rows in the result
-        #     set.  For example, a SQL query like `"SELECT UserId, UserName FROM
+        #     set. For example, a SQL query like `"SELECT UserId, UserName FROM
         #     Users"` could return a `row_type` value like:
         #
         #         "fields": [
@@ -206,10 +211,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Additional statistics about a {::Google::Cloud::Spanner::V1::ResultSet ResultSet} or {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet}.
+        # Additional statistics about a {::Google::Cloud::Spanner::V1::ResultSet ResultSet} or
+        # {::Google::Cloud::Spanner::V1::PartialResultSet PartialResultSet}.
         # @!attribute [rw] query_plan
         #   @return [::Google::Cloud::Spanner::V1::QueryPlan]
-        #     {::Google::Cloud::Spanner::V1::QueryPlan QueryPlan} for the query associated with this result.
+        #     {::Google::Cloud::Spanner::V1::QueryPlan QueryPlan} for the query associated with this
+        #     result.
         # @!attribute [rw] query_stats
         #   @return [::Google::Protobuf::Struct]
         #     Aggregated statistics from the execution of the query. Only present when
@@ -228,7 +235,7 @@ module Google
         #     Note: The following fields are mutually exclusive: `row_count_exact`, `row_count_lower_bound`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] row_count_lower_bound
         #   @return [::Integer]
-        #     Partitioned DML does not offer exactly-once semantics, so it
+        #     Partitioned DML doesn't offer exactly-once semantics, so it
         #     returns a lower bound of the rows modified.
         #
         #     Note: The following fields are mutually exclusive: `row_count_lower_bound`, `row_count_exact`. If a field in that set is populated, all other fields in the set will automatically be cleared.
