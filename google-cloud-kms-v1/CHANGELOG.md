@@ -1,5 +1,12 @@
 # Release History
 
+### 1.5.0 (2025-02-25)
+
+#### Features
+
+* Introduce PublicKeyFormat enum for selecting public key export encoding 
+* Support PQC asymmetric signing algorithms ML_DSA_65 and SLH_DSA_SHA2_128s ([#29168](https://github.com/googleapis/google-cloud-ruby/issues/29168)) 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features
