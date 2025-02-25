@@ -123,13 +123,13 @@ describe "Buckets Snippets" do
 
   describe "storage_soft_deleted_bucket" do
     let(:new_bucket_name) { random_bucket_name }
-    let(:soft_delete_policy) { { retention_duration_seconds: 10*24*60*60 } }
+    let(:soft_delete_policy) { { retention_duration_seconds: 864_000 } }
 
     it "get soft deleted bucket, its soft_delete_time and hard_delete_time" do
       new_bucket = storage_client.create_bucket new_bucket_name
       new_generation = new_bucket.generation
       new_bucket.soft_delete_policy = soft_delete_policy
-      _(new_bucket.soft_delete_policy.retention_duration_seconds).must_equal 10*24*60*60
+      _(new_bucket.soft_delete_policy.retention_duration_seconds).must_equal 864_000
       puts storage_client.service_account_email
 
       # ensuring bucket is created
