@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2025-02-25)
+
+#### Features
+
+* Added DeletionType::SPACE_MEMBER ([#29171](https://github.com/googleapis/google-cloud-ruby/issues/29171)) 
+
 ### 0.9.1 (2025-02-12)
 
 #### Documentation
