@@ -37,6 +37,7 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/api/routing.rb",
     "proto_docs/google/firestore/v1/aggregation_result.rb",
     "proto_docs/google/firestore/v1/bloom_filter.rb",
     "proto_docs/google/firestore/v1/common.rb",
