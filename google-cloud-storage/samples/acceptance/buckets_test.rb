@@ -129,7 +129,6 @@ describe "Buckets Snippets" do
       new_bucket = storage_client.create_bucket new_bucket_name
       new_generation = new_bucket.generation
       new_bucket.soft_delete_policy = soft_delete_policy
-      _(new_bucket.soft_delete_policy.retention_duration_seconds).must_equal 864_000
       puts storage_client.service_account_email
 
       # ensuring bucket is created
@@ -137,8 +136,9 @@ describe "Buckets Snippets" do
 
       # fetching bucket
       check_bucket = storage_client.bucket new_bucket_name
+      _(check_bucket.soft_delete_policy.retention_duration_seconds).must_equal 864_000
       puts "new bucket name-- #{check_bucket.name}"
-      puts "new bucket soft_delete_policy-- #{check_bucket.soft_delete_policy}"
+      puts "new bucket soft_delete_policy-- #{check_bucket}"
       delete_bucket_helper new_bucket_name
       # Check if the bucket is deleted
       deleted_bucket = storage_client.bucket new_bucket_name
