@@ -106,6 +106,8 @@ module Google
 
                     default_config.rpcs.update_reservation.timeout = 300.0
 
+                    default_config.rpcs.failover_reservation.timeout = 300.0
+
                     default_config.rpcs.create_capacity_commitment.timeout = 300.0
 
                     default_config.rpcs.list_capacity_commitments.timeout = 300.0
