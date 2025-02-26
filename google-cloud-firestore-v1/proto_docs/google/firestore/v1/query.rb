@@ -30,6 +30,7 @@ module Google
         # 4. order_by + start_at + end_at
         # 5. offset
         # 6. limit
+        # 7. find_nearest
         # @!attribute [rw] select
         #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::Projection]
         #     Optional sub-set of the fields to return.
@@ -408,8 +409,8 @@ module Google
           #     Since DOT_PRODUCT distances increase when the vectors are more similar,
           #     the comparison is inverted.
           #
-          #     For EUCLIDEAN, COSINE: WHERE distance <= distance_threshold
-          #     For DOT_PRODUCT:       WHERE distance >= distance_threshold
+          #     * For EUCLIDEAN, COSINE: WHERE distance <= distance_threshold
+          #     * For DOT_PRODUCT:       WHERE distance >= distance_threshold
           class FindNearest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
