@@ -141,6 +141,14 @@ module Google
           # @!attribute [rw] client_certificate_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Agent::ClientCertificateSettings]
           #     Optional. Settings for custom client certificates.
+          # @!attribute [r] satisfies_pzs
+          #   @return [::Boolean]
+          #     Optional. Output only. A read only boolean field reflecting Zone Separation
+          #     status of the agent.
+          # @!attribute [r] satisfies_pzi
+          #   @return [::Boolean]
+          #     Optional. Output only. A read only boolean field reflecting Zone Isolation
+          #     status of the agent.
           class Agent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
