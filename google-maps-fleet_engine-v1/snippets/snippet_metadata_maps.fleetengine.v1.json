@@ -92,6 +92,46 @@
       ]
     },
     {
+      "region_tag": "fleetengine_v1_generated_TripService_DeleteTrip_sync",
+      "title": "Snippet for the delete_trip call in the TripService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::V1::TripService::Client#delete_trip.",
+      "file": "trip_service/delete_trip.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_trip",
+        "full_name": "::Google::Maps::FleetEngine::V1::TripService::Client#delete_trip",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Maps::FleetEngine::V1::DeleteTripRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "TripService::Client",
+          "full_name": "::Google::Maps::FleetEngine::V1::TripService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTrip",
+          "full_name": "maps.fleetengine.v1.TripService.DeleteTrip",
+          "service": {
+            "short_name": "TripService",
+            "full_name": "maps.fleetengine.v1.TripService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "fleetengine_v1_generated_TripService_ReportBillableTrip_sync",
       "title": "Snippet for the report_billable_trip call in the TripService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::V1::TripService::Client#report_billable_trip.",
@@ -275,6 +315,46 @@
         "method": {
           "short_name": "GetVehicle",
           "full_name": "maps.fleetengine.v1.VehicleService.GetVehicle",
+          "service": {
+            "short_name": "VehicleService",
+            "full_name": "maps.fleetengine.v1.VehicleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "fleetengine_v1_generated_VehicleService_DeleteVehicle_sync",
+      "title": "Snippet for the delete_vehicle call in the VehicleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Maps::FleetEngine::V1::VehicleService::Client#delete_vehicle.",
+      "file": "vehicle_service/delete_vehicle.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_vehicle",
+        "full_name": "::Google::Maps::FleetEngine::V1::VehicleService::Client#delete_vehicle",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Maps::FleetEngine::V1::DeleteVehicleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "VehicleService::Client",
+          "full_name": "::Google::Maps::FleetEngine::V1::VehicleService::Client"
+        },
+        "method": {
+          "short_name": "DeleteVehicle",
+          "full_name": "maps.fleetengine.v1.VehicleService.DeleteVehicle",
           "service": {
             "short_name": "VehicleService",
             "full_name": "maps.fleetengine.v1.VehicleService"
