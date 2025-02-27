@@ -135,6 +135,8 @@ module Google
                          persistence_regions: nil,
                          schema_name: nil,
                          message_encoding: nil,
+                         first_revision_id: nil,
+                         last_revision_id: nil,
                          retention: nil,
                          ingestion_data_source_settings: nil,
                          options: {}
@@ -150,7 +152,9 @@ module Google
             end
             schema_settings = Google::Cloud::PubSub::V1::SchemaSettings.new(
               schema:   schema_path(schema_name),
-              encoding: message_encoding.to_s.upcase
+              encoding: message_encoding.to_s.upcase,
+              first_revision_id: first_revision_id,
+              last_revision_id: last_revision_id
             )
           end
 

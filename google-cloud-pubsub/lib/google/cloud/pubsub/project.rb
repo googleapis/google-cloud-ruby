@@ -255,6 +255,8 @@ module Google
         #   * `JSON` - JSON encoding.
         #   * `BINARY` - Binary encoding, as defined by the schema type. For some
         #     schema types, binary encoding may not be available.
+        # @param [String] first_revision_id The minimum (inclusive) revision allowed for validating messages.
+        # @param [String] last_revision_id The maximum (inclusive) revision allowed for validating messages.
         # @param [Numeric] retention Indicates the minimum number of seconds to retain a message
         #   after it is published to the topic. If this field is set, messages published
         #   to the topic within the `retention` number of seconds are always available to
@@ -281,6 +283,8 @@ module Google
                          async: nil,
                          schema_name: nil,
                          message_encoding: nil,
+                         first_revision_id: nil,
+                         last_revision_id: nil,
                          retention: nil,
                          ingestion_data_source_settings: nil
           ensure_service!
@@ -290,6 +294,8 @@ module Google
                                       persistence_regions: persistence_regions,
                                       schema_name: schema_name,
                                       message_encoding: message_encoding,
+                                      first_revision_id: first_revision_id,
+                                      last_revision_id: last_revision_id,
                                       retention: retention,
                                       ingestion_data_source_settings: ingestion_data_source_settings
           Topic.from_grpc grpc, service, async: async
