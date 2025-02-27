@@ -1,0 +1,68 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "maps.fleetengine.delivery.v1",
+  "libraryPackage": "::Google::Maps::FleetEngine::Delivery::V1",
+  "services": {
+    "DeliveryService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client",
+          "rpcs": {
+            "CreateDeliveryVehicle": {
+              "methods": [
+                "create_delivery_vehicle"
+              ]
+            },
+            "GetDeliveryVehicle": {
+              "methods": [
+                "get_delivery_vehicle"
+              ]
+            },
+            "UpdateDeliveryVehicle": {
+              "methods": [
+                "update_delivery_vehicle"
+              ]
+            },
+            "BatchCreateTasks": {
+              "methods": [
+                "batch_create_tasks"
+              ]
+            },
+            "CreateTask": {
+              "methods": [
+                "create_task"
+              ]
+            },
+            "GetTask": {
+              "methods": [
+                "get_task"
+              ]
+            },
+            "UpdateTask": {
+              "methods": [
+                "update_task"
+              ]
+            },
+            "ListTasks": {
+              "methods": [
+                "list_tasks"
+              ]
+            },
+            "GetTaskTrackingInfo": {
+              "methods": [
+                "get_task_tracking_info"
+              ]
+            },
+            "ListDeliveryVehicles": {
+              "methods": [
+                "list_delivery_vehicles"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
