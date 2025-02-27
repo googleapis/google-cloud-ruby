@@ -72,6 +72,21 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # DeleteDeliveryVehicle request message.
+          # @!attribute [rw] header
+          #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader]
+          #     Optional. The standard Delivery API request header.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Must be in the format
+          #     `providers/{provider}/deliveryVehicles/{delivery_vehicle}`.
+          #     The `provider` must be the Google Cloud Project ID. For example,
+          #     `sample-cloud-project`.
+          class DeleteDeliveryVehicleRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The `ListDeliveryVehicles` request message.
           # @!attribute [rw] header
           #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader]
@@ -251,6 +266,20 @@ module Google
           #     `provider` must be the Google Cloud Project ID. For example,
           #     `sample-cloud-project`.
           class GetTaskRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # DeleteTask request message.
+          # @!attribute [rw] header
+          #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader]
+          #     Optional. The standard Delivery API request header.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Must be in the format `providers/{provider}/tasks/{task}`. The
+          #     `provider` must be the Google Cloud Project ID. For example,
+          #     `sample-cloud-project`.
+          class DeleteTaskRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
