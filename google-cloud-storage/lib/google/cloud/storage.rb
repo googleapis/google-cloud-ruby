@@ -96,7 +96,6 @@ module Google
                    max_elapsed_time: nil, base_interval: nil, max_interval: nil,
                    multiplier: nil, upload_chunk_size: nil, universe_domain: nil,
                    upload_url: nil, delete_upload: nil
-
         scope             ||= configure.scope
         retries           ||= configure.retries
         timeout           ||= configure.timeout
