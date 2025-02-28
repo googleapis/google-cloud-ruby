@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-beyond_corp-app_connections-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.beyondcorp.appconnections.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectionsService_ListAppConnections_sync",
+      "title": "Snippet for the list_app_connections call in the AppConnectionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#list_app_connections.",
+      "file": "app_connections_service/list_app_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_app_connections",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#list_app_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnections::V1::ListAppConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppConnections::V1::ListAppConnectionsResponse",
+        "client": {
+          "short_name": "AppConnectionsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client"
+        },
+        "method": {
+          "short_name": "ListAppConnections",
+          "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.ListAppConnections",
+          "service": {
+            "short_name": "AppConnectionsService",
+            "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_sync",
+      "title": "Snippet for the get_app_connection call in the AppConnectionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#get_app_connection.",
+      "file": "app_connections_service/get_app_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_app_connection",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#get_app_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnections::V1::GetAppConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnection",
+        "client": {
+          "short_name": "AppConnectionsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client"
+        },
+        "method": {
+          "short_name": "GetAppConnection",
+          "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.GetAppConnection",
+          "service": {
+            "short_name": "AppConnectionsService",
+            "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectionsService_CreateAppConnection_sync",
+      "title": "Snippet for the create_app_connection call in the AppConnectionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#create_app_connection.",
+      "file": "app_connections_service/create_app_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_app_connection",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#create_app_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnections::V1::CreateAppConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectionsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client"
+        },
+        "method": {
+          "short_name": "CreateAppConnection",
+          "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.CreateAppConnection",
+          "service": {
+            "short_name": "AppConnectionsService",
+            "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectionsService_UpdateAppConnection_sync",
+      "title": "Snippet for the update_app_connection call in the AppConnectionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#update_app_connection.",
+      "file": "app_connections_service/update_app_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_app_connection",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#update_app_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnections::V1::UpdateAppConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectionsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAppConnection",
+          "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.UpdateAppConnection",
+          "service": {
+            "short_name": "AppConnectionsService",
+            "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectionsService_DeleteAppConnection_sync",
+      "title": "Snippet for the delete_app_connection call in the AppConnectionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#delete_app_connection.",
+      "file": "app_connections_service/delete_app_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_app_connection",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#delete_app_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnections::V1::DeleteAppConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "AppConnectionsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAppConnection",
+          "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.DeleteAppConnection",
+          "service": {
+            "short_name": "AppConnectionsService",
+            "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "beyondcorp_v1_generated_AppConnectionsService_ResolveAppConnections_sync",
+      "title": "Snippet for the resolve_app_connections call in the AppConnectionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#resolve_app_connections.",
+      "file": "app_connections_service/resolve_app_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resolve_app_connections",
+        "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#resolve_app_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::BeyondCorp::AppConnections::V1::ResolveAppConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::BeyondCorp::AppConnections::V1::ResolveAppConnectionsResponse",
+        "client": {
+          "short_name": "AppConnectionsService::Client",
+          "full_name": "::Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client"
+        },
+        "method": {
+          "short_name": "ResolveAppConnections",
+          "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService.ResolveAppConnections",
+          "service": {
+            "short_name": "AppConnectionsService",
+            "full_name": "google.cloud.beyondcorp.appconnections.v1.AppConnectionsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
