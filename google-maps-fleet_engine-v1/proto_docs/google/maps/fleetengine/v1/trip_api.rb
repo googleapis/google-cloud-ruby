@@ -135,6 +135,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DeleteTrip request message.
+        # @!attribute [rw] header
+        #   @return [::Google::Maps::FleetEngine::V1::RequestHeader]
+        #     Optional. The standard Fleet Engine request header.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Must be in the format `providers/{provider}/trips/{trip}`.
+        #     The provider must be the Project ID (for example, `sample-cloud-project`)
+        #     of the Google Cloud Project of which the service account making
+        #     this call is a member.
+        class DeleteTripRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # ReportBillableTrip request message.
         # @!attribute [rw] name
         #   @return [::String]

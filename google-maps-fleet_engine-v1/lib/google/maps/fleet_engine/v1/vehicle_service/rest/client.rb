@@ -444,6 +444,93 @@ module Google
               end
 
               ##
+              # Deletes a Vehicle from the Fleet Engine.
+              #
+              # Returns FAILED_PRECONDITION if the Vehicle has active Trips.
+              # assigned to it.
+              #
+              # @overload delete_vehicle(request, options = nil)
+              #   Pass arguments to `delete_vehicle` via a request object, either of type
+              #   {::Google::Maps::FleetEngine::V1::DeleteVehicleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Maps::FleetEngine::V1::DeleteVehicleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_vehicle(header: nil, name: nil)
+              #   Pass arguments to `delete_vehicle` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param header [::Google::Maps::FleetEngine::V1::RequestHeader, ::Hash]
+              #     Optional. The standard Fleet Engine request header.
+              #   @param name [::String]
+              #     Required. Must be in the format
+              #     `providers/{provider}/vehicles/{vehicle}`.
+              #     The \\{provider} must be the Project ID (for example, `sample-cloud-project`)
+              #     of the Google Cloud Project of which the service account making
+              #     this call is a member.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/maps/fleet_engine/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Maps::FleetEngine::V1::VehicleService::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Maps::FleetEngine::V1::DeleteVehicleRequest.new
+              #
+              #   # Call the delete_vehicle method.
+              #   result = client.delete_vehicle request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
+              def delete_vehicle request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Maps::FleetEngine::V1::DeleteVehicleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_vehicle.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Maps::FleetEngine::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_vehicle.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_vehicle.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @vehicle_service_stub.delete_vehicle request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Writes updated vehicle data to the Fleet Engine.
               #
               # When updating a `Vehicle`, the following fields cannot be updated since
@@ -1220,6 +1307,11 @@ module Google
                   #
                   attr_reader :get_vehicle
                   ##
+                  # RPC-specific configuration for `delete_vehicle`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_vehicle
+                  ##
                   # RPC-specific configuration for `update_vehicle`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1246,6 +1338,8 @@ module Google
                     @create_vehicle = ::Gapic::Config::Method.new create_vehicle_config
                     get_vehicle_config = parent_rpcs.get_vehicle if parent_rpcs.respond_to? :get_vehicle
                     @get_vehicle = ::Gapic::Config::Method.new get_vehicle_config
+                    delete_vehicle_config = parent_rpcs.delete_vehicle if parent_rpcs.respond_to? :delete_vehicle
+                    @delete_vehicle = ::Gapic::Config::Method.new delete_vehicle_config
                     update_vehicle_config = parent_rpcs.update_vehicle if parent_rpcs.respond_to? :update_vehicle
                     @update_vehicle = ::Gapic::Config::Method.new update_vehicle_config
                     update_vehicle_attributes_config = parent_rpcs.update_vehicle_attributes if parent_rpcs.respond_to? :update_vehicle_attributes

@@ -39,6 +39,13 @@ module Google
         # @!attribute [rw] last_location
         #   @return [::Google::Maps::FleetEngine::V1::VehicleLocation]
         #     Last reported location of the vehicle.
+        # @!attribute [rw] past_locations
+        #   @return [::Array<::Google::Maps::FleetEngine::V1::VehicleLocation>]
+        #     Input only. Locations where this vehicle has been in the past that haven't
+        #     yet been reported to Fleet Engine. This is used in `UpdateVehicleRequest`
+        #     to record locations which were previously unable to be sent to the server.
+        #     Typically this happens when the vehicle does not have internet
+        #     connectivity.
         # @!attribute [rw] maximum_capacity
         #   @return [::Integer]
         #     The total numbers of riders this vehicle can carry.  The driver is not

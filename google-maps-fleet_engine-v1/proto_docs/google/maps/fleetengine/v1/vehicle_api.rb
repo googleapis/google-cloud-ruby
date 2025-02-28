@@ -104,6 +104,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DeleteVehicle request message.
+        # @!attribute [rw] header
+        #   @return [::Google::Maps::FleetEngine::V1::RequestHeader]
+        #     Optional. The standard Fleet Engine request header.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Must be in the format
+        #     `providers/{provider}/vehicles/{vehicle}`.
+        #     The \\{provider} must be the Project ID (for example, `sample-cloud-project`)
+        #     of the Google Cloud Project of which the service account making
+        #     this call is a member.
+        class DeleteVehicleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `UpdateVehicle request message.
         # @!attribute [rw] header
         #   @return [::Google::Maps::FleetEngine::V1::RequestHeader]

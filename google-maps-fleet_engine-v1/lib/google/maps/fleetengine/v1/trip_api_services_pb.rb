@@ -37,6 +37,11 @@ module Google
             rpc :CreateTrip, ::Google::Maps::FleetEngine::V1::CreateTripRequest, ::Google::Maps::FleetEngine::V1::Trip
             # Get information about a single trip.
             rpc :GetTrip, ::Google::Maps::FleetEngine::V1::GetTripRequest, ::Google::Maps::FleetEngine::V1::Trip
+            # Deletes a single Trip.
+            #
+            # Returns FAILED_PRECONDITION if the Trip is active and assigned to a
+            # vehicle.
+            rpc :DeleteTrip, ::Google::Maps::FleetEngine::V1::DeleteTripRequest, ::Google::Protobuf::Empty
             # Report billable trip usage.
             rpc :ReportBillableTrip, ::Google::Maps::FleetEngine::V1::ReportBillableTripRequest, ::Google::Protobuf::Empty
             # Get all the trips for a specific vehicle.

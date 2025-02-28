@@ -462,6 +462,100 @@ module Google
             end
 
             ##
+            # Deletes a single Trip.
+            #
+            # Returns FAILED_PRECONDITION if the Trip is active and assigned to a
+            # vehicle.
+            #
+            # @overload delete_trip(request, options = nil)
+            #   Pass arguments to `delete_trip` via a request object, either of type
+            #   {::Google::Maps::FleetEngine::V1::DeleteTripRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Maps::FleetEngine::V1::DeleteTripRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_trip(header: nil, name: nil)
+            #   Pass arguments to `delete_trip` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param header [::Google::Maps::FleetEngine::V1::RequestHeader, ::Hash]
+            #     Optional. The standard Fleet Engine request header.
+            #   @param name [::String]
+            #     Required. Must be in the format `providers/{provider}/trips/{trip}`.
+            #     The provider must be the Project ID (for example, `sample-cloud-project`)
+            #     of the Google Cloud Project of which the service account making
+            #     this call is a member.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/maps/fleet_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Maps::FleetEngine::V1::TripService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Maps::FleetEngine::V1::DeleteTripRequest.new
+            #
+            #   # Call the delete_trip method.
+            #   result = client.delete_trip request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_trip request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Maps::FleetEngine::V1::DeleteTripRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_trip.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Maps::FleetEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name &&
+                 %r{^providers/[^/]+/?$}.match?(request.name)
+                header_params["provider_id"] = request.name
+              end
+
+              request_params_header = URI.encode_www_form header_params
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_trip.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_trip.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @trip_service_stub.call_rpc :delete_trip, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Report billable trip usage.
             #
             # @overload report_billable_trip(request, options = nil)
@@ -993,6 +1087,11 @@ module Google
                 #
                 attr_reader :get_trip
                 ##
+                # RPC-specific configuration for `delete_trip`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_trip
+                ##
                 # RPC-specific configuration for `report_billable_trip`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1014,6 +1113,8 @@ module Google
                   @create_trip = ::Gapic::Config::Method.new create_trip_config
                   get_trip_config = parent_rpcs.get_trip if parent_rpcs.respond_to? :get_trip
                   @get_trip = ::Gapic::Config::Method.new get_trip_config
+                  delete_trip_config = parent_rpcs.delete_trip if parent_rpcs.respond_to? :delete_trip
+                  @delete_trip = ::Gapic::Config::Method.new delete_trip_config
                   report_billable_trip_config = parent_rpcs.report_billable_trip if parent_rpcs.respond_to? :report_billable_trip
                   @report_billable_trip = ::Gapic::Config::Method.new report_billable_trip_config
                   search_trips_config = parent_rpcs.search_trips if parent_rpcs.respond_to? :search_trips
