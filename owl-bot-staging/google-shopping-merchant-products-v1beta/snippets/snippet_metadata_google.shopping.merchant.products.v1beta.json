@@ -1,0 +1,175 @@
+{
+  "client_library": {
+    "name": "google-shopping-merchant-products-v1beta",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.shopping.merchant.products.v1beta",
+        "version": "v1beta"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "merchantapi_v1beta_generated_ProductInputsService_InsertProductInput_sync",
+      "title": "Snippet for the insert_product_input call in the ProductInputsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client#insert_product_input.",
+      "file": "product_inputs_service/insert_product_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "insert_product_input",
+        "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client#insert_product_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Products::V1beta::InsertProductInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Products::V1beta::ProductInput",
+        "client": {
+          "short_name": "ProductInputsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client"
+        },
+        "method": {
+          "short_name": "InsertProductInput",
+          "full_name": "google.shopping.merchant.products.v1beta.ProductInputsService.InsertProductInput",
+          "service": {
+            "short_name": "ProductInputsService",
+            "full_name": "google.shopping.merchant.products.v1beta.ProductInputsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_ProductInputsService_DeleteProductInput_sync",
+      "title": "Snippet for the delete_product_input call in the ProductInputsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client#delete_product_input.",
+      "file": "product_inputs_service/delete_product_input.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_product_input",
+        "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client#delete_product_input",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Products::V1beta::DeleteProductInputRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductInputsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client"
+        },
+        "method": {
+          "short_name": "DeleteProductInput",
+          "full_name": "google.shopping.merchant.products.v1beta.ProductInputsService.DeleteProductInput",
+          "service": {
+            "short_name": "ProductInputsService",
+            "full_name": "google.shopping.merchant.products.v1beta.ProductInputsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_ProductsService_GetProduct_sync",
+      "title": "Snippet for the get_product call in the ProductsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Products::V1beta::ProductsService::Client#get_product.",
+      "file": "products_service/get_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_product",
+        "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductsService::Client#get_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Products::V1beta::GetProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Products::V1beta::Product",
+        "client": {
+          "short_name": "ProductsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductsService::Client"
+        },
+        "method": {
+          "short_name": "GetProduct",
+          "full_name": "google.shopping.merchant.products.v1beta.ProductsService.GetProduct",
+          "service": {
+            "short_name": "ProductsService",
+            "full_name": "google.shopping.merchant.products.v1beta.ProductsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "merchantapi_v1beta_generated_ProductsService_ListProducts_sync",
+      "title": "Snippet for the list_products call in the ProductsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Shopping::Merchant::Products::V1beta::ProductsService::Client#list_products.",
+      "file": "products_service/list_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_products",
+        "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductsService::Client#list_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Shopping::Merchant::Products::V1beta::ListProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Shopping::Merchant::Products::V1beta::ListProductsResponse",
+        "client": {
+          "short_name": "ProductsService::Client",
+          "full_name": "::Google::Shopping::Merchant::Products::V1beta::ProductsService::Client"
+        },
+        "method": {
+          "short_name": "ListProducts",
+          "full_name": "google.shopping.merchant.products.v1beta.ProductsService.ListProducts",
+          "service": {
+            "short_name": "ProductsService",
+            "full_name": "google.shopping.merchant.products.v1beta.ProductsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

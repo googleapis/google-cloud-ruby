@@ -1,0 +1,47 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.shopping.merchant.products.v1beta",
+  "libraryPackage": "::Google::Shopping::Merchant::Products::V1beta",
+  "services": {
+    "ProductInputsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Products::V1beta::ProductInputsService::Client",
+          "rpcs": {
+            "InsertProductInput": {
+              "methods": [
+                "insert_product_input"
+              ]
+            },
+            "DeleteProductInput": {
+              "methods": [
+                "delete_product_input"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ProductsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Shopping::Merchant::Products::V1beta::ProductsService::Client",
+          "rpcs": {
+            "GetProduct": {
+              "methods": [
+                "get_product"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "list_products"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
