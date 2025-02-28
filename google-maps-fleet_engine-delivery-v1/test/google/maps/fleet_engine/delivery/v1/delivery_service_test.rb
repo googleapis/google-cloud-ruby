@@ -188,6 +188,66 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
     end
   end
 
+  def test_delete_delivery_vehicle
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    header = {}
+    name = "hello world"
+
+    delete_delivery_vehicle_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_delivery_vehicle, name
+      assert_kind_of ::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader), request["header"]
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_delivery_vehicle_client_stub do
+      # Create client
+      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_delivery_vehicle({ header: header, name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_delivery_vehicle header: header, name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_delivery_vehicle ::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_delivery_vehicle({ header: header, name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_delivery_vehicle(::Google::Maps::FleetEngine::Delivery::V1::DeleteDeliveryVehicleRequest.new(header: header, name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_delivery_vehicle_client_stub.call_rpc_count
+    end
+  end
+
   def test_update_delivery_vehicle
     # Create GRPC objects.
     grpc_response = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryVehicle.new
@@ -433,6 +493,66 @@ class ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::ClientTest < M
 
       # Verify method calls
       assert_equal 5, get_task_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_task
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    header = {}
+    name = "hello world"
+
+    delete_task_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_task, name
+      assert_kind_of ::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Maps::FleetEngine::Delivery::V1::DeliveryRequestHeader), request["header"]
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_task_client_stub do
+      # Create client
+      client = ::Google::Maps::FleetEngine::Delivery::V1::DeliveryService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_task({ header: header, name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_task header: header, name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_task ::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_task({ header: header, name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_task(::Google::Maps::FleetEngine::Delivery::V1::DeleteTaskRequest.new(header: header, name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_task_client_stub.call_rpc_count
     end
   end
 

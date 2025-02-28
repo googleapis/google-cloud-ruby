@@ -38,6 +38,13 @@ module Google
           # @!attribute [rw] last_location
           #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryVehicleLocation]
           #     The last reported location of the Delivery Vehicle.
+          # @!attribute [rw] past_locations
+          #   @return [::Array<::Google::Maps::FleetEngine::Delivery::V1::DeliveryVehicleLocation>]
+          #     Input only. Locations where this Delivery Vehicle has been in the past that
+          #     haven't yet been reported to Fleet Engine. This is used in
+          #     `UpdateDeliveryVehicleRequest` to record locations which were previously
+          #     unable to be sent to the server. Typically this happens when the Delivery
+          #     Vehicle does not have internet connectivity.
           # @!attribute [rw] navigation_status
           #   @return [::Google::Maps::FleetEngine::Delivery::V1::DeliveryVehicleNavigationStatus]
           #     The Delivery Vehicle's navigation status.
