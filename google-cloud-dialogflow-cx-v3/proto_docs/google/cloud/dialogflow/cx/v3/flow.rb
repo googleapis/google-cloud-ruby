@@ -107,7 +107,7 @@ module Google
           #     way regardless of the current page. Transition routes defined in the page
           #     have higher priority than those defined in the flow.
           #
-          #     TransitionRoutes are evalauted in the following order:
+          #     TransitionRoutes are evaluated in the following order:
           #
           #     *   TransitionRoutes with intent specified.
           #     *   TransitionRoutes with only condition specified.

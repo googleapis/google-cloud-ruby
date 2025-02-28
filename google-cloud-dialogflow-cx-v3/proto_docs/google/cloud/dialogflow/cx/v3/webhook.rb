@@ -76,8 +76,7 @@ module Google
             #     The password for HTTP Basic authentication.
             # @!attribute [rw] request_headers
             #   @return [::Google::Protobuf::Map{::String => ::String}]
-            #     The HTTP request headers to send together with webhook
-            #     requests.
+            #     The HTTP request headers to send together with webhook requests.
             # @!attribute [rw] allowed_ca_certs
             #   @return [::Array<::String>]
             #     Optional. Specifies a list of allowed custom CA certificates (in DER

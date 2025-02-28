@@ -88,7 +88,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Represents an example that the agent is trained on to identify the intent.
-            # @!attribute [rw] id
+            # @!attribute [r] id
             #   @return [::String]
             #     Output only. The unique identifier of the training phrase.
             # @!attribute [rw] parts
