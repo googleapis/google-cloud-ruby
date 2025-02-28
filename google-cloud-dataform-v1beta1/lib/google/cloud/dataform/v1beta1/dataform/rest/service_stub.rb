@@ -282,10 +282,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse]
               #   A result object deserialized from the server's reply
               def commit_repository_changes request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -306,7 +306,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -722,10 +722,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse]
               #   A result object deserialized from the server's reply
               def pull_git_commits request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -746,7 +746,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -762,10 +762,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse]
               #   A result object deserialized from the server's reply
               def push_git_commits request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -786,7 +786,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -882,10 +882,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse]
               #   A result object deserialized from the server's reply
               def commit_workspace_changes request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -906,7 +906,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -922,10 +922,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse]
               #   A result object deserialized from the server's reply
               def reset_workspace_changes request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -946,7 +946,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -1034,6 +1034,46 @@ module Google
               end
 
               ##
+              # Baseline implementation for the search_files REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::SearchFilesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::SearchFilesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::SearchFilesResponse]
+              #   A result object deserialized from the server's reply
+              def search_files request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_search_files_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "search_files",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Dataform::V1beta1::SearchFilesResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
               # Baseline implementation for the make_directory REST call
               #
               # @param request_pb [::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest]
@@ -1082,10 +1122,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse]
               #   A result object deserialized from the server's reply
               def remove_directory request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -1106,7 +1146,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -1202,10 +1242,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::RemoveFileResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::RemoveFileResponse]
               #   A result object deserialized from the server's reply
               def remove_file request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -1226,7 +1266,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::RemoveFileResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -2042,10 +2082,10 @@ module Google
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, operation] Access the result along with the TransportOperation object
-              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse]
               #   A result object deserialized from the server's reply
               def cancel_workflow_invocation request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -2066,7 +2106,7 @@ module Google
                   options: options
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
-                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -2107,6 +2147,86 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsResponse.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the get_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::GetConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::Config]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::Config]
+              #   A result object deserialized from the server's reply
+              def get_config request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "get_config",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Dataform::V1beta1::Config.decode_json response.body, ignore_unknown_fields: true
+                catch :response do
+                  yield result, operation if block_given?
+                  result
+                end
+              end
+
+              ##
+              # Baseline implementation for the update_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataform::V1beta1::Config]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataform::V1beta1::Config]
+              #   A result object deserialized from the server's reply
+              def update_config request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split "=", 2 }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri: uri,
+                  body: body || "",
+                  params: query_string_params,
+                  method_name: "update_config",
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::Dataform::V1beta1::Config.decode_json response.body, ignore_unknown_fields: true
                 catch :response do
                   yield result, operation if block_given?
                   result
@@ -2619,6 +2739,27 @@ module Google
                                                         .with_bindings(
                                                           uri_method: :get,
                                                           uri_template: "/v1beta1/{workspace}:queryDirectoryContents",
+                                                          matches: [
+                                                            ["workspace", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the search_files REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::SearchFilesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_search_files_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta1/{workspace}:searchFiles",
                                                           matches: [
                                                             ["workspace", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workspaces/[^/]+/?$}, false]
                                                           ]
@@ -3201,6 +3342,49 @@ module Google
                                                           uri_template: "/v1beta1/{name}:query",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/repositories/[^/]+/workflowInvocations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::GetConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/config/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1beta1/{config.name}",
+                                                          body: "config",
+                                                          matches: [
+                                                            ["config.name", %r{^projects/[^/]+/locations/[^/]+/config/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
