@@ -323,27 +323,22 @@ module Google
           # {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#streaming_detect_intent StreamingDetectIntent}
           # method.
           #
-          # Multiple response messages (N) can be returned in order.
-          #
-          # The first (N-1) responses set either the `recognition_result` or
-          # `detect_intent_response` field, depending on the request:
+          # Multiple response messages can be returned in order:
           #
           # *   If the `StreamingDetectIntentRequest.query_input.audio` field was
-          #     set, and the `StreamingDetectIntentRequest.enable_partial_response`
-          #     field was false, the `recognition_result` field is populated for each
-          #     of the (N-1) responses.
-          #     See the
-          #     {::Google::Cloud::Dialogflow::CX::V3::StreamingRecognitionResult StreamingRecognitionResult}
-          #     message for details about the result message sequence.
+          #     set, the first M messages contain `recognition_result`.
+          #     Each `recognition_result` represents a more complete transcript of what
+          #     the user said. The last `recognition_result` has `is_final` set to
+          #     `true`.
           #
           # *   If the `StreamingDetectIntentRequest.enable_partial_response` field was
           #     true, the `detect_intent_response` field is populated for each
-          #     of the (N-1) responses, where 1 <= N <= 4.
+          #     of the following N responses, where 0 <= N <= 5.
           #     These responses set the
           #     {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse#response_type DetectIntentResponse.response_type}
           #     field to `PARTIAL`.
           #
-          # For the final Nth response message, the `detect_intent_response` is fully
+          # For the last response message, the `detect_intent_response` is fully
           # populated, and
           # {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse#response_type DetectIntentResponse.response_type}
           # is set to `FINAL`.
@@ -610,6 +605,7 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SearchConfig]
           #     Optional. Search configuration for UCS search queries.
           # @!attribute [rw] populate_data_store_connection_signals
+          #   @deprecated This field is deprecated and may be removed in the next major version update.
           #   @return [::Boolean]
           #     Optional. If set to true and data stores are involved in serving the
           #     request then
@@ -633,9 +629,18 @@ module Google
           # @!attribute [rw] boost_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpecs>]
           #     Optional. Boosting configuration for the datastores.
+          #
+          #     Maps from datastore name to their boost configuration. Do not specify more
+          #     than one BoostSpecs for each datastore name. If multiple BoostSpecs are
+          #     provided for the same datastore name, the behavior is undefined.
           # @!attribute [rw] filter_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::FilterSpecs>]
           #     Optional. Filter configuration for the datastores.
+          #
+          #     Maps from datastore name to the filter expression for that datastore. Do
+          #     not specify more than one FilterSpecs for each datastore name. If multiple
+          #     FilterSpecs are provided for the same datastore name, the behavior is
+          #     undefined.
           class SearchConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -648,8 +653,8 @@ module Google
           # @!attribute [rw] condition_boost_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::BoostSpec::ConditionBoostSpec>]
           #     Optional. Condition boost specifications. If a document matches multiple
-          #     conditions in the specifictions, boost scores from these specifications are
-          #     all applied and combined in a non-linear way. Maximum number of
+          #     conditions in the specifications, boost scores from these specifications
+          #     are all applied and combined in a non-linear way. Maximum number of
           #     specifications is 20.
           class BoostSpec
             include ::Google::Protobuf::MessageExts
@@ -1012,9 +1017,7 @@ module Google
           # @!attribute [rw] data_store_connection_signals
           #   @return [::Google::Cloud::Dialogflow::CX::V3::DataStoreConnectionSignals]
           #     Optional. Data store connection feature output signals.
-          #     Filled only when data stores are involved in serving the query and
-          #     DetectIntentRequest.populate_data_store_connection_signals is set to true
-          #     in the request.
+          #     Filled only when data stores are involved in serving the query.
           class QueryResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
