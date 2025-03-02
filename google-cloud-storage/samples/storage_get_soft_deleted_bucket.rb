@@ -27,6 +27,7 @@ def get_soft_deleted_bucket bucket_name:, generation:
 
   soft_delete_time = deleted_bucket_fetch.soft_delete_time
   hard_delete_time = deleted_bucket_fetch.hard_delete_time
+  Google::Apis.logger.level = Logger::DEBUG
 
   if (soft_delete_time && hard_delete_time).nil?
     puts "Not Found"
