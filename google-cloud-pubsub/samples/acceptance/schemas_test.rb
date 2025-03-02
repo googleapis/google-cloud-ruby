@@ -13,16 +13,17 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../pubsub_create_avro_schema.rb"
-require_relative "../pubsub_create_topic_with_schema.rb"
-require_relative "../pubsub_create_proto_schema.rb"
-require_relative "../pubsub_delete_schema.rb"
-require_relative "../pubsub_get_schema.rb"
-require_relative "../pubsub_list_schemas.rb"
-require_relative "../pubsub_publish_avro_records.rb"
-require_relative "../pubsub_subscribe_avro_records.rb"
-require_relative "../pubsub_publish_proto_messages.rb"
-require_relative "../pubsub_subscribe_proto_messages.rb"
+require_relative "../pubsub_create_avro_schema"
+require_relative "../pubsub_create_topic_with_schema"
+require_relative "../pubsub_create_topic_with_schema_revisions"
+require_relative "../pubsub_create_proto_schema"
+require_relative "../pubsub_delete_schema"
+require_relative "../pubsub_get_schema"
+require_relative "../pubsub_list_schemas"
+require_relative "../pubsub_publish_avro_records"
+require_relative "../pubsub_subscribe_avro_records"
+require_relative "../pubsub_publish_proto_messages"
+require_relative "../pubsub_subscribe_proto_messages"
 
 
 describe "schemas" do
@@ -30,7 +31,7 @@ describe "schemas" do
   let(:schema_id) { random_schema_id }
   let(:topic_id) { random_topic_id }
   let(:subscription_id) { random_subscription_id }
-  let(:avsc_file) { File.expand_path("data/us-states.avsc", __dir__) }
+  let(:avsc_file) { File.expand_path "data/us-states.avsc", __dir__ }
 
   after do
     @subscription.delete if @subscription
@@ -146,7 +147,7 @@ describe "schemas" do
 
   describe "PROTOCOL_BUFFER" do
     require_relative "../utilities/us-states_pb"
-    let(:proto_file) { File.expand_path("data/us-states.proto", __dir__) }
+    let(:proto_file) { File.expand_path "data/us-states.proto", __dir__ }
     let(:proto_definition) { File.read proto_file }
 
     it "supports pubsub_create_topic_with_schema, pubsub_publish_proto_messages with binary encoding" do
@@ -180,6 +181,18 @@ describe "schemas" do
       # pubsub_publish_proto_messages
       assert_output "Published JSON-encoded protobuf message.\n" do
         publish_proto_messages topic_id: topic_id
+      end
+    end
+
+    it "supports pubsub_create_topic_with_schema_revisions" do
+      @schema = pubsub.create_schema schema_id, :protocol_buffer, proto_definition
+      first_rev = "first-rev-id"
+      last_rev = "last-rev-id"
+      # pubsub_create_topic_with_schema_revisions
+      assert_output "Topic projects/#{pubsub.project}/topics/#{topic_id} created " \
+                    "with revision interval [#{first_rev}, #{last_rev}].\n" do
+        create_topic_with_schema_revisions topic_id: topic_id, schema_id: schema_id, message_encoding: :json,
+                                           first_revision_id: first_rev, last_revision_id: last_rev
       end
     end
 
