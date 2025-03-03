@@ -22,3 +22,5 @@ Naming/AccessorMethodName:
 Naming/FileName:
   Exclude:
     - "lib/stackdriver-core.rb"
+Style/DoubleNegation:
+  Enabled: false
