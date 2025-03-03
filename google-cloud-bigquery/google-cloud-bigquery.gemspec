@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
                        "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.7"
+  gem.required_ruby_version = ">= 3.0"
 
   gem.add_dependency "bigdecimal", "~> 3.0"
   gem.add_dependency "concurrent-ruby", "~> 1.0"
