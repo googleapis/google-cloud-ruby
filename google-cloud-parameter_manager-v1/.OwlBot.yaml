@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/parametermanager/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-parameter_manager-v1/$1
