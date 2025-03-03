@@ -95,6 +95,64 @@ module Google
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::AutomatedBackupPolicy]
           #     If specified, automated backups are enabled for this table.
           #     Otherwise, automated backups are disabled.
+          # @!attribute [rw] row_key_schema
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Type::Struct]
+          #     The row key schema for this table. The schema is used to decode the raw row
+          #     key bytes into a structured format. The order of field declarations in this
+          #     schema is important, as it reflects how the raw row key bytes are
+          #     structured. Currently, this only affects how the key is read via a
+          #     GoogleSQL query from the ExecuteQuery API.
+          #
+          #     For a SQL query, the _key column is still read as raw bytes. But queries
+          #     can reference the key fields by name, which will be decoded from _key using
+          #     provided type and encoding. Queries that reference key fields will fail if
+          #     they encounter an invalid row key.
+          #
+          #     For example, if _key = "some_id#2024-04-30#\x00\x13\x00\xf3" with the
+          #     following schema:
+          #     {
+          #       fields {
+          #         field_name: "id"
+          #         type { string { encoding: utf8_bytes \\{} } }
+          #       }
+          #       fields {
+          #         field_name: "date"
+          #         type { string { encoding: utf8_bytes \\{} } }
+          #       }
+          #       fields {
+          #         field_name: "product_code"
+          #         type { int64 { encoding: big_endian_bytes \\{} } }
+          #       }
+          #       encoding { delimited_bytes { delimiter: "#" } }
+          #     }
+          #
+          #     The decoded key parts would be:
+          #       id = "some_id", date = "2024-04-30", product_code = 1245427
+          #     The query "SELECT _key, product_code FROM table" will return two columns:
+          #     /------------------------------------------------------\
+          #     |              _key                     | product_code |
+          #     | --------------------------------------|--------------|
+          #     | "some_id#2024-04-30#\x00\x13\x00\xf3" |   1245427    |
+          #     \------------------------------------------------------/
+          #
+          #     The schema has the following invariants:
+          #     (1) The decoded field values are order-preserved. For read, the field
+          #     values will be decoded in sorted mode from the raw bytes.
+          #     (2) Every field in the schema must specify a non-empty name.
+          #     (3) Every field must specify a type with an associated encoding. The type
+          #     is limited to scalar types only: Array, Map, Aggregate, and Struct are not
+          #     allowed.
+          #     (4) The field names must not collide with existing column family
+          #     names and reserved keywords "_key" and "_timestamp".
+          #
+          #     The following update operations are allowed for row_key_schema:
+          #     - Update from an empty schema to a new schema.
+          #     - Remove the existing schema. This operation requires setting the
+          #       `ignore_warnings` flag to `true`, since it might be a backward
+          #       incompatible change. Without the flag, the update request will fail with
+          #       an INVALID_ARGUMENT error.
+          #     Any other row key schema update operation (e.g. update existing schema
+          #     columns names or types) is currently unsupported.
           class Table
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
