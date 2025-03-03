@@ -41,12 +41,18 @@ module Google
             # Creates a new Repository in a given project and location.
             rpc :CreateRepository, ::Google::Cloud::Dataform::V1beta1::CreateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Updates a single Repository.
+            #
+            # **Note:** This method does not fully implement
+            # [AIP-134](https://google.aip.dev/134); in particular:
+            # - The wildcard entry (**\***) is treated as a bad request
+            # - When the **field_mask** is omitted, instead of only updating the set
+            #   fields, the request is treated as a full update on all modifiable fields
             rpc :UpdateRepository, ::Google::Cloud::Dataform::V1beta1::UpdateRepositoryRequest, ::Google::Cloud::Dataform::V1beta1::Repository
             # Deletes a single Repository.
             rpc :DeleteRepository, ::Google::Cloud::Dataform::V1beta1::DeleteRepositoryRequest, ::Google::Protobuf::Empty
             # Applies a Git commit to a Repository. The Repository must not have a value
             # for `git_remote_settings.url`.
-            rpc :CommitRepositoryChanges, ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest, ::Google::Protobuf::Empty
+            rpc :CommitRepositoryChanges, ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest, ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse
             # Returns the contents of a file (inside a Repository). The Repository
             # must not have a value for `git_remote_settings.url`.
             rpc :ReadRepositoryFile, ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileRequest, ::Google::Cloud::Dataform::V1beta1::ReadRepositoryFileResponse
@@ -71,32 +77,34 @@ module Google
             # Installs dependency NPM packages (inside a Workspace).
             rpc :InstallNpmPackages, ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesRequest, ::Google::Cloud::Dataform::V1beta1::InstallNpmPackagesResponse
             # Pulls Git commits from the Repository's remote into a Workspace.
-            rpc :PullGitCommits, ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest, ::Google::Protobuf::Empty
+            rpc :PullGitCommits, ::Google::Cloud::Dataform::V1beta1::PullGitCommitsRequest, ::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse
             # Pushes Git commits from a Workspace to the Repository's remote.
-            rpc :PushGitCommits, ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest, ::Google::Protobuf::Empty
+            rpc :PushGitCommits, ::Google::Cloud::Dataform::V1beta1::PushGitCommitsRequest, ::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse
             # Fetches Git statuses for the files in a Workspace.
             rpc :FetchFileGitStatuses, ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesRequest, ::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesResponse
             # Fetches Git ahead/behind against a remote branch.
             rpc :FetchGitAheadBehind, ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindRequest, ::Google::Cloud::Dataform::V1beta1::FetchGitAheadBehindResponse
             # Applies a Git commit for uncommitted files in a Workspace.
-            rpc :CommitWorkspaceChanges, ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest, ::Google::Protobuf::Empty
+            rpc :CommitWorkspaceChanges, ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesRequest, ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse
             # Performs a Git reset for uncommitted files in a Workspace.
-            rpc :ResetWorkspaceChanges, ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest, ::Google::Protobuf::Empty
+            rpc :ResetWorkspaceChanges, ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesRequest, ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse
             # Fetches Git diff for an uncommitted file in a Workspace.
             rpc :FetchFileDiff, ::Google::Cloud::Dataform::V1beta1::FetchFileDiffRequest, ::Google::Cloud::Dataform::V1beta1::FetchFileDiffResponse
             # Returns the contents of a given Workspace directory.
             rpc :QueryDirectoryContents, ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsRequest, ::Google::Cloud::Dataform::V1beta1::QueryDirectoryContentsResponse
+            # Finds the contents of a given Workspace directory by filter.
+            rpc :SearchFiles, ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest, ::Google::Cloud::Dataform::V1beta1::SearchFilesResponse
             # Creates a directory inside a Workspace.
             rpc :MakeDirectory, ::Google::Cloud::Dataform::V1beta1::MakeDirectoryRequest, ::Google::Cloud::Dataform::V1beta1::MakeDirectoryResponse
             # Deletes a directory (inside a Workspace) and all of its contents.
-            rpc :RemoveDirectory, ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest, ::Google::Protobuf::Empty
+            rpc :RemoveDirectory, ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryRequest, ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse
             # Moves a directory (inside a Workspace), and all of its contents, to a new
             # location.
             rpc :MoveDirectory, ::Google::Cloud::Dataform::V1beta1::MoveDirectoryRequest, ::Google::Cloud::Dataform::V1beta1::MoveDirectoryResponse
             # Returns the contents of a file (inside a Workspace).
             rpc :ReadFile, ::Google::Cloud::Dataform::V1beta1::ReadFileRequest, ::Google::Cloud::Dataform::V1beta1::ReadFileResponse
             # Deletes a file (inside a Workspace).
-            rpc :RemoveFile, ::Google::Cloud::Dataform::V1beta1::RemoveFileRequest, ::Google::Protobuf::Empty
+            rpc :RemoveFile, ::Google::Cloud::Dataform::V1beta1::RemoveFileRequest, ::Google::Cloud::Dataform::V1beta1::RemoveFileResponse
             # Moves a file (inside a Workspace) to a new location.
             rpc :MoveFile, ::Google::Cloud::Dataform::V1beta1::MoveFileRequest, ::Google::Cloud::Dataform::V1beta1::MoveFileResponse
             # Writes to a file (inside a Workspace).
@@ -108,6 +116,12 @@ module Google
             # Creates a new ReleaseConfig in a given Repository.
             rpc :CreateReleaseConfig, ::Google::Cloud::Dataform::V1beta1::CreateReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
             # Updates a single ReleaseConfig.
+            #
+            # **Note:** This method does not fully implement
+            # [AIP-134](https://google.aip.dev/134); in particular:
+            # - The wildcard entry (**\***) is treated as a bad request
+            # - When the **field_mask** is omitted, instead of only updating the set
+            #   fields, the request is treated as a full update on all modifiable fields
             rpc :UpdateReleaseConfig, ::Google::Cloud::Dataform::V1beta1::UpdateReleaseConfigRequest, ::Google::Cloud::Dataform::V1beta1::ReleaseConfig
             # Deletes a single ReleaseConfig.
             rpc :DeleteReleaseConfig, ::Google::Cloud::Dataform::V1beta1::DeleteReleaseConfigRequest, ::Google::Protobuf::Empty
@@ -126,6 +140,12 @@ module Google
             # Creates a new WorkflowConfig in a given Repository.
             rpc :CreateWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::CreateWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
             # Updates a single WorkflowConfig.
+            #
+            # **Note:** This method does not fully implement
+            # [AIP-134](https://google.aip.dev/134); in particular:
+            # - The wildcard entry (**\***) is treated as a bad request
+            # - When the **field_mask** is omitted, instead of only updating the set
+            #   fields, the request is treated as a full update on all modifiable fields
             rpc :UpdateWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::UpdateWorkflowConfigRequest, ::Google::Cloud::Dataform::V1beta1::WorkflowConfig
             # Deletes a single WorkflowConfig.
             rpc :DeleteWorkflowConfig, ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowConfigRequest, ::Google::Protobuf::Empty
@@ -138,9 +158,19 @@ module Google
             # Deletes a single WorkflowInvocation.
             rpc :DeleteWorkflowInvocation, ::Google::Cloud::Dataform::V1beta1::DeleteWorkflowInvocationRequest, ::Google::Protobuf::Empty
             # Requests cancellation of a running WorkflowInvocation.
-            rpc :CancelWorkflowInvocation, ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest, ::Google::Protobuf::Empty
+            rpc :CancelWorkflowInvocation, ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationRequest, ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse
             # Returns WorkflowInvocationActions in a given WorkflowInvocation.
             rpc :QueryWorkflowInvocationActions, ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsRequest, ::Google::Cloud::Dataform::V1beta1::QueryWorkflowInvocationActionsResponse
+            # Get default config for a given project and location.
+            rpc :GetConfig, ::Google::Cloud::Dataform::V1beta1::GetConfigRequest, ::Google::Cloud::Dataform::V1beta1::Config
+            # Update default config for a given project and location.
+            #
+            # **Note:** This method does not fully implement
+            # [AIP-134](https://google.aip.dev/134); in particular:
+            # - The wildcard entry (**\***) is treated as a bad request
+            # - When the **field_mask** is omitted, instead of only updating the set
+            #   fields, the request is treated as a full update on all modifiable fields
+            rpc :UpdateConfig, ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest, ::Google::Cloud::Dataform::V1beta1::Config
           end
 
           Stub = Service.rpc_stub_class

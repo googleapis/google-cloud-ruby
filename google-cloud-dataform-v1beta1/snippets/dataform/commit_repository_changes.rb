@@ -41,7 +41,7 @@ def commit_repository_changes
   # Call the commit_repository_changes method.
   result = client.commit_repository_changes request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_sync]

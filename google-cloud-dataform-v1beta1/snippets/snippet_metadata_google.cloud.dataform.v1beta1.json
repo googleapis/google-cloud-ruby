@@ -227,7 +227,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -667,7 +667,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -707,7 +707,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -827,7 +827,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -867,7 +867,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -972,6 +972,46 @@
       ]
     },
     {
+      "region_tag": "dataform_v1beta1_generated_Dataform_SearchFiles_sync",
+      "title": "Snippet for the search_files call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#search_files.",
+      "file": "dataform/search_files.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search_files",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#search_files",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::SearchFilesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::SearchFilesResponse",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "SearchFiles",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.SearchFiles",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dataform_v1beta1_generated_Dataform_MakeDirectory_sync",
       "title": "Snippet for the make_directory call in the Dataform service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#make_directory.",
@@ -1027,7 +1067,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -1147,7 +1187,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::RemoveFileResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -1987,7 +2027,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse",
         "client": {
           "short_name": "Dataform::Client",
           "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
@@ -2047,6 +2087,86 @@
         {
           "start": 20,
           "end": 50,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_GetConfig_sync",
+      "title": "Snippet for the get_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_config.",
+      "file": "dataform/get_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#get_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::GetConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::Config",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "GetConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.GetConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataform_v1beta1_generated_Dataform_UpdateConfig_sync",
+      "title": "Snippet for the update_config call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#update_config.",
+      "file": "dataform/update_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_config",
+        "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client#update_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataform::V1beta1::Config",
+        "client": {
+          "short_name": "Dataform::Client",
+          "full_name": "::Google::Cloud::Dataform::V1beta1::Dataform::Client"
+        },
+        "method": {
+          "short_name": "UpdateConfig",
+          "full_name": "google.cloud.dataform.v1beta1.Dataform.UpdateConfig",
+          "service": {
+            "short_name": "Dataform",
+            "full_name": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 46,
           "type": "FULL"
         }
       ]

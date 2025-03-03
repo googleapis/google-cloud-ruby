@@ -41,7 +41,7 @@ def pull_git_commits
   # Call the pull_git_commits method.
   result = client.pull_git_commits request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_PullGitCommits_sync]

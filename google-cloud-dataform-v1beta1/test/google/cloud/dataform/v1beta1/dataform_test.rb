@@ -377,7 +377,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_commit_repository_changes
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1064,7 +1064,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_pull_git_commits
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::PullGitCommitsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1126,7 +1126,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_push_git_commits
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::PushGitCommitsResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1304,7 +1304,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_commit_workspace_changes
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1368,7 +1368,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_reset_workspace_changes
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::ResetWorkspaceChangesResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1557,6 +1557,75 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     end
   end
 
+  def test_search_files
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::SearchFilesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    workspace = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+
+    search_files_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :search_files, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest, request
+      assert_equal "hello world", request["workspace"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, search_files_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.search_files workspace: workspace, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.search_files ::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.search_files({ workspace: workspace, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.search_files(::Google::Cloud::Dataform::V1beta1::SearchFilesRequest.new(workspace: workspace, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, search_files_client_stub.call_rpc_count
+    end
+  end
+
   def test_make_directory
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataform::V1beta1::MakeDirectoryResponse.new
@@ -1619,7 +1688,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_remove_directory
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::RemoveDirectoryResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -1749,12 +1818,14 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     workspace = "hello world"
     path = "hello world"
+    revision = "hello world"
 
     read_file_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :read_file, name
       assert_kind_of ::Google::Cloud::Dataform::V1beta1::ReadFileRequest, request
       assert_equal "hello world", request["workspace"]
       assert_equal "hello world", request["path"]
+      assert_equal "hello world", request["revision"]
       refute_nil options
     end
 
@@ -1765,31 +1836,31 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.read_file({ workspace: workspace, path: path }) do |response, operation|
+      client.read_file({ workspace: workspace, path: path, revision: revision }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.read_file workspace: workspace, path: path do |response, operation|
+      client.read_file workspace: workspace, path: path, revision: revision do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.read_file ::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path) do |response, operation|
+      client.read_file ::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.read_file({ workspace: workspace, path: path }, grpc_options) do |response, operation|
+      client.read_file({ workspace: workspace, path: path, revision: revision }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.read_file(::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path), grpc_options) do |response, operation|
+      client.read_file(::Google::Cloud::Dataform::V1beta1::ReadFileRequest.new(workspace: workspace, path: path, revision: revision), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1801,7 +1872,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_remove_file
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::RemoveFileResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -2299,6 +2370,8 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
 
     list_compilation_results_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_compilation_results, name
@@ -2306,6 +2379,8 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["order_by"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -2316,35 +2391,35 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_compilation_results parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_compilation_results parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_compilation_results ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_compilation_results ::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_compilation_results({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_compilation_results(::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_compilation_results(::Google::Cloud::Dataform::V1beta1::ListCompilationResultsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -3096,7 +3171,7 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
   def test_cancel_workflow_invocation
     # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::CancelWorkflowInvocationResponse.new
     grpc_operation = GRPC::ActiveCall::Operation.new nil
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     grpc_options = {}
@@ -3216,6 +3291,124 @@ class ::Google::Cloud::Dataform::V1beta1::Dataform::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, query_workflow_invocation_actions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::Config.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_config, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::GetConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_config ::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_config(::Google::Cloud::Dataform::V1beta1::GetConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataform::V1beta1::Config.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    config = {}
+    update_mask = {}
+
+    update_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_config, name
+      assert_kind_of ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataform::V1beta1::Config), request["config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_config({ config: config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_config config: config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_config ::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_config({ config: config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_config(::Google::Cloud::Dataform::V1beta1::UpdateConfigRequest.new(config: config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_config_client_stub.call_rpc_count
     end
   end
 

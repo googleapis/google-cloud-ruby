@@ -41,7 +41,7 @@ def commit_workspace_changes
   # Call the commit_workspace_changes method.
   result = client.commit_workspace_changes request
 
-  # The returned object is of type Google::Protobuf::Empty.
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::CommitWorkspaceChangesResponse.
   p result
 end
 # [END dataform_v1beta1_generated_Dataform_CommitWorkspaceChanges_sync]

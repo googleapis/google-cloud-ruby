@@ -21,10 +21,23 @@ module Google
   module Cloud
     module Dataform
       module V1beta1
-        # Represents a Dataform Git repository.
-        # @!attribute [r] name
+        # Describes encryption state of a resource.
+        # @!attribute [rw] kms_key_version_name
         #   @return [::String]
-        #     Output only. The repository's name.
+        #     Required. The KMS key version name with which data of a resource is
+        #     encrypted.
+        class DataEncryptionState
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a Dataform Git repository.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The repository's name.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the repository was created.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. The repository's user-friendly name.
@@ -55,6 +68,22 @@ module Google
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The service account to run workflow invocations under.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Optional. The reference to a KMS encryption key. If provided, it will be
+        #     used to encrypt user data in the repository and all child resources. It is
+        #     not possible to add or update the encryption key after the repository is
+        #     created. Example:
+        #     `projects/{kms_project}/locations/{location}/keyRings/{key_location}/cryptoKeys/{key}`
+        # @!attribute [r] data_encryption_state
+        #   @return [::Google::Cloud::Dataform::V1beta1::DataEncryptionState]
+        #     Output only. A data encryption state of a Git repository if this Repository
+        #     is protected by a KMS key.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class Repository
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,6 +128,7 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # The status of the authentication token.
             module TokenStatus
               # Default value. This value is unused.
               TOKEN_STATUS_UNSPECIFIED = 0
@@ -115,13 +145,12 @@ module Google
             end
           end
 
-          # Configures workspace compilation overrides for a repository.
-          # Primarily used by the UI (`console.cloud.google.com`).
-          # `schema_suffix` and `table_prefix` can have a special expression -
-          # `${workspaceName}`, which refers to the workspace name from which the
-          # compilation results will be created. API callers are expected to resolve
-          # the expression in these overrides and provide them explicitly in
-          # `code_compilation_config`
+          # Configures workspace compilation overrides for a repository. Primarily used
+          # by the UI (`console.cloud.google.com`). `schema_suffix` and `table_prefix`
+          # can have a special expression - `${workspaceName}`, which refers to the
+          # workspace name from which the compilation results will be created. API
+          # callers are expected to resolve the expression in these overrides and
+          # provide them explicitly in `code_compilation_config`
           # (https://cloud.google.com/dataform/reference/rest/v1beta1/projects.locations.repositories.compilationResults#codecompilationconfig)
           # when creating workspace-scoped compilation results.
           # @!attribute [rw] default_database
@@ -164,8 +193,9 @@ module Google
         #     Optional. Page token received from a previous `ListRepositories` call.
         #     Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListRepositories`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to `ListRepositories`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. This field only supports ordering by `name`. If unspecified, the
@@ -240,9 +270,9 @@ module Google
         #     Required. The repository's name.
         # @!attribute [rw] force
         #   @return [::Boolean]
-        #     If set to true, any child resources of this repository will also be
-        #     deleted. (Otherwise, the request will only succeed if the repository has no
-        #     child resources.)
+        #     Optional. If set to true, any child resources of this repository will also
+        #     be deleted. (Otherwise, the request will only succeed if the repository has
+        #     no child resources.)
         class DeleteRepositoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -262,8 +292,8 @@ module Google
         #     validation on the current HEAD commit SHA is performed.
         # @!attribute [rw] file_operations
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dataform::V1beta1::CommitRepositoryChangesRequest::FileOperation}]
-        #     A map to the path of the file to the operation. The path is the full file
-        #     path including filename, from repository root.
+        #     Optional. A map to the path of the file to the operation. The path is the
+        #     full file path including filename, from repository root.
         class CommitRepositoryChangesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,6 +337,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # `CommitRepositoryChanges` response message.
+        # @!attribute [rw] commit_sha
+        #   @return [::String]
+        #     The commit SHA of the current commit.
+        class CommitRepositoryChangesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # `ReadRepositoryFile` request message.
@@ -358,8 +397,8 @@ module Google
         #     subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     `QueryRepositoryDirectoryContents` must match the call that provided the
-        #     page token.
+        #     `QueryRepositoryDirectoryContents`, with the exception of `page_size`, must
+        #     match the call that provided the page token.
         class QueryRepositoryDirectoryContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -392,8 +431,9 @@ module Google
         #     Optional. Page token received from a previous `FetchRepositoryHistory`
         #     call. Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `FetchRepositoryHistory`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to `FetchRepositoryHistory`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
         class FetchRepositoryHistoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -495,9 +535,21 @@ module Google
         end
 
         # Represents a Dataform Git workspace.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The workspace's name.
+        #     Identifier. The workspace's name.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the workspace was created.
+        # @!attribute [r] data_encryption_state
+        #   @return [::Google::Cloud::Dataform::V1beta1::DataEncryptionState]
+        #     Output only. A data encryption state of a Git repository if this Workspace
+        #     is protected by a KMS key.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class Workspace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -518,8 +570,9 @@ module Google
         #     Optional. Page token received from a previous `ListWorkspaces` call.
         #     Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListWorkspaces`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to `ListWorkspaces`, with
+        #     the exception of `page_size`, must match the call that provided the page
+        #     token.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. This field only supports ordering by `name`. If unspecified, the
@@ -613,6 +666,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `PullGitCommits` response message.
+        class PullGitCommitsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `PushGitCommits` request message.
         # @!attribute [rw] name
         #   @return [::String]
@@ -623,6 +682,12 @@ module Google
         #     be pushed. If left unset, the repository's default branch name will be
         #     used.
         class PushGitCommitsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `PushGitCommits` response message.
+        class PushGitCommitsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -649,9 +714,9 @@ module Google
           # @!attribute [rw] path
           #   @return [::String]
           #     The file's full path including filename, relative to the workspace root.
-          # @!attribute [rw] state
+          # @!attribute [r] state
           #   @return [::Google::Cloud::Dataform::V1beta1::FetchFileGitStatusesResponse::UncommittedFileChange::State]
-          #     Indicates the status of the file.
+          #     Output only. Indicates the status of the file.
           class UncommittedFileChange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -721,6 +786,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `CommitWorkspaceChanges` response message.
+        class CommitWorkspaceChangesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `ResetWorkspaceChanges` request message.
         # @!attribute [rw] name
         #   @return [::String]
@@ -733,6 +804,12 @@ module Google
         #   @return [::Boolean]
         #     Optional. If set to true, untracked files will be deleted.
         class ResetWorkspaceChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `ResetWorkspaceChanges` response message.
+        class ResetWorkspaceChangesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -778,8 +855,8 @@ module Google
         #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     `QueryDirectoryContents` must match the call that provided the page
-        #     token.
+        #     `QueryDirectoryContents`, with the exception of `page_size`, must match the
+        #     call that provided the page token.
         class QueryDirectoryContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -810,6 +887,80 @@ module Google
         #
         #     Note: The following fields are mutually exclusive: `directory`, `file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class DirectoryEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration containing file search request parameters.
+        # @!attribute [rw] workspace
+        #   @return [::String]
+        #     Required. The workspace's name.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of search results to return. The server may return
+        #     fewer items than requested. If unspecified, the server will pick an
+        #     appropriate default.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `SearchFilesRequest`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `SearchFilesRequest`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Optional filter for the returned list in filtering format.
+        #     Filtering is only currently supported on the `path` field.
+        #     See https://google.aip.dev/160 for details.
+        class SearchFilesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Client-facing representation of a file search response.
+        # @!attribute [rw] search_results
+        #   @return [::Array<::Google::Cloud::Dataform::V1beta1::SearchResult>]
+        #     List of matched results.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Optional. A token, which can be sent as `page_token` to retrieve the next
+        #     page. If this field is omitted, there are no subsequent pages.
+        class SearchFilesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Client-facing representation of a search result entry.
+        # @!attribute [rw] file
+        #   @return [::Google::Cloud::Dataform::V1beta1::FileSearchResult]
+        #     Details when search result is a file.
+        #
+        #     Note: The following fields are mutually exclusive: `file`, `directory`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] directory
+        #   @return [::Google::Cloud::Dataform::V1beta1::DirectorySearchResult]
+        #     Details when search result is a directory.
+        #
+        #     Note: The following fields are mutually exclusive: `directory`, `file`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        class SearchResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Client-facing representation of a file entry in search results.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     File system path relative to the workspace root.
+        class FileSearchResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Client-facing representation of a directory entry in search results.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     File system path relative to the workspace root.
+        class DirectorySearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -846,6 +997,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `RemoveDirectory` response message.
+        class RemoveDirectoryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # `MoveDirectory` request message.
         # @!attribute [rw] workspace
         #   @return [::String]
@@ -877,6 +1034,10 @@ module Google
         #   @return [::String]
         #     Required. The file's full path including filename, relative to the
         #     workspace root.
+        # @!attribute [rw] revision
+        #   @return [::String]
+        #     Optional. The Git revision of the file to return. If left empty, the
+        #     current contents of `path` will be returned.
         class ReadFileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -900,6 +1061,12 @@ module Google
         #     Required. The file's full path including filename, relative to the
         #     workspace root.
         class RemoveFileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `RemoveFile` response message.
+        class RemoveFileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -964,9 +1131,9 @@ module Google
         end
 
         # Represents a Dataform release configuration.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The release config's name.
+        #     Identifier. The release config's name.
         # @!attribute [rw] git_commitish
         #   @return [::String]
         #     Required. Git commit/tag/branch name at which the repository should be
@@ -991,25 +1158,31 @@ module Google
         # @!attribute [r] recent_scheduled_release_records
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::ReleaseConfig::ScheduledReleaseRecord>]
         #     Output only. Records of the 10 most recent scheduled release attempts,
-        #     ordered in in descending order of `release_time`. Updated whenever
-        #     automatic creation of a compilation result is triggered by cron_schedule.
+        #     ordered in descending order of `release_time`. Updated whenever automatic
+        #     creation of a compilation result is triggered by cron_schedule.
         # @!attribute [rw] release_compilation_result
         #   @return [::String]
         #     Optional. The name of the currently released compilation result for this
-        #     release config. This value is updated when a compilation result is created
-        #     from this release config, or when this resource is updated by API call
-        #     (perhaps to roll back to an earlier release). The compilation result must
-        #     have been created using this release config. Must be in the format
+        #     release config. This value is updated when a compilation result is
+        #     automatically created from this release config (using cron_schedule), or
+        #     when this resource is updated by API call (perhaps to roll back to an
+        #     earlier release). The compilation result must have been created using this
+        #     release config. Must be in the format
         #     `projects/*/locations/*/repositories/*/compilationResults/*`.
+        # @!attribute [rw] disabled
+        #   @return [::Boolean]
+        #     Optional. Disables automatic creation of compilation results.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class ReleaseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A record of an attempt to create a compilation result for this release
           # config.
-          # @!attribute [rw] release_time
-          #   @return [::Google::Protobuf::Timestamp]
-          #     The timestamp of this release attempt.
           # @!attribute [rw] compilation_result
           #   @return [::String]
           #     The name of the created compilation result, if one was successfully
@@ -1023,6 +1196,9 @@ module Google
           #     compilation result, if the attempt was unsuccessful.
           #
           #     Note: The following fields are mutually exclusive: `error_status`, `compilation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] release_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp of this release attempt.
           class ScheduledReleaseRecord
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1044,8 +1220,9 @@ module Google
         #     Optional. Page token received from a previous `ListReleaseConfigs` call.
         #     Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListReleaseConfigs`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to `ListReleaseConfigs`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
         class ListReleaseConfigsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1116,9 +1293,6 @@ module Google
         end
 
         # Represents the result of compiling a Dataform project.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. The compilation result's name.
         # @!attribute [rw] git_commitish
         #   @return [::String]
         #     Immutable. Git commit/tag/branch name at which the repository should be
@@ -1136,12 +1310,13 @@ module Google
         #     Note: The following fields are mutually exclusive: `workspace`, `git_commitish`, `release_config`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] release_config
         #   @return [::String]
-        #     Immutable. The name of the release config to compile. The release
-        #     config's 'current_compilation_result' field will be updated to this
-        #     compilation result. Must be in the format
-        #     `projects/*/locations/*/repositories/*/releaseConfigs/*`.
+        #     Immutable. The name of the release config to compile. Must be in the
+        #     format `projects/*/locations/*/repositories/*/releaseConfigs/*`.
         #
         #     Note: The following fields are mutually exclusive: `release_config`, `git_commitish`, `workspace`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The compilation result's name.
         # @!attribute [rw] code_compilation_config
         #   @return [::Google::Cloud::Dataform::V1beta1::CodeCompilationConfig]
         #     Immutable. If set, fields of `code_compilation_config` override the default
@@ -1156,6 +1331,17 @@ module Google
         # @!attribute [r] compilation_errors
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::CompilationResult::CompilationError>]
         #     Output only. Errors encountered during project compilation.
+        # @!attribute [r] data_encryption_state
+        #   @return [::Google::Cloud::Dataform::V1beta1::DataEncryptionState]
+        #     Output only. Only set if the repository has a KMS Key.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the compilation result was created.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class CompilationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1211,6 +1397,9 @@ module Google
         # @!attribute [rw] table_prefix
         #   @return [::String]
         #     Optional. The prefix that should be prepended to all table names.
+        # @!attribute [rw] default_notebook_runtime_options
+        #   @return [::Google::Cloud::Dataform::V1beta1::NotebookRuntimeOptions]
+        #     Optional. The default notebook runtime options.
         class CodeCompilationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1223,6 +1412,16 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Configures various aspects of Dataform notebook runtime.
+        # @!attribute [rw] gcs_output_bucket
+        #   @return [::String]
+        #     Optional. The Google Cloud Storage location to upload the result to.
+        #     Format: `gs://bucket-name`.
+        class NotebookRuntimeOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # `ListCompilationResults` request message.
@@ -1240,8 +1439,17 @@ module Google
         #     Optional. Page token received from a previous `ListCompilationResults`
         #     call. Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListCompilationResults`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to `ListCompilationResults`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. This field only supports ordering by `name` and `create_time`.
+        #     If unspecified, the server will choose the ordering.
+        #     If specified, the default order is ascending for the `name` field.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter for the returned list.
         class ListCompilationResultsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1289,13 +1497,13 @@ module Google
         # will be written to the referenced database object.
         # @!attribute [rw] database
         #   @return [::String]
-        #     The action's database (Google Cloud project ID) .
+        #     Optional. The action's database (Google Cloud project ID) .
         # @!attribute [rw] schema
         #   @return [::String]
-        #     The action's schema (BigQuery dataset ID), within `database`.
+        #     Optional. The action's schema (BigQuery dataset ID), within `database`.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The action's name, within `database` and `schema`.
+        #     Optional. The action's name, within `database` and `schema`.
         class Target
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1342,6 +1550,31 @@ module Google
         end
 
         # Represents a single Dataform action in a compilation result.
+        # @!attribute [rw] relation
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation]
+        #     The database relation created/updated by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] operations
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Operations]
+        #     The database operations executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] assertion
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Assertion]
+        #     The assertion executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] declaration
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Declaration]
+        #     The declaration declared by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`, `notebook`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] notebook
+        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Notebook]
+        #     The notebook executed by this action.
+        #
+        #     Note: The following fields are mutually exclusive: `notebook`, `relation`, `operations`, `assertion`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] target
         #   @return [::Google::Cloud::Dataform::V1beta1::Target]
         #     This action's identifier. Unique within the compilation result.
@@ -1353,26 +1586,11 @@ module Google
         #   @return [::String]
         #     The full path including filename in which this action is located, relative
         #     to the workspace root.
-        # @!attribute [rw] relation
-        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Relation]
-        #     The database relation created/updated by this action.
-        #
-        #     Note: The following fields are mutually exclusive: `relation`, `operations`, `assertion`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] operations
-        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Operations]
-        #     The database operations executed by this action.
-        #
-        #     Note: The following fields are mutually exclusive: `operations`, `relation`, `assertion`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] assertion
-        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Assertion]
-        #     The assertion executed by this action.
-        #
-        #     Note: The following fields are mutually exclusive: `assertion`, `relation`, `operations`, `declaration`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] declaration
-        #   @return [::Google::Cloud::Dataform::V1beta1::CompilationResultAction::Declaration]
-        #     The declaration declared by this action.
-        #
-        #     Note: The following fields are mutually exclusive: `declaration`, `relation`, `operations`, `assertion`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class CompilationResultAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1553,6 +1771,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Represents a notebook.
+          # @!attribute [rw] dependency_targets
+          #   @return [::Array<::Google::Cloud::Dataform::V1beta1::Target>]
+          #     A list of actions that this action depends on.
+          # @!attribute [rw] disabled
+          #   @return [::Boolean]
+          #     Whether this action is disabled (i.e. should not be run).
+          # @!attribute [rw] contents
+          #   @return [::String]
+          #     The contents of the notebook.
+          # @!attribute [rw] tags
+          #   @return [::Array<::String>]
+          #     Arbitrary, user-defined tags on this action.
+          class Notebook
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # `QueryCompilationResultActions` request message.
@@ -1571,8 +1807,8 @@ module Google
         #     subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     `QueryCompilationResultActions` must match the call that provided the page
-        #     token.
+        #     `QueryCompilationResultActions`, with the exception of `page_size`, must
+        #     match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. Optional filter for the returned list. Filtering is only
@@ -1596,9 +1832,9 @@ module Google
         end
 
         # Represents a Dataform workflow configuration.
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The workflow config's name.
+        #     Identifier. The workflow config's name.
         # @!attribute [rw] release_config
         #   @return [::String]
         #     Required. The name of the release config whose release_compilation_result
@@ -1620,17 +1856,25 @@ module Google
         # @!attribute [r] recent_scheduled_execution_records
         #   @return [::Array<::Google::Cloud::Dataform::V1beta1::WorkflowConfig::ScheduledExecutionRecord>]
         #     Output only. Records of the 10 most recent scheduled execution attempts,
-        #     ordered in in descending order of `execution_time`. Updated whenever
-        #     automatic creation of a workflow invocation is triggered by cron_schedule.
+        #     ordered in descending order of `execution_time`. Updated whenever automatic
+        #     creation of a workflow invocation is triggered by cron_schedule.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the WorkflowConfig was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of when the WorkflowConfig was last updated.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class WorkflowConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # A record of an attempt to create a workflow invocation for this workflow
           # config.
-          # @!attribute [rw] execution_time
-          #   @return [::Google::Protobuf::Timestamp]
-          #     The timestamp of this execution attempt.
           # @!attribute [rw] workflow_invocation
           #   @return [::String]
           #     The name of the created workflow invocation, if one was successfully
@@ -1644,6 +1888,9 @@ module Google
           #     workflow invocation, if the attempt was unsuccessful.
           #
           #     Note: The following fields are mutually exclusive: `error_status`, `workflow_invocation`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [r] execution_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The timestamp of this execution attempt.
           class ScheduledExecutionRecord
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1693,8 +1940,9 @@ module Google
         #     Optional. Page token received from a previous `ListWorkflowConfigs` call.
         #     Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListWorkflowConfigs`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to `ListWorkflowConfigs`,
+        #     with the exception of `page_size`, must match the call that provided the
+        #     page token.
         class ListWorkflowConfigsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1765,9 +2013,6 @@ module Google
         end
 
         # Represents a single invocation of a compilation result.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. The workflow invocation's name.
         # @!attribute [rw] compilation_result
         #   @return [::String]
         #     Immutable. The name of the compilation result to use for this invocation.
@@ -1781,6 +2026,9 @@ module Google
         #     format `projects/*/locations/*/repositories/*/workflowConfigs/*`.
         #
         #     Note: The following fields are mutually exclusive: `workflow_config`, `compilation_result`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The workflow invocation's name.
         # @!attribute [rw] invocation_config
         #   @return [::Google::Cloud::Dataform::V1beta1::InvocationConfig]
         #     Immutable. If left unset, a default InvocationConfig will be used.
@@ -1790,6 +2038,19 @@ module Google
         # @!attribute [r] invocation_timing
         #   @return [::Google::Type::Interval]
         #     Output only. This workflow invocation's timing details.
+        # @!attribute [r] resolved_compilation_result
+        #   @return [::String]
+        #     Output only. The resolved compilation result that was used to create this
+        #     invocation. Will be in the format
+        #     `projects/*/locations/*/repositories/*/compilationResults/*`.
+        # @!attribute [r] data_encryption_state
+        #   @return [::Google::Cloud::Dataform::V1beta1::DataEncryptionState]
+        #     Output only. Only set if the repository has a KMS Key.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class WorkflowInvocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1832,8 +2093,9 @@ module Google
         #     Optional. Page token received from a previous `ListWorkflowInvocations`
         #     call. Provide this to retrieve the subsequent page.
         #
-        #     When paginating, all other parameters provided to `ListWorkflowInvocations`
-        #     must match the call that provided the page token.
+        #     When paginating, all other parameters provided to
+        #     `ListWorkflowInvocations`, with the exception of `page_size`, must match
+        #     the call that provided the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. This field only supports ordering by `name`. If unspecified, the
@@ -1903,7 +2165,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # `CancelWorkflowInvocation` response message.
+        class CancelWorkflowInvocationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a single action in a workflow invocation.
+        # @!attribute [r] bigquery_action
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::BigQueryAction]
+        #     Output only. The workflow action's bigquery action details.
+        #
+        #     Note: The following fields are mutually exclusive: `bigquery_action`, `notebook_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] notebook_action
+        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::NotebookAction]
+        #     Output only. The workflow action's notebook action details.
+        #
+        #     Note: The following fields are mutually exclusive: `notebook_action`, `bigquery_action`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [r] target
         #   @return [::Google::Cloud::Dataform::V1beta1::Target]
         #     Output only. This action's identifier. Unique within the workflow
@@ -1926,9 +2204,11 @@ module Google
         #     CANCELLED, FAILED] state.
         #     `end_time` will be set if the action is in [SUCCEEDED, CANCELLED, FAILED]
         #     state.
-        # @!attribute [r] bigquery_action
-        #   @return [::Google::Cloud::Dataform::V1beta1::WorkflowInvocationAction::BigQueryAction]
-        #     Output only. The workflow action's bigquery action details.
+        # @!attribute [r] internal_metadata
+        #   @return [::String]
+        #     Output only. All the metadata information that is used internally to serve
+        #     the resource. For example: timestamps, flags, status fields, etc. The
+        #     format of this field is a JSON string.
         class WorkflowInvocationAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1937,7 +2217,25 @@ module Google
           # @!attribute [r] sql_script
           #   @return [::String]
           #     Output only. The generated BigQuery SQL script that will be executed.
+          # @!attribute [r] job_id
+          #   @return [::String]
+          #     Output only. The ID of the BigQuery job that executed the SQL in
+          #     sql_script. Only set once the job has started to run.
           class BigQueryAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Represents a workflow action that will run against a Notebook runtime.
+          # @!attribute [r] contents
+          #   @return [::String]
+          #     Output only. The code contents of a Notebook to be run.
+          # @!attribute [r] job_id
+          #   @return [::String]
+          #     Output only. The ID of the Vertex job that executed the notebook in
+          #     contents and also the ID used for the outputs created in Google Cloud
+          #     Storage buckets. Only set once the job has started to run.
+          class NotebookAction
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1985,8 +2283,8 @@ module Google
         #     subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     `QueryWorkflowInvocationActions` must match the call that provided the page
-        #     token.
+        #     `QueryWorkflowInvocationActions`, with the exception of `page_size`, must
+        #     match the call that provided the page token.
         class QueryWorkflowInvocationActionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2001,6 +2299,40 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class QueryWorkflowInvocationActionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Config for all repositories in a given project and location.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. The config name.
+        # @!attribute [rw] default_kms_key_name
+        #   @return [::String]
+        #     Optional. The default KMS key that is used if no encryption key is provided
+        #     when a repository is created.
+        class Config
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `GetConfig` request message.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The config name.
+        class GetConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # `UpdateConfig` request message.
+        # @!attribute [rw] config
+        #   @return [::Google::Cloud::Dataform::V1beta1::Config]
+        #     Required. The config to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Specifies the fields to be updated in the config.
+        class UpdateConfigRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
