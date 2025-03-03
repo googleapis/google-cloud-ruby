@@ -1111,6 +1111,10 @@
       "component": "google-cloud-parallelstore-v1beta",
       "version_file": "lib/google/cloud/parallelstore/v1beta/version.rb"
     },
+    "google-cloud-parameter_manager-v1": {
+      "component": "google-cloud-parameter_manager-v1",
+      "version_file": "lib/google/cloud/parameter_manager/v1/version.rb"
+    },
     "google-cloud-phishing_protection": {
       "component": "google-cloud-phishing_protection",
       "version_file": "lib/google/cloud/phishing_protection/version.rb"
