@@ -551,7 +551,7 @@
   "google-cloud-parallelstore-v1beta+FILLER": "0.0.0",
   "google-cloud-parameter_manager": "0.0.1",
   "google-cloud-parameter_manager+FILLER": "0.0.0",
-  "google-cloud-parameter_manager-v1": "0.0.1",
+  "google-cloud-parameter_manager-v1": "0.1.0",
   "google-cloud-parameter_manager-v1+FILLER": "0.0.0",
   "google-cloud-phishing_protection": "0.16.0",
   "google-cloud-phishing_protection+FILLER": "0.0.0",

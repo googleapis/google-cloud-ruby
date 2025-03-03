@@ -8,7 +8,7 @@
     "name": "parametermanager",
     "name_pretty": "Parameter Manager V1 API",
     "product_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/overview",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "(Public Preview) Parameter Manager is a single source of truth to store, access and manage the lifecycle of your workload parameters. Parameter Manager aims to make management of sensitive application parameters effortless for customers without diminishing focus on security. Note that google-cloud-parameter_manager-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-parameter_manager instead. See the readme for more details.",
