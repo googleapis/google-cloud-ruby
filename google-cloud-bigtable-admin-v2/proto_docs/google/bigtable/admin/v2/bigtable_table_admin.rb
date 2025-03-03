@@ -261,9 +261,13 @@ module Google
           #     * `change_stream_config`
           #     * `change_stream_config.retention_period`
           #     * `deletion_protection`
+          #     * `row_key_schema`
           #
           #     If `column_families` is set in `update_mask`, it will return an
           #     UNIMPLEMENTED error.
+          # @!attribute [rw] ignore_warnings
+          #   @return [::Boolean]
+          #     Optional. If true, ignore safety checks when updating the table.
           class UpdateTableRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
