@@ -1,0 +1,17 @@
+{
+    "api_id": "parametermanager.googleapis.com",
+    "api_shortname": "parametermanager",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-parameter_manager/latest",
+    "distribution_name": "google-cloud-parameter_manager",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "parametermanager",
+    "name_pretty": "Parameter Manager API",
+    "product_documentation": "https://cloud.google.com/secret-manager/parameter-manager/docs/overview",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "(Public Preview) Parameter Manager is a single source of truth to store, access and manage the lifecycle of your workload parameters. Parameter Manager aims to make management of sensitive application parameters effortless for customers without diminishing focus on security.",
+    "ruby-cloud-product-url": "https://cloud.google.com/secret-manager/parameter-manager/docs/overview",
+    "library_type": "GAPIC_MANUAL"
+}
