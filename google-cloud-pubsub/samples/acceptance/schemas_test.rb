@@ -13,16 +13,17 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../pubsub_create_avro_schema.rb"
-require_relative "../pubsub_create_topic_with_schema.rb"
-require_relative "../pubsub_create_proto_schema.rb"
-require_relative "../pubsub_delete_schema.rb"
-require_relative "../pubsub_get_schema.rb"
-require_relative "../pubsub_list_schemas.rb"
-require_relative "../pubsub_publish_avro_records.rb"
-require_relative "../pubsub_subscribe_avro_records.rb"
-require_relative "../pubsub_publish_proto_messages.rb"
-require_relative "../pubsub_subscribe_proto_messages.rb"
+require_relative "../pubsub_create_avro_schema"
+require_relative "../pubsub_create_topic_with_schema"
+require_relative "../pubsub_create_proto_schema"
+require_relative "../pubsub_delete_schema"
+require_relative "../pubsub_get_schema"
+require_relative "../pubsub_list_schema_revisions"
+require_relative "../pubsub_list_schemas"
+require_relative "../pubsub_publish_avro_records"
+require_relative "../pubsub_subscribe_avro_records"
+require_relative "../pubsub_publish_proto_messages"
+require_relative "../pubsub_subscribe_proto_messages"
 
 
 describe "schemas" do
@@ -38,7 +39,8 @@ describe "schemas" do
     @schema.delete if @schema
   end
 
-  it "supports pubsub_create_schema, pubsub_get_schema, pubsub_list_schemas, pubsub_delete_schema" do
+  it "supports pubsub_create_schema, pubsub_get_schema, pubsub_List_schema_revisions, " \
+     "pubsub_list_schemas, pubsub_delete_schema" do
     # create_avro_schema
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} created.\n" do
       create_avro_schema schema_id: schema_id, avsc_file: avsc_file
@@ -51,6 +53,12 @@ describe "schemas" do
     assert_output "Schema projects/#{pubsub.project}/schemas/#{schema_id} retrieved.\n" do
       get_schema schema_id: schema_id
     end
+
+    # pubsub_list_schema_revisions
+    out, _err = capture_io do
+      list_schema_revisions
+    end
+    assert_includes out, "Listed revisions of schema"
 
     # pubsub_list_schemas
     out, _err = capture_io do
