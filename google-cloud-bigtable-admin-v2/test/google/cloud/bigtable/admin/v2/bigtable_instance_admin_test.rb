@@ -266,6 +266,7 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
     labels = {}
     create_time = {}
     satisfies_pzs = true
+    satisfies_pzi = true
 
     update_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_instance, name
@@ -278,6 +279,8 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["create_time"]
       assert_equal true, request["satisfies_pzs"]
       assert request.has_satisfies_pzs?
+      assert_equal true, request["satisfies_pzi"]
+      assert request.has_satisfies_pzi?
       refute_nil options
     end
 
@@ -288,31 +291,31 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::ClientTest < 
       end
 
       # Use hash object
-      client.update_instance({ name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs }) do |response, operation|
+      client.update_instance({ name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_instance name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs do |response, operation|
+      client.update_instance name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs) do |response, operation|
+      client.update_instance ::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_instance({ name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs }, grpc_options) do |response, operation|
+      client.update_instance({ name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs), grpc_options) do |response, operation|
+      client.update_instance(::Google::Cloud::Bigtable::Admin::V2::Instance.new(name: name, display_name: display_name, state: state, type: type, labels: labels, create_time: create_time, satisfies_pzs: satisfies_pzs, satisfies_pzi: satisfies_pzi), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
