@@ -67,9 +67,56 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::Conversation::ConversationStage::VIRTUAL_AGENT_STAGE ConversationStage.VIRTUAL_AGENT_STAGE}
         #     stage and directly goes to
         #     {::Google::Cloud::Dialogflow::V2::Conversation::ConversationStage::HUMAN_ASSIST_STAGE ConversationStage.HUMAN_ASSIST_STAGE}.
+        # @!attribute [r] telephony_connection_info
+        #   @return [::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo]
+        #     Output only. The telephony connection information.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The information about phone calls connected via phone gateway to the
+          # conversation.
+          # @!attribute [r] dialed_number
+          #   @return [::String]
+          #     Output only. The number dialed to connect this call in E.164 format.
+          # @!attribute [rw] sdp
+          #   @return [::String]
+          #     Optional. SDP of the call. It's initially the SDP answer to the endpoint,
+          #     but maybe later updated for the purpose of making the link active, etc.
+          # @!attribute [r] sip_headers
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo::SipHeader>]
+          #     Output only. The SIP headers from the initial SIP INVITE.
+          # @!attribute [r] extra_mime_contents
+          #   @return [::Array<::Google::Cloud::Dialogflow::V2::Conversation::TelephonyConnectionInfo::MimeContent>]
+          #     Output only. The mime content from the initial SIP INVITE.
+          class TelephonyConnectionInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The SIP headers from the initial SIP INVITE.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Optional. The name of the header.
+            # @!attribute [rw] value
+            #   @return [::String]
+            #     Optional. The value of the header.
+            class SipHeader
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The mime content from the initial SIP INVITE.
+            # @!attribute [rw] mime_type
+            #   @return [::String]
+            #     Optional. The mime type of the content.
+            # @!attribute [rw] content
+            #   @return [::String]
+            #     Optional. The content payload.
+            class MimeContent
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
 
           # Enumeration of the completion status of the conversation.
           module LifecycleState
@@ -85,7 +132,7 @@ module Google
 
           # Enumeration of the different conversation stages a conversation can be in.
           # Reference:
-          # https://cloud.google.com/dialogflow/priv/docs/contact-center/basics#stages
+          # https://cloud.google.com/agent-assist/docs/basics#conversation_stages
           module ConversationStage
             # Unknown. Should never be used after a conversation is successfully
             # created.
@@ -241,6 +288,9 @@ module Google
 
         # Represents a phone number for telephony integration. It allows for connecting
         # a particular conversation over telephony.
+        # @!attribute [r] country_code
+        #   @return [::Integer]
+        #     Output only. Desired country code for the phone number.
         # @!attribute [r] phone_number
         #   @return [::String]
         #     Output only. The phone number to connect to this conversation.
@@ -540,9 +590,18 @@ module Google
           # @!attribute [rw] boost_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs>]
           #     Optional. Boost specifications for data stores.
+          #
+          #     Maps from datastore name to their boost configuration. Do not specify
+          #     more than one BoostSpecs for each datastore name. If multiple BoostSpecs
+          #     are provided for the same datastore name, the behavior is undefined.
           # @!attribute [rw] filter_specs
           #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::FilterSpecs>]
           #     Optional. Filter specification for data store queries.
+          #
+          #     TMaps from datastore name to the filter expression for that datastore. Do
+          #     not specify more than one FilterSpecs for each datastore name. If
+          #     multiple FilterSpecs are provided for the same datastore name, the
+          #     behavior is undefined.
           class SearchConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -568,7 +627,7 @@ module Google
               # @!attribute [rw] condition_boost_specs
               #   @return [::Array<::Google::Cloud::Dialogflow::V2::SearchKnowledgeRequest::SearchConfig::BoostSpecs::BoostSpec::ConditionBoostSpec>]
               #     Optional. Condition boost specifications. If a document matches
-              #     multiple conditions in the specifictions, boost scores from these
+              #     multiple conditions in the specifications, boost scores from these
               #     specifications are all applied and combined in a non-linear way.
               #     Maximum number of specifications is 20.
               class BoostSpec
@@ -646,6 +705,18 @@ module Google
                     # The control points used to define the curve. The curve defined
                     # through these control points can only be monotonically increasing
                     # or decreasing(constant values are acceptable).
+                    # @!attribute [rw] attribute_value
+                    #   @return [::String]
+                    #     Optional. Can be one of:
+                    #     1. The numerical field value.
+                    #     2. The duration spec for freshness:
+                    #     The value must be formatted as an XSD `dayTimeDuration` value
+                    #     (a restricted subset of an ISO 8601 duration value). The
+                    #     pattern for this is: `[nD][T[nH][nM][nS]]`.
+                    # @!attribute [rw] boost_amount
+                    #   @return [::Float]
+                    #     Optional. The value between -1 to 1 by which to boost the score
+                    #     if the attribute_value evaluates to the value specified above.
                     class ControlPoint
                       include ::Google::Protobuf::MessageExts
                       extend ::Google::Protobuf::MessageExts::ClassMethods
