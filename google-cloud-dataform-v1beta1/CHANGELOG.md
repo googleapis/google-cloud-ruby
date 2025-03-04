@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.11.0 (2025-03-04)
+
+#### Features
+
+* Numerous additions to resource fields 
+* Support for the get_config and update_config RPCs 
+* Support for the search_files RPC 
+
 ### 0.10.0 (2025-02-07)
 
 ### ⚠ BREAKING CHANGES
