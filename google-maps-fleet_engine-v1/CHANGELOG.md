@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2025-03-04)
+
+#### Features
+
+* Support for recording vehicle locations that previously could not be sent to the server 
+* Support for the delete_trip and delete_vehicle RPCs 
+
 ### 0.4.0 (2025-01-29)
 
 #### Features
