@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.2.0 (2025-03-04)
+
+#### Features
+
+* Support for Google search and enterprise web search tools ([#29203](https://github.com/googleapis/google-cloud-ruby/issues/29203)) 
+
 ### 1.1.0 (2025-02-12)
 
 #### Features
