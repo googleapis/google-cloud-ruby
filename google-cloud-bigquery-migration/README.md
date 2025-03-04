@@ -18,7 +18,7 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-bigquery-migration-v2](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-migration-v2/latest).
 
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/migration)
+See also the [Product Documentation](https://cloud.google.com/bigquery/docs/migration-intro)
 for more usage information.
 
 ## Quick Start
