@@ -1,5 +1,15 @@
 # Changelog
 
+### 1.5.0 (2025-03-04)
+
+#### Features
+
+* Agent resources report their Zone Separation and Zone Isolation status 
+* Support the document processing mode for a data store connectdion 
+#### Documentation
+
+* Deprecated the populate_data_store_connection_signals query parameter 
+
 ### 1.4.0 (2025-01-28)
 
 #### Features
