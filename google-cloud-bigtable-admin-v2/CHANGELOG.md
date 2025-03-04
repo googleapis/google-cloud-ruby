@@ -1,5 +1,14 @@
 # Release History
 
+### 1.8.0 (2025-03-04)
+
+#### Features
+
+* Support for OrderedCodeBytes encoding for Int64 
+* Support for table row key schema 
+* Support for the ignore_warnings parameter to the update_table RPC 
+* Support for timestamp and struct encoding 
+
 ### 1.7.0 (2025-01-30)
 
 #### Features
