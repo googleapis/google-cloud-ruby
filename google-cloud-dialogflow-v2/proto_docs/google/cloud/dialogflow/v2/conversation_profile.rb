@@ -717,6 +717,9 @@ module Google
             # Run smart reply model for chat.
             SMART_REPLY = 3
 
+            # Run conversation summarization model for chat.
+            CONVERSATION_SUMMARIZATION = 8
+
             # Run knowledge search with text input from agent or text generated query.
             KNOWLEDGE_SEARCH = 14
 
