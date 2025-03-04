@@ -276,19 +276,13 @@ module Google
           end
         end
 
-        # Retrieve from Vertex AI Search datastore or engine for grounding.
-        # datastore and engine are mutually exclusive.
+        # Retrieve from Vertex AI Search datastore for grounding.
         # See https://cloud.google.com/products/agent-builder
         # @!attribute [rw] datastore
         #   @return [::String]
-        #     Optional. Fully-qualified Vertex AI Search data store resource ID.
+        #     Required. Fully-qualified Vertex AI Search data store resource ID.
         #     Format:
         #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{dataStore}`
-        # @!attribute [rw] engine
-        #   @return [::String]
-        #     Optional. Fully-qualified Vertex AI Search engine resource ID.
-        #     Format:
-        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
         class VertexAISearch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
