@@ -35,10 +35,9 @@ module Google
           #     Required. The descriptive name for this instance as it appears in UIs.
           #     Can be changed at any time, but should be kept globally unique
           #     to avoid confusion.
-          # @!attribute [rw] state
+          # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Instance::State]
-          #     (`OutputOnly`)
-          #     The current state of the instance.
+          #     Output only. The current state of the instance.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Instance::Type]
           #     The type of the instance. Defaults to `PRODUCTION`.
@@ -57,10 +56,13 @@ module Google
           #     * Keys and values must both be under 128 bytes.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. A server-assigned timestamp representing when this Instance
-          #     was created. For instances created before this field was added (August
-          #     2021), this value is `seconds: 0, nanos: 1`.
+          #     Output only. A commit timestamp representing when this Instance was
+          #     created. For instances created before this field was added (August 2021),
+          #     this value is `seconds: 0, nanos: 1`.
           # @!attribute [r] satisfies_pzs
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
+          # @!attribute [r] satisfies_pzi
           #   @return [::Boolean]
           #     Output only. Reserved for future use.
           class Instance
@@ -157,8 +159,9 @@ module Google
           #     Output only. The current state of the cluster.
           # @!attribute [rw] serve_nodes
           #   @return [::Integer]
-          #     The number of nodes allocated to this cluster. More nodes enable higher
-          #     throughput and more consistent performance.
+          #     The number of nodes in the cluster. If no value is set,
+          #     Cloud Bigtable automatically allocates nodes based on your data footprint
+          #     and optimized for 50% storage utilization.
           # @!attribute [rw] node_scaling_factor
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::NodeScalingFactor]
           #     Immutable. The node scaling factor of this cluster.
@@ -208,7 +211,6 @@ module Google
             #      `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
             #      2) Only regional keys can be used and the region of the CMEK key must
             #      match the region of the cluster.
-            #      3) All clusters within an instance must use the same CMEK key.
             #     Values are of the form
             #     `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
             class EncryptionConfig
@@ -370,17 +372,10 @@ module Google
             end
 
             # Data Boost is a serverless compute capability that lets you run
-            # high-throughput read jobs on your Bigtable data, without impacting the
-            # performance of the clusters that handle your application traffic.
-            # Currently, Data Boost exclusively supports read-only use-cases with
-            # single-cluster routing.
-            #
-            # Data Boost reads are only guaranteed to see the results of writes that
-            # were written at least 30 minutes ago. This means newly written values may
-            # not become visible for up to 30m, and also means that old values may
-            # remain visible for up to 30m after being deleted or overwritten. To
-            # mitigate the staleness of the data, users may either wait 30m, or use
-            # CheckConsistency.
+            # high-throughput read jobs and queries on your Bigtable data, without
+            # impacting the performance of the clusters that handle your application
+            # traffic. Data Boost supports read-only use cases with single-cluster
+            # routing.
             # @!attribute [rw] compute_billing_owner
             #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::DataBoostIsolationReadOnly::ComputeBillingOwner]
             #     The Compute Billing Owner for this Data Boost App Profile.
@@ -448,6 +443,49 @@ module Google
           #     by the node to serve the tablet, from 0% (tablet was not interacted with)
           #     to 100% (the node spent all cycles serving the hot tablet).
           class HotTablet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A SQL logical view object that can be referenced in SQL queries.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The unique name of the logical view.
+          #     Format:
+          #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}`
+          # @!attribute [rw] query
+          #   @return [::String]
+          #     Required. The logical view's select query.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The etag for this logical view.
+          #     This may be sent on update requests to ensure that the client has an
+          #     up-to-date value before proceeding. The server returns an ABORTED error on
+          #     a mismatched etag.
+          class LogicalView
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A materialized view object that can be referenced in SQL queries.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Identifier. The unique name of the materialized view.
+          #     Format:
+          #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`
+          # @!attribute [rw] query
+          #   @return [::String]
+          #     Required. Immutable. The materialized view's select query.
+          # @!attribute [rw] etag
+          #   @return [::String]
+          #     Optional. The etag for this materialized view.
+          #     This may be sent on update requests to ensure that the client has an
+          #     up-to-date value before proceeding. The server returns an ABORTED error on
+          #     a mismatched etag.
+          # @!attribute [rw] deletion_protection
+          #   @return [::Boolean]
+          #     Set to true to make the MaterializedView protected against deletion.
+          class MaterializedView
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
