@@ -42,7 +42,6 @@ module Google
           #     cluster ID, e.g., just `mycluster` rather than
           #     `projects/myproject/instances/myinstance/clusters/mycluster`.
           #     Fields marked `OutputOnly` must be left blank.
-          #     Currently, at most four clusters can be specified.
           class CreateInstanceRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -503,6 +502,104 @@ module Google
           #     Pass this value to `page_token` in another request to get the next
           #     page of results.
           class ListHotTabletsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.CreateLogicalView.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent instance where this logical view will be created.
+          #     Format: `projects/{project}/instances/{instance}`.
+          # @!attribute [rw] logical_view_id
+          #   @return [::String]
+          #     Required. The ID to use for the logical view, which will become the final
+          #     component of the logical view's resource name.
+          # @!attribute [rw] logical_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::LogicalView]
+          #     Required. The logical view to create.
+          class CreateLogicalViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by CreateLogicalView.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateLogicalViewRequest]
+          #     The request that prompted the initiation of this CreateLogicalView
+          #     operation.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class CreateLogicalViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.UpdateLogicalView.
+          # @!attribute [rw] logical_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::LogicalView]
+          #     Required. The logical view to update.
+          #
+          #     The logical view's `name` field is used to identify the view to update.
+          #     Format:
+          #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}`.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Optional. The list of fields to update.
+          class UpdateLogicalViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by UpdateLogicalView.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::UpdateLogicalViewRequest]
+          #     The request that prompted the initiation of this UpdateLogicalView
+          #     operation.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation was started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class UpdateLogicalViewMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.CreateMaterializedView.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The parent instance where this materialized view will be created.
+          #     Format: `projects/{project}/instances/{instance}`.
+          # @!attribute [rw] materialized_view_id
+          #   @return [::String]
+          #     Required. The ID to use for the materialized view, which will become the
+          #     final component of the materialized view's resource name.
+          # @!attribute [rw] materialized_view
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::MaterializedView]
+          #     Required. The materialized view to create.
+          class CreateMaterializedViewRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by CreateMaterializedView.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateMaterializedViewRequest]
+          #     The request that prompted the initiation of this CreateMaterializedView
+          #     operation.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was canceled.
+          class CreateMaterializedViewMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
