@@ -452,7 +452,7 @@ module Google
           #   @return [::String]
           #     Identifier. The unique name of the logical view.
           #     Format:
-          #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}
+          #     `projects/{project}/instances/{instance}/logicalViews/{logical_view}`
           # @!attribute [rw] query
           #   @return [::String]
           #     Required. The logical view's select query.
@@ -472,7 +472,7 @@ module Google
           #   @return [::String]
           #     Identifier. The unique name of the materialized view.
           #     Format:
-          #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}
+          #     `projects/{project}/instances/{instance}/materializedViews/{materialized_view}`
           # @!attribute [rw] query
           #   @return [::String]
           #     Required. Immutable. The materialized view's select query.
