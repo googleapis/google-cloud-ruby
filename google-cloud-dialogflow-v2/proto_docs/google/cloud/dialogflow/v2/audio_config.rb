@@ -323,7 +323,7 @@ module Google
         #     information.
         # @!attribute [rw] use_timeout_based_endpointing
         #   @return [::Boolean]
-        #     Use timeout based endpointing, interpreting endpointer sensitivy as
+        #     Use timeout based endpointing, interpreting endpointer sensitivity as
         #     seconds of timeout value.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
