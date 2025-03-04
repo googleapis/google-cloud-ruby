@@ -1,5 +1,16 @@
 # Release History
 
+### 1.4.0 (2025-03-04)
+
+#### Features
+
+* Added disaster recovery replication status to the Reservation resource 
+* Support "Gemini in BigQuery" features in a reservation assignment 
+* Support continuous SQL jobs in a reservation 
+#### Bug Fixes
+
+* Set the proper 5-minute timeout for the failover_reservation RPC 
+
 ### 1.3.0 (2025-01-29)
 
 #### Features
