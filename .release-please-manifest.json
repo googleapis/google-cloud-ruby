@@ -923,6 +923,6 @@
   "grafeas-v1+FILLER": "0.0.0",
   "stackdriver": "0.22.0",
   "stackdriver+FILLER": "0.0.0",
-  "stackdriver-core": "1.6.0",
+  "stackdriver-core": "1.7.0",
   "stackdriver-core+FILLER": "0.0.0"
 }
