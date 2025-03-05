@@ -156,12 +156,15 @@ module Google
     # @private
     #
     def self.auto_load_files
-      Gem.loaded_specs.values.filter_map do |spec|
-        next unless spec.name.start_with?("google-cloud-")
-        path = File.join(spec.lib_dirs_glob, spec.name + ".rb")
-        next unless File.exist?(path)
-        path
+      paths = []
+      Gem.loaded_specs.each_value do |spec|
+        next unless spec.name.start_with? "google-cloud-"
+        Dir.glob spec.lib_dirs_glob do |dir|
+          path = File.join dir, "#{spec.name}.rb"
+          paths << path if File.file? path
+        end
       end
+      paths
     end
   end
 end
