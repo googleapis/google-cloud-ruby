@@ -89,6 +89,11 @@ module Google
 
                 default_config.rpcs.read_change_stream.timeout = 43_200.0
 
+                default_config.rpcs.execute_query.timeout = 43_200.0
+                default_config.rpcs.execute_query.retry_policy = {
+                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
+                }
+
                 default_config
               end
               yield @configure if block_given?
