@@ -176,6 +176,85 @@ module Google
           end
         end
 
+        # Replica configuration for the instance.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Filestore::V1::ReplicaConfig::State]
+        #     Output only. The replica state.
+        # @!attribute [r] state_reasons
+        #   @return [::Array<::Google::Cloud::Filestore::V1::ReplicaConfig::StateReason>]
+        #     Output only. Additional information about the replication state, if
+        #     available.
+        # @!attribute [rw] peer_instance
+        #   @return [::String]
+        #     Optional. The peer instance.
+        # @!attribute [r] last_active_sync_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp of the latest replication snapshot taken on the
+        #     active instance and is already replicated safely.
+        class ReplicaConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The replica state.
+          module State
+            # State not set.
+            STATE_UNSPECIFIED = 0
+
+            # The replica is being created.
+            CREATING = 1
+
+            # The replica is ready.
+            READY = 3
+
+            # The replica is being removed.
+            REMOVING = 4
+
+            # The replica is experiencing an issue and might be unusable. You can get
+            # further details from the `stateReasons` field of the `ReplicaConfig`
+            # object.
+            FAILED = 5
+          end
+
+          # Additional information about the replication state, if available.
+          module StateReason
+            # Reason not specified.
+            STATE_REASON_UNSPECIFIED = 0
+
+            # The peer instance is unreachable.
+            PEER_INSTANCE_UNREACHABLE = 1
+
+            # The remove replica peer instance operation failed.
+            REMOVE_FAILED = 2
+          end
+        end
+
+        # Replication specifications.
+        # @!attribute [rw] role
+        #   @return [::Google::Cloud::Filestore::V1::Replication::Role]
+        #     Optional. The replication role.
+        # @!attribute [rw] replicas
+        #   @return [::Array<::Google::Cloud::Filestore::V1::ReplicaConfig>]
+        #     Optional. Replication configuration for the replica instance associated
+        #     with this instance. Only a single replica is supported.
+        class Replication
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Replication role.
+          module Role
+            # Role not set.
+            ROLE_UNSPECIFIED = 0
+
+            # The instance is the `ACTIVE` replication member, functions as
+            # the replication source instance.
+            ACTIVE = 1
+
+            # The instance is the `STANDBY` replication member, functions as
+            # the replication destination instance.
+            STANDBY = 2
+          end
+        end
+
         # A Filestore instance.
         # @!attribute [r] name
         #   @return [::String]
@@ -224,15 +303,142 @@ module Google
         #   @return [::Array<::Google::Cloud::Filestore::V1::Instance::SuspensionReason>]
         #     Output only. Field indicates all the reasons the instance is in "SUSPENDED"
         #     state.
+        # @!attribute [rw] replication
+        #   @return [::Google::Cloud::Filestore::V1::Replication]
+        #     Optional. Replication configuration.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag key-value pairs bound to this
+        #     resource. Each key must be a namespaced name and each value a short name.
+        #     Example:
+        #     "123456789012/environment" : "production",
+        #     "123456789013/costCenter" : "marketing"
+        #     See the documentation for more information:
+        #     - Namespaced name:
+        #     https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key
+        #     - Short name:
+        #     https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value
+        # @!attribute [rw] protocol
+        #   @return [::Google::Cloud::Filestore::V1::Instance::FileProtocol]
+        #     Immutable. The protocol indicates the access protocol for all shares in the
+        #     instance. This field is immutable and it cannot be changed after the
+        #     instance has been created. Default value: `NFS_V3`.
+        # @!attribute [r] custom_performance_supported
+        #   @return [::Boolean]
+        #     Output only. Indicates whether this instance supports configuring its
+        #     performance. If true, the user can configure the instance's performance by
+        #     using the 'performance_config' field.
+        # @!attribute [rw] performance_config
+        #   @return [::Google::Cloud::Filestore::V1::Instance::PerformanceConfig]
+        #     Optional. Used to configure performance.
+        # @!attribute [r] performance_limits
+        #   @return [::Google::Cloud::Filestore::V1::Instance::PerformanceLimits]
+        #     Output only. Used for getting performance limits.
+        # @!attribute [rw] deletion_protection_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the instance is protected against deletion.
+        # @!attribute [rw] deletion_protection_reason
+        #   @return [::String]
+        #     Optional. The reason for enabling deletion protection.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # IOPS per TB.
+          # Filestore defines TB as 1024^4 bytes (TiB).
+          # @!attribute [rw] max_iops_per_tb
+          #   @return [::Integer]
+          #     Required. Maximum IOPS per TiB.
+          class IOPSPerTB
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Fixed IOPS (input/output operations per second) parameters.
+          # @!attribute [rw] max_iops
+          #   @return [::Integer]
+          #     Required. Maximum IOPS.
+          class FixedIOPS
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Used for setting the performance configuration.
+          # If the user doesn't specify PerformanceConfig, automatically provision
+          # the default performance settings as described in
+          # https://cloud.google.com/filestore/docs/performance. Larger instances will
+          # be linearly set to more IOPS. If the instance's capacity is increased or
+          # decreased, its performance will be automatically adjusted upwards or
+          # downwards accordingly (respectively).
+          # @!attribute [rw] iops_per_tb
+          #   @return [::Google::Cloud::Filestore::V1::Instance::IOPSPerTB]
+          #     Provision IOPS dynamically based on the capacity of the instance.
+          #     Provisioned IOPS will be calculated by multiplying the capacity of the
+          #     instance in TiB by the `iops_per_tb` value. For example, for a 2 TiB
+          #     instance with an `iops_per_tb` value of 17000 the provisioned IOPS will
+          #     be 34000.
+          #
+          #     If the calculated value is outside the supported range for the
+          #     instance's capacity during instance creation, instance creation will
+          #     fail with an `InvalidArgument` error. Similarly, if an instance
+          #     capacity update would result in a value outside the supported range,
+          #     the update will fail with an `InvalidArgument` error.
+          #
+          #     Note: The following fields are mutually exclusive: `iops_per_tb`, `fixed_iops`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          # @!attribute [rw] fixed_iops
+          #   @return [::Google::Cloud::Filestore::V1::Instance::FixedIOPS]
+          #     Choose a fixed provisioned IOPS value for the instance, which will
+          #     remain constant regardless of instance capacity. Value must be a
+          #     multiple of 1000.
+          #
+          #     If the chosen value is outside the supported range for the instance's
+          #     capacity during instance creation, instance creation will fail with an
+          #     `InvalidArgument` error. Similarly, if an instance capacity update
+          #     would result in a value outside the supported range, the update will
+          #     fail with an `InvalidArgument` error.
+          #
+          #     Note: The following fields are mutually exclusive: `fixed_iops`, `iops_per_tb`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+          class PerformanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The enforced performance limits, calculated from the instance's performance
+          # configuration.
+          # @!attribute [r] max_iops
+          #   @return [::Integer]
+          #     Output only. The max IOPS.
+          # @!attribute [r] max_read_iops
+          #   @return [::Integer]
+          #     Output only. The max read IOPS.
+          # @!attribute [r] max_write_iops
+          #   @return [::Integer]
+          #     Output only. The max write IOPS.
+          # @!attribute [r] max_read_throughput_bps
+          #   @return [::Integer]
+          #     Output only. The max read throughput in bytes per second.
+          # @!attribute [r] max_write_throughput_bps
+          #   @return [::Integer]
+          #     Output only. The max write throughput in bytes per second.
+          class PerformanceLimits
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -276,6 +482,9 @@ module Google
 
             # The instance is reverting to a snapshot.
             REVERTING = 12
+
+            # The replica instance is being promoted.
+            PROMOTING = 13
           end
 
           # Available service tiers.
@@ -324,6 +533,19 @@ module Google
             # The KMS key used by the instance is either revoked or denied access to.
             KMS_KEY_ISSUE = 1
           end
+
+          # File access protocol.
+          module FileProtocol
+            # FILE_PROTOCOL_UNSPECIFIED serves a "not set" default value when
+            # a FileProtocol is a separate field in a message.
+            FILE_PROTOCOL_UNSPECIFIED = 0
+
+            # NFS 3.0.
+            NFS_V3 = 1
+
+            # NFS 4.1.
+            NFS_V4_1 = 2
+          end
         end
 
         # CreateInstanceRequest creates an instance.
@@ -364,6 +586,9 @@ module Google
         #     * "description"
         #     * "file_shares"
         #     * "labels"
+        #     * "performance_config"
+        #     * "deletion_protection_enabled"
+        #     * "deletion_protection_reason"
         # @!attribute [rw] instance
         #   @return [::Google::Cloud::Filestore::V1::Instance]
         #     Only fields specified in update_mask are updated.
@@ -395,9 +620,8 @@ module Google
         # specified snapshot.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required.
+        #     Required. The resource name of the instance, in the format
         #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
-        #     The resource name of the instance, in the format
         # @!attribute [rw] target_snapshot_id
         #   @return [::String]
         #     Required. The snapshot resource ID, in the format 'my-snapshot', where the
@@ -464,7 +688,7 @@ module Google
         #     if there are no more results in the list.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Unordered list. Locations that could not be reached.
         class ListInstancesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -492,6 +716,18 @@ module Google
         #   @return [::Integer]
         #     Output only. The amount of bytes needed to allocate a full copy of the
         #     snapshot content
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag key-value pairs bound to this
+        #     resource. Each key must be a namespaced name and each value a short name.
+        #     Example:
+        #     "123456789012/environment" : "production",
+        #     "123456789013/costCenter" : "marketing"
+        #     See the documentation for more information:
+        #     - Namespaced name:
+        #     https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key
+        #     - Short name:
+        #     https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value
         class Snapshot
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -501,6 +737,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -593,6 +838,10 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     List filter.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Optional. If true, allow partial responses for multi-regional Aggregated
+        #     List requests.
         class ListSnapshotsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -606,6 +855,9 @@ module Google
         #   @return [::String]
         #     The token you can use to retrieve the next page of results. Not returned
         #     if there are no more results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that could not be reached.
         class ListSnapshotsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -663,6 +915,22 @@ module Google
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     Immutable. KMS key name used for data encryption.
+        # @!attribute [rw] tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Input only. Immutable. Tag key-value pairs bound to this
+        #     resource. Each key must be a namespaced name and each value a short name.
+        #     Example:
+        #     "123456789012/environment" : "production",
+        #     "123456789013/costCenter" : "marketing"
+        #     See the documentation for more information:
+        #     - Namespaced name:
+        #     https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_key
+        #     - Short name:
+        #     https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing#retrieving_tag_value
+        # @!attribute [r] file_system_protocol
+        #   @return [::Google::Cloud::Filestore::V1::Instance::FileProtocol]
+        #     Output only. The file system protocol of the source Filestore instance that
+        #     this backup is created from.
         class Backup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -672,6 +940,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -746,6 +1023,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # PromoteReplicaRequest promotes a Filestore standby instance (replica).
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the instance, in the format
+        #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+        # @!attribute [rw] peer_instance
+        #   @return [::String]
+        #     Optional. The resource name of the peer instance to promote, in the format
+        #     `projects/{project_id}/locations/{location_id}/instances/{instance_id}`.
+        #     The peer instance is required if the operation is called on an active
+        #     instance.
+        class PromoteReplicaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # GetBackupRequest gets the state of a backup.
         # @!attribute [rw] name
         #   @return [::String]
@@ -799,7 +1092,7 @@ module Google
         #     if there are no more results in the list.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Unordered list. Locations that could not be reached.
         class ListBackupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

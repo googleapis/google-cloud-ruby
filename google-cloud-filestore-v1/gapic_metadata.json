@@ -94,6 +94,11 @@
               "methods": [
                 "update_backup"
               ]
+            },
+            "PromoteReplica": {
+              "methods": [
+                "promote_replica"
+              ]
             }
           }
         }
