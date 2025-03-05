@@ -480,6 +480,7 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
     page_token = "hello world"
     order_by = "hello world"
     filter = "hello world"
+    return_partial_success = true
 
     list_snapshots_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -495,27 +496,27 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
         end
 
         # Use hash object
-        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+        client.list_snapshots parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_snapshots ::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+        client.list_snapshots ::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+        client.list_snapshots({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_snapshots(::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+        client.list_snapshots(::Google::Cloud::Filestore::V1::ListSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter, return_partial_success: return_partial_success), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1017,6 +1018,61 @@ class ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ClientTest < 
 
         # Verify method calls
         assert_equal 5, update_backup_client_stub.call_count
+      end
+    end
+  end
+
+  def test_promote_replica
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    peer_instance = "hello world"
+
+    promote_replica_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::ServiceStub.stub :transcode_promote_replica_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, promote_replica_client_stub do
+        # Create client
+        client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.promote_replica({ name: name, peer_instance: peer_instance }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.promote_replica name: name, peer_instance: peer_instance do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.promote_replica ::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.promote_replica({ name: name, peer_instance: peer_instance }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.promote_replica(::Google::Cloud::Filestore::V1::PromoteReplicaRequest.new(name: name, peer_instance: peer_instance), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, promote_replica_client_stub.call_count
       end
     end
   end
