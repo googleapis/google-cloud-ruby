@@ -288,6 +288,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Specifies the parsing config for RagFiles.
+        # @!attribute [rw] layout_parser
+        #   @return [::Google::Cloud::AIPlatform::V1::RagFileParsingConfig::LayoutParser]
+        #     The Layout Parser to use for RagFiles.
+        class RagFileParsingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Document AI Layout Parser config.
+          # @!attribute [rw] processor_name
+          #   @return [::String]
+          #     The full resource name of a Document AI processor or processor version.
+          #     The processor must have type `LAYOUT_PARSER_PROCESSOR`. If specified, the
+          #     `additional_config.parse_as_scanned_pdf` field must be false.
+          #     Format:
+          #     * `projects/{project_id}/locations/{location}/processors/{processor_id}`
+          #     * `projects/{project_id}/locations/{location}/processors/{processor_id}/processorVersions/{processor_version_id}`
+          # @!attribute [rw] max_parsing_requests_per_min
+          #   @return [::Integer]
+          #     The maximum number of requests the job is allowed to make to the Document
+          #     AI processor per minute. Consult
+          #     https://cloud.google.com/document-ai/quotas and the Quota page for your
+          #     project to set an appropriate value here. If unspecified, a default value
+          #     of 120 QPM would be used.
+          class LayoutParser
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Config for uploading RagFile.
         # @!attribute [rw] rag_file_transformation_config
         #   @return [::Google::Cloud::AIPlatform::V1::RagFileTransformationConfig]
@@ -349,6 +379,10 @@ module Google
         # @!attribute [rw] rag_file_transformation_config
         #   @return [::Google::Cloud::AIPlatform::V1::RagFileTransformationConfig]
         #     Specifies the transformation config for RagFiles.
+        # @!attribute [rw] rag_file_parsing_config
+        #   @return [::Google::Cloud::AIPlatform::V1::RagFileParsingConfig]
+        #     Optional. Specifies the parsing config for RagFiles.
+        #     RAG will use the default parser if this field is not set.
         # @!attribute [rw] max_embedding_requests_per_min
         #   @return [::Integer]
         #     Optional. The max number of queries per minute that this job is allowed to

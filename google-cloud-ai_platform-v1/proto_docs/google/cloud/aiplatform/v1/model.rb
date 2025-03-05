@@ -472,6 +472,12 @@ module Google
         # @!attribute [rw] public_model_name
         #   @return [::String]
         #     Required. The model garden source model resource name.
+        # @!attribute [rw] version_id
+        #   @return [::String]
+        #     Optional. The model garden source model version ID.
+        # @!attribute [rw] skip_hf_model_cache
+        #   @return [::Boolean]
+        #     Optional. Whether to avoid pulling the model from the HF cache.
         class ModelGardenSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
